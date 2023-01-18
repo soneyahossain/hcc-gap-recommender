@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.joda.time.format;import org.joda.time.NoAssert;
+package org.joda.time.format;
 
 import java.util.Locale;
 
@@ -101,7 +101,7 @@ public class TestTextFields  { //extends TestCase {
             for (int month=1; month<=12; month++) {
                 DateTime dt = new DateTime(2004, month, 1, 1, 20, 30, 40, ZONES[i]);
                 String monthText = printer.print(dt);
-NoAssert.donothing(MONTHS[month], monthText);
+                assertEquals(MONTHS[month], monthText);
             }
         }
     }
@@ -112,7 +112,7 @@ NoAssert.donothing(MONTHS[month], monthText);
             for (int month=1; month<=12; month++) {
                 DateTime dt = new DateTime(2004, month, 15, 12, 20, 30, 40, ZONES[i]);
                 String monthText = printer.print(dt);
-NoAssert.donothing(MONTHS[month], monthText);
+                assertEquals(MONTHS[month], monthText);
             }
         }
     }
@@ -126,7 +126,7 @@ NoAssert.donothing(MONTHS[month], monthText);
                 int lastDay = chrono.dayOfMonth().getMaximumValue(dt.getMillis());
                 dt = new DateTime(2004, month, lastDay, 23, 20, 30, 40, chrono);
                 String monthText = printer.print(dt);
-NoAssert.donothing(MONTHS[month], monthText);
+                assertEquals(MONTHS[month], monthText);
             }
         }
     }
@@ -139,7 +139,7 @@ NoAssert.donothing(MONTHS[month], monthText);
                 mdt.setDayOfYear(day);
                 int weekday = mdt.getDayOfWeek();
                 String weekdayText = printer.print(mdt);
-NoAssert.donothing(WEEKDAYS[weekday], weekdayText);
+                assertEquals(WEEKDAYS[weekday], weekdayText);
             }
         }
     }
@@ -153,7 +153,7 @@ NoAssert.donothing(WEEKDAYS[weekday], weekdayText);
                 mdt.setHourOfDay(hour);
                 int halfday = mdt.get(chrono.halfdayOfDay());
                 String halfdayText = printer.print(mdt);
-NoAssert.donothing(HALFDAYS[halfday], halfdayText);
+                assertEquals(HALFDAYS[halfday], halfdayText);
             }
         }
     }

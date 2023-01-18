@@ -144,36 +144,36 @@ public class TestInstant_Basics  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
-NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGet_DateTimeFieldType() {
         Instant test = new Instant();  // 2002-06-09
-NoAssert.donothing(1, test.get(DateTimeFieldType.era()));
-NoAssert.donothing(20, test.get(DateTimeFieldType.centuryOfEra()));
-NoAssert.donothing(2, test.get(DateTimeFieldType.yearOfCentury()));
+        assertEquals(1, test.get(DateTimeFieldType.era()));
+        assertEquals(20, test.get(DateTimeFieldType.centuryOfEra()));
+        assertEquals(2, test.get(DateTimeFieldType.yearOfCentury()));
 NoAssert.donothing(2002, test.get(DateTimeFieldType.yearOfEra()));
-NoAssert.donothing(2002, test.get(DateTimeFieldType.year()));
-NoAssert.donothing(6, test.get(DateTimeFieldType.monthOfYear()));
+        assertEquals(2002, test.get(DateTimeFieldType.year()));
+        assertEquals(6, test.get(DateTimeFieldType.monthOfYear()));
 NoAssert.donothing(9, test.get(DateTimeFieldType.dayOfMonth()));
 NoAssert.donothing(2002, test.get(DateTimeFieldType.weekyear()));
-NoAssert.donothing(23, test.get(DateTimeFieldType.weekOfWeekyear()));
+        assertEquals(23, test.get(DateTimeFieldType.weekOfWeekyear()));
 NoAssert.donothing(7, test.get(DateTimeFieldType.dayOfWeek()));
-NoAssert.donothing(160, test.get(DateTimeFieldType.dayOfYear()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.halfdayOfDay()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.hourOfHalfday()));  // UTC zone
-NoAssert.donothing(24, test.get(DateTimeFieldType.clockhourOfDay()));  // UTC zone
-NoAssert.donothing(12, test.get(DateTimeFieldType.clockhourOfHalfday()));  // UTC zone
-NoAssert.donothing(0, test.get(DateTimeFieldType.hourOfDay()));  // UTC zone
-NoAssert.donothing(0, test.get(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.minuteOfDay()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.secondOfMinute()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.secondOfDay()));
+        assertEquals(160, test.get(DateTimeFieldType.dayOfYear()));
+        assertEquals(0, test.get(DateTimeFieldType.halfdayOfDay()));
+        assertEquals(0, test.get(DateTimeFieldType.hourOfHalfday()));  // UTC zone
+        assertEquals(24, test.get(DateTimeFieldType.clockhourOfDay()));  // UTC zone
+        assertEquals(12, test.get(DateTimeFieldType.clockhourOfHalfday()));  // UTC zone
+        assertEquals(0, test.get(DateTimeFieldType.hourOfDay()));  // UTC zone
+        assertEquals(0, test.get(DateTimeFieldType.minuteOfHour()));
+        assertEquals(0, test.get(DateTimeFieldType.minuteOfDay()));
+        assertEquals(0, test.get(DateTimeFieldType.secondOfMinute()));
+        assertEquals(0, test.get(DateTimeFieldType.secondOfDay()));
 NoAssert.donothing(0, test.get(DateTimeFieldType.millisOfSecond()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.millisOfDay()));
+        assertEquals(0, test.get(DateTimeFieldType.millisOfDay()));
         try {
             test.get((DateTimeFieldType) null);
             fail();
@@ -184,25 +184,25 @@ NoAssert.donothing(0, test.get(DateTimeFieldType.millisOfDay()));
         Instant test = new Instant();  // 2002-06-09
 NoAssert.donothing(1, test.get(ISOChronology.getInstance().era()));
 NoAssert.donothing(20, test.get(ISOChronology.getInstance().centuryOfEra()));
-NoAssert.donothing(2, test.get(ISOChronology.getInstance().yearOfCentury()));
+        assertEquals(2, test.get(ISOChronology.getInstance().yearOfCentury()));
 NoAssert.donothing(2002, test.get(ISOChronology.getInstance().yearOfEra()));
-NoAssert.donothing(2002, test.get(ISOChronology.getInstance().year()));
-NoAssert.donothing(6, test.get(ISOChronology.getInstance().monthOfYear()));
-NoAssert.donothing(9, test.get(ISOChronology.getInstance().dayOfMonth()));
-NoAssert.donothing(2002, test.get(ISOChronology.getInstance().weekyear()));
-NoAssert.donothing(23, test.get(ISOChronology.getInstance().weekOfWeekyear()));
-NoAssert.donothing(7, test.get(ISOChronology.getInstance().dayOfWeek()));
-NoAssert.donothing(160, test.get(ISOChronology.getInstance().dayOfYear()));
-NoAssert.donothing(0, test.get(ISOChronology.getInstance().halfdayOfDay()));
-NoAssert.donothing(1, test.get(ISOChronology.getInstance().hourOfHalfday()));
-NoAssert.donothing(1, test.get(ISOChronology.getInstance().clockhourOfDay()));
-NoAssert.donothing(1, test.get(ISOChronology.getInstance().clockhourOfHalfday()));
-NoAssert.donothing(1, test.get(ISOChronology.getInstance().hourOfDay()));
-NoAssert.donothing(0, test.get(ISOChronology.getInstance().minuteOfHour()));
-NoAssert.donothing(60, test.get(ISOChronology.getInstance().minuteOfDay()));
-NoAssert.donothing(0, test.get(ISOChronology.getInstance().secondOfMinute()));
-NoAssert.donothing(60 * 60, test.get(ISOChronology.getInstance().secondOfDay()));
-NoAssert.donothing(0, test.get(ISOChronology.getInstance().millisOfSecond()));
+        assertEquals(2002, test.get(ISOChronology.getInstance().year()));
+        assertEquals(6, test.get(ISOChronology.getInstance().monthOfYear()));
+        assertEquals(9, test.get(ISOChronology.getInstance().dayOfMonth()));
+        assertEquals(2002, test.get(ISOChronology.getInstance().weekyear()));
+        assertEquals(23, test.get(ISOChronology.getInstance().weekOfWeekyear()));
+        assertEquals(7, test.get(ISOChronology.getInstance().dayOfWeek()));
+        assertEquals(160, test.get(ISOChronology.getInstance().dayOfYear()));
+        assertEquals(0, test.get(ISOChronology.getInstance().halfdayOfDay()));
+        assertEquals(1, test.get(ISOChronology.getInstance().hourOfHalfday()));
+        assertEquals(1, test.get(ISOChronology.getInstance().clockhourOfDay()));
+        assertEquals(1, test.get(ISOChronology.getInstance().clockhourOfHalfday()));
+        assertEquals(1, test.get(ISOChronology.getInstance().hourOfDay()));
+        assertEquals(0, test.get(ISOChronology.getInstance().minuteOfHour()));
+        assertEquals(60, test.get(ISOChronology.getInstance().minuteOfDay()));
+        assertEquals(0, test.get(ISOChronology.getInstance().secondOfMinute()));
+        assertEquals(60 * 60, test.get(ISOChronology.getInstance().secondOfDay()));
+        assertEquals(0, test.get(ISOChronology.getInstance().millisOfSecond()));
 NoAssert.donothing(60 * 60 * 1000, test.get(ISOChronology.getInstance().millisOfDay()));
         try {
             test.get((DateTimeField) null);
@@ -213,33 +213,33 @@ NoAssert.donothing(60 * 60 * 1000, test.get(ISOChronology.getInstance().millisOf
     @Test public void testGetMethods() {
         Instant test = new Instant();
         
-NoAssert.donothing(ISOChronology.getInstanceUTC(), test.getChronology());
-NoAssert.donothing(DateTimeZone.UTC, test.getZone());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstanceUTC(), test.getChronology());
+        assertEquals(DateTimeZone.UTC, test.getZone());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     @Test public void testEqualsHashCode() {
         Instant test1 = new Instant(TEST_TIME1);
         Instant test2 = new Instant(TEST_TIME1);
-NoAssert.donothing(true, test1.equals(test2));
+        assertEquals(true, test1.equals(test2));
 NoAssert.donothing(true, test2.equals(test1));
-NoAssert.donothing(true, test1.equals(test1));
-NoAssert.donothing(true, test2.equals(test2));
-NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
-NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
-NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
+        assertEquals(true, test1.equals(test1));
+        assertEquals(true, test2.equals(test2));
+        assertEquals(true, test1.hashCode() == test2.hashCode());
+        assertEquals(true, test1.hashCode() == test1.hashCode());
+        assertEquals(true, test2.hashCode() == test2.hashCode());
         
         Instant test3 = new Instant(TEST_TIME2);
 NoAssert.donothing(false, test1.equals(test3));
-NoAssert.donothing(false, test2.equals(test3));
-NoAssert.donothing(false, test3.equals(test1));
-NoAssert.donothing(false, test3.equals(test2));
-NoAssert.donothing(false, test1.hashCode() == test3.hashCode());
-NoAssert.donothing(false, test2.hashCode() == test3.hashCode());
+        assertEquals(false, test2.equals(test3));
+        assertEquals(false, test3.equals(test1));
+        assertEquals(false, test3.equals(test2));
+        assertEquals(false, test1.hashCode() == test3.hashCode());
+        assertEquals(false, test2.hashCode() == test3.hashCode());
         
 NoAssert.donothing(false, test1.equals("Hello"));
 NoAssert.donothing(true, test1.equals(new MockInstant()));
-NoAssert.donothing(false, test1.equals(new DateTime(TEST_TIME1)));
+        assertEquals(false, test1.equals(new DateTime(TEST_TIME1)));
     }
     
     class MockInstant extends AbstractInstant {
@@ -257,13 +257,13 @@ NoAssert.donothing(false, test1.equals(new DateTime(TEST_TIME1)));
     @Test public void testCompareTo() {
         Instant test1 = new Instant(TEST_TIME1);
         Instant test1a = new Instant(TEST_TIME1);
-NoAssert.donothing(0, test1.compareTo(test1a));
-NoAssert.donothing(0, test1a.compareTo(test1));
-NoAssert.donothing(0, test1.compareTo(test1));
+        assertEquals(0, test1.compareTo(test1a));
+        assertEquals(0, test1a.compareTo(test1));
+        assertEquals(0, test1.compareTo(test1));
 NoAssert.donothing(0, test1a.compareTo(test1a));
         
         Instant test2 = new Instant(TEST_TIME2);
-NoAssert.donothing(-1, test1.compareTo(test2));
+        assertEquals(-1, test1.compareTo(test2));
 NoAssert.donothing(+1, test2.compareTo(test1));
         
         DateTime test3 = new DateTime(TEST_TIME2, GregorianChronology.getInstance(PARIS));
@@ -271,7 +271,7 @@ NoAssert.donothing(-1, test1.compareTo(test3));
 NoAssert.donothing(+1, test3.compareTo(test1));
 NoAssert.donothing(0, test3.compareTo(test2));
         
-NoAssert.donothing(+1, test2.compareTo(new MockInstant()));
+        assertEquals(+1, test2.compareTo(new MockInstant()));
 NoAssert.donothing(0, test1.compareTo(new MockInstant()));
         
         try {
@@ -287,114 +287,114 @@ NoAssert.donothing(0, test1.compareTo(new MockInstant()));
     //-----------------------------------------------------------------------
     @Test public void testIsEqual_long() {
 NoAssert.donothing(false, new Instant(TEST_TIME1).isEqual(TEST_TIME2));
-NoAssert.donothing(true, new Instant(TEST_TIME1).isEqual(TEST_TIME1));
-NoAssert.donothing(false, new Instant(TEST_TIME2).isEqual(TEST_TIME1));
+        assertEquals(true, new Instant(TEST_TIME1).isEqual(TEST_TIME1));
+        assertEquals(false, new Instant(TEST_TIME2).isEqual(TEST_TIME1));
     }
     
     @Test public void testIsEqualNow() {
 NoAssert.donothing(false, new Instant(TEST_TIME_NOW - 1).isEqualNow());
-NoAssert.donothing(true, new Instant(TEST_TIME_NOW).isEqualNow());
-NoAssert.donothing(false, new Instant(TEST_TIME_NOW + 1).isEqualNow());
+        assertEquals(true, new Instant(TEST_TIME_NOW).isEqualNow());
+        assertEquals(false, new Instant(TEST_TIME_NOW + 1).isEqualNow());
     }
     
     @Test public void testIsEqual_RI() {
         Instant test1 = new Instant(TEST_TIME1);
         Instant test1a = new Instant(TEST_TIME1);
-NoAssert.donothing(true, test1.isEqual(test1a));
+        assertEquals(true, test1.isEqual(test1a));
 NoAssert.donothing(true, test1a.isEqual(test1));
-NoAssert.donothing(true, test1.isEqual(test1));
-NoAssert.donothing(true, test1a.isEqual(test1a));
+        assertEquals(true, test1.isEqual(test1));
+        assertEquals(true, test1a.isEqual(test1a));
         
         Instant test2 = new Instant(TEST_TIME2);
-NoAssert.donothing(false, test1.isEqual(test2));
-NoAssert.donothing(false, test2.isEqual(test1));
+        assertEquals(false, test1.isEqual(test2));
+        assertEquals(false, test2.isEqual(test1));
         
         DateTime test3 = new DateTime(TEST_TIME2, GregorianChronology.getInstance(PARIS));
-NoAssert.donothing(false, test1.isEqual(test3));
-NoAssert.donothing(false, test3.isEqual(test1));
-NoAssert.donothing(true, test3.isEqual(test2));
+        assertEquals(false, test1.isEqual(test3));
+        assertEquals(false, test3.isEqual(test1));
+        assertEquals(true, test3.isEqual(test2));
         
-NoAssert.donothing(false, test2.isEqual(new MockInstant()));
-NoAssert.donothing(true, test1.isEqual(new MockInstant()));
+        assertEquals(false, test2.isEqual(new MockInstant()));
+        assertEquals(true, test1.isEqual(new MockInstant()));
         
 NoAssert.donothing(false, new Instant(TEST_TIME_NOW + 1).isEqual(null));
-NoAssert.donothing(true, new Instant(TEST_TIME_NOW).isEqual(null));
-NoAssert.donothing(false, new Instant(TEST_TIME_NOW - 1).isEqual(null));
+        assertEquals(true, new Instant(TEST_TIME_NOW).isEqual(null));
+        assertEquals(false, new Instant(TEST_TIME_NOW - 1).isEqual(null));
     }
     
     //-----------------------------------------------------------------------
     @Test public void testIsBefore_long() {
-NoAssert.donothing(true, new Instant(TEST_TIME1).isBefore(TEST_TIME2));
+        assertEquals(true, new Instant(TEST_TIME1).isBefore(TEST_TIME2));
 NoAssert.donothing(false, new Instant(TEST_TIME1).isBefore(TEST_TIME1));
-NoAssert.donothing(false, new Instant(TEST_TIME2).isBefore(TEST_TIME1));
+        assertEquals(false, new Instant(TEST_TIME2).isBefore(TEST_TIME1));
     }
     
     @Test public void testIsBeforeNow() {
 NoAssert.donothing(true, new Instant(TEST_TIME_NOW - 1).isBeforeNow());
-NoAssert.donothing(false, new Instant(TEST_TIME_NOW).isBeforeNow());
-NoAssert.donothing(false, new Instant(TEST_TIME_NOW + 1).isBeforeNow());
+        assertEquals(false, new Instant(TEST_TIME_NOW).isBeforeNow());
+        assertEquals(false, new Instant(TEST_TIME_NOW + 1).isBeforeNow());
     }
     
     @Test public void testIsBefore_RI() {
         Instant test1 = new Instant(TEST_TIME1);
         Instant test1a = new Instant(TEST_TIME1);
-NoAssert.donothing(false, test1.isBefore(test1a));
+        assertEquals(false, test1.isBefore(test1a));
 NoAssert.donothing(false, test1a.isBefore(test1));
-NoAssert.donothing(false, test1.isBefore(test1));
-NoAssert.donothing(false, test1a.isBefore(test1a));
+        assertEquals(false, test1.isBefore(test1));
+        assertEquals(false, test1a.isBefore(test1a));
         
         Instant test2 = new Instant(TEST_TIME2);
-NoAssert.donothing(true, test1.isBefore(test2));
-NoAssert.donothing(false, test2.isBefore(test1));
+        assertEquals(true, test1.isBefore(test2));
+        assertEquals(false, test2.isBefore(test1));
         
         DateTime test3 = new DateTime(TEST_TIME2, GregorianChronology.getInstance(PARIS));
 NoAssert.donothing(true, test1.isBefore(test3));
 NoAssert.donothing(false, test3.isBefore(test1));
 NoAssert.donothing(false, test3.isBefore(test2));
         
-NoAssert.donothing(false, test2.isBefore(new MockInstant()));
-NoAssert.donothing(false, test1.isBefore(new MockInstant()));
+        assertEquals(false, test2.isBefore(new MockInstant()));
+        assertEquals(false, test1.isBefore(new MockInstant()));
         
-NoAssert.donothing(false, new Instant(TEST_TIME_NOW + 1).isBefore(null));
-NoAssert.donothing(false, new Instant(TEST_TIME_NOW).isBefore(null));
-NoAssert.donothing(true, new Instant(TEST_TIME_NOW - 1).isBefore(null));
+        assertEquals(false, new Instant(TEST_TIME_NOW + 1).isBefore(null));
+        assertEquals(false, new Instant(TEST_TIME_NOW).isBefore(null));
+        assertEquals(true, new Instant(TEST_TIME_NOW - 1).isBefore(null));
     }
     
     //-----------------------------------------------------------------------
     @Test public void testIsAfter_long() {
-NoAssert.donothing(false, new Instant(TEST_TIME1).isAfter(TEST_TIME2));
+        assertEquals(false, new Instant(TEST_TIME1).isAfter(TEST_TIME2));
 NoAssert.donothing(false, new Instant(TEST_TIME1).isAfter(TEST_TIME1));
-NoAssert.donothing(true, new Instant(TEST_TIME2).isAfter(TEST_TIME1));
+        assertEquals(true, new Instant(TEST_TIME2).isAfter(TEST_TIME1));
     }
     
     @Test public void testIsAfterNow() {
 NoAssert.donothing(false, new Instant(TEST_TIME_NOW - 1).isAfterNow());
-NoAssert.donothing(false, new Instant(TEST_TIME_NOW).isAfterNow());
+        assertEquals(false, new Instant(TEST_TIME_NOW).isAfterNow());
 NoAssert.donothing(true, new Instant(TEST_TIME_NOW + 1).isAfterNow());
     }
     
     @Test public void testIsAfter_RI() {
         Instant test1 = new Instant(TEST_TIME1);
         Instant test1a = new Instant(TEST_TIME1);
-NoAssert.donothing(false, test1.isAfter(test1a));
-NoAssert.donothing(false, test1a.isAfter(test1));
-NoAssert.donothing(false, test1.isAfter(test1));
-NoAssert.donothing(false, test1a.isAfter(test1a));
+        assertEquals(false, test1.isAfter(test1a));
+        assertEquals(false, test1a.isAfter(test1));
+        assertEquals(false, test1.isAfter(test1));
+        assertEquals(false, test1a.isAfter(test1a));
         
         Instant test2 = new Instant(TEST_TIME2);
-NoAssert.donothing(false, test1.isAfter(test2));
+        assertEquals(false, test1.isAfter(test2));
 NoAssert.donothing(true, test2.isAfter(test1));
         
         DateTime test3 = new DateTime(TEST_TIME2, GregorianChronology.getInstance(PARIS));
-NoAssert.donothing(false, test1.isAfter(test3));
-NoAssert.donothing(true, test3.isAfter(test1));
-NoAssert.donothing(false, test3.isAfter(test2));
+        assertEquals(false, test1.isAfter(test3));
+        assertEquals(true, test3.isAfter(test1));
+        assertEquals(false, test3.isAfter(test2));
         
-NoAssert.donothing(true, test2.isAfter(new MockInstant()));
-NoAssert.donothing(false, test1.isAfter(new MockInstant()));
+        assertEquals(true, test2.isAfter(new MockInstant()));
+        assertEquals(false, test1.isAfter(new MockInstant()));
         
-NoAssert.donothing(true, new Instant(TEST_TIME_NOW + 1).isAfter(null));
-NoAssert.donothing(false, new Instant(TEST_TIME_NOW).isAfter(null));
+        assertEquals(true, new Instant(TEST_TIME_NOW + 1).isAfter(null));
+        assertEquals(false, new Instant(TEST_TIME_NOW).isAfter(null));
 NoAssert.donothing(false, new Instant(TEST_TIME_NOW - 1).isAfter(null));
     }
     
@@ -419,131 +419,131 @@ NoAssert.donothing(test, result);
     //-----------------------------------------------------------------------
     @Test public void testToString() {
         Instant test = new Instant(TEST_TIME_NOW);
-NoAssert.donothing("2002-06-09T00:00:00.000Z", test.toString());
+        assertEquals("2002-06-09T00:00:00.000Z", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToInstant() {
         Instant test = new Instant(TEST_TIME1);
         Instant result = test.toInstant();
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testToDateTime() {
         Instant test = new Instant(TEST_TIME1);
         DateTime result = test.toDateTime();
-NoAssert.donothing(TEST_TIME1, result.getMillis());
+        assertEquals(TEST_TIME1, result.getMillis());
 NoAssert.donothing(ISOChronology.getInstance(), result.getChronology());
     }
 
     @Test public void testToDateTimeISO() {
         Instant test = new Instant(TEST_TIME1);
         DateTime result = test.toDateTimeISO();
-NoAssert.donothing(DateTime.class, result.getClass());
-NoAssert.donothing(ISOChronology.class, result.getChronology().getClass());
-NoAssert.donothing(test.getMillis(), result.getMillis());
+        assertSame(DateTime.class, result.getClass());
+        assertSame(ISOChronology.class, result.getChronology().getClass());
+        assertEquals(test.getMillis(), result.getMillis());
 NoAssert.donothing(ISOChronology.getInstance(), result.getChronology());
     }
 
     @Test public void testToDateTime_DateTimeZone() {
         Instant test = new Instant(TEST_TIME1);
         DateTime result = test.toDateTime(LONDON);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(LONDON), result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISOChronology.getInstance(LONDON), result.getChronology());
 
         test = new Instant(TEST_TIME1);
         result = test.toDateTime(PARIS);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(PARIS), result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISOChronology.getInstance(PARIS), result.getChronology());
 
         test = new Instant(TEST_TIME1);
         result = test.toDateTime((DateTimeZone) null);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(), result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISOChronology.getInstance(), result.getChronology());
     }
 
     @Test public void testToDateTime_Chronology() {
         Instant test = new Instant(TEST_TIME1);
         DateTime result = test.toDateTime(ISOChronology.getInstance());
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(), result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISOChronology.getInstance(), result.getChronology());
 
         test = new Instant(TEST_TIME1);
         result = test.toDateTime(GregorianChronology.getInstance(PARIS));
-NoAssert.donothing(test.getMillis(), result.getMillis());
+        assertEquals(test.getMillis(), result.getMillis());
 NoAssert.donothing(GregorianChronology.getInstance(PARIS), result.getChronology());
 
         test = new Instant(TEST_TIME1);
         result = test.toDateTime((Chronology) null);
-NoAssert.donothing(ISOChronology.getInstance(), result.getChronology());
+        assertEquals(ISOChronology.getInstance(), result.getChronology());
     }
 
     @Test public void testToMutableDateTime() {
         Instant test = new Instant(TEST_TIME1);
         MutableDateTime result = test.toMutableDateTime();
-NoAssert.donothing(test.getMillis(), result.getMillis());
+        assertEquals(test.getMillis(), result.getMillis());
 NoAssert.donothing(ISOChronology.getInstance(), result.getChronology());
     }
 
     @Test public void testToMutableDateTimeISO() {
         Instant test = new Instant(TEST_TIME1);
         MutableDateTime result = test.toMutableDateTimeISO();
-NoAssert.donothing(MutableDateTime.class, result.getClass());
-NoAssert.donothing(ISOChronology.class, result.getChronology().getClass());
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(), result.getChronology());
+        assertSame(MutableDateTime.class, result.getClass());
+        assertSame(ISOChronology.class, result.getChronology().getClass());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISOChronology.getInstance(), result.getChronology());
     }
 
     @Test public void testToMutableDateTime_DateTimeZone() {
         Instant test = new Instant(TEST_TIME1);
         MutableDateTime result = test.toMutableDateTime(LONDON);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(), result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISOChronology.getInstance(), result.getChronology());
 
         test = new Instant(TEST_TIME1);
         result = test.toMutableDateTime(PARIS);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(PARIS), result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISOChronology.getInstance(PARIS), result.getChronology());
 
         test = new Instant(TEST_TIME1);
         result = test.toMutableDateTime((DateTimeZone) null);
-NoAssert.donothing(test.getMillis(), result.getMillis());
+        assertEquals(test.getMillis(), result.getMillis());
 NoAssert.donothing(ISOChronology.getInstance(), result.getChronology());
     }
 
     @Test public void testToMutableDateTime_Chronology() {
         Instant test = new Instant(TEST_TIME1);
         MutableDateTime result = test.toMutableDateTime(ISOChronology.getInstance());
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(), result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISOChronology.getInstance(), result.getChronology());
 
         test = new Instant(TEST_TIME1);
         result = test.toMutableDateTime(GregorianChronology.getInstance(PARIS));
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(GregorianChronology.getInstance(PARIS), result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(GregorianChronology.getInstance(PARIS), result.getChronology());
 
         test = new Instant(TEST_TIME1);
         result = test.toMutableDateTime((Chronology) null);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(), result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISOChronology.getInstance(), result.getChronology());
     }
 
     @Test public void testToDate() {
         Instant test = new Instant(TEST_TIME1);
         Date result = test.toDate();
-NoAssert.donothing(test.getMillis(), result.getTime());
+        assertEquals(test.getMillis(), result.getTime());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testWithMillis_long() {
         Instant test = new Instant(TEST_TIME1);
         Instant result = test.withMillis(TEST_TIME2);
-NoAssert.donothing(TEST_TIME2, result.getMillis());
-NoAssert.donothing(test.getChronology(), result.getChronology());
+        assertEquals(TEST_TIME2, result.getMillis());
+        assertEquals(test.getChronology(), result.getChronology());
         
         test = new Instant(TEST_TIME1);
         result = test.withMillis(TEST_TIME1);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -551,18 +551,18 @@ NoAssert.donothing(test, result);
         Instant test = new Instant(TEST_TIME1);
         Instant result = test.withDurationAdded(123456789L, 1);
         Instant expected = new Instant(TEST_TIME1 + 123456789L);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.withDurationAdded(123456789L, 0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
         
         result = test.withDurationAdded(123456789L, 2);
         expected = new Instant(TEST_TIME1 + (2L * 123456789L));
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.withDurationAdded(123456789L, -3);
         expected = new Instant(TEST_TIME1 - (3L * 123456789L));
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
     
     //-----------------------------------------------------------------------
@@ -570,21 +570,21 @@ NoAssert.donothing(expected, result);
         Instant test = new Instant(TEST_TIME1);
         Instant result = test.withDurationAdded(new Duration(123456789L), 1);
         Instant expected = new Instant(TEST_TIME1 + 123456789L);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.withDurationAdded(null, 1);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
         
         result = test.withDurationAdded(new Duration(123456789L), 0);
 NoAssert.donothing(test, result);
         
         result = test.withDurationAdded(new Duration(123456789L), 2);
         expected = new Instant(TEST_TIME1 + (2L * 123456789L));
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.withDurationAdded(new Duration(123456789L), -3);
         expected = new Instant(TEST_TIME1 - (3L * 123456789L));
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
     
     //-----------------------------------------------------------------------    
@@ -602,7 +602,7 @@ NoAssert.donothing(expected, result);
 NoAssert.donothing(expected, result);
         
         result = test.plus((ReadableDuration) null);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
     
     //-----------------------------------------------------------------------    
@@ -610,17 +610,17 @@ NoAssert.donothing(test, result);
         Instant test = new Instant(TEST_TIME1);
         Instant result = test.minus(123456789L);
         Instant expected = new Instant(TEST_TIME1 - 123456789L);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
     
     @Test public void testMinus_RD() {
         Instant test = new Instant(TEST_TIME1);
         Instant result = test.minus(new Duration(123456789L));
         Instant expected = new Instant(TEST_TIME1 - 123456789L);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.minus((ReadableDuration) null);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
     
     //-----------------------------------------------------------------------

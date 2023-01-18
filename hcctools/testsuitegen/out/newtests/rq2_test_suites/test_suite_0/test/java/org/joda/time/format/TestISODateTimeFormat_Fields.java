@@ -122,23 +122,23 @@ public class TestISODateTimeFormat_Fields  { //extends TestCase {
         int[] values = new int[] {2005, 6, 25};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("2005-06-25", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-06-25", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("2005-06-25", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-06-25", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("20050625", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("20050625", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("20050625", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("20050625", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -151,13 +151,13 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {2005, 6, 25};
         List types = Collections.unmodifiableList(new ArrayList(Arrays.asList(fields)));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("2005-06-25", f.print(new Partial(fields, values)));
-NoAssert.donothing(3, types.size());
+        assertEquals("2005-06-25", f.print(new Partial(fields, values)));
+        assertEquals(3, types.size());
         
         types = Arrays.asList(fields);
         f = ISODateTimeFormat.forFields(types, true, true);
 NoAssert.donothing("2005-06-25", f.print(new Partial(fields, values)));
-NoAssert.donothing(3, types.size());
+        assertEquals(3, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -181,8 +181,8 @@ NoAssert.donothing(0, types.size());
         
         types = Arrays.asList(dupFields);
         f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("2005-06-25", f.print(new Partial(fields, values)));
-NoAssert.donothing(4, types.size());
+        assertEquals("2005-06-25", f.print(new Partial(fields, values)));
+        assertEquals(4, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -194,7 +194,7 @@ NoAssert.donothing(4, types.size());
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
 NoAssert.donothing("2005", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
@@ -203,13 +203,13 @@ NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("2005", f.print(new Partial(fields, values)));
+        assertEquals("2005", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("2005", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -220,17 +220,17 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {6};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("--06", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--06", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("--06", f.print(new Partial(fields, values)));
+        assertEquals("--06", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("--06", f.print(new Partial(fields, values)));
+        assertEquals("--06", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
@@ -247,23 +247,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {25};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("---25", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("---25", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
 NoAssert.donothing("---25", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("---25", f.print(new Partial(fields, values)));
+        assertEquals("---25", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("---25", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("---25", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -280,18 +280,18 @@ NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("2005-06", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-06", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("2005-06", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-06", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("2005-06", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-06", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -303,23 +303,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {6, 25};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("--06-25", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--06-25", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("--06-25", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--06-25", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("--0625", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--0625", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("--0625", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--0625", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -331,13 +331,13 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {2005, 25};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("2005--25", f.print(new Partial(fields, values)));
+        assertEquals("2005--25", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("2005--25", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005--25", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         try {
@@ -364,23 +364,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {2005, 8, 5};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("2005-W08-5", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-W08-5", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("2005-W08-5", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-W08-5", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("2005W085", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005W085", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("2005W085", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005W085", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -391,23 +391,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {2005};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("2005", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("2005", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("2005", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("2005", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -418,23 +418,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {8};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("-W08", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-W08", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("-W08", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-W08", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
 NoAssert.donothing("-W08", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("-W08", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-W08", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -445,23 +445,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {5};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("-W-5", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-W-5", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("-W-5", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-W-5", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("-W-5", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-W-5", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("-W-5", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-W-5", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -473,23 +473,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {2005, 8};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("2005-W08", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-W08", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("2005-W08", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-W08", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("2005W08", f.print(new Partial(fields, values)));
+        assertEquals("2005W08", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("2005W08", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005W08", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -501,23 +501,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {8, 5};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("-W08-5", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-W08-5", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("-W08-5", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-W08-5", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
 NoAssert.donothing("-W085", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("-W085", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-W085", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -529,13 +529,13 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {2005, 5};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("2005-W-5", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-W-5", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("2005W-5", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005W-5", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         try {
@@ -561,22 +561,22 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {2005, 177};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("2005-177", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-177", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
 NoAssert.donothing("2005-177", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("2005177", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005177", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("2005177", f.print(new Partial(fields, values)));
+        assertEquals("2005177", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
     }
 
@@ -593,18 +593,18 @@ NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("2005", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("2005", f.print(new Partial(fields, values)));
+        assertEquals("2005", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("2005", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -615,13 +615,13 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {177};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("-177", f.print(new Partial(fields, values)));
+        assertEquals("-177", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("-177", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-177", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
@@ -630,8 +630,8 @@ NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("-177", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-177", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -647,23 +647,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {10, 20, 30, 40};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("10:20:30.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("10:20:30.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("10:20:30.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("10:20:30.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("102030.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("102030.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("102030.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("102030.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -677,22 +677,22 @@ NoAssert.donothing(0, types.size());
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
 NoAssert.donothing("10:20:30", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("10:20:30", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("10:20:30", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("102030", f.print(new Partial(fields, values)));
+        assertEquals("102030", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("102030", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("102030", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -704,23 +704,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {10, 20};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("10:20", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("10:20", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("10:20", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("10:20", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("1020", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("1020", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
 NoAssert.donothing("1020", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -731,23 +731,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {10};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("10", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("10", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("10", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("10", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("10", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("10", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("10", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("10", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -760,23 +760,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {20, 30, 40};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("-20:30.040", f.print(new Partial(fields, values)));
+        assertEquals("-20:30.040", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
 NoAssert.donothing("-20:30.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("-2030.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-2030.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("-2030.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-2030.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -793,18 +793,18 @@ NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("-20:30", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-20:30", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("-2030", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-2030", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("-2030", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-2030", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -815,7 +815,7 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {20};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("-20", f.print(new Partial(fields, values)));
+        assertEquals("-20", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
@@ -825,13 +825,13 @@ NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("-20", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-20", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
 NoAssert.donothing("-20", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -843,23 +843,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {30, 40};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("--30.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--30.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("--30.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--30.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("--30.040", f.print(new Partial(fields, values)));
+        assertEquals("--30.040", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("--30.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--30.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -870,23 +870,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {30};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("--30", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--30", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("--30", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--30", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("--30", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--30", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("--30", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("--30", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -897,13 +897,13 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {40};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("---.040", f.print(new Partial(fields, values)));
+        assertEquals("---.040", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("---.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("---.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         try {
@@ -928,12 +928,12 @@ NoAssert.donothing(0, types.size());
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, false);
 NoAssert.donothing("10--.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
 NoAssert.donothing("10--.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         try {
@@ -958,12 +958,12 @@ NoAssert.donothing(0, types.size());
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, false);
 NoAssert.donothing("10-30", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("10-30", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("10-30", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         try {
@@ -987,13 +987,13 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {20, 40};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("-20-.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-20-.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("-20-.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("-20-.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         try {
@@ -1019,11 +1019,11 @@ NoAssert.donothing(0, types.size());
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, false);
 NoAssert.donothing("10-30.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("10-30.040", f.print(new Partial(fields, values)));
+        assertEquals("10-30.040", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
@@ -1049,12 +1049,12 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {10, 20, 40};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("10:20-.040", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("10:20-.040", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("1020-.040", f.print(new Partial(fields, values)));
+        assertEquals("1020-.040", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
@@ -1083,23 +1083,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {2005, 6, 25, 12};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("2005-06-25T12", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005-06-25T12", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
 NoAssert.donothing("2005-06-25T12", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("20050625T12", f.print(new Partial(fields, values)));
+        assertEquals("20050625T12", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("20050625T12", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("20050625T12", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -1111,23 +1111,23 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {25, 12};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, true);
-NoAssert.donothing("---25T12", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("---25T12", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("---25T12", f.print(new Partial(fields, values)));
+        assertEquals("---25T12", f.print(new Partial(fields, values)));
 NoAssert.donothing(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, true);
-NoAssert.donothing("---25T12", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("---25T12", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("---25T12", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("---25T12", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
     }
 
     //-----------------------------------------------------------------------
@@ -1139,13 +1139,13 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {2005, 12};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("2005T12", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005T12", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("2005T12", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("2005T12", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         try {
@@ -1169,13 +1169,13 @@ NoAssert.donothing(0, types.size());
         int[] values = new int[] {25, 20};
         List types = new ArrayList(Arrays.asList(fields));
         DateTimeFormatter f = ISODateTimeFormat.forFields(types, true, false);
-NoAssert.donothing("---25T-20", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("---25T-20", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         f = ISODateTimeFormat.forFields(types, false, false);
-NoAssert.donothing("---25T-20", f.print(new Partial(fields, values)));
-NoAssert.donothing(0, types.size());
+        assertEquals("---25T-20", f.print(new Partial(fields, values)));
+        assertEquals(0, types.size());
         
         types = new ArrayList(Arrays.asList(fields));
         try {

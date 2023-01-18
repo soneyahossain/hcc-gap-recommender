@@ -98,8 +98,8 @@ public class TestPartial_Constructors  { //extends TestCase {
      */
     @Test public void testConstructor() throws Throwable {
         Partial test = new Partial();
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(0, test.size());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(0, test.size());
     }
 
     //-----------------------------------------------------------------------
@@ -108,7 +108,7 @@ NoAssert.donothing(0, test.size());
      */
     @Test public void testConstructor_Chrono() throws Throwable {
         Partial test = new Partial((Chronology) null);
-NoAssert.donothing(ISO_UTC, test.getChronology());
+        assertEquals(ISO_UTC, test.getChronology());
 NoAssert.donothing(0, test.size());
         
         test = new Partial(GREGORIAN_PARIS);
@@ -122,11 +122,11 @@ NoAssert.donothing(0, test.size());
      */
     @Test public void testConstructor_Type_int() throws Throwable {
         Partial test = new Partial(DateTimeFieldType.dayOfYear(), 4);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1, test.size());
-NoAssert.donothing(4, test.getValue(0));
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1, test.size());
+        assertEquals(4, test.getValue(0));
 NoAssert.donothing(4, test.get(DateTimeFieldType.dayOfYear()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfYear()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.dayOfYear()));
     }
 
     /**
@@ -159,11 +159,11 @@ NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfYear()));
      */
     @Test public void testConstructor_Type_int_Chrono() throws Throwable {
         Partial test = new Partial(DateTimeFieldType.dayOfYear(), 4, GREGORIAN_PARIS);
-NoAssert.donothing(GREGORIAN_UTC, test.getChronology());
-NoAssert.donothing(1, test.size());
-NoAssert.donothing(4, test.getValue(0));
-NoAssert.donothing(4, test.get(DateTimeFieldType.dayOfYear()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfYear()));
+        assertEquals(GREGORIAN_UTC, test.getChronology());
+        assertEquals(1, test.size());
+        assertEquals(4, test.getValue(0));
+        assertEquals(4, test.get(DateTimeFieldType.dayOfYear()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.dayOfYear()));
     }
 
     /**
@@ -201,16 +201,16 @@ NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfYear()));
         };
         int[] values = new int[] {2005, 33};
         Partial test = new Partial(types, values);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(2, test.size());
-NoAssert.donothing(2005, test.getValue(0));
-NoAssert.donothing(2005, test.get(DateTimeFieldType.year()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.year()));
-NoAssert.donothing(33, test.getValue(1));
-NoAssert.donothing(33, test.get(DateTimeFieldType.dayOfYear()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfYear()));
-NoAssert.donothing(true, Arrays.equals(test.getFieldTypes(), types));
-NoAssert.donothing(true, Arrays.equals(test.getValues(), values));
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(2, test.size());
+        assertEquals(2005, test.getValue(0));
+        assertEquals(2005, test.get(DateTimeFieldType.year()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.year()));
+        assertEquals(33, test.getValue(1));
+        assertEquals(33, test.get(DateTimeFieldType.dayOfYear()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.dayOfYear()));
+        assertEquals(true, Arrays.equals(test.getFieldTypes(), types));
+        assertEquals(true, Arrays.equals(test.getValues(), values));
     }
 
     /**
@@ -223,16 +223,16 @@ NoAssert.donothing(true, Arrays.equals(test.getValues(), values));
         };
         int[] values = new int[] {2005, 2006};
         Partial test = new Partial(types, values);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(2, test.size());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(2, test.size());
 NoAssert.donothing(2005, test.getValue(0));
-NoAssert.donothing(2005, test.get(DateTimeFieldType.year()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.year()));
+        assertEquals(2005, test.get(DateTimeFieldType.year()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.year()));
 NoAssert.donothing(2006, test.getValue(1));
-NoAssert.donothing(2006, test.get(DateTimeFieldType.weekyear()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.weekyear()));
-NoAssert.donothing(true, Arrays.equals(test.getFieldTypes(), types));
-NoAssert.donothing(true, Arrays.equals(test.getValues(), values));
+        assertEquals(2006, test.get(DateTimeFieldType.weekyear()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.weekyear()));
+        assertEquals(true, Arrays.equals(test.getFieldTypes(), types));
+        assertEquals(true, Arrays.equals(test.getValues(), values));
     }
 
     /**
@@ -242,8 +242,8 @@ NoAssert.donothing(true, Arrays.equals(test.getValues(), values));
         DateTimeFieldType[] types = new DateTimeFieldType[0];
         int[] values = new int[0];
         Partial test = new Partial(types, values);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(0, test.size());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(0, test.size());
     }
 
     /**
@@ -446,16 +446,16 @@ NoAssert.donothing(0, test.size());
         };
         int[] values = new int[] {2005, 33};
         Partial test = new Partial(types, values, GREGORIAN_PARIS);
-NoAssert.donothing(GREGORIAN_UTC, test.getChronology());
-NoAssert.donothing(2, test.size());
-NoAssert.donothing(2005, test.getValue(0));
+        assertEquals(GREGORIAN_UTC, test.getChronology());
+        assertEquals(2, test.size());
+        assertEquals(2005, test.getValue(0));
 NoAssert.donothing(2005, test.get(DateTimeFieldType.year()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.year()));
-NoAssert.donothing(33, test.getValue(1));
-NoAssert.donothing(33, test.get(DateTimeFieldType.dayOfYear()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfYear()));
-NoAssert.donothing(true, Arrays.equals(test.getFieldTypes(), types));
-NoAssert.donothing(true, Arrays.equals(test.getValues(), values));
+        assertEquals(true, test.isSupported(DateTimeFieldType.year()));
+        assertEquals(33, test.getValue(1));
+        assertEquals(33, test.get(DateTimeFieldType.dayOfYear()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.dayOfYear()));
+        assertEquals(true, Arrays.equals(test.getFieldTypes(), types));
+        assertEquals(true, Arrays.equals(test.getValues(), values));
     }
 
     //-----------------------------------------------------------------------
@@ -467,15 +467,15 @@ NoAssert.donothing(true, Arrays.equals(test.getValues(), values));
         YearMonthDay ymd = new YearMonthDay(2005, 6, 25, GREGORIAN_PARIS);
         Partial test = new Partial(ymd);
 NoAssert.donothing(GREGORIAN_UTC, test.getChronology());
-NoAssert.donothing(3, test.size());
-NoAssert.donothing(2005, test.getValue(0));
-NoAssert.donothing(2005, test.get(DateTimeFieldType.year()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.year()));
-NoAssert.donothing(6, test.getValue(1));
-NoAssert.donothing(6, test.get(DateTimeFieldType.monthOfYear()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.monthOfYear()));
+        assertEquals(3, test.size());
+        assertEquals(2005, test.getValue(0));
+        assertEquals(2005, test.get(DateTimeFieldType.year()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.year()));
+        assertEquals(6, test.getValue(1));
+        assertEquals(6, test.get(DateTimeFieldType.monthOfYear()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.monthOfYear()));
 NoAssert.donothing(25, test.getValue(2));
-NoAssert.donothing(25, test.get(DateTimeFieldType.dayOfMonth()));
+        assertEquals(25, test.get(DateTimeFieldType.dayOfMonth()));
 NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfMonth()));
     }
 
@@ -499,7 +499,7 @@ NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfMonth()));
      * @param str  the string to check
      */
     private void assertMessageContains(Exception ex, String str) {
-NoAssert.donothing(ex.getMessage() + ": " + str, true, ex.getMessage().indexOf(str) >= 0);
+        assertEquals(ex.getMessage() + ": " + str, true, ex.getMessage().indexOf(str) >= 0);
     }
 
     /**
@@ -510,7 +510,7 @@ NoAssert.donothing(ex.getMessage() + ": " + str, true, ex.getMessage().indexOf(s
      * @param str2  the string to check
      */
     private void assertMessageContains(Exception ex, String str1, String str2) {
-NoAssert.donothing(ex.getMessage() + ": " + str1 + "/" + str2, true,
+        assertEquals(ex.getMessage() + ": " + str1 + "/" + str2, true,
             ex.getMessage().indexOf(str1) >= 0 &&
             ex.getMessage().indexOf(str2) >= 0 &&
             ex.getMessage().indexOf(str1) < ex.getMessage().indexOf(str2));

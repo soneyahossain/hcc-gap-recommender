@@ -166,8 +166,8 @@ public class TestMutableDateTime_Sets  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
 NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
@@ -175,90 +175,90 @@ NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString(
     @Test public void testSetMillis_long1() {
         MutableDateTime test = new MutableDateTime(TEST_TIME1);
         test.setMillis(TEST_TIME2);
-NoAssert.donothing(TEST_TIME2, test.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME2, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetChronology_Chronology1() {
         MutableDateTime test = new MutableDateTime(TEST_TIME1);
         test.setChronology(GregorianChronology.getInstance(PARIS));
-NoAssert.donothing(TEST_TIME1, test.getMillis());
-NoAssert.donothing(GregorianChronology.getInstance(PARIS), test.getChronology());
+        assertEquals(TEST_TIME1, test.getMillis());
+        assertEquals(GregorianChronology.getInstance(PARIS), test.getChronology());
     }        
 
     @Test public void testSetChronology_Chronology2() {
         MutableDateTime test = new MutableDateTime(TEST_TIME1);
         test.setChronology(null);
-NoAssert.donothing(TEST_TIME1, test.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME1, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetZone_DateTimeZone1() {
         MutableDateTime test = new MutableDateTime(TEST_TIME1);
         test.setZone(PARIS);
-NoAssert.donothing(TEST_TIME1, test.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(PARIS), test.getChronology());
+        assertEquals(TEST_TIME1, test.getMillis());
+        assertEquals(ISOChronology.getInstance(PARIS), test.getChronology());
     }        
 
     @Test public void testSetZone_DateTimeZone2() {
         MutableDateTime test = new MutableDateTime(TEST_TIME1);
         test.setZone(null);
 NoAssert.donothing(TEST_TIME1, test.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
     }        
 
     //-----------------------------------------------------------------------
     @Test public void testSetZoneRetainFields_DateTimeZone1() {
         MutableDateTime test = new MutableDateTime(TEST_TIME1);
         test.setZoneRetainFields(PARIS);
-NoAssert.donothing(TEST_TIME1 - DateTimeConstants.MILLIS_PER_HOUR, test.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(PARIS), test.getChronology());
+        assertEquals(TEST_TIME1 - DateTimeConstants.MILLIS_PER_HOUR, test.getMillis());
+        assertEquals(ISOChronology.getInstance(PARIS), test.getChronology());
     }        
 
     @Test public void testSetZoneRetainFields_DateTimeZone2() {
         MutableDateTime test = new MutableDateTime(TEST_TIME1);
         test.setZoneRetainFields(null);
-NoAssert.donothing(TEST_TIME1, test.getMillis());
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME1, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
     }        
 
     @Test public void testSetZoneRetainFields_DateTimeZone3() {
         MutableDateTime test = new MutableDateTime(TEST_TIME1, GregorianChronology.getInstance(PARIS));
         test.setZoneRetainFields(null);
-NoAssert.donothing(TEST_TIME1 + DateTimeConstants.MILLIS_PER_HOUR, test.getMillis());
-NoAssert.donothing(GregorianChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME1 + DateTimeConstants.MILLIS_PER_HOUR, test.getMillis());
+        assertEquals(GregorianChronology.getInstance(), test.getChronology());
     }        
 
     @Test public void testSetZoneRetainFields_DateTimeZone4() {
         Chronology chrono = new MockNullZoneChronology();
         MutableDateTime test = new MutableDateTime(TEST_TIME1, chrono);
         test.setZoneRetainFields(PARIS);
-NoAssert.donothing(TEST_TIME1 - DateTimeConstants.MILLIS_PER_HOUR, test.getMillis());
-NoAssert.donothing(chrono, test.getChronology());
+        assertEquals(TEST_TIME1 - DateTimeConstants.MILLIS_PER_HOUR, test.getMillis());
+        assertSame(chrono, test.getChronology());
     }        
 
     //-----------------------------------------------------------------------
     @Test public void testSetMillis_RI1() {
         MutableDateTime test = new MutableDateTime(TEST_TIME1, BuddhistChronology.getInstance());
         test.setMillis(new Instant(TEST_TIME2));
-NoAssert.donothing(TEST_TIME2, test.getMillis());
-NoAssert.donothing(BuddhistChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME2, test.getMillis());
+        assertEquals(BuddhistChronology.getInstance(), test.getChronology());
     }
 
     @Test public void testSetMillis_RI2() {
         MutableDateTime test = new MutableDateTime(TEST_TIME1, BuddhistChronology.getInstance());
         test.setMillis(null);
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
-NoAssert.donothing(BuddhistChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
+        assertEquals(BuddhistChronology.getInstance(), test.getChronology());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSet_DateTimeFieldType_int1() {
         MutableDateTime test = new MutableDateTime(TEST_TIME1);
         test.set(DateTimeFieldType.year(), 2010);
-NoAssert.donothing(2010, test.getYear());
+        assertEquals(2010, test.getYear());
     }
 
     @Test public void testSet_DateTimeFieldType_int2() {
@@ -267,7 +267,7 @@ NoAssert.donothing(2010, test.getYear());
             test.set(null, 0);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     @Test public void testSet_DateTimeFieldType_int3() {
@@ -276,20 +276,20 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
             test.set(DateTimeFieldType.monthOfYear(), 13);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetDate_int_int_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 12, 24, 48, 501);
         test.setDate(2010, 12, 3);
-NoAssert.donothing(2010, test.getYear());
-NoAssert.donothing(12, test.getMonthOfYear());
-NoAssert.donothing(3, test.getDayOfMonth());
-NoAssert.donothing(12, test.getHourOfDay());
-NoAssert.donothing(24, test.getMinuteOfHour());
-NoAssert.donothing(48, test.getSecondOfMinute());
-NoAssert.donothing(501, test.getMillisOfSecond());
+        assertEquals(2010, test.getYear());
+        assertEquals(12, test.getMonthOfYear());
+        assertEquals(3, test.getDayOfMonth());
+        assertEquals(12, test.getHourOfDay());
+        assertEquals(24, test.getMinuteOfHour());
+        assertEquals(48, test.getSecondOfMinute());
+        assertEquals(501, test.getMillisOfSecond());
     }
 
     @Test public void testSetDate_int_int_int2() {
@@ -298,7 +298,7 @@ NoAssert.donothing(501, test.getMillisOfSecond());
             test.setDate(2010, 13, 3);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
@@ -306,13 +306,13 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
         long setter = new DateTime(2010, 12, 3, 5, 7, 9, 501).getMillis();
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 12, 24, 48, 501);
         test.setDate(setter);
-NoAssert.donothing(2010, test.getYear());
-NoAssert.donothing(12, test.getMonthOfYear());
-NoAssert.donothing(3, test.getDayOfMonth());
-NoAssert.donothing(12, test.getHourOfDay());
-NoAssert.donothing(24, test.getMinuteOfHour());
-NoAssert.donothing(48, test.getSecondOfMinute());
-NoAssert.donothing(501, test.getMillisOfSecond());
+        assertEquals(2010, test.getYear());
+        assertEquals(12, test.getMonthOfYear());
+        assertEquals(3, test.getDayOfMonth());
+        assertEquals(12, test.getHourOfDay());
+        assertEquals(24, test.getMinuteOfHour());
+        assertEquals(48, test.getSecondOfMinute());
+        assertEquals(501, test.getMillisOfSecond());
     }
 
     //-----------------------------------------------------------------------
@@ -320,51 +320,51 @@ NoAssert.donothing(501, test.getMillisOfSecond());
         DateTime setter = new DateTime(2010, 12, 3, 5, 7, 9, 501);
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 12, 24, 48, 501);
         test.setDate(setter);
-NoAssert.donothing(2010, test.getYear());
-NoAssert.donothing(12, test.getMonthOfYear());
+        assertEquals(2010, test.getYear());
+        assertEquals(12, test.getMonthOfYear());
 NoAssert.donothing(3, test.getDayOfMonth());
-NoAssert.donothing(12, test.getHourOfDay());
-NoAssert.donothing(24, test.getMinuteOfHour());
-NoAssert.donothing(48, test.getSecondOfMinute());
-NoAssert.donothing(501, test.getMillisOfSecond());
+        assertEquals(12, test.getHourOfDay());
+        assertEquals(24, test.getMinuteOfHour());
+        assertEquals(48, test.getSecondOfMinute());
+        assertEquals(501, test.getMillisOfSecond());
     }
 
     @Test public void testSetDate_RI2() {
         MutableDateTime test = new MutableDateTime(2010, 7, 8, 12, 24, 48, 501);
         test.setDate(null);  // sets to TEST_TIME_NOW
-NoAssert.donothing(2002, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
-NoAssert.donothing(12, test.getHourOfDay());
-NoAssert.donothing(24, test.getMinuteOfHour());
-NoAssert.donothing(48, test.getSecondOfMinute());
-NoAssert.donothing(501, test.getMillisOfSecond());
+        assertEquals(2002, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
+        assertEquals(12, test.getHourOfDay());
+        assertEquals(24, test.getMinuteOfHour());
+        assertEquals(48, test.getSecondOfMinute());
+        assertEquals(501, test.getMillisOfSecond());
     }
 
     @Test public void testSetDate_RI_same() {
         MutableDateTime setter = new MutableDateTime(2010, 12, 3, 2, 24, 48, 501, DateTimeZone.forID("America/Los_Angeles"));
         MutableDateTime test = new MutableDateTime(2010, 12, 3, 2, 24, 48, 501, DateTimeZone.forID("America/Los_Angeles"));
         test.setDate(setter);
-NoAssert.donothing(2010, test.getYear());
-NoAssert.donothing(12, test.getMonthOfYear());
+        assertEquals(2010, test.getYear());
+        assertEquals(12, test.getMonthOfYear());
 NoAssert.donothing(3, test.getDayOfMonth());
-NoAssert.donothing(2, test.getHourOfDay());
-NoAssert.donothing(24, test.getMinuteOfHour());
-NoAssert.donothing(48, test.getSecondOfMinute());
-NoAssert.donothing(501, test.getMillisOfSecond());
+        assertEquals(2, test.getHourOfDay());
+        assertEquals(24, test.getMinuteOfHour());
+        assertEquals(48, test.getSecondOfMinute());
+        assertEquals(501, test.getMillisOfSecond());
     }
 
     @Test public void testSetDate_RI_different1() {
         MutableDateTime setter = new MutableDateTime(2010, 12, 1, 0, 0, 0, 0, DateTimeZone.forID("America/Los_Angeles"));
         MutableDateTime test = new MutableDateTime(2010, 12, 3, 2, 24, 48, 501, DateTimeZone.forID("Europe/Moscow"));
         test.setDate(setter);
-NoAssert.donothing(2010, test.getYear());
-NoAssert.donothing(12, test.getMonthOfYear());
-NoAssert.donothing(1, test.getDayOfMonth());
-NoAssert.donothing(2, test.getHourOfDay());
+        assertEquals(2010, test.getYear());
+        assertEquals(12, test.getMonthOfYear());
+        assertEquals(1, test.getDayOfMonth());
+        assertEquals(2, test.getHourOfDay());
 NoAssert.donothing(24, test.getMinuteOfHour());
-NoAssert.donothing(48, test.getSecondOfMinute());
-NoAssert.donothing(501, test.getMillisOfSecond());
+        assertEquals(48, test.getSecondOfMinute());
+        assertEquals(501, test.getMillisOfSecond());
     }
 
     @Test public void testSetDate_RI_different2() {
@@ -373,11 +373,11 @@ NoAssert.donothing(501, test.getMillisOfSecond());
         test.setDate(setter);
 NoAssert.donothing(2010, test.getYear());
 NoAssert.donothing(12, test.getMonthOfYear());
-NoAssert.donothing(1, test.getDayOfMonth());
-NoAssert.donothing(2, test.getHourOfDay());
-NoAssert.donothing(24, test.getMinuteOfHour());
-NoAssert.donothing(48, test.getSecondOfMinute());
-NoAssert.donothing(501, test.getMillisOfSecond());
+        assertEquals(1, test.getDayOfMonth());
+        assertEquals(2, test.getHourOfDay());
+        assertEquals(24, test.getMinuteOfHour());
+        assertEquals(48, test.getSecondOfMinute());
+        assertEquals(501, test.getMillisOfSecond());
     }
 
     //-----------------------------------------------------------------------
@@ -385,12 +385,12 @@ NoAssert.donothing(501, test.getMillisOfSecond());
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 12, 24, 48, 501);
         test.setTime(5, 6, 7, 8);
 NoAssert.donothing(2002, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
-NoAssert.donothing(5, test.getHourOfDay());
-NoAssert.donothing(6, test.getMinuteOfHour());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
+        assertEquals(5, test.getHourOfDay());
+        assertEquals(6, test.getMinuteOfHour());
 NoAssert.donothing(7, test.getSecondOfMinute());
-NoAssert.donothing(8, test.getMillisOfSecond());
+        assertEquals(8, test.getMillisOfSecond());
     }
 
     @Test public void testSetTime_int_int_int2() {
@@ -399,7 +399,7 @@ NoAssert.donothing(8, test.getMillisOfSecond());
             test.setTime(60, 6, 7, 8);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
@@ -407,13 +407,13 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
         long setter = new DateTime(2010, 12, 3, 5, 7, 9, 11).getMillis();
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 12, 24, 48, 501);
         test.setTime(setter);
-NoAssert.donothing(2002, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
+        assertEquals(2002, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
 NoAssert.donothing(5, test.getHourOfDay());
-NoAssert.donothing(7, test.getMinuteOfHour());
-NoAssert.donothing(9, test.getSecondOfMinute());
-NoAssert.donothing(11, test.getMillisOfSecond());
+        assertEquals(7, test.getMinuteOfHour());
+        assertEquals(9, test.getSecondOfMinute());
+        assertEquals(11, test.getMillisOfSecond());
     }
 
     //-----------------------------------------------------------------------
@@ -421,25 +421,25 @@ NoAssert.donothing(11, test.getMillisOfSecond());
         DateTime setter = new DateTime(2010, 12, 3, 5, 7, 9, 11);
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 12, 24, 48, 501);
         test.setTime(setter);
-NoAssert.donothing(2002, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
+        assertEquals(2002, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
 NoAssert.donothing(9, test.getDayOfMonth());
 NoAssert.donothing(5, test.getHourOfDay());
-NoAssert.donothing(7, test.getMinuteOfHour());
-NoAssert.donothing(9, test.getSecondOfMinute());
-NoAssert.donothing(11, test.getMillisOfSecond());
+        assertEquals(7, test.getMinuteOfHour());
+        assertEquals(9, test.getSecondOfMinute());
+        assertEquals(11, test.getMillisOfSecond());
     }
 
     @Test public void testSetTime_RI2() {
         MutableDateTime test = new MutableDateTime(2010, 7, 8, 12, 24, 48, 501);
         test.setTime(null);  // sets to TEST_TIME_NOW, which has no time part
 NoAssert.donothing(2010, test.getYear());
-NoAssert.donothing(7, test.getMonthOfYear());
-NoAssert.donothing(8, test.getDayOfMonth());
-NoAssert.donothing(new DateTime(TEST_TIME_NOW).getHourOfDay(), test.getHourOfDay());
-NoAssert.donothing(new DateTime(TEST_TIME_NOW).getMinuteOfHour(), test.getMinuteOfHour());
+        assertEquals(7, test.getMonthOfYear());
+        assertEquals(8, test.getDayOfMonth());
+        assertEquals(new DateTime(TEST_TIME_NOW).getHourOfDay(), test.getHourOfDay());
+        assertEquals(new DateTime(TEST_TIME_NOW).getMinuteOfHour(), test.getMinuteOfHour());
 NoAssert.donothing(new DateTime(TEST_TIME_NOW).getSecondOfMinute(), test.getSecondOfMinute());
-NoAssert.donothing(new DateTime(TEST_TIME_NOW).getMillisOfSecond(), test.getMillisOfSecond());
+        assertEquals(new DateTime(TEST_TIME_NOW).getMillisOfSecond(), test.getMillisOfSecond());
     }
 
     @Test public void testSetTime_Object3() {
@@ -447,13 +447,13 @@ NoAssert.donothing(new DateTime(TEST_TIME_NOW).getMillisOfSecond(), test.getMill
         DateTime setter = new DateTime(temp.getMillis(), new MockNullZoneChronology());
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 12, 24, 48, 501);
         test.setTime(setter);
-NoAssert.donothing(2002, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
+        assertEquals(2002, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
 NoAssert.donothing(9, test.getDayOfMonth());
-NoAssert.donothing(5, test.getHourOfDay());
-NoAssert.donothing(7, test.getMinuteOfHour());
-NoAssert.donothing(9, test.getSecondOfMinute());
-NoAssert.donothing(11, test.getMillisOfSecond());
+        assertEquals(5, test.getHourOfDay());
+        assertEquals(7, test.getMinuteOfHour());
+        assertEquals(9, test.getSecondOfMinute());
+        assertEquals(11, test.getMillisOfSecond());
     }
 
     //-----------------------------------------------------------------------
@@ -461,12 +461,12 @@ NoAssert.donothing(11, test.getMillisOfSecond());
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 12, 24, 48, 501);
         test.setDateTime(2010, 12, 3, 5, 6, 7, 8);
 NoAssert.donothing(2010, test.getYear());
-NoAssert.donothing(12, test.getMonthOfYear());
-NoAssert.donothing(3, test.getDayOfMonth());
+        assertEquals(12, test.getMonthOfYear());
+        assertEquals(3, test.getDayOfMonth());
 NoAssert.donothing(5, test.getHourOfDay());
-NoAssert.donothing(6, test.getMinuteOfHour());
-NoAssert.donothing(7, test.getSecondOfMinute());
-NoAssert.donothing(8, test.getMillisOfSecond());
+        assertEquals(6, test.getMinuteOfHour());
+        assertEquals(7, test.getSecondOfMinute());
+        assertEquals(8, test.getMillisOfSecond());
     }
     
     @Test public void testSetDateTime_int_int_int_int_int_int_int2() {
@@ -483,19 +483,19 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
     @Test public void testSetYear_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setYear(2010);
-NoAssert.donothing("2010-06-09T05:06:07.008+01:00", test.toString());
+        assertEquals("2010-06-09T05:06:07.008+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetMonthOfYear_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setMonthOfYear(12);
-NoAssert.donothing("2002-12-09T05:06:07.008Z", test.toString());
+        assertEquals("2002-12-09T05:06:07.008Z", test.toString());
     }
 
     @Test public void testSetMonthOfYear_int_dstOverlapSummer_addZero() {
         MutableDateTime test = new MutableDateTime(2011, 10, 30, 2, 30, 0, 0, DateTimeZone.forID("Europe/Berlin"));
-NoAssert.donothing("2011-10-30T02:30:00.000+02:00", test.toString());
+        assertEquals("2011-10-30T02:30:00.000+02:00", test.toString());
         test.setMonthOfYear(10);
 NoAssert.donothing("2011-10-30T02:30:00.000+02:00", test.toString());
     }
@@ -503,9 +503,9 @@ NoAssert.donothing("2011-10-30T02:30:00.000+02:00", test.toString());
     @Test public void testSetMonthOfYear_int_dstOverlapWinter_addZero() {
         MutableDateTime test = new MutableDateTime(2011, 10, 30, 2, 30, 0, 0, DateTimeZone.forID("Europe/Berlin"));
         test.addHours(1);
-NoAssert.donothing("2011-10-30T02:30:00.000+01:00", test.toString());
+        assertEquals("2011-10-30T02:30:00.000+01:00", test.toString());
         test.setMonthOfYear(10);
-NoAssert.donothing("2011-10-30T02:30:00.000+01:00", test.toString());
+        assertEquals("2011-10-30T02:30:00.000+01:00", test.toString());
     }
 
     @Test public void testSetMonthOfYear_int2() {
@@ -514,7 +514,7 @@ NoAssert.donothing("2011-10-30T02:30:00.000+01:00", test.toString());
             test.setMonthOfYear(13);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
+        assertEquals("2002-06-09T05:06:07.008+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -535,29 +535,29 @@ NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
 
     @Test public void testSetDayOfMonth_int_dstOverlapSummer_addZero() {
         MutableDateTime test = new MutableDateTime(2011, 10, 30, 2, 30, 0, 0, DateTimeZone.forID("Europe/Berlin"));
-NoAssert.donothing("2011-10-30T02:30:00.000+02:00", test.toString());
+        assertEquals("2011-10-30T02:30:00.000+02:00", test.toString());
         test.setDayOfMonth(30);
-NoAssert.donothing("2011-10-30T02:30:00.000+02:00", test.toString());
+        assertEquals("2011-10-30T02:30:00.000+02:00", test.toString());
     }
 
     @Test public void testSetDayOfMonth_int_dstOverlapWinter_addZero() {
         MutableDateTime test = new MutableDateTime(2011, 10, 30, 2, 30, 0, 0, DateTimeZone.forID("Europe/Berlin"));
         test.addHours(1);
-NoAssert.donothing("2011-10-30T02:30:00.000+01:00", test.toString());
+        assertEquals("2011-10-30T02:30:00.000+01:00", test.toString());
         test.setDayOfMonth(30);
-NoAssert.donothing("2011-10-30T02:30:00.000+01:00", test.toString());
+        assertEquals("2011-10-30T02:30:00.000+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetDayOfYear_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setDayOfYear(3);
-NoAssert.donothing("2002-01-03T05:06:07.008Z", test.toString());
+        assertEquals("2002-01-03T05:06:07.008Z", test.toString());
     }
 
     @Test public void testSetDayOfYear_int_dstOverlapSummer_addZero() {
         MutableDateTime test = new MutableDateTime(2011, 10, 30, 2, 30, 0, 0, DateTimeZone.forID("Europe/Berlin"));
-NoAssert.donothing("2011-10-30T02:30:00.000+02:00", test.toString());
+        assertEquals("2011-10-30T02:30:00.000+02:00", test.toString());
         test.setDayOfYear(303);
 NoAssert.donothing("2011-10-30T02:30:00.000+02:00", test.toString());
     }
@@ -565,9 +565,9 @@ NoAssert.donothing("2011-10-30T02:30:00.000+02:00", test.toString());
     @Test public void testSetDayOfYear_int_dstOverlapWinter_addZero() {
         MutableDateTime test = new MutableDateTime(2011, 10, 30, 2, 30, 0, 0, DateTimeZone.forID("Europe/Berlin"));
         test.addHours(1);
-NoAssert.donothing("2011-10-30T02:30:00.000+01:00", test.toString());
+        assertEquals("2011-10-30T02:30:00.000+01:00", test.toString());
         test.setDayOfYear(303);
-NoAssert.donothing("2011-10-30T02:30:00.000+01:00", test.toString());
+        assertEquals("2011-10-30T02:30:00.000+01:00", test.toString());
     }
 
     @Test public void testSetDayOfYear_int2() {
@@ -583,14 +583,14 @@ NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
     @Test public void testSetWeekyear_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setWeekyear(2001);
-NoAssert.donothing("2001-06-10T05:06:07.008+01:00", test.toString());
+        assertEquals("2001-06-10T05:06:07.008+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetWeekOfWeekyear_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setWeekOfWeekyear(2);
-NoAssert.donothing("2002-01-13T05:06:07.008Z", test.toString());
+        assertEquals("2002-01-13T05:06:07.008Z", test.toString());
     }
 
     @Test public void testSetWeekOfWeekyear_int2() {
@@ -599,14 +599,14 @@ NoAssert.donothing("2002-01-13T05:06:07.008Z", test.toString());
             test.setWeekOfWeekyear(53);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
+        assertEquals("2002-06-09T05:06:07.008+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetDayOfWeek_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setDayOfWeek(5);
-NoAssert.donothing("2002-06-07T05:06:07.008+01:00", test.toString());
+        assertEquals("2002-06-07T05:06:07.008+01:00", test.toString());
     }
 
     @Test public void testSetDayOfWeek_int2() {
@@ -615,14 +615,14 @@ NoAssert.donothing("2002-06-07T05:06:07.008+01:00", test.toString());
             test.setDayOfWeek(8);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
+        assertEquals("2002-06-09T05:06:07.008+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetHourOfDay_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setHourOfDay(13);
-NoAssert.donothing("2002-06-09T13:06:07.008+01:00", test.toString());
+        assertEquals("2002-06-09T13:06:07.008+01:00", test.toString());
     }
 
     @Test public void testSetHourOfDay_int2() {
@@ -631,14 +631,14 @@ NoAssert.donothing("2002-06-09T13:06:07.008+01:00", test.toString());
             test.setHourOfDay(24);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
+        assertEquals("2002-06-09T05:06:07.008+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetMinuteOfHour_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setMinuteOfHour(13);
-NoAssert.donothing("2002-06-09T05:13:07.008+01:00", test.toString());
+        assertEquals("2002-06-09T05:13:07.008+01:00", test.toString());
     }
 
     @Test public void testSetMinuteOfHour_int2() {
@@ -647,7 +647,7 @@ NoAssert.donothing("2002-06-09T05:13:07.008+01:00", test.toString());
             test.setMinuteOfHour(60);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
+        assertEquals("2002-06-09T05:06:07.008+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -663,14 +663,14 @@ NoAssert.donothing("2002-06-09T00:13:07.008+01:00", test.toString());
             test.setMinuteOfDay(24 * 60);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
+        assertEquals("2002-06-09T05:06:07.008+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetSecondOfMinute_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setSecondOfMinute(13);
-NoAssert.donothing("2002-06-09T05:06:13.008+01:00", test.toString());
+        assertEquals("2002-06-09T05:06:13.008+01:00", test.toString());
     }
 
     @Test public void testSetSecondOfMinute_int2() {
@@ -679,14 +679,14 @@ NoAssert.donothing("2002-06-09T05:06:13.008+01:00", test.toString());
             test.setSecondOfMinute(60);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
+        assertEquals("2002-06-09T05:06:07.008+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetSecondOfDay_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setSecondOfDay(13);
-NoAssert.donothing("2002-06-09T00:00:13.008+01:00", test.toString());
+        assertEquals("2002-06-09T00:00:13.008+01:00", test.toString());
     }
 
     @Test public void testSetSecondOfDay_int2() {
@@ -695,14 +695,14 @@ NoAssert.donothing("2002-06-09T00:00:13.008+01:00", test.toString());
             test.setSecondOfDay(24 * 60 * 60);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
+        assertEquals("2002-06-09T05:06:07.008+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetMilliOfSecond_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setMillisOfSecond(13);
-NoAssert.donothing("2002-06-09T05:06:07.013+01:00", test.toString());
+        assertEquals("2002-06-09T05:06:07.013+01:00", test.toString());
     }
 
     @Test public void testSetMilliOfSecond_int2() {
@@ -718,7 +718,7 @@ NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
     @Test public void testSetMilliOfDay_int1() {
         MutableDateTime test = new MutableDateTime(2002, 6, 9, 5, 6, 7, 8);
         test.setMillisOfDay(13);
-NoAssert.donothing("2002-06-09T00:00:00.013+01:00", test.toString());
+        assertEquals("2002-06-09T00:00:00.013+01:00", test.toString());
     }
 
     @Test public void testSetMilliOfDay_int2() {
@@ -727,7 +727,7 @@ NoAssert.donothing("2002-06-09T00:00:00.013+01:00", test.toString());
             test.setMillisOfDay(24 * 60 * 60 * 1000);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing("2002-06-09T05:06:07.008+01:00", test.toString());
+        assertEquals("2002-06-09T05:06:07.008+01:00", test.toString());
     }
 
 }

@@ -123,193 +123,193 @@ public class TestISOChronology { // extends TestCase {
     //-----------------------------------------------------------------------
     @Test
     public void testFactoryUTC() {
-NoAssert.donothing(DateTimeZone.UTC, ISOChronology.getInstanceUTC().getZone());
-NoAssert.donothing(ISOChronology.class, ISOChronology.getInstanceUTC().getClass());
+        assertEquals(DateTimeZone.UTC, ISOChronology.getInstanceUTC().getZone());
+        assertSame(ISOChronology.class, ISOChronology.getInstanceUTC().getClass());
     }
     @Test
     public void testFactory() {
 NoAssert.donothing(LONDON, ISOChronology.getInstance().getZone());
-NoAssert.donothing(ISOChronology.class, ISOChronology.getInstance().getClass());
+        assertSame(ISOChronology.class, ISOChronology.getInstance().getClass());
     }
     @Test
     public void testFactory_Zone() {
-NoAssert.donothing(TOKYO, ISOChronology.getInstance(TOKYO).getZone());
+        assertEquals(TOKYO, ISOChronology.getInstance(TOKYO).getZone());
 NoAssert.donothing(PARIS, ISOChronology.getInstance(PARIS).getZone());
-NoAssert.donothing(LONDON, ISOChronology.getInstance(null).getZone());
-NoAssert.donothing(ISOChronology.class, ISOChronology.getInstance(TOKYO).getClass());
+        assertEquals(LONDON, ISOChronology.getInstance(null).getZone());
+        assertSame(ISOChronology.class, ISOChronology.getInstance(TOKYO).getClass());
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testEquality() {
-NoAssert.donothing(ISOChronology.getInstance(TOKYO), ISOChronology.getInstance(TOKYO));
-NoAssert.donothing(ISOChronology.getInstance(LONDON), ISOChronology.getInstance(LONDON));
-NoAssert.donothing(ISOChronology.getInstance(PARIS), ISOChronology.getInstance(PARIS));
-NoAssert.donothing(ISOChronology.getInstanceUTC(), ISOChronology.getInstanceUTC());
-NoAssert.donothing(ISOChronology.getInstance(), ISOChronology.getInstance(LONDON));
+        assertSame(ISOChronology.getInstance(TOKYO), ISOChronology.getInstance(TOKYO));
+        assertSame(ISOChronology.getInstance(LONDON), ISOChronology.getInstance(LONDON));
+        assertSame(ISOChronology.getInstance(PARIS), ISOChronology.getInstance(PARIS));
+        assertSame(ISOChronology.getInstanceUTC(), ISOChronology.getInstanceUTC());
+        assertSame(ISOChronology.getInstance(), ISOChronology.getInstance(LONDON));
     }
     @Test
     public void testWithUTC() {
 NoAssert.donothing(ISOChronology.getInstanceUTC(), ISOChronology.getInstance(LONDON).withUTC());
-NoAssert.donothing(ISOChronology.getInstanceUTC(), ISOChronology.getInstance(TOKYO).withUTC());
-NoAssert.donothing(ISOChronology.getInstanceUTC(), ISOChronology.getInstanceUTC().withUTC());
-NoAssert.donothing(ISOChronology.getInstanceUTC(), ISOChronology.getInstance().withUTC());
+        assertSame(ISOChronology.getInstanceUTC(), ISOChronology.getInstance(TOKYO).withUTC());
+        assertSame(ISOChronology.getInstanceUTC(), ISOChronology.getInstanceUTC().withUTC());
+        assertSame(ISOChronology.getInstanceUTC(), ISOChronology.getInstance().withUTC());
     }
     @Test
     public void testWithZone() {
-NoAssert.donothing(ISOChronology.getInstance(TOKYO), ISOChronology.getInstance(TOKYO).withZone(TOKYO));
-NoAssert.donothing(ISOChronology.getInstance(LONDON), ISOChronology.getInstance(TOKYO).withZone(LONDON));
-NoAssert.donothing(ISOChronology.getInstance(PARIS), ISOChronology.getInstance(TOKYO).withZone(PARIS));
-NoAssert.donothing(ISOChronology.getInstance(LONDON), ISOChronology.getInstance(TOKYO).withZone(null));
-NoAssert.donothing(ISOChronology.getInstance(PARIS), ISOChronology.getInstance().withZone(PARIS));
-NoAssert.donothing(ISOChronology.getInstance(PARIS), ISOChronology.getInstanceUTC().withZone(PARIS));
+        assertSame(ISOChronology.getInstance(TOKYO), ISOChronology.getInstance(TOKYO).withZone(TOKYO));
+        assertSame(ISOChronology.getInstance(LONDON), ISOChronology.getInstance(TOKYO).withZone(LONDON));
+        assertSame(ISOChronology.getInstance(PARIS), ISOChronology.getInstance(TOKYO).withZone(PARIS));
+        assertSame(ISOChronology.getInstance(LONDON), ISOChronology.getInstance(TOKYO).withZone(null));
+        assertSame(ISOChronology.getInstance(PARIS), ISOChronology.getInstance().withZone(PARIS));
+        assertSame(ISOChronology.getInstance(PARIS), ISOChronology.getInstanceUTC().withZone(PARIS));
     }
     @Test
     public void testToString() {
 NoAssert.donothing("ISOChronology[Europe/London]", ISOChronology.getInstance(LONDON).toString());
-NoAssert.donothing("ISOChronology[Asia/Tokyo]", ISOChronology.getInstance(TOKYO).toString());
-NoAssert.donothing("ISOChronology[Europe/London]", ISOChronology.getInstance().toString());
-NoAssert.donothing("ISOChronology[UTC]", ISOChronology.getInstanceUTC().toString());
+        assertEquals("ISOChronology[Asia/Tokyo]", ISOChronology.getInstance(TOKYO).toString());
+        assertEquals("ISOChronology[Europe/London]", ISOChronology.getInstance().toString());
+        assertEquals("ISOChronology[UTC]", ISOChronology.getInstanceUTC().toString());
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testDurationFields() {
         final ISOChronology iso = ISOChronology.getInstance();
-NoAssert.donothing("eras", iso.eras().getName());
-NoAssert.donothing("centuries", iso.centuries().getName());
-NoAssert.donothing("years", iso.years().getName());
+        assertEquals("eras", iso.eras().getName());
+        assertEquals("centuries", iso.centuries().getName());
+        assertEquals("years", iso.years().getName());
 NoAssert.donothing("weekyears", iso.weekyears().getName());
-NoAssert.donothing("months", iso.months().getName());
-NoAssert.donothing("weeks", iso.weeks().getName());
-NoAssert.donothing("days", iso.days().getName());
-NoAssert.donothing("halfdays", iso.halfdays().getName());
-NoAssert.donothing("hours", iso.hours().getName());
-NoAssert.donothing("minutes", iso.minutes().getName());
+        assertEquals("months", iso.months().getName());
+        assertEquals("weeks", iso.weeks().getName());
+        assertEquals("days", iso.days().getName());
+        assertEquals("halfdays", iso.halfdays().getName());
+        assertEquals("hours", iso.hours().getName());
+        assertEquals("minutes", iso.minutes().getName());
 NoAssert.donothing("seconds", iso.seconds().getName());
-NoAssert.donothing("millis", iso.millis().getName());
+        assertEquals("millis", iso.millis().getName());
         
-NoAssert.donothing(false, iso.eras().isSupported());
-NoAssert.donothing(true, iso.centuries().isSupported());
-NoAssert.donothing(true, iso.years().isSupported());
+        assertEquals(false, iso.eras().isSupported());
+        assertEquals(true, iso.centuries().isSupported());
+        assertEquals(true, iso.years().isSupported());
 NoAssert.donothing(true, iso.weekyears().isSupported());
 NoAssert.donothing(true, iso.months().isSupported());
-NoAssert.donothing(true, iso.weeks().isSupported());
-NoAssert.donothing(true, iso.days().isSupported());
-NoAssert.donothing(true, iso.halfdays().isSupported());
-NoAssert.donothing(true, iso.hours().isSupported());
-NoAssert.donothing(true, iso.minutes().isSupported());
-NoAssert.donothing(true, iso.seconds().isSupported());
+        assertEquals(true, iso.weeks().isSupported());
+        assertEquals(true, iso.days().isSupported());
+        assertEquals(true, iso.halfdays().isSupported());
+        assertEquals(true, iso.hours().isSupported());
+        assertEquals(true, iso.minutes().isSupported());
+        assertEquals(true, iso.seconds().isSupported());
 NoAssert.donothing(true, iso.millis().isSupported());
         
-NoAssert.donothing(false, iso.centuries().isPrecise());
-NoAssert.donothing(false, iso.years().isPrecise());
+        assertEquals(false, iso.centuries().isPrecise());
+        assertEquals(false, iso.years().isPrecise());
 NoAssert.donothing(false, iso.weekyears().isPrecise());
-NoAssert.donothing(false, iso.months().isPrecise());
-NoAssert.donothing(false, iso.weeks().isPrecise());
-NoAssert.donothing(false, iso.days().isPrecise());
-NoAssert.donothing(false, iso.halfdays().isPrecise());
+        assertEquals(false, iso.months().isPrecise());
+        assertEquals(false, iso.weeks().isPrecise());
+        assertEquals(false, iso.days().isPrecise());
+        assertEquals(false, iso.halfdays().isPrecise());
 NoAssert.donothing(true, iso.hours().isPrecise());
-NoAssert.donothing(true, iso.minutes().isPrecise());
+        assertEquals(true, iso.minutes().isPrecise());
 NoAssert.donothing(true, iso.seconds().isPrecise());
-NoAssert.donothing(true, iso.millis().isPrecise());
+        assertEquals(true, iso.millis().isPrecise());
         
         final ISOChronology isoUTC = ISOChronology.getInstanceUTC();
 NoAssert.donothing(false, isoUTC.centuries().isPrecise());
-NoAssert.donothing(false, isoUTC.years().isPrecise());
-NoAssert.donothing(false, isoUTC.weekyears().isPrecise());
+        assertEquals(false, isoUTC.years().isPrecise());
+        assertEquals(false, isoUTC.weekyears().isPrecise());
 NoAssert.donothing(false, isoUTC.months().isPrecise());
-NoAssert.donothing(true, isoUTC.weeks().isPrecise());
-NoAssert.donothing(true, isoUTC.days().isPrecise());
-NoAssert.donothing(true, isoUTC.halfdays().isPrecise());
+        assertEquals(true, isoUTC.weeks().isPrecise());
+        assertEquals(true, isoUTC.days().isPrecise());
+        assertEquals(true, isoUTC.halfdays().isPrecise());
 NoAssert.donothing(true, isoUTC.hours().isPrecise());
-NoAssert.donothing(true, isoUTC.minutes().isPrecise());
+        assertEquals(true, isoUTC.minutes().isPrecise());
 NoAssert.donothing(true, isoUTC.seconds().isPrecise());
 NoAssert.donothing(true, isoUTC.millis().isPrecise());
         
         final DateTimeZone gmt = DateTimeZone.forID("Etc/GMT");
         final ISOChronology isoGMT = ISOChronology.getInstance(gmt);
-NoAssert.donothing(false, isoGMT.centuries().isPrecise());
-NoAssert.donothing(false, isoGMT.years().isPrecise());
-NoAssert.donothing(false, isoGMT.weekyears().isPrecise());
-NoAssert.donothing(false, isoGMT.months().isPrecise());
+        assertEquals(false, isoGMT.centuries().isPrecise());
+        assertEquals(false, isoGMT.years().isPrecise());
+        assertEquals(false, isoGMT.weekyears().isPrecise());
+        assertEquals(false, isoGMT.months().isPrecise());
 NoAssert.donothing(true, isoGMT.weeks().isPrecise());
-NoAssert.donothing(true, isoGMT.days().isPrecise());
-NoAssert.donothing(true, isoGMT.halfdays().isPrecise());
-NoAssert.donothing(true, isoGMT.hours().isPrecise());
-NoAssert.donothing(true, isoGMT.minutes().isPrecise());
-NoAssert.donothing(true, isoGMT.seconds().isPrecise());
-NoAssert.donothing(true, isoGMT.millis().isPrecise());
+        assertEquals(true, isoGMT.days().isPrecise());
+        assertEquals(true, isoGMT.halfdays().isPrecise());
+        assertEquals(true, isoGMT.hours().isPrecise());
+        assertEquals(true, isoGMT.minutes().isPrecise());
+        assertEquals(true, isoGMT.seconds().isPrecise());
+        assertEquals(true, isoGMT.millis().isPrecise());
         
         final DateTimeZone offset = DateTimeZone.forOffsetHours(1);
         final ISOChronology isoOffset1 = ISOChronology.getInstance(offset);
-NoAssert.donothing(false, isoOffset1.centuries().isPrecise());
-NoAssert.donothing(false, isoOffset1.years().isPrecise());
+        assertEquals(false, isoOffset1.centuries().isPrecise());
+        assertEquals(false, isoOffset1.years().isPrecise());
 NoAssert.donothing(false, isoOffset1.weekyears().isPrecise());
-NoAssert.donothing(false, isoOffset1.months().isPrecise());
-NoAssert.donothing(true, isoOffset1.weeks().isPrecise());
-NoAssert.donothing(true, isoOffset1.days().isPrecise());
-NoAssert.donothing(true, isoOffset1.halfdays().isPrecise());
-NoAssert.donothing(true, isoOffset1.hours().isPrecise());
+        assertEquals(false, isoOffset1.months().isPrecise());
+        assertEquals(true, isoOffset1.weeks().isPrecise());
+        assertEquals(true, isoOffset1.days().isPrecise());
+        assertEquals(true, isoOffset1.halfdays().isPrecise());
+        assertEquals(true, isoOffset1.hours().isPrecise());
 NoAssert.donothing(true, isoOffset1.minutes().isPrecise());
-NoAssert.donothing(true, isoOffset1.seconds().isPrecise());
-NoAssert.donothing(true, isoOffset1.millis().isPrecise());
+        assertEquals(true, isoOffset1.seconds().isPrecise());
+        assertEquals(true, isoOffset1.millis().isPrecise());
     }
 
 
     @Test
     public void testDateFields() {
         final ISOChronology iso = ISOChronology.getInstance();
-NoAssert.donothing("era", iso.era().getName());
+        assertEquals("era", iso.era().getName());
 NoAssert.donothing("centuryOfEra", iso.centuryOfEra().getName());
-NoAssert.donothing("yearOfCentury", iso.yearOfCentury().getName());
-NoAssert.donothing("yearOfEra", iso.yearOfEra().getName());
-NoAssert.donothing("year", iso.year().getName());
-NoAssert.donothing("monthOfYear", iso.monthOfYear().getName());
-NoAssert.donothing("weekyearOfCentury", iso.weekyearOfCentury().getName());
+        assertEquals("yearOfCentury", iso.yearOfCentury().getName());
+        assertEquals("yearOfEra", iso.yearOfEra().getName());
+        assertEquals("year", iso.year().getName());
+        assertEquals("monthOfYear", iso.monthOfYear().getName());
+        assertEquals("weekyearOfCentury", iso.weekyearOfCentury().getName());
 NoAssert.donothing("weekyear", iso.weekyear().getName());
 NoAssert.donothing("weekOfWeekyear", iso.weekOfWeekyear().getName());
-NoAssert.donothing("dayOfYear", iso.dayOfYear().getName());
+        assertEquals("dayOfYear", iso.dayOfYear().getName());
 NoAssert.donothing("dayOfMonth", iso.dayOfMonth().getName());
-NoAssert.donothing("dayOfWeek", iso.dayOfWeek().getName());
+        assertEquals("dayOfWeek", iso.dayOfWeek().getName());
         
-NoAssert.donothing(true, iso.era().isSupported());
-NoAssert.donothing(true, iso.centuryOfEra().isSupported());
-NoAssert.donothing(true, iso.yearOfCentury().isSupported());
-NoAssert.donothing(true, iso.yearOfEra().isSupported());
-NoAssert.donothing(true, iso.year().isSupported());
-NoAssert.donothing(true, iso.monthOfYear().isSupported());
+        assertEquals(true, iso.era().isSupported());
+        assertEquals(true, iso.centuryOfEra().isSupported());
+        assertEquals(true, iso.yearOfCentury().isSupported());
+        assertEquals(true, iso.yearOfEra().isSupported());
+        assertEquals(true, iso.year().isSupported());
+        assertEquals(true, iso.monthOfYear().isSupported());
 NoAssert.donothing(true, iso.weekyearOfCentury().isSupported());
-NoAssert.donothing(true, iso.weekyear().isSupported());
-NoAssert.donothing(true, iso.weekOfWeekyear().isSupported());
-NoAssert.donothing(true, iso.dayOfYear().isSupported());
-NoAssert.donothing(true, iso.dayOfMonth().isSupported());
+        assertEquals(true, iso.weekyear().isSupported());
+        assertEquals(true, iso.weekOfWeekyear().isSupported());
+        assertEquals(true, iso.dayOfYear().isSupported());
+        assertEquals(true, iso.dayOfMonth().isSupported());
 NoAssert.donothing(true, iso.dayOfWeek().isSupported());
         
-NoAssert.donothing(iso.eras(), iso.era().getDurationField());
-NoAssert.donothing(iso.centuries(), iso.centuryOfEra().getDurationField());
-NoAssert.donothing(iso.years(), iso.yearOfCentury().getDurationField());
-NoAssert.donothing(iso.years(), iso.yearOfEra().getDurationField());
-NoAssert.donothing(iso.years(), iso.year().getDurationField());
+        assertEquals(iso.eras(), iso.era().getDurationField());
+        assertEquals(iso.centuries(), iso.centuryOfEra().getDurationField());
+        assertEquals(iso.years(), iso.yearOfCentury().getDurationField());
+        assertEquals(iso.years(), iso.yearOfEra().getDurationField());
+        assertEquals(iso.years(), iso.year().getDurationField());
 NoAssert.donothing(iso.months(), iso.monthOfYear().getDurationField());
-NoAssert.donothing(iso.weekyears(), iso.weekyearOfCentury().getDurationField());
-NoAssert.donothing(iso.weekyears(), iso.weekyear().getDurationField());
-NoAssert.donothing(iso.weeks(), iso.weekOfWeekyear().getDurationField());
-NoAssert.donothing(iso.days(), iso.dayOfYear().getDurationField());
-NoAssert.donothing(iso.days(), iso.dayOfMonth().getDurationField());
-NoAssert.donothing(iso.days(), iso.dayOfWeek().getDurationField());
+        assertEquals(iso.weekyears(), iso.weekyearOfCentury().getDurationField());
+        assertEquals(iso.weekyears(), iso.weekyear().getDurationField());
+        assertEquals(iso.weeks(), iso.weekOfWeekyear().getDurationField());
+        assertEquals(iso.days(), iso.dayOfYear().getDurationField());
+        assertEquals(iso.days(), iso.dayOfMonth().getDurationField());
+        assertEquals(iso.days(), iso.dayOfWeek().getDurationField());
         
-NoAssert.donothing(null, iso.era().getRangeDurationField());
-NoAssert.donothing(iso.eras(), iso.centuryOfEra().getRangeDurationField());
-NoAssert.donothing(iso.centuries(), iso.yearOfCentury().getRangeDurationField());
-NoAssert.donothing(iso.eras(), iso.yearOfEra().getRangeDurationField());
+        assertEquals(null, iso.era().getRangeDurationField());
+        assertEquals(iso.eras(), iso.centuryOfEra().getRangeDurationField());
+        assertEquals(iso.centuries(), iso.yearOfCentury().getRangeDurationField());
+        assertEquals(iso.eras(), iso.yearOfEra().getRangeDurationField());
 NoAssert.donothing(null, iso.year().getRangeDurationField());
 NoAssert.donothing(iso.years(), iso.monthOfYear().getRangeDurationField());
-NoAssert.donothing(iso.centuries(), iso.weekyearOfCentury().getRangeDurationField());
-NoAssert.donothing(null, iso.weekyear().getRangeDurationField());
-NoAssert.donothing(iso.weekyears(), iso.weekOfWeekyear().getRangeDurationField());
-NoAssert.donothing(iso.years(), iso.dayOfYear().getRangeDurationField());
-NoAssert.donothing(iso.months(), iso.dayOfMonth().getRangeDurationField());
+        assertEquals(iso.centuries(), iso.weekyearOfCentury().getRangeDurationField());
+        assertEquals(null, iso.weekyear().getRangeDurationField());
+        assertEquals(iso.weekyears(), iso.weekOfWeekyear().getRangeDurationField());
+        assertEquals(iso.years(), iso.dayOfYear().getRangeDurationField());
+        assertEquals(iso.months(), iso.dayOfMonth().getRangeDurationField());
 NoAssert.donothing(iso.weeks(), iso.dayOfWeek().getRangeDurationField());
     }
 
@@ -317,29 +317,29 @@ NoAssert.donothing(iso.weeks(), iso.dayOfWeek().getRangeDurationField());
     @Test
     public void testTimeFields() {
         final ISOChronology iso = ISOChronology.getInstance();
-NoAssert.donothing("halfdayOfDay", iso.halfdayOfDay().getName());
-NoAssert.donothing("clockhourOfHalfday", iso.clockhourOfHalfday().getName());
-NoAssert.donothing("hourOfHalfday", iso.hourOfHalfday().getName());
+        assertEquals("halfdayOfDay", iso.halfdayOfDay().getName());
+        assertEquals("clockhourOfHalfday", iso.clockhourOfHalfday().getName());
+        assertEquals("hourOfHalfday", iso.hourOfHalfday().getName());
 NoAssert.donothing("clockhourOfDay", iso.clockhourOfDay().getName());
-NoAssert.donothing("hourOfDay", iso.hourOfDay().getName());
-NoAssert.donothing("minuteOfDay", iso.minuteOfDay().getName());
+        assertEquals("hourOfDay", iso.hourOfDay().getName());
+        assertEquals("minuteOfDay", iso.minuteOfDay().getName());
 NoAssert.donothing("minuteOfHour", iso.minuteOfHour().getName());
-NoAssert.donothing("secondOfDay", iso.secondOfDay().getName());
-NoAssert.donothing("secondOfMinute", iso.secondOfMinute().getName());
-NoAssert.donothing("millisOfDay", iso.millisOfDay().getName());
-NoAssert.donothing("millisOfSecond", iso.millisOfSecond().getName());
+        assertEquals("secondOfDay", iso.secondOfDay().getName());
+        assertEquals("secondOfMinute", iso.secondOfMinute().getName());
+        assertEquals("millisOfDay", iso.millisOfDay().getName());
+        assertEquals("millisOfSecond", iso.millisOfSecond().getName());
         
-NoAssert.donothing(true, iso.halfdayOfDay().isSupported());
+        assertEquals(true, iso.halfdayOfDay().isSupported());
 NoAssert.donothing(true, iso.clockhourOfHalfday().isSupported());
-NoAssert.donothing(true, iso.hourOfHalfday().isSupported());
-NoAssert.donothing(true, iso.clockhourOfDay().isSupported());
-NoAssert.donothing(true, iso.hourOfDay().isSupported());
+        assertEquals(true, iso.hourOfHalfday().isSupported());
+        assertEquals(true, iso.clockhourOfDay().isSupported());
+        assertEquals(true, iso.hourOfDay().isSupported());
 NoAssert.donothing(true, iso.minuteOfDay().isSupported());
-NoAssert.donothing(true, iso.minuteOfHour().isSupported());
-NoAssert.donothing(true, iso.secondOfDay().isSupported());
-NoAssert.donothing(true, iso.secondOfMinute().isSupported());
+        assertEquals(true, iso.minuteOfHour().isSupported());
+        assertEquals(true, iso.secondOfDay().isSupported());
+        assertEquals(true, iso.secondOfMinute().isSupported());
 NoAssert.donothing(true, iso.millisOfDay().isSupported());
-NoAssert.donothing(true, iso.millisOfSecond().isSupported());
+        assertEquals(true, iso.millisOfSecond().isSupported());
     }
 
     @Test
@@ -350,16 +350,16 @@ NoAssert.donothing(true, iso.millisOfSecond().isSupported());
         DateTime start = new DateTime(maxYear, 1, 1, 0, 0, 0, 0, chrono);
         DateTime end = new DateTime(maxYear, 12, 31, 23, 59, 59, 999, chrono);
 NoAssert.donothing(start.getMillis() > 0);
-NoAssert.donothing(end.getMillis() > start.getMillis());
-NoAssert.donothing(maxYear, start.getYear());
-NoAssert.donothing(maxYear, end.getYear());
+        assertTrue(end.getMillis() > start.getMillis());
+        assertEquals(maxYear, start.getYear());
+        assertEquals(maxYear, end.getYear());
         long delta = end.getMillis() - start.getMillis();
         long expectedDelta = 
             (start.year().isLeap() ? 366L : 365L) * DateTimeConstants.MILLIS_PER_DAY - 1;
-NoAssert.donothing(expectedDelta, delta);
+        assertEquals(expectedDelta, delta);
 
 NoAssert.donothing(start, new DateTime(maxYear + "-01-01T00:00:00.000Z", chrono));
-NoAssert.donothing(end, new DateTime(maxYear + "-12-31T23:59:59.999Z", chrono));
+        assertEquals(end, new DateTime(maxYear + "-12-31T23:59:59.999Z", chrono));
 
         try {
             start.plusYears(1);
@@ -373,7 +373,7 @@ NoAssert.donothing(end, new DateTime(maxYear + "-12-31T23:59:59.999Z", chrono));
         } catch (IllegalFieldValueException e) {
         }
 
-NoAssert.donothing(maxYear + 1, chrono.year().get(Long.MAX_VALUE));
+        assertEquals(maxYear + 1, chrono.year().get(Long.MAX_VALUE));
     }
 
 
@@ -384,17 +384,17 @@ NoAssert.donothing(maxYear + 1, chrono.year().get(Long.MAX_VALUE));
 
         DateTime start = new DateTime(minYear, 1, 1, 0, 0, 0, 0, chrono);
         DateTime end = new DateTime(minYear, 12, 31, 23, 59, 59, 999, chrono);
-NoAssert.donothing(start.getMillis() < 0);
-NoAssert.donothing(end.getMillis() > start.getMillis());
-NoAssert.donothing(minYear, start.getYear());
-NoAssert.donothing(minYear, end.getYear());
+        assertTrue(start.getMillis() < 0);
+        assertTrue(end.getMillis() > start.getMillis());
+        assertEquals(minYear, start.getYear());
+        assertEquals(minYear, end.getYear());
         long delta = end.getMillis() - start.getMillis();
         long expectedDelta = 
             (start.year().isLeap() ? 366L : 365L) * DateTimeConstants.MILLIS_PER_DAY - 1;
-NoAssert.donothing(expectedDelta, delta);
+        assertEquals(expectedDelta, delta);
 
 NoAssert.donothing(start, new DateTime(minYear + "-01-01T00:00:00.000Z", chrono));
-NoAssert.donothing(end, new DateTime(minYear + "-12-31T23:59:59.999Z", chrono));
+        assertEquals(end, new DateTime(minYear + "-12-31T23:59:59.999Z", chrono));
 
         try {
             start.minusYears(1);
@@ -452,20 +452,20 @@ NoAssert.donothing(minYear - 1, chrono.year().get(Long.MIN_VALUE));
     private void testAdd(String start, DurationFieldType type, int amt, String end) {
         DateTime dtStart = new DateTime(start, ISOChronology.getInstanceUTC());
         DateTime dtEnd = new DateTime(end, ISOChronology.getInstanceUTC());
-NoAssert.donothing(dtEnd, dtStart.withFieldAdded(type, amt));
-NoAssert.donothing(dtStart, dtEnd.withFieldAdded(type, -amt));
+        assertEquals(dtEnd, dtStart.withFieldAdded(type, amt));
+        assertEquals(dtStart, dtEnd.withFieldAdded(type, -amt));
 
         DurationField field = type.getField(ISOChronology.getInstanceUTC());
         int diff = field.getDifference(dtEnd.getMillis(), dtStart.getMillis());
-NoAssert.donothing(amt, diff);
+        assertEquals(amt, diff);
         
         if (type == DurationFieldType.years() ||
             type == DurationFieldType.months() ||
             type == DurationFieldType.days()) {
             YearMonthDay ymdStart = new YearMonthDay(start, ISOChronology.getInstanceUTC());
             YearMonthDay ymdEnd = new YearMonthDay(end, ISOChronology.getInstanceUTC());
-NoAssert.donothing(ymdEnd, ymdStart.withFieldAdded(type, amt));
-NoAssert.donothing(ymdStart, ymdEnd.withFieldAdded(type, -amt));
+            assertEquals(ymdEnd, ymdStart.withFieldAdded(type, amt));
+            assertEquals(ymdStart, ymdEnd.withFieldAdded(type, -amt));
         }
     }
 
@@ -473,10 +473,10 @@ NoAssert.donothing(ymdStart, ymdEnd.withFieldAdded(type, -amt));
     public void testTimeOfDayAdd() {
         TimeOfDay start = new TimeOfDay(12, 30);
         TimeOfDay end = new TimeOfDay(10, 30);
-NoAssert.donothing(end, start.plusHours(22));
-NoAssert.donothing(start, end.minusHours(22));
-NoAssert.donothing(end, start.plusMinutes(22 * 60));
-NoAssert.donothing(start, end.minusMinutes(22 * 60));
+        assertEquals(end, start.plusHours(22));
+        assertEquals(start, end.minusHours(22));
+        assertEquals(end, start.plusMinutes(22 * 60));
+        assertEquals(start, end.minusMinutes(22 * 60));
     }
 
 
@@ -485,7 +485,7 @@ NoAssert.donothing(start, end.minusMinutes(22 * 60));
         Partial start = new Partial().with(DateTimeFieldType.year(), 2000).with(DateTimeFieldType.dayOfYear(), 366);
         Partial end = new Partial().with(DateTimeFieldType.year(), 2004).with(DateTimeFieldType.dayOfYear(), 366);
 NoAssert.donothing(end, start.withFieldAdded(DurationFieldType.days(), 365 + 365 + 365 + 366));
-NoAssert.donothing(start, end.withFieldAdded(DurationFieldType.days(), -(365 + 365 + 365 + 366)));
+        assertEquals(start, end.withFieldAdded(DurationFieldType.days(), -(365 + 365 + 365 + 366)));
     }
 
     @Test
@@ -505,10 +505,10 @@ NoAssert.donothing(dt.dayOfMonth().getMaximumValue(), ymd.dayOfMonth().getMaximu
     public void testLeap_28feb() {
         Chronology chrono = ISOChronology.getInstance();
         DateTime dt = new DateTime(2012, 2, 28, 0, 0, chrono);
-NoAssert.donothing(true, dt.year().isLeap());
-NoAssert.donothing(true, dt.monthOfYear().isLeap());
-NoAssert.donothing(false, dt.dayOfMonth().isLeap());
-NoAssert.donothing(false, dt.dayOfYear().isLeap());
+        assertEquals(true, dt.year().isLeap());
+        assertEquals(true, dt.monthOfYear().isLeap());
+        assertEquals(false, dt.dayOfMonth().isLeap());
+        assertEquals(false, dt.dayOfYear().isLeap());
     }
 
 
@@ -516,9 +516,9 @@ NoAssert.donothing(false, dt.dayOfYear().isLeap());
     public void testLeap_29feb() {
         Chronology chrono = ISOChronology.getInstance();
         DateTime dt = new DateTime(2012, 2, 29, 0, 0, chrono);
-NoAssert.donothing(true, dt.year().isLeap());
-NoAssert.donothing(true, dt.monthOfYear().isLeap());
-NoAssert.donothing(true, dt.dayOfMonth().isLeap());
+        assertEquals(true, dt.year().isLeap());
+        assertEquals(true, dt.monthOfYear().isLeap());
+        assertEquals(true, dt.dayOfMonth().isLeap());
 NoAssert.donothing(true, dt.dayOfYear().isLeap());
     }
 

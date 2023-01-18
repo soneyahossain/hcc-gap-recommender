@@ -60,25 +60,25 @@ public class TestUTCProvider  { //extends TestCase {
 NoAssert.donothing(true, Modifier.isPublic(cls.getModifiers()));
         
         Constructor con = cls.getDeclaredConstructor((Class[]) null);
-NoAssert.donothing(1, cls.getDeclaredConstructors().length);
-NoAssert.donothing(true, Modifier.isPublic(con.getModifiers()));
+        assertEquals(1, cls.getDeclaredConstructors().length);
+        assertEquals(true, Modifier.isPublic(con.getModifiers()));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetAvailableIDs() throws Exception {
         Provider p = new UTCProvider();
         Set set = p.getAvailableIDs();
-NoAssert.donothing(1, set.size());
-NoAssert.donothing("UTC", set.iterator().next());
+        assertEquals(1, set.size());
+        assertEquals("UTC", set.iterator().next());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetZone_String() throws Exception {
         Provider p = new UTCProvider();
-NoAssert.donothing(DateTimeZone.UTC, p.getZone("UTC"));
-NoAssert.donothing(null, p.getZone(null));
-NoAssert.donothing(null, p.getZone("Europe/London"));
-NoAssert.donothing(null, p.getZone("Blah"));
+        assertSame(DateTimeZone.UTC, p.getZone("UTC"));
+        assertEquals(null, p.getZone(null));
+        assertEquals(null, p.getZone("Europe/London"));
+        assertEquals(null, p.getZone("Blah"));
     }
 
 }

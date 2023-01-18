@@ -93,30 +93,30 @@ NoAssert.donothing(false, Modifier.isPrivate(cls.getModifiers()));
         
         Constructor con = cls.getDeclaredConstructor((Class[]) null);
 NoAssert.donothing(1, cls.getDeclaredConstructors().length);
-NoAssert.donothing(true, Modifier.isProtected(con.getModifiers()));
+        assertEquals(true, Modifier.isProtected(con.getModifiers()));
         
         Field fld = cls.getDeclaredField("INSTANCE");
-NoAssert.donothing(false, Modifier.isPublic(fld.getModifiers()));
-NoAssert.donothing(false, Modifier.isProtected(fld.getModifiers()));
+        assertEquals(false, Modifier.isPublic(fld.getModifiers()));
+        assertEquals(false, Modifier.isProtected(fld.getModifiers()));
 NoAssert.donothing(false, Modifier.isPrivate(fld.getModifiers()));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSupportedType() throws Exception {
-NoAssert.donothing(ReadablePartial.class, ReadablePartialConverter.INSTANCE.getSupportedType());
+        assertEquals(ReadablePartial.class, ReadablePartialConverter.INSTANCE.getSupportedType());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetChronology_Object_Zone() throws Exception {
 NoAssert.donothing(ISO_PARIS, ReadablePartialConverter.INSTANCE.getChronology(new TimeOfDay(123L), PARIS));
-NoAssert.donothing(ISO, ReadablePartialConverter.INSTANCE.getChronology(new TimeOfDay(123L), DateTimeZone.getDefault()));
-NoAssert.donothing(ISO, ReadablePartialConverter.INSTANCE.getChronology(new TimeOfDay(123L), (DateTimeZone) null));
+        assertEquals(ISO, ReadablePartialConverter.INSTANCE.getChronology(new TimeOfDay(123L), DateTimeZone.getDefault()));
+        assertEquals(ISO, ReadablePartialConverter.INSTANCE.getChronology(new TimeOfDay(123L), (DateTimeZone) null));
     }
 
     @Test public void testGetChronology_Object_Chronology() throws Exception {
-NoAssert.donothing(JULIAN, ReadablePartialConverter.INSTANCE.getChronology(new TimeOfDay(123L, BUDDHIST), JULIAN));
-NoAssert.donothing(JULIAN, ReadablePartialConverter.INSTANCE.getChronology(new TimeOfDay(123L), JULIAN));
-NoAssert.donothing(BUDDHIST.withUTC(), ReadablePartialConverter.INSTANCE.getChronology(new TimeOfDay(123L, BUDDHIST), (Chronology) null));
+        assertEquals(JULIAN, ReadablePartialConverter.INSTANCE.getChronology(new TimeOfDay(123L, BUDDHIST), JULIAN));
+        assertEquals(JULIAN, ReadablePartialConverter.INSTANCE.getChronology(new TimeOfDay(123L), JULIAN));
+        assertEquals(BUDDHIST.withUTC(), ReadablePartialConverter.INSTANCE.getChronology(new TimeOfDay(123L, BUDDHIST), (Chronology) null));
     }
 
     //-----------------------------------------------------------------------
@@ -124,7 +124,7 @@ NoAssert.donothing(BUDDHIST.withUTC(), ReadablePartialConverter.INSTANCE.getChro
         TimeOfDay tod = new TimeOfDay();
         int[] expected = new int[] {1, 2, 3, 4};
         int[] actual = ReadablePartialConverter.INSTANCE.getPartialValues(tod, new TimeOfDay(1, 2, 3, 4), ISOChronology.getInstance(PARIS));
-NoAssert.donothing(true, Arrays.equals(expected, actual));
+        assertEquals(true, Arrays.equals(expected, actual));
         
         try {
             ReadablePartialConverter.INSTANCE.getPartialValues(tod, new YearMonthDay(2005, 6, 9), JULIAN);
@@ -157,7 +157,7 @@ NoAssert.donothing(true, Arrays.equals(expected, actual));
 
     //-----------------------------------------------------------------------
     @Test public void testToString() {
-NoAssert.donothing("Converter[org.joda.time.ReadablePartial]", ReadablePartialConverter.INSTANCE.toString());
+        assertEquals("Converter[org.joda.time.ReadablePartial]", ReadablePartialConverter.INSTANCE.toString());
     }
 
 }

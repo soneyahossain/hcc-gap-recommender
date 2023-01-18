@@ -167,7 +167,7 @@ public class TestPartial_Basics  { //extends TestCase {
     @Test public void testGet() {
         Partial test = createHourMinPartial();
 NoAssert.donothing(10, test.get(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(20, test.get(DateTimeFieldType.minuteOfHour()));
+        assertEquals(20, test.get(DateTimeFieldType.minuteOfHour()));
         try {
             test.get(null);
             fail();
@@ -180,13 +180,13 @@ NoAssert.donothing(20, test.get(DateTimeFieldType.minuteOfHour()));
 
     @Test public void testSize() {
         Partial test = createHourMinPartial();
-NoAssert.donothing(2, test.size());
+        assertEquals(2, test.size());
     }
 
     @Test public void testGetFieldType() {
         Partial test = createHourMinPartial();
-NoAssert.donothing(DateTimeFieldType.hourOfDay(), test.getFieldType(0));
-NoAssert.donothing(DateTimeFieldType.minuteOfHour(), test.getFieldType(1));
+        assertSame(DateTimeFieldType.hourOfDay(), test.getFieldType(0));
+        assertSame(DateTimeFieldType.minuteOfHour(), test.getFieldType(1));
         try {
             test.getFieldType(-1);
         } catch (IndexOutOfBoundsException ex) {}
@@ -198,16 +198,16 @@ NoAssert.donothing(DateTimeFieldType.minuteOfHour(), test.getFieldType(1));
     @Test public void testGetFieldTypes() {
         Partial test = createHourMinPartial();
         DateTimeFieldType[] fields = test.getFieldTypes();
-NoAssert.donothing(2, fields.length);
-NoAssert.donothing(DateTimeFieldType.hourOfDay(), fields[0]);
-NoAssert.donothing(DateTimeFieldType.minuteOfHour(), fields[1]);
-NoAssert.donothing(test.getFieldTypes(), test.getFieldTypes());
+        assertEquals(2, fields.length);
+        assertSame(DateTimeFieldType.hourOfDay(), fields[0]);
+        assertSame(DateTimeFieldType.minuteOfHour(), fields[1]);
+        assertNotSame(test.getFieldTypes(), test.getFieldTypes());
     }
 
     @Test public void testGetField() {
         Partial test = createHourMinPartial(COPTIC_PARIS);
-NoAssert.donothing(CopticChronology.getInstanceUTC().hourOfDay(), test.getField(0));
-NoAssert.donothing(CopticChronology.getInstanceUTC().minuteOfHour(), test.getField(1));
+        assertSame(CopticChronology.getInstanceUTC().hourOfDay(), test.getField(0));
+        assertSame(CopticChronology.getInstanceUTC().minuteOfHour(), test.getField(1));
         try {
             test.getField(-1);
         } catch (IndexOutOfBoundsException ex) {}
@@ -221,13 +221,13 @@ NoAssert.donothing(CopticChronology.getInstanceUTC().minuteOfHour(), test.getFie
         DateTimeField[] fields = test.getFields();
 NoAssert.donothing(2, fields.length);
 NoAssert.donothing(CopticChronology.getInstanceUTC().hourOfDay(), fields[0]);
-NoAssert.donothing(CopticChronology.getInstanceUTC().minuteOfHour(), fields[1]);
-NoAssert.donothing(test.getFields(), test.getFields());
+        assertSame(CopticChronology.getInstanceUTC().minuteOfHour(), fields[1]);
+        assertNotSame(test.getFields(), test.getFields());
     }
 
     @Test public void testGetValue() {
         Partial test = createHourMinPartial(COPTIC_PARIS);
-NoAssert.donothing(10, test.getValue(0));
+        assertEquals(10, test.getValue(0));
 NoAssert.donothing(20, test.getValue(1));
         try {
             test.getValue(-1);
@@ -240,44 +240,44 @@ NoAssert.donothing(20, test.getValue(1));
     @Test public void testGetValues() {
         Partial test = createHourMinPartial(COPTIC_PARIS);
         int[] values = test.getValues();
-NoAssert.donothing(2, values.length);
-NoAssert.donothing(10, values[0]);
-NoAssert.donothing(20, values[1]);
-NoAssert.donothing(test.getValues(), test.getValues());
+        assertEquals(2, values.length);
+        assertEquals(10, values[0]);
+        assertEquals(20, values[1]);
+        assertNotSame(test.getValues(), test.getValues());
     }
 
     @Test public void testIsSupported() {
         Partial test = createHourMinPartial(COPTIC_PARIS);
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(false, test.isSupported(DateTimeFieldType.secondOfMinute()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.hourOfDay()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.minuteOfHour()));
+        assertEquals(false, test.isSupported(DateTimeFieldType.secondOfMinute()));
 NoAssert.donothing(false, test.isSupported(DateTimeFieldType.millisOfSecond()));
-NoAssert.donothing(false, test.isSupported(DateTimeFieldType.dayOfMonth()));
+        assertEquals(false, test.isSupported(DateTimeFieldType.dayOfMonth()));
     }
 
     @SuppressWarnings("deprecation")
     @Test public void testEqualsHashCode() {
         Partial test1 = createHourMinPartial(COPTIC_PARIS);
         Partial test2 = createHourMinPartial(COPTIC_PARIS);
-NoAssert.donothing(true, test1.equals(test2));
+        assertEquals(true, test1.equals(test2));
 NoAssert.donothing(true, test2.equals(test1));
-NoAssert.donothing(true, test1.equals(test1));
-NoAssert.donothing(true, test2.equals(test2));
+        assertEquals(true, test1.equals(test1));
+        assertEquals(true, test2.equals(test2));
 NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
 NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
-NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
+        assertEquals(true, test2.hashCode() == test2.hashCode());
         
         Partial test3 = createHourMinPartial2(COPTIC_PARIS);
-NoAssert.donothing(false, test1.equals(test3));
+        assertEquals(false, test1.equals(test3));
 NoAssert.donothing(false, test2.equals(test3));
 NoAssert.donothing(false, test3.equals(test1));
 NoAssert.donothing(false, test3.equals(test2));
-NoAssert.donothing(false, test1.hashCode() == test3.hashCode());
-NoAssert.donothing(false, test2.hashCode() == test3.hashCode());
+        assertEquals(false, test1.hashCode() == test3.hashCode());
+        assertEquals(false, test2.hashCode() == test3.hashCode());
         
 NoAssert.donothing(false, test1.equals("Hello"));
 NoAssert.donothing(false, test1.equals(MockPartial.EMPTY_INSTANCE));
-NoAssert.donothing(new TimeOfDay(10, 20, 30, 40), createTODPartial(ISO_UTC));
+        assertEquals(new TimeOfDay(10, 20, 30, 40), createTODPartial(ISO_UTC));
     }
 
     //-----------------------------------------------------------------------
@@ -285,10 +285,10 @@ NoAssert.donothing(new TimeOfDay(10, 20, 30, 40), createTODPartial(ISO_UTC));
     @Test public void testCompareTo() {
         Partial test1 = createHourMinPartial();
         Partial test1a = createHourMinPartial();
-NoAssert.donothing(0, test1.compareTo(test1a));
-NoAssert.donothing(0, test1a.compareTo(test1));
-NoAssert.donothing(0, test1.compareTo(test1));
-NoAssert.donothing(0, test1a.compareTo(test1a));
+        assertEquals(0, test1.compareTo(test1a));
+        assertEquals(0, test1a.compareTo(test1));
+        assertEquals(0, test1.compareTo(test1));
+        assertEquals(0, test1a.compareTo(test1a));
         
         Partial test2 = createHourMinPartial2(ISO_UTC);
 NoAssert.donothing(-1, test1.compareTo(test2));
@@ -296,8 +296,8 @@ NoAssert.donothing(+1, test2.compareTo(test1));
         
         Partial test3 = createHourMinPartial2(COPTIC_UTC);
 NoAssert.donothing(-1, test1.compareTo(test3));
-NoAssert.donothing(+1, test3.compareTo(test1));
-NoAssert.donothing(0, test3.compareTo(test2));
+        assertEquals(+1, test3.compareTo(test1));
+        assertEquals(0, test3.compareTo(test2));
         
 NoAssert.donothing(0, new TimeOfDay(10, 20, 30, 40).compareTo(createTODPartial(ISO_UTC)));
         
@@ -323,19 +323,19 @@ NoAssert.donothing(0, new TimeOfDay(10, 20, 30, 40).compareTo(createTODPartial(I
     @Test public void testIsEqual_TOD() {
         Partial test1 = createHourMinPartial();
         Partial test1a = createHourMinPartial();
-NoAssert.donothing(true, test1.isEqual(test1a));
-NoAssert.donothing(true, test1a.isEqual(test1));
-NoAssert.donothing(true, test1.isEqual(test1));
-NoAssert.donothing(true, test1a.isEqual(test1a));
+        assertEquals(true, test1.isEqual(test1a));
+        assertEquals(true, test1a.isEqual(test1));
+        assertEquals(true, test1.isEqual(test1));
+        assertEquals(true, test1a.isEqual(test1a));
         
         Partial test2 = createHourMinPartial2(ISO_UTC);
-NoAssert.donothing(false, test1.isEqual(test2));
+        assertEquals(false, test1.isEqual(test2));
 NoAssert.donothing(false, test2.isEqual(test1));
         
         Partial test3 = createHourMinPartial2(COPTIC_UTC);
-NoAssert.donothing(false, test1.isEqual(test3));
-NoAssert.donothing(false, test3.isEqual(test1));
-NoAssert.donothing(true, test3.isEqual(test2));
+        assertEquals(false, test1.isEqual(test3));
+        assertEquals(false, test3.isEqual(test1));
+        assertEquals(true, test3.isEqual(test2));
         
         try {
             createHourMinPartial().isEqual(null);
@@ -347,19 +347,19 @@ NoAssert.donothing(true, test3.isEqual(test2));
     @Test public void testIsBefore_TOD() {
         Partial test1 = createHourMinPartial();
         Partial test1a = createHourMinPartial();
-NoAssert.donothing(false, test1.isBefore(test1a));
-NoAssert.donothing(false, test1a.isBefore(test1));
-NoAssert.donothing(false, test1.isBefore(test1));
+        assertEquals(false, test1.isBefore(test1a));
+        assertEquals(false, test1a.isBefore(test1));
+        assertEquals(false, test1.isBefore(test1));
 NoAssert.donothing(false, test1a.isBefore(test1a));
         
         Partial test2 = createHourMinPartial2(ISO_UTC);
-NoAssert.donothing(true, test1.isBefore(test2));
-NoAssert.donothing(false, test2.isBefore(test1));
+        assertEquals(true, test1.isBefore(test2));
+        assertEquals(false, test2.isBefore(test1));
         
         Partial test3 = createHourMinPartial2(COPTIC_UTC);
-NoAssert.donothing(true, test1.isBefore(test3));
+        assertEquals(true, test1.isBefore(test3));
 NoAssert.donothing(false, test3.isBefore(test1));
-NoAssert.donothing(false, test3.isBefore(test2));
+        assertEquals(false, test3.isBefore(test2));
         
         try {
             createHourMinPartial().isBefore(null);
@@ -371,19 +371,19 @@ NoAssert.donothing(false, test3.isBefore(test2));
     @Test public void testIsAfter_TOD() {
         Partial test1 = createHourMinPartial();
         Partial test1a = createHourMinPartial();
-NoAssert.donothing(false, test1.isAfter(test1a));
-NoAssert.donothing(false, test1a.isAfter(test1));
-NoAssert.donothing(false, test1.isAfter(test1));
-NoAssert.donothing(false, test1a.isAfter(test1a));
+        assertEquals(false, test1.isAfter(test1a));
+        assertEquals(false, test1a.isAfter(test1));
+        assertEquals(false, test1.isAfter(test1));
+        assertEquals(false, test1a.isAfter(test1a));
         
         Partial test2 = createHourMinPartial2(ISO_UTC);
-NoAssert.donothing(false, test1.isAfter(test2));
-NoAssert.donothing(true, test2.isAfter(test1));
+        assertEquals(false, test1.isAfter(test2));
+        assertEquals(true, test2.isAfter(test1));
         
         Partial test3 = createHourMinPartial2(COPTIC_UTC);
-NoAssert.donothing(false, test1.isAfter(test3));
-NoAssert.donothing(true, test3.isAfter(test1));
-NoAssert.donothing(false, test3.isAfter(test2));
+        assertEquals(false, test1.isAfter(test3));
+        assertEquals(true, test3.isAfter(test1));
+        assertEquals(false, test3.isAfter(test2));
         
         try {
             createHourMinPartial().isAfter(null);
@@ -396,24 +396,24 @@ NoAssert.donothing(false, test3.isAfter(test2));
         Partial base = createHourMinPartial(COPTIC_PARIS);
         Partial test = base.withChronologyRetainFields(BUDDHIST_TOKYO);
         check(base, 10, 20);
-NoAssert.donothing(COPTIC_UTC, base.getChronology());
+        assertEquals(COPTIC_UTC, base.getChronology());
         check(test, 10, 20);
-NoAssert.donothing(BUDDHIST_UTC, test.getChronology());
+        assertEquals(BUDDHIST_UTC, test.getChronology());
     }
 
     @Test public void testWithChronologyRetainFields_sameChrono() {
         Partial base = createHourMinPartial(COPTIC_PARIS);
         Partial test = base.withChronologyRetainFields(COPTIC_TOKYO);
-NoAssert.donothing(base, test);
+        assertSame(base, test);
     }
 
     @Test public void testWithChronologyRetainFields_nullChrono() {
         Partial base = createHourMinPartial(COPTIC_PARIS);
         Partial test = base.withChronologyRetainFields(null);
         check(base, 10, 20);
-NoAssert.donothing(COPTIC_UTC, base.getChronology());
+        assertEquals(COPTIC_UTC, base.getChronology());
         check(test, 10, 20);
-NoAssert.donothing(ISO_UTC, test.getChronology());
+        assertEquals(ISO_UTC, test.getChronology());
     }
 
     //-----------------------------------------------------------------------
@@ -448,14 +448,14 @@ NoAssert.donothing(ISO_UTC, test.getChronology());
         check(test, 10, 20);
 NoAssert.donothing(3, result.size());
 NoAssert.donothing(true, result.isSupported(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(true, result.isSupported(DateTimeFieldType.minuteOfHour()));
+        assertEquals(true, result.isSupported(DateTimeFieldType.minuteOfHour()));
 NoAssert.donothing(true, result.isSupported(DateTimeFieldType.secondOfMinute()));
-NoAssert.donothing(DateTimeFieldType.hourOfDay(), result.getFieldType(0));
-NoAssert.donothing(DateTimeFieldType.minuteOfHour(), result.getFieldType(1));
-NoAssert.donothing(DateTimeFieldType.secondOfMinute(), result.getFieldType(2));
+        assertEquals(DateTimeFieldType.hourOfDay(), result.getFieldType(0));
+        assertEquals(DateTimeFieldType.minuteOfHour(), result.getFieldType(1));
+        assertEquals(DateTimeFieldType.secondOfMinute(), result.getFieldType(2));
 NoAssert.donothing(10, result.get(DateTimeFieldType.hourOfDay()));
 NoAssert.donothing(20, result.get(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(15, result.get(DateTimeFieldType.secondOfMinute()));
+        assertEquals(15, result.get(DateTimeFieldType.secondOfMinute()));
     }
 
     @Test public void testWith3b() {
@@ -463,73 +463,73 @@ NoAssert.donothing(15, result.get(DateTimeFieldType.secondOfMinute()));
         Partial result = test.with(DateTimeFieldType.minuteOfDay(), 15);
         check(test, 10, 20);
 NoAssert.donothing(3, result.size());
-NoAssert.donothing(true, result.isSupported(DateTimeFieldType.hourOfDay()));
+        assertEquals(true, result.isSupported(DateTimeFieldType.hourOfDay()));
 NoAssert.donothing(true, result.isSupported(DateTimeFieldType.minuteOfDay()));
-NoAssert.donothing(true, result.isSupported(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(DateTimeFieldType.hourOfDay(), result.getFieldType(0));
-NoAssert.donothing(DateTimeFieldType.minuteOfDay(), result.getFieldType(1));
-NoAssert.donothing(DateTimeFieldType.minuteOfHour(), result.getFieldType(2));
-NoAssert.donothing(10, result.get(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(20, result.get(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(15, result.get(DateTimeFieldType.minuteOfDay()));
+        assertEquals(true, result.isSupported(DateTimeFieldType.minuteOfHour()));
+        assertEquals(DateTimeFieldType.hourOfDay(), result.getFieldType(0));
+        assertEquals(DateTimeFieldType.minuteOfDay(), result.getFieldType(1));
+        assertEquals(DateTimeFieldType.minuteOfHour(), result.getFieldType(2));
+        assertEquals(10, result.get(DateTimeFieldType.hourOfDay()));
+        assertEquals(20, result.get(DateTimeFieldType.minuteOfHour()));
+        assertEquals(15, result.get(DateTimeFieldType.minuteOfDay()));
     }
 
     @Test public void testWith3c() {
         Partial test = createHourMinPartial();
         Partial result = test.with(DateTimeFieldType.dayOfMonth(), 15);
         check(test, 10, 20);
-NoAssert.donothing(3, result.size());
-NoAssert.donothing(true, result.isSupported(DateTimeFieldType.dayOfMonth()));
-NoAssert.donothing(true, result.isSupported(DateTimeFieldType.hourOfDay()));
+        assertEquals(3, result.size());
+        assertEquals(true, result.isSupported(DateTimeFieldType.dayOfMonth()));
+        assertEquals(true, result.isSupported(DateTimeFieldType.hourOfDay()));
 NoAssert.donothing(true, result.isSupported(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(DateTimeFieldType.dayOfMonth(), result.getFieldType(0));
-NoAssert.donothing(DateTimeFieldType.hourOfDay(), result.getFieldType(1));
-NoAssert.donothing(DateTimeFieldType.minuteOfHour(), result.getFieldType(2));
-NoAssert.donothing(10, result.get(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(20, result.get(DateTimeFieldType.minuteOfHour()));
+        assertEquals(DateTimeFieldType.dayOfMonth(), result.getFieldType(0));
+        assertEquals(DateTimeFieldType.hourOfDay(), result.getFieldType(1));
+        assertEquals(DateTimeFieldType.minuteOfHour(), result.getFieldType(2));
+        assertEquals(10, result.get(DateTimeFieldType.hourOfDay()));
+        assertEquals(20, result.get(DateTimeFieldType.minuteOfHour()));
 NoAssert.donothing(15, result.get(DateTimeFieldType.dayOfMonth()));
     }
 
     @Test public void testWith3d() {
         Partial test = new Partial(DateTimeFieldType.year(), 2005);
         Partial result = test.with(DateTimeFieldType.monthOfYear(), 6);
-NoAssert.donothing(2, result.size());
-NoAssert.donothing(2005, result.get(DateTimeFieldType.year()));
-NoAssert.donothing(6, result.get(DateTimeFieldType.monthOfYear()));
+        assertEquals(2, result.size());
+        assertEquals(2005, result.get(DateTimeFieldType.year()));
+        assertEquals(6, result.get(DateTimeFieldType.monthOfYear()));
     }        
 
     @Test public void testWith3e() {
         Partial test = new Partial(DateTimeFieldType.era(), 1);
         Partial result = test.with(DateTimeFieldType.halfdayOfDay(), 0);
-NoAssert.donothing(2, result.size());
-NoAssert.donothing(1, result.get(DateTimeFieldType.era()));
-NoAssert.donothing(0, result.get(DateTimeFieldType.halfdayOfDay()));
-NoAssert.donothing(0, result.indexOf(DateTimeFieldType.era()));
-NoAssert.donothing(1, result.indexOf(DateTimeFieldType.halfdayOfDay()));
+        assertEquals(2, result.size());
+        assertEquals(1, result.get(DateTimeFieldType.era()));
+        assertEquals(0, result.get(DateTimeFieldType.halfdayOfDay()));
+        assertEquals(0, result.indexOf(DateTimeFieldType.era()));
+        assertEquals(1, result.indexOf(DateTimeFieldType.halfdayOfDay()));
     }        
 
     @Test public void testWith3f() {
         Partial test = new Partial(DateTimeFieldType.halfdayOfDay(), 0);
         Partial result = test.with(DateTimeFieldType.era(), 1);
-NoAssert.donothing(2, result.size());
-NoAssert.donothing(1, result.get(DateTimeFieldType.era()));
-NoAssert.donothing(0, result.get(DateTimeFieldType.halfdayOfDay()));
+        assertEquals(2, result.size());
+        assertEquals(1, result.get(DateTimeFieldType.era()));
+        assertEquals(0, result.get(DateTimeFieldType.halfdayOfDay()));
 NoAssert.donothing(0, result.indexOf(DateTimeFieldType.era()));
-NoAssert.donothing(1, result.indexOf(DateTimeFieldType.halfdayOfDay()));
+        assertEquals(1, result.indexOf(DateTimeFieldType.halfdayOfDay()));
     }        
 
     @Test public void testWith4() {
         Partial test = createHourMinPartial();
         Partial result = test.with(DateTimeFieldType.hourOfDay(), 10);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testWith_baseHasNoRange() {
         Partial test = new Partial(DateTimeFieldType.year(), 1);
         Partial result = test.with(DateTimeFieldType.hourOfDay(), 10);
-NoAssert.donothing(2, result.size());
+        assertEquals(2, result.size());
 NoAssert.donothing(0, result.indexOf(DateTimeFieldType.year()));
-NoAssert.donothing(1, result.indexOf(DateTimeFieldType.hourOfDay()));
+        assertEquals(1, result.indexOf(DateTimeFieldType.hourOfDay()));
     }
 
     @Test public void testWith_argHasNoRange() {
@@ -543,9 +543,9 @@ NoAssert.donothing(1, result.indexOf(DateTimeFieldType.hourOfDay()));
     @Test public void testWith_baseAndArgHaveNoRange() {
         Partial test = new Partial(DateTimeFieldType.year(), 1);
         Partial result = test.with(DateTimeFieldType.era(), 1);
-NoAssert.donothing(2, result.size());
-NoAssert.donothing(0, result.indexOf(DateTimeFieldType.era()));
-NoAssert.donothing(1, result.indexOf(DateTimeFieldType.year()));
+        assertEquals(2, result.size());
+        assertEquals(0, result.indexOf(DateTimeFieldType.era()));
+        assertEquals(1, result.indexOf(DateTimeFieldType.year()));
     }
 
     //-----------------------------------------------------------------------
@@ -567,27 +567,27 @@ NoAssert.donothing(1, result.indexOf(DateTimeFieldType.year()));
         Partial test = createHourMinPartial();
         Partial result = test.without(DateTimeFieldType.hourOfDay());
         check(test, 10, 20);
-NoAssert.donothing(1, result.size());
-NoAssert.donothing(false, result.isSupported(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(true, result.isSupported(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(DateTimeFieldType.minuteOfHour(), result.getFieldType(0));
+        assertEquals(1, result.size());
+        assertEquals(false, result.isSupported(DateTimeFieldType.hourOfDay()));
+        assertEquals(true, result.isSupported(DateTimeFieldType.minuteOfHour()));
+        assertEquals(DateTimeFieldType.minuteOfHour(), result.getFieldType(0));
     }
 
     @Test public void testWithout4() {
         Partial test = createHourMinPartial();
         Partial result = test.without(DateTimeFieldType.minuteOfHour());
         check(test, 10, 20);
-NoAssert.donothing(1, result.size());
-NoAssert.donothing(true, result.isSupported(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(false, result.isSupported(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(DateTimeFieldType.hourOfDay(), result.getFieldType(0));
+        assertEquals(1, result.size());
+        assertEquals(true, result.isSupported(DateTimeFieldType.hourOfDay()));
+        assertEquals(false, result.isSupported(DateTimeFieldType.minuteOfHour()));
+        assertEquals(DateTimeFieldType.hourOfDay(), result.getFieldType(0));
     }
 
     @Test public void testWithout5() {
         Partial test = new Partial(DateTimeFieldType.hourOfDay(), 12);
         Partial result = test.without(DateTimeFieldType.hourOfDay());
-NoAssert.donothing(0, result.size());
-NoAssert.donothing(false, result.isSupported(DateTimeFieldType.hourOfDay()));
+        assertEquals(0, result.size());
+        assertEquals(false, result.isSupported(DateTimeFieldType.hourOfDay()));
     }
 
     //-----------------------------------------------------------------------
@@ -619,7 +619,7 @@ NoAssert.donothing(false, result.isSupported(DateTimeFieldType.hourOfDay()));
     @Test public void testWithField4() {
         Partial test = createHourMinPartial();
         Partial result = test.withField(DateTimeFieldType.hourOfDay(), 10);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -627,7 +627,7 @@ NoAssert.donothing(test, result);
         Partial test = createHourMinPartial();
         Partial result = test.withFieldAdded(DurationFieldType.hours(), 6);
         
-NoAssert.donothing(createHourMinPartial(), test);
+        assertEquals(createHourMinPartial(), test);
         check(test, 10, 20);
         check(result, 16, 20);
     }
@@ -653,7 +653,7 @@ NoAssert.donothing(createHourMinPartial(), test);
     @Test public void testWithFieldAdded4() {
         Partial test = createHourMinPartial();
         Partial result = test.withFieldAdded(DurationFieldType.hours(), 0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testWithFieldAdded5() {
@@ -721,7 +721,7 @@ NoAssert.donothing(test, result);
         Partial test = createHourMinPartial();
         Partial result = test.withFieldAddWrapped(DurationFieldType.hours(), 6);
         
-NoAssert.donothing(createHourMinPartial(), test);
+        assertEquals(createHourMinPartial(), test);
         check(test, 10, 20);
         check(result, 16, 20);
     }
@@ -747,7 +747,7 @@ NoAssert.donothing(createHourMinPartial(), test);
     @Test public void testWithFieldAddWrapped4() {
         Partial test = createHourMinPartial();
         Partial result = test.withFieldAddWrapped(DurationFieldType.hours(), 0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testWithFieldAddWrapped5() {
@@ -818,12 +818,12 @@ NoAssert.donothing(test, result);
     @Test public void testToDateTime_RI() {
         Partial base = createHourMinPartial(COPTIC_PARIS);
         DateTime dt = new DateTime(0L); // LONDON zone
-NoAssert.donothing("1970-01-01T01:00:00.000+01:00", dt.toString());
+        assertEquals("1970-01-01T01:00:00.000+01:00", dt.toString());
         
         DateTime test = base.toDateTime(dt);
         check(base, 10, 20);
-NoAssert.donothing("1970-01-01T01:00:00.000+01:00", dt.toString());
-NoAssert.donothing("1970-01-01T10:20:00.000+01:00", test.toString());
+        assertEquals("1970-01-01T01:00:00.000+01:00", dt.toString());
+        assertEquals("1970-01-01T10:20:00.000+01:00", test.toString());
     }
 
     @Test public void testToDateTime_nullRI() {
@@ -832,14 +832,14 @@ NoAssert.donothing("1970-01-01T10:20:00.000+01:00", test.toString());
         
         DateTime test = base.toDateTime((ReadableInstant) null);
         check(base, 1, 2);
-NoAssert.donothing("1970-01-02T01:02:07.008+01:00", test.toString());
+        assertEquals("1970-01-02T01:02:07.008+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testProperty() {
         Partial test = createHourMinPartial();
-NoAssert.donothing(test.property(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(test.property(DateTimeFieldType.minuteOfHour()));
+        assertNotNull(test.property(DateTimeFieldType.hourOfDay()));
+        assertNotNull(test.property(DateTimeFieldType.minuteOfHour()));
         try {
             test.property(DateTimeFieldType.secondOfDay());
             fail();
@@ -866,21 +866,21 @@ NoAssert.donothing(test.property(DateTimeFieldType.minuteOfHour()));
         ois.close();
         
 NoAssert.donothing(test, result);
-NoAssert.donothing(Arrays.equals(test.getValues(), result.getValues()));
+        assertTrue(Arrays.equals(test.getValues(), result.getValues()));
 NoAssert.donothing(Arrays.equals(test.getFields(), result.getFields()));
-NoAssert.donothing(test.getChronology(), result.getChronology());
+        assertEquals(test.getChronology(), result.getChronology());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetFormatter1() {
         Partial test = new Partial(DateTimeFieldType.year(), 2005);
-NoAssert.donothing("2005", test.getFormatter().print(test));
+        assertEquals("2005", test.getFormatter().print(test));
         
         test = test.with(DateTimeFieldType.monthOfYear(), 6);
 NoAssert.donothing("2005-06", test.getFormatter().print(test));
         
         test = test.with(DateTimeFieldType.dayOfMonth(), 25);
-NoAssert.donothing("2005-06-25", test.getFormatter().print(test));
+        assertEquals("2005-06-25", test.getFormatter().print(test));
         
         test = test.without(DateTimeFieldType.monthOfYear());
 NoAssert.donothing("2005--25", test.getFormatter().print(test));
@@ -888,7 +888,7 @@ NoAssert.donothing("2005--25", test.getFormatter().print(test));
 
     @Test public void testGetFormatter2() {
         Partial test = new Partial();
-NoAssert.donothing(null, test.getFormatter());
+        assertEquals(null, test.getFormatter());
         
         test = test.with(DateTimeFieldType.era(), 1);
 NoAssert.donothing(null, test.getFormatter());
@@ -903,7 +903,7 @@ NoAssert.donothing("-W-5", test.getFormatter().print(test));
         
         // contrast with testToString5
         test = test.with(DateTimeFieldType.dayOfMonth(), 13);
-NoAssert.donothing("---13", test.getFormatter().print(test));
+        assertEquals("---13", test.getFormatter().print(test));
     }
 
     //-----------------------------------------------------------------------
@@ -914,29 +914,29 @@ NoAssert.donothing("10:20", test.toString());
 
     @Test public void testToString2() {
         Partial test = new Partial();
-NoAssert.donothing("[]", test.toString());
+        assertEquals("[]", test.toString());
     }
 
     @Test public void testToString3() {
         Partial test = new Partial(DateTimeFieldType.year(), 2005);
-NoAssert.donothing("2005", test.toString());
+        assertEquals("2005", test.toString());
         
         test = test.with(DateTimeFieldType.monthOfYear(), 6);
-NoAssert.donothing("2005-06", test.toString());
+        assertEquals("2005-06", test.toString());
         
         test = test.with(DateTimeFieldType.dayOfMonth(), 25);
-NoAssert.donothing("2005-06-25", test.toString());
+        assertEquals("2005-06-25", test.toString());
         
         test = test.without(DateTimeFieldType.monthOfYear());
-NoAssert.donothing("2005--25", test.toString());
+        assertEquals("2005--25", test.toString());
     }
 
     @Test public void testToString4() {
         Partial test = new Partial(DateTimeFieldType.dayOfWeek(), 5);
-NoAssert.donothing("-W-5", test.toString());
+        assertEquals("-W-5", test.toString());
         
         test = test.with(DateTimeFieldType.dayOfMonth(), 13);
-NoAssert.donothing("[dayOfMonth=13, dayOfWeek=5]", test.toString());
+        assertEquals("[dayOfMonth=13, dayOfWeek=5]", test.toString());
     }
 
     @Test public void testToString5() {
@@ -944,30 +944,30 @@ NoAssert.donothing("[dayOfMonth=13, dayOfWeek=5]", test.toString());
 NoAssert.donothing("[era=1]", test.toString());
         
         test = test.with(DateTimeFieldType.halfdayOfDay(), 0);
-NoAssert.donothing("[era=1, halfdayOfDay=0]", test.toString());
+        assertEquals("[era=1, halfdayOfDay=0]", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString_String() {
         Partial test = createHourMinPartial();
 NoAssert.donothing("\ufffd\ufffd\ufffd\ufffd 10", test.toString("yyyy HH"));
-NoAssert.donothing("10:20", test.toString((String) null));
+        assertEquals("10:20", test.toString((String) null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString_String_Locale() {
         Partial test = createHourMinPartial();
-NoAssert.donothing("10 20", test.toString("H m", Locale.ENGLISH));
+        assertEquals("10 20", test.toString("H m", Locale.ENGLISH));
 NoAssert.donothing("10:20", test.toString(null, Locale.ENGLISH));
-NoAssert.donothing("10 20", test.toString("H m", null));
-NoAssert.donothing("10:20", test.toString(null, null));
+        assertEquals("10 20", test.toString("H m", null));
+        assertEquals("10:20", test.toString(null, null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString_DTFormatter() {
         Partial test = createHourMinPartial();
 NoAssert.donothing("\ufffd\ufffd\ufffd\ufffd 10", test.toString(DateTimeFormat.forPattern("yyyy HH")));
-NoAssert.donothing("10:20", test.toString((DateTimeFormatter) null));
+        assertEquals("10:20", test.toString((DateTimeFormatter) null));
     }
 
     //-----------------------------------------------------------------------
@@ -1000,7 +1000,7 @@ NoAssert.donothing("10:20", test.toString((DateTimeFormatter) null));
     }
 
     private void check(Partial test, int hour, int min) {
-NoAssert.donothing(test.toString(), hour, test.get(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(test.toString(), min, test.get(DateTimeFieldType.minuteOfHour()));
+        assertEquals(test.toString(), hour, test.get(DateTimeFieldType.hourOfDay()));
+        assertEquals(test.toString(), min, test.get(DateTimeFieldType.minuteOfHour()));
     }
 }

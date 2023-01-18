@@ -140,13 +140,13 @@ public class TestLocalDate_Constructors  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testParse_noFormatter() throws Throwable {
-NoAssert.donothing(new LocalDate(2010, 6, 30), LocalDate.parse("2010-06-30"));
-NoAssert.donothing(new LocalDate(2010, 1, 2), LocalDate.parse("2010-002"));
+        assertEquals(new LocalDate(2010, 6, 30), LocalDate.parse("2010-06-30"));
+        assertEquals(new LocalDate(2010, 1, 2), LocalDate.parse("2010-002"));
     }
 
     @Test public void testParse_formatter() throws Throwable {
         DateTimeFormatter f = DateTimeFormat.forPattern("yyyy--dd MM").withChronology(ISOChronology.getInstance(PARIS));
-NoAssert.donothing(new LocalDate(2010, 6, 30), LocalDate.parse("2010--30 06", f));
+        assertEquals(new LocalDate(2010, 6, 30), LocalDate.parse("2010--30 06", f));
     }
 
     //-----------------------------------------------------------------------
@@ -154,7 +154,7 @@ NoAssert.donothing(new LocalDate(2010, 6, 30), LocalDate.parse("2010--30 06", f)
         GregorianCalendar cal = new GregorianCalendar(1970, 1, 3, 4, 5, 6);
         cal.set(Calendar.MILLISECOND, 7);
         LocalDate expected = new LocalDate(1970, 2, 3);
-NoAssert.donothing(expected, LocalDate.fromCalendarFields(cal));
+        assertEquals(expected, LocalDate.fromCalendarFields(cal));
     }
 
     @Test public void testFactory_fromCalendarFields_beforeYearZero1() throws Exception {
@@ -162,7 +162,7 @@ NoAssert.donothing(expected, LocalDate.fromCalendarFields(cal));
         cal.set(Calendar.ERA, GregorianCalendar.BC);
         cal.set(Calendar.MILLISECOND, 7);
         LocalDate expected = new LocalDate(0, 2, 3);
-NoAssert.donothing(expected, LocalDate.fromCalendarFields(cal));
+        assertEquals(expected, LocalDate.fromCalendarFields(cal));
     }
 
     @Test public void testFactory_fromCalendarFields_beforeYearZero3() throws Exception {
@@ -185,7 +185,7 @@ NoAssert.donothing(expected, LocalDate.fromCalendarFields(cal));
         GregorianCalendar cal = new GregorianCalendar(1970, 1, 3, 4, 5, 6);
         cal.set(Calendar.MILLISECOND, 7);
         LocalDate expected = new LocalDate(1970, 2, 3);
-NoAssert.donothing(expected, LocalDate.fromDateFields(cal.getTime()));
+        assertEquals(expected, LocalDate.fromDateFields(cal.getTime()));
     }
 
     @Test public void testFactory_fromDateFields_before1970() throws Exception {
@@ -200,7 +200,7 @@ NoAssert.donothing(expected, LocalDate.fromDateFields(cal.getTime()));
         cal.set(Calendar.ERA, GregorianCalendar.BC);
         cal.set(Calendar.MILLISECOND, 7);
         LocalDate expected = new LocalDate(0, 2, 3);
-NoAssert.donothing(expected, LocalDate.fromDateFields(cal.getTime()));
+        assertEquals(expected, LocalDate.fromDateFields(cal.getTime()));
     }
 
     @Test public void testFactory_fromDateFields_beforeYearZero3() throws Exception {
@@ -208,7 +208,7 @@ NoAssert.donothing(expected, LocalDate.fromDateFields(cal.getTime()));
         cal.set(Calendar.ERA, GregorianCalendar.BC);
         cal.set(Calendar.MILLISECOND, 7);
         LocalDate expected = new LocalDate(-2, 2, 3);
-NoAssert.donothing(expected, LocalDate.fromDateFields(cal.getTime()));
+        assertEquals(expected, LocalDate.fromDateFields(cal.getTime()));
     }
 
     @Test public void testFactory_fromDateFields_null() throws Exception {
@@ -221,11 +221,11 @@ NoAssert.donothing(expected, LocalDate.fromDateFields(cal.getTime()));
     //-----------------------------------------------------------------------
     @Test public void testConstructor() throws Throwable {
         LocalDate test = new LocalDate();
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
-NoAssert.donothing(test, LocalDate.now());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
+        assertEquals(test, LocalDate.now());
     }
 
     @Test public void testConstructor_DateTimeZone() throws Throwable {
@@ -234,18 +234,18 @@ NoAssert.donothing(test, LocalDate.now());
         // 23:59 in London is 00:59 the following day in Paris
         
         LocalDate test = new LocalDate(LONDON);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(2005, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(8, test.getDayOfMonth());
-NoAssert.donothing(test, LocalDate.now(LONDON));
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(2005, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(8, test.getDayOfMonth());
+        assertEquals(test, LocalDate.now(LONDON));
         
         test = new LocalDate(PARIS);
 NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(2005, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
-NoAssert.donothing(test, LocalDate.now(PARIS));
+        assertEquals(2005, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
+        assertEquals(test, LocalDate.now(PARIS));
     }
 
     @Test public void testConstructor_nullDateTimeZone() throws Throwable {
@@ -254,61 +254,61 @@ NoAssert.donothing(test, LocalDate.now(PARIS));
         // 23:59 in London is 00:59 the following day in Paris
         
         LocalDate test = new LocalDate((DateTimeZone) null);
-NoAssert.donothing(ISO_UTC, test.getChronology());
+        assertEquals(ISO_UTC, test.getChronology());
 NoAssert.donothing(2005, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(8, test.getDayOfMonth());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(8, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_Chronology() throws Throwable {
         LocalDate test = new LocalDate(GREGORIAN_PARIS);
-NoAssert.donothing(GREGORIAN_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
+        assertEquals(GREGORIAN_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
 NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
-NoAssert.donothing(test, LocalDate.now(GREGORIAN_PARIS));
+        assertEquals(9, test.getDayOfMonth());
+        assertEquals(test, LocalDate.now(GREGORIAN_PARIS));
     }
 
     @Test public void testConstructor_nullChronology() throws Throwable {
         LocalDate test = new LocalDate((Chronology) null);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testConstructor_long1() throws Throwable {
         LocalDate test = new LocalDate(TEST_TIME1);
-NoAssert.donothing(ISO_UTC, test.getChronology());
+        assertEquals(ISO_UTC, test.getChronology());
 NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(4, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
+        assertEquals(4, test.getMonthOfYear());
+        assertEquals(6, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_long2() throws Throwable {
         LocalDate test = new LocalDate(TEST_TIME2);
 NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1971, test.getYear());
-NoAssert.donothing(5, test.getMonthOfYear());
+        assertEquals(1971, test.getYear());
+        assertEquals(5, test.getMonthOfYear());
 NoAssert.donothing(7, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_long1_DateTimeZone() throws Throwable {
         LocalDate test = new LocalDate(TEST_TIME1, PARIS);
 NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
+        assertEquals(1970, test.getYear());
 NoAssert.donothing(4, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
-NoAssert.donothing(TEST_TIME1_ROUNDED, test.getLocalMillis());
+        assertEquals(6, test.getDayOfMonth());
+        assertEquals(TEST_TIME1_ROUNDED, test.getLocalMillis());
     }
 
     @Test public void testConstructor_long2_DateTimeZone() throws Throwable {
         LocalDate test = new LocalDate(TEST_TIME2, PARIS);
 NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1971, test.getYear());
-NoAssert.donothing(5, test.getMonthOfYear());
-NoAssert.donothing(7, test.getDayOfMonth());
+        assertEquals(1971, test.getYear());
+        assertEquals(5, test.getMonthOfYear());
+        assertEquals(7, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_long3_DateTimeZone() throws Throwable {
@@ -316,11 +316,11 @@ NoAssert.donothing(7, test.getDayOfMonth());
         DateTime dtUTC = new DateTime(2006, 6, 9, 0, 0, 0, 0, DateTimeZone.UTC);
         
         LocalDate test = new LocalDate(dt.getMillis(), PARIS);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(2006, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
-NoAssert.donothing(dtUTC.getMillis(), test.getLocalMillis());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(2006, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
+        assertEquals(dtUTC.getMillis(), test.getLocalMillis());
     }
 
     @Test public void testConstructor_long4_DateTimeZone() throws Throwable {
@@ -328,84 +328,84 @@ NoAssert.donothing(dtUTC.getMillis(), test.getLocalMillis());
         DateTime dtUTC = new DateTime(2006, 6, 9, 0, 0, 0, 0, DateTimeZone.UTC);
         
         LocalDate test = new LocalDate(dt.getMillis(), PARIS);
-NoAssert.donothing(ISO_UTC, test.getChronology());
+        assertEquals(ISO_UTC, test.getChronology());
 NoAssert.donothing(2006, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
-NoAssert.donothing(dtUTC.getMillis(), test.getLocalMillis());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
+        assertEquals(dtUTC.getMillis(), test.getLocalMillis());
     }
 
     @Test public void testConstructor_long_nullDateTimeZone() throws Throwable {
         LocalDate test = new LocalDate(TEST_TIME1, (DateTimeZone) null);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
 NoAssert.donothing(4, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
+        assertEquals(6, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_long1_Chronology() throws Throwable {
         LocalDate test = new LocalDate(TEST_TIME1, GREGORIAN_PARIS);
-NoAssert.donothing(GREGORIAN_UTC, test.getChronology());
+        assertEquals(GREGORIAN_UTC, test.getChronology());
 NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(4, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
+        assertEquals(4, test.getMonthOfYear());
+        assertEquals(6, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_long2_Chronology() throws Throwable {
         LocalDate test = new LocalDate(TEST_TIME2, GREGORIAN_PARIS);
-NoAssert.donothing(GREGORIAN_UTC, test.getChronology());
-NoAssert.donothing(1971, test.getYear());
-NoAssert.donothing(5, test.getMonthOfYear());
-NoAssert.donothing(7, test.getDayOfMonth());
+        assertEquals(GREGORIAN_UTC, test.getChronology());
+        assertEquals(1971, test.getYear());
+        assertEquals(5, test.getMonthOfYear());
+        assertEquals(7, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_long_nullChronology() throws Throwable {
         LocalDate test = new LocalDate(TEST_TIME1, (Chronology) null);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
 NoAssert.donothing(4, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
+        assertEquals(6, test.getDayOfMonth());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testConstructor_Object1() throws Throwable {
         Date date = new Date(TEST_TIME1);
         LocalDate test = new LocalDate(date);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(4, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(4, test.getMonthOfYear());
+        assertEquals(6, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_nullObject() throws Throwable {
         LocalDate test = new LocalDate((Object) null);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_ObjectString1() throws Throwable {
         LocalDate test = new LocalDate("1972-04-06");
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1972, test.getYear());
-NoAssert.donothing(4, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1972, test.getYear());
+        assertEquals(4, test.getMonthOfYear());
+        assertEquals(6, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_ObjectString2() throws Throwable {
         LocalDate test = new LocalDate("1972-037");
-NoAssert.donothing(ISO_UTC, test.getChronology());
+        assertEquals(ISO_UTC, test.getChronology());
 NoAssert.donothing(1972, test.getYear());
-NoAssert.donothing(2, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
+        assertEquals(2, test.getMonthOfYear());
+        assertEquals(6, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_ObjectString3() throws Throwable {
         LocalDate test = new LocalDate("1972-02");
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1972, test.getYear());
-NoAssert.donothing(2, test.getMonthOfYear());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1972, test.getYear());
+        assertEquals(2, test.getMonthOfYear());
 NoAssert.donothing(1, test.getDayOfMonth());
     }
 
@@ -462,9 +462,9 @@ NoAssert.donothing(1, test.getDayOfMonth());
         LocalDate date = new LocalDate(1970, 4, 6, BUDDHIST_UTC);
         LocalDate test = new LocalDate(date);
 NoAssert.donothing(BUDDHIST_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(4, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
+        assertEquals(1970, test.getYear());
+        assertEquals(4, test.getMonthOfYear());
+        assertEquals(6, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_ObjectLocalTime() throws Throwable {
@@ -478,18 +478,18 @@ NoAssert.donothing(6, test.getDayOfMonth());
     @Test public void testConstructor_ObjectLocalDateTime() throws Throwable {
         LocalDateTime dt = new LocalDateTime(1970, 5, 6, 10, 20, 30, 40, BUDDHIST_UTC);
         LocalDate test = new LocalDate(dt);
-NoAssert.donothing(BUDDHIST_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(5, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
+        assertEquals(BUDDHIST_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(5, test.getMonthOfYear());
+        assertEquals(6, test.getDayOfMonth());
     }
 
     @SuppressWarnings("deprecation")
     @Test public void testConstructor_ObjectYearMonthDay() throws Throwable {
         YearMonthDay date = new YearMonthDay(1970, 4, 6, BUDDHIST_UTC);
         LocalDate test = new LocalDate(date);
-NoAssert.donothing(BUDDHIST_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
+        assertEquals(BUDDHIST_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
 NoAssert.donothing(4, test.getMonthOfYear());
 NoAssert.donothing(6, test.getDayOfMonth());
     }
@@ -498,42 +498,42 @@ NoAssert.donothing(6, test.getDayOfMonth());
     @Test public void testConstructor_Object_DateTimeZone() throws Throwable {
         Date date = new Date(TEST_TIME1);
         LocalDate test = new LocalDate(date, PARIS);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(4, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(4, test.getMonthOfYear());
+        assertEquals(6, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_nullObject_DateTimeZone() throws Throwable {
         LocalDate test = new LocalDate((Object) null, PARIS);
 NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
+        assertEquals(1970, test.getYear());
 NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
+        assertEquals(9, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_Object_nullDateTimeZone() throws Throwable {
         Date date = new Date(TEST_TIME1);
         LocalDate test = new LocalDate(date, (DateTimeZone) null);
-NoAssert.donothing(ISO_UTC, test.getChronology());
+        assertEquals(ISO_UTC, test.getChronology());
 NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(4, test.getMonthOfYear());
+        assertEquals(4, test.getMonthOfYear());
 NoAssert.donothing(6, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_nullObject_nullDateTimeZone() throws Throwable {
         LocalDate test = new LocalDate((Object) null, (DateTimeZone) null);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_Object_Chronology() throws Throwable {
         Date date = new Date(TEST_TIME1);
         LocalDate test = new LocalDate(date, GREGORIAN_PARIS);
-NoAssert.donothing(GREGORIAN_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
+        assertEquals(GREGORIAN_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
 NoAssert.donothing(4, test.getMonthOfYear());
 NoAssert.donothing(6, test.getDayOfMonth());
     }
@@ -541,95 +541,95 @@ NoAssert.donothing(6, test.getDayOfMonth());
     @Test public void testConstructor_Object_Chronology_crossChronology() throws Throwable {
         LocalDate input = new LocalDate(1970, 4, 6, ISO_UTC);
         LocalDate test = new LocalDate(input, BUDDHIST_UTC);
-NoAssert.donothing(BUDDHIST_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(4, test.getMonthOfYear());
-NoAssert.donothing(6, test.getDayOfMonth());
+        assertEquals(BUDDHIST_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(4, test.getMonthOfYear());
+        assertEquals(6, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_nullObject_Chronology() throws Throwable {
         LocalDate test = new LocalDate((Object) null, GREGORIAN_PARIS);
-NoAssert.donothing(GREGORIAN_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
+        assertEquals(GREGORIAN_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_Object_nullChronology() throws Throwable {
         Date date = new Date(TEST_TIME1);
         LocalDate test = new LocalDate(date, (Chronology) null);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(4, test.getMonthOfYear());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(4, test.getMonthOfYear());
 NoAssert.donothing(6, test.getDayOfMonth());
     }
 
     @Test public void testConstructor_nullObject_nullChronology() throws Throwable {
         LocalDate test = new LocalDate((Object) null, (Chronology) null);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
 NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
+        assertEquals(9, test.getDayOfMonth());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testConstructor_int_int_int() throws Throwable {
         LocalDate test = new LocalDate(1970, 6, 9);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
         try {
             new LocalDate(Integer.MIN_VALUE, 6, 9);
             fail();
         } catch (IllegalArgumentException ex) {
-NoAssert.donothing("Value -2147483648 for year must be in the range [-292275055,292278994]", ex.getMessage());
+            assertEquals("Value -2147483648 for year must be in the range [-292275055,292278994]", ex.getMessage());
         }
         try {
             new LocalDate(Integer.MAX_VALUE, 6, 9);
             fail();
         } catch (IllegalArgumentException ex) {
-NoAssert.donothing("Value 2147483647 for year must be in the range [-292275055,292278994]", ex.getMessage());
+            assertEquals("Value 2147483647 for year must be in the range [-292275055,292278994]", ex.getMessage());
         }
         try {
             new LocalDate(1970, 0, 9);
             fail();
         } catch (IllegalArgumentException ex) {
-NoAssert.donothing("Value 0 for monthOfYear must be in the range [1,12]", ex.getMessage());
+            assertEquals("Value 0 for monthOfYear must be in the range [1,12]", ex.getMessage());
         }
         try {
             new LocalDate(1970, 13, 9);
             fail();
         } catch (IllegalArgumentException ex) {
-NoAssert.donothing("Value 13 for monthOfYear must be in the range [1,12]", ex.getMessage());
+            assertEquals("Value 13 for monthOfYear must be in the range [1,12]", ex.getMessage());
         }
         try {
             new LocalDate(1970, 6, 0);
             fail();
         } catch (IllegalArgumentException ex) {
-NoAssert.donothing("Value 0 for dayOfMonth must be in the range [1,30]: year: 1970 month: 6", ex.getMessage());
+            assertEquals("Value 0 for dayOfMonth must be in the range [1,30]: year: 1970 month: 6", ex.getMessage());
         }
         try {
             new LocalDate(1970, 6, 31);
             fail();
         } catch (IllegalArgumentException ex) {
-NoAssert.donothing("Value 31 for dayOfMonth must be in the range [1,30]: year: 1970 month: 6", ex.getMessage());
+            assertEquals("Value 31 for dayOfMonth must be in the range [1,30]: year: 1970 month: 6", ex.getMessage());
         }
         new LocalDate(1970, 7, 31);
         try {
             new LocalDate(1970, 7, 32);
             fail();
         } catch (IllegalArgumentException ex) {
-NoAssert.donothing("Value 32 for dayOfMonth must be in the range [1,31]: year: 1970 month: 7", ex.getMessage());
+            assertEquals("Value 32 for dayOfMonth must be in the range [1,31]: year: 1970 month: 7", ex.getMessage());
         }
     }
 
     @Test public void testConstructor_int_int_int_Chronology() throws Throwable {
         LocalDate test = new LocalDate(1970, 6, 9, GREGORIAN_PARIS);
 NoAssert.donothing(GREGORIAN_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
+        assertEquals(1970, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
         try {
             new LocalDate(Integer.MIN_VALUE, 6, 9, GREGORIAN_PARIS);
             fail();
@@ -663,9 +663,9 @@ NoAssert.donothing(9, test.getDayOfMonth());
 
     @Test public void testConstructor_int_int_int_nullChronology() throws Throwable {
         LocalDate test = new LocalDate(1970, 6, 9, null);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
 NoAssert.donothing(9, test.getDayOfMonth());
     }
 

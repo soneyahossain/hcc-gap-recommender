@@ -188,213 +188,213 @@ public class TestEthiopicChronology { // extends TestCase {
     //-----------------------------------------------------------------------
     @Test
    public void testFactoryUTC() {
-NoAssert.donothing(DateTimeZone.UTC, EthiopicChronology.getInstanceUTC().getZone());
-NoAssert.donothing(EthiopicChronology.class, EthiopicChronology.getInstanceUTC().getClass());
+        assertEquals(DateTimeZone.UTC, EthiopicChronology.getInstanceUTC().getZone());
+        assertSame(EthiopicChronology.class, EthiopicChronology.getInstanceUTC().getClass());
     }
     @Test
     public void testFactory() {
-NoAssert.donothing(LONDON, EthiopicChronology.getInstance().getZone());
-NoAssert.donothing(EthiopicChronology.class, EthiopicChronology.getInstance().getClass());
+        assertEquals(LONDON, EthiopicChronology.getInstance().getZone());
+        assertSame(EthiopicChronology.class, EthiopicChronology.getInstance().getClass());
     }
 
     @Test  public void testFactory_Zone() {
-NoAssert.donothing(TOKYO, EthiopicChronology.getInstance(TOKYO).getZone());
+        assertEquals(TOKYO, EthiopicChronology.getInstance(TOKYO).getZone());
 NoAssert.donothing(PARIS, EthiopicChronology.getInstance(PARIS).getZone());
-NoAssert.donothing(LONDON, EthiopicChronology.getInstance(null).getZone());
-NoAssert.donothing(EthiopicChronology.class, EthiopicChronology.getInstance(TOKYO).getClass());
+        assertEquals(LONDON, EthiopicChronology.getInstance(null).getZone());
+        assertSame(EthiopicChronology.class, EthiopicChronology.getInstance(TOKYO).getClass());
     }
 
     //-----------------------------------------------------------------------
     @Test  public void testEquality() {
-NoAssert.donothing(EthiopicChronology.getInstance(TOKYO), EthiopicChronology.getInstance(TOKYO));
+        assertSame(EthiopicChronology.getInstance(TOKYO), EthiopicChronology.getInstance(TOKYO));
 NoAssert.donothing(EthiopicChronology.getInstance(LONDON), EthiopicChronology.getInstance(LONDON));
 NoAssert.donothing(EthiopicChronology.getInstance(PARIS), EthiopicChronology.getInstance(PARIS));
 NoAssert.donothing(EthiopicChronology.getInstanceUTC(), EthiopicChronology.getInstanceUTC());
-NoAssert.donothing(EthiopicChronology.getInstance(), EthiopicChronology.getInstance(LONDON));
+        assertSame(EthiopicChronology.getInstance(), EthiopicChronology.getInstance(LONDON));
     }
 
     @Test public void testWithUTC() {
-NoAssert.donothing(EthiopicChronology.getInstanceUTC(), EthiopicChronology.getInstance(LONDON).withUTC());
-NoAssert.donothing(EthiopicChronology.getInstanceUTC(), EthiopicChronology.getInstance(TOKYO).withUTC());
-NoAssert.donothing(EthiopicChronology.getInstanceUTC(), EthiopicChronology.getInstanceUTC().withUTC());
-NoAssert.donothing(EthiopicChronology.getInstanceUTC(), EthiopicChronology.getInstance().withUTC());
+        assertSame(EthiopicChronology.getInstanceUTC(), EthiopicChronology.getInstance(LONDON).withUTC());
+        assertSame(EthiopicChronology.getInstanceUTC(), EthiopicChronology.getInstance(TOKYO).withUTC());
+        assertSame(EthiopicChronology.getInstanceUTC(), EthiopicChronology.getInstanceUTC().withUTC());
+        assertSame(EthiopicChronology.getInstanceUTC(), EthiopicChronology.getInstance().withUTC());
     }
 
     @Test public void testWithZone() {
-NoAssert.donothing(EthiopicChronology.getInstance(TOKYO), EthiopicChronology.getInstance(TOKYO).withZone(TOKYO));
-NoAssert.donothing(EthiopicChronology.getInstance(LONDON), EthiopicChronology.getInstance(TOKYO).withZone(LONDON));
+        assertSame(EthiopicChronology.getInstance(TOKYO), EthiopicChronology.getInstance(TOKYO).withZone(TOKYO));
+        assertSame(EthiopicChronology.getInstance(LONDON), EthiopicChronology.getInstance(TOKYO).withZone(LONDON));
 NoAssert.donothing(EthiopicChronology.getInstance(PARIS), EthiopicChronology.getInstance(TOKYO).withZone(PARIS));
-NoAssert.donothing(EthiopicChronology.getInstance(LONDON), EthiopicChronology.getInstance(TOKYO).withZone(null));
-NoAssert.donothing(EthiopicChronology.getInstance(PARIS), EthiopicChronology.getInstance().withZone(PARIS));
-NoAssert.donothing(EthiopicChronology.getInstance(PARIS), EthiopicChronology.getInstanceUTC().withZone(PARIS));
+        assertSame(EthiopicChronology.getInstance(LONDON), EthiopicChronology.getInstance(TOKYO).withZone(null));
+        assertSame(EthiopicChronology.getInstance(PARIS), EthiopicChronology.getInstance().withZone(PARIS));
+        assertSame(EthiopicChronology.getInstance(PARIS), EthiopicChronology.getInstanceUTC().withZone(PARIS));
     }
 
     @Test public void testToString() {
 NoAssert.donothing("EthiopicChronology[Europe/London]", EthiopicChronology.getInstance(LONDON).toString());
 NoAssert.donothing("EthiopicChronology[Asia/Tokyo]", EthiopicChronology.getInstance(TOKYO).toString());
-NoAssert.donothing("EthiopicChronology[Europe/London]", EthiopicChronology.getInstance().toString());
+        assertEquals("EthiopicChronology[Europe/London]", EthiopicChronology.getInstance().toString());
 NoAssert.donothing("EthiopicChronology[UTC]", EthiopicChronology.getInstanceUTC().toString());
     }
 
     //-----------------------------------------------------------------------
     @Test  public void testDurationFields() {
         final EthiopicChronology ethiopic = EthiopicChronology.getInstance();
-NoAssert.donothing("eras", ethiopic.eras().getName());
+        assertEquals("eras", ethiopic.eras().getName());
 NoAssert.donothing("centuries", ethiopic.centuries().getName());
-NoAssert.donothing("years", ethiopic.years().getName());
-NoAssert.donothing("weekyears", ethiopic.weekyears().getName());
-NoAssert.donothing("months", ethiopic.months().getName());
-NoAssert.donothing("weeks", ethiopic.weeks().getName());
-NoAssert.donothing("days", ethiopic.days().getName());
+        assertEquals("years", ethiopic.years().getName());
+        assertEquals("weekyears", ethiopic.weekyears().getName());
+        assertEquals("months", ethiopic.months().getName());
+        assertEquals("weeks", ethiopic.weeks().getName());
+        assertEquals("days", ethiopic.days().getName());
 NoAssert.donothing("halfdays", ethiopic.halfdays().getName());
-NoAssert.donothing("hours", ethiopic.hours().getName());
-NoAssert.donothing("minutes", ethiopic.minutes().getName());
-NoAssert.donothing("seconds", ethiopic.seconds().getName());
+        assertEquals("hours", ethiopic.hours().getName());
+        assertEquals("minutes", ethiopic.minutes().getName());
+        assertEquals("seconds", ethiopic.seconds().getName());
 NoAssert.donothing("millis", ethiopic.millis().getName());
         
-NoAssert.donothing(false, ethiopic.eras().isSupported());
-NoAssert.donothing(true, ethiopic.centuries().isSupported());
-NoAssert.donothing(true, ethiopic.years().isSupported());
-NoAssert.donothing(true, ethiopic.weekyears().isSupported());
-NoAssert.donothing(true, ethiopic.months().isSupported());
-NoAssert.donothing(true, ethiopic.weeks().isSupported());
-NoAssert.donothing(true, ethiopic.days().isSupported());
+        assertEquals(false, ethiopic.eras().isSupported());
+        assertEquals(true, ethiopic.centuries().isSupported());
+        assertEquals(true, ethiopic.years().isSupported());
+        assertEquals(true, ethiopic.weekyears().isSupported());
+        assertEquals(true, ethiopic.months().isSupported());
+        assertEquals(true, ethiopic.weeks().isSupported());
+        assertEquals(true, ethiopic.days().isSupported());
 NoAssert.donothing(true, ethiopic.halfdays().isSupported());
 NoAssert.donothing(true, ethiopic.hours().isSupported());
-NoAssert.donothing(true, ethiopic.minutes().isSupported());
-NoAssert.donothing(true, ethiopic.seconds().isSupported());
+        assertEquals(true, ethiopic.minutes().isSupported());
+        assertEquals(true, ethiopic.seconds().isSupported());
 NoAssert.donothing(true, ethiopic.millis().isSupported());
         
-NoAssert.donothing(false, ethiopic.centuries().isPrecise());
-NoAssert.donothing(false, ethiopic.years().isPrecise());
-NoAssert.donothing(false, ethiopic.weekyears().isPrecise());
-NoAssert.donothing(false, ethiopic.months().isPrecise());
+        assertEquals(false, ethiopic.centuries().isPrecise());
+        assertEquals(false, ethiopic.years().isPrecise());
+        assertEquals(false, ethiopic.weekyears().isPrecise());
+        assertEquals(false, ethiopic.months().isPrecise());
 NoAssert.donothing(false, ethiopic.weeks().isPrecise());
-NoAssert.donothing(false, ethiopic.days().isPrecise());
-NoAssert.donothing(false, ethiopic.halfdays().isPrecise());
-NoAssert.donothing(true, ethiopic.hours().isPrecise());
-NoAssert.donothing(true, ethiopic.minutes().isPrecise());
-NoAssert.donothing(true, ethiopic.seconds().isPrecise());
+        assertEquals(false, ethiopic.days().isPrecise());
+        assertEquals(false, ethiopic.halfdays().isPrecise());
+        assertEquals(true, ethiopic.hours().isPrecise());
+        assertEquals(true, ethiopic.minutes().isPrecise());
+        assertEquals(true, ethiopic.seconds().isPrecise());
 NoAssert.donothing(true, ethiopic.millis().isPrecise());
         
         final EthiopicChronology ethiopicUTC = EthiopicChronology.getInstanceUTC();
 NoAssert.donothing(false, ethiopicUTC.centuries().isPrecise());
 NoAssert.donothing(false, ethiopicUTC.years().isPrecise());
-NoAssert.donothing(false, ethiopicUTC.weekyears().isPrecise());
-NoAssert.donothing(false, ethiopicUTC.months().isPrecise());
-NoAssert.donothing(true, ethiopicUTC.weeks().isPrecise());
-NoAssert.donothing(true, ethiopicUTC.days().isPrecise());
-NoAssert.donothing(true, ethiopicUTC.halfdays().isPrecise());
+        assertEquals(false, ethiopicUTC.weekyears().isPrecise());
+        assertEquals(false, ethiopicUTC.months().isPrecise());
+        assertEquals(true, ethiopicUTC.weeks().isPrecise());
+        assertEquals(true, ethiopicUTC.days().isPrecise());
+        assertEquals(true, ethiopicUTC.halfdays().isPrecise());
 NoAssert.donothing(true, ethiopicUTC.hours().isPrecise());
-NoAssert.donothing(true, ethiopicUTC.minutes().isPrecise());
+        assertEquals(true, ethiopicUTC.minutes().isPrecise());
 NoAssert.donothing(true, ethiopicUTC.seconds().isPrecise());
-NoAssert.donothing(true, ethiopicUTC.millis().isPrecise());
+        assertEquals(true, ethiopicUTC.millis().isPrecise());
         
         final DateTimeZone gmt = DateTimeZone.forID("Etc/GMT");
         final EthiopicChronology ethiopicGMT = EthiopicChronology.getInstance(gmt);
-NoAssert.donothing(false, ethiopicGMT.centuries().isPrecise());
-NoAssert.donothing(false, ethiopicGMT.years().isPrecise());
-NoAssert.donothing(false, ethiopicGMT.weekyears().isPrecise());
-NoAssert.donothing(false, ethiopicGMT.months().isPrecise());
-NoAssert.donothing(true, ethiopicGMT.weeks().isPrecise());
-NoAssert.donothing(true, ethiopicGMT.days().isPrecise());
-NoAssert.donothing(true, ethiopicGMT.halfdays().isPrecise());
-NoAssert.donothing(true, ethiopicGMT.hours().isPrecise());
-NoAssert.donothing(true, ethiopicGMT.minutes().isPrecise());
-NoAssert.donothing(true, ethiopicGMT.seconds().isPrecise());
-NoAssert.donothing(true, ethiopicGMT.millis().isPrecise());
+        assertEquals(false, ethiopicGMT.centuries().isPrecise());
+        assertEquals(false, ethiopicGMT.years().isPrecise());
+        assertEquals(false, ethiopicGMT.weekyears().isPrecise());
+        assertEquals(false, ethiopicGMT.months().isPrecise());
+        assertEquals(true, ethiopicGMT.weeks().isPrecise());
+        assertEquals(true, ethiopicGMT.days().isPrecise());
+        assertEquals(true, ethiopicGMT.halfdays().isPrecise());
+        assertEquals(true, ethiopicGMT.hours().isPrecise());
+        assertEquals(true, ethiopicGMT.minutes().isPrecise());
+        assertEquals(true, ethiopicGMT.seconds().isPrecise());
+        assertEquals(true, ethiopicGMT.millis().isPrecise());
     }
 
     @Test  public void testDateFields() {
         final EthiopicChronology ethiopic = EthiopicChronology.getInstance();
 NoAssert.donothing("era", ethiopic.era().getName());
-NoAssert.donothing("centuryOfEra", ethiopic.centuryOfEra().getName());
-NoAssert.donothing("yearOfCentury", ethiopic.yearOfCentury().getName());
-NoAssert.donothing("yearOfEra", ethiopic.yearOfEra().getName());
-NoAssert.donothing("year", ethiopic.year().getName());
-NoAssert.donothing("monthOfYear", ethiopic.monthOfYear().getName());
-NoAssert.donothing("weekyearOfCentury", ethiopic.weekyearOfCentury().getName());
-NoAssert.donothing("weekyear", ethiopic.weekyear().getName());
-NoAssert.donothing("weekOfWeekyear", ethiopic.weekOfWeekyear().getName());
-NoAssert.donothing("dayOfYear", ethiopic.dayOfYear().getName());
-NoAssert.donothing("dayOfMonth", ethiopic.dayOfMonth().getName());
-NoAssert.donothing("dayOfWeek", ethiopic.dayOfWeek().getName());
+        assertEquals("centuryOfEra", ethiopic.centuryOfEra().getName());
+        assertEquals("yearOfCentury", ethiopic.yearOfCentury().getName());
+        assertEquals("yearOfEra", ethiopic.yearOfEra().getName());
+        assertEquals("year", ethiopic.year().getName());
+        assertEquals("monthOfYear", ethiopic.monthOfYear().getName());
+        assertEquals("weekyearOfCentury", ethiopic.weekyearOfCentury().getName());
+        assertEquals("weekyear", ethiopic.weekyear().getName());
+        assertEquals("weekOfWeekyear", ethiopic.weekOfWeekyear().getName());
+        assertEquals("dayOfYear", ethiopic.dayOfYear().getName());
+        assertEquals("dayOfMonth", ethiopic.dayOfMonth().getName());
+        assertEquals("dayOfWeek", ethiopic.dayOfWeek().getName());
         
-NoAssert.donothing(true, ethiopic.era().isSupported());
-NoAssert.donothing(true, ethiopic.centuryOfEra().isSupported());
-NoAssert.donothing(true, ethiopic.yearOfCentury().isSupported());
-NoAssert.donothing(true, ethiopic.yearOfEra().isSupported());
-NoAssert.donothing(true, ethiopic.year().isSupported());
-NoAssert.donothing(true, ethiopic.monthOfYear().isSupported());
-NoAssert.donothing(true, ethiopic.weekyearOfCentury().isSupported());
+        assertEquals(true, ethiopic.era().isSupported());
+        assertEquals(true, ethiopic.centuryOfEra().isSupported());
+        assertEquals(true, ethiopic.yearOfCentury().isSupported());
+        assertEquals(true, ethiopic.yearOfEra().isSupported());
+        assertEquals(true, ethiopic.year().isSupported());
+        assertEquals(true, ethiopic.monthOfYear().isSupported());
+        assertEquals(true, ethiopic.weekyearOfCentury().isSupported());
 NoAssert.donothing(true, ethiopic.weekyear().isSupported());
 NoAssert.donothing(true, ethiopic.weekOfWeekyear().isSupported());
-NoAssert.donothing(true, ethiopic.dayOfYear().isSupported());
-NoAssert.donothing(true, ethiopic.dayOfMonth().isSupported());
-NoAssert.donothing(true, ethiopic.dayOfWeek().isSupported());
+        assertEquals(true, ethiopic.dayOfYear().isSupported());
+        assertEquals(true, ethiopic.dayOfMonth().isSupported());
+        assertEquals(true, ethiopic.dayOfWeek().isSupported());
         
-NoAssert.donothing(ethiopic.eras(), ethiopic.era().getDurationField());
-NoAssert.donothing(ethiopic.centuries(), ethiopic.centuryOfEra().getDurationField());
-NoAssert.donothing(ethiopic.years(), ethiopic.yearOfCentury().getDurationField());
-NoAssert.donothing(ethiopic.years(), ethiopic.yearOfEra().getDurationField());
-NoAssert.donothing(ethiopic.years(), ethiopic.year().getDurationField());
-NoAssert.donothing(ethiopic.months(), ethiopic.monthOfYear().getDurationField());
-NoAssert.donothing(ethiopic.weekyears(), ethiopic.weekyearOfCentury().getDurationField());
-NoAssert.donothing(ethiopic.weekyears(), ethiopic.weekyear().getDurationField());
+        assertEquals(ethiopic.eras(), ethiopic.era().getDurationField());
+        assertEquals(ethiopic.centuries(), ethiopic.centuryOfEra().getDurationField());
+        assertEquals(ethiopic.years(), ethiopic.yearOfCentury().getDurationField());
+        assertEquals(ethiopic.years(), ethiopic.yearOfEra().getDurationField());
+        assertEquals(ethiopic.years(), ethiopic.year().getDurationField());
+        assertEquals(ethiopic.months(), ethiopic.monthOfYear().getDurationField());
+        assertEquals(ethiopic.weekyears(), ethiopic.weekyearOfCentury().getDurationField());
+        assertEquals(ethiopic.weekyears(), ethiopic.weekyear().getDurationField());
 NoAssert.donothing(ethiopic.weeks(), ethiopic.weekOfWeekyear().getDurationField());
-NoAssert.donothing(ethiopic.days(), ethiopic.dayOfYear().getDurationField());
-NoAssert.donothing(ethiopic.days(), ethiopic.dayOfMonth().getDurationField());
-NoAssert.donothing(ethiopic.days(), ethiopic.dayOfWeek().getDurationField());
+        assertEquals(ethiopic.days(), ethiopic.dayOfYear().getDurationField());
+        assertEquals(ethiopic.days(), ethiopic.dayOfMonth().getDurationField());
+        assertEquals(ethiopic.days(), ethiopic.dayOfWeek().getDurationField());
         
-NoAssert.donothing(null, ethiopic.era().getRangeDurationField());
-NoAssert.donothing(ethiopic.eras(), ethiopic.centuryOfEra().getRangeDurationField());
-NoAssert.donothing(ethiopic.centuries(), ethiopic.yearOfCentury().getRangeDurationField());
-NoAssert.donothing(ethiopic.eras(), ethiopic.yearOfEra().getRangeDurationField());
-NoAssert.donothing(null, ethiopic.year().getRangeDurationField());
-NoAssert.donothing(ethiopic.years(), ethiopic.monthOfYear().getRangeDurationField());
+        assertEquals(null, ethiopic.era().getRangeDurationField());
+        assertEquals(ethiopic.eras(), ethiopic.centuryOfEra().getRangeDurationField());
+        assertEquals(ethiopic.centuries(), ethiopic.yearOfCentury().getRangeDurationField());
+        assertEquals(ethiopic.eras(), ethiopic.yearOfEra().getRangeDurationField());
+        assertEquals(null, ethiopic.year().getRangeDurationField());
+        assertEquals(ethiopic.years(), ethiopic.monthOfYear().getRangeDurationField());
 NoAssert.donothing(ethiopic.centuries(), ethiopic.weekyearOfCentury().getRangeDurationField());
-NoAssert.donothing(null, ethiopic.weekyear().getRangeDurationField());
-NoAssert.donothing(ethiopic.weekyears(), ethiopic.weekOfWeekyear().getRangeDurationField());
-NoAssert.donothing(ethiopic.years(), ethiopic.dayOfYear().getRangeDurationField());
-NoAssert.donothing(ethiopic.months(), ethiopic.dayOfMonth().getRangeDurationField());
-NoAssert.donothing(ethiopic.weeks(), ethiopic.dayOfWeek().getRangeDurationField());
+        assertEquals(null, ethiopic.weekyear().getRangeDurationField());
+        assertEquals(ethiopic.weekyears(), ethiopic.weekOfWeekyear().getRangeDurationField());
+        assertEquals(ethiopic.years(), ethiopic.dayOfYear().getRangeDurationField());
+        assertEquals(ethiopic.months(), ethiopic.dayOfMonth().getRangeDurationField());
+        assertEquals(ethiopic.weeks(), ethiopic.dayOfWeek().getRangeDurationField());
     }
 
     @Test public void testTimeFields() {
         final EthiopicChronology ethiopic = EthiopicChronology.getInstance();
-NoAssert.donothing("halfdayOfDay", ethiopic.halfdayOfDay().getName());
-NoAssert.donothing("clockhourOfHalfday", ethiopic.clockhourOfHalfday().getName());
-NoAssert.donothing("hourOfHalfday", ethiopic.hourOfHalfday().getName());
-NoAssert.donothing("clockhourOfDay", ethiopic.clockhourOfDay().getName());
+        assertEquals("halfdayOfDay", ethiopic.halfdayOfDay().getName());
+        assertEquals("clockhourOfHalfday", ethiopic.clockhourOfHalfday().getName());
+        assertEquals("hourOfHalfday", ethiopic.hourOfHalfday().getName());
+        assertEquals("clockhourOfDay", ethiopic.clockhourOfDay().getName());
 NoAssert.donothing("hourOfDay", ethiopic.hourOfDay().getName());
-NoAssert.donothing("minuteOfDay", ethiopic.minuteOfDay().getName());
-NoAssert.donothing("minuteOfHour", ethiopic.minuteOfHour().getName());
-NoAssert.donothing("secondOfDay", ethiopic.secondOfDay().getName());
-NoAssert.donothing("secondOfMinute", ethiopic.secondOfMinute().getName());
-NoAssert.donothing("millisOfDay", ethiopic.millisOfDay().getName());
+        assertEquals("minuteOfDay", ethiopic.minuteOfDay().getName());
+        assertEquals("minuteOfHour", ethiopic.minuteOfHour().getName());
+        assertEquals("secondOfDay", ethiopic.secondOfDay().getName());
+        assertEquals("secondOfMinute", ethiopic.secondOfMinute().getName());
+        assertEquals("millisOfDay", ethiopic.millisOfDay().getName());
 NoAssert.donothing("millisOfSecond", ethiopic.millisOfSecond().getName());
         
-NoAssert.donothing(true, ethiopic.halfdayOfDay().isSupported());
+        assertEquals(true, ethiopic.halfdayOfDay().isSupported());
 NoAssert.donothing(true, ethiopic.clockhourOfHalfday().isSupported());
-NoAssert.donothing(true, ethiopic.hourOfHalfday().isSupported());
-NoAssert.donothing(true, ethiopic.clockhourOfDay().isSupported());
-NoAssert.donothing(true, ethiopic.hourOfDay().isSupported());
-NoAssert.donothing(true, ethiopic.minuteOfDay().isSupported());
-NoAssert.donothing(true, ethiopic.minuteOfHour().isSupported());
+        assertEquals(true, ethiopic.hourOfHalfday().isSupported());
+        assertEquals(true, ethiopic.clockhourOfDay().isSupported());
+        assertEquals(true, ethiopic.hourOfDay().isSupported());
+        assertEquals(true, ethiopic.minuteOfDay().isSupported());
+        assertEquals(true, ethiopic.minuteOfHour().isSupported());
 NoAssert.donothing(true, ethiopic.secondOfDay().isSupported());
-NoAssert.donothing(true, ethiopic.secondOfMinute().isSupported());
-NoAssert.donothing(true, ethiopic.millisOfDay().isSupported());
+        assertEquals(true, ethiopic.secondOfMinute().isSupported());
+        assertEquals(true, ethiopic.millisOfDay().isSupported());
 NoAssert.donothing(true, ethiopic.millisOfSecond().isSupported());
     }
 
     //-----------------------------------------------------------------------
     @Test  public void testEpoch() {
         DateTime epoch = new DateTime(1, 1, 1, 0, 0, 0, 0, ETHIOPIC_UTC);
-NoAssert.donothing(new DateTime(8, 8, 29, 0, 0, 0, 0, JULIAN_UTC), epoch.withChronology(JULIAN_UTC));
+        assertEquals(new DateTime(8, 8, 29, 0, 0, 0, 0, JULIAN_UTC), epoch.withChronology(JULIAN_UTC));
     }
 
     @Test  public void testEra() {
-NoAssert.donothing(1, EthiopicChronology.EE);
+        assertEquals(1, EthiopicChronology.EE);
         try {
             new DateTime(-1, 13, 5, 0, 0, 0, 0, ETHIOPIC_UTC);
             fail();
@@ -438,31 +438,31 @@ NoAssert.donothing(1, EthiopicChronology.EE);
             }
             
             // test era
-NoAssert.donothing(1, era.get(millis));
+            assertEquals(1, era.get(millis));
 NoAssert.donothing("EE", era.getAsText(millis));
-NoAssert.donothing("EE", era.getAsShortText(millis));
+            assertEquals("EE", era.getAsShortText(millis));
             
             // test date
-NoAssert.donothing(expectedYear, yearValue);
+            assertEquals(expectedYear, yearValue);
 NoAssert.donothing(expectedYear, yearOfEraValue);
 NoAssert.donothing(expectedMonth, monthValue);
-NoAssert.donothing(expectedDay, dayValue);
-NoAssert.donothing(expectedDOW, dowValue);
+            assertEquals(expectedDay, dayValue);
+            assertEquals(expectedDOW, dowValue);
 NoAssert.donothing(expectedDOY, doyValue);
             
             // test leap year
-NoAssert.donothing(yearValue % 4 == 3, year.isLeap(millis));
+            assertEquals(yearValue % 4 == 3, year.isLeap(millis));
             
             // test month length
             if (monthValue == 13) {
-NoAssert.donothing(yearValue % 4 == 3, monthOfYear.isLeap(millis));
+                assertEquals(yearValue % 4 == 3, monthOfYear.isLeap(millis));
                 if (yearValue % 4 == 3) {
-NoAssert.donothing(6, monthLen);
+                    assertEquals(6, monthLen);
                 } else {
-NoAssert.donothing(5, monthLen);
+                    assertEquals(5, monthLen);
                 }
             } else {
-NoAssert.donothing(30, monthLen);
+                assertEquals(30, monthLen);
             }
             
             // recalculate date
@@ -492,80 +492,80 @@ NoAssert.donothing(30, monthLen);
 
     @Test  public void testSampleDate() {
         DateTime dt = new DateTime(2004, 6, 9, 0, 0, 0, 0, ISO_UTC).withChronology(ETHIOPIC_UTC);
-NoAssert.donothing(EthiopicChronology.EE, dt.getEra());
-NoAssert.donothing(20, dt.getCenturyOfEra());  // TODO confirm
-NoAssert.donothing(96, dt.getYearOfCentury());
-NoAssert.donothing(1996, dt.getYearOfEra());
+        assertEquals(EthiopicChronology.EE, dt.getEra());
+        assertEquals(20, dt.getCenturyOfEra());  // TODO confirm
+        assertEquals(96, dt.getYearOfCentury());
+        assertEquals(1996, dt.getYearOfEra());
         
 NoAssert.donothing(1996, dt.getYear());
         Property fld = dt.year();
-NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
+        assertEquals(false, fld.isLeap());
+        assertEquals(0, fld.getLeapAmount());
 NoAssert.donothing(DurationFieldType.days(), fld.getLeapDurationField().getType());
-NoAssert.donothing(new DateTime(1997, 10, 2, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addToCopy(1));
+        assertEquals(new DateTime(1997, 10, 2, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addToCopy(1));
         
-NoAssert.donothing(10, dt.getMonthOfYear());
+        assertEquals(10, dt.getMonthOfYear());
         fld = dt.monthOfYear();
 NoAssert.donothing(false, fld.isLeap());
 NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(DurationFieldType.days(), fld.getLeapDurationField().getType());
-NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(13, fld.getMaximumValue());
-NoAssert.donothing(13, fld.getMaximumValueOverall());
-NoAssert.donothing(new DateTime(1997, 1, 2, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addToCopy(4));
-NoAssert.donothing(new DateTime(1996, 1, 2, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addWrapFieldToCopy(4));
+        assertEquals(DurationFieldType.days(), fld.getLeapDurationField().getType());
+        assertEquals(1, fld.getMinimumValue());
+        assertEquals(1, fld.getMinimumValueOverall());
+        assertEquals(13, fld.getMaximumValue());
+        assertEquals(13, fld.getMaximumValueOverall());
+        assertEquals(new DateTime(1997, 1, 2, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addToCopy(4));
+        assertEquals(new DateTime(1996, 1, 2, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addWrapFieldToCopy(4));
         
-NoAssert.donothing(2, dt.getDayOfMonth());
+        assertEquals(2, dt.getDayOfMonth());
         fld = dt.dayOfMonth();
-NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(null, fld.getLeapDurationField());
-NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(30, fld.getMaximumValue());
-NoAssert.donothing(30, fld.getMaximumValueOverall());
-NoAssert.donothing(new DateTime(1996, 10, 3, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addToCopy(1));
+        assertEquals(false, fld.isLeap());
+        assertEquals(0, fld.getLeapAmount());
+        assertEquals(null, fld.getLeapDurationField());
+        assertEquals(1, fld.getMinimumValue());
+        assertEquals(1, fld.getMinimumValueOverall());
+        assertEquals(30, fld.getMaximumValue());
+        assertEquals(30, fld.getMaximumValueOverall());
+        assertEquals(new DateTime(1996, 10, 3, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addToCopy(1));
         
-NoAssert.donothing(DateTimeConstants.WEDNESDAY, dt.getDayOfWeek());
+        assertEquals(DateTimeConstants.WEDNESDAY, dt.getDayOfWeek());
         fld = dt.dayOfWeek();
-NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
+        assertEquals(false, fld.isLeap());
+        assertEquals(0, fld.getLeapAmount());
 NoAssert.donothing(null, fld.getLeapDurationField());
-NoAssert.donothing(1, fld.getMinimumValue());
+        assertEquals(1, fld.getMinimumValue());
 NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(7, fld.getMaximumValue());
-NoAssert.donothing(7, fld.getMaximumValueOverall());
-NoAssert.donothing(new DateTime(1996, 10, 3, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addToCopy(1));
+        assertEquals(7, fld.getMaximumValue());
+        assertEquals(7, fld.getMaximumValueOverall());
+        assertEquals(new DateTime(1996, 10, 3, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addToCopy(1));
         
-NoAssert.donothing(9 * 30 + 2, dt.getDayOfYear());
+        assertEquals(9 * 30 + 2, dt.getDayOfYear());
         fld = dt.dayOfYear();
-NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(null, fld.getLeapDurationField());
-NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(365, fld.getMaximumValue());
-NoAssert.donothing(366, fld.getMaximumValueOverall());
-NoAssert.donothing(new DateTime(1996, 10, 3, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addToCopy(1));
+        assertEquals(false, fld.isLeap());
+        assertEquals(0, fld.getLeapAmount());
+        assertEquals(null, fld.getLeapDurationField());
+        assertEquals(1, fld.getMinimumValue());
+        assertEquals(1, fld.getMinimumValueOverall());
+        assertEquals(365, fld.getMaximumValue());
+        assertEquals(366, fld.getMaximumValueOverall());
+        assertEquals(new DateTime(1996, 10, 3, 0, 0, 0, 0, ETHIOPIC_UTC), fld.addToCopy(1));
         
-NoAssert.donothing(0, dt.getHourOfDay());
-NoAssert.donothing(0, dt.getMinuteOfHour());
-NoAssert.donothing(0, dt.getSecondOfMinute());
-NoAssert.donothing(0, dt.getMillisOfSecond());
+        assertEquals(0, dt.getHourOfDay());
+        assertEquals(0, dt.getMinuteOfHour());
+        assertEquals(0, dt.getSecondOfMinute());
+        assertEquals(0, dt.getMillisOfSecond());
     }
 
     @Test   public void testSampleDateWithZone() {
         DateTime dt = new DateTime(2004, 6, 9, 12, 0, 0, 0, PARIS).withChronology(ETHIOPIC_UTC);
-NoAssert.donothing(EthiopicChronology.EE, dt.getEra());
-NoAssert.donothing(1996, dt.getYear());
-NoAssert.donothing(1996, dt.getYearOfEra());
-NoAssert.donothing(10, dt.getMonthOfYear());
-NoAssert.donothing(2, dt.getDayOfMonth());
-NoAssert.donothing(10, dt.getHourOfDay());  // PARIS is UTC+2 in summer (12-2=10)
-NoAssert.donothing(0, dt.getMinuteOfHour());
-NoAssert.donothing(0, dt.getSecondOfMinute());
-NoAssert.donothing(0, dt.getMillisOfSecond());
+        assertEquals(EthiopicChronology.EE, dt.getEra());
+        assertEquals(1996, dt.getYear());
+        assertEquals(1996, dt.getYearOfEra());
+        assertEquals(10, dt.getMonthOfYear());
+        assertEquals(2, dt.getDayOfMonth());
+        assertEquals(10, dt.getHourOfDay());  // PARIS is UTC+2 in summer (12-2=10)
+        assertEquals(0, dt.getMinuteOfHour());
+        assertEquals(0, dt.getSecondOfMinute());
+        assertEquals(0, dt.getMillisOfSecond());
     }
 
     @Test  public void testDurationYear() {
@@ -577,46 +577,46 @@ NoAssert.donothing(0, dt.getMillisOfSecond());
         DateTime dt00 = new DateTime(2000, 10, 2, 0, 0, 0, 0, ETHIOPIC_UTC);
         
         DurationField fld = dt96.year().getDurationField();
-NoAssert.donothing(ETHIOPIC_UTC.years(), fld);
-NoAssert.donothing(1L * 365L * MILLIS_PER_DAY, fld.getMillis(1, dt96.getMillis()));
-NoAssert.donothing(2L * 365L * MILLIS_PER_DAY, fld.getMillis(2, dt96.getMillis()));
+        assertEquals(ETHIOPIC_UTC.years(), fld);
+        assertEquals(1L * 365L * MILLIS_PER_DAY, fld.getMillis(1, dt96.getMillis()));
+        assertEquals(2L * 365L * MILLIS_PER_DAY, fld.getMillis(2, dt96.getMillis()));
 NoAssert.donothing(3L * 365L * MILLIS_PER_DAY, fld.getMillis(3, dt96.getMillis()));
-NoAssert.donothing((4L * 365L + 1L) * MILLIS_PER_DAY, fld.getMillis(4, dt96.getMillis()));
+        assertEquals((4L * 365L + 1L) * MILLIS_PER_DAY, fld.getMillis(4, dt96.getMillis()));
         
-NoAssert.donothing(((4L * 365L + 1L) * MILLIS_PER_DAY) / 4, fld.getMillis(1));
-NoAssert.donothing(((4L * 365L + 1L) * MILLIS_PER_DAY) / 2, fld.getMillis(2));
+        assertEquals(((4L * 365L + 1L) * MILLIS_PER_DAY) / 4, fld.getMillis(1));
+        assertEquals(((4L * 365L + 1L) * MILLIS_PER_DAY) / 2, fld.getMillis(2));
         
-NoAssert.donothing(1L * 365L * MILLIS_PER_DAY, fld.getMillis(1L, dt96.getMillis()));
-NoAssert.donothing(2L * 365L * MILLIS_PER_DAY, fld.getMillis(2L, dt96.getMillis()));
-NoAssert.donothing(3L * 365L * MILLIS_PER_DAY, fld.getMillis(3L, dt96.getMillis()));
-NoAssert.donothing((4L * 365L + 1L) * MILLIS_PER_DAY, fld.getMillis(4L, dt96.getMillis()));
+        assertEquals(1L * 365L * MILLIS_PER_DAY, fld.getMillis(1L, dt96.getMillis()));
+        assertEquals(2L * 365L * MILLIS_PER_DAY, fld.getMillis(2L, dt96.getMillis()));
+        assertEquals(3L * 365L * MILLIS_PER_DAY, fld.getMillis(3L, dt96.getMillis()));
+        assertEquals((4L * 365L + 1L) * MILLIS_PER_DAY, fld.getMillis(4L, dt96.getMillis()));
         
-NoAssert.donothing(((4L * 365L + 1L) * MILLIS_PER_DAY) / 4, fld.getMillis(1L));
-NoAssert.donothing(((4L * 365L + 1L) * MILLIS_PER_DAY) / 2, fld.getMillis(2L));
+        assertEquals(((4L * 365L + 1L) * MILLIS_PER_DAY) / 4, fld.getMillis(1L));
+        assertEquals(((4L * 365L + 1L) * MILLIS_PER_DAY) / 2, fld.getMillis(2L));
         
-NoAssert.donothing(((4L * 365L + 1L) * MILLIS_PER_DAY) / 4, fld.getUnitMillis());
+        assertEquals(((4L * 365L + 1L) * MILLIS_PER_DAY) / 4, fld.getUnitMillis());
         
-NoAssert.donothing(0, fld.getValue(1L * 365L * MILLIS_PER_DAY - 1L, dt96.getMillis()));
-NoAssert.donothing(1, fld.getValue(1L * 365L * MILLIS_PER_DAY, dt96.getMillis()));
-NoAssert.donothing(1, fld.getValue(1L * 365L * MILLIS_PER_DAY + 1L, dt96.getMillis()));
-NoAssert.donothing(1, fld.getValue(2L * 365L * MILLIS_PER_DAY - 1L, dt96.getMillis()));
-NoAssert.donothing(2, fld.getValue(2L * 365L * MILLIS_PER_DAY, dt96.getMillis()));
-NoAssert.donothing(2, fld.getValue(2L * 365L * MILLIS_PER_DAY + 1L, dt96.getMillis()));
-NoAssert.donothing(2, fld.getValue(3L * 365L * MILLIS_PER_DAY - 1L, dt96.getMillis()));
-NoAssert.donothing(3, fld.getValue(3L * 365L * MILLIS_PER_DAY, dt96.getMillis()));
-NoAssert.donothing(3, fld.getValue(3L * 365L * MILLIS_PER_DAY + 1L, dt96.getMillis()));
-NoAssert.donothing(3, fld.getValue((4L * 365L + 1L) * MILLIS_PER_DAY - 1L, dt96.getMillis()));
-NoAssert.donothing(4, fld.getValue((4L * 365L + 1L) * MILLIS_PER_DAY, dt96.getMillis()));
-NoAssert.donothing(4, fld.getValue((4L * 365L + 1L) * MILLIS_PER_DAY + 1L, dt96.getMillis()));
+        assertEquals(0, fld.getValue(1L * 365L * MILLIS_PER_DAY - 1L, dt96.getMillis()));
+        assertEquals(1, fld.getValue(1L * 365L * MILLIS_PER_DAY, dt96.getMillis()));
+        assertEquals(1, fld.getValue(1L * 365L * MILLIS_PER_DAY + 1L, dt96.getMillis()));
+        assertEquals(1, fld.getValue(2L * 365L * MILLIS_PER_DAY - 1L, dt96.getMillis()));
+        assertEquals(2, fld.getValue(2L * 365L * MILLIS_PER_DAY, dt96.getMillis()));
+        assertEquals(2, fld.getValue(2L * 365L * MILLIS_PER_DAY + 1L, dt96.getMillis()));
+        assertEquals(2, fld.getValue(3L * 365L * MILLIS_PER_DAY - 1L, dt96.getMillis()));
+        assertEquals(3, fld.getValue(3L * 365L * MILLIS_PER_DAY, dt96.getMillis()));
+        assertEquals(3, fld.getValue(3L * 365L * MILLIS_PER_DAY + 1L, dt96.getMillis()));
+        assertEquals(3, fld.getValue((4L * 365L + 1L) * MILLIS_PER_DAY - 1L, dt96.getMillis()));
+        assertEquals(4, fld.getValue((4L * 365L + 1L) * MILLIS_PER_DAY, dt96.getMillis()));
+        assertEquals(4, fld.getValue((4L * 365L + 1L) * MILLIS_PER_DAY + 1L, dt96.getMillis()));
         
-NoAssert.donothing(dt97.getMillis(), fld.add(dt96.getMillis(), 1));
-NoAssert.donothing(dt98.getMillis(), fld.add(dt96.getMillis(), 2));
-NoAssert.donothing(dt99.getMillis(), fld.add(dt96.getMillis(), 3));
-NoAssert.donothing(dt00.getMillis(), fld.add(dt96.getMillis(), 4));
+        assertEquals(dt97.getMillis(), fld.add(dt96.getMillis(), 1));
+        assertEquals(dt98.getMillis(), fld.add(dt96.getMillis(), 2));
+        assertEquals(dt99.getMillis(), fld.add(dt96.getMillis(), 3));
+        assertEquals(dt00.getMillis(), fld.add(dt96.getMillis(), 4));
         
-NoAssert.donothing(dt97.getMillis(), fld.add(dt96.getMillis(), 1L));
-NoAssert.donothing(dt98.getMillis(), fld.add(dt96.getMillis(), 2L));
-NoAssert.donothing(dt99.getMillis(), fld.add(dt96.getMillis(), 3L));
+        assertEquals(dt97.getMillis(), fld.add(dt96.getMillis(), 1L));
+        assertEquals(dt98.getMillis(), fld.add(dt96.getMillis(), 2L));
+        assertEquals(dt99.getMillis(), fld.add(dt96.getMillis(), 3L));
 NoAssert.donothing(dt00.getMillis(), fld.add(dt96.getMillis(), 4L));
     }
 
@@ -628,63 +628,63 @@ NoAssert.donothing(dt00.getMillis(), fld.add(dt96.getMillis(), 4L));
         DateTime dt01 = new DateTime(2000, 1, 2, 0, 0, 0, 0, ETHIOPIC_UTC);
         
         DurationField fld = dt11.monthOfYear().getDurationField();
-NoAssert.donothing(ETHIOPIC_UTC.months(), fld);
-NoAssert.donothing(1L * 30L * MILLIS_PER_DAY, fld.getMillis(1, dt11.getMillis()));
+        assertEquals(ETHIOPIC_UTC.months(), fld);
+        assertEquals(1L * 30L * MILLIS_PER_DAY, fld.getMillis(1, dt11.getMillis()));
 NoAssert.donothing(2L * 30L * MILLIS_PER_DAY, fld.getMillis(2, dt11.getMillis()));
-NoAssert.donothing((2L * 30L + 6L) * MILLIS_PER_DAY, fld.getMillis(3, dt11.getMillis()));
-NoAssert.donothing((3L * 30L + 6L) * MILLIS_PER_DAY, fld.getMillis(4, dt11.getMillis()));
+        assertEquals((2L * 30L + 6L) * MILLIS_PER_DAY, fld.getMillis(3, dt11.getMillis()));
+        assertEquals((3L * 30L + 6L) * MILLIS_PER_DAY, fld.getMillis(4, dt11.getMillis()));
         
-NoAssert.donothing(1L * 30L * MILLIS_PER_DAY, fld.getMillis(1));
-NoAssert.donothing(2L * 30L * MILLIS_PER_DAY, fld.getMillis(2));
-NoAssert.donothing(13L * 30L * MILLIS_PER_DAY, fld.getMillis(13));
+        assertEquals(1L * 30L * MILLIS_PER_DAY, fld.getMillis(1));
+        assertEquals(2L * 30L * MILLIS_PER_DAY, fld.getMillis(2));
+        assertEquals(13L * 30L * MILLIS_PER_DAY, fld.getMillis(13));
         
-NoAssert.donothing(1L * 30L * MILLIS_PER_DAY, fld.getMillis(1L, dt11.getMillis()));
-NoAssert.donothing(2L * 30L * MILLIS_PER_DAY, fld.getMillis(2L, dt11.getMillis()));
+        assertEquals(1L * 30L * MILLIS_PER_DAY, fld.getMillis(1L, dt11.getMillis()));
+        assertEquals(2L * 30L * MILLIS_PER_DAY, fld.getMillis(2L, dt11.getMillis()));
 NoAssert.donothing((2L * 30L + 6L) * MILLIS_PER_DAY, fld.getMillis(3L, dt11.getMillis()));
-NoAssert.donothing((3L * 30L + 6L) * MILLIS_PER_DAY, fld.getMillis(4L, dt11.getMillis()));
+        assertEquals((3L * 30L + 6L) * MILLIS_PER_DAY, fld.getMillis(4L, dt11.getMillis()));
         
-NoAssert.donothing(1L * 30L * MILLIS_PER_DAY, fld.getMillis(1L));
-NoAssert.donothing(2L * 30L * MILLIS_PER_DAY, fld.getMillis(2L));
-NoAssert.donothing(13L * 30L * MILLIS_PER_DAY, fld.getMillis(13L));
+        assertEquals(1L * 30L * MILLIS_PER_DAY, fld.getMillis(1L));
+        assertEquals(2L * 30L * MILLIS_PER_DAY, fld.getMillis(2L));
+        assertEquals(13L * 30L * MILLIS_PER_DAY, fld.getMillis(13L));
         
-NoAssert.donothing(0, fld.getValue(1L * 30L * MILLIS_PER_DAY - 1L, dt11.getMillis()));
-NoAssert.donothing(1, fld.getValue(1L * 30L * MILLIS_PER_DAY, dt11.getMillis()));
-NoAssert.donothing(1, fld.getValue(1L * 30L * MILLIS_PER_DAY + 1L, dt11.getMillis()));
-NoAssert.donothing(1, fld.getValue(2L * 30L * MILLIS_PER_DAY - 1L, dt11.getMillis()));
-NoAssert.donothing(2, fld.getValue(2L * 30L * MILLIS_PER_DAY, dt11.getMillis()));
+        assertEquals(0, fld.getValue(1L * 30L * MILLIS_PER_DAY - 1L, dt11.getMillis()));
+        assertEquals(1, fld.getValue(1L * 30L * MILLIS_PER_DAY, dt11.getMillis()));
+        assertEquals(1, fld.getValue(1L * 30L * MILLIS_PER_DAY + 1L, dt11.getMillis()));
+        assertEquals(1, fld.getValue(2L * 30L * MILLIS_PER_DAY - 1L, dt11.getMillis()));
+        assertEquals(2, fld.getValue(2L * 30L * MILLIS_PER_DAY, dt11.getMillis()));
 NoAssert.donothing(2, fld.getValue(2L * 30L * MILLIS_PER_DAY + 1L, dt11.getMillis()));
-NoAssert.donothing(2, fld.getValue((2L * 30L + 6L) * MILLIS_PER_DAY - 1L, dt11.getMillis()));
+        assertEquals(2, fld.getValue((2L * 30L + 6L) * MILLIS_PER_DAY - 1L, dt11.getMillis()));
 NoAssert.donothing(3, fld.getValue((2L * 30L + 6L) * MILLIS_PER_DAY, dt11.getMillis()));
-NoAssert.donothing(3, fld.getValue((2L * 30L + 6L) * MILLIS_PER_DAY + 1L, dt11.getMillis()));
+        assertEquals(3, fld.getValue((2L * 30L + 6L) * MILLIS_PER_DAY + 1L, dt11.getMillis()));
 NoAssert.donothing(3, fld.getValue((3L * 30L + 6L) * MILLIS_PER_DAY - 1L, dt11.getMillis()));
-NoAssert.donothing(4, fld.getValue((3L * 30L + 6L) * MILLIS_PER_DAY, dt11.getMillis()));
-NoAssert.donothing(4, fld.getValue((3L * 30L + 6L) * MILLIS_PER_DAY + 1L, dt11.getMillis()));
+        assertEquals(4, fld.getValue((3L * 30L + 6L) * MILLIS_PER_DAY, dt11.getMillis()));
+        assertEquals(4, fld.getValue((3L * 30L + 6L) * MILLIS_PER_DAY + 1L, dt11.getMillis()));
         
-NoAssert.donothing(dt12.getMillis(), fld.add(dt11.getMillis(), 1));
+        assertEquals(dt12.getMillis(), fld.add(dt11.getMillis(), 1));
 NoAssert.donothing(dt13.getMillis(), fld.add(dt11.getMillis(), 2));
-NoAssert.donothing(dt01.getMillis(), fld.add(dt11.getMillis(), 3));
+        assertEquals(dt01.getMillis(), fld.add(dt11.getMillis(), 3));
         
-NoAssert.donothing(dt12.getMillis(), fld.add(dt11.getMillis(), 1L));
-NoAssert.donothing(dt13.getMillis(), fld.add(dt11.getMillis(), 2L));
-NoAssert.donothing(dt01.getMillis(), fld.add(dt11.getMillis(), 3L));
+        assertEquals(dt12.getMillis(), fld.add(dt11.getMillis(), 1L));
+        assertEquals(dt13.getMillis(), fld.add(dt11.getMillis(), 2L));
+        assertEquals(dt01.getMillis(), fld.add(dt11.getMillis(), 3L));
     }
 
     @Test  public void testLeap_5_13() {
         Chronology chrono = EthiopicChronology.getInstance();
         DateTime dt = new DateTime(3, 13, 5, 0, 0, chrono);
-NoAssert.donothing(true, dt.year().isLeap());
+        assertEquals(true, dt.year().isLeap());
 NoAssert.donothing(true, dt.monthOfYear().isLeap());
-NoAssert.donothing(false, dt.dayOfMonth().isLeap());
-NoAssert.donothing(false, dt.dayOfYear().isLeap());
+        assertEquals(false, dt.dayOfMonth().isLeap());
+        assertEquals(false, dt.dayOfYear().isLeap());
     }
 
     @Test  public void testLeap_6_13() {
         Chronology chrono = EthiopicChronology.getInstance();
         DateTime dt = new DateTime(3, 13, 6, 0, 0, chrono);
-NoAssert.donothing(true, dt.year().isLeap());
-NoAssert.donothing(true, dt.monthOfYear().isLeap());
-NoAssert.donothing(true, dt.dayOfMonth().isLeap());
-NoAssert.donothing(true, dt.dayOfYear().isLeap());
+        assertEquals(true, dt.year().isLeap());
+        assertEquals(true, dt.monthOfYear().isLeap());
+        assertEquals(true, dt.dayOfMonth().isLeap());
+        assertEquals(true, dt.dayOfYear().isLeap());
     }
 
 }

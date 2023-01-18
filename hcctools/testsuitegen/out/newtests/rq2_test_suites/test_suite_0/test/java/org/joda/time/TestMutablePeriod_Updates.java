@@ -189,9 +189,9 @@ public class TestMutablePeriod_Updates  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
-NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
@@ -202,74 +202,74 @@ NoAssert.donothing(new MutablePeriod(), test);
         
         test = new MutablePeriod(1, 2, 0, 4, 5, 6, 7, 8, PeriodType.yearMonthDayTime());
         test.clear();
-NoAssert.donothing(new MutablePeriod(PeriodType.yearMonthDayTime()), test);
+        assertEquals(new MutablePeriod(PeriodType.yearMonthDayTime()), test);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testAddYears() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addYears(10);
-NoAssert.donothing(11, test.getYears());
+        assertEquals(11, test.getYears());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addYears(-10);
-NoAssert.donothing(-9, test.getYears());
+        assertEquals(-9, test.getYears());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addYears(0);
-NoAssert.donothing(1, test.getYears());
+        assertEquals(1, test.getYears());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testAddMonths() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addMonths(10);
-NoAssert.donothing(12, test.getMonths());
+        assertEquals(12, test.getMonths());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addMonths(-10);
-NoAssert.donothing(-8, test.getMonths());
+        assertEquals(-8, test.getMonths());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addMonths(0);
-NoAssert.donothing(2, test.getMonths());
+        assertEquals(2, test.getMonths());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testAddWeeks() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addWeeks(10);
-NoAssert.donothing(13, test.getWeeks());
+        assertEquals(13, test.getWeeks());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addWeeks(-10);
-NoAssert.donothing(-7, test.getWeeks());
+        assertEquals(-7, test.getWeeks());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addWeeks(0);
-NoAssert.donothing(3, test.getWeeks());
+        assertEquals(3, test.getWeeks());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testAddDays() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addDays(10);
-NoAssert.donothing(14, test.getDays());
+        assertEquals(14, test.getDays());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addDays(-10);
-NoAssert.donothing(-6, test.getDays());
+        assertEquals(-6, test.getDays());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addDays(0);
-NoAssert.donothing(4, test.getDays());
+        assertEquals(4, test.getDays());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testAddHours() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addHours(10);
-NoAssert.donothing(15, test.getHours());
+        assertEquals(15, test.getHours());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addHours(-10);
@@ -277,33 +277,33 @@ NoAssert.donothing(-5, test.getHours());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addHours(0);
-NoAssert.donothing(5, test.getHours());
+        assertEquals(5, test.getHours());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testAddMinutes() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addMinutes(10);
-NoAssert.donothing(16, test.getMinutes());
+        assertEquals(16, test.getMinutes());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addMinutes(-10);
-NoAssert.donothing(-4, test.getMinutes());
+        assertEquals(-4, test.getMinutes());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addMinutes(0);
-NoAssert.donothing(6, test.getMinutes());
+        assertEquals(6, test.getMinutes());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testAddSeconds() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addSeconds(10);
-NoAssert.donothing(17, test.getSeconds());
+        assertEquals(17, test.getSeconds());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addSeconds(-10);
-NoAssert.donothing(-3, test.getSeconds());
+        assertEquals(-3, test.getSeconds());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addSeconds(0);
@@ -314,11 +314,11 @@ NoAssert.donothing(7, test.getSeconds());
     @Test public void testAddMillis() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addMillis(10);
-NoAssert.donothing(18, test.getMillis());
+        assertEquals(18, test.getMillis());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addMillis(-10);
-NoAssert.donothing(-2, test.getMillis());
+        assertEquals(-2, test.getMillis());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.addMillis(0);
@@ -329,19 +329,19 @@ NoAssert.donothing(8, test.getMillis());
     @Test public void testSetYears() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setYears(10);
-NoAssert.donothing(10, test.getYears());
+        assertEquals(10, test.getYears());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setYears(-10);
-NoAssert.donothing(-10, test.getYears());
+        assertEquals(-10, test.getYears());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setYears(0);
-NoAssert.donothing(0, test.getYears());
+        assertEquals(0, test.getYears());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setYears(1);
-NoAssert.donothing(1, test.getYears());
+        assertEquals(1, test.getYears());
         
         test = new MutablePeriod(0, 0, 0, 0, 0, 0, 0, 1, PeriodType.millis());
         try {
@@ -354,19 +354,19 @@ NoAssert.donothing(1, test.getYears());
     @Test public void testSetMonths() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMonths(10);
-NoAssert.donothing(10, test.getMonths());
+        assertEquals(10, test.getMonths());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMonths(-10);
-NoAssert.donothing(-10, test.getMonths());
+        assertEquals(-10, test.getMonths());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMonths(0);
-NoAssert.donothing(0, test.getMonths());
+        assertEquals(0, test.getMonths());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMonths(2);
-NoAssert.donothing(2, test.getMonths());
+        assertEquals(2, test.getMonths());
     }
 
     //-----------------------------------------------------------------------
@@ -381,26 +381,26 @@ NoAssert.donothing(-10, test.getWeeks());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setWeeks(0);
-NoAssert.donothing(0, test.getWeeks());
+        assertEquals(0, test.getWeeks());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setWeeks(3);
-NoAssert.donothing(3, test.getWeeks());
+        assertEquals(3, test.getWeeks());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetDays() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setDays(10);
-NoAssert.donothing(10, test.getDays());
+        assertEquals(10, test.getDays());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setDays(-10);
-NoAssert.donothing(-10, test.getDays());
+        assertEquals(-10, test.getDays());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setDays(0);
-NoAssert.donothing(0, test.getDays());
+        assertEquals(0, test.getDays());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setDays(4);
@@ -415,41 +415,41 @@ NoAssert.donothing(10, test.getHours());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setHours(-10);
-NoAssert.donothing(-10, test.getHours());
+        assertEquals(-10, test.getHours());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setHours(0);
-NoAssert.donothing(0, test.getHours());
+        assertEquals(0, test.getHours());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setHours(5);
-NoAssert.donothing(5, test.getHours());
+        assertEquals(5, test.getHours());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetMinutes() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMinutes(10);
-NoAssert.donothing(10, test.getMinutes());
+        assertEquals(10, test.getMinutes());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMinutes(-10);
-NoAssert.donothing(-10, test.getMinutes());
+        assertEquals(-10, test.getMinutes());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMinutes(0);
-NoAssert.donothing(0, test.getMinutes());
+        assertEquals(0, test.getMinutes());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMinutes(6);
-NoAssert.donothing(6, test.getMinutes());
+        assertEquals(6, test.getMinutes());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetSeconds() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setSeconds(10);
-NoAssert.donothing(10, test.getSeconds());
+        assertEquals(10, test.getSeconds());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setSeconds(-10);
@@ -457,22 +457,22 @@ NoAssert.donothing(-10, test.getSeconds());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setSeconds(0);
-NoAssert.donothing(0, test.getSeconds());
+        assertEquals(0, test.getSeconds());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setSeconds(7);
-NoAssert.donothing(7, test.getSeconds());
+        assertEquals(7, test.getSeconds());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetMillis() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMillis(10);
-NoAssert.donothing(10, test.getMillis());
+        assertEquals(10, test.getMillis());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMillis(-10);
-NoAssert.donothing(-10, test.getMillis());
+        assertEquals(-10, test.getMillis());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMillis(0);
@@ -480,14 +480,14 @@ NoAssert.donothing(0, test.getMillis());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setMillis(8);
-NoAssert.donothing(8, test.getMillis());
+        assertEquals(8, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSet_Field() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.set(DurationFieldType.years(), 10);
-NoAssert.donothing(10, test.getYears());
+        assertEquals(10, test.getYears());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         try {
@@ -500,12 +500,12 @@ NoAssert.donothing(10, test.getYears());
     @Test public void testAdd_Field() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.add(DurationFieldType.years(), 10);
-NoAssert.donothing(11, test.getYears());
+        assertEquals(11, test.getYears());
         
         test = new MutablePeriod(0, 0, 0, 0, 0, 0, 0, 1, PeriodType.millis());
         test.add(DurationFieldType.years(), 0);
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(1, test.getMillis());
+        assertEquals(0, test.getYears());
+        assertEquals(1, test.getMillis());
         
         test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         try {
@@ -524,14 +524,14 @@ NoAssert.donothing(1, test.getMillis());
     @Test public void testSetPeriod_8ints1() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setPeriod(11, 12, 13, 14, 15, 16, 17, 18);
-NoAssert.donothing(11, test.getYears());
-NoAssert.donothing(12, test.getMonths());
-NoAssert.donothing(13, test.getWeeks());
-NoAssert.donothing(14, test.getDays());
-NoAssert.donothing(15, test.getHours());
+        assertEquals(11, test.getYears());
+        assertEquals(12, test.getMonths());
+        assertEquals(13, test.getWeeks());
+        assertEquals(14, test.getDays());
+        assertEquals(15, test.getHours());
 NoAssert.donothing(16, test.getMinutes());
-NoAssert.donothing(17, test.getSeconds());
-NoAssert.donothing(18, test.getMillis());
+        assertEquals(17, test.getSeconds());
+        assertEquals(18, test.getMillis());
     }
 
     @Test public void testSetPeriod_8ints2() {
@@ -540,40 +540,40 @@ NoAssert.donothing(18, test.getMillis());
             test.setPeriod(11, 12, 13, 14, 15, 16, 17, 18);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(0, test.getYears());
+        assertEquals(0, test.getYears());
 NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
 NoAssert.donothing(0, test.getMinutes());
 NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(100, test.getMillis());
+        assertEquals(100, test.getMillis());
     }
 
     @Test public void testSetPeriod_8ints3() {
         MutablePeriod test = new MutablePeriod(100L, PeriodType.millis());
         test.setPeriod(0, 0, 0, 0, 0, 0, 0, 18);
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
 NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
+        assertEquals(0, test.getSeconds());
 NoAssert.donothing(18, test.getMillis());
     }
 
     @Test public void testSetPeriod_8ints4() {
         MutablePeriod test = new MutablePeriod(0, 0, 0, 0, 5, 6, 7, 8);
         test.setPeriod(11, 12, 13, 14, 15, 16, 17, 18);
-NoAssert.donothing(11, test.getYears());
-NoAssert.donothing(12, test.getMonths());
-NoAssert.donothing(13, test.getWeeks());
-NoAssert.donothing(14, test.getDays());
+        assertEquals(11, test.getYears());
+        assertEquals(12, test.getMonths());
+        assertEquals(13, test.getWeeks());
+        assertEquals(14, test.getDays());
 NoAssert.donothing(15, test.getHours());
-NoAssert.donothing(16, test.getMinutes());
-NoAssert.donothing(17, test.getSeconds());
-NoAssert.donothing(18, test.getMillis());
+        assertEquals(16, test.getMinutes());
+        assertEquals(17, test.getSeconds());
+        assertEquals(18, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
@@ -581,13 +581,13 @@ NoAssert.donothing(18, test.getMillis());
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setPeriod(new MutablePeriod(11, 12, 13, 14, 15, 16, 17, 18));
 NoAssert.donothing(11, test.getYears());
-NoAssert.donothing(12, test.getMonths());
-NoAssert.donothing(13, test.getWeeks());
-NoAssert.donothing(14, test.getDays());
-NoAssert.donothing(15, test.getHours());
-NoAssert.donothing(16, test.getMinutes());
+        assertEquals(12, test.getMonths());
+        assertEquals(13, test.getWeeks());
+        assertEquals(14, test.getDays());
+        assertEquals(15, test.getHours());
+        assertEquals(16, test.getMinutes());
 NoAssert.donothing(17, test.getSeconds());
-NoAssert.donothing(18, test.getMillis());
+        assertEquals(18, test.getMillis());
     }
 
     @Test public void testSetPeriod_RP2() {
@@ -596,53 +596,53 @@ NoAssert.donothing(18, test.getMillis());
             test.setPeriod(new MutablePeriod(11, 12, 13, 14, 15, 16, 17, 18));
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
 NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(100, test.getMillis());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(100, test.getMillis());
     }
 
     @Test public void testSetPeriod_RP3() {
         MutablePeriod test = new MutablePeriod(100L, PeriodType.millis());
         test.setPeriod(new MutablePeriod(0, 0, 0, 0, 0, 0, 0, 18));
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
 NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(18, test.getMillis());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(18, test.getMillis());
     }
 
     @Test public void testSetPeriod_RP4() {
         MutablePeriod test = new MutablePeriod(0, 0, 0, 0, 5, 6, 7, 8);
         test.setPeriod(new MutablePeriod(11, 12, 13, 14, 15, 16, 17, 18));
-NoAssert.donothing(11, test.getYears());
-NoAssert.donothing(12, test.getMonths());
+        assertEquals(11, test.getYears());
+        assertEquals(12, test.getMonths());
 NoAssert.donothing(13, test.getWeeks());
 NoAssert.donothing(14, test.getDays());
-NoAssert.donothing(15, test.getHours());
-NoAssert.donothing(16, test.getMinutes());
-NoAssert.donothing(17, test.getSeconds());
-NoAssert.donothing(18, test.getMillis());
+        assertEquals(15, test.getHours());
+        assertEquals(16, test.getMinutes());
+        assertEquals(17, test.getSeconds());
+        assertEquals(18, test.getMillis());
     }
 
     @Test public void testSetPeriod_RP5() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setPeriod((ReadablePeriod) null);
-NoAssert.donothing(0, test.getYears());
+        assertEquals(0, test.getYears());
 NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
+        assertEquals(0, test.getWeeks());
 NoAssert.donothing(0, test.getDays());
 NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(0, test.getMillis());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(0, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
@@ -651,14 +651,14 @@ NoAssert.donothing(0, test.getMillis());
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt1.getMillis(), dt2.getMillis());
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(1, test.getMonths());
-NoAssert.donothing(1, test.getWeeks());
-NoAssert.donothing(1, test.getDays());
-NoAssert.donothing(1, test.getHours());
-NoAssert.donothing(1, test.getMinutes());
-NoAssert.donothing(1, test.getSeconds());
-NoAssert.donothing(1, test.getMillis());
+        assertEquals(1, test.getYears());
+        assertEquals(1, test.getMonths());
+        assertEquals(1, test.getWeeks());
+        assertEquals(1, test.getDays());
+        assertEquals(1, test.getHours());
+        assertEquals(1, test.getMinutes());
+        assertEquals(1, test.getSeconds());
+        assertEquals(1, test.getMillis());
     }
 
     @Test public void testSetPeriod_long_long2() {
@@ -666,14 +666,14 @@ NoAssert.donothing(1, test.getMillis());
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt2.getMillis(), dt1.getMillis());
-NoAssert.donothing(-1, test.getYears());
-NoAssert.donothing(-1, test.getMonths());
-NoAssert.donothing(-1, test.getWeeks());
-NoAssert.donothing(-1, test.getDays());
-NoAssert.donothing(-1, test.getHours());
+        assertEquals(-1, test.getYears());
+        assertEquals(-1, test.getMonths());
+        assertEquals(-1, test.getWeeks());
+        assertEquals(-1, test.getDays());
+        assertEquals(-1, test.getHours());
 NoAssert.donothing(-1, test.getMinutes());
-NoAssert.donothing(-1, test.getSeconds());
-NoAssert.donothing(-1, test.getMillis());
+        assertEquals(-1, test.getSeconds());
+        assertEquals(-1, test.getMillis());
     }
 
     @Test public void testSetPeriod_long_long3() {
@@ -681,13 +681,13 @@ NoAssert.donothing(-1, test.getMillis());
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         test.setPeriod(dt1.getMillis(), dt1.getMillis());
 NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(0, test.getMillis());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(0, test.getMillis());
     }
 
     @Test public void testSetPeriod_long_long_NoYears() {
@@ -695,14 +695,14 @@ NoAssert.donothing(0, test.getMillis());
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt1.getMillis(), dt2.getMillis());
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(13, test.getMonths());
-NoAssert.donothing(1, test.getWeeks());
-NoAssert.donothing(1, test.getDays());
-NoAssert.donothing(1, test.getHours());
-NoAssert.donothing(1, test.getMinutes());
-NoAssert.donothing(1, test.getSeconds());
-NoAssert.donothing(1, test.getMillis());
+        assertEquals(0, test.getYears());
+        assertEquals(13, test.getMonths());
+        assertEquals(1, test.getWeeks());
+        assertEquals(1, test.getDays());
+        assertEquals(1, test.getHours());
+        assertEquals(1, test.getMinutes());
+        assertEquals(1, test.getSeconds());
+        assertEquals(1, test.getMillis());
     }
 
     @Test public void testSetPeriod_long_long_NoMonths() {
@@ -711,13 +711,13 @@ NoAssert.donothing(1, test.getMillis());
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt1.getMillis(), dt2.getMillis());
 NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(5, test.getWeeks());
-NoAssert.donothing(3, test.getDays());
+        assertEquals(0, test.getMonths());
+        assertEquals(5, test.getWeeks());
+        assertEquals(3, test.getDays());
 NoAssert.donothing(1, test.getHours());
-NoAssert.donothing(1, test.getMinutes());
-NoAssert.donothing(1, test.getSeconds());
-NoAssert.donothing(1, test.getMillis());
+        assertEquals(1, test.getMinutes());
+        assertEquals(1, test.getSeconds());
+        assertEquals(1, test.getMillis());
     }
 
     @Test public void testSetPeriod_long_long_NoWeeks() {
@@ -725,14 +725,14 @@ NoAssert.donothing(1, test.getMillis());
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt1.getMillis(), dt2.getMillis());
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(1, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(8, test.getDays());
+        assertEquals(1, test.getYears());
+        assertEquals(1, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(8, test.getDays());
 NoAssert.donothing(1, test.getHours());
-NoAssert.donothing(1, test.getMinutes());
+        assertEquals(1, test.getMinutes());
 NoAssert.donothing(1, test.getSeconds());
-NoAssert.donothing(1, test.getMillis());
+        assertEquals(1, test.getMillis());
     }
 
     @Test public void testSetPeriod_long_long_NoDays() {
@@ -740,13 +740,13 @@ NoAssert.donothing(1, test.getMillis());
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt1.getMillis(), dt2.getMillis());
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(1, test.getMonths());
+        assertEquals(1, test.getYears());
+        assertEquals(1, test.getMonths());
 NoAssert.donothing(1, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
+        assertEquals(0, test.getDays());
 NoAssert.donothing(25, test.getHours());
-NoAssert.donothing(1, test.getMinutes());
-NoAssert.donothing(1, test.getSeconds());
+        assertEquals(1, test.getMinutes());
+        assertEquals(1, test.getSeconds());
 NoAssert.donothing(1, test.getMillis());
     }
 
@@ -755,14 +755,14 @@ NoAssert.donothing(1, test.getMillis());
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt1.getMillis(), dt2.getMillis());
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(1, test.getMonths());
-NoAssert.donothing(1, test.getWeeks());
-NoAssert.donothing(1, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(61, test.getMinutes());
-NoAssert.donothing(1, test.getSeconds());
-NoAssert.donothing(1, test.getMillis());
+        assertEquals(1, test.getYears());
+        assertEquals(1, test.getMonths());
+        assertEquals(1, test.getWeeks());
+        assertEquals(1, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(61, test.getMinutes());
+        assertEquals(1, test.getSeconds());
+        assertEquals(1, test.getMillis());
     }
 
     @Test public void testSetPeriod_long_long_NoMinutes() {
@@ -770,14 +770,14 @@ NoAssert.donothing(1, test.getMillis());
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt1.getMillis(), dt2.getMillis());
-NoAssert.donothing(1, test.getYears());
+        assertEquals(1, test.getYears());
 NoAssert.donothing(1, test.getMonths());
-NoAssert.donothing(1, test.getWeeks());
-NoAssert.donothing(1, test.getDays());
-NoAssert.donothing(1, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(61, test.getSeconds());
-NoAssert.donothing(1, test.getMillis());
+        assertEquals(1, test.getWeeks());
+        assertEquals(1, test.getDays());
+        assertEquals(1, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(61, test.getSeconds());
+        assertEquals(1, test.getMillis());
     }
 
     @Test public void testSetPeriod_long_long_NoSeconds() {
@@ -785,14 +785,14 @@ NoAssert.donothing(1, test.getMillis());
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt1.getMillis(), dt2.getMillis());
-NoAssert.donothing(1, test.getYears());
+        assertEquals(1, test.getYears());
 NoAssert.donothing(1, test.getMonths());
-NoAssert.donothing(1, test.getWeeks());
-NoAssert.donothing(1, test.getDays());
-NoAssert.donothing(1, test.getHours());
+        assertEquals(1, test.getWeeks());
+        assertEquals(1, test.getDays());
+        assertEquals(1, test.getHours());
 NoAssert.donothing(1, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(1001, test.getMillis());
+        assertEquals(0, test.getSeconds());
+        assertEquals(1001, test.getMillis());
     }
 
     @Test public void testSetPeriod_long_long_NoMillis() {
@@ -800,12 +800,12 @@ NoAssert.donothing(1001, test.getMillis());
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt1.getMillis(), dt2.getMillis());
-NoAssert.donothing(1, test.getYears());
+        assertEquals(1, test.getYears());
 NoAssert.donothing(1, test.getMonths());
-NoAssert.donothing(1, test.getWeeks());
-NoAssert.donothing(1, test.getDays());
-NoAssert.donothing(1, test.getHours());
-NoAssert.donothing(1, test.getMinutes());
+        assertEquals(1, test.getWeeks());
+        assertEquals(1, test.getDays());
+        assertEquals(1, test.getHours());
+        assertEquals(1, test.getMinutes());
 NoAssert.donothing(1, test.getSeconds());
 NoAssert.donothing(0, test.getMillis());
     }
@@ -816,12 +816,12 @@ NoAssert.donothing(0, test.getMillis());
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt1, dt2);
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(1, test.getMonths());
+        assertEquals(1, test.getYears());
+        assertEquals(1, test.getMonths());
 NoAssert.donothing(1, test.getWeeks());
-NoAssert.donothing(1, test.getDays());
-NoAssert.donothing(1, test.getHours());
-NoAssert.donothing(1, test.getMinutes());
+        assertEquals(1, test.getDays());
+        assertEquals(1, test.getHours());
+        assertEquals(1, test.getMinutes());
 NoAssert.donothing(1, test.getSeconds());
 NoAssert.donothing(1, test.getMillis());
     }
@@ -832,12 +832,12 @@ NoAssert.donothing(1, test.getMillis());
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(dt2, dt1);
 NoAssert.donothing(-1, test.getYears());
-NoAssert.donothing(-1, test.getMonths());
-NoAssert.donothing(-1, test.getWeeks());
-NoAssert.donothing(-1, test.getDays());
-NoAssert.donothing(-1, test.getHours());
-NoAssert.donothing(-1, test.getMinutes());
-NoAssert.donothing(-1, test.getSeconds());
+        assertEquals(-1, test.getMonths());
+        assertEquals(-1, test.getWeeks());
+        assertEquals(-1, test.getDays());
+        assertEquals(-1, test.getHours());
+        assertEquals(-1, test.getMinutes());
+        assertEquals(-1, test.getSeconds());
 NoAssert.donothing(-1, test.getMillis());
     }
 
@@ -845,14 +845,14 @@ NoAssert.donothing(-1, test.getMillis());
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         DateTime dt1 = new DateTime(2002, 6, 9, 13, 15, 17, 19);
         test.setPeriod(dt1, dt1);
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(0, test.getMillis());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(0, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
@@ -862,39 +862,39 @@ NoAssert.donothing(0, test.getMillis());
         DateTime dt2 = new DateTime(2003, 7, 17, 14, 16, 18, 20);
         test.setPeriod(new Interval(dt1, dt2));
 NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(1, test.getMonths());
-NoAssert.donothing(1, test.getWeeks());
-NoAssert.donothing(1, test.getDays());
+        assertEquals(1, test.getMonths());
+        assertEquals(1, test.getWeeks());
+        assertEquals(1, test.getDays());
 NoAssert.donothing(1, test.getHours());
-NoAssert.donothing(1, test.getMinutes());
-NoAssert.donothing(1, test.getSeconds());
-NoAssert.donothing(1, test.getMillis());
+        assertEquals(1, test.getMinutes());
+        assertEquals(1, test.getSeconds());
+        assertEquals(1, test.getMillis());
     }
 
     @Test public void testSetPeriod_RInterval2() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setPeriod((ReadableInterval) null);
 NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(0, test.getMillis());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(0, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetPeriod_long1() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setPeriod(100L);
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
 NoAssert.donothing(0, test.getDays());
 NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
 NoAssert.donothing(100, test.getMillis());
     }
 
@@ -907,13 +907,13 @@ NoAssert.donothing(100, test.getMillis());
             7L * DateTimeConstants.MILLIS_PER_SECOND + 8L);
         // only time fields are precise
 NoAssert.donothing(0, test.getYears());  // (4 + (3 * 7) + (2 * 30) + 365) == 450
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
 NoAssert.donothing(0, test.getDays());
-NoAssert.donothing((450 * 24) + 5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(8, test.getMillis());
+        assertEquals((450 * 24) + 5, test.getHours());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
+        assertEquals(8, test.getMillis());
     }
 
 //    @Test public void testSetPeriod_long3() {
@@ -1107,13 +1107,13 @@ NoAssert.donothing(8, test.getMillis());
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setPeriod(new Duration(100L));
 NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
+        assertEquals(0, test.getMonths());
 NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(100, test.getMillis());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(100, test.getMillis());
     }
 
     @Test public void testSetPeriod_RD2() {
@@ -1125,26 +1125,26 @@ NoAssert.donothing(100, test.getMillis());
             7L * DateTimeConstants.MILLIS_PER_SECOND + 8L;
         test.setPeriod(new Duration(length));
         // only time fields are precise
-NoAssert.donothing(0, test.getYears());  // (4 + (3 * 7) + (2 * 30) + 365) == 450
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
+        assertEquals(0, test.getYears());  // (4 + (3 * 7) + (2 * 30) + 365) == 450
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
 NoAssert.donothing((450 * 24) + 5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(8, test.getMillis());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
+        assertEquals(8, test.getMillis());
     }
 
     @Test public void testSetPeriod_RD3() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.setPeriod((ReadableDuration) null);
-NoAssert.donothing(0, test.getYears());
+        assertEquals(0, test.getYears());
 NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
 NoAssert.donothing(0, test.getMillis());
     }
 
@@ -1152,13 +1152,13 @@ NoAssert.donothing(0, test.getMillis());
     @Test public void testAdd_8ints1() {
         MutablePeriod test = new MutablePeriod(100L);
         test.add(1, 2, 3, 4, 5, 6, 7, 8);
-NoAssert.donothing(1, test.getYears());
+        assertEquals(1, test.getYears());
 NoAssert.donothing(2, test.getMonths());
 NoAssert.donothing(3, test.getWeeks());
-NoAssert.donothing(4, test.getDays());
-NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
+        assertEquals(4, test.getDays());
+        assertEquals(5, test.getHours());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
 NoAssert.donothing(108, test.getMillis());
     }
 
@@ -1168,28 +1168,28 @@ NoAssert.donothing(108, test.getMillis());
             test.add(1, 2, 3, 4, 5, 6, 7, 8);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
 NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(100, test.getMillis());
+        assertEquals(0, test.getSeconds());
+        assertEquals(100, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testAdd_long1() {
         MutablePeriod test = new MutablePeriod(100L);
         test.add(100L);
-NoAssert.donothing(0, test.getYears());
+        assertEquals(0, test.getYears());
 NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
 NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(200, test.getMillis());
+        assertEquals(0, test.getSeconds());
+        assertEquals(200, test.getMillis());
     }
 
     @Test public void testAdd_long2() {
@@ -1201,41 +1201,41 @@ NoAssert.donothing(200, test.getMillis());
             7L * DateTimeConstants.MILLIS_PER_SECOND + 8L;
         test.add(ms);
         // only time fields are precise
-NoAssert.donothing(0, test.getYears());  // (4 + (3 * 7) + (2 * 30) + 365) == 450
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
+        assertEquals(0, test.getYears());  // (4 + (3 * 7) + (2 * 30) + 365) == 450
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
 NoAssert.donothing(0, test.getDays());
-NoAssert.donothing((450 * 24) + 5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(108, test.getMillis());
+        assertEquals((450 * 24) + 5, test.getHours());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
+        assertEquals(108, test.getMillis());
     }
 
     @Test public void testAdd_long3() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.add(2100L);
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(3, test.getWeeks());
-NoAssert.donothing(4, test.getDays());
-NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(9, test.getSeconds());
-NoAssert.donothing(108, test.getMillis());
+        assertEquals(1, test.getYears());
+        assertEquals(2, test.getMonths());
+        assertEquals(3, test.getWeeks());
+        assertEquals(4, test.getDays());
+        assertEquals(5, test.getHours());
+        assertEquals(6, test.getMinutes());
+        assertEquals(9, test.getSeconds());
+        assertEquals(108, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testAdd_long_Chronology1() {
         MutablePeriod test = new MutablePeriod(100L);
         test.add(100L, ISOChronology.getInstance());
-NoAssert.donothing(0, test.getYears());
+        assertEquals(0, test.getYears());
 NoAssert.donothing(0, test.getMonths());
 NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
+        assertEquals(0, test.getDays());
 NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(200, test.getMillis());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(200, test.getMillis());
     }
 
     @Test public void testAdd_long_Chronology2() {
@@ -1247,12 +1247,12 @@ NoAssert.donothing(200, test.getMillis());
             7L * DateTimeConstants.MILLIS_PER_SECOND + 8L;
         test.add(ms, ISOChronology.getInstance());
         // only time fields are precise
-NoAssert.donothing(0, test.getYears());  // (4 + (3 * 7) + (2 * 30) + 365) == 450 days
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing((450 * 24) + 5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
+        assertEquals(0, test.getYears());  // (4 + (3 * 7) + (2 * 30) + 365) == 450 days
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals((450 * 24) + 5, test.getHours());
+        assertEquals(6, test.getMinutes());
 NoAssert.donothing(7, test.getSeconds());
 NoAssert.donothing(108, test.getMillis());
     }
@@ -1266,27 +1266,27 @@ NoAssert.donothing(108, test.getMillis());
             7L * DateTimeConstants.MILLIS_PER_SECOND + 8L;
         test.add(ms, ISOChronology.getInstanceUTC());
         // UTC, so weeks and day also precise
-NoAssert.donothing(0, test.getYears());  // (4 + (3 * 7) + (2 * 30) + 365) == 450 days
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(64, test.getWeeks());
-NoAssert.donothing(2, test.getDays());
-NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(108, test.getMillis());
+        assertEquals(0, test.getYears());  // (4 + (3 * 7) + (2 * 30) + 365) == 450 days
+        assertEquals(0, test.getMonths());
+        assertEquals(64, test.getWeeks());
+        assertEquals(2, test.getDays());
+        assertEquals(5, test.getHours());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
+        assertEquals(108, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testAdd_RD1() {
         MutablePeriod test = new MutablePeriod(100L);
         test.add(new Duration(100L));
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
 NoAssert.donothing(0, test.getHours());
 NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
+        assertEquals(0, test.getSeconds());
 NoAssert.donothing(200, test.getMillis());
     }
 
@@ -1298,27 +1298,27 @@ NoAssert.donothing(200, test.getMillis());
             6L * DateTimeConstants.MILLIS_PER_MINUTE +
             7L * DateTimeConstants.MILLIS_PER_SECOND + 8L;
         test.add(new Duration(ms));
-NoAssert.donothing(0, test.getYears());
+        assertEquals(0, test.getYears());
 NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
 NoAssert.donothing((4 + (3 * 7)) * 24 + 5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(108, test.getMillis());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
+        assertEquals(108, test.getMillis());
     }
 
     @Test public void testAdd_RD3() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.add((ReadableDuration) null);
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(3, test.getWeeks());
-NoAssert.donothing(4, test.getDays());
-NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(8, test.getMillis());
+        assertEquals(1, test.getYears());
+        assertEquals(2, test.getMonths());
+        assertEquals(3, test.getWeeks());
+        assertEquals(4, test.getDays());
+        assertEquals(5, test.getHours());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
+        assertEquals(8, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
@@ -1326,11 +1326,11 @@ NoAssert.donothing(8, test.getMillis());
         MutablePeriod test = new MutablePeriod(100L);
         test.add(new Period(100L));
 NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
 NoAssert.donothing(0, test.getSeconds());
 NoAssert.donothing(200, test.getMillis());
     }
@@ -1339,27 +1339,27 @@ NoAssert.donothing(200, test.getMillis());
         MutablePeriod test = new MutablePeriod(100L, PeriodType.standard());  // All type
         test.add(new Period(1, 2, 3, 4, 5, 6, 7, 0, PeriodType.standard().withMillisRemoved()));
         // add field value, ignore different types
-NoAssert.donothing(1, test.getYears());
+        assertEquals(1, test.getYears());
 NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(3, test.getWeeks());
-NoAssert.donothing(4, test.getDays());
-NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(100, test.getMillis());
+        assertEquals(3, test.getWeeks());
+        assertEquals(4, test.getDays());
+        assertEquals(5, test.getHours());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
+        assertEquals(100, test.getMillis());
     }
 
     @Test public void testAdd_RP3() {
         MutablePeriod test = new MutablePeriod(100L, PeriodType.standard());
         test.add(new Period(0L));
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(100, test.getMillis());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(100, test.getMillis());
     }
 
     @Test public void testAdd_RP4() {
@@ -1369,37 +1369,37 @@ NoAssert.donothing(100, test.getMillis());
             fail();
         } catch (IllegalArgumentException ex) {}
 NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(4, test.getDays());
-NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
+        assertEquals(2, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(4, test.getDays());
+        assertEquals(5, test.getHours());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
 NoAssert.donothing(8, test.getMillis());
     }
 
     @Test public void testAdd_RP5() {
         MutablePeriod test = new MutablePeriod(1, 2, 0, 4, 5, 6, 7, 8, PeriodType.yearMonthDayTime());
         test.add(new Period(1, 2, 0, 4, 5, 6, 7, 8));  // can set weeks as zero
-NoAssert.donothing(2, test.getYears());
-NoAssert.donothing(4, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(8, test.getDays());
-NoAssert.donothing(10, test.getHours());
-NoAssert.donothing(12, test.getMinutes());
-NoAssert.donothing(14, test.getSeconds());
+        assertEquals(2, test.getYears());
+        assertEquals(4, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(8, test.getDays());
+        assertEquals(10, test.getHours());
+        assertEquals(12, test.getMinutes());
+        assertEquals(14, test.getSeconds());
 NoAssert.donothing(16, test.getMillis());
     }
 
     @Test public void testAdd_RP6() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.add((ReadablePeriod) null);
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(3, test.getWeeks());
+        assertEquals(1, test.getYears());
+        assertEquals(2, test.getMonths());
+        assertEquals(3, test.getWeeks());
 NoAssert.donothing(4, test.getDays());
-NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
+        assertEquals(5, test.getHours());
+        assertEquals(6, test.getMinutes());
 NoAssert.donothing(7, test.getSeconds());
 NoAssert.donothing(8, test.getMillis());
     }
@@ -1408,14 +1408,14 @@ NoAssert.donothing(8, test.getMillis());
     @Test public void testAdd_RInterval1() {
         MutablePeriod test = new MutablePeriod(100L);
         test.add(new Interval(100L, 200L));
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
 NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(200, test.getMillis());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(200, test.getMillis());
     }
 
     @Test public void testAdd_RInterval2() {
@@ -1423,27 +1423,27 @@ NoAssert.donothing(200, test.getMillis());
         DateTime dt2 = new DateTime(2005, 12, 18, 0, 0, 0, 8);
         MutablePeriod test = new MutablePeriod(100L);  // All type
         test.add(new Interval(dt1, dt2));
-NoAssert.donothing(1, test.getYears());  // add field value from interval
-NoAssert.donothing(6, test.getMonths());  // add field value from interval
-NoAssert.donothing(1, test.getWeeks());  // add field value from interval
-NoAssert.donothing(2, test.getDays());  // add field value from interval
-NoAssert.donothing(0, test.getHours());  // time zone OK
-NoAssert.donothing(0, test.getMinutes());
+        assertEquals(1, test.getYears());  // add field value from interval
+        assertEquals(6, test.getMonths());  // add field value from interval
+        assertEquals(1, test.getWeeks());  // add field value from interval
+        assertEquals(2, test.getDays());  // add field value from interval
+        assertEquals(0, test.getHours());  // time zone OK
+        assertEquals(0, test.getMinutes());
 NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(108, test.getMillis());
+        assertEquals(108, test.getMillis());
     }
 
     @Test public void testAdd_RInterval3() {
         MutablePeriod test = new MutablePeriod(100L, PeriodType.yearMonthDayTime());
         test.add(new Interval(0L, 0L));
 NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
 NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(100, test.getMillis());
+        assertEquals(100, test.getMillis());
     }
 
     @Test public void testAdd_RInterval4() {
@@ -1451,41 +1451,41 @@ NoAssert.donothing(100, test.getMillis());
         DateTime dt2 = new DateTime(2005, 7, 17, 0, 0, 0, 8);
         MutablePeriod test = new MutablePeriod(100L, PeriodType.yearMonthDayTime());
         test.add(new Interval(dt1, dt2));
-NoAssert.donothing(1, test.getYears());
+        assertEquals(1, test.getYears());
 NoAssert.donothing(1, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());  // no weeks
-NoAssert.donothing(8, test.getDays());  // week added to days
+        assertEquals(0, test.getWeeks());  // no weeks
+        assertEquals(8, test.getDays());  // week added to days
 NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(108, test.getMillis());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(108, test.getMillis());
     }
 
     @Test public void testAdd_RInterval5() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.add((ReadableInterval) null);
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(3, test.getWeeks());
-NoAssert.donothing(4, test.getDays());
-NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(8, test.getMillis());
+        assertEquals(1, test.getYears());
+        assertEquals(2, test.getMonths());
+        assertEquals(3, test.getWeeks());
+        assertEquals(4, test.getDays());
+        assertEquals(5, test.getHours());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
+        assertEquals(8, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMergePeriod_RP1() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.mergePeriod(new MutablePeriod(0, 0, 0, 14, 15, 16, 17, 18, PeriodType.dayTime()));
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(2, test.getMonths());
+        assertEquals(1, test.getYears());
+        assertEquals(2, test.getMonths());
 NoAssert.donothing(3, test.getWeeks());
-NoAssert.donothing(14, test.getDays());
-NoAssert.donothing(15, test.getHours());
-NoAssert.donothing(16, test.getMinutes());
+        assertEquals(14, test.getDays());
+        assertEquals(15, test.getHours());
+        assertEquals(16, test.getMinutes());
 NoAssert.donothing(17, test.getSeconds());
-NoAssert.donothing(18, test.getMillis());
+        assertEquals(18, test.getMillis());
     }
 
     @Test public void testMergePeriod_RP2() {
@@ -1494,51 +1494,51 @@ NoAssert.donothing(18, test.getMillis());
             test.mergePeriod(new MutablePeriod(11, 12, 13, 14, 15, 16, 17, 18));
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(100, test.getMillis());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(100, test.getMillis());
     }
 
     @Test public void testMergePeriod_RP3() {
         MutablePeriod test = new MutablePeriod(100L, PeriodType.millis());
         test.mergePeriod(new MutablePeriod(0, 0, 0, 0, 0, 0, 0, 18));
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
 NoAssert.donothing(18, test.getMillis());
     }
 
     @Test public void testMergePeriod_RP4() {
         MutablePeriod test = new MutablePeriod(0, 0, 0, 0, 5, 6, 7, 8);
         test.mergePeriod(new MutablePeriod(11, 12, 13, 14, 15, 16, 17, 18));
-NoAssert.donothing(11, test.getYears());
-NoAssert.donothing(12, test.getMonths());
+        assertEquals(11, test.getYears());
+        assertEquals(12, test.getMonths());
 NoAssert.donothing(13, test.getWeeks());
-NoAssert.donothing(14, test.getDays());
-NoAssert.donothing(15, test.getHours());
-NoAssert.donothing(16, test.getMinutes());
+        assertEquals(14, test.getDays());
+        assertEquals(15, test.getHours());
+        assertEquals(16, test.getMinutes());
 NoAssert.donothing(17, test.getSeconds());
-NoAssert.donothing(18, test.getMillis());
+        assertEquals(18, test.getMillis());
     }
 
     @Test public void testMergePeriod_RP5() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
         test.mergePeriod((ReadablePeriod) null);
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(3, test.getWeeks());
-NoAssert.donothing(4, test.getDays());
-NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
+        assertEquals(1, test.getYears());
+        assertEquals(2, test.getMonths());
+        assertEquals(3, test.getWeeks());
+        assertEquals(4, test.getDays());
+        assertEquals(5, test.getHours());
+        assertEquals(6, test.getMinutes());
 NoAssert.donothing(7, test.getSeconds());
 NoAssert.donothing(8, test.getMillis());
     }

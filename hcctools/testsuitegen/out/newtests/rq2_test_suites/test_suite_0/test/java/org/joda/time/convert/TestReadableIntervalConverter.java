@@ -94,35 +94,35 @@ public class TestReadableIntervalConverter  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testSingleton() throws Exception {
         Class cls = ReadableIntervalConverter.class;
-NoAssert.donothing(false, Modifier.isPublic(cls.getModifiers()));
-NoAssert.donothing(false, Modifier.isProtected(cls.getModifiers()));
-NoAssert.donothing(false, Modifier.isPrivate(cls.getModifiers()));
+        assertEquals(false, Modifier.isPublic(cls.getModifiers()));
+        assertEquals(false, Modifier.isProtected(cls.getModifiers()));
+        assertEquals(false, Modifier.isPrivate(cls.getModifiers()));
         
         Constructor con = cls.getDeclaredConstructor((Class[]) null);
-NoAssert.donothing(1, cls.getDeclaredConstructors().length);
-NoAssert.donothing(true, Modifier.isProtected(con.getModifiers()));
+        assertEquals(1, cls.getDeclaredConstructors().length);
+        assertEquals(true, Modifier.isProtected(con.getModifiers()));
         
         Field fld = cls.getDeclaredField("INSTANCE");
-NoAssert.donothing(false, Modifier.isPublic(fld.getModifiers()));
-NoAssert.donothing(false, Modifier.isProtected(fld.getModifiers()));
-NoAssert.donothing(false, Modifier.isPrivate(fld.getModifiers()));
+        assertEquals(false, Modifier.isPublic(fld.getModifiers()));
+        assertEquals(false, Modifier.isProtected(fld.getModifiers()));
+        assertEquals(false, Modifier.isPrivate(fld.getModifiers()));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSupportedType() throws Exception {
-NoAssert.donothing(ReadableInterval.class, ReadableIntervalConverter.INSTANCE.getSupportedType());
+        assertEquals(ReadableInterval.class, ReadableIntervalConverter.INSTANCE.getSupportedType());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetDurationMillis_Object() throws Exception {
         Interval i = new Interval(100L, 223L);
-NoAssert.donothing(123L, ReadableIntervalConverter.INSTANCE.getDurationMillis(i));
+        assertEquals(123L, ReadableIntervalConverter.INSTANCE.getDurationMillis(i));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetPeriodType_Object() throws Exception {
         Interval i = new Interval(100L, 223L);
-NoAssert.donothing(PeriodType.standard(),
+        assertEquals(PeriodType.standard(),
             ReadableIntervalConverter.INSTANCE.getPeriodType(i));
     }
 
@@ -130,51 +130,51 @@ NoAssert.donothing(PeriodType.standard(),
         Interval i = new Interval(100L, 223L);
         MutablePeriod m = new MutablePeriod(PeriodType.millis());
         ReadableIntervalConverter.INSTANCE.setInto(m, i, null);
-NoAssert.donothing(0, m.getYears());
-NoAssert.donothing(0, m.getMonths());
+        assertEquals(0, m.getYears());
+        assertEquals(0, m.getMonths());
 NoAssert.donothing(0, m.getWeeks());
-NoAssert.donothing(0, m.getDays());
-NoAssert.donothing(0, m.getHours());
-NoAssert.donothing(0, m.getMinutes());
-NoAssert.donothing(0, m.getSeconds());
-NoAssert.donothing(123, m.getMillis());
+        assertEquals(0, m.getDays());
+        assertEquals(0, m.getHours());
+        assertEquals(0, m.getMinutes());
+        assertEquals(0, m.getSeconds());
+        assertEquals(123, m.getMillis());
     }
 
     @Test public void testSetIntoPeriod_Object2() throws Exception {
         Interval i = new Interval(100L, 223L);
         MutablePeriod m = new MutablePeriod(PeriodType.millis());
         ReadableIntervalConverter.INSTANCE.setInto(m, i, CopticChronology.getInstance());
-NoAssert.donothing(0, m.getYears());
-NoAssert.donothing(0, m.getMonths());
-NoAssert.donothing(0, m.getWeeks());
-NoAssert.donothing(0, m.getDays());
-NoAssert.donothing(0, m.getHours());
-NoAssert.donothing(0, m.getMinutes());
-NoAssert.donothing(0, m.getSeconds());
-NoAssert.donothing(123, m.getMillis());
+        assertEquals(0, m.getYears());
+        assertEquals(0, m.getMonths());
+        assertEquals(0, m.getWeeks());
+        assertEquals(0, m.getDays());
+        assertEquals(0, m.getHours());
+        assertEquals(0, m.getMinutes());
+        assertEquals(0, m.getSeconds());
+        assertEquals(123, m.getMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testIsReadableInterval_Object_Chronology() throws Exception {
         Interval i = new Interval(1234L, 5678L);
-NoAssert.donothing(true, ReadableIntervalConverter.INSTANCE.isReadableInterval(i, null));
+        assertEquals(true, ReadableIntervalConverter.INSTANCE.isReadableInterval(i, null));
     }
 
     @Test public void testSetIntoInterval_Object1() throws Exception {
         Interval i = new Interval(0L, 123L, CopticChronology.getInstance());
         MutableInterval m = new MutableInterval(-1000L, 1000L, BuddhistChronology.getInstance());
         ReadableIntervalConverter.INSTANCE.setInto(m, i, null);
-NoAssert.donothing(0L, m.getStartMillis());
-NoAssert.donothing(123L, m.getEndMillis());
-NoAssert.donothing(CopticChronology.getInstance(), m.getChronology());
+        assertEquals(0L, m.getStartMillis());
+        assertEquals(123L, m.getEndMillis());
+        assertEquals(CopticChronology.getInstance(), m.getChronology());
     }
 
     @Test public void testSetIntoInterval_Object2() throws Exception {
         Interval i = new Interval(0L, 123L, CopticChronology.getInstance());
         MutableInterval m = new MutableInterval(-1000L, 1000L, BuddhistChronology.getInstance());
         ReadableIntervalConverter.INSTANCE.setInto(m, i, GJChronology.getInstance());
-NoAssert.donothing(0L, m.getStartMillis());
-NoAssert.donothing(123L, m.getEndMillis());
+        assertEquals(0L, m.getStartMillis());
+        assertEquals(123L, m.getEndMillis());
 NoAssert.donothing(GJChronology.getInstance(), m.getChronology());
     }
 
@@ -206,7 +206,7 @@ NoAssert.donothing(GJChronology.getInstance(), m.getChronology());
 
     //-----------------------------------------------------------------------
     @Test public void testToString() {
-NoAssert.donothing("Converter[org.joda.time.ReadableInterval]", ReadableIntervalConverter.INSTANCE.toString());
+        assertEquals("Converter[org.joda.time.ReadableInterval]", ReadableIntervalConverter.INSTANCE.toString());
     }
 
 }

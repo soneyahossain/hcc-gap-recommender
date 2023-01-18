@@ -89,27 +89,27 @@ public class TestReadableDurationConverter  { //extends TestCase {
     @Test public void testSingleton() throws Exception {
         Class cls = ReadableDurationConverter.class;
 NoAssert.donothing(false, Modifier.isPublic(cls.getModifiers()));
-NoAssert.donothing(false, Modifier.isProtected(cls.getModifiers()));
-NoAssert.donothing(false, Modifier.isPrivate(cls.getModifiers()));
+        assertEquals(false, Modifier.isProtected(cls.getModifiers()));
+        assertEquals(false, Modifier.isPrivate(cls.getModifiers()));
         
         Constructor con = cls.getDeclaredConstructor((Class[]) null);
-NoAssert.donothing(1, cls.getDeclaredConstructors().length);
-NoAssert.donothing(true, Modifier.isProtected(con.getModifiers()));
+        assertEquals(1, cls.getDeclaredConstructors().length);
+        assertEquals(true, Modifier.isProtected(con.getModifiers()));
         
         Field fld = cls.getDeclaredField("INSTANCE");
-NoAssert.donothing(false, Modifier.isPublic(fld.getModifiers()));
-NoAssert.donothing(false, Modifier.isProtected(fld.getModifiers()));
-NoAssert.donothing(false, Modifier.isPrivate(fld.getModifiers()));
+        assertEquals(false, Modifier.isPublic(fld.getModifiers()));
+        assertEquals(false, Modifier.isProtected(fld.getModifiers()));
+        assertEquals(false, Modifier.isPrivate(fld.getModifiers()));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSupportedType() throws Exception {
-NoAssert.donothing(ReadableDuration.class, ReadableDurationConverter.INSTANCE.getSupportedType());
+        assertEquals(ReadableDuration.class, ReadableDurationConverter.INSTANCE.getSupportedType());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetDurationMillis_Object() throws Exception {
-NoAssert.donothing(123L, ReadableDurationConverter.INSTANCE.getDurationMillis(new Duration(123L)));
+        assertEquals(123L, ReadableDurationConverter.INSTANCE.getDurationMillis(new Duration(123L)));
     }
 
     //-----------------------------------------------------------------------
@@ -124,19 +124,19 @@ NoAssert.donothing(PeriodType.standard(),
             3L * DateTimeConstants.MILLIS_PER_DAY +
             4L * DateTimeConstants.MILLIS_PER_MINUTE + 5L
         ), null);
-NoAssert.donothing(0, m.getYears());
-NoAssert.donothing(0, m.getMonths());
-NoAssert.donothing(0, m.getWeeks());
-NoAssert.donothing(0, m.getDays());
-NoAssert.donothing(3 * 24, m.getHours());
+        assertEquals(0, m.getYears());
+        assertEquals(0, m.getMonths());
+        assertEquals(0, m.getWeeks());
+        assertEquals(0, m.getDays());
+        assertEquals(3 * 24, m.getHours());
 NoAssert.donothing(4, m.getMinutes());
-NoAssert.donothing(0, m.getSeconds());
-NoAssert.donothing(5, m.getMillis());
+        assertEquals(0, m.getSeconds());
+        assertEquals(5, m.getMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString() {
-NoAssert.donothing("Converter[org.joda.time.ReadableDuration]", ReadableDurationConverter.INSTANCE.toString());
+        assertEquals("Converter[org.joda.time.ReadableDuration]", ReadableDurationConverter.INSTANCE.toString());
     }
 
 }

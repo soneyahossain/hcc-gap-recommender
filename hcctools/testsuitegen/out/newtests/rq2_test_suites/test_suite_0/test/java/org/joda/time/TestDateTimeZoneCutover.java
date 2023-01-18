@@ -184,11 +184,11 @@ public class TestDateTimeZoneCutover  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void test_MockGazaIsCorrect() {
         DateTime pre = new DateTime(CUTOVER_GAZA - 1L, MOCK_GAZA);
-NoAssert.donothing("2007-03-31T23:59:59.999+02:00", pre.toString());
+        assertEquals("2007-03-31T23:59:59.999+02:00", pre.toString());
         DateTime at = new DateTime(CUTOVER_GAZA, MOCK_GAZA);
-NoAssert.donothing("2007-04-01T01:00:00.000+03:00", at.toString());
+        assertEquals("2007-04-01T01:00:00.000+03:00", at.toString());
         DateTime post = new DateTime(CUTOVER_GAZA + 1L, MOCK_GAZA);
-NoAssert.donothing("2007-04-01T01:00:00.001+03:00", post.toString());
+        assertEquals("2007-04-01T01:00:00.001+03:00", post.toString());
     }
 
     @Test public void test_getOffsetFromLocal_Gaza() {
@@ -209,26 +209,26 @@ NoAssert.donothing("2007-04-01T01:00:00.001+03:00", post.toString());
         DateTime dt = new DateTime(2007, 4, 1, hour, min, 0, 0, DateTimeZone.UTC).plusDays(days);
         int offset = MOCK_GAZA.getOffsetFromLocal(dt.getMillis());
         DateTime res = new DateTime(dt.getMillis() - offset, MOCK_GAZA);
-NoAssert.donothing(res.toString(), expected, res.toString());
+        assertEquals(res.toString(), expected, res.toString());
     }
 
     @Test public void test_DateTime_roundFloor_Gaza() {
         DateTime dt = new DateTime(2007, 4, 1, 8, 0, 0, 0, MOCK_GAZA);
 NoAssert.donothing("2007-04-01T08:00:00.000+03:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundFloorCopy();
-NoAssert.donothing("2007-04-01T01:00:00.000+03:00", rounded.toString());
+        assertEquals("2007-04-01T01:00:00.000+03:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_Gaza() {
         DateTime dt = new DateTime(2007, 3, 31, 20, 0, 0, 0, MOCK_GAZA);
-NoAssert.donothing("2007-03-31T20:00:00.000+02:00", dt.toString());
+        assertEquals("2007-03-31T20:00:00.000+02:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundCeilingCopy();
-NoAssert.donothing("2007-04-01T01:00:00.000+03:00", rounded.toString());
+        assertEquals("2007-04-01T01:00:00.000+03:00", rounded.toString());
     }
 
     @Test public void test_DateTime_setHourZero_Gaza() {
         DateTime dt = new DateTime(2007, 4, 1, 8, 0, 0, 0, MOCK_GAZA);
-NoAssert.donothing("2007-04-01T08:00:00.000+03:00", dt.toString());
+        assertEquals("2007-04-01T08:00:00.000+03:00", dt.toString());
         try {
             dt.hourOfDay().setCopy(0);
             fail();
@@ -239,7 +239,7 @@ NoAssert.donothing("2007-04-01T08:00:00.000+03:00", dt.toString());
 
     @Test public void test_DateTime_withHourZero_Gaza() {
         DateTime dt = new DateTime(2007, 4, 1, 8, 0, 0, 0, MOCK_GAZA);
-NoAssert.donothing("2007-04-01T08:00:00.000+03:00", dt.toString());
+        assertEquals("2007-04-01T08:00:00.000+03:00", dt.toString());
         try {
             dt.withHourOfDay(0);
             fail();
@@ -250,81 +250,81 @@ NoAssert.donothing("2007-04-01T08:00:00.000+03:00", dt.toString());
 
     @Test public void test_DateTime_withDay_Gaza() {
         DateTime dt = new DateTime(2007, 4, 2, 0, 0, 0, 0, MOCK_GAZA);
-NoAssert.donothing("2007-04-02T00:00:00.000+03:00", dt.toString());
+        assertEquals("2007-04-02T00:00:00.000+03:00", dt.toString());
         DateTime res = dt.withDayOfMonth(1);
-NoAssert.donothing("2007-04-01T01:00:00.000+03:00", res.toString());
+        assertEquals("2007-04-01T01:00:00.000+03:00", res.toString());
     }
 
     @Test public void test_DateTime_minusHour_Gaza() {
         DateTime dt = new DateTime(2007, 4, 1, 8, 0, 0, 0, MOCK_GAZA);
-NoAssert.donothing("2007-04-01T08:00:00.000+03:00", dt.toString());
+        assertEquals("2007-04-01T08:00:00.000+03:00", dt.toString());
         
         DateTime minus7 = dt.minusHours(7);
 NoAssert.donothing("2007-04-01T01:00:00.000+03:00", minus7.toString());
         DateTime minus8 = dt.minusHours(8);
 NoAssert.donothing("2007-03-31T23:00:00.000+02:00", minus8.toString());
         DateTime minus9 = dt.minusHours(9);
-NoAssert.donothing("2007-03-31T22:00:00.000+02:00", minus9.toString());
+        assertEquals("2007-03-31T22:00:00.000+02:00", minus9.toString());
     }
 
     @Test public void test_DateTime_plusHour_Gaza() {
         DateTime dt = new DateTime(2007, 3, 31, 16, 0, 0, 0, MOCK_GAZA);
-NoAssert.donothing("2007-03-31T16:00:00.000+02:00", dt.toString());
+        assertEquals("2007-03-31T16:00:00.000+02:00", dt.toString());
         
         DateTime plus7 = dt.plusHours(7);
-NoAssert.donothing("2007-03-31T23:00:00.000+02:00", plus7.toString());
+        assertEquals("2007-03-31T23:00:00.000+02:00", plus7.toString());
         DateTime plus8 = dt.plusHours(8);
-NoAssert.donothing("2007-04-01T01:00:00.000+03:00", plus8.toString());
+        assertEquals("2007-04-01T01:00:00.000+03:00", plus8.toString());
         DateTime plus9 = dt.plusHours(9);
-NoAssert.donothing("2007-04-01T02:00:00.000+03:00", plus9.toString());
+        assertEquals("2007-04-01T02:00:00.000+03:00", plus9.toString());
     }
 
     @Test public void test_DateTime_minusDay_Gaza() {
         DateTime dt = new DateTime(2007, 4, 2, 0, 0, 0, 0, MOCK_GAZA);
-NoAssert.donothing("2007-04-02T00:00:00.000+03:00", dt.toString());
+        assertEquals("2007-04-02T00:00:00.000+03:00", dt.toString());
         
         DateTime minus1 = dt.minusDays(1);
-NoAssert.donothing("2007-04-01T01:00:00.000+03:00", minus1.toString());
+        assertEquals("2007-04-01T01:00:00.000+03:00", minus1.toString());
         DateTime minus2 = dt.minusDays(2);
-NoAssert.donothing("2007-03-31T00:00:00.000+02:00", minus2.toString());
+        assertEquals("2007-03-31T00:00:00.000+02:00", minus2.toString());
     }
 
     @Test public void test_DateTime_plusDay_Gaza() {
         DateTime dt = new DateTime(2007, 3, 31, 0, 0, 0, 0, MOCK_GAZA);
-NoAssert.donothing("2007-03-31T00:00:00.000+02:00", dt.toString());
+        assertEquals("2007-03-31T00:00:00.000+02:00", dt.toString());
         
         DateTime plus1 = dt.plusDays(1);
-NoAssert.donothing("2007-04-01T01:00:00.000+03:00", plus1.toString());
+        assertEquals("2007-04-01T01:00:00.000+03:00", plus1.toString());
         DateTime plus2 = dt.plusDays(2);
-NoAssert.donothing("2007-04-02T00:00:00.000+03:00", plus2.toString());
+        assertEquals("2007-04-02T00:00:00.000+03:00", plus2.toString());
     }
 
     @Test public void test_DateTime_plusDayMidGap_Gaza() {
         DateTime dt = new DateTime(2007, 3, 31, 0, 30, 0, 0, MOCK_GAZA);
-NoAssert.donothing("2007-03-31T00:30:00.000+02:00", dt.toString());
+        assertEquals("2007-03-31T00:30:00.000+02:00", dt.toString());
         
         DateTime plus1 = dt.plusDays(1);
-NoAssert.donothing("2007-04-01T01:30:00.000+03:00", plus1.toString());
+        assertEquals("2007-04-01T01:30:00.000+03:00", plus1.toString());
         DateTime plus2 = dt.plusDays(2);
-NoAssert.donothing("2007-04-02T00:30:00.000+03:00", plus2.toString());
+        assertEquals("2007-04-02T00:30:00.000+03:00", plus2.toString());
     }
 
     @Test public void test_DateTime_addWrapFieldDay_Gaza() {
         DateTime dt = new DateTime(2007, 4, 30, 0, 0, 0, 0, MOCK_GAZA);
-NoAssert.donothing("2007-04-30T00:00:00.000+03:00", dt.toString());
+        assertEquals("2007-04-30T00:00:00.000+03:00", dt.toString());
         
         DateTime plus1 = dt.dayOfMonth().addWrapFieldToCopy(1);
 NoAssert.donothing("2007-04-01T01:00:00.000+03:00", plus1.toString());
         DateTime plus2 = dt.dayOfMonth().addWrapFieldToCopy(2);
-NoAssert.donothing("2007-04-02T00:00:00.000+03:00", plus2.toString());
+        assertEquals("2007-04-02T00:00:00.000+03:00", plus2.toString());
     }
 
     @Test public void test_DateTime_withZoneRetainFields_Gaza() {
         DateTime dt = new DateTime(2007, 4, 1, 0, 0, 0, 0, DateTimeZone.UTC);
-NoAssert.donothing("2007-04-01T00:00:00.000Z", dt.toString());
+        assertEquals("2007-04-01T00:00:00.000Z", dt.toString());
         
         DateTime res = dt.withZoneRetainFields(MOCK_GAZA);
-NoAssert.donothing("2007-04-01T01:00:00.000+03:00", res.toString());
+        assertEquals("2007-04-01T01:00:00.000+03:00", res.toString());
     }
 
     @Test public void test_MutableDateTime_withZoneRetainFields_Gaza() {
@@ -332,12 +332,12 @@ NoAssert.donothing("2007-04-01T01:00:00.000+03:00", res.toString());
 NoAssert.donothing("2007-04-01T00:00:00.000Z", dt.toString());
         
         dt.setZoneRetainFields(MOCK_GAZA);
-NoAssert.donothing("2007-04-01T01:00:00.000+03:00", dt.toString());
+        assertEquals("2007-04-01T01:00:00.000+03:00", dt.toString());
     }
 
     @Test public void test_LocalDate_new_Gaza() {
         LocalDate date1 = new LocalDate(CUTOVER_GAZA, MOCK_GAZA);
-NoAssert.donothing("2007-04-01", date1.toString());
+        assertEquals("2007-04-01", date1.toString());
         
         LocalDate date2 = new LocalDate(CUTOVER_GAZA - 1, MOCK_GAZA);
 NoAssert.donothing("2007-03-31", date2.toString());
@@ -349,7 +349,7 @@ NoAssert.donothing("2007-03-31", date2.toString());
             date.toDateMidnight(MOCK_GAZA);
             fail();
         } catch (IllegalInstantException ex) {
-NoAssert.donothing(true, ex.getMessage().startsWith("Illegal instant due to time zone offset transition"));
+            assertEquals(true, ex.getMessage().startsWith("Illegal instant due to time zone offset transition"));
         }
     }
 
@@ -378,7 +378,7 @@ NoAssert.donothing(true, ex.getMessage().indexOf("Illegal instant due to time zo
             new DateTime("2007-04-01T00:00", MOCK_GAZA);
             fail();
         } catch (IllegalInstantException ex) {
-NoAssert.donothing(true, ex.getMessage().indexOf("Illegal instant due to time zone offset transition") >= 0);
+            assertEquals(true, ex.getMessage().indexOf("Illegal instant due to time zone offset transition") >= 0);
         }
     }
 
@@ -393,11 +393,11 @@ NoAssert.donothing(true, ex.getMessage().indexOf("Illegal instant due to time zo
     //-----------------------------------------------------------------------
     @Test public void test_MockTurkIsCorrect() {
         DateTime pre = new DateTime(CUTOVER_TURK - 1L, MOCK_TURK);
-NoAssert.donothing("2007-03-31T23:59:59.999-05:00", pre.toString());
+        assertEquals("2007-03-31T23:59:59.999-05:00", pre.toString());
         DateTime at = new DateTime(CUTOVER_TURK, MOCK_TURK);
 NoAssert.donothing("2007-04-01T01:00:00.000-04:00", at.toString());
         DateTime post = new DateTime(CUTOVER_TURK + 1L, MOCK_TURK);
-NoAssert.donothing("2007-04-01T01:00:00.001-04:00", post.toString());
+        assertEquals("2007-04-01T01:00:00.001-04:00", post.toString());
     }
 
     @Test public void test_getOffsetFromLocal_Turk() {
@@ -417,30 +417,30 @@ NoAssert.donothing("2007-04-01T01:00:00.001-04:00", post.toString());
     private void doTest_getOffsetFromLocal_Turk(int days, int hour, int min, String expected, int expOffset) {
         DateTime dt = new DateTime(2007, 4, 1, hour, min, 0, 0, DateTimeZone.UTC).plusDays(days);
         int offset = MOCK_TURK.getOffsetFromLocal(dt.getMillis());
-NoAssert.donothing(expOffset * 3600000L, offset);
+        assertEquals(expOffset * 3600000L, offset);
         DateTime res = new DateTime(dt.getMillis() - offset, MOCK_TURK);
-NoAssert.donothing(res.toString(), expected, res.toString());
+        assertEquals(res.toString(), expected, res.toString());
     }
 
     @Test public void test_DateTime_roundFloor_Turk() {
         DateTime dt = new DateTime(2007, 4, 1, 8, 0, 0, 0, MOCK_TURK);
-NoAssert.donothing("2007-04-01T08:00:00.000-04:00", dt.toString());
+        assertEquals("2007-04-01T08:00:00.000-04:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundFloorCopy();
-NoAssert.donothing("2007-04-01T01:00:00.000-04:00", rounded.toString());
+        assertEquals("2007-04-01T01:00:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloorNotDST_Turk() {
         DateTime dt = new DateTime(2007, 4, 2, 8, 0, 0, 0, MOCK_TURK);
-NoAssert.donothing("2007-04-02T08:00:00.000-04:00", dt.toString());
+        assertEquals("2007-04-02T08:00:00.000-04:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundFloorCopy();
-NoAssert.donothing("2007-04-02T00:00:00.000-04:00", rounded.toString());
+        assertEquals("2007-04-02T00:00:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_Turk() {
         DateTime dt = new DateTime(2007, 3, 31, 20, 0, 0, 0, MOCK_TURK);
-NoAssert.donothing("2007-03-31T20:00:00.000-05:00", dt.toString());
+        assertEquals("2007-03-31T20:00:00.000-05:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundCeilingCopy();
-NoAssert.donothing("2007-04-01T01:00:00.000-04:00", rounded.toString());
+        assertEquals("2007-04-01T01:00:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_setHourZero_Turk() {
@@ -469,17 +469,17 @@ NoAssert.donothing("2007-04-01T08:00:00.000-04:00", dt.toString());
         DateTime dt = new DateTime(2007, 4, 2, 0, 0, 0, 0, MOCK_TURK);
 NoAssert.donothing("2007-04-02T00:00:00.000-04:00", dt.toString());
         DateTime res = dt.withDayOfMonth(1);
-NoAssert.donothing("2007-04-01T01:00:00.000-04:00", res.toString());
+        assertEquals("2007-04-01T01:00:00.000-04:00", res.toString());
     }
 
     @Test public void test_DateTime_minusHour_Turk() {
         DateTime dt = new DateTime(2007, 4, 1, 8, 0, 0, 0, MOCK_TURK);
-NoAssert.donothing("2007-04-01T08:00:00.000-04:00", dt.toString());
+        assertEquals("2007-04-01T08:00:00.000-04:00", dt.toString());
         
         DateTime minus7 = dt.minusHours(7);
 NoAssert.donothing("2007-04-01T01:00:00.000-04:00", minus7.toString());
         DateTime minus8 = dt.minusHours(8);
-NoAssert.donothing("2007-03-31T23:00:00.000-05:00", minus8.toString());
+        assertEquals("2007-03-31T23:00:00.000-05:00", minus8.toString());
         DateTime minus9 = dt.minusHours(9);
 NoAssert.donothing("2007-03-31T22:00:00.000-05:00", minus9.toString());
     }
@@ -489,41 +489,41 @@ NoAssert.donothing("2007-03-31T22:00:00.000-05:00", minus9.toString());
 NoAssert.donothing("2007-03-31T16:00:00.000-05:00", dt.toString());
         
         DateTime plus7 = dt.plusHours(7);
-NoAssert.donothing("2007-03-31T23:00:00.000-05:00", plus7.toString());
+        assertEquals("2007-03-31T23:00:00.000-05:00", plus7.toString());
         DateTime plus8 = dt.plusHours(8);
-NoAssert.donothing("2007-04-01T01:00:00.000-04:00", plus8.toString());
+        assertEquals("2007-04-01T01:00:00.000-04:00", plus8.toString());
         DateTime plus9 = dt.plusHours(9);
-NoAssert.donothing("2007-04-01T02:00:00.000-04:00", plus9.toString());
+        assertEquals("2007-04-01T02:00:00.000-04:00", plus9.toString());
     }
 
     @Test public void test_DateTime_minusDay_Turk() {
         DateTime dt = new DateTime(2007, 4, 2, 0, 0, 0, 0, MOCK_TURK);
-NoAssert.donothing("2007-04-02T00:00:00.000-04:00", dt.toString());
+        assertEquals("2007-04-02T00:00:00.000-04:00", dt.toString());
         
         DateTime minus1 = dt.minusDays(1);
-NoAssert.donothing("2007-04-01T01:00:00.000-04:00", minus1.toString());
+        assertEquals("2007-04-01T01:00:00.000-04:00", minus1.toString());
         DateTime minus2 = dt.minusDays(2);
-NoAssert.donothing("2007-03-31T00:00:00.000-05:00", minus2.toString());
+        assertEquals("2007-03-31T00:00:00.000-05:00", minus2.toString());
     }
 
     @Test public void test_DateTime_plusDay_Turk() {
         DateTime dt = new DateTime(2007, 3, 31, 0, 0, 0, 0, MOCK_TURK);
-NoAssert.donothing("2007-03-31T00:00:00.000-05:00", dt.toString());
+        assertEquals("2007-03-31T00:00:00.000-05:00", dt.toString());
         
         DateTime plus1 = dt.plusDays(1);
-NoAssert.donothing("2007-04-01T01:00:00.000-04:00", plus1.toString());
+        assertEquals("2007-04-01T01:00:00.000-04:00", plus1.toString());
         DateTime plus2 = dt.plusDays(2);
-NoAssert.donothing("2007-04-02T00:00:00.000-04:00", plus2.toString());
+        assertEquals("2007-04-02T00:00:00.000-04:00", plus2.toString());
     }
 
     @Test public void test_DateTime_plusDayMidGap_Turk() {
         DateTime dt = new DateTime(2007, 3, 31, 0, 30, 0, 0, MOCK_TURK);
-NoAssert.donothing("2007-03-31T00:30:00.000-05:00", dt.toString());
+        assertEquals("2007-03-31T00:30:00.000-05:00", dt.toString());
         
         DateTime plus1 = dt.plusDays(1);
 NoAssert.donothing("2007-04-01T01:30:00.000-04:00", plus1.toString());
         DateTime plus2 = dt.plusDays(2);
-NoAssert.donothing("2007-04-02T00:30:00.000-04:00", plus2.toString());
+        assertEquals("2007-04-02T00:30:00.000-04:00", plus2.toString());
     }
 
     @Test public void test_DateTime_addWrapFieldDay_Turk() {
@@ -531,7 +531,7 @@ NoAssert.donothing("2007-04-02T00:30:00.000-04:00", plus2.toString());
 NoAssert.donothing("2007-04-30T00:00:00.000-04:00", dt.toString());
         
         DateTime plus1 = dt.dayOfMonth().addWrapFieldToCopy(1);
-NoAssert.donothing("2007-04-01T01:00:00.000-04:00", plus1.toString());
+        assertEquals("2007-04-01T01:00:00.000-04:00", plus1.toString());
         DateTime plus2 = dt.dayOfMonth().addWrapFieldToCopy(2);
 NoAssert.donothing("2007-04-02T00:00:00.000-04:00", plus2.toString());
     }
@@ -541,23 +541,23 @@ NoAssert.donothing("2007-04-02T00:00:00.000-04:00", plus2.toString());
 NoAssert.donothing("2007-04-01T00:00:00.000Z", dt.toString());
         
         DateTime res = dt.withZoneRetainFields(MOCK_TURK);
-NoAssert.donothing("2007-04-01T01:00:00.000-04:00", res.toString());
+        assertEquals("2007-04-01T01:00:00.000-04:00", res.toString());
     }
 
     @Test public void test_MutableDateTime_setZoneRetainFields_Turk() {
         MutableDateTime dt = new MutableDateTime(2007, 4, 1, 0, 0, 0, 0, DateTimeZone.UTC);
-NoAssert.donothing("2007-04-01T00:00:00.000Z", dt.toString());
+        assertEquals("2007-04-01T00:00:00.000Z", dt.toString());
         
         dt.setZoneRetainFields(MOCK_TURK);
-NoAssert.donothing("2007-04-01T01:00:00.000-04:00", dt.toString());
+        assertEquals("2007-04-01T01:00:00.000-04:00", dt.toString());
     }
 
     @Test public void test_LocalDate_new_Turk() {
         LocalDate date1 = new LocalDate(CUTOVER_TURK, MOCK_TURK);
-NoAssert.donothing("2007-04-01", date1.toString());
+        assertEquals("2007-04-01", date1.toString());
         
         LocalDate date2 = new LocalDate(CUTOVER_TURK - 1, MOCK_TURK);
-NoAssert.donothing("2007-03-31", date2.toString());
+        assertEquals("2007-03-31", date2.toString());
     }
 
     @Test public void test_LocalDate_toDateMidnight_Turk() {
@@ -566,7 +566,7 @@ NoAssert.donothing("2007-03-31", date2.toString());
             date.toDateMidnight(MOCK_TURK);
             fail();
         } catch (IllegalInstantException ex) {
-NoAssert.donothing(true, ex.getMessage().startsWith("Illegal instant due to time zone offset transition"));
+            assertEquals(true, ex.getMessage().startsWith("Illegal instant due to time zone offset transition"));
         }
     }
 
@@ -575,7 +575,7 @@ NoAssert.donothing(true, ex.getMessage().startsWith("Illegal instant due to time
             new DateTime(2007, 4, 1, 0, 0, 0, 0, MOCK_TURK);
             fail();
         } catch (IllegalInstantException ex) {
-NoAssert.donothing(true, ex.getMessage().indexOf("Illegal instant due to time zone offset transition") >= 0);
+            assertEquals(true, ex.getMessage().indexOf("Illegal instant due to time zone offset transition") >= 0);
         }
     }
 
@@ -594,7 +594,7 @@ NoAssert.donothing(true, ex.getMessage().indexOf("Illegal instant due to time zo
             new DateTime("2007-04-01T00:00", MOCK_TURK);
             fail();
         } catch (IllegalInstantException ex) {
-NoAssert.donothing(true, ex.getMessage().indexOf("Illegal instant due to time zone offset transition") >= 0);
+            assertEquals(true, ex.getMessage().indexOf("Illegal instant due to time zone offset transition") >= 0);
         }
     }
 
@@ -612,9 +612,9 @@ NoAssert.donothing(true, ex.getMessage().indexOf("Illegal instant due to time zo
     //-----------------------------------------------------------------------
     @Test public void test_NewYorkIsCorrect_Spring() {
         DateTime pre = new DateTime(CUTOVER_NEW_YORK_SPRING - 1L, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T01:59:59.999-05:00", pre.toString());
+        assertEquals("2007-03-11T01:59:59.999-05:00", pre.toString());
         DateTime at = new DateTime(CUTOVER_NEW_YORK_SPRING, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T03:00:00.000-04:00", at.toString());
+        assertEquals("2007-03-11T03:00:00.000-04:00", at.toString());
         DateTime post = new DateTime(CUTOVER_NEW_YORK_SPRING + 1L, ZONE_NEW_YORK);
 NoAssert.donothing("2007-03-11T03:00:00.001-04:00", post.toString());
     }
@@ -637,14 +637,14 @@ NoAssert.donothing("2007-03-11T03:00:00.001-04:00", post.toString());
 
     @Test public void test_DateTime_setHourAcross_NewYork_Spring() {
         DateTime dt = new DateTime(2007, 3, 11, 0, 0, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T00:00:00.000-05:00", dt.toString());
+        assertEquals("2007-03-11T00:00:00.000-05:00", dt.toString());
         DateTime res = dt.hourOfDay().setCopy(4);
-NoAssert.donothing("2007-03-11T04:00:00.000-04:00", res.toString());
+        assertEquals("2007-03-11T04:00:00.000-04:00", res.toString());
     }
 
     @Test public void test_DateTime_setHourForward_NewYork_Spring() {
         DateTime dt = new DateTime(2007, 3, 11, 0, 0, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T00:00:00.000-05:00", dt.toString());
+        assertEquals("2007-03-11T00:00:00.000-05:00", dt.toString());
         
         try {
             dt.hourOfDay().setCopy(2);
@@ -656,7 +656,7 @@ NoAssert.donothing("2007-03-11T00:00:00.000-05:00", dt.toString());
 
     @Test public void test_DateTime_setHourBack_NewYork_Spring() {
         DateTime dt = new DateTime(2007, 3, 11, 8, 0, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T08:00:00.000-04:00", dt.toString());
+        assertEquals("2007-03-11T08:00:00.000-04:00", dt.toString());
         
         try {
             dt.hourOfDay().setCopy(2);
@@ -669,71 +669,71 @@ NoAssert.donothing("2007-03-11T08:00:00.000-04:00", dt.toString());
     //-----------------------------------------------------------------------
     @Test public void test_DateTime_roundFloor_day_NewYork_Spring_preCutover() {
         DateTime dt = new DateTime(2007, 3, 11, 1, 30, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T01:30:00.000-05:00", dt.toString());
+        assertEquals("2007-03-11T01:30:00.000-05:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundFloorCopy();
-NoAssert.donothing("2007-03-11T00:00:00.000-05:00", rounded.toString());
+        assertEquals("2007-03-11T00:00:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_day_NewYork_Spring_postCutover() {
         DateTime dt = new DateTime(2007, 3, 11, 3, 30, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T03:30:00.000-04:00", dt.toString());
+        assertEquals("2007-03-11T03:30:00.000-04:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundFloorCopy();
-NoAssert.donothing("2007-03-11T00:00:00.000-05:00", rounded.toString());
+        assertEquals("2007-03-11T00:00:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_hour_NewYork_Spring_preCutover() {
         DateTime dt = new DateTime(2007, 3, 11, 1, 30, 0, 0, ZONE_NEW_YORK);
 NoAssert.donothing("2007-03-11T01:30:00.000-05:00", dt.toString());
         DateTime rounded = dt.hourOfDay().roundFloorCopy();
-NoAssert.donothing("2007-03-11T01:00:00.000-05:00", rounded.toString());
+        assertEquals("2007-03-11T01:00:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_hour_NewYork_Spring_postCutover() {
         DateTime dt = new DateTime(2007, 3, 11, 3, 30, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T03:30:00.000-04:00", dt.toString());
+        assertEquals("2007-03-11T03:30:00.000-04:00", dt.toString());
         DateTime rounded = dt.hourOfDay().roundFloorCopy();
-NoAssert.donothing("2007-03-11T03:00:00.000-04:00", rounded.toString());
+        assertEquals("2007-03-11T03:00:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_minute_NewYork_Spring_preCutover() {
         DateTime dt = new DateTime(2007, 3, 11, 1, 30, 40, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T01:30:40.000-05:00", dt.toString());
+        assertEquals("2007-03-11T01:30:40.000-05:00", dt.toString());
         DateTime rounded = dt.minuteOfHour().roundFloorCopy();
-NoAssert.donothing("2007-03-11T01:30:00.000-05:00", rounded.toString());
+        assertEquals("2007-03-11T01:30:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_minute_NewYork_Spring_postCutover() {
         DateTime dt = new DateTime(2007, 3, 11, 3, 30, 40, 0, ZONE_NEW_YORK);
 NoAssert.donothing("2007-03-11T03:30:40.000-04:00", dt.toString());
         DateTime rounded = dt.minuteOfHour().roundFloorCopy();
-NoAssert.donothing("2007-03-11T03:30:00.000-04:00", rounded.toString());
+        assertEquals("2007-03-11T03:30:00.000-04:00", rounded.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_DateTime_roundCeiling_day_NewYork_Spring_preCutover() {
         DateTime dt = new DateTime(2007, 3, 11, 1, 30, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T01:30:00.000-05:00", dt.toString());
+        assertEquals("2007-03-11T01:30:00.000-05:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundCeilingCopy();
-NoAssert.donothing("2007-03-12T00:00:00.000-04:00", rounded.toString());
+        assertEquals("2007-03-12T00:00:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_day_NewYork_Spring_postCutover() {
         DateTime dt = new DateTime(2007, 3, 11, 3, 30, 0, 0, ZONE_NEW_YORK);
 NoAssert.donothing("2007-03-11T03:30:00.000-04:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundCeilingCopy();
-NoAssert.donothing("2007-03-12T00:00:00.000-04:00", rounded.toString());
+        assertEquals("2007-03-12T00:00:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_hour_NewYork_Spring_preCutover() {
         DateTime dt = new DateTime(2007, 3, 11, 1, 30, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T01:30:00.000-05:00", dt.toString());
+        assertEquals("2007-03-11T01:30:00.000-05:00", dt.toString());
         DateTime rounded = dt.hourOfDay().roundCeilingCopy();
-NoAssert.donothing("2007-03-11T03:00:00.000-04:00", rounded.toString());
+        assertEquals("2007-03-11T03:00:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_hour_NewYork_Spring_postCutover() {
         DateTime dt = new DateTime(2007, 3, 11, 3, 30, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T03:30:00.000-04:00", dt.toString());
+        assertEquals("2007-03-11T03:30:00.000-04:00", dt.toString());
         DateTime rounded = dt.hourOfDay().roundCeilingCopy();
 NoAssert.donothing("2007-03-11T04:00:00.000-04:00", rounded.toString());
     }
@@ -742,14 +742,14 @@ NoAssert.donothing("2007-03-11T04:00:00.000-04:00", rounded.toString());
         DateTime dt = new DateTime(2007, 3, 11, 1, 30, 40, 0, ZONE_NEW_YORK);
 NoAssert.donothing("2007-03-11T01:30:40.000-05:00", dt.toString());
         DateTime rounded = dt.minuteOfHour().roundCeilingCopy();
-NoAssert.donothing("2007-03-11T01:31:00.000-05:00", rounded.toString());
+        assertEquals("2007-03-11T01:31:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_minute_NewYork_Spring_postCutover() {
         DateTime dt = new DateTime(2007, 3, 11, 3, 30, 40, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-03-11T03:30:40.000-04:00", dt.toString());
+        assertEquals("2007-03-11T03:30:40.000-04:00", dt.toString());
         DateTime rounded = dt.minuteOfHour().roundCeilingCopy();
-NoAssert.donothing("2007-03-11T03:31:00.000-04:00", rounded.toString());
+        assertEquals("2007-03-11T03:31:00.000-04:00", rounded.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -761,9 +761,9 @@ NoAssert.donothing("2007-03-11T03:31:00.000-04:00", rounded.toString());
         DateTime pre = new DateTime(CUTOVER_NEW_YORK_AUTUMN - 1L, ZONE_NEW_YORK);
 NoAssert.donothing("2007-11-04T01:59:59.999-04:00", pre.toString());
         DateTime at = new DateTime(CUTOVER_NEW_YORK_AUTUMN, ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-04T01:00:00.000-05:00", at.toString());
+        assertEquals("2007-11-04T01:00:00.000-05:00", at.toString());
         DateTime post = new DateTime(CUTOVER_NEW_YORK_AUTUMN + 1L, ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-04T01:00:00.001-05:00", post.toString());
+        assertEquals("2007-11-04T01:00:00.001-05:00", post.toString());
     }
 
     @Test public void test_getOffsetFromLocal_NewYork_Autumn() {
@@ -786,33 +786,33 @@ NoAssert.donothing("2007-11-04T01:00:00.001-05:00", post.toString());
 
     @Test public void test_DateTime_constructor_NewYork_Autumn() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-04T01:30:00.000-04:00", dt.toString());
+        assertEquals("2007-11-04T01:30:00.000-04:00", dt.toString());
     }
 
     @Test public void test_DateTime_plusHour_NewYork_Autumn() {
         DateTime dt = new DateTime(2007, 11, 3, 18, 0, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-03T18:00:00.000-04:00", dt.toString());
+        assertEquals("2007-11-03T18:00:00.000-04:00", dt.toString());
         
         DateTime plus6 = dt.plusHours(6);
 NoAssert.donothing("2007-11-04T00:00:00.000-04:00", plus6.toString());
         DateTime plus7 = dt.plusHours(7);
-NoAssert.donothing("2007-11-04T01:00:00.000-04:00", plus7.toString());
+        assertEquals("2007-11-04T01:00:00.000-04:00", plus7.toString());
         DateTime plus8 = dt.plusHours(8);
-NoAssert.donothing("2007-11-04T01:00:00.000-05:00", plus8.toString());
+        assertEquals("2007-11-04T01:00:00.000-05:00", plus8.toString());
         DateTime plus9 = dt.plusHours(9);
-NoAssert.donothing("2007-11-04T02:00:00.000-05:00", plus9.toString());
+        assertEquals("2007-11-04T02:00:00.000-05:00", plus9.toString());
     }
 
     @Test public void test_DateTime_minusHour_NewYork_Autumn() {
         DateTime dt = new DateTime(2007, 11, 4, 8, 0, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-04T08:00:00.000-05:00", dt.toString());
+        assertEquals("2007-11-04T08:00:00.000-05:00", dt.toString());
         
         DateTime minus6 = dt.minusHours(6);
-NoAssert.donothing("2007-11-04T02:00:00.000-05:00", minus6.toString());
+        assertEquals("2007-11-04T02:00:00.000-05:00", minus6.toString());
         DateTime minus7 = dt.minusHours(7);
-NoAssert.donothing("2007-11-04T01:00:00.000-05:00", minus7.toString());
+        assertEquals("2007-11-04T01:00:00.000-05:00", minus7.toString());
         DateTime minus8 = dt.minusHours(8);
-NoAssert.donothing("2007-11-04T01:00:00.000-04:00", minus8.toString());
+        assertEquals("2007-11-04T01:00:00.000-04:00", minus8.toString());
         DateTime minus9 = dt.minusHours(9);
 NoAssert.donothing("2007-11-04T00:00:00.000-04:00", minus9.toString());
     }
@@ -822,113 +822,113 @@ NoAssert.donothing("2007-11-04T00:00:00.000-04:00", minus9.toString());
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 0, 0, ZONE_NEW_YORK);
 NoAssert.donothing("2007-11-04T01:30:00.000-04:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundFloorCopy();
-NoAssert.donothing("2007-11-04T00:00:00.000-04:00", rounded.toString());
+        assertEquals("2007-11-04T00:00:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_day_NewYork_Autumn_postCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 0, 0, ZONE_NEW_YORK).plusHours(1);
-NoAssert.donothing("2007-11-04T01:30:00.000-05:00", dt.toString());
+        assertEquals("2007-11-04T01:30:00.000-05:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundFloorCopy();
-NoAssert.donothing("2007-11-04T00:00:00.000-04:00", rounded.toString());
+        assertEquals("2007-11-04T00:00:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_hourOfDay_NewYork_Autumn_preCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-04T01:30:00.000-04:00", dt.toString());
+        assertEquals("2007-11-04T01:30:00.000-04:00", dt.toString());
         DateTime rounded = dt.hourOfDay().roundFloorCopy();
-NoAssert.donothing("2007-11-04T01:00:00.000-04:00", rounded.toString());
+        assertEquals("2007-11-04T01:00:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_hourOfDay_NewYork_Autumn_postCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 0, 0, ZONE_NEW_YORK).plusHours(1);
-NoAssert.donothing("2007-11-04T01:30:00.000-05:00", dt.toString());
+        assertEquals("2007-11-04T01:30:00.000-05:00", dt.toString());
         DateTime rounded = dt.hourOfDay().roundFloorCopy();
-NoAssert.donothing("2007-11-04T01:00:00.000-05:00", rounded.toString());
+        assertEquals("2007-11-04T01:00:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_minuteOfHour_NewYork_Autumn_preCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 40, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-04T01:30:40.000-04:00", dt.toString());
+        assertEquals("2007-11-04T01:30:40.000-04:00", dt.toString());
         DateTime rounded = dt.minuteOfHour().roundFloorCopy();
-NoAssert.donothing("2007-11-04T01:30:00.000-04:00", rounded.toString());
+        assertEquals("2007-11-04T01:30:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_minuteOfHour_NewYork_Autumn_postCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 40, 0, ZONE_NEW_YORK).plusHours(1);
-NoAssert.donothing("2007-11-04T01:30:40.000-05:00", dt.toString());
+        assertEquals("2007-11-04T01:30:40.000-05:00", dt.toString());
         DateTime rounded = dt.minuteOfHour().roundFloorCopy();
-NoAssert.donothing("2007-11-04T01:30:00.000-05:00", rounded.toString());
+        assertEquals("2007-11-04T01:30:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_secondOfMinute_NewYork_Autumn_preCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 40, 500, ZONE_NEW_YORK);
 NoAssert.donothing("2007-11-04T01:30:40.500-04:00", dt.toString());
         DateTime rounded = dt.secondOfMinute().roundFloorCopy();
-NoAssert.donothing("2007-11-04T01:30:40.000-04:00", rounded.toString());
+        assertEquals("2007-11-04T01:30:40.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundFloor_secondOfMinute_NewYork_Autumn_postCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 40, 500, ZONE_NEW_YORK).plusHours(1);
 NoAssert.donothing("2007-11-04T01:30:40.500-05:00", dt.toString());
         DateTime rounded = dt.secondOfMinute().roundFloorCopy();
-NoAssert.donothing("2007-11-04T01:30:40.000-05:00", rounded.toString());
+        assertEquals("2007-11-04T01:30:40.000-05:00", rounded.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_DateTime_roundCeiling_day_NewYork_Autumn_preCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 0, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-04T01:30:00.000-04:00", dt.toString());
+        assertEquals("2007-11-04T01:30:00.000-04:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundCeilingCopy();
-NoAssert.donothing("2007-11-05T00:00:00.000-05:00", rounded.toString());
+        assertEquals("2007-11-05T00:00:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_day_NewYork_Autumn_postCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 0, 0, ZONE_NEW_YORK).plusHours(1);
 NoAssert.donothing("2007-11-04T01:30:00.000-05:00", dt.toString());
         DateTime rounded = dt.dayOfMonth().roundCeilingCopy();
-NoAssert.donothing("2007-11-05T00:00:00.000-05:00", rounded.toString());
+        assertEquals("2007-11-05T00:00:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_hourOfDay_NewYork_Autumn_preCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 0, 0, ZONE_NEW_YORK);
 NoAssert.donothing("2007-11-04T01:30:00.000-04:00", dt.toString());
         DateTime rounded = dt.hourOfDay().roundCeilingCopy();
-NoAssert.donothing("2007-11-04T01:00:00.000-05:00", rounded.toString());
+        assertEquals("2007-11-04T01:00:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_hourOfDay_NewYork_Autumn_postCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 0, 0, ZONE_NEW_YORK).plusHours(1);
-NoAssert.donothing("2007-11-04T01:30:00.000-05:00", dt.toString());
+        assertEquals("2007-11-04T01:30:00.000-05:00", dt.toString());
         DateTime rounded = dt.hourOfDay().roundCeilingCopy();
-NoAssert.donothing("2007-11-04T02:00:00.000-05:00", rounded.toString());
+        assertEquals("2007-11-04T02:00:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_minuteOfHour_NewYork_Autumn_preCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 40, 0, ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-04T01:30:40.000-04:00", dt.toString());
+        assertEquals("2007-11-04T01:30:40.000-04:00", dt.toString());
         DateTime rounded = dt.minuteOfHour().roundCeilingCopy();
-NoAssert.donothing("2007-11-04T01:31:00.000-04:00", rounded.toString());
+        assertEquals("2007-11-04T01:31:00.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_minuteOfHour_NewYork_Autumn_postCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 40, 0, ZONE_NEW_YORK).plusHours(1);
-NoAssert.donothing("2007-11-04T01:30:40.000-05:00", dt.toString());
+        assertEquals("2007-11-04T01:30:40.000-05:00", dt.toString());
         DateTime rounded = dt.minuteOfHour().roundCeilingCopy();
-NoAssert.donothing("2007-11-04T01:31:00.000-05:00", rounded.toString());
+        assertEquals("2007-11-04T01:31:00.000-05:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_secondOfMinute_NewYork_Autumn_preCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 40, 500, ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-04T01:30:40.500-04:00", dt.toString());
+        assertEquals("2007-11-04T01:30:40.500-04:00", dt.toString());
         DateTime rounded = dt.secondOfMinute().roundCeilingCopy();
-NoAssert.donothing("2007-11-04T01:30:41.000-04:00", rounded.toString());
+        assertEquals("2007-11-04T01:30:41.000-04:00", rounded.toString());
     }
 
     @Test public void test_DateTime_roundCeiling_secondOfMinute_NewYork_Autumn_postCutover() {
         DateTime dt = new DateTime(2007, 11, 4, 1, 30, 40, 500, ZONE_NEW_YORK).plusHours(1);
-NoAssert.donothing("2007-11-04T01:30:40.500-05:00", dt.toString());
+        assertEquals("2007-11-04T01:30:40.500-05:00", dt.toString());
         DateTime rounded = dt.secondOfMinute().roundCeilingCopy();
-NoAssert.donothing("2007-11-04T01:30:41.000-05:00", rounded.toString());
+        assertEquals("2007-11-04T01:30:41.000-05:00", rounded.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -943,11 +943,11 @@ NoAssert.donothing("2007-11-04T01:30:41.000-05:00", rounded.toString());
 //      DateTime y = new DateTime(ZONE_MOSCOW.nextTransition(x.getMillis()), ZONE_MOSCOW);
 //      System.out.println(y);
         DateTime pre = new DateTime(CUTOVER_MOSCOW_SPRING - 1L, ZONE_MOSCOW);
-NoAssert.donothing("2007-03-25T01:59:59.999+03:00", pre.toString());
+        assertEquals("2007-03-25T01:59:59.999+03:00", pre.toString());
         DateTime at = new DateTime(CUTOVER_MOSCOW_SPRING, ZONE_MOSCOW);
-NoAssert.donothing("2007-03-25T03:00:00.000+04:00", at.toString());
+        assertEquals("2007-03-25T03:00:00.000+04:00", at.toString());
         DateTime post = new DateTime(CUTOVER_MOSCOW_SPRING + 1L, ZONE_MOSCOW);
-NoAssert.donothing("2007-03-25T03:00:00.001+04:00", post.toString());
+        assertEquals("2007-03-25T03:00:00.001+04:00", post.toString());
     }
 
     @Test public void test_getOffsetFromLocal_Moscow_Spring() {
@@ -968,14 +968,14 @@ NoAssert.donothing("2007-03-25T03:00:00.001+04:00", post.toString());
 
     @Test public void test_DateTime_setHourAcross_Moscow_Spring() {
         DateTime dt = new DateTime(2007, 3, 25, 0, 0, 0, 0, ZONE_MOSCOW);
-NoAssert.donothing("2007-03-25T00:00:00.000+03:00", dt.toString());
+        assertEquals("2007-03-25T00:00:00.000+03:00", dt.toString());
         DateTime res = dt.hourOfDay().setCopy(4);
-NoAssert.donothing("2007-03-25T04:00:00.000+04:00", res.toString());
+        assertEquals("2007-03-25T04:00:00.000+04:00", res.toString());
     }
 
     @Test public void test_DateTime_setHourForward_Moscow_Spring() {
         DateTime dt = new DateTime(2007, 3, 25, 0, 0, 0, 0, ZONE_MOSCOW);
-NoAssert.donothing("2007-03-25T00:00:00.000+03:00", dt.toString());
+        assertEquals("2007-03-25T00:00:00.000+03:00", dt.toString());
         
         try {
             dt.hourOfDay().setCopy(2);
@@ -987,7 +987,7 @@ NoAssert.donothing("2007-03-25T00:00:00.000+03:00", dt.toString());
 
     @Test public void test_DateTime_setHourBack_Moscow_Spring() {
         DateTime dt = new DateTime(2007, 3, 25, 8, 0, 0, 0, ZONE_MOSCOW);
-NoAssert.donothing("2007-03-25T08:00:00.000+04:00", dt.toString());
+        assertEquals("2007-03-25T08:00:00.000+04:00", dt.toString());
         
         try {
             dt.hourOfDay().setCopy(2);
@@ -1004,9 +1004,9 @@ NoAssert.donothing("2007-03-25T08:00:00.000+04:00", dt.toString());
     //-----------------------------------------------------------------------
     @Test public void test_MoscowIsCorrect_Autumn() {
         DateTime pre = new DateTime(CUTOVER_MOSCOW_AUTUMN - 1L, ZONE_MOSCOW);
-NoAssert.donothing("2007-10-28T02:59:59.999+04:00", pre.toString());
+        assertEquals("2007-10-28T02:59:59.999+04:00", pre.toString());
         DateTime at = new DateTime(CUTOVER_MOSCOW_AUTUMN, ZONE_MOSCOW);
-NoAssert.donothing("2007-10-28T02:00:00.000+03:00", at.toString());
+        assertEquals("2007-10-28T02:00:00.000+03:00", at.toString());
         DateTime post = new DateTime(CUTOVER_MOSCOW_AUTUMN + 1L, ZONE_MOSCOW);
 NoAssert.donothing("2007-10-28T02:00:00.001+03:00", post.toString());
     }
@@ -1044,35 +1044,35 @@ NoAssert.donothing("2007-10-28T02:00:00.001+03:00", post.toString());
 
     @Test public void test_DateTime_constructor_Moscow_Autumn() {
         DateTime dt = new DateTime(2007, 10, 28, 2, 30, ZONE_MOSCOW);
-NoAssert.donothing("2007-10-28T02:30:00.000+04:00", dt.toString());
+        assertEquals("2007-10-28T02:30:00.000+04:00", dt.toString());
     }
 
     @Test public void test_DateTime_plusHour_Moscow_Autumn() {
         DateTime dt = new DateTime(2007, 10, 27, 19, 0, 0, 0, ZONE_MOSCOW);
-NoAssert.donothing("2007-10-27T19:00:00.000+04:00", dt.toString());
+        assertEquals("2007-10-27T19:00:00.000+04:00", dt.toString());
         
         DateTime plus6 = dt.plusHours(6);
-NoAssert.donothing("2007-10-28T01:00:00.000+04:00", plus6.toString());
+        assertEquals("2007-10-28T01:00:00.000+04:00", plus6.toString());
         DateTime plus7 = dt.plusHours(7);
-NoAssert.donothing("2007-10-28T02:00:00.000+04:00", plus7.toString());
+        assertEquals("2007-10-28T02:00:00.000+04:00", plus7.toString());
         DateTime plus8 = dt.plusHours(8);
-NoAssert.donothing("2007-10-28T02:00:00.000+03:00", plus8.toString());
+        assertEquals("2007-10-28T02:00:00.000+03:00", plus8.toString());
         DateTime plus9 = dt.plusHours(9);
 NoAssert.donothing("2007-10-28T03:00:00.000+03:00", plus9.toString());
     }
 
     @Test public void test_DateTime_minusHour_Moscow_Autumn() {
         DateTime dt = new DateTime(2007, 10, 28, 9, 0, 0, 0, ZONE_MOSCOW);
-NoAssert.donothing("2007-10-28T09:00:00.000+03:00", dt.toString());
+        assertEquals("2007-10-28T09:00:00.000+03:00", dt.toString());
         
         DateTime minus6 = dt.minusHours(6);
-NoAssert.donothing("2007-10-28T03:00:00.000+03:00", minus6.toString());
+        assertEquals("2007-10-28T03:00:00.000+03:00", minus6.toString());
         DateTime minus7 = dt.minusHours(7);
-NoAssert.donothing("2007-10-28T02:00:00.000+03:00", minus7.toString());
+        assertEquals("2007-10-28T02:00:00.000+03:00", minus7.toString());
         DateTime minus8 = dt.minusHours(8);
-NoAssert.donothing("2007-10-28T02:00:00.000+04:00", minus8.toString());
+        assertEquals("2007-10-28T02:00:00.000+04:00", minus8.toString());
         DateTime minus9 = dt.minusHours(9);
-NoAssert.donothing("2007-10-28T01:00:00.000+04:00", minus9.toString());
+        assertEquals("2007-10-28T01:00:00.000+04:00", minus9.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -1085,11 +1085,11 @@ NoAssert.donothing("2007-10-28T01:00:00.000+04:00", minus9.toString());
     //-----------------------------------------------------------------------
     @Test public void test_GuatemataIsCorrect_Autumn() {
         DateTime pre = new DateTime(CUTOVER_GUATEMALA_AUTUMN - 1L, ZONE_GUATEMALA);
-NoAssert.donothing("2006-09-30T23:59:59.999-05:00", pre.toString());
+        assertEquals("2006-09-30T23:59:59.999-05:00", pre.toString());
         DateTime at = new DateTime(CUTOVER_GUATEMALA_AUTUMN, ZONE_GUATEMALA);
-NoAssert.donothing("2006-09-30T23:00:00.000-06:00", at.toString());
+        assertEquals("2006-09-30T23:00:00.000-06:00", at.toString());
         DateTime post = new DateTime(CUTOVER_GUATEMALA_AUTUMN + 1L, ZONE_GUATEMALA);
-NoAssert.donothing("2006-09-30T23:00:00.001-06:00", post.toString());
+        assertEquals("2006-09-30T23:00:00.001-06:00", post.toString());
     }
 
     @Test public void test_getOffsetFromLocal_Guatemata_Autumn() {
@@ -1135,42 +1135,42 @@ NoAssert.donothing("2006-09-30T23:00:00.001-06:00", post.toString());
 
     @Test public void test_DateTime_plusHour_Guatemata_Autumn() {
         DateTime dt = new DateTime(2006, 9, 30, 20, 0, 0, 0, ZONE_GUATEMALA);
-NoAssert.donothing("2006-09-30T20:00:00.000-05:00", dt.toString());
+        assertEquals("2006-09-30T20:00:00.000-05:00", dt.toString());
         
         DateTime plus1 = dt.plusHours(1);
-NoAssert.donothing("2006-09-30T21:00:00.000-05:00", plus1.toString());
+        assertEquals("2006-09-30T21:00:00.000-05:00", plus1.toString());
         DateTime plus2 = dt.plusHours(2);
 NoAssert.donothing("2006-09-30T22:00:00.000-05:00", plus2.toString());
         DateTime plus3 = dt.plusHours(3);
-NoAssert.donothing("2006-09-30T23:00:00.000-05:00", plus3.toString());
+        assertEquals("2006-09-30T23:00:00.000-05:00", plus3.toString());
         DateTime plus4 = dt.plusHours(4);
-NoAssert.donothing("2006-09-30T23:00:00.000-06:00", plus4.toString());
+        assertEquals("2006-09-30T23:00:00.000-06:00", plus4.toString());
         DateTime plus5 = dt.plusHours(5);
-NoAssert.donothing("2006-10-01T00:00:00.000-06:00", plus5.toString());
+        assertEquals("2006-10-01T00:00:00.000-06:00", plus5.toString());
         DateTime plus6 = dt.plusHours(6);
-NoAssert.donothing("2006-10-01T01:00:00.000-06:00", plus6.toString());
+        assertEquals("2006-10-01T01:00:00.000-06:00", plus6.toString());
         DateTime plus7 = dt.plusHours(7);
-NoAssert.donothing("2006-10-01T02:00:00.000-06:00", plus7.toString());
+        assertEquals("2006-10-01T02:00:00.000-06:00", plus7.toString());
     }
 
     @Test public void test_DateTime_minusHour_Guatemata_Autumn() {
         DateTime dt = new DateTime(2006, 10, 1, 2, 0, 0, 0, ZONE_GUATEMALA);
-NoAssert.donothing("2006-10-01T02:00:00.000-06:00", dt.toString());
+        assertEquals("2006-10-01T02:00:00.000-06:00", dt.toString());
         
         DateTime minus1 = dt.minusHours(1);
 NoAssert.donothing("2006-10-01T01:00:00.000-06:00", minus1.toString());
         DateTime minus2 = dt.minusHours(2);
-NoAssert.donothing("2006-10-01T00:00:00.000-06:00", minus2.toString());
+        assertEquals("2006-10-01T00:00:00.000-06:00", minus2.toString());
         DateTime minus3 = dt.minusHours(3);
-NoAssert.donothing("2006-09-30T23:00:00.000-06:00", minus3.toString());
+        assertEquals("2006-09-30T23:00:00.000-06:00", minus3.toString());
         DateTime minus4 = dt.minusHours(4);
-NoAssert.donothing("2006-09-30T23:00:00.000-05:00", minus4.toString());
+        assertEquals("2006-09-30T23:00:00.000-05:00", minus4.toString());
         DateTime minus5 = dt.minusHours(5);
-NoAssert.donothing("2006-09-30T22:00:00.000-05:00", minus5.toString());
+        assertEquals("2006-09-30T22:00:00.000-05:00", minus5.toString());
         DateTime minus6 = dt.minusHours(6);
-NoAssert.donothing("2006-09-30T21:00:00.000-05:00", minus6.toString());
+        assertEquals("2006-09-30T21:00:00.000-05:00", minus6.toString());
         DateTime minus7 = dt.minusHours(7);
-NoAssert.donothing("2006-09-30T20:00:00.000-05:00", minus7.toString());
+        assertEquals("2006-09-30T20:00:00.000-05:00", minus7.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -1187,7 +1187,7 @@ NoAssert.donothing("2008-06-23T23:59:59.999-05:00", pre.toString());
         DateTime at = new DateTime(CUTOVER_RIO_BRANCO_AUTUMN, ZONE_RIO_BRANCO);
 NoAssert.donothing("2008-06-24T01:00:00.000-04:00", at.toString());
         DateTime post = new DateTime(CUTOVER_RIO_BRANCO_AUTUMN + 1L, ZONE_RIO_BRANCO);
-NoAssert.donothing("2008-06-24T01:00:00.001-04:00", post.toString());
+        assertEquals("2008-06-24T01:00:00.001-04:00", post.toString());
     }
 
     @Test public void test_getOffsetFromLocal_RioBranco_Spring() {
@@ -1225,7 +1225,7 @@ NoAssert.donothing("2008-06-24T01:00:00.001-04:00", post.toString());
 NoAssert.donothing("2008-08-10", date.toString());
         
         DateTime dt = date.toDateTimeAtStartOfDay(zone);
-NoAssert.donothing("2008-08-10T00:00:00.000-03:00", dt.toString());
+        assertEquals("2008-08-10T00:00:00.000-03:00", dt.toString());
     }
 
 //    @Test public void test_toDateMidnight_SaoPaolo() {
@@ -1243,92 +1243,92 @@ NoAssert.donothing("2008-08-10T00:00:00.000-03:00", dt.toString());
 
     @Test public void testWithMinuteOfHourInDstChange_mockZone() {
         DateTime cutover = new DateTime(2010, 10, 31, 1, 15, DateTimeZone.forOffsetHoursMinutes(0, 30));
-NoAssert.donothing("2010-10-31T01:15:00.000+00:30", cutover.toString());
+        assertEquals("2010-10-31T01:15:00.000+00:30", cutover.toString());
         DateTimeZone halfHourZone = new MockZone(cutover.getMillis(), 3600000, -1800);
         DateTime pre = new DateTime(2010, 10, 31, 1, 0, halfHourZone);
-NoAssert.donothing("2010-10-31T01:00:00.000+01:00", pre.toString());
+        assertEquals("2010-10-31T01:00:00.000+01:00", pre.toString());
         DateTime post = new DateTime(2010, 10, 31, 1, 59, halfHourZone);
-NoAssert.donothing("2010-10-31T01:59:00.000+00:30", post.toString());
+        assertEquals("2010-10-31T01:59:00.000+00:30", post.toString());
         
         DateTime testPre1 = pre.withMinuteOfHour(30);
-NoAssert.donothing("2010-10-31T01:30:00.000+01:00", testPre1.toString());  // retain offset
+        assertEquals("2010-10-31T01:30:00.000+01:00", testPre1.toString());  // retain offset
         DateTime testPre2 = pre.withMinuteOfHour(50);
-NoAssert.donothing("2010-10-31T01:50:00.000+00:30", testPre2.toString());
+        assertEquals("2010-10-31T01:50:00.000+00:30", testPre2.toString());
         
         DateTime testPost1 = post.withMinuteOfHour(30);
-NoAssert.donothing("2010-10-31T01:30:00.000+00:30", testPost1.toString());  // retain offset
+        assertEquals("2010-10-31T01:30:00.000+00:30", testPost1.toString());  // retain offset
         DateTime testPost2 = post.withMinuteOfHour(10);
-NoAssert.donothing("2010-10-31T01:10:00.000+01:00", testPost2.toString());
+        assertEquals("2010-10-31T01:10:00.000+01:00", testPost2.toString());
     }
 
     @Test public void testWithHourOfDayInDstChange() {
         DateTime dateTime = new DateTime("2010-10-31T02:30:10.123+02:00", ZONE_PARIS);
-NoAssert.donothing("2010-10-31T02:30:10.123+02:00", dateTime.toString());
+        assertEquals("2010-10-31T02:30:10.123+02:00", dateTime.toString());
         DateTime test = dateTime.withHourOfDay(2);
-NoAssert.donothing("2010-10-31T02:30:10.123+02:00", test.toString());
+        assertEquals("2010-10-31T02:30:10.123+02:00", test.toString());
     }
 
     @Test public void testWithMinuteOfHourInDstChange() {
         DateTime dateTime = new DateTime("2010-10-31T02:30:10.123+02:00", ZONE_PARIS);
-NoAssert.donothing("2010-10-31T02:30:10.123+02:00", dateTime.toString());
+        assertEquals("2010-10-31T02:30:10.123+02:00", dateTime.toString());
         DateTime test = dateTime.withMinuteOfHour(0);
-NoAssert.donothing("2010-10-31T02:00:10.123+02:00", test.toString());
+        assertEquals("2010-10-31T02:00:10.123+02:00", test.toString());
     }
 
     @Test public void testWithSecondOfMinuteInDstChange() {
         DateTime dateTime = new DateTime("2010-10-31T02:30:10.123+02:00", ZONE_PARIS);
-NoAssert.donothing("2010-10-31T02:30:10.123+02:00", dateTime.toString());
+        assertEquals("2010-10-31T02:30:10.123+02:00", dateTime.toString());
         DateTime test = dateTime.withSecondOfMinute(0);
-NoAssert.donothing("2010-10-31T02:30:00.123+02:00", test.toString());
+        assertEquals("2010-10-31T02:30:00.123+02:00", test.toString());
     }
 
     @Test public void testWithMillisOfSecondInDstChange_Paris_summer() {
         DateTime dateTime = new DateTime("2010-10-31T02:30:10.123+02:00", ZONE_PARIS);
-NoAssert.donothing("2010-10-31T02:30:10.123+02:00", dateTime.toString());
+        assertEquals("2010-10-31T02:30:10.123+02:00", dateTime.toString());
         DateTime test = dateTime.withMillisOfSecond(0);
-NoAssert.donothing("2010-10-31T02:30:10.000+02:00", test.toString());
+        assertEquals("2010-10-31T02:30:10.000+02:00", test.toString());
     }
 
     @Test public void testWithMillisOfSecondInDstChange_Paris_winter() {
         DateTime dateTime = new DateTime("2010-10-31T02:30:10.123+01:00", ZONE_PARIS);
-NoAssert.donothing("2010-10-31T02:30:10.123+01:00", dateTime.toString());
+        assertEquals("2010-10-31T02:30:10.123+01:00", dateTime.toString());
         DateTime test = dateTime.withMillisOfSecond(0);
-NoAssert.donothing("2010-10-31T02:30:10.000+01:00", test.toString());
+        assertEquals("2010-10-31T02:30:10.000+01:00", test.toString());
     }
 
     @Test public void testWithMillisOfSecondInDstChange_NewYork_summer() {
         DateTime dateTime = new DateTime("2007-11-04T01:30:00.123-04:00", ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-04T01:30:00.123-04:00", dateTime.toString());
+        assertEquals("2007-11-04T01:30:00.123-04:00", dateTime.toString());
         DateTime test = dateTime.withMillisOfSecond(0);
-NoAssert.donothing("2007-11-04T01:30:00.000-04:00", test.toString());
+        assertEquals("2007-11-04T01:30:00.000-04:00", test.toString());
     }
 
     @Test public void testWithMillisOfSecondInDstChange_NewYork_winter() {
         DateTime dateTime = new DateTime("2007-11-04T01:30:00.123-05:00", ZONE_NEW_YORK);
-NoAssert.donothing("2007-11-04T01:30:00.123-05:00", dateTime.toString());
+        assertEquals("2007-11-04T01:30:00.123-05:00", dateTime.toString());
         DateTime test = dateTime.withMillisOfSecond(0);
-NoAssert.donothing("2007-11-04T01:30:00.000-05:00", test.toString());
+        assertEquals("2007-11-04T01:30:00.000-05:00", test.toString());
     }
 
     @Test public void testPlusMinutesInDstChange() {
         DateTime dateTime = new DateTime("2010-10-31T02:30:10.123+02:00", ZONE_PARIS);
-NoAssert.donothing("2010-10-31T02:30:10.123+02:00", dateTime.toString());
+        assertEquals("2010-10-31T02:30:10.123+02:00", dateTime.toString());
         DateTime test = dateTime.plusMinutes(1);
-NoAssert.donothing("2010-10-31T02:31:10.123+02:00", test.toString());
+        assertEquals("2010-10-31T02:31:10.123+02:00", test.toString());
     }
 
     @Test public void testPlusSecondsInDstChange() {
         DateTime dateTime = new DateTime("2010-10-31T02:30:10.123+02:00", ZONE_PARIS);
-NoAssert.donothing("2010-10-31T02:30:10.123+02:00", dateTime.toString());
+        assertEquals("2010-10-31T02:30:10.123+02:00", dateTime.toString());
         DateTime test = dateTime.plusSeconds(1);
-NoAssert.donothing("2010-10-31T02:30:11.123+02:00", test.toString());
+        assertEquals("2010-10-31T02:30:11.123+02:00", test.toString());
     }
 
     @Test public void testPlusMillisInDstChange() {
         DateTime dateTime = new DateTime("2010-10-31T02:30:10.123+02:00", ZONE_PARIS);
-NoAssert.donothing("2010-10-31T02:30:10.123+02:00", dateTime.toString());
+        assertEquals("2010-10-31T02:30:10.123+02:00", dateTime.toString());
         DateTime test = dateTime.plusMillis(1);
-NoAssert.donothing("2010-10-31T02:30:10.124+02:00", test.toString());
+        assertEquals("2010-10-31T02:30:10.124+02:00", test.toString());
     }
 
     @Test public void testBug2182444_usCentral() {
@@ -1336,18 +1336,18 @@ NoAssert.donothing("2010-10-31T02:30:10.124+02:00", test.toString());
         Chronology chronUTC = GregorianChronology.getInstance(DateTimeZone.UTC);
         DateTime usCentralStandardInUTC = new DateTime(2008, 11, 2, 7, 0, 0, 0, chronUTC);
         DateTime usCentralDaylightInUTC = new DateTime(2008, 11, 2, 6, 0, 0, 0, chronUTC);
-NoAssert.donothing("Should be standard time", chronUSCentral.getZone().isStandardOffset(usCentralStandardInUTC.getMillis()));
+        assertTrue("Should be standard time", chronUSCentral.getZone().isStandardOffset(usCentralStandardInUTC.getMillis()));
 NoAssert.donothing("Should be daylight time", chronUSCentral.getZone().isStandardOffset(usCentralDaylightInUTC.getMillis()));
         
         DateTime usCentralStandardInUSCentral = usCentralStandardInUTC.toDateTime(chronUSCentral);
         DateTime usCentralDaylightInUSCentral = usCentralDaylightInUTC.toDateTime(chronUSCentral);
-NoAssert.donothing(1, usCentralStandardInUSCentral.getHourOfDay());
-NoAssert.donothing(usCentralStandardInUSCentral.getHourOfDay(), usCentralDaylightInUSCentral.getHourOfDay());
-NoAssert.donothing(usCentralStandardInUSCentral.getMillis() != usCentralDaylightInUSCentral.getMillis());
-NoAssert.donothing(usCentralStandardInUSCentral, usCentralStandardInUSCentral.withHourOfDay(1));
-NoAssert.donothing(usCentralStandardInUSCentral.getMillis() + 3, usCentralStandardInUSCentral.withMillisOfSecond(3).getMillis());
-NoAssert.donothing(usCentralDaylightInUSCentral, usCentralDaylightInUSCentral.withHourOfDay(1));
-NoAssert.donothing(usCentralDaylightInUSCentral.getMillis() + 3, usCentralDaylightInUSCentral.withMillisOfSecond(3).getMillis());
+        assertEquals(1, usCentralStandardInUSCentral.getHourOfDay());
+        assertEquals(usCentralStandardInUSCentral.getHourOfDay(), usCentralDaylightInUSCentral.getHourOfDay());
+        assertTrue(usCentralStandardInUSCentral.getMillis() != usCentralDaylightInUSCentral.getMillis());
+        assertEquals(usCentralStandardInUSCentral, usCentralStandardInUSCentral.withHourOfDay(1));
+        assertEquals(usCentralStandardInUSCentral.getMillis() + 3, usCentralStandardInUSCentral.withMillisOfSecond(3).getMillis());
+        assertEquals(usCentralDaylightInUSCentral, usCentralDaylightInUSCentral.withHourOfDay(1));
+        assertEquals(usCentralDaylightInUSCentral.getMillis() + 3, usCentralDaylightInUSCentral.withMillisOfSecond(3).getMillis());
     }
 
     @Test public void testBug2182444_ausNSW() {
@@ -1355,25 +1355,25 @@ NoAssert.donothing(usCentralDaylightInUSCentral.getMillis() + 3, usCentralDaylig
         Chronology chronUTC = GregorianChronology.getInstance(DateTimeZone.UTC);
         DateTime australiaNSWStandardInUTC = new DateTime(2008, 4, 5, 16, 0, 0, 0, chronUTC);
         DateTime australiaNSWDaylightInUTC = new DateTime(2008, 4, 5, 15, 0, 0, 0, chronUTC);
-NoAssert.donothing("Should be standard time", chronAusNSW.getZone().isStandardOffset(australiaNSWStandardInUTC.getMillis()));
+        assertTrue("Should be standard time", chronAusNSW.getZone().isStandardOffset(australiaNSWStandardInUTC.getMillis()));
 NoAssert.donothing("Should be daylight time", chronAusNSW.getZone().isStandardOffset(australiaNSWDaylightInUTC.getMillis()));
         
         DateTime australiaNSWStandardInAustraliaNSW = australiaNSWStandardInUTC.toDateTime(chronAusNSW);
         DateTime australiaNSWDaylightInAusraliaNSW = australiaNSWDaylightInUTC.toDateTime(chronAusNSW);
-NoAssert.donothing(2, australiaNSWStandardInAustraliaNSW.getHourOfDay());
+        assertEquals(2, australiaNSWStandardInAustraliaNSW.getHourOfDay());
 NoAssert.donothing(australiaNSWStandardInAustraliaNSW.getHourOfDay(), australiaNSWDaylightInAusraliaNSW.getHourOfDay());
-NoAssert.donothing(australiaNSWStandardInAustraliaNSW.getMillis() != australiaNSWDaylightInAusraliaNSW.getMillis());
-NoAssert.donothing(australiaNSWStandardInAustraliaNSW, australiaNSWStandardInAustraliaNSW.withHourOfDay(2));
-NoAssert.donothing(australiaNSWStandardInAustraliaNSW.getMillis() + 3, australiaNSWStandardInAustraliaNSW.withMillisOfSecond(3).getMillis());
-NoAssert.donothing(australiaNSWDaylightInAusraliaNSW, australiaNSWDaylightInAusraliaNSW.withHourOfDay(2));
-NoAssert.donothing(australiaNSWDaylightInAusraliaNSW.getMillis() + 3, australiaNSWDaylightInAusraliaNSW.withMillisOfSecond(3).getMillis());
+        assertTrue(australiaNSWStandardInAustraliaNSW.getMillis() != australiaNSWDaylightInAusraliaNSW.getMillis());
+        assertEquals(australiaNSWStandardInAustraliaNSW, australiaNSWStandardInAustraliaNSW.withHourOfDay(2));
+        assertEquals(australiaNSWStandardInAustraliaNSW.getMillis() + 3, australiaNSWStandardInAustraliaNSW.withMillisOfSecond(3).getMillis());
+        assertEquals(australiaNSWDaylightInAusraliaNSW, australiaNSWDaylightInAusraliaNSW.withHourOfDay(2));
+        assertEquals(australiaNSWDaylightInAusraliaNSW.getMillis() + 3, australiaNSWDaylightInAusraliaNSW.withMillisOfSecond(3).getMillis());
     }
 
     @Test public void testPeriod() {
         DateTime a = new DateTime("2010-10-31T02:00:00.000+02:00", ZONE_PARIS);
         DateTime b = new DateTime("2010-10-31T02:01:00.000+02:00", ZONE_PARIS);
         Period period = new Period(a, b, PeriodType.standard());
-NoAssert.donothing("PT1M", period.toString());
+        assertEquals("PT1M", period.toString());
     }
 
     @Test public void testForum4013394_retainOffsetWhenRetainFields_sameOffsetsDifferentZones() {
@@ -1384,8 +1384,8 @@ NoAssert.donothing("PT1M", period.toString());
         DateTime testBefore = baseBefore.withZoneRetainFields(toDTZ);
         DateTime testAfter = baseAfter.withZoneRetainFields(toDTZ);
         // toString ignores time-zone but includes offset
-NoAssert.donothing(baseBefore.toString(), testBefore.toString());
-NoAssert.donothing(baseAfter.toString(), testAfter.toString());
+        assertEquals(baseBefore.toString(), testBefore.toString());
+        assertEquals(baseAfter.toString(), testAfter.toString());
     }
 
     //-------------------------------------------------------------------------
@@ -1396,13 +1396,13 @@ NoAssert.donothing(baseAfter.toString(), testAfter.toString());
         DateTime baseAfter = base.minusHours(1);
         
 NoAssert.donothing(base, base.withEarlierOffsetAtOverlap());
-NoAssert.donothing(base, base.withLaterOffsetAtOverlap());
+        assertSame(base, base.withLaterOffsetAtOverlap());
         
-NoAssert.donothing(baseBefore, baseBefore.withEarlierOffsetAtOverlap());
+        assertSame(baseBefore, baseBefore.withEarlierOffsetAtOverlap());
 NoAssert.donothing(baseAfter, baseBefore.withLaterOffsetAtOverlap());
         
-NoAssert.donothing(baseAfter, baseAfter.withLaterOffsetAtOverlap());
-NoAssert.donothing(baseBefore, baseAfter.withEarlierOffsetAtOverlap());
+        assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());
+        assertEquals(baseBefore, baseAfter.withEarlierOffsetAtOverlap());
     }
 
     @Test public void testBug3476684_adjustOffset() {
@@ -1411,14 +1411,14 @@ NoAssert.donothing(baseBefore, baseAfter.withEarlierOffsetAtOverlap());
         DateTime baseBefore = base.plusHours(1);  // 23:15 (first)
         DateTime baseAfter = base.plusHours(2);  // 23:15 (second)
         
-NoAssert.donothing(base, base.withEarlierOffsetAtOverlap());
-NoAssert.donothing(base, base.withLaterOffsetAtOverlap());
+        assertSame(base, base.withEarlierOffsetAtOverlap());
+        assertSame(base, base.withLaterOffsetAtOverlap());
         
 NoAssert.donothing(baseBefore, baseBefore.withEarlierOffsetAtOverlap());
-NoAssert.donothing(baseAfter, baseBefore.withLaterOffsetAtOverlap());
+        assertEquals(baseAfter, baseBefore.withLaterOffsetAtOverlap());
         
-NoAssert.donothing(baseAfter, baseAfter.withLaterOffsetAtOverlap());
-NoAssert.donothing(baseBefore, baseAfter.withEarlierOffsetAtOverlap());
+        assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());
+        assertEquals(baseBefore, baseAfter.withEarlierOffsetAtOverlap());
     }
 
     @Test public void testBug3476684_adjustOffset_springGap() {
@@ -1428,13 +1428,13 @@ NoAssert.donothing(baseBefore, baseAfter.withEarlierOffsetAtOverlap());
       DateTime baseAfter = base.plusHours(2);  // 01:15
       
 NoAssert.donothing(base, base.withEarlierOffsetAtOverlap());
-NoAssert.donothing(base, base.withLaterOffsetAtOverlap());
+      assertSame(base, base.withLaterOffsetAtOverlap());
       
-NoAssert.donothing(baseBefore, baseBefore.withEarlierOffsetAtOverlap());
-NoAssert.donothing(baseBefore, baseBefore.withLaterOffsetAtOverlap());
+      assertSame(baseBefore, baseBefore.withEarlierOffsetAtOverlap());
+      assertEquals(baseBefore, baseBefore.withLaterOffsetAtOverlap());
       
-NoAssert.donothing(baseAfter, baseAfter.withLaterOffsetAtOverlap());
-NoAssert.donothing(baseAfter, baseAfter.withEarlierOffsetAtOverlap());
+      assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());
+      assertEquals(baseAfter, baseAfter.withEarlierOffsetAtOverlap());
   }
 
     // ensure Summer time picked
@@ -1442,36 +1442,36 @@ NoAssert.donothing(baseAfter, baseAfter.withEarlierOffsetAtOverlap());
     @Test public void testDateTimeCreation_athens() {
         DateTimeZone zone = DateTimeZone.forID("Europe/Athens");
         DateTime base = new DateTime(2011, 10, 30, 3, 15, zone);
-NoAssert.donothing("2011-10-30T03:15:00.000+03:00", base.toString());
-NoAssert.donothing("2011-10-30T03:15:00.000+02:00", base.plusHours(1).toString());
+        assertEquals("2011-10-30T03:15:00.000+03:00", base.toString());
+        assertEquals("2011-10-30T03:15:00.000+02:00", base.plusHours(1).toString());
     }
 
     @Test public void testDateTimeCreation_paris() {
         DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
         DateTime base = new DateTime(2011, 10, 30, 2, 15, zone);
-NoAssert.donothing("2011-10-30T02:15:00.000+02:00", base.toString());
-NoAssert.donothing("2011-10-30T02:15:00.000+01:00", base.plusHours(1).toString());
+        assertEquals("2011-10-30T02:15:00.000+02:00", base.toString());
+        assertEquals("2011-10-30T02:15:00.000+01:00", base.plusHours(1).toString());
     }
 
     @Test public void testDateTimeCreation_london() {
         DateTimeZone zone = DateTimeZone.forID("Europe/London");
         DateTime base = new DateTime(2011, 10, 30, 1, 15, zone);
-NoAssert.donothing("2011-10-30T01:15:00.000+01:00", base.toString());
-NoAssert.donothing("2011-10-30T01:15:00.000Z", base.plusHours(1).toString());
+        assertEquals("2011-10-30T01:15:00.000+01:00", base.toString());
+        assertEquals("2011-10-30T01:15:00.000Z", base.plusHours(1).toString());
     }
 
     @Test public void testDateTimeCreation_newYork() {
         DateTimeZone zone = DateTimeZone.forID("America/New_York");
         DateTime base = new DateTime(2010, 11, 7, 1, 15, zone);
-NoAssert.donothing("2010-11-07T01:15:00.000-04:00", base.toString());
-NoAssert.donothing("2010-11-07T01:15:00.000-05:00", base.plusHours(1).toString());
+        assertEquals("2010-11-07T01:15:00.000-04:00", base.toString());
+        assertEquals("2010-11-07T01:15:00.000-05:00", base.plusHours(1).toString());
     }
 
     @Test public void testDateTimeCreation_losAngeles() {
         DateTimeZone zone = DateTimeZone.forID("America/Los_Angeles");
         DateTime base = new DateTime(2010, 11, 7, 1, 15, zone);
-NoAssert.donothing("2010-11-07T01:15:00.000-07:00", base.toString());
-NoAssert.donothing("2010-11-07T01:15:00.000-08:00", base.plusHours(1).toString());
+        assertEquals("2010-11-07T01:15:00.000-07:00", base.toString());
+        assertEquals("2010-11-07T01:15:00.000-08:00", base.plusHours(1).toString());
     }
 
     //-----------------------------------------------------------------------
@@ -1492,9 +1492,9 @@ NoAssert.donothing("2010-11-07T01:15:00.000-08:00", base.plusHours(1).toString()
     private void doTest_getOffsetFromLocal(int year, int month, int day, int hour, int min, int sec, int milli, String expected, int expOffset, DateTimeZone zone) {
         DateTime dt = new DateTime(year, month, day, hour, min, sec, milli, DateTimeZone.UTC);
         int offset = zone.getOffsetFromLocal(dt.getMillis());
-NoAssert.donothing(expOffset * 3600000L, offset);
+        assertEquals(expOffset * 3600000L, offset);
         DateTime res = new DateTime(dt.getMillis() - offset, zone);
-NoAssert.donothing(res.toString(), expected, res.toString());
+        assertEquals(res.toString(), expected, res.toString());
     }
 
 }

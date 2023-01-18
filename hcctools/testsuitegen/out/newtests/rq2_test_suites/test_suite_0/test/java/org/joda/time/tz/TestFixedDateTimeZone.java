@@ -66,10 +66,10 @@ public class TestFixedDateTimeZone  { //extends TestCase {
         FixedDateTimeZone zone3 = new FixedDateTimeZone("A", "B", 2, 5);
         FixedDateTimeZone zone4 = new FixedDateTimeZone("A", "B", 1, 6);
         
-NoAssert.donothing(true, zone1.equals(zone1));
-NoAssert.donothing(true, zone1.equals(zone1b));
+        assertEquals(true, zone1.equals(zone1));
+        assertEquals(true, zone1.equals(zone1b));
 NoAssert.donothing(true, zone1.equals(zone2));  // second arg ignored
-NoAssert.donothing(false, zone1.equals(zone3));
+        assertEquals(false, zone1.equals(zone3));
 NoAssert.donothing(false, zone1.equals(zone4));
     }
 
@@ -80,29 +80,29 @@ NoAssert.donothing(false, zone1.equals(zone4));
         FixedDateTimeZone zone3 = new FixedDateTimeZone("A", "B", 2, 5);
         FixedDateTimeZone zone4 = new FixedDateTimeZone("A", "B", 1, 6);
         
-NoAssert.donothing(true, zone1.hashCode() == zone1.hashCode());
-NoAssert.donothing(true, zone1.hashCode() == zone1b.hashCode());
-NoAssert.donothing(true, zone1.hashCode() == zone2.hashCode());  // second arg ignored
-NoAssert.donothing(false, zone1.hashCode() == zone3.hashCode());
-NoAssert.donothing(false, zone1.hashCode() == zone4.hashCode());
+        assertEquals(true, zone1.hashCode() == zone1.hashCode());
+        assertEquals(true, zone1.hashCode() == zone1b.hashCode());
+        assertEquals(true, zone1.hashCode() == zone2.hashCode());  // second arg ignored
+        assertEquals(false, zone1.hashCode() == zone3.hashCode());
+        assertEquals(false, zone1.hashCode() == zone4.hashCode());
     }
 
     @Test public void testToTimeZone1() throws Exception {
         FixedDateTimeZone zone = new FixedDateTimeZone("+00:01", "+00:01", 60000, 60000);
         TimeZone tz = zone.toTimeZone();
         
-NoAssert.donothing(60000, tz.getRawOffset());
-NoAssert.donothing(60000, getOffset(tz, 1167638400000L));
-NoAssert.donothing(60000, getOffset(tz, 1185951600000L));
+        assertEquals(60000, tz.getRawOffset());
+        assertEquals(60000, getOffset(tz, 1167638400000L));
+        assertEquals(60000, getOffset(tz, 1185951600000L));
     }
 
     @Test public void testToTimeZone2() throws Exception {
         FixedDateTimeZone zone = new FixedDateTimeZone("A", "B", 1, 5);
         TimeZone tz = zone.toTimeZone();
         
-NoAssert.donothing(1, tz.getRawOffset());
+        assertEquals(1, tz.getRawOffset());
 NoAssert.donothing(1, getOffset(tz, 1167638400000L));
-NoAssert.donothing(1, getOffset(tz, 1185951600000L));
+        assertEquals(1, getOffset(tz, 1185951600000L));
     }
 
     /** Make test compile on JDK 1.3. */

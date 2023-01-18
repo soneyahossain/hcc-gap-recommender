@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.joda.time.tz;import org.joda.time.NoAssert;
+package org.joda.time.tz;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -65,7 +65,7 @@ public class TestCachedDateTimeZone  { //extends TestCase {
     @Test public void test_caching() throws Exception {
         CachedDateTimeZone zone1 = CachedDateTimeZone.forZone(DateTimeZone.forID("Europe/Paris"));
         CachedDateTimeZone zone2 = CachedDateTimeZone.forZone(DateTimeZone.forID("Europe/Paris"));
-NoAssert.donothing(zone1, zone2);
+        assertSame(zone1, zone2);
     }
 
     //-----------------------------------------------------------------------
@@ -83,7 +83,7 @@ NoAssert.donothing(zone1, zone2);
         CachedDateTimeZone result = (CachedDateTimeZone) ois.readObject();
         ois.close();
         
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
     }
 
 }

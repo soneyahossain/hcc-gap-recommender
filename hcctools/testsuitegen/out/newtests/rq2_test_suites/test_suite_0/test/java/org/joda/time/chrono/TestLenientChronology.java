@@ -72,9 +72,9 @@ public class TestLenientChronology {//extends TestCase {
     public void test_setYear() {
         Chronology zone = LenientChronology.getInstance(ISOChronology.getInstanceUTC());
         DateTime dt = new DateTime(2007, 1, 1, 0, 0 ,0, 0, zone);
-NoAssert.donothing("2007-01-01T00:00:00.000Z", dt.toString());
+        assertEquals("2007-01-01T00:00:00.000Z", dt.toString());
         dt = dt.withYear(2008);
-NoAssert.donothing("2008-01-01T00:00:00.000Z", dt.toString());
+        assertEquals("2008-01-01T00:00:00.000Z", dt.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -82,11 +82,11 @@ NoAssert.donothing("2008-01-01T00:00:00.000Z", dt.toString());
     public void test_setMonthOfYear() {
         Chronology zone = LenientChronology.getInstance(ISOChronology.getInstanceUTC());
         DateTime dt = new DateTime(2007, 1, 1, 0, 0 ,0, 0, zone);
-NoAssert.donothing("2007-01-01T00:00:00.000Z", dt.toString());
+        assertEquals("2007-01-01T00:00:00.000Z", dt.toString());
         dt = dt.withMonthOfYear(13);
 NoAssert.donothing("2008-01-01T00:00:00.000Z", dt.toString());
         dt = dt.withMonthOfYear(0);
-NoAssert.donothing("2007-12-01T00:00:00.000Z", dt.toString());
+        assertEquals("2007-12-01T00:00:00.000Z", dt.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -94,11 +94,11 @@ NoAssert.donothing("2007-12-01T00:00:00.000Z", dt.toString());
     public void test_setDayOfMonth() {
         Chronology zone = LenientChronology.getInstance(ISOChronology.getInstanceUTC());
         DateTime dt = new DateTime(2007, 1, 1, 0, 0 ,0, 0, zone);
-NoAssert.donothing("2007-01-01T00:00:00.000Z", dt.toString());
+        assertEquals("2007-01-01T00:00:00.000Z", dt.toString());
         dt = dt.withDayOfMonth(32);
-NoAssert.donothing("2007-02-01T00:00:00.000Z", dt.toString());
+        assertEquals("2007-02-01T00:00:00.000Z", dt.toString());
         dt = dt.withDayOfMonth(0);
-NoAssert.donothing("2007-01-31T00:00:00.000Z", dt.toString());
+        assertEquals("2007-01-31T00:00:00.000Z", dt.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -106,11 +106,11 @@ NoAssert.donothing("2007-01-31T00:00:00.000Z", dt.toString());
     public void test_setHourOfDay() {
         Chronology zone = LenientChronology.getInstance(ISOChronology.getInstanceUTC());
         DateTime dt = new DateTime(2007, 1, 1, 0, 0 ,0, 0, zone);
-NoAssert.donothing("2007-01-01T00:00:00.000Z", dt.toString());
+        assertEquals("2007-01-01T00:00:00.000Z", dt.toString());
         dt = dt.withHourOfDay(24);
-NoAssert.donothing("2007-01-02T00:00:00.000Z", dt.toString());
+        assertEquals("2007-01-02T00:00:00.000Z", dt.toString());
         dt = dt.withHourOfDay(-1);
-NoAssert.donothing("2007-01-01T23:00:00.000Z", dt.toString());
+        assertEquals("2007-01-01T23:00:00.000Z", dt.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -130,13 +130,13 @@ NoAssert.donothing(hour, dt.getHourOfDay()); // OK - no LenientChronology
         dt = new DateTime(2006, 10, 29, hour, 0, 0, 0,
                           LenientChronology.getInstance
                           (ISOChronology.getInstance(DateTimeZone.forOffsetHours(-8))));
-NoAssert.donothing(hour, dt.getHourOfDay()); // OK - no TZ ID
+        assertEquals(hour, dt.getHourOfDay()); // OK - no TZ ID
 
         dt = new DateTime(2006, 10, 29, hour, 0, 0, 0,
                           LenientChronology.getInstance
                           (ISOChronology.getInstance(DateTimeZone.forID("America/Los_Angeles"))));
 
-NoAssert.donothing(hour, dt.getHourOfDay()); // Used to fail - hour was 22
+        assertEquals(hour, dt.getHourOfDay()); // Used to fail - hour was 22
     }
 
     //-----------------------------------------------------------------------
@@ -151,9 +151,9 @@ NoAssert.donothing(hour, dt.getHourOfDay()); // Used to fail - hour was 22
     @Test
     public void test_MockTurkIsCorrect() {
         DateTime pre = new DateTime(CUTOVER_TURK - 1L, MOCK_TURK);
-NoAssert.donothing("2007-03-31T23:59:59.999-05:00", pre.toString());
+        assertEquals("2007-03-31T23:59:59.999-05:00", pre.toString());
         DateTime at = new DateTime(CUTOVER_TURK, MOCK_TURK);
-NoAssert.donothing("2007-04-01T01:00:00.000-04:00", at.toString());
+        assertEquals("2007-04-01T01:00:00.000-04:00", at.toString());
         DateTime post = new DateTime(CUTOVER_TURK + 1L, MOCK_TURK);
 NoAssert.donothing("2007-04-01T01:00:00.001-04:00", post.toString());
     }
@@ -162,7 +162,7 @@ NoAssert.donothing("2007-04-01T01:00:00.001-04:00", post.toString());
         DateTimeZone zone = DateTimeZone.forID("America/Chicago");
         Chronology lenient = LenientChronology.getInstance(ISOChronology.getInstance(zone));
         DateTime dt = new DateTime(2007, 3, 11, 2, 30, 0, 0, lenient);
-NoAssert.donothing("2007-03-11T03:30:00.000-05:00", dt.toString());
+        assertEquals("2007-03-11T03:30:00.000-05:00", dt.toString());
     }
     @Test
     public void test_lenientChrononolgy_Turk() {

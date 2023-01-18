@@ -121,19 +121,19 @@ public class TestLocalTime_Properties  { //extends TestCase {
     @Test public void testPropertyGetHour() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
 NoAssert.donothing(test.getChronology().hourOfDay(), test.hourOfDay().getField());
-NoAssert.donothing("hourOfDay", test.hourOfDay().getName());
-NoAssert.donothing("Property[hourOfDay]", test.hourOfDay().toString());
+        assertEquals("hourOfDay", test.hourOfDay().getName());
+        assertEquals("Property[hourOfDay]", test.hourOfDay().toString());
 NoAssert.donothing(test, test.hourOfDay().getLocalTime());
-NoAssert.donothing(10, test.hourOfDay().get());
+        assertEquals(10, test.hourOfDay().get());
 NoAssert.donothing("10", test.hourOfDay().getAsString());
-NoAssert.donothing("10", test.hourOfDay().getAsText());
+        assertEquals("10", test.hourOfDay().getAsText());
 NoAssert.donothing("10", test.hourOfDay().getAsText(Locale.FRENCH));
-NoAssert.donothing("10", test.hourOfDay().getAsShortText());
-NoAssert.donothing("10", test.hourOfDay().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().hours(), test.hourOfDay().getDurationField());
+        assertEquals("10", test.hourOfDay().getAsShortText());
+        assertEquals("10", test.hourOfDay().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().hours(), test.hourOfDay().getDurationField());
 NoAssert.donothing(test.getChronology().days(), test.hourOfDay().getRangeDurationField());
 NoAssert.donothing(2, test.hourOfDay().getMaximumTextLength(null));
-NoAssert.donothing(2, test.hourOfDay().getMaximumShortTextLength(null));
+        assertEquals(2, test.hourOfDay().getMaximumShortTextLength(null));
     }
 
     @Test public void testPropertyRoundHour() {
@@ -168,10 +168,10 @@ NoAssert.donothing(2, test.hourOfDay().getMaximumShortTextLength(null));
 
     @Test public void testPropertyGetMaxMinValuesHour() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(0, test.hourOfDay().getMinimumValue());
+        assertEquals(0, test.hourOfDay().getMinimumValue());
 NoAssert.donothing(0, test.hourOfDay().getMinimumValueOverall());
-NoAssert.donothing(23, test.hourOfDay().getMaximumValue());
-NoAssert.donothing(23, test.hourOfDay().getMaximumValueOverall());
+        assertEquals(23, test.hourOfDay().getMaximumValue());
+        assertEquals(23, test.hourOfDay().getMaximumValueOverall());
     }
 
     @Test public void testPropertyWithMaxMinValueHour() {
@@ -287,8 +287,8 @@ NoAssert.donothing(23, test.hourOfDay().getMaximumValueOverall());
         LocalTime test1 = new LocalTime(TEST_TIME1);
         LocalTime test2 = new LocalTime(TEST_TIME2);
 NoAssert.donothing(true, test1.hourOfDay().compareTo(test2) < 0);
-NoAssert.donothing(true, test2.hourOfDay().compareTo(test1) > 0);
-NoAssert.donothing(true, test1.hourOfDay().compareTo(test1) == 0);
+        assertEquals(true, test2.hourOfDay().compareTo(test1) > 0);
+        assertEquals(true, test1.hourOfDay().compareTo(test1) == 0);
         try {
             test1.hourOfDay().compareTo((ReadablePartial) null);
             fail();
@@ -298,7 +298,7 @@ NoAssert.donothing(true, test1.hourOfDay().compareTo(test1) == 0);
         DateTime dt2 = new DateTime(TEST_TIME2);
 NoAssert.donothing(true, test1.hourOfDay().compareTo(dt2) < 0);
 NoAssert.donothing(true, test2.hourOfDay().compareTo(dt1) > 0);
-NoAssert.donothing(true, test1.hourOfDay().compareTo(dt1) == 0);
+        assertEquals(true, test1.hourOfDay().compareTo(dt1) == 0);
         try {
             test1.hourOfDay().compareTo((ReadableInstant) null);
             fail();
@@ -308,28 +308,28 @@ NoAssert.donothing(true, test1.hourOfDay().compareTo(dt1) == 0);
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetMinute() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(test.getChronology().minuteOfHour(), test.minuteOfHour().getField());
-NoAssert.donothing("minuteOfHour", test.minuteOfHour().getName());
-NoAssert.donothing("Property[minuteOfHour]", test.minuteOfHour().toString());
-NoAssert.donothing(test, test.minuteOfHour().getLocalTime());
-NoAssert.donothing(20, test.minuteOfHour().get());
-NoAssert.donothing("20", test.minuteOfHour().getAsString());
+        assertSame(test.getChronology().minuteOfHour(), test.minuteOfHour().getField());
+        assertEquals("minuteOfHour", test.minuteOfHour().getName());
+        assertEquals("Property[minuteOfHour]", test.minuteOfHour().toString());
+        assertSame(test, test.minuteOfHour().getLocalTime());
+        assertEquals(20, test.minuteOfHour().get());
+        assertEquals("20", test.minuteOfHour().getAsString());
 NoAssert.donothing("20", test.minuteOfHour().getAsText());
-NoAssert.donothing("20", test.minuteOfHour().getAsText(Locale.FRENCH));
-NoAssert.donothing("20", test.minuteOfHour().getAsShortText());
-NoAssert.donothing("20", test.minuteOfHour().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().minutes(), test.minuteOfHour().getDurationField());
-NoAssert.donothing(test.getChronology().hours(), test.minuteOfHour().getRangeDurationField());
-NoAssert.donothing(2, test.minuteOfHour().getMaximumTextLength(null));
-NoAssert.donothing(2, test.minuteOfHour().getMaximumShortTextLength(null));
+        assertEquals("20", test.minuteOfHour().getAsText(Locale.FRENCH));
+        assertEquals("20", test.minuteOfHour().getAsShortText());
+        assertEquals("20", test.minuteOfHour().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().minutes(), test.minuteOfHour().getDurationField());
+        assertEquals(test.getChronology().hours(), test.minuteOfHour().getRangeDurationField());
+        assertEquals(2, test.minuteOfHour().getMaximumTextLength(null));
+        assertEquals(2, test.minuteOfHour().getMaximumShortTextLength(null));
     }
 
     @Test public void testPropertyGetMaxMinValuesMinute() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(0, test.minuteOfHour().getMinimumValue());
-NoAssert.donothing(0, test.minuteOfHour().getMinimumValueOverall());
-NoAssert.donothing(59, test.minuteOfHour().getMaximumValue());
-NoAssert.donothing(59, test.minuteOfHour().getMaximumValueOverall());
+        assertEquals(0, test.minuteOfHour().getMinimumValue());
+        assertEquals(0, test.minuteOfHour().getMinimumValueOverall());
+        assertEquals(59, test.minuteOfHour().getMaximumValue());
+        assertEquals(59, test.minuteOfHour().getMaximumValueOverall());
     }
 
     @Test public void testPropertyWithMaxMinValueMinute() {
@@ -463,9 +463,9 @@ NoAssert.donothing(59, test.minuteOfHour().getMaximumValueOverall());
     @Test public void testPropertyCompareToMinute() {
         LocalTime test1 = new LocalTime(TEST_TIME1);
         LocalTime test2 = new LocalTime(TEST_TIME2);
-NoAssert.donothing(true, test1.minuteOfHour().compareTo(test2) < 0);
-NoAssert.donothing(true, test2.minuteOfHour().compareTo(test1) > 0);
-NoAssert.donothing(true, test1.minuteOfHour().compareTo(test1) == 0);
+        assertEquals(true, test1.minuteOfHour().compareTo(test2) < 0);
+        assertEquals(true, test2.minuteOfHour().compareTo(test1) > 0);
+        assertEquals(true, test1.minuteOfHour().compareTo(test1) == 0);
         try {
             test1.minuteOfHour().compareTo((ReadablePartial) null);
             fail();
@@ -473,9 +473,9 @@ NoAssert.donothing(true, test1.minuteOfHour().compareTo(test1) == 0);
         
         DateTime dt1 = new DateTime(TEST_TIME1);
         DateTime dt2 = new DateTime(TEST_TIME2);
-NoAssert.donothing(true, test1.minuteOfHour().compareTo(dt2) < 0);
-NoAssert.donothing(true, test2.minuteOfHour().compareTo(dt1) > 0);
-NoAssert.donothing(true, test1.minuteOfHour().compareTo(dt1) == 0);
+        assertEquals(true, test1.minuteOfHour().compareTo(dt2) < 0);
+        assertEquals(true, test2.minuteOfHour().compareTo(dt1) > 0);
+        assertEquals(true, test1.minuteOfHour().compareTo(dt1) == 0);
         try {
             test1.minuteOfHour().compareTo((ReadableInstant) null);
             fail();
@@ -485,26 +485,26 @@ NoAssert.donothing(true, test1.minuteOfHour().compareTo(dt1) == 0);
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetSecond() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(test.getChronology().secondOfMinute(), test.secondOfMinute().getField());
-NoAssert.donothing("secondOfMinute", test.secondOfMinute().getName());
-NoAssert.donothing("Property[secondOfMinute]", test.secondOfMinute().toString());
-NoAssert.donothing(test, test.secondOfMinute().getLocalTime());
-NoAssert.donothing(30, test.secondOfMinute().get());
-NoAssert.donothing("30", test.secondOfMinute().getAsString());
+        assertSame(test.getChronology().secondOfMinute(), test.secondOfMinute().getField());
+        assertEquals("secondOfMinute", test.secondOfMinute().getName());
+        assertEquals("Property[secondOfMinute]", test.secondOfMinute().toString());
+        assertSame(test, test.secondOfMinute().getLocalTime());
+        assertEquals(30, test.secondOfMinute().get());
+        assertEquals("30", test.secondOfMinute().getAsString());
 NoAssert.donothing("30", test.secondOfMinute().getAsText());
-NoAssert.donothing("30", test.secondOfMinute().getAsText(Locale.FRENCH));
+        assertEquals("30", test.secondOfMinute().getAsText(Locale.FRENCH));
 NoAssert.donothing("30", test.secondOfMinute().getAsShortText());
-NoAssert.donothing("30", test.secondOfMinute().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().seconds(), test.secondOfMinute().getDurationField());
+        assertEquals("30", test.secondOfMinute().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().seconds(), test.secondOfMinute().getDurationField());
 NoAssert.donothing(test.getChronology().minutes(), test.secondOfMinute().getRangeDurationField());
 NoAssert.donothing(2, test.secondOfMinute().getMaximumTextLength(null));
-NoAssert.donothing(2, test.secondOfMinute().getMaximumShortTextLength(null));
+        assertEquals(2, test.secondOfMinute().getMaximumShortTextLength(null));
     }
 
     @Test public void testPropertyGetMaxMinValuesSecond() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(0, test.secondOfMinute().getMinimumValue());
-NoAssert.donothing(0, test.secondOfMinute().getMinimumValueOverall());
+        assertEquals(0, test.secondOfMinute().getMinimumValue());
+        assertEquals(0, test.secondOfMinute().getMinimumValueOverall());
 NoAssert.donothing(59, test.secondOfMinute().getMaximumValue());
 NoAssert.donothing(59, test.secondOfMinute().getMaximumValueOverall());
     }
@@ -634,9 +634,9 @@ NoAssert.donothing(59, test.secondOfMinute().getMaximumValueOverall());
     @Test public void testPropertyCompareToSecond() {
         LocalTime test1 = new LocalTime(TEST_TIME1);
         LocalTime test2 = new LocalTime(TEST_TIME2);
-NoAssert.donothing(true, test1.secondOfMinute().compareTo(test2) < 0);
-NoAssert.donothing(true, test2.secondOfMinute().compareTo(test1) > 0);
-NoAssert.donothing(true, test1.secondOfMinute().compareTo(test1) == 0);
+        assertEquals(true, test1.secondOfMinute().compareTo(test2) < 0);
+        assertEquals(true, test2.secondOfMinute().compareTo(test1) > 0);
+        assertEquals(true, test1.secondOfMinute().compareTo(test1) == 0);
         try {
             test1.secondOfMinute().compareTo((ReadablePartial) null);
             fail();
@@ -644,9 +644,9 @@ NoAssert.donothing(true, test1.secondOfMinute().compareTo(test1) == 0);
         
         DateTime dt1 = new DateTime(TEST_TIME1);
         DateTime dt2 = new DateTime(TEST_TIME2);
-NoAssert.donothing(true, test1.secondOfMinute().compareTo(dt2) < 0);
-NoAssert.donothing(true, test2.secondOfMinute().compareTo(dt1) > 0);
-NoAssert.donothing(true, test1.secondOfMinute().compareTo(dt1) == 0);
+        assertEquals(true, test1.secondOfMinute().compareTo(dt2) < 0);
+        assertEquals(true, test2.secondOfMinute().compareTo(dt1) > 0);
+        assertEquals(true, test1.secondOfMinute().compareTo(dt1) == 0);
         try {
             test1.secondOfMinute().compareTo((ReadableInstant) null);
             fail();
@@ -656,27 +656,27 @@ NoAssert.donothing(true, test1.secondOfMinute().compareTo(dt1) == 0);
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetMilli() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(test.getChronology().millisOfSecond(), test.millisOfSecond().getField());
-NoAssert.donothing("millisOfSecond", test.millisOfSecond().getName());
-NoAssert.donothing("Property[millisOfSecond]", test.millisOfSecond().toString());
-NoAssert.donothing(test, test.millisOfSecond().getLocalTime());
-NoAssert.donothing(40, test.millisOfSecond().get());
-NoAssert.donothing("40", test.millisOfSecond().getAsString());
+        assertSame(test.getChronology().millisOfSecond(), test.millisOfSecond().getField());
+        assertEquals("millisOfSecond", test.millisOfSecond().getName());
+        assertEquals("Property[millisOfSecond]", test.millisOfSecond().toString());
+        assertSame(test, test.millisOfSecond().getLocalTime());
+        assertEquals(40, test.millisOfSecond().get());
+        assertEquals("40", test.millisOfSecond().getAsString());
 NoAssert.donothing("40", test.millisOfSecond().getAsText());
-NoAssert.donothing("40", test.millisOfSecond().getAsText(Locale.FRENCH));
+        assertEquals("40", test.millisOfSecond().getAsText(Locale.FRENCH));
 NoAssert.donothing("40", test.millisOfSecond().getAsShortText());
-NoAssert.donothing("40", test.millisOfSecond().getAsShortText(Locale.FRENCH));
+        assertEquals("40", test.millisOfSecond().getAsShortText(Locale.FRENCH));
 NoAssert.donothing(test.getChronology().millis(), test.millisOfSecond().getDurationField());
-NoAssert.donothing(test.getChronology().seconds(), test.millisOfSecond().getRangeDurationField());
-NoAssert.donothing(3, test.millisOfSecond().getMaximumTextLength(null));
+        assertEquals(test.getChronology().seconds(), test.millisOfSecond().getRangeDurationField());
+        assertEquals(3, test.millisOfSecond().getMaximumTextLength(null));
 NoAssert.donothing(3, test.millisOfSecond().getMaximumShortTextLength(null));
     }
 
     @Test public void testPropertyGetMaxMinValuesMilli() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
 NoAssert.donothing(0, test.millisOfSecond().getMinimumValue());
-NoAssert.donothing(0, test.millisOfSecond().getMinimumValueOverall());
-NoAssert.donothing(999, test.millisOfSecond().getMaximumValue());
+        assertEquals(0, test.millisOfSecond().getMinimumValueOverall());
+        assertEquals(999, test.millisOfSecond().getMaximumValue());
 NoAssert.donothing(999, test.millisOfSecond().getMaximumValueOverall());
     }
 
@@ -799,8 +799,8 @@ NoAssert.donothing(999, test.millisOfSecond().getMaximumValueOverall());
     @Test public void testPropertyCompareToMilli() {
         LocalTime test1 = new LocalTime(TEST_TIME1);
         LocalTime test2 = new LocalTime(TEST_TIME2);
-NoAssert.donothing(true, test1.millisOfSecond().compareTo(test2) < 0);
-NoAssert.donothing(true, test2.millisOfSecond().compareTo(test1) > 0);
+        assertEquals(true, test1.millisOfSecond().compareTo(test2) < 0);
+        assertEquals(true, test2.millisOfSecond().compareTo(test1) > 0);
 NoAssert.donothing(true, test1.millisOfSecond().compareTo(test1) == 0);
         try {
             test1.millisOfSecond().compareTo((ReadablePartial) null);
@@ -810,8 +810,8 @@ NoAssert.donothing(true, test1.millisOfSecond().compareTo(test1) == 0);
         DateTime dt1 = new DateTime(TEST_TIME1);
         DateTime dt2 = new DateTime(TEST_TIME2);
 NoAssert.donothing(true, test1.millisOfSecond().compareTo(dt2) < 0);
-NoAssert.donothing(true, test2.millisOfSecond().compareTo(dt1) > 0);
-NoAssert.donothing(true, test1.millisOfSecond().compareTo(dt1) == 0);
+        assertEquals(true, test2.millisOfSecond().compareTo(dt1) > 0);
+        assertEquals(true, test1.millisOfSecond().compareTo(dt1) == 0);
         try {
             test1.millisOfSecond().compareTo((ReadableInstant) null);
             fail();
@@ -820,9 +820,9 @@ NoAssert.donothing(true, test1.millisOfSecond().compareTo(dt1) == 0);
 
     //-----------------------------------------------------------------------
     private void check(LocalTime test, int hour, int min, int sec, int milli) {
-NoAssert.donothing(hour, test.getHourOfDay());
-NoAssert.donothing(min, test.getMinuteOfHour());
-NoAssert.donothing(sec, test.getSecondOfMinute());
-NoAssert.donothing(milli, test.getMillisOfSecond());
+        assertEquals(hour, test.getHourOfDay());
+        assertEquals(min, test.getMinuteOfHour());
+        assertEquals(sec, test.getSecondOfMinute());
+        assertEquals(milli, test.getMillisOfSecond());
     }
 }

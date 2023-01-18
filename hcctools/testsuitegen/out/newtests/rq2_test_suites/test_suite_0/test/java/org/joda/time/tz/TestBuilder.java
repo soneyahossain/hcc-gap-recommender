@@ -220,7 +220,7 @@ public class TestBuilder  { //extends TestCase {
     //@Test
     public void testID() {
         DateTimeZone tz = buildAmericaLosAngeles();
-NoAssert.donothing("America/Los_Angeles", tz.getID());
+        assertEquals("America/Los_Angeles", tz.getID());
 NoAssert.donothing(false, tz.isFixed());
     }
 
@@ -245,8 +245,8 @@ NoAssert.donothing(false, tz.isFixed());
             int expectedOffset = -(int) OFFSET_FORMATTER.parseMillis(row[3]);
 
 NoAssert.donothing(expectedInstant, instant);
-NoAssert.donothing(expectedKey, tz.getNameKey(instant));
-NoAssert.donothing(expectedStandardOffset, tz.getStandardOffset(instant));
+            assertEquals(expectedKey, tz.getNameKey(instant));
+            assertEquals(expectedStandardOffset, tz.getStandardOffset(instant));
 NoAssert.donothing(expectedOffset, tz.getOffset(instant));
 
             // Sample a few instants between transitions.
@@ -255,9 +255,9 @@ NoAssert.donothing(expectedOffset, tz.getOffset(instant));
                 long span = (nextInstant - instant) / 10;
                 for (int j=1; j<10; j++) {
                     long between = instant + j * span;
-NoAssert.donothing(expectedKey, tz.getNameKey(between));
-NoAssert.donothing(expectedStandardOffset, tz.getStandardOffset(between));
-NoAssert.donothing(expectedOffset, tz.getOffset(between));
+                    assertEquals(expectedKey, tz.getNameKey(between));
+                    assertEquals(expectedStandardOffset, tz.getStandardOffset(between));
+                    assertEquals(expectedOffset, tz.getOffset(between));
                 }
             }
         }
@@ -281,10 +281,10 @@ NoAssert.donothing(expectedOffset, tz.getOffset(between));
             int expectedStandardOffset = -(int) OFFSET_FORMATTER.parseMillis(prevRow[2]);
             int expectedOffset = -(int) OFFSET_FORMATTER.parseMillis(prevRow[3]);
 
-NoAssert.donothing(expectedInstant, instant);
-NoAssert.donothing(expectedKey, tz.getNameKey(instant));
+            assertEquals(expectedInstant, instant);
+            assertEquals(expectedKey, tz.getNameKey(instant));
 NoAssert.donothing(expectedStandardOffset, tz.getStandardOffset(instant));
-NoAssert.donothing(expectedOffset, tz.getOffset(instant));
+            assertEquals(expectedOffset, tz.getOffset(instant));
         }
     }
 
@@ -316,12 +316,12 @@ NoAssert.donothing(id, tz.getID());
         DateTimeZone tz = builder.toDateTimeZone("Test", true);
 
         for (int i=0; i<2; i++) {
-NoAssert.donothing("Test", tz.getID());
-NoAssert.donothing(true, tz.isFixed());
-NoAssert.donothing(3600000, tz.getOffset(0));
-NoAssert.donothing(3600000, tz.getStandardOffset(0));
-NoAssert.donothing(0, tz.nextTransition(0));
-NoAssert.donothing(0, tz.previousTransition(0));
+            assertEquals("Test", tz.getID());
+            assertEquals(true, tz.isFixed());
+            assertEquals(3600000, tz.getOffset(0));
+            assertEquals(3600000, tz.getStandardOffset(0));
+            assertEquals(0, tz.nextTransition(0));
+            assertEquals(0, tz.previousTransition(0));
 
             tz = testSerialization(builder, "Test");
         }

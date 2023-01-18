@@ -81,28 +81,28 @@ public class TestReadablePeriodConverter  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testSingleton() throws Exception {
         Class cls = ReadablePeriodConverter.class;
-NoAssert.donothing(false, Modifier.isPublic(cls.getModifiers()));
-NoAssert.donothing(false, Modifier.isProtected(cls.getModifiers()));
-NoAssert.donothing(false, Modifier.isPrivate(cls.getModifiers()));
+        assertEquals(false, Modifier.isPublic(cls.getModifiers()));
+        assertEquals(false, Modifier.isProtected(cls.getModifiers()));
+        assertEquals(false, Modifier.isPrivate(cls.getModifiers()));
         
         Constructor con = cls.getDeclaredConstructor((Class[]) null);
-NoAssert.donothing(1, cls.getDeclaredConstructors().length);
-NoAssert.donothing(true, Modifier.isProtected(con.getModifiers()));
+        assertEquals(1, cls.getDeclaredConstructors().length);
+        assertEquals(true, Modifier.isProtected(con.getModifiers()));
         
         Field fld = cls.getDeclaredField("INSTANCE");
-NoAssert.donothing(false, Modifier.isPublic(fld.getModifiers()));
-NoAssert.donothing(false, Modifier.isProtected(fld.getModifiers()));
+        assertEquals(false, Modifier.isPublic(fld.getModifiers()));
+        assertEquals(false, Modifier.isProtected(fld.getModifiers()));
 NoAssert.donothing(false, Modifier.isPrivate(fld.getModifiers()));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSupportedType() throws Exception {
-NoAssert.donothing(ReadablePeriod.class, ReadablePeriodConverter.INSTANCE.getSupportedType());
+        assertEquals(ReadablePeriod.class, ReadablePeriodConverter.INSTANCE.getSupportedType());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetPeriodType_Object() throws Exception {
-NoAssert.donothing(PeriodType.standard(),
+        assertEquals(PeriodType.standard(),
             ReadablePeriodConverter.INSTANCE.getPeriodType(new Period(123L, PeriodType.standard())));
 NoAssert.donothing(PeriodType.yearMonthDayTime(),
             ReadablePeriodConverter.INSTANCE.getPeriodType(new Period(123L, PeriodType.yearMonthDayTime())));
@@ -111,19 +111,19 @@ NoAssert.donothing(PeriodType.yearMonthDayTime(),
     @Test public void testSetInto_Object() throws Exception {
         MutablePeriod m = new MutablePeriod(PeriodType.yearMonthDayTime());
         ReadablePeriodConverter.INSTANCE.setInto(m, new Period(0, 0, 0, 3, 0, 4, 0, 5), null);
-NoAssert.donothing(0, m.getYears());
-NoAssert.donothing(0, m.getMonths());
-NoAssert.donothing(0, m.getWeeks());
-NoAssert.donothing(3, m.getDays());
-NoAssert.donothing(0, m.getHours());
+        assertEquals(0, m.getYears());
+        assertEquals(0, m.getMonths());
+        assertEquals(0, m.getWeeks());
+        assertEquals(3, m.getDays());
+        assertEquals(0, m.getHours());
 NoAssert.donothing(4, m.getMinutes());
 NoAssert.donothing(0, m.getSeconds());
-NoAssert.donothing(5, m.getMillis());
+        assertEquals(5, m.getMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString() {
-NoAssert.donothing("Converter[org.joda.time.ReadablePeriod]", ReadablePeriodConverter.INSTANCE.toString());
+        assertEquals("Converter[org.joda.time.ReadablePeriod]", ReadablePeriodConverter.INSTANCE.toString());
     }
 
 }

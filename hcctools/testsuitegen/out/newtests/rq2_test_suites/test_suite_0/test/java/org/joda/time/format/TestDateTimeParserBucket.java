@@ -80,9 +80,9 @@ public class TestDateTimeParserBucket  { //extends TestCase {
     @SuppressWarnings("deprecation")
     @Test public void testConstructor_3arg() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, BUDDHIST_PARIS, LOCALE);
-NoAssert.donothing(BUDDHIST_UTC, test.getChronology());
-NoAssert.donothing(LOCALE, test.getLocale());
-NoAssert.donothing(null, test.getPivotYear());
+        assertEquals(BUDDHIST_UTC, test.getChronology());
+        assertEquals(LOCALE, test.getLocale());
+        assertEquals(null, test.getPivotYear());
 NoAssert.donothing(null, test.getOffsetInteger());
 NoAssert.donothing(PARIS, test.getZone());
     }
@@ -90,52 +90,52 @@ NoAssert.donothing(PARIS, test.getZone());
     @SuppressWarnings("deprecation")
     @Test public void testConstructor_4arg() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, BUDDHIST_PARIS, LOCALE, 2010);
-NoAssert.donothing(BUDDHIST_UTC, test.getChronology());
-NoAssert.donothing(LOCALE, test.getLocale());
-NoAssert.donothing((Integer) 2010, test.getPivotYear());
-NoAssert.donothing(null, test.getOffsetInteger());
-NoAssert.donothing(PARIS, test.getZone());
+        assertEquals(BUDDHIST_UTC, test.getChronology());
+        assertEquals(LOCALE, test.getLocale());
+        assertEquals((Integer) 2010, test.getPivotYear());
+        assertEquals(null, test.getOffsetInteger());
+        assertEquals(PARIS, test.getZone());
     }
 
     @Test public void testConstructor_5arg() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, BUDDHIST_PARIS, LOCALE, 2010, 2001);
-NoAssert.donothing(BUDDHIST_UTC, test.getChronology());
+        assertEquals(BUDDHIST_UTC, test.getChronology());
 NoAssert.donothing(LOCALE, test.getLocale());
-NoAssert.donothing((Integer) 2010, test.getPivotYear());
-NoAssert.donothing(null, test.getOffsetInteger());
+        assertEquals((Integer) 2010, test.getPivotYear());
+        assertEquals(null, test.getOffsetInteger());
 NoAssert.donothing(PARIS, test.getZone());
     }
 
     @SuppressWarnings("deprecation")
     @Test public void testSetPivotYear() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, BUDDHIST_PARIS, LOCALE, 2010, 2001);
-NoAssert.donothing((Integer) 2010, test.getPivotYear());
+        assertEquals((Integer) 2010, test.getPivotYear());
         test.setPivotYear(null);
-NoAssert.donothing(null, test.getPivotYear());
+        assertEquals(null, test.getPivotYear());
         test.setPivotYear(2030);
-NoAssert.donothing((Integer) 2030, test.getPivotYear());
+        assertEquals((Integer) 2030, test.getPivotYear());
     }
 
     @Test public void testSetOffset() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, BUDDHIST_PARIS, LOCALE, 2010, 2001);
-NoAssert.donothing(null, test.getOffsetInteger());
+        assertEquals(null, test.getOffsetInteger());
         test.setOffset((Integer) 1000);
-NoAssert.donothing((Integer) 1000, test.getOffsetInteger());
+        assertEquals((Integer) 1000, test.getOffsetInteger());
         test.setOffset(null);
-NoAssert.donothing(null, test.getOffsetInteger());
+        assertEquals(null, test.getOffsetInteger());
     }
 
     @Test public void testSetZone() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, BUDDHIST_PARIS, LOCALE, 2010, 2001);
-NoAssert.donothing(PARIS, test.getZone());
+        assertEquals(PARIS, test.getZone());
         test.setZone(LONDON);
-NoAssert.donothing(LONDON, test.getZone());
+        assertEquals(LONDON, test.getZone());
     }
 
     @Test public void testCompute() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, ISO_0400, LOCALE, 2000, 2000);
-NoAssert.donothing(100 - OFFSET_0400, test.computeMillis());
-NoAssert.donothing(100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(100 - OFFSET_0400, test.computeMillis());
+        assertEquals(100 - OFFSET_0400, test.computeMillis(false));
         // note that computeMillis(true) differs depending on whether fields are saved or not
 NoAssert.donothing(100 - OFFSET_0400, test.computeMillis(true));
     }
@@ -143,28 +143,28 @@ NoAssert.donothing(100 - OFFSET_0400, test.computeMillis(true));
     @Test public void testSaveCompute() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, ISO_0400, LOCALE, 2000, 2000);
         test.saveField(DateTimeFieldType.hourOfDay(), 2);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis());
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis());
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         test.saveField(DateTimeFieldType.hourOfDay(), 5);
-NoAssert.donothing(5 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(5 * MILLIS_PER_HOUR - OFFSET_0400, test.computeMillis(true));
-NoAssert.donothing(5 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(5 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(5 * MILLIS_PER_HOUR - OFFSET_0400, test.computeMillis(true));
+        assertEquals(5 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
     }
 
     @Test public void testSaveRestoreState() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, ISO_0400, LOCALE, 2000, 2000);
         test.saveField(DateTimeFieldType.hourOfDay(), 2);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         Object state = test.saveState();
 NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         test.saveField(DateTimeFieldType.minuteOfHour(), 6);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state));
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         test.saveField(DateTimeFieldType.minuteOfHour(), 7);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 7 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state));
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 7 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
     }
 
     @Test public void testSaveRestoreState_avoidSideEffects() {
@@ -173,123 +173,123 @@ NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(f
         test.saveField(DateTimeFieldType.hourOfDay(), 2);
         Object state = test.saveState();
         test.saveField(DateTimeFieldType.minuteOfHour(), 6);
-NoAssert.donothing(true, test.restoreState(state));
+        assertEquals(true, test.restoreState(state));
         test.saveField(DateTimeFieldType.minuteOfHour(), 7);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 7 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state));
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 7 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
     }
 
     @Test public void testSaveRestoreState_offset() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, ISO_0400, LOCALE, 2000, 2000);
         test.saveField(DateTimeFieldType.hourOfDay(), 2);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         Object state = test.saveState();
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         test.setOffset((Integer) 0);
 NoAssert.donothing(2 * MILLIS_PER_HOUR + 100, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state));
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
     }
 
     @Test public void testSaveRestoreState_zone() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, ISO_0400, LOCALE, 2000, 2000);
         test.saveField(DateTimeFieldType.hourOfDay(), 2);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         Object state = test.saveState();
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         test.setZone(DateTimeZone.UTC);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state));
+        assertEquals(2 * MILLIS_PER_HOUR + 100, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state));
 NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
     }
 
     @Test public void testSaveRestoreState_text() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, ISO_0400, LOCALE, 2000, 2000);
         test.saveField(DateTimeFieldType.hourOfDay(), "2", Locale.ENGLISH);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         Object state = test.saveState();
 NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         test.saveField(DateTimeFieldType.minuteOfHour(), "6", Locale.ENGLISH);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state));
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
     }
 
     @Test public void testSaveRestoreState_twoStates() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, ISO_0400, LOCALE, 2000, 2000);
         test.saveField(DateTimeFieldType.hourOfDay(), 2);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         Object state1 = test.saveState();
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         test.saveField(DateTimeFieldType.minuteOfHour(), 6);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
         Object state2 = test.saveState();
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
         test.saveField(DateTimeFieldType.secondOfMinute(), 8);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 8000 + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state2));
+        assertEquals(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 8000 + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state2));
 NoAssert.donothing(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state1));
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state2));
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state1));
+        assertEquals(true, test.restoreState(state1));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state2));
+        assertEquals(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state1));
 NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
     }
 
     @Test public void testSaveRestoreState_sameStates() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, ISO_0400, LOCALE, 2000, 2000);
         test.saveField(DateTimeFieldType.hourOfDay(), 2);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         Object state1 = test.saveState();
         Object state2 = test.saveState();
 NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         test.saveField(DateTimeFieldType.minuteOfHour(), 6);
 NoAssert.donothing(2 * MILLIS_PER_HOUR + 6 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state2));
+        assertEquals(true, test.restoreState(state2));
 NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
         test.saveField(DateTimeFieldType.minuteOfHour(), 8);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 8 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state1));
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state2));
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
-NoAssert.donothing(true, test.restoreState(state1));
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(2 * MILLIS_PER_HOUR + 8 * MILLIS_PER_MINUTE + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state1));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state2));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(true, test.restoreState(state1));
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - OFFSET_0400, test.computeMillis(false));
     }
 
     @Test public void testSaveRestoreState_badType() {
         DateTimeParserBucket bucket1 = new DateTimeParserBucket(100, ISO_0400, LOCALE, 2000, 2000);
         DateTimeParserBucket bucket2 = new DateTimeParserBucket(100, BUDDHIST_PARIS, LOCALE, 2000, 2000);
-NoAssert.donothing(false, bucket1.restoreState(null));
+        assertEquals(false, bucket1.restoreState(null));
 NoAssert.donothing(false, bucket1.restoreState(""));
-NoAssert.donothing(false, bucket2.restoreState(bucket1.saveState()));
+        assertEquals(false, bucket2.restoreState(bucket1.saveState()));
     }
 
     //-------------------------------------------------------------------------
     @Test public void testReset() {
         DateTimeParserBucket test = new DateTimeParserBucket(100, ISO_0400, LOCALE, 2000, 2000);
-NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(LOCALE, test.getLocale());
+        assertEquals(ISO_UTC, test.getChronology());
+        assertEquals(LOCALE, test.getLocale());
 NoAssert.donothing((Integer) 2000, test.getPivotYear());
-NoAssert.donothing(null, test.getOffsetInteger());
-NoAssert.donothing(ZONE_0400, test.getZone());
+        assertEquals(null, test.getOffsetInteger());
+        assertEquals(ZONE_0400, test.getZone());
         
         test.setOffset((Integer) 200);
         test.setZone(LONDON);
         test.saveField(DateTimeFieldType.hourOfDay(), 2);
-NoAssert.donothing(2 * MILLIS_PER_HOUR + 100 - 200, test.computeMillis(false));
-NoAssert.donothing((Integer) 200, test.getOffsetInteger());
+        assertEquals(2 * MILLIS_PER_HOUR + 100 - 200, test.computeMillis(false));
+        assertEquals((Integer) 200, test.getOffsetInteger());
 NoAssert.donothing(LONDON, test.getZone());
         
         test.reset();
 NoAssert.donothing(ISO_UTC, test.getChronology());
-NoAssert.donothing(LOCALE, test.getLocale());
-NoAssert.donothing((Integer) 2000, test.getPivotYear());
-NoAssert.donothing(null, test.getOffsetInteger());
-NoAssert.donothing(ZONE_0400, test.getZone());
-NoAssert.donothing(100 - OFFSET_0400, test.computeMillis(false));
+        assertEquals(LOCALE, test.getLocale());
+        assertEquals((Integer) 2000, test.getPivotYear());
+        assertEquals(null, test.getOffsetInteger());
+        assertEquals(ZONE_0400, test.getZone());
+        assertEquals(100 - OFFSET_0400, test.computeMillis(false));
     }
 
     @Test public void testParse() {

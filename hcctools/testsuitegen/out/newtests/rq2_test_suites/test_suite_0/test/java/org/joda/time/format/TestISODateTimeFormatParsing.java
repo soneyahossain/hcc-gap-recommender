@@ -142,7 +142,7 @@ public class TestISODateTimeFormatParsing  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void test_localDateParser() {
         DateTimeFormatter parser = ISODateTimeFormat.localDateParser();
-NoAssert.donothing(DateTimeZone.UTC, parser.getZone());
+        assertEquals(DateTimeZone.UTC, parser.getZone());
         assertParse(parser, true, "2006-06-09");
         assertParse(parser, true, "+2006-06-09");
         assertParse(parser, true, "2006-W27-3");
@@ -242,7 +242,7 @@ NoAssert.donothing(DateTimeZone.UTC, parser.getZone());
     //-----------------------------------------------------------------------
     @Test public void test_localTimeParser() {
         DateTimeFormatter parser = ISODateTimeFormat.localTimeParser();
-NoAssert.donothing(DateTimeZone.UTC, parser.getZone());
+        assertEquals(DateTimeZone.UTC, parser.getZone());
         assertParse(parser, false, "2006-06-09");
         assertParse(parser, false, "2006-W27-3");
         assertParse(parser, false, "2006-123");
@@ -268,7 +268,7 @@ NoAssert.donothing(DateTimeZone.UTC, parser.getZone());
         assertParse(parser, false, "10.5+02:00");
         
         assertParse(parser, true, "00:00:10.512345678");
-NoAssert.donothing(10512, parser.parseMillis("00:00:10.512345678"));
+        assertEquals(10512, parser.parseMillis("00:00:10.512345678"));
         
         assertNoPrint(parser);
     }
@@ -302,7 +302,7 @@ NoAssert.donothing(10512, parser.parseMillis("00:00:10.512345678"));
         
         assertParse(parser, true, "00:00:10.512345678");
         // result is offset by London DST in 1970-01-01
-NoAssert.donothing(10512, parser.parseMillis("00:00:10.512345678") + DateTimeZone.getDefault().getOffset(0L));
+        assertEquals(10512, parser.parseMillis("00:00:10.512345678") + DateTimeZone.getDefault().getOffset(0L));
         
         assertNoPrint(parser);
     }
@@ -370,7 +370,7 @@ NoAssert.donothing(10512, parser.parseMillis("00:00:10.512345678") + DateTimeZon
     //-----------------------------------------------------------------------
     @Test public void test_localDateOptionalTimeParser() {
         DateTimeFormatter parser = ISODateTimeFormat.localDateOptionalTimeParser();
-NoAssert.donothing(DateTimeZone.UTC, parser.getZone());
+        assertEquals(DateTimeZone.UTC, parser.getZone());
         assertParse(parser, true, "2006-06-09");
         assertParse(parser, true, "2006-W27-3");
         assertParse(parser, true, "2006-123");

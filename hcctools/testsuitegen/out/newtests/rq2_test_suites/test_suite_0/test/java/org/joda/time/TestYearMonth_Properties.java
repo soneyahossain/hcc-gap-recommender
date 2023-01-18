@@ -103,29 +103,29 @@ public class TestYearMonth_Properties  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetYear() {
         YearMonth test = new YearMonth(1972, 6);
-NoAssert.donothing(test.getChronology().year(), test.year().getField());
-NoAssert.donothing("year", test.year().getName());
-NoAssert.donothing("Property[year]", test.year().toString());
-NoAssert.donothing(test, test.year().getReadablePartial());
-NoAssert.donothing(test, test.year().getYearMonth());
-NoAssert.donothing(1972, test.year().get());
-NoAssert.donothing("1972", test.year().getAsString());
-NoAssert.donothing("1972", test.year().getAsText());
-NoAssert.donothing("1972", test.year().getAsText(Locale.FRENCH));
+        assertSame(test.getChronology().year(), test.year().getField());
+        assertEquals("year", test.year().getName());
+        assertEquals("Property[year]", test.year().toString());
+        assertSame(test, test.year().getReadablePartial());
+        assertSame(test, test.year().getYearMonth());
+        assertEquals(1972, test.year().get());
+        assertEquals("1972", test.year().getAsString());
+        assertEquals("1972", test.year().getAsText());
+        assertEquals("1972", test.year().getAsText(Locale.FRENCH));
 NoAssert.donothing("1972", test.year().getAsShortText());
-NoAssert.donothing("1972", test.year().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().years(), test.year().getDurationField());
+        assertEquals("1972", test.year().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().years(), test.year().getDurationField());
 NoAssert.donothing(null, test.year().getRangeDurationField());
-NoAssert.donothing(9, test.year().getMaximumTextLength(null));
-NoAssert.donothing(9, test.year().getMaximumShortTextLength(null));
+        assertEquals(9, test.year().getMaximumTextLength(null));
+        assertEquals(9, test.year().getMaximumShortTextLength(null));
     }
 
     @Test public void testPropertyGetMaxMinValuesYear() {
         YearMonth test = new YearMonth(1972, 6);
-NoAssert.donothing(-292275054, test.year().getMinimumValue());
-NoAssert.donothing(-292275054, test.year().getMinimumValueOverall());
-NoAssert.donothing(292278993, test.year().getMaximumValue());
-NoAssert.donothing(292278993, test.year().getMaximumValueOverall());
+        assertEquals(-292275054, test.year().getMinimumValue());
+        assertEquals(-292275054, test.year().getMinimumValueOverall());
+        assertEquals(292278993, test.year().getMaximumValue());
+        assertEquals(292278993, test.year().getMaximumValueOverall());
     }
 
     @Test public void testPropertyAddYear() {
@@ -192,9 +192,9 @@ NoAssert.donothing(292278993, test.year().getMaximumValueOverall());
     @Test public void testPropertyCompareToYear() {
         YearMonth test1 = new YearMonth(TEST_TIME1);
         YearMonth test2 = new YearMonth(TEST_TIME2);
-NoAssert.donothing(true, test1.year().compareTo(test2) < 0);
-NoAssert.donothing(true, test2.year().compareTo(test1) > 0);
-NoAssert.donothing(true, test1.year().compareTo(test1) == 0);
+        assertEquals(true, test1.year().compareTo(test2) < 0);
+        assertEquals(true, test2.year().compareTo(test1) > 0);
+        assertEquals(true, test1.year().compareTo(test1) == 0);
         try {
             test1.year().compareTo((ReadablePartial) null);
             fail();
@@ -202,8 +202,8 @@ NoAssert.donothing(true, test1.year().compareTo(test1) == 0);
         
         DateTime dt1 = new DateTime(TEST_TIME1);
         DateTime dt2 = new DateTime(TEST_TIME2);
-NoAssert.donothing(true, test1.year().compareTo(dt2) < 0);
-NoAssert.donothing(true, test2.year().compareTo(dt1) > 0);
+        assertEquals(true, test1.year().compareTo(dt2) < 0);
+        assertEquals(true, test2.year().compareTo(dt1) > 0);
 NoAssert.donothing(true, test1.year().compareTo(dt1) == 0);
         try {
             test1.year().compareTo((ReadableInstant) null);
@@ -214,32 +214,32 @@ NoAssert.donothing(true, test1.year().compareTo(dt1) == 0);
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetMonth() {
         YearMonth test = new YearMonth(1972, 6);
-NoAssert.donothing(test.getChronology().monthOfYear(), test.monthOfYear().getField());
-NoAssert.donothing("monthOfYear", test.monthOfYear().getName());
-NoAssert.donothing("Property[monthOfYear]", test.monthOfYear().toString());
-NoAssert.donothing(test, test.monthOfYear().getReadablePartial());
+        assertSame(test.getChronology().monthOfYear(), test.monthOfYear().getField());
+        assertEquals("monthOfYear", test.monthOfYear().getName());
+        assertEquals("Property[monthOfYear]", test.monthOfYear().toString());
+        assertSame(test, test.monthOfYear().getReadablePartial());
 NoAssert.donothing(test, test.monthOfYear().getYearMonth());
 NoAssert.donothing(6, test.monthOfYear().get());
-NoAssert.donothing("6", test.monthOfYear().getAsString());
-NoAssert.donothing("June", test.monthOfYear().getAsText());
-NoAssert.donothing("juin", test.monthOfYear().getAsText(Locale.FRENCH));
-NoAssert.donothing("Jun", test.monthOfYear().getAsShortText());
-NoAssert.donothing("juin", test.monthOfYear().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().months(), test.monthOfYear().getDurationField());
-NoAssert.donothing(test.getChronology().years(), test.monthOfYear().getRangeDurationField());
-NoAssert.donothing(9, test.monthOfYear().getMaximumTextLength(null));
-NoAssert.donothing(3, test.monthOfYear().getMaximumShortTextLength(null));
+        assertEquals("6", test.monthOfYear().getAsString());
+        assertEquals("June", test.monthOfYear().getAsText());
+        assertEquals("juin", test.monthOfYear().getAsText(Locale.FRENCH));
+        assertEquals("Jun", test.monthOfYear().getAsShortText());
+        assertEquals("juin", test.monthOfYear().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().months(), test.monthOfYear().getDurationField());
+        assertEquals(test.getChronology().years(), test.monthOfYear().getRangeDurationField());
+        assertEquals(9, test.monthOfYear().getMaximumTextLength(null));
+        assertEquals(3, test.monthOfYear().getMaximumShortTextLength(null));
         test = new YearMonth(1972, 7);
-NoAssert.donothing("juillet", test.monthOfYear().getAsText(Locale.FRENCH));
-NoAssert.donothing("juil.", test.monthOfYear().getAsShortText(Locale.FRENCH));
+        assertEquals("juillet", test.monthOfYear().getAsText(Locale.FRENCH));
+        assertEquals("juil.", test.monthOfYear().getAsShortText(Locale.FRENCH));
     }
 
     @Test public void testPropertyGetMaxMinValuesMonth() {
         YearMonth test = new YearMonth(1972, 6);
-NoAssert.donothing(1, test.monthOfYear().getMinimumValue());
-NoAssert.donothing(1, test.monthOfYear().getMinimumValueOverall());
-NoAssert.donothing(12, test.monthOfYear().getMaximumValue());
-NoAssert.donothing(12, test.monthOfYear().getMaximumValueOverall());
+        assertEquals(1, test.monthOfYear().getMinimumValue());
+        assertEquals(1, test.monthOfYear().getMinimumValueOverall());
+        assertEquals(12, test.monthOfYear().getMaximumValue());
+        assertEquals(12, test.monthOfYear().getMaximumValueOverall());
     }
 
     @Test public void testPropertyAddMonth() {
@@ -306,8 +306,8 @@ NoAssert.donothing(12, test.monthOfYear().getMaximumValueOverall());
         YearMonth test1 = new YearMonth(TEST_TIME1);
         YearMonth test2 = new YearMonth(TEST_TIME2);
 NoAssert.donothing(true, test1.monthOfYear().compareTo(test2) < 0);
-NoAssert.donothing(true, test2.monthOfYear().compareTo(test1) > 0);
-NoAssert.donothing(true, test1.monthOfYear().compareTo(test1) == 0);
+        assertEquals(true, test2.monthOfYear().compareTo(test1) > 0);
+        assertEquals(true, test1.monthOfYear().compareTo(test1) == 0);
         try {
             test1.monthOfYear().compareTo((ReadablePartial) null);
             fail();
@@ -315,9 +315,9 @@ NoAssert.donothing(true, test1.monthOfYear().compareTo(test1) == 0);
         
         DateTime dt1 = new DateTime(TEST_TIME1);
         DateTime dt2 = new DateTime(TEST_TIME2);
-NoAssert.donothing(true, test1.monthOfYear().compareTo(dt2) < 0);
-NoAssert.donothing(true, test2.monthOfYear().compareTo(dt1) > 0);
-NoAssert.donothing(true, test1.monthOfYear().compareTo(dt1) == 0);
+        assertEquals(true, test1.monthOfYear().compareTo(dt2) < 0);
+        assertEquals(true, test2.monthOfYear().compareTo(dt1) > 0);
+        assertEquals(true, test1.monthOfYear().compareTo(dt1) == 0);
         try {
             test1.monthOfYear().compareTo((ReadableInstant) null);
             fail();
@@ -329,59 +329,59 @@ NoAssert.donothing(true, test1.monthOfYear().compareTo(dt1) == 0);
         YearMonth test1 = new YearMonth(11, 11);
         YearMonth test2 = new YearMonth(11, 12);
         YearMonth test3 = new YearMonth(11, 11, CopticChronology.getInstanceUTC());
-NoAssert.donothing(true, test1.monthOfYear().equals(test1.monthOfYear()));
+        assertEquals(true, test1.monthOfYear().equals(test1.monthOfYear()));
 NoAssert.donothing(false, test1.monthOfYear().equals(test1.year()));
-NoAssert.donothing(false, test1.monthOfYear().equals(test2.monthOfYear()));
-NoAssert.donothing(false, test1.monthOfYear().equals(test2.year()));
+        assertEquals(false, test1.monthOfYear().equals(test2.monthOfYear()));
+        assertEquals(false, test1.monthOfYear().equals(test2.year()));
         
-NoAssert.donothing(false, test1.year().equals(test1.monthOfYear()));
-NoAssert.donothing(true, test1.year().equals(test1.year()));
-NoAssert.donothing(false, test1.year().equals(test2.monthOfYear()));
+        assertEquals(false, test1.year().equals(test1.monthOfYear()));
+        assertEquals(true, test1.year().equals(test1.year()));
+        assertEquals(false, test1.year().equals(test2.monthOfYear()));
 NoAssert.donothing(true, test1.year().equals(test2.year()));
         
 NoAssert.donothing(false, test1.monthOfYear().equals(null));
 NoAssert.donothing(false, test1.monthOfYear().equals("any"));
         
         // chrono
-NoAssert.donothing(false, test1.monthOfYear().equals(test3.monthOfYear()));
+        assertEquals(false, test1.monthOfYear().equals(test3.monthOfYear()));
     }
 
     @Test public void testPropertyHashCode() {
         YearMonth test1 = new YearMonth(2005, 11);
         YearMonth test2 = new YearMonth(2005, 12);
-NoAssert.donothing(true, test1.monthOfYear().hashCode() == test1.monthOfYear().hashCode());
-NoAssert.donothing(false, test1.monthOfYear().hashCode() == test2.monthOfYear().hashCode());
-NoAssert.donothing(true, test1.year().hashCode() == test1.year().hashCode());
-NoAssert.donothing(true, test1.year().hashCode() == test2.year().hashCode());
+        assertEquals(true, test1.monthOfYear().hashCode() == test1.monthOfYear().hashCode());
+        assertEquals(false, test1.monthOfYear().hashCode() == test2.monthOfYear().hashCode());
+        assertEquals(true, test1.year().hashCode() == test1.year().hashCode());
+        assertEquals(true, test1.year().hashCode() == test2.year().hashCode());
     }
 
     @Test public void testPropertyEqualsHashCodeLenient() {
         YearMonth test1 = new YearMonth(1970, 6, LenientChronology.getInstance(COPTIC_PARIS));
         YearMonth test2 = new YearMonth(1970, 6, LenientChronology.getInstance(COPTIC_PARIS));
-NoAssert.donothing(true, test1.monthOfYear().equals(test2.monthOfYear()));
+        assertEquals(true, test1.monthOfYear().equals(test2.monthOfYear()));
 NoAssert.donothing(true, test2.monthOfYear().equals(test1.monthOfYear()));
-NoAssert.donothing(true, test1.monthOfYear().equals(test1.monthOfYear()));
-NoAssert.donothing(true, test2.monthOfYear().equals(test2.monthOfYear()));
-NoAssert.donothing(true, test1.monthOfYear().hashCode() == test2.monthOfYear().hashCode());
-NoAssert.donothing(true, test1.monthOfYear().hashCode() == test1.monthOfYear().hashCode());
-NoAssert.donothing(true, test2.monthOfYear().hashCode() == test2.monthOfYear().hashCode());
+        assertEquals(true, test1.monthOfYear().equals(test1.monthOfYear()));
+        assertEquals(true, test2.monthOfYear().equals(test2.monthOfYear()));
+        assertEquals(true, test1.monthOfYear().hashCode() == test2.monthOfYear().hashCode());
+        assertEquals(true, test1.monthOfYear().hashCode() == test1.monthOfYear().hashCode());
+        assertEquals(true, test2.monthOfYear().hashCode() == test2.monthOfYear().hashCode());
     }
 
     @Test public void testPropertyEqualsHashCodeStrict() {
         YearMonth test1 = new YearMonth(1970, 6, StrictChronology.getInstance(COPTIC_PARIS));
         YearMonth test2 = new YearMonth(1970, 6, StrictChronology.getInstance(COPTIC_PARIS));
-NoAssert.donothing(true, test1.monthOfYear().equals(test2.monthOfYear()));
-NoAssert.donothing(true, test2.monthOfYear().equals(test1.monthOfYear()));
-NoAssert.donothing(true, test1.monthOfYear().equals(test1.monthOfYear()));
-NoAssert.donothing(true, test2.monthOfYear().equals(test2.monthOfYear()));
-NoAssert.donothing(true, test1.monthOfYear().hashCode() == test2.monthOfYear().hashCode());
-NoAssert.donothing(true, test1.monthOfYear().hashCode() == test1.monthOfYear().hashCode());
+        assertEquals(true, test1.monthOfYear().equals(test2.monthOfYear()));
+        assertEquals(true, test2.monthOfYear().equals(test1.monthOfYear()));
+        assertEquals(true, test1.monthOfYear().equals(test1.monthOfYear()));
+        assertEquals(true, test2.monthOfYear().equals(test2.monthOfYear()));
+        assertEquals(true, test1.monthOfYear().hashCode() == test2.monthOfYear().hashCode());
+        assertEquals(true, test1.monthOfYear().hashCode() == test1.monthOfYear().hashCode());
 NoAssert.donothing(true, test2.monthOfYear().hashCode() == test2.monthOfYear().hashCode());
     }
 
     //-----------------------------------------------------------------------
     private void check(YearMonth test, int year, int month) {
-NoAssert.donothing(year, test.getYear());
-NoAssert.donothing(month, test.getMonthOfYear());
+        assertEquals(year, test.getYear());
+        assertEquals(month, test.getMonthOfYear());
     }
 }

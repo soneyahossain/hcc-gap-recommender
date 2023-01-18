@@ -144,9 +144,9 @@ public class TestPeriodType  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
 NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
-NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
+        assertEquals("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
@@ -177,299 +177,299 @@ NoAssert.donothing(type, result);
         PeriodType result = (PeriodType) ois.readObject();
         ois.close();
         
-NoAssert.donothing(type, result);
+        assertEquals(type, result);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testStandard() throws Exception {
         PeriodType type = PeriodType.standard();
-NoAssert.donothing(8, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.months(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(3));
+        assertEquals(8, type.size());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(DurationFieldType.months(), type.getFieldType(1));
+        assertEquals(DurationFieldType.weeks(), type.getFieldType(2));
+        assertEquals(DurationFieldType.days(), type.getFieldType(3));
 NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(4));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(5));
-NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(6));
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(5));
+        assertEquals(DurationFieldType.seconds(), type.getFieldType(6));
 NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(7));
-NoAssert.donothing("Standard", type.getName());
-NoAssert.donothing("PeriodType[Standard]", type.toString());
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.standard());
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.standard().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertEquals("Standard", type.getName());
+        assertEquals("PeriodType[Standard]", type.toString());
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type == PeriodType.standard());
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.standard().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
 NoAssert.donothing(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testYearMonthDayTime() throws Exception {
         PeriodType type = PeriodType.yearMonthDayTime();
-NoAssert.donothing(7, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.months(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(4));
-NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(5));
+        assertEquals(7, type.size());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(DurationFieldType.months(), type.getFieldType(1));
+        assertEquals(DurationFieldType.days(), type.getFieldType(2));
+        assertEquals(DurationFieldType.hours(), type.getFieldType(3));
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(4));
+        assertEquals(DurationFieldType.seconds(), type.getFieldType(5));
 NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(6));
-NoAssert.donothing("YearMonthDayTime", type.getName());
+        assertEquals("YearMonthDayTime", type.getName());
 NoAssert.donothing("PeriodType[YearMonthDayTime]", type.toString());
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.yearMonthDayTime());
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.yearMonthDayTime().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing(type);
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type == PeriodType.yearMonthDayTime());
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.yearMonthDayTime().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertSameAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testYearMonthDay() throws Exception {
         PeriodType type = PeriodType.yearMonthDay();
-NoAssert.donothing(3, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(3, type.size());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
 NoAssert.donothing(DurationFieldType.months(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(2));
+        assertEquals(DurationFieldType.days(), type.getFieldType(2));
 NoAssert.donothing("YearMonthDay", type.getName());
-NoAssert.donothing("PeriodType[YearMonthDay]", type.toString());
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.yearMonthDay());
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
+        assertEquals("PeriodType[YearMonthDay]", type.toString());
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type == PeriodType.yearMonthDay());
+        assertEquals(false, type.equals(PeriodType.millis()));
 NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.yearMonthDay().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing(type);
+        assertEquals(true, type.hashCode() == PeriodType.yearMonthDay().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertSameAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testYearWeekDayTime() throws Exception {
         PeriodType type = PeriodType.yearWeekDayTime();
-NoAssert.donothing(7, type.size());
+        assertEquals(7, type.size());
 NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(4));
-NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(5));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(6));
-NoAssert.donothing("YearWeekDayTime", type.getName());
-NoAssert.donothing("PeriodType[YearWeekDayTime]", type.toString());
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.yearWeekDayTime());
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.yearWeekDayTime().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertEquals(DurationFieldType.weeks(), type.getFieldType(1));
+        assertEquals(DurationFieldType.days(), type.getFieldType(2));
+        assertEquals(DurationFieldType.hours(), type.getFieldType(3));
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(4));
+        assertEquals(DurationFieldType.seconds(), type.getFieldType(5));
+        assertEquals(DurationFieldType.millis(), type.getFieldType(6));
+        assertEquals("YearWeekDayTime", type.getName());
+        assertEquals("PeriodType[YearWeekDayTime]", type.toString());
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type == PeriodType.yearWeekDayTime());
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.yearWeekDayTime().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
 NoAssert.donothing(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testYearWeekDay() throws Exception {
         PeriodType type = PeriodType.yearWeekDay();
-NoAssert.donothing(3, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(2));
-NoAssert.donothing("YearWeekDay", type.getName());
-NoAssert.donothing("PeriodType[YearWeekDay]", type.toString());
+        assertEquals(3, type.size());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(DurationFieldType.weeks(), type.getFieldType(1));
+        assertEquals(DurationFieldType.days(), type.getFieldType(2));
+        assertEquals("YearWeekDay", type.getName());
+        assertEquals("PeriodType[YearWeekDay]", type.toString());
 NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.yearWeekDay());
+        assertEquals(true, type == PeriodType.yearWeekDay());
 NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == type.hashCode());
 NoAssert.donothing(true, type.hashCode() == PeriodType.yearWeekDay().hashCode());
 NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing(type);
+        assertSameAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testYearDayTime() throws Exception {
         PeriodType type = PeriodType.yearDayTime();
-NoAssert.donothing(6, type.size());
+        assertEquals(6, type.size());
 NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(4));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(5));
-NoAssert.donothing("YearDayTime", type.getName());
-NoAssert.donothing("PeriodType[YearDayTime]", type.toString());
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.yearDayTime());
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
+        assertEquals(DurationFieldType.days(), type.getFieldType(1));
+        assertEquals(DurationFieldType.hours(), type.getFieldType(2));
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(3));
+        assertEquals(DurationFieldType.seconds(), type.getFieldType(4));
+        assertEquals(DurationFieldType.millis(), type.getFieldType(5));
+        assertEquals("YearDayTime", type.getName());
+        assertEquals("PeriodType[YearDayTime]", type.toString());
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type == PeriodType.yearDayTime());
+        assertEquals(false, type.equals(PeriodType.millis()));
 NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.yearDayTime().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.yearDayTime().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
 NoAssert.donothing(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testYearDay() throws Exception {
         PeriodType type = PeriodType.yearDay();
-NoAssert.donothing(2, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(2, type.size());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
 NoAssert.donothing(DurationFieldType.days(), type.getFieldType(1));
-NoAssert.donothing("YearDay", type.getName());
-NoAssert.donothing("PeriodType[YearDay]", type.toString());
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.yearDay());
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.yearDay().hashCode());
+        assertEquals("YearDay", type.getName());
+        assertEquals("PeriodType[YearDay]", type.toString());
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type == PeriodType.yearDay());
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.yearDay().hashCode());
 NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing(type);
+        assertSameAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testDayTime() throws Exception {
         PeriodType type = PeriodType.dayTime();
-NoAssert.donothing(5, type.size());
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(4));
-NoAssert.donothing("DayTime", type.getName());
-NoAssert.donothing("PeriodType[DayTime]", type.toString());
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.dayTime());
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.dayTime().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing(type);
+        assertEquals(5, type.size());
+        assertEquals(DurationFieldType.days(), type.getFieldType(0));
+        assertEquals(DurationFieldType.hours(), type.getFieldType(1));
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(2));
+        assertEquals(DurationFieldType.seconds(), type.getFieldType(3));
+        assertEquals(DurationFieldType.millis(), type.getFieldType(4));
+        assertEquals("DayTime", type.getName());
+        assertEquals("PeriodType[DayTime]", type.toString());
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type == PeriodType.dayTime());
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.dayTime().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertSameAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testTime() throws Exception {
         PeriodType type = PeriodType.time();
-NoAssert.donothing(4, type.size());
-NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(3));
-NoAssert.donothing("Time", type.getName());
-NoAssert.donothing("PeriodType[Time]", type.toString());
-NoAssert.donothing(true, type.equals(type));
+        assertEquals(4, type.size());
+        assertEquals(DurationFieldType.hours(), type.getFieldType(0));
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(1));
+        assertEquals(DurationFieldType.seconds(), type.getFieldType(2));
+        assertEquals(DurationFieldType.millis(), type.getFieldType(3));
+        assertEquals("Time", type.getName());
+        assertEquals("PeriodType[Time]", type.toString());
+        assertEquals(true, type.equals(type));
 NoAssert.donothing(true, type == PeriodType.time());
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.time().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing(type);
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.time().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertSameAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testYears() throws Exception {
         PeriodType type = PeriodType.years();
-NoAssert.donothing(1, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing("Years", type.getName());
-NoAssert.donothing("PeriodType[Years]", type.toString());
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.years());
-NoAssert.donothing(false, type.equals(PeriodType.standard()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.years().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.standard().hashCode());
-NoAssert.donothing(type);
+        assertEquals(1, type.size());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals("Years", type.getName());
+        assertEquals("PeriodType[Years]", type.toString());
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type == PeriodType.years());
+        assertEquals(false, type.equals(PeriodType.standard()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.years().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.standard().hashCode());
+        assertSameAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMonths() throws Exception {
         PeriodType type = PeriodType.months();
-NoAssert.donothing(1, type.size());
-NoAssert.donothing(DurationFieldType.months(), type.getFieldType(0));
-NoAssert.donothing("Months", type.getName());
+        assertEquals(1, type.size());
+        assertEquals(DurationFieldType.months(), type.getFieldType(0));
+        assertEquals("Months", type.getName());
 NoAssert.donothing("PeriodType[Months]", type.toString());
-NoAssert.donothing(true, type.equals(type));
+        assertEquals(true, type.equals(type));
 NoAssert.donothing(true, type == PeriodType.months());
-NoAssert.donothing(false, type.equals(PeriodType.standard()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.months().hashCode());
+        assertEquals(false, type.equals(PeriodType.standard()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.months().hashCode());
 NoAssert.donothing(false, type.hashCode() == PeriodType.standard().hashCode());
-NoAssert.donothing(type);
+        assertSameAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testWeeks() throws Exception {
         PeriodType type = PeriodType.weeks();
 NoAssert.donothing(1, type.size());
-NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(0));
+        assertEquals(DurationFieldType.weeks(), type.getFieldType(0));
 NoAssert.donothing("Weeks", type.getName());
-NoAssert.donothing("PeriodType[Weeks]", type.toString());
-NoAssert.donothing(true, type.equals(type));
+        assertEquals("PeriodType[Weeks]", type.toString());
+        assertEquals(true, type.equals(type));
 NoAssert.donothing(true, type == PeriodType.weeks());
-NoAssert.donothing(false, type.equals(PeriodType.standard()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.weeks().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.standard().hashCode());
+        assertEquals(false, type.equals(PeriodType.standard()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.weeks().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.standard().hashCode());
 NoAssert.donothing(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testDays() throws Exception {
         PeriodType type = PeriodType.days();
-NoAssert.donothing(1, type.size());
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(0));
+        assertEquals(1, type.size());
+        assertEquals(DurationFieldType.days(), type.getFieldType(0));
 NoAssert.donothing("Days", type.getName());
 NoAssert.donothing("PeriodType[Days]", type.toString());
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.days());
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type == PeriodType.days());
 NoAssert.donothing(false, type.equals(PeriodType.standard()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.days().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.standard().hashCode());
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.days().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.standard().hashCode());
 NoAssert.donothing(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testHours() throws Exception {
         PeriodType type = PeriodType.hours();
-NoAssert.donothing(1, type.size());
+        assertEquals(1, type.size());
 NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(0));
-NoAssert.donothing("Hours", type.getName());
-NoAssert.donothing("PeriodType[Hours]", type.toString());
-NoAssert.donothing(true, type.equals(type));
+        assertEquals("Hours", type.getName());
+        assertEquals("PeriodType[Hours]", type.toString());
+        assertEquals(true, type.equals(type));
 NoAssert.donothing(true, type == PeriodType.hours());
-NoAssert.donothing(false, type.equals(PeriodType.standard()));
+        assertEquals(false, type.equals(PeriodType.standard()));
 NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.hours().hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.hours().hashCode());
 NoAssert.donothing(false, type.hashCode() == PeriodType.standard().hashCode());
-NoAssert.donothing(type);
+        assertSameAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMinutes() throws Exception {
         PeriodType type = PeriodType.minutes();
-NoAssert.donothing(1, type.size());
+        assertEquals(1, type.size());
 NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(0));
-NoAssert.donothing("Minutes", type.getName());
-NoAssert.donothing("PeriodType[Minutes]", type.toString());
-NoAssert.donothing(true, type.equals(type));
+        assertEquals("Minutes", type.getName());
+        assertEquals("PeriodType[Minutes]", type.toString());
+        assertEquals(true, type.equals(type));
 NoAssert.donothing(true, type == PeriodType.minutes());
-NoAssert.donothing(false, type.equals(PeriodType.standard()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
+        assertEquals(false, type.equals(PeriodType.standard()));
+        assertEquals(true, type.hashCode() == type.hashCode());
 NoAssert.donothing(true, type.hashCode() == PeriodType.minutes().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.standard().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.standard().hashCode());
 NoAssert.donothing(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSeconds() throws Exception {
         PeriodType type = PeriodType.seconds();
-NoAssert.donothing(1, type.size());
+        assertEquals(1, type.size());
 NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(0));
-NoAssert.donothing("Seconds", type.getName());
-NoAssert.donothing("PeriodType[Seconds]", type.toString());
+        assertEquals("Seconds", type.getName());
+        assertEquals("PeriodType[Seconds]", type.toString());
 NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.seconds());
-NoAssert.donothing(false, type.equals(PeriodType.standard()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.seconds().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.standard().hashCode());
-NoAssert.donothing(type);
+        assertEquals(true, type == PeriodType.seconds());
+        assertEquals(false, type.equals(PeriodType.standard()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.seconds().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.standard().hashCode());
+        assertSameAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
@@ -479,13 +479,13 @@ NoAssert.donothing(1, type.size());
 NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(0));
 NoAssert.donothing("Millis", type.getName());
 NoAssert.donothing("PeriodType[Millis]", type.toString());
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.millis());
-NoAssert.donothing(false, type.equals(PeriodType.standard()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type == PeriodType.millis());
+        assertEquals(false, type.equals(PeriodType.standard()));
+        assertEquals(true, type.hashCode() == type.hashCode());
 NoAssert.donothing(true, type.hashCode() == PeriodType.millis().hashCode());
 NoAssert.donothing(false, type.hashCode() == PeriodType.standard().hashCode());
-NoAssert.donothing(type);
+        assertSameAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
@@ -501,7 +501,7 @@ NoAssert.donothing(PeriodType.months(), type);
         type = PeriodType.forFields(new DurationFieldType[] {
                 DurationFieldType.weeks(),
         });
-NoAssert.donothing(PeriodType.weeks(), type);
+        assertSame(PeriodType.weeks(), type);
         type = PeriodType.forFields(new DurationFieldType[] {
                 DurationFieldType.days(),
         });
@@ -509,19 +509,19 @@ NoAssert.donothing(PeriodType.days(), type);
         type = PeriodType.forFields(new DurationFieldType[] {
                 DurationFieldType.hours(),
         });
-NoAssert.donothing(PeriodType.hours(), type);
+        assertSame(PeriodType.hours(), type);
         type = PeriodType.forFields(new DurationFieldType[] {
                 DurationFieldType.minutes(),
         });
-NoAssert.donothing(PeriodType.minutes(), type);
+        assertSame(PeriodType.minutes(), type);
         type = PeriodType.forFields(new DurationFieldType[] {
                 DurationFieldType.seconds(),
         });
-NoAssert.donothing(PeriodType.seconds(), type);
+        assertSame(PeriodType.seconds(), type);
         type = PeriodType.forFields(new DurationFieldType[] {
                 DurationFieldType.millis(),
         });
-NoAssert.donothing(PeriodType.millis(), type);
+        assertSame(PeriodType.millis(), type);
     }
 
     @Test public void testForFields2() throws Exception {
@@ -530,18 +530,18 @@ NoAssert.donothing(PeriodType.millis(), type);
             DurationFieldType.hours(),
         };
         PeriodType type = PeriodType.forFields(types);
-NoAssert.donothing(2, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(1));
+        assertEquals(2, type.size());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(DurationFieldType.hours(), type.getFieldType(1));
 NoAssert.donothing("StandardNoMonthsNoWeeksNoDaysNoMinutesNoSecondsNoMillis", type.getName());
-NoAssert.donothing("PeriodType[StandardNoMonthsNoWeeksNoDaysNoMinutesNoSecondsNoMillis]", type.toString());
+        assertEquals("PeriodType[StandardNoMonthsNoWeeksNoDaysNoMinutesNoSecondsNoMillis]", type.toString());
 NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type == PeriodType.forFields(types));
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.forFields(types).hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing(type);
+        assertEquals(true, type == PeriodType.forFields(types));
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.forFields(types).hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertSameAfterSerialization(type);
     }
 
     @Test public void testForFields3() throws Exception {
@@ -550,18 +550,18 @@ NoAssert.donothing(type);
             DurationFieldType.weeks(),
         };
         PeriodType type = PeriodType.forFields(types);
-NoAssert.donothing(2, type.size());
-NoAssert.donothing(DurationFieldType.months(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(1));
-NoAssert.donothing("StandardNoYearsNoDaysNoHoursNoMinutesNoSecondsNoMillis", type.getName());
+        assertEquals(2, type.size());
+        assertEquals(DurationFieldType.months(), type.getFieldType(0));
+        assertEquals(DurationFieldType.weeks(), type.getFieldType(1));
+        assertEquals("StandardNoYearsNoDaysNoHoursNoMinutesNoSecondsNoMillis", type.getName());
 NoAssert.donothing("PeriodType[StandardNoYearsNoDaysNoHoursNoMinutesNoSecondsNoMillis]", type.toString());
-NoAssert.donothing(true, type.equals(type));
+        assertEquals(true, type.equals(type));
 NoAssert.donothing(true, type == PeriodType.forFields(types));
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.forFields(types).hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing(type);
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.forFields(types).hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertSameAfterSerialization(type);
     }
 
     @Test public void testForFields4() throws Exception {
@@ -577,7 +577,7 @@ NoAssert.donothing(type);
         };
         PeriodType type = PeriodType.forFields(types);
         PeriodType type2 = PeriodType.forFields(types2);
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
     }
 
     @Test public void testForFields5() throws Exception {
@@ -650,53 +650,53 @@ NoAssert.donothing(true, type == type2);
         };
         PeriodType type = PeriodType.forFields(types);
         PeriodType type2 = PeriodType.forFields(types2);
-NoAssert.donothing(false, type == type2);
-NoAssert.donothing(false, type.equals(type2));
+        assertEquals(false, type == type2);
+        assertEquals(false, type.equals(type2));
 NoAssert.donothing(false, type.hashCode() == type2.hashCode());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMaskYears() throws Exception {
         PeriodType type = PeriodType.standard().withYearsRemoved();
-NoAssert.donothing(7, type.size());
-NoAssert.donothing(DurationFieldType.months(), type.getFieldType(0));
+        assertEquals(7, type.size());
+        assertEquals(DurationFieldType.months(), type.getFieldType(0));
 NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(4));
+        assertEquals(DurationFieldType.days(), type.getFieldType(2));
+        assertEquals(DurationFieldType.hours(), type.getFieldType(3));
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(4));
 NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(5));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(6));
+        assertEquals(DurationFieldType.millis(), type.getFieldType(6));
 NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type.equals(PeriodType.standard().withYearsRemoved()));
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.equals(PeriodType.standard().withYearsRemoved()));
+        assertEquals(false, type.equals(PeriodType.millis()));
 NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.standard().withYearsRemoved().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing("StandardNoYears", type.getName());
-NoAssert.donothing("PeriodType[StandardNoYears]", type.toString());
-NoAssert.donothing(type);
+        assertEquals(true, type.hashCode() == PeriodType.standard().withYearsRemoved().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertEquals("StandardNoYears", type.getName());
+        assertEquals("PeriodType[StandardNoYears]", type.toString());
+        assertEqualsAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMaskMonths() throws Exception {
         PeriodType type = PeriodType.standard().withMonthsRemoved();
 NoAssert.donothing(7, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(1));
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(DurationFieldType.weeks(), type.getFieldType(1));
 NoAssert.donothing(DurationFieldType.days(), type.getFieldType(2));
 NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(4));
-NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(5));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(6));
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type.equals(PeriodType.standard().withMonthsRemoved()));
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(4));
+        assertEquals(DurationFieldType.seconds(), type.getFieldType(5));
+        assertEquals(DurationFieldType.millis(), type.getFieldType(6));
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type.equals(PeriodType.standard().withMonthsRemoved()));
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
 NoAssert.donothing(true, type.hashCode() == PeriodType.standard().withMonthsRemoved().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing("StandardNoMonths", type.getName());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertEquals("StandardNoMonths", type.getName());
 NoAssert.donothing("PeriodType[StandardNoMonths]", type.toString());
-NoAssert.donothing(type);
+        assertEqualsAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
@@ -704,150 +704,150 @@ NoAssert.donothing(type);
         PeriodType type = PeriodType.standard().withWeeksRemoved();
 NoAssert.donothing(7, type.size());
 NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.months(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(2));
+        assertEquals(DurationFieldType.months(), type.getFieldType(1));
+        assertEquals(DurationFieldType.days(), type.getFieldType(2));
 NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(4));
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(4));
 NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(5));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(6));
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type.equals(PeriodType.standard().withWeeksRemoved()));
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
+        assertEquals(DurationFieldType.millis(), type.getFieldType(6));
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type.equals(PeriodType.standard().withWeeksRemoved()));
+        assertEquals(false, type.equals(PeriodType.millis()));
 NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.standard().withWeeksRemoved().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing("StandardNoWeeks", type.getName());
-NoAssert.donothing("PeriodType[StandardNoWeeks]", type.toString());
-NoAssert.donothing(type);
+        assertEquals(true, type.hashCode() == PeriodType.standard().withWeeksRemoved().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertEquals("StandardNoWeeks", type.getName());
+        assertEquals("PeriodType[StandardNoWeeks]", type.toString());
+        assertEqualsAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMaskDays() throws Exception {
         PeriodType type = PeriodType.standard().withDaysRemoved();
-NoAssert.donothing(7, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.months(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(4));
-NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(5));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(6));
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type.equals(PeriodType.standard().withDaysRemoved()));
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.standard().withDaysRemoved().hashCode());
+        assertEquals(7, type.size());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(DurationFieldType.months(), type.getFieldType(1));
+        assertEquals(DurationFieldType.weeks(), type.getFieldType(2));
+        assertEquals(DurationFieldType.hours(), type.getFieldType(3));
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(4));
+        assertEquals(DurationFieldType.seconds(), type.getFieldType(5));
+        assertEquals(DurationFieldType.millis(), type.getFieldType(6));
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type.equals(PeriodType.standard().withDaysRemoved()));
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.standard().withDaysRemoved().hashCode());
 NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
 NoAssert.donothing("StandardNoDays", type.getName());
-NoAssert.donothing("PeriodType[StandardNoDays]", type.toString());
-NoAssert.donothing(type);
+        assertEquals("PeriodType[StandardNoDays]", type.toString());
+        assertEqualsAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMaskHours() throws Exception {
         PeriodType type = PeriodType.standard().withHoursRemoved();
-NoAssert.donothing(7, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(7, type.size());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
 NoAssert.donothing(DurationFieldType.months(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(2));
+        assertEquals(DurationFieldType.weeks(), type.getFieldType(2));
 NoAssert.donothing(DurationFieldType.days(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(4));
-NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(5));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(6));
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type.equals(PeriodType.standard().withHoursRemoved()));
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.standard().withHoursRemoved().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing("StandardNoHours", type.getName());
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(4));
+        assertEquals(DurationFieldType.seconds(), type.getFieldType(5));
+        assertEquals(DurationFieldType.millis(), type.getFieldType(6));
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type.equals(PeriodType.standard().withHoursRemoved()));
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.standard().withHoursRemoved().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertEquals("StandardNoHours", type.getName());
 NoAssert.donothing("PeriodType[StandardNoHours]", type.toString());
-NoAssert.donothing(type);
+        assertEqualsAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMaskMinutes() throws Exception {
         PeriodType type = PeriodType.standard().withMinutesRemoved();
-NoAssert.donothing(7, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(7, type.size());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
 NoAssert.donothing(DurationFieldType.months(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(4));
+        assertEquals(DurationFieldType.weeks(), type.getFieldType(2));
+        assertEquals(DurationFieldType.days(), type.getFieldType(3));
+        assertEquals(DurationFieldType.hours(), type.getFieldType(4));
 NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(5));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(6));
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type.equals(PeriodType.standard().withMinutesRemoved()));
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.standard().withMinutesRemoved().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing("StandardNoMinutes", type.getName());
-NoAssert.donothing("PeriodType[StandardNoMinutes]", type.toString());
-NoAssert.donothing(type);
+        assertEquals(DurationFieldType.millis(), type.getFieldType(6));
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type.equals(PeriodType.standard().withMinutesRemoved()));
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.standard().withMinutesRemoved().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertEquals("StandardNoMinutes", type.getName());
+        assertEquals("PeriodType[StandardNoMinutes]", type.toString());
+        assertEqualsAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMaskSeconds() throws Exception {
         PeriodType type = PeriodType.standard().withSecondsRemoved();
 NoAssert.donothing(7, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.months(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(4));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(5));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(6));
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type.equals(PeriodType.standard().withSecondsRemoved()));
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(DurationFieldType.months(), type.getFieldType(1));
+        assertEquals(DurationFieldType.weeks(), type.getFieldType(2));
+        assertEquals(DurationFieldType.days(), type.getFieldType(3));
+        assertEquals(DurationFieldType.hours(), type.getFieldType(4));
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(5));
+        assertEquals(DurationFieldType.millis(), type.getFieldType(6));
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type.equals(PeriodType.standard().withSecondsRemoved()));
+        assertEquals(false, type.equals(PeriodType.millis()));
 NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.standard().withSecondsRemoved().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing("StandardNoSeconds", type.getName());
+        assertEquals(true, type.hashCode() == PeriodType.standard().withSecondsRemoved().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertEquals("StandardNoSeconds", type.getName());
 NoAssert.donothing("PeriodType[StandardNoSeconds]", type.toString());
-NoAssert.donothing(type);
+        assertEqualsAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMaskMillis() throws Exception {
         PeriodType type = PeriodType.standard().withMillisRemoved();
-NoAssert.donothing(7, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.months(), type.getFieldType(1));
+        assertEquals(7, type.size());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(DurationFieldType.months(), type.getFieldType(1));
 NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(3));
+        assertEquals(DurationFieldType.days(), type.getFieldType(3));
 NoAssert.donothing(DurationFieldType.hours(), type.getFieldType(4));
-NoAssert.donothing(DurationFieldType.minutes(), type.getFieldType(5));
-NoAssert.donothing(DurationFieldType.seconds(), type.getFieldType(6));
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type.equals(PeriodType.standard().withMillisRemoved()));
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
-NoAssert.donothing(true, type.hashCode() == PeriodType.standard().withMillisRemoved().hashCode());
+        assertEquals(DurationFieldType.minutes(), type.getFieldType(5));
+        assertEquals(DurationFieldType.seconds(), type.getFieldType(6));
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type.equals(PeriodType.standard().withMillisRemoved()));
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
+        assertEquals(true, type.hashCode() == PeriodType.standard().withMillisRemoved().hashCode());
 NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
-NoAssert.donothing("StandardNoMillis", type.getName());
-NoAssert.donothing("PeriodType[StandardNoMillis]", type.toString());
-NoAssert.donothing(type);
+        assertEquals("StandardNoMillis", type.getName());
+        assertEquals("PeriodType[StandardNoMillis]", type.toString());
+        assertEqualsAfterSerialization(type);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMaskHoursMinutesSeconds() throws Exception {
         PeriodType type = PeriodType.standard().withHoursRemoved().withMinutesRemoved().withSecondsRemoved();
 NoAssert.donothing(5, type.size());
-NoAssert.donothing(DurationFieldType.years(), type.getFieldType(0));
-NoAssert.donothing(DurationFieldType.months(), type.getFieldType(1));
-NoAssert.donothing(DurationFieldType.weeks(), type.getFieldType(2));
-NoAssert.donothing(DurationFieldType.days(), type.getFieldType(3));
-NoAssert.donothing(DurationFieldType.millis(), type.getFieldType(4));
-NoAssert.donothing(true, type.equals(type));
-NoAssert.donothing(true, type.equals(PeriodType.standard().withHoursRemoved().withMinutesRemoved().withSecondsRemoved()));
-NoAssert.donothing(false, type.equals(PeriodType.millis()));
-NoAssert.donothing(true, type.hashCode() == type.hashCode());
+        assertEquals(DurationFieldType.years(), type.getFieldType(0));
+        assertEquals(DurationFieldType.months(), type.getFieldType(1));
+        assertEquals(DurationFieldType.weeks(), type.getFieldType(2));
+        assertEquals(DurationFieldType.days(), type.getFieldType(3));
+        assertEquals(DurationFieldType.millis(), type.getFieldType(4));
+        assertEquals(true, type.equals(type));
+        assertEquals(true, type.equals(PeriodType.standard().withHoursRemoved().withMinutesRemoved().withSecondsRemoved()));
+        assertEquals(false, type.equals(PeriodType.millis()));
+        assertEquals(true, type.hashCode() == type.hashCode());
 NoAssert.donothing(true, type.hashCode() == PeriodType.standard().withHoursRemoved().withMinutesRemoved().withSecondsRemoved().hashCode());
-NoAssert.donothing(false, type.hashCode() == PeriodType.millis().hashCode());
+        assertEquals(false, type.hashCode() == PeriodType.millis().hashCode());
 NoAssert.donothing("StandardNoHoursNoMinutesNoSeconds", type.getName());
-NoAssert.donothing("PeriodType[StandardNoHoursNoMinutesNoSeconds]", type.toString());
+        assertEquals("PeriodType[StandardNoHoursNoMinutesNoSeconds]", type.toString());
 NoAssert.donothing(type);
     }
 
@@ -855,7 +855,7 @@ NoAssert.donothing(type);
     @Test public void testMaskTwice1() throws Exception {
         PeriodType type = PeriodType.standard().withYearsRemoved();
         PeriodType type2 = type.withYearsRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
         
         type = PeriodType.standard().withMonthsRemoved();
         type2 = type.withMonthsRemoved();
@@ -863,50 +863,50 @@ NoAssert.donothing(true, type == type2);
         
         type = PeriodType.standard().withWeeksRemoved();
         type2 = type.withWeeksRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
         
         type = PeriodType.standard().withDaysRemoved();
         type2 = type.withDaysRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
         
         type = PeriodType.standard().withHoursRemoved();
         type2 = type.withHoursRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
         
         type = PeriodType.standard().withMinutesRemoved();
         type2 = type.withMinutesRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
         
         type = PeriodType.standard().withSecondsRemoved();
         type2 = type.withSecondsRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
         
         type = PeriodType.standard().withMillisRemoved();
         type2 = type.withMillisRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testMaskTwice2() throws Exception {
         PeriodType type = PeriodType.dayTime();
         PeriodType type2 = type.withYearsRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
         
         type = PeriodType.dayTime();
         type2 = type.withMonthsRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
         
         type = PeriodType.dayTime();
         type2 = type.withWeeksRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
         
         type = PeriodType.millis();
         type2 = type.withDaysRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
         
         type = PeriodType.millis();
         type2 = type.withHoursRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
         
         type = PeriodType.millis();
         type2 = type.withMinutesRemoved();
@@ -914,47 +914,47 @@ NoAssert.donothing(true, type == type2);
         
         type = PeriodType.millis();
         type2 = type.withSecondsRemoved();
-NoAssert.donothing(true, type == type2);
+        assertEquals(true, type == type2);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testEquals() throws Exception {
         PeriodType type = PeriodType.dayTime().withMillisRemoved();
-NoAssert.donothing(true, type.equals(type));
+        assertEquals(true, type.equals(type));
 NoAssert.donothing(true, type.equals(PeriodType.dayTime().withMillisRemoved()));
-NoAssert.donothing(false, type.equals(null));
-NoAssert.donothing(false, type.equals(""));
+        assertEquals(false, type.equals(null));
+        assertEquals(false, type.equals(""));
     }
 
     @Test public void testHashCode() throws Exception {
         PeriodType type = PeriodType.dayTime().withMillisRemoved();
-NoAssert.donothing(type.hashCode(), type.hashCode());
+        assertEquals(type.hashCode(), type.hashCode());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testIsSupported() throws Exception {
         PeriodType type = PeriodType.dayTime().withMillisRemoved();
-NoAssert.donothing(false, type.isSupported(DurationFieldType.years()));
-NoAssert.donothing(false, type.isSupported(DurationFieldType.months()));
-NoAssert.donothing(false, type.isSupported(DurationFieldType.weeks()));
-NoAssert.donothing(true, type.isSupported(DurationFieldType.days()));
-NoAssert.donothing(true, type.isSupported(DurationFieldType.hours()));
-NoAssert.donothing(true, type.isSupported(DurationFieldType.minutes()));
-NoAssert.donothing(true, type.isSupported(DurationFieldType.seconds()));
-NoAssert.donothing(false, type.isSupported(DurationFieldType.millis()));
+        assertEquals(false, type.isSupported(DurationFieldType.years()));
+        assertEquals(false, type.isSupported(DurationFieldType.months()));
+        assertEquals(false, type.isSupported(DurationFieldType.weeks()));
+        assertEquals(true, type.isSupported(DurationFieldType.days()));
+        assertEquals(true, type.isSupported(DurationFieldType.hours()));
+        assertEquals(true, type.isSupported(DurationFieldType.minutes()));
+        assertEquals(true, type.isSupported(DurationFieldType.seconds()));
+        assertEquals(false, type.isSupported(DurationFieldType.millis()));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testIndexOf() throws Exception {
         PeriodType type = PeriodType.dayTime().withMillisRemoved();
 NoAssert.donothing(-1, type.indexOf(DurationFieldType.years()));
-NoAssert.donothing(-1, type.indexOf(DurationFieldType.months()));
-NoAssert.donothing(-1, type.indexOf(DurationFieldType.weeks()));
-NoAssert.donothing(0, type.indexOf(DurationFieldType.days()));
-NoAssert.donothing(1, type.indexOf(DurationFieldType.hours()));
-NoAssert.donothing(2, type.indexOf(DurationFieldType.minutes()));
-NoAssert.donothing(3, type.indexOf(DurationFieldType.seconds()));
-NoAssert.donothing(-1, type.indexOf(DurationFieldType.millis()));
+        assertEquals(-1, type.indexOf(DurationFieldType.months()));
+        assertEquals(-1, type.indexOf(DurationFieldType.weeks()));
+        assertEquals(0, type.indexOf(DurationFieldType.days()));
+        assertEquals(1, type.indexOf(DurationFieldType.hours()));
+        assertEquals(2, type.indexOf(DurationFieldType.minutes()));
+        assertEquals(3, type.indexOf(DurationFieldType.seconds()));
+        assertEquals(-1, type.indexOf(DurationFieldType.millis()));
     }
 
 }

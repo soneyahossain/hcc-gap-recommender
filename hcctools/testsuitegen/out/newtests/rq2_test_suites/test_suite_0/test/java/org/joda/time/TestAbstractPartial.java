@@ -84,8 +84,8 @@ public class TestAbstractPartial  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testGetValue() throws Throwable {
         MockPartial mock = new MockPartial();
-NoAssert.donothing(1970, mock.getValue(0));
-NoAssert.donothing(1, mock.getValue(1));
+        assertEquals(1970, mock.getValue(0));
+        assertEquals(1, mock.getValue(1));
         
         try {
             mock.getValue(-1);
@@ -100,15 +100,15 @@ NoAssert.donothing(1, mock.getValue(1));
     @Test public void testGetValues() throws Throwable {
         MockPartial mock = new MockPartial();
         int[] vals = mock.getValues();
-NoAssert.donothing(2, vals.length);
-NoAssert.donothing(1970, vals[0]);
-NoAssert.donothing(1, vals[1]);
+        assertEquals(2, vals.length);
+        assertEquals(1970, vals[0]);
+        assertEquals(1, vals[1]);
     }
 
     @Test public void testGetField() throws Throwable {
         MockPartial mock = new MockPartial();
-NoAssert.donothing(BuddhistChronology.getInstanceUTC().year(), mock.getField(0));
-NoAssert.donothing(BuddhistChronology.getInstanceUTC().monthOfYear(), mock.getField(1));
+        assertEquals(BuddhistChronology.getInstanceUTC().year(), mock.getField(0));
+        assertEquals(BuddhistChronology.getInstanceUTC().monthOfYear(), mock.getField(1));
         
         try {
             mock.getField(-1);
@@ -122,7 +122,7 @@ NoAssert.donothing(BuddhistChronology.getInstanceUTC().monthOfYear(), mock.getFi
 
     @Test public void testGetFieldType() throws Throwable {
         MockPartial mock = new MockPartial();
-NoAssert.donothing(DateTimeFieldType.year(), mock.getFieldType(0));
+        assertEquals(DateTimeFieldType.year(), mock.getFieldType(0));
 NoAssert.donothing(DateTimeFieldType.monthOfYear(), mock.getFieldType(1));
         
         try {
@@ -138,21 +138,21 @@ NoAssert.donothing(DateTimeFieldType.monthOfYear(), mock.getFieldType(1));
     @Test public void testGetFieldTypes() throws Throwable {
         MockPartial mock = new MockPartial();
         DateTimeFieldType[] vals = mock.getFieldTypes();
-NoAssert.donothing(2, vals.length);
-NoAssert.donothing(DateTimeFieldType.year(), vals[0]);
-NoAssert.donothing(DateTimeFieldType.monthOfYear(), vals[1]);
+        assertEquals(2, vals.length);
+        assertEquals(DateTimeFieldType.year(), vals[0]);
+        assertEquals(DateTimeFieldType.monthOfYear(), vals[1]);
     }
 
     @Test public void testGetPropertyEquals() throws Throwable {
         MockProperty0 prop0 = new MockProperty0();
 NoAssert.donothing(true, prop0.equals(prop0));
-NoAssert.donothing(true, prop0.equals(new MockProperty0()));
-NoAssert.donothing(false, prop0.equals(new MockProperty1()));
-NoAssert.donothing(false, prop0.equals(new MockProperty0Val()));
-NoAssert.donothing(false, prop0.equals(new MockProperty0Field()));
-NoAssert.donothing(false, prop0.equals(new MockProperty0Chrono()));
-NoAssert.donothing(false, prop0.equals(""));
-NoAssert.donothing(false, prop0.equals(null));
+        assertEquals(true, prop0.equals(new MockProperty0()));
+        assertEquals(false, prop0.equals(new MockProperty1()));
+        assertEquals(false, prop0.equals(new MockProperty0Val()));
+        assertEquals(false, prop0.equals(new MockProperty0Field()));
+        assertEquals(false, prop0.equals(new MockProperty0Chrono()));
+        assertEquals(false, prop0.equals(""));
+        assertEquals(false, prop0.equals(null));
     }
 
     //-----------------------------------------------------------------------

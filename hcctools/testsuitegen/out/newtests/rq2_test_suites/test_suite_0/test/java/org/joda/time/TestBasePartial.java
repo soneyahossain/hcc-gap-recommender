@@ -76,34 +76,34 @@ public class TestBasePartial  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testSetMethods() throws Throwable {
         MockPartial mock = new MockPartial();
-NoAssert.donothing(1970, mock.getYear());
-NoAssert.donothing(1, mock.getMonthOfYear());
+        assertEquals(1970, mock.getYear());
+        assertEquals(1, mock.getMonthOfYear());
         
         mock.setYear(2004);
-NoAssert.donothing(2004, mock.getYear());
+        assertEquals(2004, mock.getYear());
 NoAssert.donothing(1, mock.getMonthOfYear());
         
         mock.setMonthOfYear(6);
-NoAssert.donothing(2004, mock.getYear());
-NoAssert.donothing(6, mock.getMonthOfYear());
+        assertEquals(2004, mock.getYear());
+        assertEquals(6, mock.getMonthOfYear());
         
         mock.set(2005, 5);
-NoAssert.donothing(2005, mock.getYear());
-NoAssert.donothing(5, mock.getMonthOfYear());
+        assertEquals(2005, mock.getYear());
+        assertEquals(5, mock.getMonthOfYear());
         
         try {
             mock.setMonthOfYear(0);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(2005, mock.getYear());
-NoAssert.donothing(5, mock.getMonthOfYear());
+        assertEquals(2005, mock.getYear());
+        assertEquals(5, mock.getMonthOfYear());
         
         try {
             mock.setMonthOfYear(13);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(2005, mock.getYear());
-NoAssert.donothing(5, mock.getMonthOfYear());
+        assertEquals(2005, mock.getYear());
+        assertEquals(5, mock.getMonthOfYear());
     }
 
     static class MockPartial extends BasePartial {

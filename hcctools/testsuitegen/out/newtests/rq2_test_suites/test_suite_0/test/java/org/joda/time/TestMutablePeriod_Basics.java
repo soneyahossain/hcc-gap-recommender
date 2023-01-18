@@ -160,55 +160,55 @@ public class TestMutablePeriod_Basics { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test
     public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
-NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testGetPeriodType() {
         MutablePeriod test = new MutablePeriod();
-NoAssert.donothing(PeriodType.standard(), test.getPeriodType());
+        assertEquals(PeriodType.standard(), test.getPeriodType());
     }
 
     @Test
     public void testGetMethods() {
         MutablePeriod test = new MutablePeriod();
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
 NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(0, test.getMillis());
+        assertEquals(0, test.getSeconds());
+        assertEquals(0, test.getMillis());
     }
 
     @Test
     public void testEqualsHashCode() {
         MutablePeriod test1 = new MutablePeriod(123L);
         MutablePeriod test2 = new MutablePeriod(123L);
-NoAssert.donothing(true, test1.equals(test2));
+        assertEquals(true, test1.equals(test2));
 NoAssert.donothing(true, test2.equals(test1));
-NoAssert.donothing(true, test1.equals(test1));
+        assertEquals(true, test1.equals(test1));
 NoAssert.donothing(true, test2.equals(test2));
-NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
-NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
-NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
+        assertEquals(true, test1.hashCode() == test2.hashCode());
+        assertEquals(true, test1.hashCode() == test1.hashCode());
+        assertEquals(true, test2.hashCode() == test2.hashCode());
 
         MutablePeriod test3 = new MutablePeriod(321L);
-NoAssert.donothing(false, test1.equals(test3));
-NoAssert.donothing(false, test2.equals(test3));
+        assertEquals(false, test1.equals(test3));
+        assertEquals(false, test2.equals(test3));
 NoAssert.donothing(false, test3.equals(test1));
 NoAssert.donothing(false, test3.equals(test2));
-NoAssert.donothing(false, test1.hashCode() == test3.hashCode());
+        assertEquals(false, test1.hashCode() == test3.hashCode());
 NoAssert.donothing(false, test2.hashCode() == test3.hashCode());
 
-NoAssert.donothing(false, test1.equals("Hello"));
-NoAssert.donothing(true, test1.equals(new MockMutablePeriod(123L)));
-NoAssert.donothing(false, test1.equals(new Period(123L, PeriodType.dayTime())));
+        assertEquals(false, test1.equals("Hello"));
+        assertEquals(true, test1.equals(new MockMutablePeriod(123L)));
+        assertEquals(false, test1.equals(new Period(123L, PeriodType.dayTime())));
     }
 
     class MockMutablePeriod extends BasePeriod {
@@ -233,7 +233,7 @@ NoAssert.donothing(false, test1.equals(new Period(123L, PeriodType.dayTime())));
         MutablePeriod result = (MutablePeriod) ois.readObject();
         ois.close();
 
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
     }
 
 //    //-----------------------------------------------------------------------
@@ -465,7 +465,7 @@ NoAssert.donothing(test, result);
     @Test
     public void testToString() {
         MutablePeriod test = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
-NoAssert.donothing("P1Y2M3W4DT5H6M7.008S", test.toString());
+        assertEquals("P1Y2M3W4DT5H6M7.008S", test.toString());
 
         test = new MutablePeriod(0, 0, 0, 0, 0, 0, 0, 0);
 NoAssert.donothing("PT0S", test.toString());
@@ -479,7 +479,7 @@ NoAssert.donothing("PT12.345S", test.toString());
     public void testToPeriod() {
         MutablePeriod test = new MutablePeriod(123L);
         Period result = test.toPeriod();
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
     }
 
     @Test
@@ -498,7 +498,7 @@ NoAssert.donothing(test, result);
     @Test
     public void testToDurationFrom() {
         MutablePeriod test = new MutablePeriod(123L);
-NoAssert.donothing(new Duration(123L), test.toDurationFrom(new Instant(0L)));
+        assertEquals(new Duration(123L), test.toDurationFrom(new Instant(0L)));
     }
 
     //-----------------------------------------------------------------------
@@ -506,8 +506,8 @@ NoAssert.donothing(new Duration(123L), test.toDurationFrom(new Instant(0L)));
     public void testCopy() {
         MutablePeriod test = new MutablePeriod(123L);
         MutablePeriod copy = test.copy();
-NoAssert.donothing(test.getPeriodType(), copy.getPeriodType());
-NoAssert.donothing(test, copy);
+        assertEquals(test.getPeriodType(), copy.getPeriodType());
+        assertEquals(test, copy);
     }
 
     //-----------------------------------------------------------------------
@@ -515,8 +515,8 @@ NoAssert.donothing(test, copy);
     public void testClone() {
         MutablePeriod test = new MutablePeriod(123L);
         MutablePeriod copy = (MutablePeriod) test.clone();
-NoAssert.donothing(test.getPeriodType(), copy.getPeriodType());
-NoAssert.donothing(test, copy);
+        assertEquals(test.getPeriodType(), copy.getPeriodType());
+        assertEquals(test, copy);
     }
 
 }

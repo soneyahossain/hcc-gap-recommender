@@ -83,40 +83,40 @@ public class TestMonths  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testConstants() {
 NoAssert.donothing(0, Months.ZERO.getMonths());
-NoAssert.donothing(1, Months.ONE.getMonths());
-NoAssert.donothing(2, Months.TWO.getMonths());
-NoAssert.donothing(3, Months.THREE.getMonths());
-NoAssert.donothing(4, Months.FOUR.getMonths());
-NoAssert.donothing(5, Months.FIVE.getMonths());
-NoAssert.donothing(6, Months.SIX.getMonths());
-NoAssert.donothing(7, Months.SEVEN.getMonths());
-NoAssert.donothing(8, Months.EIGHT.getMonths());
+        assertEquals(1, Months.ONE.getMonths());
+        assertEquals(2, Months.TWO.getMonths());
+        assertEquals(3, Months.THREE.getMonths());
+        assertEquals(4, Months.FOUR.getMonths());
+        assertEquals(5, Months.FIVE.getMonths());
+        assertEquals(6, Months.SIX.getMonths());
+        assertEquals(7, Months.SEVEN.getMonths());
+        assertEquals(8, Months.EIGHT.getMonths());
 NoAssert.donothing(9, Months.NINE.getMonths());
 NoAssert.donothing(10, Months.TEN.getMonths());
-NoAssert.donothing(11, Months.ELEVEN.getMonths());
+        assertEquals(11, Months.ELEVEN.getMonths());
 NoAssert.donothing(12, Months.TWELVE.getMonths());
-NoAssert.donothing(Integer.MAX_VALUE, Months.MAX_VALUE.getMonths());
-NoAssert.donothing(Integer.MIN_VALUE, Months.MIN_VALUE.getMonths());
+        assertEquals(Integer.MAX_VALUE, Months.MAX_VALUE.getMonths());
+        assertEquals(Integer.MIN_VALUE, Months.MIN_VALUE.getMonths());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFactory_months_int() {
-NoAssert.donothing(Months.ZERO, Months.months(0));
+        assertSame(Months.ZERO, Months.months(0));
 NoAssert.donothing(Months.ONE, Months.months(1));
 NoAssert.donothing(Months.TWO, Months.months(2));
 NoAssert.donothing(Months.THREE, Months.months(3));
-NoAssert.donothing(Months.FOUR, Months.months(4));
-NoAssert.donothing(Months.FIVE, Months.months(5));
+        assertSame(Months.FOUR, Months.months(4));
+        assertSame(Months.FIVE, Months.months(5));
 NoAssert.donothing(Months.SIX, Months.months(6));
-NoAssert.donothing(Months.SEVEN, Months.months(7));
-NoAssert.donothing(Months.EIGHT, Months.months(8));
-NoAssert.donothing(Months.NINE, Months.months(9));
-NoAssert.donothing(Months.TEN, Months.months(10));
-NoAssert.donothing(Months.ELEVEN, Months.months(11));
-NoAssert.donothing(Months.TWELVE, Months.months(12));
+        assertSame(Months.SEVEN, Months.months(7));
+        assertSame(Months.EIGHT, Months.months(8));
+        assertSame(Months.NINE, Months.months(9));
+        assertSame(Months.TEN, Months.months(10));
+        assertSame(Months.ELEVEN, Months.months(11));
+        assertSame(Months.TWELVE, Months.months(12));
 NoAssert.donothing(Months.MAX_VALUE, Months.months(Integer.MAX_VALUE));
 NoAssert.donothing(Months.MIN_VALUE, Months.months(Integer.MIN_VALUE));
-NoAssert.donothing(-1, Months.months(-1).getMonths());
+        assertEquals(-1, Months.months(-1).getMonths());
 NoAssert.donothing(13, Months.months(13).getMonths());
     }
 
@@ -126,17 +126,17 @@ NoAssert.donothing(13, Months.months(13).getMonths());
         DateTime end1 = new DateTime(2006, 9, 9, 12, 0, 0, 0, PARIS);
         DateTime end2 = new DateTime(2006, 12, 9, 12, 0, 0, 0, PARIS);
         
-NoAssert.donothing(3, Months.monthsBetween(start, end1).getMonths());
-NoAssert.donothing(0, Months.monthsBetween(start, start).getMonths());
-NoAssert.donothing(0, Months.monthsBetween(end1, end1).getMonths());
-NoAssert.donothing(-3, Months.monthsBetween(end1, start).getMonths());
-NoAssert.donothing(6, Months.monthsBetween(start, end2).getMonths());
+        assertEquals(3, Months.monthsBetween(start, end1).getMonths());
+        assertEquals(0, Months.monthsBetween(start, start).getMonths());
+        assertEquals(0, Months.monthsBetween(end1, end1).getMonths());
+        assertEquals(-3, Months.monthsBetween(end1, start).getMonths());
+        assertEquals(6, Months.monthsBetween(start, end2).getMonths());
     }
 
     @Test public void testFactory_monthsBetween_RInstant_LocalDate_EndMonth() {
-NoAssert.donothing(0, Months.monthsBetween(
+        assertEquals(0, Months.monthsBetween(
                 new DateTime(2006, 1, 31, 0, 0, 0, PARIS), new DateTime(2006, 2, 27, 0, 0, 0, PARIS)).getMonths());
-NoAssert.donothing(1, Months.monthsBetween(
+        assertEquals(1, Months.monthsBetween(
                 new DateTime(2006, 1, 28, 0, 0, 0, PARIS), new DateTime(2006, 2, 28, 0, 0, 0, PARIS)).getMonths());
 NoAssert.donothing(1, Months.monthsBetween(
                 new DateTime(2006, 1, 29, 0, 0, 0, PARIS), new DateTime(2006, 2, 28, 0, 0, 0, PARIS)).getMonths());
@@ -144,7 +144,7 @@ NoAssert.donothing(1, Months.monthsBetween(
                 new DateTime(2006, 1, 30, 0, 0, 0, PARIS), new DateTime(2006, 2, 28, 0, 0, 0, PARIS)).getMonths());
 NoAssert.donothing(1, Months.monthsBetween(
                 new DateTime(2006, 1, 31, 0, 0, 0, PARIS), new DateTime(2006, 2, 28, 0, 0, 0, PARIS)).getMonths());
-NoAssert.donothing(1, Months.monthsBetween(
+        assertEquals(1, Months.monthsBetween(
                 new DateTime(2006, 1, 31, 0, 0, 0, PARIS), new DateTime(2006, 3, 1, 0, 0, 0, PARIS)).getMonths());
     }
 
@@ -155,20 +155,20 @@ NoAssert.donothing(1, Months.monthsBetween(
         LocalDate end1 = new LocalDate(2006, 9, 9);
         YearMonthDay end2 = new YearMonthDay(2006, 12, 9);
         
-NoAssert.donothing(3, Months.monthsBetween(start, end1).getMonths());
+        assertEquals(3, Months.monthsBetween(start, end1).getMonths());
 NoAssert.donothing(0, Months.monthsBetween(start, start).getMonths());
-NoAssert.donothing(0, Months.monthsBetween(end1, end1).getMonths());
-NoAssert.donothing(-3, Months.monthsBetween(end1, start).getMonths());
-NoAssert.donothing(6, Months.monthsBetween(start, end2).getMonths());
+        assertEquals(0, Months.monthsBetween(end1, end1).getMonths());
+        assertEquals(-3, Months.monthsBetween(end1, start).getMonths());
+        assertEquals(6, Months.monthsBetween(start, end2).getMonths());
     }
 
     @Test public void testFactory_monthsBetween_RPartial_LocalDate_EndMonth() {
-NoAssert.donothing(0, Months.monthsBetween(new LocalDate(2006, 1, 31), new LocalDate(2006, 2, 27)).getMonths());
-NoAssert.donothing(1, Months.monthsBetween(new LocalDate(2006, 1, 28), new LocalDate(2006, 2, 28)).getMonths());
-NoAssert.donothing(1, Months.monthsBetween(new LocalDate(2006, 1, 29), new LocalDate(2006, 2, 28)).getMonths());
-NoAssert.donothing(1, Months.monthsBetween(new LocalDate(2006, 1, 30), new LocalDate(2006, 2, 28)).getMonths());
-NoAssert.donothing(1, Months.monthsBetween(new LocalDate(2006, 1, 31), new LocalDate(2006, 2, 28)).getMonths());
-NoAssert.donothing(1, Months.monthsBetween(new LocalDate(2006, 1, 31), new LocalDate(2006, 3, 1)).getMonths());
+        assertEquals(0, Months.monthsBetween(new LocalDate(2006, 1, 31), new LocalDate(2006, 2, 27)).getMonths());
+        assertEquals(1, Months.monthsBetween(new LocalDate(2006, 1, 28), new LocalDate(2006, 2, 28)).getMonths());
+        assertEquals(1, Months.monthsBetween(new LocalDate(2006, 1, 29), new LocalDate(2006, 2, 28)).getMonths());
+        assertEquals(1, Months.monthsBetween(new LocalDate(2006, 1, 30), new LocalDate(2006, 2, 28)).getMonths());
+        assertEquals(1, Months.monthsBetween(new LocalDate(2006, 1, 31), new LocalDate(2006, 2, 28)).getMonths());
+        assertEquals(1, Months.monthsBetween(new LocalDate(2006, 1, 31), new LocalDate(2006, 3, 1)).getMonths());
     }
 
     @Test public void testFactory_monthsBetween_RPartial_YearMonth() {
@@ -176,8 +176,8 @@ NoAssert.donothing(1, Months.monthsBetween(new LocalDate(2006, 1, 31), new Local
         for (int i = 0; i < 6; i++) {
             YearMonth start2 = new YearMonth(2011 + i, 1);
             YearMonth end = new YearMonth(2011 + i, 3);
-NoAssert.donothing(i * 12 + 2, Months.monthsBetween(start1, end).getMonths());
-NoAssert.donothing(2, Months.monthsBetween(start2, end).getMonths());
+            assertEquals(i * 12 + 2, Months.monthsBetween(start1, end).getMonths());
+            assertEquals(2, Months.monthsBetween(start2, end).getMonths());
         }
     }
 
@@ -187,13 +187,13 @@ NoAssert.donothing(2, Months.monthsBetween(start2, end).getMonths());
         MonthDay end2 = new MonthDay(2, 29);
         MonthDay end3 = new MonthDay(3, 1);
         
-NoAssert.donothing(0, Months.monthsBetween(start, end1).getMonths());
-NoAssert.donothing(0, Months.monthsBetween(start, end2).getMonths());
-NoAssert.donothing(1, Months.monthsBetween(start, end3).getMonths());
+        assertEquals(0, Months.monthsBetween(start, end1).getMonths());
+        assertEquals(0, Months.monthsBetween(start, end2).getMonths());
+        assertEquals(1, Months.monthsBetween(start, end3).getMonths());
         
-NoAssert.donothing(0, Months.monthsBetween(end1, start).getMonths());
-NoAssert.donothing(0, Months.monthsBetween(end2, start).getMonths());
-NoAssert.donothing(-1, Months.monthsBetween(end3, start).getMonths());
+        assertEquals(0, Months.monthsBetween(end1, start).getMonths());
+        assertEquals(0, Months.monthsBetween(end2, start).getMonths());
+        assertEquals(-1, Months.monthsBetween(end3, start).getMonths());
     }
 
     //-------------------------------------------------------------------------
@@ -202,20 +202,20 @@ NoAssert.donothing(-1, Months.monthsBetween(end3, start).getMonths());
         DateTime end1 = new DateTime(2006, 9, 9, 12, 0, 0, 0, PARIS);
         DateTime end2 = new DateTime(2006, 12, 9, 12, 0, 0, 0, PARIS);
         
-NoAssert.donothing(0, Months.monthsIn((ReadableInterval) null).getMonths());
-NoAssert.donothing(3, Months.monthsIn(new Interval(start, end1)).getMonths());
-NoAssert.donothing(0, Months.monthsIn(new Interval(start, start)).getMonths());
-NoAssert.donothing(0, Months.monthsIn(new Interval(end1, end1)).getMonths());
-NoAssert.donothing(6, Months.monthsIn(new Interval(start, end2)).getMonths());
+        assertEquals(0, Months.monthsIn((ReadableInterval) null).getMonths());
+        assertEquals(3, Months.monthsIn(new Interval(start, end1)).getMonths());
+        assertEquals(0, Months.monthsIn(new Interval(start, start)).getMonths());
+        assertEquals(0, Months.monthsIn(new Interval(end1, end1)).getMonths());
+        assertEquals(6, Months.monthsIn(new Interval(start, end2)).getMonths());
     }
 
     @Test public void testFactory_parseMonths_String() {
-NoAssert.donothing(0, Months.parseMonths((String) null).getMonths());
-NoAssert.donothing(0, Months.parseMonths("P0M").getMonths());
-NoAssert.donothing(1, Months.parseMonths("P1M").getMonths());
-NoAssert.donothing(-3, Months.parseMonths("P-3M").getMonths());
+        assertEquals(0, Months.parseMonths((String) null).getMonths());
+        assertEquals(0, Months.parseMonths("P0M").getMonths());
+        assertEquals(1, Months.parseMonths("P1M").getMonths());
+        assertEquals(-3, Months.parseMonths("P-3M").getMonths());
 NoAssert.donothing(2, Months.parseMonths("P0Y2M").getMonths());
-NoAssert.donothing(2, Months.parseMonths("P2MT0H0M").getMonths());
+        assertEquals(2, Months.parseMonths("P2MT0H0M").getMonths());
         try {
             Months.parseMonths("P1Y1D");
             fail();
@@ -233,43 +233,43 @@ NoAssert.donothing(2, Months.parseMonths("P2MT0H0M").getMonths());
     //-----------------------------------------------------------------------
     @Test public void testGetMethods() {
         Months test = Months.months(20);
-NoAssert.donothing(20, test.getMonths());
+        assertEquals(20, test.getMonths());
     }
 
     @Test public void testGetFieldType() {
         Months test = Months.months(20);
-NoAssert.donothing(DurationFieldType.months(), test.getFieldType());
+        assertEquals(DurationFieldType.months(), test.getFieldType());
     }
 
     @Test public void testGetPeriodType() {
         Months test = Months.months(20);
-NoAssert.donothing(PeriodType.months(), test.getPeriodType());
+        assertEquals(PeriodType.months(), test.getPeriodType());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testIsGreaterThan() {
-NoAssert.donothing(true, Months.THREE.isGreaterThan(Months.TWO));
-NoAssert.donothing(false, Months.THREE.isGreaterThan(Months.THREE));
-NoAssert.donothing(false, Months.TWO.isGreaterThan(Months.THREE));
-NoAssert.donothing(true, Months.ONE.isGreaterThan(null));
-NoAssert.donothing(false, Months.months(-1).isGreaterThan(null));
+        assertEquals(true, Months.THREE.isGreaterThan(Months.TWO));
+        assertEquals(false, Months.THREE.isGreaterThan(Months.THREE));
+        assertEquals(false, Months.TWO.isGreaterThan(Months.THREE));
+        assertEquals(true, Months.ONE.isGreaterThan(null));
+        assertEquals(false, Months.months(-1).isGreaterThan(null));
     }
 
     @Test public void testIsLessThan() {
-NoAssert.donothing(false, Months.THREE.isLessThan(Months.TWO));
+        assertEquals(false, Months.THREE.isLessThan(Months.TWO));
 NoAssert.donothing(false, Months.THREE.isLessThan(Months.THREE));
 NoAssert.donothing(true, Months.TWO.isLessThan(Months.THREE));
 NoAssert.donothing(false, Months.ONE.isLessThan(null));
-NoAssert.donothing(true, Months.months(-1).isLessThan(null));
+        assertEquals(true, Months.months(-1).isLessThan(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString() {
         Months test = Months.months(20);
-NoAssert.donothing("P20M", test.toString());
+        assertEquals("P20M", test.toString());
         
         test = Months.months(-20);
-NoAssert.donothing("P-20M", test.toString());
+        assertEquals("P-20M", test.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -287,17 +287,17 @@ NoAssert.donothing("P-20M", test.toString());
         Months result = (Months) ois.readObject();
         ois.close();
         
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPlus_int() {
         Months test2 = Months.months(2);
         Months result = test2.plus(3);
-NoAssert.donothing(2, test2.getMonths());
+        assertEquals(2, test2.getMonths());
 NoAssert.donothing(5, result.getMonths());
         
-NoAssert.donothing(1, Months.ONE.plus(0).getMonths());
+        assertEquals(1, Months.ONE.plus(0).getMonths());
         
         try {
             Months.MAX_VALUE.plus(1);
@@ -311,12 +311,12 @@ NoAssert.donothing(1, Months.ONE.plus(0).getMonths());
         Months test2 = Months.months(2);
         Months test3 = Months.months(3);
         Months result = test2.plus(test3);
-NoAssert.donothing(2, test2.getMonths());
-NoAssert.donothing(3, test3.getMonths());
-NoAssert.donothing(5, result.getMonths());
+        assertEquals(2, test2.getMonths());
+        assertEquals(3, test3.getMonths());
+        assertEquals(5, result.getMonths());
         
-NoAssert.donothing(1, Months.ONE.plus(Months.ZERO).getMonths());
-NoAssert.donothing(1, Months.ONE.plus((Months) null).getMonths());
+        assertEquals(1, Months.ONE.plus(Months.ZERO).getMonths());
+        assertEquals(1, Months.ONE.plus((Months) null).getMonths());
         
         try {
             Months.MAX_VALUE.plus(Months.ONE);
@@ -329,10 +329,10 @@ NoAssert.donothing(1, Months.ONE.plus((Months) null).getMonths());
     @Test public void testMinus_int() {
         Months test2 = Months.months(2);
         Months result = test2.minus(3);
-NoAssert.donothing(2, test2.getMonths());
-NoAssert.donothing(-1, result.getMonths());
+        assertEquals(2, test2.getMonths());
+        assertEquals(-1, result.getMonths());
         
-NoAssert.donothing(1, Months.ONE.minus(0).getMonths());
+        assertEquals(1, Months.ONE.minus(0).getMonths());
         
         try {
             Months.MIN_VALUE.minus(1);
@@ -346,12 +346,12 @@ NoAssert.donothing(1, Months.ONE.minus(0).getMonths());
         Months test2 = Months.months(2);
         Months test3 = Months.months(3);
         Months result = test2.minus(test3);
-NoAssert.donothing(2, test2.getMonths());
+        assertEquals(2, test2.getMonths());
 NoAssert.donothing(3, test3.getMonths());
-NoAssert.donothing(-1, result.getMonths());
+        assertEquals(-1, result.getMonths());
         
-NoAssert.donothing(1, Months.ONE.minus(Months.ZERO).getMonths());
-NoAssert.donothing(1, Months.ONE.minus((Months) null).getMonths());
+        assertEquals(1, Months.ONE.minus(Months.ZERO).getMonths());
+        assertEquals(1, Months.ONE.minus((Months) null).getMonths());
         
         try {
             Months.MIN_VALUE.minus(Months.ONE);
@@ -365,8 +365,8 @@ NoAssert.donothing(1, Months.ONE.minus((Months) null).getMonths());
         Months test = Months.months(2);
 NoAssert.donothing(6, test.multipliedBy(3).getMonths());
 NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(-6, test.multipliedBy(-3).getMonths());
-NoAssert.donothing(test, test.multipliedBy(1));
+        assertEquals(-6, test.multipliedBy(-3).getMonths());
+        assertSame(test, test.multipliedBy(1));
         
         Months halfMax = Months.months(Integer.MAX_VALUE / 2 + 1);
         try {
@@ -379,13 +379,13 @@ NoAssert.donothing(test, test.multipliedBy(1));
 
     @Test public void testDividedBy_int() {
         Months test = Months.months(12);
-NoAssert.donothing(6, test.dividedBy(2).getMonths());
-NoAssert.donothing(12, test.getMonths());
-NoAssert.donothing(4, test.dividedBy(3).getMonths());
-NoAssert.donothing(3, test.dividedBy(4).getMonths());
-NoAssert.donothing(2, test.dividedBy(5).getMonths());
-NoAssert.donothing(2, test.dividedBy(6).getMonths());
-NoAssert.donothing(test, test.dividedBy(1));
+        assertEquals(6, test.dividedBy(2).getMonths());
+        assertEquals(12, test.getMonths());
+        assertEquals(4, test.dividedBy(3).getMonths());
+        assertEquals(3, test.dividedBy(4).getMonths());
+        assertEquals(2, test.dividedBy(5).getMonths());
+        assertEquals(2, test.dividedBy(6).getMonths());
+        assertSame(test, test.dividedBy(1));
         
         try {
             Months.ONE.dividedBy(0);
@@ -397,8 +397,8 @@ NoAssert.donothing(test, test.dividedBy(1));
 
     @Test public void testNegated() {
         Months test = Months.months(12);
-NoAssert.donothing(-12, test.negated().getMonths());
-NoAssert.donothing(12, test.getMonths());
+        assertEquals(-12, test.negated().getMonths());
+        assertEquals(12, test.getMonths());
         
         try {
             Months.MIN_VALUE.negated();
@@ -413,7 +413,7 @@ NoAssert.donothing(12, test.getMonths());
         Months test = Months.months(3);
         LocalDate date = new LocalDate(2006, 6, 1);
         LocalDate expected = new LocalDate(2006, 9, 1);
-NoAssert.donothing(expected, date.plus(test));
+        assertEquals(expected, date.plus(test));
     }
 
 }

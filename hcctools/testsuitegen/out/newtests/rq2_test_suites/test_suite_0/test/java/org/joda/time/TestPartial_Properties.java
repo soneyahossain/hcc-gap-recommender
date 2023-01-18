@@ -106,29 +106,29 @@ public class TestPartial_Properties  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetHour() {
         Partial test = new Partial(TYPES, VALUES);
-NoAssert.donothing(test.getChronology().hourOfDay(), test.property(DateTimeFieldType.hourOfDay()).getField());
-NoAssert.donothing("hourOfDay", test.property(DateTimeFieldType.hourOfDay()).getName());
-NoAssert.donothing("Property[hourOfDay]", test.property(DateTimeFieldType.hourOfDay()).toString());
-NoAssert.donothing(test, test.property(DateTimeFieldType.hourOfDay()).getReadablePartial());
-NoAssert.donothing(test, test.property(DateTimeFieldType.hourOfDay()).getPartial());
-NoAssert.donothing(10, test.property(DateTimeFieldType.hourOfDay()).get());
-NoAssert.donothing("10", test.property(DateTimeFieldType.hourOfDay()).getAsString());
-NoAssert.donothing("10", test.property(DateTimeFieldType.hourOfDay()).getAsText());
-NoAssert.donothing("10", test.property(DateTimeFieldType.hourOfDay()).getAsText(Locale.FRENCH));
-NoAssert.donothing("10", test.property(DateTimeFieldType.hourOfDay()).getAsShortText());
-NoAssert.donothing("10", test.property(DateTimeFieldType.hourOfDay()).getAsShortText(Locale.FRENCH));
+        assertSame(test.getChronology().hourOfDay(), test.property(DateTimeFieldType.hourOfDay()).getField());
+        assertEquals("hourOfDay", test.property(DateTimeFieldType.hourOfDay()).getName());
+        assertEquals("Property[hourOfDay]", test.property(DateTimeFieldType.hourOfDay()).toString());
+        assertSame(test, test.property(DateTimeFieldType.hourOfDay()).getReadablePartial());
+        assertSame(test, test.property(DateTimeFieldType.hourOfDay()).getPartial());
+        assertEquals(10, test.property(DateTimeFieldType.hourOfDay()).get());
+        assertEquals("10", test.property(DateTimeFieldType.hourOfDay()).getAsString());
+        assertEquals("10", test.property(DateTimeFieldType.hourOfDay()).getAsText());
+        assertEquals("10", test.property(DateTimeFieldType.hourOfDay()).getAsText(Locale.FRENCH));
+        assertEquals("10", test.property(DateTimeFieldType.hourOfDay()).getAsShortText());
+        assertEquals("10", test.property(DateTimeFieldType.hourOfDay()).getAsShortText(Locale.FRENCH));
 NoAssert.donothing(test.getChronology().hours(), test.property(DateTimeFieldType.hourOfDay()).getDurationField());
 NoAssert.donothing(test.getChronology().days(), test.property(DateTimeFieldType.hourOfDay()).getRangeDurationField());
-NoAssert.donothing(2, test.property(DateTimeFieldType.hourOfDay()).getMaximumTextLength(null));
+        assertEquals(2, test.property(DateTimeFieldType.hourOfDay()).getMaximumTextLength(null));
 NoAssert.donothing(2, test.property(DateTimeFieldType.hourOfDay()).getMaximumShortTextLength(null));
     }
 
     @Test public void testPropertyGetMaxMinValuesHour() {
         Partial test = new Partial(TYPES, VALUES);
-NoAssert.donothing(0, test.property(DateTimeFieldType.hourOfDay()).getMinimumValue());
-NoAssert.donothing(0, test.property(DateTimeFieldType.hourOfDay()).getMinimumValueOverall());
-NoAssert.donothing(23, test.property(DateTimeFieldType.hourOfDay()).getMaximumValue());
-NoAssert.donothing(23, test.property(DateTimeFieldType.hourOfDay()).getMaximumValueOverall());
+        assertEquals(0, test.property(DateTimeFieldType.hourOfDay()).getMinimumValue());
+        assertEquals(0, test.property(DateTimeFieldType.hourOfDay()).getMinimumValueOverall());
+        assertEquals(23, test.property(DateTimeFieldType.hourOfDay()).getMaximumValue());
+        assertEquals(23, test.property(DateTimeFieldType.hourOfDay()).getMaximumValueOverall());
     }
 
 //    @Test public void testPropertyAddHour() {
@@ -237,9 +237,9 @@ NoAssert.donothing(23, test.property(DateTimeFieldType.hourOfDay()).getMaximumVa
     @Test public void testPropertyCompareToHour() {
         Partial test1 = new Partial(TYPES, VALUES1);
         Partial test2 = new Partial(TYPES, VALUES2);
-NoAssert.donothing(true, test1.property(DateTimeFieldType.hourOfDay()).compareTo(test2) < 0);
-NoAssert.donothing(true, test2.property(DateTimeFieldType.hourOfDay()).compareTo(test1) > 0);
-NoAssert.donothing(true, test1.property(DateTimeFieldType.hourOfDay()).compareTo(test1) == 0);
+        assertEquals(true, test1.property(DateTimeFieldType.hourOfDay()).compareTo(test2) < 0);
+        assertEquals(true, test2.property(DateTimeFieldType.hourOfDay()).compareTo(test1) > 0);
+        assertEquals(true, test1.property(DateTimeFieldType.hourOfDay()).compareTo(test1) == 0);
         try {
             test1.property(DateTimeFieldType.hourOfDay()).compareTo((ReadablePartial) null);
             fail();
@@ -247,9 +247,9 @@ NoAssert.donothing(true, test1.property(DateTimeFieldType.hourOfDay()).compareTo
         
         DateTime dt1 = new DateTime(TEST_TIME1);
         DateTime dt2 = new DateTime(TEST_TIME2);
-NoAssert.donothing(true, test1.property(DateTimeFieldType.hourOfDay()).compareTo(dt2) < 0);
-NoAssert.donothing(true, test2.property(DateTimeFieldType.hourOfDay()).compareTo(dt1) > 0);
-NoAssert.donothing(true, test1.property(DateTimeFieldType.hourOfDay()).compareTo(dt1) == 0);
+        assertEquals(true, test1.property(DateTimeFieldType.hourOfDay()).compareTo(dt2) < 0);
+        assertEquals(true, test2.property(DateTimeFieldType.hourOfDay()).compareTo(dt1) > 0);
+        assertEquals(true, test1.property(DateTimeFieldType.hourOfDay()).compareTo(dt1) == 0);
         try {
             test1.property(DateTimeFieldType.hourOfDay()).compareTo((ReadableInstant) null);
             fail();
@@ -259,29 +259,29 @@ NoAssert.donothing(true, test1.property(DateTimeFieldType.hourOfDay()).compareTo
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetMinute() {
         Partial test = new Partial(TYPES, VALUES);
-NoAssert.donothing(test.getChronology().minuteOfHour(), test.property(DateTimeFieldType.minuteOfHour()).getField());
-NoAssert.donothing("minuteOfHour", test.property(DateTimeFieldType.minuteOfHour()).getName());
-NoAssert.donothing("Property[minuteOfHour]", test.property(DateTimeFieldType.minuteOfHour()).toString());
-NoAssert.donothing(test, test.property(DateTimeFieldType.minuteOfHour()).getReadablePartial());
-NoAssert.donothing(test, test.property(DateTimeFieldType.minuteOfHour()).getPartial());
-NoAssert.donothing(20, test.property(DateTimeFieldType.minuteOfHour()).get());
+        assertSame(test.getChronology().minuteOfHour(), test.property(DateTimeFieldType.minuteOfHour()).getField());
+        assertEquals("minuteOfHour", test.property(DateTimeFieldType.minuteOfHour()).getName());
+        assertEquals("Property[minuteOfHour]", test.property(DateTimeFieldType.minuteOfHour()).toString());
+        assertSame(test, test.property(DateTimeFieldType.minuteOfHour()).getReadablePartial());
+        assertSame(test, test.property(DateTimeFieldType.minuteOfHour()).getPartial());
+        assertEquals(20, test.property(DateTimeFieldType.minuteOfHour()).get());
 NoAssert.donothing("20", test.property(DateTimeFieldType.minuteOfHour()).getAsString());
-NoAssert.donothing("20", test.property(DateTimeFieldType.minuteOfHour()).getAsText());
-NoAssert.donothing("20", test.property(DateTimeFieldType.minuteOfHour()).getAsText(Locale.FRENCH));
-NoAssert.donothing("20", test.property(DateTimeFieldType.minuteOfHour()).getAsShortText());
-NoAssert.donothing("20", test.property(DateTimeFieldType.minuteOfHour()).getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().minutes(), test.property(DateTimeFieldType.minuteOfHour()).getDurationField());
-NoAssert.donothing(test.getChronology().hours(), test.property(DateTimeFieldType.minuteOfHour()).getRangeDurationField());
-NoAssert.donothing(2, test.property(DateTimeFieldType.minuteOfHour()).getMaximumTextLength(null));
-NoAssert.donothing(2, test.property(DateTimeFieldType.minuteOfHour()).getMaximumShortTextLength(null));
+        assertEquals("20", test.property(DateTimeFieldType.minuteOfHour()).getAsText());
+        assertEquals("20", test.property(DateTimeFieldType.minuteOfHour()).getAsText(Locale.FRENCH));
+        assertEquals("20", test.property(DateTimeFieldType.minuteOfHour()).getAsShortText());
+        assertEquals("20", test.property(DateTimeFieldType.minuteOfHour()).getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().minutes(), test.property(DateTimeFieldType.minuteOfHour()).getDurationField());
+        assertEquals(test.getChronology().hours(), test.property(DateTimeFieldType.minuteOfHour()).getRangeDurationField());
+        assertEquals(2, test.property(DateTimeFieldType.minuteOfHour()).getMaximumTextLength(null));
+        assertEquals(2, test.property(DateTimeFieldType.minuteOfHour()).getMaximumShortTextLength(null));
     }
 
     @Test public void testPropertyGetMaxMinValuesMinute() {
         Partial test = new Partial(TYPES, VALUES);
-NoAssert.donothing(0, test.property(DateTimeFieldType.minuteOfHour()).getMinimumValue());
-NoAssert.donothing(0, test.property(DateTimeFieldType.minuteOfHour()).getMinimumValueOverall());
-NoAssert.donothing(59, test.property(DateTimeFieldType.minuteOfHour()).getMaximumValue());
-NoAssert.donothing(59, test.property(DateTimeFieldType.minuteOfHour()).getMaximumValueOverall());
+        assertEquals(0, test.property(DateTimeFieldType.minuteOfHour()).getMinimumValue());
+        assertEquals(0, test.property(DateTimeFieldType.minuteOfHour()).getMinimumValueOverall());
+        assertEquals(59, test.property(DateTimeFieldType.minuteOfHour()).getMaximumValue());
+        assertEquals(59, test.property(DateTimeFieldType.minuteOfHour()).getMaximumValueOverall());
     }
 
 //    @Test public void testPropertyAddMinute() {
@@ -409,9 +409,9 @@ NoAssert.donothing(59, test.property(DateTimeFieldType.minuteOfHour()).getMaximu
     @Test public void testPropertyCompareToMinute() {
         Partial test1 = new Partial(TYPES, VALUES1);
         Partial test2 = new Partial(TYPES, VALUES2);
-NoAssert.donothing(true, test1.property(DateTimeFieldType.minuteOfHour()).compareTo(test2) < 0);
+        assertEquals(true, test1.property(DateTimeFieldType.minuteOfHour()).compareTo(test2) < 0);
 NoAssert.donothing(true, test2.property(DateTimeFieldType.minuteOfHour()).compareTo(test1) > 0);
-NoAssert.donothing(true, test1.property(DateTimeFieldType.minuteOfHour()).compareTo(test1) == 0);
+        assertEquals(true, test1.property(DateTimeFieldType.minuteOfHour()).compareTo(test1) == 0);
         try {
             test1.property(DateTimeFieldType.minuteOfHour()).compareTo((ReadablePartial) null);
             fail();
@@ -419,9 +419,9 @@ NoAssert.donothing(true, test1.property(DateTimeFieldType.minuteOfHour()).compar
         
         DateTime dt1 = new DateTime(TEST_TIME1);
         DateTime dt2 = new DateTime(TEST_TIME2);
-NoAssert.donothing(true, test1.property(DateTimeFieldType.minuteOfHour()).compareTo(dt2) < 0);
+        assertEquals(true, test1.property(DateTimeFieldType.minuteOfHour()).compareTo(dt2) < 0);
 NoAssert.donothing(true, test2.property(DateTimeFieldType.minuteOfHour()).compareTo(dt1) > 0);
-NoAssert.donothing(true, test1.property(DateTimeFieldType.minuteOfHour()).compareTo(dt1) == 0);
+        assertEquals(true, test1.property(DateTimeFieldType.minuteOfHour()).compareTo(dt1) == 0);
         try {
             test1.property(DateTimeFieldType.minuteOfHour()).compareTo((ReadableInstant) null);
             fail();
@@ -430,9 +430,9 @@ NoAssert.donothing(true, test1.property(DateTimeFieldType.minuteOfHour()).compar
 
     //-----------------------------------------------------------------------
     private void check(Partial test, int hour, int min, int sec, int milli) {
-NoAssert.donothing(hour, test.get(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(min, test.get(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(sec, test.get(DateTimeFieldType.secondOfMinute()));
-NoAssert.donothing(milli, test.get(DateTimeFieldType.millisOfSecond()));
+        assertEquals(hour, test.get(DateTimeFieldType.hourOfDay()));
+        assertEquals(min, test.get(DateTimeFieldType.minuteOfHour()));
+        assertEquals(sec, test.get(DateTimeFieldType.secondOfMinute()));
+        assertEquals(milli, test.get(DateTimeFieldType.millisOfSecond()));
     }
 }

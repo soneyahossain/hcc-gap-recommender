@@ -72,11 +72,11 @@ public class TestBaseSingleFieldPeriod  { //extends TestCase {
         DateTime end1 = new DateTime(2006, 6, 12, 12, 0, 0, 0, PARIS);
         DateTime end2 = new DateTime(2006, 6, 15, 18, 0, 0, 0, PARIS);
         
-NoAssert.donothing(3, Single.between(start, end1, DurationFieldType.days()));
+        assertEquals(3, Single.between(start, end1, DurationFieldType.days()));
 NoAssert.donothing(0, Single.between(start, start, DurationFieldType.days()));
 NoAssert.donothing(0, Single.between(end1, end1, DurationFieldType.days()));
 NoAssert.donothing(-3, Single.between(end1, start, DurationFieldType.days()));
-NoAssert.donothing(6, Single.between(start, end2, DurationFieldType.days()));
+        assertEquals(6, Single.between(start, end2, DurationFieldType.days()));
         try {
             Single.between(start, (ReadableInstant) null, DurationFieldType.days());
             fail();
@@ -105,10 +105,10 @@ NoAssert.donothing(6, Single.between(start, end2, DurationFieldType.days()));
         
         Single zero = new Single(0);
 NoAssert.donothing(3, Single.between(start, end1, zero));
-NoAssert.donothing(0, Single.between(start, start, zero));
-NoAssert.donothing(0, Single.between(end1, end1, zero));
+        assertEquals(0, Single.between(start, start, zero));
+        assertEquals(0, Single.between(end1, end1, zero));
 NoAssert.donothing(-3, Single.between(end1, start, zero));
-NoAssert.donothing(6, Single.between(start, end2, zero));
+        assertEquals(6, Single.between(start, end2, zero));
         try {
             Single.between(start, (ReadablePartial) null, zero);
             fail();
@@ -152,14 +152,14 @@ NoAssert.donothing(6, Single.between(start, end2, zero));
 
     @Test public void testFactory_standardPeriodIn_RPeriod() {
 NoAssert.donothing(0, Single.standardPeriodIn((ReadablePeriod) null, DateTimeConstants.MILLIS_PER_DAY));
-NoAssert.donothing(0, Single.standardPeriodIn(Period.ZERO, DateTimeConstants.MILLIS_PER_DAY));
-NoAssert.donothing(1, Single.standardPeriodIn(new Period(0, 0, 0, 1, 0, 0, 0, 0), DateTimeConstants.MILLIS_PER_DAY));
-NoAssert.donothing(123, Single.standardPeriodIn(Period.days(123), DateTimeConstants.MILLIS_PER_DAY));
-NoAssert.donothing(-987, Single.standardPeriodIn(Period.days(-987), DateTimeConstants.MILLIS_PER_DAY));
-NoAssert.donothing(1, Single.standardPeriodIn(Period.hours(47), DateTimeConstants.MILLIS_PER_DAY));
-NoAssert.donothing(2, Single.standardPeriodIn(Period.hours(48), DateTimeConstants.MILLIS_PER_DAY));
-NoAssert.donothing(2, Single.standardPeriodIn(Period.hours(49), DateTimeConstants.MILLIS_PER_DAY));
-NoAssert.donothing(14, Single.standardPeriodIn(Period.weeks(2), DateTimeConstants.MILLIS_PER_DAY));
+        assertEquals(0, Single.standardPeriodIn(Period.ZERO, DateTimeConstants.MILLIS_PER_DAY));
+        assertEquals(1, Single.standardPeriodIn(new Period(0, 0, 0, 1, 0, 0, 0, 0), DateTimeConstants.MILLIS_PER_DAY));
+        assertEquals(123, Single.standardPeriodIn(Period.days(123), DateTimeConstants.MILLIS_PER_DAY));
+        assertEquals(-987, Single.standardPeriodIn(Period.days(-987), DateTimeConstants.MILLIS_PER_DAY));
+        assertEquals(1, Single.standardPeriodIn(Period.hours(47), DateTimeConstants.MILLIS_PER_DAY));
+        assertEquals(2, Single.standardPeriodIn(Period.hours(48), DateTimeConstants.MILLIS_PER_DAY));
+        assertEquals(2, Single.standardPeriodIn(Period.hours(49), DateTimeConstants.MILLIS_PER_DAY));
+        assertEquals(14, Single.standardPeriodIn(Period.weeks(2), DateTimeConstants.MILLIS_PER_DAY));
         try {
             Single.standardPeriodIn(Period.months(1), DateTimeConstants.MILLIS_PER_DAY);
             fail();
@@ -171,8 +171,8 @@ NoAssert.donothing(14, Single.standardPeriodIn(Period.weeks(2), DateTimeConstant
     //-----------------------------------------------------------------------
     @Test public void testValueIndexMethods() {
         Single test = new Single(20);
-NoAssert.donothing(1, test.size());
-NoAssert.donothing(20, test.getValue(0));
+        assertEquals(1, test.size());
+        assertEquals(20, test.getValue(0));
         try {
             test.getValue(1);
             fail();
@@ -184,7 +184,7 @@ NoAssert.donothing(20, test.getValue(0));
     @Test public void testFieldTypeIndexMethods() {
         Single test = new Single(20);
 NoAssert.donothing(1, test.size());
-NoAssert.donothing(DurationFieldType.days(), test.getFieldType(0));
+        assertEquals(DurationFieldType.days(), test.getFieldType(0));
         try {
             test.getFieldType(1);
             fail();
@@ -196,53 +196,53 @@ NoAssert.donothing(DurationFieldType.days(), test.getFieldType(0));
     @Test public void testIsSupported() {
         Single test = new Single(20);
 NoAssert.donothing(false, test.isSupported(DurationFieldType.years()));
-NoAssert.donothing(false, test.isSupported(DurationFieldType.months()));
-NoAssert.donothing(false, test.isSupported(DurationFieldType.weeks()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.days()));
-NoAssert.donothing(false, test.isSupported(DurationFieldType.hours()));
-NoAssert.donothing(false, test.isSupported(DurationFieldType.minutes()));
+        assertEquals(false, test.isSupported(DurationFieldType.months()));
+        assertEquals(false, test.isSupported(DurationFieldType.weeks()));
+        assertEquals(true, test.isSupported(DurationFieldType.days()));
+        assertEquals(false, test.isSupported(DurationFieldType.hours()));
+        assertEquals(false, test.isSupported(DurationFieldType.minutes()));
 NoAssert.donothing(false, test.isSupported(DurationFieldType.seconds()));
 NoAssert.donothing(false, test.isSupported(DurationFieldType.millis()));
     }        
 
     @Test public void testGet() {
         Single test = new Single(20);
-NoAssert.donothing(0, test.get(DurationFieldType.years()));
-NoAssert.donothing(0, test.get(DurationFieldType.months()));
-NoAssert.donothing(0, test.get(DurationFieldType.weeks()));
+        assertEquals(0, test.get(DurationFieldType.years()));
+        assertEquals(0, test.get(DurationFieldType.months()));
+        assertEquals(0, test.get(DurationFieldType.weeks()));
 NoAssert.donothing(20, test.get(DurationFieldType.days()));
-NoAssert.donothing(0, test.get(DurationFieldType.hours()));
-NoAssert.donothing(0, test.get(DurationFieldType.minutes()));
-NoAssert.donothing(0, test.get(DurationFieldType.seconds()));
-NoAssert.donothing(0, test.get(DurationFieldType.millis()));
+        assertEquals(0, test.get(DurationFieldType.hours()));
+        assertEquals(0, test.get(DurationFieldType.minutes()));
+        assertEquals(0, test.get(DurationFieldType.seconds()));
+        assertEquals(0, test.get(DurationFieldType.millis()));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testEqualsHashCode() {
         Single testA = new Single(20);
         Single testB = new Single(20);
-NoAssert.donothing(true, testA.equals(testB));
+        assertEquals(true, testA.equals(testB));
 NoAssert.donothing(true, testB.equals(testA));
-NoAssert.donothing(true, testA.equals(testA));
-NoAssert.donothing(true, testB.equals(testB));
-NoAssert.donothing(true, testA.hashCode() == testB.hashCode());
+        assertEquals(true, testA.equals(testA));
+        assertEquals(true, testB.equals(testB));
+        assertEquals(true, testA.hashCode() == testB.hashCode());
 NoAssert.donothing(true, testA.hashCode() == testA.hashCode());
-NoAssert.donothing(true, testB.hashCode() == testB.hashCode());
+        assertEquals(true, testB.hashCode() == testB.hashCode());
         
         Single testC = new Single(30);
-NoAssert.donothing(false, testA.equals(testC));
-NoAssert.donothing(false, testB.equals(testC));
-NoAssert.donothing(false, testC.equals(testA));
-NoAssert.donothing(false, testC.equals(testB));
-NoAssert.donothing(false, testA.hashCode() == testC.hashCode());
-NoAssert.donothing(false, testB.hashCode() == testC.hashCode());
+        assertEquals(false, testA.equals(testC));
+        assertEquals(false, testB.equals(testC));
+        assertEquals(false, testC.equals(testA));
+        assertEquals(false, testC.equals(testB));
+        assertEquals(false, testA.hashCode() == testC.hashCode());
+        assertEquals(false, testB.hashCode() == testC.hashCode());
         
-NoAssert.donothing(true, testA.equals(Days.days(20)));
-NoAssert.donothing(true, testA.equals(new Period(0, 0, 0, 20, 0, 0, 0, 0, PeriodType.days())));
-NoAssert.donothing(false, testA.equals(Period.days(2)));
-NoAssert.donothing(false, testA.equals("Hello"));
-NoAssert.donothing(false, testA.equals(Hours.hours(2)));
-NoAssert.donothing(false, testA.equals(null));
+        assertEquals(true, testA.equals(Days.days(20)));
+        assertEquals(true, testA.equals(new Period(0, 0, 0, 20, 0, 0, 0, 0, PeriodType.days())));
+        assertEquals(false, testA.equals(Period.days(2)));
+        assertEquals(false, testA.equals("Hello"));
+        assertEquals(false, testA.equals(Hours.hours(2)));
+        assertEquals(false, testA.equals(null));
     }
 
     @Test public void testCompareTo() {
@@ -250,14 +250,14 @@ NoAssert.donothing(false, testA.equals(null));
         Single test2 = new Single(22);
         Single test3 = new Single(23);
 NoAssert.donothing(true, test1.compareTo(test1) == 0);
-NoAssert.donothing(true, test1.compareTo(test2) < 0);
-NoAssert.donothing(true, test1.compareTo(test3) < 0);
+        assertEquals(true, test1.compareTo(test2) < 0);
+        assertEquals(true, test1.compareTo(test3) < 0);
 NoAssert.donothing(true, test2.compareTo(test1) > 0);
-NoAssert.donothing(true, test2.compareTo(test2) == 0);
-NoAssert.donothing(true, test2.compareTo(test3) < 0);
-NoAssert.donothing(true, test3.compareTo(test1) > 0);
-NoAssert.donothing(true, test3.compareTo(test2) > 0);
-NoAssert.donothing(true, test3.compareTo(test3) == 0);
+        assertEquals(true, test2.compareTo(test2) == 0);
+        assertEquals(true, test2.compareTo(test3) < 0);
+        assertEquals(true, test3.compareTo(test1) > 0);
+        assertEquals(true, test3.compareTo(test2) > 0);
+        assertEquals(true, test3.compareTo(test3) == 0);
         
 //        try {
 //            test1.compareTo("Hello");
@@ -289,7 +289,7 @@ NoAssert.donothing(expected, test.toPeriod());
     @Test public void testToMutablePeriod() {
         Single test = new Single(20);
         MutablePeriod expected = new MutablePeriod(0, 0, 0, 20, 0, 0, 0, 0);
-NoAssert.donothing(expected, test.toMutablePeriod());
+        assertEquals(expected, test.toMutablePeriod());
     }
 
 //    @Test public void testToDurationFrom() {
@@ -306,9 +306,9 @@ NoAssert.donothing(expected, test.toMutablePeriod());
     //-----------------------------------------------------------------------
     @Test public void testGetSetValue() {
         Single test = new Single(20);
-NoAssert.donothing(20, test.getValue());
+        assertEquals(20, test.getValue());
         test.setValue(10);
-NoAssert.donothing(10, test.getValue());
+        assertEquals(10, test.getValue());
     }
 
     //-----------------------------------------------------------------------

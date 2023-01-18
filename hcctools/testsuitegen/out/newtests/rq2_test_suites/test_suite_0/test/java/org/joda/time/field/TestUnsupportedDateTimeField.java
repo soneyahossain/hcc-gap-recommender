@@ -70,9 +70,9 @@ public class TestUnsupportedDateTimeField {
 
         try {
             UnsupportedDateTimeField.getInstance(null, null);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (IllegalArgumentException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
     }
 
@@ -99,7 +99,7 @@ NoAssert.donothing(true);
         DateTimeField fieldTwo = UnsupportedDateTimeField.getInstance(
                 dateTimeFieldTypeOne, UnsupportedDurationField
                         .getInstance(weeks));
-NoAssert.donothing(fieldOne, fieldTwo);
+        assertSame(fieldOne, fieldTwo);
 
         /**
          * The fields returned by getInstance should NOT be the same when the
@@ -108,7 +108,7 @@ NoAssert.donothing(fieldOne, fieldTwo);
         DateTimeField fieldThree = UnsupportedDateTimeField.getInstance(
                 dateTimeFieldTypeOne, UnsupportedDurationField
                         .getInstance(months));
-NoAssert.donothing(fieldOne, fieldThree);
+        assertNotSame(fieldOne, fieldThree);
     }
 
     /**
@@ -121,7 +121,7 @@ NoAssert.donothing(fieldOne, fieldThree);
                 dateTimeFieldTypeOne, UnsupportedDurationField
                         .getInstance(weeks));
 
-NoAssert.donothing(fieldOne.getName(), dateTimeFieldTypeOne.getName());
+        assertSame(fieldOne.getName(), dateTimeFieldTypeOne.getName());
     }
 
     /**
@@ -134,7 +134,7 @@ NoAssert.donothing(fieldOne.getName(), dateTimeFieldTypeOne.getName());
                 dateTimeFieldTypeOne, UnsupportedDurationField
                         .getInstance(weeks));
 NoAssert.donothing(fieldOne.isLenient());
-NoAssert.donothing(fieldOne.isSupported());
+        assertFalse(fieldOne.isSupported());
     }
 
     /**
@@ -149,7 +149,7 @@ NoAssert.donothing(fieldOne.isSupported());
                 dateTimeFieldTypeOne, UnsupportedDurationField
                         .getInstance(weeks));
 
-NoAssert.donothing(fieldOne.getLeapDurationField());
+        assertNull(fieldOne.getLeapDurationField());
 NoAssert.donothing(fieldOne.getRangeDurationField());
     }
 
@@ -193,16 +193,16 @@ NoAssert.donothing(fieldOne.getRangeDurationField());
         // valueToAdd)
         try {
             fieldOne.add(localTime, 0, new int[] { 0, 100 }, 100);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
         // addWrapField(long instant, int value)
         try {
             fieldOne.addWrapField(100000L, 250);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
         // addWrapField(ReadablePartial instant, int fieldIndex, int[] values,
         // int valueToAdd)
@@ -210,47 +210,47 @@ NoAssert.donothing(true);
             fieldOne.addWrapField(localTime, 0, new int[] { 0, 100 }, 100);
 NoAssert.donothing(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
         // addWrapPartial(ReadablePartial instant, int fieldIndex, int[] values,
         // int valueToAdd)
         try {
             fieldOne.addWrapPartial(localTime, 0, new int[] { 0, 100 }, 100);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
         // UnsupportedDateTimeField.get(long instant)
         try {
             fieldOne.get(1000L);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getAsShortText(int fieldValue,
         // Locale locale)
         try {
             fieldOne.getAsShortText(0, Locale.getDefault());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getAsShortText(long instant)
         try {
             fieldOne.getAsShortText(100000L);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getAsShortText(long instant, Locale locale)
         try {
             fieldOne.getAsShortText(100000L, Locale.getDefault());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getAsShortText(ReadablePartial partial,
@@ -258,41 +258,41 @@ NoAssert.donothing(true);
         // Locale locale)
         try {
             fieldOne.getAsShortText(localTime, 0, Locale.getDefault());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getAsShortText(ReadablePartial partial,
         // Locale locale)
         try {
             fieldOne.getAsShortText(localTime, Locale.getDefault());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getAsText(int fieldValue,
         // Locale locale)
         try {
             fieldOne.getAsText(0, Locale.getDefault());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getAsText(long instant)
         try {
             fieldOne.getAsText(1000L);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getAsText(long instant, Locale locale)
         try {
             fieldOne.getAsText(1000L, Locale.getDefault());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
 NoAssert.donothing(true);
         }
@@ -302,7 +302,7 @@ NoAssert.donothing(true);
         // Locale locale)
         try {
             fieldOne.getAsText(localTime, 0, Locale.getDefault());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
 NoAssert.donothing(true);
         }
@@ -311,16 +311,16 @@ NoAssert.donothing(true);
         // Locale locale)
         try {
             fieldOne.getAsText(localTime, Locale.getDefault());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getLeapAmount(long instant) is unsupported
         // and should always thrown an UnsupportedOperationException
         try {
             fieldOne.getLeapAmount(System.currentTimeMillis());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
 NoAssert.donothing(true);
         }
@@ -330,7 +330,7 @@ NoAssert.donothing(true);
         // UnsupportedOperationException
         try {
             fieldOne.getMaximumShortTextLength(Locale.getDefault());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
 NoAssert.donothing(true);
         }
@@ -340,18 +340,18 @@ NoAssert.donothing(true);
         // UnsupportedOperationException
         try {
             fieldOne.getMaximumTextLength(Locale.getDefault());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getMaximumValue() is unsupported
         // and should always thrown an UnsupportedOperationException
         try {
             fieldOne.getMaximumValue();
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getMaximumValue(long instant)
@@ -359,9 +359,9 @@ NoAssert.donothing(true);
         // UnsupportedOperationException
         try {
             fieldOne.getMaximumValue(1000000L);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getMaximumValue(ReadablePartial instant)
@@ -369,9 +369,9 @@ NoAssert.donothing(true);
         // UnsupportedOperationException
         try {
             fieldOne.getMaximumValue(localTime);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getMaximumValue(ReadablePartial instant,
@@ -380,7 +380,7 @@ NoAssert.donothing(true);
         // UnsupportedOperationException
         try {
             fieldOne.getMaximumValue(localTime, new int[] { 0 });
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
 NoAssert.donothing(true);
         }
@@ -389,9 +389,9 @@ NoAssert.donothing(true);
         // and should always thrown an UnsupportedOperationException
         try {
             fieldOne.getMinimumValue();
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getMinumumValue(long instant) is unsupported
@@ -400,7 +400,7 @@ NoAssert.donothing(true);
             fieldOne.getMinimumValue(10000000L);
 NoAssert.donothing(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getMinumumValue(ReadablePartial instant)
@@ -408,9 +408,9 @@ NoAssert.donothing(true);
         // UnsupportedOperationException
         try {
             fieldOne.getMinimumValue(localTime);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.getMinumumValue(ReadablePartial instant,
@@ -418,7 +418,7 @@ NoAssert.donothing(true);
         // and should always thrown an UnsupportedOperationException
         try {
             fieldOne.getMinimumValue(localTime, new int[] { 0 });
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
 NoAssert.donothing(true);
         }
@@ -427,18 +427,18 @@ NoAssert.donothing(true);
         // should always thrown an UnsupportedOperationException
         try {
             fieldOne.isLeap(System.currentTimeMillis());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.remainder(long instant) is unsupported and
         // should always thrown an UnsupportedOperationException
         try {
             fieldOne.remainder(1000000L);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.roundCeiling(long instant) is unsupported
@@ -446,9 +446,9 @@ NoAssert.donothing(true);
         // should always thrown an UnsupportedOperationException
         try {
             fieldOne.roundCeiling(1000000L);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.roundFloor(long instant) is unsupported and
@@ -457,7 +457,7 @@ NoAssert.donothing(true);
             fieldOne.roundFloor(1000000L);
 NoAssert.donothing(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.roundHalfCeiling(long instant) is
@@ -465,9 +465,9 @@ NoAssert.donothing(true);
         // should always thrown an UnsupportedOperationException
         try {
             fieldOne.roundHalfCeiling(1000000L);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.roundHalfEven(long instant) is unsupported
@@ -475,9 +475,9 @@ NoAssert.donothing(true);
         // should always thrown an UnsupportedOperationException
         try {
             fieldOne.roundHalfEven(1000000L);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.roundHalfFloor(long instant) is unsupported
@@ -487,7 +487,7 @@ NoAssert.donothing(true);
             fieldOne.roundHalfFloor(1000000L);
 NoAssert.donothing(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.set(long instant, int value) is unsupported
@@ -495,9 +495,9 @@ NoAssert.donothing(true);
         // should always thrown an UnsupportedOperationException
         try {
             fieldOne.set(1000000L, 1000);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.set(long instant, String test) is
@@ -507,7 +507,7 @@ NoAssert.donothing(true);
             fieldOne.set(1000000L, "Unsupported Operation");
 NoAssert.donothing(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.set(long instant, String text, Locale
@@ -519,7 +519,7 @@ NoAssert.donothing(true);
                     .set(1000000L, "Unsupported Operation", Locale.getDefault());
 NoAssert.donothing(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         // UnsupportedDateTimeField.set(ReadablePartial instant,
@@ -529,7 +529,7 @@ NoAssert.donothing(true);
         // should always thrown an UnsupportedOperationException
         try {
             fieldOne.set(localTime, 0, new int[] { 0 }, 10000);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
 NoAssert.donothing(true);
         }
@@ -543,9 +543,9 @@ NoAssert.donothing(true);
         try {
             fieldOne.set(localTime, 0, new int[] { 0 },
                     "Unsupported Operation", Locale.getDefault());
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
     }
 
@@ -572,16 +572,16 @@ NoAssert.donothing(true);
         // try it with an UnsupportedDurationField, then a PreciseDurationField.
         try {
             fieldOne.add(System.currentTimeMillis(), 100);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
         try {
             long currentTime = System.currentTimeMillis();
             long firstComputation = hoursDuration.add(currentTime, 100);
             long secondComputation = fieldTwo.add(currentTime,
                     100);
-NoAssert.donothing(firstComputation,secondComputation);
+            assertEquals(firstComputation,secondComputation);
         } catch (UnsupportedOperationException e) {
 NoAssert.donothing(false);
         }
@@ -593,9 +593,9 @@ NoAssert.donothing(false);
         // try it with an UnsupportedDurationField, then a PreciseDurationField.
         try {
             fieldOne.add(System.currentTimeMillis(), 1000L);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         try {
@@ -604,7 +604,7 @@ NoAssert.donothing(true);
             long secondComputation = fieldTwo.add(currentTime,
                     1000L);
 NoAssert.donothing(firstComputation == secondComputation);
-NoAssert.donothing(firstComputation,secondComputation);
+            assertEquals(firstComputation,secondComputation);
         } catch (UnsupportedOperationException e) {
 NoAssert.donothing(false);
         }
@@ -618,15 +618,15 @@ NoAssert.donothing(false);
             fieldOne.getDifference(100000L, 1000L);
 NoAssert.donothing(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         try {
             int firstDifference = hoursDuration.getDifference(100000L, 1000L);
             int secondDifference = fieldTwo.getDifference(100000L, 1000L);
-NoAssert.donothing(firstDifference,secondDifference);
+            assertEquals(firstDifference,secondDifference);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(false);
+            assertTrue(false);
         }
 
         // UnsupportedDateTimeField.getDifferenceAsLong(long minuendInstant,
@@ -636,17 +636,17 @@ NoAssert.donothing(false);
         // delegated call.
         try {
             fieldOne.getDifferenceAsLong(100000L, 1000L);
-NoAssert.donothing(false);
+            assertTrue(false);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(true);
+            assertTrue(true);
         }
 
         try {
             long firstDifference = hoursDuration.getDifference(100000L, 1000L);
             long secondDifference = fieldTwo.getDifference(100000L, 1000L);
-NoAssert.donothing(firstDifference,secondDifference);
+            assertEquals(firstDifference,secondDifference);
         } catch (UnsupportedOperationException e) {
-NoAssert.donothing(false);
+            assertTrue(false);
         }
     }
 
@@ -663,6 +663,6 @@ NoAssert.donothing(false);
 
         String debugMessage = fieldOne.toString();
 NoAssert.donothing(debugMessage);
-NoAssert.donothing(debugMessage.length() > 0);
+        assertTrue(debugMessage.length() > 0);
     }
 }
