@@ -6,8 +6,11 @@ Once this is done:
 * update the environment variables in the file `experiments/setenv`
 * `cd` into `experiments` and type: ```. setenv```
 
-To build various support libraries:
-```./install_all.sh```
+To build the HCC support libraries:
+```
+cd $HCC_HOME
+./scripts/install_all.sh
+```
 
 To make sure everything is working properly, run the following smoke tests:
 ```
