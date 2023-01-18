@@ -22,7 +22,6 @@ The smoke tests should take approximately 10mns and will exercise an end-to-end 
 You should see output that looks like the following:
 
 ``` PASTE COMPLETE OUTPUT HERE ONCE IT IS STABLE 
-
 *****************************************************************
 Smoke tests for end-to-end checked coverage computation workflow
 *****************************************************************
@@ -77,7 +76,11 @@ Trace file generated: OK
 total 7588
 -rw-rw-r-- 1 stg stg 7768597 Jan 18 20:23 CommandLineTest.trace
 
+==========================================================================================
+[SmokeTest] commons-cli-limited: Slice traces (~10mns)
+==========================================================================================
 
+FIXME: paste the rest of the smoke tests output
 
 
 ```
