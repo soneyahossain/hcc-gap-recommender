@@ -79,8 +79,28 @@ total 7588
 ==========================================================================================
 [SmokeTest] commons-cli-limited: Slice traces (~10mns)
 ==========================================================================================
+Slice file(s) generated: OK
+/home/stg/hcc-gap-recommender/experiments/slices/commons-cli-limited/cli_slices/:
+total 4
+drwxrwxr-x 2 stg stg 4096 Jan 18 20:25 CommandLineTest
 
-FIXME: paste the rest of the smoke tests output
+/home/stg/hcc-gap-recommender/experiments/slices/commons-cli-limited/cli_slices/CommandLineTest:
+total 436
+-rw-rw-r-- 1 stg stg  8939 Jan 18 20:25 CommandLineTest15.txt
+-rw-rw-r-- 1 stg stg  6510 Jan 18 20:25 CommandLineTest14.txt
+-rw-rw-r-- 1 stg stg  7106 Jan 18 20:25 CommandLineTest13.txt
+-rw-rw-r-- 1 stg stg 41426 Jan 18 20:24 CommandLineTest12.txt
+-rw-rw-r-- 1 stg stg 40431 Jan 18 20:24 CommandLineTest11.txt
+-rw-rw-r-- 1 stg stg  5326 Jan 18 20:24 CommandLineTest10.txt
+-rw-rw-r-- 1 stg stg  4012 Jan 18 20:24 CommandLineTest9.txt
+-rw-rw-r-- 1 stg stg  4273 Jan 18 20:24 CommandLineTest8.txt
+-rw-rw-r-- 1 stg stg 44125 Jan 18 20:24 CommandLineTest7.txt
+-rw-rw-r-- 1 stg stg 43454 Jan 18 20:24 CommandLineTest6.txt
+-rw-rw-r-- 1 stg stg 42567 Jan 18 20:23 CommandLineTest5.txt
+-rw-rw-r-- 1 stg stg 43728 Jan 18 20:23 CommandLineTest4.txt
+-rw-rw-r-- 1 stg stg 43592 Jan 18 20:23 CommandLineTest3.txt
+-rw-rw-r-- 1 stg stg 45389 Jan 18 20:23 CommandLineTest2.txt
+-rw-rw-r-- 1 stg stg 34564 Jan 18 20:23 CommandLineTest1.txt
 
-
+FIXME: PASTE THE REST OF THE OUTPUT
 ```
