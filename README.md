@@ -19,3 +19,6 @@ cd $HCC_EXPERIMENTS/scripts
 ```
 
 The smoke tests should take approximately 10mns and will exercise an end-to-end workflow of the HCC toolset. 
+You should see output that looks like the following:
+
+``` PASTE OUTPUT HERE ONCE IT IS STABLE ```
