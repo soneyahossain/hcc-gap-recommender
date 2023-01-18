@@ -1,0 +1,51 @@
+ 0.0% done, time left: unknown                                0.7% done, time left: unknown  1.4% done, time left: unknown  1.7% done, time left: unknown  1.8% done, time left: unknown  3.1% done, time left: unknown  4.2% done, time left:   0:00:09    5.2% done, time left:   0:00:09  5.4% done, time left:   0:00:10  5.4% done, time left:   0:00:12  5.4% done, time left:   0:00:14  7.0% done, time left:   0:00:15  8.7% done, time left:   0:00:16 11.2% done, time left:   0:00:15 12.9% done, time left:   0:00:13 14.7% done, time left:   0:00:12 16.8% done, time left:   0:00:11 18.5% done, time left:   0:00:10 20.1% done, time left:   0:00:09 22.3% done, time left:   0:00:09 25.6% done, time left:   0:00:07 27.6% done, time left:   0:00:06 29.3% done, time left:   0:00:05 31.2% done, time left:   0:00:04 34.1% done, time left:   0:00:04 37.3% done, time left:   0:00:03 39.6% done, time left:   0:00:03 41.3% done, time left:   0:00:02 45.3% done, time left:   0:00:02 49.3% done, time left:   0:00:01 53.3% done, time left:   0:00:01 57.3% done, time left:   0:00:00 60.6% done, time left:   0:00:00 61.1% done, time left:   0:00:00 61.8% done, time left:   0:00:00 63.8% done, time left:   0:00:00 68.0% done, time left:   0:00:00 72.2% done, time left:   0:00:00 76.4% done, time left:   0:00:00 81.3% done, time left:   0:00:00 83.5% done, time left:   0:00:00 84.0% done, time left:   0:00:00 86.8% done, time left:   0:00:00 89.9% done, time left:   0:00:00 93.6% done, time left:   0:00:00 96.7% done, time left:   0:00:00 98.6% done, time left:   0:00:00 98.8% done, time left:   0:00:00 99.7% done, time left:   0:00:00 100.6% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestLocalDate_Properties.testPropertyGetDay:380:*]:
+org.joda.time.LocalDate.<init>:436 ALOAD 0
+org.joda.time.LocalDate.<init>:436 INVOKESPECIAL org/joda/time/LocalDate.<init>(IIILorg/joda/time/Chronology;)V
+org.joda.time.LocalDate.<init>:456 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.<init>:456 ASTORE 4
+org.joda.time.LocalDate.<init>:458 ALOAD 0
+org.joda.time.LocalDate.<init>:458 ALOAD 4
+org.joda.time.LocalDate.<init>:458 PUTFIELD org/joda/time/LocalDate.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.getChronology:619 ALOAD 0
+org.joda.time.LocalDate.getChronology:619 GETFIELD org/joda/time/LocalDate.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.getChronology:619 ARETURN
+org.joda.time.LocalDate.dayOfMonth:1812 NEW org/joda/time/LocalDate$Property
+org.joda.time.LocalDate.dayOfMonth:1812 DUP
+org.joda.time.LocalDate.dayOfMonth:1812 ALOAD 0
+org.joda.time.LocalDate.dayOfMonth:1812 INVOKEVIRTUAL org/joda/time/LocalDate.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.dayOfMonth:1812 INVOKEVIRTUAL org/joda/time/Chronology.dayOfMonth()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalDate.dayOfMonth:1812 INVOKESPECIAL org/joda/time/LocalDate$Property.<init>(Lorg/joda/time/LocalDate;Lorg/joda/time/DateTimeField;)V
+org.joda.time.LocalDate.dayOfMonth:1812 ARETURN
+org.joda.time.LocalDate$Property.<init>:1909 ALOAD 0
+org.joda.time.LocalDate$Property.<init>:1909 ALOAD 2
+org.joda.time.LocalDate$Property.<init>:1909 PUTFIELD org/joda/time/LocalDate$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalDate$Property.getField:1936 ALOAD 0
+org.joda.time.LocalDate$Property.getField:1936 GETFIELD org/joda/time/LocalDate$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalDate$Property.getField:1936 ARETURN
+org.joda.time.TestLocalDate_Properties.main:70 INVOKEVIRTUAL org/joda/time/TestLocalDate_Properties.testPropertyGetDay()V
+org.joda.time.TestLocalDate_Properties.testPropertyGetDay:369 NEW org/joda/time/LocalDate
+org.joda.time.TestLocalDate_Properties.testPropertyGetDay:369 DUP
+org.joda.time.TestLocalDate_Properties.testPropertyGetDay:369 INVOKESPECIAL org/joda/time/LocalDate.<init>(III)V
+org.joda.time.TestLocalDate_Properties.testPropertyGetDay:369 ASTORE 1
+org.joda.time.TestLocalDate_Properties.testPropertyGetDay:380 ALOAD 1
+org.joda.time.TestLocalDate_Properties.testPropertyGetDay:380 INVOKEVIRTUAL org/joda/time/LocalDate.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.TestLocalDate_Properties.testPropertyGetDay:380 INVOKEVIRTUAL org/joda/time/Chronology.days()Lorg/joda/time/DurationField;
+org.joda.time.TestLocalDate_Properties.testPropertyGetDay:380 ALOAD 1
+org.joda.time.TestLocalDate_Properties.testPropertyGetDay:380 INVOKEVIRTUAL org/joda/time/LocalDate.dayOfMonth()Lorg/joda/time/LocalDate$Property;
+org.joda.time.TestLocalDate_Properties.testPropertyGetDay:380 INVOKEVIRTUAL org/joda/time/LocalDate$Property.getDurationField()Lorg/joda/time/DurationField;
+org.joda.time.TestLocalDate_Properties.testPropertyGetDay:380 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.chrono.AssembledChronology.days:220 ALOAD 0
+org.joda.time.chrono.AssembledChronology.days:220 GETFIELD org/joda/time/chrono/AssembledChronology.iDays Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.days:220 ARETURN
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 ALOAD 0
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 GETFIELD org/joda/time/chrono/AssembledChronology.iDayOfMonth Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 ARETURN
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+org.joda.time.field.AbstractReadableInstantFieldProperty.getDurationField:244 ALOAD 0
+org.joda.time.field.AbstractReadableInstantFieldProperty.getDurationField:244 INVOKEVIRTUAL org/joda/time/field/AbstractReadableInstantFieldProperty.getField()Lorg/joda/time/DateTimeField;
+org.joda.time.field.AbstractReadableInstantFieldProperty.getDurationField:244 ARETURN
+
+Slice consists of 46 bytecode instructions.
+Computation took 5.62 seconds.

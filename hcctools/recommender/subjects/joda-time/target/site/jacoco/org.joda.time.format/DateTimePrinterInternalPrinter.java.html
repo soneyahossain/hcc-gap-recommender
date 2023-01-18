@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateTimePrinterInternalPrinter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.format</a> &gt; <span class="el_source">DateTimePrinterInternalPrinter.java</span></div><h1>DateTimePrinterInternalPrinter.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2016 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.format;
+
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Locale;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeZone;
+import org.joda.time.ReadablePartial;
+
+/**
+ * Adapter between old and new printer interface.
+ *
+ * @author Stephen Colebourne
+ * @since 2.4
+ */
+class DateTimePrinterInternalPrinter implements InternalPrinter {
+    
+    private final DateTimePrinter underlying;
+
+    static InternalPrinter of(DateTimePrinter underlying) {
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (underlying instanceof InternalPrinterDateTimePrinter) {</span>
+<span class="fc" id="L38">            return (InternalPrinter) underlying;</span>
+        }
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (underlying == null) {</span>
+<span class="fc" id="L41">            return null;</span>
+        }
+<span class="fc" id="L43">        return new DateTimePrinterInternalPrinter(underlying);</span>
+    }
+
+<span class="fc" id="L46">    private DateTimePrinterInternalPrinter(DateTimePrinter underlying) {</span>
+<span class="fc" id="L47">        this.underlying = underlying;</span>
+<span class="fc" id="L48">    }</span>
+
+    //-----------------------------------------------------------------------
+    DateTimePrinter getUnderlying() {
+<span class="nc" id="L52">        return underlying;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    public int estimatePrintedLength() {
+<span class="fc" id="L57">        return underlying.estimatePrintedLength();</span>
+    }
+
+    public void printTo(Appendable appendable, long instant, Chronology chrono, int displayOffset,
+                    DateTimeZone displayZone, Locale locale) throws IOException {
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (appendable instanceof StringBuffer) {</span>
+<span class="fc" id="L63">            StringBuffer buf = (StringBuffer) appendable;</span>
+<span class="fc" id="L64">            underlying.printTo(buf, instant, chrono, displayOffset, displayZone, locale);</span>
+<span class="pc bnc" id="L65" title="All 2 branches missed.">        } else if (appendable instanceof Writer) {</span>
+<span class="nc" id="L66">            Writer out = (Writer) appendable;</span>
+<span class="nc" id="L67">            underlying.printTo(out, instant, chrono, displayOffset, displayZone, locale);</span>
+<span class="nc" id="L68">        } else {</span>
+<span class="nc" id="L69">            StringBuffer buf = new StringBuffer(estimatePrintedLength());</span>
+<span class="nc" id="L70">            underlying.printTo(buf, instant, chrono, displayOffset, displayZone, locale);</span>
+<span class="nc" id="L71">            appendable.append(buf);</span>
+        }
+<span class="fc" id="L73">    }</span>
+
+    public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (appendable instanceof StringBuffer) {</span>
+<span class="nc" id="L77">            StringBuffer buf = (StringBuffer) appendable;</span>
+<span class="nc" id="L78">            underlying.printTo(buf, partial, locale);</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        } else if (appendable instanceof Writer) {</span>
+<span class="nc" id="L80">            Writer out = (Writer) appendable;</span>
+<span class="nc" id="L81">            underlying.printTo(out, partial, locale);</span>
+<span class="nc" id="L82">        } else {</span>
+<span class="nc" id="L83">            StringBuffer buf = new StringBuffer(estimatePrintedLength());</span>
+<span class="nc" id="L84">            underlying.printTo(buf, partial, locale);</span>
+<span class="nc" id="L85">            appendable.append(buf);</span>
+        }
+<span class="nc" id="L87">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,58 @@
+      //ZonedChronology Suggested Asserts
+        ZonedChronology ZC = (ZonedChronology) IslamicChronology.getInstance(TOKYO,lp).getBase();
+        assertNotNull(ZC.getZone());
+        assertNotEquals(0,ZC.getDateTimeMillis(0,0,0,0,0));
+        assertFalse(ZC.equals(ZonedChronology.getInstance(chrono, TOKYO)));
+        assertEquals(0,ZC.centuries().getDifference(0,0));
+        assertEquals(0,ZC.centuries().getDifferenceAsLong(0,0));
+        assertEquals(0,ZC.minuteOfDay().getLeapAmount(0));
+        assertNull(ZC.minuteOfDay().getLeapDurationField());
+        assertEquals(0,ZC.minuteOfDay().getMinimumValue());
+        assertNotEquals(0,ZC.minuteOfDay().getMaximumTextLength(Locale.UK));
+        assertNotEquals(0,ZC.minuteOfDay().getMaximumShortTextLength(Locale.UK));
+        assertNotEquals(0,ZC.minuteOfDay().getMaximumValue());
+        assertFalse(ZC.minuteOfDay().isLeap(0));
+
+
+       6
+
+
+
+
+       //LimitChronology Suggested Asserts
+               Chronology  chrono = new CopticChronology(null, null, 7);
+               DateTime lowerLimit = new DateTime(1, 1, 1, 0, 0, 0, 0, chrono);
+               LimitChronology llc =  LimitChronology.getInstance(chrono, lowerLimit, null);
+               assertNotEquals(0, llc.getDateTimeMillis(2010,3,15,0));
+               assertEquals(0, llc.getDateTimeMillis(0,0,0,0,0));
+               assertNotEquals(0,llc.era().getMaximumValue());
+               assertNotEquals(0,llc.era().getMinimumValue());
+               assertEquals(0,llc.era().getLeapAmount(0));
+               assertFalse(llc.era().isLeap(0));
+               assertNotEquals(0,llc.era().set(1,1));
+               assertNotNull(llc.era().getAsShortText(0,null));
+               assertEquals(0,llc.dayOfYear().getDurationField().getMillis(0));
+               assertEquals(0,llc.dayOfYear().getDurationField().getValue(0));
+               assertNotEquals(0,llc.era().getMaximumValue());
+               assertNotEquals(0,llc.era().getMinimumValue());
+
+
+
+               org/joda/time/chrono/LimitChronology.add //void method call
+               org/joda/time/chrono/LimitChronology.set
+               org/joda/time/chrono/LimitChronology.getLeapDurationField  // exception line
+               org/joda/time/chrono/LimitChronology.getValue
+               org/joda/time/chrono/LimitChronology.isLeap
+               org/joda/time/chrono/LimitChronology.getLeapAmount
+               org/joda/time/chrono/LimitChronology.getDateTimeMillis
+               org/joda/time/chrono/LimitChronology.getMaximumValue
+               org/joda/time/chrono/LimitChronology.getMillis
+               org/joda/time/chrono/LimitChronology.addWrapField  //void method call
+               org/joda/time/chrono/LimitChronology.getMinimumValue
+               org/joda/time/chrono/LimitChronology.getAsText //void method call
+               org/joda/time/chrono/LimitChronology.getDifference
+               org/joda/time/chrono/LimitChronology.roundFloor
+               org/joda/time/chrono/LimitChronology.roundHalfFloor, org/joda/time/chrono/LimitChronology.add, org/joda/time/chrono/LimitChronology.set, org/joda/time/chrono/LimitChronology.remainder, org/joda/time/chrono/LimitChronology.getLeapDurationField, org/joda/time/chrono/LimitChronology.getValue, org/joda/time/chrono/LimitChronology.isLeap, org/joda/time/chrono/LimitChronology.getLeapAmount, org/joda/time/chrono/LimitChronology.getMaximumValue, org/joda/time/chrono/LimitChronology.roundCeiling, org/joda/time/chrono/LimitChronology.getMillis, org/joda/time/chrono/LimitChronology.addWrapField, org/joda/time/chrono/LimitChronology.getMinimumValue, org/joda/time/chrono/LimitChronology.getAsText, org/joda/time/chrono/LimitChronology.getValueAsLong, org/joda/time/chrono/LimitChronology.getDifference, org/joda/time/chrono/LimitChronology.getRangeDurationField, org/joda/time/chrono/LimitChronology.roundFloor, org/joda/time/chrono/LimitChronology.roundHalfEven, org/joda/time/chrono/LimitChronology.get, org/joda/time/chrono/LimitChronology.getMessage, org/joda/time/chrono/LimitChronology.getDurationField, org/joda/time/chrono/LimitChronology.roundHalfCeiling, org/joda/time/chrono/LimitChronology.getAsShortText, org/joda/time/chrono/LimitChronology.getDifferenceAsLong
+               org/joda/time/chrono/LimitChronology.get //void method call
+               org/joda/time/chrono/LimitChronology.getInstance
+               org/joda/time/chrono/LimitChronology.getAsShortText

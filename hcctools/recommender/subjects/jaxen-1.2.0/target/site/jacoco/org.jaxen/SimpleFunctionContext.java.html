@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimpleFunctionContext.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen</a> &gt; <span class="el_source">SimpleFunctionContext.java</span></div><h1>SimpleFunctionContext.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+
+package org.jaxen;
+
+import java.util.HashMap;
+
+/** Simple default implementation of &lt;code&gt;FunctionContext&lt;/code&gt;.
+ *
+ *  &lt;p&gt;
+ *  This is a simple table-based key-lookup implementation
+ *  for &lt;code&gt;FunctionContext&lt;/code&gt; which can be programmatically
+ *  extended by registering additional functions.
+ *  &lt;/p&gt;
+ *
+ *  @see XPathFunctionContext
+ *
+ *  @author &lt;a href=&quot;mailto:bob@werken.com&quot;&gt;bob mcwhirter&lt;/a&gt;
+ */
+public class SimpleFunctionContext implements FunctionContext
+{
+    /** Table of functions. */
+    private HashMap functions;
+
+    /** 
+     *  &lt;p&gt;
+     *  Construct an empty function context.
+     *  &lt;/p&gt;
+     */
+    public SimpleFunctionContext()
+<span class="fc" id="L76">    {</span>
+<span class="fc" id="L77">        this.functions = new HashMap();</span>
+<span class="fc" id="L78">    }</span>
+
+    /** Register a new function.
+     *
+     *  &lt;p&gt;
+     *  By registering a new function, any XPath expression
+     *  that utilizes this &lt;code&gt;FunctionContext&lt;/code&gt; may
+     *  refer to and use the new function.
+     *  &lt;/p&gt;
+     *
+     *  &lt;p&gt;
+     *  Functions may exist either in a namespace or not.
+     *  Namespace prefix-to-URI resolution is the responsibility
+     *  of a {@link NamespaceContext}.  Within this &lt;code&gt;FunctionContext&lt;/code&gt;
+     *  functions are only referenced using the URI, &lt;strong&gt;not&lt;/strong&gt;
+     *  the prefix.
+     *  &lt;/p&gt;
+     *
+     *  &lt;p&gt;
+     *  The namespace URI of a function may be &lt;code&gt;null&lt;/code&gt;
+     *  to indicate that it exists without a namespace.
+     *  &lt;/p&gt;
+     *
+     *  @param namespaceURI the namespace URI of the function to
+     *         be registered with this context
+     *  @param localName the non-prefixed local portion of the
+     *         function to be registered with this context
+     *  @param function a {@link Function} implementation object
+     *         to be used when evaluating the function
+     */
+    public void registerFunction(String namespaceURI,
+                                 String localName,
+                                 Function function )
+    {
+<span class="fc" id="L112">        this.functions.put( new QualifiedName(namespaceURI, localName),</span>
+                            function );
+<span class="fc" id="L114">    }</span>
+
+    public Function getFunction(String namespaceURI,
+                                String prefix,
+                                String localName )
+        throws UnresolvableException
+    {
+<span class="fc" id="L121">        QualifiedName key = new QualifiedName( namespaceURI, localName );</span>
+
+<span class="fc bfc" id="L123" title="All 2 branches covered.">        if ( this.functions.containsKey(key) ) {</span>
+<span class="fc" id="L124">            return (Function) this.functions.get( key );</span>
+        }
+        else {
+<span class="fc" id="L127">            throw new UnresolvableException( &quot;No Such Function &quot; + key.getClarkForm() );</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalendarConverter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.convert</a> &gt; <span class="el_source">CalendarConverter.java</span></div><h1>CalendarConverter.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.convert;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeZone;
+import org.joda.time.chrono.BuddhistChronology;
+import org.joda.time.chrono.GJChronology;
+import org.joda.time.chrono.GregorianChronology;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.chrono.JulianChronology;
+
+/**
+ * CalendarConverter converts a java util Calendar to an instant or partial.
+ * The Calendar is converted to milliseconds and the chronology that best
+ * matches the calendar.
+ *
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+final class CalendarConverter extends AbstractConverter
+        implements InstantConverter, PartialConverter {
+
+    /**
+     * Singleton instance.
+     */
+<span class="fc" id="L43">    static final CalendarConverter INSTANCE = new CalendarConverter();</span>
+
+    /**
+     * Restricted constructor.
+     */
+    protected CalendarConverter() {
+<span class="fc" id="L49">        super();</span>
+<span class="fc" id="L50">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the chronology.
+     * &lt;p&gt;
+     * If a chronology is specified then it is used.
+     * Otherwise, it is the GJChronology if a GregorianCalendar is used,
+     * BuddhistChronology if a BuddhistCalendar is used or ISOChronology otherwise.
+     * The time zone is extracted from the calendar if possible, default used if not.
+     * 
+     * @param object  the Calendar to convert, must not be null
+     * @param chrono  the chronology to use, null means use Calendar
+     * @return the chronology, never null
+     * @throws NullPointerException if the object is null
+     * @throws ClassCastException if the object is an invalid type
+     */
+    public Chronology getChronology(Object object, Chronology chrono) {
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (chrono != null) {</span>
+<span class="fc" id="L69">            return chrono;</span>
+        }
+<span class="fc" id="L71">        Calendar cal = (Calendar) object;</span>
+<span class="fc" id="L72">        DateTimeZone zone = null;</span>
+        try {
+<span class="fc" id="L74">            zone = DateTimeZone.forTimeZone(cal.getTimeZone());</span>
+            
+<span class="fc" id="L76">        } catch (IllegalArgumentException ex) {</span>
+<span class="fc" id="L77">            zone = DateTimeZone.getDefault();</span>
+<span class="fc" id="L78">        }</span>
+<span class="fc" id="L79">        return getChronology(cal, zone);</span>
+    }
+
+    /**
+     * Gets the chronology, which is the GJChronology if a GregorianCalendar is used,
+     * BuddhistChronology if a BuddhistCalendar is used or ISOChronology otherwise.
+     * The time zone specified is used in preference to that on the calendar.
+     * 
+     * @param object  the Calendar to convert, must not be null
+     * @param zone  the specified zone to use, null means default zone
+     * @return the chronology, never null
+     * @throws NullPointerException if the object is null
+     * @throws ClassCastException if the object is an invalid type
+     */
+    public Chronology getChronology(Object object, DateTimeZone zone) {
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        if (object.getClass().getName().endsWith(&quot;.BuddhistCalendar&quot;)) {</span>
+<span class="fc" id="L95">            return BuddhistChronology.getInstance(zone);</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        } else if (object instanceof GregorianCalendar) {</span>
+<span class="fc" id="L97">            GregorianCalendar gc = (GregorianCalendar) object;</span>
+<span class="fc" id="L98">            long cutover = gc.getGregorianChange().getTime();</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">            if (cutover == Long.MIN_VALUE) {</span>
+<span class="fc" id="L100">                return GregorianChronology.getInstance(zone);</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">            } else if (cutover == Long.MAX_VALUE) {</span>
+<span class="fc" id="L102">                return JulianChronology.getInstance(zone);</span>
+            } else {
+<span class="fc" id="L104">                return GJChronology.getInstance(zone, cutover, 4);</span>
+            }
+        } else {
+<span class="fc" id="L107">            return ISOChronology.getInstance(zone);</span>
+        }
+    }
+
+    /**
+     * Gets the millis, which is the Calendar millis value.
+     * 
+     * @param object  the Calendar to convert, must not be null
+     * @param chrono  the chronology result from getChronology, non-null
+     * @return the millisecond value
+     * @throws NullPointerException if the object is null
+     * @throws ClassCastException if the object is an invalid type
+     */
+    public long getInstantMillis(Object object, Chronology chrono) {
+<span class="fc" id="L121">        Calendar calendar = (Calendar) object;</span>
+<span class="fc" id="L122">        return calendar.getTime().getTime();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns Calendar.class.
+     * 
+     * @return Calendar.class
+     */
+    public Class&lt;?&gt; getSupportedType() {
+<span class="fc" id="L132">        return Calendar.class;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

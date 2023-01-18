@@ -1,0 +1,44 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  1.4% done, time left: unknown  3.3% done, time left: unknown  3.6% done, time left: unknown  4.7% done, time left: unknown  6.5% done, time left: unknown  8.8% done, time left:   0:00:03   11.4% done, time left:   0:00:04 13.4% done, time left:   0:00:04 14.5% done, time left:   0:00:04 16.7% done, time left:   0:00:05 19.1% done, time left:   0:00:05 20.9% done, time left:   0:00:05 27.7% done, time left:   0:00:01 34.4% done, time left:   0:00:00 36.1% done, time left:   0:00:00 36.2% done, time left:   0:00:00 37.2% done, time left:   0:00:00 41.9% done, time left:   0:00:01 49.0% done, time left:   0:00:00 55.3% done, time left:   0:00:00 63.3% done, time left:   0:00:00 66.3% done, time left:   0:00:00 70.1% done, time left:   0:00:00 80.8% done, time left:   0:00:00 91.9% done, time left:   0:00:00 95.9% done, time left:   0:00:00 97.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDateTimeUtils.testOffsetMillis:262:*]:
+org.joda.time.DateTimeUtils.currentTimeMillis:72 GETSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils.currentTimeMillis:72 INVOKEINTERFACE org/joda/time/DateTimeUtils$MillisProvider.getMillis()J
+org.joda.time.DateTimeUtils.currentTimeMillis:72 LRETURN
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:114 LLOAD 0
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:114 LCONST_0
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:114 LCMP
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:114 IFNE L0 true false
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:117 NEW org/joda/time/DateTimeUtils$OffsetMillisProvider
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:117 DUP
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:117 LLOAD 0
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:117 INVOKESPECIAL org/joda/time/DateTimeUtils$OffsetMillisProvider.<init>(J)V
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:117 PUTSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils$OffsetMillisProvider.<init>:587 ALOAD 0
+org.joda.time.DateTimeUtils$OffsetMillisProvider.<init>:587 LLOAD 1
+org.joda.time.DateTimeUtils$OffsetMillisProvider.<init>:587 PUTFIELD org/joda/time/DateTimeUtils$OffsetMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$OffsetMillisProvider.getMillis:595 INVOKESTATIC java/lang/System.currentTimeMillis()J
+org.joda.time.DateTimeUtils$OffsetMillisProvider.getMillis:595 ALOAD 0
+org.joda.time.DateTimeUtils$OffsetMillisProvider.getMillis:595 GETFIELD org/joda/time/DateTimeUtils$OffsetMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$OffsetMillisProvider.getMillis:595 LADD
+org.joda.time.DateTimeUtils$OffsetMillisProvider.getMillis:595 LRETURN
+org.joda.time.TestDateTimeUtils.main:128 INVOKEVIRTUAL org/joda/time/TestDateTimeUtils.testOffsetMillis()V
+org.joda.time.TestDateTimeUtils.testOffsetMillis:256 LDC -86400000
+org.joda.time.TestDateTimeUtils.testOffsetMillis:256 INVOKESTATIC org/joda/time/DateTimeUtils.setCurrentMillisOffset(J)V
+org.joda.time.TestDateTimeUtils.testOffsetMillis:257 INVOKESTATIC java/lang/System.currentTimeMillis()J
+org.joda.time.TestDateTimeUtils.testOffsetMillis:257 LSTORE 1
+org.joda.time.TestDateTimeUtils.testOffsetMillis:258 INVOKESTATIC org/joda/time/DateTimeUtils.currentTimeMillis()J
+org.joda.time.TestDateTimeUtils.testOffsetMillis:258 LSTORE 3
+org.joda.time.TestDateTimeUtils.testOffsetMillis:259 LLOAD 3
+org.joda.time.TestDateTimeUtils.testOffsetMillis:259 LDC 86400000
+org.joda.time.TestDateTimeUtils.testOffsetMillis:259 LADD
+org.joda.time.TestDateTimeUtils.testOffsetMillis:259 LSTORE 5
+org.joda.time.TestDateTimeUtils.testOffsetMillis:262 LLOAD 5
+org.joda.time.TestDateTimeUtils.testOffsetMillis:262 LLOAD 1
+org.joda.time.TestDateTimeUtils.testOffsetMillis:262 LSUB
+org.joda.time.TestDateTimeUtils.testOffsetMillis:262 LDC 10000
+org.joda.time.TestDateTimeUtils.testOffsetMillis:262 LCMP
+org.joda.time.TestDateTimeUtils.testOffsetMillis:262 IFGE L5 false true
+org.joda.time.TestDateTimeUtils.testOffsetMillis:262 ICONST_1
+org.joda.time.TestDateTimeUtils.testOffsetMillis:262 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 39 bytecode instructions.
+Computation took 3.36 seconds.

@@ -1,0 +1,42 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  0.4% done, time left: unknown  1.2% done, time left: unknown  2.6% done, time left: unknown  4.3% done, time left: unknown  6.4% done, time left: unknown  8.2% done, time left:   0:00:04    9.3% done, time left:   0:00:05  9.7% done, time left:   0:00:06 10.2% done, time left:   0:00:07 11.1% done, time left:   0:00:07 11.9% done, time left:   0:00:08 12.8% done, time left:   0:00:08 13.9% done, time left:   0:00:09 15.2% done, time left:   0:00:10 16.2% done, time left:   0:00:10 17.3% done, time left:   0:00:11 18.7% done, time left:   0:00:11 20.6% done, time left:   0:00:11 22.4% done, time left:   0:00:11 25.3% done, time left:   0:00:09 28.3% done, time left:   0:00:07 30.3% done, time left:   0:00:05 30.3% done, time left:   0:00:04 30.4% done, time left:   0:00:03 31.1% done, time left:   0:00:02 33.9% done, time left:   0:00:03 36.6% done, time left:   0:00:03 39.7% done, time left:   0:00:02 42.8% done, time left:   0:00:02 45.5% done, time left:   0:00:02 46.2% done, time left:   0:00:01 48.7% done, time left:   0:00:01 51.8% done, time left:   0:00:01 52.4% done, time left:   0:00:01 52.4% done, time left:   0:00:00 53.6% done, time left:   0:00:00 55.7% done, time left:   0:00:01 58.7% done, time left:   0:00:01 62.0% done, time left:   0:00:01 65.1% done, time left:   0:00:00 68.4% done, time left:   0:00:00 71.6% done, time left:   0:00:00 72.4% done, time left:   0:00:00 72.9% done, time left:   0:00:00 75.4% done, time left:   0:00:00 76.6% done, time left:   0:00:00 78.0% done, time left:   0:00:00 81.0% done, time left:   0:00:00 84.0% done, time left:   0:00:00 84.9% done, time left:   0:00:00 92.3% done, time left:   0:00:00 93.3% done, time left:   0:00:00 98.1% done, time left:   0:00:00 100.4% done, time left:   0:00:00  101.3% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:527:*]:
+org.joda.time.LocalTime.<init>:383 ALOAD 0
+org.joda.time.LocalTime.<init>:383 INVOKESPECIAL org/joda/time/LocalTime.<init>(Ljava/lang/Object;Lorg/joda/time/Chronology;)V
+org.joda.time.LocalTime.<init>:434 ALOAD 0
+org.joda.time.LocalTime.<init>:434 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:434 PUTFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getChronology:669 ALOAD 0
+org.joda.time.LocalTime.getChronology:669 GETFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getChronology:669 ARETURN
+org.joda.time.LocalTime.getHourOfDay:1100 ALOAD 0
+org.joda.time.LocalTime.getHourOfDay:1100 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getHourOfDay:1100 INVOKEVIRTUAL org/joda/time/Chronology.hourOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime.getHourOfDay:1100 INVOKEVIRTUAL org/joda/time/DateTimeField.get(J)I
+org.joda.time.LocalTime.getHourOfDay:1100 IRETURN
+org.joda.time.TestLocalTime_Constructors.main:112 INVOKEVIRTUAL org/joda/time/TestLocalTime_Constructors.testConstructor_ObjectLocalTime()V
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:524 BIPUSH 20
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:525 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:525 DUP
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:525 INVOKESPECIAL org/joda/time/LocalTime.<init>(Ljava/lang/Object;)V
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:525 ASTORE 2
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:526 ALOAD 2
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:526 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:527 LDC 10
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:527 ALOAD 2
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:527 INVOKEVIRTUAL org/joda/time/LocalTime.getHourOfDay()I
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:527 I2L
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectLocalTime:527 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 ALOAD 0
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 GETFIELD org/joda/time/chrono/AssembledChronology.iHourOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 ARETURN
+org.joda.time.chrono.BuddhistChronology.withUTC:151 GETSTATIC org/joda/time/chrono/BuddhistChronology.INSTANCE_UTC Lorg/joda/time/chrono/BuddhistChronology;
+org.joda.time.chrono.BuddhistChronology.withUTC:151 ARETURN
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 ALOAD 0
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 INVOKEVIRTUAL org/joda/time/chrono/LimitChronology$LimitDateTimeField.getWrappedField()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 IRETURN
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 ALOAD 0
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 GETFIELD org/joda/time/field/DecoratedDateTimeField.iField Lorg/joda/time/DateTimeField;
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 ARETURN
+
+Slice consists of 37 bytecode instructions.
+Computation took 6.28 seconds.

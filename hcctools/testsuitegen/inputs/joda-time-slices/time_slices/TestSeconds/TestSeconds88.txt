@@ -1,0 +1,46 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  1.0% done, time left: unknown  2.3% done, time left: unknown  2.5% done, time left: unknown  2.9% done, time left: unknown  3.1% done, time left: unknown  3.6% done, time left: unknown  4.7% done, time left: unknown  5.3% done, time left:   0:00:16    5.8% done, time left:   0:00:17  5.8% done, time left:   0:00:20  5.9% done, time left:   0:00:24  6.9% done, time left:   0:00:23  7.0% done, time left:   0:00:23  7.0% done, time left:   0:00:24  8.5% done, time left:   0:00:25  9.4% done, time left:   0:00:25  9.6% done, time left:   0:00:24  9.6% done, time left:   0:00:23 12.4% done, time left:   0:00:21 12.6% done, time left:   0:00:17 12.6% done, time left:   0:00:14 12.6% done, time left:   0:00:12 12.6% done, time left:   0:00:10 14.3% done, time left:   0:00:10 17.2% done, time left:   0:00:09 19.9% done, time left:   0:00:08 21.6% done, time left:   0:00:07 25.1% done, time left:   0:00:05 29.1% done, time left:   0:00:04 32.9% done, time left:   0:00:03 35.1% done, time left:   0:00:02 38.8% done, time left:   0:00:02 42.6% done, time left:   0:00:01 46.7% done, time left:   0:00:01 50.7% done, time left:   0:00:01 54.8% done, time left:   0:00:01 59.5% done, time left:   0:00:00 63.7% done, time left:   0:00:00 65.3% done, time left:   0:00:00 69.6% done, time left:   0:00:00 71.8% done, time left:   0:00:00 74.5% done, time left:   0:00:00 77.9% done, time left:   0:00:00 81.3% done, time left:   0:00:00 85.0% done, time left:   0:00:00 89.2% done, time left:   0:00:00 90.2% done, time left:   0:00:00 90.3% done, time left:   0:00:00 90.7% done, time left:   0:00:00 94.2% done, time left:   0:00:00 98.1% done, time left:   0:00:00 99.0% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestSeconds.testDividedBy_int:367:*]:
+org.joda.time.Seconds.seconds:72 ILOAD 0
+org.joda.time.Seconds.seconds:72 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, -2147483648 => L5, 0 => L0, 2147483647 => L4* => L6)
+org.joda.time.Seconds.seconds:78 GETSTATIC org/joda/time/Seconds.TWO Lorg/joda/time/Seconds;
+org.joda.time.Seconds.seconds:78 ARETURN
+org.joda.time.Seconds.seconds:86 NEW org/joda/time/Seconds
+org.joda.time.Seconds.seconds:86 DUP
+org.joda.time.Seconds.seconds:86 ILOAD 0
+org.joda.time.Seconds.seconds:86 INVOKESPECIAL org/joda/time/Seconds.<init>(I)V
+org.joda.time.Seconds.seconds:86 ARETURN
+org.joda.time.Seconds.<init>:198 ALOAD 0
+org.joda.time.Seconds.<init>:198 ILOAD 1
+org.joda.time.Seconds.<init>:198 INVOKESPECIAL org/joda/time/base/BaseSingleFieldPeriod.<init>(I)V
+org.joda.time.Seconds.getSeconds:323 ALOAD 0
+org.joda.time.Seconds.getSeconds:323 INVOKEVIRTUAL org/joda/time/Seconds.getValue()I
+org.joda.time.Seconds.getSeconds:323 IRETURN
+org.joda.time.Seconds.dividedBy:414 ILOAD 1
+org.joda.time.Seconds.dividedBy:414 ICONST_1
+org.joda.time.Seconds.dividedBy:414 IF_ICMPNE L0 true false
+org.joda.time.Seconds.dividedBy:417 ALOAD 0
+org.joda.time.Seconds.dividedBy:417 INVOKEVIRTUAL org/joda/time/Seconds.getValue()I
+org.joda.time.Seconds.dividedBy:417 ILOAD 1
+org.joda.time.Seconds.dividedBy:417 IDIV
+org.joda.time.Seconds.dividedBy:417 INVOKESTATIC org/joda/time/Seconds.seconds(I)Lorg/joda/time/Seconds;
+org.joda.time.Seconds.dividedBy:417 ARETURN
+org.joda.time.TestSeconds.main:62 INVOKEVIRTUAL org/joda/time/TestSeconds.testDividedBy_int()V
+org.joda.time.TestSeconds.testDividedBy_int:362 BIPUSH 12
+org.joda.time.TestSeconds.testDividedBy_int:362 INVOKESTATIC org/joda/time/Seconds.seconds(I)Lorg/joda/time/Seconds;
+org.joda.time.TestSeconds.testDividedBy_int:362 ASTORE 1
+org.joda.time.TestSeconds.testDividedBy_int:367 LDC 2
+org.joda.time.TestSeconds.testDividedBy_int:367 ALOAD 1
+org.joda.time.TestSeconds.testDividedBy_int:367 ICONST_5
+org.joda.time.TestSeconds.testDividedBy_int:367 INVOKEVIRTUAL org/joda/time/Seconds.dividedBy(I)Lorg/joda/time/Seconds;
+org.joda.time.TestSeconds.testDividedBy_int:367 INVOKEVIRTUAL org/joda/time/Seconds.getSeconds()I
+org.joda.time.TestSeconds.testDividedBy_int:367 I2L
+org.joda.time.TestSeconds.testDividedBy_int:367 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ILOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 PUTFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+
+Slice consists of 41 bytecode instructions.
+Computation took 5.69 seconds.

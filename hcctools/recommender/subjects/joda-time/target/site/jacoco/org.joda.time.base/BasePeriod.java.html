@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasePeriod.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.base</a> &gt; <span class="el_source">BasePeriod.java</span></div><h1>BasePeriod.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2011 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.base;
+
+import java.io.Serializable;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.Duration;
+import org.joda.time.DurationFieldType;
+import org.joda.time.MutablePeriod;
+import org.joda.time.PeriodType;
+import org.joda.time.ReadWritablePeriod;
+import org.joda.time.ReadableDuration;
+import org.joda.time.ReadableInstant;
+import org.joda.time.ReadablePartial;
+import org.joda.time.ReadablePeriod;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.convert.ConverterManager;
+import org.joda.time.convert.PeriodConverter;
+import org.joda.time.field.FieldUtils;
+
+/**
+ * BasePeriod is an abstract implementation of ReadablePeriod that stores
+ * data in a &lt;code&gt;PeriodType&lt;/code&gt; and an &lt;code&gt;int[]&lt;/code&gt;.
+ * &lt;p&gt;
+ * This class should generally not be used directly by API users.
+ * The {@link ReadablePeriod} interface should be used when different 
+ * kinds of period objects are to be referenced.
+ * &lt;p&gt;
+ * BasePeriod subclasses may be mutable and not thread-safe.
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+public abstract class BasePeriod
+        extends AbstractPeriod
+        implements ReadablePeriod, Serializable {
+
+    /** Serialization version */
+    private static final long serialVersionUID = -2110953284060001145L;
+    /** Serialization version */
+<span class="fc" id="L57">    private static final ReadablePeriod DUMMY_PERIOD = new AbstractPeriod() {</span>
+        public int getValue(int index) {
+<span class="nc" id="L59">            return 0;</span>
+        }
+        public PeriodType getPeriodType() {
+<span class="fc" id="L62">            return PeriodType.time();</span>
+        }
+    };
+
+    /** The type of period */
+    private final PeriodType iType;
+    /** The values */
+    private final int[] iValues;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a period from a set of field values.
+     *
+     * @param years  amount of years in this period, which must be zero if unsupported
+     * @param months  amount of months in this period, which must be zero if unsupported
+     * @param weeks  amount of weeks in this period, which must be zero if unsupported
+     * @param days  amount of days in this period, which must be zero if unsupported
+     * @param hours  amount of hours in this period, which must be zero if unsupported
+     * @param minutes  amount of minutes in this period, which must be zero if unsupported
+     * @param seconds  amount of seconds in this period, which must be zero if unsupported
+     * @param millis  amount of milliseconds in this period, which must be zero if unsupported
+     * @param type  which set of fields this period supports
+     * @throws IllegalArgumentException if period type is invalid
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    protected BasePeriod(int years, int months, int weeks, int days,
+                         int hours, int minutes, int seconds, int millis,
+                         PeriodType type) {
+<span class="fc" id="L90">        super();</span>
+<span class="fc" id="L91">        type = checkPeriodType(type);</span>
+<span class="fc" id="L92">        iType = type;</span>
+<span class="fc" id="L93">        iValues = setPeriodInternal(years, months, weeks, days, hours, minutes, seconds, millis); // internal method</span>
+<span class="fc" id="L94">    }</span>
+
+    /**
+     * Creates a period from the given interval endpoints.
+     *
+     * @param startInstant  interval start, in milliseconds
+     * @param endInstant  interval end, in milliseconds
+     * @param type  which set of fields this period supports, null means standard
+     * @param chrono  the chronology to use, null means ISO default
+     * @throws IllegalArgumentException if period type is invalid
+     */
+    protected BasePeriod(long startInstant, long endInstant, PeriodType type, Chronology chrono) {
+<span class="fc" id="L106">        super();</span>
+<span class="fc" id="L107">        type = checkPeriodType(type);</span>
+<span class="fc" id="L108">        chrono = DateTimeUtils.getChronology(chrono);</span>
+<span class="fc" id="L109">        iType = type;</span>
+<span class="fc" id="L110">        iValues = chrono.get(this, startInstant, endInstant);</span>
+<span class="fc" id="L111">    }</span>
+
+    /**
+     * Creates a period from the given interval endpoints.
+     *
+     * @param startInstant  interval start, null means now
+     * @param endInstant  interval end, null means now
+     * @param type  which set of fields this period supports, null means standard
+     * @throws IllegalArgumentException if period type is invalid
+     */
+    protected BasePeriod(ReadableInstant startInstant, ReadableInstant endInstant, PeriodType type) {
+<span class="fc" id="L122">        super();</span>
+<span class="fc" id="L123">        type = checkPeriodType(type);</span>
+<span class="fc bfc" id="L124" title="All 4 branches covered.">        if (startInstant == null &amp;&amp; endInstant == null) {</span>
+<span class="fc" id="L125">            iType = type;</span>
+<span class="fc" id="L126">            iValues = new int[size()];</span>
+        } else {
+<span class="fc" id="L128">            long startMillis = DateTimeUtils.getInstantMillis(startInstant);</span>
+<span class="fc" id="L129">            long endMillis = DateTimeUtils.getInstantMillis(endInstant);</span>
+<span class="fc" id="L130">            Chronology chrono = DateTimeUtils.getIntervalChronology(startInstant, endInstant);</span>
+<span class="fc" id="L131">            iType = type;</span>
+<span class="fc" id="L132">            iValues = chrono.get(this, startMillis, endMillis);</span>
+        }
+<span class="fc" id="L134">    }</span>
+
+    /**
+     * Creates a period from the given duration and end point.
+     * &lt;p&gt;
+     * The two partials must contain the same fields, thus you can
+     * specify two &lt;code&gt;LocalDate&lt;/code&gt; objects, or two &lt;code&gt;LocalTime&lt;/code&gt;
+     * objects, but not one of each.
+     * As these are Partial objects, time zones have no effect on the result.
+     * &lt;p&gt;
+     * The two partials must also both be contiguous - see
+     * {@link DateTimeUtils#isContiguous(ReadablePartial)} for a
+     * definition. Both &lt;code&gt;LocalDate&lt;/code&gt; and &lt;code&gt;LocalTime&lt;/code&gt; are contiguous.
+     *
+     * @param start  the start of the period, must not be null
+     * @param end  the end of the period, must not be null
+     * @param type  which set of fields this period supports, null means standard
+     * @throws IllegalArgumentException if the partials are null or invalid
+     * @since 1.1
+     */
+    protected BasePeriod(ReadablePartial start, ReadablePartial end, PeriodType type) {
+<span class="fc" id="L155">        super();</span>
+<span class="fc bfc" id="L156" title="All 4 branches covered.">        if (start == null || end == null) {</span>
+<span class="fc" id="L157">            throw new IllegalArgumentException(&quot;ReadablePartial objects must not be null&quot;);</span>
+        }
+<span class="pc bpc" id="L159" title="2 of 6 branches missed.">        if (start instanceof BaseLocal &amp;&amp; end instanceof BaseLocal &amp;&amp; start.getClass() == end.getClass()) {</span>
+            // for performance
+<span class="fc" id="L161">            type = checkPeriodType(type);</span>
+<span class="fc" id="L162">            long startMillis = ((BaseLocal) start).getLocalMillis();</span>
+<span class="fc" id="L163">            long endMillis = ((BaseLocal) end).getLocalMillis();</span>
+<span class="fc" id="L164">            Chronology chrono = start.getChronology();</span>
+<span class="fc" id="L165">            chrono = DateTimeUtils.getChronology(chrono);</span>
+<span class="fc" id="L166">            iType = type;</span>
+<span class="fc" id="L167">            iValues = chrono.get(this, startMillis, endMillis);</span>
+<span class="fc" id="L168">        } else {</span>
+<span class="fc bfc" id="L169" title="All 2 branches covered.">            if (start.size() != end.size()) {</span>
+<span class="fc" id="L170">                throw new IllegalArgumentException(&quot;ReadablePartial objects must have the same set of fields&quot;);</span>
+            }
+<span class="fc bfc" id="L172" title="All 2 branches covered.">            for (int i = 0, isize = start.size(); i &lt; isize; i++) {</span>
+<span class="fc bfc" id="L173" title="All 2 branches covered.">                if (start.getFieldType(i) != end.getFieldType(i)) {</span>
+<span class="fc" id="L174">                    throw new IllegalArgumentException(&quot;ReadablePartial objects must have the same set of fields&quot;);</span>
+                }
+            }
+<span class="fc bfc" id="L177" title="All 2 branches covered.">            if (DateTimeUtils.isContiguous(start) == false) {</span>
+<span class="fc" id="L178">                throw new IllegalArgumentException(&quot;ReadablePartial objects must be contiguous&quot;);</span>
+            }
+<span class="fc" id="L180">            iType = checkPeriodType(type);</span>
+<span class="fc" id="L181">            Chronology chrono = DateTimeUtils.getChronology(start.getChronology()).withUTC();</span>
+<span class="fc" id="L182">            iValues = chrono.get(this, chrono.set(start, 0L), chrono.set(end, 0L));</span>
+        }
+<span class="fc" id="L184">    }</span>
+
+    /**
+     * Creates a period from the given start point and duration.
+     *
+     * @param startInstant  the interval start, null means now
+     * @param duration  the duration of the interval, null means zero-length
+     * @param type  which set of fields this period supports, null means standard
+     */
+    protected BasePeriod(ReadableInstant startInstant, ReadableDuration duration, PeriodType type) {
+<span class="fc" id="L194">        super();</span>
+<span class="fc" id="L195">        type = checkPeriodType(type);</span>
+<span class="fc" id="L196">        long startMillis = DateTimeUtils.getInstantMillis(startInstant);</span>
+<span class="fc" id="L197">        long durationMillis = DateTimeUtils.getDurationMillis(duration);</span>
+<span class="fc" id="L198">        long endMillis = FieldUtils.safeAdd(startMillis, durationMillis);</span>
+<span class="fc" id="L199">        Chronology chrono = DateTimeUtils.getInstantChronology(startInstant);</span>
+<span class="fc" id="L200">        iType = type;</span>
+<span class="fc" id="L201">        iValues = chrono.get(this, startMillis, endMillis);</span>
+<span class="fc" id="L202">    }</span>
+
+    /**
+     * Creates a period from the given duration and end point.
+     *
+     * @param duration  the duration of the interval, null means zero-length
+     * @param endInstant  the interval end, null means now
+     * @param type  which set of fields this period supports, null means standard
+     */
+    protected BasePeriod(ReadableDuration duration, ReadableInstant endInstant, PeriodType type) {
+<span class="fc" id="L212">        super();</span>
+<span class="fc" id="L213">        type = checkPeriodType(type);</span>
+<span class="fc" id="L214">        long durationMillis = DateTimeUtils.getDurationMillis(duration);</span>
+<span class="fc" id="L215">        long endMillis = DateTimeUtils.getInstantMillis(endInstant);</span>
+<span class="fc" id="L216">        long startMillis = FieldUtils.safeSubtract(endMillis, durationMillis);</span>
+<span class="fc" id="L217">        Chronology chrono = DateTimeUtils.getInstantChronology(endInstant);</span>
+<span class="fc" id="L218">        iType = type;</span>
+<span class="fc" id="L219">        iValues = chrono.get(this, startMillis, endMillis);</span>
+<span class="fc" id="L220">    }</span>
+
+    /**
+     * Creates a period from the given millisecond duration with the standard period type
+     * and ISO rules, ensuring that the calculation is performed with the time-only period type.
+     * &lt;p&gt;
+     * The calculation uses the hour, minute, second and millisecond fields.
+     *
+     * @param duration  the duration, in milliseconds
+     */
+    protected BasePeriod(long duration) {
+<span class="fc" id="L231">        super();</span>
+        // bug [3264409]
+        // calculation uses period type from a period object (bad design)
+        // thus we use a dummy period object with the time type
+<span class="fc" id="L235">        iType = PeriodType.standard();</span>
+<span class="fc" id="L236">        int[] values = ISOChronology.getInstanceUTC().get(DUMMY_PERIOD, duration);</span>
+<span class="fc" id="L237">        iValues = new int[8];</span>
+<span class="fc" id="L238">        System.arraycopy(values, 0, iValues, 4, 4);</span>
+<span class="fc" id="L239">    }</span>
+
+    /**
+     * Creates a period from the given millisecond duration, which is only really
+     * suitable for durations less than one day.
+     * &lt;p&gt;
+     * Only fields that are precise will be used.
+     * Thus the largest precise field may have a large value.
+     *
+     * @param duration  the duration, in milliseconds
+     * @param type  which set of fields this period supports, null means standard
+     * @param chrono  the chronology to use, null means ISO default
+     * @throws IllegalArgumentException if period type is invalid
+     */
+    protected BasePeriod(long duration, PeriodType type, Chronology chrono) {
+<span class="fc" id="L254">        super();</span>
+<span class="fc" id="L255">        type = checkPeriodType(type);</span>
+<span class="fc" id="L256">        chrono = DateTimeUtils.getChronology(chrono);</span>
+<span class="fc" id="L257">        iType = type;</span>
+<span class="fc" id="L258">        iValues = chrono.get(this, duration);</span>
+<span class="fc" id="L259">    }</span>
+
+    /**
+     * Creates a new period based on another using the {@link ConverterManager}.
+     *
+     * @param period  the period to convert
+     * @param type  which set of fields this period supports, null means use type from object
+     * @param chrono  the chronology to use, null means ISO default
+     * @throws IllegalArgumentException if period is invalid
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    protected BasePeriod(Object period, PeriodType type, Chronology chrono) {
+<span class="fc" id="L271">        super();</span>
+<span class="fc" id="L272">        PeriodConverter converter = ConverterManager.getInstance().getPeriodConverter(period);</span>
+<span class="fc bfc" id="L273" title="All 2 branches covered.">        type = (type == null ? converter.getPeriodType(period) : type);</span>
+<span class="fc" id="L274">        type = checkPeriodType(type);</span>
+<span class="fc" id="L275">        iType = type;</span>
+<span class="fc bfc" id="L276" title="All 2 branches covered.">        if (this instanceof ReadWritablePeriod) {</span>
+<span class="fc" id="L277">            iValues = new int[size()];</span>
+<span class="fc" id="L278">            chrono = DateTimeUtils.getChronology(chrono);</span>
+<span class="fc" id="L279">            converter.setInto((ReadWritablePeriod) this, period, chrono);</span>
+        } else {
+<span class="fc" id="L281">            iValues = new MutablePeriod(period, type, chrono).getValues();</span>
+        }
+<span class="fc" id="L283">    }</span>
+
+    /**
+     * Constructor used when we trust ourselves.
+     * Do not expose publicly.
+     *
+     * @param values  the values to use, not null, not cloned
+     * @param type  which set of fields this period supports, not null
+     */
+    protected BasePeriod(int[] values, PeriodType type) {
+<span class="fc" id="L293">        super();</span>
+<span class="fc" id="L294">        iType = type;</span>
+<span class="fc" id="L295">        iValues = values;</span>
+<span class="fc" id="L296">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Validates a period type, converting nulls to a default value and
+     * checking the type is suitable for this instance.
+     * 
+     * @param type  the type to check, may be null
+     * @return the validated type to use, not null
+     * @throws IllegalArgumentException if the period type is invalid
+     */
+    protected PeriodType checkPeriodType(PeriodType type) {
+<span class="fc" id="L308">        return DateTimeUtils.getPeriodType(type);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the period type.
+     *
+     * @return the period type
+     */
+    public PeriodType getPeriodType() {
+<span class="fc" id="L318">        return iType;</span>
+    }
+
+    /**
+     * Gets the value at the specified index.
+     *
+     * @param index  the index to retrieve
+     * @return the value of the field at the specified index
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    public int getValue(int index) {
+<span class="fc" id="L329">        return iValues[index];</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the total millisecond duration of this period relative to a start instant.
+     * &lt;p&gt;
+     * This method adds the period to the specified instant in order to
+     * calculate the duration.
+     * &lt;p&gt;
+     * An instant must be supplied as the duration of a period varies.
+     * For example, a period of 1 month could vary between the equivalent of
+     * 28 and 31 days in milliseconds due to different length months.
+     * Similarly, a day can vary at Daylight Savings cutover, typically between
+     * 23 and 25 hours.
+     *
+     * @param startInstant  the instant to add the period to, thus obtaining the duration
+     * @return the total length of the period as a duration relative to the start instant
+     * @throws ArithmeticException if the millis exceeds the capacity of the duration
+     */
+    public Duration toDurationFrom(ReadableInstant startInstant) {
+<span class="fc" id="L350">        long startMillis = DateTimeUtils.getInstantMillis(startInstant);</span>
+<span class="fc" id="L351">        Chronology chrono = DateTimeUtils.getInstantChronology(startInstant);</span>
+<span class="fc" id="L352">        long endMillis = chrono.add(this, startMillis, 1);</span>
+<span class="fc" id="L353">        return new Duration(startMillis, endMillis);</span>
+    }
+
+    /**
+     * Gets the total millisecond duration of this period relative to an
+     * end instant.
+     * &lt;p&gt;
+     * This method subtracts the period from the specified instant in order
+     * to calculate the duration.
+     * &lt;p&gt;
+     * An instant must be supplied as the duration of a period varies.
+     * For example, a period of 1 month could vary between the equivalent of
+     * 28 and 31 days in milliseconds due to different length months.
+     * Similarly, a day can vary at Daylight Savings cutover, typically between
+     * 23 and 25 hours.
+     *
+     * @param endInstant  the instant to subtract the period from, thus obtaining the duration
+     * @return the total length of the period as a duration relative to the end instant
+     * @throws ArithmeticException if the millis exceeds the capacity of the duration
+     */
+    public Duration toDurationTo(ReadableInstant endInstant) {
+<span class="fc" id="L374">        long endMillis = DateTimeUtils.getInstantMillis(endInstant);</span>
+<span class="fc" id="L375">        Chronology chrono = DateTimeUtils.getInstantChronology(endInstant);</span>
+<span class="fc" id="L376">        long startMillis = chrono.add(this, endMillis, -1);</span>
+<span class="fc" id="L377">        return new Duration(startMillis, endMillis);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Checks whether a field type is supported, and if so adds the new value
+     * to the relevant index in the specified array.
+     * 
+     * @param type  the field type
+     * @param values  the array to update
+     * @param newValue  the new value to store if successful
+     */
+    private void checkAndUpdate(DurationFieldType type, int[] values, int newValue) {
+<span class="fc" id="L390">        int index = indexOf(type);</span>
+<span class="fc bfc" id="L391" title="All 2 branches covered.">        if (index == -1) {</span>
+<span class="fc bfc" id="L392" title="All 2 branches covered.">            if (newValue != 0) {</span>
+<span class="fc" id="L393">                throw new IllegalArgumentException(</span>
+<span class="fc" id="L394">                    &quot;Period does not support field '&quot; + type.getName() + &quot;'&quot;);</span>
+            }
+        } else {
+<span class="fc" id="L397">            values[index] = newValue;</span>
+        }
+<span class="fc" id="L399">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets all the fields of this period from another.
+     * 
+     * @param period  the period to copy from, not null
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    protected void setPeriod(ReadablePeriod period) {
+<span class="fc bfc" id="L409" title="All 2 branches covered.">        if (period == null) {</span>
+<span class="fc" id="L410">            setValues(new int[size()]);</span>
+        } else {
+<span class="fc" id="L412">            setPeriodInternal(period);</span>
+        }
+<span class="fc" id="L414">    }</span>
+
+    /**
+     * Private method called from constructor.
+     */
+    private void setPeriodInternal(ReadablePeriod period) {
+<span class="fc" id="L420">        int[] newValues = new int[size()];</span>
+<span class="fc bfc" id="L421" title="All 2 branches covered.">        for (int i = 0, isize = period.size(); i &lt; isize; i++) {</span>
+<span class="fc" id="L422">            DurationFieldType type = period.getFieldType(i);</span>
+<span class="fc" id="L423">            int value = period.getValue(i);</span>
+<span class="fc" id="L424">            checkAndUpdate(type, newValues, value);</span>
+        }
+<span class="fc" id="L426">        setValues(newValues);</span>
+<span class="fc" id="L427">    }</span>
+
+    /**
+     * Sets the eight standard the fields in one go.
+     * 
+     * @param years  amount of years in this period, which must be zero if unsupported
+     * @param months  amount of months in this period, which must be zero if unsupported
+     * @param weeks  amount of weeks in this period, which must be zero if unsupported
+     * @param days  amount of days in this period, which must be zero if unsupported
+     * @param hours  amount of hours in this period, which must be zero if unsupported
+     * @param minutes  amount of minutes in this period, which must be zero if unsupported
+     * @param seconds  amount of seconds in this period, which must be zero if unsupported
+     * @param millis  amount of milliseconds in this period, which must be zero if unsupported
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    protected void setPeriod(int years, int months, int weeks, int days,
+                             int hours, int minutes, int seconds, int millis) {
+<span class="fc" id="L444">        int[] newValues = setPeriodInternal(years, months, weeks, days, hours, minutes, seconds, millis);</span>
+<span class="fc" id="L445">        setValues(newValues);</span>
+<span class="fc" id="L446">    }</span>
+
+    /**
+     * Private method called from constructor.
+     */
+    private int[] setPeriodInternal(int years, int months, int weeks, int days,
+                                   int hours, int minutes, int seconds, int millis) {
+<span class="fc" id="L453">        int[] newValues = new int[size()];</span>
+<span class="fc" id="L454">        checkAndUpdate(DurationFieldType.years(), newValues, years);</span>
+<span class="fc" id="L455">        checkAndUpdate(DurationFieldType.months(), newValues, months);</span>
+<span class="fc" id="L456">        checkAndUpdate(DurationFieldType.weeks(), newValues, weeks);</span>
+<span class="fc" id="L457">        checkAndUpdate(DurationFieldType.days(), newValues, days);</span>
+<span class="fc" id="L458">        checkAndUpdate(DurationFieldType.hours(), newValues, hours);</span>
+<span class="fc" id="L459">        checkAndUpdate(DurationFieldType.minutes(), newValues, minutes);</span>
+<span class="fc" id="L460">        checkAndUpdate(DurationFieldType.seconds(), newValues, seconds);</span>
+<span class="fc" id="L461">        checkAndUpdate(DurationFieldType.millis(), newValues, millis);</span>
+<span class="fc" id="L462">        return newValues;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the value of a field in this period.
+     * 
+     * @param field  the field to set
+     * @param value  the value to set
+     * @throws IllegalArgumentException if field is is null or not supported.
+     */
+    protected void setField(DurationFieldType field, int value) {
+<span class="fc" id="L474">        setFieldInto(iValues, field, value);</span>
+<span class="fc" id="L475">    }</span>
+
+    /**
+     * Sets the value of a field in this period.
+     * 
+     * @param values  the array of values to update
+     * @param field  the field to set
+     * @param value  the value to set
+     * @throws IllegalArgumentException if field is null or not supported.
+     */
+    protected void setFieldInto(int[] values, DurationFieldType field, int value) {
+<span class="fc" id="L486">        int index = indexOf(field);</span>
+<span class="fc bfc" id="L487" title="All 2 branches covered.">        if (index == -1) {</span>
+<span class="pc bpc" id="L488" title="1 of 4 branches missed.">            if (value != 0 || field == null) {</span>
+<span class="fc" id="L489">                throw new IllegalArgumentException(</span>
+                    &quot;Period does not support field '&quot; + field + &quot;'&quot;);
+            }
+        } else {
+<span class="fc" id="L493">            values[index] = value;</span>
+        }
+<span class="fc" id="L495">    }</span>
+
+    /**
+     * Adds the value of a field in this period.
+     * 
+     * @param field  the field to set
+     * @param value  the value to set
+     * @throws IllegalArgumentException if field is is null or not supported.
+     */
+    protected void addField(DurationFieldType field, int value) {
+<span class="fc" id="L505">        addFieldInto(iValues, field, value);</span>
+<span class="fc" id="L506">    }</span>
+
+    /**
+     * Adds the value of a field in this period.
+     * 
+     * @param values  the array of values to update
+     * @param field  the field to set
+     * @param value  the value to set
+     * @throws IllegalArgumentException if field is is null or not supported.
+     */
+    protected void addFieldInto(int[] values, DurationFieldType field, int value) {
+<span class="fc" id="L517">        int index = indexOf(field);</span>
+<span class="fc bfc" id="L518" title="All 2 branches covered.">        if (index == -1) {</span>
+<span class="fc bfc" id="L519" title="All 4 branches covered.">            if (value != 0 || field == null) {</span>
+<span class="fc" id="L520">                throw new IllegalArgumentException(</span>
+                    &quot;Period does not support field '&quot; + field + &quot;'&quot;);
+            }
+        } else {
+<span class="fc" id="L524">            values[index] = FieldUtils.safeAdd(values[index], value);</span>
+        }
+<span class="fc" id="L526">    }</span>
+
+    /**
+     * Merges the fields from another period.
+     * 
+     * @param period  the period to add from, not null
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    protected void mergePeriod(ReadablePeriod period) {
+<span class="fc bfc" id="L535" title="All 2 branches covered.">        if (period != null) {</span>
+<span class="fc" id="L536">            setValues(mergePeriodInto(getValues(), period));</span>
+        }
+<span class="fc" id="L538">    }</span>
+
+    /**
+     * Merges the fields from another period.
+     * 
+     * @param values  the array of values to update
+     * @param period  the period to add from, not null
+     * @return the updated values
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    protected int[] mergePeriodInto(int[] values, ReadablePeriod period) {
+<span class="fc bfc" id="L549" title="All 2 branches covered.">        for (int i = 0, isize = period.size(); i &lt; isize; i++) {</span>
+<span class="fc" id="L550">            DurationFieldType type = period.getFieldType(i);</span>
+<span class="fc" id="L551">            int value = period.getValue(i);</span>
+<span class="fc" id="L552">            checkAndUpdate(type, values, value);</span>
+        }
+<span class="fc" id="L554">        return values;</span>
+    }
+
+    /**
+     * Adds the fields from another period.
+     * 
+     * @param period  the period to add from, not null
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    protected void addPeriod(ReadablePeriod period) {
+<span class="fc bfc" id="L564" title="All 2 branches covered.">        if (period != null) {</span>
+<span class="fc" id="L565">            setValues(addPeriodInto(getValues(), period));</span>
+        }
+<span class="fc" id="L567">    }</span>
+
+    /**
+     * Adds the fields from another period.
+     * 
+     * @param values  the array of values to update
+     * @param period  the period to add from, not null
+     * @return the updated values
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    protected int[] addPeriodInto(int[] values, ReadablePeriod period) {
+<span class="fc bfc" id="L578" title="All 2 branches covered.">        for (int i = 0, isize = period.size(); i &lt; isize; i++) {</span>
+<span class="fc" id="L579">            DurationFieldType type = period.getFieldType(i);</span>
+<span class="fc" id="L580">            int value = period.getValue(i);</span>
+<span class="fc bfc" id="L581" title="All 2 branches covered.">            if (value != 0) {</span>
+<span class="fc" id="L582">                int index = indexOf(type);</span>
+<span class="fc bfc" id="L583" title="All 2 branches covered.">                if (index == -1) {</span>
+<span class="fc" id="L584">                    throw new IllegalArgumentException(</span>
+<span class="fc" id="L585">                        &quot;Period does not support field '&quot; + type.getName() + &quot;'&quot;);</span>
+                } else {
+<span class="fc" id="L587">                    values[index] = FieldUtils.safeAdd(getValue(index), value);</span>
+                }
+            }
+        }
+<span class="fc" id="L591">        return values;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the value of the field at the specified index.
+     * 
+     * @param index  the index
+     * @param value  the value to set
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    protected void setValue(int index, int value) {
+<span class="fc" id="L603">        iValues[index] = value;</span>
+<span class="fc" id="L604">    }</span>
+
+    /**
+     * Sets the values of all fields.
+     * &lt;p&gt;
+     * In version 2.0 and later, this method copies the array into the original.
+     * This is because the instance variable has been changed to be final to satisfy the Java Memory Model.
+     * This only impacts subclasses that are mutable.
+     * 
+     * @param values  the array of values
+     */
+    protected void setValues(int[] values) {
+<span class="fc" id="L616">        System.arraycopy(values, 0, iValues, 0, iValues.length);</span>
+<span class="fc" id="L617">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

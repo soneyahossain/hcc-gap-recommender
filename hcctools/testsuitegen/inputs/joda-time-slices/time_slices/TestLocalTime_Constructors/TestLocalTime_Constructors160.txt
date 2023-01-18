@@ -1,0 +1,42 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  0.4% done, time left: unknown  1.4% done, time left: unknown  2.8% done, time left: unknown  4.5% done, time left: unknown  6.6% done, time left: unknown  8.3% done, time left:   0:00:05    9.3% done, time left:   0:00:06  9.3% done, time left:   0:00:07  9.3% done, time left:   0:00:09  9.6% done, time left:   0:00:10  9.6% done, time left:   0:00:11  9.6% done, time left:   0:00:13  9.6% done, time left:   0:00:14  9.6% done, time left:   0:00:16  9.7% done, time left:   0:00:17 10.1% done, time left:   0:00:18 10.1% done, time left:   0:00:19 10.1% done, time left:   0:00:20 10.2% done, time left:   0:00:21 11.5% done, time left:   0:00:24 12.9% done, time left:   0:00:25 14.2% done, time left:   0:00:25 15.5% done, time left:   0:00:24 16.8% done, time left:   0:00:23 18.2% done, time left:   0:00:22 19.7% done, time left:   0:00:20 22.1% done, time left:   0:00:17 25.2% done, time left:   0:00:13 28.6% done, time left:   0:00:08 30.3% done, time left:   0:00:06 30.3% done, time left:   0:00:04 30.4% done, time left:   0:00:02 32.1% done, time left:   0:00:02 35.2% done, time left:   0:00:03 38.4% done, time left:   0:00:02 41.6% done, time left:   0:00:02 44.5% done, time left:   0:00:02 46.2% done, time left:   0:00:01 46.5% done, time left:   0:00:01 49.6% done, time left:   0:00:01 52.3% done, time left:   0:00:01 52.4% done, time left:   0:00:00 52.5% done, time left:   0:00:00 54.5% done, time left:   0:00:00 56.5% done, time left:   0:00:01 59.1% done, time left:   0:00:01 61.9% done, time left:   0:00:01 64.7% done, time left:   0:00:01 67.6% done, time left:   0:00:00 70.6% done, time left:   0:00:00 72.4% done, time left:   0:00:00 73.0% done, time left:   0:00:00 75.9% done, time left:   0:00:00 77.0% done, time left:   0:00:00 78.9% done, time left:   0:00:00 84.9% done, time left:   0:00:00 86.1% done, time left:   0:00:00 93.3% done, time left:   0:00:00 98.0% done, time left:   0:00:00 100.3% done, time left:   0:00:00  101.3% done, time left:   0:00:00 102.9% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:558:*]:
+org.joda.time.LocalTime.<init>:383 ALOAD 0
+org.joda.time.LocalTime.<init>:383 INVOKESPECIAL org/joda/time/LocalTime.<init>(Ljava/lang/Object;Lorg/joda/time/Chronology;)V
+org.joda.time.LocalTime.<init>:434 ALOAD 0
+org.joda.time.LocalTime.<init>:434 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:434 PUTFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getChronology:669 ALOAD 0
+org.joda.time.LocalTime.getChronology:669 GETFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getChronology:669 ARETURN
+org.joda.time.LocalTime.getSecondOfMinute:1118 ALOAD 0
+org.joda.time.LocalTime.getSecondOfMinute:1118 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getSecondOfMinute:1118 INVOKEVIRTUAL org/joda/time/Chronology.secondOfMinute()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime.getSecondOfMinute:1118 INVOKEVIRTUAL org/joda/time/DateTimeField.get(J)I
+org.joda.time.LocalTime.getSecondOfMinute:1118 IRETURN
+org.joda.time.TestLocalTime_Constructors.main:115 INVOKEVIRTUAL org/joda/time/TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay()V
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:553 BIPUSH 20
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:554 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:554 DUP
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:554 INVOKESPECIAL org/joda/time/LocalTime.<init>(Ljava/lang/Object;)V
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:554 ASTORE 2
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:555 ALOAD 2
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:555 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:558 LDC 30
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:558 ALOAD 2
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:558 INVOKEVIRTUAL org/joda/time/LocalTime.getSecondOfMinute()I
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:558 I2L
+org.joda.time.TestLocalTime_Constructors.testConstructor_ObjectTimeOfDay:558 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 ALOAD 0
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 GETFIELD org/joda/time/chrono/AssembledChronology.iSecondOfMinute Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 ARETURN
+org.joda.time.chrono.BuddhistChronology.withUTC:151 GETSTATIC org/joda/time/chrono/BuddhistChronology.INSTANCE_UTC Lorg/joda/time/chrono/BuddhistChronology;
+org.joda.time.chrono.BuddhistChronology.withUTC:151 ARETURN
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 ALOAD 0
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 INVOKEVIRTUAL org/joda/time/chrono/LimitChronology$LimitDateTimeField.getWrappedField()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 IRETURN
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 ALOAD 0
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 GETFIELD org/joda/time/field/DecoratedDateTimeField.iField Lorg/joda/time/DateTimeField;
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 ARETURN
+
+Slice consists of 37 bytecode instructions.
+Computation took 7.10 seconds.

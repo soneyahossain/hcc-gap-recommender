@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReadablePartialConverter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.convert</a> &gt; <span class="el_source">ReadablePartialConverter.java</span></div><h1>ReadablePartialConverter.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.convert;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.DateTimeZone;
+import org.joda.time.ReadablePartial;
+
+/**
+ * ReadablePartialConverter extracts partial fields and chronology from a ReadablePartial.
+ *
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+class ReadablePartialConverter extends AbstractConverter
+        implements PartialConverter {
+
+    /**
+     * Singleton instance.
+     */
+<span class="fc" id="L35">    static final ReadablePartialConverter INSTANCE = new ReadablePartialConverter();</span>
+
+    /**
+     * Restricted constructor.
+     */
+    protected ReadablePartialConverter() {
+<span class="fc" id="L41">        super();</span>
+<span class="fc" id="L42">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the chronology, which is taken from the ReadablePartial.
+     * 
+     * @param object  the ReadablePartial to convert, must not be null
+     * @param zone  the specified zone to use, null means default zone
+     * @return the chronology, never null
+     */
+    public Chronology getChronology(Object object, DateTimeZone zone) {
+<span class="fc" id="L53">        return getChronology(object, (Chronology) null).withZone(zone);</span>
+    }
+
+    /**
+     * Gets the chronology, which is taken from the ReadableInstant.
+     * &lt;p&gt;
+     * If the passed in chronology is non-null, it is used.
+     * Otherwise the chronology from the instant is used.
+     * 
+     * @param object  the ReadablePartial to convert, must not be null
+     * @param chrono  the chronology to use, null means use that from object
+     * @return the chronology, never null
+     */
+    public Chronology getChronology(Object object, Chronology chrono) {
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (chrono == null) {</span>
+<span class="fc" id="L68">            chrono = ((ReadablePartial) object).getChronology();</span>
+<span class="fc" id="L69">            chrono = DateTimeUtils.getChronology(chrono);</span>
+        }
+<span class="fc" id="L71">        return chrono;</span>
+    }
+
+    /**
+     * Extracts the values of the partial from an object of this converter's type.
+     * The chrono parameter is a hint to the converter, should it require a
+     * chronology to aid in conversion.
+     * 
+     * @param fieldSource  a partial that provides access to the fields.
+     *  This partial may be incomplete and only getFieldType(int) should be used
+     * @param object  the object to convert
+     * @param chrono  the chronology to use, which is the non-null result of getChronology()
+     * @return the array of field values that match the fieldSource, must be non-null valid
+     * @throws ClassCastException if the object is invalid
+     */
+    public int[] getPartialValues(ReadablePartial fieldSource, Object object, Chronology chrono) {
+<span class="fc" id="L87">        ReadablePartial input = (ReadablePartial) object;</span>
+<span class="fc" id="L88">        int size = fieldSource.size();</span>
+<span class="fc" id="L89">        int[] values = new int[size];</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L91">            values[i] = input.get(fieldSource.getFieldType(i));</span>
+        }
+<span class="fc" id="L93">        chrono.validate(fieldSource, values);</span>
+<span class="fc" id="L94">        return values;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns ReadableInstant.class.
+     * 
+     * @return ReadableInstant.class
+     */
+    public Class&lt;?&gt; getSupportedType() {
+<span class="fc" id="L104">        return ReadablePartial.class;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

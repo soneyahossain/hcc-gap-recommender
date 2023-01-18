@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LangFunction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.function</a> &gt; <span class="el_source">LangFunction.java</span></div><h1>LangFunction.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+
+package org.jaxen.function;
+
+import java.util.Iterator;
+import java.util.List;
+
+import org.jaxen.Context;
+import org.jaxen.Function;
+import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
+import org.jaxen.UnsupportedAxisException;
+
+/**
+ * &lt;p&gt;
+ * &lt;b&gt;4.3&lt;/b&gt; &lt;code&gt;&lt;i&gt;boolean&lt;/i&gt; lang(&lt;i&gt;string&lt;/i&gt;)&lt;/code&gt;
+ * &lt;/p&gt;
+ * 
+ * &lt;blockquote cite=&quot;http://www.w3.org/TR/xpath#function-lang&quot;&gt;
+ * &lt;p&gt;
+ * The &lt;b&gt;lang&lt;/b&gt; function returns true or false depending on whether
+ * the language of the context node as specified by
+ * &lt;code&gt;xml:lang&lt;/code&gt; attributes is the same as or is a sublanguage
+ * of the language specified by the argument string. The language of the
+ * context node is determined by the value of the &lt;code&gt;xml:lang&lt;/code&gt;
+ * 
+ * attribute on the context node, or, if the context node has no
+ * &lt;code&gt;xml:lang&lt;/code&gt; attribute, by the value of the
+ * &lt;code&gt;xml:lang&lt;/code&gt; attribute on the nearest ancestor of the
+ * context node that has an &lt;code&gt;xml:lang&lt;/code&gt; attribute. If there
+ * is no such attribute, then &lt;b&gt;&lt;a href=&quot;#function-lang&quot;&gt;lang&lt;/a&gt;&lt;/b&gt;
+ * returns false. If there is such an attribute, then &lt;b&gt;&lt;a
+ * href=&quot;#function-lang&quot;&gt;lang&lt;/a&gt;&lt;/b&gt; returns true if the attribute
+ * value is equal to the argument ignoring case, or if there is some
+ * suffix starting with &lt;code&gt;-&lt;/code&gt; such that the attribute value
+ * is equal to the argument ignoring that suffix of the attribute value
+ * and ignoring case. For example, &lt;code&gt;lang(&quot;en&quot;)&lt;/code&gt; would
+ * return true if the context node is any of these five elements:
+ * &lt;/p&gt;
+ * 
+ * &lt;pre&gt;
+ *  &amp;lt;para xml:lang=&amp;quot;en&amp;quot;/&amp;gt;
+ *  &amp;lt;div xml:lang=&amp;quot;en&amp;quot;&amp;gt;&amp;lt;para/&amp;gt;&amp;lt;/div&amp;gt;
+ *  &amp;lt;para xml:lang=&amp;quot;EN&amp;quot;/&amp;gt;
+ *  &amp;lt;para xml:lang=&amp;quot;en-us&amp;quot;/&amp;gt;
+ * &lt;/pre&gt;
+ * 
+ * &lt;/blockquote&gt;
+ * 
+ * @author Attila Szegedi (szegedia @ freemail.hu)
+ * @see &lt;a href=&quot;https://www.w3.org/TR/xpath#function-lang&quot;
+ *      target=&quot;_top&quot;&gt;XPath Specification&lt;/a&gt;
+ */
+public class LangFunction implements Function
+{
+    private static final String LANG_LOCALNAME = &quot;lang&quot;;
+    private static final String XMLNS_URI = 
+        &quot;http://www.w3.org/XML/1998/namespace&quot;;
+    
+
+    /**
+     * Create a new &lt;code&gt;LangFunction&lt;/code&gt; object.
+     */
+<span class="fc" id="L110">    public LangFunction() {}</span>
+    
+    
+    /**
+     * &lt;p&gt;
+     * Determines whether or not the context node is written in the language specified
+     * by the XPath string-value of &lt;code&gt;args.get(0)&lt;/code&gt;,
+     * as determined by the nearest &lt;code&gt;xml:lang&lt;/code&gt; attribute in scope. 
+     * &lt;/p&gt;
+     * 
+     * @param context the context in which to evaluate the &lt;code&gt;lang()&lt;/code&gt; function
+     * @param args the arguments to the lang function
+     * @return a &lt;code&gt;Boolean&lt;/code&gt; indicating whether the context node is written in
+     *     the specified language
+     * @throws FunctionCallException if &lt;code&gt;args&lt;/code&gt; does not have length one
+     * 
+     */
+    public Object call(Context context,
+                       List args) throws FunctionCallException
+    {
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        if (args.size() != 1) {</span>
+<span class="fc" id="L131">            throw new FunctionCallException(&quot;lang() requires exactly one argument.&quot;);   </span>
+        }
+        
+<span class="fc" id="L134">        Object arg = args.get(0);</span>
+            
+        try {
+<span class="fc" id="L137">            return evaluate(context.getNodeSet(), arg, context.getNavigator() );</span>
+        }
+<span class="nc" id="L139">        catch(UnsupportedAxisException e) {</span>
+<span class="nc" id="L140">            throw new FunctionCallException(&quot;Can't evaluate lang()&quot;, </span>
+                                                 e);
+        }
+       
+    }
+
+    private static Boolean evaluate(List contextNodes, Object lang, Navigator nav)
+      throws UnsupportedAxisException
+    {
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        return evaluate(contextNodes.get(0), </span>
+<span class="fc" id="L150">            StringFunction.evaluate(lang, nav), nav)</span>
+            ? Boolean.TRUE : Boolean.FALSE;
+    }
+
+    private static boolean evaluate(Object node, String lang, Navigator nav)
+      throws UnsupportedAxisException
+    {
+        
+<span class="fc" id="L158">        Object element = node;</span>
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        if (! nav.isElement(element)) {</span>
+<span class="fc" id="L160">            element = nav.getParentNode(node);</span>
+        }
+<span class="fc bfc" id="L162" title="All 4 branches covered.">        while (element != null &amp;&amp; nav.isElement(element)) </span>
+        {
+<span class="fc" id="L164">            Iterator attrs = nav.getAttributeAxisIterator(element);</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">            while(attrs.hasNext())</span>
+            {
+<span class="fc" id="L167">                Object attr = attrs.next();</span>
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">                if(LANG_LOCALNAME.equals(nav.getAttributeName(attr)) &amp;&amp; </span>
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">                   XMLNS_URI.equals(nav.getAttributeNamespaceUri(attr)))</span>
+                {
+<span class="fc" id="L171">                    return </span>
+<span class="fc" id="L172">                        isSublang(nav.getAttributeStringValue(attr), lang);</span>
+                }
+<span class="nc" id="L174">            }</span>
+<span class="fc" id="L175">            element = nav.getParentNode(element);</span>
+<span class="fc" id="L176">        }</span>
+<span class="fc" id="L177">        return false;</span>
+    }
+    
+    private static boolean isSublang(String sublang, String lang)
+    {
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        if(sublang.equalsIgnoreCase(lang))</span>
+        {
+<span class="fc" id="L184">            return true;</span>
+        }
+<span class="fc" id="L186">        int ll = lang.length();</span>
+<span class="fc" id="L187">        return </span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">            sublang.length() &gt; ll &amp;&amp; </span>
+<span class="fc bfc" id="L189" title="All 2 branches covered.">            sublang.charAt(ll) == '-' &amp;&amp; </span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">            sublang.substring(0, ll).equalsIgnoreCase(lang);</span>
+    }
+    
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JaxenHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen</a> &gt; <span class="el_source">JaxenHandler.java</span></div><h1>JaxenHandler.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+
+
+package org.jaxen;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+import org.jaxen.expr.DefaultXPathFactory;
+import org.jaxen.expr.Expr;
+import org.jaxen.expr.FilterExpr;
+import org.jaxen.expr.FunctionCallExpr;
+import org.jaxen.expr.LocationPath;
+import org.jaxen.expr.Predicate;
+import org.jaxen.expr.Predicated;
+import org.jaxen.expr.Step;
+import org.jaxen.expr.XPathExpr;
+import org.jaxen.expr.XPathFactory;
+import org.jaxen.saxpath.Operator;
+import org.jaxen.saxpath.XPathHandler;
+
+/** SAXPath &lt;code&gt;XPathHandler&lt;/code&gt; implementation capable
+ *  of building Jaxen expression trees which can walk various
+ *  different object models.
+ *
+ *  @author bob mcwhirter (bob@werken.com)
+ */
+public class JaxenHandler implements XPathHandler
+{
+    private XPathFactory xpathFactory;
+    private XPathExpr    xpath;
+    
+    /**
+     * ????
+     */
+    protected boolean simplified;
+
+    /**
+     * This may be changed to an ArrayList in the future (i.e. version &amp;gt;= 1.2). 
+     * You really shouldn't be accessing this field directly, but
+     * if you are please try to use it as a generic List. Don't use the 
+     * methods that are only available in LinkedList.
+     */
+    protected LinkedList stack;
+
+    /** Constructor
+     */
+    public JaxenHandler()
+<span class="fc" id="L95">    {</span>
+<span class="fc" id="L96">        this.stack        = new LinkedList();</span>
+<span class="fc" id="L97">        this.xpathFactory = new DefaultXPathFactory();</span>
+<span class="fc" id="L98">    }</span>
+    
+    /** Set the Jaxen &lt;code&gt;XPathFactory&lt;/code&gt; that constructs
+     *  the XPath expression tree during the parse.
+     *
+     *  @param xpathFactory the factory to use during the parse
+     */
+    public void setXPathFactory(XPathFactory xpathFactory)
+    {
+<span class="fc" id="L107">        this.xpathFactory = xpathFactory;</span>
+<span class="fc" id="L108">    }</span>
+
+    /** Retrieve the Jaxen &lt;code&gt;XPathFactory&lt;/code&gt; used
+     *  during the parse to construct the XPath expression tree.
+     *
+     *  @return the &lt;code&gt;XPathFactory&lt;/code&gt; used during the parse.
+     */
+    public XPathFactory getXPathFactory()
+    {
+<span class="fc" id="L117">        return this.xpathFactory;</span>
+    }
+
+    /** Retrieve the simplified Jaxen XPath expression tree.
+     *
+     *  &lt;p&gt;
+     *  This method is only valid once &lt;code&gt;XPathReader.parse(...)&lt;/code&gt;
+     *  successfully returned.
+     *  &lt;/p&gt;
+     *
+     *  @return the XPath expression tree
+     */
+    public XPathExpr getXPathExpr()
+    {
+<span class="fc" id="L131">        return getXPathExpr( true );</span>
+    }
+
+    /** Retrieve the Jaxen XPath expression tree, optionally
+     *  simplified.
+     *
+     *  &lt;p&gt;
+     *  This method is only valid once &lt;code&gt;XPathReader.parse(...)&lt;/code&gt;
+     *  successfully returned.
+     *  &lt;/p&gt;
+     *  
+     *  @param shouldSimplify ????
+     *
+     *  @return the XPath expression tree
+     */
+    public XPathExpr getXPathExpr(boolean shouldSimplify)
+    {
+<span class="pc bpc" id="L148" title="1 of 4 branches missed.">        if ( shouldSimplify &amp;&amp; ! this.simplified )</span>
+        {
+<span class="fc" id="L150">            this.xpath.simplify();</span>
+<span class="fc" id="L151">            this.simplified = true;</span>
+        }
+
+<span class="fc" id="L154">        return this.xpath;</span>
+    }
+
+    public void startXPath()
+    {
+<span class="fc" id="L159">        this.simplified = false;</span>
+<span class="fc" id="L160">        pushFrame();</span>
+<span class="fc" id="L161">    }</span>
+    
+    public void endXPath() throws JaxenException
+    {
+<span class="fc" id="L165">        this.xpath = getXPathFactory().createXPath( (Expr) pop() );</span>
+<span class="fc" id="L166">        popFrame();</span>
+<span class="fc" id="L167">    }</span>
+
+    public void startPathExpr()
+    {
+<span class="fc" id="L171">        pushFrame();</span>
+<span class="fc" id="L172">    }</span>
+
+    public void endPathExpr() throws JaxenException
+    {
+
+        // PathExpr ::=   LocationPath
+        //              | FilterExpr
+        //              | FilterExpr / RelativeLocationPath
+        //              | FilterExpr // RelativeLocationPath
+        //
+        // If the current stack-frame has two items, it's a
+        // FilterExpr and a LocationPath (of some flavor).
+        //
+        // If the current stack-frame has one item, it's simply
+        // a FilterExpr, and more than likely boils down to a
+        // primary expr of some flavor.  But that's for another
+        // method...
+
+        FilterExpr   filterExpr;
+        LocationPath locationPath;
+
+        Object       popped;
+
+<span class="fc bfc" id="L195" title="All 2 branches covered.">        if ( stackSize() == 2 )</span>
+        {
+<span class="fc" id="L197">            locationPath = (LocationPath) pop();</span>
+<span class="fc" id="L198">            filterExpr   = (FilterExpr) pop();</span>
+        }
+        else
+        {
+<span class="fc" id="L202">            popped = pop();</span>
+
+<span class="fc bfc" id="L204" title="All 2 branches covered.">            if ( popped instanceof LocationPath )</span>
+            {
+<span class="fc" id="L206">                locationPath = (LocationPath) popped;</span>
+<span class="fc" id="L207">                filterExpr   = null;</span>
+            }
+            else
+            {
+<span class="fc" id="L211">                locationPath = null;</span>
+<span class="fc" id="L212">                filterExpr   = (FilterExpr) popped;</span>
+            }
+        }
+<span class="fc" id="L215">        popFrame();</span>
+
+<span class="fc" id="L217">        push( getXPathFactory().createPathExpr( filterExpr,</span>
+                                               locationPath ) );
+<span class="fc" id="L219">    }</span>
+
+    public void startAbsoluteLocationPath() throws JaxenException
+    {
+<span class="fc" id="L223">        pushFrame();</span>
+
+<span class="fc" id="L225">        push( getXPathFactory().createAbsoluteLocationPath() );</span>
+<span class="fc" id="L226">    }</span>
+
+    public void endAbsoluteLocationPath() throws JaxenException
+    {
+<span class="fc" id="L230">        endLocationPath();</span>
+<span class="fc" id="L231">    }</span>
+
+    public void startRelativeLocationPath() throws JaxenException
+    {
+<span class="fc" id="L235">        pushFrame();</span>
+
+<span class="fc" id="L237">        push( getXPathFactory().createRelativeLocationPath() );</span>
+<span class="fc" id="L238">    }</span>
+
+    public void endRelativeLocationPath() throws JaxenException
+    {
+<span class="fc" id="L242">        endLocationPath();</span>
+<span class="fc" id="L243">    }</span>
+
+    protected void endLocationPath() throws JaxenException 
+    {
+<span class="fc" id="L247">        LocationPath path = (LocationPath) peekFrame().removeFirst();</span>
+
+<span class="fc" id="L249">        addSteps( path,</span>
+<span class="fc" id="L250">                  popFrame().iterator() );</span>
+
+<span class="fc" id="L252">        push( path );</span>
+<span class="fc" id="L253">    }</span>
+
+    protected void addSteps(LocationPath locationPath,
+                          Iterator stepIter)
+    {
+<span class="fc bfc" id="L258" title="All 2 branches covered.">        while ( stepIter.hasNext() )</span>
+        {
+<span class="fc" id="L260">            locationPath.addStep( (Step) stepIter.next() );</span>
+        }
+<span class="fc" id="L262">    }</span>
+
+    public void startNameStep(int axis,
+                              String prefix,
+                              String localName) throws JaxenException
+    {
+<span class="fc" id="L268">        pushFrame();</span>
+
+<span class="fc" id="L270">        push( getXPathFactory().createNameStep( axis,</span>
+                                               prefix,
+                                               localName ) );
+<span class="fc" id="L273">    }</span>
+
+    public void endNameStep() 
+    {
+<span class="fc" id="L277">        endStep();</span>
+<span class="fc" id="L278">    }</span>
+    
+    public void startTextNodeStep(int axis) throws JaxenException
+    {
+        //System.err.println(&quot;startTextNodeStep()&quot;);
+<span class="fc" id="L283">        pushFrame();</span>
+        
+<span class="fc" id="L285">        push( getXPathFactory().createTextNodeStep( axis ) );</span>
+<span class="fc" id="L286">    }</span>
+    
+    public void endTextNodeStep()
+    {
+<span class="fc" id="L290">        endStep();</span>
+<span class="fc" id="L291">    }</span>
+
+    public void startCommentNodeStep(int axis) throws JaxenException
+    {
+<span class="fc" id="L295">        pushFrame();</span>
+
+<span class="fc" id="L297">        push( getXPathFactory().createCommentNodeStep( axis ) );</span>
+<span class="fc" id="L298">    }</span>
+
+    public void endCommentNodeStep()
+    {
+<span class="fc" id="L302">        endStep();</span>
+<span class="fc" id="L303">    }</span>
+        
+    public void startAllNodeStep(int axis) throws JaxenException
+    {
+<span class="fc" id="L307">        pushFrame();</span>
+
+<span class="fc" id="L309">        push( getXPathFactory().createAllNodeStep( axis ) );</span>
+<span class="fc" id="L310">    }</span>
+
+    public void endAllNodeStep()
+    {
+<span class="fc" id="L314">        endStep();</span>
+<span class="fc" id="L315">    }</span>
+
+    public void startProcessingInstructionNodeStep(int axis,
+                                                   String name) throws JaxenException
+    {
+<span class="fc" id="L320">        pushFrame();</span>
+
+<span class="fc" id="L322">        push( getXPathFactory().createProcessingInstructionNodeStep( axis,</span>
+                                                                    name ) );
+<span class="fc" id="L324">    }</span>
+    
+    public void endProcessingInstructionNodeStep()
+    {
+<span class="fc" id="L328">        endStep();</span>
+<span class="fc" id="L329">    }</span>
+
+    protected void endStep()
+    {
+<span class="fc" id="L333">        Step step = (Step) peekFrame().removeFirst();</span>
+
+<span class="fc" id="L335">        addPredicates( step,</span>
+<span class="fc" id="L336">                       popFrame().iterator() );</span>
+
+<span class="fc" id="L338">        push( step );</span>
+<span class="fc" id="L339">    }</span>
+    
+    public void startPredicate()
+    {
+<span class="fc" id="L343">        pushFrame();</span>
+<span class="fc" id="L344">    }</span>
+    
+    public void endPredicate() throws JaxenException
+    {
+<span class="fc" id="L348">        Predicate predicate = getXPathFactory().createPredicate( (Expr) pop() );</span>
+
+<span class="fc" id="L350">        popFrame();</span>
+
+<span class="fc" id="L352">        push( predicate );</span>
+<span class="fc" id="L353">    }</span>
+
+    public void startFilterExpr() 
+    {
+<span class="fc" id="L357">        pushFrame();</span>
+<span class="fc" id="L358">    }</span>
+
+    public void endFilterExpr() throws JaxenException
+    {
+<span class="fc" id="L362">        Expr expr = (Expr) peekFrame().removeFirst();</span>
+        
+<span class="fc" id="L364">        FilterExpr filter = getXPathFactory().createFilterExpr( expr );</span>
+
+<span class="fc" id="L366">        Iterator predIter = popFrame().iterator();</span>
+
+<span class="fc" id="L368">        addPredicates( filter,</span>
+                       predIter );
+
+<span class="fc" id="L371">        push( filter );</span>
+<span class="fc" id="L372">    }</span>
+
+    protected void addPredicates(Predicated obj,
+                               Iterator predIter)
+    {
+<span class="fc bfc" id="L377" title="All 2 branches covered.">        while ( predIter.hasNext() )</span>
+        {
+<span class="fc" id="L379">            obj.addPredicate( (Predicate) predIter.next() );</span>
+        }
+<span class="fc" id="L381">    }</span>
+
+    protected void returnExpr()
+    {
+<span class="nc" id="L385">        Expr expr = (Expr) pop();</span>
+<span class="nc" id="L386">        popFrame();</span>
+<span class="nc" id="L387">        push( expr );</span>
+<span class="nc" id="L388">    }</span>
+
+    public void startOrExpr()
+    {
+<span class="fc" id="L392">    }</span>
+
+    public void endOrExpr(boolean create) throws JaxenException
+    {
+
+<span class="fc bfc" id="L397" title="All 2 branches covered.">        if ( create )</span>
+        {
+<span class="fc" id="L399">            Expr rhs = (Expr) pop();</span>
+<span class="fc" id="L400">            Expr lhs = (Expr) pop();</span>
+
+<span class="fc" id="L402">            push( getXPathFactory().createOrExpr( lhs,</span>
+                                                 rhs ) );
+        }
+<span class="fc" id="L405">    }</span>
+
+    public void startAndExpr()
+    {
+<span class="fc" id="L409">    }</span>
+
+    public void endAndExpr(boolean create) throws JaxenException
+    {
+
+<span class="fc bfc" id="L414" title="All 2 branches covered.">        if ( create )</span>
+        {
+
+<span class="fc" id="L417">            Expr rhs = (Expr) pop();</span>
+<span class="fc" id="L418">            Expr lhs = (Expr) pop();</span>
+
+<span class="fc" id="L420">            push( getXPathFactory().createAndExpr( lhs,</span>
+                                                  rhs ) );
+        }
+<span class="fc" id="L423">    }</span>
+
+    public void startEqualityExpr()
+    {
+<span class="fc" id="L427">    }</span>
+
+    public void endEqualityExpr(int operator) throws JaxenException
+    {
+
+<span class="pc bpc" id="L432" title="1 of 2 branches missed.">        if ( operator != Operator.NO_OP )</span>
+        {
+            
+<span class="fc" id="L435">            Expr rhs = (Expr) pop();</span>
+<span class="fc" id="L436">            Expr lhs = (Expr) pop();</span>
+            
+<span class="fc" id="L438">            push( getXPathFactory().createEqualityExpr( lhs,</span>
+                                                        rhs,
+                                                        operator ) );
+        }
+<span class="fc" id="L442">    }</span>
+
+    public void startRelationalExpr()
+    {
+<span class="fc" id="L446">    }</span>
+
+    public void endRelationalExpr(int operator) throws JaxenException
+    {
+
+<span class="pc bpc" id="L451" title="1 of 2 branches missed.">        if ( operator != Operator.NO_OP )</span>
+        {
+
+<span class="fc" id="L454">            Expr rhs = (Expr) pop();</span>
+<span class="fc" id="L455">            Expr lhs = (Expr) pop();</span>
+
+<span class="fc" id="L457">            push( getXPathFactory().createRelationalExpr( lhs,</span>
+                                                         rhs,
+                                                         operator ) );
+        }
+<span class="fc" id="L461">    }</span>
+
+    public void startAdditiveExpr()
+    {
+<span class="fc" id="L465">    }</span>
+
+    public void endAdditiveExpr(int operator) throws JaxenException
+    {
+
+<span class="pc bpc" id="L470" title="1 of 2 branches missed.">        if ( operator != Operator.NO_OP )</span>
+        {
+            
+<span class="fc" id="L473">            Expr rhs = (Expr) pop();</span>
+<span class="fc" id="L474">            Expr lhs = (Expr) pop();</span>
+            
+<span class="fc" id="L476">            push( getXPathFactory().createAdditiveExpr( lhs,</span>
+                                                        rhs,
+                                                        operator ) );
+        }
+<span class="fc" id="L480">    }</span>
+
+    public void startMultiplicativeExpr()
+    {
+<span class="fc" id="L484">    }</span>
+
+    public void endMultiplicativeExpr(int operator) throws JaxenException
+    {
+
+<span class="pc bpc" id="L489" title="1 of 2 branches missed.">        if ( operator != Operator.NO_OP )</span>
+        {
+
+<span class="fc" id="L492">            Expr rhs = (Expr) pop();</span>
+<span class="fc" id="L493">            Expr lhs = (Expr) pop();</span>
+            
+<span class="fc" id="L495">            push( getXPathFactory().createMultiplicativeExpr( lhs,</span>
+                                                             rhs,
+                                                             operator ) );
+        }
+<span class="fc" id="L499">    }</span>
+
+    public void startUnaryExpr()
+    {
+<span class="fc" id="L503">     }</span>
+
+    public void endUnaryExpr(int operator) throws JaxenException
+    {
+
+<span class="pc bpc" id="L508" title="1 of 2 branches missed.">        if ( operator != Operator.NO_OP )</span>
+        {
+<span class="fc" id="L510">            push( getXPathFactory().createUnaryExpr( (Expr) pop(),</span>
+                                                    operator ) );
+        }
+<span class="fc" id="L513">    }</span>
+
+    public void startUnionExpr() 
+    {
+<span class="fc" id="L517">    }</span>
+
+    public void endUnionExpr(boolean create) throws JaxenException
+    {
+
+<span class="fc bfc" id="L522" title="All 2 branches covered.">        if ( create )</span>
+        {
+
+<span class="fc" id="L525">            Expr rhs = (Expr) pop();</span>
+<span class="fc" id="L526">            Expr lhs = (Expr) pop();</span>
+
+<span class="fc" id="L528">            push( getXPathFactory().createUnionExpr( lhs,</span>
+                                                    rhs ) );
+        }
+<span class="fc" id="L531">    }</span>
+
+    public void number(int number) throws JaxenException
+    {
+<span class="nc" id="L535">        push( getXPathFactory().createNumberExpr( number ) );</span>
+<span class="nc" id="L536">    }</span>
+
+    public void number(double number) throws JaxenException
+    {
+<span class="fc" id="L540">        push( getXPathFactory().createNumberExpr( number ) );</span>
+<span class="fc" id="L541">    }</span>
+
+    public void literal(String literal) throws JaxenException
+    {
+<span class="fc" id="L545">        push( getXPathFactory().createLiteralExpr( literal ) );</span>
+<span class="fc" id="L546">    }</span>
+
+    public void variableReference(String prefix,
+                                  String variableName) throws JaxenException
+    {
+<span class="fc" id="L551">        push( getXPathFactory().createVariableReferenceExpr( prefix,</span>
+                                                             variableName ) );
+<span class="fc" id="L553">    }</span>
+
+    public void startFunction(String prefix,
+                              String functionName) throws JaxenException
+    {
+<span class="fc" id="L558">        pushFrame();</span>
+<span class="fc" id="L559">        push( getXPathFactory().createFunctionCallExpr( prefix,</span>
+                                                        functionName ) );
+<span class="fc" id="L561">    }</span>
+
+    public void endFunction()
+    {
+<span class="fc" id="L565">        FunctionCallExpr function = (FunctionCallExpr) peekFrame().removeFirst();</span>
+
+<span class="fc" id="L567">        addParameters( function,</span>
+<span class="fc" id="L568">                       popFrame().iterator() );</span>
+
+<span class="fc" id="L570">        push( function );</span>
+<span class="fc" id="L571">    }</span>
+
+    protected void addParameters(FunctionCallExpr function,
+                               Iterator paramIter)
+    {
+<span class="fc bfc" id="L576" title="All 2 branches covered.">        while ( paramIter.hasNext() )</span>
+        {
+<span class="fc" id="L578">            function.addParameter( (Expr) paramIter.next() );</span>
+        }
+<span class="fc" id="L580">    }</span>
+
+    protected int stackSize()
+    {
+<span class="fc" id="L584">        return peekFrame().size();</span>
+    }
+
+    protected void push(Object obj)
+    {
+<span class="fc" id="L589">        peekFrame().addLast( obj );</span>
+<span class="fc" id="L590">    }</span>
+
+    protected Object pop()
+    {
+<span class="fc" id="L594">        return peekFrame().removeLast();</span>
+    }
+
+    protected boolean canPop()
+    {
+<span class="nc bnc" id="L599" title="All 2 branches missed.">        return ( peekFrame().size() &gt; 0 );</span>
+    }
+
+    protected void pushFrame()
+    {
+<span class="fc" id="L604">        this.stack.addLast( new LinkedList() );</span>
+<span class="fc" id="L605">    }</span>
+
+    protected LinkedList popFrame()
+    {
+<span class="fc" id="L609">        return (LinkedList) this.stack.removeLast();</span>
+    }
+
+    protected LinkedList peekFrame()
+    {
+<span class="fc" id="L614">        return (LinkedList) this.stack.getLast();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,36 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.3% done, time left: unknown  0.4% done, time left:   0:03:07    0.6% done, time left:   0:02:13  0.7% done, time left:   0:01:58  1.1% done, time left:   0:01:42  1.4% done, time left:   0:01:31  2.0% done, time left:   0:01:22  2.2% done, time left:   0:01:16  2.2% done, time left:   0:01:11  2.2% done, time left:   0:01:09  2.8% done, time left:   0:01:06  3.5% done, time left:   0:01:05  3.5% done, time left:   0:01:02  3.5% done, time left:   0:01:00  3.5% done, time left:   0:00:59  3.5% done, time left:   0:00:57  4.3% done, time left:   0:00:59  5.9% done, time left:   0:00:58  7.3% done, time left:   0:00:55  8.3% done, time left:   0:00:51 10.0% done, time left:   0:00:47 11.4% done, time left:   0:00:42 12.9% done, time left:   0:00:38 13.2% done, time left:   0:00:33 13.3% done, time left:   0:00:28 13.3% done, time left:   0:00:25 14.1% done, time left:   0:00:23 15.5% done, time left:   0:00:21 16.6% done, time left:   0:00:20 17.5% done, time left:   0:00:18 17.5% done, time left:   0:00:16 17.9% done, time left:   0:00:15 18.0% done, time left:   0:00:13 19.2% done, time left:   0:00:13 20.8% done, time left:   0:00:13 22.3% done, time left:   0:00:13 23.9% done, time left:   0:00:12 25.5% done, time left:   0:00:11 27.3% done, time left:   0:00:10 29.0% done, time left:   0:00:09 30.7% done, time left:   0:00:08 32.4% done, time left:   0:00:08 34.1% done, time left:   0:00:07 35.9% done, time left:   0:00:06 37.8% done, time left:   0:00:06 39.6% done, time left:   0:00:05 41.4% done, time left:   0:00:05 43.3% done, time left:   0:00:04 44.9% done, time left:   0:00:04 46.3% done, time left:   0:00:03 48.5% done, time left:   0:00:03 54.1% done, time left:   0:00:00 60.0% done, time left:   0:00:00 65.6% done, time left:   0:00:00 71.3% done, time left:   0:00:00 76.9% done, time left:   0:00:00 82.5% done, time left:   0:00:00 88.7% done, time left:   0:00:00 96.1% done, time left:   0:00:00 99.5% done, time left:   0:00:00 100.5% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.field.TestMillisDurationField.test_getDifference_long_int:187:*]:
+org.joda.time.field.FieldUtils.safeSubtract:103 LLOAD 0
+org.joda.time.field.FieldUtils.safeSubtract:103 LLOAD 2
+org.joda.time.field.FieldUtils.safeSubtract:103 LSUB
+org.joda.time.field.FieldUtils.safeSubtract:103 LSTORE 4
+org.joda.time.field.FieldUtils.safeSubtract:109 LLOAD 4
+org.joda.time.field.FieldUtils.safeSubtract:109 LRETURN
+org.joda.time.field.FieldUtils.safeToInt:226 LDC -2147483648
+org.joda.time.field.FieldUtils.safeToInt:226 LLOAD 0
+org.joda.time.field.FieldUtils.safeToInt:226 LCMP
+org.joda.time.field.FieldUtils.safeToInt:226 IFGT L0 false true
+org.joda.time.field.FieldUtils.safeToInt:226 LLOAD 0
+org.joda.time.field.FieldUtils.safeToInt:226 LDC 2147483647
+org.joda.time.field.FieldUtils.safeToInt:226 LCMP
+org.joda.time.field.FieldUtils.safeToInt:226 IFGT L0 false true
+org.joda.time.field.FieldUtils.safeToInt:227 LLOAD 0
+org.joda.time.field.FieldUtils.safeToInt:227 L2I
+org.joda.time.field.FieldUtils.safeToInt:227 IRETURN
+org.joda.time.field.MillisDurationField.getDifference:125 LLOAD 1
+org.joda.time.field.MillisDurationField.getDifference:125 LLOAD 3
+org.joda.time.field.MillisDurationField.getDifference:125 INVOKESTATIC org/joda/time/field/FieldUtils.safeSubtract(JJ)J
+org.joda.time.field.MillisDurationField.getDifference:125 INVOKESTATIC org/joda/time/field/FieldUtils.safeToInt(J)I
+org.joda.time.field.MillisDurationField.getDifference:125 IRETURN
+org.joda.time.field.TestMillisDurationField.main:55 INVOKEVIRTUAL org/joda/time/field/TestMillisDurationField.test_getDifference_long_int()V
+org.joda.time.field.TestMillisDurationField.test_getDifference_long_int:186 LCONST_0
+org.joda.time.field.TestMillisDurationField.test_getDifference_long_int:187 LDC -667
+org.joda.time.field.TestMillisDurationField.test_getDifference_long_int:187 GETSTATIC org/joda/time/field/MillisDurationField.INSTANCE Lorg/joda/time/DurationField;
+org.joda.time.field.TestMillisDurationField.test_getDifference_long_int:187 LDC 567
+org.joda.time.field.TestMillisDurationField.test_getDifference_long_int:187 LDC 1234
+org.joda.time.field.TestMillisDurationField.test_getDifference_long_int:187 INVOKEVIRTUAL org/joda/time/DurationField.getDifference(JJ)I
+org.joda.time.field.TestMillisDurationField.test_getDifference_long_int:187 I2L
+org.joda.time.field.TestMillisDurationField.test_getDifference_long_int:187 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 31 bytecode instructions.
+Computation took 7.15 seconds.

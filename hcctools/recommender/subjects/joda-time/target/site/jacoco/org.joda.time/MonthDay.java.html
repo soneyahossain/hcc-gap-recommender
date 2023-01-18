@@ -1,0 +1,978 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MonthDay.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">MonthDay.java</span></div><h1>MonthDay.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2010 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import org.joda.convert.FromString;
+import org.joda.convert.ToString;
+import org.joda.time.base.BasePartial;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.field.AbstractPartialFieldProperty;
+import org.joda.time.field.FieldUtils;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
+import org.joda.time.format.ISODateTimeFormat;
+
+/**
+ * MonthDay is an immutable partial supporting the monthOfYear and dayOfMonth fields.
+ * &lt;p&gt;
+ * NOTE: This class only supports the two fields listed above.
+ * It is impossible to query any other fields, such as dayOfWeek or centuryOfEra.
+ * &lt;p&gt;
+ * Calculations on MonthDay are performed using a {@link Chronology}.
+ * This chronology is set to be in the UTC time zone for all calculations.
+ * &lt;p&gt;
+ * One use case for this class is to store a birthday without the year (to avoid
+ * storing the age of the person).
+ * This class can be used as the gMonthDay type in XML Schema.
+ * &lt;p&gt;
+ * Each individual field can be queried in two ways:
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;code&gt;getMonthOfYear()&lt;/code&gt;
+ * &lt;li&gt;&lt;code&gt;monthOfYear().get()&lt;/code&gt;
+ * &lt;/ul&gt;
+ * The second technique also provides access to other useful methods on the
+ * field:
+ * &lt;ul&gt;
+ * &lt;li&gt;numeric value - &lt;code&gt;monthOfYear().get()&lt;/code&gt;
+ * &lt;li&gt;text value - &lt;code&gt;monthOfYear().getAsText()&lt;/code&gt;
+ * &lt;li&gt;short text value - &lt;code&gt;monthOfYear().getAsShortText()&lt;/code&gt;
+ * &lt;li&gt;maximum/minimum values - &lt;code&gt;monthOfYear().getMaximumValue()&lt;/code&gt;
+ * &lt;li&gt;add/subtract - &lt;code&gt;monthOfYear().addToCopy()&lt;/code&gt;
+ * &lt;li&gt;set - &lt;code&gt;monthOfYear().setCopy()&lt;/code&gt;
+ * &lt;/ul&gt;
+ * &lt;p&gt;
+ * MonthDay is thread-safe and immutable, provided that the Chronology is as well.
+ * All standard Chronology classes supplied are thread-safe and immutable.
+ *
+ * @author Chris Pheby
+ * @since 2.0
+ */
+public final class MonthDay
+        extends BasePartial
+        implements ReadablePartial, Serializable {
+
+    /** Serialization version */
+    private static final long serialVersionUID = 2954560699050434609L;
+
+    /** The singleton set of field types */
+<span class="fc" id="L79">    private static final DateTimeFieldType[] FIELD_TYPES = new DateTimeFieldType[] {</span>
+<span class="fc" id="L80">        DateTimeFieldType.monthOfYear(),</span>
+<span class="fc" id="L81">        DateTimeFieldType.dayOfMonth(), };</span>
+
+    /** The singleton set of field types */
+<span class="fc" id="L84">    private static final DateTimeFormatter PARSER = new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L85">        .appendOptional(ISODateTimeFormat.localDateParser().getParser())</span>
+<span class="fc" id="L86">        .appendOptional(DateTimeFormat.forPattern(&quot;--MM-dd&quot;).getParser()).toFormatter();</span>
+
+    /** The index of the monthOfYear field in the field array */
+    public static final int MONTH_OF_YEAR = 0;
+    /** The index of the day field in the field array */
+    public static final int DAY_OF_MONTH = 1;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Obtains a {@code MonthDay} set to the current system millisecond time
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the default time zone.
+     * The resulting object does not use the zone.
+     * 
+     * @return the current month-day, not null
+     * @since 2.0
+     */
+    public static MonthDay now() {
+<span class="fc" id="L103">        return new MonthDay();</span>
+    }
+
+    /**
+     * Obtains a {@code MonthDay} set to the current system millisecond time
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the specified time zone.
+     * The resulting object does not use the zone.
+     *
+     * @param zone  the time zone, not null
+     * @return the current month-day, not null
+     * @since 2.0
+     */
+    public static MonthDay now(DateTimeZone zone) {
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        if (zone == null) {</span>
+<span class="nc" id="L117">            throw new NullPointerException(&quot;Zone must not be null&quot;);</span>
+        }
+<span class="fc" id="L119">        return new MonthDay(zone);</span>
+    }
+
+    /**
+     * Obtains a {@code MonthDay} set to the current system millisecond time
+     * using the specified chronology.
+     * The resulting object does not use the zone.
+     *
+     * @param chronology  the chronology, not null
+     * @return the current month-day, not null
+     * @since 2.0
+     */
+    public static MonthDay now(Chronology chronology) {
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">        if (chronology == null) {</span>
+<span class="nc" id="L133">            throw new NullPointerException(&quot;Chronology must not be null&quot;);</span>
+        }
+<span class="fc" id="L135">        return new MonthDay(chronology);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Parses a {@code MonthDay} from the specified string.
+     * &lt;p&gt;
+     * This uses {@link ISODateTimeFormat#localDateParser()} or the format {@code --MM-dd}.
+     * 
+     * @param str  the string to parse, not null
+     * @since 2.0
+     */
+    @FromString
+    public static MonthDay parse(String str) {
+<span class="fc" id="L149">        return parse(str, PARSER);</span>
+    }
+
+    /**
+     * Parses a {@code MonthDay} from the specified string using a formatter.
+     * 
+     * @param str  the string to parse, not null
+     * @param formatter  the formatter to use, not null
+     * @since 2.0
+     */
+    public static MonthDay parse(String str, DateTimeFormatter formatter) {
+<span class="fc" id="L160">        LocalDate date = formatter.parseLocalDate(str);</span>
+<span class="fc" id="L161">        return new MonthDay(date.getMonthOfYear(), date.getDayOfMonth());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs a MonthDay from a &lt;code&gt;java.util.Calendar&lt;/code&gt;
+     * using exactly the same field values avoiding any time zone effects.
+     * &lt;p&gt;
+     * Each field is queried from the Calendar and assigned to the MonthDay.
+     * &lt;p&gt;
+     * This factory method ignores the type of the calendar and always
+     * creates a MonthDay with ISO chronology. It is expected that you
+     * will only pass in instances of &lt;code&gt;GregorianCalendar&lt;/code&gt; however
+     * this is not validated.
+     *
+     * @param calendar  the Calendar to extract fields from
+     * @return the created MonthDay, never null
+     * @throws IllegalArgumentException if the calendar is null
+     * @throws IllegalArgumentException if the monthOfYear or dayOfMonth is invalid for the ISO chronology
+     */
+    public static MonthDay fromCalendarFields(Calendar calendar) {
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        if (calendar == null) {</span>
+<span class="fc" id="L183">            throw new IllegalArgumentException(&quot;The calendar must not be null&quot;);</span>
+        }
+<span class="fc" id="L185">        return new MonthDay(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));</span>
+    }
+
+    /**
+     * Constructs a MonthDay from a &lt;code&gt;java.util.Date&lt;/code&gt;
+     * using exactly the same field values avoiding any time zone effects.
+     * &lt;p&gt;
+     * Each field is queried from the Date and assigned to the MonthDay.
+     * &lt;p&gt;
+     * This factory method always creates a MonthDay with ISO chronology.
+     *
+     * @param date  the Date to extract fields from
+     * @return the created MonthDay, never null
+     * @throws IllegalArgumentException if the calendar is null
+     * @throws IllegalArgumentException if the monthOfYear or dayOfMonth is invalid for the ISO chronology
+     */
+    @SuppressWarnings(&quot;deprecation&quot;)
+    public static MonthDay fromDateFields(Date date) {
+<span class="fc bfc" id="L203" title="All 2 branches covered.">        if (date == null) {</span>
+<span class="fc" id="L204">            throw new IllegalArgumentException(&quot;The date must not be null&quot;);</span>
+        }
+<span class="fc" id="L206">        return new MonthDay(date.getMonth() + 1, date.getDate());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs a MonthDay with the current monthOfYear, using ISOChronology in
+     * the default zone to extract the fields.
+     * &lt;p&gt;
+     * The constructor uses the default time zone, resulting in the local time
+     * being initialised. Once the constructor is complete, all further calculations
+     * are performed without reference to a time-zone (by switching to UTC).
+     * 
+     * @see #now()
+     */
+    public MonthDay() {
+<span class="fc" id="L221">        super();</span>
+<span class="fc" id="L222">    }</span>
+
+    /**
+     * Constructs a MonthDay with the current month-day, using ISOChronology in
+     * the specified zone to extract the fields.
+     * &lt;p&gt;
+     * The constructor uses the specified time zone to obtain the current month-day.
+     * Once the constructor is complete, all further calculations
+     * are performed without reference to a time-zone (by switching to UTC).
+     * 
+     * @param zone  the zone to use, null means default zone
+     * @see #now(DateTimeZone)
+     */
+    public MonthDay(DateTimeZone zone) {
+<span class="fc" id="L236">        super(ISOChronology.getInstance(zone));</span>
+<span class="fc" id="L237">    }</span>
+
+    /**
+     * Constructs a MonthDay with the current month-day, using the specified chronology
+     * and zone to extract the fields.
+     * &lt;p&gt;
+     * The constructor uses the time zone of the chronology specified.
+     * Once the constructor is complete, all further calculations are performed
+     * without reference to a time-zone (by switching to UTC).
+     *
+     * @param chronology  the chronology, null means ISOChronology in the default zone
+     * @see #now(Chronology)
+     */
+    public MonthDay(Chronology chronology) {
+<span class="fc" id="L251">        super(chronology);</span>
+<span class="fc" id="L252">    }</span>
+
+    /**
+     * Constructs a MonthDay extracting the partial fields from the specified
+     * milliseconds using the ISOChronology in the default zone.
+     * &lt;p&gt;
+     * The constructor uses the default time zone, resulting in the local time
+     * being initialised. Once the constructor is complete, all further calculations
+     * are performed without reference to a time-zone (by switching to UTC).
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+     */
+    public MonthDay(long instant) {
+<span class="fc" id="L265">        super(instant);</span>
+<span class="fc" id="L266">    }</span>
+
+    /**
+     * Constructs a MonthDay extracting the partial fields from the specified
+     * milliseconds using the chronology provided.
+     * &lt;p&gt;
+     * The constructor uses the time zone of the chronology specified.
+     * Once the constructor is complete, all further calculations are performed
+     * without reference to a time-zone (by switching to UTC).
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+     * @param chronology  the chronology, null means ISOChronology in the default zone
+     */
+    public MonthDay(long instant, Chronology chronology) {
+<span class="fc" id="L280">        super(instant, chronology);</span>
+<span class="fc" id="L281">    }</span>
+
+    /**
+     * Constructs a MonthDay from an Object that represents some form of time.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadableInstant, String, Calendar and Date.
+     * The String formats are described by {@link ISODateTimeFormat#localDateParser()}.
+     * &lt;p&gt;
+     * The chronology used will be derived from the object, defaulting to ISO.
+     *
+     * @param instant  the date-time object, null means now
+     * @throws IllegalArgumentException if the instant is invalid
+     */
+    public MonthDay(Object instant) {
+<span class="fc" id="L297">        super(instant, null, ISODateTimeFormat.localDateParser());</span>
+<span class="fc" id="L298">    }</span>
+
+    /**
+     * Constructs a MonthDay from an Object that represents some form of time,
+     * using the specified chronology.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadableInstant, String, Calendar and Date.
+     * The String formats are described by {@link ISODateTimeFormat#localDateParser()}.
+     * &lt;p&gt;
+     * The constructor uses the time zone of the chronology specified.
+     * Once the constructor is complete, all further calculations are performed
+     * without reference to a time-zone (by switching to UTC).
+     * The specified chronology overrides that of the object.
+     *
+     * @param instant  the date-time object, null means now
+     * @param chronology  the chronology, null means ISO default
+     * @throws IllegalArgumentException if the instant is invalid
+     */
+    public MonthDay(Object instant, Chronology chronology) {
+<span class="fc" id="L319">        super(instant, DateTimeUtils.getChronology(chronology), ISODateTimeFormat.localDateParser());</span>
+<span class="fc" id="L320">    }</span>
+
+    /**
+     * Constructs a MonthDay with specified year and month
+     * using &lt;code&gt;ISOChronology&lt;/code&gt;.
+     * &lt;p&gt;
+     * The constructor uses the no time zone initialising the fields as provided.
+     * Once the constructor is complete, all further calculations
+     * are performed without reference to a time-zone (by switching to UTC).
+     *
+     * @param monthOfYear  the month of the year
+     * @param dayOfMonth  the day of the month
+     */
+    public MonthDay(int monthOfYear, int dayOfMonth) {
+<span class="fc" id="L334">        this(monthOfYear, dayOfMonth, null);</span>
+<span class="fc" id="L335">    }</span>
+
+    /**
+     * Constructs an instance set to the specified monthOfYear and dayOfMonth
+     * using the specified chronology, whose zone is ignored.
+     * &lt;p&gt;
+     * If the chronology is null, &lt;code&gt;ISOChronology&lt;/code&gt; is used.
+     * &lt;p&gt;
+     * The constructor uses the time zone of the chronology specified.
+     * Once the constructor is complete, all further calculations are performed
+     * without reference to a time-zone (by switching to UTC).
+     *
+     * @param monthOfYear  the month of the year
+     * @param dayOfMonth  the day of the month
+     * @param chronology  the chronology, null means ISOChronology in the default zone
+     */
+    public MonthDay(int monthOfYear, int dayOfMonth, Chronology chronology) {
+<span class="fc" id="L352">        super(new int[] {monthOfYear, dayOfMonth}, chronology);</span>
+<span class="fc" id="L353">    }</span>
+
+    /**
+     * Constructs a MonthDay with chronology from this instance and new values.
+     *
+     * @param partial  the partial to base this new instance on
+     * @param values  the new set of values
+     */
+    MonthDay(MonthDay partial, int[] values) {
+<span class="fc" id="L362">        super(partial, values);</span>
+<span class="fc" id="L363">    }</span>
+
+    /**
+     * Constructs a MonthDay with values from this instance and a new chronology.
+     *
+     * @param partial  the partial to base this new instance on
+     * @param chrono  the new chronology
+     */
+    MonthDay(MonthDay partial, Chronology chrono) {
+<span class="fc" id="L372">        super(partial, chrono);</span>
+<span class="fc" id="L373">    }</span>
+
+    /**
+     * Handle broken serialization from other tools.
+     * @return the resolved object, not null
+     */
+    private Object readResolve() {
+<span class="pc bpc" id="L380" title="1 of 2 branches missed.">        if (DateTimeZone.UTC.equals(getChronology().getZone()) == false) {</span>
+<span class="nc" id="L381">            return new MonthDay(this, getChronology().withUTC());</span>
+        }
+<span class="fc" id="L383">        return this;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the number of fields in this partial, which is two.
+     * The supported fields are MonthOfYear and DayOfMonth.
+     * Note that only these fields may be queried.
+     *
+     * @return the field count, two
+     */
+    public int size() {
+<span class="fc" id="L395">        return 2;</span>
+    }
+
+    /**
+     * Gets the field for a specific index in the chronology specified.
+     * &lt;p&gt;
+     * This method must not use any instance variables.
+     * 
+     * @param index  the index to retrieve
+     * @param chrono  the chronology to use
+     * @return the field, never null
+     */
+    protected DateTimeField getField(int index, Chronology chrono) {
+<span class="fc bfc" id="L408" title="All 3 branches covered.">        switch (index) {</span>
+        case MONTH_OF_YEAR:
+<span class="fc" id="L410">            return chrono.monthOfYear();</span>
+        case DAY_OF_MONTH:
+<span class="fc" id="L412">            return chrono.dayOfMonth();</span>
+        default:
+<span class="fc" id="L414">            throw new IndexOutOfBoundsException(&quot;Invalid index: &quot; + index);</span>
+        }
+    }
+
+    /**
+     * Gets the field type at the specified index.
+     *
+     * @param index  the index to retrieve
+     * @return the field at the specified index, never null
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    public DateTimeFieldType getFieldType(int index) {
+<span class="fc" id="L426">        return FIELD_TYPES[index];</span>
+    }
+
+    /**
+     * Gets an array of the field type of each of the fields that this partial supports.
+     * &lt;p&gt;
+     * The fields are returned largest to smallest, Month, Day.
+     *
+     * @return the array of field types (cloned), largest to smallest, never null
+     */
+    public DateTimeFieldType[] getFieldTypes() {
+<span class="fc" id="L437">        return (DateTimeFieldType[]) FIELD_TYPES.clone();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this month-day with the specified chronology.
+     * This instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * This method retains the values of the fields, thus the result will
+     * typically refer to a different instant.
+     * &lt;p&gt;
+     * The time zone of the specified chronology is ignored, as MonthDay
+     * operates without a time zone.
+     *
+     * @param newChronology  the new chronology, null means ISO
+     * @return a copy of this month-day with a different chronology, never null
+     * @throws IllegalArgumentException if the values are invalid for the new chronology
+     */
+    public MonthDay withChronologyRetainFields(Chronology newChronology) {
+<span class="fc" id="L456">        newChronology = DateTimeUtils.getChronology(newChronology);</span>
+<span class="fc" id="L457">        newChronology = newChronology.withUTC();</span>
+<span class="fc bfc" id="L458" title="All 2 branches covered.">        if (newChronology == getChronology()) {</span>
+<span class="fc" id="L459">            return this;</span>
+        } else {
+<span class="fc" id="L461">            MonthDay newMonthDay = new MonthDay(this, newChronology);</span>
+<span class="fc" id="L462">            newChronology.validate(newMonthDay, getValues());</span>
+<span class="fc" id="L463">            return newMonthDay;</span>
+        }
+    }
+
+    /**
+     * Returns a copy of this month-day with the specified field set to a new value.
+     * &lt;p&gt;
+     * For example, if the field type is &lt;code&gt;dayOfMonth&lt;/code&gt; then the day
+     * would be changed in the returned instance.
+     * &lt;p&gt;
+     * These three lines are equivalent:
+     * &lt;pre&gt;
+     * MonthDay updated = md.withField(DateTimeFieldType.dayOfMonth(), 6);
+     * MonthDay updated = md.dayOfMonth().setCopy(6);
+     * MonthDay updated = md.property(DateTimeFieldType.dayOfMonth()).setCopy(6);
+     * &lt;/pre&gt;
+     *
+     * @param fieldType  the field type to set, not null
+     * @param value  the value to set
+     * @return a copy of this instance with the field set, never null
+     * @throws IllegalArgumentException if the value is null or invalid
+     */
+    public MonthDay withField(DateTimeFieldType fieldType, int value) {
+<span class="fc" id="L486">        int index = indexOfSupported(fieldType);</span>
+<span class="fc bfc" id="L487" title="All 2 branches covered.">        if (value == getValue(index)) {</span>
+<span class="fc" id="L488">            return this;</span>
+        }
+<span class="fc" id="L490">        int[] newValues = getValues();</span>
+<span class="fc" id="L491">        newValues = getField(index).set(this, index, newValues, value);</span>
+<span class="fc" id="L492">        return new MonthDay(this, newValues);</span>
+    }
+
+    /**
+     * Returns a copy of this month-day with the value of the specified field increased.
+     * &lt;p&gt;
+     * If the addition is zero, then &lt;code&gt;this&lt;/code&gt; is returned.
+     * &lt;p&gt;
+     * These three lines are equivalent:
+     * &lt;pre&gt;
+     * MonthDay added = md.withFieldAdded(DurationFieldType.days(), 6);
+     * MonthDay added = md.plusDays(6);
+     * MonthDay added = md.dayOfMonth().addToCopy(6);
+     * &lt;/pre&gt;
+     * 
+     * @param fieldType  the field type to add to, not null
+     * @param amount  the amount to add
+     * @return a copy of this instance with the field updated, never null
+     * @throws IllegalArgumentException if the value is null or invalid
+     * @throws ArithmeticException if the new date-time exceeds the capacity
+     */
+    public MonthDay withFieldAdded(DurationFieldType fieldType, int amount) {
+<span class="fc" id="L514">        int index = indexOfSupported(fieldType);</span>
+<span class="fc bfc" id="L515" title="All 2 branches covered.">        if (amount == 0) {</span>
+<span class="fc" id="L516">            return this;</span>
+        }
+<span class="fc" id="L518">        int[] newValues = getValues();</span>
+<span class="fc" id="L519">        newValues = getField(index).add(this, index, newValues, amount);</span>
+<span class="fc" id="L520">        return new MonthDay(this, newValues);</span>
+    }
+
+    /**
+     * Returns a copy of this month-day with the specified period added.
+     * &lt;p&gt;
+     * If the addition is zero, then &lt;code&gt;this&lt;/code&gt; is returned.
+     * Fields in the period that aren't present in the partial are ignored.
+     * &lt;p&gt;
+     * This method is typically used to add multiple copies of complex
+     * period instances. Adding one field is best achieved using methods
+     * like {@link #withFieldAdded(DurationFieldType, int)}
+     * or {@link #plusMonths(int)}.
+     * 
+     * @param period  the period to add to this one, null means zero
+     * @param scalar  the amount of times to add, such as -1 to subtract once
+     * @return a copy of this instance with the period added, never null
+     * @throws ArithmeticException if the new date-time exceeds the capacity
+     */
+    public MonthDay withPeriodAdded(ReadablePeriod period, int scalar) {
+<span class="pc bpc" id="L540" title="1 of 4 branches missed.">        if (period == null || scalar == 0) {</span>
+<span class="fc" id="L541">            return this;</span>
+        }
+<span class="fc" id="L543">        int[] newValues = getValues();</span>
+<span class="fc bfc" id="L544" title="All 2 branches covered.">        for (int i = 0; i &lt; period.size(); i++) {</span>
+<span class="fc" id="L545">            DurationFieldType fieldType = period.getFieldType(i);</span>
+<span class="fc" id="L546">            int index = indexOf(fieldType);</span>
+<span class="fc bfc" id="L547" title="All 2 branches covered.">            if (index &gt;= 0) {</span>
+<span class="fc" id="L548">                newValues = getField(index).add(this, index, newValues,</span>
+<span class="fc" id="L549">                        FieldUtils.safeMultiply(period.getValue(i), scalar));</span>
+            }
+        }
+<span class="fc" id="L552">        return new MonthDay(this, newValues);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this month-day with the specified period added.
+     * &lt;p&gt;
+     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+     * &lt;p&gt;
+     * This method is typically used to add complex period instances.
+     * Adding one field is best achieved using methods
+     * like {@link #plusMonths(int)}.
+     * 
+     * @param period  the duration to add to this one, null means zero
+     * @return a copy of this instance with the period added, never null
+     * @throws ArithmeticException if the new month-day exceeds the capacity
+     */
+    public MonthDay plus(ReadablePeriod period) {
+<span class="fc" id="L570">        return withPeriodAdded(period, 1);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this month-day plus the specified number of months.
+     * &lt;p&gt;
+     * This month-day instance is immutable and unaffected by this method call.
+     * The month will wrap at the end of the year from December to January.
+     * The day will be adjusted to the last valid value if necessary.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * MonthDay added = md.plusMonths(6);
+     * MonthDay added = md.plus(Period.months(6));
+     * MonthDay added = md.withFieldAdded(DurationFieldType.months(), 6);
+     * &lt;/pre&gt;
+     *
+     * @param months  the amount of months to add, may be negative
+     * @return the new month-day plus the increased months, never null
+     */
+    public MonthDay plusMonths(int months) {
+<span class="fc" id="L592">        return withFieldAdded(DurationFieldType.months(), months);</span>
+    }
+
+    /**
+     * Returns a copy of this month-day plus the specified number of days.
+     * &lt;p&gt;
+     * This month-day instance is immutable and unaffected by this method call.
+     * The month will wrap at the end of the year from December to January.
+     * &lt;p&gt;
+     * If the number of days added requires wrapping past the end of February,
+     * the wrapping will be calculated assuming February has 29 days. 
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * MonthDay added = md.plusDays(6);
+     * MonthDay added = md.plus(Period.days(6));
+     * MonthDay added = md.withFieldAdded(DurationFieldType.days(), 6);
+     * &lt;/pre&gt;
+     *
+     * @param days  the amount of days to add, may be negative
+     * @return the new month-day plus the increased days, never null
+     */
+    public MonthDay plusDays(int days) {
+<span class="fc" id="L615">        return withFieldAdded(DurationFieldType.days(), days);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this month-day with the specified period taken away.
+     * &lt;p&gt;
+     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+     * &lt;p&gt;
+     * This method is typically used to subtract complex period instances.
+     * Subtracting one field is best achieved using methods
+     * like {@link #minusMonths(int)}.
+     * 
+     * @param period  the period to reduce this instant by
+     * @return a copy of this instance with the period taken away, never null
+     * @throws ArithmeticException if the new month-day exceeds the capacity
+     */
+    public MonthDay minus(ReadablePeriod period) {
+<span class="fc" id="L633">        return withPeriodAdded(period, -1);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this month-day minus the specified number of months.
+     * &lt;p&gt;
+     * This MonthDay instance is immutable and unaffected by this method call.
+     * The month will wrap at the end of the year from January to December.
+     * The day will be adjusted to the last valid value if necessary.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * MonthDay subtracted = md.minusMonths(6);
+     * MonthDay subtracted = md.minus(Period.months(6));
+     * MonthDay subtracted = md.withFieldAdded(DurationFieldType.months(), -6);
+     * &lt;/pre&gt;
+     *
+     * @param months  the amount of months to subtract, may be negative
+     * @return the new month-day minus the increased months, never null
+     */
+    public MonthDay minusMonths(int months) {
+<span class="fc" id="L655">        return withFieldAdded(DurationFieldType.months(), FieldUtils.safeNegate(months));</span>
+    }
+
+    /**
+     * Returns a copy of this month-day minus the specified number of months.
+     * &lt;p&gt;
+     * This month-day instance is immutable and unaffected by this method call.
+     * The month will wrap at the end of the year from January to December.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * MonthDay subtracted = md.minusDays(6);
+     * MonthDay subtracted = md.minus(Period.days(6));
+     * MonthDay subtracted = md.withFieldAdded(DurationFieldType.days(), -6);
+     * &lt;/pre&gt;
+     *
+     * @param days  the amount of days to subtract, may be negative
+     * @return the new month-day minus the increased days, never null
+     */
+    public MonthDay minusDays(int days) {
+<span class="fc" id="L675">        return withFieldAdded(DurationFieldType.days(), FieldUtils.safeNegate(days));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Converts this object to a LocalDate with the same month-day and chronology.
+     *
+     * @param year  the year to use, valid for chronology
+     * @return a LocalDate with the same month-day and chronology, never null
+     */
+    public LocalDate toLocalDate(int year) {
+<span class="fc" id="L686">        return new LocalDate(year, getMonthOfYear(), getDayOfMonth(), getChronology());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the month of year field value.
+     *
+     * @return the month of year
+     */
+    public int getMonthOfYear() {
+<span class="fc" id="L696">        return getValue(MONTH_OF_YEAR);</span>
+    }
+
+    /**
+     * Get the day of month field value.
+     *
+     * @return the day of month
+     */
+    public int getDayOfMonth() {
+<span class="fc" id="L705">        return getValue(DAY_OF_MONTH);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this month-day with the month of year field updated.
+     * &lt;p&gt;
+     * MonthDay is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * month of year changed.
+     *
+     * @param monthOfYear  the month of year to set
+     * @return a copy of this object with the field set, never null
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public MonthDay withMonthOfYear(int monthOfYear) {
+<span class="fc" id="L721">        int[] newValues = getValues();</span>
+<span class="fc" id="L722">        newValues = getChronology().monthOfYear().set(this, MONTH_OF_YEAR, newValues, monthOfYear);</span>
+<span class="fc" id="L723">        return new MonthDay(this, newValues);</span>
+    }
+
+    /**
+     * Returns a copy of this month-day with the day of month field updated.
+     * &lt;p&gt;
+     * MonthDay is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * day of month changed.
+     *
+     * @param dayOfMonth  the day of month to set
+     * @return a copy of this object with the field set, never null
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public MonthDay withDayOfMonth(int dayOfMonth) {
+<span class="fc" id="L738">        int[] newValues = getValues();</span>
+<span class="fc" id="L739">        newValues = getChronology().dayOfMonth().set(this, DAY_OF_MONTH, newValues, dayOfMonth);</span>
+<span class="fc" id="L740">        return new MonthDay(this, newValues);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the property object for the specified type, which contains
+     * many useful methods.
+     *
+     * @param type  the field type to get the property for
+     * @return the property object
+     * @throws IllegalArgumentException if the field is null or unsupported
+     */
+    public Property property(DateTimeFieldType type) {
+<span class="fc" id="L753">        return new Property(this, indexOfSupported(type));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the month of year field property which provides access to advanced functionality.
+     * 
+     * @return the month of year property
+     */
+    public Property monthOfYear() {
+<span class="fc" id="L763">        return new Property(this, MONTH_OF_YEAR);</span>
+    }
+
+    /**
+     * Get the day of month field property which provides access to advanced functionality.
+     * 
+     * @return the day of month property
+     */
+    public Property dayOfMonth() {
+<span class="fc" id="L772">        return new Property(this, DAY_OF_MONTH);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Output the month-day in ISO8601 format (--MM-dd).
+     *
+     * @return ISO8601 time formatted string.
+     */
+    @ToString
+    public String toString() {
+<span class="fc" id="L783">        List&lt;DateTimeFieldType&gt; fields = new ArrayList&lt;DateTimeFieldType&gt;();</span>
+<span class="fc" id="L784">        fields.add(DateTimeFieldType.monthOfYear());</span>
+<span class="fc" id="L785">        fields.add(DateTimeFieldType.dayOfMonth());</span>
+<span class="fc" id="L786">        return ISODateTimeFormat.forFields(fields, true, true).print(this);</span>
+    }
+
+    /**
+     * Output the month-day using the specified format pattern.
+     *
+     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+     * @see org.joda.time.format.DateTimeFormat
+     */
+    public String toString(String pattern) {
+<span class="fc bfc" id="L796" title="All 2 branches covered.">        if (pattern == null) {</span>
+<span class="fc" id="L797">            return toString();</span>
+        }
+<span class="fc" id="L799">        return DateTimeFormat.forPattern(pattern).print(this);</span>
+    }
+
+    /**
+     * Output the month-day using the specified format pattern.
+     *
+     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+     * @param locale  Locale to use, null means default
+     * @see org.joda.time.format.DateTimeFormat
+     */
+    public String toString(String pattern, Locale locale) throws IllegalArgumentException {
+<span class="fc bfc" id="L810" title="All 2 branches covered.">        if (pattern == null) {</span>
+<span class="fc" id="L811">            return toString();</span>
+        }
+<span class="fc" id="L813">        return DateTimeFormat.forPattern(pattern).withLocale(locale).print(this);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * The property class for &lt;code&gt;MonthDay&lt;/code&gt;.
+     * &lt;p&gt;
+     * This class binds a &lt;code&gt;YearMonth&lt;/code&gt; to a &lt;code&gt;DateTimeField&lt;/code&gt;.
+     * 
+     * @author Chris Pheby
+     * @since 2.0
+     */
+    public static class Property extends AbstractPartialFieldProperty implements Serializable {
+
+        /** Serialization version */
+        private static final long serialVersionUID = 5727734012190224363L;
+
+        /** The partial */
+        private final MonthDay iBase;
+        /** The field index */
+        private final int iFieldIndex;
+
+        /**
+         * Constructs a property.
+         * 
+         * @param partial  the partial instance
+         * @param fieldIndex  the index in the partial
+         */
+        Property(MonthDay partial, int fieldIndex) {
+<span class="fc" id="L842">            super();</span>
+<span class="fc" id="L843">            iBase = partial;</span>
+<span class="fc" id="L844">            iFieldIndex = fieldIndex;</span>
+<span class="fc" id="L845">        }</span>
+
+        /**
+         * Gets the field that this property uses.
+         * 
+         * @return the field
+         */
+        public DateTimeField getField() {
+<span class="fc" id="L853">            return iBase.getField(iFieldIndex);</span>
+        }
+
+        /**
+         * Gets the partial that this property belongs to.
+         * 
+         * @return the partial
+         */
+        protected ReadablePartial getReadablePartial() {
+<span class="fc" id="L862">            return iBase;</span>
+        }
+
+        /**
+         * Gets the partial that this property belongs to.
+         * 
+         * @return the partial
+         */
+        public MonthDay getMonthDay() {
+<span class="fc" id="L871">            return iBase;</span>
+        }
+
+        /**
+         * Gets the value of this field.
+         * 
+         * @return the field value
+         */
+        public int get() {
+<span class="fc" id="L880">            return iBase.getValue(iFieldIndex);</span>
+        }
+
+        //-----------------------------------------------------------------------
+        /**
+         * Adds to the value of this field in a copy of this MonthDay.
+         * &lt;p&gt;
+         * The value will be added to this field. If the value is too large to be
+         * added solely to this field then it will affect larger fields.
+         * Smaller fields are unaffected.
+         * &lt;p&gt;
+         * The MonthDay attached to this property is unchanged by this call.
+         * Instead, a new instance is returned.
+         * 
+         * @param valueToAdd  the value to add to the field in the copy
+         * @return a copy of the MonthDay with the field value changed
+         * @throws IllegalArgumentException if the value isn't valid
+         */
+        public MonthDay addToCopy(int valueToAdd) {
+<span class="fc" id="L899">            int[] newValues = iBase.getValues();</span>
+<span class="fc" id="L900">            newValues = getField().add(iBase, iFieldIndex, newValues, valueToAdd);</span>
+<span class="fc" id="L901">            return new MonthDay(iBase, newValues);</span>
+        }
+
+        /**
+         * Adds to the value of this field in a copy of this MonthDay wrapping
+         * within this field if the maximum value is reached.
+         * &lt;p&gt;
+         * The value will be added to this field. If the value is too large to be
+         * added solely to this field then it wraps within this field.
+         * Other fields are unaffected.
+         * &lt;p&gt;
+         * For example,
+         * &lt;code&gt;--12-30&lt;/code&gt; addWrapField one month returns &lt;code&gt;--01-30&lt;/code&gt;.
+         * &lt;p&gt;
+         * The MonthDay attached to this property is unchanged by this call.
+         * Instead, a new instance is returned.
+         * 
+         * @param valueToAdd  the value to add to the field in the copy
+         * @return a copy of the MonthDay with the field value changed
+         * @throws IllegalArgumentException if the value isn't valid
+         */
+        public MonthDay addWrapFieldToCopy(int valueToAdd) {
+<span class="fc" id="L923">            int[] newValues = iBase.getValues();</span>
+<span class="fc" id="L924">            newValues = getField().addWrapField(iBase, iFieldIndex, newValues, valueToAdd);</span>
+<span class="fc" id="L925">            return new MonthDay(iBase, newValues);</span>
+        }
+
+        //-----------------------------------------------------------------------
+        /**
+         * Sets this field in a copy of the MonthDay.
+         * &lt;p&gt;
+         * The MonthDay attached to this property is unchanged by this call.
+         * Instead, a new instance is returned.
+         * 
+         * @param value  the value to set the field in the copy to
+         * @return a copy of the MonthDay with the field value changed
+         * @throws IllegalArgumentException if the value isn't valid
+         */
+        public MonthDay setCopy(int value) {
+<span class="fc" id="L940">            int[] newValues = iBase.getValues();</span>
+<span class="fc" id="L941">            newValues = getField().set(iBase, iFieldIndex, newValues, value);</span>
+<span class="fc" id="L942">            return new MonthDay(iBase, newValues);</span>
+        }
+
+        /**
+         * Sets this field in a copy of the MonthDay to a parsed text value.
+         * &lt;p&gt;
+         * The MonthDay attached to this property is unchanged by this call.
+         * Instead, a new instance is returned.
+         * 
+         * @param text  the text value to set
+         * @param locale  optional locale to use for selecting a text symbol
+         * @return a copy of the MonthDay with the field value changed
+         * @throws IllegalArgumentException if the text value isn't valid
+         */
+        public MonthDay setCopy(String text, Locale locale) {
+<span class="fc" id="L957">            int[] newValues = iBase.getValues();</span>
+<span class="fc" id="L958">            newValues = getField().set(iBase, iFieldIndex, newValues, text, locale);</span>
+<span class="fc" id="L959">            return new MonthDay(iBase, newValues);</span>
+        }
+
+        /**
+         * Sets this field in a copy of the MonthDay to a parsed text value.
+         * &lt;p&gt;
+         * The MonthDay attached to this property is unchanged by this call.
+         * Instead, a new instance is returned.
+         * 
+         * @param text  the text value to set
+         * @return a copy of the MonthDay with the field value changed
+         * @throws IllegalArgumentException if the text value isn't valid
+         */
+        public MonthDay setCopy(String text) {
+<span class="fc" id="L973">            return setCopy(text, null);</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

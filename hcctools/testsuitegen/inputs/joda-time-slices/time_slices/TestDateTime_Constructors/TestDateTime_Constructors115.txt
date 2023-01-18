@@ -1,0 +1,91 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  0.8% done, time left: unknown  1.0% done, time left: unknown  1.4% done, time left:   0:00:25    2.1% done, time left:   0:00:22  2.8% done, time left:   0:00:20  3.5% done, time left:   0:00:19  4.1% done, time left:   0:00:19  4.8% done, time left:   0:00:18  5.6% done, time left:   0:00:18  6.9% done, time left:   0:00:19  8.6% done, time left:   0:00:19 10.1% done, time left:   0:00:19 11.9% done, time left:   0:00:18 13.7% done, time left:   0:00:16 15.4% done, time left:   0:00:15 17.2% done, time left:   0:00:14 19.1% done, time left:   0:00:13 21.0% done, time left:   0:00:12 23.2% done, time left:   0:00:11 25.3% done, time left:   0:00:09 27.5% done, time left:   0:00:08 29.2% done, time left:   0:00:07 30.9% done, time left:   0:00:06 32.1% done, time left:   0:00:05 33.9% done, time left:   0:00:05 37.0% done, time left:   0:00:04 39.7% done, time left:   0:00:04 42.7% done, time left:   0:00:03 44.8% done, time left:   0:00:02 46.9% done, time left:   0:00:02 48.8% done, time left:   0:00:02 50.8% done, time left:   0:00:02 52.2% done, time left:   0:00:02 52.7% done, time left:   0:00:01 54.5% done, time left:   0:00:01 54.6% done, time left:   0:00:00 54.8% done, time left:   0:00:00 56.8% done, time left:   0:00:01 59.0% done, time left:   0:00:01 61.3% done, time left:   0:00:01 63.4% done, time left:   0:00:01 65.7% done, time left:   0:00:01 68.0% done, time left:   0:00:01 70.3% done, time left:   0:00:00 72.6% done, time left:   0:00:00 74.9% done, time left:   0:00:00 77.1% done, time left:   0:00:00 79.4% done, time left:   0:00:00 81.7% done, time left:   0:00:00 83.9% done, time left:   0:00:00 86.0% done, time left:   0:00:00 88.3% done, time left:   0:00:00 90.6% done, time left:   0:00:00 92.7% done, time left:   0:00:00 93.7% done, time left:   0:00:00 94.6% done, time left:   0:00:00 97.0% done, time left:   0:00:00 98.4% done, time left:   0:00:00 99.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDateTime_Constructors.testConstructor_badconverterObject_DateTimeZone:569:*]:
+org.joda.time.DateTime.<init>:302 ALOAD 0
+org.joda.time.DateTime.<init>:302 INVOKESPECIAL org/joda/time/base/BaseDateTime.<init>(Ljava/lang/Object;Lorg/joda/time/Chronology;)V
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:187 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:187 ARETURN
+org.joda.time.DateTimeZone.setDefault:207 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.setDefault:207 ALOAD 0
+org.joda.time.DateTimeZone.setDefault:207 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.set(Ljava/lang/Object;)V
+org.joda.time.TestDateTime_Constructors.main:77 INVOKEVIRTUAL org/joda/time/TestDateTime_Constructors.setUp()V
+org.joda.time.TestDateTime_Constructors.main:77 INVOKEVIRTUAL org/joda/time/TestDateTime_Constructors.test_now_Chronology()V
+org.joda.time.TestDateTime_Constructors.main:114 INVOKEVIRTUAL org/joda/time/TestDateTime_Constructors.setUp()V
+org.joda.time.TestDateTime_Constructors.main:114 INVOKEVIRTUAL org/joda/time/TestDateTime_Constructors.testConstructor_badconverterObject_DateTimeZone()V
+org.joda.time.TestDateTime_Constructors.setUp:153 GETSTATIC org/joda/time/TestDateTime_Constructors.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.TestDateTime_Constructors.setUp:153 INVOKESTATIC org/joda/time/DateTimeZone.setDefault(Lorg/joda/time/DateTimeZone;)V
+org.joda.time.TestDateTime_Constructors.test_now_Chronology:206 INVOKESTATIC org/joda/time/chrono/GregorianChronology.getInstance()Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.TestDateTime_Constructors.testConstructor_badconverterObject_DateTimeZone:567 NEW org/joda/time/DateTime
+org.joda.time.TestDateTime_Constructors.testConstructor_badconverterObject_DateTimeZone:567 DUP
+org.joda.time.TestDateTime_Constructors.testConstructor_badconverterObject_DateTimeZone:567 INVOKESTATIC org/joda/time/chrono/GregorianChronology.getInstance()Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.TestDateTime_Constructors.testConstructor_badconverterObject_DateTimeZone:567 INVOKESPECIAL org/joda/time/DateTime.<init>(Ljava/lang/Object;Lorg/joda/time/Chronology;)V
+org.joda.time.TestDateTime_Constructors.testConstructor_badconverterObject_DateTimeZone:567 ASTORE 1
+org.joda.time.TestDateTime_Constructors.testConstructor_badconverterObject_DateTimeZone:569 LCONST_0
+org.joda.time.TestDateTime_Constructors.testConstructor_badconverterObject_DateTimeZone:569 ALOAD 1
+org.joda.time.TestDateTime_Constructors.testConstructor_badconverterObject_DateTimeZone:569 INVOKEVIRTUAL org/joda/time/DateTime.getMillis()J
+org.joda.time.TestDateTime_Constructors.testConstructor_badconverterObject_DateTimeZone:569 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.BaseDateTime.<init>:173 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:173 INVOKEINTERFACE org/joda/time/convert/InstantConverter.getInstantMillis(Ljava/lang/Object;Lorg/joda/time/Chronology;)J
+org.joda.time.base.BaseDateTime.<init>:173 INVOKEVIRTUAL org/joda/time/base/BaseDateTime.checkInstant(JLorg/joda/time/Chronology;)J
+org.joda.time.base.BaseDateTime.<init>:173 PUTFIELD org/joda/time/base/BaseDateTime.iMillis J
+org.joda.time.base.BaseDateTime.checkInstant:294 LLOAD 1
+org.joda.time.base.BaseDateTime.checkInstant:294 LRETURN
+org.joda.time.base.BaseDateTime.getMillis:305 ALOAD 0
+org.joda.time.base.BaseDateTime.getMillis:305 GETFIELD org/joda/time/base/BaseDateTime.iMillis J
+org.joda.time.base.BaseDateTime.getMillis:305 LRETURN
+org.joda.time.chrono.GregorianChronology.getInstance:89 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.GregorianChronology.getInstance:89 ICONST_4
+org.joda.time.chrono.GregorianChronology.getInstance:89 INVOKESTATIC org/joda/time/chrono/GregorianChronology.getInstance(Lorg/joda/time/DateTimeZone;I)Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.chrono.GregorianChronology.getInstance:89 ARETURN
+org.joda.time.chrono.GregorianChronology.getInstance:114 GETSTATIC org/joda/time/chrono/GregorianChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.GregorianChronology.getInstance:114 ALOAD 0
+org.joda.time.chrono.GregorianChronology.getInstance:114 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.GregorianChronology.getInstance:114 ASTORE 3
+org.joda.time.chrono.GregorianChronology.getInstance:115 ALOAD 3
+org.joda.time.chrono.GregorianChronology.getInstance:115 IFNONNULL L1 false true
+org.joda.time.chrono.GregorianChronology.getInstance:116 BIPUSH 7
+org.joda.time.chrono.GregorianChronology.getInstance:116 ANEWARRAY org/joda/time/chrono/GregorianChronology
+org.joda.time.chrono.GregorianChronology.getInstance:116 ASTORE 3
+org.joda.time.chrono.GregorianChronology.getInstance:117 GETSTATIC org/joda/time/chrono/GregorianChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.GregorianChronology.getInstance:117 ALOAD 0
+org.joda.time.chrono.GregorianChronology.getInstance:117 ALOAD 3
+org.joda.time.chrono.GregorianChronology.getInstance:117 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.GregorianChronology.getInstance:123 ALOAD 3
+org.joda.time.chrono.GregorianChronology.getInstance:123 ILOAD 1
+org.joda.time.chrono.GregorianChronology.getInstance:123 ICONST_1
+org.joda.time.chrono.GregorianChronology.getInstance:123 ISUB
+org.joda.time.chrono.GregorianChronology.getInstance:123 AALOAD
+org.joda.time.chrono.GregorianChronology.getInstance:123 ASTORE 2
+org.joda.time.chrono.GregorianChronology.getInstance:128 ALOAD 2
+org.joda.time.chrono.GregorianChronology.getInstance:128 IFNONNULL L12 false true
+org.joda.time.chrono.GregorianChronology.getInstance:130 ALOAD 3
+org.joda.time.chrono.GregorianChronology.getInstance:130 ILOAD 1
+org.joda.time.chrono.GregorianChronology.getInstance:130 ICONST_1
+org.joda.time.chrono.GregorianChronology.getInstance:130 ISUB
+org.joda.time.chrono.GregorianChronology.getInstance:130 AALOAD
+org.joda.time.chrono.GregorianChronology.getInstance:130 ASTORE 2
+org.joda.time.chrono.GregorianChronology.getInstance:131 ALOAD 2
+org.joda.time.chrono.GregorianChronology.getInstance:131 IFNONNULL L8 false true
+org.joda.time.chrono.GregorianChronology.getInstance:132 ALOAD 0
+org.joda.time.chrono.GregorianChronology.getInstance:132 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.GregorianChronology.getInstance:132 IF_ACMPNE L6 true false
+org.joda.time.chrono.GregorianChronology.getInstance:136 NEW org/joda/time/chrono/GregorianChronology
+org.joda.time.chrono.GregorianChronology.getInstance:136 ASTORE 2
+org.joda.time.chrono.GregorianChronology.getInstance:139 ALOAD 3
+org.joda.time.chrono.GregorianChronology.getInstance:139 ILOAD 1
+org.joda.time.chrono.GregorianChronology.getInstance:139 ICONST_1
+org.joda.time.chrono.GregorianChronology.getInstance:139 ISUB
+org.joda.time.chrono.GregorianChronology.getInstance:139 ALOAD 2
+org.joda.time.chrono.GregorianChronology.getInstance:139 AASTORE
+org.joda.time.chrono.GregorianChronology.getInstance:143 ALOAD 2
+org.joda.time.chrono.GregorianChronology.getInstance:143 ARETURN
+org.joda.time.convert.MockZeroNullIntegerConverter.getInstantMillis:33 LCONST_0
+org.joda.time.convert.MockZeroNullIntegerConverter.getInstantMillis:33 LRETURN
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+
+Slice consists of 371 bytecode instructions.
+Computation took 7.06 seconds.

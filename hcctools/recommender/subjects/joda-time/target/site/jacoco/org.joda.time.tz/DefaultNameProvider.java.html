@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultNameProvider.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.tz</a> &gt; <span class="el_source">DefaultNameProvider.java</span></div><h1>DefaultNameProvider.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2011 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.tz;
+
+import java.text.DateFormatSymbols;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import org.joda.time.DateTimeUtils;
+
+/**
+ * The default name provider acquires localized names from
+ * {@link DateFormatSymbols java.text.DateFormatSymbols}.
+ * &lt;p&gt;
+ * DefaultNameProvider is thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+@SuppressWarnings(&quot;unchecked&quot;)
+public class DefaultNameProvider implements NameProvider {
+    // locale -&gt; (id -&gt; (nameKey -&gt; [shortName, name]))
+<span class="fc" id="L37">    private HashMap&lt;Locale, Map&lt;String, Map&lt;String, Object&gt;&gt;&gt; iByLocaleCache = createCache();</span>
+<span class="fc" id="L38">    private HashMap&lt;Locale, Map&lt;String, Map&lt;Boolean, Object&gt;&gt;&gt; iByLocaleCache2 = createCache();</span>
+
+<span class="fc" id="L40">    public DefaultNameProvider() {</span>
+<span class="fc" id="L41">    }</span>
+
+    //-----------------------------------------------------------------------
+    // retained original code for name lookup, not used in normal code
+    // this code could be refactored to avoid duplication, but leaving it as is ensures backward compatibility
+    public String getShortName(Locale locale, String id, String nameKey) {
+<span class="fc" id="L47">        String[] nameSet = getNameSet(locale, id, nameKey);</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        return nameSet == null ? null : nameSet[0];</span>
+    }
+    
+    public String getName(Locale locale, String id, String nameKey) {
+<span class="fc" id="L52">        String[] nameSet = getNameSet(locale, id, nameKey);</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        return nameSet == null ? null : nameSet[1];</span>
+    }
+
+    private synchronized String[] getNameSet(Locale locale, String id, String nameKey) {
+<span class="pc bpc" id="L57" title="1 of 6 branches missed.">        if (locale == null || id == null || nameKey == null) {</span>
+<span class="fc" id="L58">            return null;</span>
+        }
+
+<span class="nc" id="L61">        Map&lt;String, Map&lt;String, Object&gt;&gt; byIdCache = iByLocaleCache.get(locale);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (byIdCache == null) {</span>
+<span class="nc" id="L63">            iByLocaleCache.put(locale, byIdCache = createCache());</span>
+        }
+
+<span class="nc" id="L66">        Map&lt;String, Object&gt; byNameKeyCache = byIdCache.get(id);</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (byNameKeyCache == null) {</span>
+<span class="nc" id="L68">            byIdCache.put(id, byNameKeyCache = createCache());</span>
+            
+<span class="nc" id="L70">            String[][] zoneStringsEn = DateTimeUtils.getDateFormatSymbols(Locale.ENGLISH).getZoneStrings();</span>
+<span class="nc" id="L71">            String[] setEn = null;</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">            for (String[] strings : zoneStringsEn) {</span>
+<span class="nc bnc" id="L73" title="All 6 branches missed.">                if (strings != null &amp;&amp; strings.length &gt;= 5 &amp;&amp; id.equals(strings[0])) {</span>
+<span class="nc" id="L74">                    setEn = strings;</span>
+<span class="nc" id="L75">                    break;</span>
+                }
+            }
+<span class="nc" id="L78">            String[][] zoneStringsLoc = DateTimeUtils.getDateFormatSymbols(locale).getZoneStrings();</span>
+<span class="nc" id="L79">            String[] setLoc = null;</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">            for (String[] strings : zoneStringsLoc) {</span>
+<span class="nc bnc" id="L81" title="All 6 branches missed.">                if (strings != null &amp;&amp; strings.length &gt;= 5 &amp;&amp; id.equals(strings[0])) {</span>
+<span class="nc" id="L82">                    setLoc = strings;</span>
+<span class="nc" id="L83">                    break;</span>
+                }
+            }
+            
+<span class="nc bnc" id="L87" title="All 4 branches missed.">            if (setEn != null &amp;&amp; setLoc != null) {</span>
+<span class="nc" id="L88">                byNameKeyCache.put(setEn[2], new String[] {setLoc[2], setLoc[1]});</span>
+                // need to handle case where summer and winter have the same
+                // abbreviation, such as EST in Australia [1716305]
+                // we handle this by appending &quot;-Summer&quot;, cf ZoneInfoCompiler
+<span class="nc bnc" id="L92" title="All 2 branches missed.">                if (setEn[2].equals(setEn[4])) {</span>
+<span class="nc" id="L93">                    byNameKeyCache.put(setEn[4] + &quot;-Summer&quot;, new String[] {setLoc[4], setLoc[3]});</span>
+                } else {
+<span class="nc" id="L95">                    byNameKeyCache.put(setEn[4], new String[] {setLoc[4], setLoc[3]});</span>
+                }
+            }
+        }
+<span class="nc" id="L99">        return (String[]) byNameKeyCache.get(nameKey);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    // change lookup to operate on boolean standard/summer time flag
+    // handles changes to the nameKey better
+    public String getShortName(Locale locale, String id, String nameKey, boolean standardTime) {
+<span class="nc" id="L106">        String[] nameSet = getNameSet(locale, id, nameKey, standardTime);</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        return nameSet == null ? null : nameSet[0];</span>
+    }
+    
+    public String getName(Locale locale, String id, String nameKey, boolean standardTime) {
+<span class="nc" id="L111">        String[] nameSet = getNameSet(locale, id, nameKey, standardTime);</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        return nameSet == null ? null : nameSet[1];</span>
+    }
+
+    private synchronized String[] getNameSet(Locale locale, String id, String nameKey, boolean standardTime) {
+<span class="nc bnc" id="L116" title="All 6 branches missed.">        if (locale == null || id == null || nameKey == null) {</span>
+<span class="nc" id="L117">            return null;</span>
+        }
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        if (id.startsWith(&quot;Etc/&quot;)) {</span>
+<span class="nc" id="L120">            id = id.substring(4);</span>
+        }
+
+<span class="nc" id="L123">        Map&lt;String, Map&lt;Boolean, Object&gt;&gt; byIdCache = iByLocaleCache2.get(locale);</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        if (byIdCache == null) {</span>
+<span class="nc" id="L125">            iByLocaleCache2.put(locale, byIdCache = createCache());</span>
+        }
+
+<span class="nc" id="L128">        Map&lt;Boolean, Object&gt; byNameKeyCache = byIdCache.get(id);</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (byNameKeyCache == null) {</span>
+<span class="nc" id="L130">            byIdCache.put(id, byNameKeyCache = createCache());</span>
+            
+<span class="nc" id="L132">            String[][] zoneStringsEn = DateTimeUtils.getDateFormatSymbols(Locale.ENGLISH).getZoneStrings();</span>
+<span class="nc" id="L133">            String[] setEn = null;</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">            for (String[] strings : zoneStringsEn) {</span>
+<span class="nc bnc" id="L135" title="All 6 branches missed.">                if (strings != null &amp;&amp; strings.length &gt;= 5 &amp;&amp; id.equals(strings[0])) {</span>
+<span class="nc" id="L136">                    setEn = strings;</span>
+<span class="nc" id="L137">                    break;</span>
+                }
+            }
+<span class="nc" id="L140">            String[][] zoneStringsLoc = DateTimeUtils.getDateFormatSymbols(locale).getZoneStrings();</span>
+<span class="nc" id="L141">            String[] setLoc = null;</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">            for (String[] strings : zoneStringsLoc) {</span>
+<span class="nc bnc" id="L143" title="All 6 branches missed.">                if (strings != null &amp;&amp; strings.length &gt;= 5 &amp;&amp; id.equals(strings[0])) {</span>
+<span class="nc" id="L144">                    setLoc = strings;</span>
+<span class="nc" id="L145">                    break;</span>
+                }
+            }
+            
+<span class="nc bnc" id="L149" title="All 4 branches missed.">            if (setEn != null &amp;&amp; setLoc != null) {</span>
+<span class="nc" id="L150">                byNameKeyCache.put(Boolean.TRUE, new String[] {setLoc[2], setLoc[1]});</span>
+<span class="nc" id="L151">                byNameKeyCache.put(Boolean.FALSE, new String[] {setLoc[4], setLoc[3]});</span>
+            }
+        }
+<span class="nc" id="L154">        return (String[]) byNameKeyCache.get(Boolean.valueOf(standardTime));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    private HashMap createCache() {
+<span class="fc" id="L159">        return new HashMap(7);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

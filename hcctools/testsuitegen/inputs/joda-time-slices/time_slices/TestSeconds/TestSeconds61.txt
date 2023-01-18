@@ -1,0 +1,42 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.9% done, time left: unknown  2.2% done, time left: unknown  2.5% done, time left: unknown  2.7% done, time left: unknown  3.0% done, time left: unknown  3.6% done, time left: unknown  4.5% done, time left: unknown  5.2% done, time left:   0:00:13    5.7% done, time left:   0:00:15  5.8% done, time left:   0:00:18  5.8% done, time left:   0:00:21  5.8% done, time left:   0:00:25  5.9% done, time left:   0:00:27  6.9% done, time left:   0:00:28  7.5% done, time left:   0:00:28  9.4% done, time left:   0:00:28  9.6% done, time left:   0:00:26  9.6% done, time left:   0:00:25 11.5% done, time left:   0:00:24 12.6% done, time left:   0:00:22 12.6% done, time left:   0:00:20 12.6% done, time left:   0:00:18 12.6% done, time left:   0:00:16 12.6% done, time left:   0:00:15 14.3% done, time left:   0:00:16 18.0% done, time left:   0:00:12 21.6% done, time left:   0:00:08 23.3% done, time left:   0:00:06 27.0% done, time left:   0:00:04 30.9% done, time left:   0:00:03 34.3% done, time left:   0:00:02 37.0% done, time left:   0:00:02 40.8% done, time left:   0:00:02 45.0% done, time left:   0:00:01 49.1% done, time left:   0:00:01 53.4% done, time left:   0:00:01 57.7% done, time left:   0:00:00 62.0% done, time left:   0:00:00 63.7% done, time left:   0:00:00 66.4% done, time left:   0:00:00 69.7% done, time left:   0:00:00 72.0% done, time left:   0:00:00 74.5% done, time left:   0:00:00 77.3% done, time left:   0:00:00 80.2% done, time left:   0:00:00 83.6% done, time left:   0:00:00 87.1% done, time left:   0:00:00 90.2% done, time left:   0:00:00 90.3% done, time left:   0:00:00 90.6% done, time left:   0:00:00 92.5% done, time left:   0:00:00 96.1% done, time left:   0:00:00 98.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestSeconds.testToStandardMinutes:262:*]:
+org.joda.time.Minutes.minutes:72 ILOAD 0
+org.joda.time.Minutes.minutes:72 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, -2147483648 => L5, 0 => L0, 2147483647 => L4* => L6)
+org.joda.time.Minutes.minutes:78 GETSTATIC org/joda/time/Minutes.TWO Lorg/joda/time/Minutes;
+org.joda.time.Minutes.minutes:78 ARETURN
+org.joda.time.Seconds.seconds:72 ILOAD 0
+org.joda.time.Seconds.seconds:72 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, -2147483648 => L5, 0 => L0, 2147483647 => L4* => L6)
+org.joda.time.Seconds.seconds:86 NEW org/joda/time/Seconds
+org.joda.time.Seconds.seconds:86 DUP
+org.joda.time.Seconds.seconds:86 ILOAD 0
+org.joda.time.Seconds.seconds:86 INVOKESPECIAL org/joda/time/Seconds.<init>(I)V
+org.joda.time.Seconds.seconds:86 ARETURN
+org.joda.time.Seconds.<init>:198 ALOAD 0
+org.joda.time.Seconds.<init>:198 ILOAD 1
+org.joda.time.Seconds.<init>:198 INVOKESPECIAL org/joda/time/base/BaseSingleFieldPeriod.<init>(I)V
+org.joda.time.Seconds.toStandardMinutes:294 ALOAD 0
+org.joda.time.Seconds.toStandardMinutes:294 INVOKEVIRTUAL org/joda/time/Seconds.getValue()I
+org.joda.time.Seconds.toStandardMinutes:294 BIPUSH 60
+org.joda.time.Seconds.toStandardMinutes:294 IDIV
+org.joda.time.Seconds.toStandardMinutes:294 INVOKESTATIC org/joda/time/Minutes.minutes(I)Lorg/joda/time/Minutes;
+org.joda.time.Seconds.toStandardMinutes:294 ARETURN
+org.joda.time.TestSeconds.main:55 INVOKEVIRTUAL org/joda/time/TestSeconds.testToStandardMinutes()V
+org.joda.time.TestSeconds.testToStandardMinutes:260 BIPUSH 120
+org.joda.time.TestSeconds.testToStandardMinutes:260 INVOKESTATIC org/joda/time/Seconds.seconds(I)Lorg/joda/time/Seconds;
+org.joda.time.TestSeconds.testToStandardMinutes:260 ASTORE 1
+org.joda.time.TestSeconds.testToStandardMinutes:261 ICONST_2
+org.joda.time.TestSeconds.testToStandardMinutes:261 INVOKESTATIC org/joda/time/Minutes.minutes(I)Lorg/joda/time/Minutes;
+org.joda.time.TestSeconds.testToStandardMinutes:261 ASTORE 2
+org.joda.time.TestSeconds.testToStandardMinutes:262 ALOAD 2
+org.joda.time.TestSeconds.testToStandardMinutes:262 ALOAD 1
+org.joda.time.TestSeconds.testToStandardMinutes:262 INVOKEVIRTUAL org/joda/time/Seconds.toStandardMinutes()Lorg/joda/time/Minutes;
+org.joda.time.TestSeconds.testToStandardMinutes:262 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ILOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 PUTFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+
+Slice consists of 37 bytecode instructions.
+Computation took 5.96 seconds.

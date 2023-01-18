@@ -1,0 +1,37 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.5% done, time left: unknown  0.8% done, time left: unknown  2.0% done, time left: unknown  2.6% done, time left: unknown  3.0% done, time left: unknown  3.5% done, time left: unknown  3.7% done, time left: unknown  4.9% done, time left:   0:00:08    4.9% done, time left:   0:00:12  4.9% done, time left:   0:00:16  4.9% done, time left:   0:00:21  4.9% done, time left:   0:00:25  4.9% done, time left:   0:00:29  4.9% done, time left:   0:00:33  4.9% done, time left:   0:00:37  4.9% done, time left:   0:00:42  4.9% done, time left:   0:00:45  5.8% done, time left:   0:00:48  6.9% done, time left:   0:00:48  8.3% done, time left:   0:00:49  8.4% done, time left:   0:00:46  8.4% done, time left:   0:00:45 10.4% done, time left:   0:00:42 10.9% done, time left:   0:00:38 10.9% done, time left:   0:00:34 10.9% done, time left:   0:00:31 10.9% done, time left:   0:00:29 12.2% done, time left:   0:00:28 14.9% done, time left:   0:00:24 18.0% done, time left:   0:00:18 19.6% done, time left:   0:00:14 22.9% done, time left:   0:00:10 26.1% done, time left:   0:00:07 28.9% done, time left:   0:00:05 31.0% done, time left:   0:00:04 33.7% done, time left:   0:00:04 37.2% done, time left:   0:00:03 40.5% done, time left:   0:00:02 44.0% done, time left:   0:00:02 47.6% done, time left:   0:00:01 51.1% done, time left:   0:00:01 53.3% done, time left:   0:00:01 54.4% done, time left:   0:00:00 57.1% done, time left:   0:00:01 58.9% done, time left:   0:00:01 61.3% done, time left:   0:00:01 63.3% done, time left:   0:00:01 66.1% done, time left:   0:00:01 69.4% done, time left:   0:00:00 72.4% done, time left:   0:00:00 73.6% done, time left:   0:00:00 73.7% done, time left:   0:00:00 74.3% done, time left:   0:00:00 77.5% done, time left:   0:00:00 80.1% done, time left:   0:00:00 81.7% done, time left:   0:00:00 81.9% done, time left:   0:00:00 82.6% done, time left:   0:00:00 84.6% done, time left:   0:00:00 87.6% done, time left:   0:00:00 91.0% done, time left:   0:00:00 94.3% done, time left:   0:00:00 97.6% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDays.testIsGreaterThan:248:*]:
+org.joda.time.Days.days:80 ILOAD 0
+org.joda.time.Days.days:80 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, 5 => L5, 7 => L7, -2147483648 => L9, 0 => L0, 4 => L4, 6 => L6, 2147483647 => L8* => L10)
+org.joda.time.Days.days:102 NEW org/joda/time/Days
+org.joda.time.Days.days:102 DUP
+org.joda.time.Days.days:102 ILOAD 0
+org.joda.time.Days.days:102 INVOKESPECIAL org/joda/time/Days.<init>(I)V
+org.joda.time.Days.days:102 ARETURN
+org.joda.time.Days.<init>:216 ALOAD 0
+org.joda.time.Days.<init>:216 ILOAD 1
+org.joda.time.Days.<init>:216 INVOKESPECIAL org/joda/time/base/BaseSingleFieldPeriod.<init>(I)V
+org.joda.time.Days.isGreaterThan:459 ALOAD 1
+org.joda.time.Days.isGreaterThan:459 IFNONNULL L2 false true
+org.joda.time.Days.isGreaterThan:460 ALOAD 0
+org.joda.time.Days.isGreaterThan:460 INVOKEVIRTUAL org/joda/time/Days.getValue()I
+org.joda.time.Days.isGreaterThan:460 IFLE L0 true false
+org.joda.time.Days.isGreaterThan:460 ICONST_0
+org.joda.time.Days.isGreaterThan:460 IRETURN
+org.joda.time.TestDays.main:49 INVOKEVIRTUAL org/joda/time/TestDays.testIsGreaterThan()V
+org.joda.time.TestDays.testIsGreaterThan:248 ICONST_0
+org.joda.time.TestDays.testIsGreaterThan:248 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestDays.testIsGreaterThan:248 ICONST_M1
+org.joda.time.TestDays.testIsGreaterThan:248 INVOKESTATIC org/joda/time/Days.days(I)Lorg/joda/time/Days;
+org.joda.time.TestDays.testIsGreaterThan:248 ACONST_NULL
+org.joda.time.TestDays.testIsGreaterThan:248 INVOKEVIRTUAL org/joda/time/Days.isGreaterThan(Lorg/joda/time/Days;)Z
+org.joda.time.TestDays.testIsGreaterThan:248 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestDays.testIsGreaterThan:248 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ILOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 PUTFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+
+Slice consists of 36 bytecode instructions.
+Computation took 7.15 seconds.

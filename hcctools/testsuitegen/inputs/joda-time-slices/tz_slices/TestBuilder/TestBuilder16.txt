@@ -1,0 +1,340 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.5% done, time left: unknown  0.8% done, time left: unknown  1.0% done, time left: unknown  1.5% done, time left: unknown  1.7% done, time left: unknown  1.9% done, time left:   0:01:04    1.9% done, time left:   0:01:36  1.9% done, time left:   0:02:08  2.4% done, time left:   0:01:52  2.8% done, time left:   0:01:39  4.0% done, time left:   0:01:28  5.5% done, time left:   0:01:19  7.4% done, time left:   0:01:12  9.3% done, time left:   0:01:03 11.3% done, time left:   0:00:53 13.5% done, time left:   0:00:43 15.7% done, time left:   0:00:35 18.0% done, time left:   0:00:27 20.1% done, time left:   0:00:21 22.5% done, time left:   0:00:17 24.8% done, time left:   0:00:13 27.0% done, time left:   0:00:10 29.1% done, time left:   0:00:08 31.3% done, time left:   0:00:07 33.4% done, time left:   0:00:06 35.6% done, time left:   0:00:05 40.6% done, time left:   0:00:02 42.9% done, time left:   0:00:01 44.8% done, time left:   0:00:01 46.5% done, time left:   0:00:01 48.4% done, time left:   0:00:01 50.3% done, time left:   0:00:01 52.2% done, time left:   0:00:01 54.1% done, time left:   0:00:01 56.1% done, time left:   0:00:01 57.9% done, time left:   0:00:01 59.9% done, time left:   0:00:01 62.0% done, time left:   0:00:01 64.0% done, time left:   0:00:01 66.1% done, time left:   0:00:01 68.2% done, time left:   0:00:01 70.3% done, time left:   0:00:00 72.4% done, time left:   0:00:00 74.4% done, time left:   0:00:00 76.5% done, time left:   0:00:00 78.6% done, time left:   0:00:00 80.6% done, time left:   0:00:00 87.4% done, time left:   0:00:00 95.6% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.tz.TestBuilder.testFixed:319:*]:
+org.joda.time.DateTimeZone.<init>:719 ALOAD 0
+org.joda.time.DateTimeZone.<init>:719 ALOAD 1
+org.joda.time.DateTimeZone.<init>:719 PUTFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ALOAD 0
+org.joda.time.DateTimeZone.getID:732 GETFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ARETURN
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:96 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:96 INSTANCEOF java/io/DataInput
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:96 IFEQ L0 true false
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:99 NEW java/io/DataInputStream
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:99 ALOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:99 INVOKESTATIC org/joda/time/tz/DateTimeZoneBuilder.readFrom(Ljava/io/DataInput;Ljava/lang/String;)Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:99 ARETURN
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:111 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:111 INVOKEINTERFACE java/io/DataInput.readUnsignedByte()I
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:111 LOOKUPSWITCH (67 => L2, 70 => L0, 80 => L3* => L4)
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:113 NEW org/joda/time/tz/FixedDateTimeZone
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:113 DUP
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:113 ALOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:113 INVOKESPECIAL org/joda/time/tz/FixedDateTimeZone.<init>(Ljava/lang/String;Ljava/lang/String;II)V
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:113 ASTORE 2
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:118 ALOAD 2
+org.joda.time.tz.DateTimeZoneBuilder.readFrom:118 ARETURN
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:141 LLOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:141 LDC 1800000
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:141 LREM
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:141 LCONST_0
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:141 LCMP
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:141 IFNE L0 false true
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:143 LLOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:143 LDC 1800000
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:143 LDIV
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:143 LSTORE 3
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:144 LLOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:144 BIPUSH 58
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:144 LSHL
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:144 BIPUSH 58
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:144 LSHR
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:144 LLOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:144 LCMP
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:144 IFNE L0 false true
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:146 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.writeMillis:146 INVOKEINTERFACE java/io/DataOutput.writeByte(I)V
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:216 LDC "UTC"
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:216 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:216 INVOKEVIRTUAL java/lang/String.equals(Ljava/lang/Object;)Z
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:216 IFEQ L0 true false
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:220 NEW org/joda/time/tz/FixedDateTimeZone
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:220 DUP
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:220 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:220 ALOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:220 ILOAD 2
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:220 ILOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:220 INVOKESPECIAL org/joda/time/tz/FixedDateTimeZone.<init>(Ljava/lang/String;Ljava/lang/String;II)V
+org.joda.time.tz.DateTimeZoneBuilder.buildFixedZone:220 ARETURN
+org.joda.time.tz.DateTimeZoneBuilder.<init>:227 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.<init>:227 NEW java/util/ArrayList
+org.joda.time.tz.DateTimeZoneBuilder.<init>:227 DUP
+org.joda.time.tz.DateTimeZoneBuilder.<init>:227 BIPUSH 10
+org.joda.time.tz.DateTimeZoneBuilder.<init>:227 INVOKESPECIAL java/util/ArrayList.<init>(I)V
+org.joda.time.tz.DateTimeZoneBuilder.<init>:227 PUTFIELD org/joda/time/tz/DateTimeZoneBuilder.iRuleSets Ljava/util/ArrayList;
+org.joda.time.tz.DateTimeZoneBuilder.addCutover:259 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.addCutover:259 GETFIELD org/joda/time/tz/DateTimeZoneBuilder.iRuleSets Ljava/util/ArrayList;
+org.joda.time.tz.DateTimeZoneBuilder.addCutover:259 NEW org/joda/time/tz/DateTimeZoneBuilder$RuleSet
+org.joda.time.tz.DateTimeZoneBuilder.addCutover:259 DUP
+org.joda.time.tz.DateTimeZoneBuilder.addCutover:259 INVOKESPECIAL org/joda/time/tz/DateTimeZoneBuilder$RuleSet.<init>()V
+org.joda.time.tz.DateTimeZoneBuilder.addCutover:259 INVOKEVIRTUAL java/util/ArrayList.add(Ljava/lang/Object;)Z
+org.joda.time.tz.DateTimeZoneBuilder.setStandardOffset:269 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.setStandardOffset:269 INVOKESPECIAL org/joda/time/tz/DateTimeZoneBuilder.getLastRuleSet()Lorg/joda/time/tz/DateTimeZoneBuilder$RuleSet;
+org.joda.time.tz.DateTimeZoneBuilder.setStandardOffset:269 ILOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.setStandardOffset:269 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder$RuleSet.setStandardOffset(I)V
+org.joda.time.tz.DateTimeZoneBuilder.setStandardOffset:270 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.setStandardOffset:270 ARETURN
+org.joda.time.tz.DateTimeZoneBuilder.setFixedSavings:277 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.setFixedSavings:277 INVOKESPECIAL org/joda/time/tz/DateTimeZoneBuilder.getLastRuleSet()Lorg/joda/time/tz/DateTimeZoneBuilder$RuleSet;
+org.joda.time.tz.DateTimeZoneBuilder.setFixedSavings:277 ALOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.setFixedSavings:277 ILOAD 2
+org.joda.time.tz.DateTimeZoneBuilder.setFixedSavings:277 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder$RuleSet.setFixedSavings(Ljava/lang/String;I)V
+org.joda.time.tz.DateTimeZoneBuilder.setFixedSavings:278 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.setFixedSavings:278 ARETURN
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:321 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:321 GETFIELD org/joda/time/tz/DateTimeZoneBuilder.iRuleSets Ljava/util/ArrayList;
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:321 INVOKEVIRTUAL java/util/ArrayList.size()I
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:321 IFNE L0 false true
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:322 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:322 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder.addCutover(ICIIIZI)Lorg/joda/time/tz/DateTimeZoneBuilder;
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:324 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:324 GETFIELD org/joda/time/tz/DateTimeZoneBuilder.iRuleSets Ljava/util/ArrayList;
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:324 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:324 GETFIELD org/joda/time/tz/DateTimeZoneBuilder.iRuleSets Ljava/util/ArrayList;
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:324 INVOKEVIRTUAL java/util/ArrayList.size()I
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:324 ICONST_1
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:324 ISUB
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:324 INVOKEVIRTUAL java/util/ArrayList.get(I)Ljava/lang/Object;
+org.joda.time.tz.DateTimeZoneBuilder.getLastRuleSet:324 ARETURN
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:340 NEW java/util/ArrayList
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:340 DUP
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:340 INVOKESPECIAL java/util/ArrayList.<init>()V
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:340 ASTORE 3
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:344 ACONST_NULL
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:344 ASTORE 4
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:349 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:349 GETFIELD org/joda/time/tz/DateTimeZoneBuilder.iRuleSets Ljava/util/ArrayList;
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:349 INVOKEVIRTUAL java/util/ArrayList.size()I
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:349 ISTORE 8
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:350 ICONST_0
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:350 ISTORE 9
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:350 ILOAD 9
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:350 ILOAD 8
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:350 IF_ICMPGE L7 true true
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:350 IINC 9 1
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:351 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:351 GETFIELD org/joda/time/tz/DateTimeZoneBuilder.iRuleSets Ljava/util/ArrayList;
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:351 ILOAD 9
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:351 INVOKEVIRTUAL java/util/ArrayList.get(I)Ljava/lang/Object;
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:351 ASTORE 10
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:352 ALOAD 10
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:352 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder$RuleSet.firstTransition(J)Lorg/joda/time/tz/DateTimeZoneBuilder$Transition;
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:352 ASTORE 11
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:353 ALOAD 11
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:353 IFNONNULL L2 true false
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:356 ALOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:356 ALOAD 11
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:356 INVOKESPECIAL org/joda/time/tz/DateTimeZoneBuilder.addTransition(Ljava/util/ArrayList;Lorg/joda/time/tz/DateTimeZoneBuilder$Transition;)Z
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:361 NEW org/joda/time/tz/DateTimeZoneBuilder$RuleSet
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:361 DUP
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:361 ALOAD 10
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:361 INVOKESPECIAL org/joda/time/tz/DateTimeZoneBuilder$RuleSet.<init>(Lorg/joda/time/tz/DateTimeZoneBuilder$RuleSet;)V
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:361 ASTORE 10
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:363 ALOAD 10
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:363 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder$RuleSet.nextTransition(JI)Lorg/joda/time/tz/DateTimeZoneBuilder$Transition;
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:363 IFNULL L5 true false
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:382 ALOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:382 INVOKEVIRTUAL java/util/ArrayList.size()I
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:382 IFNE L9 true false
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:389 ALOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:389 INVOKEVIRTUAL java/util/ArrayList.size()I
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:389 ICONST_1
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:389 IF_ICMPNE L10 false true
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:389 ALOAD 4
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:389 IFNONNULL L10 false true
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:390 ALOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:390 ICONST_0
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:390 INVOKEVIRTUAL java/util/ArrayList.get(I)Ljava/lang/Object;
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:390 ASTORE 9
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:391 ALOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:391 ALOAD 9
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:391 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder$Transition.getNameKey()Ljava/lang/String;
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:391 ALOAD 9
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:391 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder$Transition.getWallOffset()I
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:391 ALOAD 9
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:391 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder$Transition.getStandardOffset()I
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:391 INVOKESTATIC org/joda/time/tz/DateTimeZoneBuilder.buildFixedZone(Ljava/lang/String;Ljava/lang/String;II)Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.DateTimeZoneBuilder.toDateTimeZone:391 ARETURN
+org.joda.time.tz.DateTimeZoneBuilder.addTransition:403 ALOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.addTransition:403 INVOKEVIRTUAL java/util/ArrayList.size()I
+org.joda.time.tz.DateTimeZoneBuilder.addTransition:403 ISTORE 3
+org.joda.time.tz.DateTimeZoneBuilder.addTransition:404 ILOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.addTransition:404 IFNE L0 false true
+org.joda.time.tz.DateTimeZoneBuilder.addTransition:406 ALOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.addTransition:406 ALOAD 2
+org.joda.time.tz.DateTimeZoneBuilder.addTransition:406 INVOKEVIRTUAL java/util/ArrayList.add(Ljava/lang/Object;)Z
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:448 ALOAD 2
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:448 INSTANCEOF java/io/DataOutput
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:448 IFEQ L0 true false
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:451 NEW java/io/DataOutputStream
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:451 DUP
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:451 ALOAD 2
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:451 INVOKESPECIAL java/io/DataOutputStream.<init>(Ljava/io/OutputStream;)V
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:451 ASTORE 3
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:452 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:452 ALOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:452 ALOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:452 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder.writeTo(Ljava/lang/String;Ljava/io/DataOutput;)V
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:466 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:466 ALOAD 1
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:466 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder.toDateTimeZone(Ljava/lang/String;Z)Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:466 ASTORE 3
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:468 ALOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:468 INSTANCEOF org/joda/time/tz/FixedDateTimeZone
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:468 IFEQ L0 false true
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:469 ALOAD 2
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:469 INVOKEINTERFACE java/io/DataOutput.writeByte(I)V
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:470 ALOAD 2
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:470 ALOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:470 INVOKEVIRTUAL org/joda/time/DateTimeZone.getNameKey(J)Ljava/lang/String;
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:470 INVOKEINTERFACE java/io/DataOutput.writeUTF(Ljava/lang/String;)V
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:471 ALOAD 2
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:471 ALOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:471 INVOKEVIRTUAL org/joda/time/DateTimeZone.getOffset(J)I
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:471 I2L
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:471 INVOKESTATIC org/joda/time/tz/DateTimeZoneBuilder.writeMillis(Ljava/io/DataOutput;J)V
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:472 ALOAD 2
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:472 ALOAD 3
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:472 INVOKEVIRTUAL org/joda/time/DateTimeZone.getStandardOffset(J)I
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:472 I2L
+org.joda.time.tz.DateTimeZoneBuilder.writeTo:472 INVOKESTATIC org/joda/time/tz/DateTimeZoneBuilder.writeMillis(Ljava/io/DataOutput;J)V
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:997 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:997 NEW java/util/ArrayList
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:997 DUP
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:997 BIPUSH 10
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:997 INVOKESPECIAL java/util/ArrayList.<init>(I)V
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:997 PUTFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iRules Ljava/util/ArrayList;
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:1006 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:1006 NEW java/util/ArrayList
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:1006 DUP
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:1006 ALOAD 1
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:1006 GETFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iRules Ljava/util/ArrayList;
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:1006 INVOKESPECIAL java/util/ArrayList.<init>(Ljava/util/Collection;)V
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.<init>:1006 PUTFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iRules Ljava/util/ArrayList;
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.setStandardOffset:1019 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.setStandardOffset:1019 ILOAD 1
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.setStandardOffset:1019 PUTFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iStandardOffset I
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.setFixedSavings:1023 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.setFixedSavings:1023 ALOAD 1
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.setFixedSavings:1023 PUTFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iInitialNameKey Ljava/lang/String;
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.setFixedSavings:1024 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.setFixedSavings:1024 ILOAD 2
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.setFixedSavings:1024 PUTFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iInitialSaveMillis I
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1045 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1045 GETFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iInitialNameKey Ljava/lang/String;
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1045 IFNULL L0 false true
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 NEW org/joda/time/tz/DateTimeZoneBuilder$Transition
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 DUP
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 GETFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iInitialNameKey Ljava/lang/String;
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 GETFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iStandardOffset I
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 GETFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iInitialSaveMillis I
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 IADD
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 GETFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iStandardOffset I
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 INVOKESPECIAL org/joda/time/tz/DateTimeZoneBuilder$Transition.<init>(JLjava/lang/String;II)V
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.firstTransition:1047 ARETURN
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1119 ACONST_NULL
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1119 ASTORE 5
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1122 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1122 GETFIELD org/joda/time/tz/DateTimeZoneBuilder$RuleSet.iRules Ljava/util/ArrayList;
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1122 INVOKEVIRTUAL java/util/ArrayList.iterator()Ljava/util/Iterator;
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1122 ASTORE 8
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1123 ALOAD 8
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1123 INVOKEINTERFACE java/util/Iterator.hasNext()Z
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1123 IFEQ L3 true false
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1139 ALOAD 5
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1139 IFNONNULL L4 false true
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1140 ACONST_NULL
+org.joda.time.tz.DateTimeZoneBuilder$RuleSet.nextTransition:1140 ARETURN
+org.joda.time.tz.DateTimeZoneBuilder$Transition.<init>:924 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$Transition.<init>:924 ALOAD 3
+org.joda.time.tz.DateTimeZoneBuilder$Transition.<init>:924 PUTFIELD org/joda/time/tz/DateTimeZoneBuilder$Transition.iNameKey Ljava/lang/String;
+org.joda.time.tz.DateTimeZoneBuilder$Transition.<init>:925 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$Transition.<init>:925 ILOAD 4
+org.joda.time.tz.DateTimeZoneBuilder$Transition.<init>:925 PUTFIELD org/joda/time/tz/DateTimeZoneBuilder$Transition.iWallOffset I
+org.joda.time.tz.DateTimeZoneBuilder$Transition.<init>:926 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$Transition.<init>:926 ILOAD 5
+org.joda.time.tz.DateTimeZoneBuilder$Transition.<init>:926 PUTFIELD org/joda/time/tz/DateTimeZoneBuilder$Transition.iStandardOffset I
+org.joda.time.tz.DateTimeZoneBuilder$Transition.getNameKey:934 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$Transition.getNameKey:934 GETFIELD org/joda/time/tz/DateTimeZoneBuilder$Transition.iNameKey Ljava/lang/String;
+org.joda.time.tz.DateTimeZoneBuilder$Transition.getNameKey:934 ARETURN
+org.joda.time.tz.DateTimeZoneBuilder$Transition.getWallOffset:938 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$Transition.getWallOffset:938 GETFIELD org/joda/time/tz/DateTimeZoneBuilder$Transition.iWallOffset I
+org.joda.time.tz.DateTimeZoneBuilder$Transition.getWallOffset:938 IRETURN
+org.joda.time.tz.DateTimeZoneBuilder$Transition.getStandardOffset:942 ALOAD 0
+org.joda.time.tz.DateTimeZoneBuilder$Transition.getStandardOffset:942 GETFIELD org/joda/time/tz/DateTimeZoneBuilder$Transition.iStandardOffset I
+org.joda.time.tz.DateTimeZoneBuilder$Transition.getStandardOffset:942 IRETURN
+org.joda.time.tz.FixedDateTimeZone.<init>:38 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:38 ALOAD 1
+org.joda.time.tz.FixedDateTimeZone.<init>:38 INVOKESPECIAL org/joda/time/DateTimeZone.<init>(Ljava/lang/String;)V
+org.joda.time.tz.FixedDateTimeZone.<init>:39 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:39 ALOAD 2
+org.joda.time.tz.FixedDateTimeZone.<init>:39 PUTFIELD org/joda/time/tz/FixedDateTimeZone.iNameKey Ljava/lang/String;
+org.joda.time.tz.FixedDateTimeZone.<init>:40 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:40 ILOAD 3
+org.joda.time.tz.FixedDateTimeZone.<init>:40 PUTFIELD org/joda/time/tz/FixedDateTimeZone.iWallOffset I
+org.joda.time.tz.FixedDateTimeZone.<init>:41 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:41 ILOAD 4
+org.joda.time.tz.FixedDateTimeZone.<init>:41 PUTFIELD org/joda/time/tz/FixedDateTimeZone.iStandardOffset I
+org.joda.time.tz.FixedDateTimeZone.getNameKey:45 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.getNameKey:45 GETFIELD org/joda/time/tz/FixedDateTimeZone.iNameKey Ljava/lang/String;
+org.joda.time.tz.FixedDateTimeZone.getNameKey:45 ARETURN
+org.joda.time.tz.FixedDateTimeZone.getOffset:49 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.getOffset:49 GETFIELD org/joda/time/tz/FixedDateTimeZone.iWallOffset I
+org.joda.time.tz.FixedDateTimeZone.getOffset:49 IRETURN
+org.joda.time.tz.FixedDateTimeZone.getStandardOffset:53 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.getStandardOffset:53 GETFIELD org/joda/time/tz/FixedDateTimeZone.iStandardOffset I
+org.joda.time.tz.FixedDateTimeZone.getStandardOffset:53 IRETURN
+org.joda.time.tz.TestBuilder.main:42 INVOKEVIRTUAL org/joda/time/tz/TestBuilder.testFixed()V
+org.joda.time.tz.TestBuilder.testSerialization:304 NEW java/io/ByteArrayOutputStream
+org.joda.time.tz.TestBuilder.testSerialization:304 DUP
+org.joda.time.tz.TestBuilder.testSerialization:304 INVOKESPECIAL java/io/ByteArrayOutputStream.<init>()V
+org.joda.time.tz.TestBuilder.testSerialization:304 ASTORE 2
+org.joda.time.tz.TestBuilder.testSerialization:305 ALOAD 0
+org.joda.time.tz.TestBuilder.testSerialization:305 LDC "America/Los_Angeles"
+org.joda.time.tz.TestBuilder.testSerialization:305 ALOAD 2
+org.joda.time.tz.TestBuilder.testSerialization:305 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder.writeTo(Ljava/lang/String;Ljava/io/OutputStream;)V
+org.joda.time.tz.TestBuilder.testSerialization:306 NEW java/io/ByteArrayInputStream
+org.joda.time.tz.TestBuilder.testSerialization:306 DUP
+org.joda.time.tz.TestBuilder.testSerialization:306 ALOAD 2
+org.joda.time.tz.TestBuilder.testSerialization:306 INVOKEVIRTUAL java/io/ByteArrayOutputStream.toByteArray()[B
+org.joda.time.tz.TestBuilder.testSerialization:306 INVOKESPECIAL java/io/ByteArrayInputStream.<init>([B)V
+org.joda.time.tz.TestBuilder.testSerialization:306 ASTORE 3
+org.joda.time.tz.TestBuilder.testSerialization:307 ALOAD 3
+org.joda.time.tz.TestBuilder.testSerialization:307 ALOAD 1
+org.joda.time.tz.TestBuilder.testSerialization:307 INVOKESTATIC org/joda/time/tz/DateTimeZoneBuilder.readFrom(Ljava/io/InputStream;Ljava/lang/String;)Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.TestBuilder.testSerialization:307 ASTORE 4
+org.joda.time.tz.TestBuilder.testSerialization:309 ALOAD 4
+org.joda.time.tz.TestBuilder.testSerialization:309 ARETURN
+org.joda.time.tz.TestBuilder.testFixed:313 NEW org/joda/time/tz/DateTimeZoneBuilder
+org.joda.time.tz.TestBuilder.testFixed:313 DUP
+org.joda.time.tz.TestBuilder.testFixed:313 INVOKESPECIAL org/joda/time/tz/DateTimeZoneBuilder.<init>()V
+org.joda.time.tz.TestBuilder.testFixed:313 LDC 3600000
+org.joda.time.tz.TestBuilder.testFixed:313 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder.setStandardOffset(I)Lorg/joda/time/tz/DateTimeZoneBuilder;
+org.joda.time.tz.TestBuilder.testFixed:313 LDC "LMT"
+org.joda.time.tz.TestBuilder.testFixed:313 ICONST_0
+org.joda.time.tz.TestBuilder.testFixed:313 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder.setFixedSavings(Ljava/lang/String;I)Lorg/joda/time/tz/DateTimeZoneBuilder;
+org.joda.time.tz.TestBuilder.testFixed:313 ASTORE 1
+org.joda.time.tz.TestBuilder.testFixed:316 ALOAD 1
+org.joda.time.tz.TestBuilder.testFixed:316 LDC "Test"
+org.joda.time.tz.TestBuilder.testFixed:316 INVOKEVIRTUAL org/joda/time/tz/DateTimeZoneBuilder.toDateTimeZone(Ljava/lang/String;Z)Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.TestBuilder.testFixed:316 ASTORE 2
+org.joda.time.tz.TestBuilder.testFixed:318 ICONST_0
+org.joda.time.tz.TestBuilder.testFixed:318 ISTORE 3
+org.joda.time.tz.TestBuilder.testFixed:318 ILOAD 3
+org.joda.time.tz.TestBuilder.testFixed:318 ICONST_2
+org.joda.time.tz.TestBuilder.testFixed:318 IF_ICMPGE L1 false true
+org.joda.time.tz.TestBuilder.testFixed:318 IINC 3 1
+org.joda.time.tz.TestBuilder.testFixed:319 LDC "Test"
+org.joda.time.tz.TestBuilder.testFixed:319 ALOAD 2
+org.joda.time.tz.TestBuilder.testFixed:319 INVOKEVIRTUAL org/joda/time/DateTimeZone.getID()Ljava/lang/String;
+org.joda.time.tz.TestBuilder.testFixed:319 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.tz.TestBuilder.testFixed:326 ALOAD 1
+org.joda.time.tz.TestBuilder.testFixed:326 LDC "Test"
+org.joda.time.tz.TestBuilder.testFixed:326 INVOKESTATIC org/joda/time/tz/TestBuilder.testSerialization(Lorg/joda/time/tz/DateTimeZoneBuilder;Ljava/lang/String;)Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.TestBuilder.testFixed:326 ASTORE 2
+
+Slice consists of 562 bytecode instructions.
+Computation took 5.59 seconds.

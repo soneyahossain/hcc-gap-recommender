@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasicYearDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">BasicYearDateTimeField.java</span></div><h1>BasicYearDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2015 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+import org.joda.time.field.FieldUtils;
+import org.joda.time.field.ImpreciseDateTimeField;
+
+/**
+ * A year field suitable for many calendars.
+ *
+ * @author Guy Allard
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.1, refactored from GJYearDateTimeField
+ */
+class BasicYearDateTimeField extends ImpreciseDateTimeField {
+
+    /** Serialization version. */
+    @SuppressWarnings(&quot;unused&quot;)
+    private static final long serialVersionUID = -98628754872287L;
+
+    /** The underlying basic chronology. */
+    protected final BasicChronology iChronology;
+
+    /**
+     * Restricted constructor.
+     * 
+     * @param chronology  the chronology this field belongs to
+     */
+    BasicYearDateTimeField(BasicChronology chronology) {
+<span class="fc" id="L46">        super(DateTimeFieldType.year(), chronology.getAverageMillisPerYear());</span>
+<span class="fc" id="L47">        iChronology = chronology;</span>
+<span class="fc" id="L48">    }</span>
+
+    public boolean isLenient() {
+<span class="fc" id="L51">        return false;</span>
+    }
+
+    public int get(long instant) {
+<span class="fc" id="L55">        return iChronology.getYear(instant);</span>
+    }
+
+    public long add(long instant, int years) {
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (years == 0) {</span>
+<span class="fc" id="L60">            return instant;</span>
+        }
+<span class="fc" id="L62">        int thisYear = get(instant);</span>
+<span class="fc" id="L63">        int newYear = FieldUtils.safeAdd(thisYear, years);</span>
+<span class="fc" id="L64">        return set(instant, newYear);</span>
+    }
+
+    public long add(long instant, long years) {
+<span class="fc" id="L68">        return add(instant, FieldUtils.safeToInt(years));</span>
+    }
+
+    public long addWrapField(long instant, int years) {
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        if (years == 0) {</span>
+<span class="fc" id="L73">            return instant;</span>
+        }
+        // Return newly calculated millis value
+<span class="fc" id="L76">        int thisYear = iChronology.getYear(instant);</span>
+<span class="fc" id="L77">        int wrappedYear = FieldUtils.getWrappedValue</span>
+<span class="fc" id="L78">            (thisYear, years, iChronology.getMinYear(), iChronology.getMaxYear());</span>
+<span class="fc" id="L79">        return set(instant, wrappedYear);</span>
+    }
+
+    public long set(long instant, int year) {
+<span class="fc" id="L83">        FieldUtils.verifyValueBounds</span>
+<span class="fc" id="L84">            (this, year, iChronology.getMinYear(), iChronology.getMaxYear());</span>
+<span class="fc" id="L85">        return iChronology.setYear(instant, year);</span>
+    }
+
+    @Override
+    public long setExtended(long instant, int year) {
+<span class="fc" id="L90">        FieldUtils.verifyValueBounds(</span>
+<span class="fc" id="L91">                this, year, iChronology.getMinYear() - 1, iChronology.getMaxYear() + 1);</span>
+<span class="fc" id="L92">        return iChronology.setYear(instant, year);</span>
+    }
+
+    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (minuendInstant &lt; subtrahendInstant) {</span>
+<span class="fc" id="L97">            return -iChronology.getYearDifference(subtrahendInstant, minuendInstant);</span>
+        }
+<span class="fc" id="L99">        return iChronology.getYearDifference(minuendInstant, subtrahendInstant);</span>
+    }
+
+    public DurationField getRangeDurationField() {
+<span class="fc" id="L103">        return null;</span>
+    }
+
+    public boolean isLeap(long instant) {
+<span class="fc" id="L107">        return iChronology.isLeapYear(get(instant));</span>
+    }
+
+    public int getLeapAmount(long instant) {
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (iChronology.isLeapYear(get(instant))) {</span>
+<span class="fc" id="L112">            return 1;</span>
+        } else {
+<span class="fc" id="L114">            return 0;</span>
+        }
+    }
+
+    public DurationField getLeapDurationField() {
+<span class="fc" id="L119">        return iChronology.days();</span>
+    }
+
+    public int getMinimumValue() {
+<span class="fc" id="L123">        return iChronology.getMinYear();</span>
+    }
+
+    public int getMaximumValue() {
+<span class="fc" id="L127">        return iChronology.getMaxYear();</span>
+    }
+
+    public long roundFloor(long instant) {
+<span class="fc" id="L131">        return iChronology.getYearMillis(get(instant));</span>
+    }
+
+    public long roundCeiling(long instant) {
+<span class="fc" id="L135">        int year = get(instant);</span>
+<span class="fc" id="L136">        long yearStartMillis = iChronology.getYearMillis(year);</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        if (instant != yearStartMillis) {</span>
+            // Bump up to start of next year.
+<span class="fc" id="L139">            instant = iChronology.getYearMillis(year + 1);</span>
+        }
+<span class="fc" id="L141">        return instant;</span>
+    }
+
+    public long remainder(long instant) {
+<span class="fc" id="L145">        return instant - roundFloor(instant);</span>
+    }
+
+    /**
+     * Serialization singleton
+     */
+    private Object readResolve() {
+<span class="nc" id="L152">        return iChronology.year();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

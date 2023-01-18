@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GregorianChronology.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">GregorianChronology.java</span></div><h1>GregorianChronology.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeZone;
+
+/**
+ * Implements a pure proleptic Gregorian calendar system, which defines every
+ * fourth year as leap, unless the year is divisible by 100 and not by 400.
+ * This improves upon the Julian calendar leap year rule.
+ * &lt;p&gt;
+ * Although the Gregorian calendar did not exist before 1582 CE, this
+ * chronology assumes it did, thus it is proleptic. This implementation also
+ * fixes the start of the year at January 1, and defines the year zero.
+ * &lt;p&gt;
+ * GregorianChronology is thread-safe and immutable.
+ *
+ * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/Gregorian_calendar&quot;&gt;Wikipedia&lt;/a&gt;
+ * @see JulianChronology
+ * @see GJChronology
+ * 
+ * @author Guy Allard
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public final class GregorianChronology extends BasicGJChronology {
+
+    /** Serialization lock */
+    private static final long serialVersionUID = -861407383323710522L;
+
+    private static final long MILLIS_PER_YEAR =
+        (long) (365.2425 * DateTimeConstants.MILLIS_PER_DAY);
+
+    private static final long MILLIS_PER_MONTH =
+        (long) (365.2425 * DateTimeConstants.MILLIS_PER_DAY / 12);
+
+    private static final int DAYS_0000_TO_1970 = 719527;
+
+    /** The lowest year that can be fully supported. */
+    private static final int MIN_YEAR = -292275054;
+
+    /** The highest year that can be fully supported. */
+    private static final int MAX_YEAR = 292278993;
+
+    /** Singleton instance of a UTC GregorianChronology */
+    private static final GregorianChronology INSTANCE_UTC;
+
+    /** Cache of zone to chronology arrays */
+<span class="fc" id="L67">    private static final ConcurrentHashMap&lt;DateTimeZone, GregorianChronology[]&gt; cCache = new ConcurrentHashMap&lt;DateTimeZone, GregorianChronology[]&gt;();</span>
+
+    static {
+<span class="fc" id="L70">        INSTANCE_UTC = getInstance(DateTimeZone.UTC);</span>
+<span class="fc" id="L71">    }</span>
+
+    /**
+     * Gets an instance of the GregorianChronology.
+     * The time zone of the returned instance is UTC.
+     * 
+     * @return a singleton UTC instance of the chronology
+     */
+    public static GregorianChronology getInstanceUTC() {
+<span class="fc" id="L80">        return INSTANCE_UTC;</span>
+    }
+
+    /**
+     * Gets an instance of the GregorianChronology in the default time zone.
+     * 
+     * @return a chronology in the default time zone
+     */
+    public static GregorianChronology getInstance() {
+<span class="fc" id="L89">        return getInstance(DateTimeZone.getDefault(), 4);</span>
+    }
+
+    /**
+     * Gets an instance of the GregorianChronology in the given time zone.
+     * 
+     * @param zone  the time zone to get the chronology in, null is default
+     * @return a chronology in the specified time zone
+     */
+    public static GregorianChronology getInstance(DateTimeZone zone) {
+<span class="fc" id="L99">        return getInstance(zone, 4);</span>
+    }
+
+    /**
+     * Gets an instance of the GregorianChronology in the given time zone.
+     * 
+     * @param zone  the time zone to get the chronology in, null is default
+     * @param minDaysInFirstWeek  minimum number of days in first week of the year; default is 4
+     * @return a chronology in the specified time zone
+     */
+    public static GregorianChronology getInstance(DateTimeZone zone, int minDaysInFirstWeek) {
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        if (zone == null) {</span>
+<span class="fc" id="L111">            zone = DateTimeZone.getDefault();</span>
+        }
+        GregorianChronology chrono;
+<span class="fc" id="L114">        GregorianChronology[] chronos = cCache.get(zone);</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        if (chronos == null) {</span>
+<span class="fc" id="L116">            chronos = new GregorianChronology[7];</span>
+<span class="fc" id="L117">            GregorianChronology[] oldChronos = cCache.putIfAbsent(zone, chronos);</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">            if (oldChronos != null) {</span>
+<span class="nc" id="L119">                chronos = oldChronos;</span>
+            }
+        }
+        try {
+<span class="fc" id="L123">            chrono = chronos[minDaysInFirstWeek - 1];</span>
+<span class="fc" id="L124">        } catch (ArrayIndexOutOfBoundsException e) {</span>
+<span class="fc" id="L125">            throw new IllegalArgumentException</span>
+                (&quot;Invalid min days in first week: &quot; + minDaysInFirstWeek);
+<span class="fc" id="L127">        }</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        if (chrono == null) {</span>
+<span class="fc" id="L129">            synchronized (chronos) {</span>
+<span class="fc" id="L130">                chrono = chronos[minDaysInFirstWeek - 1];</span>
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">                if (chrono == null) {</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">                    if (zone == DateTimeZone.UTC) {</span>
+<span class="fc" id="L133">                        chrono = new GregorianChronology(null, null, minDaysInFirstWeek);</span>
+                    } else {
+<span class="fc" id="L135">                        chrono = getInstance(DateTimeZone.UTC, minDaysInFirstWeek);</span>
+<span class="fc" id="L136">                        chrono = new GregorianChronology</span>
+<span class="fc" id="L137">                            (ZonedChronology.getInstance(chrono, zone), null, minDaysInFirstWeek);</span>
+                    }
+<span class="fc" id="L139">                    chronos[minDaysInFirstWeek - 1] = chrono;</span>
+                }
+<span class="fc" id="L141">            }</span>
+        }
+<span class="fc" id="L143">        return chrono;</span>
+    }
+
+    // Constructors and instance variables
+    //-----------------------------------------------------------------------
+
+    /**
+     * Restricted constructor
+     */
+    private GregorianChronology(Chronology base, Object param, int minDaysInFirstWeek) {
+<span class="fc" id="L153">        super(base, param, minDaysInFirstWeek);</span>
+<span class="fc" id="L154">    }</span>
+
+    /**
+     * Serialization singleton
+     */
+    private Object readResolve() {
+<span class="fc" id="L160">        Chronology base = getBase();</span>
+<span class="fc" id="L161">        int minDays = getMinimumDaysInFirstWeek();</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">        minDays = (minDays == 0 ? 4 : minDays);  // handle rename of BaseGJChronology</span>
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        return base == null ?</span>
+<span class="fc" id="L164">                getInstance(DateTimeZone.UTC, minDays) :</span>
+<span class="fc" id="L165">                    getInstance(base.getZone(), minDays);</span>
+    }
+
+    // Conversion
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the Chronology in the UTC time zone.
+     * 
+     * @return the chronology in UTC
+     */
+    public Chronology withUTC() {
+<span class="fc" id="L176">        return INSTANCE_UTC;</span>
+    }
+
+    /**
+     * Gets the Chronology in a specific time zone.
+     * 
+     * @param zone  the zone to get the chronology in, null is default
+     * @return the chronology
+     */
+    public Chronology withZone(DateTimeZone zone) {
+<span class="fc bfc" id="L186" title="All 2 branches covered.">        if (zone == null) {</span>
+<span class="fc" id="L187">            zone = DateTimeZone.getDefault();</span>
+        }
+<span class="fc bfc" id="L189" title="All 2 branches covered.">        if (zone == getZone()) {</span>
+<span class="fc" id="L190">            return this;</span>
+        }
+<span class="fc" id="L192">        return getInstance(zone);</span>
+    }
+
+    protected void assemble(Fields fields) {
+<span class="fc bfc" id="L196" title="All 2 branches covered.">        if (getBase() == null) {</span>
+<span class="fc" id="L197">            super.assemble(fields);</span>
+        }
+<span class="fc" id="L199">    }</span>
+
+    boolean isLeapYear(int year) {
+<span class="fc bfc" id="L202" title="All 6 branches covered.">        return ((year &amp; 3) == 0) &amp;&amp; ((year % 100) != 0 || (year % 400) == 0);</span>
+    }
+
+    long calculateFirstDayOfYearMillis(int year) {
+        // Initial value is just temporary.
+<span class="fc" id="L207">        int leapYears = year / 100;</span>
+<span class="fc bfc" id="L208" title="All 2 branches covered.">        if (year &lt; 0) {</span>
+            // Add 3 before shifting right since /4 and &gt;&gt;2 behave differently
+            // on negative numbers. When the expression is written as
+            // (year / 4) - (year / 100) + (year / 400),
+            // it works for both positive and negative values, except this optimization
+            // eliminates two divisions.
+<span class="fc" id="L214">            leapYears = ((year + 3) &gt;&gt; 2) - leapYears + ((leapYears + 3) &gt;&gt; 2) - 1;</span>
+        } else {
+<span class="fc" id="L216">            leapYears = (year &gt;&gt; 2) - leapYears + (leapYears &gt;&gt; 2);</span>
+<span class="fc bfc" id="L217" title="All 2 branches covered.">            if (isLeapYear(year)) {</span>
+<span class="fc" id="L218">                leapYears--;</span>
+            }
+        }
+
+<span class="fc" id="L222">        return (year * 365L + (leapYears - DAYS_0000_TO_1970)) * DateTimeConstants.MILLIS_PER_DAY;</span>
+    }
+
+    int getMinYear() {
+<span class="fc" id="L226">        return MIN_YEAR;</span>
+    }
+
+    int getMaxYear() {
+<span class="fc" id="L230">        return MAX_YEAR;</span>
+    }
+
+    long getAverageMillisPerYear() {
+<span class="fc" id="L234">        return MILLIS_PER_YEAR;</span>
+    }
+
+    long getAverageMillisPerYearDividedByTwo() {
+<span class="fc" id="L238">        return MILLIS_PER_YEAR / 2;</span>
+    }
+
+    long getAverageMillisPerMonth() {
+<span class="fc" id="L242">        return MILLIS_PER_MONTH;</span>
+    }
+
+    long getApproxMillisAtEpochDividedByTwo() {
+<span class="fc" id="L246">        return (1970L * MILLIS_PER_YEAR) / 2;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

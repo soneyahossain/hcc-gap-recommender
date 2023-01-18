@@ -1,0 +1,56 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.3% done, time left: unknown  0.9% done, time left: unknown  1.0% done, time left: unknown  1.1% done, time left: unknown  1.2% done, time left:   0:01:42    1.2% done, time left:   0:02:33  1.2% done, time left:   0:03:24  1.2% done, time left:   0:04:16  1.4% done, time left:   0:03:57  1.6% done, time left:   0:03:37  2.1% done, time left:   0:03:15  2.8% done, time left:   0:02:57  3.4% done, time left:   0:02:42  4.2% done, time left:   0:02:30  5.1% done, time left:   0:02:20  6.3% done, time left:   0:02:12  6.8% done, time left:   0:02:03  8.4% done, time left:   0:01:54 10.0% done, time left:   0:01:42 11.6% done, time left:   0:01:30 13.2% done, time left:   0:01:17 14.9% done, time left:   0:01:06 16.6% done, time left:   0:00:55 18.3% done, time left:   0:00:46 20.0% done, time left:   0:00:38 21.8% done, time left:   0:00:31 23.6% done, time left:   0:00:26 25.5% done, time left:   0:00:21 27.1% done, time left:   0:00:17 27.1% done, time left:   0:00:13 27.1% done, time left:   0:00:11 27.7% done, time left:   0:00:09 28.6% done, time left:   0:00:08 29.6% done, time left:   0:00:08 30.8% done, time left:   0:00:07 31.9% done, time left:   0:00:07 33.1% done, time left:   0:00:07 34.6% done, time left:   0:00:07 35.0% done, time left:   0:00:06 36.8% done, time left:   0:00:06 38.5% done, time left:   0:00:06 39.5% done, time left:   0:00:05 41.0% done, time left:   0:00:05 42.7% done, time left:   0:00:05 44.4% done, time left:   0:00:05 46.1% done, time left:   0:00:04 47.8% done, time left:   0:00:04 48.6% done, time left:   0:00:03 50.1% done, time left:   0:00:03 53.3% done, time left:   0:00:02 57.7% done, time left:   0:00:00 63.9% done, time left:   0:00:00 69.5% done, time left:   0:00:00 77.2% done, time left:   0:00:00 84.8% done, time left:   0:00:00 92.1% done, time left:   0:00:00 97.8% done, time left:   0:00:00 98.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:90:*]:
+org.apache.commons.csv.ExtendedBufferedReader.read:58 ALOAD 0
+org.apache.commons.csv.ExtendedBufferedReader.read:58 ISTORE 1
+org.apache.commons.csv.ExtendedBufferedReader.read:59 ILOAD 1
+org.apache.commons.csv.ExtendedBufferedReader.read:59 BIPUSH 13
+org.apache.commons.csv.ExtendedBufferedReader.read:59 IF_ICMPEQ L0 true true
+org.apache.commons.csv.ExtendedBufferedReader.read:59 ILOAD 1
+org.apache.commons.csv.ExtendedBufferedReader.read:59 BIPUSH 10
+org.apache.commons.csv.ExtendedBufferedReader.read:59 IF_ICMPNE L1 false true
+org.apache.commons.csv.ExtendedBufferedReader.read:59 ALOAD 0
+org.apache.commons.csv.ExtendedBufferedReader.read:59 GETFIELD org/apache/commons/csv/ExtendedBufferedReader.lastChar I
+org.apache.commons.csv.ExtendedBufferedReader.read:59 BIPUSH 13
+org.apache.commons.csv.ExtendedBufferedReader.read:59 IF_ICMPEQ L1 false true
+org.apache.commons.csv.ExtendedBufferedReader.read:60 ALOAD 0
+org.apache.commons.csv.ExtendedBufferedReader.read:60 DUP
+org.apache.commons.csv.ExtendedBufferedReader.read:60 GETFIELD org/apache/commons/csv/ExtendedBufferedReader.eolCounter J
+org.apache.commons.csv.ExtendedBufferedReader.read:60 LCONST_1
+org.apache.commons.csv.ExtendedBufferedReader.read:60 LADD
+org.apache.commons.csv.ExtendedBufferedReader.read:60 PUTFIELD org/apache/commons/csv/ExtendedBufferedReader.eolCounter J
+org.apache.commons.csv.ExtendedBufferedReader.read:62 ALOAD 0
+org.apache.commons.csv.ExtendedBufferedReader.read:62 ILOAD 1
+org.apache.commons.csv.ExtendedBufferedReader.read:62 PUTFIELD org/apache/commons/csv/ExtendedBufferedReader.lastChar I
+org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber:158 ALOAD 0
+org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber:158 GETFIELD org/apache/commons/csv/ExtendedBufferedReader.lastChar I
+org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber:158 BIPUSH 13
+org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber:158 IF_ICMPEQ L0 false true
+org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber:158 ALOAD 0
+org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber:158 GETFIELD org/apache/commons/csv/ExtendedBufferedReader.lastChar I
+org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber:158 BIPUSH 10
+org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber:158 IF_ICMPEQ L0 true false
+org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber:159 ALOAD 0
+org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber:159 GETFIELD org/apache/commons/csv/ExtendedBufferedReader.eolCounter J
+org.apache.commons.csv.ExtendedBufferedReader.getCurrentLineNumber:159 LRETURN
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:48 INVOKESPECIAL org/apache/commons/csv/ExtendedBufferedReaderTest.createBufferedReader(Ljava/lang/String;)Lorg/apache/commons/csv/ExtendedBufferedReader;
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:48 ASTORE 1
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:53 ALOAD 1
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:53 INVOKEVIRTUAL org/apache/commons/csv/ExtendedBufferedReader.read()I
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:60 ALOAD 1
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:60 INVOKEVIRTUAL org/apache/commons/csv/ExtendedBufferedReader.read()I
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:68 LCONST_1
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:76 ALOAD 1
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:76 INVOKEVIRTUAL org/apache/commons/csv/ExtendedBufferedReader.read()I
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:82 ALOAD 1
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:82 INVOKEVIRTUAL org/apache/commons/csv/ExtendedBufferedReader.read()I
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:89 ALOAD 1
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:89 INVOKEVIRTUAL org/apache/commons/csv/ExtendedBufferedReader.read()I
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:90 LDC 3
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:90 ALOAD 1
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:90 INVOKEVIRTUAL org/apache/commons/csv/ExtendedBufferedReader.getCurrentLineNumber()J
+org.apache.commons.csv.ExtendedBufferedReaderTest.testReadLookahead1:90 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.apache.commons.csv.ExtendedBufferedReaderTest.createBufferedReader:208 NEW org/apache/commons/csv/ExtendedBufferedReader
+org.apache.commons.csv.ExtendedBufferedReaderTest.createBufferedReader:208 ARETURN
+
+Slice consists of 5981 bytecode instructions.
+Computation took 6.64 seconds.

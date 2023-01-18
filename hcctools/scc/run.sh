@@ -1,0 +1,1 @@
+java -jar assembly/scc.jar enums_slices clover.xml out prefix.txt

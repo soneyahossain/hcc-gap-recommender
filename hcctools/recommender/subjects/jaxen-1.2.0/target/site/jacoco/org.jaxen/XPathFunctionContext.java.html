@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XPathFunctionContext.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen</a> &gt; <span class="el_source">XPathFunctionContext.java</span></div><h1>XPathFunctionContext.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+
+package org.jaxen;
+
+import org.jaxen.function.BooleanFunction;
+import org.jaxen.function.CeilingFunction;
+import org.jaxen.function.ConcatFunction;
+import org.jaxen.function.ContainsFunction;
+import org.jaxen.function.CountFunction;
+import org.jaxen.function.FalseFunction;
+import org.jaxen.function.FloorFunction;
+import org.jaxen.function.IdFunction;
+import org.jaxen.function.LangFunction;
+import org.jaxen.function.LastFunction;
+import org.jaxen.function.LocalNameFunction;
+import org.jaxen.function.NameFunction;
+import org.jaxen.function.NamespaceUriFunction;
+import org.jaxen.function.NormalizeSpaceFunction;
+import org.jaxen.function.NotFunction;
+import org.jaxen.function.NumberFunction;
+import org.jaxen.function.PositionFunction;
+import org.jaxen.function.RoundFunction;
+import org.jaxen.function.StartsWithFunction;
+import org.jaxen.function.StringFunction;
+import org.jaxen.function.StringLengthFunction;
+import org.jaxen.function.SubstringAfterFunction;
+import org.jaxen.function.SubstringBeforeFunction;
+import org.jaxen.function.SubstringFunction;
+import org.jaxen.function.SumFunction;
+import org.jaxen.function.TranslateFunction;
+import org.jaxen.function.TrueFunction;
+import org.jaxen.function.ext.EndsWithFunction;
+import org.jaxen.function.ext.EvaluateFunction;
+import org.jaxen.function.ext.LowerFunction;
+import org.jaxen.function.ext.UpperFunction;
+import org.jaxen.function.xslt.DocumentFunction;
+
+/** A &lt;code&gt;FunctionContext&lt;/code&gt; implementing the core XPath
+ *  function library, plus Jaxen extensions.
+ *
+ *  &lt;p&gt;
+ *  The core XPath function library is provided through this
+ *  implementation of &lt;code&gt;FunctionContext&lt;/code&gt;.  Additionally,
+ *  extension functions have been provided, as enumerated below.
+ *  &lt;/p&gt;
+ *
+ *  &lt;p&gt;
+ *  This class is re-entrant and thread-safe.  If using the
+ *  default instance, it is inadvisable to call 
+ *  {@link #registerFunction(String, String, Function)}
+ *  as that will extend the global function context, affecting other
+ *  users. 
+ *  &lt;/p&gt;
+ *
+ *  &lt;p&gt;
+ *  Extension functions:
+ *  &lt;/p&gt;
+ *
+ *  &lt;ul&gt;
+ *     &lt;li&gt;evaluate(..)&lt;/li&gt;
+ *     &lt;li&gt;upper-case(..)&lt;/li&gt;
+ *     &lt;li&gt;lower-case(..)&lt;/li&gt;
+ *     &lt;li&gt;ends-with(..)&lt;/li&gt;
+ *  &lt;/ul&gt;
+ *
+ *  @see FunctionContext
+ *  @see org.jaxen.function
+ *  @see org.jaxen.function.xslt
+ *  @see org.jaxen.function.ext
+ *
+ *  @author &lt;a href=&quot;mailto:bob@werken.com&quot;&gt;bob mcwhirter&lt;/a&gt;
+ */
+public class XPathFunctionContext extends SimpleFunctionContext
+{
+<span class="fc" id="L121">    private static XPathFunctionContext instance = new XPathFunctionContext();</span>
+
+    /** Retrieve the default function context
+     *
+     *  @return the default function context
+     */
+    public static FunctionContext getInstance()
+    {
+<span class="fc" id="L129">        return instance;</span>
+    }
+
+    /** Create a new XPath function context.
+     *  All core XPath and Jaxen extension functions are registered.
+     */
+    public XPathFunctionContext()
+    {
+<span class="fc" id="L137">        this(true);</span>
+<span class="fc" id="L138">    }</span>
+
+    /** Create a new XPath function context.
+     *  All core XPath functions are registered.
+     *  
+     * @param includeExtensionFunctions if true extension functions are included;
+     *     if false, they aren't
+     */
+    public XPathFunctionContext(boolean includeExtensionFunctions)
+<span class="fc" id="L147">    {</span>
+<span class="fc" id="L148">        registerXPathFunctions();</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        if (includeExtensionFunctions) {</span>
+<span class="fc" id="L150">            registerXSLTFunctions();</span>
+<span class="fc" id="L151">            registerExtensionFunctions();</span>
+        }
+<span class="fc" id="L153">    }</span>
+
+    private void registerXPathFunctions() {
+
+<span class="fc" id="L157">        registerFunction( null,  // namespace URI</span>
+                          &quot;boolean&quot;,
+                          new BooleanFunction() );
+
+<span class="fc" id="L161">        registerFunction( null,  // namespace URI</span>
+                          &quot;ceiling&quot;,
+                          new CeilingFunction() );
+
+<span class="fc" id="L165">        registerFunction( null,  // namespace URI</span>
+                          &quot;concat&quot;,
+                          new ConcatFunction() );
+
+<span class="fc" id="L169">        registerFunction( null,  // namespace URI</span>
+                          &quot;contains&quot;,
+                          new ContainsFunction() );
+        
+<span class="fc" id="L173">        registerFunction( null,  // namespace URI</span>
+                          &quot;count&quot;,
+                          new CountFunction() );
+
+<span class="fc" id="L177">        registerFunction( null,  // namespace URI</span>
+                          &quot;false&quot;,
+                          new FalseFunction() );
+
+<span class="fc" id="L181">        registerFunction( null,  // namespace URI</span>
+                          &quot;floor&quot;,
+                          new FloorFunction() );
+
+<span class="fc" id="L185">        registerFunction( null,  // namespace URI</span>
+                          &quot;id&quot;,
+                          new IdFunction() );
+
+<span class="fc" id="L189">        registerFunction( null,  // namespace URI</span>
+                          &quot;lang&quot;,
+                          new LangFunction() );
+
+<span class="fc" id="L193">        registerFunction( null,  // namespace URI</span>
+                          &quot;last&quot;,
+                          new LastFunction() );
+
+<span class="fc" id="L197">        registerFunction( null,  // namespace URI</span>
+                          &quot;local-name&quot;,
+                          new LocalNameFunction() );
+
+<span class="fc" id="L201">        registerFunction( null,  // namespace URI</span>
+                          &quot;name&quot;,
+                          new NameFunction() );
+
+<span class="fc" id="L205">        registerFunction( null,  // namespace URI</span>
+                          &quot;namespace-uri&quot;,
+                          new NamespaceUriFunction() );
+
+<span class="fc" id="L209">        registerFunction( null,  // namespace URI</span>
+                          &quot;normalize-space&quot;,
+                          new NormalizeSpaceFunction() );
+
+<span class="fc" id="L213">        registerFunction( null,  // namespace URI</span>
+                          &quot;not&quot;,
+                          new NotFunction() );
+
+<span class="fc" id="L217">        registerFunction( null,  // namespace URI</span>
+                          &quot;number&quot;,
+                          new NumberFunction() );
+
+<span class="fc" id="L221">        registerFunction( null,  // namespace URI</span>
+                          &quot;position&quot;,
+                          new PositionFunction() );
+
+<span class="fc" id="L225">        registerFunction( null,  // namespace URI</span>
+                          &quot;round&quot;,
+                          new RoundFunction() );
+
+<span class="fc" id="L229">        registerFunction( null,  // namespace URI</span>
+                          &quot;starts-with&quot;,
+                          new StartsWithFunction() );
+
+<span class="fc" id="L233">        registerFunction( null,  // namespace URI</span>
+                          &quot;string&quot;,
+                          new StringFunction() );
+
+<span class="fc" id="L237">        registerFunction( null,  // namespace URI</span>
+                          &quot;string-length&quot;,
+                          new StringLengthFunction() );
+
+<span class="fc" id="L241">        registerFunction( null,  // namespace URI</span>
+                          &quot;substring-after&quot;,
+                          new SubstringAfterFunction() );
+
+<span class="fc" id="L245">        registerFunction( null,  // namespace URI</span>
+                          &quot;substring-before&quot;,
+                          new SubstringBeforeFunction() );
+
+<span class="fc" id="L249">        registerFunction( null,  // namespace URI</span>
+                          &quot;substring&quot;,
+                          new SubstringFunction() );
+
+<span class="fc" id="L253">        registerFunction( null,  // namespace URI</span>
+                          &quot;sum&quot;,
+                          new SumFunction() );
+
+<span class="fc" id="L257">        registerFunction( null,  // namespace URI</span>
+                          &quot;true&quot;,
+                          new TrueFunction() );
+        
+<span class="fc" id="L261">        registerFunction( null,  // namespace URI</span>
+                          &quot;translate&quot;,
+                          new TranslateFunction() );
+<span class="fc" id="L264">    }</span>
+
+    private void registerXSLTFunctions() {
+
+        // extension functions defined in XSLT
+<span class="fc" id="L269">        registerFunction( null,  // namespace URI</span>
+                          &quot;document&quot;,
+                          new DocumentFunction() );
+<span class="fc" id="L272">    }</span>
+
+    private void registerExtensionFunctions() {
+        // extension functions should go into a namespace, but which one?
+        // for now, keep them in default namespace to not break any code
+
+<span class="fc" id="L278">        registerFunction( null,  // namespace URI</span>
+                          &quot;evaluate&quot;,
+                          new EvaluateFunction() );
+        
+<span class="fc" id="L282">        registerFunction( null,  // namespace URI</span>
+                          &quot;lower-case&quot;,
+                          new LowerFunction() );
+        
+<span class="fc" id="L286">        registerFunction( null,  // namespace URI</span>
+                          &quot;upper-case&quot;,
+                          new UpperFunction() );
+        
+<span class="fc" id="L290">        registerFunction( null,  // namespace URI</span>
+                          &quot;ends-with&quot;,
+                          new EndsWithFunction() );
+<span class="fc" id="L293">    }</span>
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

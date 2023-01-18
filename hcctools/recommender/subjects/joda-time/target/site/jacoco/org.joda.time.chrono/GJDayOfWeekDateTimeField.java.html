@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GJDayOfWeekDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">GJDayOfWeekDateTimeField.java</span></div><h1>GJDayOfWeekDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import java.util.Locale;
+
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+import org.joda.time.field.PreciseDurationDateTimeField;
+
+/**
+ * GJDayOfWeekDateTimeField provides time calculations for the
+ * day of the week component of time.
+ *
+ * @since 1.0
+ * @author Guy Allard
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ */
+final class GJDayOfWeekDateTimeField extends PreciseDurationDateTimeField {
+    
+    /** Serialization version */
+    @SuppressWarnings(&quot;unused&quot;)
+    private static final long serialVersionUID = -3857947176719041436L;
+
+    private final BasicChronology iChronology;
+
+    /**
+     * Restricted constructor.
+     */
+    GJDayOfWeekDateTimeField(BasicChronology chronology, DurationField days) {
+<span class="fc" id="L46">        super(DateTimeFieldType.dayOfWeek(), days);</span>
+<span class="fc" id="L47">        iChronology = chronology;</span>
+<span class="fc" id="L48">    }</span>
+
+    /**
+     * Get the value of the specified time instant.
+     * 
+     * @param instant  the time instant in millis to query
+     * @return the day of the week extracted from the input
+     */
+    public int get(long instant) {
+<span class="fc" id="L57">        return iChronology.getDayOfWeek(instant);</span>
+    }
+
+    /**
+     * Get the textual value of the specified time instant.
+     * 
+     * @param fieldValue  the field value to query
+     * @param locale  the locale to use
+     * @return the day of the week, such as 'Monday'
+     */
+    public String getAsText(int fieldValue, Locale locale) {
+<span class="fc" id="L68">        return GJLocaleSymbols.forLocale(locale).dayOfWeekValueToText(fieldValue);</span>
+    }
+
+    /**
+     * Get the abbreviated textual value of the specified time instant.
+     * 
+     * @param fieldValue  the field value to query
+     * @param locale  the locale to use
+     * @return the day of the week, such as 'Mon'
+     */
+    public String getAsShortText(int fieldValue, Locale locale) {
+<span class="fc" id="L79">        return GJLocaleSymbols.forLocale(locale).dayOfWeekValueToShortText(fieldValue);</span>
+    }
+
+    /**
+     * Convert the specified text and locale into a value.
+     * 
+     * @param text  the text to convert
+     * @param locale  the locale to convert using
+     * @return the value extracted from the text
+     * @throws IllegalArgumentException if the text is invalid
+     */
+    protected int convertText(String text, Locale locale) {
+<span class="fc" id="L91">        return GJLocaleSymbols.forLocale(locale).dayOfWeekTextToValue(text);</span>
+    }
+
+    public DurationField getRangeDurationField() {
+<span class="fc" id="L95">        return iChronology.weeks();</span>
+    }
+
+    /**
+     * Get the minimum value that this field can have.
+     * 
+     * @return the field's minimum value
+     */
+    public int getMinimumValue() {
+<span class="fc" id="L104">        return DateTimeConstants.MONDAY;</span>
+    }
+
+    /**
+     * Get the maximum value that this field can have.
+     * 
+     * @return the field's maximum value
+     */
+    public int getMaximumValue() {
+<span class="fc" id="L113">        return DateTimeConstants.SUNDAY;</span>
+    }
+
+    /**
+     * Get the maximum length of the text returned by this field.
+     * 
+     * @param locale  the locale to use
+     * @return the maximum textual length
+     */
+    public int getMaximumTextLength(Locale locale) {
+<span class="fc" id="L123">        return GJLocaleSymbols.forLocale(locale).getDayOfWeekMaxTextLength();</span>
+    }
+
+    /**
+     * Get the maximum length of the abbreviated text returned by this field.
+     * 
+     * @param locale  the locale to use
+     * @return the maximum abbreviated textual length
+     */
+    public int getMaximumShortTextLength(Locale locale) {
+<span class="fc" id="L133">        return GJLocaleSymbols.forLocale(locale).getDayOfWeekMaxShortTextLength();</span>
+    }
+
+    /**
+     * Serialization singleton
+     */
+    private Object readResolve() {
+<span class="nc" id="L140">        return iChronology.dayOfWeek();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,85 @@
+ 0.0% done, time left: unknown                                0.4% done, time left: unknown  0.8% done, time left: unknown  2.6% done, time left: unknown  4.2% done, time left: unknown  6.7% done, time left: unknown  9.2% done, time left: unknown 11.7% done, time left: unknown 14.1% done, time left: unknown 17.3% done, time left:   0:00:02   21.3% done, time left:   0:00:03 26.6% done, time left:   0:00:02 32.5% done, time left:   0:00:01 41.1% done, time left:   0:00:00 45.2% done, time left:   0:00:00 45.6% done, time left:   0:00:00 46.6% done, time left:   0:00:00 53.1% done, time left:   0:00:00 62.9% done, time left:   0:00:00 69.8% done, time left:   0:00:00 72.4% done, time left:   0:00:00 75.7% done, time left:   0:00:00 85.9% done, time left:   0:00:00 91.9% done, time left:   0:00:00 97.7% done, time left:   0:00:00 101.0% done, time left:   0:00:00  103.5% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:182:*]:
+org.joda.time.DateTimeUtils.currentTimeMillis:72 GETSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils.currentTimeMillis:72 INVOKEINTERFACE org/joda/time/DateTimeUtils$MillisProvider.getMillis()J
+org.joda.time.DateTimeUtils.currentTimeMillis:72 LRETURN
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 NEW org/joda/time/DateTimeUtils$FixedMillisProvider
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 DUP
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 LLOAD 0
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 INVOKESPECIAL org/joda/time/DateTimeUtils$FixedMillisProvider.<init>(J)V
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 PUTSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils.getInstantMillis:162 ALOAD 0
+org.joda.time.DateTimeUtils.getInstantMillis:162 IFNONNULL L0 false true
+org.joda.time.DateTimeUtils.getInstantMillis:163 INVOKESTATIC org/joda/time/DateTimeUtils.currentTimeMillis()J
+org.joda.time.DateTimeUtils.getInstantMillis:163 LRETURN
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 ALOAD 0
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 LLOAD 1
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 PUTFIELD org/joda/time/DateTimeUtils$FixedMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 ALOAD 0
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 GETFIELD org/joda/time/DateTimeUtils$FixedMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 LRETURN
+org.joda.time.MutableInterval.setInterval:245 ALOAD 1
+org.joda.time.MutableInterval.setInterval:245 IFNONNULL L0 false true
+org.joda.time.MutableInterval.setInterval:245 ALOAD 2
+org.joda.time.MutableInterval.setInterval:245 IFNONNULL L0 true false
+org.joda.time.MutableInterval.setInterval:249 ALOAD 1
+org.joda.time.MutableInterval.setInterval:249 INVOKESTATIC org/joda/time/DateTimeUtils.getInstantMillis(Lorg/joda/time/ReadableInstant;)J
+org.joda.time.MutableInterval.setInterval:249 LSTORE 3
+org.joda.time.MutableInterval.setInterval:252 ALOAD 0
+org.joda.time.MutableInterval.setInterval:252 LLOAD 3
+org.joda.time.MutableInterval.setInterval:252 INVOKESPECIAL org/joda/time/base/BaseInterval.setInterval(JJLorg/joda/time/Chronology;)V
+org.joda.time.TestMutableInterval_Updates.<init>:39 ALOAD 0
+org.joda.time.TestMutableInterval_Updates.<init>:39 LDC 11688
+org.joda.time.TestMutableInterval_Updates.<init>:39 PUTFIELD org/joda/time/TestMutableInterval_Updates.y2002days J
+org.joda.time.TestMutableInterval_Updates.<init>:49 ALOAD 0
+org.joda.time.TestMutableInterval_Updates.<init>:49 ALOAD 0
+org.joda.time.TestMutableInterval_Updates.<init>:49 GETFIELD org/joda/time/TestMutableInterval_Updates.y2002days J
+org.joda.time.TestMutableInterval_Updates.<init>:49 LDC 31
+org.joda.time.TestMutableInterval_Updates.<init>:49 LADD
+org.joda.time.TestMutableInterval_Updates.<init>:49 LDC 28
+org.joda.time.TestMutableInterval_Updates.<init>:49 LADD
+org.joda.time.TestMutableInterval_Updates.<init>:49 LDC 31
+org.joda.time.TestMutableInterval_Updates.<init>:49 LADD
+org.joda.time.TestMutableInterval_Updates.<init>:49 LDC 30
+org.joda.time.TestMutableInterval_Updates.<init>:49 LADD
+org.joda.time.TestMutableInterval_Updates.<init>:49 LDC 31
+org.joda.time.TestMutableInterval_Updates.<init>:49 LADD
+org.joda.time.TestMutableInterval_Updates.<init>:49 LDC 9
+org.joda.time.TestMutableInterval_Updates.<init>:49 LADD
+org.joda.time.TestMutableInterval_Updates.<init>:49 LCONST_1
+org.joda.time.TestMutableInterval_Updates.<init>:49 LSUB
+org.joda.time.TestMutableInterval_Updates.<init>:49 LDC 86400000
+org.joda.time.TestMutableInterval_Updates.<init>:49 LMUL
+org.joda.time.TestMutableInterval_Updates.<init>:49 PUTFIELD org/joda/time/TestMutableInterval_Updates.TEST_TIME_NOW J
+org.joda.time.TestMutableInterval_Updates.main:69 NEW org/joda/time/TestMutableInterval_Updates
+org.joda.time.TestMutableInterval_Updates.main:69 DUP
+org.joda.time.TestMutableInterval_Updates.main:69 INVOKESPECIAL org/joda/time/TestMutableInterval_Updates.<init>()V
+org.joda.time.TestMutableInterval_Updates.main:69 ASTORE 1
+org.joda.time.TestMutableInterval_Updates.main:75 ALOAD 1
+org.joda.time.TestMutableInterval_Updates.main:75 INVOKEVIRTUAL org/joda/time/TestMutableInterval_Updates.setUp()V
+org.joda.time.TestMutableInterval_Updates.main:75 ALOAD 1
+org.joda.time.TestMutableInterval_Updates.main:75 INVOKEVIRTUAL org/joda/time/TestMutableInterval_Updates.testSetInterval_RI_RI3()V
+org.joda.time.TestMutableInterval_Updates.setUp:121 ALOAD 0
+org.joda.time.TestMutableInterval_Updates.setUp:121 GETFIELD org/joda/time/TestMutableInterval_Updates.TEST_TIME_NOW J
+org.joda.time.TestMutableInterval_Updates.setUp:121 INVOKESTATIC org/joda/time/DateTimeUtils.setCurrentMillisFixed(J)V
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:180 NEW org/joda/time/MutableInterval
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:180 ASTORE 1
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:181 ALOAD 1
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:181 ACONST_NULL
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:181 NEW org/joda/time/Instant
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:181 DUP
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:181 INVOKEVIRTUAL org/joda/time/MutableInterval.setInterval(Lorg/joda/time/ReadableInstant;Lorg/joda/time/ReadableInstant;)V
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:182 ALOAD 0
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:182 GETFIELD org/joda/time/TestMutableInterval_Updates.TEST_TIME_NOW J
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:182 ALOAD 1
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:182 INVOKEVIRTUAL org/joda/time/MutableInterval.getStartMillis()J
+org.joda.time.TestMutableInterval_Updates.testSetInterval_RI_RI3:182 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.BaseInterval.getStartMillis:225 ALOAD 0
+org.joda.time.base.BaseInterval.getStartMillis:225 GETFIELD org/joda/time/base/BaseInterval.iStartMillis J
+org.joda.time.base.BaseInterval.getStartMillis:225 LRETURN
+org.joda.time.base.BaseInterval.setInterval:249 ALOAD 0
+org.joda.time.base.BaseInterval.setInterval:249 LLOAD 1
+org.joda.time.base.BaseInterval.setInterval:249 PUTFIELD org/joda/time/base/BaseInterval.iStartMillis J
+
+Slice consists of 80 bytecode instructions.
+Computation took 3.02 seconds.

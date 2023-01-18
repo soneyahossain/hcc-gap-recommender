@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FunctionCallException.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen</a> &gt; <span class="el_source">FunctionCallException.java</span></div><h1>FunctionCallException.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+
+package org.jaxen;
+
+/** 
+ * Thrown if an exception occurs during the evaluation of a function.
+ * This exception may include a root exception--for instance an 
+ * &lt;code&gt;IOException&lt;/code&gt; if the real problem was failure to 
+ * load an XML document via the XSLT &lt;code&gt;document()&lt;/code&gt; function.
+ *
+ * @author bob mcwhirter (bob @ werken.com)
+ * @author &lt;a href=&quot;mailto:jstrachan@apache.org&quot;&gt;James Strachan&lt;/a&gt;
+ */
+public class FunctionCallException extends JaxenException
+{
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7908649612495640943L;
+
+    /**
+     * Create a new FunctionCallException with the specified detail message.
+     * 
+     * @param message the detail message
+     */
+    public FunctionCallException(String message) {
+<span class="fc" id="L74">        super( message );</span>
+<span class="fc" id="L75">    }</span>
+
+    /**
+     * Create a new FunctionCallException with the specified root cause.
+     * 
+     * @param nestedException the cause of this exception
+     */
+    public FunctionCallException(Throwable nestedException) {
+<span class="fc" id="L83">        super( nestedException );</span>
+<span class="fc" id="L84">    }</span>
+
+    /**
+     * Create a new FunctionCallException with the specified detail message
+     * and root cause.
+     * 
+     * @param message the detail message
+     * @param nestedException the cause of this exception
+     */
+    public FunctionCallException(String message, Exception nestedException) {
+<span class="fc" id="L94">        super( message, nestedException );</span>
+<span class="fc" id="L95">    }</span>
+       
+    /**
+     * &lt;p&gt;
+     * Returns the exception that caused this function call to fail.
+     * Use &lt;code&gt;getCause&lt;/code&gt; instead.
+     * &lt;/p&gt;
+     * 
+     * @return the exception that caused this function call to fail
+     * 
+     * @deprecated replaced by {@link #getCause()}
+     */
+    public Throwable getNestedException() {
+<span class="nc" id="L108">        return getCause();</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

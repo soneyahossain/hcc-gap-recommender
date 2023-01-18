@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BaseDurationField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">BaseDurationField.java</span></div><h1>BaseDurationField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import java.io.Serializable;
+
+import org.joda.time.DurationField;
+import org.joda.time.DurationFieldType;
+
+/**
+ * BaseDurationField provides the common behaviour for DurationField
+ * implementations.
+ * &lt;p&gt;
+ * This class should generally not be used directly by API users. The
+ * DurationField class should be used when different kinds of DurationField
+ * objects are to be referenced.
+ * &lt;p&gt;
+ * BaseDurationField is thread-safe and immutable, and its subclasses must
+ * be as well.
+ *
+ * @author Brian S O'Neill
+ * @see DecoratedDurationField
+ * @since 1.0
+ */
+public abstract class BaseDurationField extends DurationField implements Serializable {
+
+    /** Serialization lock. */
+    private static final long serialVersionUID = -2554245107589433218L;
+
+    /** A descriptive name for the field. */
+    private final DurationFieldType iType;
+
+    protected BaseDurationField(DurationFieldType type) {
+<span class="fc" id="L47">        super();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (type == null) {</span>
+<span class="fc" id="L49">            throw new IllegalArgumentException(&quot;The type must not be null&quot;);</span>
+        }
+<span class="fc" id="L51">        iType = type;</span>
+<span class="fc" id="L52">    }</span>
+
+    public final DurationFieldType getType() {
+<span class="fc" id="L55">        return iType;</span>
+    }
+
+    public final String getName() {
+<span class="fc" id="L59">        return iType.getName();</span>
+    }
+
+    /**
+     * @return true always
+     */
+    public final boolean isSupported() {
+<span class="fc" id="L66">        return true;</span>
+    }
+
+    //------------------------------------------------------------------------
+    /**
+     * Get the value of this field from the milliseconds, which is approximate
+     * if this field is imprecise.
+     *
+     * @param duration  the milliseconds to query, which may be negative
+     * @return the value of the field, in the units of the field, which may be
+     * negative
+     */
+    public int getValue(long duration) {
+<span class="fc" id="L79">        return FieldUtils.safeToInt(getValueAsLong(duration));</span>
+    }
+
+    /**
+     * Get the value of this field from the milliseconds, which is approximate
+     * if this field is imprecise.
+     *
+     * @param duration  the milliseconds to query, which may be negative
+     * @return the value of the field, in the units of the field, which may be
+     * negative
+     */
+    public long getValueAsLong(long duration) {
+<span class="fc" id="L91">        return duration / getUnitMillis();</span>
+    }
+
+    /**
+     * Get the value of this field from the milliseconds relative to an
+     * instant.
+     *
+     * &lt;p&gt;If the milliseconds is positive, then the instant is treated as a
+     * &quot;start instant&quot;. If negative, the instant is treated as an &quot;end
+     * instant&quot;.
+     *
+     * &lt;p&gt;The default implementation returns
+     * &lt;code&gt;Utils.safeToInt(getAsLong(millisDuration, instant))&lt;/code&gt;.
+     * 
+     * @param duration  the milliseconds to query, which may be negative
+     * @param instant  the start instant to calculate relative to
+     * @return the value of the field, in the units of the field, which may be
+     * negative
+     */
+    public int getValue(long duration, long instant) {
+<span class="fc" id="L111">        return FieldUtils.safeToInt(getValueAsLong(duration, instant));</span>
+    }
+
+    /**
+     * Get the millisecond duration of this field from its value, which is
+     * approximate if this field is imprecise.
+     * 
+     * @param value  the value of the field, which may be negative
+     * @return the milliseconds that the field represents, which may be
+     * negative
+     */
+    public long getMillis(int value) {
+<span class="fc" id="L123">        return value * getUnitMillis();  // safe</span>
+    }
+
+    /**
+     * Get the millisecond duration of this field from its value, which is
+     * approximate if this field is imprecise.
+     * 
+     * @param value  the value of the field, which may be negative
+     * @return the milliseconds that the field represents, which may be
+     * negative
+     */
+    public long getMillis(long value) {
+<span class="fc" id="L135">        return FieldUtils.safeMultiply(value, getUnitMillis());</span>
+    }
+
+    // Calculation API
+    //------------------------------------------------------------------------
+    public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L141">        return FieldUtils.safeToInt(getDifferenceAsLong(minuendInstant, subtrahendInstant));</span>
+    }
+
+    //------------------------------------------------------------------------
+    public int compareTo(DurationField otherField) {
+<span class="fc" id="L146">        long otherMillis = otherField.getUnitMillis();</span>
+<span class="fc" id="L147">        long thisMillis = getUnitMillis();</span>
+        // cannot do (thisMillis - otherMillis) as can overflow
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        if (thisMillis == otherMillis) {</span>
+<span class="fc" id="L150">            return 0;</span>
+        }
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        if (thisMillis &lt; otherMillis) {</span>
+<span class="fc" id="L153">            return -1;</span>
+        } else {
+<span class="fc" id="L155">            return 1;</span>
+        }
+    }
+
+    /**
+     * Get a suitable debug string.
+     * 
+     * @return debug string
+     */
+    public String toString() {
+<span class="fc" id="L165">        return &quot;DurationField[&quot; + getName() + ']';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EthiopicChronology.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">EthiopicChronology.java</span></div><h1>EthiopicChronology.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeZone;
+import org.joda.time.field.SkipDateTimeField;
+
+/**
+ * Implements the Ethiopic calendar system, which defines every fourth year as
+ * leap, much like the Julian calendar. The year is broken down into 12 months,
+ * each 30 days in length. An extra period at the end of the year is either 5
+ * or 6 days in length. In this implementation, it is considered a 13th month.
+ * &lt;p&gt;
+ * Year 1 in the Ethiopic calendar began on August 29, 8 CE (Julian), thus
+ * Ethiopic years do not begin at the same time as Julian years. This chronology
+ * is not proleptic, as it does not allow dates before the first Ethiopic year.
+ * &lt;p&gt;
+ * This implementation defines a day as midnight to midnight exactly as per
+ * the ISO chronology. Some references indicate that a coptic day starts at
+ * sunset on the previous ISO day, but this has not been confirmed and is not
+ * implemented.
+ * &lt;p&gt;
+ * EthiopicChronology is thread-safe and immutable.
+ *
+ * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/Ethiopian_calendar&quot;&gt;Wikipedia&lt;/a&gt;
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.2
+ */
+public final class EthiopicChronology extends BasicFixedMonthChronology {
+
+    /** Serialization lock */
+    private static final long serialVersionUID = -5972804258688333942L;
+
+    /**
+     * Constant value for 'Ethiopean Era', equivalent
+     * to the value returned for AD/CE.
+     */
+    public static final int EE = DateTimeConstants.CE;
+
+    /** A singleton era field. */
+<span class="fc" id="L62">    private static final DateTimeField ERA_FIELD = new BasicSingleEraDateTimeField(&quot;EE&quot;);</span>
+
+    /** The lowest year that can be fully supported. */
+    private static final int MIN_YEAR = -292269337;
+
+    /** The highest year that can be fully supported. */
+    private static final int MAX_YEAR = 292272984;
+
+    /** Cache of zone to chronology arrays */
+<span class="fc" id="L71">    private static final ConcurrentHashMap&lt;DateTimeZone, EthiopicChronology[]&gt; cCache = new ConcurrentHashMap&lt;DateTimeZone, EthiopicChronology[]&gt;();</span>
+
+    /** Singleton instance of a UTC EthiopicChronology */
+    private static final EthiopicChronology INSTANCE_UTC;
+    static {
+        // init after static fields
+<span class="fc" id="L77">        INSTANCE_UTC = getInstance(DateTimeZone.UTC);</span>
+<span class="fc" id="L78">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets an instance of the EthiopicChronology.
+     * The time zone of the returned instance is UTC.
+     * 
+     * @return a singleton UTC instance of the chronology
+     */
+    public static EthiopicChronology getInstanceUTC() {
+<span class="fc" id="L88">        return INSTANCE_UTC;</span>
+    }
+
+    /**
+     * Gets an instance of the EthiopicChronology in the default time zone.
+     * 
+     * @return a chronology in the default time zone
+     */
+    public static EthiopicChronology getInstance() {
+<span class="fc" id="L97">        return getInstance(DateTimeZone.getDefault(), 4);</span>
+    }
+
+    /**
+     * Gets an instance of the EthiopicChronology in the given time zone.
+     * 
+     * @param zone  the time zone to get the chronology in, null is default
+     * @return a chronology in the specified time zone
+     */
+    public static EthiopicChronology getInstance(DateTimeZone zone) {
+<span class="fc" id="L107">        return getInstance(zone, 4);</span>
+    }
+
+    /**
+     * Gets an instance of the EthiopicChronology in the given time zone.
+     * 
+     * @param zone  the time zone to get the chronology in, null is default
+     * @param minDaysInFirstWeek  minimum number of days in first week of the year; default is 4
+     * @return a chronology in the specified time zone
+     */
+    public static EthiopicChronology getInstance(DateTimeZone zone, int minDaysInFirstWeek) {
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (zone == null) {</span>
+<span class="fc" id="L119">            zone = DateTimeZone.getDefault();</span>
+        }
+        EthiopicChronology chrono;
+<span class="fc" id="L122">        EthiopicChronology[] chronos = cCache.get(zone);</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">        if (chronos == null) {</span>
+<span class="fc" id="L124">            chronos = new EthiopicChronology[7];</span>
+<span class="fc" id="L125">            EthiopicChronology[] oldChronos = cCache.putIfAbsent(zone, chronos);</span>
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">            if (oldChronos != null) {</span>
+<span class="nc" id="L127">                chronos = oldChronos;</span>
+            }
+        }
+        try {
+<span class="fc" id="L131">            chrono = chronos[minDaysInFirstWeek - 1];</span>
+<span class="nc" id="L132">        } catch (ArrayIndexOutOfBoundsException e) {</span>
+<span class="nc" id="L133">            throw new IllegalArgumentException</span>
+                (&quot;Invalid min days in first week: &quot; + minDaysInFirstWeek);
+<span class="fc" id="L135">        }</span>
+
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        if (chrono == null) {</span>
+<span class="fc" id="L138">            synchronized (chronos) {</span>
+<span class="fc" id="L139">                chrono = chronos[minDaysInFirstWeek - 1];</span>
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">                if (chrono == null) {</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">                    if (zone == DateTimeZone.UTC) {</span>
+                        // First create without a lower limit.
+<span class="fc" id="L143">                        chrono = new EthiopicChronology(null, null, minDaysInFirstWeek);</span>
+                        // Impose lower limit and make another EthiopicChronology.
+<span class="fc" id="L145">                        DateTime lowerLimit = new DateTime(1, 1, 1, 0, 0, 0, 0, chrono);</span>
+<span class="fc" id="L146">                        chrono = new EthiopicChronology</span>
+<span class="fc" id="L147">                            (LimitChronology.getInstance(chrono, lowerLimit, null),</span>
+                             null, minDaysInFirstWeek);
+<span class="fc" id="L149">                    } else {</span>
+<span class="fc" id="L150">                        chrono = getInstance(DateTimeZone.UTC, minDaysInFirstWeek);</span>
+<span class="fc" id="L151">                        chrono = new EthiopicChronology</span>
+<span class="fc" id="L152">                            (ZonedChronology.getInstance(chrono, zone), null, minDaysInFirstWeek);</span>
+                    }
+<span class="fc" id="L154">                    chronos[minDaysInFirstWeek - 1] = chrono;</span>
+                }
+<span class="fc" id="L156">            }</span>
+        }
+<span class="fc" id="L158">        return chrono;</span>
+    }
+
+    // Constructors and instance variables
+    //-----------------------------------------------------------------------
+    /**
+     * Restricted constructor.
+     */
+    EthiopicChronology(Chronology base, Object param, int minDaysInFirstWeek) {
+<span class="fc" id="L167">        super(base, param, minDaysInFirstWeek);</span>
+<span class="fc" id="L168">    }</span>
+
+    /**
+     * Serialization singleton.
+     */
+    private Object readResolve() {
+<span class="nc" id="L174">        Chronology base = getBase();</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        return base == null ?</span>
+<span class="nc" id="L176">                getInstance(DateTimeZone.UTC, getMinimumDaysInFirstWeek()) :</span>
+<span class="nc" id="L177">                    getInstance(base.getZone(), getMinimumDaysInFirstWeek());</span>
+    }
+
+    // Conversion
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the Chronology in the UTC time zone.
+     * 
+     * @return the chronology in UTC
+     */
+    public Chronology withUTC() {
+<span class="fc" id="L188">        return INSTANCE_UTC;</span>
+    }
+
+    /**
+     * Gets the Chronology in a specific time zone.
+     * 
+     * @param zone  the zone to get the chronology in, null is default
+     * @return the chronology
+     */
+    public Chronology withZone(DateTimeZone zone) {
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        if (zone == null) {</span>
+<span class="fc" id="L199">            zone = DateTimeZone.getDefault();</span>
+        }
+<span class="fc bfc" id="L201" title="All 2 branches covered.">        if (zone == getZone()) {</span>
+<span class="fc" id="L202">            return this;</span>
+        }
+<span class="fc" id="L204">        return getInstance(zone);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    @Override
+    boolean isLeapDay(long instant) {
+<span class="pc bpc" id="L210" title="1 of 4 branches missed.">        return dayOfMonth().get(instant) == 6 &amp;&amp; monthOfYear().isLeap(instant);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    long calculateFirstDayOfYearMillis(int year) {
+        // Java epoch is 1970-01-01 Gregorian which is 1962-04-23 Ethiopic.
+        // Calculate relative to the nearest leap year and account for the
+        // difference later.
+
+<span class="fc" id="L219">        int relativeYear = year - 1963;</span>
+        int leapYears;
+<span class="fc bfc" id="L221" title="All 2 branches covered.">        if (relativeYear &lt;= 0) {</span>
+            // Add 3 before shifting right since /4 and &gt;&gt;2 behave differently
+            // on negative numbers.
+<span class="fc" id="L224">            leapYears = (relativeYear + 3) &gt;&gt; 2;</span>
+        } else {
+<span class="fc" id="L226">            leapYears = relativeYear &gt;&gt; 2;</span>
+            // For post 1963 an adjustment is needed as jan1st is before leap day
+<span class="fc bfc" id="L228" title="All 2 branches covered.">            if (!isLeapYear(year)) {</span>
+<span class="fc" id="L229">                leapYears++;</span>
+            }
+        }
+        
+<span class="fc" id="L233">        long millis = (relativeYear * 365L + leapYears)</span>
+            * (long)DateTimeConstants.MILLIS_PER_DAY;
+
+        // Adjust to account for difference between 1963-01-01 and 1962-04-23.
+
+<span class="fc" id="L238">        return millis + (365L - 112) * DateTimeConstants.MILLIS_PER_DAY;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getMinYear() {
+<span class="fc" id="L243">        return MIN_YEAR;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getMaxYear() {
+<span class="fc" id="L248">        return MAX_YEAR;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    long getApproxMillisAtEpochDividedByTwo() {
+<span class="fc" id="L253">        return (1962L * MILLIS_PER_YEAR + 112L * DateTimeConstants.MILLIS_PER_DAY) / 2;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    protected void assemble(Fields fields) {
+<span class="fc bfc" id="L258" title="All 2 branches covered.">        if (getBase() == null) {</span>
+<span class="fc" id="L259">            super.assemble(fields);</span>
+
+            // Ethiopic, like Julian, has no year zero.
+<span class="fc" id="L262">            fields.year = new SkipDateTimeField(this, fields.year);</span>
+<span class="fc" id="L263">            fields.weekyear = new SkipDateTimeField(this, fields.weekyear);</span>
+            
+<span class="fc" id="L265">            fields.era = ERA_FIELD;</span>
+<span class="fc" id="L266">            fields.monthOfYear = new BasicMonthOfYearDateTimeField(this, 13);</span>
+<span class="fc" id="L267">            fields.months = fields.monthOfYear.getDurationField();</span>
+        }
+<span class="fc" id="L269">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

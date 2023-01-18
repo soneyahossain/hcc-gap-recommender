@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ZeroIsMaxDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">ZeroIsMaxDateTimeField.java</span></div><h1>ZeroIsMaxDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+import org.joda.time.ReadablePartial;
+
+/**
+ * Wraps another field such that zero values are replaced with one more than
+ * it's maximum. This is particularly useful for implementing an clockhourOfDay
+ * field, where the midnight value of 0 is replaced with 24.
+ * &lt;p&gt;
+ * ZeroIsMaxDateTimeField is thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public final class ZeroIsMaxDateTimeField extends DecoratedDateTimeField {
+
+    @SuppressWarnings(&quot;unused&quot;)
+    private static final long serialVersionUID = 961749798233026866L;
+
+    /**
+     * Constructor.
+     * 
+     * @param field  the base field
+     * @param type  the field type this field will actually use
+     * @throws IllegalArgumentException if wrapped field's minimum value is not zero
+     */
+    public ZeroIsMaxDateTimeField(DateTimeField field, DateTimeFieldType type) {
+<span class="fc" id="L46">        super(field, type);</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (field.getMinimumValue() != 0) {</span>
+<span class="nc" id="L48">            throw new IllegalArgumentException(&quot;Wrapped field's minumum value must be zero&quot;);</span>
+        }
+<span class="fc" id="L50">    }</span>
+
+    public int get(long instant) {
+<span class="fc" id="L53">        int value = getWrappedField().get(instant);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (value == 0) {</span>
+<span class="fc" id="L55">            value = getMaximumValue();</span>
+        }
+<span class="fc" id="L57">        return value;</span>
+    }
+
+    public long add(long instant, int value) {
+<span class="nc" id="L61">        return getWrappedField().add(instant, value);</span>
+    }
+
+    public long add(long instant, long value) {
+<span class="nc" id="L65">        return getWrappedField().add(instant, value);</span>
+    }
+
+    public long addWrapField(long instant, int value) {
+<span class="nc" id="L69">        return getWrappedField().addWrapField(instant, value);</span>
+    }
+
+    public int[] addWrapField(ReadablePartial instant, int fieldIndex, int[] values, int valueToAdd) {
+<span class="nc" id="L73">        return getWrappedField().addWrapField(instant, fieldIndex, values, valueToAdd);</span>
+    }
+
+    public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="nc" id="L77">        return getWrappedField().getDifference(minuendInstant, subtrahendInstant);</span>
+    }
+
+    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="nc" id="L81">        return getWrappedField().getDifferenceAsLong(minuendInstant, subtrahendInstant);</span>
+    }
+
+    public long set(long instant, int value) {
+<span class="fc" id="L85">        int max = getMaximumValue();</span>
+<span class="fc" id="L86">        FieldUtils.verifyValueBounds(this, value, 1, max);</span>
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        if (value == max) {</span>
+<span class="nc" id="L88">            value = 0;</span>
+        }
+<span class="fc" id="L90">        return getWrappedField().set(instant, value);</span>
+    }
+
+    public boolean isLeap(long instant) {
+<span class="nc" id="L94">        return getWrappedField().isLeap(instant);</span>
+    }
+
+    public int getLeapAmount(long instant) {
+<span class="nc" id="L98">        return getWrappedField().getLeapAmount(instant);</span>
+    }
+
+    public DurationField getLeapDurationField() {
+<span class="fc" id="L102">        return getWrappedField().getLeapDurationField();</span>
+    }
+
+    /**
+     * Always returns 1.
+     * 
+     * @return the minimum value of 1
+     */
+    public int getMinimumValue() {
+<span class="nc" id="L111">        return 1;</span>
+    }
+
+    /**
+     * Always returns 1.
+     * 
+     * @return the minimum value of 1
+     */
+    public int getMinimumValue(long instant) {
+<span class="nc" id="L120">        return 1;</span>
+    }
+
+    /**
+     * Always returns 1.
+     * 
+     * @return the minimum value of 1
+     */
+    public int getMinimumValue(ReadablePartial instant) {
+<span class="nc" id="L129">        return 1;</span>
+    }
+
+    /**
+     * Always returns 1.
+     * 
+     * @return the minimum value of 1
+     */
+    public int getMinimumValue(ReadablePartial instant, int[] values) {
+<span class="nc" id="L138">        return 1;</span>
+    }
+
+    /**
+     * Get the maximum value for the field, which is one more than the wrapped
+     * field's maximum value.
+     * 
+     * @return the maximum value
+     */
+    public int getMaximumValue() {
+<span class="fc" id="L148">        return getWrappedField().getMaximumValue() + 1;</span>
+    }
+
+    /**
+     * Get the maximum value for the field, which is one more than the wrapped
+     * field's maximum value.
+     * 
+     * @return the maximum value
+     */
+    public int getMaximumValue(long instant) {
+<span class="nc" id="L158">        return getWrappedField().getMaximumValue(instant) + 1;</span>
+    }
+
+    /**
+     * Get the maximum value for the field, which is one more than the wrapped
+     * field's maximum value.
+     * 
+     * @return the maximum value
+     */
+    public int getMaximumValue(ReadablePartial instant) {
+<span class="nc" id="L168">        return getWrappedField().getMaximumValue(instant) + 1;</span>
+    }
+
+    /**
+     * Get the maximum value for the field, which is one more than the wrapped
+     * field's maximum value.
+     * 
+     * @return the maximum value
+     */
+    public int getMaximumValue(ReadablePartial instant, int[] values) {
+<span class="nc" id="L178">        return getWrappedField().getMaximumValue(instant, values) + 1;</span>
+    }
+
+    public long roundFloor(long instant) {
+<span class="fc" id="L182">        return getWrappedField().roundFloor(instant);</span>
+    }
+
+    public long roundCeiling(long instant) {
+<span class="nc" id="L186">        return getWrappedField().roundCeiling(instant);</span>
+    }
+
+    public long roundHalfFloor(long instant) {
+<span class="nc" id="L190">        return getWrappedField().roundHalfFloor(instant);</span>
+    }
+
+    public long roundHalfCeiling(long instant) {
+<span class="nc" id="L194">        return getWrappedField().roundHalfCeiling(instant);</span>
+    }
+
+    public long roundHalfEven(long instant) {
+<span class="nc" id="L198">        return getWrappedField().roundHalfEven(instant);</span>
+    }
+
+    public long remainder(long instant) {
+<span class="nc" id="L202">        return getWrappedField().remainder(instant);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

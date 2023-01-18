@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BaseChronology.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">BaseChronology.java</span></div><h1>BaseChronology.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import java.io.Serializable;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DateTimeZone;
+import org.joda.time.DurationField;
+import org.joda.time.DurationFieldType;
+import org.joda.time.IllegalFieldValueException;
+import org.joda.time.ReadablePartial;
+import org.joda.time.ReadablePeriod;
+import org.joda.time.field.FieldUtils;
+import org.joda.time.field.UnsupportedDateTimeField;
+import org.joda.time.field.UnsupportedDurationField;
+
+/**
+ * BaseChronology provides a skeleton implementation for chronology
+ * classes. Many utility methods are defined, but all fields are unsupported.
+ * &lt;p&gt;
+ * BaseChronology is thread-safe and immutable, and all subclasses must be
+ * as well.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public abstract class BaseChronology
+        extends Chronology
+        implements Serializable {
+
+    /** Serialization version. */
+    private static final long serialVersionUID = -7310865996721419676L;
+
+    /**
+     * Restricted constructor.
+     */
+    protected BaseChronology() {
+<span class="fc" id="L54">        super();</span>
+<span class="fc" id="L55">    }</span>
+
+    /**
+     * Returns the DateTimeZone that this Chronology operates in, or null if
+     * unspecified.
+     *
+     * @return DateTimeZone null if unspecified
+     */
+    public abstract DateTimeZone getZone();
+
+    /**
+     * Returns an instance of this Chronology that operates in the UTC time
+     * zone. Chronologies that do not operate in a time zone or are already
+     * UTC must return themselves.
+     *
+     * @return a version of this chronology that ignores time zones
+     */
+    public abstract Chronology withUTC();
+    
+    /**
+     * Returns an instance of this Chronology that operates in any time zone.
+     *
+     * @return a version of this chronology with a specific time zone
+     * @param zone to use, or default if null
+     * @see org.joda.time.chrono.ZonedChronology
+     */
+    public abstract Chronology withZone(DateTimeZone zone);
+
+    /**
+     * Returns a datetime millisecond instant, formed from the given year,
+     * month, day, and millisecond values. The set of given values must refer
+     * to a valid datetime, or else an IllegalArgumentException is thrown.
+     * &lt;p&gt;
+     * The default implementation calls upon separate DateTimeFields to
+     * determine the result. Subclasses are encouraged to provide a more
+     * efficient implementation.
+     *
+     * @param year year to use
+     * @param monthOfYear month to use
+     * @param dayOfMonth day of month to use
+     * @param millisOfDay millisecond to use
+     * @return millisecond instant from 1970-01-01T00:00:00Z
+     */
+    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,
+                                  int millisOfDay)
+        throws IllegalArgumentException
+    {
+<span class="fc" id="L102">        long instant = year().set(0, year);</span>
+<span class="fc" id="L103">        instant = monthOfYear().set(instant, monthOfYear);</span>
+<span class="fc" id="L104">        instant = dayOfMonth().set(instant, dayOfMonth);</span>
+<span class="fc" id="L105">        return millisOfDay().set(instant, millisOfDay);</span>
+    }
+
+    /**
+     * Returns a datetime millisecond instant, formed from the given year,
+     * month, day, hour, minute, second, and millisecond values. The set of
+     * given values must refer to a valid datetime, or else an
+     * IllegalArgumentException is thrown.
+     * &lt;p&gt;
+     * The default implementation calls upon separate DateTimeFields to
+     * determine the result. Subclasses are encouraged to provide a more
+     * efficient implementation.
+     *
+     * @param year year to use
+     * @param monthOfYear month to use
+     * @param dayOfMonth day of month to use
+     * @param hourOfDay hour to use
+     * @param minuteOfHour minute to use
+     * @param secondOfMinute second to use
+     * @param millisOfSecond millisecond to use
+     * @return millisecond instant from 1970-01-01T00:00:00Z
+     */
+    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,
+                                  int hourOfDay, int minuteOfHour,
+                                  int secondOfMinute, int millisOfSecond)
+        throws IllegalArgumentException
+    {
+<span class="fc" id="L132">        long instant = year().set(0, year);</span>
+<span class="fc" id="L133">        instant = monthOfYear().set(instant, monthOfYear);</span>
+<span class="fc" id="L134">        instant = dayOfMonth().set(instant, dayOfMonth);</span>
+<span class="fc" id="L135">        instant = hourOfDay().set(instant, hourOfDay);</span>
+<span class="fc" id="L136">        instant = minuteOfHour().set(instant, minuteOfHour);</span>
+<span class="fc" id="L137">        instant = secondOfMinute().set(instant, secondOfMinute);</span>
+<span class="fc" id="L138">        return millisOfSecond().set(instant, millisOfSecond);</span>
+    }
+
+    /**
+     * Returns a datetime millisecond instant, from from the given instant,
+     * hour, minute, second, and millisecond values. The set of given values
+     * must refer to a valid datetime, or else an IllegalArgumentException is
+     * thrown.
+     * &lt;p&gt;
+     * The default implementation calls upon separate DateTimeFields to
+     * determine the result. Subclasses are encouraged to provide a more
+     * efficient implementation.
+     *
+     * @param instant instant to start from
+     * @param hourOfDay hour to use
+     * @param minuteOfHour minute to use
+     * @param secondOfMinute second to use
+     * @param millisOfSecond millisecond to use
+     * @return millisecond instant from 1970-01-01T00:00:00Z
+     */
+    public long getDateTimeMillis(long instant,
+                                  int hourOfDay, int minuteOfHour,
+                                  int secondOfMinute, int millisOfSecond)
+        throws IllegalArgumentException
+    {
+<span class="fc" id="L163">        instant = hourOfDay().set(instant, hourOfDay);</span>
+<span class="fc" id="L164">        instant = minuteOfHour().set(instant, minuteOfHour);</span>
+<span class="fc" id="L165">        instant = secondOfMinute().set(instant, secondOfMinute);</span>
+<span class="fc" id="L166">        return millisOfSecond().set(instant, millisOfSecond);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Validates whether the fields stored in a partial instant are valid.
+     * &lt;p&gt;
+     * This implementation uses {@link DateTimeField#getMinimumValue(ReadablePartial, int[])}
+     * and {@link DateTimeField#getMaximumValue(ReadablePartial, int[])}.
+     *
+     * @param partial  the partial instant to validate
+     * @param values  the values to validate, not null unless the partial is empty
+     * @throws IllegalArgumentException if the instant is invalid
+     */
+    public void validate(ReadablePartial partial, int[] values) {
+        // check values in standard range, catching really stupid cases like -1
+        // this means that the second check will not hit trouble
+<span class="fc" id="L183">        int size = partial.size();</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L185">            int value = values[i];</span>
+<span class="fc" id="L186">            DateTimeField field = partial.getField(i);</span>
+<span class="fc bfc" id="L187" title="All 2 branches covered.">            if (value &lt; field.getMinimumValue()) {</span>
+<span class="fc" id="L188">                throw new IllegalFieldValueException</span>
+<span class="fc" id="L189">                    (field.getType(), Integer.valueOf(value),</span>
+<span class="fc" id="L190">                     Integer.valueOf(field.getMinimumValue()), null);</span>
+            }
+<span class="fc bfc" id="L192" title="All 2 branches covered.">            if (value &gt; field.getMaximumValue()) {</span>
+<span class="fc" id="L193">                throw new IllegalFieldValueException</span>
+<span class="fc" id="L194">                    (field.getType(), Integer.valueOf(value),</span>
+<span class="fc" id="L195">                     null, Integer.valueOf(field.getMaximumValue()));</span>
+            }
+        }
+        // check values in specific range, catching really odd cases like 30th Feb
+<span class="fc bfc" id="L199" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L200">            int value = values[i];</span>
+<span class="fc" id="L201">            DateTimeField field = partial.getField(i);</span>
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">            if (value &lt; field.getMinimumValue(partial, values)) {</span>
+<span class="nc" id="L203">                throw new IllegalFieldValueException</span>
+<span class="nc" id="L204">                    (field.getType(), Integer.valueOf(value),</span>
+<span class="nc" id="L205">                     Integer.valueOf(field.getMinimumValue(partial, values)), null);</span>
+            }
+<span class="fc bfc" id="L207" title="All 2 branches covered.">            if (value &gt; field.getMaximumValue(partial, values)) {</span>
+<span class="fc" id="L208">                throw new IllegalFieldValueException</span>
+<span class="fc" id="L209">                    (field.getType(), Integer.valueOf(value),</span>
+<span class="fc" id="L210">                     null, Integer.valueOf(field.getMaximumValue(partial, values)));</span>
+            }
+        }
+<span class="fc" id="L213">    }</span>
+
+    /**
+     * Gets the values of a partial from an instant.
+     *
+     * @param partial  the partial instant to use
+     * @param instant  the instant to query
+     * @return the values of the partial extracted from the instant
+     */
+    public int[] get(ReadablePartial partial, long instant) {
+<span class="fc" id="L223">        int size = partial.size();</span>
+<span class="fc" id="L224">        int[] values = new int[size];</span>
+<span class="fc bfc" id="L225" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L226">            values[i] = partial.getFieldType(i).getField(this).get(instant);</span>
+        }
+<span class="fc" id="L228">        return values;</span>
+    }
+
+    /**
+     * Sets the partial into the instant.
+     *
+     * @param partial  the partial instant to use
+     * @param instant  the instant to update
+     * @return the updated instant
+     */
+    public long set(ReadablePartial partial, long instant) {
+<span class="fc bfc" id="L239" title="All 2 branches covered.">        for (int i = 0, isize = partial.size(); i &lt; isize; i++) {</span>
+<span class="fc" id="L240">            instant = partial.getFieldType(i).getField(this).set(instant, partial.getValue(i));</span>
+        }
+<span class="fc" id="L242">        return instant;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the values of a period from an interval.
+     *
+     * @param period  the period instant to use
+     * @param startInstant  the start instant of an interval to query
+     * @param endInstant  the start instant of an interval to query
+     * @return the values of the period extracted from the interval
+     */
+    public int[] get(ReadablePeriod period, long startInstant, long endInstant) {
+<span class="fc" id="L255">        int size = period.size();</span>
+<span class="fc" id="L256">        int[] values = new int[size];</span>
+<span class="fc bfc" id="L257" title="All 2 branches covered.">        if (startInstant != endInstant) {</span>
+<span class="fc bfc" id="L258" title="All 2 branches covered.">            for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L259">                DurationField field = period.getFieldType(i).getField(this);</span>
+<span class="fc" id="L260">                int value = field.getDifference(endInstant, startInstant);</span>
+<span class="fc bfc" id="L261" title="All 2 branches covered.">                if (value != 0) {</span>
+<span class="fc" id="L262">                    startInstant = field.add(startInstant, value);</span>
+                }
+<span class="fc" id="L264">                values[i] = value;</span>
+            }
+        }
+<span class="fc" id="L267">        return values;</span>
+    }
+
+    /**
+     * Gets the values of a period from an interval.
+     *
+     * @param period  the period instant to use
+     * @param duration  the duration to query
+     * @return the values of the period extracted from the duration
+     */
+    public int[] get(ReadablePeriod period, long duration) {
+<span class="fc" id="L278">        int size = period.size();</span>
+<span class="fc" id="L279">        int[] values = new int[size];</span>
+<span class="fc bfc" id="L280" title="All 2 branches covered.">        if (duration != 0) {</span>
+<span class="fc" id="L281">            long current = 0;</span>
+<span class="fc bfc" id="L282" title="All 2 branches covered.">            for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L283">                DurationField field = period.getFieldType(i).getField(this);</span>
+<span class="fc bfc" id="L284" title="All 2 branches covered.">                if (field.isPrecise()) {</span>
+<span class="fc" id="L285">                    int value = field.getDifference(duration, current);</span>
+<span class="fc" id="L286">                    current = field.add(current, value);</span>
+<span class="fc" id="L287">                    values[i] = value;</span>
+                }
+            }
+        }
+<span class="fc" id="L291">        return values;</span>
+    }
+
+    /**
+     * Adds the period to the instant, specifying the number of times to add.
+     *
+     * @param period  the period to add, null means add nothing
+     * @param instant  the instant to add to
+     * @param scalar  the number of times to add
+     * @return the updated instant
+     */
+    public long add(ReadablePeriod period, long instant, int scalar) {
+<span class="pc bpc" id="L303" title="2 of 4 branches missed.">        if (scalar != 0 &amp;&amp; period != null) {</span>
+<span class="fc bfc" id="L304" title="All 2 branches covered.">            for (int i = 0, isize = period.size(); i &lt; isize; i++) {</span>
+<span class="fc" id="L305">                long value = period.getValue(i); // use long to allow for multiplication (fits OK)</span>
+<span class="fc bfc" id="L306" title="All 2 branches covered.">                if (value != 0) {</span>
+<span class="fc" id="L307">                    instant = period.getFieldType(i).getField(this).add(instant, value * scalar);</span>
+                }
+            }
+        }
+<span class="fc" id="L311">        return instant;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Adds the duration to the instant, specifying the number of times to add.
+     *
+     * @param instant  the instant to add to
+     * @param duration  the duration to add
+     * @param scalar  the number of times to add
+     * @return the updated instant
+     */
+    public long add(long instant, long duration, int scalar) {
+<span class="pc bpc" id="L324" title="1 of 4 branches missed.">        if (duration == 0 || scalar == 0) {</span>
+<span class="fc" id="L325">            return instant;</span>
+        }
+<span class="fc" id="L327">        long add = FieldUtils.safeMultiply(duration, scalar);</span>
+<span class="fc" id="L328">        return FieldUtils.safeAdd(instant, add);</span>
+    }
+
+    // Millis
+    //-----------------------------------------------------------------------
+    /**
+     * Get the millis duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField millis() {
+<span class="nc" id="L339">        return UnsupportedDurationField.getInstance(DurationFieldType.millis());</span>
+    }
+
+    /**
+     * Get the millis of second field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField millisOfSecond() {
+<span class="nc" id="L348">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.millisOfSecond(), millis());</span>
+    }
+
+    /**
+     * Get the millis of day field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField millisOfDay() {
+<span class="nc" id="L357">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.millisOfDay(), millis());</span>
+    }
+
+    // Second
+    //-----------------------------------------------------------------------
+    /**
+     * Get the seconds duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField seconds() {
+<span class="nc" id="L368">        return UnsupportedDurationField.getInstance(DurationFieldType.seconds());</span>
+    }
+
+    /**
+     * Get the second of minute field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField secondOfMinute() {
+<span class="nc" id="L377">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.secondOfMinute(), seconds());</span>
+    }
+
+    /**
+     * Get the second of day field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField secondOfDay() {
+<span class="nc" id="L386">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.secondOfDay(), seconds());</span>
+    }
+
+    // Minute
+    //-----------------------------------------------------------------------
+    /**
+     * Get the minutes duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField minutes() {
+<span class="nc" id="L397">        return UnsupportedDurationField.getInstance(DurationFieldType.minutes());</span>
+    }
+
+    /**
+     * Get the minute of hour field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField minuteOfHour() {
+<span class="nc" id="L406">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.minuteOfHour(), minutes());</span>
+    }
+
+    /**
+     * Get the minute of day field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField minuteOfDay() {
+<span class="nc" id="L415">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.minuteOfDay(), minutes());</span>
+    }
+
+    // Hour
+    //-----------------------------------------------------------------------
+    /**
+     * Get the hours duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField hours() {
+<span class="nc" id="L426">        return UnsupportedDurationField.getInstance(DurationFieldType.hours());</span>
+    }
+
+    /**
+     * Get the hour of day (0-23) field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField hourOfDay() {
+<span class="nc" id="L435">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.hourOfDay(), hours());</span>
+    }
+
+    /**
+     * Get the hour of day (offset to 1-24) field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField clockhourOfDay() {
+<span class="nc" id="L444">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.clockhourOfDay(), hours());</span>
+    }
+
+    // Halfday
+    //-----------------------------------------------------------------------
+    /**
+     * Get the halfdays duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField halfdays() {
+<span class="nc" id="L455">        return UnsupportedDurationField.getInstance(DurationFieldType.halfdays());</span>
+    }
+
+    /**
+     * Get the hour of am/pm (0-11) field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField hourOfHalfday() {
+<span class="nc" id="L464">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.hourOfHalfday(), hours());</span>
+    }
+
+    /**
+     * Get the hour of am/pm (offset to 1-12) field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField clockhourOfHalfday() {
+<span class="nc" id="L473">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.clockhourOfHalfday(), hours());</span>
+    }
+
+    /**
+     * Get the AM(0) PM(1) field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField halfdayOfDay() {
+<span class="nc" id="L482">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.halfdayOfDay(), halfdays());</span>
+    }
+
+    // Day
+    //-----------------------------------------------------------------------
+    /**
+     * Get the days duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField days() {
+<span class="nc" id="L493">        return UnsupportedDurationField.getInstance(DurationFieldType.days());</span>
+    }
+
+    /**
+     * Get the day of week field for this chronology.
+     *
+     * &lt;p&gt;DayOfWeek values are defined in
+     * {@link org.joda.time.DateTimeConstants DateTimeConstants}.
+     * They use the ISO definitions, where 1 is Monday and 7 is Sunday.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField dayOfWeek() {
+<span class="nc" id="L506">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.dayOfWeek(), days());</span>
+    }
+
+    /**
+     * Get the day of month field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField dayOfMonth() {
+<span class="nc" id="L515">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.dayOfMonth(), days());</span>
+    }
+
+    /**
+     * Get the day of year field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField dayOfYear() {
+<span class="nc" id="L524">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.dayOfYear(), days());</span>
+    }
+
+    // Week
+    //-----------------------------------------------------------------------
+    /**
+     * Get the weeks duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField weeks() {
+<span class="nc" id="L535">        return UnsupportedDurationField.getInstance(DurationFieldType.weeks());</span>
+    }
+
+    /**
+     * Get the week of a week based year field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField weekOfWeekyear() {
+<span class="nc" id="L544">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.weekOfWeekyear(), weeks());</span>
+    }
+
+    // Weekyear
+    //-----------------------------------------------------------------------
+    /**
+     * Get the weekyears duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField weekyears() {
+<span class="nc" id="L555">        return UnsupportedDurationField.getInstance(DurationFieldType.weekyears());</span>
+    }
+
+    /**
+     * Get the year of a week based year field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField weekyear() {
+<span class="nc" id="L564">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.weekyear(), weekyears());</span>
+    }
+
+    /**
+     * Get the year of a week based year in a century field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField weekyearOfCentury() {
+<span class="nc" id="L573">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.weekyearOfCentury(), weekyears());</span>
+    }
+
+    // Month
+    //-----------------------------------------------------------------------
+    /**
+     * Get the months duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField months() {
+<span class="nc" id="L584">        return UnsupportedDurationField.getInstance(DurationFieldType.months());</span>
+    }
+
+    /**
+     * Get the month of year field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField monthOfYear() {
+<span class="nc" id="L593">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.monthOfYear(), months());</span>
+    }
+
+    // Year
+    //-----------------------------------------------------------------------
+    /**
+     * Get the years duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField years() {
+<span class="nc" id="L604">        return UnsupportedDurationField.getInstance(DurationFieldType.years());</span>
+    }
+
+    /**
+     * Get the year field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField year() {
+<span class="nc" id="L613">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.year(), years());</span>
+    }
+
+    /**
+     * Get the year of era field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField yearOfEra() {
+<span class="nc" id="L622">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.yearOfEra(), years());</span>
+    }
+
+    /**
+     * Get the year of century field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField yearOfCentury() {
+<span class="nc" id="L631">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.yearOfCentury(), years());</span>
+    }
+
+    // Century
+    //-----------------------------------------------------------------------
+    /**
+     * Get the centuries duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField centuries() {
+<span class="nc" id="L642">        return UnsupportedDurationField.getInstance(DurationFieldType.centuries());</span>
+    }
+
+    /**
+     * Get the century of era field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField centuryOfEra() {
+<span class="nc" id="L651">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.centuryOfEra(), centuries());</span>
+    }
+
+    // Era
+    //-----------------------------------------------------------------------
+    /**
+     * Get the eras duration field for this chronology.
+     * 
+     * @return DurationField or UnsupportedDurationField if unsupported
+     */
+    public DurationField eras() {
+<span class="fc" id="L662">        return UnsupportedDurationField.getInstance(DurationFieldType.eras());</span>
+    }
+
+    /**
+     * Get the era field for this chronology.
+     * 
+     * @return DateTimeField or UnsupportedDateTimeField if unsupported
+     */
+    public DateTimeField era() {
+<span class="nc" id="L671">        return UnsupportedDateTimeField.getInstance(DateTimeFieldType.era(), eras());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets a debugging toString.
+     * 
+     * @return a debugging string
+     */
+    public abstract String toString();
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

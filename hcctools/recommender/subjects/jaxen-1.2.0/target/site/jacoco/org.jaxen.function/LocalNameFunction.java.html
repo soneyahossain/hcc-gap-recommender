@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocalNameFunction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.function</a> &gt; <span class="el_source">LocalNameFunction.java</span></div><h1>LocalNameFunction.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+
+package org.jaxen.function;
+
+import java.util.List;
+
+import org.jaxen.Context;
+import org.jaxen.Function;
+import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
+
+/**
+ *   &lt;p&gt;&lt;b&gt;4.1&lt;/b&gt; &lt;code&gt;&lt;i&gt;string&lt;/i&gt; local-name(&lt;i&gt;node-set?&lt;/i&gt;)&lt;/code&gt;&lt;/p&gt; 
+ *  
+ * 
+ * &lt;blockquote cite=&quot;http://www.w3.org/TR/xpath&quot;&gt;
+ * The &lt;b&gt;local-name&lt;/b&gt; function returns the local part of the 
+ * expanded-name of the node in the argument node-set that is first in document order. 
+ * If the argument node-set is empty or the first node has no expanded-name, an 
+ * empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.
+ *
+ * &lt;/blockquote&gt;
+ * 
+ * @author bob mcwhirter (bob @ werken.com)
+ * @see &lt;a href=&quot;https://www.w3.org/TR/xpath#function-local-name&quot; target=&quot;_top&quot;&gt;Section 4.1 of the XPath Specification&lt;/a&gt;
+ */
+public class LocalNameFunction implements Function
+{
+    
+    /**
+     * Create a new &lt;code&gt;LocalNameFunction&lt;/code&gt; object.
+     */
+<span class="fc" id="L79">    public LocalNameFunction() {}</span>
+    
+    /**
+     * Returns the local-name of the specified node or the context node if 
+     * no arguments are provided.
+     * 
+     * @param context the context at the point in the
+     *         expression where the function is called
+     * @param args a &lt;code&gt;List&lt;/code&gt; containing zero or one items
+     * 
+     * @return a &lt;code&gt;String&lt;/code&gt; containing the local-name
+     * 
+     * @throws FunctionCallException if &lt;code&gt;args&lt;/code&gt; has more than one item
+     */
+    public Object call(Context context,
+                       List args) throws FunctionCallException
+    {
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if ( args.size() == 0 )</span>
+        {
+<span class="fc" id="L98">            return evaluate( context.getNodeSet(),</span>
+<span class="fc" id="L99">                             context.getNavigator() ); </span>
+        }
+
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        if ( args.size() == 1 )</span>
+        {
+<span class="fc" id="L104">            return evaluate( args,</span>
+<span class="fc" id="L105">                             context.getNavigator() );</span>
+        }
+
+<span class="fc" id="L108">        throw new FunctionCallException( &quot;local-name() requires zero or one argument.&quot; );</span>
+    }
+
+    /**
+     * Returns the local-name of &lt;code&gt;list.get(0)&lt;/code&gt;
+     * 
+     * @param list a list of nodes
+     * @param nav the &lt;code&gt;Navigator&lt;/code&gt; used to retrieve the local name
+     * 
+     * @return the local-name of &lt;code&gt;list.get(0)&lt;/code&gt;
+     * 
+     * @throws FunctionCallException if &lt;code&gt;list.get(0)&lt;/code&gt; is not a node
+     */
+    public static String evaluate(List list,
+                                  Navigator nav) throws FunctionCallException
+    {
+<span class="fc bfc" id="L124" title="All 2 branches covered.">        if ( ! list.isEmpty() )</span>
+        {            
+<span class="fc" id="L126">            Object first = list.get(0);</span>
+
+<span class="fc bfc" id="L128" title="All 2 branches covered.">            if (first instanceof List)</span>
+            {
+<span class="fc" id="L130">                return evaluate( (List) first,</span>
+                                 nav );
+            }
+<span class="fc bfc" id="L133" title="All 2 branches covered.">            else if ( nav.isElement( first ) )</span>
+            {
+<span class="fc" id="L135">                return nav.getElementName( first );</span>
+            }
+<span class="fc bfc" id="L137" title="All 2 branches covered.">            else if ( nav.isAttribute( first ) )</span>
+            {
+<span class="fc" id="L139">                return nav.getAttributeName( first );</span>
+            }
+<span class="fc bfc" id="L141" title="All 2 branches covered.">            else if ( nav.isProcessingInstruction( first ) )</span>
+            {
+<span class="fc" id="L143">                return nav.getProcessingInstructionTarget( first );</span>
+            }
+<span class="fc bfc" id="L145" title="All 2 branches covered.">            else if ( nav.isNamespace( first ) )</span>
+            {
+<span class="fc" id="L147">                return nav.getNamespacePrefix( first );</span>
+            }
+<span class="fc bfc" id="L149" title="All 2 branches covered.">            else if ( nav.isDocument( first ) )</span>
+            {
+<span class="fc" id="L151">                return &quot;&quot;;</span>
+            }
+<span class="fc bfc" id="L153" title="All 2 branches covered.">            else if ( nav.isComment( first ) )</span>
+            {
+<span class="fc" id="L155">                return &quot;&quot;;</span>
+            }
+<span class="fc bfc" id="L157" title="All 2 branches covered.">            else if ( nav.isText( first ) )</span>
+            {
+<span class="fc" id="L159">                return &quot;&quot;;</span>
+            }
+            else {
+<span class="fc" id="L162">                throw new FunctionCallException(&quot;The argument to the local-name function must be a node-set&quot;);   </span>
+            }
+        }
+
+<span class="fc" id="L166">        return &quot;&quot;;</span>
+    }
+    
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

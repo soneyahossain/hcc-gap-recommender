@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EvaluateFunction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.function.ext</a> &gt; <span class="el_source">EvaluateFunction.java</span></div><h1>EvaluateFunction.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+package org.jaxen.function.ext;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.jaxen.Context;
+import org.jaxen.ContextSupport;
+import org.jaxen.Function;
+import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
+import org.jaxen.XPath;
+import org.jaxen.function.StringFunction;
+
+/**
+ * &lt;code&gt;&lt;i&gt;node-set&lt;/i&gt; evaluate(&lt;i&gt;string&lt;/i&gt;)&lt;/code&gt; 
+ *  
+ * @author Erwin Bolwidt (ejb @ klomp.org)
+ */
+<span class="fc" id="L66">public class EvaluateFunction implements Function</span>
+{
+    public Object call( Context context, List args )
+        throws FunctionCallException
+    {
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if ( args.size() == 1 ) {</span>
+<span class="fc" id="L72">            return evaluate( context, args.get(0));</span>
+        }
+
+<span class="nc" id="L75">        throw new FunctionCallException( &quot;evaluate() requires one argument&quot; );</span>
+    }
+
+    public static List evaluate (Context context, Object arg)
+        throws FunctionCallException
+    {
+<span class="fc" id="L81">        List contextNodes = context.getNodeSet();</span>
+        
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (contextNodes.size() == 0)</span>
+<span class="nc" id="L84">            return Collections.EMPTY_LIST;</span>
+      
+<span class="fc" id="L86">        Navigator nav = context.getNavigator();</span>
+
+        String xpathString;
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        if ( arg instanceof String )</span>
+<span class="fc" id="L90">            xpathString = (String)arg;</span>
+        else
+<span class="fc" id="L92">            xpathString = StringFunction.evaluate(arg, nav);</span>
+
+        try {
+<span class="fc" id="L95">            XPath xpath = nav.parseXPath(xpathString);</span>
+<span class="fc" id="L96">            ContextSupport support = context.getContextSupport();</span>
+<span class="fc" id="L97">            xpath.setVariableContext( support.getVariableContext() );</span>
+<span class="fc" id="L98">            xpath.setFunctionContext( support.getFunctionContext() );</span>
+<span class="fc" id="L99">            xpath.setNamespaceContext( support.getNamespaceContext() );</span>
+<span class="fc" id="L100">            return xpath.selectNodes( context.duplicate() );</span>
+        }
+<span class="nc" id="L102">        catch ( org.jaxen.saxpath.SAXPathException e ) {</span>
+<span class="nc" id="L103">            throw new FunctionCallException(e.toString());</span>
+        }
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

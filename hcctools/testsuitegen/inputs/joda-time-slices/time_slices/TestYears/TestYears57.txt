@@ -1,0 +1,65 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.8% done, time left: unknown  1.9% done, time left: unknown  2.0% done, time left: unknown  2.3% done, time left: unknown  2.5% done, time left: unknown  3.0% done, time left: unknown  4.0% done, time left: unknown  4.6% done, time left:   0:00:18    4.8% done, time left:   0:00:22  4.9% done, time left:   0:00:26  5.0% done, time left:   0:00:30  6.1% done, time left:   0:00:29  7.7% done, time left:   0:00:28  7.9% done, time left:   0:00:26  7.9% done, time left:   0:00:24  9.7% done, time left:   0:00:24 10.4% done, time left:   0:00:23 10.4% done, time left:   0:00:22 10.4% done, time left:   0:00:20 10.7% done, time left:   0:00:19 13.4% done, time left:   0:00:18 15.8% done, time left:   0:00:15 18.1% done, time left:   0:00:13 19.9% done, time left:   0:00:11 23.3% done, time left:   0:00:08 26.6% done, time left:   0:00:06 28.8% done, time left:   0:00:05 31.6% done, time left:   0:00:04 34.9% done, time left:   0:00:03 38.3% done, time left:   0:00:03 41.8% done, time left:   0:00:02 45.8% done, time left:   0:00:01 49.8% done, time left:   0:00:01 53.5% done, time left:   0:00:01 54.9% done, time left:   0:00:00 57.6% done, time left:   0:00:01 60.0% done, time left:   0:00:01 63.2% done, time left:   0:00:01 63.7% done, time left:   0:00:00 63.9% done, time left:   0:00:00 65.2% done, time left:   0:00:00 68.3% done, time left:   0:00:00 70.5% done, time left:   0:00:00 72.3% done, time left:   0:00:00 73.0% done, time left:   0:00:00 77.8% done, time left:   0:00:00 82.6% done, time left:   0:00:00 85.7% done, time left:   0:00:00 89.0% done, time left:   0:00:00 92.1% done, time left:   0:00:00 95.3% done, time left:   0:00:00 98.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestYears.testPlus_Years:244:*]:
+org.joda.time.TestYears.main:52 INVOKEVIRTUAL org/joda/time/TestYears.testPlus_Years()V
+org.joda.time.TestYears.testPlus_Years:239 ICONST_2
+org.joda.time.TestYears.testPlus_Years:239 INVOKESTATIC org/joda/time/Years.years(I)Lorg/joda/time/Years;
+org.joda.time.TestYears.testPlus_Years:239 ASTORE 1
+org.joda.time.TestYears.testPlus_Years:240 ICONST_3
+org.joda.time.TestYears.testPlus_Years:240 INVOKESTATIC org/joda/time/Years.years(I)Lorg/joda/time/Years;
+org.joda.time.TestYears.testPlus_Years:240 ASTORE 2
+org.joda.time.TestYears.testPlus_Years:241 ALOAD 1
+org.joda.time.TestYears.testPlus_Years:241 ALOAD 2
+org.joda.time.TestYears.testPlus_Years:241 INVOKEVIRTUAL org/joda/time/Years.plus(Lorg/joda/time/Years;)Lorg/joda/time/Years;
+org.joda.time.TestYears.testPlus_Years:241 ASTORE 3
+org.joda.time.TestYears.testPlus_Years:244 LDC 5
+org.joda.time.TestYears.testPlus_Years:244 ALOAD 3
+org.joda.time.TestYears.testPlus_Years:244 INVOKEVIRTUAL org/joda/time/Years.getYears()I
+org.joda.time.TestYears.testPlus_Years:244 I2L
+org.joda.time.TestYears.testPlus_Years:244 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.Years.years:72 ILOAD 0
+org.joda.time.Years.years:72 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, -2147483648 => L5, 0 => L0, 2147483647 => L4* => L6)
+org.joda.time.Years.years:78 GETSTATIC org/joda/time/Years.TWO Lorg/joda/time/Years;
+org.joda.time.Years.years:78 ARETURN
+org.joda.time.Years.years:80 GETSTATIC org/joda/time/Years.THREE Lorg/joda/time/Years;
+org.joda.time.Years.years:80 ARETURN
+org.joda.time.Years.years:86 NEW org/joda/time/Years
+org.joda.time.Years.years:86 DUP
+org.joda.time.Years.years:86 ILOAD 0
+org.joda.time.Years.years:86 INVOKESPECIAL org/joda/time/Years.<init>(I)V
+org.joda.time.Years.years:86 ARETURN
+org.joda.time.Years.<init>:175 ALOAD 0
+org.joda.time.Years.<init>:175 ILOAD 1
+org.joda.time.Years.<init>:175 INVOKESPECIAL org/joda/time/base/BaseSingleFieldPeriod.<init>(I)V
+org.joda.time.Years.getYears:213 ALOAD 0
+org.joda.time.Years.getYears:213 INVOKEVIRTUAL org/joda/time/Years.getValue()I
+org.joda.time.Years.getYears:213 IRETURN
+org.joda.time.Years.plus:227 ILOAD 1
+org.joda.time.Years.plus:227 IFNE L0 true false
+org.joda.time.Years.plus:230 ALOAD 0
+org.joda.time.Years.plus:230 INVOKEVIRTUAL org/joda/time/Years.getValue()I
+org.joda.time.Years.plus:230 ILOAD 1
+org.joda.time.Years.plus:230 INVOKESTATIC org/joda/time/field/FieldUtils.safeAdd(II)I
+org.joda.time.Years.plus:230 INVOKESTATIC org/joda/time/Years.years(I)Lorg/joda/time/Years;
+org.joda.time.Years.plus:230 ARETURN
+org.joda.time.Years.plus:243 ALOAD 1
+org.joda.time.Years.plus:243 IFNONNULL L0 true false
+org.joda.time.Years.plus:246 ALOAD 0
+org.joda.time.Years.plus:246 ALOAD 1
+org.joda.time.Years.plus:246 INVOKEVIRTUAL org/joda/time/Years.getValue()I
+org.joda.time.Years.plus:246 INVOKEVIRTUAL org/joda/time/Years.plus(I)Lorg/joda/time/Years;
+org.joda.time.Years.plus:246 ARETURN
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ILOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 PUTFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+org.joda.time.field.FieldUtils.safeAdd:67 ILOAD 0
+org.joda.time.field.FieldUtils.safeAdd:67 ILOAD 1
+org.joda.time.field.FieldUtils.safeAdd:67 IADD
+org.joda.time.field.FieldUtils.safeAdd:67 ISTORE 2
+org.joda.time.field.FieldUtils.safeAdd:73 ILOAD 2
+org.joda.time.field.FieldUtils.safeAdd:73 IRETURN
+
+Slice consists of 60 bytecode instructions.
+Computation took 6.04 seconds.

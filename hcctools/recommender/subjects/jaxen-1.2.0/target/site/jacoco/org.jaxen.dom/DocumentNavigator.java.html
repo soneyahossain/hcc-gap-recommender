@@ -1,0 +1,982 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DocumentNavigator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.dom</a> &gt; <span class="el_source">DocumentNavigator.java</span></div><h1>DocumentNavigator.java</h1><pre class="source lang-java linenums">package org.jaxen.dom;
+
+/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2005 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+import org.jaxen.*;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+/**
+ * Interface for navigating around the W3C DOM Level 2 object model.
+ *
+ * &lt;p&gt;
+ * This class is not intended for direct usage, but is
+ * used by the Jaxen engine during evaluation.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;This class implements the {@link org.jaxen.DefaultNavigator} interface
+ * for the Jaxen XPath library.  This adapter allows the Jaxen
+ * library to be used to execute XPath queries against any object tree
+ * that implements the DOM level 2 interfaces.&lt;/p&gt;
+ *
+ * &lt;p&gt;Note: DOM level 2 does not include a node representing an XPath
+ * namespace node.  This navigator will return namespace nodes
+ * as instances of the custom {@link NamespaceNode} class, and
+ * users will have to check result sets to locate and isolate
+ * these.&lt;/p&gt;
+ *
+ * @author David Megginson
+ * @author James Strachan
+ * @see XPath
+ * @see NamespaceNode
+ */
+public class DocumentNavigator extends DefaultNavigator {
+
+
+    ////////////////////////////////////////////////////////////////////
+    // Constants.
+    ////////////////////////////////////////////////////////////////////
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 8460943068889528115L;
+
+<span class="fc" id="L99">    private final static DocumentNavigator SINGLETON = new DocumentNavigator();</span>
+
+
+    ////////////////////////////////////////////////////////////////////
+    // Constructor.
+    ////////////////////////////////////////////////////////////////////
+
+
+    /**
+     * Default constructor.
+     */
+<span class="fc" id="L110">    public DocumentNavigator() {</span>
+<span class="fc" id="L111">    }</span>
+
+
+    /**
+     * Get a constant DocumentNavigator for efficiency.
+     *
+     * @return a constant instance of a DocumentNavigator.
+     */
+    public static Navigator getInstance() {
+<span class="fc" id="L120">        return SINGLETON;</span>
+    }
+
+
+    ////////////////////////////////////////////////////////////////////
+    // Implementation of org.jaxen.DefaultNavigator.
+    ////////////////////////////////////////////////////////////////////
+
+
+    /**
+     * Get an iterator over all of this node's children.
+     *
+     * @param contextNode the context node for the child axis.
+     * @return a possibly-empty iterator (not null)
+     */
+    public Iterator getChildAxisIterator(Object contextNode) {
+<span class="fc" id="L136">        Node node = (Node) contextNode;</span>
+
+<span class="fc bfc" id="L138" title="All 4 branches covered.">        if (node.getNodeType() == Node.ELEMENT_NODE || node.getNodeType() == Node.DOCUMENT_NODE) {</span>
+<span class="fc" id="L139">            return new NodeIterator((Node) contextNode) {</span>
+                protected Node getFirstNode(Node node) {
+<span class="fc" id="L141">                    return node.getFirstChild();</span>
+                }
+
+                protected Node getNextNode(Node node) {
+<span class="fc" id="L145">                    return node.getNextSibling();</span>
+                }
+            };
+        }
+
+<span class="fc" id="L150">        return JaxenConstants.EMPTY_ITERATOR;</span>
+
+    }
+
+
+    /**
+     * Get a (single-member) iterator over this node's parent.
+     *
+     * @param contextNode the context node for the parent axis
+     * @return a possibly-empty iterator (not null)
+     */
+    public Iterator getParentAxisIterator(Object contextNode) {
+<span class="fc" id="L162">        Node node = (Node) contextNode;</span>
+
+<span class="fc bfc" id="L164" title="All 2 branches covered.">        if (node.getNodeType() == Node.ATTRIBUTE_NODE) {</span>
+<span class="fc" id="L165">            return new NodeIterator(node) {</span>
+                protected Node getFirstNode(Node n) {
+                    // We can assume castability here because we've already
+                    // tested the node type.
+<span class="fc" id="L169">                    return ((Attr) n).getOwnerElement();</span>
+                }
+
+                protected Node getNextNode(Node n) {
+<span class="fc" id="L173">                    return null;</span>
+                }
+            };
+        } else {
+<span class="fc" id="L177">            return new NodeIterator(node) {</span>
+                protected Node getFirstNode(Node n) {
+<span class="fc" id="L179">                    return n.getParentNode();</span>
+                }
+
+                protected Node getNextNode(Node n) {
+<span class="fc" id="L183">                    return null;</span>
+                }
+            };
+        }
+    }
+
+
+    /**
+     * Return the XPath parent of the supplied DOM node.
+     * XPath has slightly different definition of parent than DOM does.
+     * In particular, the parent of an attribute is not null.
+     *
+     * @param child the child node
+     * @return the parent of the specified node; or null if
+     * the node does not have a parent
+     */
+    public Object getParentNode(Object child) {
+<span class="fc" id="L200">        Node node = (Node) child;</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">        if (node.getNodeType() == Node.ATTRIBUTE_NODE) {</span>
+<span class="fc" id="L202">            return ((Attr) node).getOwnerElement();</span>
+        }
+<span class="fc" id="L204">        return node.getParentNode();</span>
+    }
+
+
+    /**
+     * Get an iterator over all following siblings.
+     *
+     * @param contextNode the context node for the sibling iterator
+     * @return a possibly-empty iterator (not null)
+     */
+    public Iterator getFollowingSiblingAxisIterator(Object contextNode) {
+<span class="fc" id="L215">        return new NodeIterator((Node) contextNode) {</span>
+            protected Node getFirstNode(Node node) {
+<span class="fc" id="L217">                return getNextNode(node);</span>
+            }
+
+            protected Node getNextNode(Node node) {
+<span class="fc" id="L221">                return node.getNextSibling();</span>
+            }
+        };
+    }
+
+
+    /**
+     * Get an iterator over all preceding siblings.
+     *
+     * @param contextNode the context node for the preceding sibling axis
+     * @return a possibly-empty iterator (not null)
+     */
+    public Iterator getPrecedingSiblingAxisIterator(Object contextNode) {
+<span class="fc" id="L234">        return new NodeIterator((Node) contextNode) {</span>
+            protected Node getFirstNode(Node node) {
+<span class="fc" id="L236">                return getNextNode(node);</span>
+            }
+
+            protected Node getNextNode(Node node) {
+<span class="fc" id="L240">                return node.getPreviousSibling();</span>
+            }
+        };
+    }
+
+
+    /**
+     * Get an iterator over all following nodes, depth-first.
+     *
+     * @param contextNode the context node for the following axis
+     * @return a possibly-empty iterator (not null)
+     */
+    public Iterator getFollowingAxisIterator(Object contextNode) {
+<span class="fc" id="L253">        return new NodeIterator((Node) contextNode) {</span>
+            protected Node getFirstNode(Node node) {
+<span class="fc bfc" id="L255" title="All 2 branches covered.">                if (node == null) {</span>
+<span class="fc" id="L256">                    return null;</span>
+                } else {
+<span class="fc" id="L258">                    Node sibling = node.getNextSibling();</span>
+<span class="fc bfc" id="L259" title="All 2 branches covered.">                    if (sibling == null) {</span>
+<span class="fc" id="L260">                        return getFirstNode(node.getParentNode());</span>
+                    } else {
+<span class="fc" id="L262">                        return sibling;</span>
+                    }
+                }
+            }
+
+            protected Node getNextNode(Node node) {
+<span class="pc bpc" id="L268" title="1 of 2 branches missed.">                if (node == null) {</span>
+<span class="nc" id="L269">                    return null;</span>
+                } else {
+<span class="fc" id="L271">                    Node n = node.getFirstChild();</span>
+<span class="fc bfc" id="L272" title="All 2 branches covered.">                    if (n == null) n = node.getNextSibling();</span>
+<span class="fc bfc" id="L273" title="All 2 branches covered.">                    if (n == null) return getFirstNode(node.getParentNode());</span>
+<span class="fc" id="L274">                    else return n;</span>
+                }
+            }
+        };
+    }
+
+
+    /**
+     * Get an iterator over all attributes.
+     *
+     * @param contextNode the context node for the attribute axis
+     * @return a possibly-empty iterator (not null)
+     */
+    public Iterator getAttributeAxisIterator(Object contextNode) {
+<span class="fc bfc" id="L288" title="All 2 branches covered.">        if (isElement(contextNode)) {</span>
+<span class="fc" id="L289">            return new AttributeIterator((Node) contextNode);</span>
+        } else {
+<span class="fc" id="L291">            return JaxenConstants.EMPTY_ITERATOR;</span>
+        }
+    }
+
+
+    /**
+     * Get an iterator over all declared namespaces.
+     *
+     * &lt;p&gt;Note: this iterator is not live: it takes a snapshot
+     * and that snapshot remains static during the life of
+     * the iterator (i.e. it won't reflect subsequent changes
+     * to the DOM).&lt;/p&gt;
+     *
+     * &lt;p&gt;
+     * In the event that the DOM is inconsistent; for instance a
+     * &lt;code&gt;pre:foo&lt;/code&gt; element is declared by DOM to be in the
+     * http://www.a.com/ namespace but also has an
+     * &lt;code&gt;xmlns:pre=&quot;http://www.b.com&quot;&lt;/code&gt; attribute; then only
+     * one of the namespaces will be counted. This will be the intrinsic
+     * namespace of the &lt;code&gt;Element&lt;/code&gt; or &lt;code&gt;Attr&lt;/code&gt; object
+     * rather than the one provide by the contradictory namespace
+     * declaration attribute. In the event of a contradiction between two
+     * attributes on the same element--e.g. &lt;code&gt;pre:foo&lt;/code&gt; in the
+     * http://www.a.com/ namespace and &lt;code&gt;pre:bar&lt;/code&gt; in the
+     * http://www.b.com/ namespace--it is undefined which namespace
+     * will be returned.
+     * &lt;/p&gt;
+     *
+     * @param contextNode the context node for the namespace axis
+     * @return a possibly-empty iterator (not null)
+     */
+    public Iterator getNamespaceAxisIterator(Object contextNode) {
+        // Only elements have namespace nodes
+<span class="fc bfc" id="L324" title="All 2 branches covered.">        if (isElement(contextNode)) {</span>
+
+<span class="fc" id="L326">            HashMap nsMap = new HashMap();</span>
+
+            // Starting at the current node, walk
+            // up to the root, noting the namespace
+            // declarations in scope.
+<span class="fc" id="L331">            for (Node n = (Node) contextNode;</span>
+<span class="fc bfc" id="L332" title="All 2 branches covered.">                 n != null;</span>
+<span class="fc" id="L333">                 n = n.getParentNode()) {</span>
+
+                // 1. Look for the namespace of the element itself
+<span class="fc" id="L336">                String myNamespace = n.getNamespaceURI();</span>
+<span class="pc bpc" id="L337" title="1 of 4 branches missed.">                if (myNamespace != null &amp;&amp; !&quot;&quot;.equals(myNamespace)) {</span>
+<span class="fc" id="L338">                    String myPrefix = n.getPrefix();</span>
+<span class="pc bpc" id="L339" title="1 of 2 branches missed.">                    if (!nsMap.containsKey(myPrefix)) {</span>
+<span class="fc" id="L340">                        NamespaceNode ns = new NamespaceNode((Node) contextNode, myPrefix, myNamespace);</span>
+<span class="fc" id="L341">                        nsMap.put(myPrefix, ns);</span>
+                    }
+                }
+
+<span class="fc bfc" id="L345" title="All 2 branches covered.">                if (n.hasAttributes()) {</span>
+<span class="fc" id="L346">                    NamedNodeMap atts = n.getAttributes();</span>
+<span class="fc" id="L347">                    int length = atts.getLength();</span>
+                    // 2. Look for namespaces of attributes
+<span class="fc bfc" id="L349" title="All 2 branches covered.">                    for (int i = 0; i &lt; length; i++) {</span>
+<span class="fc" id="L350">                        Attr att = (Attr) atts.item(i);</span>
+                        // Work around Crimson bug by testing URI rather than name
+<span class="fc" id="L352">                        String attributeNamespace = att.getNamespaceURI();</span>
+<span class="fc bfc" id="L353" title="All 2 branches covered.">                        if (&quot;http://www.w3.org/2000/xmlns/&quot;.equals(attributeNamespace)) {</span>
+<span class="fc bfc" id="L354" title="All 2 branches covered.">                        } else if (attributeNamespace != null) {</span>
+<span class="fc" id="L355">                            String prefix = att.getPrefix();</span>
+<span class="fc" id="L356">                            NamespaceNode ns =</span>
+                                    new NamespaceNode((Node) contextNode, prefix, attributeNamespace);
+                            // Add only if there's not a closer declaration in force.
+<span class="fc bfc" id="L359" title="All 2 branches covered.">                            if (!nsMap.containsKey(prefix)) nsMap.put(prefix, ns);</span>
+
+                        }
+                    }
+
+                    // 3. Look for namespace declaration attributes
+<span class="fc bfc" id="L365" title="All 2 branches covered.">                    for (int i = 0; i &lt; length; i++) {</span>
+<span class="fc" id="L366">                        Attr att = (Attr) atts.item(i);</span>
+                        // work around crimson bug by testing URI rather than name
+<span class="fc" id="L368">                        String attributeNamespace = att.getNamespaceURI();</span>
+<span class="fc bfc" id="L369" title="All 2 branches covered.">                        if (&quot;http://www.w3.org/2000/xmlns/&quot;.equals(attributeNamespace)) {</span>
+<span class="fc" id="L370">                            NamespaceNode ns =</span>
+                                    new NamespaceNode((Node) contextNode, att);
+                            // Add only if there's not a closer declaration in force.
+<span class="fc" id="L373">                            String name = ns.getNodeName();</span>
+<span class="fc bfc" id="L374" title="All 2 branches covered.">                            if (!nsMap.containsKey(name)) nsMap.put(name, ns);</span>
+                        }
+                    }
+
+                }
+
+            }
+            // Section 5.4 of the XPath rec requires
+            // this to be present.
+<span class="fc" id="L383">            nsMap.put(&quot;xml&quot;,</span>
+                    new
+                            NamespaceNode((Node) contextNode,
+                            &quot;xml&quot;,
+                            &quot;http://www.w3.org/XML/1998/namespace&quot;));
+
+            // An empty default namespace cancels
+            // any previous default.
+<span class="fc" id="L391">            NamespaceNode defaultNS = (NamespaceNode) nsMap.get(&quot;&quot;);</span>
+<span class="pc bpc" id="L392" title="3 of 4 branches missed.">            if (defaultNS != null &amp;&amp; defaultNS.getNodeValue().length() == 0) {</span>
+<span class="nc" id="L393">                nsMap.remove(&quot;&quot;);</span>
+            }
+<span class="fc" id="L395">            return nsMap.values().iterator();</span>
+        } else {
+<span class="fc" id="L397">            return JaxenConstants.EMPTY_ITERATOR;</span>
+        }
+    }
+
+    /**
+     * Returns a parsed form of the given XPath string, which will be suitable
+     * for queries on DOM documents.
+     *
+     * @param xpath the XPath expression
+     * @return a parsed form of the given XPath string
+     * @throws org.jaxen.saxpath.SAXPathException if the string is syntactically incorrect
+     */
+    public XPath parseXPath(String xpath) throws org.jaxen.saxpath.SAXPathException {
+<span class="fc" id="L410">        return new DOMXPath(xpath);</span>
+    }
+
+    /**
+     * Get the top-level document node.
+     *
+     * @param contextNode any node in the document
+     * @return the root node
+     */
+    public Object getDocumentNode(Object contextNode) {
+<span class="fc bfc" id="L420" title="All 2 branches covered.">        if (isDocument(contextNode)) return contextNode;</span>
+<span class="fc" id="L421">        else return ((Node) contextNode).getOwnerDocument();</span>
+    }
+
+    // Why are there separate methods for getElementNamespaceURI and 
+    // getAttributeNamespaceURI when they do exactly the same thing?
+    // This should be combined in a future version.
+
+    /**
+     * Get the namespace URI of an element.
+     *
+     * @param element the target node
+     * @return a string (possibly empty) if the node is an element,
+     * and null otherwise
+     */
+    public String getElementNamespaceUri(Object element) {
+        try {
+<span class="fc" id="L437">            Node node = (Node) element;</span>
+<span class="fc bfc" id="L438" title="All 2 branches covered.">            if (node.getNodeType() == Node.ELEMENT_NODE) {</span>
+<span class="fc" id="L439">                return node.getNamespaceURI();</span>
+            }
+<span class="nc" id="L441">        } catch (ClassCastException ex) {</span>
+<span class="fc" id="L442">        }</span>
+<span class="fc" id="L443">        return null;</span>
+    }
+
+
+    /**
+     * Get the local name of an element.
+     *
+     * @param element the target node
+     * @return a string representing the unqualified local name
+     * if the node is an element, or null otherwise
+     */
+    public String getElementName(Object element) {
+<span class="fc bfc" id="L455" title="All 2 branches covered.">        if (isElement(element)) {</span>
+<span class="fc" id="L456">            String name = ((Node) element).getLocalName();</span>
+<span class="fc bfc" id="L457" title="All 2 branches covered.">            if (name == null) name = ((Node) element).getNodeName();</span>
+<span class="fc" id="L458">            return name;</span>
+        }
+<span class="fc" id="L460">        return null;</span>
+    }
+
+
+    /**
+     * Get the qualified name of an element.
+     *
+     * @param element the target node
+     * @return a string representing the qualified (i.e. possibly
+     * prefixed) name if the argument is an element, or null otherwise
+     */
+    public String getElementQName(Object element) {
+        try {
+<span class="fc" id="L473">            Node node = (Node) element;</span>
+<span class="fc bfc" id="L474" title="All 2 branches covered.">            if (node.getNodeType() == Node.ELEMENT_NODE) {</span>
+<span class="fc" id="L475">                return node.getNodeName();</span>
+            }
+<span class="nc" id="L477">        } catch (ClassCastException ex) {</span>
+<span class="fc" id="L478">        }</span>
+<span class="fc" id="L479">        return null;</span>
+    }
+
+
+    /**
+     * Get the namespace URI of an attribute.
+     *
+     * @param attribute the target node
+     * @return the namespace name of the specified node
+     */
+    public String getAttributeNamespaceUri(Object attribute) {
+        try {
+<span class="fc" id="L491">            Node node = (Node) attribute;</span>
+<span class="fc bfc" id="L492" title="All 2 branches covered.">            if (node.getNodeType() == Node.ATTRIBUTE_NODE) {</span>
+<span class="fc" id="L493">                return node.getNamespaceURI();</span>
+            }
+<span class="nc" id="L495">        } catch (ClassCastException ex) {</span>
+<span class="fc" id="L496">        }</span>
+<span class="fc" id="L497">        return null;</span>
+    }
+
+
+    /**
+     * Get the local name of an attribute.
+     *
+     * @param attribute the target node
+     * @return a string representing the unqualified local name
+     * if the node is an attribute, or null otherwise
+     */
+    public String getAttributeName(Object attribute) {
+<span class="fc bfc" id="L509" title="All 2 branches covered.">        if (isAttribute(attribute)) {</span>
+<span class="fc" id="L510">            String name = ((Node) attribute).getLocalName();</span>
+<span class="fc bfc" id="L511" title="All 2 branches covered.">            if (name == null) name = ((Node) attribute).getNodeName();</span>
+<span class="fc" id="L512">            return name;</span>
+        }
+<span class="fc" id="L514">        return null;</span>
+    }
+
+
+    /**
+     * Get the qualified name of an attribute.
+     *
+     * @param attribute the target node
+     * @return a string representing the qualified (i.e. possibly
+     * prefixed) name if the argument is an attribute, or null otherwise
+     */
+    public String getAttributeQName(Object attribute) {
+        try {
+<span class="fc" id="L527">            Node node = (Node) attribute;</span>
+<span class="fc bfc" id="L528" title="All 2 branches covered.">            if (node.getNodeType() == Node.ATTRIBUTE_NODE) {</span>
+<span class="fc" id="L529">                return node.getNodeName();</span>
+            }
+<span class="nc" id="L531">        } catch (ClassCastException ex) {</span>
+<span class="fc" id="L532">        }</span>
+<span class="fc" id="L533">        return null;</span>
+    }
+
+
+    /**
+     * Test if a node is a top-level document.
+     *
+     * @param object the target node
+     * @return true if the node is the document root, false otherwise
+     */
+    public boolean isDocument(Object object) {
+<span class="fc bfc" id="L544" title="All 2 branches covered.">        return (object instanceof Node) &amp;&amp;</span>
+<span class="fc bfc" id="L545" title="All 2 branches covered.">                (((Node) object).getNodeType() == Node.DOCUMENT_NODE);</span>
+    }
+
+
+    /**
+     * Test if a node is a namespace.
+     *
+     * @param object the target node
+     * @return true if the node is a namespace, false otherwise
+     */
+    public boolean isNamespace(Object object) {
+<span class="fc" id="L556">        return (object instanceof NamespaceNode);</span>
+    }
+
+
+    /**
+     * Test if a node is an element.
+     *
+     * @param object the target node
+     * @return true if the node is an element, false otherwise
+     */
+    public boolean isElement(Object object) {
+<span class="fc bfc" id="L567" title="All 2 branches covered.">        return (object instanceof Node) &amp;&amp;</span>
+<span class="fc bfc" id="L568" title="All 2 branches covered.">                (((Node) object).getNodeType() == Node.ELEMENT_NODE);</span>
+    }
+
+
+    /**
+     * Test if a node is an attribute. &lt;code&gt;xmlns&lt;/code&gt; and
+     * &lt;code&gt;xmlns:pre&lt;/code&gt; attributes do not count as attributes
+     * for the purposes of XPath.
+     *
+     * @param object the target node
+     * @return true if the node is an attribute, false otherwise
+     */
+    public boolean isAttribute(Object object) {
+<span class="fc bfc" id="L581" title="All 2 branches covered.">        return (object instanceof Node) &amp;&amp;</span>
+<span class="fc bfc" id="L582" title="All 2 branches covered.">                (((Node) object).getNodeType() == Node.ATTRIBUTE_NODE)</span>
+<span class="pc bpc" id="L583" title="1 of 2 branches missed.">                &amp;&amp; !&quot;http://www.w3.org/2000/xmlns/&quot;.equals(((Node) object).getNamespaceURI());</span>
+    }
+
+
+    /**
+     * Test if a node is a comment.
+     *
+     * @param object the target node
+     * @return true if the node is a comment, false otherwise
+     */
+    public boolean isComment(Object object) {
+<span class="fc bfc" id="L594" title="All 2 branches covered.">        return (object instanceof Node) &amp;&amp;</span>
+<span class="fc bfc" id="L595" title="All 2 branches covered.">                (((Node) object).getNodeType() == Node.COMMENT_NODE);</span>
+    }
+
+
+    /**
+     * Test if a node is plain text.
+     *
+     * @param object the target node
+     * @return true if the node is a text node, false otherwise
+     */
+    public boolean isText(Object object) {
+<span class="fc bfc" id="L606" title="All 2 branches covered.">        if (object instanceof Node) {</span>
+<span class="fc bfc" id="L607" title="All 2 branches covered.">            switch (((Node) object).getNodeType()) {</span>
+                case Node.TEXT_NODE:
+                case Node.CDATA_SECTION_NODE:
+<span class="fc" id="L610">                    return true;</span>
+                default:
+<span class="fc" id="L612">                    return false;</span>
+            }
+        } else {
+<span class="fc" id="L615">            return false;</span>
+        }
+    }
+
+
+    /**
+     * Test if a node is a processing instruction.
+     *
+     * @param object the target node
+     * @return true if the node is a processing instruction, false otherwise
+     */
+    public boolean isProcessingInstruction(Object object) {
+<span class="fc bfc" id="L627" title="All 2 branches covered.">        return (object instanceof Node) &amp;&amp;</span>
+<span class="fc bfc" id="L628" title="All 2 branches covered.">                (((Node) object).getNodeType() == Node.PROCESSING_INSTRUCTION_NODE);</span>
+    }
+
+
+    /**
+     * Get the string value of an element node.
+     *
+     * @param object the target node
+     * @return the text inside the node and its descendants if the node
+     * is an element, null otherwise
+     */
+    public String getElementStringValue(Object object) {
+<span class="pc bpc" id="L640" title="1 of 2 branches missed.">        if (isElement(object)) {</span>
+<span class="fc" id="L641">            return getStringValue((Node) object, new StringBuffer()).toString();</span>
+        } else {
+<span class="nc" id="L643">            return null;</span>
+        }
+    }
+
+
+    /**
+     * Construct a node's string value recursively.
+     *
+     * @param node   the current node
+     * @param buffer the buffer for building the text
+     * @return the buffer passed as a parameter (for convenience)
+     */
+    private StringBuffer getStringValue(Node node, StringBuffer buffer) {
+<span class="fc bfc" id="L656" title="All 2 branches covered.">        if (isText(node)) {</span>
+<span class="fc" id="L657">            buffer.append(node.getNodeValue());</span>
+        } else {
+<span class="fc" id="L659">            NodeList children = node.getChildNodes();</span>
+<span class="fc" id="L660">            int length = children.getLength();</span>
+<span class="fc bfc" id="L661" title="All 2 branches covered.">            for (int i = 0; i &lt; length; i++) {</span>
+<span class="fc" id="L662">                getStringValue(children.item(i), buffer);</span>
+            }
+        }
+<span class="fc" id="L665">        return buffer;</span>
+    }
+
+
+    /**
+     * Get the string value of an attribute node.
+     *
+     * @param object the target node
+     * @return the text of the attribute value if the node is an
+     * attribute, null otherwise
+     */
+    public String getAttributeStringValue(Object object) {
+<span class="pc bpc" id="L677" title="1 of 2 branches missed.">        if (isAttribute(object)) return ((Node) object).getNodeValue();</span>
+<span class="nc" id="L678">        else return null;</span>
+    }
+
+
+    /**
+     * Get the string value of text.
+     *
+     * @param object the target node
+     * @return the string of text if the node is text, null otherwise
+     */
+    public String getTextStringValue(Object object) {
+<span class="pc bpc" id="L689" title="1 of 2 branches missed.">        if (isText(object)) return ((Node) object).getNodeValue();</span>
+<span class="nc" id="L690">        else return null;</span>
+    }
+
+
+    /**
+     * Get the string value of a comment node.
+     *
+     * @param object the target node
+     * @return the text of the comment if the node is a comment, null otherwise
+     */
+    public String getCommentStringValue(Object object) {
+<span class="pc bpc" id="L701" title="1 of 2 branches missed.">        if (isComment(object)) return ((Node) object).getNodeValue();</span>
+<span class="nc" id="L702">        else return null;</span>
+    }
+
+
+    /**
+     * Get the string value of a namespace node.
+     *
+     * @param object the target node
+     * @return the namespace URI as a (possibly empty) string if the
+     * node is a namespace node, null otherwise
+     */
+    public String getNamespaceStringValue(Object object) {
+<span class="pc bpc" id="L714" title="1 of 2 branches missed.">        if (isNamespace(object)) return ((NamespaceNode) object).getNodeValue();</span>
+<span class="nc" id="L715">        else return null;</span>
+    }
+
+    /**
+     * Get the prefix value of a namespace node.
+     *
+     * @param object the target node
+     * @return the namespace prefix a (possibly empty) string if the
+     * node is a namespace node, null otherwise
+     */
+    public String getNamespacePrefix(Object object) {
+<span class="pc bpc" id="L726" title="1 of 2 branches missed.">        if (isNamespace(object)) return ((NamespaceNode) object).getLocalName();</span>
+<span class="nc" id="L727">        else return null;</span>
+    }
+
+    /**
+     * Translate a namespace prefix to a URI.
+     *
+     * @param prefix  the namespace prefix
+     * @param element the namespace context
+     * @return the namespace URI bound to the prefix in the scope of &lt;code&gt;element&lt;/code&gt;;
+     * null if the prefix is not bound
+     */
+    public String translateNamespacePrefixToUri(String prefix, Object element) {
+<span class="nc" id="L739">        Iterator it = getNamespaceAxisIterator(element);</span>
+<span class="nc bnc" id="L740" title="All 2 branches missed.">        while (it.hasNext()) {</span>
+<span class="nc" id="L741">            NamespaceNode ns = (NamespaceNode) it.next();</span>
+<span class="nc bnc" id="L742" title="All 2 branches missed.">            if (prefix.equals(ns.getNodeName())) return ns.getNodeValue();</span>
+<span class="nc" id="L743">        }</span>
+<span class="nc" id="L744">        return null;</span>
+    }
+
+    /**
+     * Use JAXP to load a namespace aware document from a given URI.
+     *
+     * @param uri the URI of the document to load
+     * @return the new W3C DOM Level 2 Document instance
+     * @throws FunctionCallException containing a nested exception
+     *                               if a problem occurs trying to parse the given document
+     * @todo Possibly we could make the factory a thread local.
+     */
+    public Object getDocument(String uri) throws FunctionCallException {
+        try {
+            // We really do need to construct a new factory here each time.
+            // DocumentBuilderFactory is not guaranteed to be thread safe? 
+<span class="fc" id="L760">            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span>
+<span class="fc" id="L761">            factory.setNamespaceAware(true);</span>
+<span class="fc" id="L762">            DocumentBuilder builder = factory.newDocumentBuilder();</span>
+<span class="fc" id="L763">            return builder.parse(uri);</span>
+<span class="nc" id="L764">        } catch (ParserConfigurationException e) {</span>
+<span class="nc" id="L765">            throw new FunctionCallException(&quot;JAXP setup error in document() function: &quot; + e.getMessage(), e);</span>
+<span class="nc" id="L766">        } catch (SAXException e) {</span>
+<span class="nc" id="L767">            throw new FunctionCallException(&quot;XML error in document() function: &quot; + e.getMessage(), e);</span>
+<span class="nc" id="L768">        } catch (IOException e) {</span>
+<span class="nc" id="L769">            throw new FunctionCallException(&quot;I/O error in document() function: &quot; + e.getMessage(), e);</span>
+        }
+
+    }
+
+    /**
+     * Get the target of a processing instruction node.
+     *
+     * @param obj the processing instruction
+     * @return the target of the processing instruction
+     * @throws ClassCastException if obj is not a processing instruction
+     */
+    public String getProcessingInstructionTarget(Object obj) {
+<span class="fc bfc" id="L782" title="All 2 branches covered.">        if (isProcessingInstruction(obj)) {</span>
+<span class="fc" id="L783">            ProcessingInstruction pi = (ProcessingInstruction) obj;</span>
+<span class="fc" id="L784">            return pi.getTarget();</span>
+        }
+<span class="fc" id="L786">        throw new ClassCastException(obj + &quot; is not a processing instruction&quot;);</span>
+    }
+
+    /**
+     * Get the data of a processing instruction node.
+     *
+     * @param obj the processing instruction
+     * @return the target of the processing instruction
+     * @throws ClassCastException if obj is not a processing instruction
+     */
+    public String getProcessingInstructionData(Object obj) {
+<span class="fc bfc" id="L797" title="All 2 branches covered.">        if (isProcessingInstruction(obj)) {</span>
+<span class="fc" id="L798">            ProcessingInstruction pi = (ProcessingInstruction) obj;</span>
+<span class="fc" id="L799">            return pi.getData();</span>
+        }
+<span class="fc" id="L801">        throw new ClassCastException(obj + &quot; is not a processing instruction&quot;);</span>
+    }
+
+
+    ////////////////////////////////////////////////////////////////////
+    // Inner class: iterate over DOM nodes.
+    ////////////////////////////////////////////////////////////////////
+
+
+    // FIXME: needs to recurse into
+    // DocumentFragment and EntityReference
+    // to use their children.
+
+    /**
+     * Returns the element whose ID is given by elementId.
+     * If no such element exists, returns null.
+     * Attributes with the name &quot;ID&quot; are not of type ID unless so defined.
+     * Attribute types are only known if when the parser understands DTD's or
+     * schemas that declare attributes of type ID. When JAXP is used, you
+     * must call &lt;code&gt;setValidating(true)&lt;/code&gt; on the
+     * DocumentBuilderFactory.
+     *
+     * @param object    a node from the document in which to look for the id
+     * @param elementId id to look for
+     * @return element whose ID is given by elementId, or null if no such
+     * element exists in the document or if the implementation
+     * does not know about attribute types
+     * @throws ClassCastException if object is not an &lt;code&gt;org.w3c.dom.Node&lt;/code&gt; object
+     * @see javax.xml.parsers.DocumentBuilderFactory
+     */
+    public Object getElementById(Object object, String elementId) {
+<span class="fc" id="L832">        Document doc = (Document) getDocumentNode(object);</span>
+<span class="pc bpc" id="L833" title="1 of 2 branches missed.">        if (doc != null) return doc.getElementById(elementId);</span>
+<span class="nc" id="L834">        else return null;</span>
+    }
+
+
+    ////////////////////////////////////////////////////////////////////
+    // Inner class: iterate over a DOM named node map.
+    ////////////////////////////////////////////////////////////////////
+
+    /**
+     * An iterator over an attribute list.
+     */
+    private static class AttributeIterator implements Iterator {
+
+        private NamedNodeMap map;
+        private int pos;
+<span class="fc" id="L849">        private int lastAttribute = -1;</span>
+
+        /**
+         * Constructor.
+         *
+         * @param parent the parent DOM element for the attributes.
+         */
+<span class="fc" id="L856">        AttributeIterator(Node parent) {</span>
+<span class="fc" id="L857">            this.map = parent.getAttributes();</span>
+<span class="fc" id="L858">            this.pos = 0;</span>
+<span class="fc bfc" id="L859" title="All 2 branches covered.">            for (int i = this.map.getLength() - 1; i &gt;= 0; i--) {</span>
+<span class="fc" id="L860">                Node node = map.item(i);</span>
+<span class="fc bfc" id="L861" title="All 2 branches covered.">                if (!&quot;http://www.w3.org/2000/xmlns/&quot;.equals(node.getNamespaceURI())) {</span>
+<span class="fc" id="L862">                    this.lastAttribute = i;</span>
+<span class="fc" id="L863">                    break;</span>
+                }
+            }
+<span class="fc" id="L866">        }</span>
+
+        public boolean hasNext() {
+<span class="fc bfc" id="L869" title="All 2 branches covered.">            return pos &lt;= lastAttribute;</span>
+        }
+
+        public Object next() {
+<span class="fc" id="L873">            Node attr = map.item(pos++);</span>
+<span class="pc bpc" id="L874" title="1 of 2 branches missed.">            if (attr == null) throw new NoSuchElementException();</span>
+<span class="pc bpc" id="L875" title="1 of 2 branches missed.">            else if (&quot;http://www.w3.org/2000/xmlns/&quot;.equals(attr.getNamespaceURI())) {</span>
+                // XPath doesn't consider namespace declarations to be attributes
+                // so skip it and go to the next one
+<span class="nc" id="L878">                return next();</span>
+<span class="fc" id="L879">            } else return attr;</span>
+        }
+
+        public void remove() {
+<span class="nc" id="L883">            throw new UnsupportedOperationException();</span>
+        }
+
+    }
+
+    /**
+     * A generic iterator over DOM nodes.
+     *
+     * &lt;p&gt;Concrete subclasses must implement the {@link #getFirstNode}
+     * and {@link #getNextNode} methods for a specific iteration
+     * strategy.&lt;/p&gt;
+     */
+    abstract class NodeIterator
+            implements Iterator {
+
+
+        private Node node;
+
+        /**
+         * Constructor.
+         *
+         * @param contextNode the starting node
+         */
+<span class="fc" id="L906">        public NodeIterator(Node contextNode) {</span>
+<span class="fc" id="L907">            node = getFirstNode(contextNode);</span>
+<span class="fc bfc" id="L908" title="All 2 branches covered.">            while (!isXPathNode(node)) {</span>
+<span class="fc" id="L909">                node = getNextNode(node);</span>
+            }
+<span class="fc" id="L911">        }</span>
+
+        public boolean hasNext() {
+<span class="fc bfc" id="L914" title="All 2 branches covered.">            return (node != null);</span>
+        }
+
+        public Object next() {
+<span class="pc bpc" id="L918" title="1 of 2 branches missed.">            if (node == null) throw new NoSuchElementException();</span>
+<span class="fc" id="L919">            Node ret = node;</span>
+<span class="fc" id="L920">            node = getNextNode(node);</span>
+<span class="pc bpc" id="L921" title="1 of 2 branches missed.">            while (!isXPathNode(node)) {</span>
+<span class="nc" id="L922">                node = getNextNode(node);</span>
+            }
+<span class="fc" id="L924">            return ret;</span>
+        }
+
+        public void remove() {
+<span class="nc" id="L928">            throw new UnsupportedOperationException();</span>
+        }
+
+        /**
+         * Get the first node for iteration.
+         *
+         * &lt;p&gt;This method must derive an initial node for iteration
+         * from a context node.&lt;/p&gt;
+         *
+         * @param contextNode the starting node
+         * @return the first node in the iteration
+         * @see #getNextNode
+         */
+        protected abstract Node getFirstNode(Node contextNode);
+
+        /**
+         * Get the next node for iteration.
+         *
+         * &lt;p&gt;This method must locate a following node from the
+         * current context node.&lt;/p&gt;
+         *
+         * @param contextNode the current node in the iteration
+         * @return the following node in the iteration, or null
+         * if there is none
+         * @see #getFirstNode
+         */
+        protected abstract Node getNextNode(Node contextNode);
+
+        /**
+         * Test whether a DOM node is usable by XPath.
+         *
+         * @param node the DOM node to test
+         * @return true if the node is usable, false if it should be skipped
+         */
+        private boolean isXPathNode(Node node) {
+            // null is usable, because it means end
+<span class="fc bfc" id="L964" title="All 2 branches covered.">            if (node == null) return true;</span>
+
+<span class="fc bfc" id="L966" title="All 2 branches covered.">            switch (node.getNodeType()) {</span>
+                case Node.DOCUMENT_FRAGMENT_NODE:
+                case Node.DOCUMENT_TYPE_NODE:
+                case Node.ENTITY_NODE:
+                case Node.ENTITY_REFERENCE_NODE:
+                case Node.NOTATION_NODE:
+<span class="fc" id="L972">                    return false;</span>
+                default:
+<span class="fc" id="L974">                    return true;</span>
+            }
+        }
+    }
+
+}
+
+// end of DocumentNavigator.java
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BaseSingleFieldPeriod.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.base</a> &gt; <span class="el_source">BaseSingleFieldPeriod.java</span></div><h1>BaseSingleFieldPeriod.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.base;
+
+import java.io.Serializable;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.DurationField;
+import org.joda.time.DurationFieldType;
+import org.joda.time.MutablePeriod;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
+import org.joda.time.ReadableInstant;
+import org.joda.time.ReadablePartial;
+import org.joda.time.ReadablePeriod;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.field.FieldUtils;
+
+/**
+ * BaseSingleFieldPeriod is an abstract implementation of ReadablePeriod that
+ * manages a single duration field, such as days or minutes.
+ * &lt;p&gt;
+ * This class should generally not be used directly by API users.
+ * The {@link ReadablePeriod} interface should be used when different 
+ * kinds of period objects are to be referenced.
+ * &lt;p&gt;
+ * BaseSingleFieldPeriod subclasses may be mutable and not thread-safe.
+ *
+ * @author Stephen Colebourne
+ * @since 1.4
+ */
+public abstract class BaseSingleFieldPeriod
+        implements ReadablePeriod, Comparable&lt;BaseSingleFieldPeriod&gt;, Serializable {
+
+    /** Serialization version. */
+    private static final long serialVersionUID = 9386874258972L;
+    /** The start of 1972. */
+    private static final long START_1972 = 2L * 365L * 86400L * 1000L;
+
+    /** The period in the units of this period. */
+    private volatile int iPeriod;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Calculates the number of whole units between the two specified datetimes.
+     *
+     * @param start  the start instant, validated to not be null
+     * @param end  the end instant, validated to not be null
+     * @param field  the field type to use, must not be null
+     * @return the period
+     * @throws IllegalArgumentException if the instants are null or invalid
+     */
+    protected static int between(ReadableInstant start, ReadableInstant end, DurationFieldType field) {
+<span class="fc bfc" id="L68" title="All 4 branches covered.">        if (start == null || end == null) {</span>
+<span class="fc" id="L69">            throw new IllegalArgumentException(&quot;ReadableInstant objects must not be null&quot;);</span>
+        }
+<span class="fc" id="L71">        Chronology chrono = DateTimeUtils.getInstantChronology(start);</span>
+<span class="fc" id="L72">        int amount = field.getField(chrono).getDifference(end.getMillis(), start.getMillis());</span>
+<span class="fc" id="L73">        return amount;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Calculates the number of whole units between the two specified partial datetimes.
+     * &lt;p&gt;
+     * The two partials must contain the same fields, for example you can specify
+     * two &lt;code&gt;LocalDate&lt;/code&gt; objects.
+     *
+     * @param start  the start partial date, validated to not be null
+     * @param end  the end partial date, validated to not be null
+     * @param zeroInstance  the zero instance constant, must not be null
+     * @return the period
+     * @throws IllegalArgumentException if the partials are null or invalid
+     */
+    protected static int between(ReadablePartial start, ReadablePartial end, ReadablePeriod zeroInstance) {
+<span class="fc bfc" id="L90" title="All 4 branches covered.">        if (start == null || end == null) {</span>
+<span class="fc" id="L91">            throw new IllegalArgumentException(&quot;ReadablePartial objects must not be null&quot;);</span>
+        }
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (start.size() != end.size()) {</span>
+<span class="fc" id="L94">            throw new IllegalArgumentException(&quot;ReadablePartial objects must have the same set of fields&quot;);</span>
+        }
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        for (int i = 0, isize = start.size(); i &lt; isize; i++) {</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">            if (start.getFieldType(i) != end.getFieldType(i)) {</span>
+<span class="fc" id="L98">                throw new IllegalArgumentException(&quot;ReadablePartial objects must have the same set of fields&quot;);</span>
+            }
+        }
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        if (DateTimeUtils.isContiguous(start) == false) {</span>
+<span class="fc" id="L102">            throw new IllegalArgumentException(&quot;ReadablePartial objects must be contiguous&quot;);</span>
+        }
+<span class="fc" id="L104">        Chronology chrono = DateTimeUtils.getChronology(start.getChronology()).withUTC();</span>
+<span class="fc" id="L105">        int[] values = chrono.get(zeroInstance, chrono.set(start, START_1972), chrono.set(end, START_1972));</span>
+<span class="fc" id="L106">        return values[0];</span>
+    }
+
+    /**
+     * Creates a new instance representing the number of complete standard length units
+     * in the specified period.
+     * &lt;p&gt;
+     * This factory method converts all fields from the period to hours using standardised
+     * durations for each field. Only those fields which have a precise duration in
+     * the ISO UTC chronology can be converted.
+     * &lt;ul&gt;
+     * &lt;li&gt;One week consists of 7 days.
+     * &lt;li&gt;One day consists of 24 hours.
+     * &lt;li&gt;One hour consists of 60 minutes.
+     * &lt;li&gt;One minute consists of 60 seconds.
+     * &lt;li&gt;One second consists of 1000 milliseconds.
+     * &lt;/ul&gt;
+     * Months and Years are imprecise and periods containing these values cannot be converted.
+     *
+     * @param period  the period to get the number of hours from, must not be null
+     * @param millisPerUnit  the number of milliseconds in one standard unit of this period
+     * @throws IllegalArgumentException if the period contains imprecise duration values
+     */
+    protected static int standardPeriodIn(ReadablePeriod period, long millisPerUnit) {
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        if (period == null) {</span>
+<span class="fc" id="L131">            return 0;</span>
+        }
+<span class="fc" id="L133">        Chronology iso = ISOChronology.getInstanceUTC();</span>
+<span class="fc" id="L134">        long duration = 0L;</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">        for (int i = 0; i &lt; period.size(); i++) {</span>
+<span class="fc" id="L136">            int value = period.getValue(i);</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">            if (value != 0) {</span>
+<span class="fc" id="L138">                DurationField field = period.getFieldType(i).getField(iso);</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">                if (field.isPrecise() == false) {</span>
+<span class="fc" id="L140">                    throw new IllegalArgumentException(</span>
+<span class="fc" id="L141">                            &quot;Cannot convert period to duration as &quot; + field.getName() +</span>
+                            &quot; is not precise in the period &quot; + period);
+                }
+<span class="fc" id="L144">                duration = FieldUtils.safeAdd(duration, FieldUtils.safeMultiply(field.getUnitMillis(), value));</span>
+            }
+        }
+<span class="fc" id="L147">        return FieldUtils.safeToInt(duration / millisPerUnit);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a new instance representing the specified period.
+     *
+     * @param period  the period to represent
+     */
+    protected BaseSingleFieldPeriod(int period) {
+<span class="fc" id="L157">        super();</span>
+<span class="fc" id="L158">        iPeriod = period;</span>
+<span class="fc" id="L159">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the amount of this period.
+     *
+     * @return the period value
+     */
+    protected int getValue() {
+<span class="fc" id="L168">        return iPeriod;</span>
+    }
+
+    /**
+     * Sets the amount of this period.
+     * To make a subclass immutable you must declare it final, or block this method.
+     *
+     * @param value  the period value
+     */
+    protected void setValue(int value) {
+<span class="fc" id="L178">        iPeriod = value;</span>
+<span class="fc" id="L179">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the single duration field type.
+     *
+     * @return the duration field type, not null
+     */
+    public abstract DurationFieldType getFieldType();
+
+    /**
+     * Gets the period type which matches the duration field type.
+     *
+     * @return the period type, not null
+     */
+    public abstract PeriodType getPeriodType();
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the number of fields that this period supports, which is one.
+     *
+     * @return the number of fields supported, which is one
+     */
+    public int size() {
+<span class="fc" id="L203">        return 1;</span>
+    }
+
+    /**
+     * Gets the field type at the specified index.
+     * &lt;p&gt;
+     * The only index supported by this period is zero which returns the
+     * field type of this class.
+     *
+     * @param index  the index to retrieve, which must be zero
+     * @return the field at the specified index
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    public DurationFieldType getFieldType(int index) {
+<span class="fc bfc" id="L217" title="All 2 branches covered.">        if (index != 0) {</span>
+<span class="fc" id="L218">            throw new IndexOutOfBoundsException(String.valueOf(index));</span>
+        }
+<span class="fc" id="L220">        return getFieldType();</span>
+    }
+
+    /**
+     * Gets the value at the specified index.
+     * &lt;p&gt;
+     * The only index supported by this period is zero.
+     *
+     * @param index  the index to retrieve, which must be zero
+     * @return the value of the field at the specified index
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    public int getValue(int index) {
+<span class="fc bfc" id="L233" title="All 2 branches covered.">        if (index != 0) {</span>
+<span class="fc" id="L234">            throw new IndexOutOfBoundsException(String.valueOf(index));</span>
+        }
+<span class="fc" id="L236">        return getValue();</span>
+    }
+
+    /**
+     * Gets the value of a duration field represented by this period.
+     * &lt;p&gt;
+     * If the field type specified does not match the type used by this class
+     * then zero is returned.
+     *
+     * @param type  the field type to query, null returns zero
+     * @return the value of that field, zero if field not supported
+     */
+    public int get(DurationFieldType type) {
+<span class="fc bfc" id="L249" title="All 2 branches covered.">        if (type == getFieldType()) {</span>
+<span class="fc" id="L250">            return getValue();</span>
+        }
+<span class="fc" id="L252">        return 0;</span>
+    }
+
+    /**
+     * Checks whether the duration field specified is supported by this period.
+     *
+     * @param type  the type to check, may be null which returns false
+     * @return true if the field is supported
+     */
+    public boolean isSupported(DurationFieldType type) {
+<span class="fc bfc" id="L262" title="All 2 branches covered.">        return (type == getFieldType());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get this period as an immutable &lt;code&gt;Period&lt;/code&gt; object.
+     * The period will use &lt;code&gt;PeriodType.standard()&lt;/code&gt;.
+     *
+     * @return a &lt;code&gt;Period&lt;/code&gt; representing the same number of days
+     */
+    public Period toPeriod() {
+<span class="fc" id="L273">        return Period.ZERO.withFields(this);</span>
+    }
+
+    /**
+     * Get this object as a &lt;code&gt;MutablePeriod&lt;/code&gt;.
+     * &lt;p&gt;
+     * This will always return a new &lt;code&gt;MutablePeriod&lt;/code&gt; with the same fields.
+     * The period will use &lt;code&gt;PeriodType.standard()&lt;/code&gt;.
+     * 
+     * @return a MutablePeriod using the same field set and values
+     */
+    public MutablePeriod toMutablePeriod() {
+<span class="fc" id="L285">        MutablePeriod period = new MutablePeriod();</span>
+<span class="fc" id="L286">        period.add(this);</span>
+<span class="fc" id="L287">        return period;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Compares this object with the specified object for equality based on the
+     * value of each field. All ReadablePeriod instances are accepted, but only
+     * those with a matching &lt;code&gt;PeriodType&lt;/code&gt; can return true.
+     *
+     * @param period  a readable period to check against
+     * @return true if all the field values are equal, false if
+     *  not or the period is null or of an incorrect type
+     */
+    public boolean equals(Object period) {
+<span class="fc bfc" id="L301" title="All 2 branches covered.">        if (this == period) {</span>
+<span class="fc" id="L302">            return true;</span>
+        }
+<span class="fc bfc" id="L304" title="All 2 branches covered.">        if (period instanceof ReadablePeriod == false) {</span>
+<span class="fc" id="L305">            return false;</span>
+        }
+<span class="fc" id="L307">        ReadablePeriod other = (ReadablePeriod) period;</span>
+<span class="fc bfc" id="L308" title="All 4 branches covered.">        return (other.getPeriodType() == getPeriodType() &amp;&amp; other.getValue(0) == getValue());</span>
+    }
+
+    /**
+     * Gets a hash code for the period as defined by ReadablePeriod.
+     *
+     * @return a hash code
+     */
+    public int hashCode() {
+<span class="fc" id="L317">        int total = 17;</span>
+<span class="fc" id="L318">        total = 27 * total + getValue();</span>
+<span class="fc" id="L319">        total = 27 * total + getFieldType().hashCode();</span>
+<span class="fc" id="L320">        return total;</span>
+    }
+
+    /**
+     * Compares this period to another object of the same class.
+     *
+     * @param other  the other period, must not be null
+     * @return zero if equal, positive if greater, negative if less
+     * @throws NullPointerException if the other period is null
+     * @throws ClassCastException if the other period is of a different type
+     */
+    public int compareTo(BaseSingleFieldPeriod other) {
+<span class="pc bpc" id="L332" title="1 of 2 branches missed.">        if (other.getClass() != getClass()) {</span>
+<span class="nc" id="L333">            throw new ClassCastException(getClass() + &quot; cannot be compared to &quot; + other.getClass());</span>
+        }
+<span class="fc" id="L335">        int otherValue = other.getValue();</span>
+<span class="fc" id="L336">        int thisValue = getValue();</span>
+<span class="fc bfc" id="L337" title="All 2 branches covered.">        if (thisValue &gt; otherValue) {</span>
+<span class="fc" id="L338">            return 1;</span>
+        }
+<span class="fc bfc" id="L340" title="All 2 branches covered.">        if (thisValue &lt; otherValue) {</span>
+<span class="fc" id="L341">            return -1;</span>
+        }
+<span class="fc" id="L343">        return 0;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

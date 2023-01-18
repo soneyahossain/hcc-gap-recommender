@@ -1,0 +1,56 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  0.7% done, time left: unknown  1.5% done, time left: unknown  2.1% done, time left: unknown  3.0% done, time left: unknown  3.7% done, time left:   0:00:14    4.2% done, time left:   0:00:15  4.7% done, time left:   0:00:16  5.3% done, time left:   0:00:16  5.8% done, time left:   0:00:16  6.5% done, time left:   0:00:16  7.4% done, time left:   0:00:17  8.6% done, time left:   0:00:17  8.7% done, time left:   0:00:17 10.4% done, time left:   0:00:18 12.4% done, time left:   0:00:17 14.4% done, time left:   0:00:16 16.3% done, time left:   0:00:14 18.3% done, time left:   0:00:13 20.1% done, time left:   0:00:11 22.3% done, time left:   0:00:10 24.5% done, time left:   0:00:09 26.8% done, time left:   0:00:08 29.1% done, time left:   0:00:07 31.5% done, time left:   0:00:06 33.7% done, time left:   0:00:05 35.9% done, time left:   0:00:04 38.2% done, time left:   0:00:04 40.4% done, time left:   0:00:03 42.4% done, time left:   0:00:03 44.5% done, time left:   0:00:03 46.6% done, time left:   0:00:03 48.4% done, time left:   0:00:02 49.7% done, time left:   0:00:02 49.7% done, time left:   0:00:01 49.8% done, time left:   0:00:01 50.0% done, time left:   0:00:00 51.4% done, time left:   0:00:01 53.6% done, time left:   0:00:02 54.9% done, time left:   0:00:01 56.4% done, time left:   0:00:01 58.8% done, time left:   0:00:02 60.1% done, time left:   0:00:01 61.5% done, time left:   0:00:01 63.0% done, time left:   0:00:01 63.6% done, time left:   0:00:01 64.0% done, time left:   0:00:00 65.0% done, time left:   0:00:01 66.7% done, time left:   0:00:01 67.3% done, time left:   0:00:01 67.3% done, time left:   0:00:00 68.7% done, time left:   0:00:01 68.8% done, time left:   0:00:00 68.9% done, time left:   0:00:00 70.9% done, time left:   0:00:00 73.2% done, time left:   0:00:00 74.4% done, time left:   0:00:00 76.7% done, time left:   0:00:00 78.9% done, time left:   0:00:00 80.3% done, time left:   0:00:00 82.6% done, time left:   0:00:00 84.9% done, time left:   0:00:00 87.4% done, time left:   0:00:00 89.8% done, time left:   0:00:00 92.1% done, time left:   0:00:00 94.4% done, time left:   0:00:00 95.6% done, time left:   0:00:00 97.1% done, time left:   0:00:00 98.0% done, time left:   0:00:00 100.3% done, time left:   0:00:00  102.4% done, time left:   0:00:00 103.3% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.TestDuration_Basics.testToPeriod:531:*]:
+org.joda.time.Period.<init>:382 ALOAD 0
+org.joda.time.Period.<init>:382 INVOKESPECIAL org/joda/time/base/BasePeriod.<init>(J)V
+org.joda.time.Period.getWeeks:775 ALOAD 0
+org.joda.time.Period.getWeeks:775 INVOKEVIRTUAL org/joda/time/Period.getPeriodType()Lorg/joda/time/PeriodType;
+org.joda.time.Period.getWeeks:775 ALOAD 0
+org.joda.time.Period.getWeeks:775 GETSTATIC org/joda/time/PeriodType.WEEK_INDEX I
+org.joda.time.Period.getWeeks:775 INVOKEVIRTUAL org/joda/time/PeriodType.getIndexedField(Lorg/joda/time/ReadablePeriod;I)I
+org.joda.time.Period.getWeeks:775 IRETURN
+org.joda.time.PeriodType.standard:102 GETSTATIC org/joda/time/PeriodType.cStandard Lorg/joda/time/PeriodType;
+org.joda.time.PeriodType.standard:102 ASTORE 0
+org.joda.time.PeriodType.standard:116 ALOAD 0
+org.joda.time.PeriodType.standard:116 ARETURN
+org.joda.time.PeriodType.getIndexedField:674 ALOAD 0
+org.joda.time.PeriodType.getIndexedField:674 GETFIELD org/joda/time/PeriodType.iIndices [I
+org.joda.time.PeriodType.getIndexedField:674 ILOAD 2
+org.joda.time.PeriodType.getIndexedField:674 IALOAD
+org.joda.time.PeriodType.getIndexedField:674 ISTORE 3
+org.joda.time.PeriodType.getIndexedField:675 ILOAD 3
+org.joda.time.PeriodType.getIndexedField:675 ICONST_M1
+org.joda.time.PeriodType.getIndexedField:675 IF_ICMPNE L0 true false
+org.joda.time.PeriodType.getIndexedField:675 ALOAD 1
+org.joda.time.PeriodType.getIndexedField:675 ILOAD 3
+org.joda.time.PeriodType.getIndexedField:675 INVOKEINTERFACE org/joda/time/ReadablePeriod.getValue(I)I
+org.joda.time.PeriodType.getIndexedField:675 IRETURN
+org.joda.time.TestDuration_Basics.main:95 INVOKEVIRTUAL org/joda/time/TestDuration_Basics.testToPeriod()V
+org.joda.time.TestDuration_Basics.testToPeriod:528 INVOKEVIRTUAL org/joda/time/Duration.toPeriod()Lorg/joda/time/Period;
+org.joda.time.TestDuration_Basics.testToPeriod:528 ASTORE 5
+org.joda.time.TestDuration_Basics.testToPeriod:531 LCONST_0
+org.joda.time.TestDuration_Basics.testToPeriod:531 ALOAD 5
+org.joda.time.TestDuration_Basics.testToPeriod:531 INVOKEVIRTUAL org/joda/time/Period.getWeeks()I
+org.joda.time.TestDuration_Basics.testToPeriod:531 I2L
+org.joda.time.TestDuration_Basics.testToPeriod:531 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.AbstractDuration.toPeriod:80 NEW org/joda/time/Period
+org.joda.time.base.AbstractDuration.toPeriod:80 DUP
+org.joda.time.base.AbstractDuration.toPeriod:80 INVOKESPECIAL org/joda/time/Period.<init>(J)V
+org.joda.time.base.AbstractDuration.toPeriod:80 ARETURN
+org.joda.time.base.BasePeriod.<init>:235 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:235 INVOKESTATIC org/joda/time/PeriodType.standard()Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.<init>:235 PUTFIELD org/joda/time/base/BasePeriod.iType Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.<init>:237 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:237 BIPUSH 8
+org.joda.time.base.BasePeriod.<init>:237 NEWARRAY T_INT
+org.joda.time.base.BasePeriod.<init>:237 PUTFIELD org/joda/time/base/BasePeriod.iValues [I
+org.joda.time.base.BasePeriod.getPeriodType:318 ALOAD 0
+org.joda.time.base.BasePeriod.getPeriodType:318 GETFIELD org/joda/time/base/BasePeriod.iType Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.getPeriodType:318 ARETURN
+org.joda.time.base.BasePeriod.getValue:329 ALOAD 0
+org.joda.time.base.BasePeriod.getValue:329 GETFIELD org/joda/time/base/BasePeriod.iValues [I
+org.joda.time.base.BasePeriod.getValue:329 ILOAD 1
+org.joda.time.base.BasePeriod.getValue:329 IALOAD
+org.joda.time.base.BasePeriod.getValue:329 IRETURN
+
+Slice consists of 51 bytecode instructions.
+Computation took 8.34 seconds.

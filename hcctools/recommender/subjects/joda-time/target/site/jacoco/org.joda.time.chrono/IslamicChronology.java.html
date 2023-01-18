@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IslamicChronology.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">IslamicChronology.java</span></div><h1>IslamicChronology.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import java.io.Serializable;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeZone;
+
+/**
+ * Implements the Islamic, or Hijri, calendar system using arithmetic rules.
+ * &lt;p&gt;
+ * This calendar is a lunar calendar with a shorter year than ISO.
+ * Year 1 in the Islamic calendar began on July 16, 622 CE (Julian), thus
+ * Islamic years do not begin at the same time as Julian years. This chronology
+ * is not proleptic, as it does not allow dates before the first Islamic year.
+ * &lt;p&gt;
+ * There are two basic forms of the Islamic calendar, the tabular and the
+ * observed. The observed form cannot easily be used by computers as it
+ * relies on human observation of the new moon.
+ * The tabular calendar, implemented here, is an arithmetical approximation
+ * of the observed form that follows relatively simple rules.
+ * &lt;p&gt;
+ * The tabular form of the calendar defines 12 months of alternately
+ * 30 and 29 days. The last month is extended to 30 days in a leap year.
+ * Leap years occur according to a 30 year cycle. There are four recognised
+ * patterns of leap years in the 30 year cycle:
+ * &lt;pre&gt;
+ * Years 2, 5, 7, 10, 13, 15, 18, 21, 24, 26 &amp; 29 - 15-based, used by Microsoft
+ * Years 2, 5, 7, 10, 13, 16, 18, 21, 24, 26 &amp; 29 - 16-based, most commonly used
+ * Years 2, 5, 8, 10, 13, 16, 19, 21, 24, 27 &amp; 29 - Indian
+ * Years 2, 5, 8, 11, 13, 16, 19, 21, 24, 27 &amp; 30 - Habash al-Hasib
+ * &lt;/pre&gt;
+ * You can select which pattern to use via the factory methods, or use the
+ * default (16-based).
+ * &lt;p&gt;
+ * This implementation defines a day as midnight to midnight exactly as per
+ * the ISO chronology. This correct start of day is at sunset on the previous
+ * day, however this cannot readily be modelled and has been ignored.
+ * &lt;p&gt;
+ * IslamicChronology is thread-safe and immutable.
+ *
+ * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/Islamic_calendar&quot;&gt;Wikipedia&lt;/a&gt;
+ *
+ * @author Stephen Colebourne
+ * @since 1.2
+ */
+public final class IslamicChronology extends BasicChronology {
+
+    /** Serialization lock */
+    private static final long serialVersionUID = -3663823829888L;
+
+    /**
+     * Constant value for 'Anno Hegirae', equivalent
+     * to the value returned for AD/CE.
+     */
+    public static final int AH = DateTimeConstants.CE;
+
+    /** A singleton era field. */
+<span class="fc" id="L77">    private static final DateTimeField ERA_FIELD = new BasicSingleEraDateTimeField(&quot;AH&quot;);</span>
+
+    /** Leap year 15-based pattern. */
+<span class="fc" id="L80">    public static final LeapYearPatternType LEAP_YEAR_15_BASED = new LeapYearPatternType(0, 623158436);</span>
+    /** Leap year 16-based pattern. */
+<span class="fc" id="L82">    public static final LeapYearPatternType LEAP_YEAR_16_BASED = new LeapYearPatternType(1, 623191204);</span>
+    /** Leap year Indian pattern. */
+<span class="fc" id="L84">    public static final LeapYearPatternType LEAP_YEAR_INDIAN = new LeapYearPatternType(2, 690562340);</span>
+    /** Leap year Habash al-Hasib pattern. */
+<span class="fc" id="L86">    public static final LeapYearPatternType LEAP_YEAR_HABASH_AL_HASIB = new LeapYearPatternType(3, 153692453);</span>
+
+    /** The lowest year that can be fully supported. */
+    private static final int MIN_YEAR = -292269337;
+
+    /**
+     * The highest year that can be fully supported.
+     * Although calculateFirstDayOfYearMillis can go higher without
+     * overflowing, the getYear method overflows when it adds the
+     * approximate millis at the epoch.
+     */
+    private static final int MAX_YEAR = 292271022;
+
+    /** The days in a pair of months. */
+    private static final int MONTH_PAIR_LENGTH = 59;
+
+    /** The length of the long month. */
+    private static final int LONG_MONTH_LENGTH = 30;
+
+    /** The length of the short month. */
+    private static final int SHORT_MONTH_LENGTH = 29;
+
+    /** The length of the long month in millis. */
+    private static final long MILLIS_PER_MONTH_PAIR = 59L * DateTimeConstants.MILLIS_PER_DAY;
+
+    /** The length of the long month in millis. */
+    private static final long MILLIS_PER_MONTH = (long) (29.53056 * DateTimeConstants.MILLIS_PER_DAY);
+
+    /** The length of the long month in millis. */
+    private static final long MILLIS_PER_LONG_MONTH = 30L * DateTimeConstants.MILLIS_PER_DAY;
+
+    /** The typical millis per year. */
+    private static final long MILLIS_PER_YEAR = (long) (354.36667 * DateTimeConstants.MILLIS_PER_DAY);
+
+    /** The typical millis per year. */
+    private static final long MILLIS_PER_SHORT_YEAR = 354L * DateTimeConstants.MILLIS_PER_DAY;
+
+    /** The typical millis per year. */
+    private static final long MILLIS_PER_LONG_YEAR = 355L * DateTimeConstants.MILLIS_PER_DAY;
+
+    /** The millis of 0001-01-01. */
+    private static final long MILLIS_YEAR_1 = -42521587200000L;
+                                    //        -42520809600000L;
+//    long start = 0L - 278L * DateTimeConstants.MILLIS_PER_DAY;
+//    long cy = 46L * MILLIS_PER_CYCLE;  // 1381-01-01
+//    long rem = 5L * MILLIS_PER_SHORT_YEAR +
+//            3L * MILLIS_PER_LONG_YEAR;  // 1389-01-01
+
+    /** The length of the cycle of leap years. */
+    private static final int CYCLE = 30;
+
+    /** The millis of a 30 year cycle. */
+    private static final long MILLIS_PER_CYCLE = ((19L * 354L + 11L * 355L) * DateTimeConstants.MILLIS_PER_DAY);
+
+    /** Cache of zone to chronology arrays */
+<span class="fc" id="L141">    private static final ConcurrentHashMap&lt;DateTimeZone, IslamicChronology[]&gt; cCache = new ConcurrentHashMap&lt;DateTimeZone, IslamicChronology[]&gt;();</span>
+
+    /** Singleton instance of a UTC IslamicChronology */
+    private static final IslamicChronology INSTANCE_UTC;
+    static {
+        // init after static fields
+<span class="fc" id="L147">        INSTANCE_UTC = getInstance(DateTimeZone.UTC);</span>
+<span class="fc" id="L148">    }</span>
+
+    /** The leap years to use. */
+    private final LeapYearPatternType iLeapYears;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets an instance of the IslamicChronology.
+     * The time zone of the returned instance is UTC.
+     * 
+     * @return a singleton UTC instance of the chronology
+     */
+    public static IslamicChronology getInstanceUTC() {
+<span class="fc" id="L161">        return INSTANCE_UTC;</span>
+    }
+
+    /**
+     * Gets an instance of the IslamicChronology in the default time zone.
+     * 
+     * @return a chronology in the default time zone
+     */
+    public static IslamicChronology getInstance() {
+<span class="fc" id="L170">        return getInstance(DateTimeZone.getDefault(), LEAP_YEAR_16_BASED);</span>
+    }
+
+    /**
+     * Gets an instance of the IslamicChronology in the given time zone.
+     * 
+     * @param zone  the time zone to get the chronology in, null is default
+     * @return a chronology in the specified time zone
+     */
+    public static IslamicChronology getInstance(DateTimeZone zone) {
+<span class="fc" id="L180">        return getInstance(zone, LEAP_YEAR_16_BASED);</span>
+    }
+
+    /**
+     * Gets an instance of the IslamicChronology in the given time zone.
+     * 
+     * @param zone  the time zone to get the chronology in, null is default
+     * @param leapYears  the type defining the leap year pattern
+     * @return a chronology in the specified time zone
+     */
+    public static IslamicChronology getInstance(DateTimeZone zone, LeapYearPatternType leapYears) {
+<span class="fc bfc" id="L191" title="All 2 branches covered.">        if (zone == null) {</span>
+<span class="fc" id="L192">            zone = DateTimeZone.getDefault();</span>
+        }
+        IslamicChronology chrono;
+<span class="fc" id="L195">        IslamicChronology[] chronos = cCache.get(zone);</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">        if (chronos == null) {</span>
+<span class="fc" id="L197">            chronos = new IslamicChronology[4];</span>
+<span class="fc" id="L198">            IslamicChronology[] oldChronos = cCache.putIfAbsent(zone, chronos);</span>
+<span class="pc bpc" id="L199" title="1 of 2 branches missed.">            if (oldChronos != null) {</span>
+<span class="nc" id="L200">                chronos = oldChronos;</span>
+            }
+        }
+<span class="fc" id="L203">        chrono = chronos[leapYears.index];</span>
+<span class="fc bfc" id="L204" title="All 2 branches covered.">        if (chrono == null) {</span>
+<span class="fc" id="L205">            synchronized (chronos) {</span>
+<span class="fc" id="L206">                chrono = chronos[leapYears.index];</span>
+<span class="pc bpc" id="L207" title="1 of 2 branches missed.">                if (chrono == null) {</span>
+<span class="fc bfc" id="L208" title="All 2 branches covered.">                    if (zone == DateTimeZone.UTC) {</span>
+                        // First create without a lower limit.
+<span class="fc" id="L210">                        chrono = new IslamicChronology(null, null, leapYears);</span>
+                        // Impose lower limit and make another IslamicChronology.
+<span class="fc" id="L212">                        DateTime lowerLimit = new DateTime(1, 1, 1, 0, 0, 0, 0, chrono);</span>
+<span class="fc" id="L213">                        chrono = new IslamicChronology(</span>
+<span class="fc" id="L214">                            LimitChronology.getInstance(chrono, lowerLimit, null),</span>
+                             null, leapYears);
+<span class="fc" id="L216">                    } else {</span>
+<span class="fc" id="L217">                        chrono = getInstance(DateTimeZone.UTC, leapYears);</span>
+<span class="fc" id="L218">                        chrono = new IslamicChronology</span>
+<span class="fc" id="L219">                            (ZonedChronology.getInstance(chrono, zone), null, leapYears);</span>
+                    }
+<span class="fc" id="L221">                    chronos[leapYears.index] = chrono;</span>
+                }
+<span class="fc" id="L223">            }</span>
+        }
+<span class="fc" id="L225">        return chrono;</span>
+    }
+
+    // Constructors and instance variables
+    //-----------------------------------------------------------------------
+    /**
+     * Restricted constructor.
+     */
+    IslamicChronology(Chronology base, Object param, LeapYearPatternType leapYears) {
+<span class="fc" id="L234">        super(base, param, 4);</span>
+<span class="fc" id="L235">        this.iLeapYears = leapYears;</span>
+<span class="fc" id="L236">    }</span>
+
+    /**
+     * Serialization singleton.
+     */
+    private Object readResolve() {
+<span class="nc" id="L242">        Chronology base = getBase();</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">        return base == null ? getInstanceUTC() : getInstance(base.getZone());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the leap year pattern type.
+     *
+     * @return the pattern type
+     */
+    public LeapYearPatternType getLeapYearPatternType() {
+<span class="nc" id="L253">        return iLeapYears;</span>
+    }
+
+    // Conversion
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the Chronology in the UTC time zone.
+     * 
+     * @return the chronology in UTC
+     */
+    public Chronology withUTC() {
+<span class="fc" id="L264">        return INSTANCE_UTC;</span>
+    }
+
+    /**
+     * Gets the Chronology in a specific time zone.
+     * 
+     * @param zone  the zone to get the chronology in, null is default
+     * @return the chronology
+     */
+    public Chronology withZone(DateTimeZone zone) {
+<span class="fc bfc" id="L274" title="All 2 branches covered.">        if (zone == null) {</span>
+<span class="fc" id="L275">            zone = DateTimeZone.getDefault();</span>
+        }
+<span class="fc bfc" id="L277" title="All 2 branches covered.">        if (zone == getZone()) {</span>
+<span class="fc" id="L278">            return this;</span>
+        }
+<span class="fc" id="L280">        return getInstance(zone);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Checks if this chronology instance equals another.
+     * 
+     * @param obj  the object to compare to
+     * @return true if equal
+     * @since 2.3
+     */
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L292" title="All 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L293">            return true;</span>
+        }
+<span class="nc bnc" id="L295" title="All 2 branches missed.">        if (obj instanceof IslamicChronology) {</span>
+<span class="nc" id="L296">            IslamicChronology chrono = (IslamicChronology) obj;</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">            return getLeapYearPatternType().index == chrono.getLeapYearPatternType().index &amp;&amp;</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">                    super.equals(obj);</span>
+        }
+<span class="nc" id="L300">        return false;</span>
+    }
+
+    /**
+     * A suitable hash code for the chronology.
+     * 
+     * @return the hash code
+     * @since 1.6
+     */
+    public int hashCode() {
+<span class="nc" id="L310">        return super.hashCode() * 13 + getLeapYearPatternType().hashCode();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getYear(long instant) {
+<span class="fc" id="L315">        long millisIslamic = instant - MILLIS_YEAR_1;</span>
+<span class="fc" id="L316">        long cycles = millisIslamic / MILLIS_PER_CYCLE;</span>
+<span class="fc" id="L317">        long cycleRemainder = millisIslamic % MILLIS_PER_CYCLE;</span>
+        
+<span class="fc" id="L319">        int year = (int) ((cycles * CYCLE) + 1L);</span>
+<span class="pc bpc" id="L320" title="1 of 2 branches missed.">        long yearMillis = (isLeapYear(year) ? MILLIS_PER_LONG_YEAR : MILLIS_PER_SHORT_YEAR);</span>
+<span class="fc bfc" id="L321" title="All 2 branches covered.">        while (cycleRemainder &gt;= yearMillis) {</span>
+<span class="fc" id="L322">            cycleRemainder -= yearMillis;</span>
+<span class="fc bfc" id="L323" title="All 2 branches covered.">            yearMillis = (isLeapYear(++year) ? MILLIS_PER_LONG_YEAR : MILLIS_PER_SHORT_YEAR);</span>
+        }
+<span class="fc" id="L325">        return year;</span>
+    }
+
+    long setYear(long instant, int year) {
+        // optimsed implementation of set, due to fixed months
+<span class="fc" id="L330">        int thisYear = getYear(instant);</span>
+<span class="fc" id="L331">        int dayOfYear = getDayOfYear(instant, thisYear);</span>
+<span class="fc" id="L332">        int millisOfDay = getMillisOfDay(instant);</span>
+
+        // Current year is leap, and day is leap.
+<span class="pc bpc" id="L335" title="3 of 4 branches missed.">        if (dayOfYear &gt; 354 &amp;&amp; !isLeapYear(year)) {</span>
+                // Moving to a non-leap year, leap day doesn't exist.
+<span class="nc" id="L337">                dayOfYear--;</span>
+        }
+
+<span class="fc" id="L340">        instant = getYearMonthDayMillis(year, 1, dayOfYear);</span>
+<span class="fc" id="L341">        instant += millisOfDay;</span>
+<span class="fc" id="L342">        return instant;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    long getYearDifference(long minuendInstant, long subtrahendInstant) {
+        // optimsed implementation of getDifference, due to fixed months
+<span class="nc" id="L348">        int minuendYear = getYear(minuendInstant);</span>
+<span class="nc" id="L349">        int subtrahendYear = getYear(subtrahendInstant);</span>
+
+        // Inlined remainder method to avoid duplicate calls to get.
+<span class="nc" id="L352">        long minuendRem = minuendInstant - getYearMillis(minuendYear);</span>
+<span class="nc" id="L353">        long subtrahendRem = subtrahendInstant - getYearMillis(subtrahendYear);</span>
+
+<span class="nc" id="L355">        int difference = minuendYear - subtrahendYear;</span>
+<span class="nc bnc" id="L356" title="All 2 branches missed.">        if (minuendRem &lt; subtrahendRem) {</span>
+<span class="nc" id="L357">            difference--;</span>
+        }
+<span class="nc" id="L359">        return difference;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    long getTotalMillisByYearMonth(int year, int month) {
+<span class="fc bfc" id="L364" title="All 2 branches covered.">        if (--month % 2 == 1) {</span>
+<span class="fc" id="L365">            month /= 2;</span>
+<span class="fc" id="L366">            return month * MILLIS_PER_MONTH_PAIR + MILLIS_PER_LONG_MONTH;</span>
+        } else {
+<span class="fc" id="L368">            month /= 2;</span>
+<span class="fc" id="L369">            return month * MILLIS_PER_MONTH_PAIR;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    int getDayOfMonth(long millis) {
+        // optimised for simple months
+<span class="fc" id="L376">        int doy = getDayOfYear(millis) - 1;</span>
+<span class="pc bpc" id="L377" title="1 of 2 branches missed.">        if (doy == 354) {</span>
+<span class="nc" id="L378">            return 30;</span>
+        }
+<span class="fc" id="L380">        return (doy % MONTH_PAIR_LENGTH) % LONG_MONTH_LENGTH + 1;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    boolean isLeapYear(int year) {
+<span class="fc" id="L385">        return iLeapYears.isLeapYear(year);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getDaysInYearMax() {
+<span class="fc" id="L390">        return 355;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getDaysInYear(int year) {
+<span class="fc bfc" id="L395" title="All 2 branches covered.">        return isLeapYear(year) ? 355 : 354;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getDaysInYearMonth(int year, int month) {
+<span class="fc bfc" id="L400" title="All 4 branches covered.">        if (month == 12 &amp;&amp; isLeapYear(year)) {</span>
+<span class="fc" id="L401">            return LONG_MONTH_LENGTH;</span>
+        }
+<span class="fc bfc" id="L403" title="All 2 branches covered.">        return (--month % 2 == 0 ? LONG_MONTH_LENGTH : SHORT_MONTH_LENGTH);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getDaysInMonthMax() {
+<span class="fc" id="L408">        return LONG_MONTH_LENGTH;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getDaysInMonthMax(int month) {
+<span class="nc bnc" id="L413" title="All 2 branches missed.">        if (month == 12) {</span>
+<span class="nc" id="L414">            return LONG_MONTH_LENGTH;</span>
+        }
+<span class="nc bnc" id="L416" title="All 2 branches missed.">        return (--month % 2 == 0 ? LONG_MONTH_LENGTH : SHORT_MONTH_LENGTH);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getMonthOfYear(long millis, int year) {
+<span class="fc" id="L421">        int doyZeroBased = (int) ((millis - getYearMillis(year)) / DateTimeConstants.MILLIS_PER_DAY);</span>
+<span class="pc bpc" id="L422" title="1 of 2 branches missed.">        if (doyZeroBased == 354) {</span>
+<span class="nc" id="L423">            return 12;</span>
+        }
+<span class="fc" id="L425">        return ((doyZeroBased * 2) / MONTH_PAIR_LENGTH) + 1;</span>
+//        return (int) (doyZeroBased / 29.9f) + 1;
+//        
+//        int monthPairZeroBased = doyZeroBased / MONTH_PAIR_LENGTH;
+//        int monthPairRemainder = doyZeroBased % MONTH_PAIR_LENGTH;
+//        return (monthPairZeroBased * 2) + 1 + (monthPairRemainder &gt;= LONG_MONTH_LENGTH ? 1 : 0);
+    }
+
+    //-----------------------------------------------------------------------
+    long getAverageMillisPerYear() {
+<span class="fc" id="L435">        return MILLIS_PER_YEAR;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    long getAverageMillisPerYearDividedByTwo() {
+<span class="nc" id="L440">        return MILLIS_PER_YEAR / 2;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    long getAverageMillisPerMonth() {
+<span class="fc" id="L445">        return MILLIS_PER_MONTH;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    long calculateFirstDayOfYearMillis(int year) {
+<span class="pc bpc" id="L450" title="1 of 2 branches missed.">        if (year &gt; MAX_YEAR) {</span>
+<span class="nc" id="L451">            throw new ArithmeticException(&quot;Year is too large: &quot; + year + &quot; &gt; &quot; + MAX_YEAR);</span>
+        }
+<span class="pc bpc" id="L453" title="1 of 2 branches missed.">        if (year &lt; MIN_YEAR) {</span>
+<span class="nc" id="L454">            throw new ArithmeticException(&quot;Year is too small: &quot; + year + &quot; &lt; &quot; + MIN_YEAR);</span>
+        }
+
+        // Java epoch is 1970-01-01 Gregorian which is 0622-07-16 Islamic.
+        // 0001-01-01 Islamic is -42520809600000L
+        // would prefer to calculate against year zero, but leap year
+        // can be in that year so it doesn't work
+<span class="fc" id="L461">        year--;</span>
+<span class="fc" id="L462">        long cycle = year / CYCLE;</span>
+<span class="fc" id="L463">        long millis = MILLIS_YEAR_1 + cycle * MILLIS_PER_CYCLE;</span>
+<span class="fc" id="L464">        int cycleRemainder = (year % CYCLE) + 1;</span>
+        
+<span class="fc bfc" id="L466" title="All 2 branches covered.">        for (int i = 1; i &lt; cycleRemainder; i++) {</span>
+<span class="fc bfc" id="L467" title="All 2 branches covered.">            millis += (isLeapYear(i) ? MILLIS_PER_LONG_YEAR : MILLIS_PER_SHORT_YEAR);</span>
+        }
+        
+<span class="fc" id="L470">        return millis;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getMinYear() {
+<span class="fc" id="L475">        return 1; //MIN_YEAR;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getMaxYear() {
+<span class="fc" id="L480">        return MAX_YEAR;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    long getApproxMillisAtEpochDividedByTwo() {
+        // Epoch 1970-01-01 ISO = 1389-10-22 Islamic
+<span class="nc" id="L486">        return (-MILLIS_YEAR_1) / 2;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    protected void assemble(Fields fields) {
+<span class="fc bfc" id="L491" title="All 2 branches covered.">        if (getBase() == null) {</span>
+<span class="fc" id="L492">            super.assemble(fields);</span>
+
+<span class="fc" id="L494">            fields.era = ERA_FIELD;</span>
+<span class="fc" id="L495">            fields.monthOfYear = new BasicMonthOfYearDateTimeField(this, 12);</span>
+<span class="fc" id="L496">            fields.months = fields.monthOfYear.getDurationField();</span>
+        }
+<span class="fc" id="L498">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Opaque object describing a leap year pattern for the Islamic Chronology.
+     *
+     * @since 1.2
+     */
+    public static class LeapYearPatternType implements Serializable {
+        /** Serialization lock */
+        private static final long serialVersionUID = 26581275372698L;
+//        /** Leap year raw data encoded into bits. */
+//        private static final int[][] LEAP_YEARS = {
+//            {2, 5, 7, 10, 13, 15, 18, 21, 24, 26, 29},  // 623158436
+//            {2, 5, 7, 10, 13, 16, 18, 21, 24, 26, 29},  // 623191204
+//            {2, 5, 8, 10, 13, 16, 19, 21, 24, 27, 29},  // 690562340
+//            {0, 2, 5, 8, 11, 13, 16, 19, 21, 24, 27},   // 153692453
+//        };
+        
+        /** The index. */
+        final byte index;
+        /** The leap year pattern, a bit-based 1=true pattern. */
+        final int pattern;
+        
+        /**
+         * Constructor.
+         * This constructor takes a bit pattern where bits 0-29 correspond
+         * to years 0-29 in the 30 year Islamic cycle of years. This allows
+         * a highly efficient lookup by bit-matching.
+         *
+         * @param index  the index
+         * @param pattern  the bit pattern
+         */
+        LeapYearPatternType(int index, int pattern) {
+<span class="fc" id="L532">            super();</span>
+<span class="fc" id="L533">            this.index = (byte) index;</span>
+<span class="fc" id="L534">            this.pattern = pattern;</span>
+<span class="fc" id="L535">        }</span>
+        
+        /**
+         * Is the year a leap year.
+         * @param year  the year to query
+         * @return true if leap
+         */
+        boolean isLeapYear(int year) {
+<span class="fc" id="L543">            int key = 1 &lt;&lt; (year % 30);</span>
+<span class="fc bfc" id="L544" title="All 2 branches covered.">            return ((pattern &amp; key) &gt; 0);</span>
+        }
+        
+        /**
+         * Ensure a singleton is returned if possible.
+         * @return the singleton instance
+         */
+        private Object readResolve() {
+<span class="nc bnc" id="L552" title="All 5 branches missed.">            switch (index) {</span>
+                case 0:
+<span class="nc" id="L554">                    return LEAP_YEAR_15_BASED;</span>
+                case 1:
+<span class="nc" id="L556">                    return LEAP_YEAR_16_BASED;</span>
+                case 2:
+<span class="nc" id="L558">                    return LEAP_YEAR_INDIAN;</span>
+                case 3:
+<span class="nc" id="L560">                    return LEAP_YEAR_HABASH_AL_HASIB;</span>
+                default:
+<span class="nc" id="L562">                    return this;</span>
+            }
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+<span class="nc bnc" id="L568" title="All 2 branches missed.">            if (obj instanceof LeapYearPatternType) {</span>
+<span class="nc bnc" id="L569" title="All 2 branches missed.">                return index == ((LeapYearPatternType) obj).index;</span>
+            }
+<span class="nc" id="L571">            return false;</span>
+        }
+
+        @Override
+        public int hashCode() {
+<span class="nc" id="L576">            return index;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

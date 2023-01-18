@@ -1,0 +1,46 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  0.7% done, time left: unknown  1.8% done, time left: unknown  2.8% done, time left: unknown  3.0% done, time left: unknown  3.3% done, time left: unknown  3.5% done, time left: unknown  3.9% done, time left:   0:00:22    4.0% done, time left:   0:00:30  4.0% done, time left:   0:00:40  4.0% done, time left:   0:00:50  4.0% done, time left:   0:00:59  4.0% done, time left:   0:01:09  4.0% done, time left:   0:01:19  4.0% done, time left:   0:01:28  4.9% done, time left:   0:01:26  5.9% done, time left:   0:01:23  7.4% done, time left:   0:01:19  9.1% done, time left:   0:01:13  9.8% done, time left:   0:01:07 10.0% done, time left:   0:01:00 10.0% done, time left:   0:00:55 12.5% done, time left:   0:00:47 13.0% done, time left:   0:00:39 13.0% done, time left:   0:00:33 13.0% done, time left:   0:00:28 13.0% done, time left:   0:00:24 13.0% done, time left:   0:00:21 17.5% done, time left:   0:00:12 21.7% done, time left:   0:00:07 23.9% done, time left:   0:00:05 27.2% done, time left:   0:00:04 29.1% done, time left:   0:00:03 32.4% done, time left:   0:00:03 35.1% done, time left:   0:00:03 38.7% done, time left:   0:00:02 42.8% done, time left:   0:00:02 47.3% done, time left:   0:00:01 51.8% done, time left:   0:00:01 56.3% done, time left:   0:00:00 60.7% done, time left:   0:00:00 64.3% done, time left:   0:00:00 66.3% done, time left:   0:00:00 69.4% done, time left:   0:00:00 72.0% done, time left:   0:00:00 74.4% done, time left:   0:00:00 82.2% done, time left:   0:00:00 90.0% done, time left:   0:00:00 90.2% done, time left:   0:00:00 90.7% done, time left:   0:00:00 98.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestHours.testDividedBy_int:393:*]:
+org.joda.time.Hours.hours:82 ILOAD 0
+org.joda.time.Hours.hours:82 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, 5 => L5, 7 => L7, 2147483647 => L9, -2147483648 => L10, 0 => L0, 4 => L4, 6 => L6, 8 => L8* => L11)
+org.joda.time.Hours.hours:92 GETSTATIC org/joda/time/Hours.FOUR Lorg/joda/time/Hours;
+org.joda.time.Hours.hours:92 ARETURN
+org.joda.time.Hours.hours:106 NEW org/joda/time/Hours
+org.joda.time.Hours.hours:106 DUP
+org.joda.time.Hours.hours:106 ILOAD 0
+org.joda.time.Hours.hours:106 INVOKESPECIAL org/joda/time/Hours.<init>(I)V
+org.joda.time.Hours.hours:106 ARETURN
+org.joda.time.Hours.<init>:218 ALOAD 0
+org.joda.time.Hours.<init>:218 ILOAD 1
+org.joda.time.Hours.<init>:218 INVOKESPECIAL org/joda/time/base/BaseSingleFieldPeriod.<init>(I)V
+org.joda.time.Hours.getHours:342 ALOAD 0
+org.joda.time.Hours.getHours:342 INVOKEVIRTUAL org/joda/time/Hours.getValue()I
+org.joda.time.Hours.getHours:342 IRETURN
+org.joda.time.Hours.dividedBy:433 ILOAD 1
+org.joda.time.Hours.dividedBy:433 ICONST_1
+org.joda.time.Hours.dividedBy:433 IF_ICMPNE L0 true false
+org.joda.time.Hours.dividedBy:436 ALOAD 0
+org.joda.time.Hours.dividedBy:436 INVOKEVIRTUAL org/joda/time/Hours.getValue()I
+org.joda.time.Hours.dividedBy:436 ILOAD 1
+org.joda.time.Hours.dividedBy:436 IDIV
+org.joda.time.Hours.dividedBy:436 INVOKESTATIC org/joda/time/Hours.hours(I)Lorg/joda/time/Hours;
+org.joda.time.Hours.dividedBy:436 ARETURN
+org.joda.time.TestHours.main:62 INVOKEVIRTUAL org/joda/time/TestHours.testDividedBy_int()V
+org.joda.time.TestHours.testDividedBy_int:390 BIPUSH 12
+org.joda.time.TestHours.testDividedBy_int:390 INVOKESTATIC org/joda/time/Hours.hours(I)Lorg/joda/time/Hours;
+org.joda.time.TestHours.testDividedBy_int:390 ASTORE 1
+org.joda.time.TestHours.testDividedBy_int:393 LDC 4
+org.joda.time.TestHours.testDividedBy_int:393 ALOAD 1
+org.joda.time.TestHours.testDividedBy_int:393 ICONST_3
+org.joda.time.TestHours.testDividedBy_int:393 INVOKEVIRTUAL org/joda/time/Hours.dividedBy(I)Lorg/joda/time/Hours;
+org.joda.time.TestHours.testDividedBy_int:393 INVOKEVIRTUAL org/joda/time/Hours.getHours()I
+org.joda.time.TestHours.testDividedBy_int:393 I2L
+org.joda.time.TestHours.testDividedBy_int:393 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ILOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 PUTFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+
+Slice consists of 41 bytecode instructions.
+Computation took 6.05 seconds.

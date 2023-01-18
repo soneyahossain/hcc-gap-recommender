@@ -1,0 +1,71 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.3% done, time left: unknown  1.4% done, time left: unknown  2.3% done, time left: unknown  3.0% done, time left: unknown  4.1% done, time left: unknown  5.6% done, time left: unknown  6.0% done, time left:   0:00:27    6.0% done, time left:   0:00:40  6.0% done, time left:   0:00:54  6.0% done, time left:   0:01:07  6.0% done, time left:   0:01:21  6.0% done, time left:   0:01:33  6.2% done, time left:   0:01:38  6.6% done, time left:   0:01:35  8.1% done, time left:   0:01:30 10.2% done, time left:   0:01:21 14.1% done, time left:   0:00:52 16.4% done, time left:   0:00:36 17.6% done, time left:   0:00:26 18.1% done, time left:   0:00:19 18.5% done, time left:   0:00:14 20.0% done, time left:   0:00:12 22.3% done, time left:   0:00:10 24.3% done, time left:   0:00:09 24.5% done, time left:   0:00:07 24.5% done, time left:   0:00:05 27.9% done, time left:   0:00:04 28.1% done, time left:   0:00:03 28.1% done, time left:   0:00:02 28.1% done, time left:   0:00:01 29.8% done, time left:   0:00:01 34.6% done, time left:   0:00:01 38.8% done, time left:   0:00:01 42.1% done, time left:   0:00:01 53.8% done, time left:   0:00:00 55.1% done, time left:   0:00:00 57.6% done, time left:   0:00:00 62.0% done, time left:   0:00:00 66.7% done, time left:   0:00:00 70.0% done, time left:   0:00:00 73.1% done, time left:   0:00:00 76.5% done, time left:   0:00:00 81.4% done, time left:   0:00:00 85.5% done, time left:   0:00:00 89.9% done, time left:   0:00:00 93.9% done, time left:   0:00:00 97.5% done, time left:   0:00:00 100.8% done, time left:   0:00:00  102.4% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.TestInstant_Basics.testToDateTimeISO:443:*]:
+org.joda.time.DateTime.<init>:236 ALOAD 0
+org.joda.time.DateTime.<init>:236 ALOAD 3
+org.joda.time.DateTime.<init>:236 INVOKESPECIAL org/joda/time/base/BaseDateTime.<init>(JLorg/joda/time/Chronology;)V
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:187 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:187 ARETURN
+org.joda.time.DateTimeZone.setDefault:207 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.setDefault:207 ALOAD 0
+org.joda.time.DateTimeZone.setDefault:207 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.set(Ljava/lang/Object;)V
+org.joda.time.Instant.toDateTime:320 NEW org/joda/time/DateTime
+org.joda.time.Instant.toDateTime:320 DUP
+org.joda.time.Instant.toDateTime:320 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.Instant.toDateTime:320 INVOKESPECIAL org/joda/time/DateTime.<init>(JLorg/joda/time/Chronology;)V
+org.joda.time.Instant.toDateTime:320 ARETURN
+org.joda.time.Instant.toDateTimeISO:347 INVOKEVIRTUAL org/joda/time/Instant.toDateTime()Lorg/joda/time/DateTime;
+org.joda.time.Instant.toDateTimeISO:347 ARETURN
+org.joda.time.TestInstant_Basics.main:79 INVOKEVIRTUAL org/joda/time/TestInstant_Basics.setUp()V
+org.joda.time.TestInstant_Basics.main:79 INVOKEVIRTUAL org/joda/time/TestInstant_Basics.testGet_DateTimeField()V
+org.joda.time.TestInstant_Basics.main:96 INVOKEVIRTUAL org/joda/time/TestInstant_Basics.setUp()V
+org.joda.time.TestInstant_Basics.main:96 INVOKEVIRTUAL org/joda/time/TestInstant_Basics.testToDateTimeISO()V
+org.joda.time.TestInstant_Basics.setUp:130 GETSTATIC org/joda/time/TestInstant_Basics.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.TestInstant_Basics.setUp:130 INVOKESTATIC org/joda/time/DateTimeZone.setDefault(Lorg/joda/time/DateTimeZone;)V
+org.joda.time.TestInstant_Basics.testGet_DateTimeField:185 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.TestInstant_Basics.testToDateTimeISO:441 INVOKEVIRTUAL org/joda/time/Instant.toDateTimeISO()Lorg/joda/time/DateTime;
+org.joda.time.TestInstant_Basics.testToDateTimeISO:441 ASTORE 2
+org.joda.time.TestInstant_Basics.testToDateTimeISO:443 LDC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.TestInstant_Basics.testToDateTimeISO:443 ALOAD 2
+org.joda.time.TestInstant_Basics.testToDateTimeISO:443 INVOKEVIRTUAL org/joda/time/DateTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.TestInstant_Basics.testToDateTimeISO:443 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.joda.time.TestInstant_Basics.testToDateTimeISO:443 INVOKESTATIC org/junit/Assert.assertSame(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.base.BaseDateTime.<init>:125 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:125 ALOAD 3
+org.joda.time.base.BaseDateTime.<init>:125 INVOKEVIRTUAL org/joda/time/base/BaseDateTime.checkChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:125 PUTFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.checkChronology:280 ALOAD 1
+org.joda.time.base.BaseDateTime.checkChronology:280 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.checkChronology:280 ARETURN
+org.joda.time.base.BaseDateTime.getChronology:314 ALOAD 0
+org.joda.time.base.BaseDateTime.getChronology:314 GETFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.getChronology:314 ARETURN
+org.joda.time.chrono.ISOChronology.getInstance:79 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.ISOChronology.getInstance:79 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.getInstance:79 ARETURN
+org.joda.time.chrono.ISOChronology.getInstance:92 GETSTATIC org/joda/time/chrono/ISOChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.ISOChronology.getInstance:92 ALOAD 0
+org.joda.time.chrono.ISOChronology.getInstance:92 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.ISOChronology.getInstance:92 ASTORE 1
+org.joda.time.chrono.ISOChronology.getInstance:93 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:93 IFNONNULL L1 false true
+org.joda.time.chrono.ISOChronology.getInstance:94 NEW org/joda/time/chrono/ISOChronology
+org.joda.time.chrono.ISOChronology.getInstance:94 ASTORE 1
+org.joda.time.chrono.ISOChronology.getInstance:95 GETSTATIC org/joda/time/chrono/ISOChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.ISOChronology.getInstance:95 ALOAD 0
+org.joda.time.chrono.ISOChronology.getInstance:95 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:95 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.ISOChronology.getInstance:100 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:100 ARETURN
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+
+Slice consists of 351 bytecode instructions.
+Computation took 5.76 seconds.

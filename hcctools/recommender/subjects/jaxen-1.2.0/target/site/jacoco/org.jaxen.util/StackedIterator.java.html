@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StackedIterator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.util</a> &gt; <span class="el_source">StackedIterator.java</span></div><h1>StackedIterator.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+
+package org.jaxen.util;
+
+import org.jaxen.Navigator;
+
+import java.util.*;
+
+/**
+ * @deprecated this iterator is no longer used to implement any of the Jaxen axes. If you have implemented
+ * a navigator-specific axis based on this class, take a look at the DescendantAxisIterator for ideas
+ * on how to remove that dependency.
+ */
+public abstract class StackedIterator implements Iterator {
+
+    private LinkedList iteratorStack;
+    private Navigator navigator;
+
+    private Set created;
+
+    public StackedIterator(Object contextNode,
+<span class="nc" id="L68">                           Navigator navigator) {</span>
+<span class="nc" id="L69">        this.iteratorStack = new LinkedList();</span>
+<span class="nc" id="L70">        this.created = new HashSet();</span>
+
+<span class="nc" id="L72">        init(contextNode,</span>
+                navigator);
+<span class="nc" id="L74">    }</span>
+
+<span class="nc" id="L76">    protected StackedIterator() {</span>
+<span class="nc" id="L77">        this.iteratorStack = new LinkedList();</span>
+<span class="nc" id="L78">        this.created = new HashSet();</span>
+<span class="nc" id="L79">    }</span>
+
+    protected void init(Object contextNode,
+                        Navigator navigator) {
+<span class="nc" id="L83">        this.navigator = navigator;</span>
+
+        //pushIterator( internalCreateIterator( contextNode ) );
+<span class="nc" id="L86">    }</span>
+
+    protected Iterator internalCreateIterator(Object contextNode) {
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (this.created.contains(contextNode)) {</span>
+<span class="nc" id="L90">            return null;</span>
+        }
+
+<span class="nc" id="L93">        this.created.add(contextNode);</span>
+
+<span class="nc" id="L95">        return createIterator(contextNode);</span>
+    }
+
+    public boolean hasNext() {
+<span class="nc" id="L99">        Iterator curIter = currentIterator();</span>
+
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (curIter == null) {</span>
+<span class="nc" id="L102">            return false;</span>
+        }
+
+<span class="nc" id="L105">        return curIter.hasNext();</span>
+    }
+
+    public Object next() throws NoSuchElementException {
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (!hasNext()) {</span>
+<span class="nc" id="L110">            throw new NoSuchElementException();</span>
+        }
+
+<span class="nc" id="L113">        Iterator curIter = currentIterator();</span>
+<span class="nc" id="L114">        Object object = curIter.next();</span>
+
+<span class="nc" id="L116">        pushIterator(internalCreateIterator(object));</span>
+
+<span class="nc" id="L118">        return object;</span>
+    }
+
+    public void remove() throws UnsupportedOperationException {
+<span class="nc" id="L122">        throw new UnsupportedOperationException();</span>
+    }
+
+    abstract protected Iterator createIterator(Object contextNode);
+
+    protected void pushIterator(Iterator iter) {
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        if (iter != null) {</span>
+<span class="nc" id="L129">            this.iteratorStack.addFirst(iter); //addLast( iter );</span>
+        }
+<span class="nc" id="L131">    }</span>
+
+    private Iterator currentIterator() {
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        while (iteratorStack.size() &gt; 0) {</span>
+<span class="nc" id="L135">            Iterator curIter = (Iterator) iteratorStack.getFirst();</span>
+
+<span class="nc bnc" id="L137" title="All 2 branches missed.">            if (curIter.hasNext()) {</span>
+<span class="nc" id="L138">                return curIter;</span>
+            }
+
+<span class="nc" id="L141">            iteratorStack.removeFirst();</span>
+<span class="nc" id="L142">        }</span>
+
+<span class="nc" id="L144">        return null;</span>
+    }
+
+    protected Navigator getNavigator() {
+<span class="nc" id="L148">        return this.navigator;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

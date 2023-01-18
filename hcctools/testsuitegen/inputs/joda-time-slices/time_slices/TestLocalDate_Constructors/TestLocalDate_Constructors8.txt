@@ -1,0 +1,46 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  0.7% done, time left: unknown  2.0% done, time left: unknown  3.8% done, time left: unknown  6.0% done, time left: unknown  7.6% done, time left: unknown  8.7% done, time left:   0:00:08    9.5% done, time left:   0:00:09  9.9% done, time left:   0:00:10  9.9% done, time left:   0:00:11  9.9% done, time left:   0:00:13 10.2% done, time left:   0:00:14 11.1% done, time left:   0:00:16 11.8% done, time left:   0:00:16 13.0% done, time left:   0:00:17 14.2% done, time left:   0:00:18 14.8% done, time left:   0:00:17 14.8% done, time left:   0:00:16 17.1% done, time left:   0:00:16 20.0% done, time left:   0:00:13 22.1% done, time left:   0:00:11 25.4% done, time left:   0:00:08 28.0% done, time left:   0:00:06 31.0% done, time left:   0:00:05 34.7% done, time left:   0:00:03 37.5% done, time left:   0:00:03 41.8% done, time left:   0:00:02 46.4% done, time left:   0:00:01 51.0% done, time left:   0:00:01 55.9% done, time left:   0:00:00 59.1% done, time left:   0:00:00 59.2% done, time left:   0:00:00 59.9% done, time left:   0:00:00 60.3% done, time left:   0:00:00 61.9% done, time left:   0:00:00 64.8% done, time left:   0:00:00 67.7% done, time left:   0:00:00 70.2% done, time left:   0:00:00 72.5% done, time left:   0:00:00 74.4% done, time left:   0:00:00 76.0% done, time left:   0:00:00 76.1% done, time left:   0:00:00 76.2% done, time left:   0:00:00 78.1% done, time left:   0:00:00 82.2% done, time left:   0:00:00 84.4% done, time left:   0:00:00 85.5% done, time left:   0:00:00 89.8% done, time left:   0:00:00 94.2% done, time left:   0:00:00 96.3% done, time left:   0:00:00 98.2% done, time left:   0:00:00 99.1% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:195:*]:
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:164 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:164 IFNONNULL L8 false true
+org.joda.time.DateTimeZone.getDefault:174 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:174 IFNONNULL L4 false true
+org.joda.time.DateTimeZone.getDefault:175 INVOKESTATIC java/util/TimeZone.getDefault()Ljava/util/TimeZone;
+org.joda.time.LocalDate.fromCalendarFields:212 NEW org/joda/time/LocalDate
+org.joda.time.LocalDate.fromCalendarFields:212 ARETURN
+org.joda.time.LocalDate.fromDateFields:244 ALOAD 0
+org.joda.time.LocalDate.fromDateFields:244 INVOKEVIRTUAL java/util/Date.getTime()J
+org.joda.time.LocalDate.fromDateFields:244 LCONST_0
+org.joda.time.LocalDate.fromDateFields:244 LCMP
+org.joda.time.LocalDate.fromDateFields:244 IFGE L1 false true
+org.joda.time.LocalDate.fromDateFields:248 INVOKESTATIC org/joda/time/LocalDate.fromCalendarFields(Ljava/util/Calendar;)Lorg/joda/time/LocalDate;
+org.joda.time.LocalDate.fromDateFields:248 ARETURN
+org.joda.time.TestLocalDate_Constructors.main:63 INVOKEVIRTUAL org/joda/time/TestLocalDate_Constructors.setUp()V
+org.joda.time.TestLocalDate_Constructors.main:70 INVOKEVIRTUAL org/joda/time/TestLocalDate_Constructors.testFactory_fromDateFields_before1970()V
+org.joda.time.TestLocalDate_Constructors.setUp:131 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:192 NEW java/util/GregorianCalendar
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:192 DUP
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:192 SIPUSH 1969
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:192 ICONST_1
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:192 ICONST_3
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:192 ICONST_4
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:192 ICONST_5
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:192 BIPUSH 6
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:192 INVOKESPECIAL java/util/GregorianCalendar.<init>(IIIIII)V
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:192 ASTORE 1
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:193 ALOAD 1
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:193 BIPUSH 14
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:193 BIPUSH 7
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:193 INVOKEVIRTUAL java/util/GregorianCalendar.set(II)V
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:194 NEW org/joda/time/LocalDate
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:194 ASTORE 2
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:195 ALOAD 2
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:195 ALOAD 1
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:195 INVOKEVIRTUAL java/util/GregorianCalendar.getTime()Ljava/util/Date;
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:195 INVOKESTATIC org/joda/time/LocalDate.fromDateFields(Ljava/util/Date;)Lorg/joda/time/LocalDate;
+org.joda.time.TestLocalDate_Constructors.testFactory_fromDateFields_before1970:195 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 1082 bytecode instructions.
+Computation took 6.17 seconds.

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StringFunction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.function</a> &gt; <span class="el_source">StringFunction.java</span></div><h1>StringFunction.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+
+package org.jaxen.function;
+
+import org.jaxen.Context;
+import org.jaxen.Function;
+import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
+import org.jaxen.UnsupportedAxisException;
+import org.jaxen.JaxenRuntimeException;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.List;
+import java.util.Iterator;
+import java.util.Locale;
+
+/**
+ * &lt;p&gt;
+ * &lt;b&gt;4.2&lt;/b&gt; &lt;code&gt;&lt;i&gt;string&lt;/i&gt; string(&lt;i&gt;object&lt;/i&gt;)&lt;/code&gt;
+ * &lt;/p&gt;
+ * 
+ * 
+ * &lt;blockquote cite=&quot;http://www.w3.org/TR/xpath&quot;&gt;
+ * &lt;p&gt;
+ * The &lt;b&gt;string&lt;/b&gt; function converts
+ * an object to a string as follows:
+ * &lt;/p&gt;
+ * 
+ * &lt;ul&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * A node-set is converted to a string by returning the &lt;a
+ * href=&quot;https://www.w3.org/TR/xpath#dt-string-value&quot; target=&quot;_top&quot;&gt;string-value&lt;/a&gt; of the node in the node-set
+ * that is first in &lt;a href=&quot;https://www.w3.org/TR/xpath#dt-document-order&quot; target=&quot;_top&quot;&gt;document order&lt;/a&gt;. If
+ * the node-set is empty, an empty string is returned.
+ * &lt;/p&gt;
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * A number is converted to a string as follows
+ * &lt;/p&gt;
+ * 
+ * &lt;ul&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * NaN is converted to the string &lt;code&gt;NaN&lt;/code&gt;
+ * &lt;/p&gt;
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * positive zero is converted to the string &lt;code&gt;0&lt;/code&gt;
+ * &lt;/p&gt;
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * 
+ * &lt;p&gt;
+ * negative zero is converted to the string &lt;code&gt;0&lt;/code&gt;
+ * &lt;/p&gt;
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * positive infinity is converted to the string &lt;code&gt;Infinity&lt;/code&gt;
+ * &lt;/p&gt;
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * negative infinity is converted to the string &lt;code&gt;-Infinity&lt;/code&gt;
+ * 
+ * &lt;/p&gt;
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * if the number is an integer, the number is represented in decimal
+ * form as a &lt;a href=&quot;https://www.w3.org/TR/xpath#NT-Number&quot; target=&quot;_top&quot;&gt;Number&lt;/a&gt; with no decimal point and
+ * no leading zeros, preceded by a minus sign (&lt;code&gt;-&lt;/code&gt;) if
+ * the number is negative
+ * &lt;/p&gt;
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * otherwise, the number is represented in decimal form as a Number including a decimal point with at least
+ * one digit before the decimal point and at least one digit after the
+ * decimal point, preceded by a minus sign (&lt;code&gt;-&lt;/code&gt;) if the
+ * number is negative; there must be no leading zeros before the decimal
+ * point apart possibly from the one required digit immediately before
+ * the decimal point; beyond the one required digit after the decimal
+ * point there must be as many, but only as many, more digits as are
+ * needed to uniquely distinguish the number from all other IEEE 754
+ * numeric values.
+ * &lt;/p&gt;
+ * 
+ * &lt;/li&gt;
+ * 
+ * &lt;/ul&gt;
+ * 
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * The boolean false value is converted to the string &lt;code&gt;false&lt;/code&gt;.
+ * The boolean true value is converted to the string &lt;code&gt;true&lt;/code&gt;.
+ * &lt;/p&gt;
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * An object of a type other than the four basic types is converted to a
+ * string in a way that is dependent on that type.
+ * &lt;/p&gt;
+ * 
+ * &lt;/li&gt;
+ * 
+ * &lt;/ul&gt;
+ * 
+ * &lt;p&gt;
+ * If the argument is omitted, it defaults to a node-set with the
+ * context node as its only member.
+ * &lt;/p&gt;
+ * 
+ * &lt;/blockquote&gt;
+ * 
+ * @author bob mcwhirter (bob @ werken.com)
+ * @see &lt;a href=&quot;https://www.w3.org/TR/xpath#function-string&quot;
+ *      target=&quot;_top&quot;&gt;Section 4.2 of the XPath Specification&lt;/a&gt;
+ */
+public class StringFunction implements Function
+{
+
+<span class="fc" id="L186">    private static DecimalFormat format = (DecimalFormat) NumberFormat.getInstance(Locale.ENGLISH);</span>
+    
+    static {
+<span class="fc" id="L189">        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.ENGLISH);</span>
+<span class="fc" id="L190">        symbols.setNaN(&quot;NaN&quot;);</span>
+<span class="fc" id="L191">        symbols.setInfinity(&quot;Infinity&quot;);</span>
+<span class="fc" id="L192">        format.setGroupingUsed(false);</span>
+<span class="fc" id="L193">        format.setMaximumFractionDigits(32);</span>
+<span class="fc" id="L194">        format.setDecimalFormatSymbols(symbols);</span>
+<span class="fc" id="L195">    }</span>
+
+    /**
+     * Create a new &lt;code&gt;StringFunction&lt;/code&gt; object.
+     */
+<span class="fc" id="L200">    public StringFunction() {}</span>
+    
+    /**
+     * Returns the string-value of &lt;code&gt;args.get(0)&lt;/code&gt; 
+     * or of the context node if &lt;code&gt;args&lt;/code&gt; is empty.
+     * 
+     * @param context the context at the point in the
+     *         expression where the function is called
+     * @param args list with zero or one element
+     * 
+     * @return a &lt;code&gt;String&lt;/code&gt; 
+     * 
+     * @throws FunctionCallException if &lt;code&gt;args&lt;/code&gt; has more than one item
+     */    
+    public Object call(Context context,
+                       List args) throws FunctionCallException
+    {
+<span class="fc" id="L217">        int size = args.size();</span>
+
+<span class="fc bfc" id="L219" title="All 2 branches covered.">        if ( size == 0 )</span>
+        {
+<span class="fc" id="L221">            return evaluate( context.getNodeSet(),</span>
+<span class="fc" id="L222">                             context.getNavigator() );</span>
+        }
+<span class="fc bfc" id="L224" title="All 2 branches covered.">        else if ( size == 1 )</span>
+        {
+<span class="fc" id="L226">            return evaluate( args.get(0),</span>
+<span class="fc" id="L227">                             context.getNavigator() );</span>
+        }
+
+<span class="fc" id="L230">        throw new FunctionCallException( &quot;string() takes at most argument.&quot; );</span>
+    }
+    
+    /**
+     * Returns the XPath string-value of &lt;code&gt;obj&lt;/code&gt;.
+     * This operation is only defined if obj is a node, node-set,
+     * &lt;code&gt;String&lt;/code&gt;, &lt;code&gt;Number&lt;/code&gt;, or 
+     * &lt;code&gt;Boolean&lt;/code&gt;. For other types this function
+     * returns the empty string. 
+     * 
+     * @param obj the node, node-set, string, number, or boolean
+     *      whose string-value is calculated
+     * @param nav the navigator used to calculate the string-value
+     * 
+     * @return a &lt;code&gt;String&lt;/code&gt;. May be empty but is never null.
+     */    
+    public static String evaluate(Object obj,
+                                  Navigator nav)
+    {
+        try
+        {
+            // Workaround because XOM uses lists for Text nodes
+            // so we need to check for that first
+<span class="fc bfc" id="L253" title="All 4 branches covered.">            if (nav != null &amp;&amp; nav.isText(obj))</span>
+            {
+<span class="fc" id="L255">                return nav.getTextStringValue(obj);</span>
+            }
+            
+<span class="fc bfc" id="L258" title="All 2 branches covered.">            if (obj instanceof List)</span>
+            {
+<span class="fc" id="L260">                List list = (List) obj;</span>
+<span class="fc bfc" id="L261" title="All 2 branches covered.">                if (list.isEmpty())</span>
+                {
+<span class="fc" id="L263">                    return &quot;&quot;;</span>
+                }
+                // do not recurse: only first list should unwrap
+<span class="fc" id="L266">                obj = list.get(0);</span>
+            }
+            
+<span class="fc bfc" id="L269" title="All 2 branches covered.">            if (nav != null) {</span>
+                // This stack of instanceof really suggests there's 
+                // a failure to take advantage of polymorphism here
+<span class="fc bfc" id="L272" title="All 2 branches covered.">                if (nav.isElement(obj))</span>
+                {
+<span class="fc" id="L274">                    return nav.getElementStringValue(obj);</span>
+                }
+<span class="fc bfc" id="L276" title="All 2 branches covered.">                else if (nav.isAttribute(obj))</span>
+                {
+<span class="fc" id="L278">                    return nav.getAttributeStringValue(obj);</span>
+                }
+    
+<span class="fc bfc" id="L281" title="All 2 branches covered.">                else if (nav.isDocument(obj))</span>
+                {
+<span class="fc" id="L283">                    Iterator childAxisIterator = nav.getChildAxisIterator(obj);</span>
+<span class="pc bpc" id="L284" title="1 of 2 branches missed.">                    while (childAxisIterator.hasNext())</span>
+                    {
+<span class="fc" id="L286">                        Object descendant = childAxisIterator.next();</span>
+<span class="pc bpc" id="L287" title="1 of 2 branches missed.">                        if (nav.isElement(descendant))</span>
+                        {
+<span class="fc" id="L289">                            return nav.getElementStringValue(descendant);</span>
+                        }
+<span class="nc" id="L291">                    }</span>
+<span class="nc" id="L292">                }</span>
+<span class="fc bfc" id="L293" title="All 2 branches covered.">                else if (nav.isProcessingInstruction(obj))</span>
+                {
+<span class="fc" id="L295">                    return nav.getProcessingInstructionData(obj);</span>
+                }
+<span class="fc bfc" id="L297" title="All 2 branches covered.">                else if (nav.isComment(obj))</span>
+                {
+<span class="fc" id="L299">                    return nav.getCommentStringValue(obj);</span>
+                }
+<span class="fc bfc" id="L301" title="All 2 branches covered.">                else if (nav.isText(obj))</span>
+                {
+<span class="fc" id="L303">                    return nav.getTextStringValue(obj);</span>
+                }
+<span class="fc bfc" id="L305" title="All 2 branches covered.">                else if (nav.isNamespace(obj))</span>
+                {
+<span class="fc" id="L307">                    return nav.getNamespaceStringValue(obj);</span>
+                }
+            }
+            
+<span class="fc bfc" id="L311" title="All 2 branches covered.">            if (obj instanceof String)</span>
+            {
+<span class="fc" id="L313">                return (String) obj;</span>
+            }
+<span class="fc bfc" id="L315" title="All 2 branches covered.">            else if (obj instanceof Boolean)</span>
+            {
+<span class="fc" id="L317">                return stringValue(((Boolean) obj).booleanValue());</span>
+            }
+<span class="fc bfc" id="L319" title="All 2 branches covered.">            else if (obj instanceof Number)</span>
+            {
+<span class="fc" id="L321">                return stringValue(((Number) obj).doubleValue());</span>
+            }
+            
+        }
+<span class="nc" id="L325">        catch (UnsupportedAxisException e)</span>
+        {
+<span class="nc" id="L327">            throw new JaxenRuntimeException(e);</span>
+<span class="fc" id="L328">        }</span>
+        
+<span class="fc" id="L330">        return &quot;&quot;;</span>
+
+    }
+
+    private static String stringValue(double value)
+    {
+        
+        // DecimalFormat formats negative zero as &quot;-0&quot;.
+        // Therefore we need to test for zero explicitly here.
+<span class="fc bfc" id="L339" title="All 2 branches covered.">        if (value == 0) return &quot;0&quot;;</span>
+        
+        // need to synchronize object for thread-safety
+<span class="fc" id="L342">        String result = null;</span>
+<span class="fc" id="L343">        synchronized (format) {</span>
+<span class="fc" id="L344">            result = format.format(value);</span>
+<span class="fc" id="L345">        }</span>
+<span class="fc" id="L346">        return result;</span>
+        
+    }
+
+    private static String stringValue(boolean value)
+    {
+<span class="fc bfc" id="L352" title="All 2 branches covered.">        return value ? &quot;true&quot; : &quot;false&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

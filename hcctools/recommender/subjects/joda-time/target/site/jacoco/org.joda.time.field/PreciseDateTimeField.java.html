@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreciseDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">PreciseDateTimeField.java</span></div><h1>PreciseDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+
+/**
+ * Precise datetime field, composed of two precise duration fields.
+ * &lt;p&gt;
+ * This DateTimeField is useful for defining DateTimeFields that are composed
+ * of precise durations, like time of day fields. If either duration field is
+ * imprecise, then an {@link ImpreciseDateTimeField} may be used instead.
+ * &lt;p&gt;
+ * PreciseDateTimeField is thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.0
+ * @see ImpreciseDateTimeField
+ */
+public class PreciseDateTimeField extends PreciseDurationDateTimeField {
+
+    @SuppressWarnings(&quot;unused&quot;)
+    private static final long serialVersionUID = -5586801265774496376L;
+
+    /** The maximum range in the correct units */
+    private final int iRange;
+
+    private final DurationField iRangeField;
+
+    /**
+     * Constructor.
+     * 
+     * @param type  the field type this field uses
+     * @param unit  precise unit duration, like &quot;seconds()&quot;.
+     * @param range precise range duration, preferably a multiple of the unit,
+     * like &quot;minutes()&quot;.
+     * @throws IllegalArgumentException if either duration field is imprecise
+     * @throws IllegalArgumentException if unit milliseconds is less than one
+     * or effective value range is less than two.
+     */
+    public PreciseDateTimeField(DateTimeFieldType type,
+                                DurationField unit, DurationField range) {
+<span class="fc" id="L58">        super(type, unit);</span>
+
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (!range.isPrecise()) {</span>
+<span class="fc" id="L61">            throw new IllegalArgumentException(&quot;Range duration field must be precise&quot;);</span>
+        }
+
+<span class="fc" id="L64">        long rangeMillis = range.getUnitMillis();</span>
+<span class="fc" id="L65">        iRange = (int)(rangeMillis / getUnitMillis());</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (iRange &lt; 2) {</span>
+<span class="fc" id="L67">            throw new IllegalArgumentException(&quot;The effective range must be at least 2&quot;);</span>
+        }
+
+<span class="fc" id="L70">        iRangeField = range;</span>
+<span class="fc" id="L71">    }</span>
+
+    /**
+     * Get the amount of fractional units from the specified time instant.
+     * 
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to query
+     * @return the amount of fractional units extracted from the input.
+     */
+    public int get(long instant) {
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (instant &gt;= 0) {</span>
+<span class="fc" id="L81">            return (int) ((instant / getUnitMillis()) % iRange);</span>
+        } else {
+<span class="fc" id="L83">            return iRange - 1 + (int) (((instant + 1) / getUnitMillis()) % iRange);</span>
+        }
+    }
+
+    /**
+     * Add to the component of the specified time instant, wrapping around
+     * within that component if necessary.
+     * 
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to add to
+     * @param amount  the amount of units to add (can be negative).
+     * @return the updated time instant.
+     */
+    public long addWrapField(long instant, int amount) {
+<span class="fc" id="L96">        int thisValue = get(instant);</span>
+<span class="fc" id="L97">        int wrappedValue = FieldUtils.getWrappedValue</span>
+<span class="fc" id="L98">            (thisValue, amount, getMinimumValue(), getMaximumValue());</span>
+        // copy code from set() to avoid repeat call to get()
+<span class="fc" id="L100">        return instant + (wrappedValue - thisValue) * getUnitMillis();</span>
+    }
+
+    /**
+     * Set the specified amount of units to the specified time instant.
+     * 
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z to set in
+     * @param value  value of units to set.
+     * @return the updated time instant.
+     * @throws IllegalArgumentException if value is too large or too small.
+     */
+    public long set(long instant, int value) {
+<span class="fc" id="L112">        FieldUtils.verifyValueBounds(this, value, getMinimumValue(), getMaximumValue());</span>
+<span class="fc" id="L113">        return instant + (value - get(instant)) * iUnitMillis;</span>
+    }
+
+    /**
+     * Returns the range duration of this field. For example, if this field
+     * represents &quot;minute of hour&quot;, then the range duration field is an hours.
+     *
+     * @return the range duration of this field, or null if field has no range
+     */
+    public DurationField getRangeDurationField() {
+<span class="fc" id="L123">        return iRangeField;</span>
+    }
+
+    /**
+     * Get the maximum value for the field.
+     * 
+     * @return the maximum value
+     */
+    public int getMaximumValue() {
+<span class="fc" id="L132">        return iRange - 1;</span>
+    }
+    
+    /**
+     * Returns the range of the field in the field's units.
+     * &lt;p&gt;
+     * For example, 60 for seconds per minute. The field is allowed values
+     * from 0 to range - 1.
+     * 
+     * @return unit range
+     */
+    public int getRange() {
+<span class="fc" id="L144">        return iRange;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

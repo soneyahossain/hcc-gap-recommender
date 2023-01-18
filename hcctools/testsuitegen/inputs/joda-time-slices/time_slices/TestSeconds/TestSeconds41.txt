@@ -1,0 +1,238 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.9% done, time left: unknown  2.2% done, time left: unknown  2.5% done, time left: unknown  2.7% done, time left: unknown  3.0% done, time left: unknown  3.5% done, time left: unknown  4.1% done, time left: unknown  5.2% done, time left:   0:00:08    5.2% done, time left:   0:00:12  5.2% done, time left:   0:00:17  5.7% done, time left:   0:00:18  7.1% done, time left:   0:00:18  9.2% done, time left:   0:00:18  9.4% done, time left:   0:00:17  9.6% done, time left:   0:00:16  9.8% done, time left:   0:00:15 12.6% done, time left:   0:00:14 12.6% done, time left:   0:00:12 12.6% done, time left:   0:00:10 12.6% done, time left:   0:00:09 12.6% done, time left:   0:00:08 14.9% done, time left:   0:00:08 18.1% done, time left:   0:00:07 21.3% done, time left:   0:00:06 22.8% done, time left:   0:00:05 26.7% done, time left:   0:00:04 30.6% done, time left:   0:00:03 34.2% done, time left:   0:00:02 36.6% done, time left:   0:00:02 40.3% done, time left:   0:00:02 44.4% done, time left:   0:00:01 48.3% done, time left:   0:00:01 52.4% done, time left:   0:00:01 56.5% done, time left:   0:00:00 61.0% done, time left:   0:00:00 63.7% done, time left:   0:00:00 65.4% done, time left:   0:00:00 67.3% done, time left:   0:00:00 69.6% done, time left:   0:00:00 71.5% done, time left:   0:00:00 74.0% done, time left:   0:00:00 76.4% done, time left:   0:00:00 79.6% done, time left:   0:00:00 82.7% done, time left:   0:00:00 85.9% done, time left:   0:00:00 89.5% done, time left:   0:00:00 90.2% done, time left:   0:00:00 90.3% done, time left:   0:00:00 90.7% done, time left:   0:00:00 92.7% done, time left:   0:00:00 96.2% done, time left:   0:00:00 98.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestSeconds.testFactory_parseSeconds_String:165:*]:
+org.joda.time.DateTimeUtils.getPeriodType:302 ALOAD 0
+org.joda.time.DateTimeUtils.getPeriodType:302 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getPeriodType:305 ALOAD 0
+org.joda.time.DateTimeUtils.getPeriodType:305 ARETURN
+org.joda.time.MutablePeriod.<init>:200 ALOAD 0
+org.joda.time.MutablePeriod.<init>:200 ALOAD 3
+org.joda.time.MutablePeriod.<init>:200 INVOKESPECIAL org/joda/time/base/BasePeriod.<init>(JLorg/joda/time/PeriodType;Lorg/joda/time/Chronology;)V
+org.joda.time.MutablePeriod.<init>:426 ALOAD 0
+org.joda.time.MutablePeriod.<init>:426 ALOAD 2
+org.joda.time.MutablePeriod.<init>:426 INVOKESPECIAL org/joda/time/base/BasePeriod.<init>(Ljava/lang/Object;Lorg/joda/time/PeriodType;Lorg/joda/time/Chronology;)V
+org.joda.time.Period.<init>:674 ALOAD 0
+org.joda.time.Period.<init>:674 ALOAD 1
+org.joda.time.Period.<init>:674 ACONST_NULL
+org.joda.time.Period.<init>:674 INVOKESPECIAL org/joda/time/base/BasePeriod.<init>(Ljava/lang/Object;Lorg/joda/time/PeriodType;Lorg/joda/time/Chronology;)V
+org.joda.time.Period.getSeconds:812 ALOAD 0
+org.joda.time.Period.getSeconds:812 INVOKEVIRTUAL org/joda/time/Period.getPeriodType()Lorg/joda/time/PeriodType;
+org.joda.time.Period.getSeconds:812 ALOAD 0
+org.joda.time.Period.getSeconds:812 GETSTATIC org/joda/time/PeriodType.SECOND_INDEX I
+org.joda.time.Period.getSeconds:812 INVOKEVIRTUAL org/joda/time/PeriodType.getIndexedField(Lorg/joda/time/ReadablePeriod;I)I
+org.joda.time.Period.getSeconds:812 IRETURN
+org.joda.time.PeriodType.getIndexedField:674 ALOAD 0
+org.joda.time.PeriodType.getIndexedField:674 GETFIELD org/joda/time/PeriodType.iIndices [I
+org.joda.time.PeriodType.getIndexedField:674 ILOAD 2
+org.joda.time.PeriodType.getIndexedField:674 IALOAD
+org.joda.time.PeriodType.getIndexedField:674 ISTORE 3
+org.joda.time.PeriodType.getIndexedField:675 ILOAD 3
+org.joda.time.PeriodType.getIndexedField:675 ICONST_M1
+org.joda.time.PeriodType.getIndexedField:675 IF_ICMPNE L0 true false
+org.joda.time.PeriodType.getIndexedField:675 ALOAD 1
+org.joda.time.PeriodType.getIndexedField:675 ILOAD 3
+org.joda.time.PeriodType.getIndexedField:675 INVOKEINTERFACE org/joda/time/ReadablePeriod.getValue(I)I
+org.joda.time.PeriodType.getIndexedField:675 IRETURN
+org.joda.time.Seconds.seconds:72 ILOAD 0
+org.joda.time.Seconds.seconds:72 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, -2147483648 => L5, 0 => L0, 2147483647 => L4* => L6)
+org.joda.time.Seconds.seconds:78 GETSTATIC org/joda/time/Seconds.TWO Lorg/joda/time/Seconds;
+org.joda.time.Seconds.seconds:78 ARETURN
+org.joda.time.Seconds.parseSeconds:182 ALOAD 0
+org.joda.time.Seconds.parseSeconds:182 IFNONNULL L0 true false
+org.joda.time.Seconds.parseSeconds:185 GETSTATIC org/joda/time/Seconds.PARSER Lorg/joda/time/format/PeriodFormatter;
+org.joda.time.Seconds.parseSeconds:185 ALOAD 0
+org.joda.time.Seconds.parseSeconds:185 INVOKEVIRTUAL org/joda/time/format/PeriodFormatter.parsePeriod(Ljava/lang/String;)Lorg/joda/time/Period;
+org.joda.time.Seconds.parseSeconds:185 ASTORE 1
+org.joda.time.Seconds.parseSeconds:186 ALOAD 1
+org.joda.time.Seconds.parseSeconds:186 INVOKEVIRTUAL org/joda/time/Period.getSeconds()I
+org.joda.time.Seconds.parseSeconds:186 INVOKESTATIC org/joda/time/Seconds.seconds(I)Lorg/joda/time/Seconds;
+org.joda.time.Seconds.parseSeconds:186 ARETURN
+org.joda.time.Seconds.getSeconds:323 ALOAD 0
+org.joda.time.Seconds.getSeconds:323 INVOKEVIRTUAL org/joda/time/Seconds.getValue()I
+org.joda.time.Seconds.getSeconds:323 IRETURN
+org.joda.time.TestSeconds.main:44 INVOKEVIRTUAL org/joda/time/TestSeconds.testFactory_parseSeconds_String()V
+org.joda.time.TestSeconds.testFactory_parseSeconds_String:162 LCONST_1
+org.joda.time.TestSeconds.testFactory_parseSeconds_String:165 LDC 2
+org.joda.time.TestSeconds.testFactory_parseSeconds_String:165 LDC "PT0H2S"
+org.joda.time.TestSeconds.testFactory_parseSeconds_String:165 INVOKESTATIC org/joda/time/Seconds.parseSeconds(Ljava/lang/String;)Lorg/joda/time/Seconds;
+org.joda.time.TestSeconds.testFactory_parseSeconds_String:165 INVOKEVIRTUAL org/joda/time/Seconds.getSeconds()I
+org.joda.time.TestSeconds.testFactory_parseSeconds_String:165 I2L
+org.joda.time.TestSeconds.testFactory_parseSeconds_String:165 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.AbstractPeriod.size:56 ALOAD 0
+org.joda.time.base.AbstractPeriod.size:56 INVOKEVIRTUAL org/joda/time/base/AbstractPeriod.getPeriodType()Lorg/joda/time/PeriodType;
+org.joda.time.base.AbstractPeriod.size:56 IRETURN
+org.joda.time.base.AbstractPeriod.getValues:95 ALOAD 0
+org.joda.time.base.AbstractPeriod.getValues:95 INVOKEVIRTUAL org/joda/time/base/AbstractPeriod.size()I
+org.joda.time.base.AbstractPeriod.getValues:95 NEWARRAY T_INT
+org.joda.time.base.AbstractPeriod.getValues:95 ASTORE 1
+org.joda.time.base.AbstractPeriod.getValues:96 ICONST_0
+org.joda.time.base.AbstractPeriod.getValues:96 ISTORE 2
+org.joda.time.base.AbstractPeriod.getValues:96 ILOAD 2
+org.joda.time.base.AbstractPeriod.getValues:96 ALOAD 1
+org.joda.time.base.AbstractPeriod.getValues:96 ARRAYLENGTH
+org.joda.time.base.AbstractPeriod.getValues:96 IF_ICMPGE L1 true true
+org.joda.time.base.AbstractPeriod.getValues:96 IINC 2 1
+org.joda.time.base.AbstractPeriod.getValues:97 ALOAD 1
+org.joda.time.base.AbstractPeriod.getValues:97 ILOAD 2
+org.joda.time.base.AbstractPeriod.getValues:97 ALOAD 0
+org.joda.time.base.AbstractPeriod.getValues:97 ILOAD 2
+org.joda.time.base.AbstractPeriod.getValues:97 INVOKEVIRTUAL org/joda/time/base/AbstractPeriod.getValue(I)I
+org.joda.time.base.AbstractPeriod.getValues:97 IASTORE
+org.joda.time.base.AbstractPeriod.getValues:99 ALOAD 1
+org.joda.time.base.AbstractPeriod.getValues:99 ARETURN
+org.joda.time.base.AbstractPeriod.toPeriod:147 NEW org/joda/time/Period
+org.joda.time.base.AbstractPeriod.toPeriod:147 DUP
+org.joda.time.base.AbstractPeriod.toPeriod:147 ALOAD 0
+org.joda.time.base.AbstractPeriod.toPeriod:147 INVOKESPECIAL org/joda/time/Period.<init>(Ljava/lang/Object;)V
+org.joda.time.base.AbstractPeriod.toPeriod:147 ARETURN
+org.joda.time.base.BasePeriod.<init>:255 ALOAD 3
+org.joda.time.base.BasePeriod.<init>:255 INVOKEVIRTUAL org/joda/time/base/BasePeriod.checkPeriodType(Lorg/joda/time/PeriodType;)Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.<init>:255 ASTORE 3
+org.joda.time.base.BasePeriod.<init>:257 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:257 ALOAD 3
+org.joda.time.base.BasePeriod.<init>:257 PUTFIELD org/joda/time/base/BasePeriod.iType Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.<init>:273 ALOAD 2
+org.joda.time.base.BasePeriod.<init>:273 IFNONNULL L0 true true
+org.joda.time.base.BasePeriod.<init>:273 ALOAD 1
+org.joda.time.base.BasePeriod.<init>:273 INVOKEINTERFACE org/joda/time/convert/PeriodConverter.getPeriodType(Ljava/lang/Object;)Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.<init>:273 ALOAD 2
+org.joda.time.base.BasePeriod.<init>:273 ASTORE 2
+org.joda.time.base.BasePeriod.<init>:274 ALOAD 2
+org.joda.time.base.BasePeriod.<init>:274 INVOKEVIRTUAL org/joda/time/base/BasePeriod.checkPeriodType(Lorg/joda/time/PeriodType;)Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.<init>:274 ASTORE 2
+org.joda.time.base.BasePeriod.<init>:275 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:275 ALOAD 2
+org.joda.time.base.BasePeriod.<init>:275 PUTFIELD org/joda/time/base/BasePeriod.iType Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.<init>:276 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:276 INSTANCEOF org/joda/time/ReadWritablePeriod
+org.joda.time.base.BasePeriod.<init>:276 IFEQ L2 true true
+org.joda.time.base.BasePeriod.<init>:277 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:277 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:277 INVOKEVIRTUAL org/joda/time/base/BasePeriod.size()I
+org.joda.time.base.BasePeriod.<init>:277 NEWARRAY T_INT
+org.joda.time.base.BasePeriod.<init>:277 PUTFIELD org/joda/time/base/BasePeriod.iValues [I
+org.joda.time.base.BasePeriod.<init>:281 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:281 NEW org/joda/time/MutablePeriod
+org.joda.time.base.BasePeriod.<init>:281 DUP
+org.joda.time.base.BasePeriod.<init>:281 ALOAD 2
+org.joda.time.base.BasePeriod.<init>:281 INVOKESPECIAL org/joda/time/MutablePeriod.<init>(Ljava/lang/Object;Lorg/joda/time/PeriodType;Lorg/joda/time/Chronology;)V
+org.joda.time.base.BasePeriod.<init>:281 INVOKEVIRTUAL org/joda/time/MutablePeriod.getValues()[I
+org.joda.time.base.BasePeriod.<init>:281 PUTFIELD org/joda/time/base/BasePeriod.iValues [I
+org.joda.time.base.BasePeriod.checkPeriodType:308 ALOAD 1
+org.joda.time.base.BasePeriod.checkPeriodType:308 INVOKESTATIC org/joda/time/DateTimeUtils.getPeriodType(Lorg/joda/time/PeriodType;)Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.checkPeriodType:308 ARETURN
+org.joda.time.base.BasePeriod.getPeriodType:318 ALOAD 0
+org.joda.time.base.BasePeriod.getPeriodType:318 GETFIELD org/joda/time/base/BasePeriod.iType Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.getPeriodType:318 ARETURN
+org.joda.time.base.BasePeriod.getValue:329 ALOAD 0
+org.joda.time.base.BasePeriod.getValue:329 GETFIELD org/joda/time/base/BasePeriod.iValues [I
+org.joda.time.base.BasePeriod.getValue:329 ILOAD 1
+org.joda.time.base.BasePeriod.getValue:329 IALOAD
+org.joda.time.base.BasePeriod.getValue:329 IRETURN
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+org.joda.time.convert.ReadablePeriodConverter.getPeriodType:70 ALOAD 1
+org.joda.time.convert.ReadablePeriodConverter.getPeriodType:70 ASTORE 2
+org.joda.time.convert.ReadablePeriodConverter.getPeriodType:71 ALOAD 2
+org.joda.time.convert.ReadablePeriodConverter.getPeriodType:71 INVOKEINTERFACE org/joda/time/ReadablePeriod.getPeriodType()Lorg/joda/time/PeriodType;
+org.joda.time.convert.ReadablePeriodConverter.getPeriodType:71 ARETURN
+org.joda.time.format.PeriodFormatter.getParser:146 ALOAD 0
+org.joda.time.format.PeriodFormatter.getParser:146 GETFIELD org/joda/time/format/PeriodFormatter.iParser Lorg/joda/time/format/PeriodParser;
+org.joda.time.format.PeriodFormatter.getParser:146 ARETURN
+org.joda.time.format.PeriodFormatter.parsePeriod:308 ALOAD 0
+org.joda.time.format.PeriodFormatter.parsePeriod:308 ALOAD 1
+org.joda.time.format.PeriodFormatter.parsePeriod:308 INVOKEVIRTUAL org/joda/time/format/PeriodFormatter.parseMutablePeriod(Ljava/lang/String;)Lorg/joda/time/MutablePeriod;
+org.joda.time.format.PeriodFormatter.parsePeriod:308 INVOKEVIRTUAL org/joda/time/MutablePeriod.toPeriod()Lorg/joda/time/Period;
+org.joda.time.format.PeriodFormatter.parsePeriod:308 ARETURN
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:321 NEW org/joda/time/MutablePeriod
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:321 DUP
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:321 ALOAD 0
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:321 GETFIELD org/joda/time/format/PeriodFormatter.iParseType Lorg/joda/time/PeriodType;
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:321 INVOKESPECIAL org/joda/time/MutablePeriod.<init>(JLorg/joda/time/PeriodType;)V
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:321 ASTORE 2
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:322 ALOAD 0
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:322 INVOKEVIRTUAL org/joda/time/format/PeriodFormatter.getParser()Lorg/joda/time/format/PeriodParser;
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:322 ALOAD 1
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:322 ICONST_0
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:322 INVOKEINTERFACE org/joda/time/format/PeriodParser.parseInto(Lorg/joda/time/ReadWritablePeriod;Ljava/lang/String;ILjava/util/Locale;)I
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:322 ISTORE 3
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:323 ILOAD 3
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:323 IFLT L0 false true
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:324 ILOAD 3
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:324 ALOAD 1
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:324 INVOKEVIRTUAL java/lang/String.length()I
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:324 IF_ICMPLT L1 false true
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:325 ALOAD 2
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:325 ARETURN
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2034 ILOAD 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2034 ISTORE 5
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2035 ALOAD 0
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2035 GETFIELD org/joda/time/format/PeriodFormatterBuilder$Separator.iBeforeParser Lorg/joda/time/format/PeriodParser;
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2035 ISTORE 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2037 ILOAD 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2037 IFGE L0 true false
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2043 ILOAD 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2043 ILOAD 5
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2043 IF_ICMPLE L6 false true
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2045 ALOAD 0
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2045 GETFIELD org/joda/time/format/PeriodFormatterBuilder$Separator.iParsedForms [Ljava/lang/String;
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2045 ASTORE 8
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2046 ALOAD 8
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2046 ARRAYLENGTH
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2046 ISTORE 9
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2047 ICONST_0
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2047 ISTORE 10
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2047 ILOAD 10
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2047 ILOAD 9
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2047 IF_ICMPGE L6 false true
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2048 ALOAD 8
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2048 ILOAD 10
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2048 AALOAD
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2048 ASTORE 11
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 ALOAD 11
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 IFNULL L2 false true
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 ALOAD 11
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 INVOKEVIRTUAL java/lang/String.length()I
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 IFEQ L2 false true
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 ALOAD 2
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 ICONST_1
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 ILOAD 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 ALOAD 11
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 ICONST_0
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 ALOAD 11
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 INVOKEVIRTUAL java/lang/String.length()I
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 INVOKEVIRTUAL java/lang/String.regionMatches(ZILjava/lang/String;II)Z
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2049 IFEQ L5 false true
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2052 ALOAD 11
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2052 IFNONNULL L3 true false
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2052 ALOAD 11
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2052 INVOKEVIRTUAL java/lang/String.length()I
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2052 ISTORE 7
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2053 ILOAD 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2053 ILOAD 7
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2053 IADD
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2053 ISTORE 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2054 ICONST_1
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2054 ISTORE 6
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2060 ILOAD 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2060 ISTORE 5
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2061 ALOAD 0
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2061 GETFIELD org/joda/time/format/PeriodFormatterBuilder$Separator.iAfterParser Lorg/joda/time/format/PeriodParser;
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2061 ISTORE 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2063 ILOAD 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2063 IFGE L7 true false
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2067 ILOAD 6
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2067 IFEQ L8 false true
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2067 ILOAD 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2067 ILOAD 5
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2067 IF_ICMPNE L8 true false
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2072 ILOAD 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2072 ILOAD 5
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2072 IF_ICMPLE L9 false true
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2072 ILOAD 6
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2072 IFNE L9 true false
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2077 ILOAD 3
+org.joda.time.format.PeriodFormatterBuilder$Separator.parseInto:2077 IRETURN
+
+Slice consists of 233 bytecode instructions.
+Computation took 5.78 seconds.

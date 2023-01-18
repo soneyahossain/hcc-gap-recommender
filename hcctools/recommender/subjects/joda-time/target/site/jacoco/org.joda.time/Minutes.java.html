@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Minutes.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">Minutes.java</span></div><h1>Minutes.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2010 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import org.joda.convert.FromString;
+import org.joda.convert.ToString;
+import org.joda.time.base.BaseSingleFieldPeriod;
+import org.joda.time.field.FieldUtils;
+import org.joda.time.format.ISOPeriodFormat;
+import org.joda.time.format.PeriodFormatter;
+
+/**
+ * An immutable time period representing a number of minutes.
+ * &lt;p&gt;
+ * &lt;code&gt;Minutes&lt;/code&gt; is an immutable period that can only store minutes.
+ * It does not store years, months or hours for example. As such it is a
+ * type-safe way of representing a number of minutes in an application.
+ * &lt;p&gt;
+ * The number of minutes is set in the constructor, and may be queried using
+ * &lt;code&gt;getMinutes()&lt;/code&gt;. Basic mathematical operations are provided -
+ * &lt;code&gt;plus()&lt;/code&gt;, &lt;code&gt;minus()&lt;/code&gt;, &lt;code&gt;multipliedBy()&lt;/code&gt; and
+ * &lt;code&gt;dividedBy()&lt;/code&gt;.
+ * &lt;p&gt;
+ * &lt;code&gt;Minutes&lt;/code&gt; is thread-safe and immutable.
+ *
+ * @author Stephen Colebourne
+ * @since 1.4
+ */
+public final class Minutes extends BaseSingleFieldPeriod {
+
+    /** Constant representing zero minutes. */
+<span class="fc" id="L45">    public static final Minutes ZERO = new Minutes(0);</span>
+    /** Constant representing one minute. */
+<span class="fc" id="L47">    public static final Minutes ONE = new Minutes(1);</span>
+    /** Constant representing two minutes. */
+<span class="fc" id="L49">    public static final Minutes TWO = new Minutes(2);</span>
+    /** Constant representing three minutes. */
+<span class="fc" id="L51">    public static final Minutes THREE = new Minutes(3);</span>
+    /** Constant representing the maximum number of minutes that can be stored in this object. */
+<span class="fc" id="L53">    public static final Minutes MAX_VALUE = new Minutes(Integer.MAX_VALUE);</span>
+    /** Constant representing the minimum number of minutes that can be stored in this object. */
+<span class="fc" id="L55">    public static final Minutes MIN_VALUE = new Minutes(Integer.MIN_VALUE);</span>
+
+    /** The parser to use for this class. */
+<span class="fc" id="L58">    private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.minutes());</span>
+    /** Serialization version. */
+    private static final long serialVersionUID = 87525275727380863L;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Obtains an instance of &lt;code&gt;Minutes&lt;/code&gt; that may be cached.
+     * &lt;code&gt;Minutes&lt;/code&gt; is immutable, so instances can be cached and shared.
+     * This factory method provides access to shared instances.
+     *
+     * @param minutes  the number of minutes to obtain an instance for
+     * @return the instance of Minutes
+     */
+    public static Minutes minutes(int minutes) {
+<span class="fc bfc" id="L72" title="All 7 branches covered.">        switch (minutes) {</span>
+            case 0:
+<span class="fc" id="L74">                return ZERO;</span>
+            case 1:
+<span class="fc" id="L76">                return ONE;</span>
+            case 2:
+<span class="fc" id="L78">                return TWO;</span>
+            case 3:
+<span class="fc" id="L80">                return THREE;</span>
+            case Integer.MAX_VALUE:
+<span class="fc" id="L82">                return MAX_VALUE;</span>
+            case Integer.MIN_VALUE:
+<span class="fc" id="L84">                return MIN_VALUE;</span>
+            default:
+<span class="fc" id="L86">                return new Minutes(minutes);</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a &lt;code&gt;Minutes&lt;/code&gt; representing the number of whole minutes
+     * between the two specified datetimes.
+     *
+     * @param start  the start instant, must not be null
+     * @param end  the end instant, must not be null
+     * @return the period in minutes
+     * @throws IllegalArgumentException if the instants are null or invalid
+     */
+    public static Minutes minutesBetween(ReadableInstant start, ReadableInstant end) {
+<span class="fc" id="L101">        int amount = BaseSingleFieldPeriod.between(start, end, DurationFieldType.minutes());</span>
+<span class="fc" id="L102">        return Minutes.minutes(amount);</span>
+    }
+
+    /**
+     * Creates a &lt;code&gt;Minutes&lt;/code&gt; representing the number of whole minutes
+     * between the two specified partial datetimes.
+     * &lt;p&gt;
+     * The two partials must contain the same fields, for example you can specify
+     * two &lt;code&gt;LocalTime&lt;/code&gt; objects.
+     *
+     * @param start  the start partial date, must not be null
+     * @param end  the end partial date, must not be null
+     * @return the period in minutes
+     * @throws IllegalArgumentException if the partials are null or invalid
+     */
+    public static Minutes minutesBetween(ReadablePartial start, ReadablePartial end) {
+<span class="pc bpc" id="L118" title="1 of 4 branches missed.">        if (start instanceof LocalTime &amp;&amp; end instanceof LocalTime)   {</span>
+<span class="fc" id="L119">            Chronology chrono = DateTimeUtils.getChronology(start.getChronology());</span>
+<span class="fc" id="L120">            int minutes = chrono.minutes().getDifference(</span>
+<span class="fc" id="L121">                    ((LocalTime) end).getLocalMillis(), ((LocalTime) start).getLocalMillis());</span>
+<span class="fc" id="L122">            return Minutes.minutes(minutes);</span>
+        }
+<span class="fc" id="L124">        int amount = BaseSingleFieldPeriod.between(start, end, ZERO);</span>
+<span class="fc" id="L125">        return Minutes.minutes(amount);</span>
+    }
+
+    /**
+     * Creates a &lt;code&gt;Minutes&lt;/code&gt; representing the number of whole minutes
+     * in the specified interval.
+     *
+     * @param interval  the interval to extract minutes from, null returns zero
+     * @return the period in minutes
+     * @throws IllegalArgumentException if the partials are null or invalid
+     */
+    public static Minutes minutesIn(ReadableInterval interval) {
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        if (interval == null)   {</span>
+<span class="fc" id="L138">            return Minutes.ZERO;</span>
+        }
+<span class="fc" id="L140">        int amount = BaseSingleFieldPeriod.between(interval.getStart(), interval.getEnd(), DurationFieldType.minutes());</span>
+<span class="fc" id="L141">        return Minutes.minutes(amount);</span>
+    }
+
+    /**
+     * Creates a new &lt;code&gt;Minutes&lt;/code&gt; representing the number of complete
+     * standard length minutes in the specified period.
+     * &lt;p&gt;
+     * This factory method converts all fields from the period to minutes using standardised
+     * durations for each field. Only those fields which have a precise duration in
+     * the ISO UTC chronology can be converted.
+     * &lt;ul&gt;
+     * &lt;li&gt;One week consists of 7 days.
+     * &lt;li&gt;One day consists of 24 hours.
+     * &lt;li&gt;One hour consists of 60 minutes.
+     * &lt;li&gt;One minute consists of 60 seconds.
+     * &lt;li&gt;One second consists of 1000 milliseconds.
+     * &lt;/ul&gt;
+     * Months and Years are imprecise and periods containing these values cannot be converted.
+     *
+     * @param period  the period to get the number of minutes from, null returns zero
+     * @return the period in minutes
+     * @throws IllegalArgumentException if the period contains imprecise duration values
+     */
+    public static Minutes standardMinutesIn(ReadablePeriod period) {
+<span class="fc" id="L165">        int amount = BaseSingleFieldPeriod.standardPeriodIn(period, DateTimeConstants.MILLIS_PER_MINUTE);</span>
+<span class="fc" id="L166">        return Minutes.minutes(amount);</span>
+    }
+
+    /**
+     * Creates a new &lt;code&gt;Minutes&lt;/code&gt; by parsing a string in the ISO8601 format 'PTnM'.
+     * &lt;p&gt;
+     * The parse will accept the full ISO syntax of PnYnMnWnDTnHnMnS however only the
+     * minutes component may be non-zero. If any other component is non-zero, an exception
+     * will be thrown.
+     *
+     * @param periodStr  the period string, null returns zero
+     * @return the period in minutes
+     * @throws IllegalArgumentException if the string format is invalid
+     */
+    @FromString
+    public static Minutes parseMinutes(String periodStr) {
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        if (periodStr == null) {</span>
+<span class="fc" id="L183">            return Minutes.ZERO;</span>
+        }
+<span class="fc" id="L185">        Period p = PARSER.parsePeriod(periodStr);</span>
+<span class="fc" id="L186">        return Minutes.minutes(p.getMinutes());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a new instance representing a number of minutes.
+     * You should consider using the factory method {@link #minutes(int)}
+     * instead of the constructor.
+     *
+     * @param minutes  the number of minutes to represent
+     */
+    private Minutes(int minutes) {
+<span class="fc" id="L198">        super(minutes);</span>
+<span class="fc" id="L199">    }</span>
+
+    /**
+     * Resolves singletons.
+     * 
+     * @return the singleton instance
+     */
+    private Object readResolve() {
+<span class="fc" id="L207">        return Minutes.minutes(getValue());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the duration field type, which is &lt;code&gt;minutes&lt;/code&gt;.
+     *
+     * @return the period type
+     */
+    public DurationFieldType getFieldType() {
+<span class="fc" id="L217">        return DurationFieldType.minutes();</span>
+    }
+
+    /**
+     * Gets the period type, which is &lt;code&gt;minutes&lt;/code&gt;.
+     *
+     * @return the period type
+     */
+    public PeriodType getPeriodType() {
+<span class="fc" id="L226">        return PeriodType.minutes();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Converts this period in minutes to a period in weeks assuming a
+     * 7 days week, 24 hour day and 60 minute hour.
+     * &lt;p&gt;
+     * This method allows you to convert between different types of period.
+     * However to achieve this it makes the assumption that all weeks are
+     * 7 days long, all days are 24 hours long and all hours are 60 minutes long.
+     * This is not true when daylight savings is considered and may also not
+     * be true for some unusual chronologies. However, it is included
+     * as it is a useful operation for many applications and business rules.
+     * 
+     * @return a period representing the number of whole weeks for this number of minutes
+     */
+    public Weeks toStandardWeeks() {
+<span class="fc" id="L244">        return Weeks.weeks(getValue() / DateTimeConstants.MINUTES_PER_WEEK);</span>
+    }
+
+    /**
+     * Converts this period in minutes to a period in days assuming a
+     * 24 hour day and 60 minute hour.
+     * &lt;p&gt;
+     * This method allows you to convert between different types of period.
+     * However to achieve this it makes the assumption that all days are
+     * 24 hours long and all hours are 60 minutes long.
+     * This is not true when daylight savings is considered and may also not
+     * be true for some unusual chronologies. However, it is included
+     * as it is a useful operation for many applications and business rules.
+     * 
+     * @return a period representing the number of whole days for this number of minutes
+     */
+    public Days toStandardDays() {
+<span class="fc" id="L261">        return Days.days(getValue() / DateTimeConstants.MINUTES_PER_DAY);</span>
+    }
+
+    /**
+     * Converts this period in minutes to a period in hours assuming a
+     * 60 minute hour.
+     * &lt;p&gt;
+     * This method allows you to convert between different types of period.
+     * However to achieve this it makes the assumption that all hours are
+     * 60 minutes long.
+     * This may not be true for some unusual chronologies. However, it is included
+     * as it is a useful operation for many applications and business rules.
+     * 
+     * @return a period representing the number of hours for this number of minutes
+     */
+    public Hours toStandardHours() {
+<span class="fc" id="L277">        return Hours.hours(getValue() / DateTimeConstants.MINUTES_PER_HOUR);</span>
+    }
+
+    /**
+     * Converts this period in minutes to a period in seconds assuming a
+     * 60 second minute.
+     * &lt;p&gt;
+     * This method allows you to convert between different types of period.
+     * However to achieve this it makes the assumption that all minutes are
+     * 60 seconds long.
+     * This may not be true for some unusual chronologies. However, it is included
+     * as it is a useful operation for many applications and business rules.
+     * 
+     * @return a period representing the number of seconds for this number of minutes
+     * @throws ArithmeticException if the number of seconds is too large to be represented
+     */
+    public Seconds toStandardSeconds() {
+<span class="fc" id="L294">        return Seconds.seconds(FieldUtils.safeMultiply(getValue(), DateTimeConstants.SECONDS_PER_MINUTE));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Converts this period in minutes to a duration in milliseconds assuming a
+     * 60 second minute.
+     * &lt;p&gt;
+     * This method allows you to convert from a period to a duration.
+     * However to achieve this it makes the assumption that all minutes are
+     * 60 seconds long. This might not be true for an unusual chronology,
+     * for example one that takes leap seconds into account.
+     * However, the method is included as it is a useful operation for many
+     * applications and business rules.
+     *
+     * @return a duration equivalent to this number of minutes
+     */
+    public Duration toStandardDuration() {
+<span class="fc" id="L312">        long minutes = getValue();  // assign to a long</span>
+<span class="fc" id="L313">        return new Duration(minutes * DateTimeConstants.MILLIS_PER_MINUTE);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the number of minutes that this period represents.
+     *
+     * @return the number of minutes in the period
+     */
+    public int getMinutes() {
+<span class="fc" id="L323">        return getValue();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the specified number of minutes added.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param minutes  the amount of minutes to add, may be negative
+     * @return the new period plus the specified number of minutes
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Minutes plus(int minutes) {
+<span class="fc bfc" id="L337" title="All 2 branches covered.">        if (minutes == 0) {</span>
+<span class="fc" id="L338">            return this;</span>
+        }
+<span class="fc" id="L340">        return Minutes.minutes(FieldUtils.safeAdd(getValue(), minutes));</span>
+    }
+
+    /**
+     * Returns a new instance with the specified number of minutes added.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param minutes  the amount of minutes to add, may be negative, null means zero
+     * @return the new period plus the specified number of minutes
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Minutes plus(Minutes minutes) {
+<span class="fc bfc" id="L353" title="All 2 branches covered.">        if (minutes == null) {</span>
+<span class="fc" id="L354">            return this;</span>
+        }
+<span class="fc" id="L356">        return plus(minutes.getValue());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the specified number of minutes taken away.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param minutes  the amount of minutes to take away, may be negative
+     * @return the new period minus the specified number of minutes
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Minutes minus(int minutes) {
+<span class="fc" id="L370">        return plus(FieldUtils.safeNegate(minutes));</span>
+    }
+
+    /**
+     * Returns a new instance with the specified number of minutes taken away.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param minutes  the amount of minutes to take away, may be negative, null means zero
+     * @return the new period minus the specified number of minutes
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Minutes minus(Minutes minutes) {
+<span class="fc bfc" id="L383" title="All 2 branches covered.">        if (minutes == null) {</span>
+<span class="fc" id="L384">            return this;</span>
+        }
+<span class="fc" id="L386">        return minus(minutes.getValue());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the minutes multiplied by the specified scalar.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param scalar  the amount to multiply by, may be negative
+     * @return the new period multiplied by the specified scalar
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Minutes multipliedBy(int scalar) {
+<span class="fc" id="L400">        return Minutes.minutes(FieldUtils.safeMultiply(getValue(), scalar));</span>
+    }
+
+    /**
+     * Returns a new instance with the minutes divided by the specified divisor.
+     * The calculation uses integer division, thus 3 divided by 2 is 1.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param divisor  the amount to divide by, may be negative
+     * @return the new period divided by the specified divisor
+     * @throws ArithmeticException if the divisor is zero
+     */
+    public Minutes dividedBy(int divisor) {
+<span class="fc bfc" id="L414" title="All 2 branches covered.">        if (divisor == 1) {</span>
+<span class="fc" id="L415">            return this;</span>
+        }
+<span class="fc" id="L417">        return Minutes.minutes(getValue() / divisor);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the minutes value negated.
+     *
+     * @return the new period with a negated value
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Minutes negated() {
+<span class="fc" id="L428">        return Minutes.minutes(FieldUtils.safeNegate(getValue()));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Is this minutes instance greater than the specified number of minutes.
+     *
+     * @param other  the other period, null means zero
+     * @return true if this minutes instance is greater than the specified one
+     */
+    public boolean isGreaterThan(Minutes other) {
+<span class="fc bfc" id="L439" title="All 2 branches covered.">        if (other == null) {</span>
+<span class="fc bfc" id="L440" title="All 2 branches covered.">            return getValue() &gt; 0;</span>
+        }
+<span class="fc bfc" id="L442" title="All 2 branches covered.">        return getValue() &gt; other.getValue();</span>
+    }
+
+    /**
+     * Is this minutes instance less than the specified number of minutes.
+     *
+     * @param other  the other period, null means zero
+     * @return true if this minutes instance is less than the specified one
+     */
+    public boolean isLessThan(Minutes other) {
+<span class="fc bfc" id="L452" title="All 2 branches covered.">        if (other == null) {</span>
+<span class="fc bfc" id="L453" title="All 2 branches covered.">            return getValue() &lt; 0;</span>
+        }
+<span class="fc bfc" id="L455" title="All 2 branches covered.">        return getValue() &lt; other.getValue();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets this instance as a String in the ISO8601 duration format.
+     * &lt;p&gt;
+     * For example, &quot;PT4M&quot; represents 4 minutes.
+     *
+     * @return the value as an ISO8601 string
+     */
+    @ToString
+    public String toString() {
+<span class="fc" id="L468">        return &quot;PT&quot; + String.valueOf(getValue()) + &quot;M&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DividedDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">DividedDateTimeField.java</span></div><h1>DividedDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+
+/**
+ * Divides a DateTimeField such that the retrieved values are reduced by a
+ * fixed divisor. The field's unit duration is scaled accordingly, but the
+ * range duration is unchanged.
+ * &lt;p&gt;
+ * DividedDateTimeField is thread-safe and immutable.
+ *
+ * @see RemainderDateTimeField
+ * 
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public class DividedDateTimeField extends DecoratedDateTimeField {
+
+    @SuppressWarnings(&quot;unused&quot;)
+    private static final long serialVersionUID = 8318475124230605365L;
+
+    // Shared with RemainderDateTimeField.
+    final int iDivisor;
+    final DurationField iDurationField;
+    final DurationField iRangeDurationField;
+
+    private final int iMin;
+    private final int iMax;
+
+    /**
+     * Constructor.
+     * 
+     * @param field  the field to wrap, like &quot;year()&quot;.
+     * @param type  the field type this field will actually use
+     * @param divisor  divisor, such as 100 years in a century
+     * @throws IllegalArgumentException if divisor is less than two
+     */
+    public DividedDateTimeField(DateTimeField field,
+                                DateTimeFieldType type, int divisor) {
+<span class="fc" id="L58">        this(field, field.getRangeDurationField(), type, divisor);</span>
+<span class="fc" id="L59">    }</span>
+
+    /**
+     * Constructor.
+     * 
+     * @param field  the field to wrap, like &quot;year()&quot;.
+     * @param rangeField  the range field, null to derive
+     * @param type  the field type this field will actually use
+     * @param divisor  divisor, such as 100 years in a century
+     * @throws IllegalArgumentException if divisor is less than two
+     */
+    public DividedDateTimeField(DateTimeField field, DurationField rangeField,
+                                DateTimeFieldType type, int divisor) {
+<span class="fc" id="L72">        super(field, type);</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if (divisor &lt; 2) {</span>
+<span class="nc" id="L74">            throw new IllegalArgumentException(&quot;The divisor must be at least 2&quot;);</span>
+        }
+<span class="fc" id="L76">        DurationField unitField = field.getDurationField();</span>
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">        if (unitField == null) {</span>
+<span class="nc" id="L78">            iDurationField = null;</span>
+        } else {
+<span class="fc" id="L80">            iDurationField = new ScaledDurationField(</span>
+<span class="fc" id="L81">                unitField, type.getDurationType(), divisor);</span>
+        }
+<span class="fc" id="L83">        iRangeDurationField = rangeField;</span>
+<span class="fc" id="L84">        iDivisor = divisor;</span>
+<span class="fc" id="L85">        int i = field.getMinimumValue();</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        int min = (i &gt;= 0) ? i / divisor : ((i + 1) / divisor - 1);</span>
+<span class="fc" id="L87">        int j = field.getMaximumValue();</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        int max = (j &gt;= 0) ? j / divisor : ((j + 1) / divisor - 1);</span>
+<span class="fc" id="L89">        iMin = min;</span>
+<span class="fc" id="L90">        iMax = max;</span>
+<span class="fc" id="L91">    }</span>
+
+    /**
+     * Construct a DividedDateTimeField that compliments the given
+     * RemainderDateTimeField.
+     *
+     * @param remainderField  complimentary remainder field, like &quot;yearOfCentury()&quot;.
+     * @param type  the field type this field will actually use
+     */
+    public DividedDateTimeField(RemainderDateTimeField remainderField, DateTimeFieldType type) {
+<span class="nc" id="L101">        this(remainderField, null, type);</span>
+<span class="nc" id="L102">    }</span>
+
+    /**
+     * Construct a DividedDateTimeField that compliments the given
+     * RemainderDateTimeField.
+     *
+     * @param remainderField  complimentary remainder field, like &quot;yearOfCentury()&quot;.
+     * @param rangeField  the range field, null to derive
+     * @param type  the field type this field will actually use
+     */
+    public DividedDateTimeField(RemainderDateTimeField remainderField, DurationField rangeField, DateTimeFieldType type) {
+<span class="nc" id="L113">        super(remainderField.getWrappedField(), type);</span>
+<span class="nc" id="L114">        int divisor = iDivisor = remainderField.iDivisor;</span>
+<span class="nc" id="L115">        iDurationField = remainderField.iRangeField;</span>
+<span class="nc" id="L116">        iRangeDurationField = rangeField;</span>
+<span class="nc" id="L117">        DateTimeField field = getWrappedField();</span>
+<span class="nc" id="L118">        int i = field.getMinimumValue();</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        int min = (i &gt;= 0) ? i / divisor : ((i + 1) / divisor - 1);</span>
+<span class="nc" id="L120">        int j = field.getMaximumValue();</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        int max = (j &gt;= 0) ? j / divisor : ((j + 1) / divisor - 1);</span>
+<span class="nc" id="L122">        iMin = min;</span>
+<span class="nc" id="L123">        iMax = max;</span>
+<span class="nc" id="L124">    }</span>
+
+    @Override
+    public DurationField getRangeDurationField() {
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        if (iRangeDurationField != null) {</span>
+<span class="fc" id="L129">            return iRangeDurationField;</span>
+        }
+<span class="fc" id="L131">        return super.getRangeDurationField();</span>
+    }
+
+    /**
+     * Get the amount of scaled units from the specified time instant.
+     * 
+     * @param instant  the time instant in millis to query.
+     * @return the amount of scaled units extracted from the input.
+     */
+    public int get(long instant) {
+<span class="fc" id="L141">        int value = getWrappedField().get(instant);</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">        if (value &gt;= 0) {</span>
+<span class="fc" id="L143">            return value / iDivisor;</span>
+        } else {
+<span class="nc" id="L145">            return ((value + 1) / iDivisor) - 1;</span>
+        }
+    }
+
+    /**
+     * Add the specified amount of scaled units to the specified time
+     * instant. The amount added may be negative.
+     * 
+     * @param instant  the time instant in millis to update.
+     * @param amount  the amount of scaled units to add (can be negative).
+     * @return the updated time instant.
+     */
+    public long add(long instant, int amount) {
+<span class="nc" id="L158">        return getWrappedField().add(instant, amount * iDivisor);</span>
+    }
+
+    /**
+     * Add the specified amount of scaled units to the specified time
+     * instant. The amount added may be negative.
+     * 
+     * @param instant  the time instant in millis to update.
+     * @param amount  the amount of scaled units to add (can be negative).
+     * @return the updated time instant.
+     */
+    public long add(long instant, long amount) {
+<span class="nc" id="L170">        return getWrappedField().add(instant, amount * iDivisor);</span>
+    }
+
+    /**
+     * Add to the scaled component of the specified time instant,
+     * wrapping around within that component if necessary.
+     * 
+     * @param instant  the time instant in millis to update.
+     * @param amount  the amount of scaled units to add (can be negative).
+     * @return the updated time instant.
+     */
+    public long addWrapField(long instant, int amount) {
+<span class="nc" id="L182">        return set(instant, FieldUtils.getWrappedValue(get(instant), amount, iMin, iMax));</span>
+    }
+
+    public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="nc" id="L186">        return getWrappedField().getDifference(minuendInstant, subtrahendInstant) / iDivisor;</span>
+    }
+
+    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="nc" id="L190">        return getWrappedField().getDifferenceAsLong(minuendInstant, subtrahendInstant) / iDivisor;</span>
+    }
+
+    /**
+     * Set the specified amount of scaled units to the specified time instant.
+     * 
+     * @param instant  the time instant in millis to update.
+     * @param value  value of scaled units to set.
+     * @return the updated time instant.
+     * @throws IllegalArgumentException if value is too large or too small.
+     */
+    public long set(long instant, int value) {
+<span class="fc" id="L202">        FieldUtils.verifyValueBounds(this, value, iMin, iMax);</span>
+<span class="fc" id="L203">        int remainder = getRemainder(getWrappedField().get(instant));</span>
+<span class="fc" id="L204">        return getWrappedField().set(instant, value * iDivisor + remainder);</span>
+    }
+
+    /**
+     * Returns a scaled version of the wrapped field's unit duration field.
+     */
+    public DurationField getDurationField() {
+<span class="fc" id="L211">        return iDurationField;</span>
+    }
+
+    /**
+     * Get the minimum value for the field.
+     * 
+     * @return the minimum value
+     */
+    public int getMinimumValue() {
+<span class="fc" id="L220">        return iMin;</span>
+    }
+
+    /**
+     * Get the maximum value for the field.
+     * 
+     * @return the maximum value
+     */
+    public int getMaximumValue() {
+<span class="fc" id="L229">        return iMax;</span>
+    }
+
+    public long roundFloor(long instant) {
+<span class="nc" id="L233">        DateTimeField field = getWrappedField();</span>
+<span class="nc" id="L234">        return field.roundFloor(field.set(instant, get(instant) * iDivisor));</span>
+    }
+
+    public long remainder(long instant) {
+<span class="nc" id="L238">        return set(instant, get(getWrappedField().remainder(instant)));</span>
+    }
+
+    /**
+     * Returns the divisor applied, in the field's units.
+     * 
+     * @return the divisor
+     */
+    public int getDivisor() {
+<span class="nc" id="L247">        return iDivisor;</span>
+    }
+
+    private int getRemainder(int value) {
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">        if (value &gt;= 0) {</span>
+<span class="fc" id="L252">            return value % iDivisor;</span>
+        } else {
+<span class="nc" id="L254">            return (iDivisor - 1) + ((value + 1) % iDivisor);</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,164 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.5% done, time left: unknown  1.3% done, time left: unknown  2.8% done, time left: unknown  2.9% done, time left: unknown  3.2% done, time left: unknown  3.4% done, time left: unknown  4.0% done, time left: unknown  4.4% done, time left:   0:00:21    5.6% done, time left:   0:00:17  5.6% done, time left:   0:00:19  5.6% done, time left:   0:00:22  5.7% done, time left:   0:00:24  7.4% done, time left:   0:00:25  8.4% done, time left:   0:00:24  9.8% done, time left:   0:00:24 10.0% done, time left:   0:00:22 10.0% done, time left:   0:00:21 11.1% done, time left:   0:00:21 13.0% done, time left:   0:00:21 13.0% done, time left:   0:00:19 13.0% done, time left:   0:00:17 13.0% done, time left:   0:00:15 13.0% done, time left:   0:00:14 16.2% done, time left:   0:00:12 20.6% done, time left:   0:00:07 23.3% done, time left:   0:00:05 28.1% done, time left:   0:00:03 32.6% done, time left:   0:00:02 35.5% done, time left:   0:00:02 39.4% done, time left:   0:00:02 43.6% done, time left:   0:00:01 47.7% done, time left:   0:00:01 52.0% done, time left:   0:00:01 56.5% done, time left:   0:00:00 61.0% done, time left:   0:00:00 64.3% done, time left:   0:00:00 65.7% done, time left:   0:00:00 69.3% done, time left:   0:00:00 71.5% done, time left:   0:00:00 73.8% done, time left:   0:00:00 75.5% done, time left:   0:00:00 78.7% done, time left:   0:00:00 81.8% done, time left:   0:00:00 85.0% done, time left:   0:00:00 88.5% done, time left:   0:00:00 90.0% done, time left:   0:00:00 90.2% done, time left:   0:00:00 90.7% done, time left:   0:00:00 94.3% done, time left:   0:00:00 97.8% done, time left:   0:00:00 98.7% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestHours.testFactory_standardHoursIn_RPeriod:159:*]:
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:282 ALOAD 1
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:282 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:282 ASTORE 1
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:284 ALOAD 0
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:284 GETFIELD org/joda/time/DurationFieldType$StandardDurationFieldType.iOrdinal B
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:284 TABLESWITCH (1 => L0, 2 => L1, 3 => L2, 4 => L3, 5 => L4, 6 => L5, 7 => L6, 8 => L7, 9 => L8, 10 => L9, 11 => L10, 12 => L11, * => L12)
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:302 ALOAD 1
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:302 INVOKEVIRTUAL org/joda/time/Chronology.hours()Lorg/joda/time/DurationField;
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:302 ARETURN
+org.joda.time.Hours.hours:82 ILOAD 0
+org.joda.time.Hours.hours:82 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, 5 => L5, 7 => L7, 2147483647 => L9, -2147483648 => L10, 0 => L0, 4 => L4, 6 => L6, 8 => L8* => L11)
+org.joda.time.Hours.hours:106 NEW org/joda/time/Hours
+org.joda.time.Hours.hours:106 DUP
+org.joda.time.Hours.hours:106 ILOAD 0
+org.joda.time.Hours.hours:106 INVOKESPECIAL org/joda/time/Hours.<init>(I)V
+org.joda.time.Hours.hours:106 ARETURN
+org.joda.time.Hours.standardHoursIn:185 ALOAD 0
+org.joda.time.Hours.standardHoursIn:185 LDC 3600000
+org.joda.time.Hours.standardHoursIn:185 INVOKESTATIC org/joda/time/base/BaseSingleFieldPeriod.standardPeriodIn(Lorg/joda/time/ReadablePeriod;J)I
+org.joda.time.Hours.standardHoursIn:185 ISTORE 1
+org.joda.time.Hours.standardHoursIn:186 ILOAD 1
+org.joda.time.Hours.standardHoursIn:186 INVOKESTATIC org/joda/time/Hours.hours(I)Lorg/joda/time/Hours;
+org.joda.time.Hours.standardHoursIn:186 ARETURN
+org.joda.time.Hours.<init>:218 ALOAD 0
+org.joda.time.Hours.<init>:218 ILOAD 1
+org.joda.time.Hours.<init>:218 INVOKESPECIAL org/joda/time/base/BaseSingleFieldPeriod.<init>(I)V
+org.joda.time.Hours.getHours:342 ALOAD 0
+org.joda.time.Hours.getHours:342 INVOKEVIRTUAL org/joda/time/Hours.getValue()I
+org.joda.time.Hours.getHours:342 IRETURN
+org.joda.time.Period.hours:178 NEW org/joda/time/Period
+org.joda.time.Period.hours:178 DUP
+org.joda.time.Period.hours:178 BIPUSH 8
+org.joda.time.Period.hours:178 NEWARRAY T_INT
+org.joda.time.Period.hours:178 DUP
+org.joda.time.Period.hours:178 ICONST_4
+org.joda.time.Period.hours:178 ILOAD 0
+org.joda.time.Period.hours:178 IASTORE
+org.joda.time.Period.hours:178 INVOKESTATIC org/joda/time/PeriodType.standard()Lorg/joda/time/PeriodType;
+org.joda.time.Period.hours:178 INVOKESPECIAL org/joda/time/Period.<init>([ILorg/joda/time/PeriodType;)V
+org.joda.time.Period.hours:178 ARETURN
+org.joda.time.Period.<init>:736 ALOAD 0
+org.joda.time.Period.<init>:736 ALOAD 1
+org.joda.time.Period.<init>:736 ALOAD 2
+org.joda.time.Period.<init>:736 INVOKESPECIAL org/joda/time/base/BasePeriod.<init>([ILorg/joda/time/PeriodType;)V
+org.joda.time.PeriodType.standard:102 GETSTATIC org/joda/time/PeriodType.cStandard Lorg/joda/time/PeriodType;
+org.joda.time.PeriodType.standard:102 ASTORE 0
+org.joda.time.PeriodType.standard:116 ALOAD 0
+org.joda.time.PeriodType.standard:116 ARETURN
+org.joda.time.TestHours.main:43 INVOKEVIRTUAL org/joda/time/TestHours.testFactory_standardHoursIn_RPeriod()V
+org.joda.time.TestHours.testFactory_standardHoursIn_RPeriod:158 LCONST_1
+org.joda.time.TestHours.testFactory_standardHoursIn_RPeriod:158 NEW org/joda/time/Period
+org.joda.time.TestHours.testFactory_standardHoursIn_RPeriod:158 DUP
+org.joda.time.TestHours.testFactory_standardHoursIn_RPeriod:159 LDC 123
+org.joda.time.TestHours.testFactory_standardHoursIn_RPeriod:159 BIPUSH 123
+org.joda.time.TestHours.testFactory_standardHoursIn_RPeriod:159 INVOKESTATIC org/joda/time/Period.hours(I)Lorg/joda/time/Period;
+org.joda.time.TestHours.testFactory_standardHoursIn_RPeriod:159 INVOKESTATIC org/joda/time/Hours.standardHoursIn(Lorg/joda/time/ReadablePeriod;)Lorg/joda/time/Hours;
+org.joda.time.TestHours.testFactory_standardHoursIn_RPeriod:159 INVOKEVIRTUAL org/joda/time/Hours.getHours()I
+org.joda.time.TestHours.testFactory_standardHoursIn_RPeriod:159 I2L
+org.joda.time.TestHours.testFactory_standardHoursIn_RPeriod:159 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.AbstractPeriod.size:56 ALOAD 0
+org.joda.time.base.AbstractPeriod.size:56 INVOKEVIRTUAL org/joda/time/base/AbstractPeriod.getPeriodType()Lorg/joda/time/PeriodType;
+org.joda.time.base.AbstractPeriod.size:56 IRETURN
+org.joda.time.base.AbstractPeriod.getFieldType:68 ALOAD 0
+org.joda.time.base.AbstractPeriod.getFieldType:68 INVOKEVIRTUAL org/joda/time/base/AbstractPeriod.getPeriodType()Lorg/joda/time/PeriodType;
+org.joda.time.base.AbstractPeriod.getFieldType:68 ARETURN
+org.joda.time.base.BasePeriod.<init>:294 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:294 ALOAD 2
+org.joda.time.base.BasePeriod.<init>:294 PUTFIELD org/joda/time/base/BasePeriod.iType Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.<init>:295 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:295 ALOAD 1
+org.joda.time.base.BasePeriod.<init>:295 PUTFIELD org/joda/time/base/BasePeriod.iValues [I
+org.joda.time.base.BasePeriod.getPeriodType:318 ALOAD 0
+org.joda.time.base.BasePeriod.getPeriodType:318 GETFIELD org/joda/time/base/BasePeriod.iType Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.getPeriodType:318 ARETURN
+org.joda.time.base.BasePeriod.getValue:329 ALOAD 0
+org.joda.time.base.BasePeriod.getValue:329 GETFIELD org/joda/time/base/BasePeriod.iValues [I
+org.joda.time.base.BasePeriod.getValue:329 ILOAD 1
+org.joda.time.base.BasePeriod.getValue:329 IALOAD
+org.joda.time.base.BasePeriod.getValue:329 IRETURN
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:130 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:130 IFNONNULL L0 true false
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:133 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstanceUTC()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:133 ASTORE 3
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:134 LCONST_0
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:134 LSTORE 4
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:135 ICONST_0
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:135 ISTORE 6
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:135 ILOAD 6
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:135 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:135 INVOKEINTERFACE org/joda/time/ReadablePeriod.size()I
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:135 IF_ICMPGE L4 true true
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:135 IINC 6 1
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:136 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:136 ILOAD 6
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:136 INVOKEINTERFACE org/joda/time/ReadablePeriod.getValue(I)I
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:136 ISTORE 7
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:137 ILOAD 7
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:137 IFEQ L3 false true
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:138 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:138 INVOKEINTERFACE org/joda/time/ReadablePeriod.getFieldType(I)Lorg/joda/time/DurationFieldType;
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:138 ALOAD 3
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:138 INVOKEVIRTUAL org/joda/time/DurationFieldType.getField(Lorg/joda/time/Chronology;)Lorg/joda/time/DurationField;
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:138 ASTORE 8
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:144 LLOAD 4
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:144 ALOAD 8
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:144 INVOKEVIRTUAL org/joda/time/DurationField.getUnitMillis()J
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:144 ILOAD 7
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:144 INVOKESTATIC org/joda/time/field/FieldUtils.safeMultiply(JI)J
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:144 INVOKESTATIC org/joda/time/field/FieldUtils.safeAdd(JJ)J
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:144 LSTORE 4
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:147 LLOAD 4
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:147 LLOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:147 LDIV
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:147 INVOKESTATIC org/joda/time/field/FieldUtils.safeToInt(J)I
+org.joda.time.base.BaseSingleFieldPeriod.standardPeriodIn:147 IRETURN
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ILOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 PUTFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+org.joda.time.chrono.AssembledChronology.hours:192 ALOAD 0
+org.joda.time.chrono.AssembledChronology.hours:192 GETFIELD org/joda/time/chrono/AssembledChronology.iHours Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.hours:192 ARETURN
+org.joda.time.chrono.ISOChronology.getInstanceUTC:70 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.getInstanceUTC:70 ARETURN
+org.joda.time.field.FieldUtils.safeAdd:85 LLOAD 0
+org.joda.time.field.FieldUtils.safeAdd:85 LLOAD 2
+org.joda.time.field.FieldUtils.safeAdd:85 LADD
+org.joda.time.field.FieldUtils.safeAdd:85 LSTORE 4
+org.joda.time.field.FieldUtils.safeAdd:91 LLOAD 4
+org.joda.time.field.FieldUtils.safeAdd:91 LRETURN
+org.joda.time.field.FieldUtils.safeMultiply:139 ILOAD 2
+org.joda.time.field.FieldUtils.safeMultiply:139 TABLESWITCH (-1 => L0, 0 => L2, 1 => L3, * => L4)
+org.joda.time.field.FieldUtils.safeMultiply:150 LLOAD 0
+org.joda.time.field.FieldUtils.safeMultiply:150 ILOAD 2
+org.joda.time.field.FieldUtils.safeMultiply:150 I2L
+org.joda.time.field.FieldUtils.safeMultiply:150 LMUL
+org.joda.time.field.FieldUtils.safeMultiply:150 LSTORE 3
+org.joda.time.field.FieldUtils.safeMultiply:154 LLOAD 3
+org.joda.time.field.FieldUtils.safeMultiply:154 LRETURN
+org.joda.time.field.FieldUtils.safeToInt:226 LDC -2147483648
+org.joda.time.field.FieldUtils.safeToInt:226 LLOAD 0
+org.joda.time.field.FieldUtils.safeToInt:226 LCMP
+org.joda.time.field.FieldUtils.safeToInt:226 IFGT L0 false true
+org.joda.time.field.FieldUtils.safeToInt:226 LLOAD 0
+org.joda.time.field.FieldUtils.safeToInt:226 LDC 2147483647
+org.joda.time.field.FieldUtils.safeToInt:226 LCMP
+org.joda.time.field.FieldUtils.safeToInt:226 IFGT L0 false true
+org.joda.time.field.FieldUtils.safeToInt:227 LLOAD 0
+org.joda.time.field.FieldUtils.safeToInt:227 L2I
+org.joda.time.field.FieldUtils.safeToInt:227 IRETURN
+org.joda.time.field.PreciseDurationField.getUnitMillis:63 ALOAD 0
+org.joda.time.field.PreciseDurationField.getUnitMillis:63 GETFIELD org/joda/time/field/PreciseDurationField.iUnitMillis J
+org.joda.time.field.PreciseDurationField.getUnitMillis:63 LRETURN
+
+Slice consists of 159 bytecode instructions.
+Computation took 5.95 seconds.

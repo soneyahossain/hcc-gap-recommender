@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultXPathFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.expr</a> &gt; <span class="el_source">DefaultXPathFactory.java</span></div><h1>DefaultXPathFactory.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+package org.jaxen.expr;
+
+import org.jaxen.JaxenException;
+import org.jaxen.expr.iter.*;
+import org.jaxen.saxpath.Axis;
+import org.jaxen.saxpath.Operator;
+
+/**
+ * The concrete implementation of the XPathFactory anstract factory.
+ *
+ * @see XPathFactory
+ */
+<span class="fc" id="L60">public class DefaultXPathFactory implements XPathFactory {</span>
+    public XPathExpr createXPath(Expr rootExpr) throws JaxenException {
+<span class="fc" id="L62">        return new DefaultXPathExpr(rootExpr);</span>
+    }
+
+    public PathExpr createPathExpr(FilterExpr filterExpr,
+                                   LocationPath locationPath) throws JaxenException {
+<span class="fc" id="L67">        return new DefaultPathExpr(filterExpr,</span>
+                locationPath);
+    }
+
+    public LocationPath createRelativeLocationPath() throws JaxenException {
+<span class="fc" id="L72">        return new DefaultRelativeLocationPath();</span>
+    }
+
+    public LocationPath createAbsoluteLocationPath() throws JaxenException {
+<span class="fc" id="L76">        return new DefaultAbsoluteLocationPath();</span>
+    }
+
+    public BinaryExpr createOrExpr(Expr lhs,
+                                   Expr rhs) throws JaxenException {
+<span class="fc" id="L81">        return new DefaultOrExpr(lhs,</span>
+                rhs);
+    }
+
+    public BinaryExpr createAndExpr(Expr lhs,
+                                    Expr rhs) throws JaxenException {
+<span class="fc" id="L87">        return new DefaultAndExpr(lhs,</span>
+                rhs);
+    }
+
+    public BinaryExpr createEqualityExpr(Expr lhs,
+                                         Expr rhs,
+                                         int equalityOperator) throws JaxenException {
+<span class="pc bpc" id="L94" title="1 of 3 branches missed.">        switch (equalityOperator) {</span>
+            case Operator.EQUALS: {
+<span class="fc" id="L96">                return new DefaultEqualsExpr(lhs,</span>
+                        rhs);
+            }
+            case Operator.NOT_EQUALS: {
+<span class="fc" id="L100">                return new DefaultNotEqualsExpr(lhs,</span>
+                        rhs);
+            }
+        }
+<span class="nc" id="L104">        throw new JaxenException(&quot;Unhandled operator in createEqualityExpr(): &quot; + equalityOperator);</span>
+    }
+
+    public BinaryExpr createRelationalExpr(Expr lhs,
+                                           Expr rhs,
+                                           int relationalOperator) throws JaxenException {
+<span class="pc bpc" id="L110" title="1 of 5 branches missed.">        switch (relationalOperator) {</span>
+            case Operator.LESS_THAN: {
+<span class="fc" id="L112">                return new DefaultLessThanExpr(lhs,</span>
+                        rhs);
+            }
+            case Operator.GREATER_THAN: {
+<span class="fc" id="L116">                return new DefaultGreaterThanExpr(lhs,</span>
+                        rhs);
+            }
+            case Operator.LESS_THAN_EQUALS: {
+<span class="fc" id="L120">                return new DefaultLessThanEqualExpr(lhs,</span>
+                        rhs);
+            }
+            case Operator.GREATER_THAN_EQUALS: {
+<span class="fc" id="L124">                return new DefaultGreaterThanEqualExpr(lhs,</span>
+                        rhs);
+            }
+        }
+<span class="nc" id="L128">        throw new JaxenException(&quot;Unhandled operator in createRelationalExpr(): &quot; + relationalOperator);</span>
+    }
+
+    public BinaryExpr createAdditiveExpr(Expr lhs,
+                                         Expr rhs,
+                                         int additiveOperator) throws JaxenException {
+<span class="pc bpc" id="L134" title="1 of 3 branches missed.">        switch (additiveOperator) {</span>
+            case Operator.ADD: {
+<span class="fc" id="L136">                return new DefaultPlusExpr(lhs,</span>
+                        rhs);
+            }
+            case Operator.SUBTRACT: {
+<span class="fc" id="L140">                return new DefaultMinusExpr(lhs,</span>
+                        rhs);
+            }
+        }
+<span class="nc" id="L144">        throw new JaxenException(&quot;Unhandled operator in createAdditiveExpr(): &quot; + additiveOperator);</span>
+    }
+
+    public BinaryExpr createMultiplicativeExpr(Expr lhs,
+                                               Expr rhs,
+                                               int multiplicativeOperator) throws JaxenException {
+<span class="pc bpc" id="L150" title="1 of 4 branches missed.">        switch (multiplicativeOperator) {</span>
+            case Operator.MULTIPLY: {
+<span class="fc" id="L152">                return new DefaultMultiplyExpr(lhs,</span>
+                        rhs);
+            }
+            case Operator.DIV: {
+<span class="fc" id="L156">                return new DefaultDivExpr(lhs,</span>
+                        rhs);
+            }
+            case Operator.MOD: {
+<span class="fc" id="L160">                return new DefaultModExpr(lhs,</span>
+                        rhs);
+            }
+        }
+<span class="nc" id="L164">        throw new JaxenException(&quot;Unhandled operator in createMultiplicativeExpr(): &quot; + multiplicativeOperator);</span>
+    }
+
+    public Expr createUnaryExpr(Expr expr,
+                                int unaryOperator) throws JaxenException {
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">        switch (unaryOperator) {</span>
+            case Operator.NEGATIVE: {
+<span class="fc" id="L171">                return new DefaultUnaryExpr(expr);</span>
+            }
+        }
+<span class="nc" id="L174">        return expr;</span>
+    }
+
+    public UnionExpr createUnionExpr(Expr lhs,
+                                     Expr rhs) throws JaxenException {
+<span class="fc" id="L179">        return new DefaultUnionExpr(lhs,</span>
+                rhs);
+    }
+
+    public FilterExpr createFilterExpr(Expr expr) throws JaxenException {
+<span class="fc" id="L184">        return new DefaultFilterExpr(expr, createPredicateSet());</span>
+    }
+
+    public FunctionCallExpr createFunctionCallExpr(String prefix,
+                                                   String functionName) throws JaxenException {
+<span class="fc" id="L189">        return new DefaultFunctionCallExpr(prefix,</span>
+                functionName);
+    }
+
+    public NumberExpr createNumberExpr(int number) throws JaxenException {
+<span class="nc" id="L194">        return new DefaultNumberExpr(new Double(number));</span>
+    }
+
+    public NumberExpr createNumberExpr(double number) throws JaxenException {
+<span class="fc" id="L198">        return new DefaultNumberExpr(new Double(number));</span>
+    }
+
+    public LiteralExpr createLiteralExpr(String literal) throws JaxenException {
+<span class="fc" id="L202">        return new DefaultLiteralExpr(literal);</span>
+    }
+
+    public VariableReferenceExpr createVariableReferenceExpr(String prefix,
+                                                             String variable) throws JaxenException {
+<span class="fc" id="L207">        return new DefaultVariableReferenceExpr(prefix,</span>
+                variable);
+    }
+
+    public Step createNameStep(int axis,
+                               String prefix,
+                               String localName) throws JaxenException {
+<span class="fc" id="L214">        IterableAxis iter = getIterableAxis(axis);</span>
+<span class="fc" id="L215">        return new DefaultNameStep(iter,</span>
+                prefix,
+                localName,
+<span class="fc" id="L218">                createPredicateSet());</span>
+    }
+
+    public Step createTextNodeStep(int axis) throws JaxenException {
+<span class="fc" id="L222">        IterableAxis iter = getIterableAxis(axis);</span>
+<span class="fc" id="L223">        return new DefaultTextNodeStep(iter, createPredicateSet());</span>
+    }
+
+    public Step createCommentNodeStep(int axis) throws JaxenException {
+<span class="fc" id="L227">        IterableAxis iter = getIterableAxis(axis);</span>
+<span class="fc" id="L228">        return new DefaultCommentNodeStep(iter, createPredicateSet());</span>
+    }
+
+    public Step createAllNodeStep(int axis) throws JaxenException {
+<span class="fc" id="L232">        IterableAxis iter = getIterableAxis(axis);</span>
+<span class="fc" id="L233">        return new DefaultAllNodeStep(iter, createPredicateSet());</span>
+    }
+
+    public Step createProcessingInstructionNodeStep(int axis,
+                                                    String piName) throws JaxenException {
+<span class="fc" id="L238">        IterableAxis iter = getIterableAxis(axis);</span>
+<span class="fc" id="L239">        return new DefaultProcessingInstructionNodeStep(iter,</span>
+                piName,
+<span class="fc" id="L241">                createPredicateSet());</span>
+    }
+
+    public Predicate createPredicate(Expr predicateExpr) throws JaxenException {
+<span class="fc" id="L245">        return new DefaultPredicate(predicateExpr);</span>
+    }
+
+    protected IterableAxis getIterableAxis(int axis) throws JaxenException {
+
+<span class="fc bfc" id="L250" title="All 14 branches covered.">        switch (axis) {</span>
+            case Axis.CHILD:
+<span class="fc" id="L252">                return new IterableChildAxis(axis);</span>
+            case Axis.DESCENDANT:
+<span class="fc" id="L254">                return new IterableDescendantAxis(axis);</span>
+            case Axis.PARENT:
+<span class="fc" id="L256">                return new IterableParentAxis(axis);</span>
+            case Axis.FOLLOWING_SIBLING:
+<span class="fc" id="L258">                return new IterableFollowingSiblingAxis(axis);</span>
+            case Axis.PRECEDING_SIBLING:
+<span class="fc" id="L260">                return new IterablePrecedingSiblingAxis(axis);</span>
+            case Axis.FOLLOWING:
+<span class="fc" id="L262">                return new IterableFollowingAxis(axis);</span>
+            case Axis.PRECEDING:
+<span class="fc" id="L264">                return new IterablePrecedingAxis(axis);</span>
+            case Axis.ATTRIBUTE:
+<span class="fc" id="L266">                return new IterableAttributeAxis(axis);</span>
+            case Axis.NAMESPACE:
+<span class="fc" id="L268">                return new IterableNamespaceAxis(axis);</span>
+            case Axis.SELF:
+<span class="fc" id="L270">                return new IterableSelfAxis(axis);</span>
+            case Axis.DESCENDANT_OR_SELF:
+<span class="fc" id="L272">                return new IterableDescendantOrSelfAxis(axis);</span>
+            case Axis.ANCESTOR_OR_SELF:
+<span class="fc" id="L274">                return new IterableAncestorOrSelfAxis(axis);</span>
+            case Axis.ANCESTOR:
+<span class="fc" id="L276">                return new IterableAncestorAxis(axis);</span>
+            default:
+<span class="fc" id="L278">                throw new JaxenException(&quot;Unrecognized axis code: &quot; + axis);</span>
+        }
+
+    }
+
+    public PredicateSet createPredicateSet() throws JaxenException {
+<span class="fc" id="L284">        return new PredicateSet();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

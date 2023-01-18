@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasicDayOfYearDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">BasicDayOfYearDateTimeField.java</span></div><h1>BasicDayOfYearDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+import org.joda.time.ReadablePartial;
+import org.joda.time.field.PreciseDurationDateTimeField;
+
+/**
+ * Provides time calculations for the day of the year component of time.
+ *
+ * @author Guy Allard
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.1, refactored from GJDayOfYearDateTimeField
+ */
+final class BasicDayOfYearDateTimeField extends PreciseDurationDateTimeField {
+
+    @SuppressWarnings(&quot;unused&quot;)
+    private static final long serialVersionUID = -6821236822336841037L;
+
+    private final BasicChronology iChronology;
+
+    /**
+     * Restricted constructor
+     */
+    BasicDayOfYearDateTimeField(BasicChronology chronology, DurationField days) {
+<span class="fc" id="L42">        super(DateTimeFieldType.dayOfYear(), days);</span>
+<span class="fc" id="L43">        iChronology = chronology;</span>
+<span class="fc" id="L44">    }</span>
+
+    /**
+     * Get the day of the year component of the specified time instant.
+     * 
+     * @param instant  the time instant in millis to query.
+     * @return the day of the year extracted from the input.
+     */
+    public int get(long instant) {
+<span class="fc" id="L53">        return iChronology.getDayOfYear(instant);</span>
+    }
+
+    public DurationField getRangeDurationField() {
+<span class="fc" id="L57">        return iChronology.years();</span>
+    }
+
+    public int getMinimumValue() {
+<span class="fc" id="L61">        return 1;</span>
+    }
+
+    public int getMaximumValue() {
+<span class="fc" id="L65">        return iChronology.getDaysInYearMax();</span>
+    }
+
+    public int getMaximumValue(long instant) {
+<span class="fc" id="L69">        int year = iChronology.getYear(instant);</span>
+<span class="fc" id="L70">        return iChronology.getDaysInYear(year);</span>
+    }
+
+    public int getMaximumValue(ReadablePartial partial) {
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (partial.isSupported(DateTimeFieldType.year())) {</span>
+<span class="nc" id="L75">            int year = partial.get(DateTimeFieldType.year());</span>
+<span class="nc" id="L76">            return iChronology.getDaysInYear(year);</span>
+        }
+<span class="nc" id="L78">        return iChronology.getDaysInYearMax();</span>
+    }
+
+    public int getMaximumValue(ReadablePartial partial, int[] values) {
+<span class="fc" id="L82">        int size = partial.size();</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">            if (partial.getFieldType(i) == DateTimeFieldType.year()) {</span>
+<span class="fc" id="L85">                int year = values[i];</span>
+<span class="fc" id="L86">                return iChronology.getDaysInYear(year);</span>
+            }
+        }
+<span class="fc" id="L89">        return iChronology.getDaysInYearMax();</span>
+    }
+
+    protected int getMaximumValueForSet(long instant, int value) {
+<span class="fc" id="L93">        int maxLessOne = iChronology.getDaysInYearMax() - 1;</span>
+<span class="fc bfc" id="L94" title="All 4 branches covered.">        return (value &gt; maxLessOne || value &lt; 1) ? getMaximumValue(instant) : maxLessOne;</span>
+    }
+
+    @Override
+    public boolean isLeap(long instant) {
+<span class="fc" id="L99">        return iChronology.isLeapDay(instant);</span>
+    }
+
+    /**
+     * Serialization singleton
+     */
+    private Object readResolve() {
+<span class="nc" id="L106">        return iChronology.dayOfYear();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

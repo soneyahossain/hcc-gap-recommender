@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReadableIntervalConverter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.convert</a> &gt; <span class="el_source">ReadableIntervalConverter.java</span></div><h1>ReadableIntervalConverter.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.convert;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.ReadWritableInterval;
+import org.joda.time.ReadWritablePeriod;
+import org.joda.time.ReadableInterval;
+
+/**
+ * Converts intervals into durations of any requested period type.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+class ReadableIntervalConverter extends AbstractConverter
+        implements IntervalConverter, DurationConverter, PeriodConverter {
+
+    /**
+     * Singleton instance.
+     */
+<span class="fc" id="L36">    static final ReadableIntervalConverter INSTANCE = new ReadableIntervalConverter();</span>
+
+    /**
+     * Restricted constructor.
+     */
+    protected ReadableIntervalConverter() {
+<span class="fc" id="L42">        super();</span>
+<span class="fc" id="L43">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the millisecond length of the interval.
+     * 
+     * @param object  the interval
+     */
+    public long getDurationMillis(Object object) {
+<span class="fc" id="L52">        return (((ReadableInterval) object)).toDurationMillis();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the values of the mutable duration from the specified interval.
+     * 
+     * @param writablePeriod  the period to modify
+     * @param object  the interval to set from
+     * @param chrono  the chronology to use
+     */
+    public void setInto(ReadWritablePeriod writablePeriod, Object object, Chronology chrono) {
+<span class="fc" id="L64">        ReadableInterval interval = (ReadableInterval) object;</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        chrono = (chrono != null ? chrono : DateTimeUtils.getIntervalChronology(interval));</span>
+<span class="fc" id="L66">        long start = interval.getStartMillis();</span>
+<span class="fc" id="L67">        long end = interval.getEndMillis();</span>
+<span class="fc" id="L68">        int[] values = chrono.get(writablePeriod, start, end);</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        for (int i = 0; i &lt; values.length; i++) {</span>
+<span class="fc" id="L70">            writablePeriod.setValue(i, values[i]);</span>
+        }
+<span class="fc" id="L72">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Checks if the input is a ReadableInterval.
+     * &lt;p&gt;
+     * If it is, then the calling code should cast and copy the fields directly.
+     *
+     * @param object  the object to convert, must not be null
+     * @param chrono  the chronology to use, may be null
+     * @return true if the input is a ReadableInterval
+     * @throws ClassCastException if the object is invalid
+     */
+    public boolean isReadableInterval(Object object, Chronology chrono) {
+<span class="fc" id="L86">        return true;</span>
+    }
+
+    /**
+     * Extracts interval endpoint values from an object of this converter's
+     * type, and sets them into the given ReadWritableInterval.
+     *
+     * @param writableInterval interval to get modified, not null
+     * @param object  the object to convert, must not be null
+     * @param chrono  the chronology to use, may be null
+     * @throws ClassCastException if the object is invalid
+     */
+    public void setInto(ReadWritableInterval writableInterval, Object object, Chronology chrono) {
+<span class="fc" id="L99">        ReadableInterval input = (ReadableInterval) object;</span>
+<span class="fc" id="L100">        writableInterval.setInterval(input);</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        if (chrono != null) {</span>
+<span class="fc" id="L102">            writableInterval.setChronology(chrono);</span>
+        } else {
+<span class="fc" id="L104">            writableInterval.setChronology(input.getChronology());</span>
+        }
+<span class="fc" id="L106">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns ReadableInterval.class.
+     */
+    public Class&lt;?&gt; getSupportedType() {
+<span class="fc" id="L113">        return ReadableInterval.class;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

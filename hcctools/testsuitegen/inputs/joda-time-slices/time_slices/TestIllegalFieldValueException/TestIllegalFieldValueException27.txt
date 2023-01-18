@@ -1,0 +1,47 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.3% done, time left: unknown  0.7% done, time left: unknown  1.0% done, time left: unknown  1.4% done, time left: unknown  1.6% done, time left: unknown  1.8% done, time left:   0:00:48    2.2% done, time left:   0:00:43  2.5% done, time left:   0:00:40  2.6% done, time left:   0:00:41  2.6% done, time left:   0:00:44  2.6% done, time left:   0:00:47  2.6% done, time left:   0:00:51  2.7% done, time left:   0:00:54  2.7% done, time left:   0:00:57  2.8% done, time left:   0:01:00  2.8% done, time left:   0:01:04  3.3% done, time left:   0:01:06  3.5% done, time left:   0:01:06  4.6% done, time left:   0:01:07  4.6% done, time left:   0:01:04  5.4% done, time left:   0:01:04  6.2% done, time left:   0:01:04  7.5% done, time left:   0:01:03  8.6% done, time left:   0:01:00 10.0% done, time left:   0:00:57 11.5% done, time left:   0:00:52 12.4% done, time left:   0:00:47 13.2% done, time left:   0:00:43 14.0% done, time left:   0:00:39 15.6% done, time left:   0:00:36 17.3% done, time left:   0:00:32 19.0% done, time left:   0:00:28 20.2% done, time left:   0:00:25 21.8% done, time left:   0:00:22 22.1% done, time left:   0:00:18 22.1% done, time left:   0:00:15 22.8% done, time left:   0:00:13 23.9% done, time left:   0:00:12 24.9% done, time left:   0:00:12 26.2% done, time left:   0:00:11 27.9% done, time left:   0:00:11 28.5% done, time left:   0:00:09 28.9% done, time left:   0:00:08 29.7% done, time left:   0:00:08 31.7% done, time left:   0:00:08 33.7% done, time left:   0:00:07 35.7% done, time left:   0:00:07 37.6% done, time left:   0:00:06 39.6% done, time left:   0:00:05 41.6% done, time left:   0:00:04 42.7% done, time left:   0:00:04 44.6% done, time left:   0:00:03 50.3% done, time left:   0:00:00 59.0% done, time left:   0:00:00 66.6% done, time left:   0:00:00 74.8% done, time left:   0:00:00 83.2% done, time left:   0:00:00 91.8% done, time left:   0:00:00 99.2% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:111:*]:
+org.joda.time.DateTimeFieldType.year:339 GETSTATIC org/joda/time/DateTimeFieldType.YEAR_TYPE Lorg/joda/time/DateTimeFieldType;
+org.joda.time.DateTimeFieldType.year:339 ARETURN
+org.joda.time.DateTimeFieldType.getName:390 ALOAD 0
+org.joda.time.DateTimeFieldType.getName:390 GETFIELD org/joda/time/DateTimeFieldType.iName Ljava/lang/String;
+org.joda.time.DateTimeFieldType.getName:390 ARETURN
+org.joda.time.IllegalFieldValueException.<init>:111 ALOAD 0
+org.joda.time.IllegalFieldValueException.<init>:111 ALOAD 1
+org.joda.time.IllegalFieldValueException.<init>:111 INVOKEVIRTUAL org/joda/time/DateTimeFieldType.getName()Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.<init>:111 PUTFIELD org/joda/time/IllegalFieldValueException.iFieldName Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.getFieldName:283 ALOAD 0
+org.joda.time.IllegalFieldValueException.getFieldName:283 GETFIELD org/joda/time/IllegalFieldValueException.iFieldName Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.getFieldName:283 ARETURN
+org.joda.time.TestIllegalFieldValueException.main:36 INVOKEVIRTUAL org/joda/time/TestIllegalFieldValueException.testSkipDateTimeField()V
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:103 NEW org/joda/time/field/SkipDateTimeField
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:103 DUP
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:103 SIPUSH 1970
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:103 INVOKESPECIAL org/joda/time/field/SkipDateTimeField.<init>(Lorg/joda/time/Chronology;Lorg/joda/time/DateTimeField;I)V
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:103 ASTORE 1
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:106 ALOAD 1
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:106 SIPUSH 1970
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:106 INVOKEVIRTUAL org/joda/time/DateTimeField.set(JI)J
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:108 ASTORE 2
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:111 LDC "year"
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:111 ALOAD 2
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:111 INVOKEVIRTUAL org/joda/time/IllegalFieldValueException.getFieldName()Ljava/lang/String;
+org.joda.time.TestIllegalFieldValueException.testSkipDateTimeField:111 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.field.SkipDateTimeField.<init>:75 ALOAD 0
+org.joda.time.field.SkipDateTimeField.<init>:75 ILOAD 3
+org.joda.time.field.SkipDateTimeField.<init>:75 PUTFIELD org/joda/time/field/SkipDateTimeField.iSkip I
+org.joda.time.field.SkipDateTimeField.set:89 ILOAD 3
+org.joda.time.field.SkipDateTimeField.set:89 ALOAD 0
+org.joda.time.field.SkipDateTimeField.set:89 GETFIELD org/joda/time/field/SkipDateTimeField.iSkip I
+org.joda.time.field.SkipDateTimeField.set:89 IF_ICMPGT L1 false true
+org.joda.time.field.SkipDateTimeField.set:90 ILOAD 3
+org.joda.time.field.SkipDateTimeField.set:90 ALOAD 0
+org.joda.time.field.SkipDateTimeField.set:90 GETFIELD org/joda/time/field/SkipDateTimeField.iSkip I
+org.joda.time.field.SkipDateTimeField.set:90 IF_ICMPNE L0 false true
+org.joda.time.field.SkipDateTimeField.set:91 NEW org/joda/time/IllegalFieldValueException
+org.joda.time.field.SkipDateTimeField.set:91 DUP
+org.joda.time.field.SkipDateTimeField.set:91 INVOKESTATIC org/joda/time/DateTimeFieldType.year()Lorg/joda/time/DateTimeFieldType;
+org.joda.time.field.SkipDateTimeField.set:91 INVOKESPECIAL org/joda/time/IllegalFieldValueException.<init>(Lorg/joda/time/DateTimeFieldType;Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/Number;)V
+org.joda.time.field.SkipDateTimeField.set:91 ATHROW
+
+Slice consists of 42 bytecode instructions.
+Computation took 6.76 seconds.

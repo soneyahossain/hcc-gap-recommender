@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ZoneInfoCompiler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.tz</a> &gt; <span class="el_source">ZoneInfoCompiler.java</span></div><h1>ZoneInfoCompiler.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.tz;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
+import org.joda.time.MutableDateTime;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.chrono.LenientChronology;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
+
+/**
+ * Compiles IANA ZoneInfo database files into binary files for each time zone
+ * in the database. {@link DateTimeZoneBuilder} is used to construct and encode
+ * compiled data files. {@link ZoneInfoProvider} loads the encoded files and
+ * converts them back into {@link DateTimeZone} objects.
+ * &lt;p&gt;
+ * Although this tool is similar to zic, the binary formats are not
+ * compatible. The latest IANA time zone database files may be obtained
+ * &lt;a href=&quot;https://www.iana.org/time-zones&quot;&gt;here&lt;/a&gt;.
+ * &lt;p&gt;
+ * ZoneInfoCompiler is mutable and not thread-safe, although the main method
+ * may be safely invoked by multiple threads.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public class ZoneInfoCompiler {
+    static DateTimeOfYear cStartOfYear;
+
+    static Chronology cLenientISO;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Launches the ZoneInfoCompiler tool.
+     *
+     * &lt;pre&gt;
+     * Usage: java org.joda.time.tz.ZoneInfoCompiler &amp;lt;options&amp;gt; &amp;lt;source files&amp;gt;
+     * where possible options include:
+     *   -src &amp;lt;directory&amp;gt;    Specify where to read source files
+     *   -dst &amp;lt;directory&amp;gt;    Specify where to write generated files
+     *   -verbose            Output verbosely (default false)
+     * &lt;/pre&gt;
+     */
+    public static void main(String[] args) throws Exception {
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if (args.length == 0) {</span>
+<span class="nc" id="L82">            printUsage();</span>
+<span class="nc" id="L83">            return;</span>
+        }
+
+<span class="fc" id="L86">        File inputDir = null;</span>
+<span class="fc" id="L87">        File outputDir = null;</span>
+<span class="fc" id="L88">        boolean verbose = false;</span>
+
+        int i;
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">        for (i=0; i&lt;args.length; i++) {</span>
+            try {
+<span class="fc bfc" id="L93" title="All 2 branches covered.">                if (&quot;-src&quot;.equals(args[i])) {</span>
+<span class="fc" id="L94">                    inputDir = new File(args[++i]);</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">                } else if (&quot;-dst&quot;.equals(args[i])) {</span>
+<span class="fc" id="L96">                    outputDir = new File(args[++i]);</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">                } else if (&quot;-verbose&quot;.equals(args[i])) {</span>
+<span class="nc" id="L98">                    verbose = true;</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">                } else if (&quot;-?&quot;.equals(args[i])) {</span>
+<span class="nc" id="L100">                    printUsage();</span>
+<span class="nc" id="L101">                    return;</span>
+                } else {
+<span class="fc" id="L103">                    break;</span>
+                }
+<span class="nc" id="L105">            } catch (IndexOutOfBoundsException e) {</span>
+<span class="nc" id="L106">                printUsage();</span>
+<span class="nc" id="L107">                return;</span>
+<span class="fc" id="L108">            }</span>
+        }
+
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        if (i &gt;= args.length) {</span>
+<span class="nc" id="L112">            printUsage();</span>
+<span class="nc" id="L113">            return;</span>
+        }
+
+<span class="fc" id="L116">        File[] sources = new File[args.length - i];</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        for (int j=0; i&lt;args.length; i++,j++) {</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">            sources[j] = inputDir == null ? new File(args[i]) : new File(inputDir, args[i]);</span>
+        }
+
+<span class="fc" id="L121">        ZoneInfoLogger.set(verbose);</span>
+<span class="fc" id="L122">        ZoneInfoCompiler zic = new ZoneInfoCompiler();</span>
+<span class="nc" id="L123">        zic.compile(outputDir, sources);</span>
+<span class="nc" id="L124">    }</span>
+
+    private static void printUsage() {
+<span class="nc" id="L127">        System.out.println(&quot;Usage: java org.joda.time.tz.ZoneInfoCompiler &lt;options&gt; &lt;source files&gt;&quot;);</span>
+<span class="nc" id="L128">        System.out.println(&quot;where possible options include:&quot;);</span>
+<span class="nc" id="L129">        System.out.println(&quot;  -src &lt;directory&gt;    Specify where to read source files&quot;);</span>
+<span class="nc" id="L130">        System.out.println(&quot;  -dst &lt;directory&gt;    Specify where to write generated files&quot;);</span>
+<span class="nc" id="L131">        System.out.println(&quot;  -verbose            Output verbosely (default false)&quot;);</span>
+<span class="nc" id="L132">    }</span>
+
+    static DateTimeOfYear getStartOfYear() {
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        if (cStartOfYear == null) {</span>
+<span class="nc" id="L136">            cStartOfYear = new DateTimeOfYear();</span>
+        }
+<span class="nc" id="L138">        return cStartOfYear;</span>
+    }
+
+    static Chronology getLenientISOChronology() {
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        if (cLenientISO == null) {</span>
+<span class="fc" id="L143">            cLenientISO = LenientChronology.getInstance(ISOChronology.getInstanceUTC());</span>
+        }
+<span class="fc" id="L145">        return cLenientISO;</span>
+    }
+
+    /**
+     * @param zimap maps string ids to DateTimeZone objects.
+     */
+    static void writeZoneInfoMap(DataOutputStream dout, Map&lt;String, DateTimeZone&gt; zimap) throws IOException {
+
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">        if ( dout == null ){</span>
+<span class="fc" id="L154">            throw new IllegalArgumentException(&quot;DataOutputStream must not be null.&quot;);</span>
+        }
+
+        // Build the string pool.
+<span class="nc" id="L158">        Map&lt;String, Short&gt; idToIndex = new HashMap&lt;String, Short&gt;(zimap.size());</span>
+<span class="nc" id="L159">        TreeMap&lt;Short, String&gt; indexToId = new TreeMap&lt;Short, String&gt;();</span>
+
+<span class="nc" id="L161">        short count = 0;</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        for (Entry&lt;String, DateTimeZone&gt; entry : zimap.entrySet()) {</span>
+<span class="nc" id="L163">            String id = (String)entry.getKey();</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">            if (!idToIndex.containsKey(id)) {</span>
+<span class="nc" id="L165">                Short index = Short.valueOf(count);</span>
+<span class="nc" id="L166">                idToIndex.put(id, index);</span>
+<span class="nc" id="L167">                indexToId.put(index, id);</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">                if (++count == 0) {</span>
+<span class="nc" id="L169">                    throw new InternalError(&quot;Too many time zone ids&quot;);</span>
+                }
+            }
+<span class="nc" id="L172">            id = ((DateTimeZone)entry.getValue()).getID();</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">            if (!idToIndex.containsKey(id)) {</span>
+<span class="nc" id="L174">                Short index = Short.valueOf(count);</span>
+<span class="nc" id="L175">                idToIndex.put(id, index);</span>
+<span class="nc" id="L176">                indexToId.put(index, id);</span>
+<span class="nc bnc" id="L177" title="All 2 branches missed.">                if (++count == 0) {</span>
+<span class="nc" id="L178">                    throw new InternalError(&quot;Too many time zone ids&quot;);</span>
+                }
+            }
+<span class="nc" id="L181">        }</span>
+
+        // Write the string pool, ordered by index.
+<span class="nc" id="L184">        dout.writeShort(indexToId.size());</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">        for (String id : indexToId.values()) {</span>
+<span class="nc" id="L186">            dout.writeUTF(id);</span>
+<span class="nc" id="L187">        }</span>
+
+        // Write the mappings.
+<span class="nc" id="L190">        dout.writeShort(zimap.size());</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">        for (Entry&lt;String, DateTimeZone&gt; entry : zimap.entrySet()) {</span>
+<span class="nc" id="L192">            String id = entry.getKey();</span>
+<span class="nc" id="L193">            dout.writeShort(idToIndex.get(id).shortValue());</span>
+<span class="nc" id="L194">            id = entry.getValue().getID();</span>
+<span class="nc" id="L195">            dout.writeShort(idToIndex.get(id).shortValue());</span>
+<span class="nc" id="L196">        }</span>
+<span class="nc" id="L197">    }</span>
+
+    static int parseYear(String str, int def) {
+<span class="fc" id="L200">        str = str.toLowerCase(Locale.ENGLISH);</span>
+<span class="fc bfc" id="L201" title="All 4 branches covered.">        if (str.equals(&quot;minimum&quot;) || str.equals(&quot;min&quot;)) {</span>
+<span class="fc" id="L202">            return Integer.MIN_VALUE;</span>
+<span class="pc bpc" id="L203" title="1 of 4 branches missed.">        } else if (str.equals(&quot;maximum&quot;) || str.equals(&quot;max&quot;)) {</span>
+<span class="fc" id="L204">            return Integer.MAX_VALUE;</span>
+<span class="fc bfc" id="L205" title="All 2 branches covered.">        } else if (str.equals(&quot;only&quot;)) {</span>
+<span class="fc" id="L206">            return def;</span>
+        }
+<span class="fc" id="L208">        return Integer.parseInt(str);</span>
+    }
+
+    static int parseMonth(String str) {
+<span class="fc" id="L212">        DateTimeField field = ISOChronology.getInstanceUTC().monthOfYear();</span>
+<span class="fc" id="L213">        return field.get(field.set(0, str, Locale.ENGLISH));</span>
+    }
+
+    static int parseDayOfWeek(String str) {
+<span class="fc" id="L217">        DateTimeField field = ISOChronology.getInstanceUTC().dayOfWeek();</span>
+<span class="fc" id="L218">        return field.get(field.set(0, str, Locale.ENGLISH));</span>
+    }
+    
+    static String parseOptional(String str) {
+<span class="fc bfc" id="L222" title="All 2 branches covered.">        return (str.equals(&quot;-&quot;)) ? null : str;</span>
+    }
+
+    static int parseTime(String str) {
+<span class="fc" id="L226">        DateTimeFormatter p = ISODateTimeFormat.hourMinuteSecondFraction();</span>
+<span class="fc" id="L227">        MutableDateTime mdt = new MutableDateTime(0, getLenientISOChronology());</span>
+<span class="fc" id="L228">        int pos = 0;</span>
+<span class="pc bpc" id="L229" title="1 of 2 branches missed.">        if (str.startsWith(&quot;-&quot;)) {</span>
+<span class="nc" id="L230">            pos = 1;</span>
+        }
+<span class="fc" id="L232">        int newPos = p.parseInto(mdt, str, pos);</span>
+<span class="pc bpc" id="L233" title="1 of 2 branches missed.">        if (newPos == ~pos) {</span>
+<span class="nc" id="L234">            throw new IllegalArgumentException(str);</span>
+        }
+<span class="fc" id="L236">        int millis = (int)mdt.getMillis();</span>
+<span class="pc bpc" id="L237" title="1 of 2 branches missed.">        if (pos == 1) {</span>
+<span class="nc" id="L238">            millis = -millis;</span>
+        }
+<span class="fc" id="L240">        return millis;</span>
+    }
+
+    static char parseZoneChar(char c) {
+<span class="pc bpc" id="L244" title="1 of 3 branches missed.">        switch (c) {</span>
+        case 's': case 'S':
+            // Standard time
+<span class="fc" id="L247">            return 's';</span>
+        case 'u': case 'U': case 'g': case 'G': case 'z': case 'Z':
+            // UTC
+<span class="nc" id="L250">            return 'u';</span>
+        case 'w': case 'W': default:
+            // Wall time
+<span class="fc" id="L253">            return 'w';</span>
+        }
+    }
+
+    /**
+     * @return false if error.
+     */
+    static boolean test(String id, DateTimeZone tz) {
+<span class="fc bfc" id="L261" title="All 2 branches covered.">        if (!id.equals(tz.getID())) {</span>
+<span class="fc" id="L262">            return true;</span>
+        }
+
+        // Test to ensure that reported transitions are not duplicated.
+
+<span class="fc" id="L267">        long millis = ISOChronology.getInstanceUTC().year().set(0, 1850);</span>
+<span class="fc" id="L268">        long end = ISOChronology.getInstanceUTC().year().set(0, 2050);</span>
+
+<span class="fc" id="L270">        int offset = tz.getOffset(millis);</span>
+<span class="fc" id="L271">        int stdOffset = tz.getStandardOffset(millis);</span>
+<span class="fc" id="L272">        String key = tz.getNameKey(millis);</span>
+
+<span class="fc" id="L274">        List&lt;Long&gt; transitions = new ArrayList&lt;Long&gt;();</span>
+
+        while (true) {
+<span class="fc" id="L277">            long next = tz.nextTransition(millis);</span>
+<span class="pc bpc" id="L278" title="3 of 4 branches missed.">            if (next == millis || next &gt; end) {</span>
+<span class="nc" id="L279">                break;</span>
+            }
+
+<span class="nc" id="L282">            millis = next;</span>
+
+<span class="nc" id="L284">            int nextOffset = tz.getOffset(millis);</span>
+<span class="nc" id="L285">            int nextStdOffset = tz.getStandardOffset(millis);</span>
+<span class="nc" id="L286">            String nextKey = tz.getNameKey(millis);</span>
+
+<span class="nc bnc" id="L288" title="All 6 branches missed.">            if (offset == nextOffset &amp;&amp; stdOffset == nextStdOffset &amp;&amp; key.equals(nextKey)) {</span>
+<span class="nc" id="L289">                System.out.println(&quot;*d* Error in &quot; + tz.getID() + &quot; &quot;</span>
+                                   + new DateTime(millis,
+<span class="nc" id="L291">                                                  ISOChronology.getInstanceUTC()));</span>
+<span class="nc" id="L292">                return false;</span>
+            }
+
+<span class="nc bnc" id="L295" title="All 6 branches missed.">            if (nextKey == null || (nextKey.length() &lt; 3 &amp;&amp; !&quot;??&quot;.equals(nextKey))) {</span>
+<span class="nc" id="L296">                System.out.println(&quot;*s* Error in &quot; + tz.getID() + &quot; &quot;</span>
+                                   + new DateTime(millis,
+<span class="nc" id="L298">                                                  ISOChronology.getInstanceUTC())</span>
+                                   + &quot;, nameKey=&quot; + nextKey);
+<span class="nc" id="L300">                return false;</span>
+            }
+
+<span class="nc" id="L303">            transitions.add(Long.valueOf(millis));</span>
+
+<span class="nc" id="L305">            offset = nextOffset;</span>
+<span class="nc" id="L306">            key = nextKey;</span>
+<span class="nc" id="L307">        }</span>
+
+        // Now verify that reverse transitions match up.
+
+<span class="fc" id="L311">        millis = ISOChronology.getInstanceUTC().year().set(0, 2050);</span>
+<span class="fc" id="L312">        end = ISOChronology.getInstanceUTC().year().set(0, 1850);</span>
+
+<span class="pc bpc" id="L314" title="1 of 2 branches missed.">        for (int i=transitions.size(); --i&gt;= 0; ) {</span>
+<span class="nc" id="L315">            long prev = tz.previousTransition(millis);</span>
+<span class="nc bnc" id="L316" title="All 4 branches missed.">            if (prev == millis || prev &lt; end) {</span>
+<span class="nc" id="L317">                break;</span>
+            }
+
+<span class="nc" id="L320">            millis = prev;</span>
+
+<span class="nc" id="L322">            long trans = transitions.get(i).longValue();</span>
+            
+<span class="nc bnc" id="L324" title="All 2 branches missed.">            if (trans - 1 != millis) {</span>
+<span class="nc" id="L325">                System.out.println(&quot;*r* Error in &quot; + tz.getID() + &quot; &quot;</span>
+                                   + new DateTime(millis,
+<span class="nc" id="L327">                                                  ISOChronology.getInstanceUTC()) + &quot; != &quot;</span>
+                                   + new DateTime(trans - 1,
+<span class="nc" id="L329">                                                  ISOChronology.getInstanceUTC()));</span>
+                                   
+<span class="nc" id="L331">                return false;</span>
+            }
+<span class="nc" id="L333">        }</span>
+
+<span class="fc" id="L335">        return true;</span>
+    }
+
+    // Maps names to RuleSets.
+    private Map&lt;String, RuleSet&gt; iRuleSets;
+
+    // List of Zone objects.
+    private List&lt;Zone&gt; iZones;
+
+    // List String pairs to link.
+    private List&lt;String&gt; iGoodLinks;
+
+    // List String pairs to link.
+    private List&lt;String&gt; iBackLinks;
+
+<span class="fc" id="L350">    public ZoneInfoCompiler() {</span>
+<span class="fc" id="L351">        iRuleSets = new HashMap&lt;String, RuleSet&gt;();</span>
+<span class="fc" id="L352">        iZones = new ArrayList&lt;Zone&gt;();</span>
+<span class="fc" id="L353">        iGoodLinks = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L354">        iBackLinks = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L355">    }</span>
+
+    /**
+     * Returns a map of ids to DateTimeZones.
+     *
+     * @param outputDir optional directory to write compiled data files to
+     * @param sources optional list of source files to parse
+     */
+    public Map&lt;String, DateTimeZone&gt; compile(File outputDir, File[] sources) throws IOException {
+<span class="pc bpc" id="L364" title="1 of 2 branches missed.">        if (sources != null) {</span>
+<span class="pc bpc" id="L365" title="1 of 2 branches missed.">            for (int i=0; i&lt;sources.length; i++) {</span>
+<span class="fc" id="L366">                BufferedReader in = null;</span>
+                try {
+<span class="fc" id="L368">                    in = new BufferedReader(new FileReader(sources[i]));</span>
+<span class="nc" id="L369">                    parseDataFile(in, &quot;backward&quot;.equals(sources[i].getName()));</span>
+                } finally {
+<span class="pc bpc" id="L371" title="1 of 2 branches missed.">                    if (in != null) {</span>
+<span class="fc" id="L372">                        in.close();</span>
+                    }
+                }
+            }
+        }
+
+<span class="nc bnc" id="L378" title="All 2 branches missed.">        if (outputDir != null) {</span>
+<span class="nc bnc" id="L379" title="All 4 branches missed.">            if (!outputDir.exists() &amp;&amp; !outputDir.mkdirs()) {</span>
+<span class="nc" id="L380">                throw new IOException(&quot;Destination directory doesn't exist and cannot be created: &quot; + outputDir);</span>
+            }
+<span class="nc bnc" id="L382" title="All 2 branches missed.">            if (!outputDir.isDirectory()) {</span>
+<span class="nc" id="L383">                throw new IOException(&quot;Destination is not a directory: &quot; + outputDir);</span>
+            }
+        }
+
+<span class="nc" id="L387">        Map&lt;String, DateTimeZone&gt; map = new TreeMap&lt;String, DateTimeZone&gt;();</span>
+<span class="nc" id="L388">        Map&lt;String, Zone&gt; sourceMap = new TreeMap&lt;String, Zone&gt;();</span>
+
+<span class="nc" id="L390">        System.out.println(&quot;Writing zoneinfo files&quot;);</span>
+        // write out the standard entries
+<span class="nc bnc" id="L392" title="All 2 branches missed.">        for (int i = 0; i &lt; iZones.size(); i++) {</span>
+<span class="nc" id="L393">            Zone zone = iZones.get(i);</span>
+<span class="nc" id="L394">            DateTimeZoneBuilder builder = new DateTimeZoneBuilder();</span>
+<span class="nc" id="L395">            zone.addToBuilder(builder, iRuleSets);</span>
+<span class="nc" id="L396">            DateTimeZone tz = builder.toDateTimeZone(zone.iName, true);</span>
+<span class="nc bnc" id="L397" title="All 2 branches missed.">            if (test(tz.getID(), tz)) {</span>
+<span class="nc" id="L398">                map.put(tz.getID(), tz);</span>
+<span class="nc" id="L399">                sourceMap.put(tz.getID(), zone);</span>
+<span class="nc bnc" id="L400" title="All 2 branches missed.">                if (outputDir != null) {</span>
+<span class="nc" id="L401">                    writeZone(outputDir, builder, tz);</span>
+                }
+            }
+        }
+
+        // revive zones from &quot;good&quot; links
+<span class="nc bnc" id="L407" title="All 2 branches missed.">        for (int i = 0; i &lt; iGoodLinks.size(); i += 2) {</span>
+<span class="nc" id="L408">            String baseId = iGoodLinks.get(i);</span>
+<span class="nc" id="L409">            String alias = iGoodLinks.get(i + 1);</span>
+<span class="nc" id="L410">            Zone sourceZone = sourceMap.get(baseId);</span>
+<span class="nc bnc" id="L411" title="All 2 branches missed.">            if (sourceZone == null) {</span>
+<span class="nc" id="L412">                System.out.println(&quot;Cannot find source zone '&quot; + baseId + &quot;' to link alias '&quot; + alias + &quot;' to&quot;);</span>
+            } else {
+<span class="nc" id="L414">                DateTimeZoneBuilder builder = new DateTimeZoneBuilder();</span>
+<span class="nc" id="L415">                sourceZone.addToBuilder(builder, iRuleSets);</span>
+<span class="nc" id="L416">                DateTimeZone revived = builder.toDateTimeZone(alias, true);</span>
+<span class="nc bnc" id="L417" title="All 2 branches missed.">                if (test(revived.getID(), revived)) {</span>
+<span class="nc" id="L418">                    map.put(revived.getID(), revived);</span>
+<span class="nc bnc" id="L419" title="All 2 branches missed.">                    if (outputDir != null) {</span>
+<span class="nc" id="L420">                        writeZone(outputDir, builder, revived);</span>
+                    }
+                }
+<span class="nc" id="L423">                map.put(revived.getID(), revived);</span>
+<span class="nc bnc" id="L424" title="All 2 branches missed.">                if (ZoneInfoLogger.verbose()) {</span>
+<span class="nc" id="L425">                    System.out.println(&quot;Good link: &quot; + alias + &quot; -&gt; &quot; + baseId + &quot; revived&quot;);</span>
+                }
+            }
+        }
+
+        // store &quot;back&quot; links as aliases (where name is permanently mapped
+<span class="nc bnc" id="L431" title="All 2 branches missed.">        for (int pass = 0; pass &lt; 2; pass++) {</span>
+<span class="nc bnc" id="L432" title="All 2 branches missed.">            for (int i = 0; i &lt; iBackLinks.size(); i += 2) {</span>
+<span class="nc" id="L433">                String id = iBackLinks.get(i);</span>
+<span class="nc" id="L434">                String alias = iBackLinks.get(i + 1);</span>
+<span class="nc" id="L435">                DateTimeZone tz = map.get(id);</span>
+<span class="nc bnc" id="L436" title="All 2 branches missed.">                if (tz == null) {</span>
+<span class="nc bnc" id="L437" title="All 2 branches missed.">                    if (pass &gt; 0) {</span>
+<span class="nc" id="L438">                        System.out.println(&quot;Cannot find time zone '&quot; + id + &quot;' to link alias '&quot; + alias + &quot;' to&quot;);</span>
+                    }
+                } else {
+<span class="nc" id="L441">                    map.put(alias, tz);</span>
+<span class="nc bnc" id="L442" title="All 2 branches missed.">                    if (ZoneInfoLogger.verbose()) {</span>
+<span class="nc" id="L443">                        System.out.println(&quot;Back link: &quot; + alias + &quot; -&gt; &quot; + tz.getID());</span>
+                    }
+                }
+            }
+        }
+
+        // write map that unites the time-zone data, pointing aliases and real zones at files
+<span class="nc bnc" id="L450" title="All 2 branches missed.">        if (outputDir != null) {</span>
+<span class="nc" id="L451">            System.out.println(&quot;Writing ZoneInfoMap&quot;);</span>
+<span class="nc" id="L452">            File file = new File(outputDir, &quot;ZoneInfoMap&quot;);</span>
+<span class="nc bnc" id="L453" title="All 2 branches missed.">            if (!file.getParentFile().exists()) {</span>
+<span class="nc" id="L454">                file.getParentFile().mkdirs();</span>
+            }
+
+<span class="nc" id="L457">            OutputStream out = new FileOutputStream(file);</span>
+<span class="nc" id="L458">            DataOutputStream dout = new DataOutputStream(out);</span>
+            try {
+                // Sort and filter out any duplicates that match case.
+<span class="nc" id="L461">                Map&lt;String, DateTimeZone&gt; zimap = new TreeMap&lt;String, DateTimeZone&gt;(String.CASE_INSENSITIVE_ORDER);</span>
+<span class="nc" id="L462">                zimap.putAll(map);</span>
+<span class="nc" id="L463">                writeZoneInfoMap(dout, zimap);</span>
+            } finally {
+<span class="nc" id="L465">                dout.close();</span>
+            }
+        }
+
+<span class="nc" id="L469">        return map;</span>
+    }
+
+    private void writeZone(File outputDir, DateTimeZoneBuilder builder, DateTimeZone tz) throws IOException {
+<span class="nc bnc" id="L473" title="All 2 branches missed.">        if (ZoneInfoLogger.verbose()) {</span>
+<span class="nc" id="L474">            System.out.println(&quot;Writing &quot; + tz.getID());</span>
+        }
+<span class="nc" id="L476">        File file = new File(outputDir, tz.getID());</span>
+<span class="nc bnc" id="L477" title="All 2 branches missed.">        if (!file.getParentFile().exists()) {</span>
+<span class="nc" id="L478">            file.getParentFile().mkdirs();</span>
+        }
+<span class="nc" id="L480">        OutputStream out = new FileOutputStream(file);</span>
+        try {
+<span class="nc" id="L482">            builder.writeTo(tz.getID(), out);</span>
+        } finally {
+<span class="nc" id="L484">            out.close();</span>
+        }
+
+        // Test if it can be read back.
+<span class="nc" id="L488">        InputStream in = new FileInputStream(file);</span>
+<span class="nc" id="L489">        DateTimeZone tz2 = DateTimeZoneBuilder.readFrom(in, tz.getID());</span>
+<span class="nc" id="L490">        in.close();</span>
+
+<span class="nc bnc" id="L492" title="All 2 branches missed.">        if (!tz.equals(tz2)) {</span>
+<span class="nc" id="L493">            System.out.println(&quot;*e* Error in &quot; + tz.getID() +</span>
+                               &quot;: Didn't read properly from file&quot;);
+        }
+<span class="nc" id="L496">    }</span>
+
+    public void parseDataFile(BufferedReader in, boolean backward) throws IOException {
+<span class="fc" id="L499">        Zone zone = null;</span>
+        String line;
+<span class="fc bfc" id="L501" title="All 2 branches covered.">        while ((line = in.readLine()) != null) {</span>
+<span class="fc" id="L502">            String trimmed = line.trim();</span>
+<span class="fc bfc" id="L503" title="All 4 branches covered.">            if (trimmed.length() == 0 || trimmed.charAt(0) == '#') {</span>
+<span class="fc" id="L504">                continue;</span>
+            }
+
+<span class="fc" id="L507">            int index = line.indexOf('#');</span>
+<span class="fc bfc" id="L508" title="All 2 branches covered.">            if (index &gt;= 0) {</span>
+<span class="fc" id="L509">                line = line.substring(0, index);</span>
+            }
+
+            //System.out.println(line);
+
+<span class="fc" id="L514">            StringTokenizer st = new StringTokenizer(line, &quot; \t&quot;);</span>
+
+<span class="pc bpc" id="L516" title="1 of 4 branches missed.">            if (Character.isWhitespace(line.charAt(0)) &amp;&amp; st.hasMoreTokens()) {</span>
+<span class="pc bpc" id="L517" title="1 of 2 branches missed.">                if (zone != null) {</span>
+                    // Zone continuation
+<span class="nc" id="L519">                    zone.chain(st);</span>
+                }
+                continue;
+            } else {
+<span class="pc bpc" id="L523" title="1 of 2 branches missed.">                if (zone != null) {</span>
+<span class="nc" id="L524">                    iZones.add(zone);</span>
+                }
+<span class="fc" id="L526">                zone = null;</span>
+            }
+
+<span class="pc bpc" id="L529" title="1 of 2 branches missed.">            if (st.hasMoreTokens()) {</span>
+<span class="fc" id="L530">                String token = st.nextToken();</span>
+<span class="fc bfc" id="L531" title="All 2 branches covered.">                if (token.equalsIgnoreCase(&quot;Rule&quot;)) {</span>
+<span class="fc" id="L532">                    Rule r = new Rule(st);</span>
+<span class="fc" id="L533">                    RuleSet rs = iRuleSets.get(r.iName);</span>
+<span class="fc bfc" id="L534" title="All 2 branches covered.">                    if (rs == null) {</span>
+<span class="fc" id="L535">                        rs = new RuleSet(r);</span>
+<span class="fc" id="L536">                        iRuleSets.put(r.iName, rs);</span>
+                    } else {
+<span class="fc" id="L538">                        rs.addRule(r);</span>
+                    }
+<span class="fc bfc" id="L540" title="All 2 branches covered.">                } else if (token.equalsIgnoreCase(&quot;Zone&quot;)) {</span>
+<span class="pc bpc" id="L541" title="1 of 2 branches missed.">                    if (st.countTokens() &lt; 4) {</span>
+<span class="fc" id="L542">                        throw new IllegalArgumentException(&quot;Attempting to create a Zone from an incomplete tokenizer&quot;);</span>
+                    }
+<span class="nc" id="L544">                    zone = new Zone(st);</span>
+<span class="pc bpc" id="L545" title="1 of 2 branches missed.">                } else if (token.equalsIgnoreCase(&quot;Link&quot;)) {</span>
+<span class="nc" id="L546">                    String real = st.nextToken();</span>
+<span class="nc" id="L547">                    String alias = st.nextToken();</span>
+                    // links in &quot;backward&quot; are deprecated names
+                    // links in other files should be kept
+                    // special case a few to try to repair terrible damage to tzdb
+<span class="nc bnc" id="L551" title="All 8 branches missed.">                    if (backward || alias.equals(&quot;US/Pacific-New&quot;) || alias.startsWith(&quot;Etc/&quot;) || alias.equals(&quot;GMT&quot;)) {</span>
+<span class="nc" id="L552">                        iBackLinks.add(real);</span>
+<span class="nc" id="L553">                        iBackLinks.add(alias);</span>
+                    } else {
+<span class="nc" id="L555">                        iGoodLinks.add(real);</span>
+<span class="nc" id="L556">                        iGoodLinks.add(alias);</span>
+                    }
+<span class="nc" id="L558">                } else {</span>
+<span class="fc" id="L559">                    System.out.println(&quot;Unknown line: &quot; + line);</span>
+                }
+            }
+<span class="fc" id="L562">        }</span>
+
+<span class="pc bpc" id="L564" title="1 of 2 branches missed.">        if (zone != null) {</span>
+<span class="nc" id="L565">            iZones.add(zone);</span>
+        }
+<span class="fc" id="L567">    }</span>
+
+    static class DateTimeOfYear {
+        public final int iMonthOfYear;
+        public final int iDayOfMonth;
+        public final int iDayOfWeek;
+        public final boolean iAdvanceDayOfWeek;
+        public final int iMillisOfDay;
+        public final char iZoneChar;
+
+<span class="nc" id="L577">        DateTimeOfYear() {</span>
+<span class="nc" id="L578">            iMonthOfYear = 1;</span>
+<span class="nc" id="L579">            iDayOfMonth = 1;</span>
+<span class="nc" id="L580">            iDayOfWeek = 0;</span>
+<span class="nc" id="L581">            iAdvanceDayOfWeek = false;</span>
+<span class="nc" id="L582">            iMillisOfDay = 0;</span>
+<span class="nc" id="L583">            iZoneChar = 'w';</span>
+<span class="nc" id="L584">        }</span>
+
+<span class="fc" id="L586">        DateTimeOfYear(StringTokenizer st) {</span>
+<span class="fc" id="L587">            int month = 1;</span>
+<span class="fc" id="L588">            int day = 1;</span>
+<span class="fc" id="L589">            int dayOfWeek = 0;</span>
+<span class="fc" id="L590">            int millis = 0;</span>
+<span class="fc" id="L591">            boolean advance = false;</span>
+<span class="fc" id="L592">            char zoneChar = 'w';</span>
+
+<span class="pc bpc" id="L594" title="1 of 2 branches missed.">            if (st.hasMoreTokens()) {</span>
+<span class="fc" id="L595">                month = parseMonth(st.nextToken());</span>
+
+<span class="pc bpc" id="L597" title="1 of 2 branches missed.">                if (st.hasMoreTokens()) {</span>
+<span class="fc" id="L598">                    String str = st.nextToken();</span>
+<span class="fc bfc" id="L599" title="All 2 branches covered.">                    if (str.startsWith(&quot;last&quot;)) {</span>
+<span class="fc" id="L600">                        day = -1;</span>
+<span class="fc" id="L601">                        dayOfWeek = parseDayOfWeek(str.substring(4));</span>
+<span class="fc" id="L602">                        advance = false;</span>
+                    } else {
+                        try {
+<span class="fc" id="L605">                            day = Integer.parseInt(str);</span>
+<span class="fc" id="L606">                            dayOfWeek = 0;</span>
+<span class="fc" id="L607">                            advance = false;</span>
+<span class="fc" id="L608">                        } catch (NumberFormatException e) {</span>
+<span class="fc" id="L609">                            int index = str.indexOf(&quot;&gt;=&quot;);</span>
+<span class="pc bpc" id="L610" title="1 of 2 branches missed.">                            if (index &gt; 0) {</span>
+<span class="fc" id="L611">                                day = Integer.parseInt(str.substring(index + 2));</span>
+<span class="fc" id="L612">                                dayOfWeek = parseDayOfWeek(str.substring(0, index));</span>
+<span class="fc" id="L613">                                advance = true;</span>
+                            } else {
+<span class="nc" id="L615">                                index = str.indexOf(&quot;&lt;=&quot;);</span>
+<span class="nc bnc" id="L616" title="All 2 branches missed.">                                if (index &gt; 0) {</span>
+<span class="nc" id="L617">                                    day = Integer.parseInt(str.substring(index + 2));</span>
+<span class="nc" id="L618">                                    dayOfWeek = parseDayOfWeek(str.substring(0, index));</span>
+<span class="nc" id="L619">                                    advance = false;</span>
+                                } else {
+<span class="nc" id="L621">                                    throw new IllegalArgumentException(str);</span>
+                                }
+                            }
+<span class="fc" id="L624">                        }</span>
+                    }
+
+<span class="pc bpc" id="L627" title="1 of 2 branches missed.">                    if (st.hasMoreTokens()) {</span>
+<span class="fc" id="L628">                        str = st.nextToken();</span>
+<span class="fc" id="L629">                        zoneChar = parseZoneChar(str.charAt(str.length() - 1));</span>
+<span class="fc bfc" id="L630" title="All 2 branches covered.">                        if (str.equals(&quot;24:00&quot;)) {</span>
+                            // handle end of year
+<span class="pc bpc" id="L632" title="3 of 4 branches missed.">                            if (month == 12 &amp;&amp; day == 31) {</span>
+<span class="nc" id="L633">                                millis = parseTime(&quot;23:59:59.999&quot;);</span>
+                            } else {
+<span class="fc bfc" id="L635" title="All 2 branches covered.">                                LocalDate date = (day == -1 ?</span>
+<span class="fc" id="L636">                                        new LocalDate(2001, month, 1).plusMonths(1) :</span>
+<span class="fc" id="L637">                                        new LocalDate(2001, month, day).plusDays(1));</span>
+<span class="fc bfc" id="L638" title="All 4 branches covered.">                                advance = (day != -1 &amp;&amp; dayOfWeek != 0);</span>
+<span class="fc" id="L639">                                month = date.getMonthOfYear();</span>
+<span class="fc" id="L640">                                day = date.getDayOfMonth();</span>
+<span class="fc bfc" id="L641" title="All 2 branches covered.">                                if (dayOfWeek != 0) {</span>
+<span class="fc" id="L642">                                    dayOfWeek = ((dayOfWeek - 1 + 1) % 7) + 1;</span>
+                                }
+<span class="fc" id="L644">                            }</span>
+                        } else {
+<span class="fc" id="L646">                            millis = parseTime(str);</span>
+                        }
+                    }
+                }
+            }
+
+<span class="fc" id="L652">            iMonthOfYear = month;</span>
+<span class="fc" id="L653">            iDayOfMonth = day;</span>
+<span class="fc" id="L654">            iDayOfWeek = dayOfWeek;</span>
+<span class="fc" id="L655">            iAdvanceDayOfWeek = advance;</span>
+<span class="fc" id="L656">            iMillisOfDay = millis;</span>
+<span class="fc" id="L657">            iZoneChar = zoneChar;</span>
+<span class="fc" id="L658">        }</span>
+
+        /**
+         * Adds a recurring savings rule to the builder.
+         */
+        public void addRecurring(DateTimeZoneBuilder builder, String nameKey,
+                                 int saveMillis, int fromYear, int toYear)
+        {
+<span class="nc" id="L666">            builder.addRecurringSavings(nameKey, saveMillis,</span>
+                                        fromYear, toYear,
+                                        iZoneChar,
+                                        iMonthOfYear,
+                                        iDayOfMonth,
+                                        iDayOfWeek,
+                                        iAdvanceDayOfWeek,
+                                        iMillisOfDay);
+<span class="nc" id="L674">        }</span>
+
+        /**
+         * Adds a cutover to the builder.
+         */
+        public void addCutover(DateTimeZoneBuilder builder, int year) {
+<span class="nc" id="L680">            builder.addCutover(year,</span>
+                               iZoneChar,
+                               iMonthOfYear,
+                               iDayOfMonth,
+                               iDayOfWeek,
+                               iAdvanceDayOfWeek,
+                               iMillisOfDay);
+<span class="nc" id="L687">        }</span>
+
+        public String toString() {
+<span class="nc" id="L690">            return</span>
+                &quot;MonthOfYear: &quot; + iMonthOfYear + &quot;\n&quot; +
+                &quot;DayOfMonth: &quot; + iDayOfMonth + &quot;\n&quot; +
+                &quot;DayOfWeek: &quot; + iDayOfWeek + &quot;\n&quot; +
+                &quot;AdvanceDayOfWeek: &quot; + iAdvanceDayOfWeek + &quot;\n&quot; +
+                &quot;MillisOfDay: &quot; + iMillisOfDay + &quot;\n&quot; +
+                &quot;ZoneChar: &quot; + iZoneChar + &quot;\n&quot;;
+        }
+    }
+
+    private static class Rule {
+        public final String iName;
+        public final int iFromYear;
+        public final int iToYear;
+        public final String iType;
+        public final DateTimeOfYear iDateTimeOfYear;
+        public final int iSaveMillis;
+        public final String iLetterS;
+
+<span class="fc" id="L709">        Rule(StringTokenizer st) {</span>
+<span class="fc bfc" id="L710" title="All 2 branches covered.">            if (st.countTokens() &lt; 6) {</span>
+<span class="fc" id="L711">                throw new IllegalArgumentException(&quot;Attempting to create a Rule from an incomplete tokenizer&quot;);</span>
+            }
+<span class="fc" id="L713">            iName = st.nextToken().intern();</span>
+<span class="fc" id="L714">            iFromYear = parseYear(st.nextToken(), 0);</span>
+<span class="fc" id="L715">            iToYear = parseYear(st.nextToken(), iFromYear);</span>
+<span class="pc bpc" id="L716" title="1 of 2 branches missed.">            if (iToYear &lt; iFromYear) {</span>
+<span class="nc" id="L717">                throw new IllegalArgumentException();</span>
+            }
+<span class="fc" id="L719">            iType = parseOptional(st.nextToken());</span>
+<span class="fc" id="L720">            iDateTimeOfYear = new DateTimeOfYear(st);</span>
+<span class="fc" id="L721">            iSaveMillis = parseTime(st.nextToken());</span>
+<span class="fc" id="L722">            iLetterS = parseOptional(st.nextToken());</span>
+<span class="fc" id="L723">        }</span>
+
+        // creates a rule to go before the specified rule
+<span class="nc" id="L726">        Rule(Rule after) {</span>
+<span class="nc" id="L727">            iName = after.iName;</span>
+<span class="nc" id="L728">            iFromYear = 1800;</span>
+<span class="nc" id="L729">            iToYear = after.iFromYear;</span>
+<span class="nc" id="L730">            iType = null;</span>
+<span class="nc" id="L731">            iDateTimeOfYear = after.iDateTimeOfYear;  // does not matter</span>
+<span class="nc" id="L732">            iSaveMillis = 0;</span>
+<span class="nc" id="L733">            iLetterS = after.iLetterS;</span>
+<span class="nc" id="L734">        }</span>
+
+        /**
+         * Adds a recurring savings rule to the builder.
+         */
+        public void addRecurring(DateTimeZoneBuilder builder, int negativeSave, String nameFormat) {
+<span class="nc" id="L740">            int saveMillis = iSaveMillis + -negativeSave;</span>
+<span class="nc" id="L741">            String nameKey = formatName(nameFormat, saveMillis, iLetterS);</span>
+<span class="nc" id="L742">            iDateTimeOfYear.addRecurring(builder, nameKey, saveMillis, iFromYear, iToYear);</span>
+<span class="nc" id="L743">        }</span>
+
+        private static String formatName(String nameFormat, int saveMillis, String letterS) {
+<span class="nc" id="L746">            int index = nameFormat.indexOf('/');</span>
+<span class="nc bnc" id="L747" title="All 2 branches missed.">            if (index &gt; 0) {</span>
+<span class="nc bnc" id="L748" title="All 2 branches missed.">                if (saveMillis == 0) {</span>
+                    // Extract standard name.
+<span class="nc" id="L750">                    return nameFormat.substring(0, index).intern();</span>
+                } else {
+<span class="nc" id="L752">                    return nameFormat.substring(index + 1).intern();</span>
+                }
+            }
+<span class="nc" id="L755">            index = nameFormat.indexOf(&quot;%s&quot;);</span>
+<span class="nc bnc" id="L756" title="All 2 branches missed.">            if (index &lt; 0) {</span>
+<span class="nc" id="L757">                return nameFormat;</span>
+            }
+<span class="nc" id="L759">            String left = nameFormat.substring(0, index);</span>
+<span class="nc" id="L760">            String right = nameFormat.substring(index + 2);</span>
+            String name;
+<span class="nc bnc" id="L762" title="All 2 branches missed.">            if (letterS == null) {</span>
+<span class="nc" id="L763">                name = left.concat(right);</span>
+            } else {
+<span class="nc" id="L765">                name = left + letterS + right;</span>
+            }
+<span class="nc" id="L767">            return name.intern();</span>
+        }
+
+        public String toString() {
+<span class="nc" id="L771">            return</span>
+                &quot;[Rule]\n&quot; + 
+                &quot;Name: &quot; + iName + &quot;\n&quot; +
+                &quot;FromYear: &quot; + iFromYear + &quot;\n&quot; +
+                &quot;ToYear: &quot; + iToYear + &quot;\n&quot; +
+                &quot;Type: &quot; + iType + &quot;\n&quot; +
+                iDateTimeOfYear +
+                &quot;SaveMillis: &quot; + iSaveMillis + &quot;\n&quot; +
+                &quot;LetterS: &quot; + iLetterS + &quot;\n&quot;;
+        }
+    }
+
+    private static class RuleSet {
+        private List&lt;Rule&gt; iRules;
+
+<span class="fc" id="L786">        RuleSet(Rule rule) {</span>
+<span class="fc" id="L787">            iRules = new ArrayList&lt;Rule&gt;();</span>
+<span class="fc" id="L788">            iRules.add(rule);</span>
+<span class="fc" id="L789">        }</span>
+
+        void addRule(Rule rule) {
+<span class="pc bpc" id="L792" title="1 of 2 branches missed.">            if (!(rule.iName.equals(iRules.get(0).iName))) {</span>
+<span class="nc" id="L793">                throw new IllegalArgumentException(&quot;Rule name mismatch&quot;);</span>
+            }
+<span class="fc" id="L795">            iRules.add(rule);</span>
+<span class="fc" id="L796">        }</span>
+
+        /**
+         * Adds recurring savings rules to the builder.
+         */
+        public void addRecurring(DateTimeZoneBuilder builder, int standardMillis, String nameFormat) {
+            // a hack is necessary to remove negative SAVE values from the input tzdb file
+            // negative save values cause the standard offset to be set in the summer instead of the winter
+            // this causes the wrong name to be chosen from the CLDR data
+
+            // check if the ruleset has negative SAVE values
+<span class="nc" id="L807">            int negativeSave = 0;</span>
+<span class="nc bnc" id="L808" title="All 2 branches missed.">            for (int i = 0; i &lt; iRules.size(); i++) {</span>
+<span class="nc" id="L809">                Rule rule = iRules.get(i);</span>
+<span class="nc bnc" id="L810" title="All 2 branches missed.">                if (rule.iSaveMillis &lt; 0) {</span>
+<span class="nc" id="L811">                    negativeSave = Math.min(negativeSave, rule.iSaveMillis);</span>
+                }
+            }
+
+            // if negative SAVE values, then patch standard millis and name format
+<span class="nc bnc" id="L816" title="All 2 branches missed.">            if (negativeSave &lt; 0) {</span>
+<span class="nc" id="L817">                System.out.println(&quot;Fixed negative save values for rule '&quot; + iRules.get(0).iName + &quot;'&quot;);</span>
+<span class="nc" id="L818">                standardMillis += negativeSave;</span>
+<span class="nc" id="L819">                int slashPos = nameFormat.indexOf(&quot;/&quot;);</span>
+<span class="nc bnc" id="L820" title="All 2 branches missed.">                if (slashPos &gt; 0) {</span>
+<span class="nc" id="L821">                    nameFormat = nameFormat.substring(slashPos + 1) + &quot;/&quot; + nameFormat.substring(0, slashPos);</span>
+                }
+            }
+<span class="nc" id="L824">            builder.setStandardOffset(standardMillis);</span>
+
+            // add a fake rule that predates all other rules to ensure standard=summer (see Namibia)
+<span class="nc bnc" id="L827" title="All 2 branches missed.">            if (negativeSave &lt; 0) {</span>
+<span class="nc" id="L828">                Rule rule = new Rule(iRules.get(0));</span>
+<span class="nc" id="L829">                rule.addRecurring(builder, negativeSave, nameFormat);</span>
+            }
+
+            // add each rule, passing through the negative save to alter the actual iSaveMillis value that is used
+<span class="nc bnc" id="L833" title="All 2 branches missed.">            for (int i = 0; i &lt; iRules.size(); i++) {</span>
+<span class="nc" id="L834">                Rule rule = iRules.get(i);</span>
+<span class="nc" id="L835">                rule.addRecurring(builder, negativeSave, nameFormat);</span>
+            }
+<span class="nc" id="L837">        }</span>
+    }
+
+    private static class Zone {
+        public final String iName;
+        public final int iOffsetMillis;
+        public final String iRules;
+        public final String iFormat;
+        public final int iUntilYear;
+        public final DateTimeOfYear iUntilDateTimeOfYear;
+
+        private Zone iNext;
+
+        Zone(StringTokenizer st) {
+<span class="nc" id="L851">            this(st.nextToken(), st);</span>
+<span class="nc" id="L852">        }</span>
+
+<span class="nc" id="L854">        private Zone(String name, StringTokenizer st) {</span>
+<span class="nc" id="L855">            iName = name.intern();</span>
+<span class="nc" id="L856">            iOffsetMillis = parseTime(st.nextToken());</span>
+<span class="nc" id="L857">            iRules = parseOptional(st.nextToken());</span>
+<span class="nc" id="L858">            iFormat = st.nextToken().intern();</span>
+
+<span class="nc" id="L860">            int year = Integer.MAX_VALUE;</span>
+<span class="nc" id="L861">            DateTimeOfYear dtOfYear = getStartOfYear();</span>
+
+<span class="nc bnc" id="L863" title="All 2 branches missed.">            if (st.hasMoreTokens()) {</span>
+<span class="nc" id="L864">                year = Integer.parseInt(st.nextToken());</span>
+<span class="nc bnc" id="L865" title="All 2 branches missed.">                if (st.hasMoreTokens()) {</span>
+<span class="nc" id="L866">                    dtOfYear = new DateTimeOfYear(st);</span>
+                }
+            }
+
+<span class="nc" id="L870">            iUntilYear = year;</span>
+<span class="nc" id="L871">            iUntilDateTimeOfYear = dtOfYear;</span>
+<span class="nc" id="L872">        }</span>
+
+        void chain(StringTokenizer st) {
+<span class="nc bnc" id="L875" title="All 2 branches missed.">            if (iNext != null) {</span>
+<span class="nc" id="L876">                iNext.chain(st);</span>
+            } else {
+<span class="nc" id="L878">                iNext = new Zone(iName, st);</span>
+            }
+<span class="nc" id="L880">        }</span>
+
+        /*
+        public DateTimeZone buildDateTimeZone(Map ruleSets) {
+            DateTimeZoneBuilder builder = new DateTimeZoneBuilder();
+            addToBuilder(builder, ruleSets);
+            return builder.toDateTimeZone(iName);
+        }
+        */
+
+        /**
+         * Adds zone info to the builder.
+         */
+        public void addToBuilder(DateTimeZoneBuilder builder, Map&lt;String, RuleSet&gt; ruleSets) {
+<span class="nc" id="L894">            addToBuilder(this, builder, ruleSets);</span>
+<span class="nc" id="L895">        }</span>
+
+        private static void addToBuilder(Zone zone,
+                                         DateTimeZoneBuilder builder,
+                                         Map&lt;String, RuleSet&gt; ruleSets)
+        {
+<span class="nc bnc" id="L901" title="All 2 branches missed.">            for (; zone != null; zone = zone.iNext) {</span>
+<span class="nc bnc" id="L902" title="All 2 branches missed.">                if (zone.iRules == null) {</span>
+<span class="nc" id="L903">                    builder.setStandardOffset(zone.iOffsetMillis);</span>
+<span class="nc" id="L904">                    builder.setFixedSavings(zone.iFormat, 0);</span>
+                } else {
+                    try {
+                        // Check if iRules actually just refers to a savings.
+<span class="nc" id="L908">                        int saveMillis = parseTime(zone.iRules);</span>
+<span class="nc" id="L909">                        builder.setStandardOffset(zone.iOffsetMillis);</span>
+<span class="nc" id="L910">                        builder.setFixedSavings(zone.iFormat, saveMillis);</span>
+                    }
+<span class="nc" id="L912">                    catch (Exception e) {</span>
+                        // Zone is using a RuleSet for this segment of the timeline
+<span class="nc" id="L914">                        RuleSet rs = ruleSets.get(zone.iRules);</span>
+<span class="nc bnc" id="L915" title="All 2 branches missed.">                        if (rs == null) {</span>
+<span class="nc" id="L916">                            throw new IllegalArgumentException</span>
+                                (&quot;Rules not found: &quot; + zone.iRules);
+                        }
+<span class="nc" id="L919">                        rs.addRecurring(builder, zone.iOffsetMillis, zone.iFormat);</span>
+<span class="nc" id="L920">                    }</span>
+                }
+
+<span class="nc bnc" id="L923" title="All 2 branches missed.">                if (zone.iUntilYear == Integer.MAX_VALUE) {</span>
+<span class="nc" id="L924">                    break;</span>
+                }
+
+<span class="nc" id="L927">                zone.iUntilDateTimeOfYear.addCutover(builder, zone.iUntilYear);</span>
+            }
+<span class="nc" id="L929">        }</span>
+
+        public String toString() {
+<span class="nc" id="L932">            String str =</span>
+                &quot;[Zone]\n&quot; + 
+                &quot;Name: &quot; + iName + &quot;\n&quot; +
+                &quot;OffsetMillis: &quot; + iOffsetMillis + &quot;\n&quot; +
+                &quot;Rules: &quot; + iRules + &quot;\n&quot; +
+                &quot;Format: &quot; + iFormat + &quot;\n&quot; +
+                &quot;UntilYear: &quot; + iUntilYear + &quot;\n&quot; +
+                iUntilDateTimeOfYear;
+
+<span class="nc bnc" id="L941" title="All 2 branches missed.">            if (iNext == null) {</span>
+<span class="nc" id="L942">                return str;</span>
+            }
+
+<span class="nc" id="L945">            return str + &quot;...\n&quot; + iNext.toString();</span>
+        }
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

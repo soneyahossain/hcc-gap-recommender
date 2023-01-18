@@ -1,0 +1,2019 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ISODateTimeFormat.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.format</a> &gt; <span class="el_source">ISODateTimeFormat.java</span></div><h1>ISODateTimeFormat.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.format;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.joda.time.DateTimeFieldType;
+
+/**
+ * Factory that creates instances of DateTimeFormatter based on the ISO8601 standard.
+ * &lt;p&gt;
+ * Date-time formatting is performed by the {@link DateTimeFormatter} class.
+ * Three classes provide factory methods to create formatters, and this is one.
+ * The others are {@link DateTimeFormat} and {@link DateTimeFormatterBuilder}.
+ * &lt;p&gt;
+ * ISO8601 is the international standard for data interchange. It defines a
+ * framework, rather than an absolute standard. As a result this provider has a
+ * number of methods that represent common uses of the framework. The most common
+ * formats are {@link #date() date}, {@link #time() time}, and {@link #dateTime() dateTime}.
+ * &lt;p&gt;
+ * For example, to format a date time in ISO format:
+ * &lt;pre&gt;
+ * DateTime dt = new DateTime();
+ * DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
+ * String str = fmt.print(dt);
+ * &lt;/pre&gt;
+ * &lt;p&gt;
+ * Note that these formatters mostly follow the ISO8601 standard for printing.
+ * For parsing, the formatters are more lenient and allow formats that are not
+ * in strict compliance with the standard.
+ * &lt;p&gt;
+ * It is important to understand that these formatters are not linked to
+ * the &lt;code&gt;ISOChronology&lt;/code&gt;. These formatters may be used with any
+ * chronology, however there may be certain side effects with more unusual
+ * chronologies. For example, the ISO formatters rely on dayOfWeek being
+ * single digit, dayOfMonth being two digit and dayOfYear being three digit.
+ * A chronology with a ten day week would thus cause issues. However, in
+ * general, it is safe to use these formatters with other chronologies.
+ * &lt;p&gt;
+ * ISODateTimeFormat is thread-safe and immutable, and the formatters it
+ * returns are as well.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ * @see DateTimeFormat
+ * @see DateTimeFormatterBuilder
+ */
+public class ISODateTimeFormat {
+
+    /**
+     * Constructor.
+     *
+     * @since 1.1 (previously private)
+     */
+    protected ISODateTimeFormat() {
+<span class="fc" id="L71">        super();</span>
+<span class="fc" id="L72">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a formatter that outputs only those fields specified.
+     * &lt;p&gt;
+     * This method examines the fields provided and returns an ISO-style
+     * formatter that best fits. This can be useful for outputting
+     * less-common ISO styles, such as YearMonth (YYYY-MM) or MonthDay (--MM-DD).
+     * &lt;p&gt;
+     * Note that parsing is often not supported by the resulting formatter, especially in basic mode.
+     * &lt;p&gt;
+     * The list provided may have overlapping fields, such as dayOfWeek and
+     * dayOfMonth. In this case, the style is chosen based on the following
+     * list, thus in the example, the calendar style is chosen as dayOfMonth
+     * is higher in priority than dayOfWeek:
+     * &lt;ul&gt;
+     * &lt;li&gt;monthOfYear - calendar date style
+     * &lt;li&gt;dayOfYear - ordinal date style
+     * &lt;li&gt;weekOfWeekYear - week date style
+     * &lt;li&gt;dayOfMonth - calendar date style
+     * &lt;li&gt;dayOfWeek - week date style
+     * &lt;li&gt;year
+     * &lt;li&gt;weekyear
+     * &lt;/ul&gt;
+     * The supported formats are:
+     * &lt;pre&gt;
+     * Extended      Basic       Fields
+     * 2005-03-25    20050325    year/monthOfYear/dayOfMonth
+     * 2005-03       2005-03     year/monthOfYear
+     * 2005--25      2005--25    year/dayOfMonth *
+     * 2005          2005        year
+     * --03-25       --0325      monthOfYear/dayOfMonth
+     * --03          --03        monthOfYear
+     * ---03         ---03       dayOfMonth
+     * 2005-084      2005084     year/dayOfYear
+     * -084          -084        dayOfYear
+     * 2005-W12-5    2005W125    weekyear/weekOfWeekyear/dayOfWeek
+     * 2005-W-5      2005W-5     weekyear/dayOfWeek *
+     * 2005-W12      2005W12     weekyear/weekOfWeekyear
+     * -W12-5        -W125       weekOfWeekyear/dayOfWeek
+     * -W12          -W12        weekOfWeekyear
+     * -W-5          -W-5        dayOfWeek
+     * 10:20:30.040  102030.040  hour/minute/second/milli
+     * 10:20:30      102030      hour/minute/second
+     * 10:20         1020        hour/minute
+     * 10            10          hour
+     * -20:30.040    -2030.040   minute/second/milli
+     * -20:30        -2030       minute/second
+     * -20           -20         minute
+     * --30.040      --30.040    second/milli
+     * --30          --30        second
+     * ---.040       ---.040     milli *
+     * 10-30.040     10-30.040   hour/second/milli *
+     * 10:20-.040    1020-.040   hour/minute/milli *
+     * 10-30         10-30       hour/second *
+     * 10--.040      10--.040    hour/milli *
+     * -20-.040      -20-.040    minute/milli *
+     *   plus datetime formats like {date}T{time}
+     * &lt;/pre&gt;
+     * * indicates that this is not an official ISO format and can be excluded
+     * by passing in &lt;code&gt;strictISO&lt;/code&gt; as &lt;code&gt;true&lt;/code&gt;.
+     * &lt;p&gt;
+     * This method can side effect the input collection of fields.
+     * If the input collection is modifiable, then each field that was added to
+     * the formatter will be removed from the collection, including any duplicates.
+     * If the input collection is unmodifiable then no side effect occurs.
+     * &lt;p&gt;
+     * This side effect processing is useful if you need to know whether all
+     * the fields were converted into the formatter or not. To achieve this,
+     * pass in a modifiable list, and check that it is empty on exit.
+     *
+     * @param fields  the fields to get a formatter for, not null,
+     *  updated by the method call unless unmodifiable,
+     *  removing those fields built in the formatter
+     * @param extended  true to use the extended format (with separators)
+     * @param strictISO  true to stick exactly to ISO8601, false to include additional formats
+     * @return a suitable formatter
+     * @throws IllegalArgumentException if there is no format for the fields
+     * @since 1.1
+     */
+    public static DateTimeFormatter forFields(
+        Collection&lt;DateTimeFieldType&gt; fields,
+        boolean extended,
+        boolean strictISO) {
+        
+<span class="fc bfc" id="L158" title="All 4 branches covered.">        if (fields == null || fields.size() == 0) {</span>
+<span class="fc" id="L159">            throw new IllegalArgumentException(&quot;The fields must not be null or empty&quot;);</span>
+        }
+<span class="fc" id="L161">        Set&lt;DateTimeFieldType&gt; workingFields = new HashSet&lt;DateTimeFieldType&gt;(fields);</span>
+<span class="fc" id="L162">        int inputSize = workingFields.size();</span>
+<span class="fc" id="L163">        boolean reducedPrec = false;</span>
+<span class="fc" id="L164">        DateTimeFormatterBuilder bld = new DateTimeFormatterBuilder();</span>
+        // date
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        if (workingFields.contains(DateTimeFieldType.monthOfYear())) {</span>
+<span class="fc" id="L167">            reducedPrec = dateByMonth(bld, workingFields, extended, strictISO);</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">        } else if (workingFields.contains(DateTimeFieldType.dayOfYear())) {</span>
+<span class="fc" id="L169">            reducedPrec = dateByOrdinal(bld, workingFields, extended, strictISO);</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">        } else if (workingFields.contains(DateTimeFieldType.weekOfWeekyear())) {</span>
+<span class="fc" id="L171">            reducedPrec = dateByWeek(bld, workingFields, extended, strictISO);</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">        } else if (workingFields.contains(DateTimeFieldType.dayOfMonth())) {</span>
+<span class="fc" id="L173">            reducedPrec = dateByMonth(bld, workingFields, extended, strictISO);</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">        } else if (workingFields.contains(DateTimeFieldType.dayOfWeek())) {</span>
+<span class="fc" id="L175">            reducedPrec = dateByWeek(bld, workingFields, extended, strictISO);</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">        } else if (workingFields.remove(DateTimeFieldType.year())) {</span>
+<span class="fc" id="L177">            bld.append(Constants.ye);</span>
+<span class="fc" id="L178">            reducedPrec = true;</span>
+<span class="fc bfc" id="L179" title="All 2 branches covered.">        } else if (workingFields.remove(DateTimeFieldType.weekyear())) {</span>
+<span class="fc" id="L180">            bld.append(Constants.we);</span>
+<span class="fc" id="L181">            reducedPrec = true;</span>
+        }
+<span class="fc bfc" id="L183" title="All 2 branches covered.">        boolean datePresent = (workingFields.size() &lt; inputSize);</span>
+        
+        // time
+<span class="fc" id="L186">        time(bld, workingFields, extended, strictISO, reducedPrec, datePresent);</span>
+        
+        // result
+<span class="fc bfc" id="L189" title="All 2 branches covered.">        if (bld.canBuildFormatter() == false) {</span>
+<span class="fc" id="L190">            throw new IllegalArgumentException(&quot;No valid format for fields: &quot; + fields);</span>
+        }
+        
+        // side effect the input collection to indicate the processed fields
+        // handling unmodifiable collections with no side effect
+        try {
+<span class="fc" id="L196">            fields.retainAll(workingFields);</span>
+<span class="fc" id="L197">        } catch (UnsupportedOperationException ex) {</span>
+            // ignore, so we can handle unmodifiable collections
+<span class="fc" id="L199">        }</span>
+<span class="fc" id="L200">        return bld.toFormatter();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a date using the calendar date format.
+     * Specification reference: 5.2.1.
+     *
+     * @param bld  the builder
+     * @param fields  the fields
+     * @param extended  true to use extended format
+     * @param strictISO  true to only allow ISO formats
+     * @return true if reduced precision
+     * @since 1.1
+     */
+    private static boolean dateByMonth(
+        DateTimeFormatterBuilder bld,
+        Collection&lt;DateTimeFieldType&gt; fields,
+        boolean extended,
+        boolean strictISO) {
+        
+<span class="fc" id="L221">        boolean reducedPrec = false;</span>
+<span class="fc bfc" id="L222" title="All 2 branches covered.">        if (fields.remove(DateTimeFieldType.year())) {</span>
+<span class="fc" id="L223">            bld.append(Constants.ye);</span>
+<span class="fc bfc" id="L224" title="All 2 branches covered.">            if (fields.remove(DateTimeFieldType.monthOfYear())) {</span>
+<span class="fc bfc" id="L225" title="All 2 branches covered.">                if (fields.remove(DateTimeFieldType.dayOfMonth())) {</span>
+                    // YYYY-MM-DD/YYYYMMDD
+<span class="fc" id="L227">                    appendSeparator(bld, extended);</span>
+<span class="fc" id="L228">                    bld.appendMonthOfYear(2);</span>
+<span class="fc" id="L229">                    appendSeparator(bld, extended);</span>
+<span class="fc" id="L230">                    bld.appendDayOfMonth(2);</span>
+                } else {
+                    // YYYY-MM/YYYY-MM
+<span class="fc" id="L233">                    bld.appendLiteral('-');</span>
+<span class="fc" id="L234">                    bld.appendMonthOfYear(2);</span>
+<span class="fc" id="L235">                    reducedPrec = true;</span>
+                }
+            } else {
+<span class="pc bpc" id="L238" title="1 of 2 branches missed.">                if (fields.remove(DateTimeFieldType.dayOfMonth())) {</span>
+                    // YYYY--DD/YYYY--DD (non-iso)
+<span class="fc" id="L240">                    checkNotStrictISO(fields, strictISO);</span>
+<span class="fc" id="L241">                    bld.appendLiteral('-');</span>
+<span class="fc" id="L242">                    bld.appendLiteral('-');</span>
+<span class="fc" id="L243">                    bld.appendDayOfMonth(2);</span>
+                } else {
+                    // YYYY/YYYY
+<span class="nc" id="L246">                    reducedPrec = true;</span>
+                }
+            }
+            
+<span class="fc bfc" id="L250" title="All 2 branches covered.">        } else if (fields.remove(DateTimeFieldType.monthOfYear())) {</span>
+<span class="fc" id="L251">            bld.appendLiteral('-');</span>
+<span class="fc" id="L252">            bld.appendLiteral('-');</span>
+<span class="fc" id="L253">            bld.appendMonthOfYear(2);</span>
+<span class="fc bfc" id="L254" title="All 2 branches covered.">            if (fields.remove(DateTimeFieldType.dayOfMonth())) {</span>
+                // --MM-DD/--MMDD
+<span class="fc" id="L256">                appendSeparator(bld, extended);</span>
+<span class="fc" id="L257">                bld.appendDayOfMonth(2);</span>
+            } else {
+                // --MM/--MM
+<span class="fc" id="L260">                reducedPrec = true;</span>
+            }
+<span class="pc bpc" id="L262" title="1 of 2 branches missed.">        } else if (fields.remove(DateTimeFieldType.dayOfMonth())) {</span>
+            // ---DD/---DD
+<span class="fc" id="L264">            bld.appendLiteral('-');</span>
+<span class="fc" id="L265">            bld.appendLiteral('-');</span>
+<span class="fc" id="L266">            bld.appendLiteral('-');</span>
+<span class="fc" id="L267">            bld.appendDayOfMonth(2);</span>
+        }
+<span class="fc" id="L269">        return reducedPrec;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a date using the ordinal date format.
+     * Specification reference: 5.2.2.
+     *
+     * @param bld  the builder
+     * @param fields  the fields
+     * @param extended  true to use extended format
+     * @param strictISO  true to only allow ISO formats
+     * @since 1.1
+     */
+    private static boolean dateByOrdinal(
+        DateTimeFormatterBuilder bld,
+        Collection&lt;DateTimeFieldType&gt; fields,
+        boolean extended,
+        boolean strictISO) {
+        
+<span class="fc" id="L289">        boolean reducedPrec = false;</span>
+<span class="fc bfc" id="L290" title="All 2 branches covered.">        if (fields.remove(DateTimeFieldType.year())) {</span>
+<span class="fc" id="L291">            bld.append(Constants.ye);</span>
+<span class="pc bpc" id="L292" title="1 of 2 branches missed.">            if (fields.remove(DateTimeFieldType.dayOfYear())) {</span>
+                // YYYY-DDD/YYYYDDD
+<span class="fc" id="L294">                appendSeparator(bld, extended);</span>
+<span class="fc" id="L295">                bld.appendDayOfYear(3);</span>
+            } else {
+                // YYYY/YYYY
+<span class="nc" id="L298">                reducedPrec = true;</span>
+            }
+            
+<span class="pc bpc" id="L301" title="1 of 2 branches missed.">        } else if (fields.remove(DateTimeFieldType.dayOfYear())) {</span>
+            // -DDD/-DDD
+<span class="fc" id="L303">            bld.appendLiteral('-');</span>
+<span class="fc" id="L304">            bld.appendDayOfYear(3);</span>
+        }
+<span class="fc" id="L306">        return reducedPrec;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a date using the calendar date format.
+     * Specification reference: 5.2.3.
+     *
+     * @param bld  the builder
+     * @param fields  the fields
+     * @param extended  true to use extended format
+     * @param strictISO  true to only allow ISO formats
+     * @since 1.1
+     */
+    private static boolean dateByWeek(
+        DateTimeFormatterBuilder bld,
+        Collection&lt;DateTimeFieldType&gt; fields,
+        boolean extended,
+        boolean strictISO) {
+        
+<span class="fc" id="L326">        boolean reducedPrec = false;</span>
+<span class="fc bfc" id="L327" title="All 2 branches covered.">        if (fields.remove(DateTimeFieldType.weekyear())) {</span>
+<span class="fc" id="L328">            bld.append(Constants.we);</span>
+<span class="fc bfc" id="L329" title="All 2 branches covered.">            if (fields.remove(DateTimeFieldType.weekOfWeekyear())) {</span>
+<span class="fc" id="L330">                appendSeparator(bld, extended);</span>
+<span class="fc" id="L331">                bld.appendLiteral('W');</span>
+<span class="fc" id="L332">                bld.appendWeekOfWeekyear(2);</span>
+<span class="fc bfc" id="L333" title="All 2 branches covered.">                if (fields.remove(DateTimeFieldType.dayOfWeek())) {</span>
+                    // YYYY-WWW-D/YYYYWWWD
+<span class="fc" id="L335">                    appendSeparator(bld, extended);</span>
+<span class="fc" id="L336">                    bld.appendDayOfWeek(1);</span>
+                } else {
+                    // YYYY-WWW/YYYY-WWW
+<span class="fc" id="L339">                    reducedPrec = true;</span>
+                }
+            } else {
+<span class="pc bpc" id="L342" title="1 of 2 branches missed.">                if (fields.remove(DateTimeFieldType.dayOfWeek())) {</span>
+                    // YYYY-W-D/YYYYW-D (non-iso)
+<span class="fc" id="L344">                    checkNotStrictISO(fields, strictISO);</span>
+<span class="fc" id="L345">                    appendSeparator(bld, extended);</span>
+<span class="fc" id="L346">                    bld.appendLiteral('W');</span>
+<span class="fc" id="L347">                    bld.appendLiteral('-');</span>
+<span class="fc" id="L348">                    bld.appendDayOfWeek(1);</span>
+                } else {
+                    // YYYY/YYYY
+<span class="nc" id="L351">                    reducedPrec = true;</span>
+                }
+            }
+            
+<span class="fc bfc" id="L355" title="All 2 branches covered.">        } else if (fields.remove(DateTimeFieldType.weekOfWeekyear())) {</span>
+<span class="fc" id="L356">            bld.appendLiteral('-');</span>
+<span class="fc" id="L357">            bld.appendLiteral('W');</span>
+<span class="fc" id="L358">            bld.appendWeekOfWeekyear(2);</span>
+<span class="fc bfc" id="L359" title="All 2 branches covered.">            if (fields.remove(DateTimeFieldType.dayOfWeek())) {</span>
+                // -WWW-D/-WWWD
+<span class="fc" id="L361">                appendSeparator(bld, extended);</span>
+<span class="fc" id="L362">                bld.appendDayOfWeek(1);</span>
+            } else {
+                // -WWW/-WWW
+<span class="fc" id="L365">                reducedPrec = true;</span>
+            }
+<span class="pc bpc" id="L367" title="1 of 2 branches missed.">        } else if (fields.remove(DateTimeFieldType.dayOfWeek())) {</span>
+            // -W-D/-W-D
+<span class="fc" id="L369">            bld.appendLiteral('-');</span>
+<span class="fc" id="L370">            bld.appendLiteral('W');</span>
+<span class="fc" id="L371">            bld.appendLiteral('-');</span>
+<span class="fc" id="L372">            bld.appendDayOfWeek(1);</span>
+        }
+<span class="fc" id="L374">        return reducedPrec;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Adds the time fields to the builder.
+     * Specification reference: 5.3.1.
+     * 
+     * @param bld  the builder
+     * @param fields  the fields
+     * @param extended  whether to use the extended format
+     * @param strictISO  whether to be strict
+     * @param reducedPrec  whether the date was reduced precision
+     * @param datePresent  whether there was a date
+     * @since 1.1
+     */
+    private static void time(
+        DateTimeFormatterBuilder bld,
+        Collection&lt;DateTimeFieldType&gt; fields,
+        boolean extended,
+        boolean strictISO,
+        boolean reducedPrec,
+        boolean datePresent) {
+        
+<span class="fc" id="L398">        boolean hour = fields.remove(DateTimeFieldType.hourOfDay());</span>
+<span class="fc" id="L399">        boolean minute = fields.remove(DateTimeFieldType.minuteOfHour());</span>
+<span class="fc" id="L400">        boolean second = fields.remove(DateTimeFieldType.secondOfMinute());</span>
+<span class="fc" id="L401">        boolean milli = fields.remove(DateTimeFieldType.millisOfSecond());</span>
+<span class="fc bfc" id="L402" title="All 8 branches covered.">        if (!hour &amp;&amp; !minute &amp;&amp; !second &amp;&amp; !milli) {</span>
+<span class="fc" id="L403">            return;</span>
+        }
+<span class="pc bpc" id="L405" title="1 of 8 branches missed.">        if (hour || minute || second || milli) {</span>
+<span class="fc bfc" id="L406" title="All 4 branches covered.">            if (strictISO &amp;&amp; reducedPrec) {</span>
+<span class="fc" id="L407">                throw new IllegalArgumentException(&quot;No valid ISO8601 format for fields because Date was reduced precision: &quot; + fields);</span>
+            }
+<span class="fc bfc" id="L409" title="All 2 branches covered.">            if (datePresent) {</span>
+<span class="fc" id="L410">                bld.appendLiteral('T');</span>
+            }
+        }
+<span class="fc bfc" id="L413" title="All 12 branches covered.">        if (hour &amp;&amp; minute &amp;&amp; second || (hour &amp;&amp; !second &amp;&amp; !milli)) {</span>
+            // OK - HMSm/HMS/HM/H - valid in combination with date
+        } else {
+<span class="fc bfc" id="L416" title="All 4 branches covered.">            if (strictISO &amp;&amp; datePresent) {</span>
+<span class="fc" id="L417">                throw new IllegalArgumentException(&quot;No valid ISO8601 format for fields because Time was truncated: &quot; + fields);</span>
+            }
+<span class="fc bfc" id="L419" title="All 12 branches covered.">            if (!hour &amp;&amp; (minute &amp;&amp; second || (minute &amp;&amp; !milli) || second)) {</span>
+                // OK - MSm/MS/M/Sm/S - valid ISO formats
+            } else {
+<span class="fc bfc" id="L422" title="All 2 branches covered.">                if (strictISO) {</span>
+<span class="fc" id="L423">                    throw new IllegalArgumentException(&quot;No valid ISO8601 format for fields: &quot; + fields);</span>
+                }
+            }
+        }
+<span class="fc bfc" id="L427" title="All 2 branches covered.">        if (hour) {</span>
+<span class="fc" id="L428">            bld.appendHourOfDay(2);</span>
+<span class="pc bpc" id="L429" title="1 of 6 branches missed.">        } else if (minute || second || milli) {</span>
+<span class="fc" id="L430">            bld.appendLiteral('-');</span>
+        }
+<span class="fc bfc" id="L432" title="All 6 branches covered.">        if (extended &amp;&amp; hour &amp;&amp; minute) {</span>
+<span class="fc" id="L433">            bld.appendLiteral(':');</span>
+        }
+<span class="fc bfc" id="L435" title="All 2 branches covered.">        if (minute) {</span>
+<span class="fc" id="L436">            bld.appendMinuteOfHour(2);</span>
+<span class="fc bfc" id="L437" title="All 4 branches covered.">        } else if (second || milli) {</span>
+<span class="fc" id="L438">            bld.appendLiteral('-');</span>
+        }
+<span class="fc bfc" id="L440" title="All 6 branches covered.">        if (extended &amp;&amp; minute &amp;&amp; second) {</span>
+<span class="fc" id="L441">            bld.appendLiteral(':');</span>
+        }
+<span class="fc bfc" id="L443" title="All 2 branches covered.">        if (second) {</span>
+<span class="fc" id="L444">            bld.appendSecondOfMinute(2);</span>
+<span class="fc bfc" id="L445" title="All 2 branches covered.">        } else if (milli) {</span>
+<span class="fc" id="L446">            bld.appendLiteral('-');</span>
+        }
+<span class="fc bfc" id="L448" title="All 2 branches covered.">        if (milli) {</span>
+<span class="fc" id="L449">            bld.appendLiteral('.');</span>
+<span class="fc" id="L450">            bld.appendMillisOfSecond(3);</span>
+        }
+<span class="fc" id="L452">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Checks that the iso only flag is not set, throwing an exception if it is.
+     * 
+     * @param fields  the fields
+     * @param strictISO  true if only ISO formats allowed
+     * @since 1.1
+     */
+    private static void checkNotStrictISO(Collection&lt;DateTimeFieldType&gt; fields, boolean strictISO) {
+<span class="fc bfc" id="L463" title="All 2 branches covered.">        if (strictISO) {</span>
+<span class="fc" id="L464">            throw new IllegalArgumentException(&quot;No valid ISO8601 format for fields: &quot; + fields);</span>
+        }
+<span class="fc" id="L466">    }</span>
+
+    /**
+     * Appends the separator if necessary.
+     *
+     * @param bld  the builder
+     * @param extended  whether to append the separator
+     * @param sep  the separator
+     * @since 1.1
+     */
+    private static void appendSeparator(DateTimeFormatterBuilder bld, boolean extended) {
+<span class="fc bfc" id="L477" title="All 2 branches covered.">        if (extended) {</span>
+<span class="fc" id="L478">            bld.appendLiteral('-');</span>
+        }
+<span class="fc" id="L480">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a generic ISO date parser for parsing dates with a possible zone.
+     * &lt;p&gt;
+     * The returned formatter can only be used for parsing, printing is unsupported.
+     * &lt;p&gt;
+     * It accepts formats described by the following syntax:
+     * &lt;pre&gt;
+     * date              = date-element ['T' offset]
+     * date-element      = std-date-element | ord-date-element | week-date-element
+     * std-date-element  = yyyy ['-' MM ['-' dd]]
+     * ord-date-element  = yyyy ['-' DDD]
+     * week-date-element = xxxx '-W' ww ['-' e]
+     * offset            = 'Z' | (('+' | '-') HH [':' mm [':' ss [('.' | ',') SSS]]])
+     * &lt;/pre&gt;
+     */
+    public static DateTimeFormatter dateParser() {
+<span class="fc" id="L499">        return Constants.dp;</span>
+    }
+
+    /**
+     * Returns a generic ISO date parser for parsing local dates.
+     * &lt;p&gt;
+     * The returned formatter can only be used for parsing, printing is unsupported.
+     * &lt;p&gt;
+     * This parser is initialised with the local (UTC) time zone.
+     * &lt;p&gt;
+     * It accepts formats described by the following syntax:
+     * &lt;pre&gt;
+     * date-element      = std-date-element | ord-date-element | week-date-element
+     * std-date-element  = yyyy ['-' MM ['-' dd]]
+     * ord-date-element  = yyyy ['-' DDD]
+     * week-date-element = xxxx '-W' ww ['-' e]
+     * &lt;/pre&gt;
+     * @since 1.3
+     */
+    public static DateTimeFormatter localDateParser() {
+<span class="fc" id="L519">        return Constants.ldp;</span>
+    }
+
+    /**
+     * Returns a generic ISO date parser for parsing dates.
+     * &lt;p&gt;
+     * The returned formatter can only be used for parsing, printing is unsupported.
+     * &lt;p&gt;
+     * It accepts formats described by the following syntax:
+     * &lt;pre&gt;
+     * date-element      = std-date-element | ord-date-element | week-date-element
+     * std-date-element  = yyyy ['-' MM ['-' dd]]
+     * ord-date-element  = yyyy ['-' DDD]
+     * week-date-element = xxxx '-W' ww ['-' e]
+     * &lt;/pre&gt;
+     */
+    public static DateTimeFormatter dateElementParser() {
+<span class="fc" id="L536">        return Constants.dpe;</span>
+    }
+
+    /**
+     * Returns a generic ISO time parser for parsing times with a possible zone.
+     * &lt;p&gt;
+     * The returned formatter can only be used for parsing, printing is unsupported.
+     * &lt;p&gt;
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * It accepts formats described by the following syntax:
+     * &lt;pre&gt;
+     * time           = ['T'] time-element [offset]
+     * time-element   = HH [minute-element] | [fraction]
+     * minute-element = ':' mm [second-element] | [fraction]
+     * second-element = ':' ss [fraction]
+     * fraction       = ('.' | ',') digit+
+     * offset         = 'Z' | (('+' | '-') HH [':' mm [':' ss [('.' | ',') SSS]]])
+     * &lt;/pre&gt;
+     */
+    public static DateTimeFormatter timeParser() {
+<span class="fc" id="L557">        return Constants.tp;</span>
+    }
+
+    /**
+     * Returns a generic ISO time parser for parsing local times.
+     * &lt;p&gt;
+     * The returned formatter can only be used for parsing, printing is unsupported.
+     * &lt;p&gt;
+     * This parser is initialised with the local (UTC) time zone.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * It accepts formats described by the following syntax:
+     * &lt;pre&gt;
+     * time           = ['T'] time-element
+     * time-element   = HH [minute-element] | [fraction]
+     * minute-element = ':' mm [second-element] | [fraction]
+     * second-element = ':' ss [fraction]
+     * fraction       = ('.' | ',') digit+
+     * &lt;/pre&gt;
+     * @since 1.3
+     */
+    public static DateTimeFormatter localTimeParser() {
+<span class="fc" id="L579">        return Constants.ltp;</span>
+    }
+
+    /**
+     * Returns a generic ISO time parser.
+     * &lt;p&gt;
+     * The returned formatter can only be used for parsing, printing is unsupported.
+     * &lt;p&gt;
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * It accepts formats described by the following syntax:
+     * &lt;pre&gt;
+     * time-element   = HH [minute-element] | [fraction]
+     * minute-element = ':' mm [second-element] | [fraction]
+     * second-element = ':' ss [fraction]
+     * fraction       = ('.' | ',') digit+
+     * &lt;/pre&gt;
+     */
+    public static DateTimeFormatter timeElementParser() {
+<span class="fc" id="L598">        return Constants.tpe;</span>
+    }
+
+    /**
+     * Returns a generic ISO datetime parser which parses either a date or a time or both.
+     * &lt;p&gt;
+     * The returned formatter can only be used for parsing, printing is unsupported.
+     * &lt;p&gt;
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * It accepts formats described by the following syntax:
+     * &lt;pre&gt;
+     * datetime          = time | date-opt-time
+     * time              = 'T' time-element [offset]
+     * date-opt-time     = date-element ['T' [time-element] [offset]]
+     * date-element      = std-date-element | ord-date-element | week-date-element
+     * std-date-element  = yyyy ['-' MM ['-' dd]]
+     * ord-date-element  = yyyy ['-' DDD]
+     * week-date-element = xxxx '-W' ww ['-' e]
+     * time-element      = HH [minute-element] | [fraction]
+     * minute-element    = ':' mm [second-element] | [fraction]
+     * second-element    = ':' ss [fraction]
+     * fraction          = ('.' | ',') digit+
+     * offset            = 'Z' | (('+' | '-') HH [':' mm [':' ss [('.' | ',') SSS]]])
+     * &lt;/pre&gt;
+     */
+    public static DateTimeFormatter dateTimeParser() {
+<span class="fc" id="L625">        return Constants.dtp;</span>
+    }
+
+    /**
+     * Returns a generic ISO datetime parser where the date is mandatory and the time is optional.
+     * &lt;p&gt;
+     * The returned formatter can only be used for parsing, printing is unsupported.
+     * &lt;p&gt;
+     * This parser can parse zoned datetimes.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * It accepts formats described by the following syntax:
+     * &lt;pre&gt;
+     * date-opt-time     = date-element ['T' [time-element] [offset]]
+     * date-element      = std-date-element | ord-date-element | week-date-element
+     * std-date-element  = yyyy ['-' MM ['-' dd]]
+     * ord-date-element  = yyyy ['-' DDD]
+     * week-date-element = xxxx '-W' ww ['-' e]
+     * time-element      = HH [minute-element] | [fraction]
+     * minute-element    = ':' mm [second-element] | [fraction]
+     * second-element    = ':' ss [fraction]
+     * fraction          = ('.' | ',') digit+
+     * &lt;/pre&gt;
+     * @since 1.3
+     */
+    public static DateTimeFormatter dateOptionalTimeParser() {
+<span class="fc" id="L651">        return Constants.dotp;</span>
+    }
+
+    /**
+     * Returns a generic ISO datetime parser where the date is mandatory and the time is optional.
+     * &lt;p&gt;
+     * The returned formatter can only be used for parsing, printing is unsupported.
+     * &lt;p&gt;
+     * This parser only parses local datetimes.
+     * This parser is initialised with the local (UTC) time zone.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * It accepts formats described by the following syntax:
+     * &lt;pre&gt;
+     * datetime          = date-element ['T' time-element]
+     * date-element      = std-date-element | ord-date-element | week-date-element
+     * std-date-element  = yyyy ['-' MM ['-' dd]]
+     * ord-date-element  = yyyy ['-' DDD]
+     * week-date-element = xxxx '-W' ww ['-' e]
+     * time-element      = HH [minute-element] | [fraction]
+     * minute-element    = ':' mm [second-element] | [fraction]
+     * second-element    = ':' ss [fraction]
+     * fraction          = ('.' | ',') digit+
+     * &lt;/pre&gt;
+     * @since 1.3
+     */
+    public static DateTimeFormatter localDateOptionalTimeParser() {
+<span class="fc" id="L678">        return Constants.ldotp;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a formatter for a full date as four digit year, two digit month
+     * of year, and two digit day of month (yyyy-MM-dd).
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format.
+     * See {@link #dateParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for yyyy-MM-dd
+     */
+    public static DateTimeFormatter date() {
+<span class="fc" id="L692">        return yearMonthDay();</span>
+    }
+
+    /**
+     * Returns a formatter for a two digit hour of day, two digit minute of
+     * hour, two digit second of minute, three digit fraction of second, and
+     * time zone offset (HH:mm:ss.SSSZZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HH:mm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which includes milliseconds.
+     * See {@link #timeParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for HH:mm:ss.SSSZZ
+     */
+    public static DateTimeFormatter time() {
+<span class="fc" id="L709">        return Constants.t;</span>
+    }
+
+    /**
+     * Returns a formatter for a two digit hour of day, two digit minute of
+     * hour, two digit second of minute, and time zone offset (HH:mm:ssZZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HH:mm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which excludes milliseconds.
+     * See {@link #timeParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for HH:mm:ssZZ
+     */
+    public static DateTimeFormatter timeNoMillis() {
+<span class="fc" id="L725">        return Constants.tx;</span>
+    }
+
+    /**
+     * Returns a formatter for a two digit hour of day, two digit minute of
+     * hour, two digit second of minute, three digit fraction of second, and
+     * time zone offset prefixed by 'T' ('T'HH:mm:ss.SSSZZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HH:mm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which includes milliseconds.
+     * See {@link #timeParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for 'T'HH:mm:ss.SSSZZ
+     */
+    public static DateTimeFormatter tTime() {
+<span class="fc" id="L742">        return Constants.tt;</span>
+    }
+
+    /**
+     * Returns a formatter for a two digit hour of day, two digit minute of
+     * hour, two digit second of minute, and time zone offset prefixed
+     * by 'T' ('T'HH:mm:ssZZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HH:mm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which excludes milliseconds.
+     * See {@link #timeParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for 'T'HH:mm:ssZZ
+     */
+    public static DateTimeFormatter tTimeNoMillis() {
+<span class="fc" id="L759">        return Constants.ttx;</span>
+    }
+
+    /**
+     * Returns a formatter that combines a full date and time, separated by a 'T'
+     * (yyyy-MM-dd'T'HH:mm:ss.SSSZZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HH:mm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which includes milliseconds.
+     * See {@link #dateTimeParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for yyyy-MM-dd'T'HH:mm:ss.SSSZZ
+     */
+    public static DateTimeFormatter dateTime() {
+<span class="fc" id="L775">        return Constants.dt;</span>
+    }
+
+    /**
+     * Returns a formatter that combines a full date and time without millis,
+     * separated by a 'T' (yyyy-MM-dd'T'HH:mm:ssZZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HH:mm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which excludes milliseconds.
+     * See {@link #dateTimeParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for yyyy-MM-dd'T'HH:mm:ssZZ
+     */
+    public static DateTimeFormatter dateTimeNoMillis() {
+<span class="fc" id="L791">        return Constants.dtx;</span>
+    }
+
+    /**
+     * Returns a formatter for a full ordinal date, using a four
+     * digit year and three digit dayOfYear (yyyy-DDD).
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format.
+     * See {@link #dateParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for yyyy-DDD
+     * @since 1.1
+     */
+    public static DateTimeFormatter ordinalDate() {
+<span class="fc" id="L805">        return Constants.od;</span>
+    }
+
+    /**
+     * Returns a formatter for a full ordinal date and time, using a four
+     * digit year and three digit dayOfYear (yyyy-DDD'T'HH:mm:ss.SSSZZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HH:mm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which includes milliseconds.
+     * See {@link #dateTimeParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for yyyy-DDD'T'HH:mm:ss.SSSZZ
+     * @since 1.1
+     */
+    public static DateTimeFormatter ordinalDateTime() {
+<span class="fc" id="L822">        return Constants.odt;</span>
+    }
+
+    /**
+     * Returns a formatter for a full ordinal date and time without millis,
+     * using a four digit year and three digit dayOfYear (yyyy-DDD'T'HH:mm:ssZZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HH:mm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which excludes milliseconds.
+     * See {@link #dateTimeParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for yyyy-DDD'T'HH:mm:ssZZ
+     * @since 1.1
+     */
+    public static DateTimeFormatter ordinalDateTimeNoMillis() {
+<span class="fc" id="L839">        return Constants.odtx;</span>
+    }
+
+    /**
+     * Returns a formatter for a full date as four digit weekyear, two digit
+     * week of weekyear, and one digit day of week (xxxx-'W'ww-e).
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format.
+     * See {@link #dateParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for xxxx-'W'ww-e
+     */
+    public static DateTimeFormatter weekDate() {
+<span class="fc" id="L852">        return Constants.wwd;</span>
+    }
+
+    /**
+     * Returns a formatter that combines a full weekyear date and time,
+     * separated by a 'T' (xxxx-'W'ww-e'T'HH:mm:ss.SSSZZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HH:mm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which includes milliseconds.
+     * See {@link #dateTimeParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for xxxx-'W'ww-e'T'HH:mm:ss.SSSZZ
+     */
+    public static DateTimeFormatter weekDateTime() {
+<span class="fc" id="L868">        return Constants.wdt;</span>
+    }
+
+    /**
+     * Returns a formatter that combines a full weekyear date and time without millis,
+     * separated by a 'T' (xxxx-'W'ww-e'T'HH:mm:ssZZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HH:mm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which excludes milliseconds.
+     * See {@link #dateTimeParser()} for a more flexible parser that accepts different formats.
+     * 
+     * @return a formatter for xxxx-'W'ww-e'T'HH:mm:ssZZ
+     */
+    public static DateTimeFormatter weekDateTimeNoMillis() {
+<span class="fc" id="L884">        return Constants.wdtx;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a basic formatter for a full date as four digit year, two digit
+     * month of year, and two digit day of month (yyyyMMdd).
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format.
+     * 
+     * @return a formatter for yyyyMMdd
+     */
+    public static DateTimeFormatter basicDate() {
+<span class="fc" id="L897">        return Constants.bd;</span>
+    }
+
+    /**
+     * Returns a basic formatter for a two digit hour of day, two digit minute
+     * of hour, two digit second of minute, three digit millis, and time zone
+     * offset (HHmmss.SSSZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HHmm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which includes milliseconds.
+     * 
+     * @return a formatter for HHmmss.SSSZ
+     */
+    public static DateTimeFormatter basicTime() {
+<span class="fc" id="L913">        return Constants.bt;</span>
+    }
+
+    /**
+     * Returns a basic formatter for a two digit hour of day, two digit minute
+     * of hour, two digit second of minute, and time zone offset (HHmmssZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HHmm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which excludes milliseconds.
+     * 
+     * @return a formatter for HHmmssZ
+     */
+    public static DateTimeFormatter basicTimeNoMillis() {
+<span class="fc" id="L928">        return Constants.btx;</span>
+    }
+
+    /**
+     * Returns a basic formatter for a two digit hour of day, two digit minute
+     * of hour, two digit second of minute, three digit millis, and time zone
+     * offset prefixed by 'T' ('T'HHmmss.SSSZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HHmm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which includes milliseconds.
+     * 
+     * @return a formatter for 'T'HHmmss.SSSZ
+     */
+    public static DateTimeFormatter basicTTime() {
+<span class="fc" id="L944">        return Constants.btt;</span>
+    }
+
+    /**
+     * Returns a basic formatter for a two digit hour of day, two digit minute
+     * of hour, two digit second of minute, and time zone offset prefixed by 'T'
+     * ('T'HHmmssZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HHmm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which excludes milliseconds.
+     * 
+     * @return a formatter for 'T'HHmmssZ
+     */
+    public static DateTimeFormatter basicTTimeNoMillis() {
+<span class="fc" id="L960">        return Constants.bttx;</span>
+    }
+
+    /**
+     * Returns a basic formatter that combines a basic date and time, separated
+     * by a 'T' (yyyyMMdd'T'HHmmss.SSSZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HHmm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which includes milliseconds.
+     * 
+     * @return a formatter for yyyyMMdd'T'HHmmss.SSSZ
+     */
+    public static DateTimeFormatter basicDateTime() {
+<span class="fc" id="L975">        return Constants.bdt;</span>
+    }
+
+    /**
+     * Returns a basic formatter that combines a basic date and time without millis,
+     * separated by a 'T' (yyyyMMdd'T'HHmmssZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HHmm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which excludes milliseconds.
+     * 
+     * @return a formatter for yyyyMMdd'T'HHmmssZ
+     */
+    public static DateTimeFormatter basicDateTimeNoMillis() {
+<span class="fc" id="L990">        return Constants.bdtx;</span>
+    }
+
+    /**
+     * Returns a formatter for a full ordinal date, using a four
+     * digit year and three digit dayOfYear (yyyyDDD).
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format.
+     * 
+     * @return a formatter for yyyyDDD
+     * @since 1.1
+     */
+    public static DateTimeFormatter basicOrdinalDate() {
+<span class="fc" id="L1003">        return Constants.bod;</span>
+    }
+
+    /**
+     * Returns a formatter for a full ordinal date and time, using a four
+     * digit year and three digit dayOfYear (yyyyDDD'T'HHmmss.SSSZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HHmm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which includes milliseconds.
+     * 
+     * @return a formatter for yyyyDDD'T'HHmmss.SSSZ
+     * @since 1.1
+     */
+    public static DateTimeFormatter basicOrdinalDateTime() {
+<span class="fc" id="L1019">        return Constants.bodt;</span>
+    }
+
+    /**
+     * Returns a formatter for a full ordinal date and time without millis,
+     * using a four digit year and three digit dayOfYear (yyyyDDD'T'HHmmssZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HHmm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which excludes milliseconds.
+     * 
+     * @return a formatter for yyyyDDD'T'HHmmssZ
+     * @since 1.1
+     */
+    public static DateTimeFormatter basicOrdinalDateTimeNoMillis() {
+<span class="fc" id="L1035">        return Constants.bodtx;</span>
+    }
+
+    /**
+     * Returns a basic formatter for a full date as four digit weekyear, two
+     * digit week of weekyear, and one digit day of week (xxxx'W'wwe).
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format.
+     * 
+     * @return a formatter for xxxx'W'wwe
+     */
+    public static DateTimeFormatter basicWeekDate() {
+<span class="fc" id="L1047">        return Constants.bwd;</span>
+    }
+
+    /**
+     * Returns a basic formatter that combines a basic weekyear date and time,
+     * separated by a 'T' (xxxx'W'wwe'T'HHmmss.SSSZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HHmm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which includes milliseconds.
+     * 
+     * @return a formatter for xxxx'W'wwe'T'HHmmss.SSSZ
+     */
+    public static DateTimeFormatter basicWeekDateTime() {
+<span class="fc" id="L1062">        return Constants.bwdt;</span>
+    }
+
+    /**
+     * Returns a basic formatter that combines a basic weekyear date and time
+     * without millis, separated by a 'T' (xxxx'W'wwe'T'HHmmssZ).
+     * &lt;p&gt;
+     * The time zone offset is 'Z' for zero, and of the form '\u00b1HHmm' for non-zero.
+     * The parser is strict by default, thus time string {@code 24:00} cannot be parsed.
+     * &lt;p&gt;
+     * The returned formatter prints and parses only this format, which excludes milliseconds.
+     * 
+     * @return a formatter for xxxx'W'wwe'T'HHmmssZ
+     */
+    public static DateTimeFormatter basicWeekDateTimeNoMillis() {
+<span class="fc" id="L1077">        return Constants.bwdtx;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a formatter for a four digit year. (yyyy)
+     * 
+     * @return a formatter for yyyy
+     */
+    public static DateTimeFormatter year() {
+<span class="fc" id="L1087">        return Constants.ye;</span>
+    }
+
+    /**
+     * Returns a formatter for a four digit year and two digit month of
+     * year. (yyyy-MM)
+     * 
+     * @return a formatter for yyyy-MM
+     */
+    public static DateTimeFormatter yearMonth() {
+<span class="fc" id="L1097">        return Constants.ym;</span>
+    }
+
+    /**
+     * Returns a formatter for a four digit year, two digit month of year, and
+     * two digit day of month. (yyyy-MM-dd)
+     * 
+     * @return a formatter for yyyy-MM-dd
+     */
+    public static DateTimeFormatter yearMonthDay() {
+<span class="fc" id="L1107">        return Constants.ymd;</span>
+    }
+
+    /**
+     * Returns a formatter for a four digit weekyear. (xxxx)
+     * 
+     * @return a formatter for xxxx
+     */
+    public static DateTimeFormatter weekyear() {
+<span class="fc" id="L1116">        return Constants.we;</span>
+    }
+
+    /**
+     * Returns a formatter for a four digit weekyear and two digit week of
+     * weekyear. (xxxx-'W'ww)
+     * 
+     * @return a formatter for xxxx-'W'ww
+     */
+    public static DateTimeFormatter weekyearWeek() {
+<span class="fc" id="L1126">        return Constants.ww;</span>
+    }
+
+    /**
+     * Returns a formatter for a four digit weekyear, two digit week of
+     * weekyear, and one digit day of week. (xxxx-'W'ww-e)
+     * 
+     * @return a formatter for xxxx-'W'ww-e
+     */
+    public static DateTimeFormatter weekyearWeekDay() {
+<span class="fc" id="L1136">        return Constants.wwd;</span>
+    }
+
+    /**
+     * Returns a formatter for a two digit hour of day. (HH)
+     * 
+     * @return a formatter for HH
+     */
+    public static DateTimeFormatter hour() {
+<span class="fc" id="L1145">        return Constants.hde;</span>
+    }
+
+    /**
+     * Returns a formatter for a two digit hour of day and two digit minute of
+     * hour. (HH:mm)
+     * 
+     * @return a formatter for HH:mm
+     */
+    public static DateTimeFormatter hourMinute() {
+<span class="fc" id="L1155">        return Constants.hm;</span>
+    }
+
+    /**
+     * Returns a formatter for a two digit hour of day, two digit minute of
+     * hour, and two digit second of minute. (HH:mm:ss)
+     * 
+     * @return a formatter for HH:mm:ss
+     */
+    public static DateTimeFormatter hourMinuteSecond() {
+<span class="fc" id="L1165">        return Constants.hms;</span>
+    }
+
+    /**
+     * Returns a formatter for a two digit hour of day, two digit minute of
+     * hour, two digit second of minute, and three digit fraction of
+     * second (HH:mm:ss.SSS). Parsing will parse up to 3 fractional second
+     * digits.
+     * 
+     * @return a formatter for HH:mm:ss.SSS
+     */
+    public static DateTimeFormatter hourMinuteSecondMillis() {
+<span class="fc" id="L1177">        return Constants.hmsl;</span>
+    }
+
+    /**
+     * Returns a formatter for a two digit hour of day, two digit minute of
+     * hour, two digit second of minute, and three digit fraction of
+     * second (HH:mm:ss.SSS). Parsing will parse up to 9 fractional second
+     * digits, throwing away all except the first three.
+     * 
+     * @return a formatter for HH:mm:ss.SSS
+     */
+    public static DateTimeFormatter hourMinuteSecondFraction() {
+<span class="fc" id="L1189">        return Constants.hmsf;</span>
+    }
+
+    /**
+     * Returns a formatter that combines a full date and two digit hour of
+     * day. (yyyy-MM-dd'T'HH)
+     * 
+     * @return a formatter for yyyy-MM-dd'T'HH
+     */
+    public static DateTimeFormatter dateHour() {
+<span class="fc" id="L1199">        return Constants.dh;</span>
+    }
+
+    /**
+     * Returns a formatter that combines a full date, two digit hour of day,
+     * and two digit minute of hour. (yyyy-MM-dd'T'HH:mm)
+     * 
+     * @return a formatter for yyyy-MM-dd'T'HH:mm
+     */
+    public static DateTimeFormatter dateHourMinute() {
+<span class="fc" id="L1209">        return Constants.dhm;</span>
+    }
+
+    /**
+     * Returns a formatter that combines a full date, two digit hour of day,
+     * two digit minute of hour, and two digit second of
+     * minute. (yyyy-MM-dd'T'HH:mm:ss)
+     * 
+     * @return a formatter for yyyy-MM-dd'T'HH:mm:ss
+     */
+    public static DateTimeFormatter dateHourMinuteSecond() {
+<span class="fc" id="L1220">        return Constants.dhms;</span>
+    }
+
+    /**
+     * Returns a formatter that combines a full date, two digit hour of day,
+     * two digit minute of hour, two digit second of minute, and three digit
+     * fraction of second (yyyy-MM-dd'T'HH:mm:ss.SSS). Parsing will parse up
+     * to 3 fractional second digits.
+     * 
+     * @return a formatter for yyyy-MM-dd'T'HH:mm:ss.SSS
+     */
+    public static DateTimeFormatter dateHourMinuteSecondMillis() {
+<span class="fc" id="L1232">        return Constants.dhmsl;</span>
+    }
+
+    /**
+     * Returns a formatter that combines a full date, two digit hour of day,
+     * two digit minute of hour, two digit second of minute, and three digit
+     * fraction of second (yyyy-MM-dd'T'HH:mm:ss.SSS). Parsing will parse up
+     * to 9 fractional second digits, throwing away all except the first three.
+     * 
+     * @return a formatter for yyyy-MM-dd'T'HH:mm:ss.SSS
+     */
+    public static DateTimeFormatter dateHourMinuteSecondFraction() {
+<span class="fc" id="L1244">        return Constants.dhmsf;</span>
+    }
+
+    //-----------------------------------------------------------------------
+<span class="nc" id="L1248">    static final class Constants {</span>
+        private static final DateTimeFormatter
+<span class="fc" id="L1250">            ye = yearElement(),  // year element (yyyy)</span>
+<span class="fc" id="L1251">            mye = monthElement(), // monthOfYear element (-MM)</span>
+<span class="fc" id="L1252">            dme = dayOfMonthElement(), // dayOfMonth element (-dd)</span>
+<span class="fc" id="L1253">            we = weekyearElement(),  // weekyear element (xxxx)</span>
+<span class="fc" id="L1254">            wwe = weekElement(), // weekOfWeekyear element (-ww)</span>
+<span class="fc" id="L1255">            dwe = dayOfWeekElement(), // dayOfWeek element (-ee)</span>
+<span class="fc" id="L1256">            dye = dayOfYearElement(), // dayOfYear element (-DDD)</span>
+<span class="fc" id="L1257">            hde = hourElement(), // hourOfDay element (HH)</span>
+<span class="fc" id="L1258">            mhe = minuteElement(), // minuteOfHour element (:mm)</span>
+<span class="fc" id="L1259">            sme = secondElement(), // secondOfMinute element (:ss)</span>
+<span class="fc" id="L1260">            fse = fractionElement(), // fractionOfSecond element (.SSSSSSSSS)</span>
+<span class="fc" id="L1261">            ze = offsetElement(),  // zone offset element</span>
+<span class="fc" id="L1262">            lte = literalTElement(), // literal 'T' element</span>
+            
+            //y,   // year (same as year element)
+<span class="fc" id="L1265">            ym = yearMonth(),  // year month</span>
+<span class="fc" id="L1266">            ymd = yearMonthDay(), // year month day</span>
+
+            //w,   // weekyear (same as weekyear element)
+<span class="fc" id="L1269">            ww = weekyearWeek(),  // weekyear week</span>
+<span class="fc" id="L1270">            wwd = weekyearWeekDay(), // weekyear week day</span>
+
+            //h,    // hour (same as hour element)
+<span class="fc" id="L1273">            hm = hourMinute(),   // hour minute</span>
+<span class="fc" id="L1274">            hms = hourMinuteSecond(),  // hour minute second</span>
+<span class="fc" id="L1275">            hmsl = hourMinuteSecondMillis(), // hour minute second millis</span>
+<span class="fc" id="L1276">            hmsf = hourMinuteSecondFraction(), // hour minute second fraction</span>
+
+<span class="fc" id="L1278">            dh = dateHour(),    // date hour</span>
+<span class="fc" id="L1279">            dhm = dateHourMinute(),   // date hour minute</span>
+<span class="fc" id="L1280">            dhms = dateHourMinuteSecond(),  // date hour minute second</span>
+<span class="fc" id="L1281">            dhmsl = dateHourMinuteSecondMillis(), // date hour minute second millis</span>
+<span class="fc" id="L1282">            dhmsf = dateHourMinuteSecondFraction(), // date hour minute second fraction</span>
+
+            //d,  // date (same as ymd)
+<span class="fc" id="L1285">            t = time(),  // time</span>
+<span class="fc" id="L1286">            tx = timeNoMillis(),  // time no millis</span>
+<span class="fc" id="L1287">            tt = tTime(),  // Ttime</span>
+<span class="fc" id="L1288">            ttx = tTimeNoMillis(),  // Ttime no millis</span>
+<span class="fc" id="L1289">            dt = dateTime(), // date time</span>
+<span class="fc" id="L1290">            dtx = dateTimeNoMillis(), // date time no millis</span>
+
+            //wd,  // week date (same as wwd)
+<span class="fc" id="L1293">            wdt = weekDateTime(), // week date time</span>
+<span class="fc" id="L1294">            wdtx = weekDateTimeNoMillis(), // week date time no millis</span>
+
+<span class="fc" id="L1296">            od = ordinalDate(),  // ordinal date (same as yd)</span>
+<span class="fc" id="L1297">            odt = ordinalDateTime(), // ordinal date time</span>
+<span class="fc" id="L1298">            odtx = ordinalDateTimeNoMillis(), // ordinal date time no millis</span>
+
+<span class="fc" id="L1300">            bd = basicDate(),  // basic date</span>
+<span class="fc" id="L1301">            bt = basicTime(),  // basic time</span>
+<span class="fc" id="L1302">            btx = basicTimeNoMillis(),  // basic time no millis</span>
+<span class="fc" id="L1303">            btt = basicTTime(), // basic Ttime</span>
+<span class="fc" id="L1304">            bttx = basicTTimeNoMillis(), // basic Ttime no millis</span>
+<span class="fc" id="L1305">            bdt = basicDateTime(), // basic date time</span>
+<span class="fc" id="L1306">            bdtx = basicDateTimeNoMillis(), // basic date time no millis</span>
+
+<span class="fc" id="L1308">            bod = basicOrdinalDate(),  // basic ordinal date</span>
+<span class="fc" id="L1309">            bodt = basicOrdinalDateTime(), // basic ordinal date time</span>
+<span class="fc" id="L1310">            bodtx = basicOrdinalDateTimeNoMillis(), // basic ordinal date time no millis</span>
+
+<span class="fc" id="L1312">            bwd = basicWeekDate(),  // basic week date</span>
+<span class="fc" id="L1313">            bwdt = basicWeekDateTime(), // basic week date time</span>
+<span class="fc" id="L1314">            bwdtx = basicWeekDateTimeNoMillis(), // basic week date time no millis</span>
+
+<span class="fc" id="L1316">            dpe = dateElementParser(), // date parser element</span>
+<span class="fc" id="L1317">            tpe = timeElementParser(), // time parser element</span>
+<span class="fc" id="L1318">            dp = dateParser(),  // date parser</span>
+<span class="fc" id="L1319">            ldp = localDateParser(), // local date parser</span>
+<span class="fc" id="L1320">            tp = timeParser(),  // time parser</span>
+<span class="fc" id="L1321">            ltp = localTimeParser(), // local time parser</span>
+<span class="fc" id="L1322">            dtp = dateTimeParser(), // date time parser</span>
+<span class="fc" id="L1323">            dotp = dateOptionalTimeParser(), // date optional time parser</span>
+<span class="fc" id="L1324">            ldotp = localDateOptionalTimeParser(); // local date optional time parser</span>
+
+        //-----------------------------------------------------------------------
+        private static DateTimeFormatter dateParser() {
+<span class="pc bpc" id="L1328" title="1 of 2 branches missed.">            if (dp == null) {</span>
+<span class="fc" id="L1329">                DateTimeParser tOffset = new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1330">                    .appendLiteral('T')</span>
+<span class="fc" id="L1331">                    .append(offsetElement()).toParser();</span>
+<span class="fc" id="L1332">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1333">                    .append(dateElementParser())</span>
+<span class="fc" id="L1334">                    .appendOptional(tOffset)</span>
+<span class="fc" id="L1335">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1337">            return dp;</span>
+        }
+
+        private static DateTimeFormatter localDateParser() {
+<span class="pc bpc" id="L1341" title="1 of 2 branches missed.">            if (ldp == null) {</span>
+<span class="fc" id="L1342">                return dateElementParser().withZoneUTC();</span>
+            }
+<span class="nc" id="L1344">            return ldp;</span>
+        }
+
+        private static DateTimeFormatter dateElementParser() {
+<span class="fc bfc" id="L1348" title="All 2 branches covered.">            if (dpe == null) {</span>
+<span class="fc" id="L1349">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1350">                    .append(null, new DateTimeParser[] {</span>
+                        new DateTimeFormatterBuilder()
+<span class="fc" id="L1352">                        .append(yearElement())</span>
+                        .appendOptional
+<span class="fc" id="L1354">                        (new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1355">                         .append(monthElement())</span>
+<span class="fc" id="L1356">                         .appendOptional(dayOfMonthElement().getParser())</span>
+<span class="fc" id="L1357">                         .toParser())</span>
+<span class="fc" id="L1358">                        .toParser(),</span>
+                        new DateTimeFormatterBuilder()
+<span class="fc" id="L1360">                        .append(weekyearElement())</span>
+<span class="fc" id="L1361">                        .append(weekElement())</span>
+<span class="fc" id="L1362">                        .appendOptional(dayOfWeekElement().getParser())</span>
+<span class="fc" id="L1363">                        .toParser(),</span>
+                        new DateTimeFormatterBuilder()
+<span class="fc" id="L1365">                        .append(yearElement())</span>
+<span class="fc" id="L1366">                        .append(dayOfYearElement())</span>
+<span class="fc" id="L1367">                        .toParser()</span>
+                    })
+<span class="fc" id="L1369">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1371">            return dpe;</span>
+        }
+
+        private static DateTimeFormatter timeParser() {
+<span class="pc bpc" id="L1375" title="1 of 2 branches missed.">            if (tp == null) {</span>
+<span class="fc" id="L1376">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1377">                    .appendOptional(literalTElement().getParser())</span>
+<span class="fc" id="L1378">                    .append(timeElementParser())</span>
+<span class="fc" id="L1379">                    .appendOptional(offsetElement().getParser())</span>
+<span class="fc" id="L1380">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1382">            return tp;</span>
+        }
+
+        private static DateTimeFormatter localTimeParser() {
+<span class="pc bpc" id="L1386" title="1 of 2 branches missed.">            if (ltp == null) {</span>
+<span class="fc" id="L1387">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1388">                    .appendOptional(literalTElement().getParser())</span>
+<span class="fc" id="L1389">                    .append(timeElementParser())</span>
+<span class="fc" id="L1390">                    .toFormatter().withZoneUTC();</span>
+            }
+<span class="nc" id="L1392">            return ltp;</span>
+        }
+
+        private static DateTimeFormatter timeElementParser() {
+<span class="fc bfc" id="L1396" title="All 2 branches covered.">            if (tpe == null) {</span>
+                // Decimal point can be either '.' or ','
+<span class="fc" id="L1398">                DateTimeParser decimalPoint = new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1399">                    .append(null, new DateTimeParser[] {</span>
+                        new DateTimeFormatterBuilder()
+<span class="fc" id="L1401">                        .appendLiteral('.')</span>
+<span class="fc" id="L1402">                        .toParser(),</span>
+                        new DateTimeFormatterBuilder()
+<span class="fc" id="L1404">                        .appendLiteral(',')</span>
+<span class="fc" id="L1405">                        .toParser()</span>
+                    })
+<span class="fc" id="L1407">                    .toParser();</span>
+
+<span class="fc" id="L1409">                return new DateTimeFormatterBuilder()</span>
+                    // time-element
+<span class="fc" id="L1411">                    .append(hourElement())</span>
+                    .append
+<span class="fc" id="L1413">                    (null, new DateTimeParser[] {</span>
+                        new DateTimeFormatterBuilder()
+                        // minute-element
+<span class="fc" id="L1416">                        .append(minuteElement())</span>
+                        .append
+<span class="fc" id="L1418">                        (null, new DateTimeParser[] {</span>
+                            new DateTimeFormatterBuilder()
+                            // second-element
+<span class="fc" id="L1421">                            .append(secondElement())</span>
+                            // second fraction
+<span class="fc" id="L1423">                            .appendOptional(new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1424">                                            .append(decimalPoint)</span>
+<span class="fc" id="L1425">                                            .appendFractionOfSecond(1, 9)</span>
+<span class="fc" id="L1426">                                            .toParser())</span>
+<span class="fc" id="L1427">                            .toParser(),</span>
+                            // minute fraction
+                            new DateTimeFormatterBuilder()
+<span class="fc" id="L1430">                            .append(decimalPoint)</span>
+<span class="fc" id="L1431">                            .appendFractionOfMinute(1, 9)</span>
+<span class="fc" id="L1432">                            .toParser(),</span>
+                            null
+                        })
+<span class="fc" id="L1435">                        .toParser(),</span>
+                        // hour fraction
+                        new DateTimeFormatterBuilder()
+<span class="fc" id="L1438">                        .append(decimalPoint)</span>
+<span class="fc" id="L1439">                        .appendFractionOfHour(1, 9)</span>
+<span class="fc" id="L1440">                        .toParser(),</span>
+                        null
+                    })
+<span class="fc" id="L1443">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1445">            return tpe;</span>
+        }
+
+        private static DateTimeFormatter dateTimeParser() {
+<span class="pc bpc" id="L1449" title="1 of 2 branches missed.">            if (dtp == null) {</span>
+                // This is different from the general time parser in that the 'T'
+                // is required.
+<span class="fc" id="L1452">                DateTimeParser time = new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1453">                    .appendLiteral('T')</span>
+<span class="fc" id="L1454">                    .append(timeElementParser())</span>
+<span class="fc" id="L1455">                    .appendOptional(offsetElement().getParser())</span>
+<span class="fc" id="L1456">                    .toParser();</span>
+<span class="fc" id="L1457">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1458">                    .append(null, new DateTimeParser[] {time, dateOptionalTimeParser().getParser()})</span>
+<span class="fc" id="L1459">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1461">            return dtp;</span>
+        }
+
+        private static DateTimeFormatter dateOptionalTimeParser() {
+<span class="pc bpc" id="L1465" title="1 of 2 branches missed.">            if (dotp == null) {</span>
+<span class="fc" id="L1466">                DateTimeParser timeOrOffset = new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1467">                    .appendLiteral('T')</span>
+<span class="fc" id="L1468">                    .appendOptional(timeElementParser().getParser())</span>
+<span class="fc" id="L1469">                    .appendOptional(offsetElement().getParser())</span>
+<span class="fc" id="L1470">                    .toParser();</span>
+<span class="fc" id="L1471">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1472">                    .append(dateElementParser())</span>
+<span class="fc" id="L1473">                    .appendOptional(timeOrOffset)</span>
+<span class="fc" id="L1474">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1476">            return dotp;</span>
+        }
+
+        private static DateTimeFormatter localDateOptionalTimeParser() {
+<span class="pc bpc" id="L1480" title="1 of 2 branches missed.">            if (ldotp == null) {</span>
+<span class="fc" id="L1481">                DateTimeParser time = new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1482">                    .appendLiteral('T')</span>
+<span class="fc" id="L1483">                    .append(timeElementParser())</span>
+<span class="fc" id="L1484">                    .toParser();</span>
+<span class="fc" id="L1485">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1486">                    .append(dateElementParser())</span>
+<span class="fc" id="L1487">                    .appendOptional(time)</span>
+<span class="fc" id="L1488">                    .toFormatter().withZoneUTC();</span>
+            }
+<span class="nc" id="L1490">            return ldotp;</span>
+        }
+
+        //-----------------------------------------------------------------------
+        private static DateTimeFormatter time() {
+<span class="fc bfc" id="L1495" title="All 2 branches covered.">            if (t == null) {</span>
+<span class="fc" id="L1496">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1497">                    .append(hourMinuteSecondFraction())</span>
+<span class="fc" id="L1498">                    .append(offsetElement())</span>
+<span class="fc" id="L1499">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1501">            return t;</span>
+        }
+
+        private static DateTimeFormatter timeNoMillis() {
+<span class="fc bfc" id="L1505" title="All 2 branches covered.">            if (tx == null) {</span>
+<span class="fc" id="L1506">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1507">                    .append(hourMinuteSecond())</span>
+<span class="fc" id="L1508">                    .append(offsetElement())</span>
+<span class="fc" id="L1509">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1511">            return tx;</span>
+        }
+
+        private static DateTimeFormatter tTime() {
+<span class="fc bfc" id="L1515" title="All 2 branches covered.">            if (tt == null) {</span>
+<span class="fc" id="L1516">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1517">                    .append(literalTElement())</span>
+<span class="fc" id="L1518">                    .append(time())</span>
+<span class="fc" id="L1519">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1521">            return tt;</span>
+        }
+
+        private static DateTimeFormatter tTimeNoMillis() {
+<span class="fc bfc" id="L1525" title="All 2 branches covered.">            if (ttx == null) {</span>
+<span class="fc" id="L1526">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1527">                    .append(literalTElement())</span>
+<span class="fc" id="L1528">                    .append(timeNoMillis())</span>
+<span class="fc" id="L1529">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1531">            return ttx;</span>
+        }
+
+        private static DateTimeFormatter dateTime() {
+<span class="pc bpc" id="L1535" title="1 of 2 branches missed.">            if (dt == null) {</span>
+<span class="fc" id="L1536">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1537">                    .append(date())</span>
+<span class="fc" id="L1538">                    .append(tTime())</span>
+<span class="fc" id="L1539">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1541">            return dt;</span>
+        }
+
+        private static DateTimeFormatter dateTimeNoMillis() {
+<span class="pc bpc" id="L1545" title="1 of 2 branches missed.">            if (dtx == null) {</span>
+<span class="fc" id="L1546">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1547">                    .append(date())</span>
+<span class="fc" id="L1548">                    .append(tTimeNoMillis())</span>
+<span class="fc" id="L1549">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1551">            return dtx;</span>
+        }
+
+        private static DateTimeFormatter ordinalDate() {
+<span class="fc bfc" id="L1555" title="All 2 branches covered.">            if (od == null) {</span>
+<span class="fc" id="L1556">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1557">                    .append(yearElement())</span>
+<span class="fc" id="L1558">                    .append(dayOfYearElement())</span>
+<span class="fc" id="L1559">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1561">            return od;</span>
+        }
+
+        private static DateTimeFormatter ordinalDateTime() {
+<span class="pc bpc" id="L1565" title="1 of 2 branches missed.">            if (odt == null) {</span>
+<span class="fc" id="L1566">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1567">                    .append(ordinalDate())</span>
+<span class="fc" id="L1568">                    .append(tTime())</span>
+<span class="fc" id="L1569">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1571">            return odt;</span>
+        }
+
+        private static DateTimeFormatter ordinalDateTimeNoMillis() {
+<span class="pc bpc" id="L1575" title="1 of 2 branches missed.">            if (odtx == null) {</span>
+<span class="fc" id="L1576">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1577">                    .append(ordinalDate())</span>
+<span class="fc" id="L1578">                    .append(tTimeNoMillis())</span>
+<span class="fc" id="L1579">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1581">            return odtx;</span>
+        }
+
+        private static DateTimeFormatter weekDateTime() {
+<span class="pc bpc" id="L1585" title="1 of 2 branches missed.">            if (wdt == null) {</span>
+<span class="fc" id="L1586">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1587">                    .append(weekDate())</span>
+<span class="fc" id="L1588">                    .append(tTime())</span>
+<span class="fc" id="L1589">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1591">            return wdt;</span>
+        }
+
+        private static DateTimeFormatter weekDateTimeNoMillis() {
+<span class="pc bpc" id="L1595" title="1 of 2 branches missed.">            if (wdtx == null) {</span>
+<span class="fc" id="L1596">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1597">                    .append(weekDate())</span>
+<span class="fc" id="L1598">                    .append(tTimeNoMillis())</span>
+<span class="fc" id="L1599">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1601">            return wdtx;</span>
+        }
+
+        //-----------------------------------------------------------------------
+        private static DateTimeFormatter basicDate() {
+<span class="fc bfc" id="L1606" title="All 2 branches covered.">            if (bd == null) {</span>
+<span class="fc" id="L1607">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1608">                    .appendYear(4, 4)</span>
+<span class="fc" id="L1609">                    .appendFixedDecimal(DateTimeFieldType.monthOfYear(), 2)</span>
+<span class="fc" id="L1610">                    .appendFixedDecimal(DateTimeFieldType.dayOfMonth(), 2)</span>
+<span class="fc" id="L1611">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1613">            return bd;</span>
+        }
+
+        private static DateTimeFormatter basicTime() {
+<span class="fc bfc" id="L1617" title="All 2 branches covered.">            if (bt == null) {</span>
+<span class="fc" id="L1618">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1619">                    .appendFixedDecimal(DateTimeFieldType.hourOfDay(), 2)</span>
+<span class="fc" id="L1620">                    .appendFixedDecimal(DateTimeFieldType.minuteOfHour(), 2)</span>
+<span class="fc" id="L1621">                    .appendFixedDecimal(DateTimeFieldType.secondOfMinute(), 2)</span>
+<span class="fc" id="L1622">                    .appendLiteral('.')</span>
+<span class="fc" id="L1623">                    .appendFractionOfSecond(3, 9)</span>
+<span class="fc" id="L1624">                    .appendTimeZoneOffset(&quot;Z&quot;, false, 2, 2)</span>
+<span class="fc" id="L1625">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1627">            return bt;</span>
+        }
+
+        private static DateTimeFormatter basicTimeNoMillis() {
+<span class="fc bfc" id="L1631" title="All 2 branches covered.">            if (btx == null) {</span>
+<span class="fc" id="L1632">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1633">                    .appendFixedDecimal(DateTimeFieldType.hourOfDay(), 2)</span>
+<span class="fc" id="L1634">                    .appendFixedDecimal(DateTimeFieldType.minuteOfHour(), 2)</span>
+<span class="fc" id="L1635">                    .appendFixedDecimal(DateTimeFieldType.secondOfMinute(), 2)</span>
+<span class="fc" id="L1636">                    .appendTimeZoneOffset(&quot;Z&quot;, false, 2, 2)</span>
+<span class="fc" id="L1637">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1639">            return btx;</span>
+        }
+
+        private static DateTimeFormatter basicTTime() {
+<span class="fc bfc" id="L1643" title="All 2 branches covered.">            if (btt == null) {</span>
+<span class="fc" id="L1644">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1645">                    .append(literalTElement())</span>
+<span class="fc" id="L1646">                    .append(basicTime())</span>
+<span class="fc" id="L1647">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1649">            return btt;</span>
+        }
+
+        private static DateTimeFormatter basicTTimeNoMillis() {
+<span class="fc bfc" id="L1653" title="All 2 branches covered.">            if (bttx == null) {</span>
+<span class="fc" id="L1654">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1655">                    .append(literalTElement())</span>
+<span class="fc" id="L1656">                    .append(basicTimeNoMillis())</span>
+<span class="fc" id="L1657">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1659">            return bttx;</span>
+        }
+
+        private static DateTimeFormatter basicDateTime() {
+<span class="pc bpc" id="L1663" title="1 of 2 branches missed.">            if (bdt == null) {</span>
+<span class="fc" id="L1664">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1665">                    .append(basicDate())</span>
+<span class="fc" id="L1666">                    .append(basicTTime())</span>
+<span class="fc" id="L1667">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1669">            return bdt;</span>
+        }
+
+        private static DateTimeFormatter basicDateTimeNoMillis() {
+<span class="pc bpc" id="L1673" title="1 of 2 branches missed.">            if (bdtx == null) {</span>
+<span class="fc" id="L1674">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1675">                    .append(basicDate())</span>
+<span class="fc" id="L1676">                    .append(basicTTimeNoMillis())</span>
+<span class="fc" id="L1677">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1679">            return bdtx;</span>
+        }
+
+        private static DateTimeFormatter basicOrdinalDate() {
+<span class="fc bfc" id="L1683" title="All 2 branches covered.">            if (bod == null) {</span>
+<span class="fc" id="L1684">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1685">                    .appendYear(4, 4)</span>
+<span class="fc" id="L1686">                    .appendFixedDecimal(DateTimeFieldType.dayOfYear(), 3)</span>
+<span class="fc" id="L1687">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1689">            return bod;</span>
+        }
+
+        private static DateTimeFormatter basicOrdinalDateTime() {
+<span class="pc bpc" id="L1693" title="1 of 2 branches missed.">            if (bodt == null) {</span>
+<span class="fc" id="L1694">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1695">                    .append(basicOrdinalDate())</span>
+<span class="fc" id="L1696">                    .append(basicTTime())</span>
+<span class="fc" id="L1697">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1699">            return bodt;</span>
+        }
+
+        private static DateTimeFormatter basicOrdinalDateTimeNoMillis() {
+<span class="pc bpc" id="L1703" title="1 of 2 branches missed.">            if (bodtx == null) {</span>
+<span class="fc" id="L1704">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1705">                    .append(basicOrdinalDate())</span>
+<span class="fc" id="L1706">                    .append(basicTTimeNoMillis())</span>
+<span class="fc" id="L1707">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1709">            return bodtx;</span>
+        }
+
+        private static DateTimeFormatter basicWeekDate() {
+<span class="fc bfc" id="L1713" title="All 2 branches covered.">            if (bwd == null) {</span>
+<span class="fc" id="L1714">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1715">                    .appendWeekyear(4, 4)</span>
+<span class="fc" id="L1716">                    .appendLiteral('W')</span>
+<span class="fc" id="L1717">                    .appendFixedDecimal(DateTimeFieldType.weekOfWeekyear(), 2)</span>
+<span class="fc" id="L1718">                    .appendFixedDecimal(DateTimeFieldType.dayOfWeek(), 1)</span>
+<span class="fc" id="L1719">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1721">            return bwd;</span>
+        }
+
+        private static DateTimeFormatter basicWeekDateTime() {
+<span class="pc bpc" id="L1725" title="1 of 2 branches missed.">            if (bwdt == null) {</span>
+<span class="fc" id="L1726">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1727">                    .append(basicWeekDate())</span>
+<span class="fc" id="L1728">                    .append(basicTTime())</span>
+<span class="fc" id="L1729">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1731">            return bwdt;</span>
+        }
+
+        private static DateTimeFormatter basicWeekDateTimeNoMillis() {
+<span class="pc bpc" id="L1735" title="1 of 2 branches missed.">            if (bwdtx == null) {</span>
+<span class="fc" id="L1736">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1737">                    .append(basicWeekDate())</span>
+<span class="fc" id="L1738">                    .append(basicTTimeNoMillis())</span>
+<span class="fc" id="L1739">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1741">            return bwdtx;</span>
+        }
+
+        //-----------------------------------------------------------------------
+        private static DateTimeFormatter yearMonth() {
+<span class="pc bpc" id="L1746" title="1 of 2 branches missed.">            if (ym == null) {</span>
+<span class="fc" id="L1747">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1748">                    .append(yearElement())</span>
+<span class="fc" id="L1749">                    .append(monthElement())</span>
+<span class="fc" id="L1750">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1752">            return ym;</span>
+        }
+
+        private static DateTimeFormatter yearMonthDay() {
+<span class="pc bpc" id="L1756" title="1 of 2 branches missed.">            if (ymd == null) {</span>
+<span class="fc" id="L1757">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1758">                    .append(yearElement())</span>
+<span class="fc" id="L1759">                    .append(monthElement())</span>
+<span class="fc" id="L1760">                    .append(dayOfMonthElement())</span>
+<span class="fc" id="L1761">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1763">            return ymd;</span>
+        }
+
+        private static DateTimeFormatter weekyearWeek() {
+<span class="pc bpc" id="L1767" title="1 of 2 branches missed.">            if (ww == null) {</span>
+<span class="fc" id="L1768">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1769">                    .append(weekyearElement())</span>
+<span class="fc" id="L1770">                    .append(weekElement())</span>
+<span class="fc" id="L1771">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1773">            return ww;</span>
+        }
+
+        private static DateTimeFormatter weekyearWeekDay() {
+<span class="pc bpc" id="L1777" title="1 of 2 branches missed.">            if (wwd == null) {</span>
+<span class="fc" id="L1778">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1779">                    .append(weekyearElement())</span>
+<span class="fc" id="L1780">                    .append(weekElement())</span>
+<span class="fc" id="L1781">                    .append(dayOfWeekElement())</span>
+<span class="fc" id="L1782">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1784">            return wwd;</span>
+        }
+
+        private static DateTimeFormatter hourMinute() {
+<span class="fc bfc" id="L1788" title="All 2 branches covered.">            if (hm == null) {</span>
+<span class="fc" id="L1789">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1790">                    .append(hourElement())</span>
+<span class="fc" id="L1791">                    .append(minuteElement())</span>
+<span class="fc" id="L1792">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1794">            return hm;</span>
+        }
+
+        private static DateTimeFormatter hourMinuteSecond() {
+<span class="fc bfc" id="L1798" title="All 2 branches covered.">            if (hms == null) {</span>
+<span class="fc" id="L1799">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1800">                    .append(hourElement())</span>
+<span class="fc" id="L1801">                    .append(minuteElement())</span>
+<span class="fc" id="L1802">                    .append(secondElement())</span>
+<span class="fc" id="L1803">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1805">            return hms;</span>
+        }
+
+        private static DateTimeFormatter hourMinuteSecondMillis() {
+<span class="fc bfc" id="L1809" title="All 2 branches covered.">            if (hmsl == null) {</span>
+<span class="fc" id="L1810">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1811">                    .append(hourElement())</span>
+<span class="fc" id="L1812">                    .append(minuteElement())</span>
+<span class="fc" id="L1813">                    .append(secondElement())</span>
+<span class="fc" id="L1814">                    .appendLiteral('.')</span>
+<span class="fc" id="L1815">                    .appendFractionOfSecond(3, 3)</span>
+<span class="fc" id="L1816">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1818">            return hmsl;</span>
+        }
+
+        private static DateTimeFormatter hourMinuteSecondFraction() {
+<span class="fc bfc" id="L1822" title="All 2 branches covered.">            if (hmsf == null) {</span>
+<span class="fc" id="L1823">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1824">                    .append(hourElement())</span>
+<span class="fc" id="L1825">                    .append(minuteElement())</span>
+<span class="fc" id="L1826">                    .append(secondElement())</span>
+<span class="fc" id="L1827">                    .append(fractionElement())</span>
+<span class="fc" id="L1828">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1830">            return hmsf;</span>
+        }
+
+        private static DateTimeFormatter dateHour() {
+<span class="pc bpc" id="L1834" title="1 of 2 branches missed.">            if (dh == null) {</span>
+<span class="fc" id="L1835">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1836">                    .append(date())</span>
+<span class="fc" id="L1837">                    .append(literalTElement())</span>
+<span class="fc" id="L1838">                    .append(hour())</span>
+<span class="fc" id="L1839">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1841">            return dh;</span>
+        }
+
+        private static DateTimeFormatter dateHourMinute() {
+<span class="pc bpc" id="L1845" title="1 of 2 branches missed.">            if (dhm == null) {</span>
+<span class="fc" id="L1846">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1847">                    .append(date())</span>
+<span class="fc" id="L1848">                    .append(literalTElement())</span>
+<span class="fc" id="L1849">                    .append(hourMinute())</span>
+<span class="fc" id="L1850">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1852">            return dhm;</span>
+        }
+
+        private static DateTimeFormatter dateHourMinuteSecond() {
+<span class="pc bpc" id="L1856" title="1 of 2 branches missed.">            if (dhms == null) {</span>
+<span class="fc" id="L1857">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1858">                    .append(date())</span>
+<span class="fc" id="L1859">                    .append(literalTElement())</span>
+<span class="fc" id="L1860">                    .append(hourMinuteSecond())</span>
+<span class="fc" id="L1861">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1863">            return dhms;</span>
+        }
+
+        private static DateTimeFormatter dateHourMinuteSecondMillis() {
+<span class="pc bpc" id="L1867" title="1 of 2 branches missed.">            if (dhmsl == null) {</span>
+<span class="fc" id="L1868">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1869">                    .append(date())</span>
+<span class="fc" id="L1870">                    .append(literalTElement())</span>
+<span class="fc" id="L1871">                    .append(hourMinuteSecondMillis())</span>
+<span class="fc" id="L1872">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1874">            return dhmsl;</span>
+        }
+
+        private static DateTimeFormatter dateHourMinuteSecondFraction() {
+<span class="pc bpc" id="L1878" title="1 of 2 branches missed.">            if (dhmsf == null) {</span>
+<span class="fc" id="L1879">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1880">                    .append(date())</span>
+<span class="fc" id="L1881">                    .append(literalTElement())</span>
+<span class="fc" id="L1882">                    .append(hourMinuteSecondFraction())</span>
+<span class="fc" id="L1883">                    .toFormatter();</span>
+            }
+<span class="nc" id="L1885">            return dhmsf;</span>
+        }
+
+        //-----------------------------------------------------------------------
+        private static DateTimeFormatter yearElement() {
+<span class="fc bfc" id="L1890" title="All 2 branches covered.">            if (ye == null) {</span>
+<span class="fc" id="L1891">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1892">                    .appendYear(4, 9)</span>
+<span class="fc" id="L1893">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1895">            return ye;</span>
+        }
+    
+        private static DateTimeFormatter monthElement() {
+<span class="fc bfc" id="L1899" title="All 2 branches covered.">            if (mye == null) {</span>
+<span class="fc" id="L1900">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1901">                    .appendLiteral('-')</span>
+<span class="fc" id="L1902">                    .appendMonthOfYear(2)</span>
+<span class="fc" id="L1903">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1905">            return mye;</span>
+        }
+    
+        private static DateTimeFormatter dayOfMonthElement() {
+<span class="fc bfc" id="L1909" title="All 2 branches covered.">            if (dme == null) {</span>
+<span class="fc" id="L1910">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1911">                    .appendLiteral('-')</span>
+<span class="fc" id="L1912">                    .appendDayOfMonth(2)</span>
+<span class="fc" id="L1913">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1915">            return dme;</span>
+        }
+    
+        private static DateTimeFormatter weekyearElement() {
+<span class="fc bfc" id="L1919" title="All 2 branches covered.">            if (we == null) {</span>
+<span class="fc" id="L1920">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1921">                    .appendWeekyear(4, 9)</span>
+<span class="fc" id="L1922">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1924">            return we;</span>
+        }
+    
+        private static DateTimeFormatter weekElement() {
+<span class="fc bfc" id="L1928" title="All 2 branches covered.">            if (wwe == null) {</span>
+<span class="fc" id="L1929">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1930">                    .appendLiteral(&quot;-W&quot;)</span>
+<span class="fc" id="L1931">                    .appendWeekOfWeekyear(2)</span>
+<span class="fc" id="L1932">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1934">            return wwe;</span>
+        }
+    
+        private static DateTimeFormatter dayOfWeekElement() {
+<span class="fc bfc" id="L1938" title="All 2 branches covered.">            if (dwe == null) {</span>
+<span class="fc" id="L1939">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1940">                    .appendLiteral('-')</span>
+<span class="fc" id="L1941">                    .appendDayOfWeek(1)</span>
+<span class="fc" id="L1942">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1944">            return dwe;</span>
+        }
+    
+        private static DateTimeFormatter dayOfYearElement() {
+<span class="fc bfc" id="L1948" title="All 2 branches covered.">            if (dye == null) {</span>
+<span class="fc" id="L1949">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1950">                    .appendLiteral('-')</span>
+<span class="fc" id="L1951">                    .appendDayOfYear(3)</span>
+<span class="fc" id="L1952">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1954">            return dye;</span>
+        }
+        
+        private static DateTimeFormatter literalTElement() {
+<span class="fc bfc" id="L1958" title="All 2 branches covered.">            if (lte == null) {</span>
+<span class="fc" id="L1959">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1960">                    .appendLiteral('T')</span>
+<span class="fc" id="L1961">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1963">            return lte;</span>
+        }
+    
+        private static DateTimeFormatter hourElement() {
+<span class="fc bfc" id="L1967" title="All 2 branches covered.">            if (hde == null) {</span>
+<span class="fc" id="L1968">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1969">                    .appendHourOfDay(2)</span>
+<span class="fc" id="L1970">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1972">            return hde;</span>
+        }
+    
+        private static DateTimeFormatter minuteElement() {
+<span class="fc bfc" id="L1976" title="All 2 branches covered.">            if (mhe == null) {</span>
+<span class="fc" id="L1977">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1978">                    .appendLiteral(':')</span>
+<span class="fc" id="L1979">                    .appendMinuteOfHour(2)</span>
+<span class="fc" id="L1980">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1982">            return mhe;</span>
+        }
+    
+        private static DateTimeFormatter secondElement() {
+<span class="fc bfc" id="L1986" title="All 2 branches covered.">            if (sme == null) {</span>
+<span class="fc" id="L1987">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1988">                    .appendLiteral(':')</span>
+<span class="fc" id="L1989">                    .appendSecondOfMinute(2)</span>
+<span class="fc" id="L1990">                    .toFormatter();</span>
+            }
+<span class="fc" id="L1992">            return sme;</span>
+        }
+    
+        private static DateTimeFormatter fractionElement() {
+<span class="fc bfc" id="L1996" title="All 2 branches covered.">            if (fse == null) {</span>
+<span class="fc" id="L1997">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L1998">                    .appendLiteral('.')</span>
+                    // Support parsing up to nanosecond precision even though
+                    // those extra digits will be dropped.
+<span class="fc" id="L2001">                    .appendFractionOfSecond(3, 9)</span>
+<span class="fc" id="L2002">                    .toFormatter();</span>
+            }
+<span class="fc" id="L2004">            return fse;</span>
+        }
+    
+        private static DateTimeFormatter offsetElement() {
+<span class="fc bfc" id="L2008" title="All 2 branches covered.">            if (ze == null) {</span>
+<span class="fc" id="L2009">                return new DateTimeFormatterBuilder()</span>
+<span class="fc" id="L2010">                    .appendTimeZoneOffset(&quot;Z&quot;, true, 2, 4)</span>
+<span class="fc" id="L2011">                    .toFormatter();</span>
+            }
+<span class="fc" id="L2013">            return ze;</span>
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

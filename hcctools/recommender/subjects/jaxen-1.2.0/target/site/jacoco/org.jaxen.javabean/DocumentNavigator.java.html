@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DocumentNavigator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.javabean</a> &gt; <span class="el_source">DocumentNavigator.java</span></div><h1>DocumentNavigator.java</h1><pre class="source lang-java linenums">/*
+ $Id$
+
+ Copyright 2003 The Werken Company. All Rights Reserved.
+ 
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+  * Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+
+  * Neither the name of the Jaxen Project nor the names of its
+    contributors may be used to endorse or promote products derived 
+    from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+ */
+package org.jaxen.javabean;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Iterator;
+import java.util.Collection;
+
+import org.jaxen.DefaultNavigator;
+import org.jaxen.FunctionCallException;
+import org.jaxen.NamedAccessNavigator;
+import org.jaxen.Navigator;
+import org.jaxen.XPath;
+import org.jaxen.JaxenConstants;
+import org.jaxen.util.SingleObjectIterator;
+
+/** 
+ * Interface for navigating around a JavaBean object model.
+ *
+ * &lt;p&gt;
+ * This class is not intended for direct usage, but is
+ * used by the Jaxen engine during evaluation.
+ * &lt;/p&gt;
+ *
+ * @see XPath
+ *
+ * @author &lt;a href=&quot;mailto:bob@werken.com&quot;&gt;bob mcwhirter&lt;/a&gt;
+ */
+<span class="nc" id="L61">public class DocumentNavigator</span>
+    extends DefaultNavigator
+    implements NamedAccessNavigator
+{
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1768605107626726499L;
+
+    /** Empty Class array. */
+<span class="nc" id="L72">    private static final Class[] EMPTY_CLASS_ARRAY = new Class[0];</span>
+
+    /** Empty Object array. */
+<span class="nc" id="L75">    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];</span>
+
+    /** Singleton implementation.
+     */
+<span class="nc" id="L79">    private static final DocumentNavigator instance = new DocumentNavigator();</span>
+
+    /** Retrieve the singleton instance of this &lt;code&gt;DocumentNavigator&lt;/code&gt;.
+     */
+    public static Navigator getInstance()
+    {
+<span class="nc" id="L85">        return instance;</span>
+    }
+
+    public boolean isElement(Object obj)
+    {
+<span class="nc" id="L90">        return (obj instanceof Element);</span>
+    }
+
+    public boolean isComment(Object obj)
+    {
+<span class="nc" id="L95">        return false;</span>
+    }
+
+    public boolean isText(Object obj)
+    {
+<span class="nc" id="L100">        return ( obj instanceof String );</span>
+    }
+
+    public boolean isAttribute(Object obj)
+    {
+<span class="nc" id="L105">        return false;</span>
+    }
+
+    public boolean isProcessingInstruction(Object obj)
+    {
+<span class="nc" id="L110">        return false;</span>
+    }
+
+    public boolean isDocument(Object obj)
+    {
+<span class="nc" id="L115">        return false;</span>
+    }
+
+    public boolean isNamespace(Object obj)
+    {
+<span class="nc" id="L120">        return false;</span>
+    }
+
+    public String getElementName(Object obj)
+    {
+<span class="nc" id="L125">        return ((Element)obj).getName();</span>
+    }
+
+    public String getElementNamespaceUri(Object obj)
+    {
+<span class="nc" id="L130">        return &quot;&quot;;</span>
+    }
+
+    public String getElementQName(Object obj)
+    {
+<span class="nc" id="L135">        return &quot;&quot;;</span>
+    }
+
+    public String getAttributeName(Object obj)
+    {
+<span class="nc" id="L140">        return &quot;&quot;;</span>
+    }
+
+    public String getAttributeNamespaceUri(Object obj)
+    {
+<span class="nc" id="L145">        return &quot;&quot;;</span>
+    }
+
+    public String getAttributeQName(Object obj)
+    {
+<span class="nc" id="L150">        return &quot;&quot;;</span>
+    }
+
+    public Iterator getChildAxisIterator(Object contextNode)
+    {
+<span class="nc" id="L155">        return JaxenConstants.EMPTY_ITERATOR;</span>
+    }
+
+    /**
+     * Retrieves an &lt;code&gt;Iterator&lt;/code&gt; over the child elements that
+     * match the supplied name.
+     *
+     * @param contextNode  the origin context node
+     * @param localName  the local name of the children to return, always present
+     * @param namespacePrefix  the prefix of the namespace of the children to return
+     * @param namespaceURI  the namespace URI of the children to return
+     * @return an Iterator that traverses the named children, or null if none
+     */
+    public Iterator getChildAxisIterator(Object contextNode,
+                                         String localName,
+                                         String namespacePrefix,
+                                         String namespaceURI)
+    {
+<span class="nc" id="L173">        Class cls = ((Element)contextNode).getObject().getClass();</span>
+
+<span class="nc" id="L175">        String methodName = javacase( localName );</span>
+
+<span class="nc" id="L177">        Method method = null;</span>
+        
+        try
+        {
+<span class="nc" id="L181">            method = cls.getMethod( &quot;get&quot; + methodName, EMPTY_CLASS_ARRAY );</span>
+        }
+<span class="nc" id="L183">        catch (NoSuchMethodException e)</span>
+        {
+            try
+            {
+<span class="nc" id="L187">                method = cls.getMethod( &quot;get&quot; + methodName + &quot;s&quot;, EMPTY_CLASS_ARRAY );</span>
+            }
+<span class="nc" id="L189">            catch (NoSuchMethodException ee)</span>
+            {
+                try
+                {
+<span class="nc" id="L193">                    method = cls.getMethod( localName, EMPTY_CLASS_ARRAY );</span>
+                }
+<span class="nc" id="L195">                catch (NoSuchMethodException eee)</span>
+                {
+<span class="nc" id="L197">                    method = null;</span>
+<span class="nc" id="L198">                }</span>
+<span class="nc" id="L199">            }</span>
+<span class="nc" id="L200">        }</span>
+
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        if ( method == null )</span>
+        {
+<span class="nc" id="L204">            return JaxenConstants.EMPTY_ITERATOR;</span>
+        }
+
+        try
+        {
+<span class="nc" id="L209">            Object result = method.invoke( ((Element)contextNode).getObject(), EMPTY_OBJECT_ARRAY );</span>
+            
+<span class="nc bnc" id="L211" title="All 2 branches missed.">            if ( result == null )</span>
+            {
+<span class="nc" id="L213">                return JaxenConstants.EMPTY_ITERATOR;</span>
+            } 
+            
+<span class="nc bnc" id="L216" title="All 2 branches missed.">            if ( result instanceof Collection )</span>
+            {
+<span class="nc" id="L218">                return new ElementIterator( (Element) contextNode, localName, ((Collection)result).iterator() );</span>
+            }
+            
+<span class="nc bnc" id="L221" title="All 2 branches missed.">            if ( result.getClass().isArray() )</span>
+            {
+<span class="nc" id="L223">                return JaxenConstants.EMPTY_ITERATOR;</span>
+            }
+            
+<span class="nc" id="L226">            return new SingleObjectIterator( new Element( (Element) contextNode, localName, result ) );</span>
+        }
+<span class="nc" id="L228">        catch (IllegalAccessException e)</span>
+        {
+            // swallow
+        }
+<span class="nc" id="L232">        catch (InvocationTargetException e)</span>
+        {
+            // swallow
+<span class="nc" id="L235">        }</span>
+
+<span class="nc" id="L237">        return JaxenConstants.EMPTY_ITERATOR;</span>
+    }
+
+    public Iterator getParentAxisIterator(Object contextNode)
+    {
+<span class="nc bnc" id="L242" title="All 2 branches missed.">        if ( contextNode instanceof Element )</span>
+        {
+<span class="nc" id="L244">            return new SingleObjectIterator( ((Element)contextNode).getParent() );</span>
+        }
+
+<span class="nc" id="L247">        return JaxenConstants.EMPTY_ITERATOR;</span>
+    }
+
+    public Iterator getAttributeAxisIterator(Object contextNode)
+    {
+<span class="nc" id="L252">        return JaxenConstants.EMPTY_ITERATOR;</span>
+    }
+
+    /**
+     * Retrieves an &lt;code&gt;Iterator&lt;/code&gt; over the attribute elements that
+     * match the supplied name.
+     *
+     * @param contextNode  the origin context node
+     * @param localName  the local name of the attributes to return, always present
+     * @param namespacePrefix  the prefix of the namespace of the attributes to return
+     * @param namespaceURI  the namespace URI of the attributes to return
+     * @return an Iterator that traverses the named attributes, not null
+     */
+    public Iterator getAttributeAxisIterator(Object contextNode,
+                                             String localName,
+                                             String namespacePrefix,
+                                             String namespaceURI) {
+<span class="nc" id="L269">        return JaxenConstants.EMPTY_ITERATOR;</span>
+    }
+        
+    public Iterator getNamespaceAxisIterator(Object contextNode)
+    {
+<span class="nc" id="L274">        return JaxenConstants.EMPTY_ITERATOR;</span>
+    }
+
+    public Object getDocumentNode(Object contextNode)
+    {
+<span class="nc" id="L279">        return null;</span>
+    }
+
+    public Object getParentNode(Object contextNode)
+    {
+<span class="nc bnc" id="L284" title="All 2 branches missed.">        if ( contextNode instanceof Element )</span>
+        {
+<span class="nc" id="L286">            return ((Element)contextNode).getParent();</span>
+        }
+
+<span class="nc" id="L289">        return JaxenConstants.EMPTY_ITERATOR;</span>
+    }
+
+    public String getTextStringValue(Object obj)
+    {
+<span class="nc bnc" id="L294" title="All 2 branches missed.">        if ( obj instanceof Element )</span>
+        {
+<span class="nc" id="L296">            return ((Element)obj).getObject().toString();</span>
+        }
+<span class="nc" id="L298">        return obj.toString();</span>
+    }
+
+    public String getElementStringValue(Object obj)
+    {
+<span class="nc bnc" id="L303" title="All 2 branches missed.">        if ( obj instanceof Element )</span>
+        {
+<span class="nc" id="L305">            return ((Element)obj).getObject().toString();</span>
+        }
+<span class="nc" id="L307">        return obj.toString();</span>
+    }
+
+    public String getAttributeStringValue(Object obj)
+    {
+<span class="nc" id="L312">        return obj.toString();</span>
+    }
+
+    public String getNamespaceStringValue(Object obj)
+    {
+<span class="nc" id="L317">        return obj.toString();</span>
+    }
+
+    public String getNamespacePrefix(Object obj)
+    {
+<span class="nc" id="L322">        return null;</span>
+    }
+
+    public String getCommentStringValue(Object obj)
+    {
+<span class="nc" id="L327">        return null;</span>
+    }
+    
+    public String translateNamespacePrefixToUri(String prefix, Object context)
+    {
+<span class="nc" id="L332">        return null;</span>
+    }
+    
+    public short getNodeType(Object node) 
+    {
+<span class="nc" id="L337">        return 0;</span>
+    }
+    
+    public Object getDocument(String uri) throws FunctionCallException
+    {
+<span class="nc" id="L342">        return null;</span>
+    }
+
+    public String getProcessingInstructionTarget(Object obj)
+    {
+<span class="nc" id="L347">        return null;</span>
+    }
+
+    public String getProcessingInstructionData(Object obj)
+    {
+<span class="nc" id="L352">        return null;</span>
+    }
+
+    public XPath parseXPath(String xpath)
+        throws org.jaxen.saxpath.SAXPathException
+    {
+<span class="nc" id="L358">        return new JavaBeanXPath( xpath );</span>
+    }
+
+    protected String javacase(String name)
+    {
+<span class="nc bnc" id="L363" title="All 2 branches missed.">        if ( name.length() == 0 )</span>
+        {
+<span class="nc" id="L365">            return name;</span>
+        }
+<span class="nc bnc" id="L367" title="All 2 branches missed.">        else if ( name.length() == 1 )</span>
+        {
+<span class="nc" id="L369">            return name.toUpperCase();</span>
+        } 
+
+<span class="nc" id="L372">        return name.substring( 0, 1 ).toUpperCase() + name.substring( 1 );</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

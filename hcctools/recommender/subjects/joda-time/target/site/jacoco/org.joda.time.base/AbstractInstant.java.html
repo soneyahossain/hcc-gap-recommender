@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractInstant.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.base</a> &gt; <span class="el_source">AbstractInstant.java</span></div><h1>AbstractInstant.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.base;
+
+import java.util.Date;
+
+import org.joda.convert.ToString;
+import org.joda.time.Chronology;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.DateTimeZone;
+import org.joda.time.Instant;
+import org.joda.time.MutableDateTime;
+import org.joda.time.ReadableInstant;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.field.FieldUtils;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
+
+/**
+ * AbstractInstant provides the common behaviour for instant classes.
+ * &lt;p&gt;
+ * This class has no concept of a chronology, all methods work on the
+ * millisecond instant.
+ * &lt;p&gt;
+ * This class should generally not be used directly by API users. The 
+ * {@link ReadableInstant} interface should be used when different 
+ * kinds of date/time objects are to be referenced.
+ * &lt;p&gt;
+ * Whenever you want to implement &lt;code&gt;ReadableInstant&lt;/code&gt; you should
+ * extend this class.
+ * &lt;p&gt;
+ * AbstractInstant itself is thread-safe and immutable, but subclasses may be
+ * mutable and not thread-safe.
+ *
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public abstract class AbstractInstant implements ReadableInstant {
+
+    /**
+     * Constructor.
+     */
+    protected AbstractInstant() {
+<span class="fc" id="L61">        super();</span>
+<span class="fc" id="L62">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the time zone of the instant from the chronology.
+     * 
+     * @return the DateTimeZone that the instant is using, never null
+     */
+    public DateTimeZone getZone() {
+<span class="fc" id="L71">        return getChronology().getZone();</span>
+    }
+
+    /**
+     * Get the value of one of the fields of a datetime using the chronology of the instant.
+     * &lt;p&gt;
+     * This method uses the chronology of the instant to obtain the value.
+     * For example:
+     * &lt;pre&gt;
+     * DateTime dt = new DateTime();
+     * int year = dt.get(DateTimeFieldType.year());
+     * &lt;/pre&gt;
+     *
+     * @param type  a field type, usually obtained from DateTimeFieldType, not null
+     * @return the value of that field
+     * @throws IllegalArgumentException if the field type is null
+     */
+    public int get(DateTimeFieldType type) {
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        if (type == null) {</span>
+<span class="fc" id="L90">            throw new IllegalArgumentException(&quot;The DateTimeFieldType must not be null&quot;);</span>
+        }
+<span class="fc" id="L92">        return type.getField(getChronology()).get(getMillis());</span>
+    }
+
+    /**
+     * Checks if the field type specified is supported by this instant and chronology.
+     * This can be used to avoid exceptions in {@link #get(DateTimeFieldType)}.
+     *
+     * @param type  a field type, usually obtained from DateTimeFieldType
+     * @return true if the field type is supported
+     */
+    public boolean isSupported(DateTimeFieldType type) {
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        if (type == null) {</span>
+<span class="fc" id="L104">            return false;</span>
+        }
+<span class="fc" id="L106">        return type.getField(getChronology()).isSupported();</span>
+    }
+
+    /**
+     * Get the value of one of the fields of a datetime.
+     * &lt;p&gt;
+     * This could be used to get a field using a different Chronology.
+     * For example:
+     * &lt;pre&gt;
+     * Instant dt = new Instant();
+     * int gjYear = dt.get(Chronology.getCoptic().year());
+     * &lt;/pre&gt;
+     * 
+     * @param field  the DateTimeField to use, not null
+     * @return the value
+     * @throws IllegalArgumentException if the field is null
+     */
+    public int get(DateTimeField field) {
+<span class="fc bfc" id="L124" title="All 2 branches covered.">        if (field == null) {</span>
+<span class="fc" id="L125">            throw new IllegalArgumentException(&quot;The DateTimeField must not be null&quot;);</span>
+        }
+<span class="fc" id="L127">        return field.get(getMillis());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get this object as an Instant.
+     * 
+     * @return an Instant using the same millis
+     */
+    public Instant toInstant() {
+<span class="fc" id="L137">        return new Instant(getMillis());</span>
+    }
+
+    /**
+     * Get this object as a DateTime in the same zone.
+     *
+     * @return a DateTime using the same millis
+     */
+    public DateTime toDateTime() {
+<span class="fc" id="L146">        return new DateTime(getMillis(), getZone());</span>
+    }
+
+    /**
+     * Get this object as a DateTime using ISOChronology in the same zone.
+     *
+     * @return a DateTime using the same millis with ISOChronology
+     */
+    public DateTime toDateTimeISO() {
+<span class="fc" id="L155">        return new DateTime(getMillis(), ISOChronology.getInstance(getZone()));</span>
+    }
+
+    /**
+     * Get this object as a DateTime using the same chronology but a different zone.
+     * 
+     * @param zone time zone to apply, or default if null
+     * @return a DateTime using the same millis
+     */
+    public DateTime toDateTime(DateTimeZone zone) {
+<span class="fc" id="L165">        Chronology chrono = DateTimeUtils.getChronology(getChronology());</span>
+<span class="fc" id="L166">        chrono = chrono.withZone(zone);</span>
+<span class="fc" id="L167">        return new DateTime(getMillis(), chrono);</span>
+    }
+
+    /**
+     * Get this object as a DateTime using the given chronology and its zone.
+     * 
+     * @param chronology chronology to apply, or ISOChronology if null
+     * @return a DateTime using the same millis
+     */
+    public DateTime toDateTime(Chronology chronology) {
+<span class="fc" id="L177">        return new DateTime(getMillis(), chronology);</span>
+    }
+
+    // NOTE: Although the toMutableDateTime methods could check to see if this
+    // is already a MutableDateTime and return this casted, it makes it too
+    // easy to mistakenly modify ReadableDateTime input parameters. Always
+    // returning a copy prevents this.
+
+    /**
+     * Get this object as a MutableDateTime in the same zone.
+     *
+     * @return a MutableDateTime using the same millis
+     */
+    public MutableDateTime toMutableDateTime() {
+<span class="fc" id="L191">        return new MutableDateTime(getMillis(), getZone());</span>
+    }
+
+    /**
+     * Get this object as a MutableDateTime using ISOChronology in the same zone.
+     *
+     * @return a MutableDateTime using the same millis with ISOChronology
+     */
+    public MutableDateTime toMutableDateTimeISO() {
+<span class="fc" id="L200">        return new MutableDateTime(getMillis(), ISOChronology.getInstance(getZone()));</span>
+    }
+
+    /**
+     * Get this object as a MutableDateTime using the same chronology but a different zone.
+     * 
+     * @param zone time zone to apply, or default if null
+     * @return a MutableDateTime using the same millis
+     */
+    public MutableDateTime toMutableDateTime(DateTimeZone zone) {
+<span class="fc" id="L210">        Chronology chrono = DateTimeUtils.getChronology(getChronology());</span>
+<span class="fc" id="L211">        chrono = chrono.withZone(zone);</span>
+<span class="fc" id="L212">        return new MutableDateTime(getMillis(), chrono);</span>
+    }
+
+    /**
+     * Get this object as a MutableDateTime using the given chronology and its zone.
+     * 
+     * @param chronology chronology to apply, or ISOChronology if null
+     * @return a MutableDateTime using the same millis
+     */
+    public MutableDateTime toMutableDateTime(Chronology chronology) {
+<span class="fc" id="L222">        return new MutableDateTime(getMillis(), chronology);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the date time as a &lt;code&gt;java.util.Date&lt;/code&gt;.
+     * &lt;p&gt;
+     * The &lt;code&gt;Date&lt;/code&gt; object created has exactly the same millisecond
+     * instant as this object.
+     *
+     * @return a Date initialised with this datetime
+     */
+    public Date toDate() {
+<span class="fc" id="L235">        return new Date(getMillis());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Compares this object with the specified object for equality based
+     * on the millisecond instant, chronology and time zone.
+     * &lt;p&gt;
+     * Two objects which represent the same instant in time, but are in
+     * different time zones (based on time zone id), will be considered to
+     * be different. Only two objects with the same {@link DateTimeZone},
+     * {@link Chronology} and instant are equal.
+     * &lt;p&gt;
+     * See {@link #isEqual(ReadableInstant)} for an equals method that
+     * ignores the Chronology and time zone.
+     * &lt;p&gt;
+     * All ReadableInstant instances are accepted.
+     *
+     * @param readableInstant  a readable instant to check against
+     * @return true if millisecond and chronology are equal, false if
+     *  not or the instant is null or of an incorrect type
+     */
+    public boolean equals(Object readableInstant) {
+        // must be to fulfil ReadableInstant contract
+<span class="fc bfc" id="L259" title="All 2 branches covered.">        if (this == readableInstant) {</span>
+<span class="fc" id="L260">            return true;</span>
+        }
+<span class="fc bfc" id="L262" title="All 2 branches covered.">        if (readableInstant instanceof ReadableInstant == false) {</span>
+<span class="fc" id="L263">            return false;</span>
+        }
+<span class="fc" id="L265">        ReadableInstant otherInstant = (ReadableInstant) readableInstant;</span>
+<span class="fc" id="L266">        return</span>
+<span class="fc bfc" id="L267" title="All 2 branches covered.">            getMillis() == otherInstant.getMillis() &amp;&amp;</span>
+<span class="fc bfc" id="L268" title="All 2 branches covered.">            FieldUtils.equals(getChronology(), otherInstant.getChronology());</span>
+    }
+
+    /**
+     * Gets a hash code for the instant as defined in &lt;code&gt;ReadableInstant&lt;/code&gt;.
+     *
+     * @return a suitable hash code
+     */
+    public int hashCode() {
+        // must be to fulfil ReadableInstant contract
+<span class="fc" id="L278">        return</span>
+<span class="fc" id="L279">            ((int) (getMillis() ^ (getMillis() &gt;&gt;&gt; 32))) +</span>
+<span class="fc" id="L280">            (getChronology().hashCode());</span>
+    }
+
+    /**
+     * Compares this object with the specified object for ascending
+     * millisecond instant order. This ordering is inconsistent with
+     * equals, as it ignores the Chronology.
+     * &lt;p&gt;
+     * All ReadableInstant instances are accepted.
+     *
+     * @param other  a readable instant to check against
+     * @return negative value if this is less, 0 if equal, or positive value if greater
+     * @throws NullPointerException if the object is null
+     * @throws ClassCastException if the object type is not supported
+     */
+    public int compareTo(ReadableInstant other) {
+<span class="fc bfc" id="L296" title="All 2 branches covered.">        if (this == other) {</span>
+<span class="fc" id="L297">            return 0;</span>
+        }
+        
+<span class="fc" id="L300">        long otherMillis = other.getMillis();</span>
+<span class="fc" id="L301">        long thisMillis = getMillis();</span>
+        
+        // cannot do (thisMillis - otherMillis) as can overflow
+<span class="fc bfc" id="L304" title="All 2 branches covered.">        if (thisMillis == otherMillis) {</span>
+<span class="fc" id="L305">            return 0;</span>
+        }
+<span class="fc bfc" id="L307" title="All 2 branches covered.">        if (thisMillis &lt; otherMillis) {</span>
+<span class="fc" id="L308">            return -1;</span>
+        } else {
+<span class="fc" id="L310">            return 1;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Is this instant strictly after the millisecond instant passed in
+     * comparing solely by millisecond.
+     *
+     * @param instant  a millisecond instant to check against
+     * @return true if this instant is strictly after the instant passed in
+     */
+    public boolean isAfter(long instant) {
+<span class="fc bfc" id="L323" title="All 2 branches covered.">        return (getMillis() &gt; instant);</span>
+    }
+
+    /**
+     * Is this instant strictly after the current instant
+     * comparing solely by millisecond.
+     * 
+     * @return true if this instant is strictly after the current instant
+     */
+    public boolean isAfterNow() {
+<span class="fc" id="L333">        return isAfter(DateTimeUtils.currentTimeMillis());</span>
+    }
+
+    /**
+     * Is this instant strictly after the instant passed in
+     * comparing solely by millisecond.
+     *
+     * @param instant  an instant to check against, null means now
+     * @return true if the instant is strictly after the instant passed in
+     */
+    public boolean isAfter(ReadableInstant instant) {
+<span class="fc" id="L344">        long instantMillis = DateTimeUtils.getInstantMillis(instant);</span>
+<span class="fc" id="L345">        return isAfter(instantMillis);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Is this instant strictly before the millisecond instant passed in
+     * comparing solely by millisecond.
+     *
+     * @param instant  a millisecond instant to check against
+     * @return true if this instant is strictly before the instant passed in
+     */
+    public boolean isBefore(long instant) {
+<span class="fc bfc" id="L357" title="All 2 branches covered.">        return (getMillis() &lt; instant);</span>
+    }
+
+    /**
+     * Is this instant strictly before the current instant
+     * comparing solely by millisecond.
+     * 
+     * @return true if this instant is strictly before the current instant
+     */
+    public boolean isBeforeNow() {
+<span class="fc" id="L367">        return isBefore(DateTimeUtils.currentTimeMillis());</span>
+    }
+
+    /**
+     * Is this instant strictly before the instant passed in
+     * comparing solely by millisecond.
+     *
+     * @param instant  an instant to check against, null means now
+     * @return true if the instant is strictly before the instant passed in
+     */
+    public boolean isBefore(ReadableInstant instant) {
+<span class="fc" id="L378">        long instantMillis = DateTimeUtils.getInstantMillis(instant);</span>
+<span class="fc" id="L379">        return isBefore(instantMillis);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Is this instant equal to the millisecond instant passed in
+     * comparing solely by millisecond.
+     *
+     * @param instant  a millisecond instant to check against
+     * @return true if this instant is equal to the instant passed in
+     */
+    public boolean isEqual(long instant) {
+<span class="fc bfc" id="L391" title="All 2 branches covered.">        return (getMillis() == instant);</span>
+    }
+
+    /**
+     * Is this instant equal to the current instant
+     * comparing solely by millisecond.
+     * 
+     * @return true if this instant is equal to the current instant
+     */
+    public boolean isEqualNow() {
+<span class="fc" id="L401">        return isEqual(DateTimeUtils.currentTimeMillis());</span>
+    }
+
+    /**
+     * Is this instant equal to the instant passed in
+     * comparing solely by millisecond.
+     *
+     * @param instant  an instant to check against, null means now
+     * @return true if the instant is equal to the instant passed in
+     */
+    public boolean isEqual(ReadableInstant instant) {
+<span class="fc" id="L412">        long instantMillis = DateTimeUtils.getInstantMillis(instant);</span>
+<span class="fc" id="L413">        return isEqual(instantMillis);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Output the date time in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZZ).
+     * 
+     * @return ISO8601 time formatted string, not null
+     */
+    @ToString
+    public String toString() {
+<span class="fc" id="L424">        return ISODateTimeFormat.dateTime().print(this);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Uses the specified formatter to convert this partial to a String.
+     *
+     * @param formatter  the formatter to use, null means use &lt;code&gt;toString()&lt;/code&gt;.
+     * @return the formatted string, not null
+     * @since 1.1
+     */
+    public String toString(DateTimeFormatter formatter) {
+<span class="fc bfc" id="L436" title="All 2 branches covered.">        if (formatter == null) {</span>
+<span class="fc" id="L437">            return toString();</span>
+        }
+<span class="fc" id="L439">        return formatter.print(this);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

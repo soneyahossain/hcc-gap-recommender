@@ -1,0 +1,82 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.7% done, time left: unknown  1.7% done, time left: unknown  2.4% done, time left: unknown  3.2% done, time left: unknown  3.7% done, time left:   0:00:19    4.3% done, time left:   0:00:19  4.8% done, time left:   0:00:19  5.3% done, time left:   0:00:19  5.8% done, time left:   0:00:19  6.6% done, time left:   0:00:18  7.3% done, time left:   0:00:18  8.5% done, time left:   0:00:19  8.8% done, time left:   0:00:18 10.3% done, time left:   0:00:19 11.6% done, time left:   0:00:19 13.6% done, time left:   0:00:18 15.6% done, time left:   0:00:17 17.8% done, time left:   0:00:15 19.7% done, time left:   0:00:13 22.0% done, time left:   0:00:11 24.2% done, time left:   0:00:09 26.6% done, time left:   0:00:08 28.9% done, time left:   0:00:07 31.3% done, time left:   0:00:06 33.7% done, time left:   0:00:05 35.5% done, time left:   0:00:04 37.9% done, time left:   0:00:04 40.0% done, time left:   0:00:03 42.1% done, time left:   0:00:03 44.1% done, time left:   0:00:03 46.2% done, time left:   0:00:03 48.0% done, time left:   0:00:02 49.7% done, time left:   0:00:02 49.7% done, time left:   0:00:01 49.8% done, time left:   0:00:01 49.8% done, time left:   0:00:00 51.2% done, time left:   0:00:01 53.5% done, time left:   0:00:01 55.9% done, time left:   0:00:01 59.8% done, time left:   0:00:01 61.2% done, time left:   0:00:00 62.5% done, time left:   0:00:00 63.3% done, time left:   0:00:00 63.6% done, time left:   0:00:00 63.9% done, time left:   0:00:00 64.7% done, time left:   0:00:00 65.6% done, time left:   0:00:00 67.2% done, time left:   0:00:00 67.3% done, time left:   0:00:00 68.8% done, time left:   0:00:00 68.9% done, time left:   0:00:00 71.3% done, time left:   0:00:00 73.3% done, time left:   0:00:00 75.2% done, time left:   0:00:00 77.7% done, time left:   0:00:00 79.9% done, time left:   0:00:00 81.8% done, time left:   0:00:00 83.7% done, time left:   0:00:00 85.9% done, time left:   0:00:00 88.3% done, time left:   0:00:00 90.9% done, time left:   0:00:00 93.4% done, time left:   0:00:00 95.2% done, time left:   0:00:00 96.8% done, time left:   0:00:00 97.1% done, time left:   0:00:00 97.9% done, time left:   0:00:00 100.1% done, time left:   0:00:00  101.9% done, time left:   0:00:00 102.8% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.TestDuration_Basics.testToString:361:*]:
+org.joda.time.Duration.<init>:178 ALOAD 0
+org.joda.time.Duration.<init>:178 LLOAD 1
+org.joda.time.Duration.<init>:178 INVOKESPECIAL org/joda/time/base/BaseDuration.<init>(J)V
+org.joda.time.TestDuration_Basics.main:84 INVOKEVIRTUAL org/joda/time/TestDuration_Basics.testToString()V
+org.joda.time.TestDuration_Basics.testToString:356 LCONST_0
+org.joda.time.TestDuration_Basics.testToString:361 LDC "PT-1.123S"
+org.joda.time.TestDuration_Basics.testToString:361 NEW org/joda/time/Duration
+org.joda.time.TestDuration_Basics.testToString:361 DUP
+org.joda.time.TestDuration_Basics.testToString:361 LDC -1123
+org.joda.time.TestDuration_Basics.testToString:361 INVOKESPECIAL org/joda/time/Duration.<init>(J)V
+org.joda.time.TestDuration_Basics.testToString:361 INVOKEVIRTUAL org/joda/time/Duration.toString()Ljava/lang/String;
+org.joda.time.TestDuration_Basics.testToString:361 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.base.AbstractDuration.toString:204 ALOAD 0
+org.joda.time.base.AbstractDuration.toString:204 INVOKEVIRTUAL org/joda/time/base/AbstractDuration.getMillis()J
+org.joda.time.base.AbstractDuration.toString:204 LSTORE 1
+org.joda.time.base.AbstractDuration.toString:205 NEW java/lang/StringBuffer
+org.joda.time.base.AbstractDuration.toString:205 ASTORE 3
+org.joda.time.base.AbstractDuration.toString:206 ALOAD 3
+org.joda.time.base.AbstractDuration.toString:206 LDC "PT"
+org.joda.time.base.AbstractDuration.toString:206 INVOKEVIRTUAL java/lang/StringBuffer.append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+org.joda.time.base.AbstractDuration.toString:207 LLOAD 1
+org.joda.time.base.AbstractDuration.toString:207 LCONST_0
+org.joda.time.base.AbstractDuration.toString:207 LCMP
+org.joda.time.base.AbstractDuration.toString:207 IFGE L0 false true
+org.joda.time.base.AbstractDuration.toString:207 ICONST_1
+org.joda.time.base.AbstractDuration.toString:207 ISTORE 4
+org.joda.time.base.AbstractDuration.toString:208 ALOAD 3
+org.joda.time.base.AbstractDuration.toString:208 LLOAD 1
+org.joda.time.base.AbstractDuration.toString:208 INVOKESTATIC org/joda/time/format/FormatUtils.appendUnpaddedInteger(Ljava/lang/StringBuffer;J)V
+org.joda.time.base.AbstractDuration.toString:209 ALOAD 3
+org.joda.time.base.AbstractDuration.toString:209 INVOKEVIRTUAL java/lang/StringBuffer.length()I
+org.joda.time.base.AbstractDuration.toString:209 ILOAD 4
+org.joda.time.base.AbstractDuration.toString:209 IFEQ L3 false true
+org.joda.time.base.AbstractDuration.toString:209 BIPUSH 7
+org.joda.time.base.AbstractDuration.toString:209 IF_ICMPGE L7 true false
+org.joda.time.base.AbstractDuration.toString:218 ALOAD 3
+org.joda.time.base.AbstractDuration.toString:218 ARETURN
+org.joda.time.base.BaseDuration.<init>:62 ALOAD 0
+org.joda.time.base.BaseDuration.<init>:62 LLOAD 1
+org.joda.time.base.BaseDuration.<init>:62 PUTFIELD org/joda/time/base/BaseDuration.iMillis J
+org.joda.time.base.BaseDuration.getMillis:115 ALOAD 0
+org.joda.time.base.BaseDuration.getMillis:115 GETFIELD org/joda/time/base/BaseDuration.iMillis J
+org.joda.time.base.BaseDuration.getMillis:115 LRETURN
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:291 ILOAD 1
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:291 IFGE L1 false true
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:292 ALOAD 0
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:292 INVOKEINTERFACE java/lang/Appendable.append(C)Ljava/lang/Appendable;
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:293 ILOAD 1
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:293 LDC -2147483648
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:293 IF_ICMPEQ L0 false true
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:294 ILOAD 1
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:294 INEG
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:294 ISTORE 1
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:300 ILOAD 1
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:300 BIPUSH 10
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:300 IF_ICMPGE L2 true false
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:302 ILOAD 1
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:302 BIPUSH 100
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:302 IF_ICMPGE L3 true false
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:311 ALOAD 0
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:311 ILOAD 1
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:311 INVOKESTATIC java/lang/Integer.toString(I)Ljava/lang/String;
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:311 INVOKEINTERFACE java/lang/Appendable.append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:325 ALOAD 0
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:325 LLOAD 1
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:325 INVOKESTATIC org/joda/time/format/FormatUtils.appendUnpaddedInteger(Ljava/lang/Appendable;J)V
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:340 LLOAD 1
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:340 L2I
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:340 ISTORE 3
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:341 ILOAD 3
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:341 I2L
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:341 LLOAD 1
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:341 LCMP
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:341 IFNE L0 false true
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:342 ALOAD 0
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:342 ILOAD 3
+org.joda.time.format.FormatUtils.appendUnpaddedInteger:342 INVOKESTATIC org/joda/time/format/FormatUtils.appendUnpaddedInteger(Ljava/lang/Appendable;I)V
+
+Slice consists of 117 bytecode instructions.
+Computation took 8.29 seconds.

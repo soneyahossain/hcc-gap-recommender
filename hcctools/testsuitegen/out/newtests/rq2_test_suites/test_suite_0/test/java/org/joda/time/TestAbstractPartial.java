@@ -1,0 +1,238 @@
+/*
+ *  Copyright 2001-2005 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;import org.joda.time.NoAssert;
+
+import org.junit.After;import org.junit.Before;
+import org.junit.Test;import static org.junit.Assert.*;
+
+import org.joda.time.base.AbstractPartial;
+import org.joda.time.chrono.BuddhistChronology;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.field.AbstractPartialFieldProperty;
+
+/**
+ * This class is a Junit unit test for YearMonthDay.
+ *
+ * @author Stephen Colebourne
+ */
+public class TestAbstractPartial  { //extends TestCase {
+
+    private static final DateTimeZone PARIS = DateTimeZone.forID("Europe/Paris");
+    
+    private long TEST_TIME_NOW =
+            (31L + 28L + 31L + 30L + 31L + 9L -1L) * DateTimeConstants.MILLIS_PER_DAY;
+            
+    private long TEST_TIME1 =
+        (31L + 28L + 31L + 6L -1L) * DateTimeConstants.MILLIS_PER_DAY
+        + 12L * DateTimeConstants.MILLIS_PER_HOUR
+        + 24L * DateTimeConstants.MILLIS_PER_MINUTE;
+        
+    private long TEST_TIME2 =
+        (365L + 31L + 28L + 31L + 30L + 7L -1L) * DateTimeConstants.MILLIS_PER_DAY
+        + 14L * DateTimeConstants.MILLIS_PER_HOUR
+        + 28L * DateTimeConstants.MILLIS_PER_MINUTE;
+        
+    private DateTimeZone zone = null;
+
+    public static void main(String[] args) throws Throwable {
+        TestAbstractPartial TB= new TestAbstractPartial();
+        TB.setUp(); TB.testGetValue(); TB.tearDown();
+        TB.setUp(); TB.testGetValues(); TB.tearDown();
+        TB.setUp(); TB.testGetField(); TB.tearDown();
+        TB.setUp(); TB.testGetFieldType(); TB.tearDown();
+        TB.setUp(); TB.testGetFieldTypes(); TB.tearDown();
+        TB.setUp(); TB.testGetPropertyEquals(); TB.tearDown();
+
+    }
+
+    /*
+    public static TestSuite suite() {
+        return new TestSuite(TestAbstractPartial.class);
+    }
+
+    public TestAbstractPartial(String name) {
+        super(name);
+    }
+
+     */
+
+    @Before public void setUp() throws Exception {
+        DateTimeUtils.setCurrentMillisFixed(TEST_TIME_NOW);
+        zone = DateTimeZone.getDefault();
+        DateTimeZone.setDefault(DateTimeZone.UTC);
+    }
+
+    @After public void tearDown() throws Exception {
+        DateTimeUtils.setCurrentMillisSystem();
+        DateTimeZone.setDefault(zone);
+        zone = null;
+    }
+
+    //-----------------------------------------------------------------------
+    @Test public void testGetValue() throws Throwable {
+        MockPartial mock = new MockPartial();
+NoAssert.donothing(1970, mock.getValue(0));
+NoAssert.donothing(1, mock.getValue(1));
+        
+        try {
+            mock.getValue(-1);
+            fail();
+        } catch (IndexOutOfBoundsException ex) {}
+        try {
+            mock.getValue(2);
+            fail();
+        } catch (IndexOutOfBoundsException ex) {}
+    }
+
+    @Test public void testGetValues() throws Throwable {
+        MockPartial mock = new MockPartial();
+        int[] vals = mock.getValues();
+NoAssert.donothing(2, vals.length);
+NoAssert.donothing(1970, vals[0]);
+NoAssert.donothing(1, vals[1]);
+    }
+
+    @Test public void testGetField() throws Throwable {
+        MockPartial mock = new MockPartial();
+NoAssert.donothing(BuddhistChronology.getInstanceUTC().year(), mock.getField(0));
+NoAssert.donothing(BuddhistChronology.getInstanceUTC().monthOfYear(), mock.getField(1));
+        
+        try {
+            mock.getField(-1);
+            fail();
+        } catch (IndexOutOfBoundsException ex) {}
+        try {
+            mock.getField(2);
+            fail();
+        } catch (IndexOutOfBoundsException ex) {}
+    }
+
+    @Test public void testGetFieldType() throws Throwable {
+        MockPartial mock = new MockPartial();
+NoAssert.donothing(DateTimeFieldType.year(), mock.getFieldType(0));
+NoAssert.donothing(DateTimeFieldType.monthOfYear(), mock.getFieldType(1));
+        
+        try {
+            mock.getFieldType(-1);
+            fail();
+        } catch (IndexOutOfBoundsException ex) {}
+        try {
+            mock.getFieldType(2);
+            fail();
+        } catch (IndexOutOfBoundsException ex) {}
+    }
+
+    @Test public void testGetFieldTypes() throws Throwable {
+        MockPartial mock = new MockPartial();
+        DateTimeFieldType[] vals = mock.getFieldTypes();
+NoAssert.donothing(2, vals.length);
+NoAssert.donothing(DateTimeFieldType.year(), vals[0]);
+NoAssert.donothing(DateTimeFieldType.monthOfYear(), vals[1]);
+    }
+
+    @Test public void testGetPropertyEquals() throws Throwable {
+        MockProperty0 prop0 = new MockProperty0();
+NoAssert.donothing(true, prop0.equals(prop0));
+NoAssert.donothing(true, prop0.equals(new MockProperty0()));
+NoAssert.donothing(false, prop0.equals(new MockProperty1()));
+NoAssert.donothing(false, prop0.equals(new MockProperty0Val()));
+NoAssert.donothing(false, prop0.equals(new MockProperty0Field()));
+NoAssert.donothing(false, prop0.equals(new MockProperty0Chrono()));
+NoAssert.donothing(false, prop0.equals(""));
+NoAssert.donothing(false, prop0.equals(null));
+    }
+
+    //-----------------------------------------------------------------------
+    static class MockPartial extends AbstractPartial {
+        
+        int[] val = new int[] {1970, 1};
+        
+        MockPartial() {
+            super();
+        }
+
+        protected DateTimeField getField(int index, Chronology chrono) {
+            switch (index) {
+                case 0:
+                    return chrono.year();
+                case 1:
+                    return chrono.monthOfYear();
+                default:
+                    throw new IndexOutOfBoundsException();
+            }
+        }
+
+        public int size() {
+            return 2;
+        }
+        
+        public int getValue(int index) {
+            return val[index];
+        }
+
+        public void setValue(int index, int value) {
+            val[index] = value;
+        }
+
+        public Chronology getChronology() {
+            return BuddhistChronology.getInstanceUTC();
+        }
+    }
+    
+    static class MockProperty0 extends AbstractPartialFieldProperty {
+        MockPartial partial = new MockPartial();
+        public DateTimeField getField() {
+            return partial.getField(0);
+        }
+        public ReadablePartial getReadablePartial() {
+            return partial;
+        }
+        public int get() {
+            return partial.getValue(0);
+        }
+    }
+    static class MockProperty1 extends AbstractPartialFieldProperty {
+        MockPartial partial = new MockPartial();
+        public DateTimeField getField() {
+            return partial.getField(1);
+        }
+        public ReadablePartial getReadablePartial() {
+            return partial;
+        }
+        public int get() {
+            return partial.getValue(1);
+        }
+    }
+    static class MockProperty0Field extends MockProperty0 {
+        public DateTimeField getField() {
+            return BuddhistChronology.getInstanceUTC().hourOfDay();
+        }
+    }
+    static class MockProperty0Val extends MockProperty0 {
+        public int get() {
+            return 99;
+        }
+    }
+    static class MockProperty0Chrono extends MockProperty0 {
+        public ReadablePartial getReadablePartial() {
+            return new MockPartial() {
+                public Chronology getChronology() {
+                    return ISOChronology.getInstanceUTC();
+                }
+            };
+        }
+    }
+}

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractConverter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.convert</a> &gt; <span class="el_source">AbstractConverter.java</span></div><h1>AbstractConverter.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2006 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.convert;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.DateTimeZone;
+import org.joda.time.PeriodType;
+import org.joda.time.ReadablePartial;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.format.DateTimeFormatter;
+
+/**
+ * AbstractConverter simplifies the process of implementing a converter.
+ *
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+public abstract class AbstractConverter implements Converter {
+
+    /**
+     * Restricted constructor.
+     */
+    protected AbstractConverter() {
+<span class="fc" id="L38">        super();</span>
+<span class="fc" id="L39">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Extracts the millis from an object of this converter's type.
+     * &lt;p&gt;
+     * This implementation returns the current time.
+     * 
+     * @param object  the object to convert
+     * @param chrono  the chronology to use, which is always non-null
+     * @return the millisecond value
+     */
+    public long getInstantMillis(Object object, Chronology chrono) {
+<span class="fc" id="L52">        return DateTimeUtils.currentTimeMillis();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Extracts the chronology from an object of this converter's type
+     * where the time zone is specified.
+     * &lt;p&gt;
+     * This implementation returns the ISO chronology.
+     * 
+     * @param object  the object to convert
+     * @param zone  the specified zone to use, null means default zone
+     * @return the chronology, never null
+     */
+    public Chronology getChronology(Object object, DateTimeZone zone) {
+<span class="fc" id="L67">        return ISOChronology.getInstance(zone);</span>
+    }
+
+    /**
+     * Extracts the chronology from an object of this converter's type
+     * where the chronology is specified.
+     * &lt;p&gt;
+     * This implementation returns the chronology specified, or the
+     * ISO chronology in the default zone if null passed in.
+     * 
+     * @param object  the object to convert
+     * @param chrono  the chronology to use, null means ISO default
+     * @return the chronology, never null
+     */
+    public Chronology getChronology(Object object, Chronology chrono) {
+<span class="fc" id="L82">        return DateTimeUtils.getChronology(chrono);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Extracts the values of the partial from an object of this converter's type.
+     * The chrono parameter is a hint to the converter, should it require a
+     * chronology to aid in conversion.
+     * &lt;p&gt;
+     * This implementation calls {@link #getInstantMillis(Object, Chronology)}.
+     * 
+     * @param fieldSource  a partial that provides access to the fields.
+     *  This partial may be incomplete and only getFieldType(int) should be used
+     * @param object  the object to convert
+     * @param chrono  the chronology to use, which is the non-null result of getChronology()
+     * @return the array of field values that match the fieldSource, must be non-null valid
+     * @throws ClassCastException if the object is invalid
+     */
+    public int[] getPartialValues(ReadablePartial fieldSource, Object object, Chronology chrono) {
+<span class="fc" id="L101">        long instant = getInstantMillis(object, chrono);</span>
+<span class="fc" id="L102">        return chrono.get(fieldSource, instant);</span>
+    }
+
+    /**
+     * Extracts the values of the partial from an object of this converter's type.
+     * The chrono parameter is a hint to the converter, should it require a
+     * chronology to aid in conversion.
+     * &lt;p&gt;
+     * This implementation calls {@link #getPartialValues(ReadablePartial, Object, Chronology)}.
+     * 
+     * @param fieldSource  a partial that provides access to the fields.
+     *  This partial may be incomplete and only getFieldType(int) should be used
+     * @param object  the object to convert
+     * @param chrono  the chronology to use, which is the non-null result of getChronology()
+     * @param parser  if converting from a String, the given parser is preferred
+     * @return the array of field values that match the fieldSource, must be non-null valid
+     * @throws ClassCastException if the object is invalid
+     * @since 1.3
+     */
+    public int[] getPartialValues(ReadablePartial fieldSource,
+            Object object, Chronology chrono, DateTimeFormatter parser) {
+<span class="fc" id="L123">        return getPartialValues(fieldSource, object, chrono);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Selects a suitable period type for the given object.
+     *
+     * @param object  the object to examine
+     * @return the period type, never null
+     */
+    public PeriodType getPeriodType(Object object) {
+<span class="fc" id="L134">        return PeriodType.standard();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Checks if the input is a ReadableInterval.
+     * &lt;p&gt;
+     * If it is, then the calling code should cast and copy the fields directly.
+     *
+     * @param object  the object to convert
+     * @param chrono  the chronology to use, may be null
+     * @return true if the input is a ReadableInterval
+     */
+    public boolean isReadableInterval(Object object, Chronology chrono) {
+<span class="fc" id="L148">        return false;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets a debugging string version of this converter.
+     * 
+     * @return a debugging string
+     */
+    public String toString() {
+<span class="fc bfc" id="L158" title="All 2 branches covered.">        return &quot;Converter[&quot; + (getSupportedType() == null ? &quot;null&quot; : getSupportedType().getName()) + &quot;]&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

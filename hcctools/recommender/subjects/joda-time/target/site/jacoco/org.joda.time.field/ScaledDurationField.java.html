@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScaledDurationField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">ScaledDurationField.java</span></div><h1>ScaledDurationField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2005 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import org.joda.time.DurationField;
+import org.joda.time.DurationFieldType;
+
+/**
+ * Scales a DurationField such that it's unit millis becomes larger in
+ * magnitude.
+ * &lt;p&gt;
+ * ScaledDurationField is thread-safe and immutable.
+ *
+ * @see PreciseDurationField
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public class ScaledDurationField extends DecoratedDurationField {
+
+    private static final long serialVersionUID = -3205227092378684157L;
+
+    private final int iScalar;
+
+    /**
+     * Constructor
+     * 
+     * @param field  the field to wrap, like &quot;year()&quot;.
+     * @param type  the type this field will actually use
+     * @param scalar  scalar, such as 100 years in a century
+     * @throws IllegalArgumentException if scalar is zero or one.
+     */
+    public ScaledDurationField(DurationField field, DurationFieldType type, int scalar) {
+<span class="fc" id="L47">        super(field, type);</span>
+<span class="fc bfc" id="L48" title="All 4 branches covered.">        if (scalar == 0 || scalar == 1) {</span>
+<span class="fc" id="L49">            throw new IllegalArgumentException(&quot;The scalar must not be 0 or 1&quot;);</span>
+        }
+<span class="fc" id="L51">        iScalar = scalar;</span>
+<span class="fc" id="L52">    }</span>
+
+    public int getValue(long duration) {
+<span class="fc" id="L55">        return getWrappedField().getValue(duration) / iScalar;</span>
+    }
+
+    public long getValueAsLong(long duration) {
+<span class="fc" id="L59">        return getWrappedField().getValueAsLong(duration) / iScalar;</span>
+    }
+
+    public int getValue(long duration, long instant) {
+<span class="fc" id="L63">        return getWrappedField().getValue(duration, instant) / iScalar;</span>
+    }
+
+    public long getValueAsLong(long duration, long instant) {
+<span class="fc" id="L67">        return getWrappedField().getValueAsLong(duration, instant) / iScalar;</span>
+    }
+
+    public long getMillis(int value) {
+<span class="fc" id="L71">        long scaled = ((long) value) * ((long) iScalar);</span>
+<span class="fc" id="L72">        return getWrappedField().getMillis(scaled);</span>
+    }
+
+    public long getMillis(long value) {
+<span class="fc" id="L76">        long scaled = FieldUtils.safeMultiply(value, iScalar);</span>
+<span class="fc" id="L77">        return getWrappedField().getMillis(scaled);</span>
+    }
+
+    public long getMillis(int value, long instant) {
+<span class="fc" id="L81">        long scaled = ((long) value) * ((long) iScalar);</span>
+<span class="fc" id="L82">        return getWrappedField().getMillis(scaled, instant);</span>
+    }
+
+    public long getMillis(long value, long instant) {
+<span class="fc" id="L86">        long scaled = FieldUtils.safeMultiply(value, iScalar);</span>
+<span class="fc" id="L87">        return getWrappedField().getMillis(scaled, instant);</span>
+    }
+
+    public long add(long instant, int value) {
+<span class="fc" id="L91">        long scaled = ((long) value) * ((long) iScalar);</span>
+<span class="fc" id="L92">        return getWrappedField().add(instant, scaled);</span>
+    }
+
+    public long add(long instant, long value) {
+<span class="fc" id="L96">        long scaled = FieldUtils.safeMultiply(value, iScalar);</span>
+<span class="fc" id="L97">        return getWrappedField().add(instant, scaled);</span>
+    }
+
+    public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L101">        return getWrappedField().getDifference(minuendInstant, subtrahendInstant) / iScalar;</span>
+    }
+
+    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L105">        return getWrappedField().getDifferenceAsLong(minuendInstant, subtrahendInstant) / iScalar;</span>
+    }
+
+    public long getUnitMillis() {
+<span class="fc" id="L109">        return getWrappedField().getUnitMillis() * iScalar;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns the scalar applied, in the field's units.
+     * 
+     * @return the scalar
+     */
+    public int getScalar() {
+<span class="fc" id="L119">        return iScalar;</span>
+    }
+
+    /**
+     * Compares this duration field to another.
+     * Two fields are equal if of the same type and duration.
+     * 
+     * @param obj  the object to compare to
+     * @return if equal
+     */
+    public boolean equals(Object obj) {
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        if (this == obj) {</span>
+<span class="fc" id="L131">            return true;</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        } else if (obj instanceof ScaledDurationField) {</span>
+<span class="fc" id="L133">            ScaledDurationField other = (ScaledDurationField) obj;</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">            return (getWrappedField().equals(other.getWrappedField())) &amp;&amp;</span>
+<span class="fc bfc" id="L135" title="All 4 branches covered.">                   (getType() == other.getType()) &amp;&amp;</span>
+                   (iScalar == other.iScalar);
+        }
+<span class="fc" id="L138">        return false;</span>
+    }
+
+    /**
+     * Gets a hash code for this instance.
+     * 
+     * @return a suitable hashcode
+     */
+    public int hashCode() {
+<span class="fc" id="L147">        long scalar = iScalar;</span>
+<span class="fc" id="L148">        int hash = (int) (scalar ^ (scalar &gt;&gt;&gt; 32));</span>
+<span class="fc" id="L149">        hash += getType().hashCode();</span>
+<span class="fc" id="L150">        hash += getWrappedField().hashCode();</span>
+<span class="fc" id="L151">        return hash;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

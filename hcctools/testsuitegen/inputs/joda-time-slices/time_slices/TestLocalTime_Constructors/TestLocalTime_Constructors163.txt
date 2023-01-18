@@ -1,0 +1,75 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  0.8% done, time left: unknown  2.1% done, time left: unknown  3.4% done, time left: unknown  4.7% done, time left: unknown  5.8% done, time left: unknown  7.2% done, time left:   0:00:06    8.1% done, time left:   0:00:07  8.3% done, time left:   0:00:09  8.3% done, time left:   0:00:10  8.8% done, time left:   0:00:11  9.3% done, time left:   0:00:12  9.3% done, time left:   0:00:13  9.4% done, time left:   0:00:14 10.1% done, time left:   0:00:15 11.1% done, time left:   0:00:17 12.4% done, time left:   0:00:18 13.6% done, time left:   0:00:18 14.9% done, time left:   0:00:19 16.2% done, time left:   0:00:18 17.2% done, time left:   0:00:17 18.2% done, time left:   0:00:17 19.5% done, time left:   0:00:16 20.9% done, time left:   0:00:16 23.6% done, time left:   0:00:14 26.7% done, time left:   0:00:10 29.8% done, time left:   0:00:07 30.3% done, time left:   0:00:04 30.4% done, time left:   0:00:03 30.4% done, time left:   0:00:02 31.3% done, time left:   0:00:02 34.1% done, time left:   0:00:02 37.2% done, time left:   0:00:02 40.6% done, time left:   0:00:02 44.0% done, time left:   0:00:02 46.2% done, time left:   0:00:01 47.5% done, time left:   0:00:01 50.9% done, time left:   0:00:01 52.4% done, time left:   0:00:01 52.4% done, time left:   0:00:00 52.7% done, time left:   0:00:00 55.0% done, time left:   0:00:01 57.2% done, time left:   0:00:01 59.8% done, time left:   0:00:01 62.7% done, time left:   0:00:01 65.5% done, time left:   0:00:00 68.4% done, time left:   0:00:00 71.4% done, time left:   0:00:00 72.4% done, time left:   0:00:00 72.9% done, time left:   0:00:00 74.0% done, time left:   0:00:00 76.2% done, time left:   0:00:00 77.3% done, time left:   0:00:00 79.5% done, time left:   0:00:00 82.6% done, time left:   0:00:00 84.9% done, time left:   0:00:00 85.4% done, time left:   0:00:00 88.3% done, time left:   0:00:00 91.4% done, time left:   0:00:00 93.3% done, time left:   0:00:00 94.1% done, time left:   0:00:00 98.9% done, time left:   0:00:00 100.7% done, time left:   0:00:00  101.6% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:567:*]:
+org.joda.time.LocalTime.<init>:408 ALOAD 0
+org.joda.time.LocalTime.<init>:408 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:408 PUTFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:410 ALOAD 0
+org.joda.time.LocalTime.<init>:410 ALOAD 0
+org.joda.time.LocalTime.<init>:410 GETFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:410 INVOKEVIRTUAL org/joda/time/Chronology.getDateTimeMillis(JIIII)J
+org.joda.time.LocalTime.<init>:410 PUTFIELD org/joda/time/LocalTime.iLocalMillis J
+org.joda.time.LocalTime.getLocalMillis:660 ALOAD 0
+org.joda.time.LocalTime.getLocalMillis:660 GETFIELD org/joda/time/LocalTime.iLocalMillis J
+org.joda.time.LocalTime.getLocalMillis:660 LRETURN
+org.joda.time.LocalTime.getChronology:669 ALOAD 0
+org.joda.time.LocalTime.getChronology:669 GETFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getChronology:669 ARETURN
+org.joda.time.LocalTime.getHourOfDay:1100 ALOAD 0
+org.joda.time.LocalTime.getHourOfDay:1100 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getHourOfDay:1100 INVOKEVIRTUAL org/joda/time/Chronology.hourOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime.getHourOfDay:1100 ALOAD 0
+org.joda.time.LocalTime.getHourOfDay:1100 INVOKEVIRTUAL org/joda/time/LocalTime.getLocalMillis()J
+org.joda.time.LocalTime.getHourOfDay:1100 INVOKEVIRTUAL org/joda/time/DateTimeField.get(J)I
+org.joda.time.LocalTime.getHourOfDay:1100 IRETURN
+org.joda.time.TestLocalTime_Constructors.main:116 INVOKEVIRTUAL org/joda/time/TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone()V
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:565 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:565 DUP
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:565 GETSTATIC org/joda/time/TestLocalTime_Constructors.PARIS Lorg/joda/time/DateTimeZone;
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:565 INVOKESPECIAL org/joda/time/LocalTime.<init>(Ljava/lang/Object;Lorg/joda/time/DateTimeZone;)V
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:565 ASTORE 2
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:567 ICONST_1
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:567 GETSTATIC org/joda/time/TestLocalTime_Constructors.OFFSET_PARIS I
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:567 IADD
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:567 I2L
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:567 ALOAD 2
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:567 INVOKEVIRTUAL org/joda/time/LocalTime.getHourOfDay()I
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:567 I2L
+org.joda.time.TestLocalTime_Constructors.testConstructor_Object1_DateTimeZone:567 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 DUP
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ASTORE 7
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 GETFIELD org/joda/time/chrono/AssembledChronology.iBaseFlags I
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ICONST_1
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 IAND
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ICONST_1
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 IF_ICMPNE L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:148 ALOAD 7
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:148 LRETURN
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 ALOAD 0
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 GETFIELD org/joda/time/chrono/AssembledChronology.iHourOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 ARETURN
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+org.joda.time.field.PreciseDateTimeField.get:80 LLOAD 1
+org.joda.time.field.PreciseDateTimeField.get:80 LCONST_0
+org.joda.time.field.PreciseDateTimeField.get:80 LCMP
+org.joda.time.field.PreciseDateTimeField.get:80 IFLT L0 false true
+org.joda.time.field.PreciseDateTimeField.get:81 LLOAD 1
+org.joda.time.field.PreciseDateTimeField.get:81 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.get:81 INVOKEVIRTUAL org/joda/time/field/PreciseDateTimeField.getUnitMillis()J
+org.joda.time.field.PreciseDateTimeField.get:81 LDIV
+org.joda.time.field.PreciseDateTimeField.get:81 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.get:81 GETFIELD org/joda/time/field/PreciseDateTimeField.iRange I
+org.joda.time.field.PreciseDateTimeField.get:81 I2L
+org.joda.time.field.PreciseDateTimeField.get:81 LREM
+org.joda.time.field.PreciseDateTimeField.get:81 L2I
+org.joda.time.field.PreciseDateTimeField.get:81 IRETURN
+org.joda.time.field.PreciseDurationDateTimeField.getUnitMillis:155 ALOAD 0
+org.joda.time.field.PreciseDurationDateTimeField.getUnitMillis:155 GETFIELD org/joda/time/field/PreciseDurationDateTimeField.iUnitMillis J
+org.joda.time.field.PreciseDurationDateTimeField.getUnitMillis:155 LRETURN
+
+Slice consists of 70 bytecode instructions.
+Computation took 7.02 seconds.

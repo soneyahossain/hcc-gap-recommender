@@ -1,0 +1,2399 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocalDateTime.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">LocalDateTime.java</span></div><h1>LocalDateTime.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import org.joda.convert.FromString;
+import org.joda.convert.ToString;
+import org.joda.time.base.BaseLocal;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.convert.ConverterManager;
+import org.joda.time.convert.PartialConverter;
+import org.joda.time.field.AbstractReadableInstantFieldProperty;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
+
+/**
+ * LocalDateTime is an unmodifiable datetime class representing a
+ * datetime without a time zone.
+ * &lt;p&gt;
+ * LocalDateTime implements the {@link ReadablePartial} interface.
+ * To do this, certain methods focus on key fields Year, MonthOfYear,
+ * DayOfYear and MillisOfDay.
+ * However, &lt;b&gt;all&lt;/b&gt; fields may in fact be queried.
+ * &lt;p&gt;
+ * Internally, LocalDateTime uses a single millisecond-based value to
+ * represent the local datetime. This value is only used internally and
+ * is not exposed to applications.
+ * &lt;p&gt;
+ * Calculations on LocalDateTime are performed using a {@link Chronology}.
+ * This chronology will be set internally to be in the UTC time zone
+ * for all calculations.
+ *
+ * &lt;p&gt;Each individual field can be queried in two ways:
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;code&gt;getHourOfDay()&lt;/code&gt;
+ * &lt;li&gt;&lt;code&gt;hourOfDay().get()&lt;/code&gt;
+ * &lt;/ul&gt;
+ * The second technique also provides access to other useful methods on the
+ * field:
+ * &lt;ul&gt;
+ * &lt;li&gt;numeric value
+ * &lt;li&gt;text value
+ * &lt;li&gt;short text value
+ * &lt;li&gt;maximum/minimum values
+ * &lt;li&gt;add/subtract
+ * &lt;li&gt;set
+ * &lt;li&gt;rounding
+ * &lt;/ul&gt;
+ *
+ * &lt;p&gt;
+ * LocalDateTime is thread-safe and immutable, provided that the Chronology is as well.
+ * All standard Chronology classes supplied are thread-safe and immutable.
+ *
+ * @author Stephen Colebourne
+ * @since 1.3
+ */
+public final class LocalDateTime
+        extends BaseLocal
+        implements ReadablePartial, Serializable {
+
+    /** Serialization lock */
+    private static final long serialVersionUID = -268716875315837168L;
+
+    /** The index of the year field in the field array */
+    private static final int YEAR = 0;
+    /** The index of the monthOfYear field in the field array */
+    private static final int MONTH_OF_YEAR = 1;
+    /** The index of the dayOfMonth field in the field array */
+    private static final int DAY_OF_MONTH = 2;
+    /** The index of the millis field in the field array */
+    private static final int MILLIS_OF_DAY = 3;
+
+    /** The local millis from 1970-01-01T00:00:00 */
+    private final long iLocalMillis;
+    /** The chronology to use in UTC */
+    private final Chronology iChronology;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Obtains a {@code LocalDateTime} set to the current system millisecond time
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the default time zone.
+     * The resulting object does not use the zone.
+     * 
+     * @return the current date, not null
+     * @since 2.0
+     */
+    public static LocalDateTime now() {
+<span class="fc" id="L111">        return new LocalDateTime();</span>
+    }
+
+    /**
+     * Obtains a {@code LocalDateTime} set to the current system millisecond time
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the specified time zone.
+     * The resulting object does not use the zone.
+     *
+     * @param zone  the time zone, not null
+     * @return the current date, not null
+     * @since 2.0
+     */
+    public static LocalDateTime now(DateTimeZone zone) {
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">        if (zone == null) {</span>
+<span class="nc" id="L125">            throw new NullPointerException(&quot;Zone must not be null&quot;);</span>
+        }
+<span class="fc" id="L127">        return new LocalDateTime(zone);</span>
+    }
+
+    /**
+     * Obtains a {@code LocalDateTime} set to the current system millisecond time
+     * using the specified chronology.
+     * The resulting object does not use the zone.
+     *
+     * @param chronology  the chronology, not null
+     * @return the current date, not null
+     * @since 2.0
+     */
+    public static LocalDateTime now(Chronology chronology) {
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">        if (chronology == null) {</span>
+<span class="nc" id="L141">            throw new NullPointerException(&quot;Chronology must not be null&quot;);</span>
+        }
+<span class="fc" id="L143">        return new LocalDateTime(chronology);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Parses a {@code LocalDateTime} from the specified string.
+     * &lt;p&gt;
+     * This uses {@link ISODateTimeFormat#localDateOptionalTimeParser()}.
+     * 
+     * @param str  the string to parse, not null
+     * @since 2.0
+     */
+    @FromString
+    public static LocalDateTime parse(String str) {
+<span class="fc" id="L157">        return parse(str, ISODateTimeFormat.localDateOptionalTimeParser());</span>
+    }
+
+    /**
+     * Parses a {@code LocalDateTime} from the specified string using a formatter.
+     * 
+     * @param str  the string to parse, not null
+     * @param formatter  the formatter to use, not null
+     * @since 2.0
+     */
+    public static LocalDateTime parse(String str, DateTimeFormatter formatter) {
+<span class="fc" id="L168">        return formatter.parseLocalDateTime(str);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs a LocalDateTime from a &lt;code&gt;java.util.Calendar&lt;/code&gt;
+     * using exactly the same field values.
+     * &lt;p&gt;
+     * Each field is queried from the Calendar and assigned to the LocalDateTime.
+     * This is useful if you have been using the Calendar as a local date,
+     * ignoring the zone.
+     * &lt;p&gt;
+     * One advantage of this method is that this method is unaffected if the
+     * version of the time zone data differs between the JDK and Joda-Time.
+     * That is because the local field values are transferred, calculated using
+     * the JDK time zone data and without using the Joda-Time time zone data.
+     * &lt;p&gt;
+     * This factory method ignores the type of the calendar and always
+     * creates a LocalDateTime with ISO chronology. It is expected that you
+     * will only pass in instances of &lt;code&gt;GregorianCalendar&lt;/code&gt; however
+     * this is not validated.
+     *
+     * @param calendar  the Calendar to extract fields from, not null
+     * @return the created local date-time, not null
+     * @throws IllegalArgumentException if the calendar is null
+     * @throws IllegalArgumentException if the date is invalid for the ISO chronology
+     */
+    public static LocalDateTime fromCalendarFields(Calendar calendar) {
+<span class="fc bfc" id="L196" title="All 2 branches covered.">        if (calendar == null) {</span>
+<span class="fc" id="L197">            throw new IllegalArgumentException(&quot;The calendar must not be null&quot;);</span>
+        }
+<span class="fc" id="L199">        int era = calendar.get(Calendar.ERA);</span>
+<span class="fc" id="L200">        int yearOfEra = calendar.get(Calendar.YEAR);</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">        return new LocalDateTime(</span>
+            (era == GregorianCalendar.AD ? yearOfEra : 1 - yearOfEra),
+<span class="fc" id="L203">            calendar.get(Calendar.MONTH) + 1,</span>
+<span class="fc" id="L204">            calendar.get(Calendar.DAY_OF_MONTH),</span>
+<span class="fc" id="L205">            calendar.get(Calendar.HOUR_OF_DAY),</span>
+<span class="fc" id="L206">            calendar.get(Calendar.MINUTE),</span>
+<span class="fc" id="L207">            calendar.get(Calendar.SECOND),</span>
+<span class="fc" id="L208">            calendar.get(Calendar.MILLISECOND)</span>
+        );
+    }
+
+    /**
+     * Constructs a LocalDateTime from a &lt;code&gt;java.util.Date&lt;/code&gt;
+     * using exactly the same field values.
+     * &lt;p&gt;
+     * Each field is queried from the Date and assigned to the LocalDateTime.
+     * This is useful if you have been using the Date as a local date,
+     * ignoring the zone.
+     * &lt;p&gt;
+     * One advantage of this method is that this method is unaffected if the
+     * version of the time zone data differs between the JDK and Joda-Time.
+     * That is because the local field values are transferred, calculated using
+     * the JDK time zone data and without using the Joda-Time time zone data.
+     * &lt;p&gt;
+     * This factory method always creates a LocalDateTime with ISO chronology.
+     *
+     * @param date  the Date to extract fields from, not null
+     * @return the created local date-time, not null
+     * @throws IllegalArgumentException if the calendar is null
+     * @throws IllegalArgumentException if the date is invalid for the ISO chronology
+     */
+    @SuppressWarnings(&quot;deprecation&quot;)
+    public static LocalDateTime fromDateFields(Date date) {
+<span class="fc bfc" id="L234" title="All 2 branches covered.">        if (date == null) {</span>
+<span class="fc" id="L235">            throw new IllegalArgumentException(&quot;The date must not be null&quot;);</span>
+        }
+<span class="fc bfc" id="L237" title="All 2 branches covered.">        if (date.getTime() &lt; 0) {</span>
+            // handle years in era BC
+<span class="fc" id="L239">            GregorianCalendar cal = new GregorianCalendar();</span>
+<span class="fc" id="L240">            cal.setTime(date);</span>
+<span class="fc" id="L241">            return fromCalendarFields(cal);</span>
+        }
+<span class="fc" id="L243">        return new LocalDateTime(</span>
+<span class="fc" id="L244">            date.getYear() + 1900,</span>
+<span class="fc" id="L245">            date.getMonth() + 1,</span>
+<span class="fc" id="L246">            date.getDate(),</span>
+<span class="fc" id="L247">            date.getHours(),</span>
+<span class="fc" id="L248">            date.getMinutes(),</span>
+<span class="fc" id="L249">            date.getSeconds(),</span>
+<span class="fc" id="L250">            (((int) (date.getTime() % 1000)) + 1000) % 1000</span>
+        );
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs an instance set to the current local time evaluated using
+     * ISO chronology in the default zone.
+     * &lt;p&gt;
+     * Once the constructor is completed, the zone is no longer used.
+     * 
+     * @see #now()
+     */
+    public LocalDateTime() {
+<span class="fc" id="L264">        this(DateTimeUtils.currentTimeMillis(), ISOChronology.getInstance());</span>
+<span class="fc" id="L265">    }</span>
+
+    /**
+     * Constructs an instance set to the current local time evaluated using
+     * ISO chronology in the specified zone.
+     * &lt;p&gt;
+     * If the specified time zone is null, the default zone is used.
+     * Once the constructor is completed, the zone is no longer used.
+     *
+     * @param zone  the time zone, null means default zone
+     * @see #now(DateTimeZone)
+     */
+    public LocalDateTime(DateTimeZone zone) {
+<span class="fc" id="L278">        this(DateTimeUtils.currentTimeMillis(), ISOChronology.getInstance(zone));</span>
+<span class="fc" id="L279">    }</span>
+
+    /**
+     * Constructs an instance set to the current local time evaluated using
+     * specified chronology.
+     * &lt;p&gt;
+     * If the chronology is null, ISO chronology in the default time zone is used.
+     * Once the constructor is completed, the zone is no longer used.
+     *
+     * @param chronology  the chronology, null means ISOChronology in default zone
+     * @see #now(Chronology)
+     */
+    public LocalDateTime(Chronology chronology) {
+<span class="fc" id="L292">        this(DateTimeUtils.currentTimeMillis(), chronology);</span>
+<span class="fc" id="L293">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs an instance set to the local time defined by the specified
+     * instant evaluated using ISO chronology in the default zone.
+     * &lt;p&gt;
+     * Once the constructor is completed, the zone is no longer used.
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+     */
+    public LocalDateTime(long instant) {
+<span class="fc" id="L305">        this(instant, ISOChronology.getInstance());</span>
+<span class="fc" id="L306">    }</span>
+
+    /**
+     * Constructs an instance set to the local time defined by the specified
+     * instant evaluated using ISO chronology in the specified zone.
+     * &lt;p&gt;
+     * If the specified time zone is null, the default zone is used.
+     * Once the constructor is completed, the zone is no longer used.
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+     * @param zone  the time zone, null means default zone
+     */
+    public LocalDateTime(long instant, DateTimeZone zone) {
+<span class="fc" id="L319">        this(instant, ISOChronology.getInstance(zone));</span>
+<span class="fc" id="L320">    }</span>
+
+    /**
+     * Constructs an instance set to the local time defined by the specified
+     * instant evaluated using the specified chronology.
+     * &lt;p&gt;
+     * If the chronology is null, ISO chronology in the default zone is used.
+     * Once the constructor is completed, the zone is no longer used.
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+     * @param chronology  the chronology, null means ISOChronology in default zone
+     */
+<span class="fc" id="L332">    public LocalDateTime(long instant, Chronology chronology) {</span>
+<span class="fc" id="L333">        chronology = DateTimeUtils.getChronology(chronology);</span>
+        
+<span class="fc" id="L335">        long localMillis = chronology.getZone().getMillisKeepLocal(DateTimeZone.UTC, instant);</span>
+<span class="fc" id="L336">        iLocalMillis = localMillis;</span>
+<span class="fc" id="L337">        iChronology = chronology.withUTC();</span>
+<span class="fc" id="L338">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs an instance from an Object that represents a datetime.
+     * &lt;p&gt;
+     * If the object contains no chronology, &lt;code&gt;ISOChronology&lt;/code&gt; is used.
+     * If the object contains no time zone, the default zone is used.
+     * Once the constructor is completed, the zone is no longer used.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadablePartial, ReadableInstant, String, Calendar and Date.
+     * The String formats are described by {@link ISODateTimeFormat#localDateOptionalTimeParser()}.
+     * The default String converter ignores the zone and only parses the field values.
+     *
+     * @param instant  the datetime object
+     * @throws IllegalArgumentException if the instant is invalid
+     */
+    public LocalDateTime(Object instant) {
+<span class="fc" id="L358">        this(instant, (Chronology) null);</span>
+<span class="fc" id="L359">    }</span>
+
+    /**
+     * Constructs an instance from an Object that represents a datetime,
+     * forcing the time zone to that specified.
+     * &lt;p&gt;
+     * If the object contains no chronology, &lt;code&gt;ISOChronology&lt;/code&gt; is used.
+     * If the specified time zone is null, the default zone is used.
+     * Once the constructor is completed, the zone is no longer used.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadablePartial, ReadableInstant, String, Calendar and Date.
+     * The String formats are described by {@link ISODateTimeFormat#localDateOptionalTimeParser()}.
+     * The default String converter ignores the zone and only parses the field values.
+     *
+     * @param instant  the datetime object
+     * @param zone  the time zone
+     * @throws IllegalArgumentException if the instant is invalid
+     */
+<span class="fc" id="L379">    public LocalDateTime(Object instant, DateTimeZone zone) {</span>
+<span class="fc" id="L380">        PartialConverter converter = ConverterManager.getInstance().getPartialConverter(instant);</span>
+<span class="fc" id="L381">        Chronology chronology = converter.getChronology(instant, zone);</span>
+<span class="fc" id="L382">        chronology = DateTimeUtils.getChronology(chronology);</span>
+<span class="fc" id="L383">        iChronology = chronology.withUTC();</span>
+<span class="fc" id="L384">        int[] values = converter.getPartialValues(this, instant, chronology, ISODateTimeFormat.localDateOptionalTimeParser());</span>
+<span class="fc" id="L385">        iLocalMillis = iChronology.getDateTimeMillis(values[0], values[1], values[2], values[3]);</span>
+<span class="fc" id="L386">    }</span>
+
+    /**
+     * Constructs an instance from an Object that represents a datetime,
+     * using the specified chronology.
+     * &lt;p&gt;
+     * If the chronology is null, ISO in the default time zone is used.
+     * Once the constructor is completed, the zone is no longer used.
+     * If the instant contains a chronology, it will be ignored.
+     * For example, passing a {@code LocalDate} and a different chronology
+     * will return a date with the year/month/day from the date applied
+     * unaltered to the specified chronology.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadablePartial, ReadableInstant, String, Calendar and Date.
+     * The String formats are described by {@link ISODateTimeFormat#localDateOptionalTimeParser()}.
+     * The default String converter ignores the zone and only parses the field values.
+     *
+     * @param instant  the datetime object
+     * @param chronology  the chronology
+     * @throws IllegalArgumentException if the instant is invalid
+     */
+<span class="fc" id="L409">    public LocalDateTime(Object instant, Chronology chronology) {</span>
+<span class="fc" id="L410">        PartialConverter converter = ConverterManager.getInstance().getPartialConverter(instant);</span>
+<span class="fc" id="L411">        chronology = converter.getChronology(instant, chronology);</span>
+<span class="fc" id="L412">        chronology = DateTimeUtils.getChronology(chronology);</span>
+<span class="fc" id="L413">        iChronology = chronology.withUTC();</span>
+<span class="fc" id="L414">        int[] values = converter.getPartialValues(this, instant, chronology, ISODateTimeFormat.localDateOptionalTimeParser());</span>
+<span class="fc" id="L415">        iLocalMillis = iChronology.getDateTimeMillis(values[0], values[1], values[2], values[3]);</span>
+<span class="fc" id="L416">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs an instance set to the specified date and time
+     * using &lt;code&gt;ISOChronology&lt;/code&gt;.
+     *
+     * @param year  the year
+     * @param monthOfYear  the month of the year, from 1 to 12
+     * @param dayOfMonth  the day of the month, from 1 to 31
+     * @param hourOfDay  the hour of the day, from 0 to 23
+     * @param minuteOfHour  the minute of the hour, from 0 to 59
+     */
+    public LocalDateTime(
+            int year,
+            int monthOfYear,
+            int dayOfMonth,
+            int hourOfDay,
+            int minuteOfHour) {
+<span class="fc" id="L435">        this(year, monthOfYear, dayOfMonth, hourOfDay,</span>
+<span class="fc" id="L436">            minuteOfHour, 0, 0, ISOChronology.getInstanceUTC());</span>
+<span class="fc" id="L437">    }</span>
+
+    /**
+     * Constructs an instance set to the specified date and time
+     * using &lt;code&gt;ISOChronology&lt;/code&gt;.
+     *
+     * @param year  the year
+     * @param monthOfYear  the month of the year, from 1 to 12
+     * @param dayOfMonth  the day of the month, from 1 to 31
+     * @param hourOfDay  the hour of the day, from 0 to 23
+     * @param minuteOfHour  the minute of the hour, from 0 to 59
+     * @param secondOfMinute  the second of the minute, from 0 to 59
+     */
+    public LocalDateTime(
+            int year,
+            int monthOfYear,
+            int dayOfMonth,
+            int hourOfDay,
+            int minuteOfHour,
+            int secondOfMinute) {
+<span class="fc" id="L457">        this(year, monthOfYear, dayOfMonth, hourOfDay,</span>
+<span class="fc" id="L458">            minuteOfHour, secondOfMinute, 0, ISOChronology.getInstanceUTC());</span>
+<span class="fc" id="L459">    }</span>
+
+    /**
+     * Constructs an instance set to the specified date and time
+     * using &lt;code&gt;ISOChronology&lt;/code&gt;.
+     *
+     * @param year  the year
+     * @param monthOfYear  the month of the year, from 1 to 12
+     * @param dayOfMonth  the day of the month, from 1 to 31
+     * @param hourOfDay  the hour of the day, from 0 to 23
+     * @param minuteOfHour  the minute of the hour, from 0 to 59
+     * @param secondOfMinute  the second of the minute, from 0 to 59
+     * @param millisOfSecond  the millisecond of the second, from 0 to 999
+     */
+    public LocalDateTime(
+            int year,
+            int monthOfYear,
+            int dayOfMonth,
+            int hourOfDay,
+            int minuteOfHour,
+            int secondOfMinute,
+            int millisOfSecond) {
+<span class="fc" id="L481">        this(year, monthOfYear, dayOfMonth, hourOfDay,</span>
+<span class="fc" id="L482">            minuteOfHour, secondOfMinute, millisOfSecond, ISOChronology.getInstanceUTC());</span>
+<span class="fc" id="L483">    }</span>
+
+    /**
+     * Constructs an instance set to the specified date and time
+     * using the specified chronology, whose zone is ignored.
+     * &lt;p&gt;
+     * If the chronology is null, &lt;code&gt;ISOChronology&lt;/code&gt; is used.
+     *
+     * @param year  the year, valid values defined by the chronology
+     * @param monthOfYear  the month of the year, valid values defined by the chronology
+     * @param dayOfMonth  the day of the month, valid values defined by the chronology
+     * @param hourOfDay  the hour of the day, valid values defined by the chronology
+     * @param minuteOfHour  the minute of the hour, valid values defined by the chronology
+     * @param secondOfMinute  the second of the minute, valid values defined by the chronology
+     * @param millisOfSecond  the millisecond of the second, valid values defined by the chronology
+     * @param chronology  the chronology, null means ISOChronology in default zone
+     */
+    public LocalDateTime(
+            int year,
+            int monthOfYear,
+            int dayOfMonth,
+            int hourOfDay,
+            int minuteOfHour,
+            int secondOfMinute,
+            int millisOfSecond,
+            Chronology chronology) {
+<span class="fc" id="L509">        super();</span>
+<span class="fc" id="L510">        chronology = DateTimeUtils.getChronology(chronology).withUTC();</span>
+<span class="fc" id="L511">        long instant = chronology.getDateTimeMillis(year, monthOfYear, dayOfMonth,</span>
+            hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+<span class="fc" id="L513">        iChronology = chronology;</span>
+<span class="fc" id="L514">        iLocalMillis = instant;</span>
+<span class="fc" id="L515">    }</span>
+
+    /**
+     * Handle broken serialization from other tools.
+     * @return the resolved object, not null
+     */
+    private Object readResolve() {
+<span class="pc bpc" id="L522" title="1 of 2 branches missed.">        if (iChronology == null) {</span>
+<span class="nc" id="L523">            return new LocalDateTime(iLocalMillis, ISOChronology.getInstanceUTC());</span>
+        }
+<span class="pc bpc" id="L525" title="1 of 2 branches missed.">        if (DateTimeZone.UTC.equals(iChronology.getZone()) == false) {</span>
+<span class="nc" id="L526">            return new LocalDateTime(iLocalMillis, iChronology.withUTC());</span>
+        }
+<span class="fc" id="L528">        return this;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the number of fields in this partial, which is four.
+     * The supported fields are Year, MonthOfDay, DayOfMonth and MillisOfDay.
+     *
+     * @return the field count, four
+     */
+    public int size() {
+<span class="fc" id="L539">        return 4;</span>
+    }
+
+    /**
+     * Gets the field for a specific index in the chronology specified.
+     * &lt;p&gt;
+     * This method must not use any instance variables.
+     *
+     * @param index  the index to retrieve
+     * @param chrono  the chronology to use
+     * @return the field
+     */
+    protected DateTimeField getField(int index, Chronology chrono) {
+<span class="fc bfc" id="L552" title="All 5 branches covered.">        switch (index) {</span>
+            case YEAR:
+<span class="fc" id="L554">                return chrono.year();</span>
+            case MONTH_OF_YEAR:
+<span class="fc" id="L556">                return chrono.monthOfYear();</span>
+            case DAY_OF_MONTH:
+<span class="fc" id="L558">                return chrono.dayOfMonth();</span>
+            case MILLIS_OF_DAY:
+<span class="fc" id="L560">                return chrono.millisOfDay();</span>
+            default:
+<span class="fc" id="L562">                throw new IndexOutOfBoundsException(&quot;Invalid index: &quot; + index);</span>
+        }
+    }
+
+    /**
+     * Gets the value of the field at the specified index.
+     * &lt;p&gt;
+     * This method is required to support the &lt;code&gt;ReadablePartial&lt;/code&gt;
+     * interface. The supported fields are Year, MonthOfDay, DayOfMonth and MillisOfDay.
+     *
+     * @param index  the index, zero to two
+     * @return the value
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    public int getValue(int index) {
+<span class="fc bfc" id="L577" title="All 5 branches covered.">        switch (index) {</span>
+            case YEAR:
+<span class="fc" id="L579">                return getChronology().year().get(getLocalMillis());</span>
+            case MONTH_OF_YEAR:
+<span class="fc" id="L581">                return getChronology().monthOfYear().get(getLocalMillis());</span>
+            case DAY_OF_MONTH:
+<span class="fc" id="L583">                return getChronology().dayOfMonth().get(getLocalMillis());</span>
+            case MILLIS_OF_DAY:
+<span class="fc" id="L585">                return getChronology().millisOfDay().get(getLocalMillis());</span>
+            default:
+<span class="fc" id="L587">                throw new IndexOutOfBoundsException(&quot;Invalid index: &quot; + index);</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the value of one of the fields of a datetime.
+     * &lt;p&gt;
+     * This method gets the value of the specified field.
+     * For example:
+     * &lt;pre&gt;
+     * DateTime dt = new DateTime();
+     * int year = dt.get(DateTimeFieldType.year());
+     * &lt;/pre&gt;
+     *
+     * @param type  a field type, usually obtained from DateTimeFieldType, not null
+     * @return the value of that field
+     * @throws IllegalArgumentException if the field type is null
+     */
+    public int get(DateTimeFieldType type) {
+<span class="fc bfc" id="L607" title="All 2 branches covered.">        if (type == null) {</span>
+<span class="fc" id="L608">            throw new IllegalArgumentException(&quot;The DateTimeFieldType must not be null&quot;);</span>
+        }
+<span class="fc" id="L610">        return type.getField(getChronology()).get(getLocalMillis());</span>
+    }
+
+    /**
+     * Checks if the field type specified is supported by this
+     * local datetime and chronology.
+     * This can be used to avoid exceptions in {@link #get(DateTimeFieldType)}.
+     *
+     * @param type  a field type, usually obtained from DateTimeFieldType
+     * @return true if the field type is supported
+     */
+    public boolean isSupported(DateTimeFieldType type) {
+<span class="fc bfc" id="L622" title="All 2 branches covered.">        if (type == null) {</span>
+<span class="fc" id="L623">            return false;</span>
+        }
+<span class="fc" id="L625">        return type.getField(getChronology()).isSupported();</span>
+    }
+
+    /**
+     * Checks if the duration type specified is supported by this
+     * local datetime and chronology.
+     *
+     * @param type  a duration type, usually obtained from DurationFieldType
+     * @return true if the field type is supported
+     */
+    public boolean isSupported(DurationFieldType type) {
+<span class="fc bfc" id="L636" title="All 2 branches covered.">        if (type == null) {</span>
+<span class="fc" id="L637">            return false;</span>
+        }
+<span class="fc" id="L639">        return type.getField(getChronology()).isSupported();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the milliseconds of the datetime instant from the Java epoch
+     * of 1970-01-01T00:00:00 (not fixed to any specific time zone).
+     *
+     * @return the number of milliseconds since 1970-01-01T00:00:00
+     * @since 1.5 (previously private)
+     */
+    protected long getLocalMillis() {
+<span class="fc" id="L651">        return iLocalMillis;</span>
+    }
+
+    /**
+     * Gets the chronology of the datetime.
+     *
+     * @return the Chronology that the datetime is using
+     */
+    public Chronology getChronology() {
+<span class="fc" id="L660">        return iChronology;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Compares this ReadablePartial with another returning true if the chronology,
+     * field types and values are equal.
+     *
+     * @param partial  an object to check against
+     * @return true if fields and values are equal
+     */
+    public boolean equals(Object partial) {
+        // override to perform faster
+<span class="fc bfc" id="L673" title="All 2 branches covered.">        if (this == partial) {</span>
+<span class="fc" id="L674">            return true;</span>
+        }
+<span class="fc bfc" id="L676" title="All 2 branches covered.">        if (partial instanceof LocalDateTime) {</span>
+<span class="fc" id="L677">            LocalDateTime other = (LocalDateTime) partial;</span>
+<span class="fc bfc" id="L678" title="All 2 branches covered.">            if (iChronology.equals(other.iChronology)) {</span>
+<span class="pc bpc" id="L679" title="1 of 2 branches missed.">                return iLocalMillis == other.iLocalMillis;</span>
+            }
+        }
+<span class="fc" id="L682">        return super.equals(partial);</span>
+    }
+
+    /**
+     * Compares this partial with another returning an integer
+     * indicating the order.
+     * &lt;p&gt;
+     * The fields are compared in order, from largest to smallest.
+     * The first field that is non-equal is used to determine the result.
+     * &lt;p&gt;
+     * The specified object must be a partial instance whose field types
+     * match those of this partial.
+     *
+     * @param partial  an object to check against
+     * @return negative if this is less, zero if equal, positive if greater
+     * @throws ClassCastException if the partial is the wrong class
+     *  or if it has field types that don't match
+     * @throws NullPointerException if the partial is null
+     */
+    public int compareTo(ReadablePartial partial) {
+        // override to perform faster
+<span class="fc bfc" id="L703" title="All 2 branches covered.">        if (this == partial) {</span>
+<span class="fc" id="L704">            return 0;</span>
+        }
+<span class="fc bfc" id="L706" title="All 2 branches covered.">        if (partial instanceof LocalDateTime) {</span>
+<span class="fc" id="L707">            LocalDateTime other = (LocalDateTime) partial;</span>
+<span class="fc bfc" id="L708" title="All 2 branches covered.">            if (iChronology.equals(other.iChronology)) {</span>
+<span class="fc bfc" id="L709" title="All 4 branches covered.">                return (iLocalMillis &lt; other.iLocalMillis ? -1 :</span>
+                            (iLocalMillis == other.iLocalMillis ? 0 : 1));
+
+            }
+        }
+<span class="fc" id="L714">        return super.compareTo(partial);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Converts this object to a DateTime using the default zone.
+     * &lt;p&gt;
+     * When the time zone is applied, the local date-time may be affected by daylight saving.
+     * In a daylight saving gap, when the local time does not exist,
+     * this method will throw an exception.
+     * In a daylight saving overlap, when the same local time occurs twice,
+     * this method returns the first occurrence of the local time.
+     * 
+     * @return &lt;code&gt;this&lt;/code&gt;
+     * @throws IllegalInstantException if the local time does not exist when the time zone is applied
+     */
+    public DateTime toDateTime() {
+<span class="fc" id="L731">        return toDateTime((DateTimeZone) null);</span>
+    }
+
+    /**
+     * Converts this object to a DateTime using the specified zone.
+     * &lt;p&gt;
+     * When the time zone is applied, the local date-time may be affected by daylight saving.
+     * In a daylight saving gap, when the local time does not exist,
+     * this method will throw an exception.
+     * In a daylight saving overlap, when the same local time occurs twice,
+     * this method returns the first occurrence of the local time.
+     * 
+     * @param zone time zone to apply, or default if null
+     * @return a DateTime using the same millis
+     * @throws IllegalInstantException if the local time does not exist when the time zone is applied
+     */
+    public DateTime toDateTime(DateTimeZone zone) {
+<span class="fc" id="L748">        zone = DateTimeUtils.getZone(zone);</span>
+<span class="fc" id="L749">        Chronology chrono = iChronology.withZone(zone);</span>
+<span class="fc" id="L750">        return new DateTime(</span>
+<span class="fc" id="L751">                getYear(), getMonthOfYear(), getDayOfMonth(),</span>
+<span class="fc" id="L752">                getHourOfDay(), getMinuteOfHour(),</span>
+<span class="fc" id="L753">                getSecondOfMinute(), getMillisOfSecond(), chrono);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Converts this object to a LocalDate with the same date and chronology.
+     *
+     * @return a LocalDate with the same date and chronology
+     */
+    public LocalDate toLocalDate() {
+<span class="fc" id="L763">        return new LocalDate(getLocalMillis(), getChronology());</span>
+    }
+
+    /**
+     * Converts this object to a LocalTime with the same time and chronology.
+     *
+     * @return a LocalTime with the same time and chronology
+     */
+    public LocalTime toLocalTime() {
+<span class="fc" id="L772">        return new LocalTime(getLocalMillis(), getChronology());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the date time as a &lt;code&gt;java.util.Date&lt;/code&gt;.
+     * &lt;p&gt;
+     * The &lt;code&gt;Date&lt;/code&gt; object created has exactly the same fields as this
+     * date-time, except when the time would be invalid due to a daylight savings
+     * gap. In that case, the time will be set to the earliest valid time after the gap.
+     * &lt;p&gt;
+     * In the case of a daylight savings overlap, the earlier instant is selected.
+     * &lt;p&gt;
+     * Converting to a JDK Date is full of complications as the JDK Date constructor
+     * doesn't behave as you might expect around DST transitions. This method works
+     * by taking a first guess and then adjusting. This also handles the situation
+     * where the JDK time zone data differs from the Joda-Time time zone data.
+     *
+     * @return a Date initialised with this date-time, never null
+     * @since 2.0
+     */
+    @SuppressWarnings(&quot;deprecation&quot;)
+    public Date toDate() {
+<span class="fc" id="L795">        int dom = getDayOfMonth();</span>
+<span class="fc" id="L796">        Date date = new Date(getYear() - 1900, getMonthOfYear() - 1, dom,</span>
+<span class="fc" id="L797">                        getHourOfDay(), getMinuteOfHour(), getSecondOfMinute());</span>
+<span class="fc" id="L798">        date.setTime(date.getTime() + getMillisOfSecond());</span>
+<span class="fc" id="L799">        return correctDstTransition(date, TimeZone.getDefault());</span>
+    }
+
+    /**
+     * Get the date time as a &lt;code&gt;java.util.Date&lt;/code&gt; using the specified time zone.
+     * &lt;p&gt;
+     * The &lt;code&gt;Date&lt;/code&gt; object created has exactly the same fields as this
+     * date-time, except when the time would be invalid due to a daylight savings
+     * gap. In that case, the time will be set to the earliest valid time after the gap.
+     * &lt;p&gt;
+     * In the case of a daylight savings overlap, the earlier instant is selected.
+     * &lt;p&gt;
+     * Converting to a JDK Date is full of complications as the JDK Date constructor
+     * doesn't behave as you might expect around DST transitions. This method works
+     * by taking a first guess and then adjusting. This also handles the situation
+     * where the JDK time zone data differs from the Joda-Time time zone data.
+     * &lt;p&gt;
+     * Unlike {@link #toDate()}, this implementation does not rely on Java's synchronized
+     * time zone initialization logic, and should demonstrate better concurrent performance
+     * characteristics.
+     *
+     * @return a Date initialised with this date-time, never null
+     * @since 2.3
+     */
+    public Date toDate(final TimeZone timeZone) {
+<span class="fc" id="L824">        final Calendar calendar = Calendar.getInstance(timeZone);</span>
+<span class="fc" id="L825">        calendar.clear();</span>
+<span class="fc" id="L826">        calendar.set(getYear(), getMonthOfYear() - 1, getDayOfMonth(),</span>
+<span class="fc" id="L827">                    getHourOfDay(), getMinuteOfHour(), getSecondOfMinute());</span>
+<span class="fc" id="L828">        Date date = calendar.getTime();</span>
+<span class="fc" id="L829">        date.setTime(date.getTime() + getMillisOfSecond());</span>
+<span class="fc" id="L830">        return correctDstTransition(date, timeZone);</span>
+    }
+
+    /**
+     * Correct &lt;code&gt;date&lt;/code&gt; in case of DST overlap.
+     * &lt;p&gt;
+     * The &lt;code&gt;Date&lt;/code&gt; object created has exactly the same fields as this
+     * date-time, except when the time would be invalid due to a daylight savings
+     * gap. In that case, the time will be set to the earliest valid time after the gap.
+     * &lt;p&gt;
+     * In the case of a daylight savings overlap, the earlier instant is selected.
+     * &lt;p&gt;
+     * Converting to a JDK Date is full of complications as the JDK Date constructor
+     * doesn't behave as you might expect around DST transitions. This method works
+     * by taking a first guess and then adjusting. This also handles the situation
+     * where the JDK time zone data differs from the Joda-Time time zone data.
+     * @see #toDate()
+     */
+    private Date correctDstTransition(Date date, final TimeZone timeZone) {
+<span class="fc" id="L849">        Calendar calendar = Calendar.getInstance(timeZone);</span>
+<span class="fc" id="L850">        calendar.setTime(date);</span>
+<span class="fc" id="L851">        LocalDateTime check = LocalDateTime.fromCalendarFields(calendar);</span>
+<span class="fc bfc" id="L852" title="All 2 branches covered.">        if (check.isBefore(this)) {</span>
+            // DST gap
+            // move forward in units of one minute until equal/after
+<span class="fc bfc" id="L855" title="All 2 branches covered.">            while (check.isBefore(this)) {</span>
+<span class="fc" id="L856">                calendar.setTimeInMillis(calendar.getTimeInMillis() + 60000);</span>
+<span class="fc" id="L857">                check = LocalDateTime.fromCalendarFields(calendar);</span>
+            }
+            // move back in units of one second until date wrong
+<span class="fc bfc" id="L860" title="All 2 branches covered.">            while (check.isBefore(this) == false) {</span>
+<span class="fc" id="L861">                calendar.setTimeInMillis(calendar.getTimeInMillis() - 1000);</span>
+<span class="fc" id="L862">                check = LocalDateTime.fromCalendarFields(calendar);</span>
+            }
+<span class="fc" id="L864">            calendar.setTimeInMillis(calendar.getTimeInMillis() + 1000);</span>
+<span class="fc bfc" id="L865" title="All 2 branches covered.">        } else if (check.equals(this)) {</span>
+            // check for DST overlap
+<span class="fc" id="L867">            final Calendar earlier = Calendar.getInstance(timeZone);</span>
+<span class="fc" id="L868">            earlier.setTimeInMillis(calendar.getTimeInMillis() - timeZone.getDSTSavings());</span>
+<span class="fc" id="L869">            check = LocalDateTime.fromCalendarFields(earlier);</span>
+<span class="pc bpc" id="L870" title="1 of 2 branches missed.">            if (check.equals(this)) {</span>
+<span class="fc" id="L871">                calendar = earlier;</span>
+            }
+        }
+<span class="fc" id="L874">        return calendar.getTime();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime with different local millis.
+     * &lt;p&gt;
+     * The returned object will be a new instance of the same type.
+     * Only the millis will change, the chronology is kept.
+     * The returned object will be either be a new instance or &lt;code&gt;this&lt;/code&gt;.
+     *
+     * @param newMillis  the new millis, from 1970-01-01T00:00:00
+     * @return a copy of this datetime with different millis
+     */
+    LocalDateTime withLocalMillis(long newMillis) {
+<span class="fc bfc" id="L889" title="All 2 branches covered.">        return (newMillis == getLocalMillis() ? this : new LocalDateTime(newMillis, getChronology()));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime with the specified date,
+     * retaining the time fields.
+     * &lt;p&gt;
+     * If the date is already the date passed in, then &lt;code&gt;this&lt;/code&gt; is returned.
+     * &lt;p&gt;
+     * To set a single field use the properties, for example:
+     * &lt;pre&gt;
+     * DateTime set = dt.monthOfYear().setCopy(6);
+     * &lt;/pre&gt;
+     *
+     * @param year  the new year value
+     * @param monthOfYear  the new monthOfYear value
+     * @param dayOfMonth  the new dayOfMonth value
+     * @return a copy of this datetime with a different date
+     * @throws IllegalArgumentException if any value if invalid
+     */
+    public LocalDateTime withDate(int year, int monthOfYear, int dayOfMonth) {
+<span class="fc" id="L911">        Chronology chrono = getChronology();</span>
+<span class="fc" id="L912">        long instant = getLocalMillis();</span>
+<span class="fc" id="L913">        instant = chrono.year().set(instant, year);</span>
+<span class="fc" id="L914">        instant = chrono.monthOfYear().set(instant, monthOfYear);</span>
+<span class="fc" id="L915">        instant = chrono.dayOfMonth().set(instant, dayOfMonth);</span>
+<span class="fc" id="L916">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the specified time,
+     * retaining the date fields.
+     * &lt;p&gt;
+     * If the time is already the time passed in, then &lt;code&gt;this&lt;/code&gt; is returned.
+     * &lt;p&gt;
+     * To set a single field use the properties, for example:
+     * &lt;pre&gt;
+     * LocalDateTime set = dt.hourOfDay().setCopy(6);
+     * &lt;/pre&gt;
+     *
+     * @param hourOfDay  the hour of the day
+     * @param minuteOfHour  the minute of the hour
+     * @param secondOfMinute  the second of the minute
+     * @param millisOfSecond  the millisecond of the second
+     * @return a copy of this datetime with a different time
+     * @throws IllegalArgumentException if any value if invalid
+     */
+    public LocalDateTime withTime(int hourOfDay, int minuteOfHour, int secondOfMinute, int millisOfSecond) {
+<span class="fc" id="L938">        Chronology chrono = getChronology();</span>
+<span class="fc" id="L939">        long instant = getLocalMillis();</span>
+<span class="fc" id="L940">        instant = chrono.hourOfDay().set(instant, hourOfDay);</span>
+<span class="fc" id="L941">        instant = chrono.minuteOfHour().set(instant, minuteOfHour);</span>
+<span class="fc" id="L942">        instant = chrono.secondOfMinute().set(instant, secondOfMinute);</span>
+<span class="fc" id="L943">        instant = chrono.millisOfSecond().set(instant, millisOfSecond);</span>
+<span class="fc" id="L944">        return withLocalMillis(instant);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime with the partial set of fields
+     * replacing those from this instance.
+     * &lt;p&gt;
+     * For example, if the partial is a &lt;code&gt;TimeOfDay&lt;/code&gt; then the time fields
+     * would be changed in the returned instance.
+     * If the partial is null, then &lt;code&gt;this&lt;/code&gt; is returned.
+     *
+     * @param partial  the partial set of fields to apply to this datetime, null ignored
+     * @return a copy of this datetime with a different set of fields
+     * @throws IllegalArgumentException if any value is invalid
+     */
+    public LocalDateTime withFields(ReadablePartial partial) {
+<span class="nc bnc" id="L961" title="All 2 branches missed.">        if (partial == null) {</span>
+<span class="nc" id="L962">            return this;</span>
+        }
+<span class="nc" id="L964">        return withLocalMillis(getChronology().set(partial, getLocalMillis()));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the specified field set to a new value.
+     * &lt;p&gt;
+     * For example, if the field type is &lt;code&gt;hourOfDay&lt;/code&gt; then the hour of day
+     * field would be changed in the returned instance.
+     * If the field type is null, then &lt;code&gt;this&lt;/code&gt; is returned.
+     * &lt;p&gt;
+     * These three lines are equivalent:
+     * &lt;pre&gt;
+     * LocalDateTime updated = dt.withField(DateTimeFieldType.dayOfMonth(), 6);
+     * LocalDateTime updated = dt.dayOfMonth().setCopy(6);
+     * LocalDateTime updated = dt.property(DateTimeFieldType.dayOfMonth()).setCopy(6);
+     * &lt;/pre&gt;
+     *
+     * @param fieldType  the field type to set, not null
+     * @param value  the value to set
+     * @return a copy of this datetime with the field set
+     * @throws IllegalArgumentException if the value is null or invalid
+     */
+    public LocalDateTime withField(DateTimeFieldType fieldType, int value) {
+<span class="fc bfc" id="L987" title="All 2 branches covered.">        if (fieldType == null) {</span>
+<span class="fc" id="L988">            throw new IllegalArgumentException(&quot;Field must not be null&quot;);</span>
+        }
+<span class="fc" id="L990">        long instant = fieldType.getField(getChronology()).set(getLocalMillis(), value);</span>
+<span class="fc" id="L991">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the value of the specified
+     * field increased.
+     * &lt;p&gt;
+     * If the addition is zero or the field is null, then &lt;code&gt;this&lt;/code&gt; is returned.
+     * &lt;p&gt;
+     * These three lines are equivalent:
+     * &lt;pre&gt;
+     * LocalDateTime added = dt.withFieldAdded(DurationFieldType.years(), 6);
+     * LocalDateTime added = dt.plusYears(6);
+     * LocalDateTime added = dt.plus(Period.years(6));
+     * &lt;/pre&gt;
+     *
+     * @param fieldType  the field type to add to, not null
+     * @param amount  the amount to add
+     * @return a copy of this datetime with the field updated
+     * @throws IllegalArgumentException if the value is null or invalid
+     * @throws ArithmeticException if the result exceeds the internal capacity
+     */
+    public LocalDateTime withFieldAdded(DurationFieldType fieldType, int amount) {
+<span class="fc bfc" id="L1014" title="All 2 branches covered.">        if (fieldType == null) {</span>
+<span class="fc" id="L1015">            throw new IllegalArgumentException(&quot;Field must not be null&quot;);</span>
+        }
+<span class="fc bfc" id="L1017" title="All 2 branches covered.">        if (amount == 0) {</span>
+<span class="fc" id="L1018">            return this;</span>
+        }
+<span class="fc" id="L1020">        long instant = fieldType.getField(getChronology()).add(getLocalMillis(), amount);</span>
+<span class="fc" id="L1021">        return withLocalMillis(instant);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime with the specified duration added.
+     * &lt;p&gt;
+     * If the addition is zero, then &lt;code&gt;this&lt;/code&gt; is returned.
+     *
+     * @param durationToAdd  the duration to add to this one, null means zero
+     * @param scalar  the amount of times to add, such as -1 to subtract once
+     * @return a copy of this datetime with the duration added
+     * @throws ArithmeticException if the result exceeds the internal capacity
+     */
+    public LocalDateTime withDurationAdded(ReadableDuration durationToAdd, int scalar) {
+<span class="nc bnc" id="L1036" title="All 4 branches missed.">        if (durationToAdd == null || scalar == 0) {</span>
+<span class="nc" id="L1037">            return this;</span>
+        }
+<span class="nc" id="L1039">        long instant = getChronology().add(getLocalMillis(), durationToAdd.getMillis(), scalar);</span>
+<span class="nc" id="L1040">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the specified period added.
+     * &lt;p&gt;
+     * If the addition is zero, then &lt;code&gt;this&lt;/code&gt; is returned.
+     * &lt;p&gt;
+     * This method is typically used to add multiple copies of complex
+     * period instances. Adding one field is best achieved using methods
+     * like {@link #withFieldAdded(DurationFieldType, int)}
+     * or {@link #plusYears(int)}.
+     *
+     * @param period  the period to add to this one, null means zero
+     * @param scalar  the amount of times to add, such as -1 to subtract once
+     * @return a copy of this datetime with the period added
+     * @throws ArithmeticException if the result exceeds the internal capacity
+     */
+    public LocalDateTime withPeriodAdded(ReadablePeriod period, int scalar) {
+<span class="pc bpc" id="L1059" title="1 of 4 branches missed.">        if (period == null || scalar == 0) {</span>
+<span class="fc" id="L1060">            return this;</span>
+        }
+<span class="fc" id="L1062">        long instant = getChronology().add(period, getLocalMillis(), scalar);</span>
+<span class="fc" id="L1063">        return withLocalMillis(instant);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime with the specified duration added.
+     * &lt;p&gt;
+     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+     *
+     * @param duration  the duration to add to this one, null means zero
+     * @return a copy of this datetime with the duration added
+     * @throws ArithmeticException if the result exceeds the internal capacity
+     */
+    public LocalDateTime plus(ReadableDuration duration) {
+<span class="nc" id="L1077">        return withDurationAdded(duration, 1);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the specified period added.
+     * &lt;p&gt;
+     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+     * &lt;p&gt;
+     * This method is typically used to add complex period instances.
+     * Adding one field is best achieved using methods
+     * like {@link #plusYears(int)}.
+     *
+     * @param period  the period to add to this one, null means zero
+     * @return a copy of this datetime with the period added
+     * @throws ArithmeticException if the result exceeds the internal capacity
+     */
+    public LocalDateTime plus(ReadablePeriod period) {
+<span class="fc" id="L1094">        return withPeriodAdded(period, 1);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime plus the specified number of years.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime added = dt.plusYears(6);
+     * LocalDateTime added = dt.plus(Period.years(6));
+     * LocalDateTime added = dt.withFieldAdded(DurationFieldType.years(), 6);
+     * &lt;/pre&gt;
+     *
+     * @param years  the amount of years to add, may be negative
+     * @return the new LocalDateTime plus the increased years
+     */
+    public LocalDateTime plusYears(int years) {
+<span class="fc bfc" id="L1114" title="All 2 branches covered.">        if (years == 0) {</span>
+<span class="fc" id="L1115">            return this;</span>
+        }
+<span class="fc" id="L1117">        long instant = getChronology().years().add(getLocalMillis(), years);</span>
+<span class="fc" id="L1118">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime plus the specified number of months.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime added = dt.plusMonths(6);
+     * LocalDateTime added = dt.plus(Period.months(6));
+     * LocalDateTime added = dt.withFieldAdded(DurationFieldType.months(), 6);
+     * &lt;/pre&gt;
+     *
+     * @param months  the amount of months to add, may be negative
+     * @return the new LocalDateTime plus the increased months
+     */
+    public LocalDateTime plusMonths(int months) {
+<span class="fc bfc" id="L1137" title="All 2 branches covered.">        if (months == 0) {</span>
+<span class="fc" id="L1138">            return this;</span>
+        }
+<span class="fc" id="L1140">        long instant = getChronology().months().add(getLocalMillis(), months);</span>
+<span class="fc" id="L1141">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime plus the specified number of weeks.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime added = dt.plusWeeks(6);
+     * LocalDateTime added = dt.plus(Period.weeks(6));
+     * LocalDateTime added = dt.withFieldAdded(DurationFieldType.weeks(), 6);
+     * &lt;/pre&gt;
+     *
+     * @param weeks  the amount of weeks to add, may be negative
+     * @return the new LocalDateTime plus the increased weeks
+     */
+    public LocalDateTime plusWeeks(int weeks) {
+<span class="fc bfc" id="L1160" title="All 2 branches covered.">        if (weeks == 0) {</span>
+<span class="fc" id="L1161">            return this;</span>
+        }
+<span class="fc" id="L1163">        long instant = getChronology().weeks().add(getLocalMillis(), weeks);</span>
+<span class="fc" id="L1164">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime plus the specified number of days.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime added = dt.plusDays(6);
+     * LocalDateTime added = dt.plus(Period.days(6));
+     * LocalDateTime added = dt.withFieldAdded(DurationFieldType.days(), 6);
+     * &lt;/pre&gt;
+     *
+     * @param days  the amount of days to add, may be negative
+     * @return the new LocalDateTime plus the increased days
+     */
+    public LocalDateTime plusDays(int days) {
+<span class="fc bfc" id="L1183" title="All 2 branches covered.">        if (days == 0) {</span>
+<span class="fc" id="L1184">            return this;</span>
+        }
+<span class="fc" id="L1186">        long instant = getChronology().days().add(getLocalMillis(), days);</span>
+<span class="fc" id="L1187">        return withLocalMillis(instant);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime plus the specified number of hours.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime added = dt.plusHours(6);
+     * LocalDateTime added = dt.plus(Period.hours(6));
+     * LocalDateTime added = dt.withFieldAdded(DurationFieldType.hours(), 6);
+     * &lt;/pre&gt;
+     *
+     * @param hours  the amount of hours to add, may be negative
+     * @return the new LocalDateTime plus the increased hours
+     */
+    public LocalDateTime plusHours(int hours) {
+<span class="fc bfc" id="L1207" title="All 2 branches covered.">        if (hours == 0) {</span>
+<span class="fc" id="L1208">            return this;</span>
+        }
+<span class="fc" id="L1210">        long instant = getChronology().hours().add(getLocalMillis(), hours);</span>
+<span class="fc" id="L1211">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime plus the specified number of minutes.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime added = dt.plusMinutes(6);
+     * LocalDateTime added = dt.plus(Period.minutes(6));
+     * LocalDateTime added = dt.withFieldAdded(DurationFieldType.minutes(), 6);
+     * &lt;/pre&gt;
+     *
+     * @param minutes  the amount of minutes to add, may be negative
+     * @return the new LocalDateTime plus the increased minutes
+     */
+    public LocalDateTime plusMinutes(int minutes) {
+<span class="fc bfc" id="L1230" title="All 2 branches covered.">        if (minutes == 0) {</span>
+<span class="fc" id="L1231">            return this;</span>
+        }
+<span class="fc" id="L1233">        long instant = getChronology().minutes().add(getLocalMillis(), minutes);</span>
+<span class="fc" id="L1234">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime plus the specified number of seconds.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime added = dt.plusSeconds(6);
+     * LocalDateTime added = dt.plus(Period.seconds(6));
+     * LocalDateTime added = dt.withFieldAdded(DurationFieldType.seconds(), 6);
+     * &lt;/pre&gt;
+     *
+     * @param seconds  the amount of seconds to add, may be negative
+     * @return the new LocalDateTime plus the increased seconds
+     */
+    public LocalDateTime plusSeconds(int seconds) {
+<span class="fc bfc" id="L1253" title="All 2 branches covered.">        if (seconds == 0) {</span>
+<span class="fc" id="L1254">            return this;</span>
+        }
+<span class="fc" id="L1256">        long instant = getChronology().seconds().add(getLocalMillis(), seconds);</span>
+<span class="fc" id="L1257">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime plus the specified number of millis.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime added = dt.plusMillis(6);
+     * LocalDateTime added = dt.plus(Period.millis(6));
+     * LocalDateTime added = dt.withFieldAdded(DurationFieldType.millis(), 6);
+     * &lt;/pre&gt;
+     *
+     * @param millis  the amount of millis to add, may be negative
+     * @return the new LocalDateTime plus the increased millis
+     */
+    public LocalDateTime plusMillis(int millis) {
+<span class="fc bfc" id="L1276" title="All 2 branches covered.">        if (millis == 0) {</span>
+<span class="fc" id="L1277">            return this;</span>
+        }
+<span class="fc" id="L1279">        long instant = getChronology().millis().add(getLocalMillis(), millis);</span>
+<span class="fc" id="L1280">        return withLocalMillis(instant);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime with the specified duration taken away.
+     * &lt;p&gt;
+     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+     *
+     * @param duration  the duration to reduce this instant by
+     * @return a copy of this datetime with the duration taken away
+     * @throws ArithmeticException if the result exceeds the internal capacity
+     */
+    public LocalDateTime minus(ReadableDuration duration) {
+<span class="nc" id="L1294">        return withDurationAdded(duration, -1);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the specified period taken away.
+     * &lt;p&gt;
+     * If the amount is zero or null, then &lt;code&gt;this&lt;/code&gt; is returned.
+     * &lt;p&gt;
+     * This method is typically used to subtract complex period instances.
+     * Subtracting one field is best achieved using methods
+     * like {@link #minusYears(int)}.
+     *
+     * @param period  the period to reduce this instant by
+     * @return a copy of this datetime with the period taken away
+     * @throws ArithmeticException if the result exceeds the internal capacity
+     */
+    public LocalDateTime minus(ReadablePeriod period) {
+<span class="fc" id="L1311">        return withPeriodAdded(period, -1);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime minus the specified number of years.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime subtracted = dt.minusYears(6);
+     * LocalDateTime subtracted = dt.minus(Period.years(6));
+     * LocalDateTime subtracted = dt.withFieldAdded(DurationFieldType.years(), -6);
+     * &lt;/pre&gt;
+     *
+     * @param years  the amount of years to subtract, may be negative
+     * @return the new LocalDateTime minus the increased years
+     */
+    public LocalDateTime minusYears(int years) {
+<span class="fc bfc" id="L1331" title="All 2 branches covered.">        if (years == 0) {</span>
+<span class="fc" id="L1332">            return this;</span>
+        }
+<span class="fc" id="L1334">        long instant = getChronology().years().subtract(getLocalMillis(), years);</span>
+<span class="fc" id="L1335">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime minus the specified number of months.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime subtracted = dt.minusMonths(6);
+     * LocalDateTime subtracted = dt.minus(Period.months(6));
+     * LocalDateTime subtracted = dt.withFieldAdded(DurationFieldType.months(), -6);
+     * &lt;/pre&gt;
+     *
+     * @param months  the amount of months to subtract, may be negative
+     * @return the new LocalDateTime minus the increased months
+     */
+    public LocalDateTime minusMonths(int months) {
+<span class="fc bfc" id="L1354" title="All 2 branches covered.">        if (months == 0) {</span>
+<span class="fc" id="L1355">            return this;</span>
+        }
+<span class="fc" id="L1357">        long instant = getChronology().months().subtract(getLocalMillis(), months);</span>
+<span class="fc" id="L1358">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime minus the specified number of weeks.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime subtracted = dt.minusWeeks(6);
+     * LocalDateTime subtracted = dt.minus(Period.weeks(6));
+     * LocalDateTime subtracted = dt.withFieldAdded(DurationFieldType.weeks(), -6);
+     * &lt;/pre&gt;
+     *
+     * @param weeks  the amount of weeks to subtract, may be negative
+     * @return the new LocalDateTime minus the increased weeks
+     */
+    public LocalDateTime minusWeeks(int weeks) {
+<span class="fc bfc" id="L1377" title="All 2 branches covered.">        if (weeks == 0) {</span>
+<span class="fc" id="L1378">            return this;</span>
+        }
+<span class="fc" id="L1380">        long instant = getChronology().weeks().subtract(getLocalMillis(), weeks);</span>
+<span class="fc" id="L1381">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime minus the specified number of days.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime subtracted = dt.minusDays(6);
+     * LocalDateTime subtracted = dt.minus(Period.days(6));
+     * LocalDateTime subtracted = dt.withFieldAdded(DurationFieldType.days(), -6);
+     * &lt;/pre&gt;
+     *
+     * @param days  the amount of days to subtract, may be negative
+     * @return the new LocalDateTime minus the increased days
+     */
+    public LocalDateTime minusDays(int days) {
+<span class="fc bfc" id="L1400" title="All 2 branches covered.">        if (days == 0) {</span>
+<span class="fc" id="L1401">            return this;</span>
+        }
+<span class="fc" id="L1403">        long instant = getChronology().days().subtract(getLocalMillis(), days);</span>
+<span class="fc" id="L1404">        return withLocalMillis(instant);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime minus the specified number of hours.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime subtracted = dt.minusHours(6);
+     * LocalDateTime subtracted = dt.minus(Period.hours(6));
+     * LocalDateTime subtracted = dt.withFieldAdded(DurationFieldType.hours(), -6);
+     * &lt;/pre&gt;
+     *
+     * @param hours  the amount of hours to subtract, may be negative
+     * @return the new LocalDateTime minus the increased hours
+     */
+    public LocalDateTime minusHours(int hours) {
+<span class="fc bfc" id="L1424" title="All 2 branches covered.">        if (hours == 0) {</span>
+<span class="fc" id="L1425">            return this;</span>
+        }
+<span class="fc" id="L1427">        long instant = getChronology().hours().subtract(getLocalMillis(), hours);</span>
+<span class="fc" id="L1428">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime minus the specified number of minutes.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime subtracted = dt.minusMinutes(6);
+     * LocalDateTime subtracted = dt.minus(Period.minutes(6));
+     * LocalDateTime subtracted = dt.withFieldAdded(DurationFieldType.minutes(), -6);
+     * &lt;/pre&gt;
+     *
+     * @param minutes  the amount of minutes to subtract, may be negative
+     * @return the new LocalDateTime minus the increased minutes
+     */
+    public LocalDateTime minusMinutes(int minutes) {
+<span class="fc bfc" id="L1447" title="All 2 branches covered.">        if (minutes == 0) {</span>
+<span class="fc" id="L1448">            return this;</span>
+        }
+<span class="fc" id="L1450">        long instant = getChronology().minutes().subtract(getLocalMillis(), minutes);</span>
+<span class="fc" id="L1451">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime minus the specified number of seconds.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime subtracted = dt.minusSeconds(6);
+     * LocalDateTime subtracted = dt.minus(Period.seconds(6));
+     * LocalDateTime subtracted = dt.withFieldAdded(DurationFieldType.seconds(), -6);
+     * &lt;/pre&gt;
+     *
+     * @param seconds  the amount of seconds to subtract, may be negative
+     * @return the new LocalDateTime minus the increased seconds
+     */
+    public LocalDateTime minusSeconds(int seconds) {
+<span class="fc bfc" id="L1470" title="All 2 branches covered.">        if (seconds == 0) {</span>
+<span class="fc" id="L1471">            return this;</span>
+        }
+<span class="fc" id="L1473">        long instant = getChronology().seconds().subtract(getLocalMillis(), seconds);</span>
+<span class="fc" id="L1474">        return withLocalMillis(instant);</span>
+    }
+
+    /**
+     * Returns a copy of this datetime minus the specified number of millis.
+     * &lt;p&gt;
+     * This LocalDateTime instance is immutable and unaffected by this method call.
+     * &lt;p&gt;
+     * The following three lines are identical in effect:
+     * &lt;pre&gt;
+     * LocalDateTime subtracted = dt.minusMillis(6);
+     * LocalDateTime subtracted = dt.minus(Period.millis(6));
+     * LocalDateTime subtracted = dt.withFieldAdded(DurationFieldType.millis(), -6);
+     * &lt;/pre&gt;
+     *
+     * @param millis  the amount of millis to subtract, may be negative
+     * @return the new LocalDateTime minus the increased millis
+     */
+    public LocalDateTime minusMillis(int millis) {
+<span class="fc bfc" id="L1493" title="All 2 branches covered.">        if (millis == 0) {</span>
+<span class="fc" id="L1494">            return this;</span>
+        }
+<span class="fc" id="L1496">        long instant = getChronology().millis().subtract(getLocalMillis(), millis);</span>
+<span class="fc" id="L1497">        return withLocalMillis(instant);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the property object for the specified type, which contains many
+     * useful methods.
+     *
+     * @param fieldType  the field type to get the chronology for
+     * @return the property object
+     * @throws IllegalArgumentException if the field is null or unsupported
+     */
+    public Property property(DateTimeFieldType fieldType) {
+<span class="fc bfc" id="L1510" title="All 2 branches covered.">        if (fieldType == null) {</span>
+<span class="fc" id="L1511">            throw new IllegalArgumentException(&quot;The DateTimeFieldType must not be null&quot;);</span>
+        }
+<span class="pc bpc" id="L1513" title="1 of 2 branches missed.">        if (isSupported(fieldType) == false) {</span>
+<span class="nc" id="L1514">            throw new IllegalArgumentException(&quot;Field '&quot; + fieldType + &quot;' is not supported&quot;);</span>
+        }
+<span class="fc" id="L1516">        return new Property(this, fieldType.getField(getChronology()));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the era field value.
+     *
+     * @return the era
+     */
+    public int getEra() {
+<span class="fc" id="L1526">        return getChronology().era().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the year of era field value.
+     *
+     * @return the year of era
+     */
+    public int getCenturyOfEra() {
+<span class="fc" id="L1535">        return getChronology().centuryOfEra().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the year of era field value.
+     *
+     * @return the year of era
+     */
+    public int getYearOfEra() {
+<span class="fc" id="L1544">        return getChronology().yearOfEra().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the year of century field value.
+     *
+     * @return the year of century
+     */
+    public int getYearOfCentury() {
+<span class="fc" id="L1553">        return getChronology().yearOfCentury().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the year field value.
+     *
+     * @return the year
+     */
+    public int getYear() {
+<span class="fc" id="L1562">        return getChronology().year().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the weekyear field value.
+     * &lt;p&gt;
+     * The weekyear is the year that matches with the weekOfWeekyear field.
+     * In the standard ISO8601 week algorithm, the first week of the year
+     * is that in which at least 4 days are in the year. As a result of this
+     * definition, day 1 of the first week may be in the previous year.
+     * The weekyear allows you to query the effective year for that day.
+     *
+     * @return the weekyear
+     */
+    public int getWeekyear() {
+<span class="fc" id="L1577">        return getChronology().weekyear().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the month of year field value.
+     *
+     * @return the month of year
+     */
+    public int getMonthOfYear() {
+<span class="fc" id="L1586">        return getChronology().monthOfYear().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the week of weekyear field value.
+     * &lt;p&gt;
+     * This field is associated with the &quot;weekyear&quot; via {@link #getWeekyear()}.
+     * In the standard ISO8601 week algorithm, the first week of the year
+     * is that in which at least 4 days are in the year. As a result of this
+     * definition, day 1 of the first week may be in the previous year.
+     *
+     * @return the week of a week based year
+     */
+    public int getWeekOfWeekyear() {
+<span class="fc" id="L1600">        return getChronology().weekOfWeekyear().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the day of year field value.
+     *
+     * @return the day of year
+     */
+    public int getDayOfYear() {
+<span class="fc" id="L1609">        return getChronology().dayOfYear().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the day of month field value.
+     * &lt;p&gt;
+     * The values for the day of month are defined in {@link org.joda.time.DateTimeConstants}.
+     *
+     * @return the day of month
+     */
+    public int getDayOfMonth() {
+<span class="fc" id="L1620">        return getChronology().dayOfMonth().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the day of week field value.
+     * &lt;p&gt;
+     * The values for the day of week are defined in {@link org.joda.time.DateTimeConstants}.
+     *
+     * @return the day of week
+     */
+    public int getDayOfWeek() {
+<span class="fc" id="L1631">        return getChronology().dayOfWeek().get(getLocalMillis());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the hour of day field value.
+     *
+     * @return the hour of day
+     */
+    public int getHourOfDay() {
+<span class="fc" id="L1641">        return getChronology().hourOfDay().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the minute of hour field value.
+     *
+     * @return the minute of hour
+     */
+    public int getMinuteOfHour() {
+<span class="fc" id="L1650">        return getChronology().minuteOfHour().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the second of minute field value.
+     *
+     * @return the second of minute
+     */
+    public int getSecondOfMinute() {
+<span class="fc" id="L1659">        return getChronology().secondOfMinute().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the millis of second field value.
+     *
+     * @return the millis of second
+     */
+    public int getMillisOfSecond() {
+<span class="fc" id="L1668">        return getChronology().millisOfSecond().get(getLocalMillis());</span>
+    }
+
+    /**
+     * Get the millis of day field value.
+     *
+     * @return the millis of day
+     */
+    public int getMillisOfDay() {
+<span class="fc" id="L1677">        return getChronology().millisOfDay().get(getLocalMillis());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime with the era field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * era changed.
+     *
+     * @param era  the era to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withEra(int era) {
+<span class="fc" id="L1693">        return withLocalMillis(getChronology().era().set(getLocalMillis(), era));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the century of era field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * century of era changed.
+     *
+     * @param centuryOfEra  the century of era to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withCenturyOfEra(int centuryOfEra) {
+<span class="fc" id="L1708">        return withLocalMillis(getChronology().centuryOfEra().set(getLocalMillis(), centuryOfEra));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the year of era field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * year of era changed.
+     *
+     * @param yearOfEra  the year of era to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withYearOfEra(int yearOfEra) {
+<span class="fc" id="L1723">        return withLocalMillis(getChronology().yearOfEra().set(getLocalMillis(), yearOfEra));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the year of century field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * year of century changed.
+     *
+     * @param yearOfCentury  the year of century to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withYearOfCentury(int yearOfCentury) {
+<span class="fc" id="L1738">        return withLocalMillis(getChronology().yearOfCentury().set(getLocalMillis(), yearOfCentury));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the year field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * year changed.
+     *
+     * @param year  the year to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withYear(int year) {
+<span class="fc" id="L1753">        return withLocalMillis(getChronology().year().set(getLocalMillis(), year));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the weekyear field updated.
+     * &lt;p&gt;
+     * The weekyear is the year that matches with the weekOfWeekyear field.
+     * In the standard ISO8601 week algorithm, the first week of the year
+     * is that in which at least 4 days are in the year. As a result of this
+     * definition, day 1 of the first week may be in the previous year.
+     * The weekyear allows you to query the effective year for that day.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * weekyear changed.
+     *
+     * @param weekyear  the weekyear to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withWeekyear(int weekyear) {
+<span class="fc" id="L1774">        return withLocalMillis(getChronology().weekyear().set(getLocalMillis(), weekyear));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the month of year field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * month of year changed.
+     *
+     * @param monthOfYear  the month of year to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withMonthOfYear(int monthOfYear) {
+<span class="fc" id="L1789">        return withLocalMillis(getChronology().monthOfYear().set(getLocalMillis(), monthOfYear));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the week of weekyear field updated.
+     * &lt;p&gt;
+     * This field is associated with the &quot;weekyear&quot; via {@link #withWeekyear(int)}.
+     * In the standard ISO8601 week algorithm, the first week of the year
+     * is that in which at least 4 days are in the year. As a result of this
+     * definition, day 1 of the first week may be in the previous year.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * week of weekyear changed.
+     *
+     * @param weekOfWeekyear  the week of weekyear to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withWeekOfWeekyear(int weekOfWeekyear) {
+<span class="fc" id="L1809">        return withLocalMillis(getChronology().weekOfWeekyear().set(getLocalMillis(), weekOfWeekyear));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the day of year field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * day of year changed.
+     *
+     * @param dayOfYear  the day of year to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withDayOfYear(int dayOfYear) {
+<span class="fc" id="L1824">        return withLocalMillis(getChronology().dayOfYear().set(getLocalMillis(), dayOfYear));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the day of month field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * day of month changed.
+     *
+     * @param dayOfMonth  the day of month to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withDayOfMonth(int dayOfMonth) {
+<span class="fc" id="L1839">        return withLocalMillis(getChronology().dayOfMonth().set(getLocalMillis(), dayOfMonth));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the day of week field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * day of week changed.
+     *
+     * @param dayOfWeek  the day of week to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withDayOfWeek(int dayOfWeek) {
+<span class="fc" id="L1854">        return withLocalMillis(getChronology().dayOfWeek().set(getLocalMillis(), dayOfWeek));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this datetime with the hour of day field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * hour of day changed.
+     *
+     * @param hour  the hour of day to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withHourOfDay(int hour) {
+<span class="fc" id="L1870">        return withLocalMillis(getChronology().hourOfDay().set(getLocalMillis(), hour));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the minute of hour field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * minute of hour changed.
+     *
+     * @param minute  the minute of hour to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withMinuteOfHour(int minute) {
+<span class="fc" id="L1885">        return withLocalMillis(getChronology().minuteOfHour().set(getLocalMillis(), minute));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the second of minute field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * second of minute changed.
+     *
+     * @param second  the second of minute to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withSecondOfMinute(int second) {
+<span class="fc" id="L1900">        return withLocalMillis(getChronology().secondOfMinute().set(getLocalMillis(), second));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the millis of second field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * millis of second changed.
+     *
+     * @param millis  the millis of second to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withMillisOfSecond(int millis) {
+<span class="fc" id="L1915">        return withLocalMillis(getChronology().millisOfSecond().set(getLocalMillis(), millis));</span>
+    }
+
+    /**
+     * Returns a copy of this datetime with the millis of day field updated.
+     * &lt;p&gt;
+     * LocalDateTime is immutable, so there are no set methods.
+     * Instead, this method returns a new instance with the value of
+     * millis of day changed.
+     *
+     * @param millis  the millis of day to set
+     * @return a copy of this object with the field set
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public LocalDateTime withMillisOfDay(int millis) {
+<span class="fc" id="L1930">        return withLocalMillis(getChronology().millisOfDay().set(getLocalMillis(), millis));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the era property which provides access to advanced functionality.
+     *
+     * @return the era property
+     */
+    public Property era() {
+<span class="fc" id="L1940">        return new Property(this, getChronology().era());</span>
+    }
+
+    /**
+     * Get the century of era property which provides access to advanced functionality.
+     *
+     * @return the year of era property
+     */
+    public Property centuryOfEra() {
+<span class="fc" id="L1949">        return new Property(this, getChronology().centuryOfEra());</span>
+    }
+
+    /**
+     * Get the year of century property which provides access to advanced functionality.
+     *
+     * @return the year of era property
+     */
+    public Property yearOfCentury() {
+<span class="fc" id="L1958">        return new Property(this, getChronology().yearOfCentury());</span>
+    }
+
+    /**
+     * Get the year of era property which provides access to advanced functionality.
+     *
+     * @return the year of era property
+     */
+    public Property yearOfEra() {
+<span class="fc" id="L1967">        return new Property(this, getChronology().yearOfEra());</span>
+    }
+
+    /**
+     * Get the year property which provides access to advanced functionality.
+     *
+     * @return the year property
+     */
+    public Property year() {
+<span class="fc" id="L1976">        return new Property(this, getChronology().year());</span>
+    }
+
+    /**
+     * Get the weekyear property which provides access to advanced functionality.
+     *
+     * @return the weekyear property
+     */
+    public Property weekyear() {
+<span class="fc" id="L1985">        return new Property(this, getChronology().weekyear());</span>
+    }
+
+    /**
+     * Get the month of year property which provides access to advanced functionality.
+     *
+     * @return the month of year property
+     */
+    public Property monthOfYear() {
+<span class="fc" id="L1994">        return new Property(this, getChronology().monthOfYear());</span>
+    }
+
+    /**
+     * Get the week of a week based year property which provides access to advanced functionality.
+     *
+     * @return the week of a week based year property
+     */
+    public Property weekOfWeekyear() {
+<span class="fc" id="L2003">        return new Property(this, getChronology().weekOfWeekyear());</span>
+    }
+
+    /**
+     * Get the day of year property which provides access to advanced functionality.
+     *
+     * @return the day of year property
+     */
+    public Property dayOfYear() {
+<span class="fc" id="L2012">        return new Property(this, getChronology().dayOfYear());</span>
+    }
+
+    /**
+     * Get the day of month property which provides access to advanced functionality.
+     *
+     * @return the day of month property
+     */
+    public Property dayOfMonth() {
+<span class="fc" id="L2021">        return new Property(this, getChronology().dayOfMonth());</span>
+    }
+
+    /**
+     * Get the day of week property which provides access to advanced functionality.
+     *
+     * @return the day of week property
+     */
+    public Property dayOfWeek() {
+<span class="fc" id="L2030">        return new Property(this, getChronology().dayOfWeek());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the hour of day field property which provides access to advanced functionality.
+     * 
+     * @return the hour of day property
+     */
+    public Property hourOfDay() {
+<span class="fc" id="L2040">        return new Property(this, getChronology().hourOfDay());</span>
+    }
+
+    /**
+     * Get the minute of hour field property which provides access to advanced functionality.
+     * 
+     * @return the minute of hour property
+     */
+    public Property minuteOfHour() {
+<span class="fc" id="L2049">        return new Property(this, getChronology().minuteOfHour());</span>
+    }
+
+    /**
+     * Get the second of minute field property which provides access to advanced functionality.
+     * 
+     * @return the second of minute property
+     */
+    public Property secondOfMinute() {
+<span class="fc" id="L2058">        return new Property(this, getChronology().secondOfMinute());</span>
+    }
+
+    /**
+     * Get the millis of second property which provides access to advanced functionality.
+     * 
+     * @return the millis of second property
+     */
+    public Property millisOfSecond() {
+<span class="fc" id="L2067">        return new Property(this, getChronology().millisOfSecond());</span>
+    }
+
+    /**
+     * Get the millis of day property which provides access to advanced functionality.
+     * 
+     * @return the millis of day property
+     */
+    public Property millisOfDay() {
+<span class="fc" id="L2076">        return new Property(this, getChronology().millisOfDay());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Output the date time in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSS).
+     * 
+     * @return ISO8601 time formatted string.
+     */
+    @ToString
+    public String toString() {
+<span class="fc" id="L2087">        return ISODateTimeFormat.dateTime().print(this);</span>
+    }
+
+    /**
+     * Output the date using the specified format pattern.
+     *
+     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+     * @see org.joda.time.format.DateTimeFormat
+     */
+    public String toString(String pattern) {
+<span class="fc bfc" id="L2097" title="All 2 branches covered.">        if (pattern == null) {</span>
+<span class="fc" id="L2098">            return toString();</span>
+        }
+<span class="fc" id="L2100">        return DateTimeFormat.forPattern(pattern).print(this);</span>
+    }
+
+    /**
+     * Output the date using the specified format pattern.
+     *
+     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+     * @param locale  Locale to use, null means default
+     * @see org.joda.time.format.DateTimeFormat
+     */
+    public String toString(String pattern, Locale locale) throws IllegalArgumentException {
+<span class="fc bfc" id="L2111" title="All 2 branches covered.">        if (pattern == null) {</span>
+<span class="fc" id="L2112">            return toString();</span>
+        }
+<span class="fc" id="L2114">        return DateTimeFormat.forPattern(pattern).withLocale(locale).print(this);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * LocalDateTime.Property binds a LocalDateTime to a DateTimeField allowing
+     * powerful datetime functionality to be easily accessed.
+     * &lt;p&gt;
+     * The simplest use of this class is as an alternative get method, here used to
+     * get the year '1972' (as an int) and the month 'December' (as a String).
+     * &lt;pre&gt;
+     * LocalDateTime dt = new LocalDateTime(1972, 12, 3, 0, 0);
+     * int year = dt.year().get();
+     * String monthStr = dt.month().getAsText();
+     * &lt;/pre&gt;
+     * &lt;p&gt;
+     * Methods are also provided that allow date modification. These return
+     * new instances of LocalDateTime - they do not modify the original.
+     * The example below yields two independent immutable date objects
+     * 20 years apart.
+     * &lt;pre&gt;
+     * LocalDateTime dt = new LocalDateTime(1972, 12, 3, 0, 0);
+     * LocalDateTime dt1920 = dt.year().setCopy(1920);
+     * &lt;/pre&gt;
+     * &lt;p&gt;
+     * LocalDateTime.Property itself is thread-safe and immutable, as well as the
+     * LocalDateTime being operated on.
+     *
+     * @author Stephen Colebourne
+     * @author Brian S O'Neill
+     * @since 1.3
+     */
+    public static final class Property extends AbstractReadableInstantFieldProperty {
+        
+        /** Serialization version */
+        private static final long serialVersionUID = -358138762846288L;
+        
+        /** The instant this property is working against */
+        private transient LocalDateTime iInstant;
+        /** The field this property is working against */
+        private transient DateTimeField iField;
+        
+        /**
+         * Constructor.
+         * 
+         * @param instant  the instant to set
+         * @param field  the field to use
+         */
+        Property(LocalDateTime instant, DateTimeField field) {
+<span class="fc" id="L2163">            super();</span>
+<span class="fc" id="L2164">            iInstant = instant;</span>
+<span class="fc" id="L2165">            iField = field;</span>
+<span class="fc" id="L2166">        }</span>
+        
+        /**
+         * Writes the property in a safe serialization format.
+         */
+        private void writeObject(ObjectOutputStream oos) throws IOException {
+<span class="nc" id="L2172">            oos.writeObject(iInstant);</span>
+<span class="nc" id="L2173">            oos.writeObject(iField.getType());</span>
+<span class="nc" id="L2174">        }</span>
+
+        /**
+         * Reads the property from a safe serialization format.
+         */
+        private void readObject(ObjectInputStream oos) throws IOException, ClassNotFoundException {
+<span class="nc" id="L2180">            iInstant = (LocalDateTime) oos.readObject();</span>
+<span class="nc" id="L2181">            DateTimeFieldType type = (DateTimeFieldType) oos.readObject();</span>
+<span class="nc" id="L2182">            iField = type.getField(iInstant.getChronology());</span>
+<span class="nc" id="L2183">        }</span>
+
+        //-----------------------------------------------------------------------
+        /**
+         * Gets the field being used.
+         * 
+         * @return the field
+         */
+        public DateTimeField getField() {
+<span class="fc" id="L2192">            return iField;</span>
+        }
+        
+        /**
+         * Gets the milliseconds of the datetime that this property is linked to.
+         * 
+         * @return the milliseconds
+         */
+        protected long getMillis() {
+<span class="fc" id="L2201">            return iInstant.getLocalMillis();</span>
+        }
+        
+        /**
+         * Gets the chronology of the datetime that this property is linked to.
+         * 
+         * @return the chronology
+         * @since 1.4
+         */
+        protected Chronology getChronology() {
+<span class="fc" id="L2211">            return iInstant.getChronology();</span>
+        }
+        
+        /**
+         * Gets the LocalDateTime object linked to this property.
+         * 
+         * @return the linked LocalDateTime
+         */
+        public LocalDateTime getLocalDateTime() {
+<span class="fc" id="L2220">            return iInstant;</span>
+        }
+        
+        //-----------------------------------------------------------------------
+        /**
+         * Adds to this field in a copy of this LocalDateTime.
+         * &lt;p&gt;
+         * The LocalDateTime attached to this property is unchanged by this call.
+         *
+         * @param value  the value to add to the field in the copy
+         * @return a copy of the LocalDateTime with the field value changed
+         * @throws IllegalArgumentException if the value isn't valid
+         */
+        public LocalDateTime addToCopy(int value) {
+<span class="fc" id="L2234">            return iInstant.withLocalMillis(iField.add(iInstant.getLocalMillis(), value));</span>
+        }
+        
+        /**
+         * Adds to this field in a copy of this LocalDateTime.
+         * &lt;p&gt;
+         * The LocalDateTime attached to this property is unchanged by this call.
+         *
+         * @param value  the value to add to the field in the copy
+         * @return a copy of the LocalDateTime with the field value changed
+         * @throws IllegalArgumentException if the value isn't valid
+         */
+        public LocalDateTime addToCopy(long value) {
+<span class="nc" id="L2247">            return iInstant.withLocalMillis(iField.add(iInstant.getLocalMillis(), value));</span>
+        }
+        
+        /**
+         * Adds to this field, possibly wrapped, in a copy of this LocalDateTime.
+         * A field wrapped operation only changes this field.
+         * Thus 31st January addWrapField one day goes to the 1st January.
+         * &lt;p&gt;
+         * The LocalDateTime attached to this property is unchanged by this call.
+         *
+         * @param value  the value to add to the field in the copy
+         * @return a copy of the LocalDateTime with the field value changed
+         * @throws IllegalArgumentException if the value isn't valid
+         */
+        public LocalDateTime addWrapFieldToCopy(int value) {
+<span class="fc" id="L2262">            return iInstant.withLocalMillis(iField.addWrapField(iInstant.getLocalMillis(), value));</span>
+        }
+        
+        //-----------------------------------------------------------------------
+        /**
+         * Sets this field in a copy of the LocalDateTime.
+         * &lt;p&gt;
+         * The LocalDateTime attached to this property is unchanged by this call.
+         *
+         * @param value  the value to set the field in the copy to
+         * @return a copy of the LocalDateTime with the field value changed
+         * @throws IllegalArgumentException if the value isn't valid
+         */
+        public LocalDateTime setCopy(int value) {
+<span class="fc" id="L2276">            return iInstant.withLocalMillis(iField.set(iInstant.getLocalMillis(), value));</span>
+        }
+        
+        /**
+         * Sets this field in a copy of the LocalDateTime to a parsed text value.
+         * &lt;p&gt;
+         * The LocalDateTime attached to this property is unchanged by this call.
+         *
+         * @param text  the text value to set
+         * @param locale  optional locale to use for selecting a text symbol
+         * @return a copy of the LocalDateTime with the field value changed
+         * @throws IllegalArgumentException if the text value isn't valid
+         */
+        public LocalDateTime setCopy(String text, Locale locale) {
+<span class="fc" id="L2290">            return iInstant.withLocalMillis(iField.set(iInstant.getLocalMillis(), text, locale));</span>
+        }
+        
+        /**
+         * Sets this field in a copy of the LocalDateTime to a parsed text value.
+         * &lt;p&gt;
+         * The LocalDateTime attached to this property is unchanged by this call.
+         *
+         * @param text  the text value to set
+         * @return a copy of the LocalDateTime with the field value changed
+         * @throws IllegalArgumentException if the text value isn't valid
+         */
+        public LocalDateTime setCopy(String text) {
+<span class="fc" id="L2303">            return setCopy(text, null);</span>
+        }
+        
+        //-----------------------------------------------------------------------
+        /**
+         * Returns a new LocalDateTime with this field set to the maximum value
+         * for this field.
+         * &lt;p&gt;
+         * This operation is useful for obtaining a LocalDateTime on the last day
+         * of the month, as month lengths vary.
+         * &lt;pre&gt;
+         * LocalDateTime lastDayOfMonth = dt.dayOfMonth().withMaximumValue();
+         * &lt;/pre&gt;
+         * &lt;p&gt;
+         * The LocalDateTime attached to this property is unchanged by this call.
+         *
+         * @return a copy of the LocalDateTime with this field set to its maximum
+         */
+        public LocalDateTime withMaximumValue() {
+<span class="fc" id="L2322">            return setCopy(getMaximumValue());</span>
+        }
+        
+        /**
+         * Returns a new LocalDateTime with this field set to the minimum value
+         * for this field.
+         * &lt;p&gt;
+         * The LocalDateTime attached to this property is unchanged by this call.
+         *
+         * @return a copy of the LocalDateTime with this field set to its minimum
+         */
+        public LocalDateTime withMinimumValue() {
+<span class="fc" id="L2334">            return setCopy(getMinimumValue());</span>
+        }
+        
+        //-----------------------------------------------------------------------
+        /**
+         * Rounds to the lowest whole unit of this field on a copy of this
+         * LocalDateTime.
+         * &lt;p&gt;
+         * For example, rounding floor on the hourOfDay field of a LocalDateTime
+         * where the time is 10:30 would result in new LocalDateTime with the
+         * time of 10:00.
+         *
+         * @return a copy of the LocalDateTime with the field value changed
+         */
+        public LocalDateTime roundFloorCopy() {
+<span class="fc" id="L2349">            return iInstant.withLocalMillis(iField.roundFloor(iInstant.getLocalMillis()));</span>
+        }
+        
+        /**
+         * Rounds to the highest whole unit of this field on a copy of this
+         * LocalDateTime.
+         * &lt;p&gt;
+         * For example, rounding floor on the hourOfDay field of a LocalDateTime
+         * where the time is 10:30 would result in new LocalDateTime with the
+         * time of 11:00.
+         *
+         * @return a copy of the LocalDateTime with the field value changed
+         */
+        public LocalDateTime roundCeilingCopy() {
+<span class="fc" id="L2363">            return iInstant.withLocalMillis(iField.roundCeiling(iInstant.getLocalMillis()));</span>
+        }
+        
+        /**
+         * Rounds to the nearest whole unit of this field on a copy of this
+         * LocalDateTime, favoring the floor if halfway.
+         *
+         * @return a copy of the LocalDateTime with the field value changed
+         */
+        public LocalDateTime roundHalfFloorCopy() {
+<span class="fc" id="L2373">            return iInstant.withLocalMillis(iField.roundHalfFloor(iInstant.getLocalMillis()));</span>
+        }
+        
+        /**
+         * Rounds to the nearest whole unit of this field on a copy of this
+         * LocalDateTime, favoring the ceiling if halfway.
+         *
+         * @return a copy of the LocalDateTime with the field value changed
+         */
+        public LocalDateTime roundHalfCeilingCopy() {
+<span class="fc" id="L2383">            return iInstant.withLocalMillis(iField.roundHalfCeiling(iInstant.getLocalMillis()));</span>
+        }
+        
+        /**
+         * Rounds to the nearest whole unit of this field on a copy of this
+         * LocalDateTime.  If halfway, the ceiling is favored over the floor
+         * only if it makes this field's value even.
+         *
+         * @return a copy of the LocalDateTime with the field value changed
+         */
+        public LocalDateTime roundHalfEvenCopy() {
+<span class="fc" id="L2394">            return iInstant.withLocalMillis(iField.roundHalfEven(iInstant.getLocalMillis()));</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

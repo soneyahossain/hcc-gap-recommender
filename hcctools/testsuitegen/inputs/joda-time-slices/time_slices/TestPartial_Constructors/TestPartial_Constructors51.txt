@@ -1,0 +1,71 @@
+ 0.0% done, time left: unknown                                0.4% done, time left: unknown  1.8% done, time left: unknown  4.5% done, time left: unknown  4.8% done, time left: unknown  6.4% done, time left: unknown 10.0% done, time left: unknown 15.3% done, time left: unknown 22.6% done, time left: unknown 32.2% done, time left: unknown 41.1% done, time left:   0:00:00   46.1% done, time left:   0:00:01 46.7% done, time left:   0:00:01 47.4% done, time left:   0:00:01 49.1% done, time left:   0:00:01 56.8% done, time left:   0:00:00 64.7% done, time left:   0:00:00 72.9% done, time left:   0:00:00 81.5% done, time left:   0:00:00 85.3% done, time left:   0:00:00 93.0% done, time left:   0:00:00 94.2% done, time left:   0:00:00 98.4% done, time left:   0:00:00 101.2% done, time left:   0:00:00  107.9% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.TestPartial_Constructors.testConstructor_Partial:471:*]:
+org.joda.time.Partial.<init>:287 ALOAD 0
+org.joda.time.Partial.<init>:287 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.Partial.<init>:287 PUTFIELD org/joda/time/Partial.iChronology Lorg/joda/time/Chronology;
+org.joda.time.Partial.<init>:289 ALOAD 0
+org.joda.time.Partial.<init>:289 INVOKEINTERFACE org/joda/time/ReadablePartial.size()I
+org.joda.time.Partial.<init>:289 NEWARRAY T_INT
+org.joda.time.Partial.<init>:289 PUTFIELD org/joda/time/Partial.iValues [I
+org.joda.time.Partial.<init>:290 ICONST_0
+org.joda.time.Partial.<init>:290 ISTORE 2
+org.joda.time.Partial.<init>:290 ILOAD 2
+org.joda.time.Partial.<init>:290 INVOKEINTERFACE org/joda/time/ReadablePartial.size()I
+org.joda.time.Partial.<init>:290 IF_ICMPGE L2 false true
+org.joda.time.Partial.<init>:292 ALOAD 0
+org.joda.time.Partial.<init>:292 GETFIELD org/joda/time/Partial.iValues [I
+org.joda.time.Partial.<init>:292 ILOAD 2
+org.joda.time.Partial.<init>:292 ALOAD 1
+org.joda.time.Partial.<init>:292 ILOAD 2
+org.joda.time.Partial.<init>:292 INVOKEINTERFACE org/joda/time/ReadablePartial.getValue(I)I
+org.joda.time.Partial.<init>:292 IASTORE
+org.joda.time.Partial.getChronology:346 ALOAD 0
+org.joda.time.Partial.getChronology:346 GETFIELD org/joda/time/Partial.iChronology Lorg/joda/time/Chronology;
+org.joda.time.Partial.getChronology:346 ARETURN
+org.joda.time.Partial.getValue:393 ALOAD 0
+org.joda.time.Partial.getValue:393 GETFIELD org/joda/time/Partial.iValues [I
+org.joda.time.Partial.getValue:393 ILOAD 1
+org.joda.time.Partial.getValue:393 IALOAD
+org.joda.time.Partial.getValue:393 IRETURN
+org.joda.time.TestPartial_Constructors.main:68 INVOKEVIRTUAL org/joda/time/TestPartial_Constructors.testConstructor_Partial()V
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:467 NEW org/joda/time/YearMonthDay
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:467 DUP
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:467 SIPUSH 2005
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:467 INVOKESPECIAL org/joda/time/YearMonthDay.<init>(IIILorg/joda/time/Chronology;)V
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:467 ASTORE 1
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:468 NEW org/joda/time/Partial
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:468 DUP
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:468 ALOAD 1
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:468 INVOKESPECIAL org/joda/time/Partial.<init>(Lorg/joda/time/ReadablePartial;)V
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:468 ASTORE 2
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:469 ALOAD 2
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:469 INVOKEVIRTUAL org/joda/time/Partial.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:471 LDC 2005
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:471 ALOAD 2
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:471 ICONST_0
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:471 INVOKEVIRTUAL org/joda/time/Partial.getValue(I)I
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:471 I2L
+org.joda.time.TestPartial_Constructors.testConstructor_Partial:471 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.YearMonthDay.<init>:288 ALOAD 0
+org.joda.time.YearMonthDay.<init>:288 ICONST_3
+org.joda.time.YearMonthDay.<init>:288 NEWARRAY T_INT
+org.joda.time.YearMonthDay.<init>:288 DUP
+org.joda.time.YearMonthDay.<init>:288 ICONST_0
+org.joda.time.YearMonthDay.<init>:288 ILOAD 1
+org.joda.time.YearMonthDay.<init>:288 IASTORE
+org.joda.time.YearMonthDay.<init>:288 INVOKESPECIAL org/joda/time/base/BasePartial.<init>([ILorg/joda/time/Chronology;)V
+org.joda.time.YearMonthDay.size:318 ICONST_3
+org.joda.time.YearMonthDay.size:318 IRETURN
+org.joda.time.base.BasePartial.<init>:184 ALOAD 0
+org.joda.time.base.BasePartial.<init>:184 ALOAD 1
+org.joda.time.base.BasePartial.<init>:184 PUTFIELD org/joda/time/base/BasePartial.iValues [I
+org.joda.time.base.BasePartial.getValue:225 ALOAD 0
+org.joda.time.base.BasePartial.getValue:225 GETFIELD org/joda/time/base/BasePartial.iValues [I
+org.joda.time.base.BasePartial.getValue:225 ILOAD 1
+org.joda.time.base.BasePartial.getValue:225 IALOAD
+org.joda.time.base.BasePartial.getValue:225 IRETURN
+org.joda.time.chrono.GregorianChronology.withUTC:176 GETSTATIC org/joda/time/chrono/GregorianChronology.INSTANCE_UTC Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.chrono.GregorianChronology.withUTC:176 ARETURN
+
+Slice consists of 66 bytecode instructions.
+Computation took 2.67 seconds.

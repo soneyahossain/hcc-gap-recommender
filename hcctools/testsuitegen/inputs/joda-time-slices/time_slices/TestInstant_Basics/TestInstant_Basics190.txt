@@ -1,0 +1,129 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.7% done, time left: unknown  1.6% done, time left: unknown  2.8% done, time left: unknown  4.7% done, time left: unknown  6.0% done, time left: unknown  6.2% done, time left:   0:00:52    7.1% done, time left:   0:00:35  9.3% done, time left:   0:00:26 11.5% done, time left:   0:00:22 13.4% done, time left:   0:00:19 15.5% done, time left:   0:00:17 17.4% done, time left:   0:00:14 18.0% done, time left:   0:00:12 18.5% done, time left:   0:00:10 19.5% done, time left:   0:00:09 21.3% done, time left:   0:00:09 24.2% done, time left:   0:00:08 24.5% done, time left:   0:00:06 24.5% done, time left:   0:00:04 24.5% done, time left:   0:00:03 28.0% done, time left:   0:00:03 28.1% done, time left:   0:00:02 28.1% done, time left:   0:00:01 29.9% done, time left:   0:00:01 34.8% done, time left:   0:00:01 38.8% done, time left:   0:00:01 42.6% done, time left:   0:00:01 48.0% done, time left:   0:00:00 53.1% done, time left:   0:00:00 55.3% done, time left:   0:00:00 58.1% done, time left:   0:00:00 62.6% done, time left:   0:00:00 67.6% done, time left:   0:00:00 70.2% done, time left:   0:00:00 73.7% done, time left:   0:00:00 77.9% done, time left:   0:00:00 82.5% done, time left:   0:00:00 86.0% done, time left:   0:00:00 89.9% done, time left:   0:00:00 94.4% done, time left:   0:00:00 97.4% done, time left:   0:00:00 99.0% done, time left:   0:00:00 102.0% done, time left:   0:00:00  102.8% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.TestInstant_Basics.testPlus_RD:602:*]:
+org.joda.time.Duration.<init>:178 ALOAD 0
+org.joda.time.Duration.<init>:178 LLOAD 1
+org.joda.time.Duration.<init>:178 INVOKESPECIAL org/joda/time/base/BaseDuration.<init>(J)V
+org.joda.time.Instant.<init>:147 ALOAD 0
+org.joda.time.Instant.<init>:147 LLOAD 1
+org.joda.time.Instant.<init>:147 PUTFIELD org/joda/time/Instant.iMillis J
+org.joda.time.Instant.withMillis:189 LLOAD 1
+org.joda.time.Instant.withMillis:189 ALOAD 0
+org.joda.time.Instant.withMillis:189 GETFIELD org/joda/time/Instant.iMillis J
+org.joda.time.Instant.withMillis:189 LCMP
+org.joda.time.Instant.withMillis:189 IFNE L0 true false
+org.joda.time.Instant.withMillis:189 NEW org/joda/time/Instant
+org.joda.time.Instant.withMillis:189 ARETURN
+org.joda.time.Instant.withDurationAdded:203 LLOAD 1
+org.joda.time.Instant.withDurationAdded:203 LCONST_0
+org.joda.time.Instant.withDurationAdded:203 LCMP
+org.joda.time.Instant.withDurationAdded:203 IFEQ L0 false true
+org.joda.time.Instant.withDurationAdded:203 ILOAD 3
+org.joda.time.Instant.withDurationAdded:203 IFNE L1 true false
+org.joda.time.Instant.withDurationAdded:206 ALOAD 0
+org.joda.time.Instant.withDurationAdded:206 INVOKEVIRTUAL org/joda/time/Instant.getMillis()J
+org.joda.time.Instant.withDurationAdded:206 LLOAD 1
+org.joda.time.Instant.withDurationAdded:206 ILOAD 3
+org.joda.time.Instant.withDurationAdded:206 INVOKEVIRTUAL org/joda/time/Chronology.add(JJI)J
+org.joda.time.Instant.withDurationAdded:206 LSTORE 4
+org.joda.time.Instant.withDurationAdded:207 ALOAD 0
+org.joda.time.Instant.withDurationAdded:207 LLOAD 4
+org.joda.time.Instant.withDurationAdded:207 INVOKEVIRTUAL org/joda/time/Instant.withMillis(J)Lorg/joda/time/Instant;
+org.joda.time.Instant.withDurationAdded:207 ARETURN
+org.joda.time.Instant.withDurationAdded:221 ALOAD 1
+org.joda.time.Instant.withDurationAdded:221 IFNULL L0 false true
+org.joda.time.Instant.withDurationAdded:221 ILOAD 2
+org.joda.time.Instant.withDurationAdded:221 IFNE L1 true false
+org.joda.time.Instant.withDurationAdded:224 ALOAD 0
+org.joda.time.Instant.withDurationAdded:224 ALOAD 1
+org.joda.time.Instant.withDurationAdded:224 INVOKEINTERFACE org/joda/time/ReadableDuration.getMillis()J
+org.joda.time.Instant.withDurationAdded:224 ILOAD 2
+org.joda.time.Instant.withDurationAdded:224 INVOKEVIRTUAL org/joda/time/Instant.withDurationAdded(JI)Lorg/joda/time/Instant;
+org.joda.time.Instant.withDurationAdded:224 ARETURN
+org.joda.time.Instant.plus:251 ALOAD 0
+org.joda.time.Instant.plus:251 ALOAD 1
+org.joda.time.Instant.plus:251 ICONST_1
+org.joda.time.Instant.plus:251 INVOKEVIRTUAL org/joda/time/Instant.withDurationAdded(Lorg/joda/time/ReadableDuration;I)Lorg/joda/time/Instant;
+org.joda.time.Instant.plus:251 ARETURN
+org.joda.time.Instant.getMillis:288 ALOAD 0
+org.joda.time.Instant.getMillis:288 GETFIELD org/joda/time/Instant.iMillis J
+org.joda.time.Instant.getMillis:288 LRETURN
+org.joda.time.TestInstant_Basics.<init>:46 ALOAD 0
+org.joda.time.TestInstant_Basics.<init>:46 LDC 11688
+org.joda.time.TestInstant_Basics.<init>:46 PUTFIELD org/joda/time/TestInstant_Basics.y2002days J
+org.joda.time.TestInstant_Basics.<init>:60 ALOAD 0
+org.joda.time.TestInstant_Basics.<init>:60 ALOAD 0
+org.joda.time.TestInstant_Basics.<init>:60 GETFIELD org/joda/time/TestInstant_Basics.y2002days J
+org.joda.time.TestInstant_Basics.<init>:60 LDC 31
+org.joda.time.TestInstant_Basics.<init>:60 LADD
+org.joda.time.TestInstant_Basics.<init>:60 LDC 28
+org.joda.time.TestInstant_Basics.<init>:60 LADD
+org.joda.time.TestInstant_Basics.<init>:60 LDC 31
+org.joda.time.TestInstant_Basics.<init>:60 LADD
+org.joda.time.TestInstant_Basics.<init>:60 LDC 5
+org.joda.time.TestInstant_Basics.<init>:60 LADD
+org.joda.time.TestInstant_Basics.<init>:60 LCONST_1
+org.joda.time.TestInstant_Basics.<init>:60 LSUB
+org.joda.time.TestInstant_Basics.<init>:60 LDC 86400000
+org.joda.time.TestInstant_Basics.<init>:60 LMUL
+org.joda.time.TestInstant_Basics.<init>:60 LDC 43200000
+org.joda.time.TestInstant_Basics.<init>:60 LADD
+org.joda.time.TestInstant_Basics.<init>:60 LDC 1440000
+org.joda.time.TestInstant_Basics.<init>:60 LADD
+org.joda.time.TestInstant_Basics.<init>:60 PUTFIELD org/joda/time/TestInstant_Basics.TEST_TIME1 J
+org.joda.time.TestInstant_Basics.main:76 NEW org/joda/time/TestInstant_Basics
+org.joda.time.TestInstant_Basics.main:76 DUP
+org.joda.time.TestInstant_Basics.main:76 INVOKESPECIAL org/joda/time/TestInstant_Basics.<init>()V
+org.joda.time.TestInstant_Basics.main:76 ASTORE 1
+org.joda.time.TestInstant_Basics.main:108 ALOAD 1
+org.joda.time.TestInstant_Basics.main:108 INVOKEVIRTUAL org/joda/time/TestInstant_Basics.testPlus_RD()V
+org.joda.time.TestInstant_Basics.testPlus_RD:599 NEW org/joda/time/Instant
+org.joda.time.TestInstant_Basics.testPlus_RD:599 DUP
+org.joda.time.TestInstant_Basics.testPlus_RD:599 ALOAD 0
+org.joda.time.TestInstant_Basics.testPlus_RD:599 GETFIELD org/joda/time/TestInstant_Basics.TEST_TIME1 J
+org.joda.time.TestInstant_Basics.testPlus_RD:599 INVOKESPECIAL org/joda/time/Instant.<init>(J)V
+org.joda.time.TestInstant_Basics.testPlus_RD:599 ASTORE 1
+org.joda.time.TestInstant_Basics.testPlus_RD:600 ALOAD 1
+org.joda.time.TestInstant_Basics.testPlus_RD:600 NEW org/joda/time/Duration
+org.joda.time.TestInstant_Basics.testPlus_RD:600 DUP
+org.joda.time.TestInstant_Basics.testPlus_RD:600 LDC 123456789
+org.joda.time.TestInstant_Basics.testPlus_RD:600 INVOKESPECIAL org/joda/time/Duration.<init>(J)V
+org.joda.time.TestInstant_Basics.testPlus_RD:600 INVOKEVIRTUAL org/joda/time/Instant.plus(Lorg/joda/time/ReadableDuration;)Lorg/joda/time/Instant;
+org.joda.time.TestInstant_Basics.testPlus_RD:600 ASTORE 2
+org.joda.time.TestInstant_Basics.testPlus_RD:601 NEW org/joda/time/Instant
+org.joda.time.TestInstant_Basics.testPlus_RD:601 ASTORE 3
+org.joda.time.TestInstant_Basics.testPlus_RD:602 ALOAD 3
+org.joda.time.TestInstant_Basics.testPlus_RD:602 ALOAD 2
+org.joda.time.TestInstant_Basics.testPlus_RD:602 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.base.BaseDuration.<init>:62 ALOAD 0
+org.joda.time.base.BaseDuration.<init>:62 LLOAD 1
+org.joda.time.base.BaseDuration.<init>:62 PUTFIELD org/joda/time/base/BaseDuration.iMillis J
+org.joda.time.base.BaseDuration.getMillis:115 ALOAD 0
+org.joda.time.base.BaseDuration.getMillis:115 GETFIELD org/joda/time/base/BaseDuration.iMillis J
+org.joda.time.base.BaseDuration.getMillis:115 LRETURN
+org.joda.time.chrono.BaseChronology.add:324 LLOAD 3
+org.joda.time.chrono.BaseChronology.add:324 LCONST_0
+org.joda.time.chrono.BaseChronology.add:324 LCMP
+org.joda.time.chrono.BaseChronology.add:324 IFEQ L0 false true
+org.joda.time.chrono.BaseChronology.add:324 ILOAD 5
+org.joda.time.chrono.BaseChronology.add:324 IFNE L1 true false
+org.joda.time.chrono.BaseChronology.add:327 LLOAD 3
+org.joda.time.chrono.BaseChronology.add:327 ILOAD 5
+org.joda.time.chrono.BaseChronology.add:327 INVOKESTATIC org/joda/time/field/FieldUtils.safeMultiply(JI)J
+org.joda.time.chrono.BaseChronology.add:327 LSTORE 6
+org.joda.time.chrono.BaseChronology.add:328 LLOAD 1
+org.joda.time.chrono.BaseChronology.add:328 LLOAD 6
+org.joda.time.chrono.BaseChronology.add:328 INVOKESTATIC org/joda/time/field/FieldUtils.safeAdd(JJ)J
+org.joda.time.chrono.BaseChronology.add:328 LRETURN
+org.joda.time.field.FieldUtils.safeAdd:85 LLOAD 0
+org.joda.time.field.FieldUtils.safeAdd:85 LLOAD 2
+org.joda.time.field.FieldUtils.safeAdd:85 LADD
+org.joda.time.field.FieldUtils.safeAdd:85 LSTORE 4
+org.joda.time.field.FieldUtils.safeAdd:91 LLOAD 4
+org.joda.time.field.FieldUtils.safeAdd:91 LRETURN
+org.joda.time.field.FieldUtils.safeMultiply:139 ILOAD 2
+org.joda.time.field.FieldUtils.safeMultiply:139 TABLESWITCH (-1 => L0, 0 => L2, 1 => L3, * => L4)
+org.joda.time.field.FieldUtils.safeMultiply:148 LLOAD 0
+org.joda.time.field.FieldUtils.safeMultiply:148 LRETURN
+
+Slice consists of 124 bytecode instructions.
+Computation took 5.42 seconds.

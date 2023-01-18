@@ -1,0 +1,38 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  1.1% done, time left: unknown  3.2% done, time left: unknown  3.6% done, time left: unknown  5.0% done, time left: unknown  6.8% done, time left: unknown  8.9% done, time left:   0:00:04   11.3% done, time left:   0:00:04 13.4% done, time left:   0:00:04 14.2% done, time left:   0:00:04 17.6% done, time left:   0:00:05 20.4% done, time left:   0:00:04 23.8% done, time left:   0:00:04 26.8% done, time left:   0:00:04 31.7% done, time left:   0:00:02 36.1% done, time left:   0:00:02 36.1% done, time left:   0:00:00 36.4% done, time left:   0:00:00 37.7% done, time left:   0:00:00 45.1% done, time left:   0:00:00 51.8% done, time left:   0:00:00 69.0% done, time left:   0:00:00 71.6% done, time left:   0:00:00 81.1% done, time left:   0:00:00 89.8% done, time left:   0:00:00 92.3% done, time left:   0:00:00 96.0% done, time left:   0:00:00 97.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDateTimeUtils.testOffsetMillis:260:*]:
+org.joda.time.DateTimeUtils.currentTimeMillis:72 GETSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils.currentTimeMillis:72 INVOKEINTERFACE org/joda/time/DateTimeUtils$MillisProvider.getMillis()J
+org.joda.time.DateTimeUtils.currentTimeMillis:72 LRETURN
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:114 LLOAD 0
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:114 LCONST_0
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:114 LCMP
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:114 IFNE L0 true false
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:117 NEW org/joda/time/DateTimeUtils$OffsetMillisProvider
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:117 DUP
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:117 LLOAD 0
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:117 INVOKESPECIAL org/joda/time/DateTimeUtils$OffsetMillisProvider.<init>(J)V
+org.joda.time.DateTimeUtils.setCurrentMillisOffset:117 PUTSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils$OffsetMillisProvider.<init>:587 ALOAD 0
+org.joda.time.DateTimeUtils$OffsetMillisProvider.<init>:587 LLOAD 1
+org.joda.time.DateTimeUtils$OffsetMillisProvider.<init>:587 PUTFIELD org/joda/time/DateTimeUtils$OffsetMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$OffsetMillisProvider.getMillis:595 INVOKESTATIC java/lang/System.currentTimeMillis()J
+org.joda.time.DateTimeUtils$OffsetMillisProvider.getMillis:595 ALOAD 0
+org.joda.time.DateTimeUtils$OffsetMillisProvider.getMillis:595 GETFIELD org/joda/time/DateTimeUtils$OffsetMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$OffsetMillisProvider.getMillis:595 LADD
+org.joda.time.DateTimeUtils$OffsetMillisProvider.getMillis:595 LRETURN
+org.joda.time.TestDateTimeUtils.main:128 INVOKEVIRTUAL org/joda/time/TestDateTimeUtils.testOffsetMillis()V
+org.joda.time.TestDateTimeUtils.testOffsetMillis:256 LDC -86400000
+org.joda.time.TestDateTimeUtils.testOffsetMillis:256 INVOKESTATIC org/joda/time/DateTimeUtils.setCurrentMillisOffset(J)V
+org.joda.time.TestDateTimeUtils.testOffsetMillis:257 INVOKESTATIC java/lang/System.currentTimeMillis()J
+org.joda.time.TestDateTimeUtils.testOffsetMillis:257 LSTORE 1
+org.joda.time.TestDateTimeUtils.testOffsetMillis:258 INVOKESTATIC org/joda/time/DateTimeUtils.currentTimeMillis()J
+org.joda.time.TestDateTimeUtils.testOffsetMillis:258 LSTORE 3
+org.joda.time.TestDateTimeUtils.testOffsetMillis:260 LLOAD 3
+org.joda.time.TestDateTimeUtils.testOffsetMillis:260 LLOAD 1
+org.joda.time.TestDateTimeUtils.testOffsetMillis:260 LCMP
+org.joda.time.TestDateTimeUtils.testOffsetMillis:260 IFGE L1 false true
+org.joda.time.TestDateTimeUtils.testOffsetMillis:260 ICONST_1
+org.joda.time.TestDateTimeUtils.testOffsetMillis:260 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 33 bytecode instructions.
+Computation took 3.31 seconds.

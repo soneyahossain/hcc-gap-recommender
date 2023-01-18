@@ -1,0 +1,88 @@
+ 0.0% done, time left: unknown                                1.9% done, time left: unknown  7.4% done, time left: unknown 12.8% done, time left: unknown 20.5% done, time left: unknown 24.4% done, time left: unknown 34.3% done, time left: unknown 42.3% done, time left: unknown 51.9% done, time left: unknown 55.5% done, time left:   0:00:01   55.5% done, time left:   0:00:02 55.5% done, time left:   0:00:03 57.9% done, time left:   0:00:03 67.4% done, time left:   0:00:00 69.8% done, time left:   0:00:00 73.0% done, time left:   0:00:00 78.6% done, time left:   0:00:00 84.6% done, time left:   0:00:00 90.2% done, time left:   0:00:00 93.6% done, time left:   0:00:00 100.1% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:556:*]:
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:903 ALOAD 0
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:903 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:903 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.roundFloor(J)J
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:903 LSTORE 3
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:904 ALOAD 0
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:904 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:904 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.roundCeiling(J)J
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:904 LSTORE 5
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:906 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:906 LLOAD 3
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:906 LSUB
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:906 LSTORE 7
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:907 LLOAD 5
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:907 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:907 LSUB
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:907 LSTORE 9
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:909 LLOAD 7
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:909 LLOAD 9
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:909 LCMP
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:909 IFGT L0 false true
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:911 LLOAD 3
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:911 LRETURN
+org.joda.time.field.PreciseDateTimeField.<init>:58 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.<init>:58 ALOAD 2
+org.joda.time.field.PreciseDateTimeField.<init>:58 INVOKESPECIAL org/joda/time/field/PreciseDurationDateTimeField.<init>(Lorg/joda/time/DateTimeFieldType;Lorg/joda/time/DurationField;)V
+org.joda.time.field.PreciseDurationDateTimeField.<init>:55 ALOAD 0
+org.joda.time.field.PreciseDurationDateTimeField.<init>:55 ALOAD 2
+org.joda.time.field.PreciseDurationDateTimeField.<init>:55 INVOKEVIRTUAL org/joda/time/DurationField.getUnitMillis()J
+org.joda.time.field.PreciseDurationDateTimeField.<init>:55 PUTFIELD org/joda/time/field/PreciseDurationDateTimeField.iUnitMillis J
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:93 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:93 LCONST_0
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:93 LCMP
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:93 IFLT L0 false true
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 ALOAD 0
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 GETFIELD org/joda/time/field/PreciseDurationDateTimeField.iUnitMillis J
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 LREM
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 LSUB
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 LRETURN
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:110 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:110 LCONST_0
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:110 LCMP
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:110 IFLE L0 false true
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:111 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:111 LCONST_1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:111 LSUB
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:111 LSTORE 1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 ALOAD 0
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 GETFIELD org/joda/time/field/PreciseDurationDateTimeField.iUnitMillis J
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LREM
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LSUB
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 ALOAD 0
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 GETFIELD org/joda/time/field/PreciseDurationDateTimeField.iUnitMillis J
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LADD
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LRETURN
+org.joda.time.field.TestPreciseDateTimeField.main:88 INVOKEVIRTUAL org/joda/time/field/TestPreciseDateTimeField.test_roundHalfFloor_long()V
+org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:551 NEW org/joda/time/field/TestPreciseDateTimeField$MockPreciseDateTimeField
+org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:551 DUP
+org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:551 INVOKESPECIAL org/joda/time/field/TestPreciseDateTimeField$MockPreciseDateTimeField.<init>()V
+org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:551 ASTORE 1
+org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:552 LCONST_0
+org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:554 LCONST_0
+org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:556 LDC 60
+org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:556 ALOAD 1
+org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:556 LDC 60
+org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:556 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.roundHalfFloor(J)J
+org.joda.time.field.TestPreciseDateTimeField.test_roundHalfFloor_long:556 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.field.TestPreciseDateTimeField$MockCountingDurationField.<init>:623 ALOAD 0
+org.joda.time.field.TestPreciseDateTimeField$MockCountingDurationField.<init>:623 ILOAD 2
+org.joda.time.field.TestPreciseDateTimeField$MockCountingDurationField.<init>:623 PUTFIELD org/joda/time/field/TestPreciseDateTimeField$MockCountingDurationField.unit I
+org.joda.time.field.TestPreciseDateTimeField$MockCountingDurationField.getUnitMillis:629 ALOAD 0
+org.joda.time.field.TestPreciseDateTimeField$MockCountingDurationField.getUnitMillis:629 GETFIELD org/joda/time/field/TestPreciseDateTimeField$MockCountingDurationField.unit I
+org.joda.time.field.TestPreciseDateTimeField$MockCountingDurationField.getUnitMillis:629 I2L
+org.joda.time.field.TestPreciseDateTimeField$MockCountingDurationField.getUnitMillis:629 LRETURN
+org.joda.time.field.TestPreciseDateTimeField$MockPreciseDateTimeField.<init>:592 ALOAD 0
+org.joda.time.field.TestPreciseDateTimeField$MockPreciseDateTimeField.<init>:592 NEW org/joda/time/field/TestPreciseDateTimeField$MockCountingDurationField
+org.joda.time.field.TestPreciseDateTimeField$MockPreciseDateTimeField.<init>:592 DUP
+org.joda.time.field.TestPreciseDateTimeField$MockPreciseDateTimeField.<init>:592 BIPUSH 60
+org.joda.time.field.TestPreciseDateTimeField$MockPreciseDateTimeField.<init>:592 INVOKESPECIAL org/joda/time/field/TestPreciseDateTimeField$MockCountingDurationField.<init>(Lorg/joda/time/DurationFieldType;I)V
+org.joda.time.field.TestPreciseDateTimeField$MockPreciseDateTimeField.<init>:592 INVOKESPECIAL org/joda/time/field/PreciseDateTimeField.<init>(Lorg/joda/time/DateTimeFieldType;Lorg/joda/time/DurationField;Lorg/joda/time/DurationField;)V
+
+Slice consists of 83 bytecode instructions.
+Computation took 2.61 seconds.

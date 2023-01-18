@@ -1,0 +1,52 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  1.1% done, time left: unknown  3.3% done, time left: unknown  4.2% done, time left: unknown  5.4% done, time left: unknown  6.5% done, time left: unknown  7.1% done, time left: unknown  7.3% done, time left:   0:00:37    7.3% done, time left:   0:00:54  8.1% done, time left:   0:00:45  9.1% done, time left:   0:00:38 10.9% done, time left:   0:00:34 14.2% done, time left:   0:00:26 17.6% done, time left:   0:00:18 17.6% done, time left:   0:00:12 17.8% done, time left:   0:00:09 18.5% done, time left:   0:00:07 23.8% done, time left:   0:00:03 28.0% done, time left:   0:00:03 30.6% done, time left:   0:00:03 32.7% done, time left:   0:00:03 36.5% done, time left:   0:00:02 42.0% done, time left:   0:00:01 47.2% done, time left:   0:00:01 53.4% done, time left:   0:00:00 59.1% done, time left:   0:00:00 64.8% done, time left:   0:00:00 70.2% done, time left:   0:00:00 76.1% done, time left:   0:00:00 80.4% done, time left:   0:00:00 81.4% done, time left:   0:00:00 81.9% done, time left:   0:00:00 84.9% done, time left:   0:00:00 88.0% done, time left:   0:00:00 91.0% done, time left:   0:00:00 93.9% done, time left:   0:00:00 97.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestInstant_Constructors.test_ofEpochSecond:141:*]:
+org.joda.time.Instant.ofEpochSecond:101 NEW org/joda/time/Instant
+org.joda.time.Instant.ofEpochSecond:101 DUP
+org.joda.time.Instant.ofEpochSecond:101 LLOAD 0
+org.joda.time.Instant.ofEpochSecond:101 SIPUSH 1000
+org.joda.time.Instant.ofEpochSecond:101 INVOKESTATIC org/joda/time/field/FieldUtils.safeMultiply(JI)J
+org.joda.time.Instant.ofEpochSecond:101 INVOKESPECIAL org/joda/time/Instant.<init>(J)V
+org.joda.time.Instant.ofEpochSecond:101 ARETURN
+org.joda.time.Instant.<init>:147 ALOAD 0
+org.joda.time.Instant.<init>:147 LLOAD 1
+org.joda.time.Instant.<init>:147 PUTFIELD org/joda/time/Instant.iMillis J
+org.joda.time.Instant.getMillis:288 ALOAD 0
+org.joda.time.Instant.getMillis:288 GETFIELD org/joda/time/Instant.iMillis J
+org.joda.time.Instant.getMillis:288 LRETURN
+org.joda.time.Instant.getChronology:300 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstanceUTC()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.Instant.getChronology:300 ARETURN
+org.joda.time.TestInstant_Constructors.<init>:45 ALOAD 0
+org.joda.time.TestInstant_Constructors.<init>:45 LDC 8252640000
+org.joda.time.TestInstant_Constructors.<init>:45 PUTFIELD org/joda/time/TestInstant_Constructors.TEST_TIME1 J
+org.joda.time.TestInstant_Constructors.main:60 NEW org/joda/time/TestInstant_Constructors
+org.joda.time.TestInstant_Constructors.main:60 DUP
+org.joda.time.TestInstant_Constructors.main:60 INVOKESPECIAL org/joda/time/TestInstant_Constructors.<init>()V
+org.joda.time.TestInstant_Constructors.main:60 ASTORE 1
+org.joda.time.TestInstant_Constructors.main:64 ALOAD 1
+org.joda.time.TestInstant_Constructors.main:64 INVOKEVIRTUAL org/joda/time/TestInstant_Constructors.test_ofEpochSecond()V
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:139 ALOAD 0
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:139 GETFIELD org/joda/time/TestInstant_Constructors.TEST_TIME1 J
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:139 LDC 1000
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:139 LDIV
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:139 INVOKESTATIC org/joda/time/Instant.ofEpochSecond(J)Lorg/joda/time/Instant;
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:139 ASTORE 1
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:140 INVOKEVIRTUAL org/joda/time/Instant.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:141 ALOAD 0
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:141 GETFIELD org/joda/time/TestInstant_Constructors.TEST_TIME1 J
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:141 ALOAD 1
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:141 INVOKEVIRTUAL org/joda/time/Instant.getMillis()J
+org.joda.time.TestInstant_Constructors.test_ofEpochSecond:141 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.chrono.ISOChronology.getInstanceUTC:70 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.getInstanceUTC:70 ARETURN
+org.joda.time.field.FieldUtils.safeMultiply:139 ILOAD 2
+org.joda.time.field.FieldUtils.safeMultiply:139 TABLESWITCH (-1 => L0, 0 => L2, 1 => L3, * => L4)
+org.joda.time.field.FieldUtils.safeMultiply:150 LLOAD 0
+org.joda.time.field.FieldUtils.safeMultiply:150 ILOAD 2
+org.joda.time.field.FieldUtils.safeMultiply:150 I2L
+org.joda.time.field.FieldUtils.safeMultiply:150 LMUL
+org.joda.time.field.FieldUtils.safeMultiply:150 LSTORE 3
+org.joda.time.field.FieldUtils.safeMultiply:154 LLOAD 3
+org.joda.time.field.FieldUtils.safeMultiply:154 LRETURN
+
+Slice consists of 47 bytecode instructions.
+Computation took 4.30 seconds.

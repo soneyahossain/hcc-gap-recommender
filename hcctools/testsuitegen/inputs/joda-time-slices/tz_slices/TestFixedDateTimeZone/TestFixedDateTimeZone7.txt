@@ -1,0 +1,59 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.3% done, time left: unknown  0.5% done, time left: unknown  0.9% done, time left: unknown  1.6% done, time left: unknown  2.3% done, time left:   0:00:12    3.0% done, time left:   0:00:13  4.1% done, time left:   0:00:12  5.4% done, time left:   0:00:12  6.8% done, time left:   0:00:12  8.3% done, time left:   0:00:12  9.8% done, time left:   0:00:12 11.4% done, time left:   0:00:12 13.0% done, time left:   0:00:12 14.7% done, time left:   0:00:12 16.4% done, time left:   0:00:11 18.1% done, time left:   0:00:11 19.7% done, time left:   0:00:10 21.3% done, time left:   0:00:09 22.7% done, time left:   0:00:09 23.5% done, time left:   0:00:08 23.9% done, time left:   0:00:07 24.4% done, time left:   0:00:06 25.0% done, time left:   0:00:06 25.9% done, time left:   0:00:06 27.3% done, time left:   0:00:07 28.7% done, time left:   0:00:07 30.4% done, time left:   0:00:07 32.4% done, time left:   0:00:07 34.5% done, time left:   0:00:06 36.7% done, time left:   0:00:06 38.9% done, time left:   0:00:05 41.1% done, time left:   0:00:04 43.4% done, time left:   0:00:03 45.5% done, time left:   0:00:03 47.4% done, time left:   0:00:03 49.3% done, time left:   0:00:02 51.0% done, time left:   0:00:02 52.8% done, time left:   0:00:02 54.5% done, time left:   0:00:02 56.2% done, time left:   0:00:02 57.6% done, time left:   0:00:02 59.2% done, time left:   0:00:02 60.9% done, time left:   0:00:01 62.5% done, time left:   0:00:01 64.2% done, time left:   0:00:01 65.9% done, time left:   0:00:01 67.6% done, time left:   0:00:01 69.3% done, time left:   0:00:01 71.0% done, time left:   0:00:01 72.7% done, time left:   0:00:00 74.3% done, time left:   0:00:00 76.0% done, time left:   0:00:00 77.7% done, time left:   0:00:00 83.3% done, time left:   0:00:00 89.3% done, time left:   0:00:00 95.8% done, time left:   0:00:00 99.7% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.tz.TestFixedDateTimeZone.testHashCode:84:*]:
+org.joda.time.DateTimeZone.<init>:719 ALOAD 0
+org.joda.time.DateTimeZone.<init>:719 ALOAD 1
+org.joda.time.DateTimeZone.<init>:719 PUTFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ALOAD 0
+org.joda.time.DateTimeZone.getID:732 GETFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ARETURN
+org.joda.time.tz.FixedDateTimeZone.<init>:38 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:38 ALOAD 1
+org.joda.time.tz.FixedDateTimeZone.<init>:38 INVOKESPECIAL org/joda/time/DateTimeZone.<init>(Ljava/lang/String;)V
+org.joda.time.tz.FixedDateTimeZone.<init>:40 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:40 ILOAD 3
+org.joda.time.tz.FixedDateTimeZone.<init>:40 PUTFIELD org/joda/time/tz/FixedDateTimeZone.iWallOffset I
+org.joda.time.tz.FixedDateTimeZone.<init>:41 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:41 ILOAD 4
+org.joda.time.tz.FixedDateTimeZone.<init>:41 PUTFIELD org/joda/time/tz/FixedDateTimeZone.iStandardOffset I
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 INVOKEVIRTUAL org/joda/time/tz/FixedDateTimeZone.getID()Ljava/lang/String;
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 INVOKEVIRTUAL java/lang/String.hashCode()I
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 BIPUSH 37
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 GETFIELD org/joda/time/tz/FixedDateTimeZone.iStandardOffset I
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 IMUL
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 IADD
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 BIPUSH 31
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 GETFIELD org/joda/time/tz/FixedDateTimeZone.iWallOffset I
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 IMUL
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 IADD
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 IRETURN
+org.joda.time.tz.TestFixedDateTimeZone.main:36 INVOKEVIRTUAL org/joda/time/tz/TestFixedDateTimeZone.testHashCode()V
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:77 NEW org/joda/time/tz/FixedDateTimeZone
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:77 DUP
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:77 LDC "A"
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:77 ICONST_1
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:77 ICONST_5
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:77 INVOKESPECIAL org/joda/time/tz/FixedDateTimeZone.<init>(Ljava/lang/String;Ljava/lang/String;II)V
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:77 ASTORE 1
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:78 NEW org/joda/time/tz/FixedDateTimeZone
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:78 DUP
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:78 LDC "A"
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:78 ICONST_1
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:78 ICONST_5
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:78 INVOKESPECIAL org/joda/time/tz/FixedDateTimeZone.<init>(Ljava/lang/String;Ljava/lang/String;II)V
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:78 ASTORE 2
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:84 ICONST_1
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:84 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:84 ALOAD 1
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:84 INVOKEVIRTUAL org/joda/time/tz/FixedDateTimeZone.hashCode()I
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:84 ALOAD 2
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:84 INVOKEVIRTUAL org/joda/time/tz/FixedDateTimeZone.hashCode()I
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:84 IF_ICMPNE L2 false true
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:84 ICONST_1
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:84 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.tz.TestFixedDateTimeZone.testHashCode:84 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 58 bytecode instructions.
+Computation took 6.38 seconds.

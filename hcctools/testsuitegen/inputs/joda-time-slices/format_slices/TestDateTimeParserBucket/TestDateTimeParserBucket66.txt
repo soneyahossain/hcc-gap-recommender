@@ -1,0 +1,59 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:233:*]:
+org.joda.time.format.DateTimeParserBucket.saveField:309 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.saveField:309 INVOKESPECIAL org/joda/time/format/DateTimeParserBucket.obtainSaveField()Lorg/joda/time/format/DateTimeParserBucket$SavedField;
+org.joda.time.format.DateTimeParserBucket.obtainSaveField:336 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.obtainSaveField:336 ACONST_NULL
+org.joda.time.format.DateTimeParserBucket.obtainSaveField:336 PUTFIELD org/joda/time/format/DateTimeParserBucket.iSavedState Ljava/lang/Object;
+org.joda.time.format.DateTimeParserBucket.saveState:353 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.saveState:353 GETFIELD org/joda/time/format/DateTimeParserBucket.iSavedState Ljava/lang/Object;
+org.joda.time.format.DateTimeParserBucket.saveState:353 IFNONNULL L0 false true
+org.joda.time.format.DateTimeParserBucket.saveState:354 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.saveState:354 NEW org/joda/time/format/DateTimeParserBucket$SavedState
+org.joda.time.format.DateTimeParserBucket.saveState:354 DUP
+org.joda.time.format.DateTimeParserBucket.saveState:354 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.saveState:354 INVOKESPECIAL org/joda/time/format/DateTimeParserBucket$SavedState.<init>(Lorg/joda/time/format/DateTimeParserBucket;)V
+org.joda.time.format.DateTimeParserBucket.saveState:354 PUTFIELD org/joda/time/format/DateTimeParserBucket.iSavedState Ljava/lang/Object;
+org.joda.time.format.DateTimeParserBucket.saveState:356 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.saveState:356 GETFIELD org/joda/time/format/DateTimeParserBucket.iSavedState Ljava/lang/Object;
+org.joda.time.format.DateTimeParserBucket.saveState:356 ARETURN
+org.joda.time.format.DateTimeParserBucket.restoreState:368 ALOAD 1
+org.joda.time.format.DateTimeParserBucket.restoreState:368 INSTANCEOF org/joda/time/format/DateTimeParserBucket$SavedState
+org.joda.time.format.DateTimeParserBucket.restoreState:368 IFEQ L0 false true
+org.joda.time.format.DateTimeParserBucket.restoreState:369 ALOAD 1
+org.joda.time.format.DateTimeParserBucket.restoreState:369 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.restoreState:369 INVOKEVIRTUAL org/joda/time/format/DateTimeParserBucket$SavedState.restoreState(Lorg/joda/time/format/DateTimeParserBucket;)Z
+org.joda.time.format.DateTimeParserBucket.restoreState:369 IFEQ L0 false true
+org.joda.time.format.DateTimeParserBucket.restoreState:371 ICONST_1
+org.joda.time.format.DateTimeParserBucket.restoreState:371 IRETURN
+org.joda.time.format.DateTimeParserBucket$SavedState.<init>:518 ALOAD 0
+org.joda.time.format.DateTimeParserBucket$SavedState.<init>:518 ALOAD 1
+org.joda.time.format.DateTimeParserBucket$SavedState.<init>:518 PUTFIELD org/joda/time/format/DateTimeParserBucket$SavedState.this$0 Lorg/joda/time/format/DateTimeParserBucket;
+org.joda.time.format.DateTimeParserBucket$SavedState.restoreState:526 ALOAD 1
+org.joda.time.format.DateTimeParserBucket$SavedState.restoreState:526 ALOAD 0
+org.joda.time.format.DateTimeParserBucket$SavedState.restoreState:526 GETFIELD org/joda/time/format/DateTimeParserBucket$SavedState.this$0 Lorg/joda/time/format/DateTimeParserBucket;
+org.joda.time.format.DateTimeParserBucket$SavedState.restoreState:526 IF_ACMPEQ L0 true false
+org.joda.time.format.DateTimeParserBucket$SavedState.restoreState:541 ICONST_1
+org.joda.time.format.DateTimeParserBucket$SavedState.restoreState:541 IRETURN
+org.joda.time.format.TestDateTimeParserBucket.main:61 INVOKEVIRTUAL org/joda/time/format/TestDateTimeParserBucket.testSaveRestoreState_twoStates()V
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:220 NEW org/joda/time/format/DateTimeParserBucket
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:220 ASTORE 1
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:221 ALOAD 1
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:221 INVOKEVIRTUAL org/joda/time/format/DateTimeParserBucket.saveField(Lorg/joda/time/DateTimeFieldType;I)V
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:223 ALOAD 1
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:223 INVOKEVIRTUAL org/joda/time/format/DateTimeParserBucket.saveState()Ljava/lang/Object;
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:223 ASTORE 2
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:225 ALOAD 1
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:225 INVOKEVIRTUAL org/joda/time/format/DateTimeParserBucket.saveField(Lorg/joda/time/DateTimeFieldType;I)V
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:227 ALOAD 1
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:227 INVOKEVIRTUAL org/joda/time/format/DateTimeParserBucket.saveState()Ljava/lang/Object;
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:233 ICONST_1
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:233 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:233 ALOAD 1
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:233 ALOAD 2
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:233 INVOKEVIRTUAL org/joda/time/format/DateTimeParserBucket.restoreState(Ljava/lang/Object;)Z
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:233 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.format.TestDateTimeParserBucket.testSaveRestoreState_twoStates:233 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 58 bytecode instructions.
+Computation took 1.41 seconds.

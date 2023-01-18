@@ -1,0 +1,37 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  0.8% done, time left: unknown  1.8% done, time left: unknown  2.8% done, time left: unknown  3.0% done, time left: unknown  3.3% done, time left: unknown  3.5% done, time left: unknown  4.0% done, time left:   0:00:22    4.0% done, time left:   0:00:30  4.2% done, time left:   0:00:34  4.6% done, time left:   0:00:35  5.2% done, time left:   0:00:33  5.6% done, time left:   0:00:32  5.7% done, time left:   0:00:32  5.7% done, time left:   0:00:33  6.7% done, time left:   0:00:35  7.6% done, time left:   0:00:35  8.0% done, time left:   0:00:34  9.8% done, time left:   0:00:33 10.0% done, time left:   0:00:31 10.0% done, time left:   0:00:28 10.9% done, time left:   0:00:28 13.0% done, time left:   0:00:26 13.0% done, time left:   0:00:22 13.0% done, time left:   0:00:20 13.0% done, time left:   0:00:17 13.0% done, time left:   0:00:15 13.5% done, time left:   0:00:14 17.3% done, time left:   0:00:11 21.3% done, time left:   0:00:07 23.6% done, time left:   0:00:05 27.9% done, time left:   0:00:03 33.6% done, time left:   0:00:01 36.1% done, time left:   0:00:01 40.0% done, time left:   0:00:01 44.3% done, time left:   0:00:01 48.7% done, time left:   0:00:01 53.1% done, time left:   0:00:01 57.3% done, time left:   0:00:00 61.7% done, time left:   0:00:00 64.3% done, time left:   0:00:00 65.4% done, time left:   0:00:00 68.4% done, time left:   0:00:00 70.1% done, time left:   0:00:00 72.3% done, time left:   0:00:00 74.6% done, time left:   0:00:00 78.3% done, time left:   0:00:00 81.1% done, time left:   0:00:00 84.4% done, time left:   0:00:00 88.3% done, time left:   0:00:00 90.0% done, time left:   0:00:00 90.2% done, time left:   0:00:00 91.1% done, time left:   0:00:00 95.0% done, time left:   0:00:00 98.4% done, time left:   0:00:00 98.8% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestHours.testIsLessThan:224:*]:
+org.joda.time.Hours.hours:82 ILOAD 0
+org.joda.time.Hours.hours:82 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, 5 => L5, 7 => L7, 2147483647 => L9, -2147483648 => L10, 0 => L0, 4 => L4, 6 => L6, 8 => L8* => L11)
+org.joda.time.Hours.hours:106 NEW org/joda/time/Hours
+org.joda.time.Hours.hours:106 DUP
+org.joda.time.Hours.hours:106 ILOAD 0
+org.joda.time.Hours.hours:106 INVOKESPECIAL org/joda/time/Hours.<init>(I)V
+org.joda.time.Hours.hours:106 ARETURN
+org.joda.time.Hours.<init>:218 ALOAD 0
+org.joda.time.Hours.<init>:218 ILOAD 1
+org.joda.time.Hours.<init>:218 INVOKESPECIAL org/joda/time/base/BaseSingleFieldPeriod.<init>(I)V
+org.joda.time.Hours.isLessThan:471 ALOAD 1
+org.joda.time.Hours.isLessThan:471 IFNONNULL L2 false true
+org.joda.time.Hours.isLessThan:472 ALOAD 0
+org.joda.time.Hours.isLessThan:472 INVOKEVIRTUAL org/joda/time/Hours.getValue()I
+org.joda.time.Hours.isLessThan:472 IFGE L0 false true
+org.joda.time.Hours.isLessThan:472 ICONST_1
+org.joda.time.Hours.isLessThan:472 IRETURN
+org.joda.time.TestHours.main:49 INVOKEVIRTUAL org/joda/time/TestHours.testIsLessThan()V
+org.joda.time.TestHours.testIsLessThan:224 ICONST_1
+org.joda.time.TestHours.testIsLessThan:224 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestHours.testIsLessThan:224 ICONST_M1
+org.joda.time.TestHours.testIsLessThan:224 INVOKESTATIC org/joda/time/Hours.hours(I)Lorg/joda/time/Hours;
+org.joda.time.TestHours.testIsLessThan:224 ACONST_NULL
+org.joda.time.TestHours.testIsLessThan:224 INVOKEVIRTUAL org/joda/time/Hours.isLessThan(Lorg/joda/time/Hours;)Z
+org.joda.time.TestHours.testIsLessThan:224 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestHours.testIsLessThan:224 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ILOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 PUTFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+
+Slice consists of 36 bytecode instructions.
+Computation took 6.42 seconds.

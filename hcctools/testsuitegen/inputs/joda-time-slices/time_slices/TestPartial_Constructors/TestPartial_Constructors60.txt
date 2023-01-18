@@ -1,0 +1,229 @@
+ 0.0% done, time left: unknown                                0.4% done, time left: unknown  1.6% done, time left: unknown  3.5% done, time left: unknown  4.8% done, time left: unknown  4.9% done, time left: unknown  8.2% done, time left: unknown 13.1% done, time left: unknown 16.2% done, time left: unknown 25.5% done, time left: unknown 33.9% done, time left:   0:00:00   35.9% done, time left:   0:00:00 38.4% done, time left:   0:00:01 41.3% done, time left:   0:00:01 45.1% done, time left:   0:00:01 46.2% done, time left:   0:00:01 46.7% done, time left:   0:00:00 47.4% done, time left:   0:00:00 49.1% done, time left:   0:00:01 54.2% done, time left:   0:00:00 62.5% done, time left:   0:00:00 74.2% done, time left:   0:00:00 83.0% done, time left:   0:00:00 89.6% done, time left:   0:00:00 94.2% done, time left:   0:00:00 94.8% done, time left:   0:00:00 100.5% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestPartial_Constructors.assertMessageContains:502:*]:
+org.joda.time.IllegalFieldValueException.createMessage:63 INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.createMessage:63 ARETURN
+org.joda.time.IllegalFieldValueException.<init>:108 ALOAD 0
+org.joda.time.IllegalFieldValueException.<init>:108 INVOKESTATIC org/joda/time/IllegalFieldValueException.createMessage(Ljava/lang/String;Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/String;)Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.<init>:108 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.joda.time.IllegalFieldValueException.<init>:116 ALOAD 0
+org.joda.time.IllegalFieldValueException.<init>:116 ALOAD 0
+org.joda.time.IllegalFieldValueException.<init>:116 INVOKESPECIAL java/lang/IllegalArgumentException.getMessage()Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.<init>:116 PUTFIELD org/joda/time/IllegalFieldValueException.iMessage Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.getMessage:336 ALOAD 0
+org.joda.time.IllegalFieldValueException.getMessage:336 GETFIELD org/joda/time/IllegalFieldValueException.iMessage Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.getMessage:336 ARETURN
+org.joda.time.Partial.<init>:139 ALOAD 1
+org.joda.time.Partial.<init>:139 INVOKESPECIAL org/joda/time/Partial.<init>(Lorg/joda/time/DateTimeFieldType;ILorg/joda/time/Chronology;)V
+org.joda.time.Partial.<init>:156 ALOAD 1
+org.joda.time.Partial.<init>:156 IFNONNULL L0 false true
+org.joda.time.Partial.<init>:157 NEW java/lang/IllegalArgumentException
+org.joda.time.Partial.<init>:157 DUP
+org.joda.time.Partial.<init>:157 LDC "The field type must not be null"
+org.joda.time.Partial.<init>:157 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.joda.time.Partial.<init>:157 ATHROW
+org.joda.time.Partial.<init>:177 ALOAD 0
+org.joda.time.Partial.<init>:177 ALOAD 1
+org.joda.time.Partial.<init>:177 ALOAD 2
+org.joda.time.Partial.<init>:177 INVOKESPECIAL org/joda/time/Partial.<init>([Lorg/joda/time/DateTimeFieldType;[ILorg/joda/time/Chronology;)V
+org.joda.time.Partial.<init>:197 ALOAD 1
+org.joda.time.Partial.<init>:197 IFNONNULL L0 false true
+org.joda.time.Partial.<init>:198 NEW java/lang/IllegalArgumentException
+org.joda.time.Partial.<init>:198 DUP
+org.joda.time.Partial.<init>:198 LDC "Types array must not be null"
+org.joda.time.Partial.<init>:198 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.joda.time.Partial.<init>:198 ATHROW
+org.joda.time.Partial.<init>:200 ALOAD 2
+org.joda.time.Partial.<init>:200 IFNONNULL L1 false true
+org.joda.time.Partial.<init>:201 NEW java/lang/IllegalArgumentException
+org.joda.time.Partial.<init>:201 DUP
+org.joda.time.Partial.<init>:201 LDC "Values array must not be null"
+org.joda.time.Partial.<init>:201 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.joda.time.Partial.<init>:201 ATHROW
+org.joda.time.Partial.<init>:203 ALOAD 2
+org.joda.time.Partial.<init>:203 ARRAYLENGTH
+org.joda.time.Partial.<init>:203 ALOAD 1
+org.joda.time.Partial.<init>:203 ARRAYLENGTH
+org.joda.time.Partial.<init>:203 IF_ICMPEQ L2 false true
+org.joda.time.Partial.<init>:204 NEW java/lang/IllegalArgumentException
+org.joda.time.Partial.<init>:204 DUP
+org.joda.time.Partial.<init>:204 LDC "Values array must be the same length as the types array"
+org.joda.time.Partial.<init>:204 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.joda.time.Partial.<init>:204 ATHROW
+org.joda.time.Partial.<init>:206 ALOAD 1
+org.joda.time.Partial.<init>:206 ARRAYLENGTH
+org.joda.time.Partial.<init>:206 IFNE L3 true false
+org.joda.time.Partial.<init>:211 ICONST_0
+org.joda.time.Partial.<init>:211 ISTORE 4
+org.joda.time.Partial.<init>:211 ILOAD 4
+org.joda.time.Partial.<init>:211 ALOAD 1
+org.joda.time.Partial.<init>:211 ARRAYLENGTH
+org.joda.time.Partial.<init>:211 IF_ICMPGE L6 true true
+org.joda.time.Partial.<init>:211 IINC 4 1
+org.joda.time.Partial.<init>:212 ALOAD 1
+org.joda.time.Partial.<init>:212 ILOAD 4
+org.joda.time.Partial.<init>:212 AALOAD
+org.joda.time.Partial.<init>:212 IFNONNULL L5 false true
+org.joda.time.Partial.<init>:213 NEW java/lang/IllegalArgumentException
+org.joda.time.Partial.<init>:213 DUP
+org.joda.time.Partial.<init>:213 INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String;
+org.joda.time.Partial.<init>:213 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.joda.time.Partial.<init>:213 ATHROW
+org.joda.time.Partial.<init>:217 ICONST_0
+org.joda.time.Partial.<init>:217 ISTORE 5
+org.joda.time.Partial.<init>:217 ILOAD 5
+org.joda.time.Partial.<init>:217 ALOAD 1
+org.joda.time.Partial.<init>:217 ARRAYLENGTH
+org.joda.time.Partial.<init>:217 IF_ICMPGE L17 true true
+org.joda.time.Partial.<init>:217 IINC 5 1
+org.joda.time.Partial.<init>:271 ALOAD 0
+org.joda.time.Partial.<init>:271 ALOAD 1
+org.joda.time.Partial.<init>:271 INVOKEVIRTUAL [Lorg/joda/time/DateTimeFieldType;.clone()Ljava/lang/Object;
+org.joda.time.Partial.<init>:271 PUTFIELD org/joda/time/Partial.iTypes [Lorg/joda/time/DateTimeFieldType;
+org.joda.time.Partial.<init>:272 ALOAD 0
+org.joda.time.Partial.<init>:272 ALOAD 2
+org.joda.time.Partial.<init>:272 INVOKEVIRTUAL org/joda/time/Chronology.validate(Lorg/joda/time/ReadablePartial;[I)V
+org.joda.time.Partial.<init>:284 ALOAD 1
+org.joda.time.Partial.<init>:284 IFNONNULL L0 false true
+org.joda.time.Partial.<init>:285 NEW java/lang/IllegalArgumentException
+org.joda.time.Partial.<init>:285 DUP
+org.joda.time.Partial.<init>:285 LDC "The partial must not be null"
+org.joda.time.Partial.<init>:285 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.joda.time.Partial.<init>:285 ATHROW
+org.joda.time.Partial.size:334 ALOAD 0
+org.joda.time.Partial.size:334 GETFIELD org/joda/time/Partial.iTypes [Lorg/joda/time/DateTimeFieldType;
+org.joda.time.Partial.size:334 ARRAYLENGTH
+org.joda.time.Partial.size:334 IRETURN
+org.joda.time.TestPartial_Constructors.main:52 INVOKEVIRTUAL org/joda/time/TestPartial_Constructors.testConstructorEx1_Type_int()V
+org.joda.time.TestPartial_Constructors.main:55 INVOKEVIRTUAL org/joda/time/TestPartial_Constructors.testConstructorEx_Type_int_Chrono()V
+org.joda.time.TestPartial_Constructors.main:60 INVOKEVIRTUAL org/joda/time/TestPartial_Constructors.testConstructorEx1_TypeArray_intArray()V
+org.joda.time.TestPartial_Constructors.main:61 INVOKEVIRTUAL org/joda/time/TestPartial_Constructors.testConstructorEx3_TypeArray_intArray()V
+org.joda.time.TestPartial_Constructors.main:62 INVOKEVIRTUAL org/joda/time/TestPartial_Constructors.testConstructorEx5_TypeArray_intArray()V
+org.joda.time.TestPartial_Constructors.main:63 INVOKEVIRTUAL org/joda/time/TestPartial_Constructors.testConstructorEx6_TypeArray_intArray()V
+org.joda.time.TestPartial_Constructors.main:66 INVOKEVIRTUAL org/joda/time/TestPartial_Constructors.testConstructorEx9_TypeArray_intArray()V
+org.joda.time.TestPartial_Constructors.main:69 INVOKEVIRTUAL org/joda/time/TestPartial_Constructors.testConstructorEx_Partial()V
+org.joda.time.TestPartial_Constructors.testConstructorEx1_Type_int:137 ACONST_NULL
+org.joda.time.TestPartial_Constructors.testConstructorEx1_Type_int:137 INVOKESPECIAL org/joda/time/Partial.<init>(Lorg/joda/time/DateTimeFieldType;I)V
+org.joda.time.TestPartial_Constructors.testConstructorEx1_Type_int:139 ASTORE 1
+org.joda.time.TestPartial_Constructors.testConstructorEx1_Type_int:140 ALOAD 1
+org.joda.time.TestPartial_Constructors.testConstructorEx1_Type_int:140 LDC "must not be null"
+org.joda.time.TestPartial_Constructors.testConstructorEx1_Type_int:140 INVOKESPECIAL org/joda/time/TestPartial_Constructors.assertMessageContains(Ljava/lang/Exception;Ljava/lang/String;)V
+org.joda.time.TestPartial_Constructors.testConstructorEx_Type_int_Chrono:174 ACONST_NULL
+org.joda.time.TestPartial_Constructors.testConstructorEx_Type_int_Chrono:174 INVOKESPECIAL org/joda/time/Partial.<init>(Lorg/joda/time/DateTimeFieldType;ILorg/joda/time/Chronology;)V
+org.joda.time.TestPartial_Constructors.testConstructorEx_Type_int_Chrono:176 ASTORE 1
+org.joda.time.TestPartial_Constructors.testConstructorEx_Type_int_Chrono:177 ALOAD 1
+org.joda.time.TestPartial_Constructors.testConstructorEx_Type_int_Chrono:177 LDC "must not be null"
+org.joda.time.TestPartial_Constructors.testConstructorEx_Type_int_Chrono:177 INVOKESPECIAL org/joda/time/TestPartial_Constructors.assertMessageContains(Ljava/lang/Exception;Ljava/lang/String;)V
+org.joda.time.TestPartial_Constructors.testConstructorEx1_TypeArray_intArray:254 ACONST_NULL
+org.joda.time.TestPartial_Constructors.testConstructorEx1_TypeArray_intArray:254 INVOKESPECIAL org/joda/time/Partial.<init>([Lorg/joda/time/DateTimeFieldType;[I)V
+org.joda.time.TestPartial_Constructors.testConstructorEx1_TypeArray_intArray:256 ASTORE 1
+org.joda.time.TestPartial_Constructors.testConstructorEx1_TypeArray_intArray:257 ALOAD 1
+org.joda.time.TestPartial_Constructors.testConstructorEx1_TypeArray_intArray:257 LDC "must not be null"
+org.joda.time.TestPartial_Constructors.testConstructorEx1_TypeArray_intArray:257 INVOKESPECIAL org/joda/time/TestPartial_Constructors.assertMessageContains(Ljava/lang/Exception;Ljava/lang/String;)V
+org.joda.time.TestPartial_Constructors.testConstructorEx3_TypeArray_intArray:266 ACONST_NULL
+org.joda.time.TestPartial_Constructors.testConstructorEx3_TypeArray_intArray:266 INVOKESPECIAL org/joda/time/Partial.<init>([Lorg/joda/time/DateTimeFieldType;[I)V
+org.joda.time.TestPartial_Constructors.testConstructorEx3_TypeArray_intArray:268 ASTORE 1
+org.joda.time.TestPartial_Constructors.testConstructorEx3_TypeArray_intArray:269 ALOAD 1
+org.joda.time.TestPartial_Constructors.testConstructorEx3_TypeArray_intArray:269 LDC "must not be null"
+org.joda.time.TestPartial_Constructors.testConstructorEx3_TypeArray_intArray:269 INVOKESPECIAL org/joda/time/TestPartial_Constructors.assertMessageContains(Ljava/lang/Exception;Ljava/lang/String;)V
+org.joda.time.TestPartial_Constructors.testConstructorEx5_TypeArray_intArray:278 ICONST_1
+org.joda.time.TestPartial_Constructors.testConstructorEx5_TypeArray_intArray:278 ANEWARRAY org/joda/time/DateTimeFieldType
+org.joda.time.TestPartial_Constructors.testConstructorEx5_TypeArray_intArray:278 ICONST_2
+org.joda.time.TestPartial_Constructors.testConstructorEx5_TypeArray_intArray:278 NEWARRAY T_INT
+org.joda.time.TestPartial_Constructors.testConstructorEx5_TypeArray_intArray:278 INVOKESPECIAL org/joda/time/Partial.<init>([Lorg/joda/time/DateTimeFieldType;[I)V
+org.joda.time.TestPartial_Constructors.testConstructorEx5_TypeArray_intArray:280 ASTORE 1
+org.joda.time.TestPartial_Constructors.testConstructorEx5_TypeArray_intArray:281 ALOAD 1
+org.joda.time.TestPartial_Constructors.testConstructorEx5_TypeArray_intArray:281 LDC "same length"
+org.joda.time.TestPartial_Constructors.testConstructorEx5_TypeArray_intArray:281 INVOKESPECIAL org/joda/time/TestPartial_Constructors.assertMessageContains(Ljava/lang/Exception;Ljava/lang/String;)V
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:290 ICONST_2
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:290 ANEWARRAY org/joda/time/DateTimeFieldType
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:290 DUP
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:290 ICONST_0
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:290 ACONST_NULL
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:290 AASTORE
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:290 INVOKESPECIAL org/joda/time/Partial.<init>([Lorg/joda/time/DateTimeFieldType;[I)V
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:292 ASTORE 1
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:293 ALOAD 1
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:293 LDC "contain null"
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:293 INVOKESPECIAL org/joda/time/TestPartial_Constructors.assertMessageContains(Ljava/lang/Exception;Ljava/lang/String;)V
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:296 ICONST_2
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:296 ANEWARRAY org/joda/time/DateTimeFieldType
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:296 DUP
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:296 ICONST_1
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:296 ACONST_NULL
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:296 AASTORE
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:296 INVOKESPECIAL org/joda/time/Partial.<init>([Lorg/joda/time/DateTimeFieldType;[I)V
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:298 ASTORE 1
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:299 ALOAD 1
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:299 LDC "contain null"
+org.joda.time.TestPartial_Constructors.testConstructorEx6_TypeArray_intArray:299 INVOKESPECIAL org/joda/time/TestPartial_Constructors.assertMessageContains(Ljava/lang/Exception;Ljava/lang/String;)V
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:427 ICONST_2
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:427 NEWARRAY T_INT
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:427 DUP
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:427 ICONST_1
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:427 ICONST_0
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:427 IASTORE
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:427 ASTORE 1
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:428 ICONST_2
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:428 ANEWARRAY org/joda/time/DateTimeFieldType
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:428 ASTORE 2
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:431 NEW org/joda/time/Partial
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:431 DUP
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:431 ALOAD 2
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:431 ALOAD 1
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:431 INVOKESPECIAL org/joda/time/Partial.<init>([Lorg/joda/time/DateTimeFieldType;[I)V
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:433 ASTORE 3
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:434 ALOAD 3
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:434 LDC "Value 0"
+org.joda.time.TestPartial_Constructors.testConstructorEx9_TypeArray_intArray:434 INVOKESPECIAL org/joda/time/TestPartial_Constructors.assertMessageContains(Ljava/lang/Exception;Ljava/lang/String;)V
+org.joda.time.TestPartial_Constructors.testConstructorEx_Partial:487 ACONST_NULL
+org.joda.time.TestPartial_Constructors.testConstructorEx_Partial:487 INVOKESPECIAL org/joda/time/Partial.<init>(Lorg/joda/time/ReadablePartial;)V
+org.joda.time.TestPartial_Constructors.testConstructorEx_Partial:489 ASTORE 1
+org.joda.time.TestPartial_Constructors.testConstructorEx_Partial:490 ALOAD 1
+org.joda.time.TestPartial_Constructors.testConstructorEx_Partial:490 LDC "must not be null"
+org.joda.time.TestPartial_Constructors.testConstructorEx_Partial:490 INVOKESPECIAL org/joda/time/TestPartial_Constructors.assertMessageContains(Ljava/lang/Exception;Ljava/lang/String;)V
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 NEW java/lang/StringBuilder
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 DUP
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 INVOKESPECIAL java/lang/StringBuilder.<init>()V
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 ALOAD 1
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 INVOKEVIRTUAL java/lang/Exception.getMessage()Ljava/lang/String;
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 LDC ": "
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 ALOAD 2
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String;
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 ICONST_1
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 ALOAD 1
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 INVOKEVIRTUAL java/lang/Exception.getMessage()Ljava/lang/String;
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 ALOAD 2
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 INVOKEVIRTUAL java/lang/String.indexOf(Ljava/lang/String;)I
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 IFLT L0 false true
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 ICONST_1
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestPartial_Constructors.assertMessageContains:502 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.chrono.BaseChronology.validate:183 ALOAD 1
+org.joda.time.chrono.BaseChronology.validate:183 INVOKEINTERFACE org/joda/time/ReadablePartial.size()I
+org.joda.time.chrono.BaseChronology.validate:183 ISTORE 3
+org.joda.time.chrono.BaseChronology.validate:184 ICONST_0
+org.joda.time.chrono.BaseChronology.validate:184 ISTORE 4
+org.joda.time.chrono.BaseChronology.validate:184 ILOAD 4
+org.joda.time.chrono.BaseChronology.validate:184 ILOAD 3
+org.joda.time.chrono.BaseChronology.validate:184 IF_ICMPGE L3 false true
+org.joda.time.chrono.BaseChronology.validate:184 IINC 4 1
+org.joda.time.chrono.BaseChronology.validate:185 ALOAD 2
+org.joda.time.chrono.BaseChronology.validate:185 ILOAD 4
+org.joda.time.chrono.BaseChronology.validate:185 IALOAD
+org.joda.time.chrono.BaseChronology.validate:185 ISTORE 5
+org.joda.time.chrono.BaseChronology.validate:187 ILOAD 5
+org.joda.time.chrono.BaseChronology.validate:187 INVOKEVIRTUAL org/joda/time/DateTimeField.getMinimumValue()I
+org.joda.time.chrono.BaseChronology.validate:187 IF_ICMPGE L1 false true
+org.joda.time.chrono.BaseChronology.validate:188 NEW org/joda/time/IllegalFieldValueException
+org.joda.time.chrono.BaseChronology.validate:188 DUP
+org.joda.time.chrono.BaseChronology.validate:188 INVOKESPECIAL org/joda/time/IllegalFieldValueException.<init>(Lorg/joda/time/DateTimeFieldType;Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/Number;)V
+org.joda.time.chrono.BaseChronology.validate:188 ATHROW
+org.joda.time.chrono.GJDayOfWeekDateTimeField.getMinimumValue:104 ICONST_1
+org.joda.time.chrono.GJDayOfWeekDateTimeField.getMinimumValue:104 IRETURN
+
+Slice consists of 247 bytecode instructions.
+Computation took 2.82 seconds.

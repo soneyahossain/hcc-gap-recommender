@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PrecedingAxisIterator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.util</a> &gt; <span class="el_source">PrecedingAxisIterator.java</span></div><h1>PrecedingAxisIterator.java</h1><pre class="source lang-java linenums">package org.jaxen.util;
+
+/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2005 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+import org.jaxen.JaxenConstants;
+import org.jaxen.JaxenRuntimeException;
+import org.jaxen.Navigator;
+import org.jaxen.UnsupportedAxisException;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+
+/**
+ * &lt;p&gt;
+ * Represents the XPath &lt;code&gt;preceding&lt;/code&gt; axis.
+ * The &quot;&lt;code&gt;preceding&lt;/code&gt; axis contains all nodes in the same document as the context
+ * node that are before the context node in document order, excluding any ancestors
+ * and excluding attribute nodes and namespace nodes.&quot;
+ *
+ * &lt;p&gt;
+ * This implementation of '&lt;code&gt;preceding&lt;/code&gt;' works like so:
+ * the &lt;code&gt;preceding&lt;/code&gt; axis includes preceding siblings of this node and
+ * their descendants. Also, for each ancestor node of this node, it includes
+ * all preceding siblings of that ancestor, and their descendants. Finally, it
+ * includes the ancestor nodes themselves.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;
+ * The reversed &lt;code&gt;descendant-or-self&lt;/code&gt; axes that are required are calculated using a
+ * stack of reversed 'child-or-self' axes. When asked for a node, it is always taken
+ * from a child-or-self axis. If it was the last node on that axis, the node is returned.
+ * Otherwise, this axis is pushed on the stack, and the process is repeated with the child-or-self
+ * of the node. Eventually this recurses down to the last descendant of any node, then works
+ * back up to the root.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;
+ * Most object models could provide a faster implementation of the reversed
+ * 'children-or-self' used here.&lt;/p&gt;
+ *
+ * @version 1.2b12
+ */
+public class PrecedingAxisIterator implements Iterator {
+    private Iterator ancestorOrSelf;
+    private Iterator precedingSibling;
+    private ListIterator childrenOrSelf;
+    private ArrayList stack;
+
+    private Navigator navigator;
+
+    /**
+     * Create a new &lt;code&gt;preceding&lt;/code&gt; axis iterator.
+     *
+     * @param contextNode the node to start from
+     * @param navigator   the object model specific navigator
+     */
+    public PrecedingAxisIterator(Object contextNode,
+<span class="fc" id="L106">                                 Navigator navigator) throws UnsupportedAxisException {</span>
+<span class="fc" id="L107">        this.navigator = navigator;</span>
+<span class="fc" id="L108">        this.ancestorOrSelf = navigator.getAncestorOrSelfAxisIterator(contextNode);</span>
+<span class="fc" id="L109">        this.precedingSibling = JaxenConstants.EMPTY_ITERATOR;</span>
+<span class="fc" id="L110">        this.childrenOrSelf = JaxenConstants.EMPTY_LIST_ITERATOR;</span>
+<span class="fc" id="L111">        this.stack = new ArrayList();</span>
+<span class="fc" id="L112">    }</span>
+
+
+    /**
+     * Returns true if there are any preceding nodes remaining; false otherwise.
+     *
+     * @return true if any preceding nodes remain; false otherwise
+     * @see java.util.Iterator#hasNext()
+     */
+    public boolean hasNext() {
+        try {
+<span class="fc bfc" id="L123" title="All 2 branches covered.">            while (!childrenOrSelf.hasPrevious()) {</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">                if (stack.isEmpty()) {</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">                    while (!precedingSibling.hasNext()) {</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">                        if (!ancestorOrSelf.hasNext()) {</span>
+<span class="fc" id="L127">                            return false;</span>
+                        }
+<span class="fc" id="L129">                        Object contextNode = ancestorOrSelf.next();</span>
+<span class="fc" id="L130">                        precedingSibling = new PrecedingSiblingAxisIterator(contextNode, navigator);</span>
+<span class="fc" id="L131">                    }</span>
+<span class="fc" id="L132">                    Object node = precedingSibling.next();</span>
+<span class="fc" id="L133">                    childrenOrSelf = childrenOrSelf(node);</span>
+<span class="fc" id="L134">                } else {</span>
+<span class="fc" id="L135">                    childrenOrSelf = (ListIterator) stack.remove(stack.size() - 1);</span>
+                }
+            }
+<span class="fc" id="L138">            return true;</span>
+<span class="nc" id="L139">        } catch (UnsupportedAxisException e) {</span>
+<span class="nc" id="L140">            throw new JaxenRuntimeException(e);</span>
+        }
+    }
+
+    private ListIterator childrenOrSelf(Object node) {
+        try {
+<span class="fc" id="L146">            ArrayList reversed = new ArrayList();</span>
+<span class="fc" id="L147">            reversed.add(node);</span>
+<span class="fc" id="L148">            Iterator childAxisIterator = navigator.getChildAxisIterator(node);</span>
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">            if (childAxisIterator != null) {</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">                while (childAxisIterator.hasNext()) {</span>
+<span class="fc" id="L151">                    reversed.add(childAxisIterator.next());</span>
+                }
+            }
+<span class="fc" id="L154">            return reversed.listIterator(reversed.size());</span>
+<span class="nc" id="L155">        } catch (UnsupportedAxisException e) {</span>
+<span class="nc" id="L156">            throw new JaxenRuntimeException(e);</span>
+        }
+    }
+
+    /**
+     * Returns the next preceding node.
+     *
+     * @return the next preceding node
+     * @throws NoSuchElementException if no preceding nodes remain
+     * @see java.util.Iterator#next()
+     */
+    public Object next() throws NoSuchElementException {
+<span class="fc bfc" id="L168" title="All 2 branches covered.">        if (!hasNext()) {</span>
+<span class="fc" id="L169">            throw new NoSuchElementException();</span>
+        }
+        while (true) {
+<span class="fc" id="L172">            Object result = childrenOrSelf.previous();</span>
+<span class="fc bfc" id="L173" title="All 2 branches covered.">            if (childrenOrSelf.hasPrevious()) {</span>
+                // if this isn't 'self' construct 'descendant-or-self'
+<span class="fc" id="L175">                stack.add(childrenOrSelf);</span>
+<span class="fc" id="L176">                childrenOrSelf = childrenOrSelf(result);</span>
+<span class="fc" id="L177">                continue;</span>
+            }
+<span class="fc" id="L179">            return result;</span>
+        }
+    }
+
+
+    /**
+     * This operation is not supported.
+     *
+     * @throws UnsupportedOperationException always
+     */
+    public void remove() throws UnsupportedOperationException {
+<span class="fc" id="L190">        throw new UnsupportedOperationException();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

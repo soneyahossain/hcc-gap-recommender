@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TranslateFunction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.function</a> &gt; <span class="el_source">TranslateFunction.java</span></div><h1>TranslateFunction.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+
+package org.jaxen.function;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.jaxen.Context;
+import org.jaxen.Function;
+import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
+
+/**
+ * &lt;p&gt;
+ * &lt;b&gt;4.2&lt;/b&gt;
+ * &lt;code&gt;&lt;i&gt;string&lt;/i&gt; translate(&lt;i&gt;string&lt;/i&gt;,&lt;i&gt;string&lt;/i&gt;,&lt;i&gt;string&lt;/i&gt;)&lt;/code&gt;
+ * &lt;/p&gt;
+ * 
+ * &lt;blockquote cite=&quot;http://www.w3.org/TR/xpath#function-translate&quot;&gt;
+ * &lt;p&gt;
+ * The &lt;b&gt;&lt;a href=&quot;https://www.w3.org/TR/xpath#function-translate&quot;&gt;translate&lt;/a&gt;&lt;/b&gt; function
+ * returns the first argument string with occurrences of characters in
+ * the second argument string replaced by the character at the
+ * corresponding position in the third argument string. For example,
+ * &lt;code&gt;translate(&quot;bar&quot;,&quot;abc&quot;,&quot;ABC&quot;)&lt;/code&gt; returns the string
+ * &lt;code&gt;BAr&lt;/code&gt;. If there is a character in the second argument
+ * string with no character at a corresponding position in the third
+ * argument string (because the second argument string is longer than
+ * the third argument string), then occurrences of that character in the
+ * first argument string are removed. For example,
+ * &lt;code&gt;translate(&quot;--aaa--&quot;,&quot;abc-&quot;,&quot;ABC&quot;)&lt;/code&gt; returns
+ * &lt;code&gt;&quot;AAA&quot;&lt;/code&gt;. If a character occurs more than once in the
+ * second argument string, then the first occurrence determines the
+ * replacement character. If the third argument string is longer than
+ * the second argument string, then excess characters are ignored.
+ * &lt;/p&gt;
+ * 
+ * &lt;blockquote&gt; &lt;b&gt;NOTE: &lt;/b&gt;The &lt;b&gt;translate&lt;/b&gt; function is not a
+ * sufficient solution for case conversion in all languages. A future
+ * version of XPath may provide additional functions for case
+ * conversion.&lt;/blockquote&gt;
+ * 
+ * &lt;/blockquote&gt;
+ * 
+ * @author Jan Dvorak ( jan.dvorak @ mathan.cz )
+ * 
+ * @see &lt;a href=&quot;https://www.w3.org/TR/xpath#function-translate&quot;
+ *      target=&quot;_top&quot;&gt;Section 4.2 of the XPath Specification&lt;/a&gt;
+ */
+public class TranslateFunction implements Function
+{
+
+     /* The translation is done thru a HashMap. Performance tip (for anyone
+      * who needs to improve the performance of this particular function):
+      * Cache the HashMaps, once they are constructed. */
+    
+    /**
+     * Create a new &lt;code&gt;TranslateFunction&lt;/code&gt; object.
+     */
+<span class="fc" id="L107">    public TranslateFunction() {}</span>
+    
+    
+    /** Returns a copy of the first argument in which
+     * characters found in the second argument are replaced by
+     * corresponding characters from the third argument.
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args a list that contains exactly three items
+     * 
+     * @return a &lt;code&gt;String&lt;/code&gt; built from &lt;code&gt;args.get(0)&lt;/code&gt; 
+     *     in which occurrences of characters in &lt;code&gt;args.get(1)&lt;/code&gt; 
+     *     are replaced by the corresponding characters in &lt;code&gt;args.get(2)&lt;/code&gt; 
+     * 
+     * @throws FunctionCallException if &lt;code&gt;args&lt;/code&gt; does not have exactly three items
+     */
+    public Object call(Context context,
+                       List args) throws FunctionCallException
+    {
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        if (args.size() == 3) {</span>
+<span class="fc" id="L128">            return evaluate( args.get(0),</span>
+<span class="fc" id="L129">                             args.get(1),</span>
+<span class="fc" id="L130">                             args.get(2),</span>
+<span class="fc" id="L131">                             context.getNavigator() );</span>
+        }
+
+<span class="fc" id="L134">        throw new FunctionCallException( &quot;translate() requires three arguments.&quot; );</span>
+    }
+
+    /** 
+     * Returns a copy of &lt;code&gt;strArg&lt;/code&gt; in which
+     * characters found in &lt;code&gt;fromArg&lt;/code&gt; are replaced by
+     * corresponding characters from &lt;code&gt;toArg&lt;/code&gt;.
+     * If necessary each argument is first converted to it string-value
+     * as if by the XPath &lt;code&gt;string()&lt;/code&gt; function.
+     * 
+     * @param strArg the base string
+     * @param fromArg the characters to be replaced
+     * @param toArg the characters they will be replaced by
+     * @param nav the &lt;code&gt;Navigator&lt;/code&gt; used to calculate the string-values of the arguments.
+     * 
+     * @return a copy of &lt;code&gt;strArg&lt;/code&gt; in which
+     *  characters found in &lt;code&gt;fromArg&lt;/code&gt; are replaced by
+     *  corresponding characters from &lt;code&gt;toArg&lt;/code&gt;
+     *  
+     * @throws FunctionCallException if one of the arguments is a malformed Unicode string;
+     *     that is, if surrogate characters don't line up properly
+     * 
+     */
+    public static String evaluate(Object strArg,
+                                  Object fromArg,
+                                  Object toArg,
+                                  Navigator nav) throws FunctionCallException
+    {
+<span class="fc" id="L162">        String inStr = StringFunction.evaluate( strArg, nav );</span>
+<span class="fc" id="L163">        String fromStr = StringFunction.evaluate( fromArg, nav );</span>
+<span class="fc" id="L164">        String toStr = StringFunction.evaluate( toArg, nav );</span>
+    
+        // Initialize the mapping in a HashMap
+<span class="fc" id="L167">        Map characterMap = new HashMap();</span>
+<span class="fc" id="L168">        String[] fromCharacters = toUnicodeCharacters(fromStr);</span>
+<span class="fc" id="L169">        String[] toCharacters = toUnicodeCharacters(toStr);</span>
+<span class="fc" id="L170">        int fromLen = fromCharacters.length;</span>
+<span class="fc" id="L171">        int toLen = toCharacters.length;</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">        for ( int i = 0; i &lt; fromLen; i++ ) {</span>
+<span class="fc" id="L173">            String cFrom = fromCharacters[i];</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">            if ( characterMap.containsKey( cFrom ) ) {</span>
+                // We've seen the character before, ignore
+<span class="fc" id="L176">                continue;</span>
+            }
+            
+<span class="fc bfc" id="L179" title="All 2 branches covered.">            if ( i &lt; toLen ) {</span>
+                // Will change
+<span class="fc" id="L181">                characterMap.put( cFrom, toCharacters[i] );</span>
+            } 
+            else {
+                // Will delete
+<span class="fc" id="L185">                characterMap.put( cFrom, null );</span>
+            }
+        }
+
+        // Process the input string thru the map
+<span class="fc" id="L190">        StringBuffer outStr = new StringBuffer( inStr.length() );</span>
+<span class="fc" id="L191">        String[] inCharacters = toUnicodeCharacters(inStr);</span>
+<span class="fc" id="L192">        int inLen = inCharacters.length;</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        for ( int i = 0; i &lt; inLen; i++ ) {</span>
+<span class="fc" id="L194">            String cIn = inCharacters[i];</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">            if ( characterMap.containsKey( cIn ) ) {</span>
+<span class="fc" id="L196">                String cTo = (String) characterMap.get( cIn );</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">                if ( cTo != null ) {</span>
+<span class="fc" id="L198">                    outStr.append( cTo );</span>
+                }
+<span class="fc" id="L200">            } </span>
+            else {
+<span class="fc" id="L202">                outStr.append( cIn );</span>
+            }
+        }
+    
+<span class="fc" id="L206">        return outStr.toString();</span>
+    }
+
+    private static String[] toUnicodeCharacters(String s) throws FunctionCallException {
+
+<span class="fc" id="L211">        String[] result = new String[s.length()];</span>
+<span class="fc" id="L212">        int stringLength = 0;</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">        for (int i = 0; i &lt; s.length(); i++) {</span>
+<span class="fc" id="L214">            char c1 = s.charAt(i);</span>
+<span class="fc bfc" id="L215" title="All 2 branches covered.">            if (isHighSurrogate(c1)) {</span>
+                try {
+<span class="fc" id="L217">                    char c2 = s.charAt(i+1);</span>
+<span class="fc bfc" id="L218" title="All 2 branches covered.">                    if (isLowSurrogate(c2)) {</span>
+<span class="fc" id="L219">                        result[stringLength] = (c1 + &quot;&quot; + c2).intern();</span>
+<span class="fc" id="L220">                        i++;</span>
+                    }
+                    else {
+<span class="fc" id="L223">                        throw new FunctionCallException(&quot;Mismatched surrogate pair in translate function&quot;);</span>
+                    }
+                }
+<span class="nc" id="L226">                catch (StringIndexOutOfBoundsException ex) {</span>
+<span class="nc" id="L227">                    throw new FunctionCallException(&quot;High surrogate without low surrogate at end of string passed to translate function&quot;);</span>
+<span class="fc" id="L228">                }</span>
+            }
+            else {
+<span class="fc" id="L231">                result[stringLength]=String.valueOf(c1).intern();</span>
+            }
+<span class="fc" id="L233">            stringLength++;</span>
+        }
+        
+<span class="fc bfc" id="L236" title="All 2 branches covered.">        if (stringLength == result.length) return result;</span>
+        
+        // trim array
+<span class="fc" id="L239">        String[] trimmed = new String[stringLength];</span>
+<span class="fc" id="L240">        System.arraycopy(result, 0, trimmed, 0, stringLength);</span>
+<span class="fc" id="L241">        return trimmed;</span>
+        
+    }
+
+    private static boolean isHighSurrogate(char c) {
+<span class="fc bfc" id="L246" title="All 4 branches covered.">        return c &gt;= 0xD800 &amp;&amp; c &lt;= 0xDBFF;</span>
+    }
+     
+    private static boolean isLowSurrogate(char c) {
+<span class="pc bpc" id="L250" title="1 of 4 branches missed.">        return c &gt;= 0xDC00 &amp;&amp; c &lt;= 0xDFFF;</span>
+    }
+     
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,52 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  1.0% done, time left: unknown  2.2% done, time left: unknown  2.7% done, time left: unknown  2.9% done, time left: unknown  3.2% done, time left: unknown  3.7% done, time left: unknown  4.3% done, time left: unknown  5.4% done, time left:   0:00:08    5.4% done, time left:   0:00:12  5.4% done, time left:   0:00:16  5.4% done, time left:   0:00:20  5.4% done, time left:   0:00:23  6.0% done, time left:   0:00:25  7.5% done, time left:   0:00:26  9.6% done, time left:   0:00:25  9.7% done, time left:   0:00:23  9.8% done, time left:   0:00:21 11.4% done, time left:   0:00:20 12.8% done, time left:   0:00:19 12.8% done, time left:   0:00:17 12.8% done, time left:   0:00:16 12.8% done, time left:   0:00:14 13.4% done, time left:   0:00:14 16.9% done, time left:   0:00:11 20.5% done, time left:   0:00:08 22.4% done, time left:   0:00:06 26.4% done, time left:   0:00:04 30.4% done, time left:   0:00:03 34.2% done, time left:   0:00:02 36.5% done, time left:   0:00:02 40.3% done, time left:   0:00:02 44.4% done, time left:   0:00:01 48.4% done, time left:   0:00:01 52.6% done, time left:   0:00:01 56.7% done, time left:   0:00:00 60.9% done, time left:   0:00:00 63.9% done, time left:   0:00:00 65.6% done, time left:   0:00:00 69.2% done, time left:   0:00:00 71.2% done, time left:   0:00:00 73.9% done, time left:   0:00:00 76.4% done, time left:   0:00:00 79.5% done, time left:   0:00:00 82.9% done, time left:   0:00:00 86.2% done, time left:   0:00:00 89.9% done, time left:   0:00:00 90.2% done, time left:   0:00:00 90.3% done, time left:   0:00:00 90.7% done, time left:   0:00:00 94.4% done, time left:   0:00:00 98.4% done, time left:   0:00:00 99.2% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestMinutes.testMultipliedBy_int:360:*]:
+org.joda.time.Minutes.minutes:72 ILOAD 0
+org.joda.time.Minutes.minutes:72 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, -2147483648 => L5, 0 => L0, 2147483647 => L4* => L6)
+org.joda.time.Minutes.minutes:78 GETSTATIC org/joda/time/Minutes.TWO Lorg/joda/time/Minutes;
+org.joda.time.Minutes.minutes:78 ARETURN
+org.joda.time.Minutes.minutes:86 NEW org/joda/time/Minutes
+org.joda.time.Minutes.minutes:86 DUP
+org.joda.time.Minutes.minutes:86 ILOAD 0
+org.joda.time.Minutes.minutes:86 INVOKESPECIAL org/joda/time/Minutes.<init>(I)V
+org.joda.time.Minutes.minutes:86 ARETURN
+org.joda.time.Minutes.<init>:198 ALOAD 0
+org.joda.time.Minutes.<init>:198 ILOAD 1
+org.joda.time.Minutes.<init>:198 INVOKESPECIAL org/joda/time/base/BaseSingleFieldPeriod.<init>(I)V
+org.joda.time.Minutes.getMinutes:323 ALOAD 0
+org.joda.time.Minutes.getMinutes:323 INVOKEVIRTUAL org/joda/time/Minutes.getValue()I
+org.joda.time.Minutes.getMinutes:323 IRETURN
+org.joda.time.Minutes.multipliedBy:400 ALOAD 0
+org.joda.time.Minutes.multipliedBy:400 INVOKEVIRTUAL org/joda/time/Minutes.getValue()I
+org.joda.time.Minutes.multipliedBy:400 ILOAD 1
+org.joda.time.Minutes.multipliedBy:400 INVOKESTATIC org/joda/time/field/FieldUtils.safeMultiply(II)I
+org.joda.time.Minutes.multipliedBy:400 INVOKESTATIC org/joda/time/Minutes.minutes(I)Lorg/joda/time/Minutes;
+org.joda.time.Minutes.multipliedBy:400 ARETURN
+org.joda.time.TestMinutes.main:61 INVOKEVIRTUAL org/joda/time/TestMinutes.testMultipliedBy_int()V
+org.joda.time.TestMinutes.testMultipliedBy_int:357 ICONST_2
+org.joda.time.TestMinutes.testMultipliedBy_int:357 INVOKESTATIC org/joda/time/Minutes.minutes(I)Lorg/joda/time/Minutes;
+org.joda.time.TestMinutes.testMultipliedBy_int:357 ASTORE 1
+org.joda.time.TestMinutes.testMultipliedBy_int:360 LDC -6
+org.joda.time.TestMinutes.testMultipliedBy_int:360 ALOAD 1
+org.joda.time.TestMinutes.testMultipliedBy_int:360 BIPUSH -3
+org.joda.time.TestMinutes.testMultipliedBy_int:360 INVOKEVIRTUAL org/joda/time/Minutes.multipliedBy(I)Lorg/joda/time/Minutes;
+org.joda.time.TestMinutes.testMultipliedBy_int:360 INVOKEVIRTUAL org/joda/time/Minutes.getMinutes()I
+org.joda.time.TestMinutes.testMultipliedBy_int:360 I2L
+org.joda.time.TestMinutes.testMultipliedBy_int:360 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ILOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 PUTFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+org.joda.time.field.FieldUtils.safeMultiply:122 ILOAD 0
+org.joda.time.field.FieldUtils.safeMultiply:122 I2L
+org.joda.time.field.FieldUtils.safeMultiply:122 ILOAD 1
+org.joda.time.field.FieldUtils.safeMultiply:122 I2L
+org.joda.time.field.FieldUtils.safeMultiply:122 LMUL
+org.joda.time.field.FieldUtils.safeMultiply:122 LSTORE 2
+org.joda.time.field.FieldUtils.safeMultiply:126 LLOAD 2
+org.joda.time.field.FieldUtils.safeMultiply:126 L2I
+org.joda.time.field.FieldUtils.safeMultiply:126 IRETURN
+
+Slice consists of 47 bytecode instructions.
+Computation took 5.68 seconds.

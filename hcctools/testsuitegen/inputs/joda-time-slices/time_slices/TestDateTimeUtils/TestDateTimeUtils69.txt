@@ -1,0 +1,162 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  1.5% done, time left: unknown  3.3% done, time left: unknown  3.6% done, time left: unknown  4.0% done, time left: unknown  5.9% done, time left: unknown  7.9% done, time left:   0:00:04   10.1% done, time left:   0:00:04 12.4% done, time left:   0:00:04 13.7% done, time left:   0:00:04 15.8% done, time left:   0:00:05 18.2% done, time left:   0:00:05 22.5% done, time left:   0:00:04 28.3% done, time left:   0:00:02 34.4% done, time left:   0:00:01 35.5% done, time left:   0:00:00 36.1% done, time left:   0:00:00 36.4% done, time left:   0:00:00 37.2% done, time left:   0:00:00 41.4% done, time left:   0:00:01 47.3% done, time left:   0:00:00 53.4% done, time left:   0:00:00 57.5% done, time left:   0:00:00 66.4% done, time left:   0:00:00 71.5% done, time left:   0:00:00 92.3% done, time left:   0:00:00 97.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDateTimeUtils.test_julianDay:522:*]:
+org.joda.time.DateTime.<init>:236 ALOAD 0
+org.joda.time.DateTime.<init>:236 LLOAD 1
+org.joda.time.DateTime.<init>:236 ALOAD 3
+org.joda.time.DateTime.<init>:236 INVOKESPECIAL org/joda/time/base/BaseDateTime.<init>(JLorg/joda/time/Chronology;)V
+org.joda.time.DateTime.<init>:347 ALOAD 0
+org.joda.time.DateTime.<init>:347 ALOAD 6
+org.joda.time.DateTime.<init>:347 INVOKESPECIAL org/joda/time/base/BaseDateTime.<init>(IIIIIIILorg/joda/time/DateTimeZone;)V
+org.joda.time.DateTime.withMillis:598 LLOAD 1
+org.joda.time.DateTime.withMillis:598 ALOAD 0
+org.joda.time.DateTime.withMillis:598 INVOKEVIRTUAL org/joda/time/DateTime.getMillis()J
+org.joda.time.DateTime.withMillis:598 LCMP
+org.joda.time.DateTime.withMillis:598 IFNE L0 true false
+org.joda.time.DateTime.withMillis:598 NEW org/joda/time/DateTime
+org.joda.time.DateTime.withMillis:598 DUP
+org.joda.time.DateTime.withMillis:598 LLOAD 1
+org.joda.time.DateTime.withMillis:598 ALOAD 0
+org.joda.time.DateTime.withMillis:598 INVOKEVIRTUAL org/joda/time/DateTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.DateTime.withMillis:598 INVOKESPECIAL org/joda/time/DateTime.<init>(JLorg/joda/time/Chronology;)V
+org.joda.time.DateTime.withMillis:598 ARETURN
+org.joda.time.DateTime.plusHours:1146 ILOAD 1
+org.joda.time.DateTime.plusHours:1146 IFNE L0 true false
+org.joda.time.DateTime.plusHours:1149 ALOAD 0
+org.joda.time.DateTime.plusHours:1149 INVOKEVIRTUAL org/joda/time/DateTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.DateTime.plusHours:1149 INVOKEVIRTUAL org/joda/time/Chronology.hours()Lorg/joda/time/DurationField;
+org.joda.time.DateTime.plusHours:1149 ALOAD 0
+org.joda.time.DateTime.plusHours:1149 INVOKEVIRTUAL org/joda/time/DateTime.getMillis()J
+org.joda.time.DateTime.plusHours:1149 ILOAD 1
+org.joda.time.DateTime.plusHours:1149 INVOKEVIRTUAL org/joda/time/DurationField.add(JI)J
+org.joda.time.DateTime.plusHours:1149 LSTORE 2
+org.joda.time.DateTime.plusHours:1150 ALOAD 0
+org.joda.time.DateTime.plusHours:1150 LLOAD 2
+org.joda.time.DateTime.plusHours:1150 INVOKEVIRTUAL org/joda/time/DateTime.withMillis(J)Lorg/joda/time/DateTime;
+org.joda.time.DateTime.plusHours:1150 ARETURN
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.DateTimeUtils.toJulianDay:483 LLOAD 0
+org.joda.time.DateTimeUtils.toJulianDay:483 L2D
+org.joda.time.DateTimeUtils.toJulianDay:483 LDC 8.64E7
+org.joda.time.DateTimeUtils.toJulianDay:483 DDIV
+org.joda.time.DateTimeUtils.toJulianDay:483 DSTORE 2
+org.joda.time.DateTimeUtils.toJulianDay:484 DLOAD 2
+org.joda.time.DateTimeUtils.toJulianDay:484 LDC 2440587.5
+org.joda.time.DateTimeUtils.toJulianDay:484 DADD
+org.joda.time.DateTimeUtils.toJulianDay:484 DRETURN
+org.joda.time.DateTimeUtils.toJulianDayNumber:503 LLOAD 0
+org.joda.time.DateTimeUtils.toJulianDayNumber:503 INVOKESTATIC org/joda/time/DateTimeUtils.toJulianDay(J)D
+org.joda.time.DateTimeUtils.toJulianDayNumber:503 LDC 0.5
+org.joda.time.DateTimeUtils.toJulianDayNumber:503 DADD
+org.joda.time.DateTimeUtils.toJulianDayNumber:503 INVOKESTATIC java/lang/Math.floor(D)D
+org.joda.time.DateTimeUtils.toJulianDayNumber:503 D2L
+org.joda.time.DateTimeUtils.toJulianDayNumber:503 LRETURN
+org.joda.time.DateTimeZone.getID:732 ALOAD 0
+org.joda.time.DateTimeZone.getID:732 GETFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ARETURN
+org.joda.time.TestDateTimeUtils.main:145 INVOKEVIRTUAL org/joda/time/TestDateTimeUtils.test_julianDay()V
+org.joda.time.TestDateTimeUtils.test_julianDay:504 NEW org/joda/time/DateTime
+org.joda.time.TestDateTimeUtils.test_julianDay:504 DUP
+org.joda.time.TestDateTimeUtils.test_julianDay:504 ICONST_1
+org.joda.time.TestDateTimeUtils.test_julianDay:504 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.TestDateTimeUtils.test_julianDay:504 INVOKESPECIAL org/joda/time/DateTime.<init>(IIIIILorg/joda/time/DateTimeZone;)V
+org.joda.time.TestDateTimeUtils.test_julianDay:504 ASTORE 1
+org.joda.time.TestDateTimeUtils.test_julianDay:510 ALOAD 1
+org.joda.time.TestDateTimeUtils.test_julianDay:510 BIPUSH 6
+org.joda.time.TestDateTimeUtils.test_julianDay:510 INVOKEVIRTUAL org/joda/time/DateTime.plusHours(I)Lorg/joda/time/DateTime;
+org.joda.time.TestDateTimeUtils.test_julianDay:510 ASTORE 1
+org.joda.time.TestDateTimeUtils.test_julianDay:515 ALOAD 1
+org.joda.time.TestDateTimeUtils.test_julianDay:515 BIPUSH 6
+org.joda.time.TestDateTimeUtils.test_julianDay:515 INVOKEVIRTUAL org/joda/time/DateTime.plusHours(I)Lorg/joda/time/DateTime;
+org.joda.time.TestDateTimeUtils.test_julianDay:515 ASTORE 1
+org.joda.time.TestDateTimeUtils.test_julianDay:520 ALOAD 1
+org.joda.time.TestDateTimeUtils.test_julianDay:520 BIPUSH 6
+org.joda.time.TestDateTimeUtils.test_julianDay:520 INVOKEVIRTUAL org/joda/time/DateTime.plusHours(I)Lorg/joda/time/DateTime;
+org.joda.time.TestDateTimeUtils.test_julianDay:520 ASTORE 1
+org.joda.time.TestDateTimeUtils.test_julianDay:522 LDC 2440588
+org.joda.time.TestDateTimeUtils.test_julianDay:522 ALOAD 1
+org.joda.time.TestDateTimeUtils.test_julianDay:522 INVOKEVIRTUAL org/joda/time/DateTime.getMillis()J
+org.joda.time.TestDateTimeUtils.test_julianDay:522 INVOKESTATIC org/joda/time/DateTimeUtils.toJulianDayNumber(J)J
+org.joda.time.TestDateTimeUtils.test_julianDay:522 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.UTCDateTimeZone.hashCode:80 ALOAD 0
+org.joda.time.UTCDateTimeZone.hashCode:80 INVOKEVIRTUAL org/joda/time/UTCDateTimeZone.getID()Ljava/lang/String;
+org.joda.time.UTCDateTimeZone.hashCode:80 INVOKEVIRTUAL java/lang/String.hashCode()I
+org.joda.time.UTCDateTimeZone.hashCode:80 IRETURN
+org.joda.time.base.BaseDateTime.<init>:125 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:125 ALOAD 3
+org.joda.time.base.BaseDateTime.<init>:125 INVOKEVIRTUAL org/joda/time/base/BaseDateTime.checkChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:125 PUTFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:126 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:126 LLOAD 1
+org.joda.time.base.BaseDateTime.<init>:126 INVOKEVIRTUAL org/joda/time/base/BaseDateTime.checkInstant(JLorg/joda/time/Chronology;)J
+org.joda.time.base.BaseDateTime.<init>:126 PUTFIELD org/joda/time/base/BaseDateTime.iMillis J
+org.joda.time.base.BaseDateTime.<init>:226 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:226 ALOAD 8
+org.joda.time.base.BaseDateTime.<init>:226 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.base.BaseDateTime.<init>:226 INVOKESPECIAL org/joda/time/base/BaseDateTime.<init>(IIIIIIILorg/joda/time/Chronology;)V
+org.joda.time.base.BaseDateTime.<init>:256 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:256 ALOAD 8
+org.joda.time.base.BaseDateTime.<init>:256 INVOKEVIRTUAL org/joda/time/base/BaseDateTime.checkChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:256 PUTFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:257 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:257 GETFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:257 INVOKEVIRTUAL org/joda/time/Chronology.getDateTimeMillis(IIIIIII)J
+org.joda.time.base.BaseDateTime.<init>:257 LSTORE 9
+org.joda.time.base.BaseDateTime.<init>:259 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:259 LLOAD 9
+org.joda.time.base.BaseDateTime.<init>:259 INVOKEVIRTUAL org/joda/time/base/BaseDateTime.checkInstant(JLorg/joda/time/Chronology;)J
+org.joda.time.base.BaseDateTime.<init>:259 PUTFIELD org/joda/time/base/BaseDateTime.iMillis J
+org.joda.time.base.BaseDateTime.checkChronology:280 ALOAD 1
+org.joda.time.base.BaseDateTime.checkChronology:280 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.checkChronology:280 ARETURN
+org.joda.time.base.BaseDateTime.checkInstant:294 LLOAD 1
+org.joda.time.base.BaseDateTime.checkInstant:294 LRETURN
+org.joda.time.base.BaseDateTime.getMillis:305 ALOAD 0
+org.joda.time.base.BaseDateTime.getMillis:305 GETFIELD org/joda/time/base/BaseDateTime.iMillis J
+org.joda.time.base.BaseDateTime.getMillis:305 LRETURN
+org.joda.time.base.BaseDateTime.getChronology:314 ALOAD 0
+org.joda.time.base.BaseDateTime.getChronology:314 GETFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.getChronology:314 ARETURN
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 DUP
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 ASTORE 8
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 GETFIELD org/joda/time/chrono/AssembledChronology.iBaseFlags I
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 ICONST_5
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 IAND
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 ICONST_5
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 IF_ICMPNE L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:133 ALOAD 8
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:133 LRETURN
+org.joda.time.chrono.AssembledChronology.hours:192 ALOAD 0
+org.joda.time.chrono.AssembledChronology.hours:192 GETFIELD org/joda/time/chrono/AssembledChronology.iHours Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.hours:192 ARETURN
+org.joda.time.chrono.ISOChronology.getInstance:92 GETSTATIC org/joda/time/chrono/ISOChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.ISOChronology.getInstance:92 ALOAD 0
+org.joda.time.chrono.ISOChronology.getInstance:92 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.ISOChronology.getInstance:92 ASTORE 1
+org.joda.time.chrono.ISOChronology.getInstance:100 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:100 ARETURN
+org.joda.time.field.FieldUtils.safeAdd:85 LLOAD 0
+org.joda.time.field.FieldUtils.safeAdd:85 LLOAD 2
+org.joda.time.field.FieldUtils.safeAdd:85 LADD
+org.joda.time.field.FieldUtils.safeAdd:85 LSTORE 4
+org.joda.time.field.FieldUtils.safeAdd:91 LLOAD 4
+org.joda.time.field.FieldUtils.safeAdd:91 LRETURN
+org.joda.time.field.PreciseDurationField.add:104 ILOAD 3
+org.joda.time.field.PreciseDurationField.add:104 I2L
+org.joda.time.field.PreciseDurationField.add:104 ALOAD 0
+org.joda.time.field.PreciseDurationField.add:104 GETFIELD org/joda/time/field/PreciseDurationField.iUnitMillis J
+org.joda.time.field.PreciseDurationField.add:104 LMUL
+org.joda.time.field.PreciseDurationField.add:104 LSTORE 4
+org.joda.time.field.PreciseDurationField.add:105 LLOAD 1
+org.joda.time.field.PreciseDurationField.add:105 LLOAD 4
+org.joda.time.field.PreciseDurationField.add:105 INVOKESTATIC org/joda/time/field/FieldUtils.safeAdd(JJ)J
+org.joda.time.field.PreciseDurationField.add:105 LRETURN
+
+Slice consists of 307 bytecode instructions.
+Computation took 3.26 seconds.

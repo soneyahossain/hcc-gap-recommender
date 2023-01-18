@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NamespaceNode.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.dom</a> &gt; <span class="el_source">NamespaceNode.java</span></div><h1>NamespaceNode.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+////////////////////////////////////////////////////////////////////
+// Inner class for a Namespace node.
+////////////////////////////////////////////////////////////////////
+
+package org.jaxen.dom;
+
+import org.jaxen.pattern.Pattern;
+import org.w3c.dom.*;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+
+
+/**
+ * Extension DOM2/DOM3 node type for a namespace node.
+ *
+ * &lt;p&gt;This class implements the DOM2 and DOM3 {@link Node} interface
+ * to allow namespace nodes to be included in the result
+ * set of an XPath selectNodes operation, even though DOM does
+ * not model namespaces in scope as separate nodes.&lt;/p&gt;
+ *
+ * &lt;p&gt;
+ * While all of the DOM2 methods are implemented with reasonable
+ * defaults, there will be some unexpected surprises, so users are
+ * advised to test for NamespaceNodes and filter them out from the
+ * result sets as early as possible.
+ * &lt;/p&gt;
+ *
+ * &lt;ol&gt;
+ *
+ * &lt;li&gt;The {@link #getNodeType} method returns {@link #NAMESPACE_NODE},
+ * which is not one of the usual DOM2 node types.  Generic code may
+ * fall unexpectedly out of switch statements, for example.&lt;/li&gt;
+ *
+ * &lt;li&gt;The {@link #getOwnerDocument} method returns the owner document
+ * of the parent node, but that owner document will know nothing about
+ * the namespace node.&lt;/li&gt;
+ *
+ * &lt;li&gt;The {@link #isSupported} method always returns false.&lt;/li&gt;
+ *
+ * &lt;li&gt; The DOM3 methods sometimes throw UnsupportedOperationException.
+ *      They're here only to allow this class to be compiled with Java 1.5.
+ *       Do not call or rely on them.&lt;/li&gt;
+ * &lt;/ol&gt;
+ *
+ * &lt;p&gt;All attempts to modify a &lt;code&gt;NamespaceNode&lt;/code&gt; will fail with a {@link
+ * DOMException} ({@link
+ * DOMException#NO_MODIFICATION_ALLOWED_ERR}).&lt;/p&gt;
+ *
+ * @author David Megginson
+ * @author Elliotte Rusty Harold
+ * @see DocumentNavigator
+ */
+public class NamespaceNode implements Node {
+
+    /**
+     * Constant: this is a NamespaceNode.
+     *
+     * @see #getNodeType
+     */
+    public final static short NAMESPACE_NODE = Pattern.NAMESPACE_NODE;
+
+    // FIXME &quot;Note: Numeric codes up to 200 are reserved to W3C for possible future use.&quot;
+    // We should be using higher codes. Here we're using 13, the same as DOM 3's type for XPathNamespace.
+    // However, that's only a note not a recommendation.
+    private Node parent;
+    private String name;
+
+
+    ////////////////////////////////////////////////////////////////////
+    // Implementation of org.w3c.dom.Node.
+    ////////////////////////////////////////////////////////////////////
+    private String value;
+    // XXX userdata needs testing
+<span class="fc" id="L123">    private HashMap userData = new HashMap();</span>
+
+
+    /**
+     * Create a new NamespaceNode.
+     *
+     * @param parent the DOM node to which the namespace is attached
+     * @param name   the namespace prefix
+     * @param value  the namespace URI
+     */
+<span class="fc" id="L133">    public NamespaceNode(Node parent, String name, String value) {</span>
+<span class="fc" id="L134">        this.parent = parent;</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">        this.name = name == null ? &quot;&quot; : name;</span>
+<span class="fc" id="L136">        this.value = value;</span>
+<span class="fc" id="L137">    }</span>
+
+
+    /**
+     * Constructor.
+     *
+     * @param parent    the DOM node to which the namespace is attached
+     * @param attribute the DOM attribute object containing the
+     *                  namespace declaration
+     */
+<span class="fc" id="L147">    NamespaceNode(Node parent, Node attribute) {</span>
+<span class="fc" id="L148">        String attributeName = attribute.getNodeName();</span>
+
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (attributeName.equals(&quot;xmlns&quot;)) {</span>
+<span class="nc" id="L151">            this.name = &quot;&quot;;</span>
+<span class="pc bpc" id="L152" title="1 of 2 branches missed.">        } else if (attributeName.startsWith(&quot;xmlns:&quot;)) {</span>
+<span class="fc" id="L153">            this.name = attributeName.substring(6); // the part after &quot;xmlns:&quot;</span>
+        } else { // workaround for Crimson bug; Crimson incorrectly reports the prefix as the node name
+<span class="nc" id="L155">            this.name = attributeName;</span>
+        }
+<span class="fc" id="L157">        this.parent = parent;</span>
+<span class="fc" id="L158">        this.value = attribute.getNodeValue();</span>
+<span class="fc" id="L159">    }</span>
+
+    /**
+     * Get the namespace prefix.
+     *
+     * @return the namespace prefix, or &quot;&quot; for the default namespace
+     */
+    public String getNodeName() {
+<span class="fc" id="L167">        return name;</span>
+    }
+
+    /**
+     * Get the namespace URI.
+     *
+     * @return the namespace URI
+     */
+    public String getNodeValue() {
+<span class="fc" id="L176">        return value;</span>
+    }
+
+    /**
+     * Change the namespace URI (always fails).
+     *
+     * @param value the new URI
+     * @throws DOMException always
+     */
+    public void setNodeValue(String value) throws DOMException {
+<span class="nc" id="L186">        disallowModification();</span>
+<span class="nc" id="L187">    }</span>
+
+    /**
+     * Get the node type.
+     *
+     * @return always {@link #NAMESPACE_NODE}.
+     */
+    public short getNodeType() {
+<span class="fc" id="L195">        return NAMESPACE_NODE;</span>
+    }
+
+    /**
+     * Get the parent node.
+     *
+     * &lt;p&gt;This method returns the element that was queried for Namespaces
+     * in effect, &lt;em&gt;not&lt;/em&gt; necessarily the actual element containing
+     * the Namespace declaration.&lt;/p&gt;
+     *
+     * @return the parent node (not null)
+     */
+    public Node getParentNode() {
+<span class="fc" id="L208">        return parent;</span>
+    }
+
+    /**
+     * Get the list of child nodes.
+     *
+     * @return an empty node list
+     */
+    public NodeList getChildNodes() {
+<span class="nc" id="L217">        return new EmptyNodeList();</span>
+    }
+
+    /**
+     * Get the first child node.
+     *
+     * @return null
+     */
+    public Node getFirstChild() {
+<span class="nc" id="L226">        return null;</span>
+    }
+
+    /**
+     * Get the last child node.
+     *
+     * @return null
+     */
+    public Node getLastChild() {
+<span class="nc" id="L235">        return null;</span>
+    }
+
+    /**
+     * Get the previous sibling node.
+     *
+     * @return null
+     */
+    public Node getPreviousSibling() {
+<span class="nc" id="L244">        return null;</span>
+    }
+
+    /**
+     * Get the next sibling node.
+     *
+     * @return null
+     */
+    public Node getNextSibling() {
+<span class="nc" id="L253">        return null;</span>
+    }
+
+    /**
+     * Get the attribute nodes.
+     *
+     * @return null
+     */
+    public NamedNodeMap getAttributes() {
+<span class="nc" id="L262">        return null;</span>
+    }
+
+    /**
+     * Get the owner document.
+     *
+     * @return the owner document &lt;em&gt;of the parent node&lt;/em&gt;
+     */
+    public Document getOwnerDocument() {
+<span class="nc bnc" id="L271" title="All 2 branches missed.">        if (parent == null) return null;</span>
+<span class="nc" id="L272">        return parent.getOwnerDocument();</span>
+    }
+
+    /**
+     * Insert a new child node (always fails).
+     *
+     * @param newChild the node to add
+     * @param refChild ignored
+     * @return never
+     * @throws DOMException always
+     * @see Node#insertBefore
+     */
+    public Node insertBefore(Node newChild, Node refChild)
+            throws DOMException {
+<span class="nc" id="L286">        disallowModification();</span>
+<span class="nc" id="L287">        return null;</span>
+    }
+
+    /**
+     * Replace a child node (always fails).
+     *
+     * @param newChild the node to add
+     * @param oldChild the child node to replace
+     * @return never
+     * @throws DOMException always
+     * @see Node#replaceChild
+     */
+    public Node replaceChild(Node newChild, Node oldChild) throws DOMException {
+<span class="nc" id="L300">        disallowModification();</span>
+<span class="nc" id="L301">        return null;</span>
+    }
+
+    /**
+     * Remove a child node (always fails).
+     *
+     * @param oldChild the child node to remove
+     * @return never
+     * @throws DOMException always
+     * @see Node#removeChild
+     */
+    public Node removeChild(Node oldChild) throws DOMException {
+<span class="nc" id="L313">        disallowModification();</span>
+<span class="nc" id="L314">        return null;</span>
+    }
+
+    /**
+     * Append a new child node (always fails).
+     *
+     * @param newChild the node to add
+     * @return never
+     * @throws DOMException always
+     * @see Node#appendChild
+     */
+    public Node appendChild(Node newChild) throws DOMException {
+<span class="nc" id="L326">        disallowModification();</span>
+<span class="nc" id="L327">        return null;</span>
+    }
+
+    /**
+     * Test for child nodes.
+     *
+     * @return false
+     */
+    public boolean hasChildNodes() {
+<span class="nc" id="L336">        return false;</span>
+    }
+
+    /**
+     * Create a copy of this node.
+     *
+     * @param deep make a deep copy (no effect, since namespace nodes
+     *             don't have children).
+     * @return a new copy of this namespace node
+     */
+    public Node cloneNode(boolean deep) {
+<span class="nc" id="L347">        return new NamespaceNode(parent, name, value);</span>
+    }
+
+    /**
+     * Normalize the text descendants of this node.
+     *
+     * &lt;p&gt;This method has no effect, since namespace nodes have no
+     * descendants.&lt;/p&gt;
+     */
+    public void normalize() {
+        // no op
+<span class="nc" id="L358">    }</span>
+
+    /**
+     * Test if a DOM2 feature is supported. (None are.)
+     *
+     * @param feature the feature name
+     * @param version the feature version
+     * @return false
+     */
+    public boolean isSupported(String feature, String version) {
+<span class="nc" id="L368">        return false;</span>
+    }
+
+    /**
+     * Get the namespace URI of this node.
+     *
+     * &lt;p&gt;Namespace declarations are not themselves
+     * Namespace-qualified.&lt;/p&gt;
+     *
+     * @return null
+     */
+    public String getNamespaceURI() {
+<span class="nc" id="L380">        return null;</span>
+    }
+
+    /**
+     * Get the namespace prefix of this node.
+     *
+     * &lt;p&gt;Namespace declarations are not themselves
+     * namespace-qualified.&lt;/p&gt;
+     *
+     * @return null
+     * @see #getLocalName
+     */
+    public String getPrefix() {
+<span class="nc" id="L393">        return null;</span>
+    }
+
+
+    ////////////////////////////////////////////////////////////////////
+    // Override default methods from java.lang.Object.
+    ////////////////////////////////////////////////////////////////////
+
+    /**
+     * Change the namespace prefix of this node (always fails).
+     *
+     * @param prefix the new prefix
+     * @throws DOMException always thrown
+     */
+    public void setPrefix(String prefix)
+            throws DOMException {
+<span class="nc" id="L409">        disallowModification();</span>
+<span class="nc" id="L410">    }</span>
+
+    /**
+     * Get the XPath name of the namespace node;; i.e. the
+     * namespace prefix.
+     *
+     * @return the namespace prefix
+     */
+    public String getLocalName() {
+<span class="fc" id="L419">        return name;</span>
+    }
+
+    /**
+     * Test if this node has attributes.
+     *
+     * @return false
+     */
+    public boolean hasAttributes() {
+<span class="nc" id="L428">        return false;</span>
+    }
+
+    /**
+     * Throw a NO_MODIFICATION_ALLOWED_ERR DOMException.
+     *
+     * @throws DOMException always thrown
+     */
+    private void disallowModification() throws DOMException {
+<span class="fc" id="L437">        throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR,</span>
+                &quot;Namespace node may not be modified&quot;);
+    }
+
+
+    ////////////////////////////////////////////////////////////////////
+    // Internal state.
+    ////////////////////////////////////////////////////////////////////
+
+    /**
+     * Generate a hash code for a namespace node.
+     *
+     * @return a hash code for this node
+     */
+    public int hashCode() {
+<span class="fc" id="L452">        return hashCode(parent) + hashCode(name) + hashCode(value);</span>
+    }
+
+    /**
+     * Test for equivalence with another object.
+     *
+     * &lt;p&gt;Two Namespace nodes are considered equivalent if their parents,
+     * names, and values are equal.&lt;/p&gt;
+     *
+     * @param o the object to test for equality
+     * @return true if the object is equivalent to this node, false
+     * otherwise
+     */
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L466" title="All 2 branches missed.">        if (o == this) return true;</span>
+<span class="nc bnc" id="L467" title="All 2 branches missed.">        else if (o == null) return false;</span>
+<span class="nc bnc" id="L468" title="All 2 branches missed.">        else if (o instanceof NamespaceNode) {</span>
+<span class="nc" id="L469">            NamespaceNode ns = (NamespaceNode) o;</span>
+<span class="nc bnc" id="L470" title="All 2 branches missed.">            return (equals(parent, ns.getParentNode()) &amp;&amp;</span>
+<span class="nc bnc" id="L471" title="All 2 branches missed.">                    equals(name, ns.getNodeName()) &amp;&amp;</span>
+<span class="nc bnc" id="L472" title="All 2 branches missed.">                    equals(value, ns.getNodeValue()));</span>
+        } else {
+<span class="nc" id="L474">            return false;</span>
+        }
+    }
+
+    /**
+     * Helper method for generating a hash code.
+     *
+     * @param o the object for generating a hash code (possibly null)
+     * @return the object's hash code, or 0 if the object is null
+     * @see java.lang.Object#hashCode
+     */
+    private int hashCode(Object o) {
+<span class="pc bpc" id="L486" title="1 of 2 branches missed.">        return (o == null ? 0 : o.hashCode());</span>
+    }
+
+
+    ////////////////////////////////////////////////////////////////////
+    // Inner class: empty node list.
+    ////////////////////////////////////////////////////////////////////
+
+    /**
+     * Helper method for comparing two objects.
+     *
+     * @param a the first object to compare (possibly null)
+     * @param b the second object to compare (possibly null)
+     * @return true if the objects are equivalent or are both null
+     * @see java.lang.Object#equals
+     */
+    private boolean equals(Object a, Object b) {
+<span class="nc bnc" id="L503" title="All 6 branches missed.">        return ((a == null &amp;&amp; b == null) ||</span>
+<span class="nc bnc" id="L504" title="All 2 branches missed.">                (a != null &amp;&amp; a.equals(b)));</span>
+    }
+
+    ////////////////////////////////////////////////////////////////////
+    // DOM Level 3 methods
+    ////////////////////////////////////////////////////////////////////
+
+    /**
+     * Return the base URI of the document containing this node.
+     * This only works in DOM 3.
+     *
+     * @return null
+     */
+    public String getBaseURI() {
+<span class="nc" id="L518">        Class clazz = Node.class;</span>
+        try {
+<span class="nc" id="L520">            Class[] args = new Class[0];</span>
+<span class="nc" id="L521">            Method getBaseURI = clazz.getMethod(&quot;getBaseURI&quot;, args);</span>
+<span class="nc" id="L522">            String base = (String) getBaseURI.invoke(this.getParentNode(), args);</span>
+<span class="nc" id="L523">            return base;</span>
+<span class="nc" id="L524">        } catch (Exception ex) {</span>
+<span class="nc" id="L525">            return null;</span>
+        }
+    }
+
+
+    /**
+     * Compare relative position of this node to another nbode. (Always fails).
+     * This method is included solely for compatibility with the superclass.
+     *
+     * @param other the node to compare to
+     * @return never
+     * @throws DOMException NOT_SUPPORTED_ERR
+     */
+    public short compareDocumentPosition(Node other) throws DOMException {
+<span class="nc" id="L539">        DOMException ex = new DOMException(</span>
+                DOMException.NOT_SUPPORTED_ERR,
+                &quot;DOM level 3 interfaces are not fully implemented in Jaxen's NamespaceNode class&quot;
+        );
+<span class="nc" id="L543">        throw ex;</span>
+    }
+
+
+    /**
+     * Return the namespace URI.
+     *
+     * @return the namespace URI
+     * @see #getNodeValue
+     */
+    public String getTextContent() {
+<span class="fc" id="L554">        return value;</span>
+    }
+
+
+    /**
+     * Change the value of this node (always fails).
+     * This method is included solely for compatibility with the superclass.
+     *
+     * @param textContent the new content
+     * @throws DOMException always
+     */
+    public void setTextContent(String textContent) throws DOMException {
+<span class="nc" id="L566">        disallowModification();</span>
+<span class="nc" id="L567">    }</span>
+
+
+    /**
+     * Returns true if and only if this object represents the same XPath namespace node
+     * as the argument; that is, they have the same parent, the same prefix, and the
+     * same URI.
+     *
+     * @param other the node to compare to
+     * @return true if this object represents the same XPath namespace node
+     * as other; false otherwise
+     */
+    public boolean isSameNode(Node other) {
+<span class="fc" id="L580">        boolean a = this.isEqualNode(other);</span>
+        // a bit flaky (should really be 
+        // this.getParentNode().isEqual(other.getParentNode())
+        // but we want this to compile in Java 1.4 without problems
+        // Note that this will mess up code coverage since you can't cover both
+        // branches in the same VM
+        boolean b;
+<span class="fc" id="L587">        Node thisParent = this.getParentNode();</span>
+<span class="fc" id="L588">        Node thatParent = other.getParentNode();</span>
+        try {
+<span class="fc" id="L590">            Class clazz = Node.class;</span>
+<span class="fc" id="L591">            Class[] args = {clazz};</span>
+<span class="nc" id="L592">            Method isEqual = clazz.getMethod(&quot;isEqual&quot;, args);</span>
+<span class="nc" id="L593">            Object[] args2 = new Object[1];</span>
+<span class="nc" id="L594">            args2[0] = thatParent;</span>
+<span class="nc" id="L595">            Boolean result = (Boolean) isEqual.invoke(thisParent, args2);</span>
+<span class="nc" id="L596">            b = result.booleanValue();</span>
+<span class="fc" id="L597">        } catch (NoSuchMethodException ex) {</span>
+<span class="fc" id="L598">            b = thisParent.equals(thatParent);</span>
+<span class="nc" id="L599">        } catch (InvocationTargetException ex) {</span>
+<span class="nc" id="L600">            b = thisParent.equals(thatParent);</span>
+<span class="nc" id="L601">        } catch (IllegalAccessException ex) {</span>
+<span class="nc" id="L602">            b = thisParent.equals(thatParent);</span>
+<span class="pc" id="L603">        }</span>
+
+<span class="pc bpc" id="L605" title="1 of 4 branches missed.">        return a &amp;&amp; b;</span>
+
+    }
+
+
+    /**
+     * Return the prefix bound to this namespace URI within the scope
+     * of this node.
+     *
+     * @param namespaceURI the URI to find a prefix binding for
+     * @return a prefix matching this namespace URI
+     * @throws UnsupportedOperationException in DOM 2
+     */
+    public String lookupPrefix(String namespaceURI) {
+        // This could be fully implemented even in Java 1.4. See
+        // http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
+        // It hardly seems worth the effort though.
+
+        try {
+<span class="nc" id="L624">            Class clazz = Node.class;</span>
+<span class="nc" id="L625">            Class[] argTypes = {String.class};</span>
+<span class="nc" id="L626">            Method lookupPrefix = clazz.getMethod(&quot;lookupPrefix&quot;, argTypes);</span>
+<span class="nc" id="L627">            String[] args = {namespaceURI};</span>
+<span class="nc" id="L628">            String result = (String) lookupPrefix.invoke(parent, args);</span>
+<span class="nc" id="L629">            return result;</span>
+<span class="nc" id="L630">        } catch (NoSuchMethodException ex) {</span>
+<span class="nc" id="L631">            throw new UnsupportedOperationException(&quot;Cannot lookup prefixes in DOM 2&quot;);</span>
+<span class="nc" id="L632">        } catch (InvocationTargetException ex) {</span>
+<span class="nc" id="L633">            throw new UnsupportedOperationException(&quot;Cannot lookup prefixes in DOM 2&quot;);</span>
+<span class="nc" id="L634">        } catch (IllegalAccessException ex) {</span>
+<span class="nc" id="L635">            throw new UnsupportedOperationException(&quot;Cannot lookup prefixes in DOM 2&quot;);</span>
+        }
+
+    }
+
+
+    /**
+     * Return true if the specified URI is the default namespace in
+     * scope (always fails). This method is included solely for
+     * compatibility with the superclass.
+     *
+     * @param namespaceURI the URI to check
+     * @return never
+     * @throws UnsupportedOperationException always
+     */
+    public boolean isDefaultNamespace(String namespaceURI) {
+<span class="nc" id="L651">        return namespaceURI.equals(this.lookupNamespaceURI(null));</span>
+    }
+
+
+    /**
+     * Return the namespace URI mapped to the specified
+     * prefix within the scope of this namespace node.
+     *
+     * @param prefix the prefix to search for
+     * @return the namespace URI mapped to this prefix
+     * @throws UnsupportedOperationException in DOM 2
+     */
+    public String lookupNamespaceURI(String prefix) {
+        // This could be fully implemented even in Java 1.4. See
+        // http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
+        // It hardly seems worth the effort though.
+
+        try {
+<span class="nc" id="L669">            Class clazz = Node.class;</span>
+<span class="nc" id="L670">            Class[] argTypes = {String.class};</span>
+<span class="nc" id="L671">            Method lookupNamespaceURI = clazz.getMethod(&quot;lookupNamespaceURI&quot;, argTypes);</span>
+<span class="nc" id="L672">            String[] args = {prefix};</span>
+<span class="nc" id="L673">            String result = (String) lookupNamespaceURI.invoke(parent, args);</span>
+<span class="nc" id="L674">            return result;</span>
+<span class="nc" id="L675">        } catch (NoSuchMethodException ex) {</span>
+<span class="nc" id="L676">            throw new UnsupportedOperationException(&quot;Cannot lookup namespace URIs in DOM 2&quot;);</span>
+<span class="nc" id="L677">        } catch (InvocationTargetException ex) {</span>
+<span class="nc" id="L678">            throw new UnsupportedOperationException(&quot;Cannot lookup namespace URIs in DOM 2&quot;);</span>
+<span class="nc" id="L679">        } catch (IllegalAccessException ex) {</span>
+<span class="nc" id="L680">            throw new UnsupportedOperationException(&quot;Cannot lookup namespace URIs in DOM 2&quot;);</span>
+        }
+    }
+
+
+    /**
+     * Returns true if this object binds the same prefix to the same URI.
+     * That is, this object has the same prefix and URI as the argument.
+     *
+     * @param arg the node to compare to
+     * @return true if this object has the same prefix and URI as the argument; false otherwise
+     */
+    public boolean isEqualNode(Node arg) {
+<span class="pc bpc" id="L693" title="1 of 2 branches missed.">        if (arg.getNodeType() == this.getNodeType()) {</span>
+<span class="fc" id="L694">            NamespaceNode other = (NamespaceNode) arg;</span>
+<span class="pc bpc" id="L695" title="3 of 4 branches missed.">            if (other.name == null &amp;&amp; this.name != null) return false;</span>
+<span class="pc bpc" id="L696" title="2 of 4 branches missed.">            else if (other.name != null &amp;&amp; this.name == null) return false;</span>
+<span class="pc bpc" id="L697" title="3 of 4 branches missed.">            else if (other.value == null &amp;&amp; this.value != null) return false;</span>
+<span class="pc bpc" id="L698" title="2 of 4 branches missed.">            else if (other.value != null &amp;&amp; this.value == null) return false;</span>
+<span class="pc bpc" id="L699" title="3 of 4 branches missed.">            else if (other.name == null &amp;&amp; this.name == null) {</span>
+<span class="nc" id="L700">                return other.value.equals(this.value);</span>
+            }
+
+<span class="pc bpc" id="L703" title="1 of 4 branches missed.">            return other.name.equals(this.name) &amp;&amp; other.value.equals(this.value);</span>
+        }
+<span class="nc" id="L705">        return false;</span>
+    }
+
+
+    /**
+     * Returns the value of the requested feature. Always returns null.
+     *
+     * @return null
+     */
+    public Object getFeature(String feature, String version) {
+<span class="fc" id="L715">        return null;</span>
+    }
+
+    /**
+     * Associates an object with a key.
+     *
+     * @param key     the key by which the data will be retrieved
+     * @param data    the object to store with the key
+     * @param handler ignored since namespace nodes cannot be imported, cloned, or renamed
+     * @return the value previously associated with this key; or null
+     * if there isn't any such previous value
+     */
+    public Object setUserData(String key, Object data, UserDataHandler handler) {
+<span class="nc" id="L728">        Object oldValue = getUserData(key);</span>
+<span class="nc" id="L729">        userData.put(key, data);</span>
+<span class="nc" id="L730">        return oldValue;</span>
+    }
+
+    /**
+     * Returns the user data associated with the given key.
+     *
+     * @param key the lookup key
+     * @return the object associated with the key; or null if no such object is available
+     */
+    public Object getUserData(String key) {
+<span class="nc" id="L740">        return userData.get(key);</span>
+    }
+
+    /**
+     * A node list with no members.
+     *
+     * &lt;p&gt;This class is necessary for the {@link Node#getChildNodes}
+     * method, which must return an empty node list rather than
+     * null when there are no children.&lt;/p&gt;
+     */
+    private static class EmptyNodeList implements NodeList {
+
+        /**
+         * @see NodeList#getLength
+         */
+        public int getLength() {
+<span class="nc" id="L756">            return 0;</span>
+        }
+
+
+        /**
+         * @see NodeList#item
+         */
+        public Node item(int index) {
+<span class="nc" id="L764">            return null;</span>
+        }
+
+    }
+
+}
+
+// end of NamespaceNode.java
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

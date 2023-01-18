@@ -1,0 +1,43 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.7% done, time left: unknown  0.8% done, time left: unknown  0.9% done, time left: unknown  1.8% done, time left: unknown  3.5% done, time left: unknown  6.0% done, time left: unknown  8.3% done, time left:   0:00:03    9.7% done, time left:   0:00:04 11.7% done, time left:   0:00:04 12.0% done, time left:   0:00:05 15.0% done, time left:   0:00:05 17.1% done, time left:   0:00:05 21.9% done, time left:   0:00:03 23.7% done, time left:   0:00:02 24.8% done, time left:   0:00:02 26.9% done, time left:   0:00:02 30.4% done, time left:   0:00:02 34.8% done, time left:   0:00:02 38.7% done, time left:   0:00:02 42.2% done, time left:   0:00:01 44.7% done, time left:   0:00:01 49.4% done, time left:   0:00:01 55.0% done, time left:   0:00:00 61.2% done, time left:   0:00:00 63.2% done, time left:   0:00:00 64.4% done, time left:   0:00:00 70.3% done, time left:   0:00:00 73.5% done, time left:   0:00:00 79.0% done, time left:   0:00:00 84.4% done, time left:   0:00:00 90.3% done, time left:   0:00:00 93.9% done, time left:   0:00:00 97.8% done, time left:   0:00:00 99.5% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.convert.TestNullConverter.testGetInstantMillis_Object_Chronology:151:*]:
+org.joda.time.DateTimeUtils.currentTimeMillis:72 GETSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils.currentTimeMillis:72 INVOKEINTERFACE org/joda/time/DateTimeUtils$MillisProvider.getMillis()J
+org.joda.time.DateTimeUtils.currentTimeMillis:72 LRETURN
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 NEW org/joda/time/DateTimeUtils$FixedMillisProvider
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 DUP
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 LLOAD 0
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 INVOKESPECIAL org/joda/time/DateTimeUtils$FixedMillisProvider.<init>(J)V
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 PUTSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 ALOAD 0
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 LLOAD 1
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 PUTFIELD org/joda/time/DateTimeUtils$FixedMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 ALOAD 0
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 GETFIELD org/joda/time/DateTimeUtils$FixedMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 LRETURN
+org.joda.time.convert.AbstractConverter.getInstantMillis:52 INVOKESTATIC org/joda/time/DateTimeUtils.currentTimeMillis()J
+org.joda.time.convert.AbstractConverter.getInstantMillis:52 LRETURN
+org.joda.time.convert.TestNullConverter.<init>:52 ALOAD 0
+org.joda.time.convert.TestNullConverter.<init>:52 LDC 1765230040
+org.joda.time.convert.TestNullConverter.<init>:52 PUTFIELD org/joda/time/convert/TestNullConverter.TEST_TIME_NOW J
+org.joda.time.convert.TestNullConverter.main:74 NEW org/joda/time/convert/TestNullConverter
+org.joda.time.convert.TestNullConverter.main:74 DUP
+org.joda.time.convert.TestNullConverter.main:74 INVOKESPECIAL org/joda/time/convert/TestNullConverter.<init>()V
+org.joda.time.convert.TestNullConverter.main:74 ASTORE 1
+org.joda.time.convert.TestNullConverter.main:78 ALOAD 1
+org.joda.time.convert.TestNullConverter.main:78 INVOKEVIRTUAL org/joda/time/convert/TestNullConverter.setUp()V
+org.joda.time.convert.TestNullConverter.main:78 ALOAD 1
+org.joda.time.convert.TestNullConverter.main:78 INVOKEVIRTUAL org/joda/time/convert/TestNullConverter.testGetInstantMillis_Object_Chronology()V
+org.joda.time.convert.TestNullConverter.setUp:104 ALOAD 0
+org.joda.time.convert.TestNullConverter.setUp:104 GETFIELD org/joda/time/convert/TestNullConverter.TEST_TIME_NOW J
+org.joda.time.convert.TestNullConverter.setUp:104 INVOKESTATIC org/joda/time/DateTimeUtils.setCurrentMillisFixed(J)V
+org.joda.time.convert.TestNullConverter.testGetInstantMillis_Object_Chronology:151 ALOAD 0
+org.joda.time.convert.TestNullConverter.testGetInstantMillis_Object_Chronology:151 GETFIELD org/joda/time/convert/TestNullConverter.TEST_TIME_NOW J
+org.joda.time.convert.TestNullConverter.testGetInstantMillis_Object_Chronology:151 GETSTATIC org/joda/time/convert/NullConverter.INSTANCE Lorg/joda/time/convert/NullConverter;
+org.joda.time.convert.TestNullConverter.testGetInstantMillis_Object_Chronology:151 ACONST_NULL
+org.joda.time.convert.TestNullConverter.testGetInstantMillis_Object_Chronology:151 ACONST_NULL
+org.joda.time.convert.TestNullConverter.testGetInstantMillis_Object_Chronology:151 CHECKCAST org/joda/time/Chronology
+org.joda.time.convert.TestNullConverter.testGetInstantMillis_Object_Chronology:151 INVOKEVIRTUAL org/joda/time/convert/NullConverter.getInstantMillis(Ljava/lang/Object;Lorg/joda/time/Chronology;)J
+org.joda.time.convert.TestNullConverter.testGetInstantMillis_Object_Chronology:151 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 38 bytecode instructions.
+Computation took 3.95 seconds.

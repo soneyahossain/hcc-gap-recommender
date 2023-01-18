@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IdFunction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.function</a> &gt; <span class="el_source">IdFunction.java</span></div><h1>IdFunction.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+package org.jaxen.function;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.StringTokenizer;
+
+import org.jaxen.Context;
+import org.jaxen.Function;
+import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
+
+/**
+ * &lt;p&gt;&lt;b&gt;4.1&lt;/b&gt; &lt;code&gt;&lt;i&gt;node-set&lt;/i&gt; id(&lt;i&gt;object&lt;/i&gt;)&lt;/code&gt; &lt;/p&gt;
+ *  
+ * &lt;p&gt;The &lt;b&gt;id&lt;/b&gt; function returns a &lt;code&gt;List&lt;/code&gt;
+ * of all the elements in the context document that have an ID
+ * matching one of a specified list of IDs. How an attribute is determined
+ * to be of type ID depends on the navigator, but it normally requires that
+ * the attribute be declared to have type ID in the DTD. 
+ * &lt;/p&gt;
+ * 
+ * &lt;p&gt;
+ * There should be no more than one element in any document with a 
+ * certain ID. However, if there are multiple such elements--i.e. if 
+ * there are duplicate IDs--then this function selects only the first element 
+ * in document order with the specified ID. 
+ * &lt;/p&gt;
+ * 
+ * @author Erwin Bolwidt (ejb @ klomp.org)
+ * @author J\u00e9r\u00f4me N\u00e8gre (jerome.negre @ e-xmlmedia.fr)
+ * 
+ * @see &lt;a href=&quot;https://www.w3.org/TR/xpath#function-id&quot; target=&quot;_top&quot;&gt;Section 4.1 of the XPath Specification&lt;/a&gt;
+ */
+public class IdFunction implements Function
+{
+
+    /**
+     * Create a new &lt;code&gt;IdFunction&lt;/code&gt; object.
+     */
+<span class="fc" id="L89">    public IdFunction() {}</span>
+    
+    /** 
+     * Returns a list of the nodes with the specified IDs.
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args a list with exactly one item which is either a string
+     *     a node-set
+     * 
+     * @return a &lt;code&gt;List&lt;/code&gt; containing the first node in document 
+     *     with each of the specified IDs; or 
+     *     an empty list if there are no such nodes
+     * 
+     * @throws FunctionCallException if &lt;code&gt;args&lt;/code&gt; has more or less than one item
+     */
+    public Object call(Context context, List args) throws FunctionCallException
+    {
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        if ( args.size() == 1 ) {</span>
+<span class="fc" id="L108">            return evaluate( context.getNodeSet(),</span>
+<span class="fc" id="L109">                             args.get(0), context.getNavigator() );</span>
+        }
+
+<span class="fc" id="L112">        throw new FunctionCallException( &quot;id() requires one argument&quot; );</span>
+    }
+
+    /** 
+     * Returns a list of the nodes with the specified IDs.
+     * 
+     * @param contextNodes the context node-set. The first item in this list
+     *     determines the document in which the search is performed.
+     * @param arg the ID or IDs to search for
+     * @param nav the navigator used to calculate string-values and search
+     *     by ID
+     * 
+     * @return a &lt;code&gt;List&lt;/code&gt; containing the first node in document 
+     *     with each of the specified IDs; or 
+     *     an empty list if there are no such nodes
+     * 
+     */
+    public static List evaluate(List contextNodes, Object arg, Navigator nav)
+    {
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">        if (contextNodes.size() == 0) return Collections.EMPTY_LIST;</span>
+      
+<span class="fc" id="L133">        List nodes = new ArrayList();</span>
+
+<span class="fc" id="L135">        Object contextNode = contextNodes.get(0);</span>
+
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        if (arg instanceof List) {</span>
+<span class="fc" id="L138">            Iterator iter = ((List)arg).iterator();</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">            while (iter.hasNext()) {</span>
+<span class="fc" id="L140">                String id = StringFunction.evaluate(iter.next(), nav);</span>
+<span class="fc" id="L141">                nodes.addAll( evaluate( contextNodes, id, nav ) );</span>
+<span class="fc" id="L142">            }</span>
+<span class="fc" id="L143">        } </span>
+        else {
+<span class="fc" id="L145">            String ids = StringFunction.evaluate(arg, nav);</span>
+<span class="fc" id="L146">            StringTokenizer tok = new StringTokenizer(ids, &quot; \t\n\r&quot;);</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">            while (tok.hasMoreTokens()) {</span>
+<span class="fc" id="L148">                String id = tok.nextToken();</span>
+<span class="fc" id="L149">                Object node = nav.getElementById(contextNode, id);</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">                if (node != null) {</span>
+<span class="fc" id="L151">                    nodes.add(node);</span>
+                }
+<span class="fc" id="L153">            }</span>
+        }
+<span class="fc" id="L155">        return nodes;</span>
+    }
+    
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

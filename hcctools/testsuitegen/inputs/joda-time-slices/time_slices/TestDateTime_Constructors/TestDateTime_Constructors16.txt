@@ -1,0 +1,544 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.6% done, time left: unknown  0.9% done, time left: unknown  1.1% done, time left: unknown  1.6% done, time left: unknown  2.7% done, time left:   0:00:09    3.8% done, time left:   0:00:09  4.3% done, time left:   0:00:09  4.9% done, time left:   0:00:10  5.9% done, time left:   0:00:10  7.3% done, time left:   0:00:11  9.1% done, time left:   0:00:12 10.8% done, time left:   0:00:12 12.8% done, time left:   0:00:12 14.8% done, time left:   0:00:11 16.8% done, time left:   0:00:10 17.4% done, time left:   0:00:09 19.6% done, time left:   0:00:08 21.9% done, time left:   0:00:08 24.2% done, time left:   0:00:07 26.6% done, time left:   0:00:06 28.8% done, time left:   0:00:05 30.6% done, time left:   0:00:05 32.3% done, time left:   0:00:05 33.9% done, time left:   0:00:04 36.1% done, time left:   0:00:04 38.1% done, time left:   0:00:04 40.1% done, time left:   0:00:04 42.4% done, time left:   0:00:03 44.7% done, time left:   0:00:03 46.9% done, time left:   0:00:03 49.2% done, time left:   0:00:02 51.4% done, time left:   0:00:02 52.2% done, time left:   0:00:01 52.8% done, time left:   0:00:01 54.0% done, time left:   0:00:01 54.5% done, time left:   0:00:01 54.6% done, time left:   0:00:00 55.3% done, time left:   0:00:00 57.6% done, time left:   0:00:01 59.9% done, time left:   0:00:01 62.3% done, time left:   0:00:01 64.8% done, time left:   0:00:01 67.3% done, time left:   0:00:01 69.9% done, time left:   0:00:00 72.4% done, time left:   0:00:00 74.7% done, time left:   0:00:00 76.8% done, time left:   0:00:00 79.0% done, time left:   0:00:00 81.1% done, time left:   0:00:00 83.4% done, time left:   0:00:00 85.5% done, time left:   0:00:00 87.5% done, time left:   0:00:00 89.7% done, time left:   0:00:00 91.6% done, time left:   0:00:00 93.5% done, time left:   0:00:00 93.7% done, time left:   0:00:00 94.2% done, time left:   0:00:00 96.5% done, time left:   0:00:00 97.6% done, time left:   0:00:00 98.9% done, time left:   0:00:00 99.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDateTime_Constructors.testParse_noFormatter_vs_constructor_correctOffset:239:*]:
+org.joda.time.DateTime.now:89 INVOKESPECIAL org/joda/time/DateTime.<init>()V
+org.joda.time.DateTime.parse:149 ALOAD 0
+org.joda.time.DateTime.parse:149 INVOKESTATIC org/joda/time/format/ISODateTimeFormat.dateTimeParser()Lorg/joda/time/format/DateTimeFormatter;
+org.joda.time.DateTime.parse:149 INVOKEVIRTUAL org/joda/time/format/DateTimeFormatter.withOffsetParsed()Lorg/joda/time/format/DateTimeFormatter;
+org.joda.time.DateTime.parse:149 INVOKESTATIC org/joda/time/DateTime.parse(Ljava/lang/String;Lorg/joda/time/format/DateTimeFormatter;)Lorg/joda/time/DateTime;
+org.joda.time.DateTime.parse:149 ARETURN
+org.joda.time.DateTime.parse:160 ALOAD 1
+org.joda.time.DateTime.parse:160 ALOAD 0
+org.joda.time.DateTime.parse:160 INVOKEVIRTUAL org/joda/time/format/DateTimeFormatter.parseDateTime(Ljava/lang/String;)Lorg/joda/time/DateTime;
+org.joda.time.DateTime.parse:160 ARETURN
+org.joda.time.DateTime.<init>:171 INVOKESPECIAL org/joda/time/base/BaseDateTime.<init>()V
+org.joda.time.DateTime.<init>:236 ALOAD 0
+org.joda.time.DateTime.<init>:236 ALOAD 3
+org.joda.time.DateTime.<init>:236 INVOKESPECIAL org/joda/time/base/BaseDateTime.<init>(JLorg/joda/time/Chronology;)V
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true true
+org.joda.time.DateTimeUtils.getChronology:269 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.DateTimeUtils.getChronology:269 ARETURN
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:187 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:187 ARETURN
+org.joda.time.DateTimeZone.setDefault:207 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.setDefault:207 ALOAD 0
+org.joda.time.DateTimeZone.setDefault:207 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.set(Ljava/lang/Object;)V
+org.joda.time.DateTimeZone.forOffsetHours:261 ILOAD 0
+org.joda.time.DateTimeZone.forOffsetHours:261 ICONST_0
+org.joda.time.DateTimeZone.forOffsetHours:261 INVOKESTATIC org/joda/time/DateTimeZone.forOffsetHoursMinutes(II)Lorg/joda/time/DateTimeZone;
+org.joda.time.DateTimeZone.forOffsetHours:261 ARETURN
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:296 ILOAD 0
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:296 IFNE L0 true false
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:310 ILOAD 0
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:310 BIPUSH 60
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:310 IMUL
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:310 ISTORE 3
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:311 ILOAD 3
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:311 IFGE L7 true false
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:314 ILOAD 3
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:314 ILOAD 1
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:314 IADD
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:314 ISTORE 1
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:316 ILOAD 1
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:316 LDC 60000
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:316 INVOKESTATIC org/joda/time/field/FieldUtils.safeMultiply(II)I
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:316 ISTORE 2
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:320 ILOAD 2
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:320 INVOKESTATIC org/joda/time/DateTimeZone.forOffsetMillis(I)Lorg/joda/time/DateTimeZone;
+org.joda.time.DateTimeZone.forOffsetHoursMinutes:320 ARETURN
+org.joda.time.DateTimeZone.forOffsetMillis:333 ILOAD 0
+org.joda.time.DateTimeZone.forOffsetMillis:333 INVOKESTATIC org/joda/time/DateTimeZone.printOffset(I)Ljava/lang/String;
+org.joda.time.DateTimeZone.forOffsetMillis:333 ASTORE 1
+org.joda.time.DateTimeZone.forOffsetMillis:334 ALOAD 1
+org.joda.time.DateTimeZone.forOffsetMillis:334 ILOAD 0
+org.joda.time.DateTimeZone.forOffsetMillis:334 INVOKESTATIC org/joda/time/DateTimeZone.fixedOffsetZone(Ljava/lang/String;I)Lorg/joda/time/DateTimeZone;
+org.joda.time.DateTimeZone.forOffsetMillis:334 ARETURN
+org.joda.time.DateTimeZone.fixedOffsetZone:422 ILOAD 1
+org.joda.time.DateTimeZone.fixedOffsetZone:422 IFNE L0 true false
+org.joda.time.DateTimeZone.fixedOffsetZone:425 NEW org/joda/time/tz/FixedDateTimeZone
+org.joda.time.DateTimeZone.fixedOffsetZone:425 DUP
+org.joda.time.DateTimeZone.fixedOffsetZone:425 ALOAD 0
+org.joda.time.DateTimeZone.fixedOffsetZone:425 ILOAD 1
+org.joda.time.DateTimeZone.fixedOffsetZone:425 ILOAD 1
+org.joda.time.DateTimeZone.fixedOffsetZone:425 INVOKESPECIAL org/joda/time/tz/FixedDateTimeZone.<init>(Ljava/lang/String;Ljava/lang/String;II)V
+org.joda.time.DateTimeZone.fixedOffsetZone:425 ARETURN
+org.joda.time.DateTimeZone.printOffset:679 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:679 LDC 3600000
+org.joda.time.DateTimeZone.printOffset:679 IDIV
+org.joda.time.DateTimeZone.printOffset:679 ISTORE 2
+org.joda.time.DateTimeZone.printOffset:681 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:681 ILOAD 2
+org.joda.time.DateTimeZone.printOffset:681 LDC 3600000
+org.joda.time.DateTimeZone.printOffset:681 IMUL
+org.joda.time.DateTimeZone.printOffset:681 ISUB
+org.joda.time.DateTimeZone.printOffset:681 ISTORE 0
+org.joda.time.DateTimeZone.printOffset:683 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:683 LDC 60000
+org.joda.time.DateTimeZone.printOffset:683 IDIV
+org.joda.time.DateTimeZone.printOffset:683 ISTORE 3
+org.joda.time.DateTimeZone.printOffset:686 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:686 ILOAD 3
+org.joda.time.DateTimeZone.printOffset:686 LDC 60000
+org.joda.time.DateTimeZone.printOffset:686 IMUL
+org.joda.time.DateTimeZone.printOffset:686 ISUB
+org.joda.time.DateTimeZone.printOffset:686 ISTORE 0
+org.joda.time.DateTimeZone.printOffset:687 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:687 IFNE L2 false true
+org.joda.time.DateTimeZone.printOffset:688 INVOKEVIRTUAL java/lang/StringBuffer.toString()Ljava/lang/String;
+org.joda.time.DateTimeZone.printOffset:688 ARETURN
+org.joda.time.DateTimeZone.<init>:719 ALOAD 0
+org.joda.time.DateTimeZone.<init>:719 ALOAD 1
+org.joda.time.DateTimeZone.<init>:719 PUTFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ALOAD 0
+org.joda.time.DateTimeZone.getID:732 GETFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ARETURN
+org.joda.time.TestDateTime_Constructors.main:74 INVOKEVIRTUAL org/joda/time/TestDateTime_Constructors.setUp()V
+org.joda.time.TestDateTime_Constructors.main:74 INVOKEVIRTUAL org/joda/time/TestDateTime_Constructors.test_now()V
+org.joda.time.TestDateTime_Constructors.main:81 INVOKEVIRTUAL org/joda/time/TestDateTime_Constructors.setUp()V
+org.joda.time.TestDateTime_Constructors.main:81 INVOKEVIRTUAL org/joda/time/TestDateTime_Constructors.testParse_noFormatter_vs_constructor_correctOffset()V
+org.joda.time.TestDateTime_Constructors.setUp:153 GETSTATIC org/joda/time/TestDateTime_Constructors.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.TestDateTime_Constructors.setUp:153 INVOKESTATIC org/joda/time/DateTimeZone.setDefault(Lorg/joda/time/DateTimeZone;)V
+org.joda.time.TestDateTime_Constructors.test_now:178 INVOKESTATIC org/joda/time/DateTime.now()Lorg/joda/time/DateTime;
+org.joda.time.TestDateTime_Constructors.testParse_noFormatter_vs_constructor_correctOffset:236 LDC "2010-06-30T01:20+01:00"
+org.joda.time.TestDateTime_Constructors.testParse_noFormatter_vs_constructor_correctOffset:236 INVOKESTATIC org/joda/time/DateTime.parse(Ljava/lang/String;)Lorg/joda/time/DateTime;
+org.joda.time.TestDateTime_Constructors.testParse_noFormatter_vs_constructor_correctOffset:236 ASTORE 1
+org.joda.time.TestDateTime_Constructors.testParse_noFormatter_vs_constructor_correctOffset:239 ICONST_1
+org.joda.time.TestDateTime_Constructors.testParse_noFormatter_vs_constructor_correctOffset:239 INVOKESTATIC org/joda/time/DateTimeZone.forOffsetHours(I)Lorg/joda/time/DateTimeZone;
+org.joda.time.TestDateTime_Constructors.testParse_noFormatter_vs_constructor_correctOffset:239 ALOAD 1
+org.joda.time.TestDateTime_Constructors.testParse_noFormatter_vs_constructor_correctOffset:239 INVOKEVIRTUAL org/joda/time/DateTime.getZone()Lorg/joda/time/DateTimeZone;
+org.joda.time.TestDateTime_Constructors.testParse_noFormatter_vs_constructor_correctOffset:239 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.base.AbstractInstant.getZone:71 ALOAD 0
+org.joda.time.base.AbstractInstant.getZone:71 INVOKEVIRTUAL org/joda/time/base/AbstractInstant.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.base.AbstractInstant.getZone:71 ARETURN
+org.joda.time.base.BaseDateTime.<init>:61 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.base.BaseDateTime.<init>:125 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:125 ALOAD 3
+org.joda.time.base.BaseDateTime.<init>:125 INVOKEVIRTUAL org/joda/time/base/BaseDateTime.checkChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:125 PUTFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.checkChronology:280 ALOAD 1
+org.joda.time.base.BaseDateTime.checkChronology:280 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.checkChronology:280 ARETURN
+org.joda.time.base.BaseDateTime.getChronology:314 ALOAD 0
+org.joda.time.base.BaseDateTime.getChronology:314 GETFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.getChronology:314 ARETURN
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 0
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 1
+org.joda.time.chrono.AssembledChronology.<init>:100 PUTFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getZone:107 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getZone:107 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getZone:107 DUP
+org.joda.time.chrono.AssembledChronology.getZone:107 ASTORE 1
+org.joda.time.chrono.AssembledChronology.getZone:107 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getZone:108 ALOAD 1
+org.joda.time.chrono.AssembledChronology.getZone:108 ARETURN
+org.joda.time.chrono.ISOChronology.getInstance:79 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.ISOChronology.getInstance:79 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.getInstance:79 ARETURN
+org.joda.time.chrono.ISOChronology.getInstance:92 GETSTATIC org/joda/time/chrono/ISOChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.ISOChronology.getInstance:92 ALOAD 0
+org.joda.time.chrono.ISOChronology.getInstance:92 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.ISOChronology.getInstance:92 ASTORE 1
+org.joda.time.chrono.ISOChronology.getInstance:93 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:93 IFNONNULL L1 false true
+org.joda.time.chrono.ISOChronology.getInstance:94 NEW org/joda/time/chrono/ISOChronology
+org.joda.time.chrono.ISOChronology.getInstance:94 DUP
+org.joda.time.chrono.ISOChronology.getInstance:94 INVOKESTATIC org/joda/time/chrono/ZonedChronology.getInstance(Lorg/joda/time/Chronology;Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/ZonedChronology;
+org.joda.time.chrono.ISOChronology.getInstance:94 INVOKESPECIAL org/joda/time/chrono/ISOChronology.<init>(Lorg/joda/time/Chronology;)V
+org.joda.time.chrono.ISOChronology.getInstance:94 ASTORE 1
+org.joda.time.chrono.ISOChronology.getInstance:95 GETSTATIC org/joda/time/chrono/ISOChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.ISOChronology.getInstance:95 ALOAD 0
+org.joda.time.chrono.ISOChronology.getInstance:95 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:95 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.ISOChronology.getInstance:100 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:100 ARETURN
+org.joda.time.chrono.ISOChronology.<init>:110 ALOAD 0
+org.joda.time.chrono.ISOChronology.<init>:110 ALOAD 1
+org.joda.time.chrono.ISOChronology.<init>:110 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;)V
+org.joda.time.chrono.ISOChronology.withZone:134 ALOAD 1
+org.joda.time.chrono.ISOChronology.withZone:134 ALOAD 0
+org.joda.time.chrono.ISOChronology.withZone:134 INVOKEVIRTUAL org/joda/time/chrono/ISOChronology.getZone()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.ISOChronology.withZone:134 IF_ACMPNE L1 true false
+org.joda.time.chrono.ISOChronology.withZone:137 ALOAD 1
+org.joda.time.chrono.ISOChronology.withZone:137 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withZone:137 ARETURN
+org.joda.time.chrono.ZonedChronology.getInstance:69 NEW org/joda/time/chrono/ZonedChronology
+org.joda.time.chrono.ZonedChronology.getInstance:69 ARETURN
+org.joda.time.field.FieldUtils.safeMultiply:122 ILOAD 0
+org.joda.time.field.FieldUtils.safeMultiply:122 I2L
+org.joda.time.field.FieldUtils.safeMultiply:122 ILOAD 1
+org.joda.time.field.FieldUtils.safeMultiply:122 I2L
+org.joda.time.field.FieldUtils.safeMultiply:122 LMUL
+org.joda.time.field.FieldUtils.safeMultiply:122 LSTORE 2
+org.joda.time.field.FieldUtils.safeMultiply:126 LLOAD 2
+org.joda.time.field.FieldUtils.safeMultiply:126 L2I
+org.joda.time.field.FieldUtils.safeMultiply:126 IRETURN
+org.joda.time.format.DateTimeFormatter.<init>:151 ALOAD 0
+org.joda.time.format.DateTimeFormatter.<init>:151 ALOAD 2
+org.joda.time.format.DateTimeFormatter.<init>:151 PUTFIELD org/joda/time/format/DateTimeFormatter.iParser Lorg/joda/time/format/InternalParser;
+org.joda.time.format.DateTimeFormatter.<init>:153 ALOAD 0
+org.joda.time.format.DateTimeFormatter.<init>:153 ILOAD 4
+org.joda.time.format.DateTimeFormatter.<init>:153 PUTFIELD org/joda/time/format/DateTimeFormatter.iOffsetParsed Z
+org.joda.time.format.DateTimeFormatter.withOffsetParsed:256 ALOAD 0
+org.joda.time.format.DateTimeFormatter.withOffsetParsed:256 GETFIELD org/joda/time/format/DateTimeFormatter.iOffsetParsed Z
+org.joda.time.format.DateTimeFormatter.withOffsetParsed:256 ICONST_1
+org.joda.time.format.DateTimeFormatter.withOffsetParsed:256 IF_ICMPNE L0 true false
+org.joda.time.format.DateTimeFormatter.withOffsetParsed:259 NEW org/joda/time/format/DateTimeFormatter
+org.joda.time.format.DateTimeFormatter.withOffsetParsed:259 DUP
+org.joda.time.format.DateTimeFormatter.withOffsetParsed:259 ALOAD 0
+org.joda.time.format.DateTimeFormatter.withOffsetParsed:259 GETFIELD org/joda/time/format/DateTimeFormatter.iParser Lorg/joda/time/format/InternalParser;
+org.joda.time.format.DateTimeFormatter.withOffsetParsed:259 ICONST_1
+org.joda.time.format.DateTimeFormatter.withOffsetParsed:259 INVOKESPECIAL org/joda/time/format/DateTimeFormatter.<init>(Lorg/joda/time/format/InternalPrinter;Lorg/joda/time/format/InternalParser;Ljava/util/Locale;ZLorg/joda/time/Chronology;Lorg/joda/time/DateTimeZone;Ljava/lang/Integer;I)V
+org.joda.time.format.DateTimeFormatter.withOffsetParsed:259 ARETURN
+org.joda.time.format.DateTimeFormatter.parseDateTime:921 ALOAD 0
+org.joda.time.format.DateTimeFormatter.parseDateTime:921 INVOKESPECIAL org/joda/time/format/DateTimeFormatter.requireParser()Lorg/joda/time/format/InternalParser;
+org.joda.time.format.DateTimeFormatter.parseDateTime:921 ASTORE 2
+org.joda.time.format.DateTimeFormatter.parseDateTime:923 ACONST_NULL
+org.joda.time.format.DateTimeFormatter.parseDateTime:923 INVOKESPECIAL org/joda/time/format/DateTimeFormatter.selectChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.format.DateTimeFormatter.parseDateTime:923 ASTORE 3
+org.joda.time.format.DateTimeFormatter.parseDateTime:924 NEW org/joda/time/format/DateTimeParserBucket
+org.joda.time.format.DateTimeFormatter.parseDateTime:924 ASTORE 4
+org.joda.time.format.DateTimeFormatter.parseDateTime:925 ALOAD 2
+org.joda.time.format.DateTimeFormatter.parseDateTime:925 ALOAD 4
+org.joda.time.format.DateTimeFormatter.parseDateTime:925 ALOAD 1
+org.joda.time.format.DateTimeFormatter.parseDateTime:925 ICONST_0
+org.joda.time.format.DateTimeFormatter.parseDateTime:925 INVOKEINTERFACE org/joda/time/format/InternalParser.parseInto(Lorg/joda/time/format/DateTimeParserBucket;Ljava/lang/CharSequence;I)I
+org.joda.time.format.DateTimeFormatter.parseDateTime:925 ISTORE 5
+org.joda.time.format.DateTimeFormatter.parseDateTime:926 ILOAD 5
+org.joda.time.format.DateTimeFormatter.parseDateTime:926 IFLT L3 false true
+org.joda.time.format.DateTimeFormatter.parseDateTime:927 ILOAD 5
+org.joda.time.format.DateTimeFormatter.parseDateTime:927 ALOAD 1
+org.joda.time.format.DateTimeFormatter.parseDateTime:927 INVOKEVIRTUAL java/lang/String.length()I
+org.joda.time.format.DateTimeFormatter.parseDateTime:927 IF_ICMPLT L4 false true
+org.joda.time.format.DateTimeFormatter.parseDateTime:929 ALOAD 0
+org.joda.time.format.DateTimeFormatter.parseDateTime:929 GETFIELD org/joda/time/format/DateTimeFormatter.iOffsetParsed Z
+org.joda.time.format.DateTimeFormatter.parseDateTime:929 IFEQ L0 false true
+org.joda.time.format.DateTimeFormatter.parseDateTime:929 ALOAD 4
+org.joda.time.format.DateTimeFormatter.parseDateTime:929 INVOKEVIRTUAL org/joda/time/format/DateTimeParserBucket.getOffsetInteger()Ljava/lang/Integer;
+org.joda.time.format.DateTimeFormatter.parseDateTime:929 IFNULL L0 false true
+org.joda.time.format.DateTimeFormatter.parseDateTime:930 ALOAD 4
+org.joda.time.format.DateTimeFormatter.parseDateTime:930 INVOKEVIRTUAL org/joda/time/format/DateTimeParserBucket.getOffsetInteger()Ljava/lang/Integer;
+org.joda.time.format.DateTimeFormatter.parseDateTime:930 INVOKEVIRTUAL java/lang/Integer.intValue()I
+org.joda.time.format.DateTimeFormatter.parseDateTime:930 ISTORE 8
+org.joda.time.format.DateTimeFormatter.parseDateTime:931 ILOAD 8
+org.joda.time.format.DateTimeFormatter.parseDateTime:931 INVOKESTATIC org/joda/time/DateTimeZone.forOffsetMillis(I)Lorg/joda/time/DateTimeZone;
+org.joda.time.format.DateTimeFormatter.parseDateTime:931 ASTORE 9
+org.joda.time.format.DateTimeFormatter.parseDateTime:932 ALOAD 3
+org.joda.time.format.DateTimeFormatter.parseDateTime:932 ALOAD 9
+org.joda.time.format.DateTimeFormatter.parseDateTime:932 INVOKEVIRTUAL org/joda/time/Chronology.withZone(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/Chronology;
+org.joda.time.format.DateTimeFormatter.parseDateTime:932 ASTORE 3
+org.joda.time.format.DateTimeFormatter.parseDateTime:936 NEW org/joda/time/DateTime
+org.joda.time.format.DateTimeFormatter.parseDateTime:936 DUP
+org.joda.time.format.DateTimeFormatter.parseDateTime:936 ALOAD 3
+org.joda.time.format.DateTimeFormatter.parseDateTime:936 INVOKESPECIAL org/joda/time/DateTime.<init>(JLorg/joda/time/Chronology;)V
+org.joda.time.format.DateTimeFormatter.parseDateTime:936 ASTORE 8
+org.joda.time.format.DateTimeFormatter.parseDateTime:940 ALOAD 8
+org.joda.time.format.DateTimeFormatter.parseDateTime:940 ARETURN
+org.joda.time.format.DateTimeFormatter.requireParser:999 ALOAD 0
+org.joda.time.format.DateTimeFormatter.requireParser:999 GETFIELD org/joda/time/format/DateTimeFormatter.iParser Lorg/joda/time/format/InternalParser;
+org.joda.time.format.DateTimeFormatter.requireParser:999 ASTORE 1
+org.joda.time.format.DateTimeFormatter.requireParser:1003 ALOAD 1
+org.joda.time.format.DateTimeFormatter.requireParser:1003 ARETURN
+org.joda.time.format.DateTimeFormatter.selectChronology:1014 ALOAD 1
+org.joda.time.format.DateTimeFormatter.selectChronology:1014 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.format.DateTimeFormatter.selectChronology:1014 ASTORE 1
+org.joda.time.format.DateTimeFormatter.selectChronology:1021 ALOAD 1
+org.joda.time.format.DateTimeFormatter.selectChronology:1021 ARETURN
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2660 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2660 INVOKEVIRTUAL java/lang/String.length()I
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2660 ISTORE 3
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2661 ALOAD 0
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2661 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2661 ILOAD 1
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2661 ISUB
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2661 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2661 IF_ICMPGE L0 true false
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2664 ICONST_0
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2664 ISTORE 4
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2664 ILOAD 4
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2664 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2664 IF_ICMPGE L3 false true
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2665 ALOAD 0
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2665 ILOAD 1
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2665 ILOAD 4
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2665 IADD
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2665 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2665 ISTORE 5
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2666 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2666 ILOAD 4
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2666 INVOKEVIRTUAL java/lang/String.charAt(I)C
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2666 ISTORE 6
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2667 ILOAD 5
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2667 ILOAD 6
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2667 IF_ICMPEQ L2 false true
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2668 ILOAD 5
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2668 INVOKESTATIC java/lang/Character.toUpperCase(C)C
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2668 ISTORE 7
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2669 ILOAD 6
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2669 INVOKESTATIC java/lang/Character.toUpperCase(C)C
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2669 ISTORE 8
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2670 ILOAD 7
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2670 ILOAD 8
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2670 IF_ICMPEQ L2 false true
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2670 ILOAD 7
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2670 INVOKESTATIC java/lang/Character.toLowerCase(C)C
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2670 ILOAD 8
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2670 INVOKESTATIC java/lang/Character.toLowerCase(C)C
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2670 IF_ICMPEQ L2 false true
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2671 ICONST_0
+org.joda.time.format.DateTimeFormatterBuilder.csStartsWithIgnoreCase:2671 IRETURN
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2509 ALOAD 0
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2509 GETFIELD org/joda/time/format/DateTimeFormatterBuilder$Composite.iParsers [Lorg/joda/time/format/InternalParser;
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2509 ASTORE 4
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2514 ALOAD 4
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2514 ARRAYLENGTH
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2514 ISTORE 5
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2515 ICONST_0
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2515 ISTORE 6
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2515 ILOAD 6
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2515 ILOAD 5
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2515 IF_ICMPGE L2 false true
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2515 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2515 IFLT L2 false true
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2515 IINC 6 1
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2516 ALOAD 4
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2516 ILOAD 6
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2516 AALOAD
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2516 ALOAD 1
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2516 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2516 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2516 INVOKEINTERFACE org/joda/time/format/InternalParser.parseInto(Lorg/joda/time/format/DateTimeParserBucket;Ljava/lang/CharSequence;I)I
+org.joda.time.format.DateTimeFormatterBuilder$Composite.parseInto:2516 ISTORE 3
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2589 ALOAD 0
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2589 GETFIELD org/joda/time/format/DateTimeFormatterBuilder$MatchingParser.iParsers [Lorg/joda/time/format/InternalParser;
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2589 ASTORE 4
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2590 ALOAD 4
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2590 ARRAYLENGTH
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2590 ISTORE 5
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2595 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2595 ISTORE 8
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2600 ICONST_0
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2600 ISTORE 11
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2600 ILOAD 11
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2600 ILOAD 5
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2600 IF_ICMPGE L7 false true
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2600 IINC 11 1
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2601 ALOAD 4
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2601 ILOAD 11
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2601 AALOAD
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2601 ASTORE 12
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2602 ALOAD 12
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2602 IFNONNULL L2 true false
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2610 ALOAD 12
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2610 ALOAD 1
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2610 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2610 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2610 INVOKEINTERFACE org/joda/time/format/InternalParser.parseInto(Lorg/joda/time/format/DateTimeParserBucket;Ljava/lang/CharSequence;I)I
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2610 ISTORE 13
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2611 ILOAD 13
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2611 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2611 IF_ICMPLT L5 true true
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2612 ILOAD 13
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2612 ILOAD 8
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2612 IF_ICMPLE L6 false true
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2613 ILOAD 13
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2613 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2613 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2613 IF_ICMPGE L3 true false
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2618 ILOAD 13
+org.joda.time.format.DateTimeFormatterBuilder$MatchingParser.parseInto:2618 IRETURN
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2059 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2059 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2059 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2059 ISUB
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2059 ISTORE 4
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2062 ALOAD 0
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2062 GETFIELD org/joda/time/format/DateTimeFormatterBuilder$TimeZoneOffset.iZeroOffsetParseText Ljava/lang/String;
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2062 IFNULL L2 false true
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2063 ALOAD 0
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2063 GETFIELD org/joda/time/format/DateTimeFormatterBuilder$TimeZoneOffset.iZeroOffsetParseText Ljava/lang/String;
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2063 INVOKEVIRTUAL java/lang/String.length()I
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2063 IFNE L1 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2074 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2074 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2074 ALOAD 0
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2074 GETFIELD org/joda/time/format/DateTimeFormatterBuilder$TimeZoneOffset.iZeroOffsetParseText Ljava/lang/String;
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2074 INVOKESTATIC org/joda/time/format/DateTimeFormatterBuilder.csStartsWithIgnoreCase(Ljava/lang/CharSequence;ILjava/lang/String;)Z
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2074 IFEQ L2 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2082 ILOAD 4
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2082 ICONST_1
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2082 IF_ICMPGT L3 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2087 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2087 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2087 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2087 ISTORE 6
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2088 ILOAD 6
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2088 BIPUSH 45
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2088 IF_ICMPNE L4 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2090 ILOAD 6
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2090 BIPUSH 43
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2090 IF_ICMPNE L5 false true
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2091 ICONST_0
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2091 ISTORE 5
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2096 IINC 4 -1
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2097 IINC 3 1
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2111 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2111 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2111 ICONST_2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2111 INVOKESPECIAL org/joda/time/format/DateTimeFormatterBuilder$TimeZoneOffset.digitCount(Ljava/lang/CharSequence;II)I
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2111 ICONST_2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2111 IF_ICMPGE L7 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2118 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2118 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2118 INVOKESTATIC org/joda/time/format/FormatUtils.parseTwoDigits(Ljava/lang/CharSequence;I)I
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2118 ISTORE 8
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2119 ILOAD 8
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2119 BIPUSH 23
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2119 IF_ICMPLE L8 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2122 ILOAD 8
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2122 LDC 3600000
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2122 IMUL
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2122 ISTORE 7
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2123 IINC 4 -2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2124 IINC 3 2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2130 ILOAD 4
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2130 IFGT L9 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2135 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2135 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2135 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2135 ISTORE 6
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2136 ILOAD 6
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2136 BIPUSH 58
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2136 IF_ICMPNE L10 false true
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2138 IINC 4 -1
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2139 IINC 3 1
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2148 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2148 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2148 ICONST_2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2148 INVOKESPECIAL org/joda/time/format/DateTimeFormatterBuilder$TimeZoneOffset.digitCount(Ljava/lang/CharSequence;II)I
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2148 ISTORE 10
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2149 ILOAD 10
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2149 IFNE L12 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2151 ILOAD 10
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2151 ICONST_2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2151 IF_ICMPGE L13 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2156 ALOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2156 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2156 INVOKESTATIC org/joda/time/format/FormatUtils.parseTwoDigits(Ljava/lang/CharSequence;I)I
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2156 ISTORE 11
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2157 ILOAD 11
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2157 BIPUSH 59
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2157 IF_ICMPLE L14 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2160 ILOAD 7
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2160 ILOAD 11
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2160 LDC 60000
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2160 IMUL
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2160 IADD
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2160 ISTORE 7
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2161 IINC 4 -2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2166 ILOAD 4
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2166 IFGT L15 false true
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2225 ALOAD 1
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2225 ILOAD 5
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2225 IFEQ L27 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2225 ILOAD 7
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2225 INVOKESTATIC java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.parseInto:2225 INVOKEVIRTUAL org/joda/time/format/DateTimeParserBucket.setOffset(Ljava/lang/Integer;)V
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2234 ALOAD 1
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2234 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2234 ILOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2234 ISUB
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2234 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2234 INVOKESTATIC java/lang/Math.min(II)I
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2234 ISTORE 4
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2235 ICONST_0
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2235 ISTORE 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2236 ILOAD 4
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2236 IFLE L2 true true
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2236 IINC 4 -1
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2237 ALOAD 1
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2237 ILOAD 2
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2237 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2237 IADD
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2237 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2237 ISTORE 5
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2238 ILOAD 5
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2238 BIPUSH 48
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2238 IF_ICMPLT L2 false true
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2238 ILOAD 5
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2238 BIPUSH 57
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2238 IF_ICMPLE L1 true false
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2241 IINC 3 1
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2243 ILOAD 3
+org.joda.time.format.DateTimeFormatterBuilder$TimeZoneOffset.digitCount:2243 IRETURN
+org.joda.time.format.DateTimeParserBucket.getOffsetInteger:238 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.getOffsetInteger:238 GETFIELD org/joda/time/format/DateTimeParserBucket.iOffset Ljava/lang/Integer;
+org.joda.time.format.DateTimeParserBucket.getOffsetInteger:238 ARETURN
+org.joda.time.format.DateTimeParserBucket.setOffset:256 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.setOffset:256 ALOAD 1
+org.joda.time.format.DateTimeParserBucket.setOffset:256 PUTFIELD org/joda/time/format/DateTimeParserBucket.iOffset Ljava/lang/Integer;
+org.joda.time.format.FormatUtils.parseTwoDigits:423 ALOAD 0
+org.joda.time.format.FormatUtils.parseTwoDigits:423 ILOAD 1
+org.joda.time.format.FormatUtils.parseTwoDigits:423 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.joda.time.format.FormatUtils.parseTwoDigits:423 BIPUSH 48
+org.joda.time.format.FormatUtils.parseTwoDigits:423 ISUB
+org.joda.time.format.FormatUtils.parseTwoDigits:423 ISTORE 2
+org.joda.time.format.FormatUtils.parseTwoDigits:424 ILOAD 2
+org.joda.time.format.FormatUtils.parseTwoDigits:424 ICONST_3
+org.joda.time.format.FormatUtils.parseTwoDigits:424 ISHL
+org.joda.time.format.FormatUtils.parseTwoDigits:424 ILOAD 2
+org.joda.time.format.FormatUtils.parseTwoDigits:424 ICONST_1
+org.joda.time.format.FormatUtils.parseTwoDigits:424 ISHL
+org.joda.time.format.FormatUtils.parseTwoDigits:424 IADD
+org.joda.time.format.FormatUtils.parseTwoDigits:424 ALOAD 0
+org.joda.time.format.FormatUtils.parseTwoDigits:424 ILOAD 1
+org.joda.time.format.FormatUtils.parseTwoDigits:424 ICONST_1
+org.joda.time.format.FormatUtils.parseTwoDigits:424 IADD
+org.joda.time.format.FormatUtils.parseTwoDigits:424 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.joda.time.format.FormatUtils.parseTwoDigits:424 IADD
+org.joda.time.format.FormatUtils.parseTwoDigits:424 BIPUSH 48
+org.joda.time.format.FormatUtils.parseTwoDigits:424 ISUB
+org.joda.time.format.FormatUtils.parseTwoDigits:424 IRETURN
+org.joda.time.format.ISODateTimeFormat.dateTimeParser:625 INVOKESTATIC org/joda/time/format/ISODateTimeFormat$Constants.access$800()Lorg/joda/time/format/DateTimeFormatter;
+org.joda.time.format.ISODateTimeFormat.dateTimeParser:625 ARETURN
+org.joda.time.format.ISODateTimeFormat$Constants.access$800:1248 GETSTATIC org/joda/time/format/ISODateTimeFormat$Constants.dtp Lorg/joda/time/format/DateTimeFormatter;
+org.joda.time.format.ISODateTimeFormat$Constants.access$800:1248 ARETURN
+org.joda.time.format.InternalParserDateTimeParser.parseInto:52 ALOAD 0
+org.joda.time.format.InternalParserDateTimeParser.parseInto:52 GETFIELD org/joda/time/format/InternalParserDateTimeParser.underlying Lorg/joda/time/format/InternalParser;
+org.joda.time.format.InternalParserDateTimeParser.parseInto:52 ALOAD 1
+org.joda.time.format.InternalParserDateTimeParser.parseInto:52 ALOAD 2
+org.joda.time.format.InternalParserDateTimeParser.parseInto:52 ILOAD 3
+org.joda.time.format.InternalParserDateTimeParser.parseInto:52 INVOKEINTERFACE org/joda/time/format/InternalParser.parseInto(Lorg/joda/time/format/DateTimeParserBucket;Ljava/lang/CharSequence;I)I
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+org.joda.time.tz.FixedDateTimeZone.<init>:38 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:38 ALOAD 1
+org.joda.time.tz.FixedDateTimeZone.<init>:38 INVOKESPECIAL org/joda/time/DateTimeZone.<init>(Ljava/lang/String;)V
+org.joda.time.tz.FixedDateTimeZone.<init>:40 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:40 ILOAD 3
+org.joda.time.tz.FixedDateTimeZone.<init>:40 PUTFIELD org/joda/time/tz/FixedDateTimeZone.iWallOffset I
+org.joda.time.tz.FixedDateTimeZone.<init>:41 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:41 ILOAD 4
+org.joda.time.tz.FixedDateTimeZone.<init>:41 PUTFIELD org/joda/time/tz/FixedDateTimeZone.iStandardOffset I
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 INVOKEVIRTUAL org/joda/time/tz/FixedDateTimeZone.getID()Ljava/lang/String;
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 INVOKEVIRTUAL java/lang/String.hashCode()I
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 BIPUSH 37
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 GETFIELD org/joda/time/tz/FixedDateTimeZone.iStandardOffset I
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 IMUL
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 IADD
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 BIPUSH 31
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 GETFIELD org/joda/time/tz/FixedDateTimeZone.iWallOffset I
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 IMUL
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 IADD
+org.joda.time.tz.FixedDateTimeZone.hashCode:102 IRETURN
+
+Slice consists of 863 bytecode instructions.
+Computation took 7.04 seconds.

@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LimitChronology.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">LimitChronology.java</span></div><h1>LimitChronology.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import java.util.HashMap;
+import java.util.Locale;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeZone;
+import org.joda.time.DurationField;
+import org.joda.time.MutableDateTime;
+import org.joda.time.ReadableDateTime;
+import org.joda.time.field.DecoratedDateTimeField;
+import org.joda.time.field.DecoratedDurationField;
+import org.joda.time.field.FieldUtils;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
+
+/**
+ * Wraps another Chronology to impose limits on the range of instants that
+ * the fields within a Chronology may support. The limits are applied to both
+ * DateTimeFields and DurationFields.
+ * &lt;p&gt;
+ * Methods in DateTimeField and DurationField throw an IllegalArgumentException
+ * whenever given an input instant that is outside the limits or when an
+ * attempt is made to move an instant outside the limits.
+ * &lt;p&gt;
+ * LimitChronology is thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+public final class LimitChronology extends AssembledChronology {
+
+    /** Serialization lock */
+    private static final long serialVersionUID = 7670866536893052522L;
+
+    /**
+     * Wraps another chronology, with datetime limits. When withUTC or
+     * withZone is called, the returned LimitChronology instance has
+     * the same limits, except they are time zone adjusted.
+     *
+     * @param base  base chronology to wrap
+     * @param lowerLimit  inclusive lower limit, or null if none
+     * @param upperLimit  exclusive upper limit, or null if none
+     * @throws IllegalArgumentException if chronology is null or limits are invalid
+     */
+    public static LimitChronology getInstance(Chronology base,
+                                              ReadableDateTime lowerLimit,
+                                              ReadableDateTime upperLimit) {
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if (base == null) {</span>
+<span class="nc" id="L68">            throw new IllegalArgumentException(&quot;Must supply a chronology&quot;);</span>
+        }
+
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        lowerLimit = lowerLimit == null ? null : lowerLimit.toDateTime();</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        upperLimit = upperLimit == null ? null : upperLimit.toDateTime();</span>
+
+<span class="pc bpc" id="L74" title="1 of 6 branches missed.">        if (lowerLimit != null &amp;&amp; upperLimit != null &amp;&amp; !lowerLimit.isBefore(upperLimit)) {</span>
+<span class="nc" id="L75">            throw new IllegalArgumentException</span>
+            (&quot;The lower limit must be come before than the upper limit&quot;);
+        }
+
+<span class="fc" id="L79">        return new LimitChronology(base, (DateTime)lowerLimit, (DateTime)upperLimit);</span>
+    }
+
+    final DateTime iLowerLimit;
+    final DateTime iUpperLimit;
+
+    private transient LimitChronology iWithUTC;
+
+    /**
+     * Wraps another chronology, with datetime limits. When withUTC or
+     * withZone is called, the returned LimitChronology instance has
+     * the same limits, except they are time zone adjusted.
+     *
+     * @param lowerLimit  inclusive lower limit, or null if none
+     * @param upperLimit  exclusive upper limit, or null if none
+     */
+    private LimitChronology(Chronology base,
+                            DateTime lowerLimit, DateTime upperLimit) {
+<span class="fc" id="L97">        super(base, null);</span>
+        // These can be set after assembly.
+<span class="fc" id="L99">        iLowerLimit = lowerLimit;</span>
+<span class="fc" id="L100">        iUpperLimit = upperLimit;</span>
+<span class="fc" id="L101">    }</span>
+
+    /**
+     * Returns the inclusive lower limit instant.
+     * 
+     * @return lower limit
+     */
+    public DateTime getLowerLimit() {
+<span class="fc" id="L109">        return iLowerLimit;</span>
+    }
+
+    /**
+     * Returns the inclusive upper limit instant.
+     * 
+     * @return upper limit
+     */
+    public DateTime getUpperLimit() {
+<span class="fc" id="L118">        return iUpperLimit;</span>
+    }
+
+    /**
+     * If this LimitChronology is already UTC, then this is
+     * returned. Otherwise, a new instance is returned, with the limits
+     * adjusted to the new time zone.
+     */
+    public Chronology withUTC() {
+<span class="nc" id="L127">        return withZone(DateTimeZone.UTC);</span>
+    }
+
+    /**
+     * If this LimitChronology has the same time zone as the one given, then
+     * this is returned. Otherwise, a new instance is returned, with the limits
+     * adjusted to the new time zone.
+     */
+    public Chronology withZone(DateTimeZone zone) {
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        if (zone == null) {</span>
+<span class="nc" id="L137">            zone = DateTimeZone.getDefault();</span>
+        }
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (zone == getZone()) {</span>
+<span class="nc" id="L140">            return this;</span>
+        }
+
+<span class="nc bnc" id="L143" title="All 4 branches missed.">        if (zone == DateTimeZone.UTC &amp;&amp; iWithUTC != null) {</span>
+<span class="nc" id="L144">            return iWithUTC;</span>
+        }
+
+<span class="nc" id="L147">        DateTime lowerLimit = iLowerLimit;</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        if (lowerLimit != null) {</span>
+<span class="nc" id="L149">            MutableDateTime mdt = lowerLimit.toMutableDateTime();</span>
+<span class="nc" id="L150">            mdt.setZoneRetainFields(zone);</span>
+<span class="nc" id="L151">            lowerLimit = mdt.toDateTime();</span>
+        }
+
+<span class="nc" id="L154">        DateTime upperLimit = iUpperLimit;</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">        if (upperLimit != null) {</span>
+<span class="nc" id="L156">            MutableDateTime mdt = upperLimit.toMutableDateTime();</span>
+<span class="nc" id="L157">            mdt.setZoneRetainFields(zone);</span>
+<span class="nc" id="L158">            upperLimit = mdt.toDateTime();</span>
+        }
+        
+<span class="nc" id="L161">        LimitChronology chrono = getInstance</span>
+<span class="nc" id="L162">            (getBase().withZone(zone), lowerLimit, upperLimit);</span>
+
+<span class="nc bnc" id="L164" title="All 2 branches missed.">        if (zone == DateTimeZone.UTC) {</span>
+<span class="nc" id="L165">            iWithUTC = chrono;</span>
+        }
+
+<span class="nc" id="L168">        return chrono;</span>
+    }
+
+    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,
+                                  int millisOfDay)
+        throws IllegalArgumentException
+    {
+<span class="fc" id="L175">        long instant = getBase().getDateTimeMillis(year, monthOfYear, dayOfMonth, millisOfDay);</span>
+<span class="fc" id="L176">        checkLimits(instant, &quot;resulting&quot;);</span>
+<span class="fc" id="L177">        return instant;</span>
+    }
+
+    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,
+                                  int hourOfDay, int minuteOfHour,
+                                  int secondOfMinute, int millisOfSecond)
+        throws IllegalArgumentException
+    {
+<span class="fc" id="L185">        long instant = getBase().getDateTimeMillis</span>
+<span class="fc" id="L186">            (year, monthOfYear, dayOfMonth,</span>
+             hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+<span class="fc" id="L188">        checkLimits(instant, &quot;resulting&quot;);</span>
+<span class="fc" id="L189">        return instant;</span>
+    }
+
+    public long getDateTimeMillis(long instant,
+                                  int hourOfDay, int minuteOfHour,
+                                  int secondOfMinute, int millisOfSecond)
+        throws IllegalArgumentException
+    {
+<span class="fc" id="L197">        checkLimits(instant, null);</span>
+<span class="fc" id="L198">        instant = getBase().getDateTimeMillis</span>
+<span class="fc" id="L199">            (instant, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);</span>
+<span class="fc" id="L200">        checkLimits(instant, &quot;resulting&quot;);</span>
+<span class="fc" id="L201">        return instant;</span>
+    }
+
+    protected void assemble(Fields fields) {
+        // Keep a local cache of converted fields so as not to create redundant
+        // objects.
+<span class="fc" id="L207">        HashMap&lt;Object, Object&gt; converted = new HashMap&lt;Object, Object&gt;();</span>
+
+        // Convert duration fields...
+
+<span class="fc" id="L211">        fields.eras = convertField(fields.eras, converted);</span>
+<span class="fc" id="L212">        fields.centuries = convertField(fields.centuries, converted);</span>
+<span class="fc" id="L213">        fields.years = convertField(fields.years, converted);</span>
+<span class="fc" id="L214">        fields.months = convertField(fields.months, converted);</span>
+<span class="fc" id="L215">        fields.weekyears = convertField(fields.weekyears, converted);</span>
+<span class="fc" id="L216">        fields.weeks = convertField(fields.weeks, converted);</span>
+<span class="fc" id="L217">        fields.days = convertField(fields.days, converted);</span>
+
+<span class="fc" id="L219">        fields.halfdays = convertField(fields.halfdays, converted);</span>
+<span class="fc" id="L220">        fields.hours = convertField(fields.hours, converted);</span>
+<span class="fc" id="L221">        fields.minutes = convertField(fields.minutes, converted);</span>
+<span class="fc" id="L222">        fields.seconds = convertField(fields.seconds, converted);</span>
+<span class="fc" id="L223">        fields.millis = convertField(fields.millis, converted);</span>
+
+        // Convert datetime fields...
+
+<span class="fc" id="L227">        fields.year = convertField(fields.year, converted);</span>
+<span class="fc" id="L228">        fields.yearOfEra = convertField(fields.yearOfEra, converted);</span>
+<span class="fc" id="L229">        fields.yearOfCentury = convertField(fields.yearOfCentury, converted);</span>
+<span class="fc" id="L230">        fields.centuryOfEra = convertField(fields.centuryOfEra, converted);</span>
+<span class="fc" id="L231">        fields.era = convertField(fields.era, converted);</span>
+<span class="fc" id="L232">        fields.dayOfWeek = convertField(fields.dayOfWeek, converted);</span>
+<span class="fc" id="L233">        fields.dayOfMonth = convertField(fields.dayOfMonth, converted);</span>
+<span class="fc" id="L234">        fields.dayOfYear = convertField(fields.dayOfYear, converted);</span>
+<span class="fc" id="L235">        fields.monthOfYear = convertField(fields.monthOfYear, converted);</span>
+<span class="fc" id="L236">        fields.weekOfWeekyear = convertField(fields.weekOfWeekyear, converted);</span>
+<span class="fc" id="L237">        fields.weekyear = convertField(fields.weekyear, converted);</span>
+<span class="fc" id="L238">        fields.weekyearOfCentury = convertField(fields.weekyearOfCentury, converted);</span>
+
+<span class="fc" id="L240">        fields.millisOfSecond = convertField(fields.millisOfSecond, converted);</span>
+<span class="fc" id="L241">        fields.millisOfDay = convertField(fields.millisOfDay, converted);</span>
+<span class="fc" id="L242">        fields.secondOfMinute = convertField(fields.secondOfMinute, converted);</span>
+<span class="fc" id="L243">        fields.secondOfDay = convertField(fields.secondOfDay, converted);</span>
+<span class="fc" id="L244">        fields.minuteOfHour = convertField(fields.minuteOfHour, converted);</span>
+<span class="fc" id="L245">        fields.minuteOfDay = convertField(fields.minuteOfDay, converted);</span>
+<span class="fc" id="L246">        fields.hourOfDay = convertField(fields.hourOfDay, converted);</span>
+<span class="fc" id="L247">        fields.hourOfHalfday = convertField(fields.hourOfHalfday, converted);</span>
+<span class="fc" id="L248">        fields.clockhourOfDay = convertField(fields.clockhourOfDay, converted);</span>
+<span class="fc" id="L249">        fields.clockhourOfHalfday = convertField(fields.clockhourOfHalfday, converted);</span>
+<span class="fc" id="L250">        fields.halfdayOfDay = convertField(fields.halfdayOfDay, converted);</span>
+<span class="fc" id="L251">    }</span>
+
+    private DurationField convertField(DurationField field, HashMap&lt;Object, Object&gt; converted) {
+<span class="fc bfc" id="L254" title="All 4 branches covered.">        if (field == null || !field.isSupported()) {</span>
+<span class="fc" id="L255">            return field;</span>
+        }
+<span class="fc bfc" id="L257" title="All 2 branches covered.">        if (converted.containsKey(field)) {</span>
+<span class="fc" id="L258">            return (DurationField)converted.get(field);</span>
+        }
+<span class="fc" id="L260">        LimitDurationField limitField = new LimitDurationField(field);</span>
+<span class="fc" id="L261">        converted.put(field, limitField);</span>
+<span class="fc" id="L262">        return limitField;</span>
+    }
+
+    private DateTimeField convertField(DateTimeField field, HashMap&lt;Object, Object&gt; converted) {
+<span class="pc bpc" id="L266" title="2 of 4 branches missed.">        if (field == null || !field.isSupported()) {</span>
+<span class="nc" id="L267">            return field;</span>
+        }
+<span class="pc bpc" id="L269" title="1 of 2 branches missed.">        if (converted.containsKey(field)) {</span>
+<span class="nc" id="L270">            return (DateTimeField)converted.get(field);</span>
+        }
+<span class="fc" id="L272">        LimitDateTimeField limitField =</span>
+            new LimitDateTimeField(field,
+<span class="fc" id="L274">                                   convertField(field.getDurationField(), converted),</span>
+<span class="fc" id="L275">                                   convertField(field.getRangeDurationField(), converted),</span>
+<span class="fc" id="L276">                                   convertField(field.getLeapDurationField(), converted));</span>
+<span class="fc" id="L277">        converted.put(field, limitField);</span>
+<span class="fc" id="L278">        return limitField;</span>
+    }
+
+    void checkLimits(long instant, String desc) {
+        DateTime limit;
+<span class="pc bpc" id="L283" title="1 of 4 branches missed.">        if ((limit = iLowerLimit) != null &amp;&amp; instant &lt; limit.getMillis()) {</span>
+<span class="fc" id="L284">            throw new LimitException(desc, true);</span>
+        }
+<span class="pc bpc" id="L286" title="3 of 4 branches missed.">        if ((limit = iUpperLimit) != null &amp;&amp; instant &gt;= limit.getMillis()) {</span>
+<span class="nc" id="L287">            throw new LimitException(desc, false);</span>
+        }
+<span class="fc" id="L289">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * A limit chronology is only equal to a limit chronology with the
+     * same base chronology and limits.
+     * 
+     * @param obj  the object to compare to
+     * @return true if equal
+     * @since 1.4
+     */
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L301" title="1 of 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L302">            return true;</span>
+        }
+<span class="pc bpc" id="L304" title="1 of 2 branches missed.">        if (obj instanceof LimitChronology == false) {</span>
+<span class="nc" id="L305">            return false;</span>
+        }
+<span class="fc" id="L307">        LimitChronology chrono = (LimitChronology) obj;</span>
+<span class="fc" id="L308">        return</span>
+<span class="fc bfc" id="L309" title="All 2 branches covered.">            getBase().equals(chrono.getBase()) &amp;&amp;</span>
+<span class="pc bpc" id="L310" title="1 of 2 branches missed.">            FieldUtils.equals(getLowerLimit(), chrono.getLowerLimit()) &amp;&amp;</span>
+<span class="fc bfc" id="L311" title="All 2 branches covered.">            FieldUtils.equals(getUpperLimit(), chrono.getUpperLimit());</span>
+    }
+
+    /**
+     * A suitable hashcode for the chronology.
+     * 
+     * @return the hashcode
+     * @since 1.4
+     */
+    public int hashCode() {
+<span class="fc" id="L321">        int hash = 317351877;</span>
+<span class="pc bpc" id="L322" title="1 of 2 branches missed.">        hash += (getLowerLimit() != null ? getLowerLimit().hashCode() : 0);</span>
+<span class="pc bpc" id="L323" title="1 of 2 branches missed.">        hash += (getUpperLimit() != null ? getUpperLimit().hashCode() : 0);</span>
+<span class="fc" id="L324">        hash += getBase().hashCode() * 7;</span>
+<span class="fc" id="L325">        return hash;</span>
+    }
+
+    /**
+     * A debugging string for the chronology.
+     * 
+     * @return the debugging string
+     */
+    public String toString() {
+<span class="fc" id="L334">        return &quot;LimitChronology[&quot; + getBase().toString() + &quot;, &quot; +</span>
+<span class="pc bpc" id="L335" title="1 of 2 branches missed.">            (getLowerLimit() == null ? &quot;NoLimit&quot; : getLowerLimit().toString()) + &quot;, &quot; +</span>
+<span class="pc bpc" id="L336" title="1 of 2 branches missed.">            (getUpperLimit() == null ? &quot;NoLimit&quot; : getUpperLimit().toString()) + ']';</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Extends IllegalArgumentException such that the exception message is not
+     * generated unless it is actually requested.
+     */
+    private class LimitException extends IllegalArgumentException {
+        private static final long serialVersionUID = -5924689995607498581L;
+
+        private final boolean iIsLow;
+
+<span class="fc" id="L349">        LimitException(String desc, boolean isLow) {</span>
+<span class="fc" id="L350">            super(desc);</span>
+<span class="fc" id="L351">            iIsLow = isLow;</span>
+<span class="fc" id="L352">        }</span>
+
+        public String getMessage() {
+<span class="nc" id="L355">            StringBuffer buf = new StringBuffer(85);</span>
+<span class="nc" id="L356">            buf.append(&quot;The&quot;);</span>
+<span class="nc" id="L357">            String desc = super.getMessage();</span>
+<span class="nc bnc" id="L358" title="All 2 branches missed.">            if (desc != null) {</span>
+<span class="nc" id="L359">                buf.append(' ');</span>
+<span class="nc" id="L360">                buf.append(desc);</span>
+            }
+<span class="nc" id="L362">            buf.append(&quot; instant is &quot;);</span>
+
+<span class="nc" id="L364">            DateTimeFormatter p = ISODateTimeFormat.dateTime();</span>
+<span class="nc" id="L365">            p = p.withChronology(getBase());</span>
+<span class="nc bnc" id="L366" title="All 2 branches missed.">            if (iIsLow) {</span>
+<span class="nc" id="L367">                buf.append(&quot;below the supported minimum of &quot;);</span>
+<span class="nc" id="L368">                p.printTo(buf, getLowerLimit().getMillis());</span>
+            } else {
+<span class="nc" id="L370">                buf.append(&quot;above the supported maximum of &quot;);</span>
+<span class="nc" id="L371">                p.printTo(buf, getUpperLimit().getMillis());</span>
+            }
+            
+<span class="nc" id="L374">            buf.append(&quot; (&quot;);</span>
+<span class="nc" id="L375">            buf.append(getBase());</span>
+<span class="nc" id="L376">            buf.append(')');</span>
+
+<span class="nc" id="L378">            return buf.toString();</span>
+        }
+
+        public String toString() {
+<span class="nc" id="L382">            return &quot;IllegalArgumentException: &quot; + getMessage();</span>
+        }
+    }
+
+    private class LimitDurationField extends DecoratedDurationField {
+        private static final long serialVersionUID = 8049297699408782284L;
+
+<span class="fc" id="L389">        LimitDurationField(DurationField field) {</span>
+<span class="fc" id="L390">            super(field, field.getType());</span>
+<span class="fc" id="L391">        }</span>
+
+        public int getValue(long duration, long instant) {
+<span class="fc" id="L394">            checkLimits(instant, null);</span>
+<span class="fc" id="L395">            return getWrappedField().getValue(duration, instant);</span>
+        }
+
+        public long getValueAsLong(long duration, long instant) {
+<span class="nc" id="L399">            checkLimits(instant, null);</span>
+<span class="nc" id="L400">            return getWrappedField().getValueAsLong(duration, instant);</span>
+        }
+
+        public long getMillis(int value, long instant) {
+<span class="fc" id="L404">            checkLimits(instant, null);</span>
+<span class="fc" id="L405">            return getWrappedField().getMillis(value, instant);</span>
+        }
+
+        public long getMillis(long value, long instant) {
+<span class="fc" id="L409">            checkLimits(instant, null);</span>
+<span class="fc" id="L410">            return getWrappedField().getMillis(value, instant);</span>
+        }
+
+        public long add(long instant, int amount) {
+<span class="fc" id="L414">            checkLimits(instant, null);</span>
+<span class="fc" id="L415">            long result = getWrappedField().add(instant, amount);</span>
+<span class="fc" id="L416">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="fc" id="L417">            return result;</span>
+        }
+
+        public long add(long instant, long amount) {
+<span class="fc" id="L421">            checkLimits(instant, null);</span>
+<span class="fc" id="L422">            long result = getWrappedField().add(instant, amount);</span>
+<span class="fc" id="L423">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="fc" id="L424">            return result;</span>
+        }
+
+        public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L428">            checkLimits(minuendInstant, &quot;minuend&quot;);</span>
+<span class="fc" id="L429">            checkLimits(subtrahendInstant, &quot;subtrahend&quot;);</span>
+<span class="fc" id="L430">            return getWrappedField().getDifference(minuendInstant, subtrahendInstant);</span>
+        }
+
+        public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="nc" id="L434">            checkLimits(minuendInstant, &quot;minuend&quot;);</span>
+<span class="nc" id="L435">            checkLimits(subtrahendInstant, &quot;subtrahend&quot;);</span>
+<span class="nc" id="L436">            return getWrappedField().getDifferenceAsLong(minuendInstant, subtrahendInstant);</span>
+        }
+
+    }
+
+    private class LimitDateTimeField extends DecoratedDateTimeField {
+        @SuppressWarnings(&quot;unused&quot;)
+        private static final long serialVersionUID = -2435306746995699312L;
+
+        private final DurationField iDurationField;
+        private final DurationField iRangeDurationField;
+        private final DurationField iLeapDurationField;
+
+        LimitDateTimeField(DateTimeField field,
+                           DurationField durationField,
+                           DurationField rangeDurationField,
+<span class="fc" id="L452">                           DurationField leapDurationField) {</span>
+<span class="fc" id="L453">            super(field, field.getType());</span>
+<span class="fc" id="L454">            iDurationField = durationField;</span>
+<span class="fc" id="L455">            iRangeDurationField = rangeDurationField;</span>
+<span class="fc" id="L456">            iLeapDurationField = leapDurationField;</span>
+<span class="fc" id="L457">        }</span>
+
+        public int get(long instant) {
+<span class="fc" id="L460">            checkLimits(instant, null);</span>
+<span class="fc" id="L461">            return getWrappedField().get(instant);</span>
+        }
+        
+        public String getAsText(long instant, Locale locale) {
+<span class="fc" id="L465">            checkLimits(instant, null);</span>
+<span class="fc" id="L466">            return getWrappedField().getAsText(instant, locale);</span>
+        }
+        
+        public String getAsShortText(long instant, Locale locale) {
+<span class="fc" id="L470">            checkLimits(instant, null);</span>
+<span class="fc" id="L471">            return getWrappedField().getAsShortText(instant, locale);</span>
+        }
+        
+        public long add(long instant, int amount) {
+<span class="fc" id="L475">            checkLimits(instant, null);</span>
+<span class="fc" id="L476">            long result = getWrappedField().add(instant, amount);</span>
+<span class="fc" id="L477">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="fc" id="L478">            return result;</span>
+        }
+
+        public long add(long instant, long amount) {
+<span class="fc" id="L482">            checkLimits(instant, null);</span>
+<span class="fc" id="L483">            long result = getWrappedField().add(instant, amount);</span>
+<span class="fc" id="L484">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="fc" id="L485">            return result;</span>
+        }
+
+        public long addWrapField(long instant, int amount) {
+<span class="fc" id="L489">            checkLimits(instant, null);</span>
+<span class="fc" id="L490">            long result = getWrappedField().addWrapField(instant, amount);</span>
+<span class="fc" id="L491">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="fc" id="L492">            return result;</span>
+        }
+        
+        public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="nc" id="L496">            checkLimits(minuendInstant, &quot;minuend&quot;);</span>
+<span class="nc" id="L497">            checkLimits(subtrahendInstant, &quot;subtrahend&quot;);</span>
+<span class="nc" id="L498">            return getWrappedField().getDifference(minuendInstant, subtrahendInstant);</span>
+        }
+        
+        public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="nc" id="L502">            checkLimits(minuendInstant, &quot;minuend&quot;);</span>
+<span class="nc" id="L503">            checkLimits(subtrahendInstant, &quot;subtrahend&quot;);</span>
+<span class="nc" id="L504">            return getWrappedField().getDifferenceAsLong(minuendInstant, subtrahendInstant);</span>
+        }
+        
+        public long set(long instant, int value) {
+<span class="fc" id="L508">            checkLimits(instant, null);</span>
+<span class="fc" id="L509">            long result = getWrappedField().set(instant, value);</span>
+<span class="fc" id="L510">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="fc" id="L511">            return result;</span>
+        }
+        
+        public long set(long instant, String text, Locale locale) {
+<span class="nc" id="L515">            checkLimits(instant, null);</span>
+<span class="nc" id="L516">            long result = getWrappedField().set(instant, text, locale);</span>
+<span class="nc" id="L517">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="nc" id="L518">            return result;</span>
+        }
+        
+        public final DurationField getDurationField() {
+<span class="fc" id="L522">            return iDurationField;</span>
+        }
+
+        public final DurationField getRangeDurationField() {
+<span class="fc" id="L526">            return iRangeDurationField;</span>
+        }
+
+        public boolean isLeap(long instant) {
+<span class="fc" id="L530">            checkLimits(instant, null);</span>
+<span class="fc" id="L531">            return getWrappedField().isLeap(instant);</span>
+        }
+        
+        public int getLeapAmount(long instant) {
+<span class="fc" id="L535">            checkLimits(instant, null);</span>
+<span class="fc" id="L536">            return getWrappedField().getLeapAmount(instant);</span>
+        }
+        
+        public final DurationField getLeapDurationField() {
+<span class="fc" id="L540">            return iLeapDurationField;</span>
+        }
+        
+        public long roundFloor(long instant) {
+<span class="fc" id="L544">            checkLimits(instant, null);</span>
+<span class="fc" id="L545">            long result = getWrappedField().roundFloor(instant);</span>
+<span class="fc" id="L546">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="fc" id="L547">            return result;</span>
+        }
+        
+        public long roundCeiling(long instant) {
+<span class="nc" id="L551">            checkLimits(instant, null);</span>
+<span class="nc" id="L552">            long result = getWrappedField().roundCeiling(instant);</span>
+<span class="nc" id="L553">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="nc" id="L554">            return result;</span>
+        }
+        
+        public long roundHalfFloor(long instant) {
+<span class="nc" id="L558">            checkLimits(instant, null);</span>
+<span class="nc" id="L559">            long result = getWrappedField().roundHalfFloor(instant);</span>
+<span class="nc" id="L560">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="nc" id="L561">            return result;</span>
+        }
+        
+        public long roundHalfCeiling(long instant) {
+<span class="nc" id="L565">            checkLimits(instant, null);</span>
+<span class="nc" id="L566">            long result = getWrappedField().roundHalfCeiling(instant);</span>
+<span class="nc" id="L567">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="nc" id="L568">            return result;</span>
+        }
+        
+        public long roundHalfEven(long instant) {
+<span class="nc" id="L572">            checkLimits(instant, null);</span>
+<span class="nc" id="L573">            long result = getWrappedField().roundHalfEven(instant);</span>
+<span class="nc" id="L574">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="nc" id="L575">            return result;</span>
+        }
+        
+        public long remainder(long instant) {
+<span class="nc" id="L579">            checkLimits(instant, null);</span>
+<span class="nc" id="L580">            long result = getWrappedField().remainder(instant);</span>
+<span class="nc" id="L581">            checkLimits(result, &quot;resulting&quot;);</span>
+<span class="nc" id="L582">            return result;</span>
+        }
+
+        public int getMinimumValue(long instant) {
+<span class="fc" id="L586">            checkLimits(instant, null);</span>
+<span class="fc" id="L587">            return getWrappedField().getMinimumValue(instant);</span>
+        }
+
+        public int getMaximumValue(long instant) {
+<span class="fc" id="L591">            checkLimits(instant, null);</span>
+<span class="fc" id="L592">            return getWrappedField().getMaximumValue(instant);</span>
+        }
+
+        public int getMaximumTextLength(Locale locale) {
+<span class="nc" id="L596">            return getWrappedField().getMaximumTextLength(locale);</span>
+        }
+
+        public int getMaximumShortTextLength(Locale locale) {
+<span class="nc" id="L600">            return getWrappedField().getMaximumShortTextLength(locale);</span>
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

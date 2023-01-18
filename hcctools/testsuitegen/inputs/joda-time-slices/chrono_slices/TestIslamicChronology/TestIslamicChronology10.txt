@@ -1,0 +1,73 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.9% done, time left: unknown  1.0% done, time left: unknown  2.0% done, time left: unknown  2.9% done, time left: unknown  4.3% done, time left: unknown  5.6% done, time left: unknown  7.3% done, time left:   0:00:05    9.1% done, time left:   0:00:05  9.4% done, time left:   0:00:06 10.6% done, time left:   0:00:06 12.1% done, time left:   0:00:07 13.1% done, time left:   0:00:07 13.3% done, time left:   0:00:07 14.7% done, time left:   0:00:09 18.0% done, time left:   0:00:08 21.2% done, time left:   0:00:06 22.4% done, time left:   0:00:05 25.9% done, time left:   0:00:04 27.3% done, time left:   0:00:03 31.5% done, time left:   0:00:03 32.1% done, time left:   0:00:01 35.3% done, time left:   0:00:02 39.7% done, time left:   0:00:01 42.0% done, time left:   0:00:01 44.5% done, time left:   0:00:01 44.5% done, time left:   0:00:00 45.5% done, time left:   0:00:01 45.5% done, time left:   0:00:00 49.3% done, time left:   0:00:01 53.7% done, time left:   0:00:01 55.2% done, time left:   0:00:00 61.2% done, time left:   0:00:00 63.4% done, time left:   0:00:00 65.9% done, time left:   0:00:00 69.1% done, time left:   0:00:00 73.8% done, time left:   0:00:00 78.4% done, time left:   0:00:00 83.1% done, time left:   0:00:00 87.0% done, time left:   0:00:00 90.5% done, time left:   0:00:00 95.0% done, time left:   0:00:00 99.5% done, time left:   0:00:00 101.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestIslamicChronology.testEquality:216:*]:
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:187 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:187 ARETURN
+org.joda.time.DateTimeZone.setDefault:207 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.setDefault:207 ALOAD 0
+org.joda.time.DateTimeZone.setDefault:207 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.set(Ljava/lang/Object;)V
+org.joda.time.chrono.IslamicChronology.getInstance:170 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.IslamicChronology.getInstance:170 GETSTATIC org/joda/time/chrono/IslamicChronology.LEAP_YEAR_16_BASED Lorg/joda/time/chrono/IslamicChronology$LeapYearPatternType;
+org.joda.time.chrono.IslamicChronology.getInstance:170 INVOKESTATIC org/joda/time/chrono/IslamicChronology.getInstance(Lorg/joda/time/DateTimeZone;Lorg/joda/time/chrono/IslamicChronology$LeapYearPatternType;)Lorg/joda/time/chrono/IslamicChronology;
+org.joda.time.chrono.IslamicChronology.getInstance:180 ALOAD 0
+org.joda.time.chrono.IslamicChronology.getInstance:180 GETSTATIC org/joda/time/chrono/IslamicChronology.LEAP_YEAR_16_BASED Lorg/joda/time/chrono/IslamicChronology$LeapYearPatternType;
+org.joda.time.chrono.IslamicChronology.getInstance:180 INVOKESTATIC org/joda/time/chrono/IslamicChronology.getInstance(Lorg/joda/time/DateTimeZone;Lorg/joda/time/chrono/IslamicChronology$LeapYearPatternType;)Lorg/joda/time/chrono/IslamicChronology;
+org.joda.time.chrono.IslamicChronology.getInstance:180 ARETURN
+org.joda.time.chrono.IslamicChronology.getInstance:195 GETSTATIC org/joda/time/chrono/IslamicChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.IslamicChronology.getInstance:195 ALOAD 0
+org.joda.time.chrono.IslamicChronology.getInstance:195 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.IslamicChronology.getInstance:195 ASTORE 3
+org.joda.time.chrono.IslamicChronology.getInstance:196 ALOAD 3
+org.joda.time.chrono.IslamicChronology.getInstance:196 IFNONNULL L1 false true
+org.joda.time.chrono.IslamicChronology.getInstance:197 ICONST_4
+org.joda.time.chrono.IslamicChronology.getInstance:197 ANEWARRAY org/joda/time/chrono/IslamicChronology
+org.joda.time.chrono.IslamicChronology.getInstance:197 ASTORE 3
+org.joda.time.chrono.IslamicChronology.getInstance:198 GETSTATIC org/joda/time/chrono/IslamicChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.IslamicChronology.getInstance:198 ALOAD 0
+org.joda.time.chrono.IslamicChronology.getInstance:198 ALOAD 3
+org.joda.time.chrono.IslamicChronology.getInstance:198 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.IslamicChronology.getInstance:203 ALOAD 3
+org.joda.time.chrono.IslamicChronology.getInstance:203 ALOAD 1
+org.joda.time.chrono.IslamicChronology.getInstance:203 GETFIELD org/joda/time/chrono/IslamicChronology$LeapYearPatternType.index B
+org.joda.time.chrono.IslamicChronology.getInstance:203 AALOAD
+org.joda.time.chrono.IslamicChronology.getInstance:203 ASTORE 2
+org.joda.time.chrono.IslamicChronology.getInstance:204 ALOAD 2
+org.joda.time.chrono.IslamicChronology.getInstance:204 IFNONNULL L9 false true
+org.joda.time.chrono.IslamicChronology.getInstance:206 ALOAD 3
+org.joda.time.chrono.IslamicChronology.getInstance:206 ALOAD 1
+org.joda.time.chrono.IslamicChronology.getInstance:206 GETFIELD org/joda/time/chrono/IslamicChronology$LeapYearPatternType.index B
+org.joda.time.chrono.IslamicChronology.getInstance:206 AALOAD
+org.joda.time.chrono.IslamicChronology.getInstance:206 ASTORE 2
+org.joda.time.chrono.IslamicChronology.getInstance:207 ALOAD 2
+org.joda.time.chrono.IslamicChronology.getInstance:207 IFNONNULL L5 false true
+org.joda.time.chrono.IslamicChronology.getInstance:208 ALOAD 0
+org.joda.time.chrono.IslamicChronology.getInstance:208 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.IslamicChronology.getInstance:208 IF_ACMPNE L3 true false
+org.joda.time.chrono.IslamicChronology.getInstance:218 NEW org/joda/time/chrono/IslamicChronology
+org.joda.time.chrono.IslamicChronology.getInstance:218 ASTORE 2
+org.joda.time.chrono.IslamicChronology.getInstance:221 ALOAD 3
+org.joda.time.chrono.IslamicChronology.getInstance:221 ALOAD 1
+org.joda.time.chrono.IslamicChronology.getInstance:221 GETFIELD org/joda/time/chrono/IslamicChronology$LeapYearPatternType.index B
+org.joda.time.chrono.IslamicChronology.getInstance:221 ALOAD 2
+org.joda.time.chrono.IslamicChronology.getInstance:221 AASTORE
+org.joda.time.chrono.IslamicChronology.getInstance:225 ALOAD 2
+org.joda.time.chrono.IslamicChronology.getInstance:225 ARETURN
+org.joda.time.chrono.TestIslamicChronology.main:72 INVOKEVIRTUAL org/joda/time/chrono/TestIslamicChronology.setUp()V
+org.joda.time.chrono.TestIslamicChronology.main:73 INVOKEVIRTUAL org/joda/time/chrono/TestIslamicChronology.testFactory()V
+org.joda.time.chrono.TestIslamicChronology.main:83 INVOKEVIRTUAL org/joda/time/chrono/TestIslamicChronology.testEquality()V
+org.joda.time.chrono.TestIslamicChronology.setUp:177 GETSTATIC org/joda/time/chrono/TestIslamicChronology.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestIslamicChronology.setUp:177 INVOKESTATIC org/joda/time/DateTimeZone.setDefault(Lorg/joda/time/DateTimeZone;)V
+org.joda.time.chrono.TestIslamicChronology.testFactory:201 INVOKESTATIC org/joda/time/chrono/IslamicChronology.getInstance()Lorg/joda/time/chrono/IslamicChronology;
+org.joda.time.chrono.TestIslamicChronology.testEquality:216 GETSTATIC org/joda/time/chrono/TestIslamicChronology.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestIslamicChronology.testEquality:216 INVOKESTATIC org/joda/time/chrono/IslamicChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/IslamicChronology;
+org.joda.time.chrono.TestIslamicChronology.testEquality:216 GETSTATIC org/joda/time/chrono/TestIslamicChronology.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestIslamicChronology.testEquality:216 INVOKESTATIC org/joda/time/chrono/IslamicChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/IslamicChronology;
+org.joda.time.chrono.TestIslamicChronology.testEquality:216 INVOKESTATIC org/junit/Assert.assertSame(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+
+Slice consists of 353 bytecode instructions.
+Computation took 5.15 seconds.

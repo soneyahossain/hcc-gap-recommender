@@ -1,0 +1,52 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  1.2% done, time left: unknown  2.5% done, time left: unknown  3.2% done, time left: unknown  3.5% done, time left: unknown  3.9% done, time left: unknown  5.6% done, time left: unknown  8.3% done, time left:   0:00:03   11.3% done, time left:   0:00:03 13.4% done, time left:   0:00:03 15.6% done, time left:   0:00:04 17.9% done, time left:   0:00:04 19.8% done, time left:   0:00:04 25.2% done, time left:   0:00:02 30.2% done, time left:   0:00:02 34.4% done, time left:   0:00:02 36.3% done, time left:   0:00:01 39.4% done, time left:   0:00:01 45.5% done, time left:   0:00:00 50.8% done, time left:   0:00:00 56.8% done, time left:   0:00:00 61.5% done, time left:   0:00:00 65.8% done, time left:   0:00:00 70.1% done, time left:   0:00:00 74.8% done, time left:   0:00:00 82.7% done, time left:   0:00:00 90.9% done, time left:   0:00:00 93.9% done, time left:   0:00:00 97.4% done, time left:   0:00:00 98.5% done, time left:   0:00:00 99.8% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:167:*]:
+org.joda.time.Interval.<init>:186 ALOAD 0
+org.joda.time.Interval.<init>:186 LLOAD 1
+org.joda.time.Interval.<init>:186 INVOKESPECIAL org/joda/time/base/BaseInterval.<init>(JJLorg/joda/time/Chronology;)V
+org.joda.time.MutableInterval.setInterval:230 ALOAD 1
+org.joda.time.MutableInterval.setInterval:230 INVOKEINTERFACE org/joda/time/ReadableInterval.getStartMillis()J
+org.joda.time.MutableInterval.setInterval:230 LSTORE 2
+org.joda.time.MutableInterval.setInterval:233 ALOAD 0
+org.joda.time.MutableInterval.setInterval:233 LLOAD 2
+org.joda.time.MutableInterval.setInterval:233 INVOKESPECIAL org/joda/time/base/BaseInterval.setInterval(JJLorg/joda/time/Chronology;)V
+org.joda.time.MutableInterval.setChronology:263 ALOAD 0
+org.joda.time.MutableInterval.setChronology:263 ALOAD 0
+org.joda.time.MutableInterval.setChronology:263 INVOKEVIRTUAL org/joda/time/MutableInterval.getStartMillis()J
+org.joda.time.MutableInterval.setChronology:263 INVOKESPECIAL org/joda/time/base/BaseInterval.setInterval(JJLorg/joda/time/Chronology;)V
+org.joda.time.base.BaseInterval.<init>:74 ALOAD 0
+org.joda.time.base.BaseInterval.<init>:74 LLOAD 1
+org.joda.time.base.BaseInterval.<init>:74 PUTFIELD org/joda/time/base/BaseInterval.iStartMillis J
+org.joda.time.base.BaseInterval.getStartMillis:225 ALOAD 0
+org.joda.time.base.BaseInterval.getStartMillis:225 GETFIELD org/joda/time/base/BaseInterval.iStartMillis J
+org.joda.time.base.BaseInterval.getStartMillis:225 LRETURN
+org.joda.time.base.BaseInterval.setInterval:249 ALOAD 0
+org.joda.time.base.BaseInterval.setInterval:249 LLOAD 1
+org.joda.time.base.BaseInterval.setInterval:249 PUTFIELD org/joda/time/base/BaseInterval.iStartMillis J
+org.joda.time.convert.ReadableIntervalConverter.setInto:99 ALOAD 2
+org.joda.time.convert.ReadableIntervalConverter.setInto:99 ASTORE 4
+org.joda.time.convert.ReadableIntervalConverter.setInto:100 ALOAD 1
+org.joda.time.convert.ReadableIntervalConverter.setInto:100 ALOAD 4
+org.joda.time.convert.ReadableIntervalConverter.setInto:100 INVOKEINTERFACE org/joda/time/ReadWritableInterval.setInterval(Lorg/joda/time/ReadableInterval;)V
+org.joda.time.convert.ReadableIntervalConverter.setInto:101 ALOAD 3
+org.joda.time.convert.ReadableIntervalConverter.setInto:101 IFNULL L0 true false
+org.joda.time.convert.ReadableIntervalConverter.setInto:104 ALOAD 1
+org.joda.time.convert.ReadableIntervalConverter.setInto:104 INVOKEINTERFACE org/joda/time/ReadWritableInterval.setChronology(Lorg/joda/time/Chronology;)V
+org.joda.time.convert.TestReadableIntervalConverter.main:68 INVOKEVIRTUAL org/joda/time/convert/TestReadableIntervalConverter.testSetIntoInterval_Object1()V
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:164 NEW org/joda/time/Interval
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:164 DUP
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:164 LCONST_0
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:164 INVOKESPECIAL org/joda/time/Interval.<init>(JJLorg/joda/time/Chronology;)V
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:164 ASTORE 1
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:165 NEW org/joda/time/MutableInterval
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:165 ASTORE 2
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:166 ALOAD 2
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:166 ALOAD 1
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:166 ACONST_NULL
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:166 INVOKEVIRTUAL org/joda/time/convert/ReadableIntervalConverter.setInto(Lorg/joda/time/ReadWritableInterval;Ljava/lang/Object;Lorg/joda/time/Chronology;)V
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:167 LCONST_0
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:167 ALOAD 2
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:167 INVOKEVIRTUAL org/joda/time/MutableInterval.getStartMillis()J
+org.joda.time.convert.TestReadableIntervalConverter.testSetIntoInterval_Object1:167 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 47 bytecode instructions.
+Computation took 3.51 seconds.

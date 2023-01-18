@@ -1,0 +1,37 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  1.1% done, time left: unknown  2.4% done, time left: unknown  2.5% done, time left: unknown  2.9% done, time left: unknown  3.0% done, time left: unknown  3.5% done, time left: unknown  4.3% done, time left: unknown  5.2% done, time left:   0:00:10    5.2% done, time left:   0:00:15  5.2% done, time left:   0:00:20  5.8% done, time left:   0:00:21  7.4% done, time left:   0:00:21  9.3% done, time left:   0:00:20  9.6% done, time left:   0:00:18  9.6% done, time left:   0:00:17 11.4% done, time left:   0:00:17 12.6% done, time left:   0:00:16 12.6% done, time left:   0:00:15 12.6% done, time left:   0:00:14 12.6% done, time left:   0:00:13 12.9% done, time left:   0:00:12 16.2% done, time left:   0:00:11 19.2% done, time left:   0:00:09 21.6% done, time left:   0:00:07 24.2% done, time left:   0:00:06 28.3% done, time left:   0:00:04 32.2% done, time left:   0:00:03 34.8% done, time left:   0:00:02 38.3% done, time left:   0:00:02 42.2% done, time left:   0:00:02 46.3% done, time left:   0:00:01 50.4% done, time left:   0:00:01 54.3% done, time left:   0:00:01 58.4% done, time left:   0:00:00 62.4% done, time left:   0:00:00 63.8% done, time left:   0:00:00 65.4% done, time left:   0:00:00 69.0% done, time left:   0:00:00 71.0% done, time left:   0:00:00 73.7% done, time left:   0:00:00 75.8% done, time left:   0:00:00 79.0% done, time left:   0:00:00 82.1% done, time left:   0:00:00 85.3% done, time left:   0:00:00 88.9% done, time left:   0:00:00 90.2% done, time left:   0:00:00 90.3% done, time left:   0:00:00 91.6% done, time left:   0:00:00 95.1% done, time left:   0:00:00 98.4% done, time left:   0:00:00 98.7% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestSeconds.testIsLessThan:210:*]:
+org.joda.time.Seconds.seconds:72 ILOAD 0
+org.joda.time.Seconds.seconds:72 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, -2147483648 => L5, 0 => L0, 2147483647 => L4* => L6)
+org.joda.time.Seconds.seconds:86 NEW org/joda/time/Seconds
+org.joda.time.Seconds.seconds:86 DUP
+org.joda.time.Seconds.seconds:86 ILOAD 0
+org.joda.time.Seconds.seconds:86 INVOKESPECIAL org/joda/time/Seconds.<init>(I)V
+org.joda.time.Seconds.seconds:86 ARETURN
+org.joda.time.Seconds.<init>:198 ALOAD 0
+org.joda.time.Seconds.<init>:198 ILOAD 1
+org.joda.time.Seconds.<init>:198 INVOKESPECIAL org/joda/time/base/BaseSingleFieldPeriod.<init>(I)V
+org.joda.time.Seconds.isLessThan:452 ALOAD 1
+org.joda.time.Seconds.isLessThan:452 IFNONNULL L2 false true
+org.joda.time.Seconds.isLessThan:453 ALOAD 0
+org.joda.time.Seconds.isLessThan:453 INVOKEVIRTUAL org/joda/time/Seconds.getValue()I
+org.joda.time.Seconds.isLessThan:453 IFGE L0 false true
+org.joda.time.Seconds.isLessThan:453 ICONST_1
+org.joda.time.Seconds.isLessThan:453 IRETURN
+org.joda.time.TestSeconds.main:49 INVOKEVIRTUAL org/joda/time/TestSeconds.testIsLessThan()V
+org.joda.time.TestSeconds.testIsLessThan:210 ICONST_1
+org.joda.time.TestSeconds.testIsLessThan:210 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestSeconds.testIsLessThan:210 ICONST_M1
+org.joda.time.TestSeconds.testIsLessThan:210 INVOKESTATIC org/joda/time/Seconds.seconds(I)Lorg/joda/time/Seconds;
+org.joda.time.TestSeconds.testIsLessThan:210 ACONST_NULL
+org.joda.time.TestSeconds.testIsLessThan:210 INVOKEVIRTUAL org/joda/time/Seconds.isLessThan(Lorg/joda/time/Seconds;)Z
+org.joda.time.TestSeconds.testIsLessThan:210 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestSeconds.testIsLessThan:210 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ILOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 PUTFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+
+Slice consists of 36 bytecode instructions.
+Computation took 5.69 seconds.

@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateTimeUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">DateTimeUtils.java</span></div><h1>DateTimeUtils.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import java.lang.reflect.Method;
+import java.text.DateFormatSymbols;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
+
+import org.joda.time.chrono.ISOChronology;
+
+/**
+ * DateTimeUtils provide public utility methods for the date-time library.
+ * &lt;p&gt;
+ * DateTimeUtils uses shared static variables which are declared as volatile
+ * for thread-safety. These can be changed during the lifetime of the application
+ * however doing so is generally a bad idea.
+ *
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+public class DateTimeUtils {
+
+    /**
+     * The singleton instance of the system millisecond provider.
+     */
+<span class="fc" id="L44">    public static final MillisProvider SYSTEM_MILLIS_PROVIDER = new SystemMillisProvider();</span>
+
+    /** The millisecond provider currently in use. */
+<span class="fc" id="L47">    private static volatile MillisProvider cMillisProvider = SYSTEM_MILLIS_PROVIDER;</span>
+    /**
+     * The default names.
+     * This is lazily initialized to reduce risks of race conditions at startup.
+     */
+<span class="fc" id="L52">    private static final AtomicReference&lt;Map&lt;String, DateTimeZone&gt;&gt; cZoneNames =</span>
+                    new AtomicReference&lt;Map&lt;String,DateTimeZone&gt;&gt;();
+
+    /**
+     * Restrictive constructor
+     */
+    protected DateTimeUtils() {
+<span class="fc" id="L59">        super();</span>
+<span class="fc" id="L60">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the current time in milliseconds.
+     * &lt;p&gt;
+     * By default this returns &lt;code&gt;System.currentTimeMillis()&lt;/code&gt;.
+     * This may be changed using other methods in this class.
+     * 
+     * @return the current time in milliseconds from 1970-01-01T00:00:00Z
+     */
+    public static final long currentTimeMillis() {
+<span class="fc" id="L72">        return cMillisProvider.getMillis();</span>
+    }
+
+    /**
+     * Resets the current time to return the system time.
+     * &lt;p&gt;
+     * This method changes the behaviour of {@link #currentTimeMillis()}.
+     * Whenever the current time is queried, {@link System#currentTimeMillis()} is used.
+     * 
+     * @throws SecurityException if the application does not have sufficient security rights
+     */
+    public static final void setCurrentMillisSystem() throws SecurityException {
+<span class="fc" id="L84">        checkPermission();</span>
+<span class="fc" id="L85">        cMillisProvider = SYSTEM_MILLIS_PROVIDER;</span>
+<span class="fc" id="L86">    }</span>
+
+    /**
+     * Sets the current time to return a fixed millisecond time.
+     * &lt;p&gt;
+     * This method changes the behaviour of {@link #currentTimeMillis()}.
+     * Whenever the current time is queried, the same millisecond time will be returned.
+     * 
+     * @param fixedMillis  the fixed millisecond time to use
+     * @throws SecurityException if the application does not have sufficient security rights
+     */
+    public static final void setCurrentMillisFixed(long fixedMillis) throws SecurityException {
+<span class="fc" id="L98">        checkPermission();</span>
+<span class="fc" id="L99">        cMillisProvider = new FixedMillisProvider(fixedMillis);</span>
+<span class="fc" id="L100">    }</span>
+
+    /**
+     * Sets the current time to return the system time plus an offset.
+     * &lt;p&gt;
+     * This method changes the behaviour of {@link #currentTimeMillis()}.
+     * Whenever the current time is queried, {@link System#currentTimeMillis()} is used
+     * and then offset by adding the millisecond value specified here.
+     * 
+     * @param offsetMillis  the fixed millisecond time to use
+     * @throws SecurityException if the application does not have sufficient security rights
+     */
+    public static final void setCurrentMillisOffset(long offsetMillis) throws SecurityException {
+<span class="fc" id="L113">        checkPermission();</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        if (offsetMillis == 0) {</span>
+<span class="fc" id="L115">            cMillisProvider = SYSTEM_MILLIS_PROVIDER;</span>
+        } else {
+<span class="fc" id="L117">            cMillisProvider = new OffsetMillisProvider(offsetMillis);</span>
+        }
+<span class="fc" id="L119">    }</span>
+
+    /**
+     * Sets the provider of the current time to class specified.
+     * &lt;p&gt;
+     * This method changes the behaviour of {@link #currentTimeMillis()}.
+     * Whenever the current time is queried, the specified class will be called.
+     * 
+     * @param millisProvider  the provider of the current time to use, not null
+     * @throws SecurityException if the application does not have sufficient security rights
+     * @since 2.0
+     */
+    public static final void setCurrentMillisProvider(MillisProvider millisProvider) throws SecurityException {
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        if (millisProvider == null) {</span>
+<span class="fc" id="L133">            throw new IllegalArgumentException(&quot;The MillisProvider must not be null&quot;);</span>
+        }
+<span class="fc" id="L135">        checkPermission();</span>
+<span class="fc" id="L136">        cMillisProvider = millisProvider;</span>
+<span class="fc" id="L137">    }</span>
+
+    /**
+     * Checks whether the provider may be changed using permission 'CurrentTime.setProvider'.
+     * 
+     * @throws SecurityException if the provider may not be changed
+     */
+    private static void checkPermission() throws SecurityException {
+<span class="fc" id="L145">        SecurityManager sm = System.getSecurityManager();</span>
+<span class="pc bpc" id="L146" title="1 of 2 branches missed.">        if (sm != null) {</span>
+<span class="nc" id="L147">            sm.checkPermission(new JodaTimePermission(&quot;CurrentTime.setProvider&quot;));</span>
+        }
+<span class="fc" id="L149">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the millisecond instant from the specified instant object handling null.
+     * &lt;p&gt;
+     * If the instant object is &lt;code&gt;null&lt;/code&gt;, the {@link #currentTimeMillis()}
+     * will be returned. Otherwise, the millis from the object are returned.
+     * 
+     * @param instant  the instant to examine, null means now
+     * @return the time in milliseconds from 1970-01-01T00:00:00Z
+     */
+    public static final long getInstantMillis(ReadableInstant instant) {
+<span class="fc bfc" id="L162" title="All 2 branches covered.">        if (instant == null) {</span>
+<span class="fc" id="L163">            return DateTimeUtils.currentTimeMillis();</span>
+        }
+<span class="fc" id="L165">        return instant.getMillis();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the chronology from the specified instant object handling null.
+     * &lt;p&gt;
+     * If the instant object is &lt;code&gt;null&lt;/code&gt;, or the instant's chronology is
+     * &lt;code&gt;null&lt;/code&gt;, {@link ISOChronology#getInstance()} will be returned.
+     * Otherwise, the chronology from the object is returned.
+     * 
+     * @param instant  the instant to examine, null means ISO in the default zone
+     * @return the chronology, never null
+     */
+    public static final Chronology getInstantChronology(ReadableInstant instant) {
+<span class="fc bfc" id="L180" title="All 2 branches covered.">        if (instant == null) {</span>
+<span class="fc" id="L181">            return ISOChronology.getInstance();</span>
+        }
+<span class="fc" id="L183">        Chronology chrono = instant.getChronology();</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">        if (chrono == null) {</span>
+<span class="fc" id="L185">            return ISOChronology.getInstance();</span>
+        }
+<span class="fc" id="L187">        return chrono;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the chronology from the specified instant based interval handling null.
+     * &lt;p&gt;
+     * The chronology is obtained from the start if that is not null, or from the
+     * end if the start is null. The result is additionally checked, and if still
+     * null then {@link ISOChronology#getInstance()} will be returned.
+     * 
+     * @param start  the instant to examine and use as the primary source of the chronology
+     * @param end  the instant to examine and use as the secondary source of the chronology
+     * @return the chronology, never null
+     */
+    public static final Chronology getIntervalChronology(ReadableInstant start, ReadableInstant end) {
+<span class="fc" id="L203">        Chronology chrono = null;</span>
+<span class="fc bfc" id="L204" title="All 2 branches covered.">        if (start != null) {</span>
+<span class="fc" id="L205">            chrono = start.getChronology();</span>
+<span class="fc bfc" id="L206" title="All 2 branches covered.">        } else if (end != null) {</span>
+<span class="fc" id="L207">            chrono = end.getChronology();</span>
+        }
+<span class="fc bfc" id="L209" title="All 2 branches covered.">        if (chrono == null) {</span>
+<span class="fc" id="L210">            chrono = ISOChronology.getInstance();</span>
+        }
+<span class="fc" id="L212">        return chrono;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the chronology from the specified interval object handling null.
+     * &lt;p&gt;
+     * If the interval object is &lt;code&gt;null&lt;/code&gt;, or the interval's chronology is
+     * &lt;code&gt;null&lt;/code&gt;, {@link ISOChronology#getInstance()} will be returned.
+     * Otherwise, the chronology from the object is returned.
+     * 
+     * @param interval  the interval to examine, null means ISO in the default zone
+     * @return the chronology, never null
+     */
+    public static final Chronology getIntervalChronology(ReadableInterval interval) {
+<span class="fc bfc" id="L227" title="All 2 branches covered.">        if (interval == null) {</span>
+<span class="fc" id="L228">            return ISOChronology.getInstance();</span>
+        }
+<span class="fc" id="L230">        Chronology chrono = interval.getChronology();</span>
+<span class="fc bfc" id="L231" title="All 2 branches covered.">        if (chrono == null) {</span>
+<span class="fc" id="L232">            return ISOChronology.getInstance();</span>
+        }
+<span class="fc" id="L234">        return chrono;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the interval handling null.
+     * &lt;p&gt;
+     * If the interval is &lt;code&gt;null&lt;/code&gt;, an interval representing now
+     * to now in the {@link ISOChronology#getInstance() ISOChronology}
+     * will be returned. Otherwise, the interval specified is returned.
+     * 
+     * @param interval  the interval to use, null means now to now
+     * @return the interval, never null
+     * @since 1.1
+     */
+    public static final ReadableInterval getReadableInterval(ReadableInterval interval) {
+<span class="fc bfc" id="L250" title="All 2 branches covered.">        if (interval == null) {</span>
+<span class="fc" id="L251">            long now = DateTimeUtils.currentTimeMillis();</span>
+<span class="fc" id="L252">            interval = new Interval(now, now);</span>
+        }
+<span class="fc" id="L254">        return interval;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the chronology handling null.
+     * &lt;p&gt;
+     * If the chronology is &lt;code&gt;null&lt;/code&gt;, {@link ISOChronology#getInstance()}
+     * will be returned. Otherwise, the chronology is returned.
+     * 
+     * @param chrono  the chronology to use, null means ISO in the default zone
+     * @return the chronology, never null
+     */
+    public static final Chronology getChronology(Chronology chrono) {
+<span class="fc bfc" id="L268" title="All 2 branches covered.">        if (chrono == null) {</span>
+<span class="fc" id="L269">            return ISOChronology.getInstance();</span>
+        }
+<span class="fc" id="L271">        return chrono;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the zone handling null.
+     * &lt;p&gt;
+     * If the zone is &lt;code&gt;null&lt;/code&gt;, {@link DateTimeZone#getDefault()}
+     * will be returned. Otherwise, the zone specified is returned.
+     * 
+     * @param zone  the time zone to use, null means the default zone
+     * @return the time zone, never null
+     */
+    public static final DateTimeZone getZone(DateTimeZone zone) {
+<span class="fc bfc" id="L285" title="All 2 branches covered.">        if (zone == null) {</span>
+<span class="fc" id="L286">            return DateTimeZone.getDefault();</span>
+        }
+<span class="fc" id="L288">        return zone;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the period type handling null.
+     * &lt;p&gt;
+     * If the zone is &lt;code&gt;null&lt;/code&gt;, {@link PeriodType#standard()}
+     * will be returned. Otherwise, the type specified is returned.
+     * 
+     * @param type  the time zone to use, null means the standard type
+     * @return the type to use, never null
+     */
+    public static final PeriodType getPeriodType(PeriodType type) {
+<span class="fc bfc" id="L302" title="All 2 branches covered.">        if (type == null) {</span>
+<span class="fc" id="L303">            return PeriodType.standard();</span>
+        }
+<span class="fc" id="L305">        return type;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the millisecond duration from the specified duration object handling null.
+     * &lt;p&gt;
+     * If the duration object is &lt;code&gt;null&lt;/code&gt;, zero will be returned.
+     * Otherwise, the millis from the object are returned.
+     * 
+     * @param duration  the duration to examine, null means zero
+     * @return the duration in milliseconds
+     */
+    public static final long getDurationMillis(ReadableDuration duration) {
+<span class="fc bfc" id="L319" title="All 2 branches covered.">        if (duration == null) {</span>
+<span class="fc" id="L320">            return 0L;</span>
+        }
+<span class="fc" id="L322">        return duration.getMillis();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Checks whether the partial is contiguous.
+     * &lt;p&gt;
+     * A partial is contiguous if one field starts where another ends.
+     * &lt;p&gt;
+     * For example &lt;code&gt;LocalDate&lt;/code&gt; is contiguous because DayOfMonth has
+     * the same range (Month) as the unit of the next field (MonthOfYear), and
+     * MonthOfYear has the same range (Year) as the unit of the next field (Year).
+     * &lt;p&gt;
+     * Similarly, &lt;code&gt;LocalTime&lt;/code&gt; is contiguous, as it consists of
+     * MillisOfSecond, SecondOfMinute, MinuteOfHour and HourOfDay (note how
+     * the names of each field 'join up').
+     * &lt;p&gt;
+     * However, a Year/HourOfDay partial is not contiguous because the range
+     * field Day is not equal to the next field Year.
+     * Similarly, a DayOfWeek/DayOfMonth partial is not contiguous because
+     * the range Month is not equal to the next field Day.
+     * 
+     * @param partial  the partial to check
+     * @return true if the partial is contiguous
+     * @throws IllegalArgumentException if the partial is null
+     * @since 1.1
+     */
+    public static final boolean isContiguous(ReadablePartial partial) {
+<span class="fc bfc" id="L350" title="All 2 branches covered.">        if (partial == null) {</span>
+<span class="fc" id="L351">            throw new IllegalArgumentException(&quot;Partial must not be null&quot;);</span>
+        }
+<span class="fc" id="L353">        DurationFieldType lastType = null;</span>
+<span class="fc bfc" id="L354" title="All 2 branches covered.">        for (int i = 0; i &lt; partial.size(); i++) {</span>
+<span class="fc" id="L355">            DateTimeField loopField = partial.getField(i);</span>
+<span class="fc bfc" id="L356" title="All 2 branches covered.">            if (i &gt; 0) {</span>
+<span class="pc bpc" id="L357" title="1 of 4 branches missed.">                if (loopField.getRangeDurationField() == null || loopField.getRangeDurationField().getType() != lastType) {</span>
+<span class="fc" id="L358">                    return false;</span>
+                }
+            }
+<span class="fc" id="L361">            lastType = loopField.getDurationField().getType();</span>
+        }
+<span class="fc" id="L363">        return true;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the {@link DateFormatSymbols} based on the given locale.
+     * &lt;p&gt;
+     * If JDK 6 or newer is being used, DateFormatSymbols.getInstance(locale) will
+     * be used in order to allow the use of locales defined as extensions.
+     * Otherwise, new DateFormatSymbols(locale) will be used.
+     * See JDK 6 {@link DateFormatSymbols} for further information.
+     * 
+     * @param locale  the {@link Locale} used to get the correct {@link DateFormatSymbols}
+     * @return the symbols
+     * @since 2.0
+     */
+    public static final DateFormatSymbols getDateFormatSymbols(Locale locale) {
+        try {
+<span class="fc" id="L381">            Method method = DateFormatSymbols.class.getMethod(&quot;getInstance&quot;, new Class[] {Locale.class});</span>
+<span class="fc" id="L382">            return (DateFormatSymbols) method.invoke(null, new Object[] {locale});</span>
+<span class="nc" id="L383">        } catch (Exception ex) {</span>
+<span class="nc" id="L384">            return new DateFormatSymbols(locale);</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the default map of time zone names.
+     * &lt;p&gt;
+     * This can be changed by {@link #setDefaultTimeZoneNames}.
+     * &lt;p&gt;
+     * The default set of short time zone names is as follows:
+     * &lt;ul&gt;
+     * &lt;li&gt;UT - UTC
+     * &lt;li&gt;UTC - UTC
+     * &lt;li&gt;GMT - UTC
+     * &lt;li&gt;EST - America/New_York
+     * &lt;li&gt;EDT - America/New_York
+     * &lt;li&gt;CST - America/Chicago
+     * &lt;li&gt;CDT - America/Chicago
+     * &lt;li&gt;MST - America/Denver
+     * &lt;li&gt;MDT - America/Denver
+     * &lt;li&gt;PST - America/Los_Angeles
+     * &lt;li&gt;PDT - America/Los_Angeles
+     * &lt;/ul&gt;
+     * 
+     * @return the unmodifiable map of abbreviations to zones, not null
+     * @since 2.2
+     */
+    public static final Map&lt;String, DateTimeZone&gt; getDefaultTimeZoneNames() {
+<span class="nc" id="L413">        Map&lt;String, DateTimeZone&gt; names = cZoneNames.get();</span>
+<span class="nc bnc" id="L414" title="All 2 branches missed.">        if (names == null) {</span>
+<span class="nc" id="L415">            names = buildDefaultTimeZoneNames();</span>
+<span class="nc bnc" id="L416" title="All 2 branches missed.">            if (!cZoneNames.compareAndSet(null, names)) {</span>
+<span class="nc" id="L417">                names = cZoneNames.get();</span>
+            }
+        }
+<span class="nc" id="L420">        return names;</span>
+    }
+
+    /**
+     * Sets the default map of time zone names.
+     * &lt;p&gt;
+     * The map is copied before storage.
+     * 
+     * @param names  the map of abbreviations to zones, not null
+     * @since 2.2
+     */
+    public static final void setDefaultTimeZoneNames(Map&lt;String, DateTimeZone&gt; names) {
+<span class="nc" id="L432">        cZoneNames.set(Collections.unmodifiableMap(new HashMap&lt;String, DateTimeZone&gt;(names)));</span>
+<span class="nc" id="L433">    }</span>
+
+    private static Map&lt;String, DateTimeZone&gt; buildDefaultTimeZoneNames() {
+        // names from RFC-822 / JDK
+        // this is all very US-centric and dubious, but perhaps it will help some
+<span class="nc" id="L438">        Map&lt;String, DateTimeZone&gt; map = new LinkedHashMap&lt;String, DateTimeZone&gt;();</span>
+<span class="nc" id="L439">        map.put(&quot;UT&quot;, DateTimeZone.UTC);</span>
+<span class="nc" id="L440">        map.put(&quot;UTC&quot;, DateTimeZone.UTC);</span>
+<span class="nc" id="L441">        map.put(&quot;GMT&quot;, DateTimeZone.UTC);</span>
+<span class="nc" id="L442">        put(map, &quot;EST&quot;, &quot;America/New_York&quot;);</span>
+<span class="nc" id="L443">        put(map, &quot;EDT&quot;, &quot;America/New_York&quot;);</span>
+<span class="nc" id="L444">        put(map, &quot;CST&quot;, &quot;America/Chicago&quot;);</span>
+<span class="nc" id="L445">        put(map, &quot;CDT&quot;, &quot;America/Chicago&quot;);</span>
+<span class="nc" id="L446">        put(map, &quot;MST&quot;, &quot;America/Denver&quot;);</span>
+<span class="nc" id="L447">        put(map, &quot;MDT&quot;, &quot;America/Denver&quot;);</span>
+<span class="nc" id="L448">        put(map, &quot;PST&quot;, &quot;America/Los_Angeles&quot;);</span>
+<span class="nc" id="L449">        put(map, &quot;PDT&quot;, &quot;America/Los_Angeles&quot;);</span>
+<span class="nc" id="L450">        return Collections.unmodifiableMap(map);</span>
+    }
+    private static void put(Map&lt;String, DateTimeZone&gt; map, String name, String id) {
+        try {
+<span class="nc" id="L454">            map.put(name, DateTimeZone.forID(id));</span>
+<span class="nc" id="L455">        } catch (RuntimeException ex) {</span>
+            // ignore
+<span class="nc" id="L457">        }</span>
+<span class="nc" id="L458">    }</span>
+    //-------------------------------------------------------------------------
+    /**
+     * Calculates the astronomical Julian Day for an instant.
+     * &lt;p&gt;
+     * The &lt;a href=&quot;https://en.wikipedia.org/wiki/Julian_day&quot;&gt;Julian day&lt;/a&gt; is a well-known
+     * system of time measurement for scientific use by the astronomy community.
+     * It expresses the interval of time in days and fractions of a day since
+     * January 1, 4713 BC (Julian) Greenwich noon.
+     * &lt;p&gt;
+     * Each day starts at midday (not midnight) and time is expressed as a fraction.
+     * Thus the fraction 0.25 is 18:00. equal to one quarter of the day from midday to midday.
+     * &lt;p&gt;
+     * Note that this method has nothing to do with the day-of-year.
+     * 
+     * @param epochMillis  the epoch millis from 1970-01-01Z
+     * @return the astronomical Julian Day represented by the specified instant
+     * @since 2.2
+     */
+    public static final double toJulianDay(long epochMillis) {
+        // useful links
+        // https://en.wikipedia.org/wiki/Julian_day#cite_note-13 - Wikipedia
+        // http://aa.usno.navy.mil/data/docs/JulianDate.php&quot; - USNO
+        // http://users.zoominternet.net/~matto/Java/Julian%20Date%20Converter.htm - Julian Date Converter by Matt Oltersdorf
+        // http://ssd.jpl.nasa.gov/tc.cgi#top - CalTech
+<span class="fc" id="L483">        double epochDay = epochMillis / 86400000d;</span>
+<span class="fc" id="L484">        return epochDay + 2440587.5d;</span>
+    }
+
+    /**
+     * Calculates the astronomical Julian Day Number for an instant.
+     * &lt;p&gt;
+     * The {@link #toJulianDay(long)} method calculates the astronomical Julian Day
+     * with a fraction based on days starting at midday.
+     * This method calculates the variant where days start at midnight.
+     * JDN 0 is used for the date equivalent to Monday January 1, 4713 BC (Julian).
+     * Thus these days start 12 hours before those of the fractional Julian Day.
+     * &lt;p&gt;
+     * Note that this method has nothing to do with the day-of-year.
+     * 
+     * @param epochMillis  the epoch millis from 1970-01-01Z
+     * @return the astronomical Julian Day represented by the specified instant
+     * @since 2.2
+     */
+    public static final long toJulianDayNumber(long epochMillis) {
+<span class="fc" id="L503">        return (long) Math.floor(toJulianDay(epochMillis) + 0.5d);</span>
+    }
+
+    /**
+     * Creates a date-time from a Julian Day.
+     * &lt;p&gt;
+     * Returns the {@code DateTime} object equal to the specified Julian Day.
+     * 
+     * @param julianDay  the Julian Day
+     * @return the epoch millis from 1970-01-01Z
+     * @since 2.2
+     */
+    public static final long fromJulianDay(double julianDay) {
+<span class="fc" id="L516">        double epochDay = julianDay - 2440587.5d;</span>
+<span class="fc" id="L517">        return (long) (epochDay * 86400000d);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * A millisecond provider, allowing control of the system clock.
+     * 
+     * @author Stephen Colebourne
+     * @since 2.0 (previously private)
+     */
+    public static interface MillisProvider {
+        /**
+         * Gets the current time.
+         * &lt;p&gt;
+         * Implementations of this method must be thread-safe.
+         * 
+         * @return the current time in milliseconds
+         */
+        long getMillis();
+    }
+
+    /**
+     * System millis provider.
+     */
+<span class="fc" id="L541">    static class SystemMillisProvider implements MillisProvider {</span>
+        /**
+         * Gets the current time.
+         * @return the current time in millis
+         */
+        public long getMillis() {
+<span class="fc" id="L547">            return System.currentTimeMillis();</span>
+        }
+    }
+
+    /**
+     * Fixed millisecond provider.
+     */
+    static class FixedMillisProvider implements MillisProvider {
+        /** The fixed millis value. */
+        private final long iMillis;
+        
+        /**
+         * Constructor.
+         * @param fixedMillis  the millis value
+         */
+<span class="fc" id="L562">        FixedMillisProvider(long fixedMillis) {</span>
+<span class="fc" id="L563">            iMillis = fixedMillis;</span>
+<span class="fc" id="L564">        }</span>
+        
+        /**
+         * Gets the current time.
+         * @return the current time in millis
+         */
+        public long getMillis() {
+<span class="fc" id="L571">            return iMillis;</span>
+        }
+    }
+
+    /**
+     * Offset from system millis provider.
+     */
+    static class OffsetMillisProvider implements MillisProvider {
+        /** The millis offset. */
+        private final long iMillis;
+        
+        /**
+         * Constructor.
+         * @param offsetMillis  the millis offset
+         */
+<span class="fc" id="L586">        OffsetMillisProvider(long offsetMillis) {</span>
+<span class="fc" id="L587">            iMillis = offsetMillis;</span>
+<span class="fc" id="L588">        }</span>
+        
+        /**
+         * Gets the current time.
+         * @return the current time in millis
+         */
+        public long getMillis() {
+<span class="fc" id="L595">            return System.currentTimeMillis() + iMillis;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

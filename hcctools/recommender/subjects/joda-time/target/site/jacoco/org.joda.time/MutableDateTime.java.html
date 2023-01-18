@@ -1,0 +1,1491 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MutableDateTime.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">MutableDateTime.java</span></div><h1>MutableDateTime.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Locale;
+
+import org.joda.convert.FromString;
+import org.joda.time.base.BaseDateTime;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.field.AbstractReadableInstantFieldProperty;
+import org.joda.time.field.FieldUtils;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
+
+/**
+ * MutableDateTime is the standard implementation of a modifiable datetime class.
+ * It holds the datetime as milliseconds from the Java epoch of 1970-01-01T00:00:00Z.
+ * &lt;p&gt;
+ * This class uses a Chronology internally. The Chronology determines how the
+ * millisecond instant value is converted into the date time fields.
+ * The default Chronology is &lt;code&gt;ISOChronology&lt;/code&gt; which is the agreed
+ * international standard and compatible with the modern Gregorian calendar.
+ * &lt;p&gt;
+ * Each individual field can be accessed in two ways:
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;code&gt;getHourOfDay()&lt;/code&gt;
+ * &lt;li&gt;&lt;code&gt;hourOfDay().get()&lt;/code&gt;
+ * &lt;/ul&gt;
+ * The second technique also provides access to other useful methods on the
+ * field:
+ * &lt;ul&gt;
+ * &lt;li&gt;get numeric value
+ * &lt;li&gt;set numeric value
+ * &lt;li&gt;add to numeric value
+ * &lt;li&gt;add to numeric value wrapping with the field
+ * &lt;li&gt;get text value
+ * &lt;li&gt;get short text value
+ * &lt;li&gt;set text value
+ * &lt;li&gt;field maximum value
+ * &lt;li&gt;field minimum value
+ * &lt;/ul&gt;
+ *
+ * &lt;p&gt;
+ * MutableDateTime is mutable and not thread-safe, unless concurrent threads
+ * are not invoking mutator methods.
+ *
+ * @author Guy Allard
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @author Mike Schrag
+ * @since 1.0
+ * @see DateTime
+ */
+public class MutableDateTime
+        extends BaseDateTime
+        implements ReadWritableDateTime, Cloneable, Serializable {
+
+    /** Serialization version */
+    private static final long serialVersionUID = 2852608688135209575L;
+
+    /** Rounding is disabled */
+    public static final int ROUND_NONE = 0;
+    /** Rounding mode as described by {@link DateTimeField#roundFloor} */
+    public static final int ROUND_FLOOR = 1;
+    /** Rounding mode as described by {@link DateTimeField#roundCeiling} */
+    public static final int ROUND_CEILING = 2;
+    /** Rounding mode as described by {@link DateTimeField#roundHalfFloor} */
+    public static final int ROUND_HALF_FLOOR = 3;
+    /** Rounding mode as described by {@link DateTimeField#roundHalfCeiling} */
+    public static final int ROUND_HALF_CEILING = 4;
+    /** Rounding mode as described by {@link DateTimeField#roundHalfEven} */
+    public static final int ROUND_HALF_EVEN = 5;
+
+    /** The field to round on */
+    private DateTimeField iRoundingField;
+    /** The mode of rounding */
+    private int iRoundingMode;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Obtains a {@code MutableDateTime} set to the current system millisecond time
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the default time zone.
+     * 
+     * @return the current date-time, not null
+     * @since 2.0
+     */
+    public static MutableDateTime now() {
+<span class="fc" id="L105">        return new MutableDateTime();</span>
+    }
+
+    /**
+     * Obtains a {@code MutableDateTime} set to the current system millisecond time
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the specified time zone.
+     *
+     * @param zone  the time zone, not null
+     * @return the current date-time, not null
+     * @since 2.0
+     */
+    public static MutableDateTime now(DateTimeZone zone) {
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (zone == null) {</span>
+<span class="fc" id="L118">            throw new NullPointerException(&quot;Zone must not be null&quot;);</span>
+        }
+<span class="fc" id="L120">        return new MutableDateTime(zone);</span>
+    }
+
+    /**
+     * Obtains a {@code MutableDateTime} set to the current system millisecond time
+     * using the specified chronology.
+     *
+     * @param chronology  the chronology, not null
+     * @return the current date-time, not null
+     * @since 2.0
+     */
+    public static MutableDateTime now(Chronology chronology) {
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        if (chronology == null) {</span>
+<span class="fc" id="L133">            throw new NullPointerException(&quot;Chronology must not be null&quot;);</span>
+        }
+<span class="fc" id="L135">        return new MutableDateTime(chronology);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Parses a {@code MutableDateTime} from the specified string.
+     * &lt;p&gt;
+     * This uses {@link ISODateTimeFormat#dateTimeParser()}.
+     * 
+     * @param str  the string to parse, not null
+     * @since 2.0
+     */
+    @FromString
+    public static MutableDateTime parse(String str) {
+<span class="fc" id="L149">        return parse(str, ISODateTimeFormat.dateTimeParser().withOffsetParsed());</span>
+    }
+
+    /**
+     * Parses a {@code MutableDateTime} from the specified string using a formatter.
+     * 
+     * @param str  the string to parse, not null
+     * @param formatter  the formatter to use, not null
+     * @since 2.0
+     */
+    public static MutableDateTime parse(String str, DateTimeFormatter formatter) {
+<span class="fc" id="L160">        return formatter.parseDateTime(str).toMutableDateTime();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs an instance set to the current system millisecond time
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the default time zone.
+     * 
+     * @see #now()
+     */
+    public MutableDateTime() {
+<span class="fc" id="L171">        super();</span>
+<span class="fc" id="L172">    }</span>
+
+    /**
+     * Constructs an instance set to the current system millisecond time
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the specified time zone.
+     * &lt;p&gt;
+     * If the specified time zone is null, the default zone is used.
+     *
+     * @param zone  the time zone, null means default zone
+     * @see #now(DateTimeZone)
+     */
+    public MutableDateTime(DateTimeZone zone) {
+<span class="fc" id="L184">        super(zone);</span>
+<span class="fc" id="L185">    }</span>
+
+    /**
+     * Constructs an instance set to the current system millisecond time
+     * using the specified chronology.
+     * &lt;p&gt;
+     * If the chronology is null, &lt;code&gt;ISOChronology&lt;/code&gt;
+     * in the default time zone is used.
+     *
+     * @param chronology  the chronology, null means ISOChronology in default zone
+     * @see #now(Chronology)
+     */
+    public MutableDateTime(Chronology chronology) {
+<span class="fc" id="L198">        super(chronology);</span>
+<span class="fc" id="L199">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs an instance set to the milliseconds from 1970-01-01T00:00:00Z
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the default time zone.
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+     */
+    public MutableDateTime(long instant) {
+<span class="fc" id="L209">        super(instant);</span>
+<span class="fc" id="L210">    }</span>
+
+    /**
+     * Constructs an instance set to the milliseconds from 1970-01-01T00:00:00Z
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the specified time zone.
+     * &lt;p&gt;
+     * If the specified time zone is null, the default zone is used.
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+     * @param zone  the time zone, null means default zone
+     */
+    public MutableDateTime(long instant, DateTimeZone zone) {
+<span class="fc" id="L222">        super(instant, zone);</span>
+<span class="fc" id="L223">    }</span>
+
+    /**
+     * Constructs an instance set to the milliseconds from 1970-01-01T00:00:00Z
+     * using the specified chronology.
+     * &lt;p&gt;
+     * If the chronology is null, &lt;code&gt;ISOChronology&lt;/code&gt;
+     * in the default time zone is used.
+     *
+     * @param instant  the milliseconds from 1970-01-01T00:00:00Z
+     * @param chronology  the chronology, null means ISOChronology in default zone
+     */
+    public MutableDateTime(long instant, Chronology chronology) {
+<span class="fc" id="L236">        super(instant, chronology);</span>
+<span class="fc" id="L237">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs an instance from an Object that represents a datetime.
+     * &lt;p&gt;
+     * If the object implies a chronology (such as GregorianCalendar does),
+     * then that chronology will be used. Otherwise, ISO default is used.
+     * Thus if a GregorianCalendar is passed in, the chronology used will
+     * be GJ, but if a Date is passed in the chronology will be ISO.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadableInstant, String, Calendar and Date.
+     *
+     * @param instant  the datetime object, null means now
+     * @throws IllegalArgumentException if the instant is invalid
+     */
+    public MutableDateTime(Object instant) {
+<span class="fc" id="L256">        super(instant, (Chronology) null);</span>
+<span class="fc" id="L257">    }</span>
+
+    /**
+     * Constructs an instance from an Object that represents a datetime,
+     * forcing the time zone to that specified.
+     * &lt;p&gt;
+     * If the object implies a chronology (such as GregorianCalendar does),
+     * then that chronology will be used, but with the time zone adjusted.
+     * Otherwise, ISO is used in the specified time zone.
+     * If the specified time zone is null, the default zone is used.
+     * Thus if a GregorianCalendar is passed in, the chronology used will
+     * be GJ, but if a Date is passed in the chronology will be ISO.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadableInstant, String, Calendar and Date.
+     *
+     * @param instant  the datetime object, null means now
+     * @param zone  the time zone, null means default time zone
+     * @throws IllegalArgumentException if the instant is invalid
+     */
+    public MutableDateTime(Object instant, DateTimeZone zone) {
+<span class="fc" id="L279">        super(instant, zone);</span>
+<span class="fc" id="L280">    }</span>
+
+    /**
+     * Constructs an instance from an Object that represents a datetime,
+     * using the specified chronology.
+     * &lt;p&gt;
+     * If the chronology is null, ISO in the default time zone is used.
+     * Any chronology implied by the object (such as GregorianCalendar does)
+     * is ignored.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadableInstant, String, Calendar and Date.
+     *
+     * @param instant  the datetime object, null means now
+     * @param chronology  the chronology, null means ISOChronology in default zone
+     * @throws IllegalArgumentException if the instant is invalid
+     */
+    public MutableDateTime(Object instant, Chronology chronology) {
+<span class="fc" id="L299">        super(instant, DateTimeUtils.getChronology(chronology));</span>
+<span class="fc" id="L300">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs an instance from datetime field values
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the default time zone.
+     *
+     * @param year  the year
+     * @param monthOfYear  the month of the year
+     * @param dayOfMonth  the day of the month
+     * @param hourOfDay  the hour of the day
+     * @param minuteOfHour  the minute of the hour
+     * @param secondOfMinute  the second of the minute
+     * @param millisOfSecond  the millisecond of the second
+     */
+    public MutableDateTime(
+            int year,
+            int monthOfYear,
+            int dayOfMonth,
+            int hourOfDay,
+            int minuteOfHour,
+            int secondOfMinute,
+            int millisOfSecond) {
+<span class="fc" id="L323">        super(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);</span>
+<span class="fc" id="L324">    }</span>
+
+    /**
+     * Constructs an instance from datetime field values
+     * using &lt;code&gt;ISOChronology&lt;/code&gt; in the specified time zone.
+     * &lt;p&gt;
+     * If the specified time zone is null, the default zone is used.
+     *
+     * @param year  the year
+     * @param monthOfYear  the month of the year
+     * @param dayOfMonth  the day of the month
+     * @param hourOfDay  the hour of the day
+     * @param minuteOfHour  the minute of the hour
+     * @param secondOfMinute  the second of the minute
+     * @param millisOfSecond  the millisecond of the second
+     * @param zone  the time zone, null means default time zone
+     */
+    public MutableDateTime(
+            int year,
+            int monthOfYear,
+            int dayOfMonth,
+            int hourOfDay,
+            int minuteOfHour,
+            int secondOfMinute,
+            int millisOfSecond,
+            DateTimeZone zone) {
+<span class="fc" id="L350">        super(year, monthOfYear, dayOfMonth,</span>
+              hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond, zone);
+<span class="fc" id="L352">    }</span>
+
+    /**
+     * Constructs an instance from datetime field values
+     * using the specified chronology.
+     * &lt;p&gt;
+     * If the chronology is null, &lt;code&gt;ISOChronology&lt;/code&gt;
+     * in the default time zone is used.
+     *
+     * @param year  the year
+     * @param monthOfYear  the month of the year
+     * @param dayOfMonth  the day of the month
+     * @param hourOfDay  the hour of the day
+     * @param minuteOfHour  the minute of the hour
+     * @param secondOfMinute  the second of the minute
+     * @param millisOfSecond  the millisecond of the second
+     * @param chronology  the chronology, null means ISOChronology in default zone
+     */
+    public MutableDateTime(
+            int year,
+            int monthOfYear,
+            int dayOfMonth,
+            int hourOfDay,
+            int minuteOfHour,
+            int secondOfMinute,
+            int millisOfSecond,
+            Chronology chronology) {
+<span class="fc" id="L379">        super(year, monthOfYear, dayOfMonth,</span>
+              hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond, chronology);
+<span class="fc" id="L381">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the field used for rounding this instant, returning null if rounding
+     * is not enabled.
+     * 
+     * @return the rounding field
+     */
+    public DateTimeField getRoundingField() {
+<span class="fc" id="L391">        return iRoundingField;</span>
+    }
+
+    /**
+     * Gets the rounding mode for this instant, returning ROUND_NONE if rounding
+     * is not enabled.
+     * 
+     * @return the rounding mode constant
+     */
+    public int getRoundingMode() {
+<span class="fc" id="L401">        return iRoundingMode;</span>
+    }
+
+    /**
+     * Sets the status of rounding to use the specified field and ROUND_FLOOR mode.
+     * A null field will disable rounding.
+     * Once set, the instant is then rounded using the new field and mode.
+     * &lt;p&gt;
+     * Enabling rounding will cause all subsequent calls to {@link #setMillis(long)}
+     * to be rounded. This can be used to control the precision of the instant,
+     * for example by setting a rounding field of minuteOfDay, the seconds and
+     * milliseconds will always be zero.
+     *
+     * @param field rounding field or null to disable
+     */
+    public void setRounding(DateTimeField field) {
+<span class="fc" id="L417">        setRounding(field, MutableDateTime.ROUND_FLOOR);</span>
+<span class="fc" id="L418">    }</span>
+
+    /**
+     * Sets the status of rounding to use the specified field and mode.
+     * A null field or mode of ROUND_NONE will disable rounding.
+     * Once set, the instant is then rounded using the new field and mode.
+     * &lt;p&gt;
+     * Enabling rounding will cause all subsequent calls to {@link #setMillis(long)}
+     * to be rounded. This can be used to control the precision of the instant,
+     * for example by setting a rounding field of minuteOfDay, the seconds and
+     * milliseconds will always be zero.
+     *
+     * @param field  rounding field or null to disable
+     * @param mode  rounding mode or ROUND_NONE to disable
+     * @throws IllegalArgumentException if mode is unknown, no exception if field is null
+     */
+    public void setRounding(DateTimeField field, int mode) {
+<span class="pc bpc" id="L435" title="1 of 6 branches missed.">        if (field != null &amp;&amp; (mode &lt; ROUND_NONE || mode &gt; ROUND_HALF_EVEN)) {</span>
+<span class="fc" id="L436">            throw new IllegalArgumentException(&quot;Illegal rounding mode: &quot; + mode);</span>
+        }
+<span class="fc bfc" id="L438" title="All 2 branches covered.">        iRoundingField = (mode == ROUND_NONE ? null : field);</span>
+<span class="fc bfc" id="L439" title="All 2 branches covered.">        iRoundingMode = (field == null ? ROUND_NONE : mode);</span>
+<span class="fc" id="L440">        setMillis(getMillis());</span>
+<span class="fc" id="L441">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the milliseconds of the datetime.
+     * &lt;p&gt;
+     * All changes to the millisecond field occurs via this method.
+     *
+     * @param instant  the milliseconds since 1970-01-01T00:00:00Z to set the
+     * datetime to
+     */
+    public void setMillis(long instant) {
+<span class="pc bpc" id="L453" title="1 of 7 branches missed.">        switch (iRoundingMode) {</span>
+            case ROUND_NONE:
+<span class="fc" id="L455">                break;</span>
+            case ROUND_FLOOR:
+<span class="fc" id="L457">                instant = iRoundingField.roundFloor(instant);</span>
+<span class="fc" id="L458">                break;</span>
+            case ROUND_CEILING:
+<span class="fc" id="L460">                instant = iRoundingField.roundCeiling(instant);</span>
+<span class="fc" id="L461">                break;</span>
+            case ROUND_HALF_FLOOR:
+<span class="fc" id="L463">                instant = iRoundingField.roundHalfFloor(instant);</span>
+<span class="fc" id="L464">                break;</span>
+            case ROUND_HALF_CEILING:
+<span class="fc" id="L466">                instant = iRoundingField.roundHalfCeiling(instant);</span>
+<span class="fc" id="L467">                break;</span>
+            case ROUND_HALF_EVEN:
+<span class="fc" id="L469">                instant = iRoundingField.roundHalfEven(instant);</span>
+                break;
+        }
+<span class="fc" id="L472">        super.setMillis(instant);</span>
+<span class="fc" id="L473">    }</span>
+
+    /**
+     * Sets the millisecond instant of this instant from another.
+     * &lt;p&gt;
+     * This method does not change the chronology of this instant, just the
+     * millisecond instant.
+     * 
+     * @param instant  the instant to use, null means now
+     */
+    public void setMillis(ReadableInstant instant) {
+<span class="fc" id="L484">        long instantMillis = DateTimeUtils.getInstantMillis(instant);</span>
+<span class="fc" id="L485">        setMillis(instantMillis);  // set via this class not super</span>
+<span class="fc" id="L486">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Add an amount of time to the datetime.
+     * 
+     * @param duration  the millis to add
+     * @throws ArithmeticException if the result exceeds the capacity of the instant
+     */
+    public void add(long duration) {
+<span class="fc" id="L496">        setMillis(FieldUtils.safeAdd(getMillis(), duration));  // set via this class not super</span>
+<span class="fc" id="L497">    }</span>
+
+    /**
+     * Adds a duration to this instant.
+     * &lt;p&gt;
+     * This will typically change the value of most fields.
+     *
+     * @param duration  the duration to add, null means add zero
+     * @throws ArithmeticException if the result exceeds the capacity of the instant
+     */
+    public void add(ReadableDuration duration) {
+<span class="fc" id="L508">        add(duration, 1);</span>
+<span class="fc" id="L509">    }</span>
+
+    /**
+     * Adds a duration to this instant specifying how many times to add.
+     * &lt;p&gt;
+     * This will typically change the value of most fields.
+     *
+     * @param duration  the duration to add, null means add zero
+     * @param scalar  direction and amount to add, which may be negative
+     * @throws ArithmeticException if the result exceeds the capacity of the instant
+     */
+    public void add(ReadableDuration duration, int scalar) {
+<span class="fc bfc" id="L521" title="All 2 branches covered.">        if (duration != null) {</span>
+<span class="fc" id="L522">            add(FieldUtils.safeMultiply(duration.getMillis(), scalar));</span>
+        }
+<span class="fc" id="L524">    }</span>
+
+    /**
+     * Adds a period to this instant.
+     * &lt;p&gt;
+     * This will typically change the value of most fields.
+     *
+     * @param period  the period to add, null means add zero
+     * @throws ArithmeticException if the result exceeds the capacity of the instant
+     */
+    public void add(ReadablePeriod period) {
+<span class="fc" id="L535">        add(period, 1);</span>
+<span class="fc" id="L536">    }</span>
+
+    /**
+     * Adds a period to this instant specifying how many times to add.
+     * &lt;p&gt;
+     * This will typically change the value of most fields.
+     *
+     * @param period  the period to add, null means add zero
+     * @param scalar  direction and amount to add, which may be negative
+     * @throws ArithmeticException if the result exceeds the capacity of the instant
+     */
+    public void add(ReadablePeriod period, int scalar) {
+<span class="fc bfc" id="L548" title="All 2 branches covered.">        if (period != null) {</span>
+<span class="fc" id="L549">            setMillis(getChronology().add(period, getMillis(), scalar));  // set via this class not super</span>
+        }
+<span class="fc" id="L551">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the chronology of the datetime.
+     * &lt;p&gt;
+     * All changes to the chronology occur via this method.
+     * 
+     * @param chronology  the chronology to use, null means ISOChronology in default zone
+     */
+    public void setChronology(Chronology chronology) {
+<span class="fc" id="L562">        super.setChronology(chronology);</span>
+<span class="fc" id="L563">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the time zone of the datetime, changing the chronology and field values.
+     * &lt;p&gt;
+     * Changing the zone using this method retains the millisecond instant.
+     * The millisecond instant is adjusted in the new zone to compensate.
+     * 
+     * chronology. Setting the time zone does not affect the millisecond value
+     * of this instant.
+     * &lt;p&gt;
+     * If the chronology already has this time zone, no change occurs.
+     *
+     * @param newZone  the time zone to use, null means default zone
+     * @see #setZoneRetainFields
+     */
+    public void setZone(DateTimeZone newZone) {
+<span class="fc" id="L581">        newZone = DateTimeUtils.getZone(newZone);</span>
+<span class="fc" id="L582">        Chronology chrono = getChronology();</span>
+<span class="fc bfc" id="L583" title="All 2 branches covered.">        if (chrono.getZone() != newZone) {</span>
+<span class="fc" id="L584">            setChronology(chrono.withZone(newZone));  // set via this class not super</span>
+        }
+<span class="fc" id="L586">    }</span>
+
+    /**
+     * Sets the time zone of the datetime, changing the chronology and millisecond.
+     * &lt;p&gt;
+     * Changing the zone using this method retains the field values.
+     * The millisecond instant is adjusted in the new zone to compensate.
+     * &lt;p&gt;
+     * If the chronology already has this time zone, no change occurs.
+     *
+     * @param newZone  the time zone to use, null means default zone
+     * @see #setZone
+     */
+    public void setZoneRetainFields(DateTimeZone newZone) {
+<span class="fc" id="L600">        newZone = DateTimeUtils.getZone(newZone);</span>
+<span class="fc" id="L601">        DateTimeZone originalZone = DateTimeUtils.getZone(getZone());</span>
+<span class="fc bfc" id="L602" title="All 2 branches covered.">        if (newZone == originalZone) {</span>
+<span class="fc" id="L603">            return;</span>
+        }
+        
+<span class="fc" id="L606">        long millis = originalZone.getMillisKeepLocal(newZone, getMillis());</span>
+<span class="fc" id="L607">        setChronology(getChronology().withZone(newZone));  // set via this class not super</span>
+<span class="fc" id="L608">        setMillis(millis);</span>
+<span class="fc" id="L609">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the value of one of the fields of the instant, such as hourOfDay.
+     *
+     * @param type  a field type, usually obtained from DateTimeFieldType, not null
+     * @param value  the value to set the field to
+     * @throws IllegalArgumentException if the value is null or invalid
+     */
+    public void set(DateTimeFieldType type, int value) {
+<span class="fc bfc" id="L620" title="All 2 branches covered.">        if (type == null) {</span>
+<span class="fc" id="L621">            throw new IllegalArgumentException(&quot;Field must not be null&quot;);</span>
+        }
+<span class="fc" id="L623">        setMillis(type.getField(getChronology()).set(getMillis(), value));</span>
+<span class="fc" id="L624">    }</span>
+
+    /**
+     * Adds to the instant specifying the duration and multiple to add.
+     *
+     * @param type  a field type, usually obtained from DateTimeFieldType, not null
+     * @param amount  the amount to add of this duration
+     * @throws IllegalArgumentException if the value is null or invalid
+     * @throws ArithmeticException if the result exceeds the capacity of the instant
+     */
+    public void add(DurationFieldType type, int amount) {
+<span class="fc bfc" id="L635" title="All 2 branches covered.">        if (type == null) {</span>
+<span class="fc" id="L636">            throw new IllegalArgumentException(&quot;Field must not be null&quot;);</span>
+        }
+<span class="fc bfc" id="L638" title="All 2 branches covered.">        if (amount != 0) {</span>
+<span class="fc" id="L639">            setMillis(type.getField(getChronology()).add(getMillis(), amount));</span>
+        }
+<span class="fc" id="L641">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the year to the specified value.
+     *
+     * @param year  the year
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setYear(final int year) {
+<span class="fc" id="L651">        setMillis(getChronology().year().set(getMillis(), year));</span>
+<span class="fc" id="L652">    }</span>
+
+    /**
+     * Add a number of years to the date.
+     *
+     * @param years  the years to add
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void addYears(final int years) {
+<span class="fc bfc" id="L661" title="All 2 branches covered.">        if (years != 0) {</span>
+<span class="fc" id="L662">            setMillis(getChronology().years().add(getMillis(), years));</span>
+        }
+<span class="fc" id="L664">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the weekyear to the specified value.
+     *
+     * @param weekyear  the weekyear
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setWeekyear(final int weekyear) {
+<span class="fc" id="L674">        setMillis(getChronology().weekyear().set(getMillis(), weekyear));</span>
+<span class="fc" id="L675">    }</span>
+
+    /**
+     * Add a number of weekyears to the date.
+     *
+     * @param weekyears  the weekyears to add
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void addWeekyears(final int weekyears) {
+<span class="pc bpc" id="L684" title="1 of 2 branches missed.">        if (weekyears != 0) {</span>
+<span class="fc" id="L685">            setMillis(getChronology().weekyears().add(getMillis(), weekyears));</span>
+        }
+<span class="fc" id="L687">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the month of the year to the specified value.
+     *
+     * @param monthOfYear  the month of the year
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setMonthOfYear(final int monthOfYear) {
+<span class="fc" id="L697">        setMillis(getChronology().monthOfYear().set(getMillis(), monthOfYear));</span>
+<span class="fc" id="L698">    }</span>
+
+    /**
+     * Add a number of months to the date.
+     *
+     * @param months  the months to add
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void addMonths(final int months) {
+<span class="fc bfc" id="L707" title="All 2 branches covered.">        if (months != 0) {</span>
+<span class="fc" id="L708">            setMillis(getChronology().months().add(getMillis(), months));</span>
+        }
+<span class="fc" id="L710">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the week of weekyear to the specified value.
+     *
+     * @param weekOfWeekyear the week of the weekyear
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setWeekOfWeekyear(final int weekOfWeekyear) {
+<span class="fc" id="L720">        setMillis(getChronology().weekOfWeekyear().set(getMillis(), weekOfWeekyear));</span>
+<span class="fc" id="L721">    }</span>
+
+    /**
+     * Add a number of weeks to the date.
+     *
+     * @param weeks  the weeks to add
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void addWeeks(final int weeks) {
+<span class="fc bfc" id="L730" title="All 2 branches covered.">        if (weeks != 0) {</span>
+<span class="fc" id="L731">            setMillis(getChronology().weeks().add(getMillis(), weeks));</span>
+        }
+<span class="fc" id="L733">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the day of year to the specified value.
+     *
+     * @param dayOfYear the day of the year
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setDayOfYear(final int dayOfYear) {
+<span class="fc" id="L743">        setMillis(getChronology().dayOfYear().set(getMillis(), dayOfYear));</span>
+<span class="fc" id="L744">    }</span>
+
+    /**
+     * Set the day of the month to the specified value.
+     *
+     * @param dayOfMonth  the day of the month
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setDayOfMonth(final int dayOfMonth) {
+<span class="fc" id="L753">        setMillis(getChronology().dayOfMonth().set(getMillis(), dayOfMonth));</span>
+<span class="fc" id="L754">    }</span>
+
+    /**
+     * Set the day of week to the specified value.
+     *
+     * @param dayOfWeek  the day of the week
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setDayOfWeek(final int dayOfWeek) {
+<span class="fc" id="L763">        setMillis(getChronology().dayOfWeek().set(getMillis(), dayOfWeek));</span>
+<span class="fc" id="L764">    }</span>
+
+    /**
+     * Add a number of days to the date.
+     *
+     * @param days  the days to add
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void addDays(final int days) {
+<span class="fc bfc" id="L773" title="All 2 branches covered.">        if (days != 0) {</span>
+<span class="fc" id="L774">            setMillis(getChronology().days().add(getMillis(), days));</span>
+        }
+<span class="fc" id="L776">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the hour of the day to the specified value.
+     *
+     * @param hourOfDay  the hour of day
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setHourOfDay(final int hourOfDay) {
+<span class="fc" id="L786">        setMillis(getChronology().hourOfDay().set(getMillis(), hourOfDay));</span>
+<span class="fc" id="L787">    }</span>
+
+    /**
+     * Add a number of hours to the date.
+     *
+     * @param hours  the hours to add
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void addHours(final int hours) {
+<span class="fc bfc" id="L796" title="All 2 branches covered.">        if (hours != 0) {</span>
+<span class="fc" id="L797">            setMillis(getChronology().hours().add(getMillis(), hours));</span>
+        }
+<span class="fc" id="L799">    }</span>
+    
+    //-----------------------------------------------------------------------
+    /**
+     * Set the minute of the day to the specified value.
+     * &lt;p&gt;
+     * Setting this will replace the values of minute-of-hour and hour-of-day.
+     *
+     * @param minuteOfDay  the minute of day
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setMinuteOfDay(final int minuteOfDay) {
+<span class="fc" id="L811">        setMillis(getChronology().minuteOfDay().set(getMillis(), minuteOfDay));</span>
+<span class="fc" id="L812">    }</span>
+
+    /**
+     * Set the minute of the hour to the specified value.
+     *
+     * @param minuteOfHour  the minute of hour
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setMinuteOfHour(final int minuteOfHour) {
+<span class="fc" id="L821">        setMillis(getChronology().minuteOfHour().set(getMillis(), minuteOfHour));</span>
+<span class="fc" id="L822">    }</span>
+
+    /**
+     * Add a number of minutes to the date.
+     *
+     * @param minutes  the minutes to add
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void addMinutes(final int minutes) {
+<span class="fc bfc" id="L831" title="All 2 branches covered.">        if (minutes != 0) {</span>
+<span class="fc" id="L832">            setMillis(getChronology().minutes().add(getMillis(), minutes));</span>
+        }
+<span class="fc" id="L834">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the second of the day to the specified value.
+     * &lt;p&gt;
+     * Setting this will replace the values of second-of-minute, minute-of-hour and hour-of-day.
+     *
+     * @param secondOfDay  the second of day
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setSecondOfDay(final int secondOfDay) {
+<span class="fc" id="L846">        setMillis(getChronology().secondOfDay().set(getMillis(), secondOfDay));</span>
+<span class="fc" id="L847">    }</span>
+
+    /**
+     * Set the second of the minute to the specified value.
+     *
+     * @param secondOfMinute  the second of minute
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setSecondOfMinute(final int secondOfMinute) {
+<span class="fc" id="L856">        setMillis(getChronology().secondOfMinute().set(getMillis(), secondOfMinute));</span>
+<span class="fc" id="L857">    }</span>
+
+    /**
+     * Add a number of seconds to the date.
+     *
+     * @param seconds  the seconds to add
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void addSeconds(final int seconds) {
+<span class="fc bfc" id="L866" title="All 2 branches covered.">        if (seconds != 0) {</span>
+<span class="fc" id="L867">            setMillis(getChronology().seconds().add(getMillis(), seconds));</span>
+        }
+<span class="fc" id="L869">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the millis of the day to the specified value.
+     * &lt;p&gt;
+     * Setting this will replace the values of milli-of-second, second-of-minute, minute-of-hour and hour-of-day.
+     *
+     * @param millisOfDay  the millis of day
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setMillisOfDay(final int millisOfDay) {
+<span class="fc" id="L881">        setMillis(getChronology().millisOfDay().set(getMillis(), millisOfDay));</span>
+<span class="fc" id="L882">    }</span>
+
+    /**
+     * Set the millis of the second to the specified value.
+     *
+     * @param millisOfSecond  the millis of second
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setMillisOfSecond(final int millisOfSecond) {
+<span class="fc" id="L891">        setMillis(getChronology().millisOfSecond().set(getMillis(), millisOfSecond));</span>
+<span class="fc" id="L892">    }</span>
+
+    /**
+     * Add a number of milliseconds to the date. The implementation of this
+     * method differs from the {@link #add(long)} method in that a
+     * DateTimeField performs the addition.
+     *
+     * @param millis  the milliseconds to add
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void addMillis(final int millis) {
+<span class="fc bfc" id="L903" title="All 2 branches covered.">        if (millis != 0) {</span>
+<span class="fc" id="L904">            setMillis(getChronology().millis().add(getMillis(), millis));</span>
+        }
+<span class="fc" id="L906">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the date from milliseconds.
+     * The time part of this object will be unaffected.
+     *
+     * @param instant  an instant to copy the date from, time part ignored
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setDate(final long instant) {
+<span class="fc" id="L917">        setMillis(getChronology().millisOfDay().set(instant, getMillisOfDay()));</span>
+<span class="fc" id="L918">    }</span>
+
+    /**
+     * Set the date from another instant.
+     * The time part of this object will be unaffected.
+     * &lt;p&gt;
+     * If the input is a {@code ReadableDateTime} then it is converted to the
+     * same time-zone as this object before using the instant millis.
+     *
+     * @param instant  an instant to copy the date from, time part ignored
+     * @throws IllegalArgumentException if the object is invalid
+     */
+    public void setDate(final ReadableInstant instant) {
+<span class="fc" id="L931">        long instantMillis = DateTimeUtils.getInstantMillis(instant);</span>
+<span class="fc bfc" id="L932" title="All 2 branches covered.">        if (instant instanceof ReadableDateTime) {</span>
+<span class="fc" id="L933">            ReadableDateTime rdt = (ReadableDateTime) instant;</span>
+<span class="fc" id="L934">            Chronology instantChrono = DateTimeUtils.getChronology(rdt.getChronology());</span>
+<span class="fc" id="L935">            DateTimeZone zone = instantChrono.getZone();</span>
+<span class="pc bpc" id="L936" title="1 of 2 branches missed.">            if (zone != null) {</span>
+<span class="fc" id="L937">                instantMillis = zone.getMillisKeepLocal(getZone(), instantMillis);</span>
+            }
+        }
+<span class="fc" id="L940">        setDate(instantMillis);</span>
+<span class="fc" id="L941">    }</span>
+
+    /**
+     * Set the date from fields.
+     * The time part of this object will be unaffected.
+     *
+     * @param year  the year
+     * @param monthOfYear  the month of the year
+     * @param dayOfMonth  the day of the month
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setDate(
+            final int year,
+            final int monthOfYear,
+            final int dayOfMonth) {
+<span class="fc" id="L956">        Chronology c = getChronology();</span>
+<span class="fc" id="L957">        long instantMidnight = c.getDateTimeMillis(year, monthOfYear, dayOfMonth, 0);</span>
+<span class="fc" id="L958">        setDate(instantMidnight);</span>
+<span class="fc" id="L959">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Set the time from milliseconds.
+     * The date part of this object will be unaffected.
+     *
+     * @param millis  an instant to copy the time from, date part ignored
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setTime(final long millis) {
+<span class="fc" id="L970">        int millisOfDay = ISOChronology.getInstanceUTC().millisOfDay().get(millis);</span>
+<span class="fc" id="L971">        setMillis(getChronology().millisOfDay().set(getMillis(), millisOfDay));</span>
+<span class="fc" id="L972">    }</span>
+
+    /**
+     * Set the time from another instant.
+     * The date part of this object will be unaffected.
+     *
+     * @param instant  an instant to copy the time from, date part ignored
+     * @throws IllegalArgumentException if the object is invalid
+     */
+    public void setTime(final ReadableInstant instant) {
+<span class="fc" id="L982">        long instantMillis = DateTimeUtils.getInstantMillis(instant);</span>
+<span class="fc" id="L983">        Chronology instantChrono = DateTimeUtils.getInstantChronology(instant);</span>
+<span class="fc" id="L984">        DateTimeZone zone = instantChrono.getZone();</span>
+<span class="fc bfc" id="L985" title="All 2 branches covered.">        if (zone != null) {</span>
+<span class="fc" id="L986">            instantMillis = zone.getMillisKeepLocal(DateTimeZone.UTC, instantMillis);</span>
+        }
+<span class="fc" id="L988">        setTime(instantMillis);</span>
+<span class="fc" id="L989">    }</span>
+
+    /**
+     * Set the time from fields.
+     * The date part of this object will be unaffected.
+     *
+     * @param hour  the hour
+     * @param minuteOfHour  the minute of the hour
+     * @param secondOfMinute  the second of the minute
+     * @param millisOfSecond  the millisecond of the second
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setTime(
+            final int hour,
+            final int minuteOfHour,
+            final int secondOfMinute,
+            final int millisOfSecond) {
+<span class="fc" id="L1006">        long instant = getChronology().getDateTimeMillis(</span>
+<span class="fc" id="L1007">            getMillis(), hour, minuteOfHour, secondOfMinute, millisOfSecond);</span>
+<span class="fc" id="L1008">        setMillis(instant);</span>
+<span class="fc" id="L1009">    }</span>
+
+    /**
+     * Set the date and time from fields.
+     *
+     * @param year  the year
+     * @param monthOfYear  the month of the year
+     * @param dayOfMonth  the day of the month
+     * @param hourOfDay  the hour of the day
+     * @param minuteOfHour  the minute of the hour
+     * @param secondOfMinute  the second of the minute
+     * @param millisOfSecond  the millisecond of the second
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public void setDateTime(
+            final int year,
+            final int monthOfYear,
+            final int dayOfMonth,
+            final int hourOfDay,
+            final int minuteOfHour,
+            final int secondOfMinute,
+            final int millisOfSecond) {
+<span class="fc" id="L1031">        long instant = getChronology().getDateTimeMillis(</span>
+            year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+<span class="fc" id="L1033">        setMillis(instant);</span>
+<span class="fc" id="L1034">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the property object for the specified type, which contains many useful methods.
+     *
+     * @param type  the field type to get the chronology for
+     * @return the property object
+     * @throws IllegalArgumentException if the field is null or unsupported
+     * @since 1.2
+     */
+    public Property property(DateTimeFieldType type) {
+<span class="fc bfc" id="L1046" title="All 2 branches covered.">        if (type == null) {</span>
+<span class="fc" id="L1047">            throw new IllegalArgumentException(&quot;The DateTimeFieldType must not be null&quot;);</span>
+        }
+<span class="fc" id="L1049">        DateTimeField field = type.getField(getChronology());</span>
+<span class="fc bfc" id="L1050" title="All 2 branches covered.">        if (field.isSupported() == false) {</span>
+<span class="fc" id="L1051">            throw new IllegalArgumentException(&quot;Field '&quot; + type + &quot;' is not supported&quot;);</span>
+        }
+<span class="fc" id="L1053">        return new Property(this, field);</span>
+    }
+
+    /**
+     * Get the era property.
+     * 
+     * @return the era property
+     */
+    public Property era() {
+<span class="fc" id="L1062">        return new Property(this, getChronology().era());</span>
+    }
+
+    /**
+     * Get the century of era property.
+     * 
+     * @return the year of era property
+     */
+    public Property centuryOfEra() {
+<span class="fc" id="L1071">        return new Property(this, getChronology().centuryOfEra());</span>
+    }
+
+    /**
+     * Get the year of century property.
+     * 
+     * @return the year of era property
+     */
+    public Property yearOfCentury() {
+<span class="fc" id="L1080">        return new Property(this, getChronology().yearOfCentury());</span>
+    }
+
+    /**
+     * Get the year of era property.
+     * 
+     * @return the year of era property
+     */
+    public Property yearOfEra() {
+<span class="fc" id="L1089">        return new Property(this, getChronology().yearOfEra());</span>
+    }
+
+    /**
+     * Get the year property.
+     * 
+     * @return the year property
+     */
+    public Property year() {
+<span class="fc" id="L1098">        return new Property(this, getChronology().year());</span>
+    }
+
+    /**
+     * Get the year of a week based year property.
+     * 
+     * @return the year of a week based year property
+     */
+    public Property weekyear() {
+<span class="fc" id="L1107">        return new Property(this, getChronology().weekyear());</span>
+    }
+
+    /**
+     * Get the month of year property.
+     * 
+     * @return the month of year property
+     */
+    public Property monthOfYear() {
+<span class="fc" id="L1116">        return new Property(this, getChronology().monthOfYear());</span>
+    }
+
+    /**
+     * Get the week of a week based year property.
+     * 
+     * @return the week of a week based year property
+     */
+    public Property weekOfWeekyear() {
+<span class="fc" id="L1125">        return new Property(this, getChronology().weekOfWeekyear());</span>
+    }
+
+    /**
+     * Get the day of year property.
+     * 
+     * @return the day of year property
+     */
+    public Property dayOfYear() {
+<span class="fc" id="L1134">        return new Property(this, getChronology().dayOfYear());</span>
+    }
+
+    /**
+     * Get the day of month property.
+     * &lt;p&gt;
+     * The values for day of month are defined in {@link DateTimeConstants}.
+     * 
+     * @return the day of month property
+     */
+    public Property dayOfMonth() {
+<span class="fc" id="L1145">        return new Property(this, getChronology().dayOfMonth());</span>
+    }
+
+    /**
+     * Get the day of week property.
+     * &lt;p&gt;
+     * The values for day of week are defined in {@link DateTimeConstants}.
+     * 
+     * @return the day of week property
+     */
+    public Property dayOfWeek() {
+<span class="fc" id="L1156">        return new Property(this, getChronology().dayOfWeek());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the hour of day field property
+     * 
+     * @return the hour of day property
+     */
+    public Property hourOfDay() {
+<span class="fc" id="L1166">        return new Property(this, getChronology().hourOfDay());</span>
+    }
+
+    /**
+     * Get the minute of day property
+     * &lt;p&gt;
+     * Calling a setter on the property will replace the values of
+     * minute-of-hour and hour-of-day.
+     * 
+     * @return the minute of day property
+     */
+    public Property minuteOfDay() {
+<span class="fc" id="L1178">        return new Property(this, getChronology().minuteOfDay());</span>
+    }
+
+    /**
+     * Get the minute of hour field property
+     * 
+     * @return the minute of hour property
+     */
+    public Property minuteOfHour() {
+<span class="fc" id="L1187">        return new Property(this, getChronology().minuteOfHour());</span>
+    }
+
+    /**
+     * Get the second of day property
+     * &lt;p&gt;
+     * Calling a setter on the property will replace the values of
+     * second-of-minute, minute-of-hour and hour-of-day.
+     * 
+     * @return the second of day property
+     */
+    public Property secondOfDay() {
+<span class="fc" id="L1199">        return new Property(this, getChronology().secondOfDay());</span>
+    }
+
+    /**
+     * Get the second of minute field property
+     * 
+     * @return the second of minute property
+     */
+    public Property secondOfMinute() {
+<span class="fc" id="L1208">        return new Property(this, getChronology().secondOfMinute());</span>
+    }
+
+    /**
+     * Get the millis of day property
+     * &lt;p&gt;
+     * Calling a setter on the property will replace the values of
+     * milli-of-second, second-of-minute, minute-of-hour and hour-of-day.
+     * 
+     * @return the millis of day property
+     */
+    public Property millisOfDay() {
+<span class="fc" id="L1220">        return new Property(this, getChronology().millisOfDay());</span>
+    }
+
+    /**
+     * Get the millis of second property
+     * 
+     * @return the millis of second property
+     */
+    public Property millisOfSecond() {
+<span class="fc" id="L1229">        return new Property(this, getChronology().millisOfSecond());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Clone this object without having to cast the returned object.
+     *
+     * @return a clone of the this object.
+     */
+    public MutableDateTime copy() {
+<span class="fc" id="L1239">        return (MutableDateTime) clone();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Clone this object.
+     *
+     * @return a clone of this object.
+     */
+    public Object clone() {
+        try {
+<span class="fc" id="L1250">            return super.clone();</span>
+<span class="nc" id="L1251">        } catch (CloneNotSupportedException ex) {</span>
+<span class="nc" id="L1252">            throw new InternalError(&quot;Clone error&quot;);</span>
+        }
+    }
+
+    /**
+     * MutableDateTime.Property binds a MutableDateTime to a
+     * DateTimeField allowing powerful datetime functionality to be easily
+     * accessed.
+     * &lt;p&gt;
+     * The example below shows how to use the property to change the value of a
+     * MutableDateTime object.
+     * &lt;pre&gt;
+     * MutableDateTime dt = new MutableDateTime(1972, 12, 3, 13, 32, 19, 123);
+     * dt.year().add(20);
+     * dt.second().roundFloor().minute().set(10);
+     * &lt;/pre&gt;
+     * &lt;p&gt;
+     * MutableDateTime.Propery itself is thread-safe and immutable, but the
+     * MutableDateTime being operated on is not.
+     *
+     * @author Stephen Colebourne
+     * @author Brian S O'Neill
+     * @since 1.0
+     */
+    public static final class Property extends AbstractReadableInstantFieldProperty {
+        
+        /** Serialization version */
+        private static final long serialVersionUID = -4481126543819298617L;
+        
+        /** The instant this property is working against */
+        private MutableDateTime iInstant;
+        /** The field this property is working against */
+        private DateTimeField iField;
+        
+        /**
+         * Constructor.
+         * 
+         * @param instant  the instant to set
+         * @param field  the field to use
+         */
+        Property(MutableDateTime instant, DateTimeField field) {
+<span class="fc" id="L1293">            super();</span>
+<span class="fc" id="L1294">            iInstant = instant;</span>
+<span class="fc" id="L1295">            iField = field;</span>
+<span class="fc" id="L1296">        }</span>
+        
+        /**
+         * Writes the property in a safe serialization format.
+         */
+        private void writeObject(ObjectOutputStream oos) throws IOException {
+<span class="fc" id="L1302">            oos.writeObject(iInstant);</span>
+<span class="fc" id="L1303">            oos.writeObject(iField.getType());</span>
+<span class="fc" id="L1304">        }</span>
+
+        /**
+         * Reads the property from a safe serialization format.
+         */
+        private void readObject(ObjectInputStream oos) throws IOException, ClassNotFoundException {
+<span class="fc" id="L1310">            iInstant = (MutableDateTime) oos.readObject();</span>
+<span class="fc" id="L1311">            DateTimeFieldType type = (DateTimeFieldType) oos.readObject();</span>
+<span class="fc" id="L1312">            iField = type.getField(iInstant.getChronology());</span>
+<span class="fc" id="L1313">        }</span>
+
+        //-----------------------------------------------------------------------
+        /**
+         * Gets the field being used.
+         * 
+         * @return the field
+         */
+        public DateTimeField getField() {
+<span class="fc" id="L1322">            return iField;</span>
+        }
+        
+        /**
+         * Gets the milliseconds of the datetime that this property is linked to.
+         * 
+         * @return the milliseconds
+         */
+        protected long getMillis() {
+<span class="fc" id="L1331">            return iInstant.getMillis();</span>
+        }
+        
+        /**
+         * Gets the chronology of the datetime that this property is linked to.
+         * 
+         * @return the chronology
+         * @since 1.4
+         */
+        protected Chronology getChronology() {
+<span class="fc" id="L1341">            return iInstant.getChronology();</span>
+        }
+        
+        /**
+         * Gets the mutable datetime being used.
+         * 
+         * @return the mutable datetime
+         */
+        public MutableDateTime getMutableDateTime() {
+<span class="fc" id="L1350">            return iInstant;</span>
+        }
+        
+        //-----------------------------------------------------------------------
+        /**
+         * Adds a value to the millis value.
+         * 
+         * @param value  the value to add
+         * @return the mutable datetime being used, so calls can be chained
+         * @see DateTimeField#add(long,int)
+         */
+        public MutableDateTime add(int value) {
+<span class="fc" id="L1362">            iInstant.setMillis(getField().add(iInstant.getMillis(), value));</span>
+<span class="fc" id="L1363">            return iInstant;</span>
+        }
+        
+        /**
+         * Adds a value to the millis value.
+         * 
+         * @param value  the value to add
+         * @return the mutable datetime being used, so calls can be chained
+         * @see DateTimeField#add(long,long)
+         */
+        public MutableDateTime add(long value) {
+<span class="fc" id="L1374">            iInstant.setMillis(getField().add(iInstant.getMillis(), value));</span>
+<span class="fc" id="L1375">            return iInstant;</span>
+        }
+        
+        /**
+         * Adds a value, possibly wrapped, to the millis value.
+         * 
+         * @param value  the value to add
+         * @return the mutable datetime being used, so calls can be chained
+         * @see DateTimeField#addWrapField
+         */
+        public MutableDateTime addWrapField(int value) {
+<span class="fc" id="L1386">            iInstant.setMillis(getField().addWrapField(iInstant.getMillis(), value));</span>
+<span class="fc" id="L1387">            return iInstant;</span>
+        }
+        
+        //-----------------------------------------------------------------------
+        /**
+         * Sets a value.
+         * 
+         * @param value  the value to set.
+         * @return the mutable datetime being used, so calls can be chained
+         * @see DateTimeField#set(long,int)
+         */
+        public MutableDateTime set(int value) {
+<span class="fc" id="L1399">            iInstant.setMillis(getField().set(iInstant.getMillis(), value));</span>
+<span class="fc" id="L1400">            return iInstant;</span>
+        }
+        
+        /**
+         * Sets a text value.
+         * 
+         * @param text  the text value to set
+         * @param locale  optional locale to use for selecting a text symbol
+         * @return the mutable datetime being used, so calls can be chained
+         * @throws IllegalArgumentException if the text value isn't valid
+         * @see DateTimeField#set(long,java.lang.String,java.util.Locale)
+         */
+        public MutableDateTime set(String text, Locale locale) {
+<span class="fc" id="L1413">            iInstant.setMillis(getField().set(iInstant.getMillis(), text, locale));</span>
+<span class="fc" id="L1414">            return iInstant;</span>
+        }
+        
+        /**
+         * Sets a text value.
+         * 
+         * @param text  the text value to set
+         * @return the mutable datetime being used, so calls can be chained
+         * @throws IllegalArgumentException if the text value isn't valid
+         * @see DateTimeField#set(long,java.lang.String)
+         */
+        public MutableDateTime set(String text) {
+<span class="fc" id="L1426">            set(text, null);</span>
+<span class="fc" id="L1427">            return iInstant;</span>
+        }
+        
+        //-----------------------------------------------------------------------
+        /**
+         * Round to the lowest whole unit of this field.
+         *
+         * @return the mutable datetime being used, so calls can be chained
+         * @see DateTimeField#roundFloor
+         */
+        public MutableDateTime roundFloor() {
+<span class="fc" id="L1438">            iInstant.setMillis(getField().roundFloor(iInstant.getMillis()));</span>
+<span class="fc" id="L1439">            return iInstant;</span>
+        }
+
+        /**
+         * Round to the highest whole unit of this field.
+         *
+         * @return the mutable datetime being used, so calls can be chained
+         * @see DateTimeField#roundCeiling
+         */
+        public MutableDateTime roundCeiling() {
+<span class="fc" id="L1449">            iInstant.setMillis(getField().roundCeiling(iInstant.getMillis()));</span>
+<span class="fc" id="L1450">            return iInstant;</span>
+        }
+        
+        /**
+         * Round to the nearest whole unit of this field, favoring the floor if
+         * halfway.
+         *
+         * @return the mutable datetime being used, so calls can be chained
+         * @see DateTimeField#roundHalfFloor
+         */
+        public MutableDateTime roundHalfFloor() {
+<span class="fc" id="L1461">            iInstant.setMillis(getField().roundHalfFloor(iInstant.getMillis()));</span>
+<span class="fc" id="L1462">            return iInstant;</span>
+        }
+        
+        /**
+         * Round to the nearest whole unit of this field, favoring the ceiling if
+         * halfway.
+         *
+         * @return the mutable datetime being used, so calls can be chained
+         * @see DateTimeField#roundHalfCeiling
+         */
+        public MutableDateTime roundHalfCeiling() {
+<span class="fc" id="L1473">            iInstant.setMillis(getField().roundHalfCeiling(iInstant.getMillis()));</span>
+<span class="fc" id="L1474">            return iInstant;</span>
+        }
+
+        /**
+         * Round to the nearest whole unit of this field. If halfway, the ceiling
+         * is favored over the floor only if it makes this field's value even.
+         *
+         * @return the mutable datetime being used, so calls can be chained
+         * @see DateTimeField#roundHalfEven
+         */
+        public MutableDateTime roundHalfEven() {
+<span class="fc" id="L1485">            iInstant.setMillis(getField().roundHalfEven(iInstant.getMillis()));</span>
+<span class="fc" id="L1486">            return iInstant;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

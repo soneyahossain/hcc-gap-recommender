@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NullConverter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.convert</a> &gt; <span class="el_source">NullConverter.java</span></div><h1>NullConverter.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.convert;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.Period;
+import org.joda.time.ReadWritableInterval;
+import org.joda.time.ReadWritablePeriod;
+
+/**
+ * NullConverter converts null to an instant, partial, duration, period
+ * or interval. Null means now for instant/partial, zero for duration/period
+ * and from now to now for interval.
+ *
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+class NullConverter extends AbstractConverter
+        implements InstantConverter, PartialConverter, DurationConverter, PeriodConverter, IntervalConverter {
+
+    /**
+     * Singleton instance.
+     */
+<span class="fc" id="L39">    static final NullConverter INSTANCE = new NullConverter();</span>
+
+    /**
+     * Restricted constructor.
+     */
+    protected NullConverter() {
+<span class="fc" id="L45">        super();</span>
+<span class="fc" id="L46">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the millisecond duration, which is zero.
+     * 
+     * @param object  the object to convert, which is null
+     * @return the millisecond duration
+     */
+    public long getDurationMillis(Object object) {
+<span class="fc" id="L56">        return 0L;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the given ReadWritableDuration to zero milliseconds.
+     *
+     * @param duration duration to get modified
+     * @param object  the object to convert, which is null
+     * @param chrono  the chronology to use
+     * @throws NullPointerException if the duration is null
+     */
+    public void setInto(ReadWritablePeriod duration, Object object, Chronology chrono) {
+<span class="fc" id="L69">        duration.setPeriod((Period) null);</span>
+<span class="fc" id="L70">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Extracts interval endpoint values from an object of this converter's
+     * type, and sets them into the given ReadWritableInterval.
+     *
+     * @param writableInterval interval to get modified, not null
+     * @param object  the object to convert, which is null
+     * @param chrono  the chronology to use, may be null
+     * @throws NullPointerException if the interval is null
+     */
+    public void setInto(ReadWritableInterval writableInterval, Object object, Chronology chrono) {
+<span class="fc" id="L83">        writableInterval.setChronology(chrono);</span>
+<span class="fc" id="L84">        long now = DateTimeUtils.currentTimeMillis();</span>
+<span class="fc" id="L85">        writableInterval.setInterval(now, now);</span>
+<span class="fc" id="L86">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns null.
+     * 
+     * @return null
+     */
+    public Class&lt;?&gt; getSupportedType() {
+<span class="fc" id="L95">        return null;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

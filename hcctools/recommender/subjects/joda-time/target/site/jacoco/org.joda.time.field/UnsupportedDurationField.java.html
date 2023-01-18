@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UnsupportedDurationField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">UnsupportedDurationField.java</span></div><h1>UnsupportedDurationField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import java.io.Serializable;
+import java.util.HashMap;
+
+import org.joda.time.DurationField;
+import org.joda.time.DurationFieldType;
+
+/**
+ * A placeholder implementation to use when a duration field is not supported.
+ * &lt;p&gt;
+ * UnsupportedDurationField is thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public final class UnsupportedDurationField extends DurationField implements Serializable {
+
+    /** Serialization lock. */
+    private static final long serialVersionUID = -6390301302770925357L;
+
+    /** The cache of unsupported duration field instances */
+    private static HashMap&lt;DurationFieldType, UnsupportedDurationField&gt; cCache;
+
+    /**
+     * Gets an instance of UnsupportedDurationField for a specific named field.
+     * The returned instance is cached.
+     * 
+     * @param type  the type to obtain
+     * @return the instance
+     */
+    public static synchronized UnsupportedDurationField getInstance(DurationFieldType type) {
+        UnsupportedDurationField field;
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (cCache == null) {</span>
+<span class="fc" id="L50">            cCache = new HashMap&lt;DurationFieldType, UnsupportedDurationField&gt;(7);</span>
+<span class="fc" id="L51">            field = null;</span>
+        } else {
+<span class="fc" id="L53">            field = cCache.get(type);</span>
+        }
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (field == null) {</span>
+<span class="fc" id="L56">            field = new UnsupportedDurationField(type);</span>
+<span class="fc" id="L57">            cCache.put(type, field);</span>
+        }
+<span class="fc" id="L59">        return field;</span>
+    }
+
+    /** The name of the field */
+    private final DurationFieldType iType;
+
+    /**
+     * Constructor.
+     * 
+     * @param type  the type to use
+     */
+<span class="fc" id="L70">    private UnsupportedDurationField(DurationFieldType type) {</span>
+<span class="fc" id="L71">        iType = type;</span>
+<span class="fc" id="L72">    }</span>
+
+    //-----------------------------------------------------------------------
+    // Design note: Simple Accessors return a suitable value, but methods
+    // intended to perform calculations throw an UnsupportedOperationException.
+
+    public final DurationFieldType getType() {
+<span class="nc" id="L79">        return iType;</span>
+    }
+
+    public String getName() {
+<span class="fc" id="L83">        return iType.getName();</span>
+    }
+
+    /**
+     * This field is not supported.
+     *
+     * @return false always
+     */
+    public boolean isSupported() {
+<span class="fc" id="L92">        return false;</span>
+    }
+
+    /**
+     * This field is precise.
+     * 
+     * @return true always
+     */
+    public boolean isPrecise() {
+<span class="nc" id="L101">        return true;</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public int getValue(long duration) {
+<span class="nc" id="L110">        throw unsupported();</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public long getValueAsLong(long duration) {
+<span class="nc" id="L119">        throw unsupported();</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public int getValue(long duration, long instant) {
+<span class="nc" id="L128">        throw unsupported();</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public long getValueAsLong(long duration, long instant) {
+<span class="nc" id="L137">        throw unsupported();</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public long getMillis(int value) {
+<span class="nc" id="L146">        throw unsupported();</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public long getMillis(long value) {
+<span class="nc" id="L155">        throw unsupported();</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public long getMillis(int value, long instant) {
+<span class="nc" id="L164">        throw unsupported();</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public long getMillis(long value, long instant) {
+<span class="nc" id="L173">        throw unsupported();</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public long add(long instant, int value) {
+<span class="fc" id="L182">        throw unsupported();</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public long add(long instant, long value) {
+<span class="fc" id="L191">        throw unsupported();</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L200">        throw unsupported();</span>
+    }
+
+    /**
+     * Always throws UnsupportedOperationException
+     *
+     * @throws UnsupportedOperationException
+     */
+    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L209">        throw unsupported();</span>
+    }
+
+    /**
+     * Always returns zero.
+     *
+     * @return zero always
+     */
+    public long getUnitMillis() {
+<span class="fc" id="L218">        return 0;</span>
+    }
+
+    /**
+     * Always returns zero, indicating that sort order is not relevant.
+     *
+     * @return zero always
+     */
+    public int compareTo(DurationField durationField) {
+<span class="fc" id="L227">        return 0;</span>
+    }
+
+    //------------------------------------------------------------------------
+    /**
+     * Compares this duration field to another.
+     * 
+     * @param obj  the object to compare to
+     * @return true if equal
+     */
+    public boolean equals(Object obj) {
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        if (this == obj) {</span>
+<span class="fc" id="L239">            return true;</span>
+<span class="pc bpc" id="L240" title="1 of 2 branches missed.">        } else if (obj instanceof UnsupportedDurationField) {</span>
+<span class="nc" id="L241">            UnsupportedDurationField other = (UnsupportedDurationField) obj;</span>
+<span class="nc bnc" id="L242" title="All 2 branches missed.">            if (other.getName() == null) {</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">                return (getName() == null);</span>
+            }
+<span class="nc" id="L245">            return (other.getName().equals(getName()));</span>
+        }
+<span class="fc" id="L247">        return false;</span>
+    }
+
+    /**
+     * Gets a suitable hashcode.
+     * 
+     * @return the hashcode
+     */
+    public int hashCode() {
+<span class="nc" id="L256">        return getName().hashCode();</span>
+    }
+
+    /**
+     * Get a suitable debug string.
+     * 
+     * @return debug string
+     */
+    public String toString() {
+<span class="nc" id="L265">        return &quot;UnsupportedDurationField[&quot; + getName() + ']';</span>
+    }
+
+    /**
+     * Ensure proper singleton serialization
+     */
+    private Object readResolve() {
+<span class="fc" id="L272">        return getInstance(iType);</span>
+    }
+
+    private UnsupportedOperationException unsupported() {
+<span class="fc" id="L276">        return new UnsupportedOperationException(iType + &quot; field is unsupported&quot;);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

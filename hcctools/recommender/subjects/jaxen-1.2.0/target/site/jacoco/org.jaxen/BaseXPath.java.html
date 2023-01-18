@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BaseXPath.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen</a> &gt; <span class="el_source">BaseXPath.java</span></div><h1>BaseXPath.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+
+package org.jaxen;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.jaxen.expr.Expr;
+import org.jaxen.expr.XPathExpr;
+import org.jaxen.function.BooleanFunction;
+import org.jaxen.function.NumberFunction;
+import org.jaxen.function.StringFunction;
+import org.jaxen.saxpath.SAXPathException;
+import org.jaxen.saxpath.XPathReader;
+import org.jaxen.saxpath.helpers.XPathReaderFactory;
+import org.jaxen.util.SingletonList;
+
+/** Base functionality for all concrete, implementation-specific XPaths.
+ *
+ *  &lt;p&gt;
+ *  This class provides generic functionality for further-defined
+ *  implementation-specific XPaths.
+ *  &lt;/p&gt;
+ *
+ *  &lt;p&gt;
+ *  If you want to adapt the Jaxen engine to traverse your own
+ *  object model, then this is a good base class to derive from.
+ *  Typically you only really need to provide your own 
+ *  {@link org.jaxen.Navigator} implementation.
+ *  &lt;/p&gt;
+ *
+ *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
+ *  @see org.jaxen.jdom.JDOMXPath   XPath for JDOM
+ *  @see org.jaxen.dom.DOMXPath     XPath for W3C DOM
+ *
+ *  @author &lt;a href=&quot;mailto:bob@werken.com&quot;&gt;bob mcwhirter&lt;/a&gt;
+ *  @author &lt;a href=&quot;mailto:jstrachan@apache.org&quot;&gt;James Strachan&lt;/a&gt;
+ */
+public class BaseXPath implements XPath, Serializable
+{
+
+    private static final long serialVersionUID = -1993731281300293168L;
+
+    /** Original expression text. */
+    private final String exprText;
+
+    /** the parsed form of the XPath expression */
+    private final XPathExpr xpath;
+    
+    /** the support information and function, namespace and variable contexts */
+    private ContextSupport support;
+
+    /** the implementation-specific Navigator for retrieving XML nodes **/
+    private Navigator navigator;
+    
+    /** Construct given an XPath expression string. 
+     *
+     *  @param xpathExpr the XPath expression
+     *
+     *  @throws JaxenException if there is a syntax error while
+     *          parsing the expression
+     */
+    protected BaseXPath(String xpathExpr) throws JaxenException
+<span class="fc" id="L110">    {</span>
+        try
+        {
+<span class="fc" id="L113">            XPathReader reader = XPathReaderFactory.createReader();</span>
+<span class="fc" id="L114">            JaxenHandler handler = new JaxenHandler();</span>
+<span class="fc" id="L115">            reader.setXPathHandler( handler );</span>
+<span class="fc" id="L116">            reader.parse( xpathExpr );</span>
+<span class="fc" id="L117">            this.xpath = handler.getXPathExpr();</span>
+        }
+<span class="fc" id="L119">        catch (org.jaxen.saxpath.XPathSyntaxException e)</span>
+        {
+<span class="fc" id="L121">            throw new org.jaxen.XPathSyntaxException( e );</span>
+        }
+<span class="fc" id="L123">        catch (SAXPathException e)</span>
+        {
+<span class="fc" id="L125">            throw new JaxenException( e );</span>
+<span class="fc" id="L126">        }</span>
+
+<span class="fc" id="L128">        this.exprText = xpathExpr;</span>
+<span class="fc" id="L129">    }</span>
+
+    /** Construct given an XPath expression string.
+     *
+     *  @param xpathExpr the XPath expression
+     *
+     *  @param navigator the XML navigator to use
+     *
+     *  @throws JaxenException if there is a syntax error while
+     *          parsing the expression
+     */
+    public BaseXPath(String xpathExpr, Navigator navigator) throws JaxenException
+    {
+<span class="fc" id="L142">        this( xpathExpr );</span>
+<span class="fc" id="L143">        this.navigator = navigator;</span>
+<span class="fc" id="L144">    }</span>
+
+    /** Evaluate this XPath against a given context.
+     *  The context of evaluation may be any object type
+     *  the navigator recognizes as a node.
+     *  The return value is either a &lt;code&gt;String&lt;/code&gt;,
+     *  &lt;code&gt;Double&lt;/code&gt;, &lt;code&gt;Boolean&lt;/code&gt;, or &lt;code&gt;List&lt;/code&gt;
+     *  of nodes.
+     *
+     *  &lt;p&gt;
+     *  When using this method, one must be careful to
+     *  test the class of the returned object.  If the returned 
+     *  object is a list, then the items in this 
+     *  list will be the actual &lt;code&gt;Document&lt;/code&gt;,
+     *  &lt;code&gt;Element&lt;/code&gt;, &lt;code&gt;Attribute&lt;/code&gt;, etc. objects
+     *  as defined by the concrete XML object-model implementation,
+     *  directly from the context document.  This method &lt;strong&gt;does
+     *  not return &lt;em&gt;copies&lt;/em&gt; of anything&lt;/strong&gt;, but merely 
+     *  returns references to objects within the source document.
+     *  &lt;/p&gt;
+     *  
+     * @param context the node, node-set or Context object for evaluation. 
+     *      This value can be null.
+     *
+     * @return the result of evaluating the XPath expression
+     *          against the supplied context
+     * @throws JaxenException if an XPath error occurs during expression evaluation
+     * @throws ClassCastException if the context is not a node
+     */
+    public Object evaluate(Object context) throws JaxenException
+    {
+<span class="fc" id="L175">        List answer = selectNodes(context);</span>
+
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">        if ( answer != null</span>
+             &amp;&amp;
+<span class="fc bfc" id="L179" title="All 2 branches covered.">             answer.size() == 1 )</span>
+        {
+<span class="fc" id="L181">            Object first = answer.get(0);</span>
+
+<span class="fc bfc" id="L183" title="All 6 branches covered.">            if ( first instanceof String</span>
+                 ||
+                 first instanceof Number
+                 ||
+                 first instanceof Boolean ) 
+            {
+<span class="fc" id="L189">                return first;</span>
+            }
+        }
+<span class="fc" id="L192">        return answer;</span>
+    }
+    
+    /** 
+     *  List all the nodes selected by this XPath
+     *  expression. If multiple nodes match, multiple nodes
+     *  are returned. Nodes are returned
+     *  in document-order, as defined by the XPath
+     *  specification. If the expression selects a non-node-set
+     *  (i.e. a number, boolean, or string) then a List
+     *  containing just that one object is returned.
+     *
+     * @param node the node, node-set or Context object for evaluation. 
+     *     This value can be null.
+     *
+     * @return the node-set of all items selected by this XPath expression
+     * @throws JaxenException if an XPath error occurs during expression evaluation
+     *
+     * @see #selectNodesForContext
+     */
+    public List selectNodes(Object node) throws JaxenException
+    {
+<span class="fc" id="L214">        Context context = getContext( node );</span>
+<span class="fc" id="L215">        return selectNodesForContext( context );</span>
+    }
+
+    /** 
+     * Return the first node selected by this XPath
+     * expression. If multiple nodes match, only one node is
+     * returned. The selected node will be the first
+     * selected node in document-order, as defined by the XPath
+     * specification.
+     *
+     * @param node the node, node-set or Context object for evaluation. 
+     *     This value can be null.
+     *
+     * @return the node-set of all items selected
+     *          by this XPath expression
+     * @throws JaxenException if an XPath error occurs during expression evaluation
+     *
+     * @see #selectNodes
+     */
+    public Object selectSingleNode(Object node) throws JaxenException
+    {
+<span class="fc" id="L236">        List results = selectNodes( node );</span>
+
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        if ( results.isEmpty() )</span>
+        {
+<span class="fc" id="L240">            return null;</span>
+        }
+
+<span class="fc" id="L243">        return results.get( 0 );</span>
+    }
+
+    /**
+     * Returns the XPath string-value of the argument node.
+     * 
+     * @param node the node whose value to take
+     * @return the XPath string value of this node
+     * @throws JaxenException if an XPath error occurs during expression evaluation
+     * @deprecated replaced by {@link #stringValueOf}
+     */
+    public String valueOf(Object node) throws JaxenException
+    {
+<span class="nc" id="L256">        return stringValueOf( node );</span>
+    }
+
+    /** Retrieves the string-value of the result of
+     *  evaluating this XPath expression when evaluated 
+     *  against the specified context.
+     *
+     *  &lt;p&gt;
+     *  The string-value of the expression is determined per
+     *  the &lt;code&gt;string(..)&lt;/code&gt; core function defined
+     *  in the XPath specification.  This means that an expression
+     *  that selects zero nodes will return the empty string,
+     *  while an expression that selects one-or-more nodes will
+     *  return the string-value of the first node.
+     *  &lt;/p&gt;
+     *
+     * @param node the node, node-set or Context object for evaluation. This value can be null.
+     *
+     * @return the string-value of the result of evaluating this expression with the specified context node
+     * @throws JaxenException if an XPath error occurs during expression evaluation
+     */
+    public String stringValueOf(Object node) throws JaxenException
+    {
+<span class="fc" id="L279">        Context context = getContext( node );</span>
+        
+<span class="fc" id="L281">        Object result = selectSingleNodeForContext( context );</span>
+
+<span class="fc bfc" id="L283" title="All 2 branches covered.">        if ( result == null )</span>
+        {
+<span class="fc" id="L285">            return &quot;&quot;;</span>
+        }
+
+<span class="fc" id="L288">        return StringFunction.evaluate( result,</span>
+<span class="fc" id="L289">                                        context.getNavigator() );</span>
+    }
+
+    /** Retrieve a boolean-value interpretation of this XPath
+     *  expression when evaluated against a given context.
+     *
+     *  &lt;p&gt;
+     *  The boolean-value of the expression is determined per
+     *  the &lt;code&gt;boolean(..)&lt;/code&gt; function defined
+     *  in the XPath specification.  This means that an expression
+     *  that selects zero nodes will return &lt;code&gt;false&lt;/code&gt;,
+     *  while an expression that selects one or more nodes will
+     *  return &lt;code&gt;true&lt;/code&gt;.
+     *  &lt;/p&gt;
+     *
+     * @param node the node, node-set or Context object for evaluation. This value can be null.
+     *
+     * @return the boolean-value of the result of evaluating this expression with the specified context node
+     * @throws JaxenException if an XPath error occurs during expression evaluation
+     */
+    public boolean booleanValueOf(Object node) throws JaxenException
+    {
+<span class="fc" id="L311">        Context context = getContext( node );</span>
+<span class="fc" id="L312">        List result = selectNodesForContext( context );</span>
+<span class="pc bpc" id="L313" title="1 of 2 branches missed.">        if ( result == null ) return false;</span>
+<span class="fc" id="L314">        return BooleanFunction.evaluate( result, context.getNavigator() ).booleanValue();</span>
+    }
+
+    /** Retrieve a number-value interpretation of this XPath
+     *  expression when evaluated against a given context.
+     *
+     *  &lt;p&gt;
+     *  The number-value of the expression is determined per
+     *  the &lt;code&gt;number(..)&lt;/code&gt; core function as defined
+     *  in the XPath specification. This means that if this
+     *  expression selects multiple nodes, the number-value
+     *  of the first node is returned.
+     *  &lt;/p&gt;
+     *
+     * @param node the node, node-set or Context object for evaluation. This value can be null.
+     *
+     * @return a &lt;code&gt;Double&lt;/code&gt; indicating the numeric value of
+     *      evaluating this expression against the specified context
+     * @throws JaxenException if an XPath error occurs during expression evaluation
+     */
+    public Number numberValueOf(Object node) throws JaxenException
+    {
+<span class="fc" id="L336">        Context context = getContext( node );</span>
+<span class="fc" id="L337">        Object result = selectSingleNodeForContext( context );</span>
+<span class="fc" id="L338">        return NumberFunction.evaluate( result,</span>
+<span class="fc" id="L339">                                        context.getNavigator() );</span>
+    }
+
+    // Helpers
+
+    /** Add a namespace prefix-to-URI mapping for this XPath
+     *  expression.
+     *
+     *  &lt;p&gt;
+     *  Namespace prefix-to-URI mappings in an XPath are independent
+     *  of those used within any document.  Only the mapping explicitly
+     *  added to this XPath will be available for resolving the
+     *  XPath expression.
+     *  &lt;/p&gt;
+     *
+     *  &lt;p&gt;
+     *  This is a convenience method for adding mappings to the
+     *  default {@link NamespaceContext} in place for this XPath.
+     *  If you have installed a custom &lt;code&gt;NamespaceContext&lt;/code&gt;
+     *  that is not a &lt;code&gt;SimpleNamespaceContext&lt;/code&gt;,
+     *  then this method will throw a &lt;code&gt;JaxenException&lt;/code&gt;.
+     *  &lt;/p&gt;
+     *
+     *  @param prefix the namespace prefix
+     *  @param uri the namespace URI
+     *
+     *  @throws JaxenException if the &lt;code&gt;NamespaceContext&lt;/code&gt;
+     *          used by this XPath is not a &lt;code&gt;SimpleNamespaceContext&lt;/code&gt;
+     */
+    public void addNamespace(String prefix,
+                             String uri) throws JaxenException
+    {
+<span class="fc" id="L371">        NamespaceContext nsContext = getNamespaceContext();</span>
+<span class="fc bfc" id="L372" title="All 2 branches covered.">        if ( nsContext instanceof SimpleNamespaceContext )</span>
+        {
+<span class="fc" id="L374">            ((SimpleNamespaceContext)nsContext).addNamespace( prefix,</span>
+                                                              uri );
+<span class="fc" id="L376">            return;</span>
+        }
+
+<span class="fc" id="L379">        throw new JaxenException(&quot;Operation not permitted while using a non-simple namespace context.&quot;);</span>
+    }
+
+
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+    //     Properties
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+
+    
+    /** Set a &lt;code&gt;NamespaceContext&lt;/code&gt; for use with this
+     *  XPath expression.
+     *
+     *  &lt;p&gt;
+     *  A &lt;code&gt;NamespaceContext&lt;/code&gt; is responsible for translating
+     *  namespace prefixes within the expression into namespace URIs.
+     *  &lt;/p&gt;
+     *
+     *  @param namespaceContext the &lt;code&gt;NamespaceContext&lt;/code&gt; to
+     *         install for this expression
+     *
+     *  @see NamespaceContext
+     *  @see NamespaceContext#translateNamespacePrefixToUri
+     */
+    public void setNamespaceContext(NamespaceContext namespaceContext)
+    {
+<span class="fc" id="L406">        getContextSupport().setNamespaceContext(namespaceContext);</span>
+<span class="fc" id="L407">    }</span>
+
+    /** Set a &lt;code&gt;FunctionContext&lt;/code&gt; for use with this XPath
+     *  expression.
+     *
+     *  &lt;p&gt;
+     *  A &lt;code&gt;FunctionContext&lt;/code&gt; is responsible for resolving
+     *  all function calls used within the expression.
+     *  &lt;/p&gt;
+     *
+     *  @param functionContext the &lt;code&gt;FunctionContext&lt;/code&gt; to
+     *         install for this expression
+     *
+     *  @see FunctionContext
+     *  @see FunctionContext#getFunction
+     */
+    public void setFunctionContext(FunctionContext functionContext)
+    {
+<span class="fc" id="L425">        getContextSupport().setFunctionContext(functionContext);</span>
+<span class="fc" id="L426">    }</span>
+
+    /** Set a &lt;code&gt;VariableContext&lt;/code&gt; for use with this XPath
+     *  expression.
+     *
+     *  &lt;p&gt;
+     *  A &lt;code&gt;VariableContext&lt;/code&gt; is responsible for resolving
+     *  all variables referenced within the expression.
+     *  &lt;/p&gt;
+     *
+     *  @param variableContext The &lt;code&gt;VariableContext&lt;/code&gt; to
+     *         install for this expression
+     *
+     *  @see VariableContext
+     *  @see VariableContext#getVariableValue
+     */
+    public void setVariableContext(VariableContext variableContext)
+    {
+<span class="fc" id="L444">        getContextSupport().setVariableContext(variableContext);</span>
+<span class="fc" id="L445">    }</span>
+
+    /** Retrieve the &lt;code&gt;NamespaceContext&lt;/code&gt; used by this XPath
+     *  expression.
+     *
+     *  &lt;p&gt;
+     *  A &lt;code&gt;NamespaceContext&lt;/code&gt; is responsible for mapping
+     *  prefixes used within the expression to namespace URIs.
+     *  &lt;/p&gt;
+     *
+     *  &lt;p&gt;
+     *  If this XPath expression has not previously had a &lt;code&gt;NamespaceContext&lt;/code&gt;
+     *  installed, a new default &lt;code&gt;NamespaceContext&lt;/code&gt; will be created,
+     *  installed and returned.
+     *  &lt;/p&gt;
+     *
+     *  @return the &lt;code&gt;NamespaceContext&lt;/code&gt; used by this expression
+     *
+     *  @see NamespaceContext
+     */
+    public NamespaceContext getNamespaceContext()
+    {
+<span class="fc" id="L467">        return getContextSupport().getNamespaceContext();</span>
+    }
+
+    /** Retrieve the &lt;code&gt;FunctionContext&lt;/code&gt; used by this XPath
+     *  expression.
+     *
+     *  &lt;p&gt;
+     *  A &lt;code&gt;FunctionContext&lt;/code&gt; is responsible for resolving
+     *  all function calls used within the expression.
+     *  &lt;/p&gt;
+     *
+     *  &lt;p&gt;
+     *  If this XPath expression has not previously had a &lt;code&gt;FunctionContext&lt;/code&gt;
+     *  installed, a new default &lt;code&gt;FunctionContext&lt;/code&gt; will be created,
+     *  installed and returned.
+     *  &lt;/p&gt;
+     *
+     *  @return the &lt;code&gt;FunctionContext&lt;/code&gt; used by this expression
+     *
+     *  @see FunctionContext
+     */
+    public FunctionContext getFunctionContext()
+    {
+<span class="fc" id="L490">        return getContextSupport().getFunctionContext();</span>
+    }
+
+    /** Retrieve the &lt;code&gt;VariableContext&lt;/code&gt; used by this XPath
+     *  expression.
+     *
+     *  &lt;p&gt;
+     *  A &lt;code&gt;VariableContext&lt;/code&gt; is responsible for resolving
+     *  all variables referenced within the expression.
+     *  &lt;/p&gt;
+     *
+     *  &lt;p&gt;
+     *  If this XPath expression has not previously had a &lt;code&gt;VariableContext&lt;/code&gt;
+     *  installed, a new default &lt;code&gt;VariableContext&lt;/code&gt; will be created,
+     *  installed and returned.
+     *  &lt;/p&gt;
+     *  
+     *  @return the &lt;code&gt;VariableContext&lt;/code&gt; used by this expression
+     *
+     *  @see VariableContext
+     */
+    public VariableContext getVariableContext()
+    {
+<span class="fc" id="L513">        return getContextSupport().getVariableContext();</span>
+    }
+    
+    
+    /** Retrieve the root expression of the internal
+     *  compiled form of this XPath expression.
+     *
+     *  &lt;p&gt;
+     *  Internally, Jaxen maintains a form of Abstract Syntax
+     *  Tree (AST) to represent the structure of the XPath expression.
+     *  This is normally not required during normal consumer-grade
+     *  usage of Jaxen.  This method is provided for hard-core users
+     *  who wish to manipulate or inspect a tree-based version of
+     *  the expression.
+     *  &lt;/p&gt;
+     *
+     *  @return the root of the AST of this expression
+     */
+    public Expr getRootExpr() 
+    {
+<span class="fc" id="L533">        return xpath.getRootExpr();</span>
+    }
+    
+    /** Return the original expression text.
+     *
+     *  @return the normalized XPath expression string
+     */
+    public String toString()
+    {
+<span class="fc" id="L542">        return this.exprText;</span>
+    }
+
+    /** Returns a string representation of the parse tree.
+     *
+     *  @return a string representation of the parse tree.
+     */
+    public String debug()
+    {
+<span class="fc" id="L551">        return this.xpath.toString();</span>
+    }
+    
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+    //     Implementation methods
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+
+    
+    /** Create a {@link Context} wrapper for the provided
+     *  implementation-specific object.
+     *
+     *  @param node the implementation-specific object 
+     *         to be used as the context
+     *
+     *  @return a &lt;code&gt;Context&lt;/code&gt; wrapper around the object
+     */
+    protected Context getContext(Object node)
+    {
+<span class="fc bfc" id="L571" title="All 2 branches covered.">        if ( node instanceof Context )</span>
+        {
+<span class="fc" id="L573">            return (Context) node;</span>
+        }
+
+<span class="fc" id="L576">        Context fullContext = new Context( getContextSupport() );</span>
+
+<span class="fc bfc" id="L578" title="All 2 branches covered.">        if ( node instanceof List )</span>
+        {
+<span class="fc" id="L580">            fullContext.setNodeSet( (List) node );</span>
+        }
+        else
+        {
+<span class="fc" id="L584">            List list = new SingletonList(node);</span>
+<span class="fc" id="L585">            fullContext.setNodeSet( list );</span>
+        }
+
+<span class="fc" id="L588">        return fullContext;</span>
+    }
+
+    /** Retrieve the {@link ContextSupport} aggregation of
+     *  &lt;code&gt;NamespaceContext&lt;/code&gt;, &lt;code&gt;FunctionContext&lt;/code&gt;,
+     *  &lt;code&gt;VariableContext&lt;/code&gt;, and {@link Navigator}.
+     *
+     *  @return aggregate &lt;code&gt;ContextSupport&lt;/code&gt; for this
+     *          XPath expression
+     */
+    protected ContextSupport getContextSupport()
+    {
+<span class="fc bfc" id="L600" title="All 2 branches covered.">        if ( support == null )</span>
+        {
+<span class="fc" id="L602">            support = new ContextSupport( </span>
+<span class="fc" id="L603">                createNamespaceContext(),</span>
+<span class="fc" id="L604">                createFunctionContext(),</span>
+<span class="fc" id="L605">                createVariableContext(),</span>
+<span class="fc" id="L606">                getNavigator() </span>
+            );
+        }
+
+<span class="fc" id="L610">        return support;</span>
+    }
+
+    /** Retrieve the XML object-model-specific {@link Navigator} 
+     *  for us in evaluating this XPath expression.
+     *
+     *  @return the implementation-specific &lt;code&gt;Navigator&lt;/code&gt;
+     */
+    public Navigator getNavigator()
+    {
+<span class="fc" id="L620">        return navigator;</span>
+    }
+    
+    
+
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+    //     Factory methods for default contexts
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+
+    /** Create a default &lt;code&gt;FunctionContext&lt;/code&gt;.
+     *
+     *  @return a default &lt;code&gt;FunctionContext&lt;/code&gt;
+     */
+    protected FunctionContext createFunctionContext()
+    {
+<span class="fc" id="L637">        return XPathFunctionContext.getInstance();</span>
+    }
+    
+    /** Create a default &lt;code&gt;NamespaceContext&lt;/code&gt;.
+     *
+     *  @return a default &lt;code&gt;NamespaceContext&lt;/code&gt; instance
+     */
+    protected NamespaceContext createNamespaceContext()
+    {
+<span class="fc" id="L646">        return new SimpleNamespaceContext();</span>
+    }
+    
+    /** Create a default &lt;code&gt;VariableContext&lt;/code&gt;.
+     *
+     *  @return a default &lt;code&gt;VariableContext&lt;/code&gt; instance
+     */
+    protected VariableContext createVariableContext()
+    {
+<span class="fc" id="L655">        return new SimpleVariableContext();</span>
+    }
+    
+    /** Select all nodes that match this XPath
+     *  expression on the given Context object. 
+     *  If multiple nodes match, multiple nodes
+     *  will be returned in document-order, as defined by the XPath
+     *  specification. If the expression selects a non-node-set
+     *  (i.e. a number, boolean, or string) then a List
+     *  containing just that one object is returned.
+     *
+     * @param context the Context which gets evaluated
+     *
+     * @return the node-set of all items selected
+     *          by this XPath expression
+     * @throws JaxenException if an XPath error occurs during expression evaluation
+     *
+     */
+    protected List selectNodesForContext(Context context) throws JaxenException
+    {
+<span class="fc" id="L675">        List list = this.xpath.asList( context );</span>
+<span class="fc" id="L676">        return list;</span>
+        
+    }
+ 
+
+    /** Return only the first node that is selected by this XPath
+     *  expression.  If multiple nodes match, only one node will be
+     *  returned. The selected node will be the first
+     *  selected node in document-order, as defined by the XPath
+     *  specification. If the XPath expression selects a double,
+     *  String, or boolean, then that object is returned.
+     *
+     * @param context the Context against which this expression is evaluated
+     *
+     * @return the first node in document order of all nodes selected
+     *          by this XPath expression
+     * @throws JaxenException if an XPath error occurs during expression evaluation
+     *
+     * @see #selectNodesForContext
+     */
+    protected Object selectSingleNodeForContext(Context context) throws JaxenException
+    {
+<span class="fc" id="L698">        List results = selectNodesForContext(context);</span>
+
+<span class="fc bfc" id="L700" title="All 2 branches covered.">        if ( results.isEmpty() )</span>
+        {
+<span class="fc" id="L702">            return null;</span>
+        }
+
+<span class="fc" id="L705">        return results.get( 0 );</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

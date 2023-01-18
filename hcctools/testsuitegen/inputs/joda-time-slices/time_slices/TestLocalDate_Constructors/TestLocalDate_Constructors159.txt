@@ -1,0 +1,104 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  1.4% done, time left: unknown  3.1% done, time left: unknown  4.8% done, time left: unknown  7.2% done, time left: unknown  8.4% done, time left: unknown  9.9% done, time left:   0:00:06   11.3% done, time left:   0:00:06 12.2% done, time left:   0:00:06 13.2% done, time left:   0:00:06 14.3% done, time left:   0:00:07 14.9% done, time left:   0:00:07 15.9% done, time left:   0:00:07 16.8% done, time left:   0:00:08 19.2% done, time left:   0:00:09 21.4% done, time left:   0:00:08 24.8% done, time left:   0:00:07 27.3% done, time left:   0:00:05 30.6% done, time left:   0:00:04 33.6% done, time left:   0:00:03 36.3% done, time left:   0:00:03 39.9% done, time left:   0:00:02 44.2% done, time left:   0:00:01 48.3% done, time left:   0:00:01 52.4% done, time left:   0:00:01 56.7% done, time left:   0:00:00 59.1% done, time left:   0:00:00 59.9% done, time left:   0:00:00 60.6% done, time left:   0:00:00 64.4% done, time left:   0:00:00 68.1% done, time left:   0:00:00 70.4% done, time left:   0:00:00 72.5% done, time left:   0:00:00 74.1% done, time left:   0:00:00 76.0% done, time left:   0:00:00 76.2% done, time left:   0:00:00 77.0% done, time left:   0:00:00 81.0% done, time left:   0:00:00 84.3% done, time left:   0:00:00 84.4% done, time left:   0:00:00 92.7% done, time left:   0:00:00 96.6% done, time left:   0:00:00 98.2% done, time left:   0:00:00 99.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestLocalDate_Constructors.testConstructor_int_int_int:616:*]:
+org.joda.time.IllegalFieldValueException.createMessage:63 INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.createMessage:63 ARETURN
+org.joda.time.IllegalFieldValueException.<init>:130 ALOAD 0
+org.joda.time.IllegalFieldValueException.<init>:130 INVOKESTATIC org/joda/time/IllegalFieldValueException.createMessage(Ljava/lang/String;Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/String;)Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.<init>:130 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.joda.time.IllegalFieldValueException.<init>:138 ALOAD 0
+org.joda.time.IllegalFieldValueException.<init>:138 ALOAD 0
+org.joda.time.IllegalFieldValueException.<init>:138 INVOKESPECIAL java/lang/IllegalArgumentException.getMessage()Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.<init>:138 PUTFIELD org/joda/time/IllegalFieldValueException.iMessage Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.getMessage:336 ALOAD 0
+org.joda.time.IllegalFieldValueException.getMessage:336 GETFIELD org/joda/time/IllegalFieldValueException.iMessage Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.getMessage:336 ARETURN
+org.joda.time.LocalDate.<init>:436 ILOAD 1
+org.joda.time.LocalDate.<init>:436 ILOAD 2
+org.joda.time.LocalDate.<init>:436 ILOAD 3
+org.joda.time.LocalDate.<init>:436 INVOKESPECIAL org/joda/time/LocalDate.<init>(IIILorg/joda/time/Chronology;)V
+org.joda.time.LocalDate.<init>:456 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.<init>:456 ASTORE 4
+org.joda.time.LocalDate.<init>:457 ALOAD 4
+org.joda.time.LocalDate.<init>:457 ILOAD 1
+org.joda.time.LocalDate.<init>:457 ILOAD 2
+org.joda.time.LocalDate.<init>:457 ILOAD 3
+org.joda.time.LocalDate.<init>:457 INVOKEVIRTUAL org/joda/time/Chronology.getDateTimeMillis(IIII)J
+org.joda.time.TestLocalDate_Constructors.main:114 INVOKEVIRTUAL org/joda/time/TestLocalDate_Constructors.testConstructor_int_int_int()V
+org.joda.time.TestLocalDate_Constructors.testConstructor_int_int_int:613 SIPUSH 1970
+org.joda.time.TestLocalDate_Constructors.testConstructor_int_int_int:613 BIPUSH 6
+org.joda.time.TestLocalDate_Constructors.testConstructor_int_int_int:613 BIPUSH 31
+org.joda.time.TestLocalDate_Constructors.testConstructor_int_int_int:613 INVOKESPECIAL org/joda/time/LocalDate.<init>(III)V
+org.joda.time.TestLocalDate_Constructors.testConstructor_int_int_int:615 ASTORE 2
+org.joda.time.TestLocalDate_Constructors.testConstructor_int_int_int:616 LDC "Value 31 for dayOfMonth must be in the range [1,30]: year: 1970 month: 6"
+org.joda.time.TestLocalDate_Constructors.testConstructor_int_int_int:616 ALOAD 2
+org.joda.time.TestLocalDate_Constructors.testConstructor_int_int_int:616 INVOKEVIRTUAL java/lang/IllegalArgumentException.getMessage()Ljava/lang/String;
+org.joda.time.TestLocalDate_Constructors.testConstructor_int_int_int:616 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 DUP
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 ASTORE 5
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 GETFIELD org/joda/time/chrono/AssembledChronology.iBaseFlags I
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 BIPUSH 6
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 IAND
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 BIPUSH 6
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 IF_ICMPNE L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:120 ALOAD 5
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:120 ILOAD 1
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:120 ILOAD 2
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:120 ILOAD 3
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:120 INVOKEVIRTUAL org/joda/time/Chronology.getDateTimeMillis(IIII)J
+org.joda.time.chrono.AssembledChronology.getBase:308 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getBase:308 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ARETURN
+org.joda.time.chrono.BasicChronology.getDateTimeMillis:155 ALOAD 0
+org.joda.time.chrono.BasicChronology.getDateTimeMillis:155 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.getBase()Lorg/joda/time/Chronology;
+org.joda.time.chrono.BasicChronology.getDateTimeMillis:155 IFNULL L0 true false
+org.joda.time.chrono.BasicChronology.getDateTimeMillis:161 ILOAD 1
+org.joda.time.chrono.BasicChronology.getDateTimeMillis:161 ILOAD 2
+org.joda.time.chrono.BasicChronology.getDateTimeMillis:161 ILOAD 3
+org.joda.time.chrono.BasicChronology.getDateTimeMillis:161 INVOKESPECIAL org/joda/time/chrono/BasicChronology.getDateTimeMillis0(IIII)J
+org.joda.time.chrono.BasicChronology.getDateTimeMillis0:187 ILOAD 1
+org.joda.time.chrono.BasicChronology.getDateTimeMillis0:187 ILOAD 2
+org.joda.time.chrono.BasicChronology.getDateTimeMillis0:187 ILOAD 3
+org.joda.time.chrono.BasicChronology.getDateTimeMillis0:187 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.getDateMidnightMillis(III)J
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:634 ILOAD 1
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:634 ILOAD 2
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:634 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.getDaysInYearMonth(II)I
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:634 ISTORE 4
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:635 ILOAD 3
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:635 ICONST_1
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:635 IF_ICMPLT L0 false true
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:635 ILOAD 3
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:635 ILOAD 4
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:635 IF_ICMPLE L1 false true
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:636 NEW org/joda/time/IllegalFieldValueException
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:636 DUP
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:636 INVOKESPECIAL org/joda/time/IllegalFieldValueException.<init>(Lorg/joda/time/DateTimeFieldType;Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/Number;Ljava/lang/String;)V
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:636 ATHROW
+org.joda.time.chrono.BasicGJChronology.getDaysInYearMonth:125 ILOAD 1
+org.joda.time.chrono.BasicGJChronology.getDaysInYearMonth:125 INVOKEVIRTUAL org/joda/time/chrono/BasicGJChronology.isLeapYear(I)Z
+org.joda.time.chrono.BasicGJChronology.getDaysInYearMonth:125 IFEQ L0 true false
+org.joda.time.chrono.BasicGJChronology.getDaysInYearMonth:128 GETSTATIC org/joda/time/chrono/BasicGJChronology.MIN_DAYS_PER_MONTH_ARRAY [I
+org.joda.time.chrono.BasicGJChronology.getDaysInYearMonth:128 ILOAD 2
+org.joda.time.chrono.BasicGJChronology.getDaysInYearMonth:128 ICONST_1
+org.joda.time.chrono.BasicGJChronology.getDaysInYearMonth:128 ISUB
+org.joda.time.chrono.BasicGJChronology.getDaysInYearMonth:128 IALOAD
+org.joda.time.chrono.BasicGJChronology.getDaysInYearMonth:128 IRETURN
+org.joda.time.chrono.GregorianChronology.getDateTimeMillis:44 ALOAD 0
+org.joda.time.chrono.GregorianChronology.getDateTimeMillis:44 ILOAD 1
+org.joda.time.chrono.GregorianChronology.getDateTimeMillis:44 ILOAD 2
+org.joda.time.chrono.GregorianChronology.getDateTimeMillis:44 ILOAD 3
+org.joda.time.chrono.GregorianChronology.getDateTimeMillis:44 INVOKESPECIAL org/joda/time/chrono/BasicGJChronology.getDateTimeMillis(IIII)J
+org.joda.time.chrono.GregorianChronology.isLeapYear:202 ILOAD 1
+org.joda.time.chrono.GregorianChronology.isLeapYear:202 ICONST_3
+org.joda.time.chrono.GregorianChronology.isLeapYear:202 IAND
+org.joda.time.chrono.GregorianChronology.isLeapYear:202 IFNE L1 true false
+org.joda.time.chrono.GregorianChronology.isLeapYear:202 ICONST_0
+org.joda.time.chrono.GregorianChronology.isLeapYear:202 IRETURN
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+
+Slice consists of 116 bytecode instructions.
+Computation took 5.44 seconds.

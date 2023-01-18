@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasicWeekOfWeekyearDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">BasicWeekOfWeekyearDateTimeField.java</span></div><h1>BasicWeekOfWeekyearDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+import org.joda.time.ReadablePartial;
+import org.joda.time.field.PreciseDurationDateTimeField;
+
+/**
+ * Provides time calculations for the week of a week based year component of time.
+ *
+ * @author Guy Allard
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.1, refactored from GJWeekOfWeekyearDateTimeField
+ */
+final class BasicWeekOfWeekyearDateTimeField extends PreciseDurationDateTimeField {
+
+    @SuppressWarnings(&quot;unused&quot;)
+    private static final long serialVersionUID = -1587436826395135328L;
+
+    private final BasicChronology iChronology;
+
+    /**
+     * Restricted constructor
+     */
+    BasicWeekOfWeekyearDateTimeField(BasicChronology chronology, DurationField weeks) {
+<span class="fc" id="L43">        super(DateTimeFieldType.weekOfWeekyear(), weeks);</span>
+<span class="fc" id="L44">        iChronology = chronology;</span>
+<span class="fc" id="L45">    }</span>
+
+    /**
+     * Get the week of a week based year component of the specified time instant.
+     * 
+     * @see org.joda.time.DateTimeField#get(long)
+     * @param instant  the time instant in millis to query.
+     * @return the week of the year extracted from the input.
+     */
+    public int get(long instant) {
+<span class="fc" id="L55">        return iChronology.getWeekOfWeekyear(instant);</span>
+    }
+
+    public DurationField getRangeDurationField() {
+<span class="fc" id="L59">        return iChronology.weekyears();</span>
+    }
+
+    // 1970-01-01 is day of week 4, Thursday. The rounding methods need to
+    // apply a corrective alignment since weeks begin on day of week 1, Monday.
+
+    public long roundFloor(long instant) {
+<span class="fc" id="L66">        return super.roundFloor(instant + 3 * DateTimeConstants.MILLIS_PER_DAY)</span>
+            - 3 * DateTimeConstants.MILLIS_PER_DAY;
+    }
+
+    public long roundCeiling(long instant) {
+<span class="nc" id="L71">        return super.roundCeiling(instant + 3 * DateTimeConstants.MILLIS_PER_DAY)</span>
+            - 3 * DateTimeConstants.MILLIS_PER_DAY;
+    }
+
+    public long remainder(long instant) {
+<span class="fc" id="L76">        return super.remainder(instant + 3 * DateTimeConstants.MILLIS_PER_DAY);</span>
+    }
+
+    public int getMinimumValue() {
+<span class="fc" id="L80">        return 1;</span>
+    }
+
+    public int getMaximumValue() {
+<span class="fc" id="L84">        return 53;</span>
+    }
+
+    public int getMaximumValue(long instant) {
+<span class="fc" id="L88">        int weekyear = iChronology.getWeekyear(instant);</span>
+<span class="fc" id="L89">        return iChronology.getWeeksInYear(weekyear);</span>
+    }
+
+    public int getMaximumValue(ReadablePartial partial) {
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (partial.isSupported(DateTimeFieldType.weekyear())) {</span>
+<span class="nc" id="L94">            int weekyear = partial.get(DateTimeFieldType.weekyear());</span>
+<span class="nc" id="L95">            return iChronology.getWeeksInYear(weekyear);</span>
+        }
+<span class="nc" id="L97">        return 53;</span>
+    }
+
+    public int getMaximumValue(ReadablePartial partial, int[] values) {
+<span class="fc" id="L101">        int size = partial.size();</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">            if (partial.getFieldType(i) == DateTimeFieldType.weekyear()) {</span>
+<span class="fc" id="L104">                int weekyear = values[i];</span>
+<span class="fc" id="L105">                return iChronology.getWeeksInYear(weekyear);</span>
+            }
+        }
+<span class="fc" id="L108">        return 53;</span>
+    }
+
+    protected int getMaximumValueForSet(long instant, int value) {
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        return value &gt; 52 ? getMaximumValue(instant) : 52;</span>
+    }
+
+    /**
+     * Serialization singleton
+     */
+    private Object readResolve() {
+<span class="nc" id="L119">        return iChronology.weekOfWeekyear();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

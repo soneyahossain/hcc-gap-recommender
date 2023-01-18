@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PeriodFormatter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.format</a> &gt; <span class="el_source">PeriodFormatter.java</span></div><h1>PeriodFormatter.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2005 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.format;
+
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Locale;
+
+import org.joda.time.MutablePeriod;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
+import org.joda.time.ReadWritablePeriod;
+import org.joda.time.ReadablePeriod;
+
+/**
+ * Controls the printing and parsing of a time period to and from a string.
+ * &lt;p&gt;
+ * This class is the main API for printing and parsing used by most applications.
+ * Instances of this class are created via one of three factory classes:
+ * &lt;ul&gt;
+ * &lt;li&gt;{@link PeriodFormat} - formats by pattern and style&lt;/li&gt;
+ * &lt;li&gt;{@link ISOPeriodFormat} - ISO8601 formats&lt;/li&gt;
+ * &lt;li&gt;{@link PeriodFormatterBuilder} - complex formats created via method calls&lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;p&gt;
+ * An instance of this class holds a reference internally to one printer and
+ * one parser. It is possible that one of these may be null, in which case the
+ * formatter cannot print/parse. This can be checked via the {@link #isPrinter()}
+ * and {@link #isParser()} methods.
+ * &lt;p&gt;
+ * The underlying printer/parser can be altered to behave exactly as required
+ * by using a decorator modifier:
+ * &lt;ul&gt;
+ * &lt;li&gt;{@link #withLocale(Locale)} - returns a new formatter that uses the specified locale&lt;/li&gt;
+ * &lt;/ul&gt;
+ * This returns a new formatter (instances of this class are immutable).
+ * &lt;p&gt;
+ * The main methods of the class are the &lt;code&gt;printXxx&lt;/code&gt; and
+ * &lt;code&gt;parseXxx&lt;/code&gt; methods. These are used as follows:
+ * &lt;pre&gt;
+ * // print using the default locale
+ * String periodStr = formatter.print(period);
+ * // print using the French locale
+ * String periodStr = formatter.withLocale(Locale.FRENCH).print(period);
+ * 
+ * // parse using the French locale
+ * Period date = formatter.withLocale(Locale.FRENCH).parsePeriod(str);
+ * &lt;/pre&gt;
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+public class PeriodFormatter {
+
+    /** The internal printer used to output the datetime. */
+    private final PeriodPrinter iPrinter;
+    /** The internal parser used to output the datetime. */
+    private final PeriodParser iParser;
+    /** The locale to use for printing and parsing. */
+    private final Locale iLocale;
+    /** The period type used in parsing. */
+    private final PeriodType iParseType;
+
+    /**
+     * Creates a new formatter, however you will normally use the factory
+     * or the builder.
+     * 
+     * @param printer  the internal printer, null if cannot print
+     * @param parser  the internal parser, null if cannot parse
+     */
+    public PeriodFormatter(
+            PeriodPrinter printer, PeriodParser parser) {
+<span class="fc" id="L87">        super();</span>
+<span class="fc" id="L88">        iPrinter = printer;</span>
+<span class="fc" id="L89">        iParser = parser;</span>
+<span class="fc" id="L90">        iLocale = null;</span>
+<span class="fc" id="L91">        iParseType = null;</span>
+<span class="fc" id="L92">    }</span>
+
+    /**
+     * Constructor.
+     * 
+     * @param printer  the internal printer, null if cannot print
+     * @param parser  the internal parser, null if cannot parse
+     * @param locale  the locale to use
+     * @param type  the parse period type
+     */
+    PeriodFormatter(
+            PeriodPrinter printer, PeriodParser parser,
+            Locale locale, PeriodType type) {
+<span class="fc" id="L105">        super();</span>
+<span class="fc" id="L106">        iPrinter = printer;</span>
+<span class="fc" id="L107">        iParser = parser;</span>
+<span class="fc" id="L108">        iLocale = locale;</span>
+<span class="fc" id="L109">        iParseType = type;</span>
+<span class="fc" id="L110">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Is this formatter capable of printing.
+     * 
+     * @return true if this is a printer
+     */
+    public boolean isPrinter() {
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        return (iPrinter != null);</span>
+    }
+
+    /**
+     * Gets the internal printer object that performs the real printing work.
+     * 
+     * @return the internal printer
+     */
+    public PeriodPrinter getPrinter() {
+<span class="fc" id="L128">        return iPrinter;</span>
+    }
+
+    /**
+     * Is this formatter capable of parsing.
+     * 
+     * @return true if this is a parser
+     */
+    public boolean isParser() {
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        return (iParser != null);</span>
+    }
+
+    /**
+     * Gets the internal parser object that performs the real parsing work.
+     * 
+     * @return the internal parser
+     */
+    public PeriodParser getParser() {
+<span class="fc" id="L146">        return iParser;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new formatter with a different locale that will be used
+     * for printing and parsing.
+     * &lt;p&gt;
+     * A PeriodFormatter is immutable, so a new instance is returned,
+     * and the original is unaltered and still usable.
+     * &lt;p&gt;
+     * A null locale indicates that no specific locale override is in use.
+     * 
+     * @param locale  the locale to use
+     * @return the new formatter
+     */
+    public PeriodFormatter withLocale(Locale locale) {
+<span class="pc bpc" id="L163" title="1 of 6 branches missed.">        if (locale == getLocale() || (locale != null &amp;&amp; locale.equals(getLocale()))) {</span>
+<span class="fc" id="L164">            return this;</span>
+        }
+<span class="fc" id="L166">        return new PeriodFormatter(iPrinter, iParser, locale, iParseType);</span>
+    }
+
+    /**
+     * Gets the locale that will be used for printing and parsing.
+     * &lt;p&gt;
+     * A null locale indicates that no specific locale override is in use.
+     * 
+     * @return the locale to use
+     */
+    public Locale getLocale() {
+<span class="fc" id="L177">        return iLocale;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new formatter with a different PeriodType for parsing.
+     * &lt;p&gt;
+     * A PeriodFormatter is immutable, so a new instance is returned,
+     * and the original is unaltered and still usable.
+     * 
+     * @param type  the type to use in parsing
+     * @return the new formatter
+     */
+    public PeriodFormatter withParseType(PeriodType type) {
+<span class="fc bfc" id="L191" title="All 2 branches covered.">        if (type == iParseType) {</span>
+<span class="fc" id="L192">            return this;</span>
+        }
+<span class="fc" id="L194">        return new PeriodFormatter(iPrinter, iParser, iLocale, type);</span>
+    }
+
+    /**
+     * Gets the PeriodType that will be used for parsing.
+     * 
+     * @return the parse type to use
+     */
+    public PeriodType getParseType() {
+<span class="fc" id="L203">        return iParseType;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Prints a ReadablePeriod to a StringBuffer.
+     *
+     * @param buf  the formatted period is appended to this buffer
+     * @param period  the period to format, not null
+     */
+    public void printTo(StringBuffer buf, ReadablePeriod period) {
+<span class="fc" id="L214">        checkPrinter();</span>
+<span class="fc" id="L215">        checkPeriod(period);</span>
+        
+<span class="fc" id="L217">        getPrinter().printTo(buf, period, iLocale);</span>
+<span class="fc" id="L218">    }</span>
+
+    /**
+     * Prints a ReadablePeriod to a Writer.
+     *
+     * @param out  the formatted period is written out
+     * @param period  the period to format, not null
+     */
+    public void printTo(Writer out, ReadablePeriod period) throws IOException {
+<span class="fc" id="L227">        checkPrinter();</span>
+<span class="fc" id="L228">        checkPeriod(period);</span>
+        
+<span class="fc" id="L230">        getPrinter().printTo(out, period, iLocale);</span>
+<span class="fc" id="L231">    }</span>
+
+    /**
+     * Prints a ReadablePeriod to a new String.
+     *
+     * @param period  the period to format, not null
+     * @return the printed result
+     */
+    public String print(ReadablePeriod period) {
+<span class="fc" id="L240">        checkPrinter();</span>
+<span class="fc" id="L241">        checkPeriod(period);</span>
+        
+<span class="fc" id="L243">        PeriodPrinter printer = getPrinter();</span>
+<span class="fc" id="L244">        StringBuffer buf = new StringBuffer(printer.calculatePrintedLength(period, iLocale));</span>
+<span class="fc" id="L245">        printer.printTo(buf, period, iLocale);</span>
+<span class="fc" id="L246">        return buf.toString();</span>
+    }
+
+    /**
+     * Checks whether printing is supported.
+     * 
+     * @throws UnsupportedOperationException if printing is not supported
+     */
+    private void checkPrinter() {
+<span class="fc bfc" id="L255" title="All 2 branches covered.">        if (iPrinter == null) {</span>
+<span class="fc" id="L256">            throw new UnsupportedOperationException(&quot;Printing not supported&quot;);</span>
+        }
+<span class="fc" id="L258">    }</span>
+
+    /**
+     * Checks whether the period is non-null.
+     * 
+     * @throws IllegalArgumentException if the period is null
+     */
+    private void checkPeriod(ReadablePeriod period) {
+<span class="fc bfc" id="L266" title="All 2 branches covered.">        if (period == null) {</span>
+<span class="fc" id="L267">            throw new IllegalArgumentException(&quot;Period must not be null&quot;);</span>
+        }
+<span class="fc" id="L269">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Parses a period from the given text, at the given position, saving the
+     * result into the fields of the given ReadWritablePeriod. If the parse
+     * succeeds, the return value is the new text position. Note that the parse
+     * may succeed without fully reading the text.
+     * &lt;p&gt;
+     * The parse type of the formatter is not used by this method.
+     * &lt;p&gt;
+     * If it fails, the return value is negative, but the period may still be
+     * modified. To determine the position where the parse failed, apply the
+     * one's complement operator (~) on the return value.
+     *
+     * @param period  a period that will be modified
+     * @param text  text to parse
+     * @param position position to start parsing from
+     * @return new position, if negative, parse failed. Apply complement
+     * operator (~) to get position of failure
+     * @throws IllegalArgumentException if any field is out of range
+     */
+    public int parseInto(ReadWritablePeriod period, String text, int position) {
+<span class="fc" id="L292">        checkParser();</span>
+<span class="fc" id="L293">        checkPeriod(period);</span>
+        
+<span class="fc" id="L295">        return getParser().parseInto(period, text, position, iLocale);</span>
+    }
+
+    /**
+     * Parses a period from the given text, returning a new Period.
+     *
+     * @param text  text to parse
+     * @return parsed value in a Period object
+     * @throws IllegalArgumentException if any field is out of range
+     */
+    public Period parsePeriod(String text) {
+<span class="fc" id="L306">        checkParser();</span>
+        
+<span class="fc" id="L308">        return parseMutablePeriod(text).toPeriod();</span>
+    }
+
+    /**
+     * Parses a period from the given text, returning a new MutablePeriod.
+     *
+     * @param text  text to parse
+     * @return parsed value in a MutablePeriod object
+     * @throws IllegalArgumentException if any field is out of range
+     */
+    public MutablePeriod parseMutablePeriod(String text) {
+<span class="fc" id="L319">        checkParser();</span>
+        
+<span class="fc" id="L321">        MutablePeriod period = new MutablePeriod(0, iParseType);</span>
+<span class="fc" id="L322">        int newPos = getParser().parseInto(period, text, 0, iLocale);</span>
+<span class="fc bfc" id="L323" title="All 2 branches covered.">        if (newPos &gt;= 0) {</span>
+<span class="fc bfc" id="L324" title="All 2 branches covered.">            if (newPos &gt;= text.length()) {</span>
+<span class="fc" id="L325">                return period;</span>
+            }
+        } else {
+<span class="fc" id="L328">            newPos = ~newPos;</span>
+        }
+<span class="fc" id="L330">        throw new IllegalArgumentException(FormatUtils.createErrorMessage(text, newPos));</span>
+    }
+
+    /**
+     * Checks whether parsing is supported.
+     * 
+     * @throws UnsupportedOperationException if parsing is not supported
+     */
+    private void checkParser() {
+<span class="fc bfc" id="L339" title="All 2 branches covered.">        if (iParser == null) {</span>
+<span class="fc" id="L340">            throw new UnsupportedOperationException(&quot;Parsing not supported&quot;);</span>
+        }
+<span class="fc" id="L342">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

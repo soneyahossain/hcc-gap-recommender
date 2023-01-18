@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StrictDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">StrictDateTimeField.java</span></div><h1>StrictDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2005 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import org.joda.time.DateTimeField;
+
+/**
+ * Converts a lenient DateTimeField into a strict one. By being strict, the set
+ * throws an IllegalArgumentException if the value is out of bounds.
+ * &lt;p&gt;
+ * StrictDateTimeField is thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @see org.joda.time.chrono.StrictChronology
+ * @see LenientDateTimeField
+ * @since 1.0
+ */
+public class StrictDateTimeField extends DelegatedDateTimeField {
+
+    private static final long serialVersionUID = 3154803964207950910L;
+
+    /**
+     * Returns a strict version of the given field. If it is already strict,
+     * then it is returned as-is. Otherwise, a new StrictDateTimeField is
+     * returned.
+     */
+    public static DateTimeField getInstance(DateTimeField field) {
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (field == null) {</span>
+<span class="nc" id="L42">            return null;</span>
+        }
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if (field instanceof LenientDateTimeField) {</span>
+<span class="nc" id="L45">            field = ((LenientDateTimeField)field).getWrappedField();</span>
+        }
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (!field.isLenient()) {</span>
+<span class="fc" id="L48">            return field;</span>
+        }
+<span class="nc" id="L50">        return new StrictDateTimeField(field);</span>
+    }
+
+    protected StrictDateTimeField(DateTimeField field) {
+<span class="nc" id="L54">        super(field);</span>
+<span class="nc" id="L55">    }</span>
+
+    public final boolean isLenient() {
+<span class="nc" id="L58">        return false;</span>
+    }
+
+    /**
+     * Does a bounds check before setting the value.
+     *
+     * @throws IllegalArgumentException if the value is invalid
+     */
+    public long set(long instant, int value) {
+<span class="nc" id="L67">        FieldUtils.verifyValueBounds</span>
+<span class="nc" id="L68">            (this, value, getMinimumValue(instant), getMaximumValue(instant));</span>
+<span class="nc" id="L69">        return super.set(instant, value);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

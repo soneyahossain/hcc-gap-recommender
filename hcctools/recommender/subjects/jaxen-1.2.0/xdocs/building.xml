@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<document url="http://jaxen.org/building.xml">
+
+  <properties>
+    <author>Elliotte Rusty Harold</author>
+    <title>Building Jaxen</title>
+  </properties>
+
+  <body>
+    <title>Building Jaxen</title>
+    
+    <section name="Compiling">
+      <p>
+        Jaxen's build system is <a href="http://maven.apache.org/">Maven 3</a>. 
+        To compile Jaxen, install Maven. Then at the shell 
+        prompt inside the top-level jaxen directory, type "mvn compile":
+      </p>
+      
+      <p><samp>$ mvn compile</samp></p>
+      
+      <p>
+        You'll likely see some deprecation warnings. Don't worry about these. 
+        They're internal to jaxen, and do not indicate bugs.
+      </p>
+      
+      <p>
+        To run the unit tests, type "mvn test":
+      </p>
+      
+      <p><samp>$ mvn test</samp></p>
+      
+      <p>
+        To build a jar file  at the shell 
+        prompt type "mvn package":
+      </p>
+      
+      <p><samp>$ mvn package</samp></p>
+      
+      <p>
+        This runs the unit tests as well. The jar file will appear in the target directory. <!--   If any are failing and you still want to 
+        build a jar file, use the <code>-Dmaven.test.failure.ignore=true</code> option:-->
+      </p>
+ <!--
+       <p><samp>$ maven -Dmaven.test.failure.ignore=true jar</samp></p>
+      -->
+      
+      
+      <p>
+        To generate javadoc, type "mvn javadoc:javadoc":
+      </p>
+      
+      <p><samp>$ mvn javadoc:javadoc</samp></p>
+      
+      <p>
+        To generate the complete documentation for the site, including 
+        code coverage measurements, static code analysis, and more, type "mvn site":
+      </p>
+      
+      <p><samp>$ mvn site</samp></p>
+      
+      <p>
+       Again the output appears in the target folder. 
+      </p>
+      
+     <p>
+        To remove build artifacts, type "mvn clean":
+      </p>
+      
+      <p><samp>$ mvn clean</samp></p>
+      
+      
+    </section>
+
+    <section name="Publishing a Release">
+      <p>
+       To prepare jaxen for release:
+      </p>
+     
+      <ol>
+        <li>Update xdocs/releases.xml, xdocs/status.xml, and xdocs/index.xml with the new version number and information.</li>        
+        <li>Update pom.xml and INSTALL with the new version number.</li>    
+        <li>Make sure all changes are committed.</li>   
+        <li>Check that all tests pass by running <samp>mvn test</samp>.</li> 
+        <li>Tag the release in Github.</li>
+        <li>And then a miracle occurs to upload to Maven Central.</li>
+        <li>
+          Upload site and binaries to cafeconleche.org/jaxen.
+        </li>
+      </ol>
+
+    </section>
+
+
+  </body>
+</document>
+
+
+
+
+
+
+
+
+

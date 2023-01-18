@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PredicateSet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.expr</a> &gt; <span class="el_source">PredicateSet.java</span></div><h1>PredicateSet.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+
+package org.jaxen.expr;
+
+import org.jaxen.Context;
+import org.jaxen.ContextSupport;
+import org.jaxen.JaxenException;
+import org.jaxen.function.BooleanFunction;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * &lt;p&gt;
+ * Represents the collection of predicates that follow the node-test in a
+ * location path.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;
+ * There is no rule that the same predicate may not
+ * appear twice in an XPath expression, nor does this class enforce any such rule.
+ * This is implemented more as a list than a set. However, adding the swme predicate
+ * twice should have no effect on the final result other than slowing it down.
+ * &lt;/p&gt;
+ */
+public class PredicateSet implements Serializable {
+
+    private static final long serialVersionUID = -7166491740228977853L;
+
+    private List predicates;
+
+    /**
+     * Create a new empty predicate set.
+     */
+<span class="fc" id="L85">    public PredicateSet() {</span>
+<span class="fc" id="L86">        this.predicates = Collections.EMPTY_LIST;</span>
+<span class="fc" id="L87">    }</span>
+
+    /**
+     * Add a predicate to the set.
+     *
+     * @param predicate the predicate to be inserted
+     */
+    public void addPredicate(Predicate predicate) {
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        if (this.predicates == Collections.EMPTY_LIST) {</span>
+<span class="fc" id="L96">            this.predicates = new ArrayList();</span>
+        }
+
+<span class="fc" id="L99">        this.predicates.add(predicate);</span>
+<span class="fc" id="L100">    }</span>
+
+    /**
+     * Returns the list containing the predicates.
+     * This list is live, not a copy.
+     *
+     * @return a live list of predicates
+     */
+    public List getPredicates() {
+<span class="fc" id="L109">        return this.predicates;</span>
+    }
+
+    /**
+     * Simplify each of the predicates in the list.
+     */
+    public void simplify() {
+<span class="fc" id="L116">        Iterator predIter = this.predicates.iterator();</span>
+<span class="fc" id="L117">        Predicate eachPred = null;</span>
+
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        while (predIter.hasNext()) {</span>
+<span class="fc" id="L120">            eachPred = (Predicate) predIter.next();</span>
+<span class="fc" id="L121">            eachPred.simplify();</span>
+        }
+<span class="fc" id="L123">    }</span>
+
+    /**
+     * Returns the XPath string containing each of the predicates.
+     *
+     * @return the XPath string containing each of the predicates
+     */
+    public String getText() {
+<span class="fc" id="L131">        StringBuffer buf = new StringBuffer();</span>
+
+<span class="fc" id="L133">        Iterator predIter = this.predicates.iterator();</span>
+<span class="fc" id="L134">        Predicate eachPred = null;</span>
+
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        while (predIter.hasNext()) {</span>
+<span class="fc" id="L137">            eachPred = (Predicate) predIter.next();</span>
+<span class="fc" id="L138">            buf.append(eachPred.getText());</span>
+        }
+
+<span class="fc" id="L141">        return buf.toString();</span>
+    }
+
+    /**
+     * &lt;p&gt;Returns true if any of the supplied nodes satisfy
+     * all the predicates in the set. Returns false if none of the supplied
+     * nodes matches all the predicates in the set. Returns false if the
+     * node-set is empty.&lt;/p&gt;
+     *
+     * @param contextNodeSet the nodes to test against these predicates
+     * @param support        ????
+     * @return true if any node in the contextNodeSet matches all the predicates
+     * @throws JaxenException
+     */
+    protected boolean evaluateAsBoolean(List contextNodeSet,
+                                        ContextSupport support) throws JaxenException {
+<span class="nc" id="L157">        return anyMatchingNode(contextNodeSet, support);</span>
+    }
+
+    private boolean anyMatchingNode(List contextNodeSet, ContextSupport support)
+            throws JaxenException {
+        // Easy way out (necessary)
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (predicates.size() == 0) {</span>
+<span class="nc" id="L164">            return false;</span>
+        }
+<span class="nc" id="L166">        Iterator predIter = predicates.iterator();</span>
+
+        // initial list to filter
+<span class="nc" id="L169">        List nodes2Filter = contextNodeSet;</span>
+        // apply all predicates
+<span class="nc bnc" id="L171" title="All 2 branches missed.">        while (predIter.hasNext()) {</span>
+<span class="nc" id="L172">            final int nodes2FilterSize = nodes2Filter.size();</span>
+            // Set up a dummy context with a list to hold each node
+<span class="nc" id="L174">            Context predContext = new Context(support);</span>
+<span class="nc" id="L175">            List tempList = new ArrayList(1);</span>
+<span class="nc" id="L176">            predContext.setNodeSet(tempList);</span>
+            // loop through the current nodes to filter and add to the
+            // filtered nodes list if the predicate succeeds
+<span class="nc bnc" id="L179" title="All 2 branches missed.">            for (int i = 0; i &lt; nodes2FilterSize; ++i) {</span>
+<span class="nc" id="L180">                Object contextNode = nodes2Filter.get(i);</span>
+<span class="nc" id="L181">                tempList.clear();</span>
+<span class="nc" id="L182">                tempList.add(contextNode);</span>
+<span class="nc" id="L183">                predContext.setNodeSet(tempList);</span>
+                // ????
+<span class="nc" id="L185">                predContext.setPosition(i + 1);</span>
+<span class="nc" id="L186">                predContext.setSize(nodes2FilterSize);</span>
+<span class="nc" id="L187">                Object predResult = ((Predicate) predIter.next()).evaluate(predContext);</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">                if (predResult instanceof Number) {</span>
+                    // Here we assume nodes are in forward or reverse order
+                    // as appropriate for axis
+<span class="nc" id="L191">                    int proximity = ((Number) predResult).intValue();</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">                    if (proximity == (i + 1)) {</span>
+<span class="nc" id="L193">                        return true;</span>
+                    }
+<span class="nc" id="L195">                } else {</span>
+<span class="nc" id="L196">                    Boolean includes =</span>
+<span class="nc" id="L197">                            BooleanFunction.evaluate(predResult,</span>
+<span class="nc" id="L198">                                    predContext.getNavigator());</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">                    if (includes.booleanValue()) {</span>
+<span class="nc" id="L200">                        return true;</span>
+                    }
+                }
+            }
+<span class="nc" id="L204">        }</span>
+
+<span class="nc" id="L206">        return false;</span>
+    }
+
+
+    /**
+     * &lt;p&gt;Returns all of the supplied nodes that satisfy
+     * all the predicates in the set. &lt;/p&gt;
+     *
+     * @param contextNodeSet the nodes to test against these predicates
+     * @param support        ????
+     * @return all the nodes that match each of the predicates
+     * @throws JaxenException
+     */
+    protected List evaluatePredicates(List contextNodeSet, ContextSupport support)
+            throws JaxenException {
+        // Easy way out (necessary)
+<span class="fc bfc" id="L222" title="All 2 branches covered.">        if (predicates.size() == 0) {</span>
+<span class="fc" id="L223">            return contextNodeSet;</span>
+        }
+<span class="fc" id="L225">        Iterator predIter = predicates.iterator();</span>
+
+        // initial list to filter
+<span class="fc" id="L228">        List nodes2Filter = contextNodeSet;</span>
+        // apply all predicates
+<span class="fc bfc" id="L230" title="All 2 branches covered.">        while (predIter.hasNext()) {</span>
+<span class="fc" id="L231">            nodes2Filter =</span>
+<span class="fc" id="L232">                    applyPredicate((Predicate) predIter.next(), nodes2Filter, support);</span>
+        }
+
+<span class="fc" id="L235">        return nodes2Filter;</span>
+    }
+
+    public List applyPredicate(Predicate predicate, List nodes2Filter, ContextSupport support)
+            throws JaxenException {
+<span class="fc" id="L240">        final int nodes2FilterSize = nodes2Filter.size();</span>
+<span class="fc" id="L241">        List filteredNodes = new ArrayList(nodes2FilterSize);</span>
+        // Set up a dummy context with a list to hold each node
+<span class="fc" id="L243">        Context predContext = new Context(support);</span>
+<span class="fc" id="L244">        List tempList = new ArrayList(1);</span>
+<span class="fc" id="L245">        predContext.setNodeSet(tempList);</span>
+        // loop through the current nodes to filter and add to the
+        // filtered nodes list if the predicate succeeds
+<span class="fc bfc" id="L248" title="All 2 branches covered.">        for (int i = 0; i &lt; nodes2FilterSize; ++i) {</span>
+<span class="fc" id="L249">            Object contextNode = nodes2Filter.get(i);</span>
+<span class="fc" id="L250">            tempList.clear();</span>
+<span class="fc" id="L251">            tempList.add(contextNode);</span>
+<span class="fc" id="L252">            predContext.setNodeSet(tempList);</span>
+            // ????
+<span class="fc" id="L254">            predContext.setPosition(i + 1);</span>
+<span class="fc" id="L255">            predContext.setSize(nodes2FilterSize);</span>
+<span class="fc" id="L256">            Object predResult = predicate.evaluate(predContext);</span>
+<span class="fc bfc" id="L257" title="All 2 branches covered.">            if (predResult instanceof Number) {</span>
+                // Here we assume nodes are in forward or reverse order
+                // as appropriate for axis
+<span class="fc" id="L260">                int proximity = ((Number) predResult).intValue();</span>
+<span class="fc bfc" id="L261" title="All 2 branches covered.">                if (proximity == (i + 1)) {</span>
+<span class="fc" id="L262">                    filteredNodes.add(contextNode);</span>
+                }
+<span class="fc" id="L264">            } else {</span>
+<span class="fc" id="L265">                Boolean includes =</span>
+<span class="fc" id="L266">                        BooleanFunction.evaluate(predResult,</span>
+<span class="fc" id="L267">                                predContext.getNavigator());</span>
+<span class="fc bfc" id="L268" title="All 2 branches covered.">                if (includes.booleanValue()) {</span>
+<span class="fc" id="L269">                    filteredNodes.add(contextNode);</span>
+                }
+            }
+        }
+<span class="fc" id="L273">        return filteredNodes;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

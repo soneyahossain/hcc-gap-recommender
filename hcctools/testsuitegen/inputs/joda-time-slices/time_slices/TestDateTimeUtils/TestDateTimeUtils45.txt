@@ -1,0 +1,101 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  1.5% done, time left: unknown  3.2% done, time left: unknown  3.6% done, time left: unknown  5.0% done, time left: unknown  7.1% done, time left:   0:00:04    9.4% done, time left:   0:00:04 11.5% done, time left:   0:00:04 13.7% done, time left:   0:00:05 14.8% done, time left:   0:00:05 17.4% done, time left:   0:00:05 21.8% done, time left:   0:00:04 27.8% done, time left:   0:00:01 33.1% done, time left:   0:00:01 35.3% done, time left:   0:00:01 36.1% done, time left:   0:00:01 36.3% done, time left:   0:00:00 36.4% done, time left:   0:00:00 40.2% done, time left:   0:00:01 47.1% done, time left:   0:00:00 52.7% done, time left:   0:00:00 59.5% done, time left:   0:00:00 66.4% done, time left:   0:00:00 70.2% done, time left:   0:00:00 78.3% done, time left:   0:00:00 89.4% done, time left:   0:00:00 96.8% done, time left:   0:00:00 98.0% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDateTimeUtils.testIsContiguous_RP:458:*]:
+org.joda.time.DateTimeUtils.isContiguous:354 ICONST_0
+org.joda.time.DateTimeUtils.isContiguous:354 ISTORE 2
+org.joda.time.DateTimeUtils.isContiguous:354 ILOAD 2
+org.joda.time.DateTimeUtils.isContiguous:354 INVOKEINTERFACE org/joda/time/ReadablePartial.size()I
+org.joda.time.DateTimeUtils.isContiguous:354 IF_ICMPGE L4 true true
+org.joda.time.DateTimeUtils.isContiguous:354 IINC 2 1
+org.joda.time.DateTimeUtils.isContiguous:355 ALOAD 0
+org.joda.time.DateTimeUtils.isContiguous:355 ILOAD 2
+org.joda.time.DateTimeUtils.isContiguous:355 INVOKEINTERFACE org/joda/time/ReadablePartial.getField(I)Lorg/joda/time/DateTimeField;
+org.joda.time.DateTimeUtils.isContiguous:355 ASTORE 3
+org.joda.time.DateTimeUtils.isContiguous:356 ILOAD 2
+org.joda.time.DateTimeUtils.isContiguous:356 IFLE L3 true true
+org.joda.time.DateTimeUtils.isContiguous:357 ALOAD 3
+org.joda.time.DateTimeUtils.isContiguous:357 INVOKEVIRTUAL org/joda/time/DateTimeField.getRangeDurationField()Lorg/joda/time/DurationField;
+org.joda.time.DateTimeUtils.isContiguous:357 IFNULL L2 false true
+org.joda.time.DateTimeUtils.isContiguous:357 ALOAD 3
+org.joda.time.DateTimeUtils.isContiguous:357 INVOKEVIRTUAL org/joda/time/DateTimeField.getRangeDurationField()Lorg/joda/time/DurationField;
+org.joda.time.DateTimeUtils.isContiguous:357 INVOKEVIRTUAL org/joda/time/DurationField.getType()Lorg/joda/time/DurationFieldType;
+org.joda.time.DateTimeUtils.isContiguous:357 ALOAD 1
+org.joda.time.DateTimeUtils.isContiguous:357 IF_ACMPEQ L3 true false
+org.joda.time.DateTimeUtils.isContiguous:361 ALOAD 3
+org.joda.time.DateTimeUtils.isContiguous:361 INVOKEVIRTUAL org/joda/time/DateTimeField.getDurationField()Lorg/joda/time/DurationField;
+org.joda.time.DateTimeUtils.isContiguous:361 INVOKEVIRTUAL org/joda/time/DurationField.getType()Lorg/joda/time/DurationFieldType;
+org.joda.time.DateTimeUtils.isContiguous:361 ASTORE 1
+org.joda.time.DateTimeUtils.isContiguous:363 ICONST_1
+org.joda.time.DateTimeUtils.isContiguous:363 IRETURN
+org.joda.time.TestDateTimeUtils.main:143 INVOKEVIRTUAL org/joda/time/TestDateTimeUtils.testIsContiguous_RP()V
+org.joda.time.TestDateTimeUtils.testIsContiguous_RP:457 NEW org/joda/time/YearMonthDay
+org.joda.time.TestDateTimeUtils.testIsContiguous_RP:457 DUP
+org.joda.time.TestDateTimeUtils.testIsContiguous_RP:457 INVOKESPECIAL org/joda/time/YearMonthDay.<init>(III)V
+org.joda.time.TestDateTimeUtils.testIsContiguous_RP:457 ASTORE 1
+org.joda.time.TestDateTimeUtils.testIsContiguous_RP:458 ICONST_1
+org.joda.time.TestDateTimeUtils.testIsContiguous_RP:458 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestDateTimeUtils.testIsContiguous_RP:458 ALOAD 1
+org.joda.time.TestDateTimeUtils.testIsContiguous_RP:458 INVOKESTATIC org/joda/time/DateTimeUtils.isContiguous(Lorg/joda/time/ReadablePartial;)Z
+org.joda.time.TestDateTimeUtils.testIsContiguous_RP:458 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestDateTimeUtils.testIsContiguous_RP:458 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.YearMonthDay.<init>:272 ALOAD 0
+org.joda.time.YearMonthDay.<init>:272 INVOKESPECIAL org/joda/time/YearMonthDay.<init>(IIILorg/joda/time/Chronology;)V
+org.joda.time.YearMonthDay.<init>:288 ALOAD 0
+org.joda.time.YearMonthDay.<init>:288 INVOKESPECIAL org/joda/time/base/BasePartial.<init>([ILorg/joda/time/Chronology;)V
+org.joda.time.YearMonthDay.size:318 ICONST_3
+org.joda.time.YearMonthDay.size:318 IRETURN
+org.joda.time.YearMonthDay.getField:331 ILOAD 1
+org.joda.time.YearMonthDay.getField:331 TABLESWITCH (0 => L0, 1 => L1, 2 => L2, * => L3)
+org.joda.time.YearMonthDay.getField:333 ALOAD 2
+org.joda.time.YearMonthDay.getField:333 INVOKEVIRTUAL org/joda/time/Chronology.year()Lorg/joda/time/DateTimeField;
+org.joda.time.YearMonthDay.getField:333 ARETURN
+org.joda.time.YearMonthDay.getField:335 ALOAD 2
+org.joda.time.YearMonthDay.getField:335 INVOKEVIRTUAL org/joda/time/Chronology.monthOfYear()Lorg/joda/time/DateTimeField;
+org.joda.time.YearMonthDay.getField:335 ARETURN
+org.joda.time.YearMonthDay.getField:337 ALOAD 2
+org.joda.time.YearMonthDay.getField:337 INVOKEVIRTUAL org/joda/time/Chronology.dayOfMonth()Lorg/joda/time/DateTimeField;
+org.joda.time.YearMonthDay.getField:337 ARETURN
+org.joda.time.base.AbstractPartial.getField:105 ILOAD 1
+org.joda.time.base.AbstractPartial.getField:105 ALOAD 0
+org.joda.time.base.AbstractPartial.getField:105 INVOKEVIRTUAL org/joda/time/base/AbstractPartial.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.base.AbstractPartial.getField:105 INVOKEVIRTUAL org/joda/time/base/AbstractPartial.getField(ILorg/joda/time/Chronology;)Lorg/joda/time/DateTimeField;
+org.joda.time.base.AbstractPartial.getField:105 ARETURN
+org.joda.time.base.BasePartial.<init>:182 ALOAD 0
+org.joda.time.base.BasePartial.<init>:182 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.base.BasePartial.<init>:182 PUTFIELD org/joda/time/base/BasePartial.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BasePartial.getChronology:249 ALOAD 0
+org.joda.time.base.BasePartial.getChronology:249 GETFIELD org/joda/time/base/BasePartial.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BasePartial.getChronology:249 ARETURN
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 ALOAD 0
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 GETFIELD org/joda/time/chrono/AssembledChronology.iDayOfMonth Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 ARETURN
+org.joda.time.chrono.AssembledChronology.months:256 ALOAD 0
+org.joda.time.chrono.AssembledChronology.months:256 GETFIELD org/joda/time/chrono/AssembledChronology.iMonths Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.months:256 ARETURN
+org.joda.time.chrono.AssembledChronology.monthOfYear:260 ALOAD 0
+org.joda.time.chrono.AssembledChronology.monthOfYear:260 GETFIELD org/joda/time/chrono/AssembledChronology.iMonthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.monthOfYear:260 ARETURN
+org.joda.time.chrono.AssembledChronology.years:264 ALOAD 0
+org.joda.time.chrono.AssembledChronology.years:264 GETFIELD org/joda/time/chrono/AssembledChronology.iYears Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.years:264 ARETURN
+org.joda.time.chrono.AssembledChronology.year:268 ALOAD 0
+org.joda.time.chrono.AssembledChronology.year:268 GETFIELD org/joda/time/chrono/AssembledChronology.iYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.year:268 ARETURN
+org.joda.time.chrono.BasicDayOfMonthDateTimeField.getRangeDurationField:52 ALOAD 0
+org.joda.time.chrono.BasicDayOfMonthDateTimeField.getRangeDurationField:52 GETFIELD org/joda/time/chrono/BasicDayOfMonthDateTimeField.iChronology Lorg/joda/time/chrono/BasicChronology;
+org.joda.time.chrono.BasicDayOfMonthDateTimeField.getRangeDurationField:52 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.months()Lorg/joda/time/DurationField;
+org.joda.time.chrono.BasicDayOfMonthDateTimeField.getRangeDurationField:52 ARETURN
+org.joda.time.chrono.BasicMonthOfYearDateTimeField.getRangeDurationField:326 ALOAD 0
+org.joda.time.chrono.BasicMonthOfYearDateTimeField.getRangeDurationField:326 GETFIELD org/joda/time/chrono/BasicMonthOfYearDateTimeField.iChronology Lorg/joda/time/chrono/BasicChronology;
+org.joda.time.chrono.BasicMonthOfYearDateTimeField.getRangeDurationField:326 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.years()Lorg/joda/time/DurationField;
+org.joda.time.chrono.BasicMonthOfYearDateTimeField.getRangeDurationField:326 ARETURN
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+org.joda.time.field.BaseDurationField.getType:55 ALOAD 0
+org.joda.time.field.BaseDurationField.getType:55 GETFIELD org/joda/time/field/BaseDurationField.iType Lorg/joda/time/DurationFieldType;
+org.joda.time.field.BaseDurationField.getType:55 ARETURN
+org.joda.time.field.ImpreciseDateTimeField.getDurationField:138 ALOAD 0
+org.joda.time.field.ImpreciseDateTimeField.getDurationField:138 GETFIELD org/joda/time/field/ImpreciseDateTimeField.iDurationField Lorg/joda/time/DurationField;
+org.joda.time.field.ImpreciseDateTimeField.getDurationField:138 ARETURN
+
+Slice consists of 100 bytecode instructions.
+Computation took 3.40 seconds.

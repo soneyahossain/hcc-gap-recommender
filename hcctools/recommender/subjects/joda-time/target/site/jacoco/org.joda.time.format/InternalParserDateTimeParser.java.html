@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InternalParserDateTimeParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.format</a> &gt; <span class="el_source">InternalParserDateTimeParser.java</span></div><h1>InternalParserDateTimeParser.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.format;
+
+
+/**
+ * Adapter between old and new printer interface.
+ *
+ * @author Stephen Colebourne
+ * @since 2.4
+ */
+class InternalParserDateTimeParser implements DateTimeParser, InternalParser {
+    
+    private final InternalParser underlying;
+
+    static DateTimeParser of(InternalParser underlying) {
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if (underlying instanceof DateTimeParserInternalParser) {</span>
+<span class="nc" id="L31">            return ((DateTimeParserInternalParser) underlying).getUnderlying();</span>
+        }
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (underlying instanceof DateTimeParser) {</span>
+<span class="fc" id="L34">            return (DateTimeParser) underlying;</span>
+        }
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (underlying == null) {</span>
+<span class="fc" id="L37">            return null;</span>
+        }
+<span class="fc" id="L39">        return new InternalParserDateTimeParser(underlying);</span>
+    }
+
+<span class="fc" id="L42">    private InternalParserDateTimeParser(InternalParser underlying) {</span>
+<span class="fc" id="L43">        this.underlying = underlying;</span>
+<span class="fc" id="L44">    }</span>
+
+    //-------------------------------------------------------------------------
+    public int estimateParsedLength() {
+<span class="fc" id="L48">        return underlying.estimateParsedLength();</span>
+    }
+
+    public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="fc" id="L52">        return underlying.parseInto(bucket, text, position);</span>
+    }
+
+    public int parseInto(DateTimeParserBucket bucket, String text, int position) {
+<span class="nc" id="L56">        return underlying.parseInto(bucket, text, position);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    @Override
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (obj == this) {</span>
+<span class="nc" id="L63">            return true;</span>
+        }
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (obj instanceof InternalParserDateTimeParser) {</span>
+<span class="fc" id="L66">            InternalParserDateTimeParser other = (InternalParserDateTimeParser) obj;</span>
+<span class="fc" id="L67">            return underlying.equals(other.underlying);</span>
+        }
+<span class="nc" id="L69">        return false;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

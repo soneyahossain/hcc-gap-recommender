@@ -1,0 +1,39 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  0.6% done, time left: unknown  2.1% done, time left: unknown  3.5% done, time left: unknown  5.4% done, time left: unknown  6.7% done, time left: unknown  8.0% done, time left: unknown  9.2% done, time left:   0:00:07   10.5% done, time left:   0:00:07 12.5% done, time left:   0:00:07 14.6% done, time left:   0:00:07 17.6% done, time left:   0:00:07 17.6% done, time left:   0:00:06 17.8% done, time left:   0:00:05 20.4% done, time left:   0:00:05 23.6% done, time left:   0:00:05 26.1% done, time left:   0:00:04 27.6% done, time left:   0:00:04 29.7% done, time left:   0:00:04 30.6% done, time left:   0:00:04 35.2% done, time left:   0:00:02 39.6% done, time left:   0:00:01 45.7% done, time left:   0:00:00 51.0% done, time left:   0:00:00 54.9% done, time left:   0:00:00 59.7% done, time left:   0:00:00 66.4% done, time left:   0:00:00 73.0% done, time left:   0:00:00 79.1% done, time left:   0:00:00 81.4% done, time left:   0:00:00 81.5% done, time left:   0:00:00 85.6% done, time left:   0:00:00 90.3% done, time left:   0:00:00 92.7% done, time left:   0:00:00 96.3% done, time left:   0:00:00 98.1% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestInstant_Constructors.testParse_noFormatter:165:*]:
+org.joda.time.Instant.parse:115 INVOKESTATIC org/joda/time/Instant.parse(Ljava/lang/String;Lorg/joda/time/format/DateTimeFormatter;)Lorg/joda/time/Instant;
+org.joda.time.Instant.parse:115 ARETURN
+org.joda.time.Instant.parse:126 INVOKEVIRTUAL org/joda/time/DateTime.toInstant()Lorg/joda/time/Instant;
+org.joda.time.Instant.parse:126 ARETURN
+org.joda.time.TestInstant_Constructors.main:68 INVOKEVIRTUAL org/joda/time/TestInstant_Constructors.testParse_noFormatter()V
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 NEW org/joda/time/DateTime
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 DUP
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 SIPUSH 2010
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 BIPUSH 6
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 BIPUSH 30
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 ICONST_0
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 BIPUSH 20
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 GETSTATIC org/joda/time/TestInstant_Constructors.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 INVOKESPECIAL org/joda/time/DateTime.<init>(IIIIILorg/joda/time/Chronology;)V
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 INVOKEVIRTUAL org/joda/time/DateTime.toInstant()Lorg/joda/time/Instant;
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 LDC "2010-06-30T01:20+02:00"
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 INVOKESTATIC org/joda/time/Instant.parse(Ljava/lang/String;)Lorg/joda/time/Instant;
+org.joda.time.TestInstant_Constructors.testParse_noFormatter:165 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.base.AbstractInstant.toInstant:137 NEW org/joda/time/Instant
+org.joda.time.base.AbstractInstant.toInstant:137 ARETURN
+org.joda.time.chrono.ISOChronology.getInstance:92 GETSTATIC org/joda/time/chrono/ISOChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.ISOChronology.getInstance:92 ALOAD 0
+org.joda.time.chrono.ISOChronology.getInstance:92 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.ISOChronology.getInstance:92 ASTORE 1
+org.joda.time.chrono.ISOChronology.getInstance:93 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:93 IFNONNULL L1 false true
+org.joda.time.chrono.ISOChronology.getInstance:94 NEW org/joda/time/chrono/ISOChronology
+org.joda.time.chrono.ISOChronology.getInstance:94 ASTORE 1
+org.joda.time.chrono.ISOChronology.getInstance:100 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:100 ARETURN
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+
+Slice consists of 147 bytecode instructions.
+Computation took 4.18 seconds.

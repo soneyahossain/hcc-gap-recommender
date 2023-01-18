@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractPeriod.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.base</a> &gt; <span class="el_source">AbstractPeriod.java</span></div><h1>AbstractPeriod.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2010 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.base;
+
+import org.joda.convert.ToString;
+import org.joda.time.DurationFieldType;
+import org.joda.time.MutablePeriod;
+import org.joda.time.Period;
+import org.joda.time.ReadablePeriod;
+import org.joda.time.format.ISOPeriodFormat;
+import org.joda.time.format.PeriodFormatter;
+
+/**
+ * AbstractPeriod provides the common behaviour for period classes.
+ * &lt;p&gt;
+ * This class should generally not be used directly by API users. The 
+ * {@link ReadablePeriod} interface should be used when different 
+ * kinds of periods are to be referenced.
+ * &lt;p&gt;
+ * AbstractPeriod subclasses may be mutable and not thread-safe.
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+public abstract class AbstractPeriod implements ReadablePeriod {
+
+    /**
+     * Constructor.
+     */
+    protected AbstractPeriod() {
+<span class="fc" id="L45">        super();</span>
+<span class="fc" id="L46">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the number of fields that this period supports.
+     *
+     * @return the number of fields supported
+     * @since 2.0 (previously on BasePeriod)
+     */
+    public int size() {
+<span class="fc" id="L56">        return getPeriodType().size();</span>
+    }
+
+    /**
+     * Gets the field type at the specified index.
+     *
+     * @param index  the index to retrieve
+     * @return the field at the specified index
+     * @throws IndexOutOfBoundsException if the index is invalid
+     * @since 2.0 (previously on BasePeriod)
+     */
+    public DurationFieldType getFieldType(int index) {
+<span class="fc" id="L68">        return getPeriodType().getFieldType(index);</span>
+    }
+
+    /**
+     * Gets an array of the field types that this period supports.
+     * &lt;p&gt;
+     * The fields are returned largest to smallest, for example Hours, Minutes, Seconds.
+     *
+     * @return the fields supported in an array that may be altered, largest to smallest
+     */
+    public DurationFieldType[] getFieldTypes() {
+<span class="fc" id="L79">        DurationFieldType[] result = new DurationFieldType[size()];</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for (int i = 0; i &lt; result.length; i++) {</span>
+<span class="fc" id="L81">            result[i] = getFieldType(i);</span>
+        }
+<span class="fc" id="L83">        return result;</span>
+    }
+
+    /**
+     * Gets an array of the value of each of the fields that this period supports.
+     * &lt;p&gt;
+     * The fields are returned largest to smallest, for example Hours, Minutes, Seconds.
+     * Each value corresponds to the same array index as &lt;code&gt;getFields()&lt;/code&gt;
+     *
+     * @return the current values of each field in an array that may be altered, largest to smallest
+     */
+    public int[] getValues() {
+<span class="fc" id="L95">        int[] result = new int[size()];</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        for (int i = 0; i &lt; result.length; i++) {</span>
+<span class="fc" id="L97">            result[i] = getValue(i);</span>
+        }
+<span class="fc" id="L99">        return result;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the value of one of the fields.
+     * &lt;p&gt;
+     * If the field type specified is not supported by the period then zero
+     * is returned.
+     *
+     * @param type  the field type to query, null returns zero
+     * @return the value of that field, zero if field not supported
+     */
+    public int get(DurationFieldType type) {
+<span class="fc" id="L113">        int index = indexOf(type);</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        if (index == -1) {</span>
+<span class="fc" id="L115">            return 0;</span>
+        }
+<span class="fc" id="L117">        return getValue(index);</span>
+    }
+
+    /**
+     * Checks whether the field specified is supported by this period.
+     *
+     * @param type  the type to check, may be null which returns false
+     * @return true if the field is supported
+     */
+    public boolean isSupported(DurationFieldType type) {
+<span class="fc" id="L127">        return getPeriodType().isSupported(type);</span>
+    }
+
+    /**
+     * Gets the index of the field in this period.
+     *
+     * @param type  the type to check, may be null which returns -1
+     * @return the index of -1 if not supported
+     */
+    public int indexOf(DurationFieldType type) {
+<span class="fc" id="L137">        return getPeriodType().indexOf(type);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get this period as an immutable &lt;code&gt;Period&lt;/code&gt; object.
+     * 
+     * @return a Period using the same field set and values
+     */
+    public Period toPeriod() {
+<span class="fc" id="L147">        return new Period(this);</span>
+    }
+
+    /**
+     * Get this object as a &lt;code&gt;MutablePeriod&lt;/code&gt;.
+     * &lt;p&gt;
+     * This will always return a new &lt;code&gt;MutablePeriod&lt;/code&gt; with the same fields.
+     * 
+     * @return a MutablePeriod using the same field set and values
+     */
+    public MutablePeriod toMutablePeriod() {
+<span class="fc" id="L158">        return new MutablePeriod(this);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Compares this object with the specified object for equality based
+     * on the value of each field. All ReadablePeriod instances are accepted.
+     * &lt;p&gt;
+     * Note that a period of 1 day is not equal to a period of 24 hours,
+     * nor is 1 hour equal to 60 minutes. Only periods with the same amount
+     * in each field are equal.
+     * &lt;p&gt;
+     * This is because periods represent an abstracted definition of a time
+     * period (eg. a day may not actually be 24 hours, it might be 23 or 25
+     * at daylight savings boundary).
+     * &lt;p&gt;
+     * To compare the actual duration of two periods, convert both to
+     * {@link org.joda.time.Duration Duration}s, an operation that emphasises
+     * that the result may differ according to the date you choose.
+     *
+     * @param period  a readable period to check against
+     * @return true if all the field values are equal, false if
+     *  not or the period is null or of an incorrect type
+     */
+    public boolean equals(Object period) {
+<span class="fc bfc" id="L183" title="All 2 branches covered.">        if (this == period) {</span>
+<span class="fc" id="L184">            return true;</span>
+        }
+<span class="fc bfc" id="L186" title="All 2 branches covered.">        if (period instanceof ReadablePeriod == false) {</span>
+<span class="fc" id="L187">            return false;</span>
+        }
+<span class="fc" id="L189">        ReadablePeriod other = (ReadablePeriod) period;</span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">        if (size() != other.size()) {</span>
+<span class="fc" id="L191">            return false;</span>
+        }
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        for (int i = 0, isize = size(); i &lt; isize; i++) {</span>
+<span class="pc bpc" id="L194" title="1 of 4 branches missed.">            if (getValue(i) != other.getValue(i) || getFieldType(i) != other.getFieldType(i)) {</span>
+<span class="fc" id="L195">                return false;</span>
+            }
+        }
+<span class="fc" id="L198">        return true;</span>
+    }
+
+    /**
+     * Gets a hash code for the period as defined by ReadablePeriod.
+     *
+     * @return a hash code
+     */
+    public int hashCode() {
+<span class="fc" id="L207">        int total = 17;</span>
+<span class="fc bfc" id="L208" title="All 2 branches covered.">        for (int i = 0, isize = size(); i &lt; isize; i++) {</span>
+<span class="fc" id="L209">            total = 27 * total + getValue(i);</span>
+<span class="fc" id="L210">            total = 27 * total + getFieldType(i).hashCode();</span>
+        }
+<span class="fc" id="L212">        return total;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the value as a String in the ISO8601 duration format.
+     * &lt;p&gt;
+     * For example, &quot;PT6H3M7S&quot; represents 6 hours, 3 minutes, 7 seconds.
+     * &lt;p&gt;
+     * For more control over the output, see
+     * {@link org.joda.time.format.PeriodFormatterBuilder PeriodFormatterBuilder}.
+     *
+     * @return the value as an ISO8601 string
+     */
+    @ToString
+    public String toString() {
+<span class="fc" id="L228">        return ISOPeriodFormat.standard().print(this);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Uses the specified formatter to convert this period to a String.
+     *
+     * @param formatter  the formatter to use, null means use &lt;code&gt;toString()&lt;/code&gt;.
+     * @return the formatted string
+     * @since 1.5
+     */
+    public String toString(PeriodFormatter formatter) {
+<span class="fc bfc" id="L240" title="All 2 branches covered.">        if (formatter == null) {</span>
+<span class="fc" id="L241">            return toString();</span>
+        }
+<span class="fc" id="L243">        return formatter.print(this);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

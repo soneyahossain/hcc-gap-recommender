@@ -1,0 +1,79 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.joda.time.tz.TestZoneInfoCompiler.testTestOne:76:*]:
+org.joda.time.DateTimeZone.forOffsetMillis:333 ILOAD 0
+org.joda.time.DateTimeZone.forOffsetMillis:333 INVOKESTATIC org/joda/time/DateTimeZone.printOffset(I)Ljava/lang/String;
+org.joda.time.DateTimeZone.forOffsetMillis:333 ASTORE 1
+org.joda.time.DateTimeZone.forOffsetMillis:334 ALOAD 1
+org.joda.time.DateTimeZone.forOffsetMillis:334 ILOAD 0
+org.joda.time.DateTimeZone.forOffsetMillis:334 INVOKESTATIC org/joda/time/DateTimeZone.fixedOffsetZone(Ljava/lang/String;I)Lorg/joda/time/DateTimeZone;
+org.joda.time.DateTimeZone.forOffsetMillis:334 ARETURN
+org.joda.time.DateTimeZone.fixedOffsetZone:422 ILOAD 1
+org.joda.time.DateTimeZone.fixedOffsetZone:422 IFNE L0 true false
+org.joda.time.DateTimeZone.fixedOffsetZone:425 NEW org/joda/time/tz/FixedDateTimeZone
+org.joda.time.DateTimeZone.fixedOffsetZone:425 DUP
+org.joda.time.DateTimeZone.fixedOffsetZone:425 ALOAD 0
+org.joda.time.DateTimeZone.fixedOffsetZone:425 INVOKESPECIAL org/joda/time/tz/FixedDateTimeZone.<init>(Ljava/lang/String;Ljava/lang/String;II)V
+org.joda.time.DateTimeZone.fixedOffsetZone:425 ARETURN
+org.joda.time.DateTimeZone.printOffset:679 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:679 LDC 3600000
+org.joda.time.DateTimeZone.printOffset:679 IDIV
+org.joda.time.DateTimeZone.printOffset:679 ISTORE 2
+org.joda.time.DateTimeZone.printOffset:681 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:681 ILOAD 2
+org.joda.time.DateTimeZone.printOffset:681 LDC 3600000
+org.joda.time.DateTimeZone.printOffset:681 IMUL
+org.joda.time.DateTimeZone.printOffset:681 ISUB
+org.joda.time.DateTimeZone.printOffset:681 ISTORE 0
+org.joda.time.DateTimeZone.printOffset:683 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:683 LDC 60000
+org.joda.time.DateTimeZone.printOffset:683 IDIV
+org.joda.time.DateTimeZone.printOffset:683 ISTORE 3
+org.joda.time.DateTimeZone.printOffset:686 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:686 ILOAD 3
+org.joda.time.DateTimeZone.printOffset:686 LDC 60000
+org.joda.time.DateTimeZone.printOffset:686 IMUL
+org.joda.time.DateTimeZone.printOffset:686 ISUB
+org.joda.time.DateTimeZone.printOffset:686 ISTORE 0
+org.joda.time.DateTimeZone.printOffset:687 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:687 IFNE L2 true false
+org.joda.time.DateTimeZone.printOffset:691 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:691 SIPUSH 1000
+org.joda.time.DateTimeZone.printOffset:691 IDIV
+org.joda.time.DateTimeZone.printOffset:691 ISTORE 4
+org.joda.time.DateTimeZone.printOffset:694 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:694 ILOAD 4
+org.joda.time.DateTimeZone.printOffset:694 SIPUSH 1000
+org.joda.time.DateTimeZone.printOffset:694 IMUL
+org.joda.time.DateTimeZone.printOffset:694 ISUB
+org.joda.time.DateTimeZone.printOffset:694 ISTORE 0
+org.joda.time.DateTimeZone.printOffset:695 ILOAD 0
+org.joda.time.DateTimeZone.printOffset:695 IFNE L3 true false
+org.joda.time.DateTimeZone.printOffset:701 INVOKEVIRTUAL java/lang/StringBuffer.toString()Ljava/lang/String;
+org.joda.time.DateTimeZone.printOffset:701 ARETURN
+org.joda.time.DateTimeZone.<init>:719 ALOAD 0
+org.joda.time.DateTimeZone.<init>:719 ALOAD 1
+org.joda.time.DateTimeZone.<init>:719 PUTFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ALOAD 0
+org.joda.time.DateTimeZone.getID:732 GETFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ARETURN
+org.joda.time.tz.FixedDateTimeZone.<init>:38 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:38 ALOAD 1
+org.joda.time.tz.FixedDateTimeZone.<init>:38 INVOKESPECIAL org/joda/time/DateTimeZone.<init>(Ljava/lang/String;)V
+org.joda.time.tz.TestZoneInfoCompiler.main:46 INVOKEVIRTUAL org/joda/time/tz/TestZoneInfoCompiler.testTestOne()V
+org.joda.time.tz.TestZoneInfoCompiler.testTestOne:74 BIPUSH 8
+org.joda.time.tz.TestZoneInfoCompiler.testTestOne:74 INVOKESTATIC org/joda/time/DateTimeZone.forOffsetMillis(I)Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.TestZoneInfoCompiler.testTestOne:74 ASTORE 1
+org.joda.time.tz.TestZoneInfoCompiler.testTestOne:76 LDC "+02:15"
+org.joda.time.tz.TestZoneInfoCompiler.testTestOne:76 ALOAD 1
+org.joda.time.tz.TestZoneInfoCompiler.testTestOne:76 INVOKESTATIC org/joda/time/tz/ZoneInfoCompiler.test(Ljava/lang/String;Lorg/joda/time/DateTimeZone;)Z
+org.joda.time.tz.TestZoneInfoCompiler.testTestOne:76 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+org.joda.time.tz.ZoneInfoCompiler.test:261 ALOAD 0
+org.joda.time.tz.ZoneInfoCompiler.test:261 ALOAD 1
+org.joda.time.tz.ZoneInfoCompiler.test:261 INVOKEVIRTUAL org/joda/time/DateTimeZone.getID()Ljava/lang/String;
+org.joda.time.tz.ZoneInfoCompiler.test:261 INVOKEVIRTUAL java/lang/String.equals(Ljava/lang/Object;)Z
+org.joda.time.tz.ZoneInfoCompiler.test:261 IFNE L0 false true
+org.joda.time.tz.ZoneInfoCompiler.test:262 ICONST_1
+org.joda.time.tz.ZoneInfoCompiler.test:262 IRETURN
+
+Slice consists of 76 bytecode instructions.
+Computation took 0.98 seconds.

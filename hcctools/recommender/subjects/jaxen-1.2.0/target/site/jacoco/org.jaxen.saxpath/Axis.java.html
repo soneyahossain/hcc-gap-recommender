@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Axis.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.saxpath</a> &gt; <span class="el_source">Axis.java</span></div><h1>Axis.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+
+package org.jaxen.saxpath;
+
+import org.jaxen.JaxenRuntimeException;
+
+
+/**
+ * Internal SAXPath class that contains constants representing
+ * XPath operators to avoid a lot of string comparisons.
+ */
+public class Axis {
+
+    /**
+     * Marker for an invalid axis
+     */
+    public final static int INVALID_AXIS = 0;
+
+    // XXX Ultimately these should use the type-safe enum pattern instead
+    /**
+     * The &lt;code&gt;child&lt;/code&gt; axis
+     */
+    public final static int CHILD = 1;
+    /**
+     * The &lt;code&gt;descendant&lt;/code&gt; axis
+     */
+    public final static int DESCENDANT = 2;
+    /**
+     * The &lt;code&gt;parent&lt;/code&gt; axis
+     */
+    public final static int PARENT = 3;
+    /**
+     * The &lt;code&gt;ancestor&lt;/code&gt; axis
+     */
+    public final static int ANCESTOR = 4;
+    /**
+     * The &lt;code&gt;following-sibling&lt;/code&gt; axis
+     */
+    public final static int FOLLOWING_SIBLING = 5;
+    /**
+     * The &lt;code&gt;preceding-sibling&lt;/code&gt; axis
+     */
+    public final static int PRECEDING_SIBLING = 6;
+    /**
+     * The &lt;code&gt;following&lt;/code&gt; axis
+     */
+    public final static int FOLLOWING = 7;
+    /**
+     * The &lt;code&gt;preceding&lt;/code&gt; axis
+     */
+    public final static int PRECEDING = 8;
+    /**
+     * The &lt;code&gt;attribute&lt;/code&gt; axis
+     */
+    public final static int ATTRIBUTE = 9;
+    /**
+     * The &lt;code&gt;namespace&lt;/code&gt; axis
+     */
+    public final static int NAMESPACE = 10;
+    /**
+     * The &lt;code&gt;self&lt;/code&gt; axis
+     */
+    public final static int SELF = 11;
+    /**
+     * The &lt;code&gt;descendant-or-self&lt;/code&gt; axis
+     */
+    public final static int DESCENDANT_OR_SELF = 12;
+    /**
+     * The &lt;code&gt;ancestor-or-self&lt;/code&gt; axis
+     */
+    public final static int ANCESTOR_OR_SELF = 13;
+
+    private Axis() {
+    }
+
+    /**
+     * &lt;p&gt;
+     * Returns the name of the axis.
+     * &lt;/p&gt;
+     *
+     * @param axisNum the axis code
+     * @return the name of the axis such as might be used in an XPath expression
+     * @throws JaxenRuntimeException if the number does not represent one of the 13
+     *                               XPath axes
+     */
+    public static String lookup(int axisNum) {
+<span class="fc bfc" id="L134" title="All 14 branches covered.">        switch (axisNum) {</span>
+            case CHILD:
+<span class="fc" id="L136">                return &quot;child&quot;;</span>
+
+            case DESCENDANT:
+<span class="fc" id="L139">                return &quot;descendant&quot;;</span>
+
+            case PARENT:
+<span class="fc" id="L142">                return &quot;parent&quot;;</span>
+
+            case ANCESTOR:
+<span class="fc" id="L145">                return &quot;ancestor&quot;;</span>
+
+            case FOLLOWING_SIBLING:
+<span class="fc" id="L148">                return &quot;following-sibling&quot;;</span>
+
+            case PRECEDING_SIBLING:
+<span class="fc" id="L151">                return &quot;preceding-sibling&quot;;</span>
+
+            case FOLLOWING:
+<span class="fc" id="L154">                return &quot;following&quot;;</span>
+
+            case PRECEDING:
+<span class="fc" id="L157">                return &quot;preceding&quot;;</span>
+
+            case ATTRIBUTE:
+<span class="fc" id="L160">                return &quot;attribute&quot;;</span>
+
+            case NAMESPACE:
+<span class="fc" id="L163">                return &quot;namespace&quot;;</span>
+
+            case SELF:
+<span class="fc" id="L166">                return &quot;self&quot;;</span>
+
+            case DESCENDANT_OR_SELF:
+<span class="fc" id="L169">                return &quot;descendant-or-self&quot;;</span>
+
+            case ANCESTOR_OR_SELF:
+<span class="fc" id="L172">                return &quot;ancestor-or-self&quot;;</span>
+        }
+
+<span class="fc" id="L175">        throw new JaxenRuntimeException(&quot;Illegal Axis Number&quot;);</span>
+    }
+
+    /**
+     * &lt;p&gt;
+     * Returns the code for an axis given its name.
+     * &lt;/p&gt;
+     *
+     * @param axisName the name of the axis: child, parent, descendant, descendant-or-self, etc.
+     * @return the axis code
+     */
+    public static int lookup(String axisName) {
+
+        // XXX All these equals calls are a small HotSpot;
+        // Need to replace this with a static HashMap
+<span class="fc bfc" id="L190" title="All 2 branches covered.">        if (&quot;child&quot;.equals(axisName)) {</span>
+<span class="fc" id="L191">            return CHILD;</span>
+        }
+
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        if (&quot;descendant&quot;.equals(axisName)) {</span>
+<span class="fc" id="L195">            return DESCENDANT;</span>
+        }
+
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        if (&quot;parent&quot;.equals(axisName)) {</span>
+<span class="fc" id="L199">            return PARENT;</span>
+        }
+
+<span class="fc bfc" id="L202" title="All 2 branches covered.">        if (&quot;ancestor&quot;.equals(axisName)) {</span>
+<span class="fc" id="L203">            return ANCESTOR;</span>
+        }
+
+<span class="fc bfc" id="L206" title="All 2 branches covered.">        if (&quot;following-sibling&quot;.equals(axisName)) {</span>
+<span class="fc" id="L207">            return FOLLOWING_SIBLING;</span>
+        }
+
+<span class="fc bfc" id="L210" title="All 2 branches covered.">        if (&quot;preceding-sibling&quot;.equals(axisName)) {</span>
+<span class="fc" id="L211">            return PRECEDING_SIBLING;</span>
+        }
+
+<span class="fc bfc" id="L214" title="All 2 branches covered.">        if (&quot;following&quot;.equals(axisName)) {</span>
+<span class="fc" id="L215">            return FOLLOWING;</span>
+        }
+
+<span class="fc bfc" id="L218" title="All 2 branches covered.">        if (&quot;preceding&quot;.equals(axisName)) {</span>
+<span class="fc" id="L219">            return PRECEDING;</span>
+        }
+
+<span class="fc bfc" id="L222" title="All 2 branches covered.">        if (&quot;attribute&quot;.equals(axisName)) {</span>
+<span class="fc" id="L223">            return ATTRIBUTE;</span>
+        }
+
+<span class="fc bfc" id="L226" title="All 2 branches covered.">        if (&quot;namespace&quot;.equals(axisName)) {</span>
+<span class="fc" id="L227">            return NAMESPACE;</span>
+        }
+
+<span class="fc bfc" id="L230" title="All 2 branches covered.">        if (&quot;self&quot;.equals(axisName)) {</span>
+<span class="fc" id="L231">            return SELF;</span>
+        }
+
+<span class="fc bfc" id="L234" title="All 2 branches covered.">        if (&quot;descendant-or-self&quot;.equals(axisName)) {</span>
+<span class="fc" id="L235">            return DESCENDANT_OR_SELF;</span>
+        }
+
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        if (&quot;ancestor-or-self&quot;.equals(axisName)) {</span>
+<span class="fc" id="L239">            return ANCESTOR_OR_SELF;</span>
+        }
+
+<span class="fc" id="L242">        return INVALID_AXIS;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateTimeParserBucket.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.format</a> &gt; <span class="el_source">DateTimeParserBucket.java</span></div><h1>DateTimeParserBucket.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2015 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.format;
+
+import java.util.Arrays;
+import java.util.Locale;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.DateTimeZone;
+import org.joda.time.DurationField;
+import org.joda.time.DurationFieldType;
+import org.joda.time.IllegalFieldValueException;
+import org.joda.time.IllegalInstantException;
+
+/**
+ * DateTimeParserBucket is an advanced class, intended mainly for parser
+ * implementations. It can also be used during normal parsing operations to
+ * capture more information about the parse.
+ * &lt;p&gt;
+ * This class allows fields to be saved in any order, but be physically set in
+ * a consistent order. This is useful for parsing against formats that allow
+ * field values to contradict each other.
+ * &lt;p&gt;
+ * Field values are applied in an order where the &quot;larger&quot; fields are set
+ * first, making their value less likely to stick.  A field is larger than
+ * another when it's range duration is longer. If both ranges are the same,
+ * then the larger field has the longer duration. If it cannot be determined
+ * which field is larger, then the fields are set in the order they were saved.
+ * &lt;p&gt;
+ * For example, these fields were saved in this order: dayOfWeek, monthOfYear,
+ * dayOfMonth, dayOfYear. When computeMillis is called, the fields are set in
+ * this order: monthOfYear, dayOfYear, dayOfMonth, dayOfWeek.
+ * &lt;p&gt;
+ * DateTimeParserBucket is mutable and not thread-safe.
+ *
+ * @author Brian S O'Neill
+ * @author Fredrik Borgh
+ * @since 1.0
+ */
+public class DateTimeParserBucket {
+
+    /** The chronology to use for parsing. */
+    private final Chronology iChrono;
+    /** The initial millis. */
+    private final long iMillis;
+    /** The locale to use for parsing. */
+    private final Locale iLocale;
+    /** Used for parsing month/day without year. */
+    private final int iDefaultYear;
+    /** The default zone from the constructor. */
+    private final DateTimeZone iDefaultZone;
+    /** The default pivot year from the constructor. */
+    private final Integer iDefaultPivotYear;
+
+    /** The parsed zone, initialised to formatter zone. */
+    private DateTimeZone iZone;
+    /** The parsed offset. */
+    private Integer iOffset;
+    /** Used for parsing two-digit years. */
+    private Integer iPivotYear;
+
+    private SavedField[] iSavedFields;
+    private int iSavedFieldsCount;
+    private boolean iSavedFieldsShared;
+    
+    private Object iSavedState;
+
+    /**
+     * Constructs a bucket.
+     * 
+     * @param instantLocal  the initial millis from 1970-01-01T00:00:00, local time
+     * @param chrono  the chronology to use
+     * @param locale  the locale to use
+     * @deprecated Use longer constructor
+     */
+    @Deprecated
+    public DateTimeParserBucket(long instantLocal, Chronology chrono, Locale locale) {
+<span class="fc" id="L94">        this(instantLocal, chrono, locale, null, 2000);</span>
+<span class="fc" id="L95">    }</span>
+
+    /**
+     * Constructs a bucket, with the option of specifying the pivot year for
+     * two-digit year parsing.
+     *
+     * @param instantLocal  the initial millis from 1970-01-01T00:00:00, local time
+     * @param chrono  the chronology to use
+     * @param locale  the locale to use
+     * @param pivotYear  the pivot year to use when parsing two-digit years
+     * @since 1.1
+     * @deprecated Use longer constructor
+     */
+    @Deprecated
+    public DateTimeParserBucket(long instantLocal, Chronology chrono, Locale locale, Integer pivotYear) {
+<span class="fc" id="L110">        this(instantLocal, chrono, locale, pivotYear, 2000);</span>
+<span class="fc" id="L111">    }</span>
+
+    /**
+     * Constructs a bucket, with the option of specifying the pivot year for
+     * two-digit year parsing.
+     *
+     * @param instantLocal  the initial millis from 1970-01-01T00:00:00, local time
+     * @param chrono  the chronology to use
+     * @param locale  the locale to use
+     * @param pivotYear  the pivot year to use when parsing two-digit years
+     * @param defaultYear  the default year to use when parsing month-day
+     * @since 2.0
+     */
+    public DateTimeParserBucket(long instantLocal, Chronology chrono,
+            Locale locale, Integer pivotYear, int defaultYear) {
+<span class="fc" id="L126">        super();</span>
+<span class="fc" id="L127">        chrono = DateTimeUtils.getChronology(chrono);</span>
+<span class="fc" id="L128">        iMillis = instantLocal;</span>
+<span class="fc" id="L129">        iDefaultZone = chrono.getZone();</span>
+<span class="fc" id="L130">        iChrono = chrono.withUTC();</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        iLocale = (locale == null ? Locale.getDefault() : locale);</span>
+<span class="fc" id="L132">        iDefaultYear = defaultYear;</span>
+<span class="fc" id="L133">        iDefaultPivotYear = pivotYear;</span>
+        // reset
+<span class="fc" id="L135">        iZone = iDefaultZone;</span>
+<span class="fc" id="L136">        iPivotYear = iDefaultPivotYear;</span>
+<span class="fc" id="L137">        iSavedFields = new SavedField[8];</span>
+<span class="fc" id="L138">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Resets the state back to that when the object was constructed.
+     * &lt;p&gt;
+     * This resets the state of the bucket, allowing a single bucket to be re-used
+     * for many parses. The bucket must not be shared between threads.
+     * 
+     * @since 2.4
+     */
+    public void reset() {
+<span class="fc" id="L150">        iZone = iDefaultZone;</span>
+<span class="fc" id="L151">        iOffset = null;</span>
+<span class="fc" id="L152">        iPivotYear = iDefaultPivotYear;</span>
+<span class="fc" id="L153">        iSavedFieldsCount = 0;</span>
+<span class="fc" id="L154">        iSavedFieldsShared = false;</span>
+<span class="fc" id="L155">        iSavedState = null;</span>
+<span class="fc" id="L156">    }</span>
+
+    /**
+     * Parses a datetime from the given text, returning the number of
+     * milliseconds since the epoch, 1970-01-01T00:00:00Z.
+     * &lt;p&gt;
+     * This parses the text using the parser into this bucket.
+     * The bucket is reset before parsing begins, allowing the bucket to be re-used.
+     * The bucket must not be shared between threads.
+     *
+     * @param parser  the parser to use, see {@link DateTimeFormatter#getParser()}, not null
+     * @param text  text to parse, not null
+     * @return parsed value expressed in milliseconds since the epoch
+     * @throws UnsupportedOperationException if parsing is not supported
+     * @throws IllegalArgumentException if the text to parse is invalid
+     * @since 2.4
+     */
+    public long parseMillis(DateTimeParser parser, CharSequence text) {
+<span class="fc" id="L174">        reset();</span>
+<span class="fc" id="L175">        return doParseMillis(DateTimeParserInternalParser.of(parser), text);</span>
+    }
+
+    long doParseMillis(InternalParser parser, CharSequence text) {
+<span class="fc" id="L179">        int newPos = parser.parseInto(this, text, 0);</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">        if (newPos &gt;= 0) {</span>
+<span class="fc bfc" id="L181" title="All 2 branches covered.">            if (newPos &gt;= text.length()) {</span>
+<span class="fc" id="L182">                return computeMillis(true, text);</span>
+            }
+        } else {
+<span class="fc" id="L185">            newPos = ~newPos;</span>
+        }
+<span class="fc" id="L187">        throw new IllegalArgumentException(FormatUtils.createErrorMessage(text.toString(), newPos));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the chronology of the bucket, which will be a local (UTC) chronology.
+     */
+    public Chronology getChronology() {
+<span class="fc" id="L195">        return iChrono;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns the locale to be used during parsing.
+     * 
+     * @return the locale to use
+     */
+    public Locale getLocale() {
+<span class="fc" id="L205">        return iLocale;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns the time zone used by computeMillis.
+     */
+    public DateTimeZone getZone() {
+<span class="fc" id="L213">        return iZone;</span>
+    }
+
+    /**
+     * Set a time zone to be used when computeMillis is called.
+     */
+    public void setZone(DateTimeZone zone) {
+<span class="fc" id="L220">        iSavedState = null;</span>
+<span class="fc" id="L221">        iZone = zone;</span>
+<span class="fc" id="L222">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns the time zone offset in milliseconds used by computeMillis.
+     * @deprecated use Integer version
+     */
+    @Deprecated
+    public int getOffset() {
+<span class="nc bnc" id="L231" title="All 2 branches missed.">        return (iOffset != null ? iOffset : 0);</span>
+    }
+
+    /**
+     * Returns the time zone offset in milliseconds used by computeMillis.
+     */
+    public Integer getOffsetInteger() {
+<span class="fc" id="L238">        return iOffset;</span>
+    }
+
+    /**
+     * Set a time zone offset to be used when computeMillis is called.
+     * @deprecated use Integer version
+     */
+    @Deprecated
+    public void setOffset(int offset) {
+<span class="nc" id="L247">        iSavedState = null;</span>
+<span class="nc" id="L248">        iOffset = offset;</span>
+<span class="nc" id="L249">    }</span>
+
+    /**
+     * Set a time zone offset to be used when computeMillis is called.
+     */
+    public void setOffset(Integer offset) {
+<span class="fc" id="L255">        iSavedState = null;</span>
+<span class="fc" id="L256">        iOffset = offset;</span>
+<span class="fc" id="L257">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns the default year used when information is incomplete.
+     * &lt;p&gt;
+     * This is used for two-digit years and when the largest parsed field is
+     * months or days.
+     * &lt;p&gt;
+     * A null value for two-digit years means to use the value from DateTimeFormatterBuilder.
+     * A null value for month/day only parsing will cause the default of 2000 to be used.
+     *
+     * @return Integer value of the pivot year, null if not set
+     * @since 1.1
+     */
+    public Integer getPivotYear() {
+<span class="fc" id="L273">        return iPivotYear;</span>
+    }
+
+    /**
+     * Sets the pivot year to use when parsing two digit years.
+     * &lt;p&gt;
+     * If the value is set to null, this will indicate that default
+     * behaviour should be used.
+     *
+     * @param pivotYear  the pivot year to use
+     * @since 1.1
+     * @deprecated this method should never have been public
+     */
+    @Deprecated
+    public void setPivotYear(Integer pivotYear) {
+<span class="fc" id="L288">        iPivotYear = pivotYear;</span>
+<span class="fc" id="L289">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Saves a datetime field value.
+     * 
+     * @param field  the field, whose chronology must match that of this bucket
+     * @param value  the value
+     */
+    public void saveField(DateTimeField field, int value) {
+<span class="fc" id="L299">        obtainSaveField().init(field, value);</span>
+<span class="fc" id="L300">    }</span>
+    
+    /**
+     * Saves a datetime field value.
+     * 
+     * @param fieldType  the field type
+     * @param value  the value
+     */
+    public void saveField(DateTimeFieldType fieldType, int value) {
+<span class="fc" id="L309">        obtainSaveField().init(fieldType.getField(iChrono), value);</span>
+<span class="fc" id="L310">    }</span>
+    
+    /**
+     * Saves a datetime field text value.
+     * 
+     * @param fieldType  the field type
+     * @param text  the text value
+     * @param locale  the locale to use
+     */
+    public void saveField(DateTimeFieldType fieldType, String text, Locale locale) {
+<span class="fc" id="L320">        obtainSaveField().init(fieldType.getField(iChrono), text, locale);</span>
+<span class="fc" id="L321">    }</span>
+    
+    private SavedField obtainSaveField() {
+<span class="fc" id="L324">        SavedField[] savedFields = iSavedFields;</span>
+<span class="fc" id="L325">        int savedFieldsCount = iSavedFieldsCount;</span>
+        
+<span class="pc bpc" id="L327" title="1 of 4 branches missed.">        if (savedFieldsCount == savedFields.length || iSavedFieldsShared) {</span>
+            // Expand capacity or merely copy if saved fields are shared.
+<span class="pc bpc" id="L329" title="1 of 2 branches missed.">            SavedField[] newArray = new SavedField</span>
+                [savedFieldsCount == savedFields.length ? savedFieldsCount * 2 : savedFields.length];
+<span class="fc" id="L331">            System.arraycopy(savedFields, 0, newArray, 0, savedFieldsCount);</span>
+<span class="fc" id="L332">            iSavedFields = savedFields = newArray;</span>
+<span class="fc" id="L333">            iSavedFieldsShared = false;</span>
+        }
+        
+<span class="fc" id="L336">        iSavedState = null;</span>
+<span class="fc" id="L337">        SavedField saved = savedFields[savedFieldsCount];</span>
+<span class="fc bfc" id="L338" title="All 2 branches covered.">        if (saved == null) {</span>
+<span class="fc" id="L339">            saved = savedFields[savedFieldsCount] = new SavedField();</span>
+        }
+<span class="fc" id="L341">        iSavedFieldsCount = savedFieldsCount + 1;</span>
+<span class="fc" id="L342">        return saved;</span>
+    }
+    
+    /**
+     * Saves the state of this bucket, returning it in an opaque object. Call
+     * restoreState to undo any changes that were made since the state was
+     * saved. Calls to saveState may be nested.
+     *
+     * @return opaque saved state, which may be passed to restoreState
+     */
+    public Object saveState() {
+<span class="fc bfc" id="L353" title="All 2 branches covered.">        if (iSavedState == null) {</span>
+<span class="fc" id="L354">            iSavedState = new SavedState();</span>
+        }
+<span class="fc" id="L356">        return iSavedState;</span>
+    }
+    
+    /**
+     * Restores the state of this bucket from a previously saved state. The
+     * state object passed into this method is not consumed, and it can be used
+     * later to restore to that state again.
+     *
+     * @param savedState opaque saved state, returned from saveState
+     * @return true state object is valid and state restored
+     */
+    public boolean restoreState(Object savedState) {
+<span class="fc bfc" id="L368" title="All 2 branches covered.">        if (savedState instanceof SavedState) {</span>
+<span class="fc bfc" id="L369" title="All 2 branches covered.">            if (((SavedState) savedState).restoreState(this)) {</span>
+<span class="fc" id="L370">                iSavedState = savedState;</span>
+<span class="fc" id="L371">                return true;</span>
+            }
+        }
+<span class="fc" id="L374">        return false;</span>
+    }
+    
+    /**
+     * Computes the parsed datetime by setting the saved fields.
+     * This method is idempotent, but it is not thread-safe.
+     *
+     * @return milliseconds since 1970-01-01T00:00:00Z
+     * @throws IllegalArgumentException if any field is out of range
+     */
+    public long computeMillis() {
+<span class="fc" id="L385">        return computeMillis(false, (CharSequence) null);</span>
+    }
+    
+    /**
+     * Computes the parsed datetime by setting the saved fields.
+     * This method is idempotent, but it is not thread-safe.
+     *
+     * @param resetFields false by default, but when true, unsaved field values are cleared
+     * @return milliseconds since 1970-01-01T00:00:00Z
+     * @throws IllegalArgumentException if any field is out of range
+     */
+    public long computeMillis(boolean resetFields) {
+<span class="fc" id="L397">        return computeMillis(resetFields, (CharSequence) null);</span>
+    }
+
+    /**
+     * Computes the parsed datetime by setting the saved fields.
+     * This method is idempotent, but it is not thread-safe.
+     *
+     * @param resetFields false by default, but when true, unsaved field values are cleared
+     * @param text optional text being parsed, to be included in any error message
+     * @return milliseconds since 1970-01-01T00:00:00Z
+     * @throws IllegalArgumentException if any field is out of range
+     * @since 1.3
+     */
+    public long computeMillis(boolean resetFields, String text) {
+<span class="fc" id="L411">        return computeMillis(resetFields, (CharSequence) text);</span>
+    }
+
+    /**
+     * Computes the parsed datetime by setting the saved fields.
+     * This method is idempotent, but it is not thread-safe.
+     *
+     * @param resetFields false by default, but when true, unsaved field values are cleared
+     * @param text optional text being parsed, to be included in any error message
+     * @return milliseconds since 1970-01-01T00:00:00Z
+     * @throws IllegalArgumentException if any field is out of range
+     * @since 2.4
+     */
+    public long computeMillis(boolean resetFields, CharSequence text) {
+<span class="fc" id="L425">        SavedField[] savedFields = iSavedFields;</span>
+<span class="fc" id="L426">        int count = iSavedFieldsCount;</span>
+<span class="fc bfc" id="L427" title="All 2 branches covered.">        if (iSavedFieldsShared) {</span>
+            // clone so that sort does not affect saved state
+<span class="fc" id="L429">            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();</span>
+<span class="fc" id="L430">            iSavedFieldsShared = false;</span>
+        }
+<span class="fc" id="L432">        sort(savedFields, count);</span>
+<span class="fc bfc" id="L433" title="All 2 branches covered.">        if (count &gt; 0) {</span>
+            // alter base year for parsing if first field is month or day
+<span class="fc" id="L435">            DurationField months = DurationFieldType.months().getField(iChrono);</span>
+<span class="fc" id="L436">            DurationField days = DurationFieldType.days().getField(iChrono);</span>
+<span class="fc" id="L437">            DurationField first = savedFields[0].iField.getDurationField();</span>
+<span class="fc bfc" id="L438" title="All 4 branches covered.">            if (compareReverse(first, months) &gt;= 0 &amp;&amp; compareReverse(first, days) &lt;= 0) {</span>
+<span class="fc" id="L439">                saveField(DateTimeFieldType.year(), iDefaultYear);</span>
+<span class="fc" id="L440">                return computeMillis(resetFields, text);</span>
+            }
+        }
+
+<span class="fc" id="L444">        long millis = iMillis;</span>
+        try {
+<span class="fc bfc" id="L446" title="All 2 branches covered.">            for (int i = 0; i &lt; count; i++) {</span>
+<span class="fc" id="L447">                millis = savedFields[i].set(millis, resetFields);</span>
+            }
+<span class="fc bfc" id="L449" title="All 2 branches covered.">            if (resetFields) {</span>
+<span class="fc bfc" id="L450" title="All 2 branches covered.">                for (int i = 0; i &lt; count; i++) {</span>
+<span class="pc bpc" id="L451" title="1 of 2 branches missed.">                    if (!savedFields[i].iField.isLenient()) {</span>
+<span class="fc bfc" id="L452" title="All 2 branches covered.">                        millis = savedFields[i].set(millis, i == (count - 1));</span>
+                    }
+                }
+            }
+<span class="nc" id="L456">        } catch (IllegalFieldValueException e) {</span>
+<span class="nc bnc" id="L457" title="All 2 branches missed.">            if (text != null) {</span>
+<span class="nc" id="L458">                e.prependMessage(&quot;Cannot parse \&quot;&quot; + text + '&quot;');</span>
+            }
+<span class="nc" id="L460">            throw e;</span>
+<span class="fc" id="L461">        }</span>
+        
+<span class="fc bfc" id="L463" title="All 2 branches covered.">        if (iOffset != null) {</span>
+<span class="fc" id="L464">            millis -= iOffset;</span>
+<span class="pc bpc" id="L465" title="1 of 2 branches missed.">        } else if (iZone != null) {</span>
+<span class="fc" id="L466">            int offset = iZone.getOffsetFromLocal(millis);</span>
+<span class="fc" id="L467">            millis -= offset;</span>
+<span class="fc bfc" id="L468" title="All 2 branches covered.">            if (offset != iZone.getOffset(millis)) {</span>
+<span class="fc" id="L469">                String message = &quot;Illegal instant due to time zone offset transition (&quot; + iZone + ')';</span>
+<span class="pc bpc" id="L470" title="1 of 2 branches missed.">                if (text != null) {</span>
+<span class="fc" id="L471">                    message = &quot;Cannot parse \&quot;&quot; + text + &quot;\&quot;: &quot; + message;</span>
+                }
+<span class="fc" id="L473">                throw new IllegalInstantException(message);</span>
+            }
+        }
+        
+<span class="fc" id="L477">        return millis;</span>
+    }
+    
+    /**
+     * Sorts elements [0,high). Calling java.util.Arrays isn't always the right
+     * choice since it always creates an internal copy of the array, even if it
+     * doesn't need to. If the array slice is small enough, an insertion sort
+     * is chosen instead, but it doesn't need a copy!
+     * &lt;p&gt;
+     * This method has a modified version of that insertion sort, except it
+     * doesn't create an unnecessary array copy. If high is over 10, then
+     * java.util.Arrays is called, which will perform a merge sort, which is
+     * faster than insertion sort on large lists.
+     * &lt;p&gt;
+     * The end result is much greater performance when computeMillis is called.
+     * Since the amount of saved fields is small, the insertion sort is a
+     * better choice. Additional performance is gained since there is no extra
+     * array allocation and copying. Also, the insertion sort here does not
+     * perform any casting operations. The version in java.util.Arrays performs
+     * casts within the insertion sort loop.
+     */
+    private static void sort(SavedField[] array, int high) {
+<span class="pc bpc" id="L499" title="1 of 2 branches missed.">        if (high &gt; 10) {</span>
+<span class="nc" id="L500">            Arrays.sort(array, 0, high);</span>
+        } else {
+<span class="fc bfc" id="L502" title="All 2 branches covered.">            for (int i=0; i&lt;high; i++) {</span>
+<span class="fc bfc" id="L503" title="All 4 branches covered.">                for (int j=i; j&gt;0 &amp;&amp; (array[j-1]).compareTo(array[j])&gt;0; j--) {</span>
+<span class="fc" id="L504">                    SavedField t = array[j];</span>
+<span class="fc" id="L505">                    array[j] = array[j-1];</span>
+<span class="fc" id="L506">                    array[j-1] = t;</span>
+                }
+            }
+        }
+<span class="fc" id="L510">    }</span>
+
+    class SavedState {
+        final DateTimeZone iZone;
+        final Integer iOffset;
+        final SavedField[] iSavedFields;
+        final int iSavedFieldsCount;
+        
+<span class="fc" id="L518">        SavedState() {</span>
+<span class="fc" id="L519">            this.iZone = DateTimeParserBucket.this.iZone;</span>
+<span class="fc" id="L520">            this.iOffset = DateTimeParserBucket.this.iOffset;</span>
+<span class="fc" id="L521">            this.iSavedFields = DateTimeParserBucket.this.iSavedFields;</span>
+<span class="fc" id="L522">            this.iSavedFieldsCount = DateTimeParserBucket.this.iSavedFieldsCount;</span>
+<span class="fc" id="L523">        }</span>
+        
+        boolean restoreState(DateTimeParserBucket enclosing) {
+<span class="fc bfc" id="L526" title="All 2 branches covered.">            if (enclosing != DateTimeParserBucket.this) {</span>
+                // block SavedState from a different bucket
+<span class="fc" id="L528">                return false;</span>
+            }
+<span class="fc" id="L530">            enclosing.iZone = this.iZone;</span>
+<span class="fc" id="L531">            enclosing.iOffset = this.iOffset;</span>
+<span class="fc" id="L532">            enclosing.iSavedFields = this.iSavedFields;</span>
+<span class="fc bfc" id="L533" title="All 2 branches covered.">            if (this.iSavedFieldsCount &lt; enclosing.iSavedFieldsCount) {</span>
+                // Since count is being restored to a lower count, the
+                // potential exists for new saved fields to destroy data being
+                // shared by another state. Set this flag such that the array
+                // of saved fields is cloned prior to modification.
+<span class="fc" id="L538">                enclosing.iSavedFieldsShared = true;</span>
+            }
+<span class="fc" id="L540">            enclosing.iSavedFieldsCount = this.iSavedFieldsCount;</span>
+<span class="fc" id="L541">            return true;</span>
+        }
+    }
+    
+    static class SavedField implements Comparable&lt;SavedField&gt; {
+        DateTimeField iField;
+        int iValue;
+        String iText;
+        Locale iLocale;
+        
+<span class="fc" id="L551">        SavedField() {</span>
+<span class="fc" id="L552">        }</span>
+        
+        void init(DateTimeField field, int value) {
+<span class="fc" id="L555">            iField = field;</span>
+<span class="fc" id="L556">            iValue = value;</span>
+<span class="fc" id="L557">            iText = null;</span>
+<span class="fc" id="L558">            iLocale = null;</span>
+<span class="fc" id="L559">        }</span>
+        
+        void init(DateTimeField field, String text, Locale locale) {
+<span class="fc" id="L562">            iField = field;</span>
+<span class="fc" id="L563">            iValue = 0;</span>
+<span class="fc" id="L564">            iText = text;</span>
+<span class="fc" id="L565">            iLocale = locale;</span>
+<span class="fc" id="L566">        }</span>
+        
+        long set(long millis, boolean reset) {
+<span class="fc bfc" id="L569" title="All 2 branches covered.">            if (iText == null) {</span>
+<span class="fc" id="L570">                millis = iField.setExtended(millis, iValue);</span>
+            } else {
+<span class="fc" id="L572">                millis = iField.set(millis, iText, iLocale);</span>
+            }
+<span class="fc bfc" id="L574" title="All 2 branches covered.">            if (reset) {</span>
+<span class="fc" id="L575">                millis = iField.roundFloor(millis);</span>
+            }
+<span class="fc" id="L577">            return millis;</span>
+        }
+        
+        /**
+         * The field with the longer range duration is ordered first, where
+         * null is considered infinite. If the ranges match, then the field
+         * with the longer duration is ordered first.
+         */
+        public int compareTo(SavedField obj) {
+<span class="fc" id="L586">            DateTimeField other = obj.iField;</span>
+<span class="fc" id="L587">            int result = compareReverse</span>
+<span class="fc" id="L588">                (iField.getRangeDurationField(), other.getRangeDurationField());</span>
+<span class="fc bfc" id="L589" title="All 2 branches covered.">            if (result != 0) {</span>
+<span class="fc" id="L590">                return result;</span>
+            }
+<span class="fc" id="L592">            return compareReverse</span>
+<span class="fc" id="L593">                (iField.getDurationField(), other.getDurationField());</span>
+        }
+    }
+
+    static int compareReverse(DurationField a, DurationField b) {
+<span class="fc bfc" id="L598" title="All 4 branches covered.">        if (a == null || !a.isSupported()) {</span>
+<span class="pc bpc" id="L599" title="1 of 4 branches missed.">            if (b == null || !b.isSupported()) {</span>
+<span class="fc" id="L600">                return 0;</span>
+            }
+<span class="fc" id="L602">            return -1;</span>
+        }
+<span class="fc bfc" id="L604" title="All 4 branches covered.">        if (b == null || !b.isSupported()) {</span>
+<span class="fc" id="L605">            return 1;</span>
+        }
+<span class="fc" id="L607">        return -a.compareTo(b);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

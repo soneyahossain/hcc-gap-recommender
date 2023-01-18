@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UnionPattern.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.pattern</a> &gt; <span class="el_source">UnionPattern.java</span></div><h1>UnionPattern.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+package org.jaxen.pattern;
+
+import org.jaxen.Context;
+import org.jaxen.JaxenException;
+
+/**
+ * &lt;p&gt;&lt;code&gt;UnionPattern&lt;/code&gt; represents a union pattern.&lt;/p&gt;
+ *
+ * @author &lt;a href=&quot;mailto:jstrachan@apache.org&quot;&gt;James Strachan&lt;/a&gt;
+ * @version $Revision$
+ * @deprecated will be removed in Jaxen 2.0
+ */
+public class UnionPattern extends Pattern {
+
+    private Pattern lhs;
+    private Pattern rhs;
+<span class="pc" id="L64">    private short nodeType = ANY_NODE;</span>
+<span class="pc" id="L65">    private String matchesNodeName = null;</span>
+
+
+<span class="nc" id="L68">    public UnionPattern() {</span>
+<span class="nc" id="L69">    }</span>
+
+<span class="fc" id="L71">    public UnionPattern(Pattern lhs, Pattern rhs) {</span>
+<span class="fc" id="L72">        this.lhs = lhs;</span>
+<span class="fc" id="L73">        this.rhs = rhs;</span>
+<span class="fc" id="L74">        init();</span>
+<span class="fc" id="L75">    }</span>
+
+
+    public Pattern getLHS() {
+<span class="nc" id="L79">        return lhs;</span>
+    }
+
+    public void setLHS(Pattern lhs) {
+<span class="nc" id="L83">        this.lhs = lhs;</span>
+<span class="nc" id="L84">        init();</span>
+<span class="nc" id="L85">    }</span>
+
+    public Pattern getRHS() {
+<span class="nc" id="L88">        return rhs;</span>
+    }
+
+    public void setRHS(Pattern rhs) {
+<span class="nc" id="L92">        this.rhs = rhs;</span>
+<span class="nc" id="L93">        init();</span>
+<span class="nc" id="L94">    }</span>
+
+
+    // Pattern interface
+    //-------------------------------------------------------------------------    
+
+    /**
+     * @return true if the pattern matches the given node
+     */
+    public boolean matches(Object node, Context context) throws JaxenException {
+<span class="nc bnc" id="L104" title="All 4 branches missed.">        return lhs.matches(node, context) || rhs.matches(node, context);</span>
+    }
+
+    public Pattern[] getUnionPatterns() {
+<span class="nc" id="L108">        return new Pattern[]{lhs, rhs};</span>
+    }
+
+
+    public short getMatchType() {
+<span class="fc" id="L113">        return nodeType;</span>
+    }
+
+
+    public String getMatchesNodeName() {
+<span class="fc" id="L118">        return matchesNodeName;</span>
+    }
+
+
+    public Pattern simplify() {
+<span class="fc" id="L123">        this.lhs = lhs.simplify();</span>
+<span class="fc" id="L124">        this.rhs = rhs.simplify();</span>
+<span class="fc" id="L125">        init();</span>
+<span class="fc" id="L126">        return this;</span>
+    }
+
+    public String getText() {
+<span class="nc" id="L130">        return lhs.getText() + &quot; | &quot; + rhs.getText();</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L134">        return super.toString() + &quot;[ lhs: &quot; + lhs + &quot; rhs: &quot; + rhs + &quot; ]&quot;;</span>
+    }
+
+    // Implementation methods
+    //-------------------------------------------------------------------------    
+    private void init() {
+<span class="fc" id="L140">        short type1 = lhs.getMatchType();</span>
+<span class="fc" id="L141">        short type2 = rhs.getMatchType();</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">        this.nodeType = (type1 == type2) ? type1 : ANY_NODE;</span>
+
+<span class="fc" id="L144">        String name1 = lhs.getMatchesNodeName();</span>
+<span class="fc" id="L145">        String name2 = rhs.getMatchesNodeName();</span>
+
+<span class="fc" id="L147">        this.matchesNodeName = null;</span>
+<span class="pc bpc" id="L148" title="5 of 6 branches missed.">        if (name1 != null &amp;&amp; name2 != null &amp;&amp; name1.equals(name2)) {</span>
+<span class="nc" id="L149">            this.matchesNodeName = name1;</span>
+        }
+<span class="fc" id="L151">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

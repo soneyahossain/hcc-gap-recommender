@@ -1,0 +1,2200 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PeriodFormatterBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.format</a> &gt; <span class="el_source">PeriodFormatterBuilder.java</span></div><h1>PeriodFormatterBuilder.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.format;
+
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.regex.Pattern;
+
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DurationFieldType;
+import org.joda.time.PeriodType;
+import org.joda.time.ReadWritablePeriod;
+import org.joda.time.ReadablePeriod;
+
+/**
+ * Factory that creates complex instances of PeriodFormatter via method calls.
+ * &lt;p&gt;
+ * Period formatting is performed by the {@link PeriodFormatter} class.
+ * Three classes provide factory methods to create formatters, and this is one.
+ * The others are {@link PeriodFormat} and {@link ISOPeriodFormat}.
+ * &lt;p&gt;
+ * PeriodFormatterBuilder is used for constructing formatters which are then
+ * used to print or parse. The formatters are built by appending specific fields
+ * or other formatters to an instance of this builder.
+ * &lt;p&gt;
+ * For example, a formatter that prints years and months, like &quot;15 years and 8 months&quot;,
+ * can be constructed as follows:
+ * &lt;p&gt;
+ * &lt;pre&gt;
+ * PeriodFormatter yearsAndMonths = new PeriodFormatterBuilder()
+ *     .printZeroAlways()
+ *     .appendYears()
+ *     .appendSuffix(&quot; year&quot;, &quot; years&quot;)
+ *     .appendSeparator(&quot; and &quot;)
+ *     .printZeroRarelyLast()
+ *     .appendMonths()
+ *     .appendSuffix(&quot; month&quot;, &quot; months&quot;)
+ *     .toFormatter();
+ * &lt;/pre&gt;
+ * &lt;p&gt;
+ * PeriodFormatterBuilder itself is mutable and not thread-safe, but the
+ * formatters that it builds are thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ * @see PeriodFormat
+ */
+public class PeriodFormatterBuilder {
+    private static final int PRINT_ZERO_RARELY_FIRST = 1;
+    private static final int PRINT_ZERO_RARELY_LAST = 2;
+    private static final int PRINT_ZERO_IF_SUPPORTED = 3;
+    private static final int PRINT_ZERO_ALWAYS = 4;
+    private static final int PRINT_ZERO_NEVER = 5;
+    
+    private static final int YEARS = 0;
+    private static final int MONTHS = 1;
+    private static final int WEEKS = 2;
+    private static final int DAYS = 3;
+    private static final int HOURS = 4;
+    private static final int MINUTES = 5;
+    private static final int SECONDS = 6;
+    private static final int MILLIS = 7;
+    private static final int SECONDS_MILLIS = 8;
+    private static final int SECONDS_OPTIONAL_MILLIS = 9;
+    private static final int MAX_FIELD = SECONDS_OPTIONAL_MILLIS;
+
+<span class="fc" id="L91">    private static final ConcurrentMap&lt;String, Pattern&gt; PATTERNS = new ConcurrentHashMap&lt;String, Pattern&gt;();</span>
+
+    private int iMinPrintedDigits;
+    private int iPrintZeroSetting;
+    private int iMaxParsedDigits;
+    private boolean iRejectSignedValues;
+
+    private PeriodFieldAffix iPrefix;
+
+    // List of Printers and Parsers used to build a final formatter.
+    private List&lt;Object&gt; iElementPairs;
+    /** Set to true if the formatter is not a printer. */
+    private boolean iNotPrinter;
+    /** Set to true if the formatter is not a parser. */
+    private boolean iNotParser;
+
+    // Last PeriodFormatter appended of each field type.
+    private FieldFormatter[] iFieldFormatters;
+
+<span class="fc" id="L110">    public PeriodFormatterBuilder() {</span>
+<span class="fc" id="L111">        clear();</span>
+<span class="fc" id="L112">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs a PeriodFormatter using all the appended elements.
+     * &lt;p&gt;
+     * This is the main method used by applications at the end of the build
+     * process to create a usable formatter.
+     * &lt;p&gt;
+     * Once this method has been called, the builder is in an invalid state.
+     * &lt;p&gt;
+     * The returned formatter may not support both printing and parsing.
+     * The methods {@link PeriodFormatter#isPrinter()} and
+     * {@link PeriodFormatter#isParser()} will help you determine the state
+     * of the formatter.
+     * 
+     * @return the newly created formatter
+     * @throws IllegalStateException if the builder can produce neither a printer nor a parser
+     */
+    public PeriodFormatter toFormatter() {
+<span class="fc" id="L132">        PeriodFormatter formatter = toFormatter(iElementPairs, iNotPrinter, iNotParser);</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        for (FieldFormatter fieldFormatter : iFieldFormatters) {</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">            if (fieldFormatter != null) {</span>
+<span class="fc" id="L135">                fieldFormatter.finish(iFieldFormatters);</span>
+            }
+        }
+<span class="fc" id="L138">        iFieldFormatters = (FieldFormatter[]) iFieldFormatters.clone();</span>
+<span class="fc" id="L139">        return formatter;</span>
+    }
+
+    /**
+     * Internal method to create a PeriodPrinter instance using all the
+     * appended elements.
+     * &lt;p&gt;
+     * Most applications will not use this method.
+     * If you want a printer in an application, call {@link #toFormatter()}
+     * and just use the printing API.
+     * &lt;p&gt;
+     * Subsequent changes to this builder do not affect the returned printer.
+     * 
+     * @return the newly created printer, null if builder cannot create a printer
+     */
+    public PeriodPrinter toPrinter() {
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        if (iNotPrinter) {</span>
+<span class="fc" id="L156">            return null;</span>
+        }
+<span class="fc" id="L158">        return toFormatter().getPrinter();</span>
+    }
+
+    /**
+     * Internal method to create a PeriodParser instance using all the
+     * appended elements.
+     * &lt;p&gt;
+     * Most applications will not use this method.
+     * If you want a printer in an application, call {@link #toFormatter()}
+     * and just use the printing API.
+     * &lt;p&gt;
+     * Subsequent changes to this builder do not affect the returned parser.
+     * 
+     * @return the newly created parser, null if builder cannot create a parser
+     */
+    public PeriodParser toParser() {
+<span class="fc bfc" id="L174" title="All 2 branches covered.">        if (iNotParser) {</span>
+<span class="fc" id="L175">            return null;</span>
+        }
+<span class="fc" id="L177">        return toFormatter().getParser();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Clears out all the appended elements, allowing this builder to be reused.
+     */
+    public void clear() {
+<span class="fc" id="L185">        iMinPrintedDigits = 1;</span>
+<span class="fc" id="L186">        iPrintZeroSetting = PRINT_ZERO_RARELY_LAST;</span>
+<span class="fc" id="L187">        iMaxParsedDigits = 10;</span>
+<span class="fc" id="L188">        iRejectSignedValues = false;</span>
+<span class="fc" id="L189">        iPrefix = null;</span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">        if (iElementPairs == null) {</span>
+<span class="fc" id="L191">            iElementPairs = new ArrayList&lt;Object&gt;();</span>
+        } else {
+<span class="fc" id="L193">            iElementPairs.clear();</span>
+        }
+<span class="fc" id="L195">        iNotPrinter = false;</span>
+<span class="fc" id="L196">        iNotParser = false;</span>
+<span class="fc" id="L197">        iFieldFormatters = new FieldFormatter[10];</span>
+<span class="fc" id="L198">    }</span>
+
+    /**
+     * Appends another formatter.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder append(PeriodFormatter formatter) {
+<span class="fc bfc" id="L206" title="All 2 branches covered.">        if (formatter == null) {</span>
+<span class="fc" id="L207">            throw new IllegalArgumentException(&quot;No formatter supplied&quot;);</span>
+        }
+<span class="fc" id="L209">        clearPrefix();</span>
+<span class="fc" id="L210">        append0(formatter.getPrinter(), formatter.getParser());</span>
+<span class="fc" id="L211">        return this;</span>
+    }
+
+    /**
+     * Appends a printer parser pair.
+     * &lt;p&gt;
+     * Either the printer or the parser may be null, in which case the builder will
+     * be unable to produce a parser or printer respectively.
+     *
+     * @param printer  appends a printer to the builder, null if printing is not supported
+     * @param parser  appends a parser to the builder, null if parsing is not supported
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalArgumentException if both the printer and parser are null
+     */
+    public PeriodFormatterBuilder append(PeriodPrinter printer, PeriodParser parser) {
+<span class="fc bfc" id="L226" title="All 4 branches covered.">        if (printer == null &amp;&amp; parser == null) {</span>
+<span class="fc" id="L227">            throw new IllegalArgumentException(&quot;No printer or parser supplied&quot;);</span>
+        }
+<span class="fc" id="L229">        clearPrefix();</span>
+<span class="fc" id="L230">        append0(printer, parser);</span>
+<span class="fc" id="L231">        return this;</span>
+    }
+
+    /**
+     * Instructs the printer to emit specific text, and the parser to expect it.
+     * The parser is case-insensitive.
+     *
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalArgumentException if text is null
+     */
+    public PeriodFormatterBuilder appendLiteral(String text) {
+<span class="fc bfc" id="L242" title="All 2 branches covered.">        if (text == null) {</span>
+<span class="fc" id="L243">            throw new IllegalArgumentException(&quot;Literal must not be null&quot;);</span>
+        }
+<span class="fc" id="L245">        clearPrefix();</span>
+<span class="fc" id="L246">        Literal literal = new Literal(text);</span>
+<span class="fc" id="L247">        append0(literal, literal);</span>
+<span class="fc" id="L248">        return this;</span>
+    }
+
+    /**
+     * Set the minimum digits printed for the next and following appended
+     * fields. By default, the minimum digits printed is one. If the field value
+     * is zero, it is not printed unless a printZero rule is applied.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder minimumPrintedDigits(int minDigits) {
+<span class="fc" id="L259">        iMinPrintedDigits = minDigits;</span>
+<span class="fc" id="L260">        return this;</span>
+    }
+
+    /**
+     * Set the maximum digits parsed for the next and following appended
+     * fields. By default, the maximum digits parsed is ten.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder maximumParsedDigits(int maxDigits) {
+<span class="nc" id="L270">        iMaxParsedDigits = maxDigits;</span>
+<span class="nc" id="L271">        return this;</span>
+    }
+
+    /**
+     * Reject signed values when parsing the next and following appended fields.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder rejectSignedValues(boolean v) {
+<span class="nc" id="L280">        iRejectSignedValues = v;</span>
+<span class="nc" id="L281">        return this;</span>
+    }
+
+    /**
+     * Never print zero values for the next and following appended fields,
+     * unless no fields would be printed. If no fields are printed, the printer
+     * forces the last &quot;printZeroRarely&quot; field to print a zero.
+     * &lt;p&gt;
+     * This field setting is the default.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder printZeroRarelyLast() {
+<span class="fc" id="L294">        iPrintZeroSetting = PRINT_ZERO_RARELY_LAST;</span>
+<span class="fc" id="L295">        return this;</span>
+    }
+
+    /**
+     * Never print zero values for the next and following appended fields,
+     * unless no fields would be printed. If no fields are printed, the printer
+     * forces the first &quot;printZeroRarely&quot; field to print a zero.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder printZeroRarelyFirst() {
+<span class="fc" id="L306">        iPrintZeroSetting = PRINT_ZERO_RARELY_FIRST;</span>
+<span class="fc" id="L307">        return this;</span>
+    }
+
+    /**
+     * Print zero values for the next and following appended fields only if the
+     * period supports it.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder printZeroIfSupported() {
+<span class="fc" id="L317">        iPrintZeroSetting = PRINT_ZERO_IF_SUPPORTED;</span>
+<span class="fc" id="L318">        return this;</span>
+    }
+
+    /**
+     * Always print zero values for the next and following appended fields,
+     * even if the period doesn't support it. The parser requires values for
+     * fields that always print zero.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder printZeroAlways() {
+<span class="fc" id="L329">        iPrintZeroSetting = PRINT_ZERO_ALWAYS;</span>
+<span class="fc" id="L330">        return this;</span>
+    }
+
+    /**
+     * Never print zero values for the next and following appended fields,
+     * unless no fields would be printed. If no fields are printed, the printer
+     * forces the last &quot;printZeroRarely&quot; field to print a zero.
+     * &lt;p&gt;
+     * This field setting is the default.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder printZeroNever() {
+<span class="fc" id="L343">        iPrintZeroSetting = PRINT_ZERO_NEVER;</span>
+<span class="fc" id="L344">        return this;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Append a field prefix which applies only to the next appended field. If
+     * the field is not printed, neither is the prefix.
+     *
+     * @param text text to print before field only if field is printed
+     * @return this PeriodFormatterBuilder
+     * @see #appendSuffix
+     */
+    public PeriodFormatterBuilder appendPrefix(String text) {
+<span class="fc bfc" id="L357" title="All 2 branches covered.">        if (text == null) {</span>
+<span class="fc" id="L358">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L360">        return appendPrefix(new SimpleAffix(text));</span>
+    }
+
+    /**
+     * Append a field prefix which applies only to the next appended field. If
+     * the field is not printed, neither is the prefix.
+     * &lt;p&gt;
+     * During parsing, the singular and plural versions are accepted whether
+     * or not the actual value matches plurality.
+     *
+     * @param singularText text to print if field value is one
+     * @param pluralText text to print if field value is not one
+     * @return this PeriodFormatterBuilder
+     * @see #appendSuffix
+     */
+    public PeriodFormatterBuilder appendPrefix(String singularText,
+                                                 String pluralText) {
+<span class="fc bfc" id="L377" title="All 4 branches covered.">        if (singularText == null || pluralText == null) {</span>
+<span class="fc" id="L378">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L380">        return appendPrefix(new PluralAffix(singularText, pluralText));</span>
+    }
+    
+    /**
+     * Append a field prefix which applies only to the next appended field.
+     * If the field is not printed, neither is the prefix.
+     * &lt;p&gt;
+     * The value is converted to String. During parsing, the prefix is selected based
+     * on the match with the regular expression. The index of the first regular
+     * expression that matches value converted to String nominates the prefix. If
+     * none of the regular expressions match the value converted to String then the
+     * last prefix is selected.
+     * &lt;p&gt;
+     * An example usage for English might look like this:
+     * 
+     * &lt;pre&gt;
+     * appendPrefix(new String[] { &amp;quot;&amp;circ;1$&amp;quot;, &amp;quot;.*&amp;quot; }, new String[] { &amp;quot; year&amp;quot;, &amp;quot; years&amp;quot; })
+     * &lt;/pre&gt;
+     * 
+     * &lt;p&gt;
+     * Please note that for languages with simple mapping (singular and plural prefix
+     * only - like the one above) the {@link #appendPrefix(String, String)} method
+     * will produce in a slightly faster formatter and that
+     * {@link #appendPrefix(String[], String[])} method should be only used when the
+     * mapping between values and prefixes is more complicated than the difference between
+     * singular and plural.
+     *
+     * @param regularExpressions  an array of regular expressions, at least one
+     *  element, length has to match the length of prefixes parameter
+     * @param prefixes  an array of prefixes, at least one element, length has to
+     *  match the length of regularExpressions parameter
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalStateException if no field exists to append to
+     * @see #appendPrefix
+     * @since 2.5
+     */
+    public PeriodFormatterBuilder appendPrefix(String[] regularExpressions, String[] prefixes) {
+<span class="fc bfc" id="L417" title="All 8 branches covered.">        if (regularExpressions == null || prefixes == null ||</span>
+                regularExpressions.length &lt; 1 || regularExpressions.length != prefixes.length) {
+<span class="fc" id="L419">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L421">        return appendPrefix(new RegExAffix(regularExpressions, prefixes));</span>
+    }
+
+    /**
+     * Append a field prefix which applies only to the next appended field. If
+     * the field is not printed, neither is the prefix.
+     *
+     * @param prefix custom prefix
+     * @return this PeriodFormatterBuilder
+     * @see #appendSuffix
+     */
+    private PeriodFormatterBuilder appendPrefix(PeriodFieldAffix prefix) {
+<span class="pc bpc" id="L433" title="1 of 2 branches missed.">        if (prefix == null) {</span>
+<span class="nc" id="L434">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc bfc" id="L436" title="All 2 branches covered.">        if (iPrefix != null) {</span>
+<span class="fc" id="L437">            prefix = new CompositeAffix(iPrefix, prefix);</span>
+        }
+<span class="fc" id="L439">        iPrefix = prefix;</span>
+<span class="fc" id="L440">        return this;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Instruct the printer to emit an integer years field, if supported.
+     * &lt;p&gt;
+     * The number of printed and parsed digits can be controlled using
+     * {@link #minimumPrintedDigits(int)} and {@link #maximumParsedDigits(int)}.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder appendYears() {
+<span class="fc" id="L453">        appendField(YEARS);</span>
+<span class="fc" id="L454">        return this;</span>
+    }
+
+    /**
+     * Instruct the printer to emit an integer months field, if supported.
+     * &lt;p&gt;
+     * The number of printed and parsed digits can be controlled using
+     * {@link #minimumPrintedDigits(int)} and {@link #maximumParsedDigits(int)}.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder appendMonths() {
+<span class="fc" id="L466">        appendField(MONTHS);</span>
+<span class="fc" id="L467">        return this;</span>
+    }
+
+    /**
+     * Instruct the printer to emit an integer weeks field, if supported.
+     * &lt;p&gt;
+     * The number of printed and parsed digits can be controlled using
+     * {@link #minimumPrintedDigits(int)} and {@link #maximumParsedDigits(int)}.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder appendWeeks() {
+<span class="fc" id="L479">        appendField(WEEKS);</span>
+<span class="fc" id="L480">        return this;</span>
+    }
+
+    /**
+     * Instruct the printer to emit an integer days field, if supported.
+     * &lt;p&gt;
+     * The number of printed and parsed digits can be controlled using
+     * {@link #minimumPrintedDigits(int)} and {@link #maximumParsedDigits(int)}.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder appendDays() {
+<span class="fc" id="L492">        appendField(DAYS);</span>
+<span class="fc" id="L493">        return this;</span>
+    }
+
+    /**
+     * Instruct the printer to emit an integer hours field, if supported.
+     * &lt;p&gt;
+     * The number of printed and parsed digits can be controlled using
+     * {@link #minimumPrintedDigits(int)} and {@link #maximumParsedDigits(int)}.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder appendHours() {
+<span class="fc" id="L505">        appendField(HOURS);</span>
+<span class="fc" id="L506">        return this;</span>
+    }
+
+    /**
+     * Instruct the printer to emit an integer minutes field, if supported.
+     * &lt;p&gt;
+     * The number of printed and parsed digits can be controlled using
+     * {@link #minimumPrintedDigits(int)} and {@link #maximumParsedDigits(int)}.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder appendMinutes() {
+<span class="fc" id="L518">        appendField(MINUTES);</span>
+<span class="fc" id="L519">        return this;</span>
+    }
+
+    /**
+     * Instruct the printer to emit an integer seconds field, if supported.
+     * &lt;p&gt;
+     * The number of printed and parsed digits can be controlled using
+     * {@link #minimumPrintedDigits(int)} and {@link #maximumParsedDigits(int)}.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder appendSeconds() {
+<span class="fc" id="L531">        appendField(SECONDS);</span>
+<span class="fc" id="L532">        return this;</span>
+    }
+
+    /**
+     * Instruct the printer to emit a combined seconds and millis field, if supported.
+     * The millis will overflow into the seconds if necessary.
+     * The millis are always output.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder appendSecondsWithMillis() {
+<span class="fc" id="L543">        appendField(SECONDS_MILLIS);</span>
+<span class="fc" id="L544">        return this;</span>
+    }
+
+    /**
+     * Instruct the printer to emit a combined seconds and millis field, if supported.
+     * The millis will overflow into the seconds if necessary.
+     * The millis are only output if non-zero.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder appendSecondsWithOptionalMillis() {
+<span class="fc" id="L555">        appendField(SECONDS_OPTIONAL_MILLIS);</span>
+<span class="fc" id="L556">        return this;</span>
+    }
+
+    /**
+     * Instruct the printer to emit an integer millis field, if supported.
+     * &lt;p&gt;
+     * The number of printed and parsed digits can be controlled using
+     * {@link #minimumPrintedDigits(int)} and {@link #maximumParsedDigits(int)}.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder appendMillis() {
+<span class="fc" id="L568">        appendField(MILLIS);</span>
+<span class="fc" id="L569">        return this;</span>
+    }
+
+    /**
+     * Instruct the printer to emit an integer millis field, if supported.
+     * &lt;p&gt;
+     * The number of parsed digits can be controlled using {@link #maximumParsedDigits(int)}.
+     *
+     * @return this PeriodFormatterBuilder
+     */
+    public PeriodFormatterBuilder appendMillis3Digit() {
+<span class="fc" id="L580">        appendField(7, 3);</span>
+<span class="fc" id="L581">        return this;</span>
+    }
+
+    private void appendField(int type) {
+<span class="fc" id="L585">        appendField(type, iMinPrintedDigits);</span>
+<span class="fc" id="L586">    }</span>
+
+    private void appendField(int type, int minPrinted) {
+<span class="fc" id="L589">        FieldFormatter field = new FieldFormatter(minPrinted, iPrintZeroSetting,</span>
+            iMaxParsedDigits, iRejectSignedValues, type, iFieldFormatters, iPrefix, null);
+<span class="fc" id="L591">        append0(field, field);</span>
+<span class="fc" id="L592">        iFieldFormatters[type] = field;</span>
+<span class="fc" id="L593">        iPrefix = null;</span>
+<span class="fc" id="L594">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Append a field suffix which applies only to the last appended field. If
+     * the field is not printed, neither is the suffix.
+     *
+     * @param text text to print after field only if field is printed
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalStateException if no field exists to append to
+     * @see #appendPrefix
+     */
+    public PeriodFormatterBuilder appendSuffix(String text) {
+<span class="fc bfc" id="L607" title="All 2 branches covered.">        if (text == null) {</span>
+<span class="fc" id="L608">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L610">        return appendSuffix(new SimpleAffix(text));</span>
+    }
+
+    /**
+     * Append a field suffix which applies only to the last appended field. If
+     * the field is not printed, neither is the suffix.
+     * &lt;p&gt;
+     * During parsing, the singular and plural versions are accepted whether or
+     * not the actual value matches plurality.
+     *
+     * @param singularText text to print if field value is one
+     * @param pluralText text to print if field value is not one
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalStateException if no field exists to append to
+     * @see #appendPrefix
+     */
+    public PeriodFormatterBuilder appendSuffix(String singularText,
+                                               String pluralText) {
+<span class="fc bfc" id="L628" title="All 4 branches covered.">        if (singularText == null || pluralText == null) {</span>
+<span class="fc" id="L629">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L631">        return appendSuffix(new PluralAffix(singularText, pluralText));</span>
+    }
+
+    /**
+     * Append a field suffix which applies only to the last appended field.
+     * If the field is not printed, neither is the suffix.
+     * &lt;p&gt;
+     * The value is converted to String. During parsing, the suffix is selected based
+     * on the match with the regular expression. The index of the first regular
+     * expression that matches value converted to String nominates the suffix. If
+     * none of the regular expressions match the value converted to String then the
+     * last suffix is selected.
+     * &lt;p&gt;
+     * An example usage for English might look like this:
+     * 
+     * &lt;pre&gt;
+     * appendSuffix(new String[] { &amp;quot;&amp;circ;1$&amp;quot;, &amp;quot;.*&amp;quot; }, new String[] { &amp;quot; year&amp;quot;, &amp;quot; years&amp;quot; })
+     * &lt;/pre&gt;
+     * 
+     * &lt;p&gt;
+     * Please note that for languages with simple mapping (singular and plural suffix
+     * only - like the one above) the {@link #appendSuffix(String, String)} method
+     * will result in a slightly faster formatter and that
+     * {@link #appendSuffix(String[], String[])} method should be only used when the
+     * mapping between values and prefixes is more complicated than the difference between
+     * singular and plural.
+     *
+     * @param regularExpressions  an array of regular expressions, at least one
+     *  element, length has to match the length of suffixes parameter
+     * @param suffixes  an array of suffixes, at least one element, length has to
+     *  match the length of regularExpressions parameter
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalStateException if no field exists to append to
+     * @see #appendPrefix
+     * @since 2.5
+     */
+    public PeriodFormatterBuilder appendSuffix(String[] regularExpressions, String[] suffixes) {
+<span class="fc bfc" id="L668" title="All 8 branches covered.">        if (regularExpressions == null || suffixes == null ||</span>
+                regularExpressions.length &lt; 1 || regularExpressions.length != suffixes.length) {
+<span class="fc" id="L670">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L672">        return appendSuffix(new RegExAffix(regularExpressions, suffixes));</span>
+    }
+
+    /**
+     * Append a field suffix which applies only to the last appended field. If
+     * the field is not printed, neither is the suffix.
+     *
+     * @param suffix custom suffix
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalStateException if no field exists to append to
+     * @see #appendPrefix
+     */
+    private PeriodFormatterBuilder appendSuffix(PeriodFieldAffix suffix) {
+        final Object originalPrinter;
+        final Object originalParser;
+<span class="fc bfc" id="L687" title="All 2 branches covered.">        if (iElementPairs.size() &gt; 0) {</span>
+<span class="fc" id="L688">            originalPrinter = iElementPairs.get(iElementPairs.size() - 2);</span>
+<span class="fc" id="L689">            originalParser = iElementPairs.get(iElementPairs.size() - 1);</span>
+        } else {
+<span class="fc" id="L691">            originalPrinter = null;</span>
+<span class="fc" id="L692">            originalParser = null;</span>
+        }
+
+<span class="pc bpc" id="L695" title="2 of 8 branches missed.">        if (originalPrinter == null || originalParser == null ||</span>
+                originalPrinter != originalParser ||
+                !(originalPrinter instanceof FieldFormatter)) {
+<span class="fc" id="L698">            throw new IllegalStateException(&quot;No field to apply suffix to&quot;);</span>
+        }
+
+<span class="fc" id="L701">        clearPrefix();</span>
+<span class="fc" id="L702">        FieldFormatter newField = new FieldFormatter((FieldFormatter) originalPrinter, suffix);</span>
+<span class="fc" id="L703">        iElementPairs.set(iElementPairs.size() - 2, newField);</span>
+<span class="fc" id="L704">        iElementPairs.set(iElementPairs.size() - 1, newField);</span>
+<span class="fc" id="L705">        iFieldFormatters[newField.getFieldType()] = newField;</span>
+        
+<span class="fc" id="L707">        return this;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Append a separator, which is output if fields are printed both before
+     * and after the separator.
+     * &lt;p&gt;
+     * For example, &lt;code&gt;builder.appendDays().appendSeparator(&quot;,&quot;).appendHours()&lt;/code&gt;
+     * will only output the comma if both the days and hours fields are output.
+     * &lt;p&gt;
+     * The text will be parsed case-insensitively.
+     * &lt;p&gt;
+     * Note: appending a separator discontinues any further work on the latest
+     * appended field.
+     *
+     * @param text  the text to use as a separator
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalStateException if this separator follows a previous one
+     */
+    public PeriodFormatterBuilder appendSeparator(String text) {
+<span class="fc" id="L728">        return appendSeparator(text, text, null, true, true);</span>
+    }
+
+    /**
+     * Append a separator, which is output only if fields are printed after the separator.
+     * &lt;p&gt;
+     * For example,
+     * &lt;code&gt;builder.appendDays().appendSeparatorIfFieldsAfter(&quot;,&quot;).appendHours()&lt;/code&gt;
+     * will only output the comma if the hours fields is output.
+     * &lt;p&gt;
+     * The text will be parsed case-insensitively.
+     * &lt;p&gt;
+     * Note: appending a separator discontinues any further work on the latest
+     * appended field.
+     *
+     * @param text  the text to use as a separator
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalStateException if this separator follows a previous one
+     */
+    public PeriodFormatterBuilder appendSeparatorIfFieldsAfter(String text) {
+<span class="fc" id="L748">        return appendSeparator(text, text, null, false, true);</span>
+    }
+
+    /**
+     * Append a separator, which is output only if fields are printed before the separator.
+     * &lt;p&gt;
+     * For example,
+     * &lt;code&gt;builder.appendDays().appendSeparatorIfFieldsBefore(&quot;,&quot;).appendHours()&lt;/code&gt;
+     * will only output the comma if the days fields is output.
+     * &lt;p&gt;
+     * The text will be parsed case-insensitively.
+     * &lt;p&gt;
+     * Note: appending a separator discontinues any further work on the latest
+     * appended field.
+     *
+     * @param text  the text to use as a separator
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalStateException if this separator follows a previous one
+     */
+    public PeriodFormatterBuilder appendSeparatorIfFieldsBefore(String text) {
+<span class="fc" id="L768">        return appendSeparator(text, text, null, true, false);</span>
+    }
+
+    /**
+     * Append a separator, which is output if fields are printed both before
+     * and after the separator.
+     * &lt;p&gt;
+     * This method changes the separator depending on whether it is the last separator
+     * to be output.
+     * &lt;p&gt;
+     * For example, &lt;code&gt;builder.appendDays().appendSeparator(&quot;,&quot;, &quot;&amp;&quot;).appendHours().appendSeparator(&quot;,&quot;, &quot;&amp;&quot;).appendMinutes()&lt;/code&gt;
+     * will output '1,2&amp;3' if all three fields are output, '1&amp;2' if two fields are output
+     * and '1' if just one field is output.
+     * &lt;p&gt;
+     * The text will be parsed case-insensitively.
+     * &lt;p&gt;
+     * Note: appending a separator discontinues any further work on the latest
+     * appended field.
+     *
+     * @param text  the text to use as a separator
+     * @param finalText  the text used used if this is the final separator to be printed
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalStateException if this separator follows a previous one
+     */
+    public PeriodFormatterBuilder appendSeparator(String text, String finalText) {
+<span class="fc" id="L793">        return appendSeparator(text, finalText, null, true, true);</span>
+    }
+
+    /**
+     * Append a separator, which is output if fields are printed both before
+     * and after the separator.
+     * &lt;p&gt;
+     * This method changes the separator depending on whether it is the last separator
+     * to be output.
+     * &lt;p&gt;
+     * For example, &lt;code&gt;builder.appendDays().appendSeparator(&quot;,&quot;, &quot;&amp;&quot;).appendHours().appendSeparator(&quot;,&quot;, &quot;&amp;&quot;).appendMinutes()&lt;/code&gt;
+     * will output '1,2&amp;3' if all three fields are output, '1&amp;2' if two fields are output
+     * and '1' if just one field is output.
+     * &lt;p&gt;
+     * The text will be parsed case-insensitively.
+     * &lt;p&gt;
+     * Note: appending a separator discontinues any further work on the latest
+     * appended field.
+     *
+     * @param text  the text to use as a separator
+     * @param finalText  the text used used if this is the final separator to be printed
+     * @param variants  set of text values which are also acceptable when parsed
+     * @return this PeriodFormatterBuilder
+     * @throws IllegalStateException if this separator follows a previous one
+     */
+    public PeriodFormatterBuilder appendSeparator(String text, String finalText,
+                                                  String[] variants) {
+<span class="fc" id="L820">        return appendSeparator(text, finalText, variants, true, true);</span>
+    }
+
+    private PeriodFormatterBuilder appendSeparator(String text, String finalText,
+                                                   String[] variants,
+                                                   boolean useBefore, boolean useAfter) {
+<span class="fc bfc" id="L826" title="All 4 branches covered.">        if (text == null || finalText == null) {</span>
+<span class="fc" id="L827">            throw new IllegalArgumentException();</span>
+        }
+
+<span class="fc" id="L830">        clearPrefix();</span>
+        
+        // optimise zero formatter case
+<span class="fc" id="L833">        List&lt;Object&gt; pairs = iElementPairs;</span>
+<span class="fc bfc" id="L834" title="All 2 branches covered.">        if (pairs.size() == 0) {</span>
+<span class="pc bpc" id="L835" title="2 of 4 branches missed.">            if (useAfter &amp;&amp; useBefore == false) {</span>
+<span class="fc" id="L836">                Separator separator = new Separator(</span>
+                        text, finalText, variants,
+                        Literal.EMPTY, Literal.EMPTY, useBefore, useAfter);
+<span class="fc" id="L839">                append0(separator, separator);</span>
+            }
+<span class="fc" id="L841">            return this;</span>
+        }
+        
+        // find the last separator added
+        int i;
+<span class="fc" id="L846">        Separator lastSeparator = null;</span>
+<span class="fc bfc" id="L847" title="All 2 branches covered.">        for (i=pairs.size(); --i&gt;=0; ) {</span>
+<span class="fc bfc" id="L848" title="All 2 branches covered.">            if (pairs.get(i) instanceof Separator) {</span>
+<span class="fc" id="L849">                lastSeparator = (Separator) pairs.get(i);</span>
+<span class="fc" id="L850">                pairs = pairs.subList(i + 1, pairs.size());</span>
+<span class="fc" id="L851">                break;</span>
+            }
+<span class="fc" id="L853">            i--;  // element pairs</span>
+        }
+        
+        // merge formatters
+<span class="fc bfc" id="L857" title="All 4 branches covered.">        if (lastSeparator != null &amp;&amp; pairs.size() == 0) {</span>
+<span class="fc" id="L858">            throw new IllegalStateException(&quot;Cannot have two adjacent separators&quot;);</span>
+        } else {
+<span class="fc" id="L860">            Object[] comp = createComposite(pairs);</span>
+<span class="fc" id="L861">            pairs.clear();</span>
+<span class="fc" id="L862">            Separator separator = new Separator(</span>
+                    text, finalText, variants,
+                    (PeriodPrinter) comp[0], (PeriodParser) comp[1],
+                    useBefore, useAfter);
+<span class="fc" id="L866">            pairs.add(separator);</span>
+<span class="fc" id="L867">            pairs.add(separator);</span>
+        }
+        
+<span class="fc" id="L870">        return this;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    private void clearPrefix() throws IllegalStateException {
+<span class="fc bfc" id="L875" title="All 2 branches covered.">        if (iPrefix != null) {</span>
+<span class="fc" id="L876">            throw new IllegalStateException(&quot;Prefix not followed by field&quot;);</span>
+        }
+<span class="fc" id="L878">        iPrefix = null;</span>
+<span class="fc" id="L879">    }</span>
+
+    private PeriodFormatterBuilder append0(PeriodPrinter printer, PeriodParser parser) {
+<span class="fc" id="L882">        iElementPairs.add(printer);</span>
+<span class="fc" id="L883">        iElementPairs.add(parser);</span>
+<span class="fc bfc" id="L884" title="All 2 branches covered.">        iNotPrinter |= (printer == null);</span>
+<span class="fc bfc" id="L885" title="All 2 branches covered.">        iNotParser |= (parser == null);</span>
+<span class="fc" id="L886">        return this;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    private static PeriodFormatter toFormatter(List&lt;Object&gt; elementPairs, boolean notPrinter, boolean notParser) {
+<span class="fc bfc" id="L891" title="All 4 branches covered.">        if (notPrinter &amp;&amp; notParser) {</span>
+<span class="fc" id="L892">            throw new IllegalStateException(&quot;Builder has created neither a printer nor a parser&quot;);</span>
+        }
+<span class="fc" id="L894">        int size = elementPairs.size();</span>
+<span class="fc bfc" id="L895" title="All 4 branches covered.">        if (size &gt;= 2 &amp;&amp; elementPairs.get(0) instanceof Separator) {</span>
+<span class="fc" id="L896">            Separator sep = (Separator) elementPairs.get(0);</span>
+<span class="pc bpc" id="L897" title="1 of 4 branches missed.">            if (sep.iAfterParser == null &amp;&amp; sep.iAfterPrinter == null) {</span>
+<span class="fc" id="L898">                PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);</span>
+<span class="fc" id="L899">                sep = sep.finish(f.getPrinter(), f.getParser());</span>
+<span class="fc" id="L900">                return new PeriodFormatter(sep, sep);</span>
+            }
+        }
+<span class="fc" id="L903">        Object[] comp = createComposite(elementPairs);</span>
+<span class="fc bfc" id="L904" title="All 2 branches covered.">        if (notPrinter) {</span>
+<span class="fc" id="L905">            return new PeriodFormatter(null, (PeriodParser) comp[1]);</span>
+<span class="fc bfc" id="L906" title="All 2 branches covered.">        } else if (notParser) {</span>
+<span class="fc" id="L907">            return new PeriodFormatter((PeriodPrinter) comp[0], null);</span>
+        } else {
+<span class="fc" id="L909">            return new PeriodFormatter((PeriodPrinter) comp[0], (PeriodParser) comp[1]);</span>
+        }
+    }
+
+    private static Object[] createComposite(List&lt;Object&gt; elementPairs) {
+<span class="pc bpc" id="L914" title="1 of 3 branches missed.">        switch (elementPairs.size()) {</span>
+            case 0:
+<span class="fc" id="L916">                return new Object[] {Literal.EMPTY, Literal.EMPTY};</span>
+            case 1:
+<span class="nc" id="L918">                return new Object[] {elementPairs.get(0), elementPairs.get(1)};</span>
+            default:
+<span class="fc" id="L920">                Composite comp = new Composite(elementPairs);</span>
+<span class="fc" id="L921">                return new Object[] {comp, comp};</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Defines a formatted field's prefix or suffix text.
+     * This can be used for fields such as 'n hours' or 'nH' or 'Hour:n'.
+     */
+    static interface PeriodFieldAffix {
+        int calculatePrintedLength(int value);
+        
+        void printTo(StringBuffer buf, int value);
+        
+        void printTo(Writer out, int value) throws IOException;
+        
+        /**
+         * @return new position after parsing affix, or ~position of failure
+         */
+        int parse(String periodStr, int position);
+
+        /**
+         * @return position where affix starts, or original ~position if not found
+         */
+        int scan(String periodStr, int position);
+
+        /**
+         * @return a copy of array of affixes
+         */
+        String[] getAffixes();
+
+        /**
+         * This method should be called only once.
+         * After first call consecutive calls to this methods will have no effect.
+         * Causes this affix to ignore a match (parse and scan
+         * methods) if there is an affix in the passed list that holds 
+         * affix text which satisfy both following conditions:
+         *  - the affix text is also a match
+         *  - the affix text is longer than the match from this object
+         * 
+         * @param affixesToIgnore
+         */
+        void finish(Set&lt;PeriodFieldAffix&gt; affixesToIgnore);
+    }
+
+    /**
+     * An affix that can be ignored.
+     */
+<span class="fc" id="L969">    static abstract class IgnorableAffix implements PeriodFieldAffix {</span>
+        private volatile String[] iOtherAffixes;
+
+        public void finish(Set&lt;PeriodFieldAffix&gt; periodFieldAffixesToIgnore) {
+<span class="pc bpc" id="L973" title="1 of 2 branches missed.">            if (iOtherAffixes == null) {</span>
+                // Calculate the shortest affix in this instance.
+<span class="fc" id="L975">                int shortestAffixLength = Integer.MAX_VALUE;</span>
+<span class="fc" id="L976">                String shortestAffix = null;</span>
+<span class="fc bfc" id="L977" title="All 2 branches covered.">                for (String affix : getAffixes()) {</span>
+<span class="fc bfc" id="L978" title="All 2 branches covered.">                    if (affix.length() &lt; shortestAffixLength) {</span>
+<span class="fc" id="L979">                        shortestAffixLength = affix.length();</span>
+<span class="fc" id="L980">                        shortestAffix = affix;</span>
+                    }
+                }
+                
+                // Pick only affixes that are longer than the shortest affix in this instance.
+                // This will reduce the number of parse operations and thus speed up the PeriodFormatter.
+                // also need to pick affixes that differ only in case (but not those that are identical)
+<span class="fc" id="L987">                Set&lt;String&gt; affixesToIgnore = new HashSet&lt;String&gt;();</span>
+<span class="fc bfc" id="L988" title="All 2 branches covered.">                for (PeriodFieldAffix periodFieldAffixToIgnore : periodFieldAffixesToIgnore) {</span>
+<span class="fc bfc" id="L989" title="All 2 branches covered.">                    if (periodFieldAffixToIgnore != null) {</span>
+<span class="fc bfc" id="L990" title="All 2 branches covered.">                        for (String affixToIgnore : periodFieldAffixToIgnore.getAffixes()) {</span>
+<span class="fc bfc" id="L991" title="All 2 branches covered.">                            if (affixToIgnore.length() &gt; shortestAffixLength ||</span>
+<span class="fc bfc" id="L992" title="All 4 branches covered.">                                    (affixToIgnore.equalsIgnoreCase(shortestAffix) &amp;&amp; !affixToIgnore.equals(shortestAffix))) {</span>
+<span class="fc" id="L993">                                affixesToIgnore.add(affixToIgnore);</span>
+                            }
+                        }                       
+                    }
+<span class="fc" id="L997">                }</span>
+<span class="fc" id="L998">                iOtherAffixes = affixesToIgnore.toArray(new String[affixesToIgnore.size()]);</span>
+            }
+<span class="fc" id="L1000">        }</span>
+
+        /**
+         * Checks if there is a match among the other affixes (stored internally) 
+         * that is longer than the passed value (textLength).
+         * 
+         * @param textLength  the length of the match
+         * @param periodStr  the Period string that will be parsed
+         * @param position  the position in the Period string at which the parsing should be started.
+         * @return true if the other affixes (stored internally) contain a match 
+         *  that is longer than the textLength parameter, false otherwise
+         */
+        protected boolean matchesOtherAffix(int textLength, String periodStr, int position) {
+<span class="fc bfc" id="L1013" title="All 2 branches covered.">            if (iOtherAffixes != null) {</span>
+                // ignore case when affix length differs
+                // match case when affix length is same
+<span class="fc bfc" id="L1016" title="All 2 branches covered.">                for (String affixToIgnore : iOtherAffixes) {</span>
+<span class="fc" id="L1017">                    int textToIgnoreLength = affixToIgnore.length();</span>
+<span class="fc bfc" id="L1018" title="All 6 branches covered.">                    if ((textLength &lt; textToIgnoreLength &amp;&amp; periodStr.regionMatches(true, position, affixToIgnore, 0, textToIgnoreLength)) ||</span>
+<span class="fc bfc" id="L1019" title="All 2 branches covered.">                            (textLength == textToIgnoreLength &amp;&amp; periodStr.regionMatches(false, position, affixToIgnore, 0, textToIgnoreLength))) {</span>
+<span class="fc" id="L1020">                        return true;</span>
+                    }
+                }
+            }
+<span class="fc" id="L1024">            return false;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Implements an affix where the text does not vary by the amount.
+     */
+    static class SimpleAffix extends IgnorableAffix {
+        private final String iText;
+
+<span class="fc" id="L1035">        SimpleAffix(String text) {</span>
+<span class="fc" id="L1036">            iText = text;</span>
+<span class="fc" id="L1037">        }</span>
+
+        public int calculatePrintedLength(int value) {
+<span class="fc" id="L1040">            return iText.length();</span>
+        }
+
+        public void printTo(StringBuffer buf, int value) {
+<span class="fc" id="L1044">            buf.append(iText);</span>
+<span class="fc" id="L1045">        }</span>
+
+        public void printTo(Writer out, int value) throws IOException {
+<span class="fc" id="L1048">            out.write(iText);</span>
+<span class="fc" id="L1049">        }</span>
+
+        public int parse(String periodStr, int position) {
+<span class="fc" id="L1052">            String text = iText;</span>
+<span class="fc" id="L1053">            int textLength = text.length();</span>
+<span class="fc bfc" id="L1054" title="All 2 branches covered.">            if (periodStr.regionMatches(true, position, text, 0, textLength)) {</span>
+<span class="fc bfc" id="L1055" title="All 2 branches covered.">                if (!matchesOtherAffix(textLength, periodStr, position)) {</span>
+<span class="fc" id="L1056">                    return position + textLength;</span>
+                }
+            }
+<span class="fc" id="L1059">            return ~position;</span>
+        }
+
+        public int scan(String periodStr, final int position) {
+<span class="fc" id="L1063">            String text = iText;</span>
+<span class="fc" id="L1064">            int textLength = text.length();</span>
+<span class="fc" id="L1065">            int sourceLength = periodStr.length();</span>
+            search:
+<span class="pc bpc" id="L1067" title="1 of 2 branches missed.">            for (int pos = position; pos &lt; sourceLength; pos++) {</span>
+<span class="fc bfc" id="L1068" title="All 2 branches covered.">                if (periodStr.regionMatches(true, pos, text, 0, textLength)) {</span>
+<span class="fc bfc" id="L1069" title="All 2 branches covered.">                    if (!matchesOtherAffix(textLength, periodStr, pos)) {</span>
+<span class="fc" id="L1070">                        return pos;</span>
+                    }
+                }
+                // Only allow number characters to be skipped in search of suffix.
+<span class="fc bfc" id="L1074" title="All 2 branches covered.">                switch (periodStr.charAt(pos)) {</span>
+                case '0': case '1': case '2': case '3': case '4':
+                case '5': case '6': case '7': case '8': case '9':
+                case '.': case ',': case '+': case '-':
+<span class="fc" id="L1078">                    break;</span>
+                default:
+<span class="fc" id="L1080">                    break search;</span>
+                }
+            }
+<span class="fc" id="L1083">            return ~position;</span>
+        }
+
+        public String[] getAffixes() {
+<span class="fc" id="L1087">            return new String[] { iText };</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Implements an affix where the text varies by the amount of the field.
+     * Only singular (1) and plural (not 1) are supported.
+     */
+    static class PluralAffix extends IgnorableAffix {
+        private final String iSingularText;
+        private final String iPluralText;
+
+<span class="fc" id="L1100">        PluralAffix(String singularText, String pluralText) {</span>
+<span class="fc" id="L1101">            iSingularText = singularText;</span>
+<span class="fc" id="L1102">            iPluralText = pluralText;</span>
+<span class="fc" id="L1103">        }</span>
+
+        public int calculatePrintedLength(int value) {
+<span class="fc bfc" id="L1106" title="All 2 branches covered.">            return (value == 1 ? iSingularText : iPluralText).length();</span>
+        }
+
+        public void printTo(StringBuffer buf, int value) {
+<span class="fc bfc" id="L1110" title="All 2 branches covered.">            buf.append(value == 1 ? iSingularText : iPluralText);</span>
+<span class="fc" id="L1111">        }</span>
+
+        public void printTo(Writer out, int value) throws IOException {
+<span class="nc bnc" id="L1114" title="All 2 branches missed.">            out.write(value == 1 ? iSingularText : iPluralText);</span>
+<span class="nc" id="L1115">        }</span>
+
+        public int parse(String periodStr, int position) {
+<span class="fc" id="L1118">            String text1 = iPluralText;</span>
+<span class="fc" id="L1119">            String text2 = iSingularText; </span>
+
+<span class="fc bfc" id="L1121" title="All 2 branches covered.">            if (text1.length() &lt; text2.length()) {</span>
+                // Swap in order to match longer one first.
+<span class="fc" id="L1123">                String temp = text1;</span>
+<span class="fc" id="L1124">                text1 = text2;</span>
+<span class="fc" id="L1125">                text2 = temp;</span>
+            }
+
+<span class="fc bfc" id="L1128" title="All 2 branches covered.">            if (periodStr.regionMatches(true, position, text1, 0, text1.length())) {</span>
+<span class="fc bfc" id="L1129" title="All 2 branches covered.">                if (!matchesOtherAffix(text1.length(), periodStr, position)) {</span>
+<span class="fc" id="L1130">                    return position + text1.length();</span>
+                }
+            }
+<span class="pc bpc" id="L1133" title="1 of 2 branches missed.">            if (periodStr.regionMatches(true, position, text2, 0, text2.length())) {</span>
+<span class="fc bfc" id="L1134" title="All 2 branches covered.">                if (!matchesOtherAffix(text2.length(), periodStr, position)) {</span>
+<span class="fc" id="L1135">                    return position + text2.length();</span>
+                }
+            }
+
+<span class="fc" id="L1139">            return ~position;</span>
+        }
+
+        public int scan(String periodStr, final int position) {
+<span class="fc" id="L1143">            String text1 = iPluralText;</span>
+<span class="fc" id="L1144">            String text2 = iSingularText; </span>
+
+<span class="fc bfc" id="L1146" title="All 2 branches covered.">            if (text1.length() &lt; text2.length()) {</span>
+                // Swap in order to match longer one first.
+<span class="fc" id="L1148">                String temp = text1;</span>
+<span class="fc" id="L1149">                text1 = text2;</span>
+<span class="fc" id="L1150">                text2 = temp;</span>
+            }
+
+<span class="fc" id="L1153">            int textLength1 = text1.length();</span>
+<span class="fc" id="L1154">            int textLength2 = text2.length();</span>
+
+<span class="fc" id="L1156">            int sourceLength = periodStr.length();</span>
+<span class="fc bfc" id="L1157" title="All 2 branches covered.">            for (int pos = position; pos &lt; sourceLength; pos++) {</span>
+<span class="fc bfc" id="L1158" title="All 2 branches covered.">                if (periodStr.regionMatches(true, pos, text1, 0, textLength1)) {</span>
+<span class="fc bfc" id="L1159" title="All 2 branches covered.">                    if (!matchesOtherAffix(text1.length(), periodStr, pos)) {</span>
+<span class="fc" id="L1160">                        return pos;</span>
+                    }
+                }
+<span class="fc bfc" id="L1163" title="All 2 branches covered.">                if (periodStr.regionMatches(true, pos, text2, 0, textLength2)) {</span>
+<span class="fc bfc" id="L1164" title="All 2 branches covered.">                    if (!matchesOtherAffix(text2.length(), periodStr, pos)) {</span>
+<span class="fc" id="L1165">                        return pos;</span>
+                    }
+                }
+            }
+<span class="fc" id="L1169">            return ~position;</span>
+        }
+
+        public String[] getAffixes() {
+<span class="fc" id="L1173">            return new String[] { iSingularText, iPluralText };</span>
+        }
+    }
+
+    // -----------------------------------------------------------------------
+    /**
+     * Implements an affix where the text varies by the amount of the field.
+     * Different amounts are supported based on the provided parameters.
+     */
+    static class RegExAffix extends IgnorableAffix {
+<span class="fc" id="L1183">        private static final Comparator&lt;String&gt; LENGTH_DESC_COMPARATOR = new Comparator&lt;String&gt;() {</span>
+            public int compare(String o1, String o2) {
+<span class="fc" id="L1185">                return o2.length() - o1.length();</span>
+            }
+        };
+        
+        private final String[] iSuffixes;
+        private final Pattern[] iPatterns;
+
+        // The parse method has to iterate over the suffixes from the longest one to the shortest one
+        // Otherwise it might consume not enough characters.
+        private final String[] iSuffixesSortedDescByLength;
+
+<span class="fc" id="L1196">        RegExAffix(String[] regExes, String[] texts) {</span>
+<span class="fc" id="L1197">            iSuffixes = texts.clone();</span>
+<span class="fc" id="L1198">            iPatterns = new Pattern[regExes.length];</span>
+<span class="fc bfc" id="L1199" title="All 2 branches covered.">            for (int i = 0; i &lt; regExes.length; i++) {</span>
+<span class="fc" id="L1200">                Pattern pattern = PATTERNS.get(regExes[i]);</span>
+<span class="fc bfc" id="L1201" title="All 2 branches covered.">                if (pattern == null) {</span>
+<span class="fc" id="L1202">                    pattern = Pattern.compile(regExes[i]);</span>
+<span class="fc" id="L1203">                    PATTERNS.putIfAbsent(regExes[i], pattern);</span>
+                }
+<span class="fc" id="L1205">                iPatterns[i] = pattern;</span>
+            }
+<span class="fc" id="L1207">            iSuffixesSortedDescByLength = iSuffixes.clone();</span>
+<span class="fc" id="L1208">            Arrays.sort(iSuffixesSortedDescByLength, LENGTH_DESC_COMPARATOR);</span>
+<span class="fc" id="L1209">        }</span>
+
+        private int selectSuffixIndex(int value) {
+<span class="fc" id="L1212">            String valueString = String.valueOf(value);</span>
+<span class="fc bfc" id="L1213" title="All 2 branches covered.">            for (int i = 0; i &lt; iPatterns.length; i++) {</span>
+<span class="fc bfc" id="L1214" title="All 2 branches covered.">                if (iPatterns[i].matcher(valueString).matches()) {</span>
+<span class="fc" id="L1215">                    return i;</span>
+                }
+            }
+<span class="fc" id="L1218">            return iPatterns.length - 1;</span>
+        }
+
+        public int calculatePrintedLength(int value) {
+<span class="fc" id="L1222">            return iSuffixes[selectSuffixIndex(value)].length();</span>
+        }
+
+        public void printTo(StringBuffer buf, int value) {
+<span class="fc" id="L1226">            buf.append(iSuffixes[selectSuffixIndex(value)]);</span>
+<span class="fc" id="L1227">        }</span>
+
+        public void printTo(Writer out, int value) throws IOException {
+<span class="nc" id="L1230">            out.write(iSuffixes[selectSuffixIndex(value)]);</span>
+<span class="nc" id="L1231">        }</span>
+
+        public int parse(String periodStr, int position) {
+<span class="fc bfc" id="L1234" title="All 2 branches covered.">            for (String text : iSuffixesSortedDescByLength) {</span>
+<span class="fc bfc" id="L1235" title="All 2 branches covered.">                if (periodStr.regionMatches(true, position, text, 0, text.length())) {</span>
+<span class="fc bfc" id="L1236" title="All 2 branches covered.">                    if (!matchesOtherAffix(text.length(), periodStr, position)) {</span>
+<span class="fc" id="L1237">                        return position + text.length();</span>
+                    }
+                }
+            }
+<span class="fc" id="L1241">            return ~position;</span>
+        }
+
+        public int scan(String periodStr, final int position) {
+<span class="fc" id="L1245">            int sourceLength = periodStr.length();</span>
+<span class="fc bfc" id="L1246" title="All 2 branches covered.">            for (int pos = position; pos &lt; sourceLength; pos++) {</span>
+<span class="fc bfc" id="L1247" title="All 2 branches covered.">                for (String text : iSuffixesSortedDescByLength) {</span>
+<span class="fc bfc" id="L1248" title="All 2 branches covered.">                    if (periodStr.regionMatches(true, pos, text, 0, text.length())) {</span>
+<span class="fc bfc" id="L1249" title="All 2 branches covered.">                        if (!matchesOtherAffix(text.length(), periodStr, pos)) {</span>
+<span class="fc" id="L1250">                            return pos;</span>
+                        }
+                    }
+                }
+            }
+<span class="fc" id="L1255">            return ~position;</span>
+        }
+
+        public String[] getAffixes() {
+<span class="fc" id="L1259">            return iSuffixes.clone();</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Builds a composite affix by merging two other affix implementations.
+     */
+    static class CompositeAffix extends IgnorableAffix {
+        private final PeriodFieldAffix iLeft;
+        private final PeriodFieldAffix iRight;
+        private final String[] iLeftRightCombinations;
+
+<span class="fc" id="L1272">        CompositeAffix(PeriodFieldAffix left, PeriodFieldAffix right) {</span>
+<span class="fc" id="L1273">            iLeft = left;</span>
+<span class="fc" id="L1274">            iRight = right;</span>
+
+            // We need to construct all possible combinations of left and right.
+            // We are doing it once in constructor so that getAffixes() is quicker.
+<span class="fc" id="L1278">            Set&lt;String&gt; result = new HashSet&lt;String&gt;(); </span>
+<span class="fc bfc" id="L1279" title="All 2 branches covered.">            for (String leftText : iLeft.getAffixes()) {</span>
+<span class="fc bfc" id="L1280" title="All 2 branches covered.">                for (String rightText : iRight.getAffixes()) {</span>
+<span class="fc" id="L1281">                    result.add(leftText + rightText);</span>
+                }
+            }
+<span class="fc" id="L1284">            iLeftRightCombinations =  result.toArray(new String[result.size()]);</span>
+<span class="fc" id="L1285">        }</span>
+
+        public int calculatePrintedLength(int value) {
+<span class="fc" id="L1288">            return iLeft.calculatePrintedLength(value)</span>
+<span class="fc" id="L1289">                + iRight.calculatePrintedLength(value);</span>
+        }
+
+        public void printTo(StringBuffer buf, int value) {
+<span class="fc" id="L1293">            iLeft.printTo(buf, value);</span>
+<span class="fc" id="L1294">            iRight.printTo(buf, value);</span>
+<span class="fc" id="L1295">        }</span>
+
+        public void printTo(Writer out, int value) throws IOException {
+<span class="nc" id="L1298">            iLeft.printTo(out, value);</span>
+<span class="nc" id="L1299">            iRight.printTo(out, value);</span>
+<span class="nc" id="L1300">        }</span>
+
+        public int parse(String periodStr, int position) {
+<span class="fc" id="L1303">            int pos = iLeft.parse(periodStr, position);</span>
+<span class="fc bfc" id="L1304" title="All 2 branches covered.">            if (pos &gt;= 0) {</span>
+<span class="fc" id="L1305">                pos = iRight.parse(periodStr, pos);</span>
+<span class="pc bpc" id="L1306" title="2 of 4 branches missed.">                if (pos &gt;= 0 &amp;&amp; matchesOtherAffix(parse(periodStr, pos) - pos, periodStr, position)) {</span>
+<span class="nc" id="L1307">                    return ~position;</span>
+                }
+            }
+<span class="fc" id="L1310">            return pos;</span>
+        }
+
+        public int scan(String periodStr, final int position) {
+<span class="fc" id="L1314">            int leftPosition = iLeft.scan(periodStr, position);</span>
+<span class="pc bpc" id="L1315" title="1 of 2 branches missed.">            if (leftPosition &gt;= 0) {</span>
+<span class="fc" id="L1316">                int rightPosition = iRight.scan(periodStr, iLeft.parse(periodStr, leftPosition));</span>
+<span class="pc bpc" id="L1317" title="2 of 4 branches missed.">                if (!(rightPosition &gt;= 0 &amp;&amp; matchesOtherAffix(iRight.parse(periodStr, rightPosition) - leftPosition, periodStr, position))) {</span>
+<span class="pc bpc" id="L1318" title="1 of 2 branches missed.">                    if (leftPosition &gt; 0) {</span>
+<span class="fc" id="L1319">                        return leftPosition;</span>
+                    } else {
+<span class="nc" id="L1321">                        return rightPosition;</span>
+                    }
+                }
+            }
+<span class="nc" id="L1325">            return ~position;</span>
+        }
+
+        public String[] getAffixes() {
+<span class="fc" id="L1329">            return iLeftRightCombinations.clone();</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Formats the numeric value of a field, potentially with prefix/suffix.
+     */
+    static class FieldFormatter
+            implements PeriodPrinter, PeriodParser {
+        private final int iMinPrintedDigits;
+        private final int iPrintZeroSetting;
+        private final int iMaxParsedDigits;
+        private final boolean iRejectSignedValues;
+        
+        /** The index of the field type, 0=year, etc. */
+        private final int iFieldType;
+        /**
+         * The array of the latest formatter added for each type.
+         * This is shared between all the field formatters in a formatter.
+         */
+        private final FieldFormatter[] iFieldFormatters;
+        
+        private final PeriodFieldAffix iPrefix;
+        private final PeriodFieldAffix iSuffix;
+
+        FieldFormatter(int minPrintedDigits, int printZeroSetting,
+                       int maxParsedDigits, boolean rejectSignedValues,
+                       int fieldType, FieldFormatter[] fieldFormatters,
+<span class="fc" id="L1358">                       PeriodFieldAffix prefix, PeriodFieldAffix suffix) {</span>
+<span class="fc" id="L1359">            iMinPrintedDigits = minPrintedDigits;</span>
+<span class="fc" id="L1360">            iPrintZeroSetting = printZeroSetting;</span>
+<span class="fc" id="L1361">            iMaxParsedDigits = maxParsedDigits;</span>
+<span class="fc" id="L1362">            iRejectSignedValues = rejectSignedValues;</span>
+<span class="fc" id="L1363">            iFieldType = fieldType;</span>
+<span class="fc" id="L1364">            iFieldFormatters = fieldFormatters;</span>
+<span class="fc" id="L1365">            iPrefix = prefix;</span>
+<span class="fc" id="L1366">            iSuffix = suffix;</span>
+<span class="fc" id="L1367">        }</span>
+
+<span class="fc" id="L1369">        FieldFormatter(FieldFormatter field, PeriodFieldAffix suffix) {</span>
+<span class="fc" id="L1370">            iMinPrintedDigits = field.iMinPrintedDigits;</span>
+<span class="fc" id="L1371">            iPrintZeroSetting = field.iPrintZeroSetting;</span>
+<span class="fc" id="L1372">            iMaxParsedDigits = field.iMaxParsedDigits;</span>
+<span class="fc" id="L1373">            iRejectSignedValues = field.iRejectSignedValues;</span>
+<span class="fc" id="L1374">            iFieldType = field.iFieldType;</span>
+<span class="fc" id="L1375">            iFieldFormatters = field.iFieldFormatters;</span>
+<span class="fc" id="L1376">            iPrefix = field.iPrefix;</span>
+<span class="fc bfc" id="L1377" title="All 2 branches covered.">            if (field.iSuffix != null) {</span>
+<span class="fc" id="L1378">                suffix = new CompositeAffix(field.iSuffix, suffix);</span>
+            }
+<span class="fc" id="L1380">            iSuffix = suffix;</span>
+<span class="fc" id="L1381">        }</span>
+
+        public void finish(FieldFormatter[] fieldFormatters) {
+            // find all other affixes that are in use
+<span class="fc" id="L1385">            Set&lt;PeriodFieldAffix&gt; prefixesToIgnore = new HashSet&lt;PeriodFieldAffix&gt;();</span>
+<span class="fc" id="L1386">            Set&lt;PeriodFieldAffix&gt; suffixesToIgnore = new HashSet&lt;PeriodFieldAffix&gt;();</span>
+<span class="fc bfc" id="L1387" title="All 2 branches covered.">            for (FieldFormatter fieldFormatter : fieldFormatters) {</span>
+<span class="fc bfc" id="L1388" title="All 4 branches covered.">                if (fieldFormatter != null &amp;&amp; !this.equals(fieldFormatter)) {</span>
+<span class="fc" id="L1389">                    prefixesToIgnore.add(fieldFormatter.iPrefix);</span>
+<span class="fc" id="L1390">                    suffixesToIgnore.add(fieldFormatter.iSuffix);</span>
+                }
+            }
+            // if we have a prefix then allow ignore behaviour
+<span class="fc bfc" id="L1394" title="All 2 branches covered.">            if (iPrefix != null) {</span>
+<span class="fc" id="L1395">                iPrefix.finish(prefixesToIgnore);                    </span>
+            }
+            // if we have a suffix then allow ignore behaviour
+<span class="fc bfc" id="L1398" title="All 2 branches covered.">            if (iSuffix != null) {</span>
+<span class="fc" id="L1399">                iSuffix.finish(suffixesToIgnore);                    </span>
+            }
+<span class="fc" id="L1401">        }</span>
+
+        public int countFieldsToPrint(ReadablePeriod period, int stopAt, Locale locale) {
+<span class="pc bpc" id="L1404" title="1 of 2 branches missed.">            if (stopAt &lt;= 0) {</span>
+<span class="nc" id="L1405">                return 0;</span>
+            }
+<span class="fc bfc" id="L1407" title="All 4 branches covered.">            if (iPrintZeroSetting == PRINT_ZERO_ALWAYS || getFieldValue(period) != Long.MAX_VALUE) {</span>
+<span class="fc" id="L1408">                return 1;</span>
+            }
+<span class="fc" id="L1410">            return 0;</span>
+        }
+
+        public int calculatePrintedLength(ReadablePeriod period, Locale locale) {
+<span class="fc" id="L1414">            long valueLong = getFieldValue(period);</span>
+<span class="fc bfc" id="L1415" title="All 2 branches covered.">            if (valueLong == Long.MAX_VALUE) {</span>
+<span class="fc" id="L1416">                return 0;</span>
+            }
+
+<span class="fc" id="L1419">            int sum = Math.max(FormatUtils.calculateDigitCount(valueLong), iMinPrintedDigits);</span>
+<span class="fc bfc" id="L1420" title="All 2 branches covered.">            if (iFieldType &gt;= SECONDS_MILLIS) {</span>
+                // valueLong contains the seconds and millis fields
+                // the minimum output is 0.000, which is 4 or 5 digits with a negative
+<span class="fc bfc" id="L1423" title="All 2 branches covered.">                sum = (valueLong &lt; 0 ? Math.max(sum, 5) : Math.max(sum, 4));</span>
+                // plus one for the decimal point
+<span class="fc" id="L1425">                sum++;</span>
+<span class="fc bfc" id="L1426" title="All 2 branches covered.">                if (iFieldType == SECONDS_OPTIONAL_MILLIS &amp;&amp;</span>
+<span class="fc bfc" id="L1427" title="All 2 branches covered.">                        (Math.abs(valueLong) % DateTimeConstants.MILLIS_PER_SECOND) == 0) {</span>
+<span class="fc" id="L1428">                    sum -= 4; // remove three digits and decimal point</span>
+                }
+                // reset valueLong to refer to the seconds part for the prefic/suffix calculation
+<span class="fc" id="L1431">                valueLong = valueLong / DateTimeConstants.MILLIS_PER_SECOND;</span>
+            }
+<span class="fc" id="L1433">            int value = (int) valueLong;</span>
+
+<span class="fc bfc" id="L1435" title="All 2 branches covered.">            if (iPrefix != null) {</span>
+<span class="fc" id="L1436">                sum += iPrefix.calculatePrintedLength(value);</span>
+            }
+<span class="fc bfc" id="L1438" title="All 2 branches covered.">            if (iSuffix != null) {</span>
+<span class="fc" id="L1439">                sum += iSuffix.calculatePrintedLength(value);</span>
+            }
+
+<span class="fc" id="L1442">            return sum;</span>
+        }
+        
+        public void printTo(StringBuffer buf, ReadablePeriod period, Locale locale) {
+<span class="fc" id="L1446">            long valueLong = getFieldValue(period);</span>
+<span class="fc bfc" id="L1447" title="All 2 branches covered.">            if (valueLong == Long.MAX_VALUE) {</span>
+<span class="fc" id="L1448">                return;</span>
+            }
+<span class="fc" id="L1450">            int value = (int) valueLong;</span>
+<span class="fc bfc" id="L1451" title="All 2 branches covered.">            if (iFieldType &gt;= SECONDS_MILLIS) {</span>
+<span class="fc" id="L1452">                value = (int) (valueLong / DateTimeConstants.MILLIS_PER_SECOND);</span>
+            }
+
+<span class="fc bfc" id="L1455" title="All 2 branches covered.">            if (iPrefix != null) {</span>
+<span class="fc" id="L1456">                iPrefix.printTo(buf, value);</span>
+            }
+<span class="fc" id="L1458">            int bufLen = buf.length();</span>
+<span class="fc" id="L1459">            int minDigits = iMinPrintedDigits;</span>
+<span class="fc bfc" id="L1460" title="All 2 branches covered.">            if (minDigits &lt;= 1) {</span>
+<span class="fc" id="L1461">                FormatUtils.appendUnpaddedInteger(buf, value);</span>
+            } else {
+<span class="fc" id="L1463">                FormatUtils.appendPaddedInteger(buf, value, minDigits);</span>
+            }
+<span class="fc bfc" id="L1465" title="All 2 branches covered.">            if (iFieldType &gt;= SECONDS_MILLIS) {</span>
+<span class="fc" id="L1466">                int dp = (int) (Math.abs(valueLong) % DateTimeConstants.MILLIS_PER_SECOND);</span>
+<span class="fc bfc" id="L1467" title="All 4 branches covered.">                if (iFieldType == SECONDS_MILLIS || dp &gt; 0) {</span>
+<span class="fc bfc" id="L1468" title="All 4 branches covered.">                    if (valueLong &lt; 0 &amp;&amp; valueLong &gt; -DateTimeConstants.MILLIS_PER_SECOND) {</span>
+<span class="fc" id="L1469">                        buf.insert(bufLen, '-');</span>
+                    }
+<span class="fc" id="L1471">                    buf.append('.');</span>
+<span class="fc" id="L1472">                    FormatUtils.appendPaddedInteger(buf, dp, 3);</span>
+                }
+            }
+<span class="fc bfc" id="L1475" title="All 2 branches covered.">            if (iSuffix != null) {</span>
+<span class="fc" id="L1476">                iSuffix.printTo(buf, value);</span>
+            }
+<span class="fc" id="L1478">        }</span>
+
+        public void printTo(Writer out, ReadablePeriod period, Locale locale) throws IOException {
+<span class="fc" id="L1481">            long valueLong = getFieldValue(period);</span>
+<span class="pc bpc" id="L1482" title="1 of 2 branches missed.">            if (valueLong == Long.MAX_VALUE) {</span>
+<span class="nc" id="L1483">                return;</span>
+            }
+<span class="fc" id="L1485">            int value = (int) valueLong;</span>
+<span class="fc bfc" id="L1486" title="All 2 branches covered.">            if (iFieldType &gt;= SECONDS_MILLIS) {</span>
+<span class="fc" id="L1487">                value = (int) (valueLong / DateTimeConstants.MILLIS_PER_SECOND);</span>
+            }
+
+<span class="pc bpc" id="L1490" title="1 of 2 branches missed.">            if (iPrefix != null) {</span>
+<span class="nc" id="L1491">                iPrefix.printTo(out, value);</span>
+            }
+<span class="fc" id="L1493">            int minDigits = iMinPrintedDigits;</span>
+<span class="pc bpc" id="L1494" title="1 of 2 branches missed.">            if (minDigits &lt;= 1) {</span>
+<span class="fc" id="L1495">                FormatUtils.writeUnpaddedInteger(out, value);</span>
+            } else {
+<span class="nc" id="L1497">                FormatUtils.writePaddedInteger(out, value, minDigits);</span>
+            }
+<span class="fc bfc" id="L1499" title="All 2 branches covered.">            if (iFieldType &gt;= SECONDS_MILLIS) {</span>
+<span class="fc" id="L1500">                int dp = (int) (Math.abs(valueLong) % DateTimeConstants.MILLIS_PER_SECOND);</span>
+<span class="pc bpc" id="L1501" title="2 of 4 branches missed.">                if (iFieldType == SECONDS_MILLIS || dp &gt; 0) {</span>
+<span class="fc" id="L1502">                    out.write('.');</span>
+<span class="fc" id="L1503">                    FormatUtils.writePaddedInteger(out, dp, 3);</span>
+                }
+            }
+<span class="pc bpc" id="L1506" title="1 of 2 branches missed.">            if (iSuffix != null) {</span>
+<span class="fc" id="L1507">                iSuffix.printTo(out, value);</span>
+            }
+<span class="fc" id="L1509">        }</span>
+
+        public int parseInto(
+                ReadWritablePeriod period, String text, 
+                int position, Locale locale) {
+
+<span class="fc bfc" id="L1515" title="All 2 branches covered.">            boolean mustParse = (iPrintZeroSetting == PRINT_ZERO_ALWAYS);</span>
+
+            // Shortcut test.
+<span class="fc bfc" id="L1518" title="All 2 branches covered.">            if (position &gt;= text.length()) {</span>
+<span class="pc bpc" id="L1519" title="1 of 2 branches missed.">                return mustParse ? ~position : position;</span>
+            }
+
+<span class="fc bfc" id="L1522" title="All 2 branches covered.">            if (iPrefix != null) {</span>
+<span class="fc" id="L1523">                position = iPrefix.parse(text, position);</span>
+<span class="fc bfc" id="L1524" title="All 2 branches covered.">                if (position &gt;= 0) {</span>
+                    // If prefix is found, then the parse must finish.
+<span class="fc" id="L1526">                    mustParse = true;</span>
+                } else {
+                    // Prefix not found, so bail.
+<span class="pc bpc" id="L1529" title="1 of 2 branches missed.">                    if (!mustParse) {</span>
+                        // It's okay because parsing of this field is not
+                        // required. Don't return an error. Fields down the
+                        // chain can continue on, trying to parse.
+<span class="fc" id="L1533">                        return ~position;</span>
+                    }
+<span class="nc" id="L1535">                    return position;</span>
+                }
+            }
+
+<span class="fc" id="L1539">            int suffixPos = -1;</span>
+<span class="fc bfc" id="L1540" title="All 4 branches covered.">            if (iSuffix != null &amp;&amp; !mustParse) {</span>
+                // Pre-scan the suffix, to help determine if this field must be
+                // parsed.
+<span class="fc" id="L1543">                suffixPos = iSuffix.scan(text, position);</span>
+<span class="fc bfc" id="L1544" title="All 2 branches covered.">                if (suffixPos &gt;= 0) {</span>
+                    // If suffix is found, then parse must finish.
+<span class="fc" id="L1546">                    mustParse = true;</span>
+                } else {
+                    // Suffix not found, so bail.
+<span class="pc bpc" id="L1549" title="1 of 2 branches missed.">                    if (!mustParse) {</span>
+                        // It's okay because parsing of this field is not
+                        // required. Don't return an error. Fields down the
+                        // chain can continue on, trying to parse.
+<span class="fc" id="L1553">                        return ~suffixPos;</span>
+                    }
+<span class="nc" id="L1555">                    return suffixPos;</span>
+                }
+            }
+
+<span class="pc bpc" id="L1559" title="1 of 4 branches missed.">            if (!mustParse &amp;&amp; !isSupported(period.getPeriodType(), iFieldType)) {</span>
+                // If parsing is not required and the field is not supported,
+                // exit gracefully so that another parser can continue on.
+<span class="nc" id="L1562">                return position;</span>
+            }
+
+            int limit;
+<span class="fc bfc" id="L1566" title="All 2 branches covered.">            if (suffixPos &gt; 0) {</span>
+<span class="fc" id="L1567">                limit = Math.min(iMaxParsedDigits, suffixPos - position);</span>
+            } else {
+<span class="fc" id="L1569">                limit = Math.min(iMaxParsedDigits, text.length() - position);</span>
+            }
+
+            // validate input number
+<span class="fc" id="L1573">            int length = 0;</span>
+<span class="fc" id="L1574">            int fractPos = -1;</span>
+<span class="fc" id="L1575">            boolean hasDigits = false;</span>
+<span class="fc" id="L1576">            boolean negative = false;</span>
+<span class="fc bfc" id="L1577" title="All 2 branches covered.">            while (length &lt; limit) {</span>
+<span class="fc" id="L1578">                char c = text.charAt(position + length);</span>
+                // leading sign
+<span class="pc bpc" id="L1580" title="2 of 8 branches missed.">                if (length == 0 &amp;&amp; (c == '-' || c == '+') &amp;&amp; !iRejectSignedValues) {</span>
+<span class="pc bpc" id="L1581" title="1 of 2 branches missed.">                    negative = c == '-';</span>
+
+                    // Next character must be a digit.
+<span class="pc bpc" id="L1584" title="1 of 2 branches missed.">                    if (length + 1 &gt;= limit || </span>
+<span class="pc bpc" id="L1585" title="2 of 4 branches missed.">                        (c = text.charAt(position + length + 1)) &lt; '0' || c &gt; '9')</span>
+                    {
+<span class="nc" id="L1587">                        break;</span>
+                    }
+
+<span class="pc bpc" id="L1590" title="1 of 2 branches missed.">                    if (negative) {</span>
+<span class="fc" id="L1591">                        length++;</span>
+                    } else {
+                        // Skip the '+' for parseInt to succeed.
+<span class="nc" id="L1594">                        position++;</span>
+                    }
+                    // Expand the limit to disregard the sign character.
+<span class="fc" id="L1597">                    limit = Math.min(limit + 1, text.length() - position);</span>
+<span class="fc" id="L1598">                    continue;</span>
+                }
+                // main number
+<span class="fc bfc" id="L1601" title="All 4 branches covered.">                if (c &gt;= '0' &amp;&amp; c &lt;= '9') {</span>
+<span class="fc" id="L1602">                    hasDigits = true;</span>
+                } else {
+<span class="pc bpc" id="L1604" title="3 of 8 branches missed.">                    if ((c == '.' || c == ',')</span>
+                         &amp;&amp; (iFieldType == SECONDS_MILLIS || iFieldType == SECONDS_OPTIONAL_MILLIS)) {
+<span class="pc bpc" id="L1606" title="1 of 2 branches missed.">                        if (fractPos &gt;= 0) {</span>
+                            // can't have two decimals
+<span class="nc" id="L1608">                            break;</span>
+                        }
+<span class="fc" id="L1610">                        fractPos = position + length + 1;</span>
+                        // Expand the limit to disregard the decimal point.
+<span class="fc" id="L1612">                        limit = Math.min(limit + 1, text.length() - position);</span>
+                    } else {
+                        break;
+                    }
+                }
+<span class="fc" id="L1617">                length++;</span>
+<span class="fc" id="L1618">            }</span>
+
+<span class="fc bfc" id="L1620" title="All 2 branches covered.">            if (!hasDigits) {</span>
+<span class="fc" id="L1621">                return ~position;</span>
+            }
+
+<span class="pc bpc" id="L1624" title="1 of 4 branches missed.">            if (suffixPos &gt;= 0 &amp;&amp; position + length != suffixPos) {</span>
+                // If there are additional non-digit characters before the
+                // suffix is reached, then assume that the suffix found belongs
+                // to a field not yet reached. Return original position so that
+                // another parser can continue on.
+<span class="nc" id="L1629">                return position;</span>
+            }
+
+<span class="pc bpc" id="L1632" title="1 of 4 branches missed.">            if (iFieldType != SECONDS_MILLIS &amp;&amp; iFieldType != SECONDS_OPTIONAL_MILLIS) {</span>
+                // Handle common case.
+<span class="fc" id="L1634">                setFieldValue(period, iFieldType, parseInt(text, position, length));</span>
+<span class="fc bfc" id="L1635" title="All 2 branches covered.">            } else if (fractPos &lt; 0) {</span>
+<span class="fc" id="L1636">                setFieldValue(period, SECONDS, parseInt(text, position, length));</span>
+<span class="fc" id="L1637">                setFieldValue(period, MILLIS, 0);</span>
+            } else {
+<span class="fc" id="L1639">                int wholeValue = parseInt(text, position, fractPos - position - 1);</span>
+<span class="fc" id="L1640">                setFieldValue(period, SECONDS, wholeValue);</span>
+
+<span class="fc" id="L1642">                int fractLen = position + length - fractPos;</span>
+                int fractValue;
+<span class="fc bfc" id="L1644" title="All 2 branches covered.">                if (fractLen &lt;= 0) {</span>
+<span class="fc" id="L1645">                    fractValue = 0;</span>
+                } else {
+<span class="pc bpc" id="L1647" title="1 of 2 branches missed.">                    if (fractLen &gt;= 3) {</span>
+<span class="fc" id="L1648">                        fractValue = parseInt(text, fractPos, 3);</span>
+                    } else {
+<span class="nc" id="L1650">                        fractValue = parseInt(text, fractPos, fractLen);</span>
+<span class="nc bnc" id="L1651" title="All 2 branches missed.">                        if (fractLen == 1) {</span>
+<span class="nc" id="L1652">                            fractValue *= 100;</span>
+                        } else {
+<span class="nc" id="L1654">                            fractValue *= 10;</span>
+                        }
+                    }
+<span class="pc bpc" id="L1657" title="1 of 4 branches missed.">                    if (negative || wholeValue &lt; 0) {</span>
+<span class="fc" id="L1658">                        fractValue = -fractValue;</span>
+                    }
+                }
+
+<span class="fc" id="L1662">                setFieldValue(period, MILLIS, fractValue);</span>
+            }
+                
+<span class="fc" id="L1665">            position += length;</span>
+
+<span class="pc bpc" id="L1667" title="1 of 4 branches missed.">            if (position &gt;= 0 &amp;&amp; iSuffix != null) {</span>
+<span class="fc" id="L1668">                position = iSuffix.parse(text, position);</span>
+            }
+                
+<span class="fc" id="L1671">            return position;</span>
+        }
+
+        /**
+         * @param text text to parse
+         * @param position position in text
+         * @param length exact count of characters to parse
+         * @return parsed int value
+         */
+        private int parseInt(String text, int position, int length) {
+<span class="fc bfc" id="L1681" title="All 2 branches covered.">            if (length &gt;= 10) {</span>
+                // Since value may exceed max, use stock parser which checks for this.
+<span class="fc" id="L1683">                return Integer.parseInt(text.substring(position, position + length));</span>
+            }
+<span class="fc bfc" id="L1685" title="All 2 branches covered.">            if (length &lt;= 0) {</span>
+<span class="fc" id="L1686">                return 0;</span>
+            }
+<span class="fc" id="L1688">            int value = text.charAt(position++);</span>
+<span class="fc" id="L1689">            length--;</span>
+            boolean negative;
+<span class="fc bfc" id="L1691" title="All 2 branches covered.">            if (value == '-') {</span>
+<span class="pc bpc" id="L1692" title="1 of 2 branches missed.">                if (--length &lt; 0) {</span>
+<span class="nc" id="L1693">                    return 0;</span>
+                }
+<span class="fc" id="L1695">                negative = true;</span>
+<span class="fc" id="L1696">                value = text.charAt(position++);</span>
+            } else {
+<span class="fc" id="L1698">                negative = false;</span>
+            }
+<span class="fc" id="L1700">            value -= '0';</span>
+<span class="fc bfc" id="L1701" title="All 2 branches covered.">            while (length-- &gt; 0) {</span>
+<span class="fc" id="L1702">                value = ((value &lt;&lt; 3) + (value &lt;&lt; 1)) + text.charAt(position++) - '0';</span>
+            }
+<span class="fc bfc" id="L1704" title="All 2 branches covered.">            return negative ? -value : value;</span>
+        }
+
+        /**
+         * @return Long.MAX_VALUE if nothing to print, otherwise value
+         */
+        long getFieldValue(ReadablePeriod period) {
+            PeriodType type;
+<span class="fc bfc" id="L1712" title="All 2 branches covered.">            if (iPrintZeroSetting == PRINT_ZERO_ALWAYS) {</span>
+<span class="fc" id="L1713">                type = null; // Don't need to check if supported.</span>
+            } else {
+<span class="fc" id="L1715">                type = period.getPeriodType();</span>
+            }
+<span class="fc bfc" id="L1717" title="All 4 branches covered.">            if (type != null &amp;&amp; isSupported(type, iFieldType) == false) {</span>
+<span class="fc" id="L1718">                return Long.MAX_VALUE;</span>
+            }
+
+            long value;
+
+<span class="pc bpc" id="L1723" title="1 of 10 branches missed.">            switch (iFieldType) {</span>
+            default:
+<span class="nc" id="L1725">                return Long.MAX_VALUE;</span>
+            case YEARS:
+<span class="fc" id="L1727">                value = period.get(DurationFieldType.years());</span>
+<span class="fc" id="L1728">                break;</span>
+            case MONTHS:
+<span class="fc" id="L1730">                value = period.get(DurationFieldType.months());</span>
+<span class="fc" id="L1731">                break;</span>
+            case WEEKS:
+<span class="fc" id="L1733">                value = period.get(DurationFieldType.weeks());</span>
+<span class="fc" id="L1734">                break;</span>
+            case DAYS:
+<span class="fc" id="L1736">                value = period.get(DurationFieldType.days());</span>
+<span class="fc" id="L1737">                break;</span>
+            case HOURS:
+<span class="fc" id="L1739">                value = period.get(DurationFieldType.hours());</span>
+<span class="fc" id="L1740">                break;</span>
+            case MINUTES:
+<span class="fc" id="L1742">                value = period.get(DurationFieldType.minutes());</span>
+<span class="fc" id="L1743">                break;</span>
+            case SECONDS:
+<span class="fc" id="L1745">                value = period.get(DurationFieldType.seconds());</span>
+<span class="fc" id="L1746">                break;</span>
+            case MILLIS:
+<span class="fc" id="L1748">                value = period.get(DurationFieldType.millis());</span>
+<span class="fc" id="L1749">                break;</span>
+            case SECONDS_MILLIS: // drop through
+            case SECONDS_OPTIONAL_MILLIS:
+<span class="fc" id="L1752">                int seconds = period.get(DurationFieldType.seconds());</span>
+<span class="fc" id="L1753">                int millis = period.get(DurationFieldType.millis());</span>
+<span class="fc" id="L1754">                value = (seconds * (long) DateTimeConstants.MILLIS_PER_SECOND) + millis;</span>
+                break;
+            }
+
+            // determine if period is zero and this is the last field
+<span class="fc bfc" id="L1759" title="All 2 branches covered.">            if (value == 0) {</span>
+<span class="fc bfc" id="L1760" title="All 4 branches covered.">                switch (iPrintZeroSetting) {</span>
+                case PRINT_ZERO_NEVER:
+<span class="fc" id="L1762">                    return Long.MAX_VALUE;</span>
+                case PRINT_ZERO_RARELY_LAST:
+<span class="fc bfc" id="L1764" title="All 4 branches covered.">                    if (isZero(period) &amp;&amp; iFieldFormatters[iFieldType] == this) {</span>
+<span class="fc bfc" id="L1765" title="All 2 branches covered.">                        for (int i = iFieldType + 1; i &lt;= MAX_FIELD; i++) {</span>
+<span class="fc bfc" id="L1766" title="All 4 branches covered.">                            if (isSupported(type, i) &amp;&amp; iFieldFormatters[i] != null) {</span>
+<span class="fc" id="L1767">                                return Long.MAX_VALUE;</span>
+                            }
+                        }
+                    } else {
+<span class="fc" id="L1771">                        return Long.MAX_VALUE;</span>
+                    }
+                    break;
+                case PRINT_ZERO_RARELY_FIRST:
+<span class="pc bpc" id="L1775" title="2 of 4 branches missed.">                    if (isZero(period) &amp;&amp; iFieldFormatters[iFieldType] == this) {</span>
+<span class="fc" id="L1776">                        int i = Math.min(iFieldType, 8);  // line split out for IBM JDK</span>
+<span class="fc" id="L1777">                        i--;                              // see bug 1660490</span>
+<span class="pc bpc" id="L1778" title="1 of 4 branches missed.">                        for (; i &gt;= 0 &amp;&amp; i &lt;= MAX_FIELD; i--) {</span>
+<span class="fc bfc" id="L1779" title="All 4 branches covered.">                            if (isSupported(type, i) &amp;&amp; iFieldFormatters[i] != null) {</span>
+<span class="fc" id="L1780">                                return Long.MAX_VALUE;</span>
+                            }
+                        }
+<span class="fc" id="L1783">                    } else {</span>
+<span class="nc" id="L1784">                        return Long.MAX_VALUE;</span>
+                    }
+                    break;
+                }
+            }
+
+<span class="fc" id="L1790">            return value;</span>
+        }
+
+        boolean isZero(ReadablePeriod period) {
+<span class="fc bfc" id="L1794" title="All 2 branches covered.">            for (int i = 0, isize = period.size(); i &lt; isize; i++) {</span>
+<span class="fc bfc" id="L1795" title="All 2 branches covered.">                if (period.getValue(i) != 0) {</span>
+<span class="fc" id="L1796">                    return false;</span>
+                }
+            }
+<span class="fc" id="L1799">            return true;</span>
+        }
+
+        boolean isSupported(PeriodType type, int field) {
+<span class="pc bpc" id="L1803" title="1 of 10 branches missed.">            switch (field) {</span>
+            default:
+<span class="nc" id="L1805">                return false;</span>
+            case YEARS:
+<span class="fc" id="L1807">                return type.isSupported(DurationFieldType.years());</span>
+            case MONTHS:
+<span class="fc" id="L1809">                return type.isSupported(DurationFieldType.months());</span>
+            case WEEKS:
+<span class="fc" id="L1811">                return type.isSupported(DurationFieldType.weeks());</span>
+            case DAYS:
+<span class="fc" id="L1813">                return type.isSupported(DurationFieldType.days());</span>
+            case HOURS:
+<span class="fc" id="L1815">                return type.isSupported(DurationFieldType.hours());</span>
+            case MINUTES:
+<span class="fc" id="L1817">                return type.isSupported(DurationFieldType.minutes());</span>
+            case SECONDS:
+<span class="fc" id="L1819">                return type.isSupported(DurationFieldType.seconds());</span>
+            case MILLIS:
+<span class="fc" id="L1821">                return type.isSupported(DurationFieldType.millis());</span>
+            case SECONDS_MILLIS: // drop through
+            case SECONDS_OPTIONAL_MILLIS:
+<span class="fc bfc" id="L1824" title="All 2 branches covered.">                return type.isSupported(DurationFieldType.seconds()) ||</span>
+<span class="pc bpc" id="L1825" title="1 of 2 branches missed.">                       type.isSupported(DurationFieldType.millis());</span>
+            }
+        }
+
+        void setFieldValue(ReadWritablePeriod period, int field, int value) {
+<span class="pc bpc" id="L1830" title="1 of 9 branches missed.">            switch (field) {</span>
+            default:
+<span class="nc" id="L1832">                break;</span>
+            case YEARS:
+<span class="fc" id="L1834">                period.setYears(value);</span>
+<span class="fc" id="L1835">                break;</span>
+            case MONTHS:
+<span class="fc" id="L1837">                period.setMonths(value);</span>
+<span class="fc" id="L1838">                break;</span>
+            case WEEKS:
+<span class="fc" id="L1840">                period.setWeeks(value);</span>
+<span class="fc" id="L1841">                break;</span>
+            case DAYS:
+<span class="fc" id="L1843">                period.setDays(value);</span>
+<span class="fc" id="L1844">                break;</span>
+            case HOURS:
+<span class="fc" id="L1846">                period.setHours(value);</span>
+<span class="fc" id="L1847">                break;</span>
+            case MINUTES:
+<span class="fc" id="L1849">                period.setMinutes(value);</span>
+<span class="fc" id="L1850">                break;</span>
+            case SECONDS:
+<span class="fc" id="L1852">                period.setSeconds(value);</span>
+<span class="fc" id="L1853">                break;</span>
+            case MILLIS:
+<span class="fc" id="L1855">                period.setMillis(value);</span>
+                break;
+            }
+<span class="fc" id="L1858">        }</span>
+
+        int getFieldType() {
+<span class="fc" id="L1861">            return iFieldType;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Handles a simple literal piece of text.
+     */
+    static class Literal
+            implements PeriodPrinter, PeriodParser {
+<span class="fc" id="L1871">        static final Literal EMPTY = new Literal(&quot;&quot;);</span>
+        private final String iText;
+
+<span class="fc" id="L1874">        Literal(String text) {</span>
+<span class="fc" id="L1875">            iText = text;</span>
+<span class="fc" id="L1876">        }</span>
+
+        public int countFieldsToPrint(ReadablePeriod period, int stopAt, Locale locale) {
+<span class="fc" id="L1879">            return 0;</span>
+        }
+
+        public int calculatePrintedLength(ReadablePeriod period, Locale locale) {
+<span class="fc" id="L1883">            return iText.length();</span>
+        }
+
+        public void printTo(StringBuffer buf, ReadablePeriod period, Locale locale) {
+<span class="fc" id="L1887">            buf.append(iText);</span>
+<span class="fc" id="L1888">        }</span>
+
+        public void printTo(Writer out, ReadablePeriod period, Locale locale) throws IOException {
+<span class="fc" id="L1891">            out.write(iText);</span>
+<span class="fc" id="L1892">        }</span>
+
+        public int parseInto(
+                ReadWritablePeriod period, String periodStr,
+                int position, Locale locale) {
+<span class="fc bfc" id="L1897" title="All 2 branches covered.">            if (periodStr.regionMatches(true, position, iText, 0, iText.length())) {</span>
+<span class="fc" id="L1898">                return position + iText.length();</span>
+            }
+<span class="fc" id="L1900">            return ~position;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Handles a separator, that splits the fields into multiple parts.
+     * For example, the 'T' in the ISO8601 standard.
+     */
+    static class Separator
+            implements PeriodPrinter, PeriodParser {
+        private final String iText;
+        private final String iFinalText;
+        private final String[] iParsedForms;
+
+        private final boolean iUseBefore;
+        private final boolean iUseAfter;
+
+        private final PeriodPrinter iBeforePrinter;
+        private volatile PeriodPrinter iAfterPrinter;
+        private final PeriodParser iBeforeParser;
+        private volatile PeriodParser iAfterParser;
+
+        Separator(String text, String finalText, String[] variants,
+                PeriodPrinter beforePrinter, PeriodParser beforeParser,
+<span class="fc" id="L1925">                boolean useBefore, boolean useAfter) {</span>
+<span class="fc" id="L1926">            iText = text;</span>
+<span class="fc" id="L1927">            iFinalText = finalText;</span>
+
+<span class="pc bpc" id="L1929" title="2 of 8 branches missed.">            if ((finalText == null || text.equals(finalText)) &amp;&amp;</span>
+                (variants == null || variants.length == 0)) {
+
+<span class="fc" id="L1932">                iParsedForms = new String[] {text};</span>
+            } else {
+                // Filter and reverse sort the parsed forms.
+<span class="fc" id="L1935">                TreeSet&lt;String&gt; parsedSet = new TreeSet&lt;String&gt;(String.CASE_INSENSITIVE_ORDER);</span>
+<span class="fc" id="L1936">                parsedSet.add(text);</span>
+<span class="fc" id="L1937">                parsedSet.add(finalText);</span>
+<span class="fc bfc" id="L1938" title="All 2 branches covered.">                if (variants != null) {</span>
+<span class="fc bfc" id="L1939" title="All 2 branches covered.">                    for (int i=variants.length; --i&gt;=0; ) {</span>
+<span class="fc" id="L1940">                        parsedSet.add(variants[i]);</span>
+                    }
+                }
+<span class="fc" id="L1943">                ArrayList&lt;String&gt; parsedList = new ArrayList&lt;String&gt;(parsedSet);</span>
+<span class="fc" id="L1944">                Collections.reverse(parsedList);</span>
+<span class="fc" id="L1945">                iParsedForms = parsedList.toArray(new String[parsedList.size()]);</span>
+            }
+
+<span class="fc" id="L1948">            iBeforePrinter = beforePrinter;</span>
+<span class="fc" id="L1949">            iBeforeParser = beforeParser;</span>
+<span class="fc" id="L1950">            iUseBefore = useBefore;</span>
+<span class="fc" id="L1951">            iUseAfter = useAfter;</span>
+<span class="fc" id="L1952">        }</span>
+
+        public int countFieldsToPrint(ReadablePeriod period, int stopAt, Locale locale) {
+<span class="fc" id="L1955">            int sum = iBeforePrinter.countFieldsToPrint(period, stopAt, locale);</span>
+<span class="fc bfc" id="L1956" title="All 2 branches covered.">            if (sum &lt; stopAt) {</span>
+<span class="fc" id="L1957">                sum += iAfterPrinter.countFieldsToPrint(period, stopAt, locale);</span>
+            }
+<span class="fc" id="L1959">            return sum;</span>
+        }
+
+        public int calculatePrintedLength(ReadablePeriod period, Locale locale) {
+<span class="fc" id="L1963">            PeriodPrinter before = iBeforePrinter;</span>
+<span class="fc" id="L1964">            PeriodPrinter after = iAfterPrinter;</span>
+            
+<span class="fc" id="L1966">            int sum = before.calculatePrintedLength(period, locale)</span>
+<span class="fc" id="L1967">                    + after.calculatePrintedLength(period, locale);</span>
+            
+<span class="fc bfc" id="L1969" title="All 2 branches covered.">            if (iUseBefore) {</span>
+<span class="fc bfc" id="L1970" title="All 2 branches covered.">                if (before.countFieldsToPrint(period, 1, locale) &gt; 0) {</span>
+<span class="fc bfc" id="L1971" title="All 2 branches covered.">                    if (iUseAfter) {</span>
+<span class="fc" id="L1972">                        int afterCount = after.countFieldsToPrint(period, 2, locale);</span>
+<span class="fc bfc" id="L1973" title="All 2 branches covered.">                        if (afterCount &gt; 0) {</span>
+<span class="fc bfc" id="L1974" title="All 2 branches covered.">                            sum += (afterCount &gt; 1 ? iText : iFinalText).length();</span>
+                        }
+<span class="fc" id="L1976">                    } else {</span>
+<span class="fc" id="L1977">                        sum += iText.length();</span>
+                    }
+                }
+<span class="pc bpc" id="L1980" title="1 of 4 branches missed.">            } else if (iUseAfter &amp;&amp; after.countFieldsToPrint(period, 1, locale) &gt; 0) {</span>
+<span class="fc" id="L1981">                sum += iText.length();</span>
+            }
+            
+<span class="fc" id="L1984">            return sum;</span>
+        }
+
+        public void printTo(StringBuffer buf, ReadablePeriod period, Locale locale) {
+<span class="fc" id="L1988">            PeriodPrinter before = iBeforePrinter;</span>
+<span class="fc" id="L1989">            PeriodPrinter after = iAfterPrinter;</span>
+            
+<span class="fc" id="L1991">            before.printTo(buf, period, locale);</span>
+<span class="fc bfc" id="L1992" title="All 2 branches covered.">            if (iUseBefore) {</span>
+<span class="fc bfc" id="L1993" title="All 2 branches covered.">                if (before.countFieldsToPrint(period, 1, locale) &gt; 0) {</span>
+<span class="fc bfc" id="L1994" title="All 2 branches covered.">                    if (iUseAfter) {</span>
+<span class="fc" id="L1995">                        int afterCount = after.countFieldsToPrint(period, 2, locale);</span>
+<span class="fc bfc" id="L1996" title="All 2 branches covered.">                        if (afterCount &gt; 0) {</span>
+<span class="fc bfc" id="L1997" title="All 2 branches covered.">                            buf.append(afterCount &gt; 1 ? iText : iFinalText);</span>
+                        }
+<span class="fc" id="L1999">                    } else {</span>
+<span class="fc" id="L2000">                        buf.append(iText);</span>
+                    }
+                }
+<span class="pc bpc" id="L2003" title="1 of 4 branches missed.">            } else if (iUseAfter &amp;&amp; after.countFieldsToPrint(period, 1, locale) &gt; 0) {</span>
+<span class="fc" id="L2004">                buf.append(iText);</span>
+            }
+<span class="fc" id="L2006">            after.printTo(buf, period, locale);</span>
+<span class="fc" id="L2007">        }</span>
+
+        public void printTo(Writer out, ReadablePeriod period, Locale locale) throws IOException {
+<span class="fc" id="L2010">            PeriodPrinter before = iBeforePrinter;</span>
+<span class="fc" id="L2011">            PeriodPrinter after = iAfterPrinter;</span>
+            
+<span class="fc" id="L2013">            before.printTo(out, period, locale);</span>
+<span class="pc bpc" id="L2014" title="1 of 2 branches missed.">            if (iUseBefore) {</span>
+<span class="nc bnc" id="L2015" title="All 2 branches missed.">                if (before.countFieldsToPrint(period, 1, locale) &gt; 0) {</span>
+<span class="nc bnc" id="L2016" title="All 2 branches missed.">                    if (iUseAfter) {</span>
+<span class="nc" id="L2017">                        int afterCount = after.countFieldsToPrint(period, 2, locale);</span>
+<span class="nc bnc" id="L2018" title="All 2 branches missed.">                        if (afterCount &gt; 0) {</span>
+<span class="nc bnc" id="L2019" title="All 2 branches missed.">                            out.write(afterCount &gt; 1 ? iText : iFinalText);</span>
+                        }
+<span class="nc" id="L2021">                    } else {</span>
+<span class="nc" id="L2022">                        out.write(iText);</span>
+                    }
+                }
+<span class="pc bpc" id="L2025" title="2 of 4 branches missed.">            } else if (iUseAfter &amp;&amp; after.countFieldsToPrint(period, 1, locale) &gt; 0) {</span>
+<span class="fc" id="L2026">                out.write(iText);</span>
+            }
+<span class="fc" id="L2028">            after.printTo(out, period, locale);</span>
+<span class="fc" id="L2029">        }</span>
+
+        public int parseInto(
+                ReadWritablePeriod period, String periodStr,
+                int position, Locale locale) {
+<span class="fc" id="L2034">            int oldPos = position;</span>
+<span class="fc" id="L2035">            position = iBeforeParser.parseInto(period, periodStr, position, locale);</span>
+
+<span class="fc bfc" id="L2037" title="All 2 branches covered.">            if (position &lt; 0) {</span>
+<span class="fc" id="L2038">                return position;</span>
+            }
+
+<span class="fc" id="L2041">            boolean found = false;</span>
+<span class="fc" id="L2042">            int parsedFormLength = -1;</span>
+<span class="fc bfc" id="L2043" title="All 2 branches covered.">            if (position &gt; oldPos) {</span>
+                // Consume this separator.
+<span class="fc" id="L2045">                String[] parsedForms = iParsedForms;</span>
+<span class="fc" id="L2046">                int length = parsedForms.length;</span>
+<span class="fc bfc" id="L2047" title="All 2 branches covered.">                for (int i=0; i &lt; length; i++) {</span>
+<span class="fc" id="L2048">                    String parsedForm = parsedForms[i];</span>
+<span class="pc bpc" id="L2049" title="1 of 4 branches missed.">                    if ((parsedForm == null || parsedForm.length() == 0) ||</span>
+<span class="fc bfc" id="L2050" title="All 2 branches covered.">                        periodStr.regionMatches(true, position, parsedForm, 0, parsedForm.length())) {</span>
+                        
+<span class="pc bpc" id="L2052" title="1 of 2 branches missed.">                        parsedFormLength = (parsedForm == null ? 0 : parsedForm.length());</span>
+<span class="fc" id="L2053">                        position += parsedFormLength;</span>
+<span class="fc" id="L2054">                        found = true;</span>
+<span class="fc" id="L2055">                        break;</span>
+                    }
+                }
+            }
+
+<span class="fc" id="L2060">            oldPos = position;</span>
+<span class="fc" id="L2061">            position = iAfterParser.parseInto(period, periodStr, position, locale);</span>
+
+<span class="fc bfc" id="L2063" title="All 2 branches covered.">            if (position &lt; 0) {</span>
+<span class="fc" id="L2064">                return position;</span>
+            }
+
+<span class="fc bfc" id="L2067" title="All 6 branches covered.">            if (found &amp;&amp; position == oldPos &amp;&amp; parsedFormLength &gt; 0) {</span>
+                // Separator should not have been supplied.
+<span class="fc" id="L2069">                return ~oldPos;</span>
+            }
+
+<span class="fc bfc" id="L2072" title="All 6 branches covered.">            if (position &gt; oldPos &amp;&amp; !found &amp;&amp; !iUseBefore) {</span>
+                // Separator was required.
+<span class="fc" id="L2074">                return ~oldPos;</span>
+            }
+
+<span class="fc" id="L2077">            return position;</span>
+        }
+
+        Separator finish(PeriodPrinter afterPrinter, PeriodParser afterParser) {
+<span class="fc" id="L2081">            iAfterPrinter = afterPrinter;</span>
+<span class="fc" id="L2082">            iAfterParser = afterParser;</span>
+<span class="fc" id="L2083">            return this;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Composite implementation that merges other fields to create a full pattern.
+     */
+    static class Composite
+            implements PeriodPrinter, PeriodParser {
+        
+        private final PeriodPrinter[] iPrinters;
+        private final PeriodParser[] iParsers;
+
+<span class="fc" id="L2097">        Composite(List&lt;Object&gt; elementPairs) {</span>
+<span class="fc" id="L2098">            List&lt;Object&gt; printerList = new ArrayList&lt;Object&gt;();</span>
+<span class="fc" id="L2099">            List&lt;Object&gt; parserList = new ArrayList&lt;Object&gt;();</span>
+
+<span class="fc" id="L2101">            decompose(elementPairs, printerList, parserList);</span>
+
+<span class="pc bpc" id="L2103" title="1 of 2 branches missed.">            if (printerList.size() &lt;= 0) {</span>
+<span class="nc" id="L2104">                iPrinters = null;</span>
+            } else {
+<span class="fc" id="L2106">                iPrinters = printerList.toArray(</span>
+<span class="fc" id="L2107">                        new PeriodPrinter[printerList.size()]);</span>
+            }
+
+<span class="pc bpc" id="L2110" title="1 of 2 branches missed.">            if (parserList.size() &lt;= 0) {</span>
+<span class="nc" id="L2111">                iParsers = null;</span>
+            } else {
+<span class="fc" id="L2113">                iParsers = parserList.toArray(</span>
+<span class="fc" id="L2114">                        new PeriodParser[parserList.size()]);</span>
+            }
+<span class="fc" id="L2116">        }</span>
+
+        public int countFieldsToPrint(ReadablePeriod period, int stopAt, Locale locale) {
+<span class="fc" id="L2119">            int sum = 0;</span>
+<span class="fc" id="L2120">            PeriodPrinter[] printers = iPrinters;</span>
+<span class="fc bfc" id="L2121" title="All 4 branches covered.">            for (int i=printers.length; sum &lt; stopAt &amp;&amp; --i&gt;=0; ) {</span>
+<span class="fc" id="L2122">                sum += printers[i].countFieldsToPrint(period, Integer.MAX_VALUE, locale);</span>
+            }
+<span class="fc" id="L2124">            return sum;</span>
+        }
+
+        public int calculatePrintedLength(ReadablePeriod period, Locale locale) {
+<span class="fc" id="L2128">            int sum = 0;</span>
+<span class="fc" id="L2129">            PeriodPrinter[] printers = iPrinters;</span>
+<span class="fc bfc" id="L2130" title="All 2 branches covered.">            for (int i=printers.length; --i&gt;=0; ) {</span>
+<span class="fc" id="L2131">                sum += printers[i].calculatePrintedLength(period, locale);</span>
+            }
+<span class="fc" id="L2133">            return sum;</span>
+        }
+
+        public void printTo(StringBuffer buf, ReadablePeriod period, Locale locale) {
+<span class="fc" id="L2137">            PeriodPrinter[] printers = iPrinters;</span>
+<span class="fc" id="L2138">            int len = printers.length;</span>
+<span class="fc bfc" id="L2139" title="All 2 branches covered.">            for (int i=0; i&lt;len; i++) {</span>
+<span class="fc" id="L2140">                printers[i].printTo(buf, period, locale);</span>
+            }
+<span class="fc" id="L2142">        }</span>
+
+        public void printTo(Writer out, ReadablePeriod period, Locale locale) throws IOException {
+<span class="fc" id="L2145">            PeriodPrinter[] printers = iPrinters;</span>
+<span class="fc" id="L2146">            int len = printers.length;</span>
+<span class="fc bfc" id="L2147" title="All 2 branches covered.">            for (int i=0; i&lt;len; i++) {</span>
+<span class="fc" id="L2148">                printers[i].printTo(out, period, locale);</span>
+            }
+<span class="fc" id="L2150">        }</span>
+
+        public int parseInto(
+                ReadWritablePeriod period, String periodStr,
+                int position, Locale locale) {
+<span class="fc" id="L2155">            PeriodParser[] parsers = iParsers;</span>
+<span class="pc bpc" id="L2156" title="1 of 2 branches missed.">            if (parsers == null) {</span>
+<span class="nc" id="L2157">                throw new UnsupportedOperationException();</span>
+            }
+
+<span class="fc" id="L2160">            int len = parsers.length;</span>
+<span class="fc bfc" id="L2161" title="All 4 branches covered.">            for (int i=0; i&lt;len &amp;&amp; position &gt;= 0; i++) {</span>
+<span class="fc" id="L2162">                position = parsers[i].parseInto(period, periodStr, position, locale);</span>
+            }
+<span class="fc" id="L2164">            return position;</span>
+        }
+
+        private void decompose(List&lt;Object&gt; elementPairs, List&lt;Object&gt; printerList, List&lt;Object&gt; parserList) {
+<span class="fc" id="L2168">            int size = elementPairs.size();</span>
+<span class="fc bfc" id="L2169" title="All 2 branches covered.">            for (int i=0; i&lt;size; i+=2) {</span>
+<span class="fc" id="L2170">                Object element = elementPairs.get(i);</span>
+<span class="fc bfc" id="L2171" title="All 2 branches covered.">                if (element instanceof PeriodPrinter) {</span>
+<span class="fc bfc" id="L2172" title="All 2 branches covered.">                    if (element instanceof Composite) {</span>
+<span class="fc" id="L2173">                        addArrayToList(printerList, ((Composite) element).iPrinters);</span>
+                    } else {
+<span class="fc" id="L2175">                        printerList.add(element);</span>
+                    }
+                }
+
+<span class="fc" id="L2179">                element = elementPairs.get(i + 1);</span>
+<span class="fc bfc" id="L2180" title="All 2 branches covered.">                if (element instanceof PeriodParser) {</span>
+<span class="fc bfc" id="L2181" title="All 2 branches covered.">                    if (element instanceof Composite) {</span>
+<span class="fc" id="L2182">                        addArrayToList(parserList, ((Composite) element).iParsers);</span>
+                    } else {
+<span class="fc" id="L2184">                        parserList.add(element);</span>
+                    }
+                }
+            }
+<span class="fc" id="L2188">        }</span>
+
+        private void addArrayToList(List&lt;Object&gt; list, Object[] array) {
+<span class="pc bpc" id="L2191" title="1 of 2 branches missed.">            if (array != null) {</span>
+<span class="fc bfc" id="L2192" title="All 2 branches covered.">                for (int i=0; i&lt;array.length; i++) {</span>
+<span class="fc" id="L2193">                    list.add(array[i]);</span>
+                }
+            }
+<span class="fc" id="L2196">        }</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

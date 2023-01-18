@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LongConverter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.convert</a> &gt; <span class="el_source">LongConverter.java</span></div><h1>LongConverter.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.convert;
+
+import org.joda.time.Chronology;
+
+/**
+ * LongConverter converts a Long to an instant, partial or duration.
+ * The Long value represents milliseconds in the ISO chronology.
+ *
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+class LongConverter extends AbstractConverter
+        implements InstantConverter, PartialConverter, DurationConverter {
+
+    /**
+     * Singleton instance.
+     */
+<span class="fc" id="L34">    static final LongConverter INSTANCE = new LongConverter();</span>
+
+    /**
+     * Restricted constructor.
+     */
+    protected LongConverter() {
+<span class="fc" id="L40">        super();</span>
+<span class="fc" id="L41">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the millisecond instant, which is the Long value.
+     * 
+     * @param object  the Long to convert, must not be null
+     * @param chrono  the chronology to use, which is always non-null
+     * @return the millisecond value
+     * @throws NullPointerException if the object is null
+     * @throws ClassCastException if the object is an invalid type
+     */
+    public long getInstantMillis(Object object, Chronology chrono) {
+<span class="fc" id="L54">        return ((Long) object).longValue();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the millisecond duration, which is the Long value.
+     * 
+     * @param object  the Long to convert, must not be null
+     * @return the millisecond duration
+     * @throws NullPointerException if the object is null
+     * @throws ClassCastException if the object is an invalid type
+     */
+    public long getDurationMillis(Object object) {
+<span class="fc" id="L67">        return ((Long) object).longValue();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns Long.class.
+     * 
+     * @return Long.class
+     */
+    public Class&lt;?&gt; getSupportedType() {
+<span class="fc" id="L77">        return Long.class;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

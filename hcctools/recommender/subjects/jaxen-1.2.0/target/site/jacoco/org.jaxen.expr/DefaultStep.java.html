@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultStep.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.expr</a> &gt; <span class="el_source">DefaultStep.java</span></div><h1>DefaultStep.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+package org.jaxen.expr;
+
+import org.jaxen.Context;
+import org.jaxen.ContextSupport;
+import org.jaxen.JaxenException;
+import org.jaxen.UnsupportedAxisException;
+import org.jaxen.expr.iter.IterableAxis;
+import org.jaxen.saxpath.Axis;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * @deprecated this class will become non-public in the future;
+ * use the interface instead
+ */
+public abstract class DefaultStep implements Step {
+    private IterableAxis axis;
+    private PredicateSet predicates;
+
+<span class="fc" id="L68">    public DefaultStep(IterableAxis axis, PredicateSet predicates) {</span>
+<span class="fc" id="L69">        this.axis = axis;</span>
+<span class="fc" id="L70">        this.predicates = predicates;</span>
+<span class="fc" id="L71">    }</span>
+
+    public void addPredicate(Predicate predicate) {
+<span class="fc" id="L74">        this.predicates.addPredicate(predicate);</span>
+<span class="fc" id="L75">    }</span>
+
+    public List getPredicates() {
+<span class="fc" id="L78">        return this.predicates.getPredicates();</span>
+    }
+
+    public PredicateSet getPredicateSet() {
+<span class="fc" id="L82">        return this.predicates;</span>
+    }
+
+    public int getAxis() {
+<span class="fc" id="L86">        return this.axis.value();</span>
+    }
+
+    public IterableAxis getIterableAxis() {
+<span class="fc" id="L90">        return this.axis;</span>
+    }
+
+    public String getAxisName() {
+<span class="fc" id="L94">        return Axis.lookup(getAxis());</span>
+    }
+
+    public String getText() {
+<span class="fc" id="L98">        return this.predicates.getText();</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L102">        return getIterableAxis() + &quot; &quot; + super.toString();</span>
+    }
+
+    public void simplify() {
+<span class="fc" id="L106">        this.predicates.simplify();</span>
+<span class="fc" id="L107">    }</span>
+
+    public Iterator axisIterator(Object contextNode, ContextSupport support)
+            throws UnsupportedAxisException {
+<span class="fc" id="L111">        return getIterableAxis().iterator(contextNode, support);</span>
+    }
+
+    public List evaluate(final Context context) throws JaxenException {
+<span class="fc" id="L115">        final List contextNodeSet = context.getNodeSet();</span>
+<span class="fc" id="L116">        final IdentitySet unique = new IdentitySet();</span>
+<span class="fc" id="L117">        final int contextSize = contextNodeSet.size();</span>
+
+        // ???? try linked lists instead?
+        // ???? initial size for these?
+<span class="fc" id="L121">        final ArrayList interimSet = new ArrayList();</span>
+<span class="fc" id="L122">        final ArrayList newNodeSet = new ArrayList();</span>
+<span class="fc" id="L123">        final ContextSupport support = context.getContextSupport();</span>
+
+        // ???? use iterator instead
+<span class="fc bfc" id="L126" title="All 2 branches covered.">        for (int i = 0; i &lt; contextSize; ++i) {</span>
+<span class="fc" id="L127">            Object eachContextNode = contextNodeSet.get(i);</span>
+
+
+            /* See jaxen-106. Might be able to optimize this by doing
+             * specific matching for individual axes. For instance on namespace axis
+             * we should only get namespace nodes and on attribute axes we only get
+             * attribute nodes. Self and parent axes have single members.
+             * Children, descendant, ancestor, and sibling axes never
+             * see any attributes or namespaces
+             */
+<span class="fc" id="L137">            Iterator axisNodeIter = axis.iterator(eachContextNode, support);</span>
+<span class="fc bfc" id="L138" title="All 2 branches covered.">            while (axisNodeIter.hasNext()) {</span>
+<span class="fc" id="L139">                Object eachAxisNode = axisNodeIter.next();</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">                if (!unique.contains(eachAxisNode)) {</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">                    if (matches(eachAxisNode, support)) {</span>
+<span class="fc" id="L142">                        unique.add(eachAxisNode);</span>
+<span class="fc" id="L143">                        interimSet.add(eachAxisNode);</span>
+                    }
+                }
+<span class="fc" id="L146">            }</span>
+<span class="fc" id="L147">            newNodeSet.addAll(getPredicateSet().evaluatePredicates(</span>
+                    interimSet, support));
+<span class="fc" id="L149">            interimSet.clear();</span>
+        }
+<span class="fc" id="L151">        return newNodeSet;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

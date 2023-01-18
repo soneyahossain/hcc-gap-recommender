@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasicSingleEraDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">BasicSingleEraDateTimeField.java</span></div><h1>BasicSingleEraDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2005 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import java.util.Locale;
+
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+import org.joda.time.DurationFieldType;
+import org.joda.time.IllegalFieldValueException;
+import org.joda.time.field.BaseDateTimeField;
+import org.joda.time.field.FieldUtils;
+import org.joda.time.field.UnsupportedDurationField;
+
+/**
+ * Provides time calculations for the coptic era component of time.
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.2, refactored from CopticEraDateTimeField
+ */
+final class BasicSingleEraDateTimeField extends BaseDateTimeField {
+
+    /**
+     * Value of the era, which will be the same as DateTimeConstants.CE.
+     */
+    private static final int ERA_VALUE = DateTimeConstants.CE;
+    /**
+     * Text value of the era.
+     */
+    private final String iEraText;
+
+    /**
+     * Restricted constructor.
+     */
+    BasicSingleEraDateTimeField(String text) {
+<span class="fc" id="L51">        super(DateTimeFieldType.era());</span>
+<span class="fc" id="L52">        iEraText = text;</span>
+<span class="fc" id="L53">    }</span>
+
+    /** @inheritDoc */
+    public boolean isLenient() {
+<span class="fc" id="L57">        return false;</span>
+    }
+
+    /** @inheritDoc */
+    public int get(long instant) {
+<span class="fc" id="L62">        return ERA_VALUE;</span>
+    }
+
+    /** @inheritDoc */
+    public long set(long instant, int era) {
+<span class="nc" id="L67">        FieldUtils.verifyValueBounds(this, era, ERA_VALUE, ERA_VALUE);</span>
+<span class="nc" id="L68">        return instant;</span>
+    }
+
+    /** @inheritDoc */
+    public long set(long instant, String text, Locale locale) {
+<span class="nc bnc" id="L73" title="All 4 branches missed.">        if (iEraText.equals(text) == false &amp;&amp; &quot;1&quot;.equals(text) == false) {</span>
+<span class="nc" id="L74">            throw new IllegalFieldValueException(DateTimeFieldType.era(), text);</span>
+        }
+<span class="nc" id="L76">        return instant;</span>
+    }
+
+    /** @inheritDoc */
+    public long roundFloor(long instant) {
+<span class="nc" id="L81">        return Long.MIN_VALUE;</span>
+    }
+
+    /** @inheritDoc */
+    public long roundCeiling(long instant) {
+<span class="nc" id="L86">        return Long.MAX_VALUE;</span>
+    }
+
+    /** @inheritDoc */
+    public long roundHalfFloor(long instant) {
+<span class="nc" id="L91">        return Long.MIN_VALUE;</span>
+    }
+
+    /** @inheritDoc */
+    public long roundHalfCeiling(long instant) {
+<span class="nc" id="L96">        return Long.MIN_VALUE;</span>
+    }
+
+    /** @inheritDoc */
+    public long roundHalfEven(long instant) {
+<span class="nc" id="L101">        return Long.MIN_VALUE;</span>
+    }
+
+    /** @inheritDoc */
+    public DurationField getDurationField() {
+<span class="fc" id="L106">        return UnsupportedDurationField.getInstance(DurationFieldType.eras());</span>
+    }
+
+    /** @inheritDoc */
+    public DurationField getRangeDurationField() {
+<span class="fc" id="L111">        return null;</span>
+    }
+
+    /** @inheritDoc */
+    public int getMinimumValue() {
+<span class="nc" id="L116">        return ERA_VALUE;</span>
+    }
+
+    /** @inheritDoc */
+    public int getMaximumValue() {
+<span class="nc" id="L121">        return ERA_VALUE;</span>
+    }
+
+    /** @inheritDoc */
+    public String getAsText(int fieldValue, Locale locale) {
+<span class="fc" id="L126">        return iEraText;</span>
+    }
+
+    /** @inheritDoc */
+    public int getMaximumTextLength(Locale locale) {
+<span class="nc" id="L131">        return iEraText.length();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

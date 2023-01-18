@@ -1,0 +1,42 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  1.1% done, time left: unknown  2.5% done, time left: unknown  2.7% done, time left: unknown  3.0% done, time left: unknown  3.2% done, time left: unknown  3.8% done, time left: unknown  4.6% done, time left: unknown  5.4% done, time left:   0:00:11    5.5% done, time left:   0:00:16  5.5% done, time left:   0:00:22  5.9% done, time left:   0:00:24  6.0% done, time left:   0:00:26  7.4% done, time left:   0:00:26  9.5% done, time left:   0:00:25  9.6% done, time left:   0:00:23  9.8% done, time left:   0:00:21 10.1% done, time left:   0:00:20 12.8% done, time left:   0:00:18 12.8% done, time left:   0:00:15 12.8% done, time left:   0:00:13 12.8% done, time left:   0:00:11 12.8% done, time left:   0:00:10 14.8% done, time left:   0:00:10 18.3% done, time left:   0:00:08 21.9% done, time left:   0:00:06 23.5% done, time left:   0:00:05 27.4% done, time left:   0:00:04 31.3% done, time left:   0:00:03 34.5% done, time left:   0:00:02 37.2% done, time left:   0:00:02 40.9% done, time left:   0:00:02 44.9% done, time left:   0:00:01 49.0% done, time left:   0:00:01 53.2% done, time left:   0:00:01 57.2% done, time left:   0:00:00 61.2% done, time left:   0:00:00 63.9% done, time left:   0:00:00 65.8% done, time left:   0:00:00 69.2% done, time left:   0:00:00 71.0% done, time left:   0:00:00 73.8% done, time left:   0:00:00 76.0% done, time left:   0:00:00 79.2% done, time left:   0:00:00 82.4% done, time left:   0:00:00 85.5% done, time left:   0:00:00 89.1% done, time left:   0:00:00 90.2% done, time left:   0:00:00 90.3% done, time left:   0:00:00 90.4% done, time left:   0:00:00 92.4% done, time left:   0:00:00 95.9% done, time left:   0:00:00 98.4% done, time left:   0:00:00 99.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestMinutes.testToStandardWeeks:248:*]:
+org.joda.time.Minutes.minutes:72 ILOAD 0
+org.joda.time.Minutes.minutes:72 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, -2147483648 => L5, 0 => L0, 2147483647 => L4* => L6)
+org.joda.time.Minutes.minutes:86 NEW org/joda/time/Minutes
+org.joda.time.Minutes.minutes:86 DUP
+org.joda.time.Minutes.minutes:86 ILOAD 0
+org.joda.time.Minutes.minutes:86 INVOKESPECIAL org/joda/time/Minutes.<init>(I)V
+org.joda.time.Minutes.minutes:86 ARETURN
+org.joda.time.Minutes.<init>:198 ALOAD 0
+org.joda.time.Minutes.<init>:198 ILOAD 1
+org.joda.time.Minutes.<init>:198 INVOKESPECIAL org/joda/time/base/BaseSingleFieldPeriod.<init>(I)V
+org.joda.time.Minutes.toStandardWeeks:244 ALOAD 0
+org.joda.time.Minutes.toStandardWeeks:244 INVOKEVIRTUAL org/joda/time/Minutes.getValue()I
+org.joda.time.Minutes.toStandardWeeks:244 SIPUSH 10080
+org.joda.time.Minutes.toStandardWeeks:244 IDIV
+org.joda.time.Minutes.toStandardWeeks:244 INVOKESTATIC org/joda/time/Weeks.weeks(I)Lorg/joda/time/Weeks;
+org.joda.time.Minutes.toStandardWeeks:244 ARETURN
+org.joda.time.TestMinutes.main:52 INVOKEVIRTUAL org/joda/time/TestMinutes.testToStandardWeeks()V
+org.joda.time.TestMinutes.testToStandardWeeks:246 SIPUSH 20160
+org.joda.time.TestMinutes.testToStandardWeeks:246 INVOKESTATIC org/joda/time/Minutes.minutes(I)Lorg/joda/time/Minutes;
+org.joda.time.TestMinutes.testToStandardWeeks:246 ASTORE 1
+org.joda.time.TestMinutes.testToStandardWeeks:247 ICONST_2
+org.joda.time.TestMinutes.testToStandardWeeks:247 INVOKESTATIC org/joda/time/Weeks.weeks(I)Lorg/joda/time/Weeks;
+org.joda.time.TestMinutes.testToStandardWeeks:247 ASTORE 2
+org.joda.time.TestMinutes.testToStandardWeeks:248 ALOAD 2
+org.joda.time.TestMinutes.testToStandardWeeks:248 ALOAD 1
+org.joda.time.TestMinutes.testToStandardWeeks:248 INVOKEVIRTUAL org/joda/time/Minutes.toStandardWeeks()Lorg/joda/time/Weeks;
+org.joda.time.TestMinutes.testToStandardWeeks:248 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.Weeks.weeks:72 ILOAD 0
+org.joda.time.Weeks.weeks:72 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, -2147483648 => L5, 0 => L0, 2147483647 => L4* => L6)
+org.joda.time.Weeks.weeks:78 GETSTATIC org/joda/time/Weeks.TWO Lorg/joda/time/Weeks;
+org.joda.time.Weeks.weeks:78 ARETURN
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ILOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 PUTFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+
+Slice consists of 37 bytecode instructions.
+Computation took 5.79 seconds.

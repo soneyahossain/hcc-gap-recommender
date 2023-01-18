@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NumberFunction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.function</a> &gt; <span class="el_source">NumberFunction.java</span></div><h1>NumberFunction.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ * 
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ * 
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ * 
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived 
+ *     from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the Jaxen Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ * 
+ * $Id$
+ */
+
+package org.jaxen.function;
+
+import java.util.Iterator;
+import java.util.List;
+
+import org.jaxen.Context;
+import org.jaxen.Function;
+import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
+
+/**
+ * &lt;p&gt;
+ * &lt;b&gt;4.4&lt;/b&gt; &lt;code&gt;&lt;i&gt;number&lt;/i&gt; number(&lt;i&gt;object&lt;/i&gt;)&lt;/code&gt;
+ * 
+ * 
+ * &lt;blockquote cite=&quot;http://www.w3.org/TR/xpath#function-number&quot;&gt;
+ * &lt;p&gt;
+ * The &lt;b&gt;number&lt;/b&gt; function converts
+ * its argument to a number as follows:
+ * &lt;/p&gt;
+ * 
+ * &lt;ul&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * a string that consists of optional whitespace followed by an optional
+ * minus sign followed by a &lt;a href=&quot;#NT-Number&quot;&gt;Number&lt;/a&gt; followed by
+ * whitespace is converted to the IEEE 754 number that is nearest
+ * (according to the IEEE 754 round-to-nearest rule) to the mathematical
+ * value represented by the string; any other string is converted to NaN
+ * &lt;/p&gt;
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * boolean true is converted to 1; boolean false is converted to 0
+ * &lt;/p&gt;
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * 
+ * &lt;p&gt;
+ * a node-set is first converted to a string as if by a call to the &lt;b&gt;&lt;a
+ * href=&quot;https://www.w3.org/TR/xpath#function-string&quot; target=&quot;_top&quot;&gt;string&lt;/a&gt;&lt;/b&gt; function and then converted
+ * in the same way as a string argument
+ * &lt;/p&gt;
+ * 
+ * &lt;/li&gt;
+ * 
+ * &lt;li&gt;
+ * &lt;p&gt;
+ * an object of a type other than the four basic types is converted to a
+ * number in a way that is dependent on that type
+ * &lt;/p&gt;
+ * &lt;/li&gt;
+ * 
+ * &lt;/ul&gt;
+ * 
+ * &lt;p&gt;
+ * If the argument is omitted, it defaults to a node-set with the
+ * context node as its only member.
+ * &lt;/p&gt;
+ * 
+ * &lt;blockquote&gt; &lt;b&gt;NOTE: &lt;/b&gt;The &lt;b&gt;number&lt;/b&gt;
+ * function should not be used for conversion of numeric data occurring
+ * in an element in an XML document unless the element is of a type that
+ * represents numeric data in a language-neutral format (which would
+ * typically be transformed into a language-specific format for
+ * presentation to a user). In addition, the &lt;b&gt;number&lt;/b&gt; function cannot be used
+ * unless the language-neutral format used by the element is consistent
+ * with the XPath syntax for a &lt;a href=&quot;https://www.w3.org/TR/xpath#NT-Number&quot;&gt;Number&lt;/a&gt;.&lt;/blockquote&gt;
+ * 
+ * &lt;/blockquote&gt;
+ * 
+ * @author bob mcwhirter (bob @ werken.com)
+ * 
+ * @see &lt;a href=&quot;https://www.w3.org/TR/xpath#function-number&quot;
+ *      target=&quot;_top&quot;&gt;Section 4.4 of the XPath Specification&lt;/a&gt;
+ */
+public class NumberFunction implements Function
+{
+
+<span class="fc" id="L130">    private final static Double NaN = new Double( Double.NaN );</span>
+    
+    
+    /**
+     * Create a new &lt;code&gt;NumberFunction&lt;/code&gt; object.
+     */
+<span class="fc" id="L136">    public NumberFunction() {}</span>
+
+    /** 
+     * Returns the number value of &lt;code&gt;args.get(0)&lt;/code&gt;,
+     * or the number value of the context node if &lt;code&gt;args&lt;/code&gt;
+     * is empty.
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args a list containing the single item to be converted to a 
+     *     &lt;code&gt;Double&lt;/code&gt;
+     * 
+     * @return a &lt;code&gt;Double&lt;/code&gt;
+     * 
+     * @throws FunctionCallException if &lt;code&gt;args&lt;/code&gt; has more than one item
+     */
+    public Object call(Context context, List args) throws FunctionCallException
+    {
+<span class="fc bfc" id="L154" title="All 2 branches covered.">        if (args.size() == 1)</span>
+        {
+<span class="fc" id="L156">            return evaluate( args.get(0), context.getNavigator() );</span>
+        }
+<span class="fc bfc" id="L158" title="All 2 branches covered.">        else if (args.size() == 0)</span>
+        {
+<span class="fc" id="L160">            return evaluate( context.getNodeSet(), context.getNavigator() );</span>
+        }
+    
+<span class="fc" id="L163">        throw new FunctionCallException( &quot;number() takes at most one argument.&quot; );</span>
+    }
+
+    /** 
+     * Returns the number value of &lt;code&gt;obj&lt;/code&gt;.
+     *
+     * @param obj the object to be converted to a number
+     * @param nav the &lt;code&gt;Navigator&lt;/code&gt; used to calculate the string-value
+     *     of node-sets
+     * 
+     * @return a &lt;code&gt;Double&lt;/code&gt;
+     */
+    public static Double evaluate(Object obj, Navigator nav)
+    {
+<span class="fc bfc" id="L177" title="All 2 branches covered.">        if( obj instanceof Double )</span>
+        {
+<span class="fc" id="L179">            return (Double) obj;</span>
+        }
+<span class="fc bfc" id="L181" title="All 2 branches covered.">        else if ( obj instanceof String )</span>
+        {
+<span class="fc" id="L183">            String str = (String) obj;</span>
+            try
+            {
+<span class="fc" id="L186">                Double doubleValue = new Double( str );        </span>
+<span class="fc" id="L187">                return doubleValue;</span>
+            }
+<span class="fc" id="L189">            catch (NumberFormatException e)</span>
+            {
+<span class="fc" id="L191">                return NaN;</span>
+            }
+        }
+<span class="pc bpc" id="L194" title="1 of 4 branches missed.">        else if ( obj instanceof List || obj instanceof Iterator )</span>
+        {
+<span class="fc" id="L196">          return evaluate( StringFunction.evaluate( obj, nav ), nav );</span>
+        }
+<span class="fc bfc" id="L198" title="All 4 branches covered.">        else if ( nav.isElement( obj ) || nav.isAttribute( obj ) </span>
+<span class="fc bfc" id="L199" title="All 6 branches covered.">                || nav.isText( obj ) || nav.isComment( obj ) || nav.isProcessingInstruction( obj ) </span>
+<span class="pc bpc" id="L200" title="2 of 4 branches missed.">                || nav.isDocument( obj ) || nav.isNamespace( obj ))</span>
+        {
+<span class="fc" id="L202">            return evaluate( StringFunction.evaluate( obj, nav ), nav );</span>
+        }
+<span class="fc bfc" id="L204" title="All 2 branches covered.">        else if ( obj instanceof Boolean )</span>
+          {
+<span class="fc bfc" id="L206" title="All 2 branches covered.">          if ( Boolean.TRUE.equals(obj) )</span>
+          {
+<span class="fc" id="L208">              return new Double( 1 );</span>
+          }
+          else
+          {
+<span class="fc" id="L212">              return new Double( 0 );</span>
+          }
+        }    
+<span class="fc" id="L215">        return NaN;</span>
+    }
+  
+  /**
+   * Determines whether the argument is not a number (NaN) as defined
+   * by IEEE 754.
+   * 
+   * @param val the double to test
+   * @return true if the value is NaN, false otherwise
+   */
+    public static boolean isNaN( double val )
+    {
+<span class="fc" id="L227">        return Double.isNaN(val);</span>
+    }
+  
+  /**
+   * Determines whether the argument is not a number (NaN) as defined
+   * by IEEE 754.
+   * 
+   * @param val the &lt;code&gt;Double&lt;/code&gt; to test
+   * @return true if the value is NaN, false otherwise
+   */
+    public static boolean isNaN( Double val )
+    {
+<span class="fc" id="L239">        return val.equals( NaN );</span>
+    }  
+  
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,40 @@
+ 0.0% done, time left: unknown                                0.3% done, time left: unknown  1.0% done, time left: unknown  2.1% done, time left: unknown  3.4% done, time left: unknown  4.8% done, time left: unknown  6.7% done, time left: unknown  8.0% done, time left:   0:00:07    9.2% done, time left:   0:00:07  9.7% done, time left:   0:00:08  9.9% done, time left:   0:00:08  9.9% done, time left:   0:00:10  9.9% done, time left:   0:00:11  9.9% done, time left:   0:00:12 10.1% done, time left:   0:00:13 10.6% done, time left:   0:00:14 10.7% done, time left:   0:00:15 10.8% done, time left:   0:00:16 10.8% done, time left:   0:00:17 10.8% done, time left:   0:00:18 10.8% done, time left:   0:00:19 13.1% done, time left:   0:00:19 15.1% done, time left:   0:00:18 16.4% done, time left:   0:00:16 17.5% done, time left:   0:00:15 20.1% done, time left:   0:00:13 22.7% done, time left:   0:00:11 25.2% done, time left:   0:00:09 28.2% done, time left:   0:00:07 31.4% done, time left:   0:00:05 34.9% done, time left:   0:00:04 38.4% done, time left:   0:00:03 41.9% done, time left:   0:00:02 44.7% done, time left:   0:00:02 47.5% done, time left:   0:00:01 49.7% done, time left:   0:00:01 52.9% done, time left:   0:00:01 55.8% done, time left:   0:00:01 56.9% done, time left:   0:00:00 57.0% done, time left:   0:00:00 57.9% done, time left:   0:00:00 61.1% done, time left:   0:00:01 63.9% done, time left:   0:00:00 64.0% done, time left:   0:00:00 64.2% done, time left:   0:00:00 64.6% done, time left:   0:00:00 65.0% done, time left:   0:00:00 68.8% done, time left:   0:00:00 74.9% done, time left:   0:00:00 76.6% done, time left:   0:00:00 85.2% done, time left:   0:00:00 85.6% done, time left:   0:00:00 96.7% done, time left:   0:00:00 98.2% done, time left:   0:00:00 98.8% done, time left:   0:00:00 98.9% done, time left:   0:00:00 99.9% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:659:*]:
+org.joda.time.LocalDateTime.<init>:413 ALOAD 0
+org.joda.time.LocalDateTime.<init>:413 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalDateTime.<init>:413 PUTFIELD org/joda/time/LocalDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDateTime.getChronology:660 ALOAD 0
+org.joda.time.LocalDateTime.getChronology:660 GETFIELD org/joda/time/LocalDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDateTime.getChronology:660 ARETURN
+org.joda.time.LocalDateTime.getHourOfDay:1641 ALOAD 0
+org.joda.time.LocalDateTime.getHourOfDay:1641 INVOKEVIRTUAL org/joda/time/LocalDateTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalDateTime.getHourOfDay:1641 INVOKEVIRTUAL org/joda/time/Chronology.hourOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalDateTime.getHourOfDay:1641 INVOKEVIRTUAL org/joda/time/DateTimeField.get(J)I
+org.joda.time.LocalDateTime.getHourOfDay:1641 IRETURN
+org.joda.time.TestLocalDateTime_Constructors.main:117 INVOKEVIRTUAL org/joda/time/TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology()V
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:654 NEW org/joda/time/LocalDateTime
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:654 DUP
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:654 GETSTATIC org/joda/time/TestLocalDateTime_Constructors.BUDDHIST_UTC Lorg/joda/time/Chronology;
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:654 INVOKESPECIAL org/joda/time/LocalDateTime.<init>(Ljava/lang/Object;Lorg/joda/time/Chronology;)V
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:654 ASTORE 2
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:655 ALOAD 2
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:655 INVOKEVIRTUAL org/joda/time/LocalDateTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:659 LDC 12
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:659 ALOAD 2
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:659 INVOKEVIRTUAL org/joda/time/LocalDateTime.getHourOfDay()I
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:659 I2L
+org.joda.time.TestLocalDateTime_Constructors.testConstructor_Object_Chronology_crossChronology:659 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 ALOAD 0
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 GETFIELD org/joda/time/chrono/AssembledChronology.iHourOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 ARETURN
+org.joda.time.chrono.BuddhistChronology.withUTC:151 GETSTATIC org/joda/time/chrono/BuddhistChronology.INSTANCE_UTC Lorg/joda/time/chrono/BuddhistChronology;
+org.joda.time.chrono.BuddhistChronology.withUTC:151 ARETURN
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 ALOAD 0
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 INVOKEVIRTUAL org/joda/time/chrono/LimitChronology$LimitDateTimeField.getWrappedField()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 IRETURN
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 ALOAD 0
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 GETFIELD org/joda/time/field/DecoratedDateTimeField.iField Lorg/joda/time/DateTimeField;
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 ARETURN
+
+Slice consists of 35 bytecode instructions.
+Computation took 6.37 seconds.

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasicGJChronology.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">BasicGJChronology.java</span></div><h1>BasicGJChronology.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeConstants;
+
+/**
+ * Abstract Chronology for implementing chronologies based on Gregorian/Julian formulae.
+ * Most of the utility methods required by subclasses are package-private,
+ * reflecting the intention that they be defined in the same package.
+ * &lt;p&gt;
+ * BasicGJChronology is thread-safe and immutable, and all subclasses must
+ * be as well.
+ *
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @author Guy Allard
+ * @since 1.2, refactored from CommonGJChronology
+ */
+abstract class BasicGJChronology extends BasicChronology {
+
+    /** Serialization lock */
+    private static final long serialVersionUID = 538276888268L;
+
+    // These arrays are NOT public. We trust ourselves not to alter the array.
+    // They use zero-based array indexes so the that valid range of months is
+    // automatically checked.
+<span class="fc" id="L42">    private static final int[] MIN_DAYS_PER_MONTH_ARRAY = {</span>
+        31,28,31,30,31,30,31,31,30,31,30,31
+    };
+<span class="fc" id="L45">    private static final int[] MAX_DAYS_PER_MONTH_ARRAY = {</span>
+        31,29,31,30,31,30,31,31,30,31,30,31
+    };
+    private static final long[] MIN_TOTAL_MILLIS_BY_MONTH_ARRAY;
+    private static final long[] MAX_TOTAL_MILLIS_BY_MONTH_ARRAY;
+    private static final long FEB_29 = (31L + 29 - 1) * DateTimeConstants.MILLIS_PER_DAY;
+
+    static {
+<span class="fc" id="L53">        MIN_TOTAL_MILLIS_BY_MONTH_ARRAY = new long[12];</span>
+<span class="fc" id="L54">        MAX_TOTAL_MILLIS_BY_MONTH_ARRAY = new long[12];</span>
+
+<span class="fc" id="L56">        long minSum = 0;</span>
+<span class="fc" id="L57">        long maxSum = 0;</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        for (int i = 0; i &lt; 11; i++) {</span>
+<span class="fc" id="L59">            long millis = MIN_DAYS_PER_MONTH_ARRAY[i]</span>
+                * (long)DateTimeConstants.MILLIS_PER_DAY;
+<span class="fc" id="L61">            minSum += millis;</span>
+<span class="fc" id="L62">            MIN_TOTAL_MILLIS_BY_MONTH_ARRAY[i + 1] = minSum;</span>
+
+<span class="fc" id="L64">            millis = MAX_DAYS_PER_MONTH_ARRAY[i]</span>
+                * (long)DateTimeConstants.MILLIS_PER_DAY;
+<span class="fc" id="L66">            maxSum += millis;</span>
+<span class="fc" id="L67">            MAX_TOTAL_MILLIS_BY_MONTH_ARRAY[i + 1] = maxSum;</span>
+        }
+<span class="fc" id="L69">    }</span>
+
+    /**
+     * Constructor.
+     */
+    BasicGJChronology(Chronology base, Object param, int minDaysInFirstWeek) {
+<span class="fc" id="L75">        super(base, param, minDaysInFirstWeek);</span>
+<span class="fc" id="L76">    }</span>
+
+    //-----------------------------------------------------------------------
+    @Override
+    boolean isLeapDay(long instant) {
+<span class="pc bpc" id="L81" title="1 of 4 branches missed.">        return dayOfMonth().get(instant) == 29 &amp;&amp; monthOfYear().isLeap(instant);</span>
+    }
+
+    int getMonthOfYear(long millis, int year) {
+        // Perform a binary search to get the month. To make it go even faster,
+        // compare using ints instead of longs. The number of milliseconds per
+        // year exceeds the limit of a 32-bit int's capacity, so divide by
+        // 1024. No precision is lost (except time of day) since the number of
+        // milliseconds per day contains 1024 as a factor. After the division,
+        // the instant isn't measured in milliseconds, but in units of
+        // (128/125)seconds.
+
+<span class="fc" id="L93">        int i = (int)((millis - getYearMillis(year)) &gt;&gt; 10);</span>
+
+        // There are 86400000 milliseconds per day, but divided by 1024 is
+        // 84375. There are 84375 (128/125)seconds per day.
+
+<span class="fc" id="L98">        return</span>
+<span class="fc bfc" id="L99" title="All 46 branches covered.">            (isLeapYear(year))</span>
+            ? ((i &lt; 182 * 84375)
+               ? ((i &lt; 91 * 84375)
+                  ? ((i &lt; 31 * 84375) ? 1 : (i &lt; 60 * 84375) ? 2 : 3)
+                  : ((i &lt; 121 * 84375) ? 4 : (i &lt; 152 * 84375) ? 5 : 6))
+               : ((i &lt; 274 * 84375)
+                  ? ((i &lt; 213 * 84375) ? 7 : (i &lt; 244 * 84375) ? 8 : 9)
+                  : ((i &lt; 305 * 84375) ? 10 : (i &lt; 335 * 84375) ? 11 : 12)))
+            : ((i &lt; 181 * 84375)
+               ? ((i &lt; 90 * 84375)
+                  ? ((i &lt; 31 * 84375) ? 1 : (i &lt; 59 * 84375) ? 2 : 3)
+                  : ((i &lt; 120 * 84375) ? 4 : (i &lt; 151 * 84375) ? 5 : 6))
+               : ((i &lt; 273 * 84375)
+                  ? ((i &lt; 212 * 84375) ? 7 : (i &lt; 243 * 84375) ? 8 : 9)
+                  : ((i &lt; 304 * 84375) ? 10 : (i &lt; 334 * 84375) ? 11 : 12)));
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the number of days in the specified month and year.
+     * 
+     * @param year  the year
+     * @param month  the month
+     * @return the number of days
+     */
+    int getDaysInYearMonth(int year, int month) {
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        if (isLeapYear(year)) {</span>
+<span class="fc" id="L126">            return MAX_DAYS_PER_MONTH_ARRAY[month - 1];</span>
+        } else {
+<span class="fc" id="L128">            return MIN_DAYS_PER_MONTH_ARRAY[month - 1];</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    int getDaysInMonthMax(int month) {
+<span class="fc" id="L134">        return MAX_DAYS_PER_MONTH_ARRAY[month - 1];</span>
+    }
+
+    //-----------------------------------------------------------------------
+    int getDaysInMonthMaxForSet(long instant, int value) {
+<span class="fc bfc" id="L139" title="All 4 branches covered.">        return ((value &gt; 28 || value &lt; 1) ? getDaysInMonthMax(instant) : 28);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    long getTotalMillisByYearMonth(int year, int month) {
+<span class="fc bfc" id="L144" title="All 2 branches covered.">        if (isLeapYear(year)) {</span>
+<span class="fc" id="L145">            return MAX_TOTAL_MILLIS_BY_MONTH_ARRAY[month - 1];</span>
+        } else {
+<span class="fc" id="L147">            return MIN_TOTAL_MILLIS_BY_MONTH_ARRAY[month - 1];</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    long getYearDifference(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L153">        int minuendYear = getYear(minuendInstant);</span>
+<span class="fc" id="L154">        int subtrahendYear = getYear(subtrahendInstant);</span>
+    
+        // Inlined remainder method to avoid duplicate calls to get.
+<span class="fc" id="L157">        long minuendRem = minuendInstant - getYearMillis(minuendYear);</span>
+<span class="fc" id="L158">        long subtrahendRem = subtrahendInstant - getYearMillis(subtrahendYear);</span>
+    
+        // Balance leap year differences on remainders.
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        if (subtrahendRem &gt;= FEB_29) {</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">            if (isLeapYear(subtrahendYear)) {</span>
+<span class="fc bfc" id="L163" title="All 2 branches covered.">                if (!isLeapYear(minuendYear)) {</span>
+<span class="fc" id="L164">                    subtrahendRem -= DateTimeConstants.MILLIS_PER_DAY;</span>
+                }
+<span class="pc bpc" id="L166" title="1 of 4 branches missed.">            } else if (minuendRem &gt;= FEB_29 &amp;&amp; isLeapYear(minuendYear)) {</span>
+<span class="fc" id="L167">                minuendRem -= DateTimeConstants.MILLIS_PER_DAY;</span>
+            }
+        }
+    
+<span class="fc" id="L171">        int difference = minuendYear - subtrahendYear;</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">        if (minuendRem &lt; subtrahendRem) {</span>
+<span class="fc" id="L173">            difference--;</span>
+        }
+<span class="fc" id="L175">        return difference;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    long setYear(long instant, int year) {
+<span class="fc" id="L180">        int thisYear = getYear(instant);</span>
+<span class="fc" id="L181">        int dayOfYear = getDayOfYear(instant, thisYear);</span>
+<span class="fc" id="L182">        int millisOfDay = getMillisOfDay(instant);</span>
+
+<span class="fc bfc" id="L184" title="All 2 branches covered.">        if (dayOfYear &gt; (31 + 28)) { // after Feb 28</span>
+<span class="fc bfc" id="L185" title="All 2 branches covered.">            if (isLeapYear(thisYear)) {</span>
+                // Current date is Feb 29 or later.
+<span class="fc bfc" id="L187" title="All 2 branches covered.">                if (!isLeapYear(year)) {</span>
+                    // Moving to a non-leap year, Feb 29 does not exist.
+<span class="fc" id="L189">                    dayOfYear--;</span>
+                }
+            } else {
+                // Current date is Mar 01 or later.
+<span class="fc bfc" id="L193" title="All 2 branches covered.">                if (isLeapYear(year)) {</span>
+                    // Moving to a leap year, account for Feb 29.
+<span class="fc" id="L195">                    dayOfYear++;</span>
+                }
+            }
+        }
+
+<span class="fc" id="L200">        instant = getYearMonthDayMillis(year, 1, dayOfYear);</span>
+<span class="fc" id="L201">        instant += millisOfDay;</span>
+
+<span class="fc" id="L203">        return instant;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DecoratedDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">DecoratedDateTimeField.java</span></div><h1>DecoratedDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+
+/**
+ * &lt;code&gt;DecoratedDateTimeField&lt;/code&gt; extends {@link BaseDateTimeField},
+ * implementing only the minimum required set of methods. These implemented
+ * methods delegate to a wrapped field.
+ * &lt;p&gt;
+ * This design allows new DateTimeField types to be defined that piggyback on
+ * top of another, inheriting all the safe method implementations from
+ * BaseDateTimeField. Should any method require pure delegation to the
+ * wrapped field, simply override and use the provided getWrappedField method.
+ * &lt;p&gt;
+ * DecoratedDateTimeField is thread-safe and immutable, and its subclasses must
+ * be as well.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ * @see DelegatedDateTimeField
+ */
+public abstract class DecoratedDateTimeField extends BaseDateTimeField {
+
+    /** Serialization version */
+    @SuppressWarnings(&quot;unused&quot;)
+    private static final long serialVersionUID = 203115783733757597L;
+
+    /** The DateTimeField being wrapped */
+    private final DateTimeField iField;
+
+    /**
+     * Constructor.
+     * 
+     * @param field  the field being decorated
+     * @param type  allow type to be overridden
+     */
+    protected DecoratedDateTimeField(DateTimeField field, DateTimeFieldType type) {
+<span class="fc" id="L55">        super(type);</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (field == null) {</span>
+<span class="fc" id="L57">            throw new IllegalArgumentException(&quot;The field must not be null&quot;);</span>
+        }
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (!field.isSupported()) {</span>
+<span class="fc" id="L60">            throw new IllegalArgumentException(&quot;The field must be supported&quot;);</span>
+        }
+<span class="fc" id="L62">        iField = field;</span>
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Gets the wrapped date time field.
+     * 
+     * @return the wrapped DateTimeField
+     */
+    public final DateTimeField getWrappedField() {
+<span class="fc" id="L71">        return iField;</span>
+    }
+
+    public boolean isLenient() {
+<span class="fc" id="L75">        return iField.isLenient();</span>
+    }
+
+    public int get(long instant) {
+<span class="fc" id="L79">        return iField.get(instant);</span>
+    }
+
+    public long set(long instant, int value) {
+<span class="fc" id="L83">        return iField.set(instant, value);</span>
+    }
+
+    public DurationField getDurationField() {
+<span class="fc" id="L87">        return iField.getDurationField();</span>
+    }
+
+    public DurationField getRangeDurationField() {
+<span class="fc" id="L91">        return iField.getRangeDurationField();</span>
+    }
+
+    public int getMinimumValue() {
+<span class="fc" id="L95">        return iField.getMinimumValue();</span>
+    }
+
+    public int getMaximumValue() {
+<span class="fc" id="L99">        return iField.getMaximumValue();</span>
+    }
+
+    public long roundFloor(long instant) {
+<span class="nc" id="L103">        return iField.roundFloor(instant);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

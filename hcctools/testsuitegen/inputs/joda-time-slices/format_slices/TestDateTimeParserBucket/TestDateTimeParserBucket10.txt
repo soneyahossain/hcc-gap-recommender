@@ -1,0 +1,43 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.joda.time.format.TestDateTimeParserBucket.testConstructor_4arg:97:*]:
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.chrono.AssembledChronology.getZone:107 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getZone:107 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getZone:107 DUP
+org.joda.time.chrono.AssembledChronology.getZone:107 ASTORE 1
+org.joda.time.chrono.AssembledChronology.getZone:107 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getZone:108 ALOAD 1
+org.joda.time.chrono.AssembledChronology.getZone:108 ARETURN
+org.joda.time.format.DateTimeParserBucket.<init>:110 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.<init>:110 ALOAD 3
+org.joda.time.format.DateTimeParserBucket.<init>:110 INVOKESPECIAL org/joda/time/format/DateTimeParserBucket.<init>(JLorg/joda/time/Chronology;Ljava/util/Locale;Ljava/lang/Integer;I)V
+org.joda.time.format.DateTimeParserBucket.<init>:127 ALOAD 3
+org.joda.time.format.DateTimeParserBucket.<init>:127 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.format.DateTimeParserBucket.<init>:127 ASTORE 3
+org.joda.time.format.DateTimeParserBucket.<init>:129 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.<init>:129 ALOAD 3
+org.joda.time.format.DateTimeParserBucket.<init>:129 INVOKEVIRTUAL org/joda/time/Chronology.getZone()Lorg/joda/time/DateTimeZone;
+org.joda.time.format.DateTimeParserBucket.<init>:129 PUTFIELD org/joda/time/format/DateTimeParserBucket.iDefaultZone Lorg/joda/time/DateTimeZone;
+org.joda.time.format.DateTimeParserBucket.<init>:135 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.<init>:135 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.<init>:135 GETFIELD org/joda/time/format/DateTimeParserBucket.iDefaultZone Lorg/joda/time/DateTimeZone;
+org.joda.time.format.DateTimeParserBucket.<init>:135 PUTFIELD org/joda/time/format/DateTimeParserBucket.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.format.DateTimeParserBucket.getZone:213 ALOAD 0
+org.joda.time.format.DateTimeParserBucket.getZone:213 GETFIELD org/joda/time/format/DateTimeParserBucket.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.format.DateTimeParserBucket.getZone:213 ARETURN
+org.joda.time.format.TestDateTimeParserBucket.main:49 INVOKEVIRTUAL org/joda/time/format/TestDateTimeParserBucket.testConstructor_4arg()V
+org.joda.time.format.TestDateTimeParserBucket.testConstructor_4arg:92 NEW org/joda/time/format/DateTimeParserBucket
+org.joda.time.format.TestDateTimeParserBucket.testConstructor_4arg:92 DUP
+org.joda.time.format.TestDateTimeParserBucket.testConstructor_4arg:92 GETSTATIC org/joda/time/format/TestDateTimeParserBucket.BUDDHIST_PARIS Lorg/joda/time/Chronology;
+org.joda.time.format.TestDateTimeParserBucket.testConstructor_4arg:92 INVOKESPECIAL org/joda/time/format/DateTimeParserBucket.<init>(JLorg/joda/time/Chronology;Ljava/util/Locale;Ljava/lang/Integer;)V
+org.joda.time.format.TestDateTimeParserBucket.testConstructor_4arg:92 ASTORE 1
+org.joda.time.format.TestDateTimeParserBucket.testConstructor_4arg:97 GETSTATIC org/joda/time/format/TestDateTimeParserBucket.PARIS Lorg/joda/time/DateTimeZone;
+org.joda.time.format.TestDateTimeParserBucket.testConstructor_4arg:97 ALOAD 1
+org.joda.time.format.TestDateTimeParserBucket.testConstructor_4arg:97 INVOKEVIRTUAL org/joda/time/format/DateTimeParserBucket.getZone()Lorg/joda/time/DateTimeZone;
+org.joda.time.format.TestDateTimeParserBucket.testConstructor_4arg:97 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 38 bytecode instructions.
+Computation took 1.34 seconds.

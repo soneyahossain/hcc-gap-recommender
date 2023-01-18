@@ -1,0 +1,24 @@
+ 0.0% done, time left: unknown                                0.5% done, time left: unknown  2.6% done, time left: unknown  3.4% done, time left: unknown  3.6% done, time left: unknown  5.0% done, time left: unknown  6.9% done, time left: unknown  8.9% done, time left:   0:00:04   11.3% done, time left:   0:00:04 13.4% done, time left:   0:00:04 14.5% done, time left:   0:00:04 20.2% done, time left:   0:00:02 26.3% done, time left:   0:00:01 32.5% done, time left:   0:00:01 36.1% done, time left:   0:00:01 36.1% done, time left:   0:00:00 36.4% done, time left:   0:00:00 37.2% done, time left:   0:00:00 41.5% done, time left:   0:00:01 48.6% done, time left:   0:00:00 53.6% done, time left:   0:00:00 58.7% done, time left:   0:00:00 64.9% done, time left:   0:00:00 70.1% done, time left:   0:00:00 74.4% done, time left:   0:00:00 91.3% done, time left:   0:00:00 95.6% done, time left:   0:00:00 97.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDateTimeUtils.testGetInstantChronology_RI:374:*]:
+org.joda.time.DateTimeUtils.getInstantChronology:180 ALOAD 0
+org.joda.time.DateTimeUtils.getInstantChronology:180 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getInstantChronology:183 INVOKEINTERFACE org/joda/time/ReadableInstant.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.DateTimeUtils.getInstantChronology:183 ASTORE 1
+org.joda.time.DateTimeUtils.getInstantChronology:184 ALOAD 1
+org.joda.time.DateTimeUtils.getInstantChronology:184 IFNONNULL L1 true false
+org.joda.time.DateTimeUtils.getInstantChronology:187 ALOAD 1
+org.joda.time.DateTimeUtils.getInstantChronology:187 ARETURN
+org.joda.time.Instant.getChronology:300 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstanceUTC()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.Instant.getChronology:300 ARETURN
+org.joda.time.TestDateTimeUtils.main:135 INVOKEVIRTUAL org/joda/time/TestDateTimeUtils.testGetInstantChronology_RI()V
+org.joda.time.TestDateTimeUtils.testGetInstantChronology_RI:373 NEW org/joda/time/Instant
+org.joda.time.TestDateTimeUtils.testGetInstantChronology_RI:373 ASTORE 2
+org.joda.time.TestDateTimeUtils.testGetInstantChronology_RI:374 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstanceUTC()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.TestDateTimeUtils.testGetInstantChronology_RI:374 ALOAD 2
+org.joda.time.TestDateTimeUtils.testGetInstantChronology_RI:374 INVOKESTATIC org/joda/time/DateTimeUtils.getInstantChronology(Lorg/joda/time/ReadableInstant;)Lorg/joda/time/Chronology;
+org.joda.time.TestDateTimeUtils.testGetInstantChronology_RI:374 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.chrono.ISOChronology.getInstanceUTC:70 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.getInstanceUTC:70 ARETURN
+
+Slice consists of 19 bytecode instructions.
+Computation took 3.31 seconds.

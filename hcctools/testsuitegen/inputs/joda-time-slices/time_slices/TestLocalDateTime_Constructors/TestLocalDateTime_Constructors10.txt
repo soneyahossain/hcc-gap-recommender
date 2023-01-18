@@ -1,0 +1,71 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  1.2% done, time left: unknown  2.3% done, time left: unknown  3.6% done, time left: unknown  5.1% done, time left: unknown  6.5% done, time left: unknown  7.7% done, time left:   0:00:07    8.6% done, time left:   0:00:08  9.2% done, time left:   0:00:09  9.7% done, time left:   0:00:10  9.9% done, time left:   0:00:10  9.9% done, time left:   0:00:11  9.9% done, time left:   0:00:13  9.9% done, time left:   0:00:14 10.3% done, time left:   0:00:15 10.7% done, time left:   0:00:15 11.1% done, time left:   0:00:16 12.3% done, time left:   0:00:18 13.9% done, time left:   0:00:19 15.3% done, time left:   0:00:19 16.4% done, time left:   0:00:18 17.9% done, time left:   0:00:18 19.5% done, time left:   0:00:17 21.7% done, time left:   0:00:15 24.5% done, time left:   0:00:12 27.3% done, time left:   0:00:09 30.6% done, time left:   0:00:06 33.9% done, time left:   0:00:04 37.4% done, time left:   0:00:03 40.9% done, time left:   0:00:02 43.8% done, time left:   0:00:02 46.5% done, time left:   0:00:02 48.8% done, time left:   0:00:01 51.6% done, time left:   0:00:01 54.4% done, time left:   0:00:01 56.9% done, time left:   0:00:01 56.9% done, time left:   0:00:00 57.0% done, time left:   0:00:00 57.3% done, time left:   0:00:00 59.1% done, time left:   0:00:00 62.3% done, time left:   0:00:01 64.0% done, time left:   0:00:00 64.4% done, time left:   0:00:00 64.6% done, time left:   0:00:00 65.1% done, time left:   0:00:00 66.2% done, time left:   0:00:00 69.0% done, time left:   0:00:00 72.9% done, time left:   0:00:00 75.3% done, time left:   0:00:00 76.5% done, time left:   0:00:00 79.1% done, time left:   0:00:00 82.4% done, time left:   0:00:00 85.2% done, time left:   0:00:00 85.6% done, time left:   0:00:00 88.4% done, time left:   0:00:00 91.7% done, time left:   0:00:00 95.1% done, time left:   0:00:00 97.0% done, time left:   0:00:00 98.8% done, time left:   0:00:00 99.5% done, time left:   0:00:00 100.7% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:224:*]:
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:164 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:164 IFNONNULL L8 false true
+org.joda.time.DateTimeZone.getDefault:174 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:174 IFNONNULL L4 false true
+org.joda.time.DateTimeZone.getDefault:175 INVOKESTATIC java/util/TimeZone.getDefault()Ljava/util/TimeZone;
+org.joda.time.LocalDateTime.fromCalendarFields:199 ALOAD 0
+org.joda.time.LocalDateTime.fromCalendarFields:199 INVOKEVIRTUAL java/util/Calendar.get(I)I
+org.joda.time.LocalDateTime.fromCalendarFields:201 NEW org/joda/time/LocalDateTime
+org.joda.time.LocalDateTime.fromCalendarFields:201 ARETURN
+org.joda.time.LocalDateTime.fromDateFields:237 ALOAD 0
+org.joda.time.LocalDateTime.fromDateFields:237 INVOKEVIRTUAL java/util/Date.getTime()J
+org.joda.time.LocalDateTime.fromDateFields:237 LCONST_0
+org.joda.time.LocalDateTime.fromDateFields:237 LCMP
+org.joda.time.LocalDateTime.fromDateFields:237 IFGE L1 false true
+org.joda.time.LocalDateTime.fromDateFields:241 INVOKESTATIC org/joda/time/LocalDateTime.fromCalendarFields(Ljava/util/Calendar;)Lorg/joda/time/LocalDateTime;
+org.joda.time.LocalDateTime.fromDateFields:241 ARETURN
+org.joda.time.TestLocalDateTime_Constructors.main:71 INVOKEVIRTUAL org/joda/time/TestLocalDateTime_Constructors.setUp()V
+org.joda.time.TestLocalDateTime_Constructors.main:74 INVOKEVIRTUAL org/joda/time/TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1()V
+org.joda.time.TestLocalDateTime_Constructors.main:80 INVOKEVIRTUAL org/joda/time/TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3()V
+org.joda.time.TestLocalDateTime_Constructors.setUp:144 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:174 NEW java/util/GregorianCalendar
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:174 DUP
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:174 ICONST_1
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:174 ICONST_4
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:174 ICONST_5
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:174 BIPUSH 6
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:174 INVOKESPECIAL java/util/GregorianCalendar.<init>(IIIIII)V
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:174 ASTORE 1
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:175 ALOAD 1
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:175 ICONST_0
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:175 ICONST_0
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:175 INVOKEVIRTUAL java/util/GregorianCalendar.set(II)V
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:176 ALOAD 1
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:176 BIPUSH 14
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:176 BIPUSH 7
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:176 INVOKEVIRTUAL java/util/GregorianCalendar.set(II)V
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:178 ALOAD 1
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromCalendarFields_beforeYearZero1:178 INVOKESTATIC org/joda/time/LocalDateTime.fromCalendarFields(Ljava/util/Calendar;)Lorg/joda/time/LocalDateTime;
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:220 NEW java/util/GregorianCalendar
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:220 DUP
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:220 ICONST_3
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:220 ICONST_1
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:220 ICONST_3
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:220 ICONST_4
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:220 ICONST_5
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:220 BIPUSH 6
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:220 INVOKESPECIAL java/util/GregorianCalendar.<init>(IIIIII)V
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:220 ASTORE 1
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:221 ALOAD 1
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:221 ICONST_0
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:221 ICONST_0
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:221 INVOKEVIRTUAL java/util/GregorianCalendar.set(II)V
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:222 ALOAD 1
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:222 BIPUSH 14
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:222 BIPUSH 7
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:222 INVOKEVIRTUAL java/util/GregorianCalendar.set(II)V
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:223 NEW org/joda/time/LocalDateTime
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:223 ASTORE 2
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:224 ALOAD 2
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:224 ALOAD 1
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:224 INVOKEVIRTUAL java/util/GregorianCalendar.getTime()Ljava/util/Date;
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:224 INVOKESTATIC org/joda/time/LocalDateTime.fromDateFields(Ljava/util/Date;)Lorg/joda/time/LocalDateTime;
+org.joda.time.TestLocalDateTime_Constructors.testFactory_fromDateFields_beforeYearZero3:224 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 1881 bytecode instructions.
+Computation took 6.93 seconds.

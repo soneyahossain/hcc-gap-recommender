@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultXPathHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.saxpath.helpers</a> &gt; <span class="el_source">DefaultXPathHandler.java</span></div><h1>DefaultXPathHandler.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+
+package org.jaxen.saxpath.helpers;
+
+import org.jaxen.saxpath.SAXPathException;
+import org.jaxen.saxpath.XPathHandler;
+
+/**
+ * Default base class for SAXPath event handlers.
+ * &lt;p&gt;
+ * This class is available as a convenience base class for SAXPath
+ * applications: it provides a default do-nothing implementation
+ * for all of the callbacks in the core SAXPath handler class, {@link
+ * org.jaxen.saxpath.XPathHandler}.
+ * &lt;p&gt;
+ * Application writers can extend this class when they need to
+ * implement only part of the &lt;code&gt;XPathHandler&lt;/code&gt;
+ * interface. Parser writers can instantiate
+ * this class to provide default handlers when the application has not
+ * supplied its own.
+ */
+
+<span class="fc" id="L70">public class DefaultXPathHandler implements XPathHandler {</span>
+
+    public void startXPath() throws SAXPathException {
+<span class="nc" id="L73">    }</span>
+
+    public void endXPath() throws SAXPathException {
+<span class="nc" id="L76">    }</span>
+
+    public void startPathExpr() throws SAXPathException {
+<span class="nc" id="L79">    }</span>
+
+    public void endPathExpr() throws SAXPathException {
+<span class="nc" id="L82">    }</span>
+
+    public void startAbsoluteLocationPath() throws SAXPathException {
+<span class="nc" id="L85">    }</span>
+
+    public void endAbsoluteLocationPath() throws SAXPathException {
+<span class="nc" id="L88">    }</span>
+
+    public void startRelativeLocationPath() throws SAXPathException {
+<span class="nc" id="L91">    }</span>
+
+    public void endRelativeLocationPath() throws SAXPathException {
+<span class="nc" id="L94">    }</span>
+
+    public void startNameStep(int axis,
+                              String prefix,
+                              String localName) throws SAXPathException {
+<span class="nc" id="L99">    }</span>
+
+    public void endNameStep() throws SAXPathException {
+<span class="nc" id="L102">    }</span>
+
+    public void startTextNodeStep(int axis) throws SAXPathException {
+<span class="nc" id="L105">    }</span>
+
+    public void endTextNodeStep() throws SAXPathException {
+<span class="nc" id="L108">    }</span>
+
+    public void startCommentNodeStep(int axis) throws SAXPathException {
+<span class="nc" id="L111">    }</span>
+
+    public void endCommentNodeStep() throws SAXPathException {
+<span class="nc" id="L114">    }</span>
+
+    public void startAllNodeStep(int axis) throws SAXPathException {
+<span class="nc" id="L117">    }</span>
+
+    public void endAllNodeStep() throws SAXPathException {
+<span class="nc" id="L120">    }</span>
+
+    public void startProcessingInstructionNodeStep(int axis,
+                                                   String name) throws SAXPathException {
+<span class="nc" id="L124">    }</span>
+
+    public void endProcessingInstructionNodeStep() throws SAXPathException {
+<span class="nc" id="L127">    }</span>
+
+    public void startPredicate() throws SAXPathException {
+<span class="nc" id="L130">    }</span>
+
+    public void endPredicate() throws SAXPathException {
+<span class="nc" id="L133">    }</span>
+
+    public void startFilterExpr() throws SAXPathException {
+<span class="nc" id="L136">    }</span>
+
+    public void endFilterExpr() throws SAXPathException {
+<span class="nc" id="L139">    }</span>
+
+    public void startOrExpr() throws SAXPathException {
+<span class="nc" id="L142">    }</span>
+
+    public void endOrExpr(boolean create) throws SAXPathException {
+<span class="nc" id="L145">    }</span>
+
+    public void startAndExpr() throws SAXPathException {
+<span class="nc" id="L148">    }</span>
+
+    public void endAndExpr(boolean create) throws SAXPathException {
+<span class="nc" id="L151">    }</span>
+
+    public void startEqualityExpr() throws SAXPathException {
+<span class="nc" id="L154">    }</span>
+
+    public void endEqualityExpr(int operator) throws SAXPathException {
+<span class="nc" id="L157">    }</span>
+
+    public void startRelationalExpr() throws SAXPathException {
+<span class="nc" id="L160">    }</span>
+
+    public void endRelationalExpr(int operator) throws SAXPathException {
+<span class="nc" id="L163">    }</span>
+
+    public void startAdditiveExpr() throws SAXPathException {
+<span class="nc" id="L166">    }</span>
+
+    public void endAdditiveExpr(int operator) throws SAXPathException {
+<span class="nc" id="L169">    }</span>
+
+    public void startMultiplicativeExpr() throws SAXPathException {
+<span class="nc" id="L172">    }</span>
+
+    public void endMultiplicativeExpr(int operator) throws SAXPathException {
+<span class="nc" id="L175">    }</span>
+
+    public void startUnaryExpr() throws SAXPathException {
+<span class="nc" id="L178">    }</span>
+
+    public void endUnaryExpr(int operator) throws SAXPathException {
+<span class="nc" id="L181">    }</span>
+
+    public void startUnionExpr() throws SAXPathException {
+<span class="nc" id="L184">    }</span>
+
+    public void endUnionExpr(boolean create) throws SAXPathException {
+<span class="nc" id="L187">    }</span>
+
+    public void number(int number) throws SAXPathException {
+<span class="nc" id="L190">    }</span>
+
+    public void number(double number) throws SAXPathException {
+<span class="nc" id="L193">    }</span>
+
+    public void literal(String literal) throws SAXPathException {
+<span class="nc" id="L196">    }</span>
+
+    public void variableReference(String prefix,
+                                  String variableName) throws SAXPathException {
+<span class="nc" id="L200">    }</span>
+
+    public void startFunction(String prefix,
+                              String functionName) throws SAXPathException {
+<span class="nc" id="L204">    }</span>
+
+    public void endFunction() throws SAXPathException {
+<span class="nc" id="L207">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

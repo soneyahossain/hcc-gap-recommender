@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatternParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.pattern</a> &gt; <span class="el_source">PatternParser.java</span></div><h1>PatternParser.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+
+package org.jaxen.pattern;
+
+import org.jaxen.JaxenException;
+import org.jaxen.JaxenHandler;
+import org.jaxen.expr.*;
+import org.jaxen.saxpath.Axis;
+import org.jaxen.saxpath.XPathReader;
+import org.jaxen.saxpath.helpers.XPathReaderFactory;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+
+/**
+ * &lt;code&gt;PatternParser&lt;/code&gt; is a helper class for parsing
+ * XSLT patterns
+ *
+ * @author &lt;a href=&quot;mailto:jstrachan@apache.org&quot;&gt;James Strachan&lt;/a&gt;
+ * @deprecated will be removed in Jaxen 2.0
+ */
+<span class="nc" id="L70">public class PatternParser {</span>
+    private static final boolean TRACE = false;
+    private static final boolean USE_HANDLER = false;
+
+    public static Pattern parse(String text) throws JaxenException, org.jaxen.saxpath.SAXPathException {
+        if (USE_HANDLER) {
+            XPathReader reader = XPathReaderFactory.createReader();
+            PatternHandler handler = new PatternHandler();
+
+            handler.setXPathFactory(new DefaultXPathFactory());
+            reader.setXPathHandler(handler);
+            reader.parse(text);
+
+            return handler.getPattern();
+        } else {
+<span class="fc" id="L85">            XPathReader reader = XPathReaderFactory.createReader();</span>
+<span class="fc" id="L86">            JaxenHandler handler = new JaxenHandler();</span>
+
+<span class="fc" id="L88">            handler.setXPathFactory(new DefaultXPathFactory());</span>
+<span class="fc" id="L89">            reader.setXPathHandler(handler);</span>
+<span class="fc" id="L90">            reader.parse(text);</span>
+
+<span class="fc" id="L92">            Pattern pattern = convertExpr(handler.getXPathExpr().getRootExpr());</span>
+<span class="fc" id="L93">            return pattern.simplify();</span>
+        }
+    }
+
+    protected static Pattern convertExpr(Expr expr) throws JaxenException {
+        if (TRACE) {
+            System.out.println(&quot;Converting: &quot; + expr + &quot; into a pattern.&quot;);
+        }
+
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (expr instanceof LocationPath) {</span>
+<span class="fc" id="L103">            return convertExpr((LocationPath) expr);</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">        } else if (expr instanceof FilterExpr) {</span>
+<span class="nc" id="L105">            LocationPathPattern answer = new LocationPathPattern();</span>
+<span class="nc" id="L106">            answer.addFilter((FilterExpr) expr);</span>
+<span class="nc" id="L107">            return answer;</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        } else if (expr instanceof UnionExpr) {</span>
+<span class="fc" id="L109">            UnionExpr unionExpr = (UnionExpr) expr;</span>
+<span class="fc" id="L110">            Pattern lhs = convertExpr(unionExpr.getLHS());</span>
+<span class="fc" id="L111">            Pattern rhs = convertExpr(unionExpr.getRHS());</span>
+<span class="fc" id="L112">            return new UnionPattern(lhs, rhs);</span>
+        } else {
+<span class="nc" id="L114">            LocationPathPattern answer = new LocationPathPattern();</span>
+<span class="nc" id="L115">            answer.addFilter(new DefaultFilterExpr(expr,</span>
+                    new PredicateSet()));
+<span class="nc" id="L117">            return answer;</span>
+        }
+    }
+
+    protected static LocationPathPattern convertExpr(LocationPath locationPath) throws JaxenException {
+<span class="fc" id="L122">        LocationPathPattern answer = new LocationPathPattern();</span>
+        //answer.setAbsolute( locationPath.isAbsolute() );
+<span class="fc" id="L124">        List steps = locationPath.getSteps();</span>
+
+        // go through steps backwards
+<span class="fc" id="L127">        LocationPathPattern path = answer;</span>
+<span class="fc" id="L128">        boolean first = true;</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        for (ListIterator iter = steps.listIterator(steps.size()); iter.hasPrevious(); ) {</span>
+<span class="fc" id="L130">            Step step = (Step) iter.previous();</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">            if (first) {</span>
+<span class="fc" id="L132">                first = false;</span>
+<span class="fc" id="L133">                path = convertStep(path, step);</span>
+            } else {
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">                if (navigationStep(step)) {</span>
+<span class="fc" id="L136">                    LocationPathPattern parent = new LocationPathPattern();</span>
+<span class="fc" id="L137">                    int axis = step.getAxis();</span>
+<span class="pc bpc" id="L138" title="1 of 4 branches missed.">                    if (axis == Axis.DESCENDANT || axis == Axis.DESCENDANT_OR_SELF) {</span>
+<span class="fc" id="L139">                        path.setAncestorPattern(parent);</span>
+                    } else {
+<span class="fc" id="L141">                        path.setParentPattern(parent);</span>
+                    }
+<span class="fc" id="L143">                    path = parent;</span>
+                }
+<span class="fc" id="L145">                path = convertStep(path, step);</span>
+            }
+<span class="fc" id="L147">        }</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">        if (locationPath.isAbsolute()) {</span>
+<span class="fc" id="L149">            LocationPathPattern parent = new LocationPathPattern(NodeTypeTest.DOCUMENT_TEST);</span>
+<span class="fc" id="L150">            path.setParentPattern(parent);</span>
+        }
+<span class="fc" id="L152">        return answer;</span>
+    }
+
+    protected static LocationPathPattern convertStep(LocationPathPattern path, Step step) throws JaxenException {
+<span class="fc bfc" id="L156" title="All 2 branches covered.">        if (step instanceof DefaultAllNodeStep) {</span>
+<span class="fc" id="L157">            int axis = step.getAxis();</span>
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">            if (axis == Axis.ATTRIBUTE) {</span>
+<span class="nc" id="L159">                path.setNodeTest(NodeTypeTest.ATTRIBUTE_TEST);</span>
+            } else {
+<span class="fc" id="L161">                path.setNodeTest(NodeTypeTest.ELEMENT_TEST);</span>
+            }
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">        } else if (step instanceof DefaultCommentNodeStep) {</span>
+<span class="nc" id="L164">            path.setNodeTest(NodeTypeTest.COMMENT_TEST);</span>
+<span class="pc bpc" id="L165" title="1 of 2 branches missed.">        } else if (step instanceof DefaultProcessingInstructionNodeStep) {</span>
+<span class="nc" id="L166">            path.setNodeTest(NodeTypeTest.PROCESSING_INSTRUCTION_TEST);</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">        } else if (step instanceof DefaultTextNodeStep) {</span>
+<span class="fc" id="L168">            path.setNodeTest(TextNodeTest.SINGLETON);</span>
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">        } else if (step instanceof DefaultCommentNodeStep) {</span>
+<span class="nc" id="L170">            path.setNodeTest(NodeTypeTest.COMMENT_TEST);</span>
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        } else if (step instanceof DefaultNameStep) {</span>
+<span class="fc" id="L172">            DefaultNameStep nameStep = (DefaultNameStep) step;</span>
+<span class="fc" id="L173">            String localName = nameStep.getLocalName();</span>
+<span class="fc" id="L174">            String prefix = nameStep.getPrefix();</span>
+<span class="fc" id="L175">            int axis = nameStep.getAxis();</span>
+<span class="fc" id="L176">            short nodeType = Pattern.ELEMENT_NODE;</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">            if (axis == Axis.ATTRIBUTE) {</span>
+<span class="fc" id="L178">                nodeType = Pattern.ATTRIBUTE_NODE;</span>
+            }
+<span class="fc bfc" id="L180" title="All 2 branches covered.">            if (nameStep.isMatchesAnyName()) {</span>
+<span class="pc bpc" id="L181" title="1 of 4 branches missed.">                if (prefix.length() == 0 || prefix.equals(&quot;*&quot;)) {</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">                    if (axis == Axis.ATTRIBUTE) {</span>
+<span class="fc" id="L183">                        path.setNodeTest(NodeTypeTest.ATTRIBUTE_TEST);</span>
+                    } else {
+<span class="fc" id="L185">                        path.setNodeTest(NodeTypeTest.ELEMENT_TEST);</span>
+                    }
+                } else {
+<span class="fc" id="L188">                    path.setNodeTest(new NamespaceTest(prefix, nodeType));</span>
+                }
+            } else {
+<span class="fc" id="L191">                path.setNodeTest(new NameTest(localName, nodeType));</span>
+                // XXXX: should support namespace in the test too
+            }
+<span class="fc" id="L194">            return convertDefaultStep(path, nameStep);</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">        } else if (step instanceof DefaultStep) {</span>
+<span class="nc" id="L196">            return convertDefaultStep(path, (DefaultStep) step);</span>
+        } else {
+<span class="nc" id="L198">            throw new JaxenException(&quot;Cannot convert: &quot; + step + &quot; to a Pattern&quot;);</span>
+        }
+<span class="fc" id="L200">        return path;</span>
+    }
+
+    protected static LocationPathPattern convertDefaultStep(LocationPathPattern path, DefaultStep step) throws JaxenException {
+<span class="fc" id="L204">        List predicates = step.getPredicates();</span>
+<span class="fc bfc" id="L205" title="All 2 branches covered.">        if (!predicates.isEmpty()) {</span>
+<span class="fc" id="L206">            FilterExpr filter = new DefaultFilterExpr(new PredicateSet());</span>
+<span class="fc bfc" id="L207" title="All 2 branches covered.">            for (Iterator iter = predicates.iterator(); iter.hasNext(); ) {</span>
+<span class="fc" id="L208">                filter.addPredicate((Predicate) iter.next());</span>
+            }
+<span class="fc" id="L210">            path.addFilter(filter);</span>
+        }
+<span class="fc" id="L212">        return path;</span>
+    }
+
+    protected static boolean navigationStep(Step step) {
+<span class="fc bfc" id="L216" title="All 2 branches covered.">        if (step instanceof DefaultNameStep) {</span>
+<span class="fc" id="L217">            return true;</span>
+<span class="pc bpc" id="L218" title="1 of 2 branches missed.">        } else if (step.getClass().equals(DefaultStep.class)) {</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">            return !step.getPredicates().isEmpty();</span>
+        } else {
+<span class="fc" id="L221">            return true;</span>
+        }
+    }
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

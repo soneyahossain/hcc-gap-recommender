@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateTimeFormat.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.format</a> &gt; <span class="el_source">DateTimeFormat.java</span></div><h1>DateTimeFormat.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.format;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReferenceArray;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.ReadablePartial;
+
+/**
+ * Factory that creates instances of DateTimeFormatter from patterns and styles.
+ * &lt;p&gt;
+ * Datetime formatting is performed by the {@link DateTimeFormatter} class.
+ * Three classes provide factory methods to create formatters, and this is one.
+ * The others are {@link ISODateTimeFormat} and {@link DateTimeFormatterBuilder}.
+ * &lt;p&gt;
+ * This class provides two types of factory:
+ * &lt;ul&gt;
+ * &lt;li&gt;{@link #forPattern(String) Pattern} provides a DateTimeFormatter based on
+ * a pattern string that is mostly compatible with the JDK date patterns.
+ * &lt;li&gt;{@link #forStyle(String) Style} provides a DateTimeFormatter based on a
+ * two character style, representing short, medium, long and full.
+ * &lt;/ul&gt;
+ * &lt;p&gt;
+ * For example, to use a pattern:
+ * &lt;pre&gt;
+ * DateTime dt = new DateTime();
+ * DateTimeFormatter fmt = DateTimeFormat.forPattern(&quot;MMMM, yyyy&quot;);
+ * String str = fmt.print(dt);
+ * &lt;/pre&gt;
+ *
+ * The pattern syntax is mostly compatible with java.text.SimpleDateFormat -
+ * time zone names cannot be parsed and a few more symbols are supported.
+ * All ASCII letters are reserved as pattern letters, which are defined as follows:
+ * &lt;blockquote&gt;
+ * &lt;pre&gt;
+ * Symbol  Meaning                      Presentation  Examples
+ * ------  -------                      ------------  -------
+ * G       era                          text          AD
+ * C       century of era (&amp;gt;=0)         number        20
+ * Y       year of era (&amp;gt;=0)            year          1996
+ *
+ * x       weekyear                     year          1996
+ * w       week of weekyear             number        27
+ * e       day of week                  number        2
+ * E       day of week                  text          Tuesday; Tue
+ *
+ * y       year                         year          1996
+ * D       day of year                  number        189
+ * M       month of year                month         July; Jul; 07
+ * d       day of month                 number        10
+ *
+ * a       halfday of day               text          PM
+ * K       hour of halfday (0~11)       number        0
+ * h       clockhour of halfday (1~12)  number        12
+ *
+ * H       hour of day (0~23)           number        0
+ * k       clockhour of day (1~24)      number        24
+ * m       minute of hour               number        30
+ * s       second of minute             number        55
+ * S       fraction of second           millis        978
+ *
+ * z       time zone                    text          Pacific Standard Time; PST
+ * Z       time zone offset/id          zone          -0800; -08:00; America/Los_Angeles
+ *
+ * '       escape for text              delimiter
+ * ''      single quote                 literal       '
+ * &lt;/pre&gt;
+ * &lt;/blockquote&gt;
+ * The count of pattern letters determine the format.
+ * &lt;p&gt;
+ * &lt;strong&gt;Text&lt;/strong&gt;: If the number of pattern letters is 4 or more,
+ * the full form is used; otherwise a short or abbreviated form is used if
+ * available.
+ * &lt;p&gt;
+ * &lt;strong&gt;Number&lt;/strong&gt;: The minimum number of digits.
+ * Shorter numbers are zero-padded to this amount.
+ * When parsing, any number of digits are accepted.
+ * &lt;p&gt;
+ * &lt;strong&gt;Year&lt;/strong&gt;: Numeric presentation for year and weekyear fields
+ * are handled specially. For example, if the count of 'y' is 2, the year
+ * will be displayed as the zero-based year of the century, which is two
+ * digits.
+ * &lt;p&gt;
+ * &lt;strong&gt;Month&lt;/strong&gt;: 3 or over, use text, otherwise use number.
+ * &lt;p&gt;
+ * &lt;strong&gt;Millis&lt;/strong&gt;: The exact number of fractional digits.
+ * If more millisecond digits are available then specified the number will be truncated,
+ * if there are fewer than specified then the number will be zero-padded to the right.
+ * When parsing, only the exact number of digits are accepted.
+ * &lt;p&gt;
+ * &lt;strong&gt;Zone&lt;/strong&gt;: 'Z' outputs offset without a colon, 'ZZ' outputs
+ * the offset with a colon, 'ZZZ' or more outputs the zone id.
+ * &lt;p&gt;
+ * &lt;strong&gt;Zone names&lt;/strong&gt;: Time zone names ('z') cannot be parsed.
+ * &lt;p&gt;
+ * Any characters in the pattern that are not in the ranges of ['a'..'z']
+ * and ['A'..'Z'] will be treated as quoted text. For instance, characters
+ * like ':', '.', ' ', '#' and '?' will appear in the resulting time text
+ * even they are not embraced within single quotes.
+ * &lt;p&gt;
+ * DateTimeFormat is thread-safe and immutable, and the formatters it returns
+ * are as well.
+ *
+ * @author Brian S O'Neill
+ * @author Maxim Zhao
+ * @since 1.0
+ * @see ISODateTimeFormat
+ * @see DateTimeFormatterBuilder
+ */
+public class DateTimeFormat {
+
+    /** Style constant for FULL. */
+    static final int FULL = 0;  // DateFormat.FULL
+    /** Style constant for LONG. */
+    static final int LONG = 1;  // DateFormat.LONG
+    /** Style constant for MEDIUM. */
+    static final int MEDIUM = 2;  // DateFormat.MEDIUM
+    /** Style constant for SHORT. */
+    static final int SHORT = 3;  // DateFormat.SHORT
+    /** Style constant for NONE. */
+    static final int NONE = 4;
+
+    /** Type constant for DATE only. */
+    static final int DATE = 0;
+    /** Type constant for TIME only. */
+    static final int TIME = 1;
+    /** Type constant for DATETIME. */
+    static final int DATETIME = 2;
+
+    /** Maximum size of the pattern cache. */
+    private static final int PATTERN_CACHE_SIZE = 500;
+    /** Maps patterns to formatters, patterns don't vary by locale. Size capped at PATTERN_CACHE_SIZE*/
+<span class="fc" id="L154">    private static final ConcurrentHashMap&lt;String, DateTimeFormatter&gt; cPatternCache = new ConcurrentHashMap&lt;String, DateTimeFormatter&gt;();</span>
+    /** Maps patterns to formatters, patterns don't vary by locale. */
+<span class="fc" id="L156">    private static final AtomicReferenceArray&lt;DateTimeFormatter&gt; cStyleCache = new AtomicReferenceArray&lt;DateTimeFormatter&gt;(25);</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Factory to create a formatter from a pattern string.
+     * The pattern string is described above in the class level javadoc.
+     * It is very similar to SimpleDateFormat patterns.
+     * &lt;p&gt;
+     * The format may contain locale specific output, and this will change as
+     * you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * For example:
+     * &lt;pre&gt;
+     * DateTimeFormat.forPattern(pattern).withLocale(Locale.FRANCE).print(dt);
+     * &lt;/pre&gt;
+     *
+     * @param pattern  pattern specification
+     * @return the formatter
+     * @throws IllegalArgumentException if the pattern is invalid
+     */
+    public static DateTimeFormatter forPattern(String pattern) {
+<span class="fc" id="L177">        return createFormatterForPattern(pattern);</span>
+    }
+
+    /**
+     * Factory to create a format from a two character style pattern.
+     * &lt;p&gt;
+     * The first character is the date style, and the second character is the
+     * time style. Specify a character of 'S' for short style, 'M' for medium,
+     * 'L' for long, and 'F' for full.
+     * A date or time may be omitted by specifying a style character '-'.
+     * &lt;p&gt;
+     * The returned formatter will dynamically adjust to the locale that
+     * the print/parse takes place in. Thus you just call
+     * {@link DateTimeFormatter#withLocale(Locale)} and the Short/Medium/Long/Full
+     * style for that locale will be output. For example:
+     * &lt;pre&gt;
+     * DateTimeFormat.forStyle(style).withLocale(Locale.FRANCE).print(dt);
+     * &lt;/pre&gt;
+     *
+     * @param style  two characters from the set {&quot;S&quot;, &quot;M&quot;, &quot;L&quot;, &quot;F&quot;, &quot;-&quot;}
+     * @return the formatter
+     * @throws IllegalArgumentException if the style is invalid
+     */
+    public static DateTimeFormatter forStyle(String style) {
+<span class="nc" id="L201">        return createFormatterForStyle(style);</span>
+    }
+
+    /**
+     * Returns the pattern used by a particular style and locale.
+     * &lt;p&gt;
+     * The first character is the date style, and the second character is the
+     * time style. Specify a character of 'S' for short style, 'M' for medium,
+     * 'L' for long, and 'F' for full.
+     * A date or time may be omitted by specifying a style character '-'.
+     *
+     * @param style  two characters from the set {&quot;S&quot;, &quot;M&quot;, &quot;L&quot;, &quot;F&quot;, &quot;-&quot;}
+     * @param locale  locale to use, null means default
+     * @return the formatter
+     * @throws IllegalArgumentException if the style is invalid
+     * @since 1.3
+     */
+    public static String patternForStyle(String style, Locale locale) {
+<span class="nc" id="L219">        DateTimeFormatter formatter = createFormatterForStyle(style);</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">        if (locale == null) {</span>
+<span class="nc" id="L221">            locale = Locale.getDefault();</span>
+        }
+        // Not pretty, but it works.
+<span class="nc" id="L224">        return ((StyleFormatter) formatter.getPrinter0()).getPattern(locale);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a format that outputs a short date format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter shortDate() {
+<span class="nc" id="L237">        return createFormatterForStyleIndex(SHORT, NONE);</span>
+    }
+
+    /**
+     * Creates a format that outputs a short time format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter shortTime() {
+<span class="nc" id="L249">        return createFormatterForStyleIndex(NONE, SHORT);</span>
+    }
+
+    /**
+     * Creates a format that outputs a short datetime format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter shortDateTime() {
+<span class="nc" id="L261">        return createFormatterForStyleIndex(SHORT, SHORT);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a format that outputs a medium date format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter mediumDate() {
+<span class="nc" id="L274">        return createFormatterForStyleIndex(MEDIUM, NONE);</span>
+    }
+
+    /**
+     * Creates a format that outputs a medium time format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter mediumTime() {
+<span class="nc" id="L286">        return createFormatterForStyleIndex(NONE, MEDIUM);</span>
+    }
+
+    /**
+     * Creates a format that outputs a medium datetime format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter mediumDateTime() {
+<span class="nc" id="L298">        return createFormatterForStyleIndex(MEDIUM, MEDIUM);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a format that outputs a long date format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter longDate() {
+<span class="nc" id="L311">        return createFormatterForStyleIndex(LONG, NONE);</span>
+    }
+
+    /**
+     * Creates a format that outputs a long time format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter longTime() {
+<span class="nc" id="L323">        return createFormatterForStyleIndex(NONE, LONG);</span>
+    }
+
+    /**
+     * Creates a format that outputs a long datetime format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter longDateTime() {
+<span class="nc" id="L335">        return createFormatterForStyleIndex(LONG, LONG);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a format that outputs a full date format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter fullDate() {
+<span class="nc" id="L348">        return createFormatterForStyleIndex(FULL, NONE);</span>
+    }
+
+    /**
+     * Creates a format that outputs a full time format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter fullTime() {
+<span class="nc" id="L360">        return createFormatterForStyleIndex(NONE, FULL);</span>
+    }
+
+    /**
+     * Creates a format that outputs a full datetime format.
+     * &lt;p&gt;
+     * The format will change as you change the locale of the formatter.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * 
+     * @return the formatter
+     */
+    public static DateTimeFormatter fullDateTime() {
+<span class="nc" id="L372">        return createFormatterForStyleIndex(FULL, FULL);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Parses the given pattern and appends the rules to the given
+     * DateTimeFormatterBuilder.
+     *
+     * @param pattern  pattern specification
+     * @throws IllegalArgumentException if the pattern is invalid
+     */
+    static void appendPatternTo(DateTimeFormatterBuilder builder, String pattern) {
+<span class="fc" id="L384">        parsePatternTo(builder, pattern);</span>
+<span class="fc" id="L385">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructor.
+     *
+     * @since 1.1 (previously private)
+     */
+    protected DateTimeFormat() {
+<span class="fc" id="L394">        super();</span>
+<span class="fc" id="L395">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Parses the given pattern and appends the rules to the given
+     * DateTimeFormatterBuilder.
+     *
+     * @param pattern  pattern specification
+     * @throws IllegalArgumentException if the pattern is invalid
+     * @see #forPattern
+     */
+    private static void parsePatternTo(DateTimeFormatterBuilder builder, String pattern) {
+<span class="fc" id="L407">        int length = pattern.length();</span>
+<span class="fc" id="L408">        int[] indexRef = new int[1];</span>
+
+<span class="fc bfc" id="L410" title="All 2 branches covered.">        for (int i=0; i&lt;length; i++) {</span>
+<span class="fc" id="L411">            indexRef[0] = i;</span>
+<span class="fc" id="L412">            String token = parseToken(pattern, indexRef);</span>
+<span class="fc" id="L413">            i = indexRef[0];</span>
+
+<span class="fc" id="L415">            int tokenLen = token.length();</span>
+<span class="pc bpc" id="L416" title="1 of 2 branches missed.">            if (tokenLen == 0) {</span>
+<span class="nc" id="L417">                break;</span>
+            }
+<span class="fc" id="L419">            char c = token.charAt(0);</span>
+
+<span class="pc bpc" id="L421" title="1 of 21 branches missed.">            switch (c) {</span>
+            case 'G': // era designator (text)
+<span class="fc" id="L423">                builder.appendEraText();</span>
+<span class="fc" id="L424">                break;</span>
+            case 'C': // century of era (number)
+<span class="fc" id="L426">                builder.appendCenturyOfEra(tokenLen, tokenLen);</span>
+<span class="fc" id="L427">                break;</span>
+            case 'x': // weekyear (number)
+            case 'y': // year (number)
+            case 'Y': // year of era (number)
+<span class="fc bfc" id="L431" title="All 2 branches covered.">                if (tokenLen == 2) {</span>
+<span class="fc" id="L432">                    boolean lenientParse = true;</span>
+
+                    // Peek ahead to next token.
+<span class="fc bfc" id="L435" title="All 2 branches covered.">                    if (i + 1 &lt; length) {</span>
+<span class="fc" id="L436">                        indexRef[0]++;</span>
+<span class="fc bfc" id="L437" title="All 2 branches covered.">                        if (isNumericToken(parseToken(pattern, indexRef))) {</span>
+                            // If next token is a number, cannot support
+                            // lenient parse, because it will consume digits
+                            // that it should not.
+<span class="fc" id="L441">                            lenientParse = false;</span>
+                        }
+<span class="fc" id="L443">                        indexRef[0]--;</span>
+                    }
+
+                    // Use pivots which are compatible with SimpleDateFormat.
+<span class="fc bfc" id="L447" title="All 2 branches covered.">                    switch (c) {</span>
+                    case 'x':
+<span class="fc" id="L449">                        builder.appendTwoDigitWeekyear</span>
+<span class="fc" id="L450">                            (new DateTime().getWeekyear() - 30, lenientParse);</span>
+<span class="fc" id="L451">                        break;</span>
+                    case 'y':
+                    case 'Y':
+                    default:
+<span class="fc" id="L455">                        builder.appendTwoDigitYear(new DateTime().getYear() - 30, lenientParse);</span>
+                        break;
+                    }
+<span class="fc" id="L458">                } else {</span>
+                    // Try to support long year values.
+<span class="fc" id="L460">                    int maxDigits = 9;</span>
+
+                    // Peek ahead to next token.
+<span class="fc bfc" id="L463" title="All 2 branches covered.">                    if (i + 1 &lt; length) {</span>
+<span class="fc" id="L464">                        indexRef[0]++;</span>
+<span class="fc bfc" id="L465" title="All 2 branches covered.">                        if (isNumericToken(parseToken(pattern, indexRef))) {</span>
+                            // If next token is a number, cannot support long years.
+<span class="fc" id="L467">                            maxDigits = tokenLen;</span>
+                        }
+<span class="fc" id="L469">                        indexRef[0]--;</span>
+                    }
+
+<span class="pc bpc" id="L472" title="1 of 4 branches missed.">                    switch (c) {</span>
+                    case 'x':
+<span class="fc" id="L474">                        builder.appendWeekyear(tokenLen, maxDigits);</span>
+<span class="fc" id="L475">                        break;</span>
+                    case 'y':
+<span class="fc" id="L477">                        builder.appendYear(tokenLen, maxDigits);</span>
+<span class="fc" id="L478">                        break;</span>
+                    case 'Y':
+<span class="fc" id="L480">                        builder.appendYearOfEra(tokenLen, maxDigits);</span>
+                        break;
+                    }
+                }
+<span class="fc" id="L484">                break;</span>
+            case 'M': // month of year (text and number)
+<span class="fc bfc" id="L486" title="All 2 branches covered.">                if (tokenLen &gt;= 3) {</span>
+<span class="fc bfc" id="L487" title="All 2 branches covered.">                    if (tokenLen &gt;= 4) {</span>
+<span class="fc" id="L488">                        builder.appendMonthOfYearText();</span>
+                    } else {
+<span class="fc" id="L490">                        builder.appendMonthOfYearShortText();</span>
+                    }
+                } else {
+<span class="fc" id="L493">                    builder.appendMonthOfYear(tokenLen);</span>
+                }
+<span class="fc" id="L495">                break;</span>
+            case 'd': // day of month (number)
+<span class="fc" id="L497">                builder.appendDayOfMonth(tokenLen);</span>
+<span class="fc" id="L498">                break;</span>
+            case 'a': // am/pm marker (text)
+<span class="fc" id="L500">                builder.appendHalfdayOfDayText();</span>
+<span class="fc" id="L501">                break;</span>
+            case 'h': // clockhour of halfday (number, 1..12)
+<span class="fc" id="L503">                builder.appendClockhourOfHalfday(tokenLen);</span>
+<span class="fc" id="L504">                break;</span>
+            case 'H': // hour of day (number, 0..23)
+<span class="fc" id="L506">                builder.appendHourOfDay(tokenLen);</span>
+<span class="fc" id="L507">                break;</span>
+            case 'k': // clockhour of day (1..24)
+<span class="fc" id="L509">                builder.appendClockhourOfDay(tokenLen);</span>
+<span class="fc" id="L510">                break;</span>
+            case 'K': // hour of halfday (0..11)
+<span class="fc" id="L512">                builder.appendHourOfHalfday(tokenLen);</span>
+<span class="fc" id="L513">                break;</span>
+            case 'm': // minute of hour (number)
+<span class="fc" id="L515">                builder.appendMinuteOfHour(tokenLen);</span>
+<span class="fc" id="L516">                break;</span>
+            case 's': // second of minute (number)
+<span class="fc" id="L518">                builder.appendSecondOfMinute(tokenLen);</span>
+<span class="fc" id="L519">                break;</span>
+            case 'S': // fraction of second (number)
+<span class="fc" id="L521">                builder.appendFractionOfSecond(tokenLen, tokenLen);</span>
+<span class="fc" id="L522">                break;</span>
+            case 'e': // day of week (number)
+<span class="fc" id="L524">                builder.appendDayOfWeek(tokenLen);</span>
+<span class="fc" id="L525">                break;</span>
+            case 'E': // dayOfWeek (text)
+<span class="fc bfc" id="L527" title="All 2 branches covered.">                if (tokenLen &gt;= 4) {</span>
+<span class="fc" id="L528">                    builder.appendDayOfWeekText();</span>
+                } else {
+<span class="fc" id="L530">                    builder.appendDayOfWeekShortText();</span>
+                }
+<span class="fc" id="L532">                break;</span>
+            case 'D': // day of year (number)
+<span class="fc" id="L534">                builder.appendDayOfYear(tokenLen);</span>
+<span class="fc" id="L535">                break;</span>
+            case 'w': // week of weekyear (number)
+<span class="fc" id="L537">                builder.appendWeekOfWeekyear(tokenLen);</span>
+<span class="fc" id="L538">                break;</span>
+            case 'z': // time zone (text)
+<span class="nc bnc" id="L540" title="All 2 branches missed.">                if (tokenLen &gt;= 4) {</span>
+<span class="nc" id="L541">                    builder.appendTimeZoneName();</span>
+                } else {
+<span class="nc" id="L543">                    builder.appendTimeZoneShortName(null);</span>
+                }
+<span class="nc" id="L545">                break;</span>
+            case 'Z': // time zone offset
+<span class="fc bfc" id="L547" title="All 2 branches covered.">                if (tokenLen == 1) {</span>
+<span class="fc" id="L548">                    builder.appendTimeZoneOffset(null, &quot;Z&quot;, false, 2, 2);</span>
+<span class="fc bfc" id="L549" title="All 2 branches covered.">                } else if (tokenLen == 2) {</span>
+<span class="fc" id="L550">                    builder.appendTimeZoneOffset(null, &quot;Z&quot;, true, 2, 2);</span>
+                } else {
+<span class="fc" id="L552">                    builder.appendTimeZoneId();</span>
+                }
+<span class="fc" id="L554">                break;</span>
+            case '\'': // literal text
+<span class="fc" id="L556">                String sub = token.substring(1);</span>
+<span class="fc bfc" id="L557" title="All 2 branches covered.">                if (sub.length() == 1) {</span>
+<span class="fc" id="L558">                    builder.appendLiteral(sub.charAt(0));</span>
+                } else {
+                    // Create copy of sub since otherwise the temporary quoted
+                    // string would still be referenced internally.
+<span class="fc" id="L562">                    builder.appendLiteral(new String(sub));</span>
+                }
+<span class="fc" id="L564">                break;</span>
+            default:
+<span class="fc" id="L566">                throw new IllegalArgumentException</span>
+                    (&quot;Illegal pattern component: &quot; + token);
+            }
+        }
+<span class="fc" id="L570">    }</span>
+
+    /**
+     * Parses an individual token.
+     * 
+     * @param pattern  the pattern string
+     * @param indexRef  a single element array, where the input is the start
+     *  location and the output is the location after parsing the token
+     * @return the parsed token
+     */
+    private static String parseToken(String pattern, int[] indexRef) {
+<span class="fc" id="L581">        StringBuilder buf = new StringBuilder();</span>
+
+<span class="fc" id="L583">        int i = indexRef[0];</span>
+<span class="fc" id="L584">        int length = pattern.length();</span>
+
+<span class="fc" id="L586">        char c = pattern.charAt(i);</span>
+<span class="pc bpc" id="L587" title="1 of 8 branches missed.">        if (c &gt;= 'A' &amp;&amp; c &lt;= 'Z' || c &gt;= 'a' &amp;&amp; c &lt;= 'z') {</span>
+            // Scan a run of the same character, which indicates a time
+            // pattern.
+<span class="fc" id="L590">            buf.append(c);</span>
+
+<span class="fc bfc" id="L592" title="All 2 branches covered.">            while (i + 1 &lt; length) {</span>
+<span class="fc" id="L593">                char peek = pattern.charAt(i + 1);</span>
+<span class="fc bfc" id="L594" title="All 2 branches covered.">                if (peek == c) {</span>
+<span class="fc" id="L595">                    buf.append(c);</span>
+<span class="fc" id="L596">                    i++;</span>
+                } else {
+                    break;
+                }
+<span class="fc" id="L600">            }</span>
+        } else {
+            // This will identify token as text.
+<span class="fc" id="L603">            buf.append('\'');</span>
+
+<span class="fc" id="L605">            boolean inLiteral = false;</span>
+
+<span class="fc bfc" id="L607" title="All 2 branches covered.">            for (; i &lt; length; i++) {</span>
+<span class="fc" id="L608">                c = pattern.charAt(i);</span>
+                
+<span class="fc bfc" id="L610" title="All 2 branches covered.">                if (c == '\'') {</span>
+<span class="pc bpc" id="L611" title="1 of 4 branches missed.">                    if (i + 1 &lt; length &amp;&amp; pattern.charAt(i + 1) == '\'') {</span>
+                        // '' is treated as escaped '
+<span class="fc" id="L613">                        i++;</span>
+<span class="fc" id="L614">                        buf.append(c);</span>
+                    } else {
+<span class="fc bfc" id="L616" title="All 2 branches covered.">                        inLiteral = !inLiteral;</span>
+                    }
+<span class="pc bpc" id="L618" title="1 of 10 branches missed.">                } else if (!inLiteral &amp;&amp;</span>
+                           (c &gt;= 'A' &amp;&amp; c &lt;= 'Z' || c &gt;= 'a' &amp;&amp; c &lt;= 'z')) {
+<span class="fc" id="L620">                    i--;</span>
+<span class="fc" id="L621">                    break;</span>
+                } else {
+<span class="fc" id="L623">                    buf.append(c);</span>
+                }
+            }
+        }
+
+<span class="fc" id="L628">        indexRef[0] = i;</span>
+<span class="fc" id="L629">        return buf.toString();</span>
+    }
+
+    /**
+     * Returns true if token should be parsed as a numeric field.
+     * 
+     * @param token  the token to parse
+     * @return true if numeric field
+     */
+    private static boolean isNumericToken(String token) {
+<span class="fc" id="L639">        int tokenLen = token.length();</span>
+<span class="pc bpc" id="L640" title="1 of 2 branches missed.">        if (tokenLen &gt; 0) {</span>
+<span class="fc" id="L641">            char c = token.charAt(0);</span>
+<span class="fc bfc" id="L642" title="All 3 branches covered.">            switch (c) {</span>
+            case 'c': // century (number)
+            case 'C': // century of era (number)
+            case 'x': // weekyear (number)
+            case 'y': // year (number)
+            case 'Y': // year of era (number)
+            case 'd': // day of month (number)
+            case 'h': // hour of day (number, 1..12)
+            case 'H': // hour of day (number, 0..23)
+            case 'm': // minute of hour (number)
+            case 's': // second of minute (number)
+            case 'S': // fraction of second (number)
+            case 'e': // day of week (number)
+            case 'D': // day of year (number)
+            case 'F': // day of week in month (number)
+            case 'w': // week of year (number)
+            case 'W': // week of month (number)
+            case 'k': // hour of day (1..24)
+            case 'K': // hour of day (0..11)
+<span class="fc" id="L661">                return true;</span>
+            case 'M': // month of year (text and number)
+<span class="pc bpc" id="L663" title="1 of 2 branches missed.">                if (tokenLen &lt;= 2) {</span>
+<span class="fc" id="L664">                    return true;</span>
+                }
+            }
+        }
+            
+<span class="fc" id="L669">        return false;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Select a format from a custom pattern.
+     *
+     * @param pattern  pattern specification
+     * @throws IllegalArgumentException if the pattern is invalid
+     * @see #appendPatternTo
+     */
+    private static DateTimeFormatter createFormatterForPattern(String pattern) {
+<span class="fc bfc" id="L681" title="All 4 branches covered.">        if (pattern == null || pattern.length() == 0) {</span>
+<span class="fc" id="L682">            throw new IllegalArgumentException(&quot;Invalid pattern specification&quot;);</span>
+        }
+<span class="fc" id="L684">        DateTimeFormatter formatter = cPatternCache.get(pattern);</span>
+<span class="fc bfc" id="L685" title="All 2 branches covered.">        if (formatter == null) {</span>
+<span class="fc" id="L686">            DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();</span>
+<span class="fc" id="L687">            parsePatternTo(builder, pattern);</span>
+<span class="fc" id="L688">            formatter = builder.toFormatter();</span>
+<span class="pc bpc" id="L689" title="1 of 2 branches missed.">            if (cPatternCache.size() &lt; PATTERN_CACHE_SIZE) {</span>
+                // the size check is not locked against concurrent access,
+                // but is accepted to be slightly off in contention scenarios.
+<span class="fc" id="L692">                DateTimeFormatter oldFormatter = cPatternCache.putIfAbsent(pattern, formatter);</span>
+<span class="pc bpc" id="L693" title="1 of 2 branches missed.">                if (oldFormatter != null) {</span>
+<span class="nc" id="L694">                    formatter = oldFormatter;</span>
+                }
+            }
+        }
+<span class="fc" id="L698">        return formatter;</span>
+    }
+
+    /**
+     * Select a format from a two character style pattern. The first character
+     * is the date style, and the second character is the time style. Specify a
+     * character of 'S' for short style, 'M' for medium, 'L' for long, and 'F'
+     * for full. A date or time may be omitted by specifying a style character '-'.
+     *
+     * @param style  two characters from the set {&quot;S&quot;, &quot;M&quot;, &quot;L&quot;, &quot;F&quot;, &quot;-&quot;}
+     * @throws IllegalArgumentException if the style is invalid
+     */
+    private static DateTimeFormatter createFormatterForStyle(String style) {
+<span class="fc bfc" id="L711" title="All 4 branches covered.">        if (style == null || style.length() != 2) {</span>
+<span class="fc" id="L712">            throw new IllegalArgumentException(&quot;Invalid style specification: &quot; + style);</span>
+        }
+<span class="fc" id="L714">        int dateStyle = selectStyle(style.charAt(0));</span>
+<span class="fc" id="L715">        int timeStyle = selectStyle(style.charAt(1));</span>
+<span class="pc bpc" id="L716" title="2 of 4 branches missed.">        if (dateStyle == NONE &amp;&amp; timeStyle == NONE) {</span>
+<span class="fc" id="L717">            throw new IllegalArgumentException(&quot;Style '--' is invalid&quot;);</span>
+        }
+<span class="nc" id="L719">        return createFormatterForStyleIndex(dateStyle, timeStyle);</span>
+    }
+
+    /**
+     * Gets the formatter for the specified style.
+     * 
+     * @param dateStyle  the date style
+     * @param timeStyle  the time style
+     * @return the formatter
+     */
+    private static DateTimeFormatter createFormatterForStyleIndex(int dateStyle, int timeStyle) {
+<span class="nc" id="L730">        int index = ((dateStyle &lt;&lt; 2) + dateStyle) + timeStyle;  // (dateStyle * 5 + timeStyle);</span>
+        // Should never happen but do a double check...
+<span class="nc bnc" id="L732" title="All 2 branches missed.">        if (index &gt;= cStyleCache.length()) {</span>
+<span class="nc" id="L733">            return createDateTimeFormatter(dateStyle, timeStyle);</span>
+        }
+<span class="nc" id="L735">        DateTimeFormatter f = cStyleCache.get(index);</span>
+<span class="nc bnc" id="L736" title="All 2 branches missed.">        if (f == null) {</span>
+<span class="nc" id="L737">            f = createDateTimeFormatter(dateStyle, timeStyle);</span>
+<span class="nc bnc" id="L738" title="All 2 branches missed.">            if (cStyleCache.compareAndSet(index, null, f) == false) {</span>
+<span class="nc" id="L739">                f = cStyleCache.get(index);</span>
+            }
+        }
+<span class="nc" id="L742">        return f;</span>
+    }
+
+    /**
+     * Creates a formatter for the specified style.
+     * 
+     * @param dateStyle  the date style
+     * @param timeStyle  the time style
+     * @return the formatter
+     */
+    private static DateTimeFormatter createDateTimeFormatter(int dateStyle, int timeStyle){
+<span class="nc" id="L753">        int type = DATETIME;</span>
+<span class="nc bnc" id="L754" title="All 2 branches missed.">        if (dateStyle == NONE) {</span>
+<span class="nc" id="L755">            type = TIME;</span>
+<span class="nc bnc" id="L756" title="All 2 branches missed.">        } else if (timeStyle == NONE) {</span>
+<span class="nc" id="L757">            type = DATE;</span>
+        }
+<span class="nc" id="L759">        StyleFormatter llf = new StyleFormatter(dateStyle, timeStyle, type);</span>
+<span class="nc" id="L760">        return new DateTimeFormatter(llf, llf);</span>
+    }
+
+    /**
+     * Gets the JDK style code from the Joda code.
+     * 
+     * @param ch  the Joda style code
+     * @return the JDK style code
+     */
+    private static int selectStyle(char ch) {
+<span class="pc bpc" id="L770" title="4 of 6 branches missed.">        switch (ch) {</span>
+        case 'S':
+<span class="nc" id="L772">            return SHORT;</span>
+        case 'M':
+<span class="nc" id="L774">            return MEDIUM;</span>
+        case 'L':
+<span class="nc" id="L776">            return LONG;</span>
+        case 'F':
+<span class="nc" id="L778">            return FULL;</span>
+        case '-':
+<span class="fc" id="L780">            return NONE;</span>
+        default:
+<span class="fc" id="L782">            throw new IllegalArgumentException(&quot;Invalid style character: &quot; + ch);</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    static class StyleFormatter
+            implements InternalPrinter, InternalParser {
+
+<span class="nc" id="L790">        private static final ConcurrentHashMap&lt;StyleFormatterCacheKey, DateTimeFormatter&gt; cCache = new ConcurrentHashMap&lt;StyleFormatterCacheKey, DateTimeFormatter&gt;();</span>
+        
+        private final int iDateStyle;
+        private final int iTimeStyle;
+        private final int iType;
+
+        StyleFormatter(int dateStyle, int timeStyle, int type) {
+<span class="nc" id="L797">            super();</span>
+<span class="nc" id="L798">            iDateStyle = dateStyle;</span>
+<span class="nc" id="L799">            iTimeStyle = timeStyle;</span>
+<span class="nc" id="L800">            iType = type;</span>
+<span class="nc" id="L801">        }</span>
+
+        public int estimatePrintedLength() {
+<span class="nc" id="L804">            return 40;  // guess</span>
+        }
+
+        public void printTo(
+                Appendable appenadble, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+<span class="nc" id="L810">            InternalPrinter p = getFormatter(locale).getPrinter0();</span>
+<span class="nc" id="L811">            p.printTo(appenadble, instant, chrono, displayOffset, displayZone, locale);</span>
+<span class="nc" id="L812">        }</span>
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+<span class="nc" id="L815">            InternalPrinter p = getFormatter(locale).getPrinter0();</span>
+<span class="nc" id="L816">            p.printTo(appendable, partial, locale);</span>
+<span class="nc" id="L817">        }</span>
+
+        public int estimateParsedLength() {
+<span class="nc" id="L820">            return 40;  // guess</span>
+        }
+
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="nc" id="L824">            InternalParser p = getFormatter(bucket.getLocale()).getParser0();</span>
+<span class="nc" id="L825">            return p.parseInto(bucket, text, position);</span>
+        }
+
+        private DateTimeFormatter getFormatter(Locale locale) {
+<span class="nc bnc" id="L829" title="All 2 branches missed.">            locale = (locale == null ? Locale.getDefault() : locale);</span>
+<span class="nc" id="L830">            StyleFormatterCacheKey key = new StyleFormatterCacheKey(iType, iDateStyle, iTimeStyle, locale);</span>
+<span class="nc" id="L831">            DateTimeFormatter f = cCache.get(key);</span>
+<span class="nc bnc" id="L832" title="All 2 branches missed.">            if (f == null) {</span>
+<span class="nc" id="L833">                f = DateTimeFormat.forPattern(getPattern(locale));</span>
+<span class="nc" id="L834">                DateTimeFormatter oldFormatter = cCache.putIfAbsent(key, f);</span>
+<span class="nc bnc" id="L835" title="All 2 branches missed.">                if (oldFormatter != null) {</span>
+<span class="nc" id="L836">                    f = oldFormatter;</span>
+                }
+            }
+<span class="nc" id="L839">            return f;</span>
+        }
+
+        String getPattern(Locale locale) {
+<span class="nc" id="L843">            DateFormat f = null;</span>
+<span class="nc bnc" id="L844" title="All 4 branches missed.">            switch (iType) {</span>
+                case DATE:
+<span class="nc" id="L846">                    f = DateFormat.getDateInstance(iDateStyle, locale);</span>
+<span class="nc" id="L847">                    break;</span>
+                case TIME:
+<span class="nc" id="L849">                    f = DateFormat.getTimeInstance(iTimeStyle, locale);</span>
+<span class="nc" id="L850">                    break;</span>
+                case DATETIME:
+<span class="nc" id="L852">                    f = DateFormat.getDateTimeInstance(iDateStyle, iTimeStyle, locale);</span>
+                    break;
+            }
+<span class="nc bnc" id="L855" title="All 2 branches missed.">            if (f instanceof SimpleDateFormat == false) {</span>
+<span class="nc" id="L856">                throw new IllegalArgumentException(&quot;No datetime pattern for locale: &quot; + locale);</span>
+            }
+<span class="nc" id="L858">            return ((SimpleDateFormat) f).toPattern();</span>
+        }
+    }
+
+    static class StyleFormatterCacheKey {
+        private final int combinedTypeAndStyle;
+        private final Locale locale;
+
+        public StyleFormatterCacheKey(int iType, int iDateStyle,
+<span class="nc" id="L867">                int iTimeStyle, Locale locale) {</span>
+<span class="nc" id="L868">            this.locale = locale;</span>
+            // keeping old key generation logic of shifting type and style
+<span class="nc" id="L870">            this.combinedTypeAndStyle = iType + (iDateStyle &lt;&lt; 4) + (iTimeStyle &lt;&lt; 8);</span>
+<span class="nc" id="L871">        }</span>
+
+        @Override
+        public int hashCode() {
+<span class="nc" id="L875">            final int prime = 31;</span>
+<span class="nc" id="L876">            int result = 1;</span>
+<span class="nc" id="L877">            result = prime * result + combinedTypeAndStyle;</span>
+<span class="nc bnc" id="L878" title="All 2 branches missed.">            result = prime * result + ((locale == null) ? 0 : locale.hashCode());</span>
+<span class="nc" id="L879">            return result;</span>
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+<span class="nc bnc" id="L884" title="All 2 branches missed.">            if (this == obj) {</span>
+<span class="nc" id="L885">                return true;</span>
+            }
+<span class="nc bnc" id="L887" title="All 2 branches missed.">            if (obj == null) {</span>
+<span class="nc" id="L888">                return false;</span>
+            }
+<span class="nc bnc" id="L890" title="All 2 branches missed.">            if (!(obj instanceof StyleFormatterCacheKey)) {</span>
+<span class="nc" id="L891">                return false;</span>
+            }
+<span class="nc" id="L893">            StyleFormatterCacheKey other = (StyleFormatterCacheKey) obj;</span>
+<span class="nc bnc" id="L894" title="All 2 branches missed.">            if (combinedTypeAndStyle != other.combinedTypeAndStyle) {</span>
+<span class="nc" id="L895">                return false;</span>
+            }
+<span class="nc bnc" id="L897" title="All 2 branches missed.">            if (locale == null) {</span>
+<span class="nc bnc" id="L898" title="All 2 branches missed.">                if (other.locale != null) {</span>
+<span class="nc" id="L899">                    return false;</span>
+                }
+<span class="nc bnc" id="L901" title="All 2 branches missed.">            } else if (!locale.equals(other.locale)) {</span>
+<span class="nc" id="L902">                return false;</span>
+            }
+<span class="nc" id="L904">            return true;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

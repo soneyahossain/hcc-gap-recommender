@@ -1,0 +1,2679 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateTimeFormatterBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.format</a> &gt; <span class="el_source">DateTimeFormatterBuilder.java</span></div><h1>DateTimeFormatterBuilder.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.format;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.DateTimeZone;
+import org.joda.time.MutableDateTime;
+import org.joda.time.MutableDateTime.Property;
+import org.joda.time.ReadablePartial;
+import org.joda.time.field.MillisDurationField;
+import org.joda.time.field.PreciseDateTimeField;
+
+/**
+ * Factory that creates complex instances of DateTimeFormatter via method calls.
+ * &lt;p&gt;
+ * Datetime formatting is performed by the {@link DateTimeFormatter} class.
+ * Three classes provide factory methods to create formatters, and this is one.
+ * The others are {@link DateTimeFormat} and {@link ISODateTimeFormat}.
+ * &lt;p&gt;
+ * DateTimeFormatterBuilder is used for constructing formatters which are then
+ * used to print or parse. The formatters are built by appending specific fields
+ * or other formatters to an instance of this builder.
+ * &lt;p&gt;
+ * For example, a formatter that prints month and year, like &quot;January 1970&quot;,
+ * can be constructed as follows:
+ * &lt;p&gt;
+ * &lt;pre&gt;
+ * DateTimeFormatter monthAndYear = new DateTimeFormatterBuilder()
+ *     .appendMonthOfYearText()
+ *     .appendLiteral(' ')
+ *     .appendYear(4, 4)
+ *     .toFormatter();
+ * &lt;/pre&gt;
+ * &lt;p&gt;
+ * DateTimeFormatterBuilder itself is mutable and not thread-safe, but the
+ * formatters that it builds are thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @author Fredrik Borgh
+ * @since 1.0
+ * @see DateTimeFormat
+ * @see ISODateTimeFormat
+ */
+public class DateTimeFormatterBuilder {
+
+    /** Array of printers and parsers (alternating). */
+    private ArrayList&lt;Object&gt; iElementPairs;
+    /** Cache of the last returned formatter. */
+    private Object iFormatter;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a DateTimeFormatterBuilder.
+     */
+    public DateTimeFormatterBuilder() {
+<span class="fc" id="L83">        super();</span>
+<span class="fc" id="L84">        iElementPairs = new ArrayList&lt;Object&gt;();</span>
+<span class="fc" id="L85">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructs a DateTimeFormatter using all the appended elements.
+     * &lt;p&gt;
+     * This is the main method used by applications at the end of the build
+     * process to create a usable formatter.
+     * &lt;p&gt;
+     * Subsequent changes to this builder do not affect the returned formatter.
+     * &lt;p&gt;
+     * The returned formatter may not support both printing and parsing.
+     * The methods {@link DateTimeFormatter#isPrinter()} and
+     * {@link DateTimeFormatter#isParser()} will help you determine the state
+     * of the formatter.
+     *
+     * @throws UnsupportedOperationException if neither printing nor parsing is supported
+     */
+    public DateTimeFormatter toFormatter() {
+<span class="fc" id="L104">        Object f = getFormatter();</span>
+<span class="fc" id="L105">        InternalPrinter printer = null;</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (isPrinter(f)) {</span>
+<span class="fc" id="L107">            printer = (InternalPrinter) f;</span>
+        }
+<span class="fc" id="L109">        InternalParser parser = null;</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        if (isParser(f)) {</span>
+<span class="fc" id="L111">            parser = (InternalParser) f;</span>
+        }
+<span class="fc bfc" id="L113" title="All 4 branches covered.">        if (printer != null || parser != null) {</span>
+<span class="fc" id="L114">            return new DateTimeFormatter(printer, parser);</span>
+        }
+<span class="fc" id="L116">        throw new UnsupportedOperationException(&quot;Both printing and parsing not supported&quot;);</span>
+    }
+
+    /**
+     * Internal method to create a DateTimePrinter instance using all the
+     * appended elements.
+     * &lt;p&gt;
+     * Most applications will not use this method.
+     * If you want a printer in an application, call {@link #toFormatter()}
+     * and just use the printing API.
+     * &lt;p&gt;
+     * Subsequent changes to this builder do not affect the returned printer.
+     *
+     * @throws UnsupportedOperationException if printing is not supported
+     */
+    public DateTimePrinter toPrinter() {
+<span class="fc" id="L132">        Object f = getFormatter();</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        if (isPrinter(f)) {</span>
+<span class="fc" id="L134">            InternalPrinter ip = (InternalPrinter) f;</span>
+<span class="fc" id="L135">            return InternalPrinterDateTimePrinter.of(ip);</span>
+        }
+<span class="fc" id="L137">        throw new UnsupportedOperationException(&quot;Printing is not supported&quot;);</span>
+    }
+
+    /**
+     * Internal method to create a DateTimeParser instance using all the
+     * appended elements.
+     * &lt;p&gt;
+     * Most applications will not use this method.
+     * If you want a parser in an application, call {@link #toFormatter()}
+     * and just use the parsing API.
+     * &lt;p&gt;
+     * Subsequent changes to this builder do not affect the returned parser.
+     *
+     * @throws UnsupportedOperationException if parsing is not supported
+     */
+    public DateTimeParser toParser() {
+<span class="fc" id="L153">        Object f = getFormatter();</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">        if (isParser(f)) {</span>
+<span class="fc" id="L155">            InternalParser ip = (InternalParser) f;</span>
+<span class="fc" id="L156">            return InternalParserDateTimeParser.of(ip);</span>
+        }
+<span class="fc" id="L158">        throw new UnsupportedOperationException(&quot;Parsing is not supported&quot;);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns true if toFormatter can be called without throwing an
+     * UnsupportedOperationException.
+     * 
+     * @return true if a formatter can be built
+     */
+    public boolean canBuildFormatter() {
+<span class="fc" id="L169">        return isFormatter(getFormatter());</span>
+    }
+
+    /**
+     * Returns true if toPrinter can be called without throwing an
+     * UnsupportedOperationException.
+     * 
+     * @return true if a printer can be built
+     */
+    public boolean canBuildPrinter() {
+<span class="fc" id="L179">        return isPrinter(getFormatter());</span>
+    }
+
+    /**
+     * Returns true if toParser can be called without throwing an
+     * UnsupportedOperationException.
+     * 
+     * @return true if a parser can be built
+     */
+    public boolean canBuildParser() {
+<span class="fc" id="L189">        return isParser(getFormatter());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Clears out all the appended elements, allowing this builder to be
+     * reused.
+     */
+    public void clear() {
+<span class="nc" id="L198">        iFormatter = null;</span>
+<span class="nc" id="L199">        iElementPairs.clear();</span>
+<span class="nc" id="L200">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Appends another formatter.
+     * &lt;p&gt;
+     * This extracts the underlying printer and parser and appends them
+     * The printer and parser interfaces are the low-level part of the formatting API.
+     * Normally, instances are extracted from another formatter.
+     * Note however that any formatter specific information, such as the locale,
+     * time-zone, chronology, offset parsing or pivot/default year, will not be
+     * extracted by this method.
+     *
+     * @param formatter  the formatter to add
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if formatter is null or of an invalid type
+     */
+    public DateTimeFormatterBuilder append(DateTimeFormatter formatter) {
+<span class="pc bpc" id="L218" title="1 of 2 branches missed.">        if (formatter == null) {</span>
+<span class="nc" id="L219">            throw new IllegalArgumentException(&quot;No formatter supplied&quot;);</span>
+        }
+<span class="fc" id="L221">        return append0(formatter.getPrinter0(), formatter.getParser0());</span>
+    }
+
+    /**
+     * Appends just a printer. With no matching parser, a parser cannot be
+     * built from this DateTimeFormatterBuilder.
+     * &lt;p&gt;
+     * The printer interface is part of the low-level part of the formatting API.
+     * Normally, instances are extracted from another formatter.
+     * Note however that any formatter specific information, such as the locale,
+     * time-zone, chronology, offset parsing or pivot/default year, will not be
+     * extracted by this method.
+     *
+     * @param printer  the printer to add, not null
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if printer is null or of an invalid type
+     */
+    public DateTimeFormatterBuilder append(DateTimePrinter printer) {
+<span class="fc" id="L239">        checkPrinter(printer);</span>
+<span class="fc" id="L240">        return append0(DateTimePrinterInternalPrinter.of(printer), null);</span>
+    }
+
+    /**
+     * Appends just a parser. With no matching printer, a printer cannot be
+     * built from this builder.
+     * &lt;p&gt;
+     * The parser interface is part of the low-level part of the formatting API.
+     * Normally, instances are extracted from another formatter.
+     * Note however that any formatter specific information, such as the locale,
+     * time-zone, chronology, offset parsing or pivot/default year, will not be
+     * extracted by this method.
+     *
+     * @param parser  the parser to add, not null
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if parser is null or of an invalid type
+     */
+    public DateTimeFormatterBuilder append(DateTimeParser parser) {
+<span class="fc" id="L258">        checkParser(parser);</span>
+<span class="fc" id="L259">        return append0(null, DateTimeParserInternalParser.of(parser));</span>
+    }
+
+    /**
+     * Appends a printer/parser pair.
+     * &lt;p&gt;
+     * The printer and parser interfaces are the low-level part of the formatting API.
+     * Normally, instances are extracted from another formatter.
+     * Note however that any formatter specific information, such as the locale,
+     * time-zone, chronology, offset parsing or pivot/default year, will not be
+     * extracted by this method.
+     *
+     * @param printer  the printer to add, not null
+     * @param parser  the parser to add, not null
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if printer or parser is null or of an invalid type
+     */
+    public DateTimeFormatterBuilder append(DateTimePrinter printer, DateTimeParser parser) {
+<span class="fc" id="L277">        checkPrinter(printer);</span>
+<span class="nc" id="L278">        checkParser(parser);</span>
+<span class="nc" id="L279">        return append0(DateTimePrinterInternalPrinter.of(printer), DateTimeParserInternalParser.of(parser));</span>
+    }
+
+    /**
+     * Appends a printer and a set of matching parsers. When parsing, the first
+     * parser in the list is selected for parsing. If it fails, the next is
+     * chosen, and so on. If none of these parsers succeeds, then the failed
+     * position of the parser that made the greatest progress is returned.
+     * &lt;p&gt;
+     * Only the printer is optional. In addition, it is illegal for any but the
+     * last of the parser array elements to be null. If the last element is
+     * null, this represents the empty parser. The presence of an empty parser
+     * indicates that the entire array of parse formats is optional.
+     * &lt;p&gt;
+     * The printer and parser interfaces are the low-level part of the formatting API.
+     * Normally, instances are extracted from another formatter.
+     * Note however that any formatter specific information, such as the locale,
+     * time-zone, chronology, offset parsing or pivot/default year, will not be
+     * extracted by this method.
+     *
+     * @param printer  the printer to add
+     * @param parsers  the parsers to add
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if any printer or parser is of an invalid type
+     * @throws IllegalArgumentException if any parser element but the last is null
+     */
+    public DateTimeFormatterBuilder append(DateTimePrinter printer, DateTimeParser[] parsers) {
+<span class="pc bpc" id="L306" title="1 of 2 branches missed.">        if (printer != null) {</span>
+<span class="nc" id="L307">            checkPrinter(printer);</span>
+        }
+<span class="pc bpc" id="L309" title="1 of 2 branches missed.">        if (parsers == null) {</span>
+<span class="nc" id="L310">            throw new IllegalArgumentException(&quot;No parsers supplied&quot;);</span>
+        }
+<span class="fc" id="L312">        int length = parsers.length;</span>
+<span class="pc bpc" id="L313" title="1 of 2 branches missed.">        if (length == 1) {</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">            if (parsers[0] == null) {</span>
+<span class="nc" id="L315">                throw new IllegalArgumentException(&quot;No parser supplied&quot;);</span>
+            }
+<span class="nc" id="L317">            return append0(DateTimePrinterInternalPrinter.of(printer), DateTimeParserInternalParser.of(parsers[0]));</span>
+        }
+
+<span class="fc" id="L320">        InternalParser[] copyOfParsers = new InternalParser[length];</span>
+        int i;
+<span class="fc bfc" id="L322" title="All 2 branches covered.">        for (i = 0; i &lt; length - 1; i++) {</span>
+<span class="pc bpc" id="L323" title="1 of 2 branches missed.">            if ((copyOfParsers[i] = DateTimeParserInternalParser.of(parsers[i])) == null) {</span>
+<span class="nc" id="L324">                throw new IllegalArgumentException(&quot;Incomplete parser array&quot;);</span>
+            }
+        }
+<span class="fc" id="L327">        copyOfParsers[i] = DateTimeParserInternalParser.of(parsers[i]);</span>
+
+<span class="fc" id="L329">        return append0(DateTimePrinterInternalPrinter.of(printer), new MatchingParser(copyOfParsers));</span>
+    }
+
+    /**
+     * Appends just a parser element which is optional. With no matching
+     * printer, a printer cannot be built from this DateTimeFormatterBuilder.
+     * &lt;p&gt;
+     * The parser interface is part of the low-level part of the formatting API.
+     * Normally, instances are extracted from another formatter.
+     * Note however that any formatter specific information, such as the locale,
+     * time-zone, chronology, offset parsing or pivot/default year, will not be
+     * extracted by this method.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if parser is null or of an invalid type
+     */
+    public DateTimeFormatterBuilder appendOptional(DateTimeParser parser) {
+<span class="fc" id="L346">        checkParser(parser);</span>
+<span class="fc" id="L347">        InternalParser[] parsers = new InternalParser[] {DateTimeParserInternalParser.of(parser), null};</span>
+<span class="fc" id="L348">        return append0(null, new MatchingParser(parsers));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Checks if the parser is non null and a provider.
+     * 
+     * @param parser  the parser to check
+     */
+    private void checkParser(DateTimeParser parser) {
+<span class="fc bfc" id="L358" title="All 2 branches covered.">        if (parser == null) {</span>
+<span class="fc" id="L359">            throw new IllegalArgumentException(&quot;No parser supplied&quot;);</span>
+        }
+<span class="fc" id="L361">    }</span>
+
+    /**
+     * Checks if the printer is non null and a provider.
+     * 
+     * @param printer  the printer to check
+     */
+    private void checkPrinter(DateTimePrinter printer) {
+<span class="fc bfc" id="L369" title="All 2 branches covered.">        if (printer == null) {</span>
+<span class="fc" id="L370">            throw new IllegalArgumentException(&quot;No printer supplied&quot;);</span>
+        }
+<span class="fc" id="L372">    }</span>
+
+    private DateTimeFormatterBuilder append0(Object element) {
+<span class="fc" id="L375">        iFormatter = null;</span>
+        // Add the element as both a printer and parser.
+<span class="fc" id="L377">        iElementPairs.add(element);</span>
+<span class="fc" id="L378">        iElementPairs.add(element);</span>
+<span class="fc" id="L379">        return this;</span>
+    }
+
+    private DateTimeFormatterBuilder append0(
+            InternalPrinter printer, InternalParser parser) {
+<span class="fc" id="L384">        iFormatter = null;</span>
+<span class="fc" id="L385">        iElementPairs.add(printer);</span>
+<span class="fc" id="L386">        iElementPairs.add(parser);</span>
+<span class="fc" id="L387">        return this;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Instructs the printer to emit a specific character, and the parser to
+     * expect it. The parser is case-insensitive.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendLiteral(char c) {
+<span class="fc" id="L398">        return append0(new CharacterLiteral(c));</span>
+    }
+
+    /**
+     * Instructs the printer to emit specific text, and the parser to expect
+     * it. The parser is case-insensitive.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if text is null
+     */
+    public DateTimeFormatterBuilder appendLiteral(String text) {
+<span class="pc bpc" id="L409" title="1 of 2 branches missed.">        if (text == null) {</span>
+<span class="nc" id="L410">            throw new IllegalArgumentException(&quot;Literal must not be null&quot;);</span>
+        }
+<span class="pc bpc" id="L412" title="2 of 3 branches missed.">        switch (text.length()) {</span>
+            case 0:
+<span class="nc" id="L414">                return this;</span>
+            case 1:
+<span class="nc" id="L416">                return append0(new CharacterLiteral(text.charAt(0)));</span>
+            default:
+<span class="fc" id="L418">                return append0(new StringLiteral(text));</span>
+        }
+    }
+
+    /**
+     * Instructs the printer to emit a field value as a decimal number, and the
+     * parser to expect an unsigned decimal number.
+     *
+     * @param fieldType  type of field to append
+     * @param minDigits  minimum number of digits to &lt;i&gt;print&lt;/i&gt;
+     * @param maxDigits  maximum number of digits to &lt;i&gt;parse&lt;/i&gt;, or the estimated
+     * maximum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if field type is null
+     */
+    public DateTimeFormatterBuilder appendDecimal(
+            DateTimeFieldType fieldType, int minDigits, int maxDigits) {
+<span class="pc bpc" id="L435" title="1 of 2 branches missed.">        if (fieldType == null) {</span>
+<span class="nc" id="L436">            throw new IllegalArgumentException(&quot;Field type must not be null&quot;);</span>
+        }
+<span class="pc bpc" id="L438" title="1 of 2 branches missed.">        if (maxDigits &lt; minDigits) {</span>
+<span class="nc" id="L439">            maxDigits = minDigits;</span>
+        }
+<span class="pc bpc" id="L441" title="2 of 4 branches missed.">        if (minDigits &lt; 0 || maxDigits &lt;= 0) {</span>
+<span class="nc" id="L442">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc bfc" id="L444" title="All 2 branches covered.">        if (minDigits &lt;= 1) {</span>
+<span class="fc" id="L445">            return append0(new UnpaddedNumber(fieldType, maxDigits, false));</span>
+        } else {
+<span class="fc" id="L447">            return append0(new PaddedNumber(fieldType, maxDigits, false, minDigits));</span>
+        }
+    }
+
+    /**
+     * Instructs the printer to emit a field value as a fixed-width decimal
+     * number (smaller numbers will be left-padded with zeros), and the parser
+     * to expect an unsigned decimal number with the same fixed width.
+     * 
+     * @param fieldType  type of field to append
+     * @param numDigits  the exact number of digits to parse or print, except if
+     * printed value requires more digits
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if field type is null or if &lt;code&gt;numDigits &lt;= 0&lt;/code&gt;
+     * @since 1.5
+     */
+    public DateTimeFormatterBuilder appendFixedDecimal(
+            DateTimeFieldType fieldType, int numDigits) {
+<span class="pc bpc" id="L465" title="1 of 2 branches missed.">        if (fieldType == null) {</span>
+<span class="nc" id="L466">            throw new IllegalArgumentException(&quot;Field type must not be null&quot;);</span>
+        }
+<span class="pc bpc" id="L468" title="1 of 2 branches missed.">        if (numDigits &lt;= 0) {</span>
+<span class="nc" id="L469">            throw new IllegalArgumentException(&quot;Illegal number of digits: &quot; + numDigits);</span>
+        }
+<span class="fc" id="L471">        return append0(new FixedNumber(fieldType, numDigits, false));</span>
+    }
+
+    /**
+     * Instructs the printer to emit a field value as a decimal number, and the
+     * parser to expect a signed decimal number.
+     *
+     * @param fieldType  type of field to append
+     * @param minDigits  minimum number of digits to &lt;i&gt;print&lt;/i&gt;
+     * @param maxDigits  maximum number of digits to &lt;i&gt;parse&lt;/i&gt;, or the estimated
+     * maximum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if field type is null
+     */
+    public DateTimeFormatterBuilder appendSignedDecimal(
+            DateTimeFieldType fieldType, int minDigits, int maxDigits) {
+<span class="pc bpc" id="L487" title="1 of 2 branches missed.">        if (fieldType == null) {</span>
+<span class="nc" id="L488">            throw new IllegalArgumentException(&quot;Field type must not be null&quot;);</span>
+        }
+<span class="pc bpc" id="L490" title="1 of 2 branches missed.">        if (maxDigits &lt; minDigits) {</span>
+<span class="nc" id="L491">            maxDigits = minDigits;</span>
+        }
+<span class="pc bpc" id="L493" title="2 of 4 branches missed.">        if (minDigits &lt; 0 || maxDigits &lt;= 0) {</span>
+<span class="nc" id="L494">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc bfc" id="L496" title="All 2 branches covered.">        if (minDigits &lt;= 1) {</span>
+<span class="fc" id="L497">            return append0(new UnpaddedNumber(fieldType, maxDigits, true));</span>
+        } else {
+<span class="fc" id="L499">            return append0(new PaddedNumber(fieldType, maxDigits, true, minDigits));</span>
+        }
+    }
+
+    /**
+     * Instructs the printer to emit a field value as a fixed-width decimal
+     * number (smaller numbers will be left-padded with zeros), and the parser
+     * to expect an signed decimal number with the same fixed width.
+     * 
+     * @param fieldType  type of field to append
+     * @param numDigits  the exact number of digits to parse or print, except if
+     * printed value requires more digits
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if field type is null or if &lt;code&gt;numDigits &lt;= 0&lt;/code&gt;
+     * @since 1.5
+     */
+    public DateTimeFormatterBuilder appendFixedSignedDecimal(
+            DateTimeFieldType fieldType, int numDigits) {
+<span class="pc bpc" id="L517" title="1 of 2 branches missed.">        if (fieldType == null) {</span>
+<span class="nc" id="L518">            throw new IllegalArgumentException(&quot;Field type must not be null&quot;);</span>
+        }
+<span class="pc bpc" id="L520" title="1 of 2 branches missed.">        if (numDigits &lt;= 0) {</span>
+<span class="nc" id="L521">            throw new IllegalArgumentException(&quot;Illegal number of digits: &quot; + numDigits);</span>
+        }
+<span class="fc" id="L523">        return append0(new FixedNumber(fieldType, numDigits, true));</span>
+    }
+
+    /**
+     * Instructs the printer to emit a field value as text, and the
+     * parser to expect text.
+     *
+     * @param fieldType  type of field to append
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if field type is null
+     */
+    public DateTimeFormatterBuilder appendText(DateTimeFieldType fieldType) {
+<span class="pc bpc" id="L535" title="1 of 2 branches missed.">        if (fieldType == null) {</span>
+<span class="nc" id="L536">            throw new IllegalArgumentException(&quot;Field type must not be null&quot;);</span>
+        }
+<span class="fc" id="L538">        return append0(new TextField(fieldType, false));</span>
+    }
+
+    /**
+     * Instructs the printer to emit a field value as short text, and the
+     * parser to expect text.
+     *
+     * @param fieldType  type of field to append
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if field type is null
+     */
+    public DateTimeFormatterBuilder appendShortText(DateTimeFieldType fieldType) {
+<span class="pc bpc" id="L550" title="1 of 2 branches missed.">        if (fieldType == null) {</span>
+<span class="nc" id="L551">            throw new IllegalArgumentException(&quot;Field type must not be null&quot;);</span>
+        }
+<span class="fc" id="L553">        return append0(new TextField(fieldType, true));</span>
+    }
+
+    /**
+     * Instructs the printer to emit a remainder of time as a decimal fraction,
+     * without decimal point. For example, if the field is specified as
+     * minuteOfHour and the time is 12:30:45, the value printed is 75. A
+     * decimal point is implied, so the fraction is 0.75, or three-quarters of
+     * a minute.
+     *
+     * @param fieldType  type of field to append
+     * @param minDigits  minimum number of digits to print.
+     * @param maxDigits  maximum number of digits to print or parse.
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @throws IllegalArgumentException if field type is null
+     */
+    public DateTimeFormatterBuilder appendFraction(
+            DateTimeFieldType fieldType, int minDigits, int maxDigits) {
+<span class="pc bpc" id="L571" title="1 of 2 branches missed.">        if (fieldType == null) {</span>
+<span class="nc" id="L572">            throw new IllegalArgumentException(&quot;Field type must not be null&quot;);</span>
+        }
+<span class="pc bpc" id="L574" title="1 of 2 branches missed.">        if (maxDigits &lt; minDigits) {</span>
+<span class="nc" id="L575">            maxDigits = minDigits;</span>
+        }
+<span class="pc bpc" id="L577" title="2 of 4 branches missed.">        if (minDigits &lt; 0 || maxDigits &lt;= 0) {</span>
+<span class="nc" id="L578">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L580">        return append0(new Fraction(fieldType, minDigits, maxDigits));</span>
+    }
+
+    /**
+     * Appends the print/parse of a fractional second.
+     * &lt;p&gt;
+     * This reliably handles the case where fractional digits are being handled
+     * beyond a visible decimal point. The digits parsed will always be treated
+     * as the most significant (numerically largest) digits.
+     * Thus '23' will be parsed as 230 milliseconds.
+     * Contrast this behaviour to {@link #appendMillisOfSecond}.
+     * This method does not print or parse the decimal point itself.
+     * 
+     * @param minDigits  minimum number of digits to print
+     * @param maxDigits  maximum number of digits to print or parse
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendFractionOfSecond(int minDigits, int maxDigits) {
+<span class="fc" id="L598">        return appendFraction(DateTimeFieldType.secondOfDay(), minDigits, maxDigits);</span>
+    }
+
+    /**
+     * Appends the print/parse of a fractional minute.
+     * &lt;p&gt;
+     * This reliably handles the case where fractional digits are being handled
+     * beyond a visible decimal point. The digits parsed will always be treated
+     * as the most significant (numerically largest) digits.
+     * Thus '23' will be parsed as 0.23 minutes (converted to milliseconds).
+     * This method does not print or parse the decimal point itself.
+     * 
+     * @param minDigits  minimum number of digits to print
+     * @param maxDigits  maximum number of digits to print or parse
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendFractionOfMinute(int minDigits, int maxDigits) {
+<span class="fc" id="L615">        return appendFraction(DateTimeFieldType.minuteOfDay(), minDigits, maxDigits);</span>
+    }
+
+    /**
+     * Appends the print/parse of a fractional hour.
+     * &lt;p&gt;
+     * This reliably handles the case where fractional digits are being handled
+     * beyond a visible decimal point. The digits parsed will always be treated
+     * as the most significant (numerically largest) digits.
+     * Thus '23' will be parsed as 0.23 hours (converted to milliseconds).
+     * This method does not print or parse the decimal point itself.
+     * 
+     * @param minDigits  minimum number of digits to print
+     * @param maxDigits  maximum number of digits to print or parse
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendFractionOfHour(int minDigits, int maxDigits) {
+<span class="fc" id="L632">        return appendFraction(DateTimeFieldType.hourOfDay(), minDigits, maxDigits);</span>
+    }
+
+    /**
+     * Appends the print/parse of a fractional day.
+     * &lt;p&gt;
+     * This reliably handles the case where fractional digits are being handled
+     * beyond a visible decimal point. The digits parsed will always be treated
+     * as the most significant (numerically largest) digits.
+     * Thus '23' will be parsed as 0.23 days (converted to milliseconds).
+     * This method does not print or parse the decimal point itself.
+     * 
+     * @param minDigits  minimum number of digits to print
+     * @param maxDigits  maximum number of digits to print or parse
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendFractionOfDay(int minDigits, int maxDigits) {
+<span class="nc" id="L649">        return appendFraction(DateTimeFieldType.dayOfYear(), minDigits, maxDigits);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric millisOfSecond field.
+     * &lt;p&gt;
+     * This method will append a field that prints a three digit value.
+     * During parsing the value that is parsed is assumed to be three digits.
+     * If less than three digits are present then they will be counted as the
+     * smallest parts of the millisecond. This is probably not what you want
+     * if you are using the field as a fraction. Instead, a fractional
+     * millisecond should be produced using {@link #appendFractionOfSecond}.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendMillisOfSecond(int minDigits) {
+<span class="fc" id="L666">        return appendDecimal(DateTimeFieldType.millisOfSecond(), minDigits, 3);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric millisOfDay field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendMillisOfDay(int minDigits) {
+<span class="nc" id="L676">        return appendDecimal(DateTimeFieldType.millisOfDay(), minDigits, 8);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric secondOfMinute field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendSecondOfMinute(int minDigits) {
+<span class="fc" id="L686">        return appendDecimal(DateTimeFieldType.secondOfMinute(), minDigits, 2);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric secondOfDay field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendSecondOfDay(int minDigits) {
+<span class="fc" id="L696">        return appendDecimal(DateTimeFieldType.secondOfDay(), minDigits, 5);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric minuteOfHour field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendMinuteOfHour(int minDigits) {
+<span class="fc" id="L706">        return appendDecimal(DateTimeFieldType.minuteOfHour(), minDigits, 2);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric minuteOfDay field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendMinuteOfDay(int minDigits) {
+<span class="nc" id="L716">        return appendDecimal(DateTimeFieldType.minuteOfDay(), minDigits, 4);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric hourOfDay field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendHourOfDay(int minDigits) {
+<span class="fc" id="L726">        return appendDecimal(DateTimeFieldType.hourOfDay(), minDigits, 2);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric clockhourOfDay field.
+     *
+     * @param minDigits minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendClockhourOfDay(int minDigits) {
+<span class="fc" id="L736">        return appendDecimal(DateTimeFieldType.clockhourOfDay(), minDigits, 2);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric hourOfHalfday field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendHourOfHalfday(int minDigits) {
+<span class="fc" id="L746">        return appendDecimal(DateTimeFieldType.hourOfHalfday(), minDigits, 2);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric clockhourOfHalfday field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendClockhourOfHalfday(int minDigits) {
+<span class="fc" id="L756">        return appendDecimal(DateTimeFieldType.clockhourOfHalfday(), minDigits, 2);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric dayOfWeek field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendDayOfWeek(int minDigits) {
+<span class="fc" id="L766">        return appendDecimal(DateTimeFieldType.dayOfWeek(), minDigits, 1);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric dayOfMonth field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendDayOfMonth(int minDigits) {
+<span class="fc" id="L776">        return appendDecimal(DateTimeFieldType.dayOfMonth(), minDigits, 2);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric dayOfYear field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendDayOfYear(int minDigits) {
+<span class="fc" id="L786">        return appendDecimal(DateTimeFieldType.dayOfYear(), minDigits, 3);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric weekOfWeekyear field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendWeekOfWeekyear(int minDigits) {
+<span class="fc" id="L796">        return appendDecimal(DateTimeFieldType.weekOfWeekyear(), minDigits, 2);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric weekyear field.
+     *
+     * @param minDigits  minimum number of digits to &lt;i&gt;print&lt;/i&gt;
+     * @param maxDigits  maximum number of digits to &lt;i&gt;parse&lt;/i&gt;, or the estimated
+     * maximum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendWeekyear(int minDigits, int maxDigits) {
+<span class="fc" id="L808">        return appendSignedDecimal(DateTimeFieldType.weekyear(), minDigits, maxDigits);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric monthOfYear field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendMonthOfYear(int minDigits) {
+<span class="fc" id="L818">        return appendDecimal(DateTimeFieldType.monthOfYear(), minDigits, 2);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric year field.
+     *
+     * @param minDigits  minimum number of digits to &lt;i&gt;print&lt;/i&gt;
+     * @param maxDigits  maximum number of digits to &lt;i&gt;parse&lt;/i&gt;, or the estimated
+     * maximum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendYear(int minDigits, int maxDigits) {
+<span class="fc" id="L830">        return appendSignedDecimal(DateTimeFieldType.year(), minDigits, maxDigits);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric year field which always prints
+     * and parses two digits. A pivot year is used during parsing to determine
+     * the range of supported years as &lt;code&gt;(pivot - 50) .. (pivot + 49)&lt;/code&gt;.
+     *
+     * &lt;pre&gt;
+     * pivot   supported range   00 is   20 is   40 is   60 is   80 is
+     * ---------------------------------------------------------------
+     * 1950      1900..1999      1900    1920    1940    1960    1980
+     * 1975      1925..2024      2000    2020    1940    1960    1980
+     * 2000      1950..2049      2000    2020    2040    1960    1980
+     * 2025      1975..2074      2000    2020    2040    2060    1980
+     * 2050      2000..2099      2000    2020    2040    2060    2080
+     * &lt;/pre&gt;
+     *
+     * @param pivot  pivot year to use when parsing
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendTwoDigitYear(int pivot) {
+<span class="fc" id="L852">        return appendTwoDigitYear(pivot, false);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric year field which always prints
+     * two digits. A pivot year is used during parsing to determine the range
+     * of supported years as &lt;code&gt;(pivot - 50) .. (pivot + 49)&lt;/code&gt;. If
+     * parse is instructed to be lenient and the digit count is not two, it is
+     * treated as an absolute year. With lenient parsing, specifying a positive
+     * or negative sign before the year also makes it absolute.
+     *
+     * @param pivot  pivot year to use when parsing
+     * @param lenientParse  when true, if digit count is not two, it is treated
+     * as an absolute year
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @since 1.1
+     */
+    public DateTimeFormatterBuilder appendTwoDigitYear(int pivot, boolean lenientParse) {
+<span class="fc" id="L870">        return append0(new TwoDigitYear(DateTimeFieldType.year(), pivot, lenientParse));</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric weekyear field which always prints
+     * and parses two digits. A pivot year is used during parsing to determine
+     * the range of supported years as &lt;code&gt;(pivot - 50) .. (pivot + 49)&lt;/code&gt;.
+     *
+     * &lt;pre&gt;
+     * pivot   supported range   00 is   20 is   40 is   60 is   80 is
+     * ---------------------------------------------------------------
+     * 1950      1900..1999      1900    1920    1940    1960    1980
+     * 1975      1925..2024      2000    2020    1940    1960    1980
+     * 2000      1950..2049      2000    2020    2040    1960    1980
+     * 2025      1975..2074      2000    2020    2040    2060    1980
+     * 2050      2000..2099      2000    2020    2040    2060    2080
+     * &lt;/pre&gt;
+     *
+     * @param pivot  pivot weekyear to use when parsing
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendTwoDigitWeekyear(int pivot) {
+<span class="fc" id="L892">        return appendTwoDigitWeekyear(pivot, false);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric weekyear field which always prints
+     * two digits. A pivot year is used during parsing to determine the range
+     * of supported years as &lt;code&gt;(pivot - 50) .. (pivot + 49)&lt;/code&gt;. If
+     * parse is instructed to be lenient and the digit count is not two, it is
+     * treated as an absolute weekyear. With lenient parsing, specifying a positive
+     * or negative sign before the weekyear also makes it absolute.
+     *
+     * @param pivot  pivot weekyear to use when parsing
+     * @param lenientParse  when true, if digit count is not two, it is treated
+     * as an absolute weekyear
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @since 1.1
+     */
+    public DateTimeFormatterBuilder appendTwoDigitWeekyear(int pivot, boolean lenientParse) {
+<span class="fc" id="L910">        return append0(new TwoDigitYear(DateTimeFieldType.weekyear(), pivot, lenientParse));</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric yearOfEra field.
+     *
+     * @param minDigits  minimum number of digits to &lt;i&gt;print&lt;/i&gt;
+     * @param maxDigits  maximum number of digits to &lt;i&gt;parse&lt;/i&gt;, or the estimated
+     * maximum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendYearOfEra(int minDigits, int maxDigits) {
+<span class="fc" id="L922">        return appendDecimal(DateTimeFieldType.yearOfEra(), minDigits, maxDigits);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric year of century field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @param maxDigits  maximum number of digits to &lt;i&gt;parse&lt;/i&gt;, or the estimated
+     * maximum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendYearOfCentury(int minDigits, int maxDigits) {
+<span class="nc" id="L934">        return appendDecimal(DateTimeFieldType.yearOfCentury(), minDigits, maxDigits);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a numeric century of era field.
+     *
+     * @param minDigits  minimum number of digits to print
+     * @param maxDigits  maximum number of digits to &lt;i&gt;parse&lt;/i&gt;, or the estimated
+     * maximum number of digits to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendCenturyOfEra(int minDigits, int maxDigits) {
+<span class="fc" id="L946">        return appendSignedDecimal(DateTimeFieldType.centuryOfEra(), minDigits, maxDigits);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a locale-specific AM/PM text, and the
+     * parser to expect it. The parser is case-insensitive.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendHalfdayOfDayText() {
+<span class="fc" id="L956">        return appendText(DateTimeFieldType.halfdayOfDay());</span>
+    }
+
+    /**
+     * Instructs the printer to emit a locale-specific dayOfWeek text. The
+     * parser will accept a long or short dayOfWeek text, case-insensitive.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendDayOfWeekText() {
+<span class="fc" id="L966">        return appendText(DateTimeFieldType.dayOfWeek());</span>
+    }
+
+    /**
+     * Instructs the printer to emit a short locale-specific dayOfWeek
+     * text. The parser will accept a long or short dayOfWeek text,
+     * case-insensitive.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendDayOfWeekShortText() {
+<span class="fc" id="L977">        return appendShortText(DateTimeFieldType.dayOfWeek());</span>
+    }
+
+    /**
+     * Instructs the printer to emit a short locale-specific monthOfYear
+     * text. The parser will accept a long or short monthOfYear text,
+     * case-insensitive.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendMonthOfYearText() { 
+<span class="fc" id="L988">        return appendText(DateTimeFieldType.monthOfYear());</span>
+    }
+
+    /**
+     * Instructs the printer to emit a locale-specific monthOfYear text. The
+     * parser will accept a long or short monthOfYear text, case-insensitive.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendMonthOfYearShortText() {
+<span class="fc" id="L998">        return appendShortText(DateTimeFieldType.monthOfYear());</span>
+    }
+
+    /**
+     * Instructs the printer to emit a locale-specific era text (BC/AD), and
+     * the parser to expect it. The parser is case-insensitive.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendEraText() {
+<span class="fc" id="L1008">        return appendText(DateTimeFieldType.era());</span>
+    }
+
+    /**
+     * Instructs the printer to emit a locale-specific time zone name.
+     * Using this method prevents parsing, because time zone names are not unique.
+     * See {@link #appendTimeZoneName(Map)}.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendTimeZoneName() {
+<span class="nc" id="L1019">        return append0(new TimeZoneName(TimeZoneName.LONG_NAME, null), null);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a locale-specific time zone name, providing a lookup for parsing.
+     * Time zone names are not unique, thus the API forces you to supply the lookup.
+     * The names are searched in the order of the map, thus it is strongly recommended
+     * to use a {@code LinkedHashMap} or similar.
+     *
+     * @param parseLookup  the table of names, not null
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendTimeZoneName(Map&lt;String, DateTimeZone&gt; parseLookup) {
+<span class="nc" id="L1032">        TimeZoneName pp = new TimeZoneName(TimeZoneName.LONG_NAME, parseLookup);</span>
+<span class="nc" id="L1033">        return append0(pp, pp);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a short locale-specific time zone name.
+     * Using this method prevents parsing, because time zone names are not unique.
+     * See {@link #appendTimeZoneShortName(Map)}.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendTimeZoneShortName() {
+<span class="nc" id="L1044">        return append0(new TimeZoneName(TimeZoneName.SHORT_NAME, null), null);</span>
+    }
+
+    /**
+     * Instructs the printer to emit a short locale-specific time zone
+     * name, providing a lookup for parsing.
+     * Time zone names are not unique, thus the API forces you to supply the lookup.
+     * The names are searched in the order of the map, thus it is strongly recommended
+     * to use a {@code LinkedHashMap} or similar.
+     *
+     * @param parseLookup  the table of names, null to use the {@link DateTimeUtils#getDefaultTimeZoneNames() default names}
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendTimeZoneShortName(Map&lt;String, DateTimeZone&gt; parseLookup) {
+<span class="nc" id="L1058">        TimeZoneName pp = new TimeZoneName(TimeZoneName.SHORT_NAME, parseLookup);</span>
+<span class="nc" id="L1059">        return append0(pp, pp);</span>
+    }
+
+    /**
+     * Instructs the printer to emit the identifier of the time zone.
+     * From version 2.0, this field can be parsed.
+     *
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendTimeZoneId() {
+<span class="fc" id="L1069">        return append0(TimeZoneId.INSTANCE, TimeZoneId.INSTANCE);</span>
+    }
+
+    /**
+     * Instructs the printer to emit text and numbers to display time zone
+     * offset from UTC. A parser will use the parsed time zone offset to adjust
+     * the datetime.
+     * &lt;p&gt;
+     * If zero offset text is supplied, then it will be printed when the zone is zero.
+     * During parsing, either the zero offset text, or the offset will be parsed.
+     *
+     * @param zeroOffsetText  the text to use if time zone offset is zero. If
+     * null, offset is always shown.
+     * @param showSeparators  if true, prints ':' separator before minute and
+     * second field and prints '.' separator before fraction field.
+     * @param minFields  minimum number of fields to print, stopping when no
+     * more precision is required. 1=hours, 2=minutes, 3=seconds, 4=fraction
+     * @param maxFields  maximum number of fields to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     */
+    public DateTimeFormatterBuilder appendTimeZoneOffset(
+            String zeroOffsetText, boolean showSeparators,
+            int minFields, int maxFields) {
+<span class="fc" id="L1092">        return append0(new TimeZoneOffset</span>
+                       (zeroOffsetText, zeroOffsetText, showSeparators, minFields, maxFields));
+    }
+
+    /**
+     * Instructs the printer to emit text and numbers to display time zone
+     * offset from UTC. A parser will use the parsed time zone offset to adjust
+     * the datetime.
+     * &lt;p&gt;
+     * If zero offset print text is supplied, then it will be printed when the zone is zero.
+     * If zero offset parse text is supplied, then either it or the offset will be parsed.
+     *
+     * @param zeroOffsetPrintText  the text to print if time zone offset is zero. If
+     * null, offset is always shown.
+     * @param zeroOffsetParseText  the text to optionally parse to indicate that the time
+     * zone offset is zero. If null, then always use the offset.
+     * @param showSeparators  if true, prints ':' separator before minute and
+     * second field and prints '.' separator before fraction field.
+     * @param minFields  minimum number of fields to print, stopping when no
+     * more precision is required. 1=hours, 2=minutes, 3=seconds, 4=fraction
+     * @param maxFields  maximum number of fields to print
+     * @return this DateTimeFormatterBuilder, for chaining
+     * @since 2.0
+     */
+    public DateTimeFormatterBuilder appendTimeZoneOffset(
+            String zeroOffsetPrintText, String zeroOffsetParseText, boolean showSeparators,
+            int minFields, int maxFields) {
+<span class="fc" id="L1119">        return append0(new TimeZoneOffset</span>
+                       (zeroOffsetPrintText, zeroOffsetParseText, showSeparators, minFields, maxFields));
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Calls upon {@link DateTimeFormat} to parse the pattern and append the
+     * results into this builder.
+     *
+     * @param pattern  pattern specification
+     * @throws IllegalArgumentException if the pattern is invalid
+     * @see DateTimeFormat
+     */
+    public DateTimeFormatterBuilder appendPattern(String pattern) {
+<span class="fc" id="L1133">        DateTimeFormat.appendPatternTo(this, pattern);</span>
+<span class="fc" id="L1134">        return this;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    private Object getFormatter() {
+<span class="fc" id="L1139">        Object f = iFormatter;</span>
+
+<span class="fc bfc" id="L1141" title="All 2 branches covered.">        if (f == null) {</span>
+<span class="fc bfc" id="L1142" title="All 2 branches covered.">            if (iElementPairs.size() == 2) {</span>
+<span class="fc" id="L1143">                Object printer = iElementPairs.get(0);</span>
+<span class="fc" id="L1144">                Object parser = iElementPairs.get(1);</span>
+
+<span class="fc bfc" id="L1146" title="All 2 branches covered.">                if (printer != null) {</span>
+<span class="pc bpc" id="L1147" title="3 of 4 branches missed.">                    if (printer == parser || parser == null) {</span>
+<span class="fc" id="L1148">                        f = printer;</span>
+                    }
+                } else {
+<span class="fc" id="L1151">                    f = parser;</span>
+                }
+            }
+
+<span class="fc bfc" id="L1155" title="All 2 branches covered.">            if (f == null) {</span>
+<span class="fc" id="L1156">                f = new Composite(iElementPairs);</span>
+            }
+
+<span class="fc" id="L1159">            iFormatter = f;</span>
+        }
+
+<span class="fc" id="L1162">        return f;</span>
+    }
+
+    private boolean isPrinter(Object f) {
+<span class="fc bfc" id="L1166" title="All 2 branches covered.">        if (f instanceof InternalPrinter) {</span>
+<span class="fc bfc" id="L1167" title="All 2 branches covered.">            if (f instanceof Composite) {</span>
+<span class="fc" id="L1168">                return ((Composite)f).isPrinter();</span>
+            }
+<span class="fc" id="L1170">            return true;</span>
+        }
+<span class="fc" id="L1172">        return false;</span>
+    }
+
+    private boolean isParser(Object f) {
+<span class="pc bpc" id="L1176" title="1 of 2 branches missed.">        if (f instanceof InternalParser) {</span>
+<span class="fc bfc" id="L1177" title="All 2 branches covered.">            if (f instanceof Composite) {</span>
+<span class="fc" id="L1178">                return ((Composite)f).isParser();</span>
+            }
+<span class="fc" id="L1180">            return true;</span>
+        }
+<span class="nc" id="L1182">        return false;</span>
+    }
+
+    private boolean isFormatter(Object f) {
+<span class="pc bpc" id="L1186" title="1 of 4 branches missed.">        return (isPrinter(f) || isParser(f));</span>
+    }
+
+    static void appendUnknownString(Appendable appendable, int len) throws IOException {
+<span class="fc bfc" id="L1190" title="All 2 branches covered.">        for (int i = len; --i &gt;= 0;) {</span>
+<span class="fc" id="L1191">            appendable.append('\ufffd');</span>
+        }
+<span class="fc" id="L1193">    }</span>
+
+    //-----------------------------------------------------------------------
+    static class CharacterLiteral
+            implements InternalPrinter, InternalParser {
+
+        private final char iValue;
+
+        CharacterLiteral(char value) {
+<span class="fc" id="L1202">            super();</span>
+<span class="fc" id="L1203">            iValue = value;</span>
+<span class="fc" id="L1204">        }</span>
+
+        public int estimatePrintedLength() {
+<span class="fc" id="L1207">            return 1;</span>
+        }
+
+        public void printTo(
+                Appendable appendable, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+<span class="fc" id="L1213">            appendable.append(iValue);</span>
+<span class="fc" id="L1214">        }</span>
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+<span class="fc" id="L1217">            appendable.append(iValue);</span>
+<span class="fc" id="L1218">        }</span>
+
+        public int estimateParsedLength() {
+<span class="fc" id="L1221">            return 1;</span>
+        }
+
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="fc bfc" id="L1225" title="All 2 branches covered.">            if (position &gt;= text.length()) {</span>
+<span class="fc" id="L1226">                return ~position;</span>
+            }
+
+<span class="fc" id="L1229">            char a = text.charAt(position);</span>
+<span class="fc" id="L1230">            char b = iValue;</span>
+
+<span class="fc bfc" id="L1232" title="All 2 branches covered.">            if (a != b) {</span>
+<span class="fc" id="L1233">                a = Character.toUpperCase(a);</span>
+<span class="fc" id="L1234">                b = Character.toUpperCase(b);</span>
+<span class="pc bpc" id="L1235" title="1 of 2 branches missed.">                if (a != b) {</span>
+<span class="fc" id="L1236">                    a = Character.toLowerCase(a);</span>
+<span class="fc" id="L1237">                    b = Character.toLowerCase(b);</span>
+<span class="pc bpc" id="L1238" title="1 of 2 branches missed.">                    if (a != b) {</span>
+<span class="fc" id="L1239">                        return ~position;</span>
+                    }
+                }
+            }
+
+<span class="fc" id="L1244">            return position + 1;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    static class StringLiteral
+            implements InternalPrinter, InternalParser {
+
+        private final String iValue;
+
+        StringLiteral(String value) {
+<span class="fc" id="L1255">            super();</span>
+<span class="fc" id="L1256">            iValue = value;</span>
+<span class="fc" id="L1257">        }</span>
+
+        public int estimatePrintedLength() {
+<span class="fc" id="L1260">            return iValue.length();</span>
+        }
+
+        public void printTo(
+                Appendable appendable, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+<span class="fc" id="L1266">            appendable.append(iValue);</span>
+<span class="fc" id="L1267">        }</span>
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+<span class="nc" id="L1270">            appendable.append(iValue);</span>
+<span class="nc" id="L1271">        }</span>
+
+        public int estimateParsedLength() {
+<span class="fc" id="L1274">            return iValue.length();</span>
+        }
+
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="fc bfc" id="L1278" title="All 2 branches covered.">            if (csStartsWithIgnoreCase(text, position, iValue)) {</span>
+<span class="fc" id="L1279">                return position + iValue.length();</span>
+            }
+<span class="fc" id="L1281">            return ~position;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    static abstract class NumberFormatter
+            implements InternalPrinter, InternalParser {
+        protected final DateTimeFieldType iFieldType;
+        protected final int iMaxParsedDigits;
+        protected final boolean iSigned;
+
+        NumberFormatter(DateTimeFieldType fieldType,
+                int maxParsedDigits, boolean signed) {
+<span class="fc" id="L1294">            super();</span>
+<span class="fc" id="L1295">            iFieldType = fieldType;</span>
+<span class="fc" id="L1296">            iMaxParsedDigits = maxParsedDigits;</span>
+<span class="fc" id="L1297">            iSigned = signed;</span>
+<span class="fc" id="L1298">        }</span>
+
+        public int estimateParsedLength() {
+<span class="fc" id="L1301">            return iMaxParsedDigits;</span>
+        }
+
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="fc" id="L1305">            int limit = Math.min(iMaxParsedDigits, text.length() - position);</span>
+
+<span class="fc" id="L1307">            boolean negative = false;</span>
+<span class="fc" id="L1308">            boolean positive = false;</span>
+<span class="fc" id="L1309">            int length = 0;</span>
+<span class="fc bfc" id="L1310" title="All 2 branches covered.">            while (length &lt; limit) {</span>
+<span class="fc" id="L1311">                char c = text.charAt(position + length);</span>
+<span class="fc bfc" id="L1312" title="All 8 branches covered.">                if (length == 0 &amp;&amp; (c == '-' || c == '+') &amp;&amp; iSigned) {</span>
+<span class="fc bfc" id="L1313" title="All 2 branches covered.">                    negative = c == '-';</span>
+<span class="fc bfc" id="L1314" title="All 2 branches covered.">                    positive = c == '+';</span>
+
+                    // Next character must be a digit.
+<span class="fc bfc" id="L1317" title="All 2 branches covered.">                    if (length + 1 &gt;= limit || </span>
+<span class="pc bpc" id="L1318" title="1 of 4 branches missed.">                        (c = text.charAt(position + length + 1)) &lt; '0' || c &gt; '9') {</span>
+<span class="nc" id="L1319">                        break;</span>
+                    }
+<span class="fc" id="L1321">                    length++;</span>
+
+                    // Expand the limit to disregard the sign character.
+<span class="fc" id="L1324">                    limit = Math.min(limit + 1, text.length() - position);</span>
+<span class="fc" id="L1325">                    continue;</span>
+                }
+<span class="fc bfc" id="L1327" title="All 4 branches covered.">                if (c &lt; '0' || c &gt; '9') {</span>
+<span class="fc" id="L1328">                    break;</span>
+                }
+<span class="fc" id="L1330">                length++;</span>
+<span class="fc" id="L1331">            }</span>
+
+<span class="fc bfc" id="L1333" title="All 2 branches covered.">            if (length == 0) {</span>
+<span class="fc" id="L1334">                return ~position;</span>
+            }
+
+            int value;
+<span class="fc bfc" id="L1338" title="All 2 branches covered.">            if (length &gt;= 9) {</span>
+                // Since value may exceed integer limits, use stock parser
+                // which checks for this.
+<span class="pc bpc" id="L1341" title="1 of 2 branches missed.">                if (positive) {</span>
+<span class="nc" id="L1342">                    value = Integer.parseInt(text.subSequence(position + 1, position += length).toString());</span>
+                } else {
+<span class="fc" id="L1344">                    value = Integer.parseInt(text.subSequence(position, position += length).toString());</span>
+                }
+//                value = Integer.parseInt(text.subSequence(position, position += length).toString());
+            } else {
+<span class="fc" id="L1348">                int i = position;</span>
+<span class="fc bfc" id="L1349" title="All 4 branches covered.">                if (negative || positive) {</span>
+<span class="fc" id="L1350">                    i++;</span>
+                }
+                try {
+<span class="fc" id="L1353">                    value = text.charAt(i++) - '0';</span>
+<span class="nc" id="L1354">                } catch (StringIndexOutOfBoundsException e) {</span>
+<span class="nc" id="L1355">                    return ~position;</span>
+<span class="fc" id="L1356">                }</span>
+<span class="fc" id="L1357">                position += length;</span>
+<span class="fc bfc" id="L1358" title="All 2 branches covered.">                while (i &lt; position) {</span>
+<span class="fc" id="L1359">                    value = ((value &lt;&lt; 3) + (value &lt;&lt; 1)) + text.charAt(i++) - '0';</span>
+                }
+<span class="fc bfc" id="L1361" title="All 2 branches covered.">                if (negative) {</span>
+<span class="fc" id="L1362">                    value = -value;</span>
+                }
+            }
+
+<span class="fc" id="L1366">            bucket.saveField(iFieldType, value);</span>
+<span class="fc" id="L1367">            return position;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    static class UnpaddedNumber extends NumberFormatter {
+
+        protected UnpaddedNumber(DateTimeFieldType fieldType,
+                       int maxParsedDigits, boolean signed)
+        {
+<span class="fc" id="L1377">            super(fieldType, maxParsedDigits, signed);</span>
+<span class="fc" id="L1378">        }</span>
+
+        public int estimatePrintedLength() {
+<span class="fc" id="L1381">            return iMaxParsedDigits;</span>
+        }
+
+        public void printTo(
+                Appendable appendable, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+            try {
+<span class="fc" id="L1388">                DateTimeField field = iFieldType.getField(chrono);</span>
+<span class="fc" id="L1389">                FormatUtils.appendUnpaddedInteger(appendable, field.get(instant));</span>
+<span class="nc" id="L1390">            } catch (RuntimeException e) {</span>
+<span class="nc" id="L1391">                appendable.append('\ufffd');</span>
+<span class="fc" id="L1392">            }</span>
+<span class="fc" id="L1393">        }</span>
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+<span class="fc bfc" id="L1396" title="All 2 branches covered.">            if (partial.isSupported(iFieldType)) {</span>
+                try {
+<span class="fc" id="L1398">                    FormatUtils.appendUnpaddedInteger(appendable, partial.get(iFieldType));</span>
+<span class="nc" id="L1399">                } catch (RuntimeException e) {</span>
+<span class="nc" id="L1400">                    appendable.append('\ufffd');</span>
+<span class="pc" id="L1401">                }</span>
+            } else {
+<span class="fc" id="L1403">                appendable.append('\ufffd');</span>
+            }
+<span class="fc" id="L1405">        }</span>
+    }
+
+    //-----------------------------------------------------------------------
+    static class PaddedNumber extends NumberFormatter {
+
+        protected final int iMinPrintedDigits;
+
+        protected PaddedNumber(DateTimeFieldType fieldType, int maxParsedDigits,
+                     boolean signed, int minPrintedDigits)
+        {
+<span class="fc" id="L1416">            super(fieldType, maxParsedDigits, signed);</span>
+<span class="fc" id="L1417">            iMinPrintedDigits = minPrintedDigits;</span>
+<span class="fc" id="L1418">        }</span>
+
+        public int estimatePrintedLength() {
+<span class="fc" id="L1421">            return iMaxParsedDigits;</span>
+        }
+
+        public void printTo(
+                Appendable appendable, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+            try {
+<span class="fc" id="L1428">                DateTimeField field = iFieldType.getField(chrono);</span>
+<span class="fc" id="L1429">                FormatUtils.appendPaddedInteger(appendable, field.get(instant), iMinPrintedDigits);</span>
+<span class="nc" id="L1430">            } catch (RuntimeException e) {</span>
+<span class="nc" id="L1431">                appendUnknownString(appendable, iMinPrintedDigits);</span>
+<span class="fc" id="L1432">            }</span>
+<span class="fc" id="L1433">        }</span>
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+<span class="fc bfc" id="L1436" title="All 2 branches covered.">            if (partial.isSupported(iFieldType)) {</span>
+                try {
+<span class="fc" id="L1438">                    FormatUtils.appendPaddedInteger(appendable, partial.get(iFieldType), iMinPrintedDigits);</span>
+<span class="nc" id="L1439">                } catch (RuntimeException e) {</span>
+<span class="nc" id="L1440">                    appendUnknownString(appendable, iMinPrintedDigits);</span>
+<span class="pc" id="L1441">                }</span>
+            } else {
+<span class="fc" id="L1443">                appendUnknownString(appendable, iMinPrintedDigits);</span>
+            }
+<span class="fc" id="L1445">        }</span>
+    }
+
+    //-----------------------------------------------------------------------
+    static class FixedNumber extends PaddedNumber {
+
+        protected FixedNumber(DateTimeFieldType fieldType, int numDigits, boolean signed) {
+<span class="fc" id="L1452">            super(fieldType, numDigits, signed, numDigits);</span>
+<span class="fc" id="L1453">        }</span>
+
+        @Override
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="fc" id="L1457">            int newPos = super.parseInto(bucket, text, position);</span>
+<span class="fc bfc" id="L1458" title="All 2 branches covered.">            if (newPos &lt; 0) {</span>
+<span class="fc" id="L1459">                return newPos;</span>
+            }
+<span class="fc" id="L1461">            int expectedPos = position + iMaxParsedDigits;</span>
+<span class="fc bfc" id="L1462" title="All 2 branches covered.">            if (newPos != expectedPos) {</span>
+<span class="fc bfc" id="L1463" title="All 2 branches covered.">                if (iSigned) {</span>
+<span class="fc" id="L1464">                    char c = text.charAt(position);</span>
+<span class="pc bpc" id="L1465" title="1 of 4 branches missed.">                    if (c == '-' || c == '+') {</span>
+<span class="fc" id="L1466">                        expectedPos++;</span>
+                    }
+                }
+<span class="pc bpc" id="L1469" title="1 of 2 branches missed.">                if (newPos &gt; expectedPos) {</span>
+                    // The failure is at the position of the first extra digit.
+<span class="nc" id="L1471">                    return ~(expectedPos + 1);</span>
+<span class="fc bfc" id="L1472" title="All 2 branches covered.">                } else if (newPos &lt; expectedPos) {</span>
+                    // The failure is at the position where the next digit should be.
+<span class="fc" id="L1474">                    return ~newPos;</span>
+                }
+            }
+<span class="fc" id="L1477">            return newPos;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    static class TwoDigitYear
+            implements InternalPrinter, InternalParser {
+
+        /** The field to print/parse. */
+        private final DateTimeFieldType iType;
+        /** The pivot year. */
+        private final int iPivot;
+        private final boolean iLenientParse;
+
+        TwoDigitYear(DateTimeFieldType type, int pivot, boolean lenientParse) {
+<span class="fc" id="L1492">            super();</span>
+<span class="fc" id="L1493">            iType = type;</span>
+<span class="fc" id="L1494">            iPivot = pivot;</span>
+<span class="fc" id="L1495">            iLenientParse = lenientParse;</span>
+<span class="fc" id="L1496">        }</span>
+
+        public int estimateParsedLength() {
+<span class="fc bfc" id="L1499" title="All 2 branches covered.">            return iLenientParse ? 4 : 2;</span>
+        }
+
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="fc" id="L1503">            int limit = text.length() - position;</span>
+
+<span class="fc bfc" id="L1505" title="All 2 branches covered.">            if (!iLenientParse) {</span>
+<span class="fc" id="L1506">                limit = Math.min(2, limit);</span>
+<span class="fc bfc" id="L1507" title="All 2 branches covered.">                if (limit &lt; 2) {</span>
+<span class="fc" id="L1508">                    return ~position;</span>
+                }
+            } else {
+<span class="fc" id="L1511">                boolean hasSignChar = false;</span>
+<span class="fc" id="L1512">                boolean negative = false;</span>
+<span class="fc" id="L1513">                int length = 0;</span>
+<span class="fc bfc" id="L1514" title="All 2 branches covered.">                while (length &lt; limit) {</span>
+<span class="fc" id="L1515">                    char c = text.charAt(position + length);</span>
+<span class="fc bfc" id="L1516" title="All 6 branches covered.">                    if (length == 0 &amp;&amp; (c == '-' || c == '+')) {</span>
+<span class="fc" id="L1517">                        hasSignChar = true;</span>
+<span class="fc bfc" id="L1518" title="All 2 branches covered.">                        negative = c == '-';</span>
+<span class="fc bfc" id="L1519" title="All 2 branches covered.">                        if (negative) {</span>
+<span class="fc" id="L1520">                            length++;</span>
+                        } else {
+                            // Skip the '+' for parseInt to succeed.
+<span class="fc" id="L1523">                            position++;</span>
+<span class="fc" id="L1524">                            limit--;</span>
+                        }
+<span class="fc" id="L1526">                        continue;</span>
+                    }
+<span class="pc bpc" id="L1528" title="1 of 4 branches missed.">                    if (c &lt; '0' || c &gt; '9') {</span>
+<span class="nc" id="L1529">                        break;</span>
+                    }
+<span class="fc" id="L1531">                    length++;</span>
+<span class="fc" id="L1532">                }</span>
+                
+<span class="fc bfc" id="L1534" title="All 2 branches covered.">                if (length == 0) {</span>
+<span class="fc" id="L1535">                    return ~position;</span>
+                }
+
+<span class="fc bfc" id="L1538" title="All 4 branches covered.">                if (hasSignChar || length != 2) {</span>
+                    int value;
+<span class="pc bpc" id="L1540" title="1 of 2 branches missed.">                    if (length &gt;= 9) {</span>
+                        // Since value may exceed integer limits, use stock
+                        // parser which checks for this.
+<span class="nc" id="L1543">                        value = Integer.parseInt(text.subSequence(position, position += length).toString());</span>
+                    } else {
+<span class="fc" id="L1545">                        int i = position;</span>
+<span class="fc bfc" id="L1546" title="All 2 branches covered.">                        if (negative) {</span>
+<span class="fc" id="L1547">                            i++;</span>
+                        }
+                        try {
+<span class="fc" id="L1550">                            value = text.charAt(i++) - '0';</span>
+<span class="fc" id="L1551">                        } catch (StringIndexOutOfBoundsException e) {</span>
+<span class="fc" id="L1552">                            return ~position;</span>
+<span class="fc" id="L1553">                        }</span>
+<span class="fc" id="L1554">                        position += length;</span>
+<span class="fc bfc" id="L1555" title="All 2 branches covered.">                        while (i &lt; position) {</span>
+<span class="fc" id="L1556">                            value = ((value &lt;&lt; 3) + (value &lt;&lt; 1)) + text.charAt(i++) - '0';</span>
+                        }
+<span class="fc bfc" id="L1558" title="All 2 branches covered.">                        if (negative) {</span>
+<span class="fc" id="L1559">                            value = -value;</span>
+                        }
+                    }
+                    
+<span class="fc" id="L1563">                    bucket.saveField(iType, value);</span>
+<span class="fc" id="L1564">                    return position;</span>
+                }
+            }
+
+            int year;
+<span class="fc" id="L1569">            char c = text.charAt(position);</span>
+<span class="pc bpc" id="L1570" title="1 of 4 branches missed.">            if (c &lt; '0' || c &gt; '9') {</span>
+<span class="fc" id="L1571">                return ~position;</span>
+            }
+<span class="fc" id="L1573">            year = c - '0';</span>
+<span class="fc" id="L1574">            c = text.charAt(position + 1);</span>
+<span class="pc bpc" id="L1575" title="2 of 4 branches missed.">            if (c &lt; '0' || c &gt; '9') {</span>
+<span class="nc" id="L1576">                return ~position;</span>
+            }
+<span class="fc" id="L1578">            year = ((year &lt;&lt; 3) + (year &lt;&lt; 1)) + c - '0';</span>
+
+<span class="fc" id="L1580">            int pivot = iPivot;</span>
+            // If the bucket pivot year is non-null, use that when parsing
+<span class="fc bfc" id="L1582" title="All 2 branches covered.">            if (bucket.getPivotYear() != null) {</span>
+<span class="fc" id="L1583">                pivot = bucket.getPivotYear().intValue();</span>
+            }
+
+<span class="fc" id="L1586">            int low = pivot - 50;</span>
+
+            int t;
+<span class="pc bpc" id="L1589" title="1 of 2 branches missed.">            if (low &gt;= 0) {</span>
+<span class="fc" id="L1590">                t = low % 100;</span>
+            } else {
+<span class="nc" id="L1592">                t = 99 + ((low + 1) % 100);</span>
+            }
+
+<span class="fc bfc" id="L1595" title="All 2 branches covered.">            year += low + ((year &lt; t) ? 100 : 0) - t;</span>
+
+<span class="fc" id="L1597">            bucket.saveField(iType, year);</span>
+<span class="fc" id="L1598">            return position + 2;</span>
+        }
+        
+        public int estimatePrintedLength() {
+<span class="fc" id="L1602">            return 2;</span>
+        }
+
+        public void printTo(
+                Appendable appendable, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+<span class="fc" id="L1608">            int year = getTwoDigitYear(instant, chrono);</span>
+<span class="pc bpc" id="L1609" title="1 of 2 branches missed.">            if (year &lt; 0) {</span>
+<span class="nc" id="L1610">                appendable.append('\ufffd');</span>
+<span class="nc" id="L1611">                appendable.append('\ufffd');</span>
+            } else {
+<span class="fc" id="L1613">                FormatUtils.appendPaddedInteger(appendable, year, 2);</span>
+            }
+<span class="fc" id="L1615">        }</span>
+
+        private int getTwoDigitYear(long instant, Chronology chrono) {
+            try {
+<span class="fc" id="L1619">                int year = iType.getField(chrono).get(instant);</span>
+<span class="fc bfc" id="L1620" title="All 2 branches covered.">                if (year &lt; 0) {</span>
+<span class="fc" id="L1621">                    year = -year;</span>
+                }
+<span class="fc" id="L1623">                return year % 100;</span>
+<span class="nc" id="L1624">            } catch (RuntimeException e) {</span>
+<span class="nc" id="L1625">                return -1;</span>
+            }
+        }
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+<span class="nc" id="L1630">            int year = getTwoDigitYear(partial);</span>
+<span class="nc bnc" id="L1631" title="All 2 branches missed.">            if (year &lt; 0) {</span>
+<span class="nc" id="L1632">                appendable.append('\ufffd');</span>
+<span class="nc" id="L1633">                appendable.append('\ufffd');</span>
+            } else {
+<span class="nc" id="L1635">                FormatUtils.appendPaddedInteger(appendable, year, 2);</span>
+            }
+<span class="nc" id="L1637">        }</span>
+
+        private int getTwoDigitYear(ReadablePartial partial) {
+<span class="nc bnc" id="L1640" title="All 2 branches missed.">            if (partial.isSupported(iType)) {</span>
+                try {
+<span class="nc" id="L1642">                    int year = partial.get(iType);</span>
+<span class="nc bnc" id="L1643" title="All 2 branches missed.">                    if (year &lt; 0) {</span>
+<span class="nc" id="L1644">                        year = -year;</span>
+                    }
+<span class="nc" id="L1646">                    return year % 100;</span>
+<span class="nc" id="L1647">                } catch (RuntimeException e) {}</span>
+            } 
+<span class="nc" id="L1649">            return -1;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    static class TextField
+            implements InternalPrinter, InternalParser {
+
+<span class="fc" id="L1657">        private static Map&lt;Locale, Map&lt;DateTimeFieldType, Object[]&gt;&gt; cParseCache =</span>
+                    new ConcurrentHashMap&lt;Locale, Map&lt;DateTimeFieldType, Object[]&gt;&gt;();
+        private final DateTimeFieldType iFieldType;
+        private final boolean iShort;
+
+        TextField(DateTimeFieldType fieldType, boolean isShort) {
+<span class="fc" id="L1663">            super();</span>
+<span class="fc" id="L1664">            iFieldType = fieldType;</span>
+<span class="fc" id="L1665">            iShort = isShort;</span>
+<span class="fc" id="L1666">        }</span>
+
+        public int estimatePrintedLength() {
+<span class="fc bfc" id="L1669" title="All 2 branches covered.">            return iShort ? 6 : 20;</span>
+        }
+
+        public void printTo(
+                Appendable appendable, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+            try {
+<span class="fc" id="L1676">                appendable.append(print(instant, chrono, locale));</span>
+<span class="nc" id="L1677">            } catch (RuntimeException e) {</span>
+<span class="nc" id="L1678">                appendable.append('\ufffd');</span>
+<span class="fc" id="L1679">            }</span>
+<span class="fc" id="L1680">        }</span>
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+            try {
+<span class="fc" id="L1684">                appendable.append(print(partial, locale));</span>
+<span class="nc" id="L1685">            } catch (RuntimeException e) {</span>
+<span class="nc" id="L1686">                appendable.append('\ufffd');</span>
+<span class="fc" id="L1687">            }</span>
+<span class="fc" id="L1688">        }</span>
+
+        private String print(long instant, Chronology chrono, Locale locale) {
+<span class="fc" id="L1691">            DateTimeField field = iFieldType.getField(chrono);</span>
+<span class="fc bfc" id="L1692" title="All 2 branches covered.">            if (iShort) {</span>
+<span class="fc" id="L1693">                return field.getAsShortText(instant, locale);</span>
+            } else {
+<span class="fc" id="L1695">                return field.getAsText(instant, locale);</span>
+            }
+        }
+
+        private String print(ReadablePartial partial, Locale locale) {
+<span class="fc bfc" id="L1700" title="All 2 branches covered.">            if (partial.isSupported(iFieldType)) {</span>
+<span class="fc" id="L1701">                DateTimeField field = iFieldType.getField(partial.getChronology());</span>
+<span class="pc bpc" id="L1702" title="1 of 2 branches missed.">                if (iShort) {</span>
+<span class="fc" id="L1703">                    return field.getAsShortText(partial, locale);</span>
+                } else {
+<span class="nc" id="L1705">                    return field.getAsText(partial, locale);</span>
+                }
+            } else {
+<span class="fc" id="L1708">                return &quot;\ufffd&quot;;</span>
+            }
+        }
+
+        public int estimateParsedLength() {
+<span class="fc" id="L1713">            return estimatePrintedLength();</span>
+        }
+
+        @SuppressWarnings(&quot;unchecked&quot;)
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="fc" id="L1718">            Locale locale = bucket.getLocale();</span>
+            // handle languages which might have non ASCII A-Z or punctuation
+            // bug 1788282
+<span class="fc" id="L1721">            Map&lt;String, Boolean&gt; validValues = null;</span>
+<span class="fc" id="L1722">            int maxLength = 0;</span>
+<span class="fc" id="L1723">            Map&lt;DateTimeFieldType, Object[]&gt; innerMap = cParseCache.get(locale);</span>
+<span class="fc bfc" id="L1724" title="All 2 branches covered.">            if (innerMap == null) {</span>
+<span class="fc" id="L1725">                innerMap = new ConcurrentHashMap&lt;DateTimeFieldType, Object[]&gt;();</span>
+<span class="fc" id="L1726">                cParseCache.put(locale, innerMap);</span>
+            }
+<span class="fc" id="L1728">            Object[] array = innerMap.get(iFieldType);</span>
+<span class="fc bfc" id="L1729" title="All 2 branches covered.">            if (array == null) {</span>
+<span class="fc" id="L1730">                validValues = new ConcurrentHashMap&lt;String, Boolean&gt;(32);  // use map as no concurrent Set</span>
+<span class="fc" id="L1731">                MutableDateTime dt = new MutableDateTime(0L, DateTimeZone.UTC);</span>
+<span class="fc" id="L1732">                Property property = dt.property(iFieldType);</span>
+<span class="fc" id="L1733">                int min = property.getMinimumValueOverall();</span>
+<span class="fc" id="L1734">                int max = property.getMaximumValueOverall();</span>
+<span class="fc bfc" id="L1735" title="All 2 branches covered.">                if (max - min &gt; 32) {  // protect against invalid fields</span>
+<span class="fc" id="L1736">                    return ~position;</span>
+                }
+<span class="fc" id="L1738">                maxLength = property.getMaximumTextLength(locale);</span>
+<span class="fc bfc" id="L1739" title="All 2 branches covered.">                for (int i = min; i &lt;= max; i++) {</span>
+<span class="fc" id="L1740">                    property.set(i);</span>
+<span class="fc" id="L1741">                    validValues.put(property.getAsShortText(locale), Boolean.TRUE);</span>
+<span class="fc" id="L1742">                    validValues.put(property.getAsShortText(locale).toLowerCase(locale), Boolean.TRUE);</span>
+<span class="fc" id="L1743">                    validValues.put(property.getAsShortText(locale).toUpperCase(locale), Boolean.TRUE);</span>
+<span class="fc" id="L1744">                    validValues.put(property.getAsText(locale), Boolean.TRUE);</span>
+<span class="fc" id="L1745">                    validValues.put(property.getAsText(locale).toLowerCase(locale), Boolean.TRUE);</span>
+<span class="fc" id="L1746">                    validValues.put(property.getAsText(locale).toUpperCase(locale), Boolean.TRUE);</span>
+                }
+<span class="fc bfc" id="L1748" title="All 4 branches covered.">                if (&quot;en&quot;.equals(locale.getLanguage()) &amp;&amp; iFieldType == DateTimeFieldType.era()) {</span>
+                    // hack to support for parsing &quot;BCE&quot; and &quot;CE&quot; if the language is English
+<span class="fc" id="L1750">                    validValues.put(&quot;BCE&quot;, Boolean.TRUE);</span>
+<span class="fc" id="L1751">                    validValues.put(&quot;bce&quot;, Boolean.TRUE);</span>
+<span class="fc" id="L1752">                    validValues.put(&quot;CE&quot;, Boolean.TRUE);</span>
+<span class="fc" id="L1753">                    validValues.put(&quot;ce&quot;, Boolean.TRUE);</span>
+<span class="fc" id="L1754">                    maxLength = 3;</span>
+                }
+<span class="fc" id="L1756">                array = new Object[] {validValues, Integer.valueOf(maxLength)};</span>
+<span class="fc" id="L1757">                innerMap.put(iFieldType, array);</span>
+<span class="fc" id="L1758">            } else {</span>
+<span class="fc" id="L1759">                validValues = (Map&lt;String, Boolean&gt;) array[0];</span>
+<span class="fc" id="L1760">                maxLength = ((Integer) array[1]).intValue();</span>
+            }
+            // match the longest string first using our knowledge of the max length
+<span class="fc" id="L1763">            int limit = Math.min(text.length(), position + maxLength);</span>
+<span class="pc bpc" id="L1764" title="1 of 2 branches missed.">            for (int i = limit; i &gt; position; i--) {</span>
+<span class="fc" id="L1765">                String match = text.subSequence(position, i).toString();</span>
+<span class="fc bfc" id="L1766" title="All 2 branches covered.">                if (validValues.containsKey(match)) {</span>
+<span class="fc" id="L1767">                    bucket.saveField(iFieldType, match, locale);</span>
+<span class="fc" id="L1768">                    return i;</span>
+                }
+            }
+<span class="nc" id="L1771">            return ~position;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    static class Fraction
+            implements InternalPrinter, InternalParser {
+
+        private final DateTimeFieldType iFieldType;
+        protected int iMinDigits;
+        protected int iMaxDigits;
+
+        protected Fraction(DateTimeFieldType fieldType, int minDigits, int maxDigits) {
+<span class="fc" id="L1784">            super();</span>
+<span class="fc" id="L1785">            iFieldType = fieldType;</span>
+            // Limit the precision requirements.
+<span class="pc bpc" id="L1787" title="1 of 2 branches missed.">            if (maxDigits &gt; 18) {</span>
+<span class="nc" id="L1788">                maxDigits = 18;</span>
+            }
+<span class="fc" id="L1790">            iMinDigits = minDigits;</span>
+<span class="fc" id="L1791">            iMaxDigits = maxDigits;</span>
+<span class="fc" id="L1792">        }</span>
+
+        public int estimatePrintedLength() {
+<span class="fc" id="L1795">            return iMaxDigits;</span>
+        }
+
+        public void printTo(
+                Appendable appendable, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+<span class="fc" id="L1801">            printTo(appendable, instant, chrono);</span>
+<span class="fc" id="L1802">        }</span>
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+            // removed check whether field is supported, as input field is typically
+            // secondOfDay which is unsupported by TimeOfDay
+<span class="fc" id="L1807">            long millis = partial.getChronology().set(partial, 0L);</span>
+<span class="fc" id="L1808">            printTo(appendable, millis, partial.getChronology());</span>
+<span class="fc" id="L1809">        }</span>
+
+        protected void printTo(Appendable appendable, long instant, Chronology chrono)
+            throws IOException
+        {
+<span class="fc" id="L1814">            DateTimeField field = iFieldType.getField(chrono);</span>
+<span class="fc" id="L1815">            int minDigits = iMinDigits;</span>
+
+            long fraction;
+            try {
+<span class="fc" id="L1819">                fraction = field.remainder(instant);</span>
+<span class="nc" id="L1820">            } catch (RuntimeException e) {</span>
+<span class="nc" id="L1821">                appendUnknownString(appendable, minDigits);</span>
+<span class="nc" id="L1822">                return;</span>
+<span class="fc" id="L1823">            }</span>
+
+<span class="fc bfc" id="L1825" title="All 2 branches covered.">            if (fraction == 0) {</span>
+<span class="fc bfc" id="L1826" title="All 2 branches covered.">                while (--minDigits &gt;= 0) {</span>
+<span class="fc" id="L1827">                    appendable.append('0');</span>
+                }
+<span class="fc" id="L1829">                return;</span>
+            }
+
+            String str;
+<span class="fc" id="L1833">            long[] fractionData = getFractionData(fraction, field);</span>
+<span class="fc" id="L1834">            long scaled = fractionData[0];</span>
+<span class="fc" id="L1835">            int maxDigits = (int) fractionData[1];</span>
+            
+<span class="pc bpc" id="L1837" title="1 of 2 branches missed.">            if ((scaled &amp; 0x7fffffff) == scaled) {</span>
+<span class="fc" id="L1838">                str = Integer.toString((int) scaled);</span>
+            } else {
+<span class="nc" id="L1840">                str = Long.toString(scaled);</span>
+            }
+
+<span class="fc" id="L1843">            int length = str.length();</span>
+<span class="fc" id="L1844">            int digits = maxDigits;</span>
+<span class="fc bfc" id="L1845" title="All 2 branches covered.">            while (length &lt; digits) {</span>
+<span class="fc" id="L1846">                appendable.append('0');</span>
+<span class="fc" id="L1847">                minDigits--;</span>
+<span class="fc" id="L1848">                digits--;</span>
+            }
+
+<span class="fc bfc" id="L1851" title="All 2 branches covered.">            if (minDigits &lt; digits) {</span>
+                // Chop off as many trailing zero digits as necessary.
+<span class="fc bfc" id="L1853" title="All 2 branches covered.">                while (minDigits &lt; digits) {</span>
+<span class="pc bpc" id="L1854" title="2 of 4 branches missed.">                    if (length &lt;= 1 || str.charAt(length - 1) != '0') {</span>
+<span class="nc" id="L1855">                        break;</span>
+                    }
+<span class="fc" id="L1857">                    digits--;</span>
+<span class="fc" id="L1858">                    length--;</span>
+                }
+<span class="pc bpc" id="L1860" title="1 of 2 branches missed.">                if (length &lt; str.length()) {</span>
+<span class="fc bfc" id="L1861" title="All 2 branches covered.">                    for (int i=0; i&lt;length; i++) {</span>
+<span class="fc" id="L1862">                        appendable.append(str.charAt(i));</span>
+                    }
+<span class="fc" id="L1864">                    return;</span>
+                }
+            }
+
+<span class="fc" id="L1868">            appendable.append(str);</span>
+<span class="fc" id="L1869">        }</span>
+        
+        private long[] getFractionData(long fraction, DateTimeField field) {
+<span class="fc" id="L1872">            long rangeMillis = field.getDurationField().getUnitMillis();</span>
+            long scalar;
+<span class="fc" id="L1874">            int maxDigits = iMaxDigits;</span>
+            while (true) {
+<span class="pc bpc" id="L1876" title="16 of 19 branches missed.">                switch (maxDigits) {</span>
+<span class="nc" id="L1877">                default: scalar = 1L; break;</span>
+<span class="nc" id="L1878">                case 1:  scalar = 10L; break;</span>
+<span class="nc" id="L1879">                case 2:  scalar = 100L; break;</span>
+<span class="fc" id="L1880">                case 3:  scalar = 1000L; break;</span>
+<span class="nc" id="L1881">                case 4:  scalar = 10000L; break;</span>
+<span class="nc" id="L1882">                case 5:  scalar = 100000L; break;</span>
+<span class="fc" id="L1883">                case 6:  scalar = 1000000L; break;</span>
+<span class="nc" id="L1884">                case 7:  scalar = 10000000L; break;</span>
+<span class="nc" id="L1885">                case 8:  scalar = 100000000L; break;</span>
+<span class="fc" id="L1886">                case 9:  scalar = 1000000000L; break;</span>
+<span class="nc" id="L1887">                case 10: scalar = 10000000000L; break;</span>
+<span class="nc" id="L1888">                case 11: scalar = 100000000000L; break;</span>
+<span class="nc" id="L1889">                case 12: scalar = 1000000000000L; break;</span>
+<span class="nc" id="L1890">                case 13: scalar = 10000000000000L; break;</span>
+<span class="nc" id="L1891">                case 14: scalar = 100000000000000L; break;</span>
+<span class="nc" id="L1892">                case 15: scalar = 1000000000000000L; break;</span>
+<span class="nc" id="L1893">                case 16: scalar = 10000000000000000L; break;</span>
+<span class="nc" id="L1894">                case 17: scalar = 100000000000000000L; break;</span>
+<span class="nc" id="L1895">                case 18: scalar = 1000000000000000000L; break;</span>
+                }
+<span class="pc bpc" id="L1897" title="1 of 2 branches missed.">                if (((rangeMillis * scalar) / scalar) == rangeMillis) {</span>
+<span class="fc" id="L1898">                    break;</span>
+                }
+                // Overflowed: scale down.
+<span class="nc" id="L1901">                maxDigits--;</span>
+            }
+            
+<span class="fc" id="L1904">            return new long[] {fraction * scalar / rangeMillis, maxDigits};</span>
+        }
+
+        public int estimateParsedLength() {
+<span class="fc" id="L1908">            return iMaxDigits;</span>
+        }
+
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="fc" id="L1912">            DateTimeField field = iFieldType.getField(bucket.getChronology());</span>
+            
+<span class="fc" id="L1914">            int limit = Math.min(iMaxDigits, text.length() - position);</span>
+
+<span class="fc" id="L1916">            long value = 0;</span>
+<span class="fc" id="L1917">            long n = field.getDurationField().getUnitMillis() * 10;</span>
+<span class="fc" id="L1918">            int length = 0;</span>
+<span class="fc bfc" id="L1919" title="All 2 branches covered.">            while (length &lt; limit) {</span>
+<span class="fc" id="L1920">                char c = text.charAt(position + length);</span>
+<span class="fc bfc" id="L1921" title="All 4 branches covered.">                if (c &lt; '0' || c &gt; '9') {</span>
+<span class="fc" id="L1922">                    break;</span>
+                }
+<span class="fc" id="L1924">                length++;</span>
+<span class="fc" id="L1925">                long nn = n / 10;</span>
+<span class="fc" id="L1926">                value += (c - '0') * nn;</span>
+<span class="fc" id="L1927">                n = nn;</span>
+<span class="fc" id="L1928">            }</span>
+
+<span class="fc" id="L1930">            value /= 10;</span>
+
+<span class="pc bpc" id="L1932" title="1 of 2 branches missed.">            if (length == 0) {</span>
+<span class="nc" id="L1933">                return ~position;</span>
+            }
+
+<span class="pc bpc" id="L1936" title="1 of 2 branches missed.">            if (value &gt; Integer.MAX_VALUE) {</span>
+<span class="nc" id="L1937">                return ~position;</span>
+            }
+
+<span class="fc" id="L1940">            DateTimeField parseField = new PreciseDateTimeField(</span>
+<span class="fc" id="L1941">                DateTimeFieldType.millisOfSecond(),</span>
+                MillisDurationField.INSTANCE,
+<span class="fc" id="L1943">                field.getDurationField());</span>
+
+<span class="fc" id="L1945">            bucket.saveField(parseField, (int) value);</span>
+
+<span class="fc" id="L1947">            return position + length;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    static class TimeZoneOffset
+            implements InternalPrinter, InternalParser {
+
+        private final String iZeroOffsetPrintText;
+        private final String iZeroOffsetParseText;
+        private final boolean iShowSeparators;
+        private final int iMinFields;
+        private final int iMaxFields;
+
+        TimeZoneOffset(String zeroOffsetPrintText, String zeroOffsetParseText,
+                                boolean showSeparators,
+                                int minFields, int maxFields)
+        {
+<span class="fc" id="L1965">            super();</span>
+<span class="fc" id="L1966">            iZeroOffsetPrintText = zeroOffsetPrintText;</span>
+<span class="fc" id="L1967">            iZeroOffsetParseText = zeroOffsetParseText;</span>
+<span class="fc" id="L1968">            iShowSeparators = showSeparators;</span>
+<span class="pc bpc" id="L1969" title="1 of 4 branches missed.">            if (minFields &lt;= 0 || maxFields &lt; minFields) {</span>
+<span class="fc" id="L1970">                throw new IllegalArgumentException();</span>
+            }
+<span class="pc bpc" id="L1972" title="1 of 2 branches missed.">            if (minFields &gt; 4) {</span>
+<span class="nc" id="L1973">                minFields = 4;</span>
+<span class="nc" id="L1974">                maxFields = 4;</span>
+            }
+<span class="fc" id="L1976">            iMinFields = minFields;</span>
+<span class="fc" id="L1977">            iMaxFields = maxFields;</span>
+<span class="fc" id="L1978">        }</span>
+            
+        public int estimatePrintedLength() {
+<span class="fc" id="L1981">            int est = 1 + iMinFields &lt;&lt; 1;</span>
+<span class="fc bfc" id="L1982" title="All 2 branches covered.">            if (iShowSeparators) {</span>
+<span class="fc" id="L1983">                est += iMinFields - 1;</span>
+            }
+<span class="pc bpc" id="L1985" title="1 of 4 branches missed.">            if (iZeroOffsetPrintText != null &amp;&amp; iZeroOffsetPrintText.length() &gt; est) {</span>
+<span class="nc" id="L1986">                est = iZeroOffsetPrintText.length();</span>
+            }
+<span class="fc" id="L1988">            return est;</span>
+        }
+
+        public void printTo(
+                Appendable buf, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+<span class="pc bpc" id="L1994" title="1 of 2 branches missed.">            if (displayZone == null) {</span>
+<span class="nc" id="L1995">                return;  // no zone</span>
+            }
+<span class="fc bfc" id="L1997" title="All 4 branches covered.">            if (displayOffset == 0 &amp;&amp; iZeroOffsetPrintText != null) {</span>
+<span class="fc" id="L1998">                buf.append(iZeroOffsetPrintText);</span>
+<span class="fc" id="L1999">                return;</span>
+            }
+<span class="fc bfc" id="L2001" title="All 2 branches covered.">            if (displayOffset &gt;= 0) {</span>
+<span class="fc" id="L2002">                buf.append('+');</span>
+            } else {
+<span class="fc" id="L2004">                buf.append('-');</span>
+<span class="fc" id="L2005">                displayOffset = -displayOffset;</span>
+            }
+
+<span class="fc" id="L2008">            int hours = displayOffset / DateTimeConstants.MILLIS_PER_HOUR;</span>
+<span class="fc" id="L2009">            FormatUtils.appendPaddedInteger(buf, hours, 2);</span>
+<span class="fc bfc" id="L2010" title="All 2 branches covered.">            if (iMaxFields == 1) {</span>
+<span class="fc" id="L2011">                return;</span>
+            }
+<span class="fc" id="L2013">            displayOffset -= hours * (int)DateTimeConstants.MILLIS_PER_HOUR;</span>
+<span class="fc bfc" id="L2014" title="All 4 branches covered.">            if (displayOffset == 0 &amp;&amp; iMinFields &lt;= 1) {</span>
+<span class="fc" id="L2015">                return;</span>
+            }
+
+<span class="fc" id="L2018">            int minutes = displayOffset / DateTimeConstants.MILLIS_PER_MINUTE;</span>
+<span class="fc bfc" id="L2019" title="All 2 branches covered.">            if (iShowSeparators) {</span>
+<span class="fc" id="L2020">                buf.append(':');</span>
+            }
+<span class="fc" id="L2022">            FormatUtils.appendPaddedInteger(buf, minutes, 2);</span>
+<span class="fc bfc" id="L2023" title="All 2 branches covered.">            if (iMaxFields == 2) {</span>
+<span class="fc" id="L2024">                return;</span>
+            }
+<span class="fc" id="L2026">            displayOffset -= minutes * DateTimeConstants.MILLIS_PER_MINUTE;</span>
+<span class="fc bfc" id="L2027" title="All 4 branches covered.">            if (displayOffset == 0 &amp;&amp; iMinFields &lt;= 2) {</span>
+<span class="fc" id="L2028">                return;</span>
+            }
+
+<span class="fc" id="L2031">            int seconds = displayOffset / DateTimeConstants.MILLIS_PER_SECOND;</span>
+<span class="pc bpc" id="L2032" title="1 of 2 branches missed.">            if (iShowSeparators) {</span>
+<span class="fc" id="L2033">                buf.append(':');</span>
+            }
+<span class="fc" id="L2035">            FormatUtils.appendPaddedInteger(buf, seconds, 2);</span>
+<span class="fc bfc" id="L2036" title="All 2 branches covered.">            if (iMaxFields == 3) {</span>
+<span class="fc" id="L2037">                return;</span>
+            }
+<span class="fc" id="L2039">            displayOffset -= seconds * DateTimeConstants.MILLIS_PER_SECOND;</span>
+<span class="pc bpc" id="L2040" title="2 of 4 branches missed.">            if (displayOffset == 0 &amp;&amp; iMinFields &lt;= 3) {</span>
+<span class="fc" id="L2041">                return;</span>
+            }
+
+<span class="nc bnc" id="L2044" title="All 2 branches missed.">            if (iShowSeparators) {</span>
+<span class="nc" id="L2045">                buf.append('.');</span>
+            }
+<span class="nc" id="L2047">            FormatUtils.appendPaddedInteger(buf, displayOffset, 3);</span>
+<span class="nc" id="L2048">        }</span>
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+            // no zone info
+<span class="fc" id="L2052">        }</span>
+
+        public int estimateParsedLength() {
+<span class="fc" id="L2055">            return estimatePrintedLength();</span>
+        }
+
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="fc" id="L2059">            int limit = text.length() - position;</span>
+
+            zeroOffset:
+<span class="fc bfc" id="L2062" title="All 2 branches covered.">            if (iZeroOffsetParseText != null) {</span>
+<span class="pc bpc" id="L2063" title="1 of 2 branches missed.">                if (iZeroOffsetParseText.length() == 0) {</span>
+                    // Peek ahead, looking for sign character.
+<span class="nc bnc" id="L2065" title="All 2 branches missed.">                    if (limit &gt; 0) {</span>
+<span class="nc" id="L2066">                        char c = text.charAt(position);</span>
+<span class="nc bnc" id="L2067" title="All 4 branches missed.">                        if (c == '-' || c == '+') {</span>
+<span class="nc" id="L2068">                            break zeroOffset;</span>
+                        }
+                    }
+<span class="nc" id="L2071">                    bucket.setOffset(Integer.valueOf(0));</span>
+<span class="nc" id="L2072">                    return position;</span>
+                }
+<span class="fc bfc" id="L2074" title="All 2 branches covered.">                if (csStartsWithIgnoreCase(text, position, iZeroOffsetParseText)) {</span>
+<span class="fc" id="L2075">                    bucket.setOffset(Integer.valueOf(0));</span>
+<span class="fc" id="L2076">                    return position + iZeroOffsetParseText.length();</span>
+                }
+            }
+
+            // Format to expect is sign character followed by at least one digit.
+
+<span class="fc bfc" id="L2082" title="All 2 branches covered.">            if (limit &lt;= 1) {</span>
+<span class="fc" id="L2083">                return ~position;</span>
+            }
+
+            boolean negative;
+<span class="fc" id="L2087">            char c = text.charAt(position);</span>
+<span class="fc bfc" id="L2088" title="All 2 branches covered.">            if (c == '-') {</span>
+<span class="fc" id="L2089">                negative = true;</span>
+<span class="fc bfc" id="L2090" title="All 2 branches covered.">            } else if (c == '+') {</span>
+<span class="fc" id="L2091">                negative = false;</span>
+            } else {
+<span class="fc" id="L2093">                return ~position;</span>
+            }
+
+<span class="fc" id="L2096">            limit--;</span>
+<span class="fc" id="L2097">            position++;</span>
+
+            // Format following sign is one of:
+            //
+            // hh
+            // hhmm
+            // hhmmss
+            // hhmmssSSS
+            // hh:mm
+            // hh:mm:ss
+            // hh:mm:ss.SSS
+
+            // First parse hours.
+
+<span class="fc bfc" id="L2111" title="All 2 branches covered.">            if (digitCount(text, position, 2) &lt; 2) {</span>
+                // Need two digits for hour.
+<span class="fc" id="L2113">                return ~position;</span>
+            }
+
+            int offset;
+
+<span class="fc" id="L2118">            int hours = FormatUtils.parseTwoDigits(text, position);</span>
+<span class="pc bpc" id="L2119" title="1 of 2 branches missed.">            if (hours &gt; 23) {</span>
+<span class="nc" id="L2120">                return ~position;</span>
+            }
+<span class="fc" id="L2122">            offset = hours * DateTimeConstants.MILLIS_PER_HOUR;</span>
+<span class="fc" id="L2123">            limit -= 2;</span>
+<span class="fc" id="L2124">            position += 2;</span>
+
+            parse: {
+                // Need to decide now if separators are expected or parsing
+                // stops at hour field.
+
+<span class="fc bfc" id="L2130" title="All 2 branches covered.">                if (limit &lt;= 0) {</span>
+<span class="fc" id="L2131">                    break parse;</span>
+                }
+
+                boolean expectSeparators;
+<span class="fc" id="L2135">                c = text.charAt(position);</span>
+<span class="fc bfc" id="L2136" title="All 2 branches covered.">                if (c == ':') {</span>
+<span class="fc" id="L2137">                    expectSeparators = true;</span>
+<span class="fc" id="L2138">                    limit--;</span>
+<span class="fc" id="L2139">                    position++;</span>
+<span class="pc bpc" id="L2140" title="2 of 4 branches missed.">                } else if (c &gt;= '0' &amp;&amp; c &lt;= '9') {</span>
+<span class="fc" id="L2141">                    expectSeparators = false;</span>
+                } else {
+                    break parse;
+                }
+
+                // Proceed to parse minutes.
+
+<span class="fc" id="L2148">                int count = digitCount(text, position, 2);</span>
+<span class="pc bpc" id="L2149" title="3 of 4 branches missed.">                if (count == 0 &amp;&amp; !expectSeparators) {</span>
+<span class="nc" id="L2150">                    break parse;</span>
+<span class="pc bpc" id="L2151" title="1 of 2 branches missed.">                } else if (count &lt; 2) {</span>
+                    // Need two digits for minute.
+<span class="nc" id="L2153">                    return ~position;</span>
+                }
+
+<span class="fc" id="L2156">                int minutes = FormatUtils.parseTwoDigits(text, position);</span>
+<span class="pc bpc" id="L2157" title="1 of 2 branches missed.">                if (minutes &gt; 59) {</span>
+<span class="nc" id="L2158">                    return ~position;</span>
+                }
+<span class="fc" id="L2160">                offset += minutes * DateTimeConstants.MILLIS_PER_MINUTE;</span>
+<span class="fc" id="L2161">                limit -= 2;</span>
+<span class="fc" id="L2162">                position += 2;</span>
+
+                // Proceed to parse seconds.
+
+<span class="fc bfc" id="L2166" title="All 2 branches covered.">                if (limit &lt;= 0) {</span>
+<span class="fc" id="L2167">                    break parse;</span>
+                }
+
+<span class="pc bpc" id="L2170" title="1 of 2 branches missed.">                if (expectSeparators) {</span>
+<span class="fc bfc" id="L2171" title="All 2 branches covered.">                    if (text.charAt(position) != ':') {</span>
+<span class="fc" id="L2172">                        break parse;</span>
+                    }
+<span class="fc" id="L2174">                    limit--;</span>
+<span class="fc" id="L2175">                    position++;</span>
+                }
+
+<span class="fc" id="L2178">                count = digitCount(text, position, 2);</span>
+<span class="pc bpc" id="L2179" title="3 of 4 branches missed.">                if (count == 0 &amp;&amp; !expectSeparators) {</span>
+<span class="nc" id="L2180">                    break parse;</span>
+<span class="pc bpc" id="L2181" title="1 of 2 branches missed.">                } else if (count &lt; 2) {</span>
+                    // Need two digits for second.
+<span class="nc" id="L2183">                    return ~position;</span>
+                }
+
+<span class="fc" id="L2186">                int seconds = FormatUtils.parseTwoDigits(text, position);</span>
+<span class="pc bpc" id="L2187" title="1 of 2 branches missed.">                if (seconds &gt; 59) {</span>
+<span class="nc" id="L2188">                    return ~position;</span>
+                }
+<span class="fc" id="L2190">                offset += seconds * DateTimeConstants.MILLIS_PER_SECOND;</span>
+<span class="fc" id="L2191">                limit -= 2;</span>
+<span class="fc" id="L2192">                position += 2;</span>
+
+                // Proceed to parse fraction of second.
+
+<span class="fc bfc" id="L2196" title="All 2 branches covered.">                if (limit &lt;= 0) {</span>
+<span class="fc" id="L2197">                    break parse;</span>
+                }
+
+<span class="pc bpc" id="L2200" title="1 of 2 branches missed.">                if (expectSeparators) {</span>
+<span class="pc bpc" id="L2201" title="3 of 4 branches missed.">                    if (text.charAt(position) != '.' &amp;&amp; text.charAt(position) != ',') {</span>
+<span class="nc" id="L2202">                        break parse;</span>
+                    }
+<span class="fc" id="L2204">                    limit--;</span>
+<span class="fc" id="L2205">                    position++;</span>
+                }
+                
+<span class="fc" id="L2208">                count = digitCount(text, position, 3);</span>
+<span class="pc bpc" id="L2209" title="3 of 4 branches missed.">                if (count == 0 &amp;&amp; !expectSeparators) {</span>
+<span class="nc" id="L2210">                    break parse;</span>
+<span class="pc bpc" id="L2211" title="1 of 2 branches missed.">                } else if (count &lt; 1) {</span>
+                    // Need at least one digit for fraction of second.
+<span class="nc" id="L2213">                    return ~position;</span>
+                }
+
+<span class="fc" id="L2216">                offset += (text.charAt(position++) - '0') * 100;</span>
+<span class="fc bfc" id="L2217" title="All 2 branches covered.">                if (count &gt; 1) {</span>
+<span class="fc" id="L2218">                    offset += (text.charAt(position++) - '0') * 10;</span>
+<span class="pc bpc" id="L2219" title="1 of 2 branches missed.">                    if (count &gt; 2) {</span>
+<span class="fc" id="L2220">                        offset += text.charAt(position++) - '0';</span>
+                    }
+                }
+            }
+
+<span class="fc bfc" id="L2225" title="All 2 branches covered.">            bucket.setOffset(Integer.valueOf(negative ? -offset : offset));</span>
+<span class="fc" id="L2226">            return position;</span>
+        }
+
+        /**
+         * Returns actual amount of digits to parse, but no more than original
+         * 'amount' parameter.
+         */
+        private int digitCount(CharSequence text, int position, int amount) {
+<span class="fc" id="L2234">            int limit = Math.min(text.length() - position, amount);</span>
+<span class="fc" id="L2235">            amount = 0;</span>
+<span class="fc bfc" id="L2236" title="All 2 branches covered.">            for (; limit &gt; 0; limit--) {</span>
+<span class="fc" id="L2237">                char c = text.charAt(position + amount);</span>
+<span class="pc bpc" id="L2238" title="2 of 4 branches missed.">                if (c &lt; '0' || c &gt; '9') {</span>
+<span class="nc" id="L2239">                    break;</span>
+                }
+<span class="fc" id="L2241">                amount++;</span>
+            }
+<span class="fc" id="L2243">            return amount;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    static class TimeZoneName
+            implements InternalPrinter, InternalParser {
+
+        static final int LONG_NAME = 0;
+        static final int SHORT_NAME = 1;
+
+        private final Map&lt;String, DateTimeZone&gt; iParseLookup;
+        private final int iType;
+
+        TimeZoneName(int type, Map&lt;String, DateTimeZone&gt; parseLookup) {
+<span class="nc" id="L2258">            super();</span>
+<span class="nc" id="L2259">            iType = type;</span>
+<span class="nc" id="L2260">            iParseLookup = parseLookup;</span>
+<span class="nc" id="L2261">        }</span>
+
+        public int estimatePrintedLength() {
+<span class="nc bnc" id="L2264" title="All 2 branches missed.">            return (iType == SHORT_NAME ? 4 : 20);</span>
+        }
+
+        public void printTo(
+                Appendable appendable, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+<span class="nc" id="L2270">            appendable.append(print(instant - displayOffset, displayZone, locale));</span>
+<span class="nc" id="L2271">        }</span>
+
+        private String print(long instant, DateTimeZone displayZone, Locale locale) {
+<span class="nc bnc" id="L2274" title="All 2 branches missed.">            if (displayZone == null) {</span>
+<span class="nc" id="L2275">                return &quot;&quot;;  // no zone</span>
+            }
+<span class="nc bnc" id="L2277" title="All 3 branches missed.">            switch (iType) {</span>
+                case LONG_NAME:
+<span class="nc" id="L2279">                    return displayZone.getName(instant, locale);</span>
+                case SHORT_NAME:
+<span class="nc" id="L2281">                    return displayZone.getShortName(instant, locale);</span>
+            }
+<span class="nc" id="L2283">            return &quot;&quot;;</span>
+        }
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+            // no zone info
+<span class="nc" id="L2288">        }</span>
+
+        public int estimateParsedLength() {
+<span class="nc bnc" id="L2291" title="All 2 branches missed.">            return (iType == SHORT_NAME ? 4 : 20);</span>
+        }
+
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="nc" id="L2295">            Map&lt;String, DateTimeZone&gt; parseLookup = iParseLookup;</span>
+<span class="nc bnc" id="L2296" title="All 2 branches missed.">            parseLookup = (parseLookup != null ? parseLookup : DateTimeUtils.getDefaultTimeZoneNames());</span>
+<span class="nc" id="L2297">            String matched = null;</span>
+<span class="nc bnc" id="L2298" title="All 2 branches missed.">            for (String name : parseLookup.keySet()) {</span>
+<span class="nc bnc" id="L2299" title="All 2 branches missed.">                if (csStartsWith(text, position, name)) {</span>
+<span class="nc bnc" id="L2300" title="All 4 branches missed.">                    if (matched == null || name.length() &gt; matched.length()) {</span>
+<span class="nc" id="L2301">                        matched = name;</span>
+                    }
+                }
+<span class="nc" id="L2304">            }</span>
+<span class="nc bnc" id="L2305" title="All 2 branches missed.">            if (matched != null) {</span>
+<span class="nc" id="L2306">                bucket.setZone(parseLookup.get(matched));</span>
+<span class="nc" id="L2307">                return position + matched.length();</span>
+            }
+<span class="nc" id="L2309">            return ~position;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+<span class="fc" id="L2314">    static enum TimeZoneId</span>
+            implements InternalPrinter, InternalParser {
+
+<span class="fc" id="L2317">        INSTANCE;</span>
+        private static final List&lt;String&gt; ALL_IDS;
+        // groups are &quot;Europe/A&quot;, &quot;Europe/B&quot;, &quot;Europe/C&quot;, etc
+        // group of &quot;&quot; is for zones that do not have a &quot;/&quot; in the name
+        private static final Map&lt;String, List&lt;String&gt;&gt; GROUPED_IDS;
+<span class="fc" id="L2322">        private static final List&lt;String&gt; BASE_GROUPED_IDS = new ArrayList&lt;String&gt;();</span>
+        static final int MAX_LENGTH;
+        static final int MAX_PREFIX_LENGTH;
+        static {
+<span class="fc" id="L2326">            ALL_IDS = new ArrayList&lt;String&gt;(DateTimeZone.getAvailableIDs());</span>
+<span class="fc" id="L2327">            Collections.sort(ALL_IDS);</span>
+<span class="fc" id="L2328">            GROUPED_IDS = new HashMap&lt;String, List&lt;String&gt;&gt;();</span>
+<span class="fc" id="L2329">            int max = 0;</span>
+<span class="fc" id="L2330">            int maxPrefix = 0;</span>
+<span class="fc bfc" id="L2331" title="All 2 branches covered.">            for (String id : ALL_IDS) {</span>
+<span class="fc" id="L2332">                int pos = id.indexOf('/');</span>
+<span class="fc bfc" id="L2333" title="All 2 branches covered.">                if (pos &gt;= 0) {</span>
+<span class="pc bpc" id="L2334" title="1 of 2 branches missed.">                    if (pos &lt; id.length()) {</span>
+<span class="fc" id="L2335">                        pos++;</span>
+                    }
+<span class="fc" id="L2337">                    maxPrefix = Math.max(maxPrefix, pos);</span>
+<span class="fc" id="L2338">                    String prefix = id.substring(0, pos + 1);</span>
+<span class="fc" id="L2339">                    String suffix = id.substring(pos);</span>
+<span class="fc bfc" id="L2340" title="All 2 branches covered.">                    if (!GROUPED_IDS.containsKey(prefix)) {</span>
+<span class="fc" id="L2341">                        GROUPED_IDS.put(prefix, new ArrayList&lt;String&gt;());</span>
+                    }
+<span class="fc" id="L2343">                    GROUPED_IDS.get(prefix).add(suffix);</span>
+<span class="fc" id="L2344">                } else {</span>
+<span class="fc" id="L2345">                    BASE_GROUPED_IDS.add(id);</span>
+                }
+<span class="fc" id="L2347">                max = Math.max(max, id.length());</span>
+<span class="fc" id="L2348">            }</span>
+<span class="fc" id="L2349">            MAX_LENGTH = max;</span>
+<span class="fc" id="L2350">            MAX_PREFIX_LENGTH = maxPrefix;</span>
+<span class="fc" id="L2351">        }</span>
+
+        public int estimatePrintedLength() {
+<span class="fc" id="L2354">            return MAX_LENGTH;</span>
+        }
+
+        public void printTo(
+                Appendable appendable, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+<span class="pc bpc" id="L2360" title="1 of 2 branches missed.">            appendable.append(displayZone != null ? displayZone.getID() : &quot;&quot;);</span>
+<span class="fc" id="L2361">        }</span>
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+            // no zone info
+<span class="nc" id="L2365">        }</span>
+
+        public int estimateParsedLength() {
+<span class="fc" id="L2368">            return MAX_LENGTH;</span>
+        }
+
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+            // select the base set of identifiers that do not have a slash
+<span class="fc" id="L2373">            List&lt;String&gt; suffixSet = BASE_GROUPED_IDS;</span>
+            // hunt for a slash only as far as the max prefix length
+<span class="fc" id="L2375">            int textLen = text.length();</span>
+<span class="fc" id="L2376">            int matchLen = Math.min(textLen, position + MAX_PREFIX_LENGTH);</span>
+<span class="fc" id="L2377">            int pos = position;</span>
+<span class="fc" id="L2378">            String prefix = &quot;&quot;;</span>
+<span class="fc bfc" id="L2379" title="All 2 branches covered.">            for (int i = pos; i &lt; matchLen; i++) {</span>
+<span class="fc bfc" id="L2380" title="All 2 branches covered.">                if (text.charAt(i) == '/') {</span>
+                    // when a slash is found, determine the prefix, such as &quot;Europe/A&quot; and lookup to get suffixes
+<span class="fc" id="L2382">                    prefix = text.subSequence(pos, i + 1).toString();</span>
+<span class="fc" id="L2383">                    pos += prefix.length();</span>
+<span class="fc" id="L2384">                    String prefixLookup = prefix;</span>
+<span class="pc bpc" id="L2385" title="1 of 2 branches missed.">                    if (i &lt; textLen) {</span>
+<span class="fc" id="L2386">                        prefixLookup += text.charAt(i + 1);</span>
+                    }
+<span class="fc" id="L2388">                    suffixSet = GROUPED_IDS.get(prefixLookup);</span>
+<span class="pc bpc" id="L2389" title="1 of 2 branches missed.">                    if (suffixSet == null) {</span>
+<span class="nc" id="L2390">                        return ~position;</span>
+                    }
+                    break;
+                }
+            }
+            // search all suffixes, hopefully a relatively small number due to prefix search
+<span class="fc" id="L2396">            String best = null;</span>
+<span class="fc bfc" id="L2397" title="All 2 branches covered.">            for (int i = 0; i &lt; suffixSet.size(); i++) {</span>
+<span class="fc" id="L2398">                String suffix = suffixSet.get(i);</span>
+<span class="fc bfc" id="L2399" title="All 2 branches covered.">                if (csStartsWith(text, pos, suffix)) {</span>
+<span class="pc bpc" id="L2400" title="1 of 4 branches missed.">                    if (best == null || suffix.length() &gt; best.length()) {</span>
+<span class="fc" id="L2401">                        best = suffix;</span>
+                    }
+                }
+            }
+            // if found then store, else fail
+<span class="fc bfc" id="L2406" title="All 2 branches covered.">            if (best != null) {</span>
+<span class="fc" id="L2407">                bucket.setZone(DateTimeZone.forID(prefix + best));</span>
+<span class="fc" id="L2408">                return pos + best.length();</span>
+            }
+<span class="fc" id="L2410">            return ~position;</span>
+        }
+
+    }
+
+    //-----------------------------------------------------------------------
+    static class Composite
+            implements InternalPrinter, InternalParser {
+
+        private final InternalPrinter[] iPrinters;
+        private final InternalParser[] iParsers;
+
+        private final int iPrintedLengthEstimate;
+        private final int iParsedLengthEstimate;
+
+        Composite(List&lt;Object&gt; elementPairs) {
+<span class="fc" id="L2426">            super();</span>
+
+<span class="fc" id="L2428">            List&lt;Object&gt; printerList = new ArrayList&lt;Object&gt;();</span>
+<span class="fc" id="L2429">            List&lt;Object&gt; parserList = new ArrayList&lt;Object&gt;();</span>
+
+<span class="fc" id="L2431">            decompose(elementPairs, printerList, parserList);</span>
+
+<span class="fc bfc" id="L2433" title="All 4 branches covered.">            if (printerList.contains(null) || printerList.isEmpty()) {</span>
+<span class="fc" id="L2434">                iPrinters = null;</span>
+<span class="fc" id="L2435">                iPrintedLengthEstimate = 0;</span>
+            } else {
+<span class="fc" id="L2437">                int size = printerList.size();</span>
+<span class="fc" id="L2438">                iPrinters = new InternalPrinter[size];</span>
+<span class="fc" id="L2439">                int printEst = 0;</span>
+<span class="fc bfc" id="L2440" title="All 2 branches covered.">                for (int i=0; i&lt;size; i++) {</span>
+<span class="fc" id="L2441">                    InternalPrinter printer = (InternalPrinter) printerList.get(i);</span>
+<span class="fc" id="L2442">                    printEst += printer.estimatePrintedLength();</span>
+<span class="fc" id="L2443">                    iPrinters[i] = printer;</span>
+                }
+<span class="fc" id="L2445">                iPrintedLengthEstimate = printEst;</span>
+            }
+
+<span class="fc bfc" id="L2448" title="All 4 branches covered.">            if (parserList.contains(null) || parserList.isEmpty()) {</span>
+<span class="fc" id="L2449">                iParsers = null;</span>
+<span class="fc" id="L2450">                iParsedLengthEstimate = 0;</span>
+            } else {
+<span class="fc" id="L2452">                int size = parserList.size();</span>
+<span class="fc" id="L2453">                iParsers = new InternalParser[size];</span>
+<span class="fc" id="L2454">                int parseEst = 0;</span>
+<span class="fc bfc" id="L2455" title="All 2 branches covered.">                for (int i=0; i&lt;size; i++) {</span>
+<span class="fc" id="L2456">                    InternalParser parser = (InternalParser) parserList.get(i);</span>
+<span class="fc" id="L2457">                    parseEst += parser.estimateParsedLength();</span>
+<span class="fc" id="L2458">                    iParsers[i] = parser;</span>
+                }
+<span class="fc" id="L2460">                iParsedLengthEstimate = parseEst;</span>
+            }
+<span class="fc" id="L2462">        }</span>
+
+        public int estimatePrintedLength() {
+<span class="fc" id="L2465">            return iPrintedLengthEstimate;</span>
+        }
+
+        public void printTo(
+                Appendable appendable, long instant, Chronology chrono,
+                int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
+<span class="fc" id="L2471">            InternalPrinter[] elements = iPrinters;</span>
+<span class="pc bpc" id="L2472" title="1 of 2 branches missed.">            if (elements == null) {</span>
+<span class="nc" id="L2473">                throw new UnsupportedOperationException();</span>
+            }
+
+<span class="fc bfc" id="L2476" title="All 2 branches covered.">            if (locale == null) {</span>
+                // Guard against default locale changing concurrently.
+<span class="fc" id="L2478">                locale = Locale.getDefault();</span>
+            }
+
+<span class="fc" id="L2481">            int len = elements.length;</span>
+<span class="fc bfc" id="L2482" title="All 2 branches covered.">            for (int i = 0; i &lt; len; i++) {</span>
+<span class="fc" id="L2483">                elements[i].printTo(appendable, instant, chrono, displayOffset, displayZone, locale);</span>
+            }
+<span class="fc" id="L2485">        }</span>
+
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+<span class="fc" id="L2488">            InternalPrinter[] elements = iPrinters;</span>
+<span class="pc bpc" id="L2489" title="1 of 2 branches missed.">            if (elements == null) {</span>
+<span class="nc" id="L2490">                throw new UnsupportedOperationException();</span>
+            }
+
+<span class="fc bfc" id="L2493" title="All 2 branches covered.">            if (locale == null) {</span>
+                // Guard against default locale changing concurrently.
+<span class="fc" id="L2495">                locale = Locale.getDefault();</span>
+            }
+
+<span class="fc" id="L2498">            int len = elements.length;</span>
+<span class="fc bfc" id="L2499" title="All 2 branches covered.">            for (int i=0; i&lt;len; i++) {</span>
+<span class="fc" id="L2500">                elements[i].printTo(appendable, partial, locale);</span>
+            }
+<span class="fc" id="L2502">        }</span>
+
+        public int estimateParsedLength() {
+<span class="fc" id="L2505">            return iParsedLengthEstimate;</span>
+        }
+
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="fc" id="L2509">            InternalParser[] elements = iParsers;</span>
+<span class="pc bpc" id="L2510" title="1 of 2 branches missed.">            if (elements == null) {</span>
+<span class="nc" id="L2511">                throw new UnsupportedOperationException();</span>
+            }
+
+<span class="fc" id="L2514">            int len = elements.length;</span>
+<span class="fc bfc" id="L2515" title="All 4 branches covered.">            for (int i=0; i&lt;len &amp;&amp; position &gt;= 0; i++) {</span>
+<span class="fc" id="L2516">                position = elements[i].parseInto(bucket, text, position);</span>
+            }
+<span class="fc" id="L2518">            return position;</span>
+        }
+
+        boolean isPrinter() {
+<span class="fc bfc" id="L2522" title="All 2 branches covered.">            return iPrinters != null;</span>
+        }
+
+        boolean isParser() {
+<span class="fc bfc" id="L2526" title="All 2 branches covered.">            return iParsers != null;</span>
+        }
+
+        /**
+         * Processes the element pairs, putting results into the given printer
+         * and parser lists.
+         */
+        private void decompose(List&lt;Object&gt; elementPairs, List&lt;Object&gt; printerList, List&lt;Object&gt; parserList) {
+<span class="fc" id="L2534">            int size = elementPairs.size();</span>
+<span class="fc bfc" id="L2535" title="All 2 branches covered.">            for (int i=0; i&lt;size; i+=2) {</span>
+<span class="fc" id="L2536">                Object element = elementPairs.get(i);</span>
+<span class="fc bfc" id="L2537" title="All 2 branches covered.">                if (element instanceof Composite) {</span>
+<span class="fc" id="L2538">                    addArrayToList(printerList, ((Composite)element).iPrinters);</span>
+                } else {
+<span class="fc" id="L2540">                    printerList.add(element);</span>
+                }
+
+<span class="fc" id="L2543">                element = elementPairs.get(i + 1);</span>
+<span class="fc bfc" id="L2544" title="All 2 branches covered.">                if (element instanceof Composite) {</span>
+<span class="fc" id="L2545">                    addArrayToList(parserList, ((Composite)element).iParsers);</span>
+                } else {
+<span class="fc" id="L2547">                    parserList.add(element);</span>
+                }
+            }
+<span class="fc" id="L2550">        }</span>
+
+        private void addArrayToList(List&lt;Object&gt; list, Object[] array) {
+<span class="pc bpc" id="L2553" title="1 of 2 branches missed.">            if (array != null) {</span>
+<span class="fc bfc" id="L2554" title="All 2 branches covered.">                for (int i=0; i&lt;array.length; i++) {</span>
+<span class="fc" id="L2555">                    list.add(array[i]);</span>
+                }
+            }
+<span class="fc" id="L2558">        }</span>
+    }
+
+    //-----------------------------------------------------------------------
+    static class MatchingParser
+            implements InternalParser {
+
+        private final InternalParser[] iParsers;
+        private final int iParsedLengthEstimate;
+
+        MatchingParser(InternalParser[] parsers) {
+<span class="fc" id="L2569">            super();</span>
+<span class="fc" id="L2570">            iParsers = parsers;</span>
+<span class="fc" id="L2571">            int est = 0;</span>
+<span class="fc bfc" id="L2572" title="All 2 branches covered.">            for (int i=parsers.length; --i&gt;=0 ;) {</span>
+<span class="fc" id="L2573">                InternalParser parser = parsers[i];</span>
+<span class="fc bfc" id="L2574" title="All 2 branches covered.">                if (parser != null) {</span>
+<span class="fc" id="L2575">                    int len = parser.estimateParsedLength();</span>
+<span class="fc bfc" id="L2576" title="All 2 branches covered.">                    if (len &gt; est) {</span>
+<span class="fc" id="L2577">                        est = len;</span>
+                    }
+                }
+<span class="fc" id="L2580">            }</span>
+<span class="fc" id="L2581">            iParsedLengthEstimate = est;</span>
+<span class="fc" id="L2582">        }</span>
+
+        public int estimateParsedLength() {
+<span class="fc" id="L2585">            return iParsedLengthEstimate;</span>
+        }
+
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+<span class="fc" id="L2589">            InternalParser[] parsers = iParsers;</span>
+<span class="fc" id="L2590">            int length = parsers.length;</span>
+
+<span class="fc" id="L2592">            final Object originalState = bucket.saveState();</span>
+<span class="fc" id="L2593">            boolean isOptional = false;</span>
+
+<span class="fc" id="L2595">            int bestValidPos = position;</span>
+<span class="fc" id="L2596">            Object bestValidState = null;</span>
+
+<span class="fc" id="L2598">            int bestInvalidPos = position;</span>
+
+<span class="fc bfc" id="L2600" title="All 2 branches covered.">            for (int i=0; i&lt;length; i++) {</span>
+<span class="fc" id="L2601">                InternalParser parser = parsers[i];</span>
+<span class="fc bfc" id="L2602" title="All 2 branches covered.">                if (parser == null) {</span>
+                    // The empty parser wins only if nothing is better.
+<span class="fc bfc" id="L2604" title="All 2 branches covered.">                    if (bestValidPos &lt;= position) {</span>
+<span class="fc" id="L2605">                        return position;</span>
+                    }
+<span class="fc" id="L2607">                    isOptional = true;</span>
+<span class="fc" id="L2608">                    break;</span>
+                }
+<span class="fc" id="L2610">                int parsePos = parser.parseInto(bucket, text, position);</span>
+<span class="fc bfc" id="L2611" title="All 2 branches covered.">                if (parsePos &gt;= position) {</span>
+<span class="fc bfc" id="L2612" title="All 2 branches covered.">                    if (parsePos &gt; bestValidPos) {</span>
+<span class="fc bfc" id="L2613" title="All 6 branches covered.">                        if (parsePos &gt;= text.length() ||</span>
+                            (i + 1) &gt;= length || parsers[i + 1] == null) {
+
+                            // Completely parsed text or no more parsers to
+                            // check. Skip the rest.
+<span class="fc" id="L2618">                            return parsePos;</span>
+                        }
+<span class="fc" id="L2620">                        bestValidPos = parsePos;</span>
+<span class="fc" id="L2621">                        bestValidState = bucket.saveState();</span>
+                    }
+                } else {
+<span class="pc bpc" id="L2624" title="1 of 2 branches missed.">                    if (parsePos &lt; 0) {</span>
+<span class="fc" id="L2625">                        parsePos = ~parsePos;</span>
+<span class="fc bfc" id="L2626" title="All 2 branches covered.">                        if (parsePos &gt; bestInvalidPos) {</span>
+<span class="fc" id="L2627">                            bestInvalidPos = parsePos;</span>
+                        }
+                    }
+                }
+<span class="fc" id="L2631">                bucket.restoreState(originalState);</span>
+            }
+
+<span class="pc bpc" id="L2634" title="2 of 6 branches missed.">            if (bestValidPos &gt; position || (bestValidPos == position &amp;&amp; isOptional)) {</span>
+                // Restore the state to the best valid parse.
+<span class="pc bpc" id="L2636" title="1 of 2 branches missed.">                if (bestValidState != null) {</span>
+<span class="fc" id="L2637">                    bucket.restoreState(bestValidState);</span>
+                }
+<span class="fc" id="L2639">                return bestValidPos;</span>
+            }
+
+<span class="fc" id="L2642">            return ~bestInvalidPos;</span>
+        }
+    }
+
+    static boolean csStartsWith(CharSequence text, int position, String search) {
+<span class="fc" id="L2647">        int searchLen = search.length();</span>
+<span class="fc bfc" id="L2648" title="All 2 branches covered.">        if ((text.length() - position) &lt; searchLen) {</span>
+<span class="fc" id="L2649">            return false;</span>
+        }
+<span class="fc bfc" id="L2651" title="All 2 branches covered.">        for (int i = 0; i &lt; searchLen; i++) {</span>
+<span class="fc bfc" id="L2652" title="All 2 branches covered.">            if (text.charAt(position + i) != search.charAt(i)) {</span>
+<span class="fc" id="L2653">                return false;</span>
+            }
+        }
+<span class="fc" id="L2656">        return true;</span>
+    }
+
+    static boolean csStartsWithIgnoreCase(CharSequence text, int position, String search) {
+<span class="fc" id="L2660">        int searchLen = search.length();</span>
+<span class="fc bfc" id="L2661" title="All 2 branches covered.">        if ((text.length() - position) &lt; searchLen) {</span>
+<span class="fc" id="L2662">            return false;</span>
+        }
+<span class="fc bfc" id="L2664" title="All 2 branches covered.">        for (int i = 0; i &lt; searchLen; i++) {</span>
+<span class="fc" id="L2665">            char ch1 = text.charAt(position + i);</span>
+<span class="fc" id="L2666">            char ch2 = search.charAt(i);</span>
+<span class="fc bfc" id="L2667" title="All 2 branches covered.">            if (ch1 != ch2) {</span>
+<span class="fc" id="L2668">                char u1 = Character.toUpperCase(ch1);</span>
+<span class="fc" id="L2669">                char u2 = Character.toUpperCase(ch2);</span>
+<span class="pc bpc" id="L2670" title="2 of 4 branches missed.">                if (u1 != u2 &amp;&amp; Character.toLowerCase(u1) != Character.toLowerCase(u2)) {</span>
+<span class="fc" id="L2671">                    return false;</span>
+                }
+            }
+        }
+<span class="fc" id="L2675">        return true;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

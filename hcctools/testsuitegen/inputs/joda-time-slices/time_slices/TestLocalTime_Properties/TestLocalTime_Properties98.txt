@@ -1,0 +1,1576 @@
+ 0.0% done, time left: unknown                                0.5% done, time left: unknown  1.8% done, time left: unknown  3.0% done, time left: unknown  4.5% done, time left: unknown  6.6% done, time left: unknown  9.7% done, time left: unknown 12.1% done, time left: unknown 16.3% done, time left:   0:00:02   16.5% done, time left:   0:00:02 17.8% done, time left:   0:00:03 20.9% done, time left:   0:00:04 25.1% done, time left:   0:00:03 29.3% done, time left:   0:00:02 34.1% done, time left:   0:00:02 37.1% done, time left:   0:00:01 42.4% done, time left:   0:00:01 47.5% done, time left:   0:00:01 52.5% done, time left:   0:00:00 57.2% done, time left:   0:00:00 57.3% done, time left:   0:00:00 57.5% done, time left:   0:00:00 57.9% done, time left:   0:00:00 60.0% done, time left:   0:00:00 63.3% done, time left:   0:00:00 69.0% done, time left:   0:00:00 75.2% done, time left:   0:00:00 80.8% done, time left:   0:00:00 85.7% done, time left:   0:00:00 92.6% done, time left:   0:00:00 96.3% done, time left:   0:00:00 97.8% done, time left:   0:00:00 99.4% done, time left:   0:00:00 102.3% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestLocalTime_Properties.check:824:*]:
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.DateTimeZone.getMillisKeepLocal:1094 ALOAD 1
+org.joda.time.DateTimeZone.getMillisKeepLocal:1094 ALOAD 0
+org.joda.time.DateTimeZone.getMillisKeepLocal:1094 IF_ACMPNE L1 false true
+org.joda.time.DateTimeZone.getMillisKeepLocal:1095 LLOAD 2
+org.joda.time.DateTimeZone.getMillisKeepLocal:1095 LRETURN
+org.joda.time.LocalTime.<init>:357 ALOAD 3
+org.joda.time.LocalTime.<init>:357 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:357 ASTORE 3
+org.joda.time.LocalTime.<init>:359 ALOAD 3
+org.joda.time.LocalTime.<init>:359 INVOKEVIRTUAL org/joda/time/Chronology.getZone()Lorg/joda/time/DateTimeZone;
+org.joda.time.LocalTime.<init>:359 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.LocalTime.<init>:359 LLOAD 1
+org.joda.time.LocalTime.<init>:359 INVOKEVIRTUAL org/joda/time/DateTimeZone.getMillisKeepLocal(Lorg/joda/time/DateTimeZone;J)J
+org.joda.time.LocalTime.<init>:359 LSTORE 4
+org.joda.time.LocalTime.<init>:360 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:360 ASTORE 3
+org.joda.time.LocalTime.<init>:361 ALOAD 0
+org.joda.time.LocalTime.<init>:361 ALOAD 3
+org.joda.time.LocalTime.<init>:361 INVOKEVIRTUAL org/joda/time/Chronology.millisOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime.<init>:361 LLOAD 4
+org.joda.time.LocalTime.<init>:361 INVOKEVIRTUAL org/joda/time/DateTimeField.get(J)I
+org.joda.time.LocalTime.<init>:361 I2L
+org.joda.time.LocalTime.<init>:361 PUTFIELD org/joda/time/LocalTime.iLocalMillis J
+org.joda.time.LocalTime.<init>:362 ALOAD 0
+org.joda.time.LocalTime.<init>:362 ALOAD 3
+org.joda.time.LocalTime.<init>:362 PUTFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:450 ALOAD 0
+org.joda.time.LocalTime.<init>:450 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIIILorg/joda/time/Chronology;)V
+org.joda.time.LocalTime.<init>:482 ALOAD 0
+org.joda.time.LocalTime.<init>:482 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIIILorg/joda/time/Chronology;)V
+org.joda.time.LocalTime.<init>:505 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:505 ASTORE 5
+org.joda.time.LocalTime.<init>:506 ALOAD 5
+org.joda.time.LocalTime.<init>:506 INVOKEVIRTUAL org/joda/time/Chronology.getDateTimeMillis(JIIII)J
+org.joda.time.LocalTime.<init>:506 LSTORE 6
+org.joda.time.LocalTime.<init>:508 ALOAD 0
+org.joda.time.LocalTime.<init>:508 ALOAD 5
+org.joda.time.LocalTime.<init>:508 PUTFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:509 ALOAD 0
+org.joda.time.LocalTime.<init>:509 LLOAD 6
+org.joda.time.LocalTime.<init>:509 PUTFIELD org/joda/time/LocalTime.iLocalMillis J
+org.joda.time.LocalTime.getLocalMillis:660 ALOAD 0
+org.joda.time.LocalTime.getLocalMillis:660 GETFIELD org/joda/time/LocalTime.iLocalMillis J
+org.joda.time.LocalTime.getLocalMillis:660 LRETURN
+org.joda.time.LocalTime.getChronology:669 ALOAD 0
+org.joda.time.LocalTime.getChronology:669 GETFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getChronology:669 ARETURN
+org.joda.time.LocalTime.withLocalMillis:738 LLOAD 1
+org.joda.time.LocalTime.withLocalMillis:738 ALOAD 0
+org.joda.time.LocalTime.withLocalMillis:738 INVOKEVIRTUAL org/joda/time/LocalTime.getLocalMillis()J
+org.joda.time.LocalTime.withLocalMillis:738 LCMP
+org.joda.time.LocalTime.withLocalMillis:738 IFNE L0 true true
+org.joda.time.LocalTime.withLocalMillis:738 ALOAD 0
+org.joda.time.LocalTime.withLocalMillis:738 NEW org/joda/time/LocalTime
+org.joda.time.LocalTime.withLocalMillis:738 DUP
+org.joda.time.LocalTime.withLocalMillis:738 LLOAD 1
+org.joda.time.LocalTime.withLocalMillis:738 ALOAD 0
+org.joda.time.LocalTime.withLocalMillis:738 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.withLocalMillis:738 INVOKESPECIAL org/joda/time/LocalTime.<init>(JLorg/joda/time/Chronology;)V
+org.joda.time.LocalTime.withLocalMillis:738 ARETURN
+org.joda.time.LocalTime.getMinuteOfHour:1109 ALOAD 0
+org.joda.time.LocalTime.getMinuteOfHour:1109 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getMinuteOfHour:1109 INVOKEVIRTUAL org/joda/time/Chronology.minuteOfHour()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime.getMinuteOfHour:1109 ALOAD 0
+org.joda.time.LocalTime.getMinuteOfHour:1109 INVOKEVIRTUAL org/joda/time/LocalTime.getLocalMillis()J
+org.joda.time.LocalTime.getMinuteOfHour:1109 INVOKEVIRTUAL org/joda/time/DateTimeField.get(J)I
+org.joda.time.LocalTime.getMinuteOfHour:1109 IRETURN
+org.joda.time.LocalTime.hourOfDay:1222 NEW org/joda/time/LocalTime$Property
+org.joda.time.LocalTime.hourOfDay:1222 DUP
+org.joda.time.LocalTime.hourOfDay:1222 ALOAD 0
+org.joda.time.LocalTime.hourOfDay:1222 ALOAD 0
+org.joda.time.LocalTime.hourOfDay:1222 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.hourOfDay:1222 INVOKEVIRTUAL org/joda/time/Chronology.hourOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime.hourOfDay:1222 INVOKESPECIAL org/joda/time/LocalTime$Property.<init>(Lorg/joda/time/LocalTime;Lorg/joda/time/DateTimeField;)V
+org.joda.time.LocalTime.hourOfDay:1222 ARETURN
+org.joda.time.LocalTime.minuteOfHour:1231 NEW org/joda/time/LocalTime$Property
+org.joda.time.LocalTime.minuteOfHour:1231 DUP
+org.joda.time.LocalTime.minuteOfHour:1231 ALOAD 0
+org.joda.time.LocalTime.minuteOfHour:1231 ALOAD 0
+org.joda.time.LocalTime.minuteOfHour:1231 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.minuteOfHour:1231 INVOKEVIRTUAL org/joda/time/Chronology.minuteOfHour()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime.minuteOfHour:1231 INVOKESPECIAL org/joda/time/LocalTime$Property.<init>(Lorg/joda/time/LocalTime;Lorg/joda/time/DateTimeField;)V
+org.joda.time.LocalTime.minuteOfHour:1231 ARETURN
+org.joda.time.LocalTime.secondOfMinute:1240 NEW org/joda/time/LocalTime$Property
+org.joda.time.LocalTime.secondOfMinute:1240 DUP
+org.joda.time.LocalTime.secondOfMinute:1240 ALOAD 0
+org.joda.time.LocalTime.secondOfMinute:1240 ALOAD 0
+org.joda.time.LocalTime.secondOfMinute:1240 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.secondOfMinute:1240 INVOKEVIRTUAL org/joda/time/Chronology.secondOfMinute()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime.secondOfMinute:1240 INVOKESPECIAL org/joda/time/LocalTime$Property.<init>(Lorg/joda/time/LocalTime;Lorg/joda/time/DateTimeField;)V
+org.joda.time.LocalTime.secondOfMinute:1240 ARETURN
+org.joda.time.LocalTime.millisOfSecond:1249 NEW org/joda/time/LocalTime$Property
+org.joda.time.LocalTime.millisOfSecond:1249 DUP
+org.joda.time.LocalTime.millisOfSecond:1249 ALOAD 0
+org.joda.time.LocalTime.millisOfSecond:1249 ALOAD 0
+org.joda.time.LocalTime.millisOfSecond:1249 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.millisOfSecond:1249 INVOKEVIRTUAL org/joda/time/Chronology.millisOfSecond()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime.millisOfSecond:1249 INVOKESPECIAL org/joda/time/LocalTime$Property.<init>(Lorg/joda/time/LocalTime;Lorg/joda/time/DateTimeField;)V
+org.joda.time.LocalTime.millisOfSecond:1249 ARETURN
+org.joda.time.LocalTime$Property.<init>:1374 ALOAD 0
+org.joda.time.LocalTime$Property.<init>:1374 ALOAD 1
+org.joda.time.LocalTime$Property.<init>:1374 PUTFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.<init>:1375 ALOAD 0
+org.joda.time.LocalTime$Property.<init>:1375 ALOAD 2
+org.joda.time.LocalTime$Property.<init>:1375 PUTFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.getField:1402 ALOAD 0
+org.joda.time.LocalTime$Property.getField:1402 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.getField:1402 ARETURN
+org.joda.time.LocalTime$Property.addCopy:1443 ALOAD 0
+org.joda.time.LocalTime$Property.addCopy:1443 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.addCopy:1443 ALOAD 0
+org.joda.time.LocalTime$Property.addCopy:1443 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.addCopy:1443 INVOKEVIRTUAL org/joda/time/DateTimeField.add(JI)J
+org.joda.time.LocalTime$Property.addCopy:1443 INVOKEVIRTUAL org/joda/time/LocalTime.withLocalMillis(J)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.addCopy:1443 ARETURN
+org.joda.time.LocalTime$Property.addNoWrapToCopy:1473 ALOAD 0
+org.joda.time.LocalTime$Property.addNoWrapToCopy:1473 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.addNoWrapToCopy:1473 INVOKEVIRTUAL org/joda/time/DateTimeField.add(JI)J
+org.joda.time.LocalTime$Property.addNoWrapToCopy:1473 LSTORE 2
+org.joda.time.LocalTime$Property.addNoWrapToCopy:1478 ALOAD 0
+org.joda.time.LocalTime$Property.addNoWrapToCopy:1478 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.addNoWrapToCopy:1478 LLOAD 2
+org.joda.time.LocalTime$Property.addNoWrapToCopy:1478 INVOKEVIRTUAL org/joda/time/LocalTime.withLocalMillis(J)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.addNoWrapToCopy:1478 ARETURN
+org.joda.time.LocalTime$Property.addWrapFieldToCopy:1493 ALOAD 0
+org.joda.time.LocalTime$Property.addWrapFieldToCopy:1493 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.addWrapFieldToCopy:1493 ALOAD 0
+org.joda.time.LocalTime$Property.addWrapFieldToCopy:1493 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.addWrapFieldToCopy:1493 ALOAD 0
+org.joda.time.LocalTime$Property.addWrapFieldToCopy:1493 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.addWrapFieldToCopy:1493 INVOKEVIRTUAL org/joda/time/LocalTime.getLocalMillis()J
+org.joda.time.LocalTime$Property.addWrapFieldToCopy:1493 ILOAD 1
+org.joda.time.LocalTime$Property.addWrapFieldToCopy:1493 INVOKEVIRTUAL org/joda/time/DateTimeField.addWrapField(JI)J
+org.joda.time.LocalTime$Property.addWrapFieldToCopy:1493 INVOKEVIRTUAL org/joda/time/LocalTime.withLocalMillis(J)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.addWrapFieldToCopy:1493 ARETURN
+org.joda.time.LocalTime$Property.setCopy:1507 ALOAD 0
+org.joda.time.LocalTime$Property.setCopy:1507 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.setCopy:1507 ALOAD 0
+org.joda.time.LocalTime$Property.setCopy:1507 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.setCopy:1507 ALOAD 0
+org.joda.time.LocalTime$Property.setCopy:1507 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.setCopy:1507 INVOKEVIRTUAL org/joda/time/LocalTime.getLocalMillis()J
+org.joda.time.LocalTime$Property.setCopy:1507 ILOAD 1
+org.joda.time.LocalTime$Property.setCopy:1507 INVOKEVIRTUAL org/joda/time/DateTimeField.set(JI)J
+org.joda.time.LocalTime$Property.setCopy:1507 INVOKEVIRTUAL org/joda/time/LocalTime.withLocalMillis(J)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.setCopy:1507 ARETURN
+org.joda.time.LocalTime$Property.setCopy:1521 ALOAD 0
+org.joda.time.LocalTime$Property.setCopy:1521 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.setCopy:1521 ALOAD 0
+org.joda.time.LocalTime$Property.setCopy:1521 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.setCopy:1521 ALOAD 0
+org.joda.time.LocalTime$Property.setCopy:1521 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.setCopy:1521 INVOKEVIRTUAL org/joda/time/LocalTime.getLocalMillis()J
+org.joda.time.LocalTime$Property.setCopy:1521 ALOAD 1
+org.joda.time.LocalTime$Property.setCopy:1521 INVOKEVIRTUAL org/joda/time/DateTimeField.set(JLjava/lang/String;Ljava/util/Locale;)J
+org.joda.time.LocalTime$Property.setCopy:1521 INVOKEVIRTUAL org/joda/time/LocalTime.withLocalMillis(J)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.setCopy:1521 ARETURN
+org.joda.time.LocalTime$Property.setCopy:1534 ALOAD 0
+org.joda.time.LocalTime$Property.setCopy:1534 ALOAD 1
+org.joda.time.LocalTime$Property.setCopy:1534 INVOKEVIRTUAL org/joda/time/LocalTime$Property.setCopy(Ljava/lang/String;Ljava/util/Locale;)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.setCopy:1534 ARETURN
+org.joda.time.LocalTime$Property.withMaximumValue:1547 ALOAD 0
+org.joda.time.LocalTime$Property.withMaximumValue:1547 ALOAD 0
+org.joda.time.LocalTime$Property.withMaximumValue:1547 INVOKEVIRTUAL org/joda/time/LocalTime$Property.getMaximumValue()I
+org.joda.time.LocalTime$Property.withMaximumValue:1547 INVOKEVIRTUAL org/joda/time/LocalTime$Property.setCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.withMaximumValue:1547 ARETURN
+org.joda.time.LocalTime$Property.withMinimumValue:1559 ALOAD 0
+org.joda.time.LocalTime$Property.withMinimumValue:1559 INVOKEVIRTUAL org/joda/time/LocalTime$Property.getMinimumValue()I
+org.joda.time.LocalTime$Property.withMinimumValue:1559 INVOKEVIRTUAL org/joda/time/LocalTime$Property.setCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.withMinimumValue:1559 ARETURN
+org.joda.time.LocalTime$Property.roundFloorCopy:1574 ALOAD 0
+org.joda.time.LocalTime$Property.roundFloorCopy:1574 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundFloorCopy:1574 ALOAD 0
+org.joda.time.LocalTime$Property.roundFloorCopy:1574 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.roundFloorCopy:1574 ALOAD 0
+org.joda.time.LocalTime$Property.roundFloorCopy:1574 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundFloorCopy:1574 INVOKEVIRTUAL org/joda/time/LocalTime.getLocalMillis()J
+org.joda.time.LocalTime$Property.roundFloorCopy:1574 INVOKEVIRTUAL org/joda/time/DateTimeField.roundFloor(J)J
+org.joda.time.LocalTime$Property.roundFloorCopy:1574 INVOKEVIRTUAL org/joda/time/LocalTime.withLocalMillis(J)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundFloorCopy:1574 ARETURN
+org.joda.time.LocalTime$Property.roundCeilingCopy:1588 ALOAD 0
+org.joda.time.LocalTime$Property.roundCeilingCopy:1588 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundCeilingCopy:1588 ALOAD 0
+org.joda.time.LocalTime$Property.roundCeilingCopy:1588 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.roundCeilingCopy:1588 ALOAD 0
+org.joda.time.LocalTime$Property.roundCeilingCopy:1588 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundCeilingCopy:1588 INVOKEVIRTUAL org/joda/time/LocalTime.getLocalMillis()J
+org.joda.time.LocalTime$Property.roundCeilingCopy:1588 INVOKEVIRTUAL org/joda/time/DateTimeField.roundCeiling(J)J
+org.joda.time.LocalTime$Property.roundCeilingCopy:1588 INVOKEVIRTUAL org/joda/time/LocalTime.withLocalMillis(J)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundCeilingCopy:1588 ARETURN
+org.joda.time.LocalTime$Property.roundHalfFloorCopy:1598 ALOAD 0
+org.joda.time.LocalTime$Property.roundHalfFloorCopy:1598 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundHalfFloorCopy:1598 ALOAD 0
+org.joda.time.LocalTime$Property.roundHalfFloorCopy:1598 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.roundHalfFloorCopy:1598 ALOAD 0
+org.joda.time.LocalTime$Property.roundHalfFloorCopy:1598 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundHalfFloorCopy:1598 INVOKEVIRTUAL org/joda/time/LocalTime.getLocalMillis()J
+org.joda.time.LocalTime$Property.roundHalfFloorCopy:1598 INVOKEVIRTUAL org/joda/time/DateTimeField.roundHalfFloor(J)J
+org.joda.time.LocalTime$Property.roundHalfFloorCopy:1598 INVOKEVIRTUAL org/joda/time/LocalTime.withLocalMillis(J)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundHalfFloorCopy:1598 ARETURN
+org.joda.time.LocalTime$Property.roundHalfCeilingCopy:1608 ALOAD 0
+org.joda.time.LocalTime$Property.roundHalfCeilingCopy:1608 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundHalfCeilingCopy:1608 ALOAD 0
+org.joda.time.LocalTime$Property.roundHalfCeilingCopy:1608 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.roundHalfCeilingCopy:1608 ALOAD 0
+org.joda.time.LocalTime$Property.roundHalfCeilingCopy:1608 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundHalfCeilingCopy:1608 INVOKEVIRTUAL org/joda/time/LocalTime.getLocalMillis()J
+org.joda.time.LocalTime$Property.roundHalfCeilingCopy:1608 INVOKEVIRTUAL org/joda/time/DateTimeField.roundHalfCeiling(J)J
+org.joda.time.LocalTime$Property.roundHalfCeilingCopy:1608 INVOKEVIRTUAL org/joda/time/LocalTime.withLocalMillis(J)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundHalfCeilingCopy:1608 ARETURN
+org.joda.time.LocalTime$Property.roundHalfEvenCopy:1619 ALOAD 0
+org.joda.time.LocalTime$Property.roundHalfEvenCopy:1619 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundHalfEvenCopy:1619 ALOAD 0
+org.joda.time.LocalTime$Property.roundHalfEvenCopy:1619 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.roundHalfEvenCopy:1619 ALOAD 0
+org.joda.time.LocalTime$Property.roundHalfEvenCopy:1619 GETFIELD org/joda/time/LocalTime$Property.iInstant Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundHalfEvenCopy:1619 INVOKEVIRTUAL org/joda/time/LocalTime.getLocalMillis()J
+org.joda.time.LocalTime$Property.roundHalfEvenCopy:1619 INVOKEVIRTUAL org/joda/time/DateTimeField.roundHalfEven(J)J
+org.joda.time.LocalTime$Property.roundHalfEvenCopy:1619 INVOKEVIRTUAL org/joda/time/LocalTime.withLocalMillis(J)Lorg/joda/time/LocalTime;
+org.joda.time.LocalTime$Property.roundHalfEvenCopy:1619 ARETURN
+org.joda.time.TestLocalTime_Properties.main:56 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyRoundHour()V
+org.joda.time.TestLocalTime_Properties.main:58 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyWithMaxMinValueHour()V
+org.joda.time.TestLocalTime_Properties.main:59 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusHour()V
+org.joda.time.TestLocalTime_Properties.main:60 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusNoWrapHour()V
+org.joda.time.TestLocalTime_Properties.main:61 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusWrapFieldHour()V
+org.joda.time.TestLocalTime_Properties.main:62 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertySetHour()V
+org.joda.time.TestLocalTime_Properties.main:63 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertySetTextHour()V
+org.joda.time.TestLocalTime_Properties.main:64 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyWithMaximumValueHour()V
+org.joda.time.TestLocalTime_Properties.main:65 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyWithMinimumValueHour()V
+org.joda.time.TestLocalTime_Properties.main:69 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyWithMaxMinValueMinute()V
+org.joda.time.TestLocalTime_Properties.main:70 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusMinute()V
+org.joda.time.TestLocalTime_Properties.main:71 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusNoWrapMinute()V
+org.joda.time.TestLocalTime_Properties.main:72 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusWrapFieldMinute()V
+org.joda.time.TestLocalTime_Properties.main:73 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertySetMinute()V
+org.joda.time.TestLocalTime_Properties.main:74 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertySetTextMinute()V
+org.joda.time.TestLocalTime_Properties.main:78 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyWithMaxMinValueSecond()V
+org.joda.time.TestLocalTime_Properties.main:79 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusSecond()V
+org.joda.time.TestLocalTime_Properties.main:80 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusNoWrapSecond()V
+org.joda.time.TestLocalTime_Properties.main:81 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusWrapFieldSecond()V
+org.joda.time.TestLocalTime_Properties.main:82 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertySetSecond()V
+org.joda.time.TestLocalTime_Properties.main:83 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertySetTextSecond()V
+org.joda.time.TestLocalTime_Properties.main:87 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyWithMaxMinValueMilli()V
+org.joda.time.TestLocalTime_Properties.main:88 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusMilli()V
+org.joda.time.TestLocalTime_Properties.main:89 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusNoWrapMilli()V
+org.joda.time.TestLocalTime_Properties.main:90 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyPlusWrapFieldMilli()V
+org.joda.time.TestLocalTime_Properties.main:91 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertySetMilli()V
+org.joda.time.TestLocalTime_Properties.main:92 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertySetTextMilli()V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:140 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:140 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:140 INVOKESPECIAL org/joda/time/LocalTime.<init>(II)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:140 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:141 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:141 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:141 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundCeilingCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:141 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:141 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:142 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:142 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:142 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundFloorCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:142 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:142 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:143 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:143 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:143 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfCeilingCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:143 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:143 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:144 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:144 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:144 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfFloorCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:144 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:144 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:145 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:145 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:145 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfEvenCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:145 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:145 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:147 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:147 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:147 INVOKESPECIAL org/joda/time/LocalTime.<init>(II)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:147 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:148 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:148 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:148 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundCeilingCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:148 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:148 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:149 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:149 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:149 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundFloorCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:149 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:149 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:150 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:150 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:150 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfCeilingCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:150 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:150 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:151 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:151 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:151 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfFloorCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:151 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:151 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:152 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:152 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:152 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfEvenCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:152 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:152 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:154 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:154 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:154 INVOKESPECIAL org/joda/time/LocalTime.<init>(II)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:154 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:155 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:155 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:155 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundCeilingCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:155 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:155 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:156 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:156 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:156 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundFloorCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:156 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:156 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:157 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:157 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:157 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfCeilingCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:157 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:157 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:158 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:158 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:158 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfFloorCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:158 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:158 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:159 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:159 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:159 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfEvenCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:159 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:159 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:161 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:161 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:161 INVOKESPECIAL org/joda/time/LocalTime.<init>(II)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:161 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:162 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:162 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:162 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundCeilingCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:162 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:162 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:163 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:163 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:163 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundFloorCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:163 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:163 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:164 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:164 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:164 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfCeilingCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:164 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:164 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:165 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:165 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:165 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfFloorCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:165 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:165 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:166 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:166 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:166 INVOKEVIRTUAL org/joda/time/LocalTime$Property.roundHalfEvenCopy()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:166 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyRoundHour:166 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:178 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:178 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:178 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:178 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:179 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:179 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:179 INVOKEVIRTUAL org/joda/time/LocalTime$Property.withMaximumValue()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:179 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:179 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:180 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:180 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:180 INVOKEVIRTUAL org/joda/time/LocalTime$Property.withMinimumValue()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:180 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueHour:180 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:184 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:184 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:184 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:184 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:185 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:185 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:185 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:185 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:186 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:186 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:186 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:187 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:187 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:187 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:189 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:189 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:189 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:189 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:190 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:190 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:190 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:192 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:192 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:192 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:192 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:193 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:193 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:193 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:195 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:195 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:195 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:195 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:196 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:196 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:196 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:198 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:198 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:198 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:198 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:199 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:199 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:199 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:201 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:201 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:201 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:201 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:202 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:202 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusHour:202 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:206 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:206 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:206 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:206 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:207 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:207 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:207 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:207 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:208 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:208 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:208 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:209 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:209 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:209 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:211 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:211 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:211 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:211 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:212 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:212 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:212 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:214 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:214 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:214 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:214 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:215 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:215 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:215 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:221 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:221 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:221 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:223 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:223 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:223 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:223 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:224 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:224 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:224 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:230 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:230 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapHour:230 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:234 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:234 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:234 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:234 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:235 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:235 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:235 BIPUSH 9
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:235 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:235 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:236 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:236 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:236 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:237 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:237 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:237 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:239 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:239 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:239 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:239 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:239 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:240 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:240 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:240 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:242 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:242 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:242 BIPUSH 18
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:242 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:242 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:243 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:243 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:243 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:245 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:245 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:245 BIPUSH -15
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:245 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:245 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:246 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:246 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldHour:246 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:250 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:250 DUP
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:250 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:250 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:251 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:251 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:251 BIPUSH 12
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:251 INVOKEVIRTUAL org/joda/time/LocalTime$Property.setCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:251 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:252 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:252 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:252 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:253 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:253 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetHour:253 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:266 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:266 DUP
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:266 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:266 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:267 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:267 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:267 LDC "12"
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:267 INVOKEVIRTUAL org/joda/time/LocalTime$Property.setCopy(Ljava/lang/String;)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:267 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:268 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:268 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:268 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:269 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:269 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetTextHour:269 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:273 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:273 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:273 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:273 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:274 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:274 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:274 INVOKEVIRTUAL org/joda/time/LocalTime$Property.withMaximumValue()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:274 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:275 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:275 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:275 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:276 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:276 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaximumValueHour:276 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:280 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:280 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:280 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:280 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:281 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:281 INVOKEVIRTUAL org/joda/time/LocalTime.hourOfDay()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:281 INVOKEVIRTUAL org/joda/time/LocalTime$Property.withMinimumValue()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:281 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:282 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:282 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:282 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:283 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:283 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyWithMinimumValueHour:283 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:336 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:336 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:336 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:336 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:337 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:337 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:337 INVOKEVIRTUAL org/joda/time/LocalTime$Property.withMaximumValue()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:337 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:337 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:338 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:338 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:338 INVOKEVIRTUAL org/joda/time/LocalTime$Property.withMinimumValue()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:338 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMinute:338 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:342 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:342 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:342 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:342 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:343 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:343 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:343 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:343 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:344 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:344 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:344 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:345 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:345 BIPUSH 29
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:345 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:347 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:347 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:347 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:347 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:348 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:348 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:348 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:350 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:350 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:350 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:350 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:351 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:351 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:351 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:353 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:353 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:353 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:353 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:354 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:354 ICONST_5
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:354 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:356 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:356 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:356 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:356 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:357 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:357 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:357 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:359 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:359 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:359 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:359 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:360 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:360 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:360 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:362 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:362 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:362 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:362 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:363 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:363 BIPUSH 11
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:363 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:365 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:365 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:365 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:365 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:366 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:366 ICONST_1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:366 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:368 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:368 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:368 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:368 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:369 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:369 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:369 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:371 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:371 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:371 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:371 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:372 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:372 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:372 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:374 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:374 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:374 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:374 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:375 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:375 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:375 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:377 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:377 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:377 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:377 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:378 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:378 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMinute:378 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:382 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:382 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:382 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:382 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:383 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:383 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:383 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:383 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:384 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:384 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:384 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:385 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:385 BIPUSH 29
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:385 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:387 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:387 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:387 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:387 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:388 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:388 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:388 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:390 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:390 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:390 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:390 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:391 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:391 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:391 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:393 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:393 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:393 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:393 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:394 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:394 ICONST_5
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:394 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:396 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:396 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:396 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:396 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:397 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:397 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:397 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:403 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:403 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:403 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:405 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:405 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:405 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:405 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:406 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:406 BIPUSH 11
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:406 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:408 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:408 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:408 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:408 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:409 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:409 ICONST_1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:409 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:411 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:411 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:411 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:411 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:412 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:412 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:412 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:414 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:414 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:414 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:414 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:415 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:415 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:415 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:417 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:417 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:417 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:417 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:418 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:418 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:418 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:424 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:424 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMinute:424 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:428 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:428 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:428 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:428 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:429 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:429 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:429 BIPUSH 9
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:429 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:429 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:430 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:430 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:430 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:431 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:431 BIPUSH 29
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:431 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:433 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:433 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:433 BIPUSH 49
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:433 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:433 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:434 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:434 BIPUSH 9
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:434 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:436 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:436 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:436 BIPUSH -47
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:436 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:436 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:437 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:437 BIPUSH 33
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMinute:437 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:441 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:441 DUP
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:441 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:441 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:442 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:442 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:442 BIPUSH 12
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:442 INVOKEVIRTUAL org/joda/time/LocalTime$Property.setCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:442 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:443 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:443 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:443 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:444 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:444 BIPUSH 12
+org.joda.time.TestLocalTime_Properties.testPropertySetMinute:444 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:457 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:457 DUP
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:457 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:457 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:458 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:458 INVOKEVIRTUAL org/joda/time/LocalTime.minuteOfHour()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:458 LDC "12"
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:458 INVOKEVIRTUAL org/joda/time/LocalTime$Property.setCopy(Ljava/lang/String;)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:458 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:459 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:459 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:459 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:460 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:460 BIPUSH 12
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMinute:460 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:513 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:513 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:513 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:513 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:514 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:514 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:514 INVOKEVIRTUAL org/joda/time/LocalTime$Property.withMaximumValue()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:514 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:514 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:515 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:515 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:515 INVOKEVIRTUAL org/joda/time/LocalTime$Property.withMinimumValue()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:515 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueSecond:515 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:519 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:519 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:519 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:519 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:520 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:520 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:520 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:520 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:521 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:521 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:521 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:522 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:522 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:522 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:524 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:524 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:524 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:524 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:525 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:525 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:525 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:527 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:527 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:527 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:527 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:528 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:528 BIPUSH 21
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:528 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:530 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:530 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:530 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:530 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:531 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:531 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:531 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:533 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:533 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:533 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:533 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:534 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:534 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:534 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:536 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:536 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:536 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:536 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:537 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:537 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:537 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:539 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:539 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:539 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:539 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:540 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:540 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:540 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:542 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:542 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:542 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:542 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:543 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:543 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:543 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:545 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:545 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:545 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:545 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:546 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:546 BIPUSH 19
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:546 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:548 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:548 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:548 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:548 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:549 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:549 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:549 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:551 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:551 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:551 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:551 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:552 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:552 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusSecond:552 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:556 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:556 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:556 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:556 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:557 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:557 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:557 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:557 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:558 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:558 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:558 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:559 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:559 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:559 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:561 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:561 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:561 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:561 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:562 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:562 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:562 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:564 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:564 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:564 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:564 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:565 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:565 BIPUSH 21
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:565 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:567 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:567 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:567 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:567 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:568 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:568 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:568 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:570 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:570 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:570 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:570 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:571 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:571 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:571 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:577 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:577 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:577 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:579 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:579 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:579 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:579 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:580 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:580 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:580 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:582 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:582 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:582 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:582 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:583 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:583 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:583 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:585 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:585 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:585 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:585 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:586 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:586 BIPUSH 19
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:586 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:588 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:588 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:588 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:588 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:589 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:589 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:589 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:595 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:595 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapSecond:595 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:599 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:599 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:599 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:599 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:600 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:600 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:600 BIPUSH 9
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:600 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:600 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:601 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:601 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:601 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:602 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:602 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:602 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:604 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:604 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:604 BIPUSH 49
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:604 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:604 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:605 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:605 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:605 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:607 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:607 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:607 BIPUSH -47
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:607 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:607 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:608 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:608 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldSecond:608 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:612 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:612 DUP
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:612 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:612 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:613 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:613 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:613 BIPUSH 12
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:613 INVOKEVIRTUAL org/joda/time/LocalTime$Property.setCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:613 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:614 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:614 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:614 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:615 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:615 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetSecond:615 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:628 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:628 DUP
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:628 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:628 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:629 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:629 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:629 LDC "12"
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:629 INVOKEVIRTUAL org/joda/time/LocalTime$Property.setCopy(Ljava/lang/String;)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:629 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:630 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:630 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:630 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:631 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:631 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetTextSecond:631 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:684 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:684 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:684 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:684 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:685 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:685 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:685 INVOKEVIRTUAL org/joda/time/LocalTime$Property.withMaximumValue()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:685 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:685 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:686 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:686 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:686 INVOKEVIRTUAL org/joda/time/LocalTime$Property.withMinimumValue()Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:686 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyWithMaxMinValueMilli:686 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:690 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:690 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:690 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:690 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:691 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:691 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:691 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:691 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:692 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:692 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:692 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:693 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:693 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:693 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:695 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:695 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:695 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:695 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:696 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:696 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:696 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:698 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:698 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:698 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:698 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:699 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:699 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:699 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:701 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:701 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:701 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:701 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:702 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:702 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:702 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:704 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:704 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:704 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:704 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:705 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:705 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:705 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:707 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:707 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:707 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:707 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:708 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:708 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:708 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:710 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:710 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:710 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:710 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:711 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:711 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:711 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:713 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:713 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:713 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:713 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:714 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:714 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:714 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:716 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:716 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:716 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:716 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:717 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:717 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:717 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:719 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:719 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:719 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:719 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:720 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:720 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusMilli:720 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:724 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:724 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:724 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:724 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:725 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:725 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:725 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:725 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:726 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:726 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:726 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:727 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:727 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:727 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:729 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:729 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:729 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:729 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:730 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:730 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:730 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:732 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:732 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:732 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:732 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:733 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:733 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:733 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:735 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:735 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:735 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:735 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:736 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:736 BIPUSH 59
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:736 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:742 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:742 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:742 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:744 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:744 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:744 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:744 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:745 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:745 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:745 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:747 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:747 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:747 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:747 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:748 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:748 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:748 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:750 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:750 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:750 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:750 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:751 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:751 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:751 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:753 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:753 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:753 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addNoWrapToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:753 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:754 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:754 ICONST_0
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:754 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:760 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:760 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusNoWrapMilli:760 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:764 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:764 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:764 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:764 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:765 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:765 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:765 BIPUSH 9
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:765 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:765 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:766 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:766 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:766 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:767 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:767 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:767 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:769 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:769 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:769 SIPUSH 995
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:769 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:769 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:770 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:770 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:770 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:772 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:772 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:772 BIPUSH -47
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:772 INVOKEVIRTUAL org/joda/time/LocalTime$Property.addWrapFieldToCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:772 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:773 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:773 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertyPlusWrapFieldMilli:773 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:777 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:777 DUP
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:777 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:777 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:778 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:778 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:778 BIPUSH 12
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:778 INVOKEVIRTUAL org/joda/time/LocalTime$Property.setCopy(I)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:778 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:779 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:779 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:779 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:780 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:780 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetMilli:780 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:793 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:793 DUP
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:793 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:793 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:794 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:794 INVOKEVIRTUAL org/joda/time/LocalTime.millisOfSecond()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:794 LDC "12"
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:794 INVOKEVIRTUAL org/joda/time/LocalTime$Property.setCopy(Ljava/lang/String;)Lorg/joda/time/LocalTime;
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:794 ASTORE 2
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:795 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:795 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:795 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:796 ALOAD 2
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:796 BIPUSH 20
+org.joda.time.TestLocalTime_Properties.testPropertySetTextMilli:796 INVOKESPECIAL org/joda/time/TestLocalTime_Properties.check(Lorg/joda/time/LocalTime;IIII)V
+org.joda.time.TestLocalTime_Properties.check:824 ILOAD 3
+org.joda.time.TestLocalTime_Properties.check:824 I2L
+org.joda.time.TestLocalTime_Properties.check:824 ALOAD 1
+org.joda.time.TestLocalTime_Properties.check:824 INVOKEVIRTUAL org/joda/time/LocalTime.getMinuteOfHour()I
+org.joda.time.TestLocalTime_Properties.check:824 I2L
+org.joda.time.TestLocalTime_Properties.check:824 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.chrono.AssembledChronology.getZone:107 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getZone:107 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getZone:107 DUP
+org.joda.time.chrono.AssembledChronology.getZone:107 ASTORE 1
+org.joda.time.chrono.AssembledChronology.getZone:107 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getZone:108 ALOAD 1
+org.joda.time.chrono.AssembledChronology.getZone:108 ARETURN
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 DUP
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ASTORE 7
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 GETFIELD org/joda/time/chrono/AssembledChronology.iBaseFlags I
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ICONST_1
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 IAND
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ICONST_1
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 IF_ICMPNE L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:148 ALOAD 7
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:148 LRETURN
+org.joda.time.chrono.AssembledChronology.millisOfSecond:160 ALOAD 0
+org.joda.time.chrono.AssembledChronology.millisOfSecond:160 GETFIELD org/joda/time/chrono/AssembledChronology.iMillisOfSecond Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.millisOfSecond:160 ARETURN
+org.joda.time.chrono.AssembledChronology.millisOfDay:164 ALOAD 0
+org.joda.time.chrono.AssembledChronology.millisOfDay:164 GETFIELD org/joda/time/chrono/AssembledChronology.iMillisOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.millisOfDay:164 ARETURN
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 ALOAD 0
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 GETFIELD org/joda/time/chrono/AssembledChronology.iSecondOfMinute Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 ARETURN
+org.joda.time.chrono.AssembledChronology.minuteOfHour:184 ALOAD 0
+org.joda.time.chrono.AssembledChronology.minuteOfHour:184 GETFIELD org/joda/time/chrono/AssembledChronology.iMinuteOfHour Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.minuteOfHour:184 ARETURN
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 ALOAD 0
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 GETFIELD org/joda/time/chrono/AssembledChronology.iHourOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 ARETURN
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+org.joda.time.field.AbstractReadableInstantFieldProperty.getMinimumValue:303 INVOKEVIRTUAL org/joda/time/DateTimeField.getMinimumValue(J)I
+org.joda.time.field.AbstractReadableInstantFieldProperty.getMinimumValue:303 IRETURN
+org.joda.time.field.AbstractReadableInstantFieldProperty.getMaximumValue:323 ALOAD 0
+org.joda.time.field.AbstractReadableInstantFieldProperty.getMaximumValue:323 INVOKEVIRTUAL org/joda/time/field/AbstractReadableInstantFieldProperty.getField()Lorg/joda/time/DateTimeField;
+org.joda.time.field.AbstractReadableInstantFieldProperty.getMaximumValue:323 INVOKEVIRTUAL org/joda/time/DateTimeField.getMaximumValue(J)I
+org.joda.time.field.AbstractReadableInstantFieldProperty.getMaximumValue:323 IRETURN
+org.joda.time.field.BaseDateTimeField.add:253 ALOAD 0
+org.joda.time.field.BaseDateTimeField.add:253 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.getDurationField()Lorg/joda/time/DurationField;
+org.joda.time.field.BaseDateTimeField.add:253 LRETURN
+org.joda.time.field.BaseDateTimeField.set:618 ALOAD 3
+org.joda.time.field.BaseDateTimeField.set:618 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.convertText(Ljava/lang/String;Ljava/util/Locale;)I
+org.joda.time.field.BaseDateTimeField.set:618 ISTORE 5
+org.joda.time.field.BaseDateTimeField.set:619 ALOAD 0
+org.joda.time.field.BaseDateTimeField.set:619 LLOAD 1
+org.joda.time.field.BaseDateTimeField.set:619 ILOAD 5
+org.joda.time.field.BaseDateTimeField.set:619 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.set(JI)J
+org.joda.time.field.BaseDateTimeField.set:619 LRETURN
+org.joda.time.field.BaseDateTimeField.convertText:668 ALOAD 1
+org.joda.time.field.BaseDateTimeField.convertText:668 INVOKESTATIC java/lang/Integer.parseInt(Ljava/lang/String;)I
+org.joda.time.field.BaseDateTimeField.convertText:668 IRETURN
+org.joda.time.field.BaseDateTimeField.getMinimumValue:746 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.getMinimumValue()I
+org.joda.time.field.BaseDateTimeField.getMinimumValue:746 IRETURN
+org.joda.time.field.BaseDateTimeField.getMaximumValue:792 ALOAD 0
+org.joda.time.field.BaseDateTimeField.getMaximumValue:792 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.getMaximumValue()I
+org.joda.time.field.BaseDateTimeField.getMaximumValue:792 IRETURN
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:903 ALOAD 0
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:903 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:903 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.roundFloor(J)J
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:903 LSTORE 3
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:904 ALOAD 0
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:904 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:904 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.roundCeiling(J)J
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:904 LSTORE 5
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:906 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:906 LLOAD 3
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:906 LSUB
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:906 LSTORE 7
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:907 LLOAD 5
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:907 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:907 LSUB
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:907 LSTORE 9
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:909 LLOAD 7
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:909 LLOAD 9
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:909 LCMP
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:909 IFGT L0 true true
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:911 LLOAD 3
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:911 LRETURN
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:913 LLOAD 5
+org.joda.time.field.BaseDateTimeField.roundHalfFloor:913 LRETURN
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:927 ALOAD 0
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:927 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:927 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.roundFloor(J)J
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:927 LSTORE 3
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:928 ALOAD 0
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:928 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:928 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.roundCeiling(J)J
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:928 LSTORE 5
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:930 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:930 LLOAD 3
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:930 LSUB
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:930 LSTORE 7
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:931 LLOAD 5
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:931 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:931 LSUB
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:931 LSTORE 9
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:933 LLOAD 9
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:933 LLOAD 7
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:933 LCMP
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:933 IFGT L0 true true
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:935 LLOAD 5
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:935 LRETURN
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:937 LLOAD 3
+org.joda.time.field.BaseDateTimeField.roundHalfCeiling:937 LRETURN
+org.joda.time.field.BaseDateTimeField.roundHalfEven:955 ALOAD 0
+org.joda.time.field.BaseDateTimeField.roundHalfEven:955 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfEven:955 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.roundFloor(J)J
+org.joda.time.field.BaseDateTimeField.roundHalfEven:955 LSTORE 3
+org.joda.time.field.BaseDateTimeField.roundHalfEven:956 ALOAD 0
+org.joda.time.field.BaseDateTimeField.roundHalfEven:956 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfEven:956 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.roundCeiling(J)J
+org.joda.time.field.BaseDateTimeField.roundHalfEven:956 LSTORE 5
+org.joda.time.field.BaseDateTimeField.roundHalfEven:958 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfEven:958 LLOAD 3
+org.joda.time.field.BaseDateTimeField.roundHalfEven:958 LSUB
+org.joda.time.field.BaseDateTimeField.roundHalfEven:958 LSTORE 7
+org.joda.time.field.BaseDateTimeField.roundHalfEven:959 LLOAD 5
+org.joda.time.field.BaseDateTimeField.roundHalfEven:959 LLOAD 1
+org.joda.time.field.BaseDateTimeField.roundHalfEven:959 LSUB
+org.joda.time.field.BaseDateTimeField.roundHalfEven:959 LSTORE 9
+org.joda.time.field.BaseDateTimeField.roundHalfEven:961 LLOAD 7
+org.joda.time.field.BaseDateTimeField.roundHalfEven:961 LLOAD 9
+org.joda.time.field.BaseDateTimeField.roundHalfEven:961 LCMP
+org.joda.time.field.BaseDateTimeField.roundHalfEven:961 IFGE L0 true true
+org.joda.time.field.BaseDateTimeField.roundHalfEven:963 LLOAD 3
+org.joda.time.field.BaseDateTimeField.roundHalfEven:963 LRETURN
+org.joda.time.field.BaseDateTimeField.roundHalfEven:964 LLOAD 9
+org.joda.time.field.BaseDateTimeField.roundHalfEven:964 LLOAD 7
+org.joda.time.field.BaseDateTimeField.roundHalfEven:964 LCMP
+org.joda.time.field.BaseDateTimeField.roundHalfEven:964 IFGE L1 true true
+org.joda.time.field.BaseDateTimeField.roundHalfEven:966 LLOAD 5
+org.joda.time.field.BaseDateTimeField.roundHalfEven:966 LRETURN
+org.joda.time.field.BaseDateTimeField.roundHalfEven:970 ALOAD 0
+org.joda.time.field.BaseDateTimeField.roundHalfEven:970 LLOAD 5
+org.joda.time.field.BaseDateTimeField.roundHalfEven:970 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.get(J)I
+org.joda.time.field.BaseDateTimeField.roundHalfEven:970 ICONST_1
+org.joda.time.field.BaseDateTimeField.roundHalfEven:970 IAND
+org.joda.time.field.BaseDateTimeField.roundHalfEven:970 IFNE L2 true true
+org.joda.time.field.BaseDateTimeField.roundHalfEven:971 LLOAD 5
+org.joda.time.field.BaseDateTimeField.roundHalfEven:971 LRETURN
+org.joda.time.field.BaseDateTimeField.roundHalfEven:973 LLOAD 3
+org.joda.time.field.BaseDateTimeField.roundHalfEven:973 LRETURN
+org.joda.time.field.FieldUtils.getWrappedValue:315 ILOAD 0
+org.joda.time.field.FieldUtils.getWrappedValue:315 ILOAD 1
+org.joda.time.field.FieldUtils.getWrappedValue:315 IADD
+org.joda.time.field.FieldUtils.getWrappedValue:315 ILOAD 2
+org.joda.time.field.FieldUtils.getWrappedValue:315 ILOAD 3
+org.joda.time.field.FieldUtils.getWrappedValue:315 INVOKESTATIC org/joda/time/field/FieldUtils.getWrappedValue(III)I
+org.joda.time.field.FieldUtils.getWrappedValue:315 IRETURN
+org.joda.time.field.FieldUtils.getWrappedValue:335 ILOAD 2
+org.joda.time.field.FieldUtils.getWrappedValue:335 ILOAD 1
+org.joda.time.field.FieldUtils.getWrappedValue:335 ISUB
+org.joda.time.field.FieldUtils.getWrappedValue:335 ICONST_1
+org.joda.time.field.FieldUtils.getWrappedValue:335 IADD
+org.joda.time.field.FieldUtils.getWrappedValue:335 ISTORE 3
+org.joda.time.field.FieldUtils.getWrappedValue:336 ILOAD 0
+org.joda.time.field.FieldUtils.getWrappedValue:336 ILOAD 1
+org.joda.time.field.FieldUtils.getWrappedValue:336 ISUB
+org.joda.time.field.FieldUtils.getWrappedValue:336 ISTORE 0
+org.joda.time.field.FieldUtils.getWrappedValue:338 ILOAD 0
+org.joda.time.field.FieldUtils.getWrappedValue:338 IFLT L1 true true
+org.joda.time.field.FieldUtils.getWrappedValue:339 ILOAD 0
+org.joda.time.field.FieldUtils.getWrappedValue:339 ILOAD 3
+org.joda.time.field.FieldUtils.getWrappedValue:339 IREM
+org.joda.time.field.FieldUtils.getWrappedValue:339 ILOAD 1
+org.joda.time.field.FieldUtils.getWrappedValue:339 IADD
+org.joda.time.field.FieldUtils.getWrappedValue:339 IRETURN
+org.joda.time.field.FieldUtils.getWrappedValue:342 ILOAD 0
+org.joda.time.field.FieldUtils.getWrappedValue:342 INEG
+org.joda.time.field.FieldUtils.getWrappedValue:342 ILOAD 3
+org.joda.time.field.FieldUtils.getWrappedValue:342 IREM
+org.joda.time.field.FieldUtils.getWrappedValue:342 ISTORE 4
+org.joda.time.field.FieldUtils.getWrappedValue:344 ILOAD 4
+org.joda.time.field.FieldUtils.getWrappedValue:344 IFNE L2 true false
+org.joda.time.field.FieldUtils.getWrappedValue:347 ILOAD 3
+org.joda.time.field.FieldUtils.getWrappedValue:347 ILOAD 4
+org.joda.time.field.FieldUtils.getWrappedValue:347 ISUB
+org.joda.time.field.FieldUtils.getWrappedValue:347 ILOAD 1
+org.joda.time.field.FieldUtils.getWrappedValue:347 IADD
+org.joda.time.field.FieldUtils.getWrappedValue:347 IRETURN
+org.joda.time.field.PreciseDateTimeField.get:80 LLOAD 1
+org.joda.time.field.PreciseDateTimeField.get:80 LCONST_0
+org.joda.time.field.PreciseDateTimeField.get:80 LCMP
+org.joda.time.field.PreciseDateTimeField.get:80 IFLT L0 true true
+org.joda.time.field.PreciseDateTimeField.get:81 LLOAD 1
+org.joda.time.field.PreciseDateTimeField.get:81 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.get:81 INVOKEVIRTUAL org/joda/time/field/PreciseDateTimeField.getUnitMillis()J
+org.joda.time.field.PreciseDateTimeField.get:81 LDIV
+org.joda.time.field.PreciseDateTimeField.get:81 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.get:81 GETFIELD org/joda/time/field/PreciseDateTimeField.iRange I
+org.joda.time.field.PreciseDateTimeField.get:81 I2L
+org.joda.time.field.PreciseDateTimeField.get:81 LREM
+org.joda.time.field.PreciseDateTimeField.get:81 L2I
+org.joda.time.field.PreciseDateTimeField.get:81 IRETURN
+org.joda.time.field.PreciseDateTimeField.get:83 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.get:83 GETFIELD org/joda/time/field/PreciseDateTimeField.iRange I
+org.joda.time.field.PreciseDateTimeField.get:83 ICONST_1
+org.joda.time.field.PreciseDateTimeField.get:83 ISUB
+org.joda.time.field.PreciseDateTimeField.get:83 LLOAD 1
+org.joda.time.field.PreciseDateTimeField.get:83 LCONST_1
+org.joda.time.field.PreciseDateTimeField.get:83 LADD
+org.joda.time.field.PreciseDateTimeField.get:83 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.get:83 INVOKEVIRTUAL org/joda/time/field/PreciseDateTimeField.getUnitMillis()J
+org.joda.time.field.PreciseDateTimeField.get:83 LDIV
+org.joda.time.field.PreciseDateTimeField.get:83 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.get:83 GETFIELD org/joda/time/field/PreciseDateTimeField.iRange I
+org.joda.time.field.PreciseDateTimeField.get:83 I2L
+org.joda.time.field.PreciseDateTimeField.get:83 LREM
+org.joda.time.field.PreciseDateTimeField.get:83 L2I
+org.joda.time.field.PreciseDateTimeField.get:83 IADD
+org.joda.time.field.PreciseDateTimeField.get:83 IRETURN
+org.joda.time.field.PreciseDateTimeField.addWrapField:96 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.addWrapField:96 LLOAD 1
+org.joda.time.field.PreciseDateTimeField.addWrapField:96 INVOKEVIRTUAL org/joda/time/field/PreciseDateTimeField.get(J)I
+org.joda.time.field.PreciseDateTimeField.addWrapField:96 ISTORE 4
+org.joda.time.field.PreciseDateTimeField.addWrapField:97 ILOAD 4
+org.joda.time.field.PreciseDateTimeField.addWrapField:97 ILOAD 3
+org.joda.time.field.PreciseDateTimeField.addWrapField:97 INVOKEVIRTUAL org/joda/time/field/PreciseDateTimeField.getMinimumValue()I
+org.joda.time.field.PreciseDateTimeField.addWrapField:97 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.addWrapField:97 INVOKEVIRTUAL org/joda/time/field/PreciseDateTimeField.getMaximumValue()I
+org.joda.time.field.PreciseDateTimeField.addWrapField:97 INVOKESTATIC org/joda/time/field/FieldUtils.getWrappedValue(IIII)I
+org.joda.time.field.PreciseDateTimeField.addWrapField:97 ISTORE 5
+org.joda.time.field.PreciseDateTimeField.addWrapField:100 LLOAD 1
+org.joda.time.field.PreciseDateTimeField.addWrapField:100 ILOAD 5
+org.joda.time.field.PreciseDateTimeField.addWrapField:100 ILOAD 4
+org.joda.time.field.PreciseDateTimeField.addWrapField:100 ISUB
+org.joda.time.field.PreciseDateTimeField.addWrapField:100 I2L
+org.joda.time.field.PreciseDateTimeField.addWrapField:100 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.addWrapField:100 INVOKEVIRTUAL org/joda/time/field/PreciseDateTimeField.getUnitMillis()J
+org.joda.time.field.PreciseDateTimeField.addWrapField:100 LMUL
+org.joda.time.field.PreciseDateTimeField.addWrapField:100 LADD
+org.joda.time.field.PreciseDateTimeField.addWrapField:100 LRETURN
+org.joda.time.field.PreciseDateTimeField.set:113 LLOAD 1
+org.joda.time.field.PreciseDateTimeField.set:113 ILOAD 3
+org.joda.time.field.PreciseDateTimeField.set:113 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.set:113 LLOAD 1
+org.joda.time.field.PreciseDateTimeField.set:113 INVOKEVIRTUAL org/joda/time/field/PreciseDateTimeField.get(J)I
+org.joda.time.field.PreciseDateTimeField.set:113 ISUB
+org.joda.time.field.PreciseDateTimeField.set:113 I2L
+org.joda.time.field.PreciseDateTimeField.set:113 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.set:113 GETFIELD org/joda/time/field/PreciseDateTimeField.iUnitMillis J
+org.joda.time.field.PreciseDateTimeField.set:113 LMUL
+org.joda.time.field.PreciseDateTimeField.set:113 LADD
+org.joda.time.field.PreciseDateTimeField.set:113 LRETURN
+org.joda.time.field.PreciseDateTimeField.getMaximumValue:132 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.getMaximumValue:132 GETFIELD org/joda/time/field/PreciseDateTimeField.iRange I
+org.joda.time.field.PreciseDateTimeField.getMaximumValue:132 ICONST_1
+org.joda.time.field.PreciseDateTimeField.getMaximumValue:132 ISUB
+org.joda.time.field.PreciseDateTimeField.getMaximumValue:132 IRETURN
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:93 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:93 LCONST_0
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:93 LCMP
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:93 IFLT L0 false true
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 ALOAD 0
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 GETFIELD org/joda/time/field/PreciseDurationDateTimeField.iUnitMillis J
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 LREM
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 LSUB
+org.joda.time.field.PreciseDurationDateTimeField.roundFloor:94 LRETURN
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:110 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:110 LCONST_0
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:110 LCMP
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:110 IFLE L0 false true
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:111 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:111 LCONST_1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:111 LSUB
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:111 LSTORE 1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LLOAD 1
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 ALOAD 0
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 GETFIELD org/joda/time/field/PreciseDurationDateTimeField.iUnitMillis J
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LREM
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LSUB
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 ALOAD 0
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 GETFIELD org/joda/time/field/PreciseDurationDateTimeField.iUnitMillis J
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LADD
+org.joda.time.field.PreciseDurationDateTimeField.roundCeiling:112 LRETURN
+org.joda.time.field.PreciseDurationDateTimeField.getDurationField:142 ALOAD 0
+org.joda.time.field.PreciseDurationDateTimeField.getDurationField:142 GETFIELD org/joda/time/field/PreciseDurationDateTimeField.iUnitField Lorg/joda/time/DurationField;
+org.joda.time.field.PreciseDurationDateTimeField.getDurationField:142 ARETURN
+org.joda.time.field.PreciseDurationDateTimeField.getMinimumValue:151 ICONST_0
+org.joda.time.field.PreciseDurationDateTimeField.getMinimumValue:151 IRETURN
+org.joda.time.field.PreciseDurationDateTimeField.getUnitMillis:155 ALOAD 0
+org.joda.time.field.PreciseDurationDateTimeField.getUnitMillis:155 GETFIELD org/joda/time/field/PreciseDurationDateTimeField.iUnitMillis J
+org.joda.time.field.PreciseDurationDateTimeField.getUnitMillis:155 LRETURN
+
+Slice consists of 1620 bytecode instructions.
+Computation took 3.71 seconds.

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImpreciseDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">ImpreciseDateTimeField.java</span></div><h1>ImpreciseDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+import org.joda.time.DurationFieldType;
+
+/**
+ * Abstract datetime field class that defines its own DurationField, which
+ * delegates back into this ImpreciseDateTimeField.
+ * &lt;p&gt;
+ * This DateTimeField is useful for defining DateTimeFields that are composed
+ * of imprecise durations. If both duration fields are precise, then a
+ * {@link PreciseDateTimeField} should be used instead.
+ * &lt;p&gt;
+ * When defining imprecise DateTimeFields where a matching DurationField is
+ * already available, just extend BaseDateTimeField directly so as not to
+ * create redundant DurationField instances.
+ * &lt;p&gt;
+ * ImpreciseDateTimeField is thread-safe and immutable, and its subclasses must
+ * be as well.
+ *
+ * @author Brian S O'Neill
+ * @see PreciseDateTimeField
+ * @since 1.0
+ */
+public abstract class ImpreciseDateTimeField extends BaseDateTimeField {
+
+    @SuppressWarnings(&quot;unused&quot;)
+    private static final long serialVersionUID = 7190739608550251860L;
+
+    final long iUnitMillis;
+    private final DurationField iDurationField;
+
+    /**
+     * Constructor.
+     * 
+     * @param type  the field type
+     * @param unitMillis  the average duration unit milliseconds
+     */
+    public ImpreciseDateTimeField(DateTimeFieldType type, long unitMillis) {
+<span class="fc" id="L56">        super(type);</span>
+<span class="fc" id="L57">        iUnitMillis = unitMillis;</span>
+<span class="fc" id="L58">        iDurationField = new LinkedDurationField(type.getDurationType());</span>
+<span class="fc" id="L59">    }</span>
+
+    public abstract int get(long instant);
+
+    public abstract long set(long instant, int value);
+
+    public abstract long add(long instant, int value);
+
+    public abstract long add(long instant, long value);
+
+    /**
+     * Computes the difference between two instants, as measured in the units
+     * of this field. Any fractional units are dropped from the result. Calling
+     * getDifference reverses the effect of calling add. In the following code:
+     *
+     * &lt;pre&gt;
+     * long instant = ...
+     * int v = ...
+     * int age = getDifference(add(instant, v), instant);
+     * &lt;/pre&gt;
+     *
+     * The value 'age' is the same as the value 'v'.
+     * &lt;p&gt;
+     * The default implementation call getDifferenceAsLong and converts the
+     * return value to an int.
+     *
+     * @param minuendInstant the milliseconds from 1970-01-01T00:00:00Z to
+     * subtract from
+     * @param subtrahendInstant the milliseconds from 1970-01-01T00:00:00Z to
+     * subtract off the minuend
+     * @return the difference in the units of this field
+     */
+    public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L92">        return FieldUtils.safeToInt(getDifferenceAsLong(minuendInstant, subtrahendInstant));</span>
+    }
+
+    /**
+     * Computes the difference between two instants, as measured in the units
+     * of this field. Any fractional units are dropped from the result. Calling
+     * getDifference reverses the effect of calling add. In the following code:
+     *
+     * &lt;pre&gt;
+     * long instant = ...
+     * long v = ...
+     * long age = getDifferenceAsLong(add(instant, v), instant);
+     * &lt;/pre&gt;
+     *
+     * The value 'age' is the same as the value 'v'.
+     * &lt;p&gt;
+     * The default implementation performs a guess-and-check algorithm using
+     * getDurationField().getUnitMillis() and the add() method. Subclasses are
+     * encouraged to provide a more efficient implementation.
+     *
+     * @param minuendInstant the milliseconds from 1970-01-01T00:00:00Z to
+     * subtract from
+     * @param subtrahendInstant the milliseconds from 1970-01-01T00:00:00Z to
+     * subtract off the minuend
+     * @return the difference in the units of this field
+     */
+    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        if (minuendInstant &lt; subtrahendInstant) {</span>
+<span class="nc" id="L120">            return -getDifferenceAsLong(subtrahendInstant, minuendInstant);</span>
+        }
+        
+<span class="nc" id="L123">        long difference = (minuendInstant - subtrahendInstant) / iUnitMillis;</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        if (add(subtrahendInstant, difference) &lt; minuendInstant) {</span>
+            do {
+<span class="nc" id="L126">                difference++;</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            } while (add(subtrahendInstant, difference) &lt;= minuendInstant);</span>
+<span class="nc" id="L128">            difference--;</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        } else if (add(subtrahendInstant, difference) &gt; minuendInstant) {</span>
+            do {
+<span class="nc" id="L131">                difference--;</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">            } while (add(subtrahendInstant, difference) &gt; minuendInstant);</span>
+        }
+<span class="nc" id="L134">        return difference;</span>
+    }
+
+    public final DurationField getDurationField() {
+<span class="fc" id="L138">        return iDurationField;</span>
+    }
+
+    public abstract DurationField getRangeDurationField();
+
+    public abstract long roundFloor(long instant);
+
+    protected final long getDurationUnitMillis() {
+<span class="nc" id="L146">        return iUnitMillis;</span>
+    }
+
+    private final class LinkedDurationField extends BaseDurationField {
+        private static final long serialVersionUID = -203813474600094134L;
+
+<span class="fc" id="L152">        LinkedDurationField(DurationFieldType type) {</span>
+<span class="fc" id="L153">            super(type);</span>
+<span class="fc" id="L154">        }</span>
+    
+        public boolean isPrecise() {
+<span class="fc" id="L157">            return false;</span>
+        }
+    
+        public long getUnitMillis() {
+<span class="fc" id="L161">            return iUnitMillis;</span>
+        }
+
+        public int getValue(long duration, long instant) {
+<span class="fc" id="L165">            return ImpreciseDateTimeField.this</span>
+<span class="fc" id="L166">                .getDifference(instant + duration, instant);</span>
+        }
+
+        public long getValueAsLong(long duration, long instant) {
+<span class="nc" id="L170">            return ImpreciseDateTimeField.this</span>
+<span class="nc" id="L171">                .getDifferenceAsLong(instant + duration, instant);</span>
+        }
+        
+        public long getMillis(int value, long instant) {
+<span class="fc" id="L175">            return ImpreciseDateTimeField.this.add(instant, value) - instant;</span>
+        }
+
+        public long getMillis(long value, long instant) {
+<span class="fc" id="L179">            return ImpreciseDateTimeField.this.add(instant, value) - instant;</span>
+        }
+
+        public long add(long instant, int value) {
+<span class="fc" id="L183">            return ImpreciseDateTimeField.this.add(instant, value);</span>
+        }
+        
+        public long add(long instant, long value) {
+<span class="fc" id="L187">            return ImpreciseDateTimeField.this.add(instant, value);</span>
+        }
+        
+        public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L191">            return ImpreciseDateTimeField.this</span>
+<span class="fc" id="L192">                .getDifference(minuendInstant, subtrahendInstant);</span>
+        }
+        
+        public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="nc" id="L196">            return ImpreciseDateTimeField.this</span>
+<span class="nc" id="L197">                .getDifferenceAsLong(minuendInstant, subtrahendInstant);</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

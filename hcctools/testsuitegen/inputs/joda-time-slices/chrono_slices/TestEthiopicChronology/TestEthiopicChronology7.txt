@@ -1,0 +1,83 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  0.9% done, time left: unknown  2.0% done, time left: unknown  2.2% done, time left: unknown  3.0% done, time left: unknown  5.0% done, time left: unknown  7.2% done, time left: unknown  7.9% done, time left: unknown 10.0% done, time left:   0:00:04   12.4% done, time left:   0:00:04 13.7% done, time left:   0:00:04 15.5% done, time left:   0:00:04 17.7% done, time left:   0:00:05 21.8% done, time left:   0:00:04 22.5% done, time left:   0:00:03 22.7% done, time left:   0:00:02 22.9% done, time left:   0:00:01 25.0% done, time left:   0:00:02 28.6% done, time left:   0:00:02 32.1% done, time left:   0:00:02 32.1% done, time left:   0:00:01 35.5% done, time left:   0:00:02 38.2% done, time left:   0:00:02 40.1% done, time left:   0:00:02 40.8% done, time left:   0:00:01 41.9% done, time left:   0:00:01 42.9% done, time left:   0:00:01 46.5% done, time left:   0:00:01 50.6% done, time left:   0:00:01 52.4% done, time left:   0:00:01 56.3% done, time left:   0:00:01 60.0% done, time left:   0:00:00 63.9% done, time left:   0:00:00 69.1% done, time left:   0:00:00 74.5% done, time left:   0:00:00 79.5% done, time left:   0:00:00 84.5% done, time left:   0:00:00 84.9% done, time left:   0:00:00 88.0% done, time left:   0:00:00 93.1% done, time left:   0:00:00 97.9% done, time left:   0:00:00 99.1% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestEthiopicChronology.testFactory_Zone:203:*]:
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:187 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:187 ARETURN
+org.joda.time.DateTimeZone.setDefault:207 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.setDefault:207 ALOAD 0
+org.joda.time.DateTimeZone.setDefault:207 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.set(Ljava/lang/Object;)V
+org.joda.time.chrono.EthiopicChronology.getZone:50 ALOAD 0
+org.joda.time.chrono.EthiopicChronology.getZone:50 ARETURN
+org.joda.time.chrono.EthiopicChronology.getInstance:97 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.EthiopicChronology.getInstance:97 ICONST_4
+org.joda.time.chrono.EthiopicChronology.getInstance:97 INVOKESTATIC org/joda/time/chrono/EthiopicChronology.getInstance(Lorg/joda/time/DateTimeZone;I)Lorg/joda/time/chrono/EthiopicChronology;
+org.joda.time.chrono.EthiopicChronology.getInstance:107 ALOAD 0
+org.joda.time.chrono.EthiopicChronology.getInstance:107 ICONST_4
+org.joda.time.chrono.EthiopicChronology.getInstance:107 INVOKESTATIC org/joda/time/chrono/EthiopicChronology.getInstance(Lorg/joda/time/DateTimeZone;I)Lorg/joda/time/chrono/EthiopicChronology;
+org.joda.time.chrono.EthiopicChronology.getInstance:107 ARETURN
+org.joda.time.chrono.EthiopicChronology.getInstance:118 ALOAD 0
+org.joda.time.chrono.EthiopicChronology.getInstance:118 IFNONNULL L0 false true
+org.joda.time.chrono.EthiopicChronology.getInstance:119 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.EthiopicChronology.getInstance:119 ASTORE 0
+org.joda.time.chrono.EthiopicChronology.getInstance:122 GETSTATIC org/joda/time/chrono/EthiopicChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.EthiopicChronology.getInstance:122 ALOAD 0
+org.joda.time.chrono.EthiopicChronology.getInstance:122 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.EthiopicChronology.getInstance:122 ASTORE 3
+org.joda.time.chrono.EthiopicChronology.getInstance:123 ALOAD 3
+org.joda.time.chrono.EthiopicChronology.getInstance:123 IFNONNULL L1 false true
+org.joda.time.chrono.EthiopicChronology.getInstance:124 BIPUSH 7
+org.joda.time.chrono.EthiopicChronology.getInstance:124 ANEWARRAY org/joda/time/chrono/EthiopicChronology
+org.joda.time.chrono.EthiopicChronology.getInstance:124 ASTORE 3
+org.joda.time.chrono.EthiopicChronology.getInstance:125 GETSTATIC org/joda/time/chrono/EthiopicChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.EthiopicChronology.getInstance:125 ALOAD 0
+org.joda.time.chrono.EthiopicChronology.getInstance:125 ALOAD 3
+org.joda.time.chrono.EthiopicChronology.getInstance:125 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.EthiopicChronology.getInstance:131 ALOAD 3
+org.joda.time.chrono.EthiopicChronology.getInstance:131 ILOAD 1
+org.joda.time.chrono.EthiopicChronology.getInstance:131 ICONST_1
+org.joda.time.chrono.EthiopicChronology.getInstance:131 ISUB
+org.joda.time.chrono.EthiopicChronology.getInstance:131 AALOAD
+org.joda.time.chrono.EthiopicChronology.getInstance:131 ASTORE 2
+org.joda.time.chrono.EthiopicChronology.getInstance:137 ALOAD 2
+org.joda.time.chrono.EthiopicChronology.getInstance:137 IFNONNULL L12 false true
+org.joda.time.chrono.EthiopicChronology.getInstance:139 ALOAD 3
+org.joda.time.chrono.EthiopicChronology.getInstance:139 ILOAD 1
+org.joda.time.chrono.EthiopicChronology.getInstance:139 ICONST_1
+org.joda.time.chrono.EthiopicChronology.getInstance:139 ISUB
+org.joda.time.chrono.EthiopicChronology.getInstance:139 AALOAD
+org.joda.time.chrono.EthiopicChronology.getInstance:139 ASTORE 2
+org.joda.time.chrono.EthiopicChronology.getInstance:140 ALOAD 2
+org.joda.time.chrono.EthiopicChronology.getInstance:140 IFNONNULL L8 false true
+org.joda.time.chrono.EthiopicChronology.getInstance:141 ALOAD 0
+org.joda.time.chrono.EthiopicChronology.getInstance:141 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.EthiopicChronology.getInstance:141 IF_ACMPNE L6 true false
+org.joda.time.chrono.EthiopicChronology.getInstance:151 NEW org/joda/time/chrono/EthiopicChronology
+org.joda.time.chrono.EthiopicChronology.getInstance:151 ASTORE 2
+org.joda.time.chrono.EthiopicChronology.getInstance:154 ALOAD 3
+org.joda.time.chrono.EthiopicChronology.getInstance:154 ILOAD 1
+org.joda.time.chrono.EthiopicChronology.getInstance:154 ICONST_1
+org.joda.time.chrono.EthiopicChronology.getInstance:154 ISUB
+org.joda.time.chrono.EthiopicChronology.getInstance:154 ALOAD 2
+org.joda.time.chrono.EthiopicChronology.getInstance:154 AASTORE
+org.joda.time.chrono.EthiopicChronology.getInstance:158 ALOAD 2
+org.joda.time.chrono.EthiopicChronology.getInstance:158 ARETURN
+org.joda.time.chrono.TestEthiopicChronology.main:77 INVOKEVIRTUAL org/joda/time/chrono/TestEthiopicChronology.setUp()V
+org.joda.time.chrono.TestEthiopicChronology.main:78 INVOKEVIRTUAL org/joda/time/chrono/TestEthiopicChronology.testFactory()V
+org.joda.time.chrono.TestEthiopicChronology.main:81 INVOKEVIRTUAL org/joda/time/chrono/TestEthiopicChronology.setUp()V
+org.joda.time.chrono.TestEthiopicChronology.main:82 INVOKEVIRTUAL org/joda/time/chrono/TestEthiopicChronology.testFactory_Zone()V
+org.joda.time.chrono.TestEthiopicChronology.setUp:171 GETSTATIC org/joda/time/chrono/TestEthiopicChronology.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestEthiopicChronology.setUp:171 INVOKESTATIC org/joda/time/DateTimeZone.setDefault(Lorg/joda/time/DateTimeZone;)V
+org.joda.time.chrono.TestEthiopicChronology.testFactory:196 INVOKESTATIC org/joda/time/chrono/EthiopicChronology.getInstance()Lorg/joda/time/chrono/EthiopicChronology;
+org.joda.time.chrono.TestEthiopicChronology.testFactory_Zone:203 GETSTATIC org/joda/time/chrono/TestEthiopicChronology.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestEthiopicChronology.testFactory_Zone:203 ACONST_NULL
+org.joda.time.chrono.TestEthiopicChronology.testFactory_Zone:203 INVOKESTATIC org/joda/time/chrono/EthiopicChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/EthiopicChronology;
+org.joda.time.chrono.TestEthiopicChronology.testFactory_Zone:203 INVOKEVIRTUAL org/joda/time/chrono/EthiopicChronology.getZone()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestEthiopicChronology.testFactory_Zone:203 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+
+Slice consists of 363 bytecode instructions.
+Computation took 4.69 seconds.

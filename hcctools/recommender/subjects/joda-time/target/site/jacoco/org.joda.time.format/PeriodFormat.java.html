@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PeriodFormat.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.format</a> &gt; <span class="el_source">PeriodFormat.java</span></div><h1>PeriodFormat.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.format;
+
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
+import org.joda.time.ReadWritablePeriod;
+import org.joda.time.ReadablePeriod;
+
+/**
+ * Factory that creates instances of PeriodFormatter.
+ * &lt;p&gt;
+ * Period formatting is performed by the {@link PeriodFormatter} class.
+ * Three classes provide factory methods to create formatters, and this is one.
+ * The others are {@link ISOPeriodFormat} and {@link PeriodFormatterBuilder}.
+ * &lt;p&gt;
+ * PeriodFormat is thread-safe and immutable, and the formatters it returns
+ * are as well.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ * @see ISOPeriodFormat
+ * @see PeriodFormatterBuilder
+ */
+public class PeriodFormat {
+
+    /**
+     * The resource bundle name.
+     */
+    private static final String BUNDLE_NAME = &quot;org.joda.time.format.messages&quot;;
+    /**
+     * The created formatters.
+     */
+<span class="fc" id="L53">    private static final ConcurrentMap&lt;Locale, PeriodFormatter&gt; FORMATTERS = new ConcurrentHashMap&lt;Locale, PeriodFormatter&gt;();</span>
+
+    /**
+     * Constructor.
+     *
+     * @since 1.1 (previously private)
+     */
+    protected PeriodFormat() {
+<span class="fc" id="L61">        super();</span>
+<span class="fc" id="L62">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the default formatter that outputs words in English.
+     * &lt;p&gt;
+     * This calls {@link #wordBased(Locale)} using a locale of {@code ENGLISH}.
+     * 
+     * @return the formatter, not null
+     */
+    public static PeriodFormatter getDefault() {
+<span class="fc" id="L73">        return wordBased(Locale.ENGLISH);</span>
+    }
+
+    /**
+     * Returns a word based formatter for the JDK default locale.
+     * &lt;p&gt;
+     * This calls {@link #wordBased(Locale)} using the {@link Locale#getDefault() default locale}.
+     * 
+     * @return the formatter, not null
+     * @since 2.0
+     */
+    public static PeriodFormatter wordBased() {
+<span class="fc" id="L85">        return wordBased(Locale.getDefault());</span>
+    }
+
+    /**
+     * Returns a word based formatter for the specified locale.
+     * &lt;p&gt;
+     * The words are configured in a resource bundle text file -
+     * {@code org.joda.time.format.messages}.
+     * This can be added to via the normal classpath resource bundle mechanisms.
+     * &lt;p&gt;
+     * You can add your own translation by creating messages_&lt;locale&gt;.properties file
+     * and adding it to the {@code org.joda.time.format.messages} path.
+     * &lt;p&gt;
+     * Simple example (1 -&gt; singular suffix, not 1 -&gt; plural suffix):
+     * 
+     * &lt;pre&gt;
+     * PeriodFormat.space=\ 
+     * PeriodFormat.comma=,
+     * PeriodFormat.commandand=,and 
+     * PeriodFormat.commaspaceand=, and 
+     * PeriodFormat.commaspace=, 
+     * PeriodFormat.spaceandspace=\ and 
+     * PeriodFormat.year=\ year
+     * PeriodFormat.years=\ years
+     * PeriodFormat.month=\ month
+     * PeriodFormat.months=\ months
+     * PeriodFormat.week=\ week
+     * PeriodFormat.weeks=\ weeks
+     * PeriodFormat.day=\ day
+     * PeriodFormat.days=\ days
+     * PeriodFormat.hour=\ hour
+     * PeriodFormat.hours=\ hours
+     * PeriodFormat.minute=\ minute
+     * PeriodFormat.minutes=\ minutes
+     * PeriodFormat.second=\ second
+     * PeriodFormat.seconds=\ seconds
+     * PeriodFormat.millisecond=\ millisecond
+     * PeriodFormat.milliseconds=\ milliseconds
+     * &lt;/pre&gt;
+     * 
+     * &lt;p&gt;
+     * Some languages contain more than two suffixes. You can use regular expressions
+     * for them. Here's an example using regular expression for English:
+     * 
+     * &lt;pre&gt;
+     * PeriodFormat.space=\ 
+     * PeriodFormat.comma=,
+     * PeriodFormat.commandand=,and 
+     * PeriodFormat.commaspaceand=, and 
+     * PeriodFormat.commaspace=, 
+     * PeriodFormat.spaceandspace=\ and 
+     * PeriodFormat.regex.separator=%
+     * PeriodFormat.years.regex=1$%.*
+     * PeriodFormat.years.list=\ year%\ years
+     * PeriodFormat.months.regex=1$%.*
+     * PeriodFormat.months.list=\ month%\ months
+     * PeriodFormat.weeks.regex=1$%.*
+     * PeriodFormat.weeks.list=\ week%\ weeks
+     * PeriodFormat.days.regex=1$%.*
+     * PeriodFormat.days.list=\ day%\ days
+     * PeriodFormat.hours.regex=1$%.*
+     * PeriodFormat.hours.list=\ hour%\ hours
+     * PeriodFormat.minutes.regex=1$%.*
+     * PeriodFormat.minutes.list=\ minute%\ minutes
+     * PeriodFormat.seconds.regex=1$%.*
+     * PeriodFormat.seconds.list=\ second%\ seconds
+     * PeriodFormat.milliseconds.regex=1$%.*
+     * PeriodFormat.milliseconds.list=\ millisecond%\ milliseconds
+     * &lt;/pre&gt;
+     * 
+     * &lt;p&gt;
+     * You can mix both approaches. Here's example for Polish (
+     * &quot;1 year, 2 years, 5 years, 12 years, 15 years, 21 years, 22 years, 25 years&quot;
+     * translates to
+     * &quot;1 rok, 2 lata, 5 lat, 12 lat, 15 lat, 21 lat, 22 lata, 25 lat&quot;). Notice that
+     * PeriodFormat.day and PeriodFormat.days is used for day suffixes as there is no
+     * need for regular expressions:
+     * 
+     * &lt;pre&gt;
+     * PeriodFormat.space=\ 
+     * PeriodFormat.comma=,
+     * PeriodFormat.commandand=,i 
+     * PeriodFormat.commaspaceand=, i 
+     * PeriodFormat.commaspace=, 
+     * PeriodFormat.spaceandspace=\ i 
+     * PeriodFormat.regex.separator=%
+     * PeriodFormat.years.regex=^1$%[0-9]*(?&amp;lt;!1)[2-4]$%[0-9]*
+     * PeriodFormat.years.list=\ rok%\ lata%\ lat
+     * PeriodFormat.months.regex=^1$%[0-9]*(?&amp;lt;!1)[2-4]$%[0-9]*
+     * PeriodFormat.months.list=\ miesi\u0105c%\ miesi\u0105ce%\ miesi\u0119cy
+     * PeriodFormat.weeks.regex=^1$%[0-9]*(?&amp;lt;!1)[2-4]$%[0-9]*
+     * PeriodFormat.weeks.list=\ tydzie\u0144%\ tygodnie%\ tygodni
+     * PeriodFormat.day=\ dzie\u0144
+     * PeriodFormat.days=\ dni
+     * PeriodFormat.hours.regex=^1$%[0-9]*(?&amp;lt;!1)[2-4]$%[0-9]*
+     * PeriodFormat.hours.list=\ godzina%\ godziny%\ godzin
+     * PeriodFormat.minutes.regex=^1$%[0-9]*(?&amp;lt;!1)[2-4]$%[0-9]*
+     * PeriodFormat.minutes.list=\ minuta%\ minuty%\ minut
+     * PeriodFormat.seconds.regex=^1$%[0-9]*(?&amp;lt;!1)[2-4]$%[0-9]*
+     * PeriodFormat.seconds.list=\ sekunda%\ sekundy%\ sekund
+     * PeriodFormat.milliseconds.regex=^1$%[0-9]*(?&amp;lt;!1)[2-4]$%[0-9]*
+     * PeriodFormat.milliseconds.list=\ milisekunda%\ milisekundy%\ milisekund
+     * &lt;/pre&gt;
+     * 
+     * &lt;p&gt;
+     * Each PeriodFormat.&amp;lt;duration_field_type&amp;gt;.regex property stands for an array of
+     * regular expressions and is followed by a property
+     * PeriodFormat.&amp;lt;duration_field_type&amp;gt;.list holding an array of suffixes.
+     * PeriodFormat.regex.separator is used for splitting. See
+     * {@link PeriodFormatterBuilder#appendSuffix(String[], String[])} for details.
+     * &lt;p&gt;
+     * Available languages are English, Danish, Dutch, French, German, Japanese,
+     * Polish, Portuguese and Spanish.
+     * 
+     * @return the formatter, not null
+     * @since 2.0, regex since 2.5
+     */
+    public static PeriodFormatter wordBased(Locale locale) {
+<span class="fc" id="L203">        PeriodFormatter pf = FORMATTERS.get(locale);</span>
+<span class="fc bfc" id="L204" title="All 2 branches covered.">        if (pf == null) {</span>
+<span class="fc" id="L205">            DynamicWordBased dynamic = new DynamicWordBased(buildWordBased(locale));</span>
+<span class="fc" id="L206">            pf = new PeriodFormatter(dynamic, dynamic, locale, null);</span>
+<span class="fc" id="L207">            PeriodFormatter existing = FORMATTERS.putIfAbsent(locale, pf);</span>
+<span class="pc bpc" id="L208" title="1 of 2 branches missed.">            if (existing != null) {</span>
+<span class="nc" id="L209">                pf = existing;</span>
+            }
+        }
+<span class="fc" id="L212">        return pf;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    private static PeriodFormatter buildWordBased(Locale locale) {
+<span class="fc" id="L217">        ResourceBundle b = ResourceBundle.getBundle(BUNDLE_NAME, locale);</span>
+<span class="fc bfc" id="L218" title="All 2 branches covered.">        if (containsKey(b, &quot;PeriodFormat.regex.separator&quot;)) {</span>
+<span class="fc" id="L219">            return buildRegExFormatter(b, locale);</span>
+        } else {
+<span class="fc" id="L221">            return buildNonRegExFormatter(b, locale);</span>
+        }
+    }
+
+    private static PeriodFormatter buildRegExFormatter(ResourceBundle b, Locale locale) {
+<span class="fc" id="L226">        String[] variants = retrieveVariants(b);</span>
+<span class="fc" id="L227">        String regExSeparator = b.getString(&quot;PeriodFormat.regex.separator&quot;);</span>
+        
+<span class="fc" id="L229">        PeriodFormatterBuilder builder = new PeriodFormatterBuilder();</span>
+<span class="fc" id="L230">        builder.appendYears();</span>
+<span class="pc bpc" id="L231" title="1 of 2 branches missed.">        if (containsKey(b, &quot;PeriodFormat.years.regex&quot;)) {</span>
+<span class="fc" id="L232">            builder.appendSuffix(</span>
+<span class="fc" id="L233">                b.getString(&quot;PeriodFormat.years.regex&quot;).split(regExSeparator),</span>
+<span class="fc" id="L234">                b.getString(&quot;PeriodFormat.years.list&quot;).split(regExSeparator));</span>
+        } else {
+<span class="nc" id="L236">            builder.appendSuffix(b.getString(&quot;PeriodFormat.year&quot;), b.getString(&quot;PeriodFormat.years&quot;));</span>
+        }
+
+<span class="fc" id="L239">        builder.appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants);</span>
+<span class="fc" id="L240">        builder.appendMonths();</span>
+<span class="pc bpc" id="L241" title="1 of 2 branches missed.">        if (containsKey(b, &quot;PeriodFormat.months.regex&quot;)) {</span>
+<span class="fc" id="L242">            builder.appendSuffix(</span>
+<span class="fc" id="L243">                    b.getString(&quot;PeriodFormat.months.regex&quot;).split(regExSeparator),</span>
+<span class="fc" id="L244">                    b.getString(&quot;PeriodFormat.months.list&quot;).split(regExSeparator));</span>
+        } else {
+<span class="nc" id="L246">            builder.appendSuffix(b.getString(&quot;PeriodFormat.month&quot;), b.getString(&quot;PeriodFormat.months&quot;));</span>
+        }        
+
+<span class="fc" id="L249">        builder.appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants);</span>
+<span class="fc" id="L250">        builder.appendWeeks();</span>
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">        if (containsKey(b, &quot;PeriodFormat.weeks.regex&quot;)) {</span>
+<span class="fc" id="L252">            builder.appendSuffix(</span>
+<span class="fc" id="L253">                    b.getString(&quot;PeriodFormat.weeks.regex&quot;).split(regExSeparator),</span>
+<span class="fc" id="L254">                    b.getString(&quot;PeriodFormat.weeks.list&quot;).split(regExSeparator));</span>
+        } else {
+<span class="nc" id="L256">            builder.appendSuffix(b.getString(&quot;PeriodFormat.week&quot;), b.getString(&quot;PeriodFormat.weeks&quot;));</span>
+        }            
+
+<span class="fc" id="L259">        builder.appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants);</span>
+<span class="fc" id="L260">        builder.appendDays();</span>
+<span class="fc bfc" id="L261" title="All 2 branches covered.">        if (containsKey(b, &quot;PeriodFormat.days.regex&quot;)) {</span>
+<span class="fc" id="L262">            builder.appendSuffix(</span>
+<span class="fc" id="L263">                    b.getString(&quot;PeriodFormat.days.regex&quot;).split(regExSeparator),</span>
+<span class="fc" id="L264">                    b.getString(&quot;PeriodFormat.days.list&quot;).split(regExSeparator));</span>
+        } else {
+<span class="fc" id="L266">            builder.appendSuffix(b.getString(&quot;PeriodFormat.day&quot;), b.getString(&quot;PeriodFormat.days&quot;));</span>
+        }            
+
+<span class="fc" id="L269">        builder.appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants);</span>
+<span class="fc" id="L270">        builder.appendHours();</span>
+<span class="pc bpc" id="L271" title="1 of 2 branches missed.">        if (containsKey(b, &quot;PeriodFormat.hours.regex&quot;)) {</span>
+<span class="fc" id="L272">            builder.appendSuffix(</span>
+<span class="fc" id="L273">                    b.getString(&quot;PeriodFormat.hours.regex&quot;).split(regExSeparator),</span>
+<span class="fc" id="L274">                    b.getString(&quot;PeriodFormat.hours.list&quot;).split(regExSeparator));</span>
+        } else {
+<span class="nc" id="L276">            builder.appendSuffix(b.getString(&quot;PeriodFormat.hour&quot;), b.getString(&quot;PeriodFormat.hours&quot;));</span>
+        }            
+
+<span class="fc" id="L279">        builder.appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants);</span>
+<span class="fc" id="L280">        builder.appendMinutes();</span>
+<span class="pc bpc" id="L281" title="1 of 2 branches missed.">        if (containsKey(b, &quot;PeriodFormat.minutes.regex&quot;)) {</span>
+<span class="fc" id="L282">            builder.appendSuffix(</span>
+<span class="fc" id="L283">                    b.getString(&quot;PeriodFormat.minutes.regex&quot;).split(regExSeparator),</span>
+<span class="fc" id="L284">                    b.getString(&quot;PeriodFormat.minutes.list&quot;).split(regExSeparator));</span>
+        } else {
+<span class="nc" id="L286">            builder.appendSuffix(b.getString(&quot;PeriodFormat.minute&quot;), b.getString(&quot;PeriodFormat.minutes&quot;));</span>
+        }    
+
+<span class="fc" id="L289">        builder.appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants);</span>
+<span class="fc" id="L290">        builder.appendSeconds();</span>
+<span class="pc bpc" id="L291" title="1 of 2 branches missed.">        if (containsKey(b, &quot;PeriodFormat.seconds.regex&quot;)) {</span>
+<span class="fc" id="L292">            builder.appendSuffix(</span>
+<span class="fc" id="L293">                    b.getString(&quot;PeriodFormat.seconds.regex&quot;).split(regExSeparator),</span>
+<span class="fc" id="L294">                    b.getString(&quot;PeriodFormat.seconds.list&quot;).split(regExSeparator));</span>
+        } else {
+<span class="nc" id="L296">            builder.appendSuffix(b.getString(&quot;PeriodFormat.second&quot;), b.getString(&quot;PeriodFormat.seconds&quot;));</span>
+        }
+
+<span class="fc" id="L299">        builder.appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants);</span>
+<span class="fc" id="L300">        builder.appendMillis();</span>
+<span class="pc bpc" id="L301" title="1 of 2 branches missed.">        if (containsKey(b, &quot;PeriodFormat.milliseconds.regex&quot;)) {</span>
+<span class="fc" id="L302">            builder.appendSuffix(</span>
+<span class="fc" id="L303">                    b.getString(&quot;PeriodFormat.milliseconds.regex&quot;).split(regExSeparator),</span>
+<span class="fc" id="L304">                    b.getString(&quot;PeriodFormat.milliseconds.list&quot;).split(regExSeparator));</span>
+        } else {
+<span class="nc" id="L306">            builder.appendSuffix(b.getString(&quot;PeriodFormat.millisecond&quot;), b.getString(&quot;PeriodFormat.milliseconds&quot;));</span>
+        }
+<span class="fc" id="L308">        return builder.toFormatter().withLocale(locale);</span>
+    }
+
+    private static PeriodFormatter buildNonRegExFormatter(ResourceBundle b, Locale locale) {
+<span class="fc" id="L312">        String[] variants = retrieveVariants(b);</span>
+<span class="fc" id="L313">        return new PeriodFormatterBuilder()</span>
+<span class="fc" id="L314">            .appendYears()</span>
+<span class="fc" id="L315">            .appendSuffix(b.getString(&quot;PeriodFormat.year&quot;), b.getString(&quot;PeriodFormat.years&quot;))</span>
+<span class="fc" id="L316">            .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</span>
+<span class="fc" id="L317">            .appendMonths()</span>
+<span class="fc" id="L318">            .appendSuffix(b.getString(&quot;PeriodFormat.month&quot;), b.getString(&quot;PeriodFormat.months&quot;))</span>
+<span class="fc" id="L319">            .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</span>
+<span class="fc" id="L320">            .appendWeeks()</span>
+<span class="fc" id="L321">            .appendSuffix(b.getString(&quot;PeriodFormat.week&quot;), b.getString(&quot;PeriodFormat.weeks&quot;))</span>
+<span class="fc" id="L322">            .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</span>
+<span class="fc" id="L323">            .appendDays()</span>
+<span class="fc" id="L324">            .appendSuffix(b.getString(&quot;PeriodFormat.day&quot;), b.getString(&quot;PeriodFormat.days&quot;))</span>
+<span class="fc" id="L325">            .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</span>
+<span class="fc" id="L326">            .appendHours()</span>
+<span class="fc" id="L327">            .appendSuffix(b.getString(&quot;PeriodFormat.hour&quot;), b.getString(&quot;PeriodFormat.hours&quot;))</span>
+<span class="fc" id="L328">            .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</span>
+<span class="fc" id="L329">            .appendMinutes()</span>
+<span class="fc" id="L330">            .appendSuffix(b.getString(&quot;PeriodFormat.minute&quot;), b.getString(&quot;PeriodFormat.minutes&quot;))</span>
+<span class="fc" id="L331">            .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</span>
+<span class="fc" id="L332">            .appendSeconds()</span>
+<span class="fc" id="L333">            .appendSuffix(b.getString(&quot;PeriodFormat.second&quot;), b.getString(&quot;PeriodFormat.seconds&quot;))</span>
+<span class="fc" id="L334">            .appendSeparator(b.getString(&quot;PeriodFormat.commaspace&quot;), b.getString(&quot;PeriodFormat.spaceandspace&quot;), variants)</span>
+<span class="fc" id="L335">            .appendMillis()</span>
+<span class="fc" id="L336">            .appendSuffix(b.getString(&quot;PeriodFormat.millisecond&quot;), b.getString(&quot;PeriodFormat.milliseconds&quot;))</span>
+<span class="fc" id="L337">            .toFormatter().withLocale(locale);</span>
+    }
+
+    private static String[] retrieveVariants(ResourceBundle b) {
+<span class="fc" id="L341">        return new String[] { b.getString(&quot;PeriodFormat.space&quot;), b.getString(&quot;PeriodFormat.comma&quot;),</span>
+<span class="fc" id="L342">                b.getString(&quot;PeriodFormat.commandand&quot;), b.getString(&quot;PeriodFormat.commaspaceand&quot;) };</span>
+    }
+
+    // simulate ResourceBundle.containsKey()
+    private static boolean containsKey(ResourceBundle bundle, String key) {
+<span class="fc bfc" id="L347" title="All 2 branches covered.">        for (Enumeration&lt;String&gt; en = bundle.getKeys(); en.hasMoreElements(); ) {</span>
+<span class="fc bfc" id="L348" title="All 2 branches covered.">            if (en.nextElement().equals(key)) {</span>
+<span class="fc" id="L349">                return true;</span>
+            }
+        }
+<span class="fc" id="L352">        return false;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Printer/parser that reacts to the locale and changes the word-based
+     * pattern if necessary.
+     */
+    static class DynamicWordBased
+            implements PeriodPrinter, PeriodParser {
+
+        /** The formatter with the locale selected at construction time. */
+        private final PeriodFormatter iFormatter;
+
+<span class="fc" id="L366">        DynamicWordBased(PeriodFormatter formatter) {</span>
+<span class="fc" id="L367">            iFormatter = formatter;</span>
+<span class="fc" id="L368">        }</span>
+
+        public int countFieldsToPrint(ReadablePeriod period, int stopAt, Locale locale) {
+<span class="nc" id="L371">            return getPrinter(locale).countFieldsToPrint(period, stopAt, locale);</span>
+        }
+
+        public int calculatePrintedLength(ReadablePeriod period, Locale locale) {
+<span class="fc" id="L375">            return getPrinter(locale).calculatePrintedLength(period, locale);</span>
+        }
+
+        public void printTo(StringBuffer buf, ReadablePeriod period, Locale locale) {
+<span class="fc" id="L379">            getPrinter(locale).printTo(buf, period, locale);</span>
+<span class="fc" id="L380">        }</span>
+
+        public void printTo(Writer out, ReadablePeriod period, Locale locale) throws IOException {
+<span class="nc" id="L383">            getPrinter(locale).printTo(out, period, locale);</span>
+<span class="nc" id="L384">        }</span>
+
+        private PeriodPrinter getPrinter(Locale locale) {
+<span class="fc bfc" id="L387" title="All 4 branches covered.">            if (locale != null &amp;&amp; !locale.equals(iFormatter.getLocale())) {</span>
+<span class="fc" id="L388">                return wordBased(locale).getPrinter();</span>
+            }
+<span class="fc" id="L390">            return iFormatter.getPrinter();</span>
+        }
+
+        public int parseInto(
+                ReadWritablePeriod period, String periodStr,
+                int position, Locale locale) {
+<span class="fc" id="L396">            return getParser(locale).parseInto(period, periodStr, position, locale);</span>
+        }
+
+        private PeriodParser getParser(Locale locale) {
+<span class="fc bfc" id="L400" title="All 4 branches covered.">            if (locale != null &amp;&amp; !locale.equals(iFormatter.getLocale())) {</span>
+<span class="fc" id="L401">                return wordBased(locale).getParser();</span>
+            }
+<span class="fc" id="L403">            return iFormatter.getParser();</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

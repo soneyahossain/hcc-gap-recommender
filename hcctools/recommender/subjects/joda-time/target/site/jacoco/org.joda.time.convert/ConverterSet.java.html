@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConverterSet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.convert</a> &gt; <span class="el_source">ConverterSet.java</span></div><h1>ConverterSet.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.convert;
+
+/**
+ * A set of converters, which allows exact converters to be quickly
+ * selected. This class is threadsafe because it is (essentially) immutable.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+class ConverterSet {
+    private final Converter[] iConverters;
+
+    // A simple immutable hashtable: closed hashing, linear probing, sized
+    // power of 2, at least one null slot.
+    private Entry[] iSelectEntries;
+
+<span class="fc" id="L32">    ConverterSet(Converter[] converters) {</span>
+        // Since this is a package private constructor, we trust ourselves not
+        // to alter the array outside this class.
+<span class="fc" id="L35">        iConverters = converters;</span>
+<span class="fc" id="L36">        iSelectEntries = new Entry[1 &lt;&lt; 4]; // 16</span>
+<span class="fc" id="L37">    }</span>
+
+    /**
+     * Returns the closest matching converter for the given type, or null if
+     * none found.
+     *
+     * @param type type to select, which may be null
+     * @throws IllegalStateException if multiple converters match the type
+     * equally well
+     */
+    Converter select(Class&lt;?&gt; type) throws IllegalStateException {
+        // Check the hashtable first.
+<span class="fc" id="L49">        Entry[] entries = iSelectEntries;</span>
+<span class="fc" id="L50">        int length = entries.length;</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        int index = type == null ? 0 : type.hashCode() &amp; (length - 1);</span>
+
+        Entry e;
+        // This loop depends on there being at least one null slot.
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        while ((e = entries[index]) != null) {</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (e.iType == type) {</span>
+<span class="fc" id="L57">                return e.iConverter;</span>
+            }
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            if (++index &gt;= length) {</span>
+<span class="fc" id="L60">                index = 0;</span>
+            }
+        }
+
+        // Not found in the hashtable, so do actual work.
+
+<span class="fc" id="L66">        Converter converter = selectSlow(this, type);</span>
+<span class="fc" id="L67">        e = new Entry(type, converter);</span>
+
+        // Save the entry for future selects. This class must be threadsafe,
+        // but there is no synchronization. Since the hashtable is being used
+        // as a cache, it is okay to destroy existing entries. This isn't
+        // likely to occur unless there is a high amount of concurrency. As
+        // time goes on, cache updates will occur less often, and the cache
+        // will fill with all the necessary entries.
+
+        // Do all updates on a copy: slots in iSelectEntries must not be
+        // updated by multiple threads as this can allow all null slots to be
+        // consumed.
+<span class="fc" id="L79">        entries = (Entry[])entries.clone();</span>
+
+        // Add new entry.
+<span class="fc" id="L82">        entries[index] = e;</span>
+
+        // Verify that at least one null slot exists!
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        for (int i=0; i&lt;length; i++) {</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">            if (entries[i] == null) {</span>
+                // Found a null slot, swap in new hashtable.
+<span class="fc" id="L88">                iSelectEntries = entries;</span>
+<span class="fc" id="L89">                return converter;</span>
+            }
+        }
+
+        // Double capacity and re-hash.
+
+<span class="fc" id="L95">        int newLength = length &lt;&lt; 1;</span>
+<span class="fc" id="L96">        Entry[] newEntries = new Entry[newLength];</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        for (int i=0; i&lt;length; i++) {</span>
+<span class="fc" id="L98">            e = entries[i];</span>
+<span class="fc" id="L99">            type = e.iType;</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">            index = type == null ? 0 : type.hashCode() &amp; (newLength - 1);</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">            while (newEntries[index] != null) {</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">                if (++index &gt;= newLength) {</span>
+<span class="nc" id="L103">                    index = 0;</span>
+                }
+            }
+<span class="fc" id="L106">            newEntries[index] = e;</span>
+        }
+
+        // Swap in new hashtable.
+<span class="fc" id="L110">        iSelectEntries = newEntries;</span>
+<span class="fc" id="L111">        return converter;</span>
+    }
+
+    /**
+     * Returns the amount of converters in the set.
+     */
+    int size() {
+<span class="fc" id="L118">        return iConverters.length;</span>
+    }
+
+    /**
+     * Copies all the converters in the set to the given array.
+     */
+    void copyInto(Converter[] converters) {
+<span class="fc" id="L125">        System.arraycopy(iConverters, 0, converters, 0, iConverters.length);</span>
+<span class="fc" id="L126">    }</span>
+
+    /**
+     * Returns a copy of this set, with the given converter added. If a
+     * matching converter is already in the set, the given converter replaces
+     * it. If the converter is exactly the same as one already in the set, the
+     * original set is returned.
+     *
+     * @param converter  converter to add, must not be null
+     * @param removed  if not null, element 0 is set to the removed converter
+     * @throws NullPointerException if converter is null
+     */
+    ConverterSet add(Converter converter, Converter[] removed) {
+<span class="fc" id="L139">        Converter[] converters = iConverters;</span>
+<span class="fc" id="L140">        int length = converters.length;</span>
+
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        for (int i=0; i&lt;length; i++) {</span>
+<span class="fc" id="L143">            Converter existing = converters[i];</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">            if (converter.equals(existing)) {</span>
+                // Already in the set.
+<span class="fc bfc" id="L146" title="All 2 branches covered.">                if (removed != null) {</span>
+<span class="fc" id="L147">                    removed[0] = null;</span>
+                }
+<span class="fc" id="L149">                return this;</span>
+            }
+            
+<span class="fc bfc" id="L152" title="All 2 branches covered.">            if (converter.getSupportedType() == existing.getSupportedType()) {</span>
+                // Replace the converter.
+<span class="fc" id="L154">                Converter[] copy = new Converter[length];</span>
+                    
+<span class="fc bfc" id="L156" title="All 2 branches covered.">                for (int j=0; j&lt;length; j++) {</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">                    if (j != i) {</span>
+<span class="fc" id="L158">                        copy[j] = converters[j];</span>
+                    } else {
+<span class="fc" id="L160">                        copy[j] = converter;</span>
+                    }
+                }
+
+<span class="fc bfc" id="L164" title="All 2 branches covered.">                if (removed != null) {</span>
+<span class="fc" id="L165">                    removed[0] = existing;</span>
+                }
+<span class="fc" id="L167">                return new ConverterSet(copy);</span>
+            }
+        }
+
+        // Not found, so add it.
+<span class="fc" id="L172">        Converter[] copy = new Converter[length + 1];</span>
+<span class="fc" id="L173">        System.arraycopy(converters, 0, copy, 0, length);</span>
+<span class="fc" id="L174">        copy[length] = converter;</span>
+        
+<span class="fc bfc" id="L176" title="All 2 branches covered.">        if (removed != null) {</span>
+<span class="fc" id="L177">            removed[0] = null;</span>
+        }
+<span class="fc" id="L179">        return new ConverterSet(copy);</span>
+    }
+
+    /**
+     * Returns a copy of this set, with the given converter removed. If the
+     * converter was not in the set, the original set is returned.
+     *
+     * @param converter  converter to remove, must not be null
+     * @param removed  if not null, element 0 is set to the removed converter
+     * @throws NullPointerException if converter is null
+     */
+    ConverterSet remove(Converter converter, Converter[] removed) {
+<span class="fc" id="L191">        Converter[] converters = iConverters;</span>
+<span class="fc" id="L192">        int length = converters.length;</span>
+
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        for (int i=0; i&lt;length; i++) {</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">            if (converter.equals(converters[i])) {</span>
+<span class="fc" id="L196">                return remove(i, removed);</span>
+            }
+        }
+
+        // Not found.
+<span class="fc bfc" id="L201" title="All 2 branches covered.">        if (removed != null) {</span>
+<span class="fc" id="L202">            removed[0] = null;</span>
+        }
+<span class="fc" id="L204">        return this;</span>
+    }
+
+    /**
+     * Returns a copy of this set, with the converter at the given index
+     * removed.
+     *
+     * @param index index of converter to remove
+     * @param removed if not null, element 0 is set to the removed converter
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    ConverterSet remove(final int index, Converter[] removed) {
+<span class="fc" id="L216">        Converter[] converters = iConverters;</span>
+<span class="fc" id="L217">        int length = converters.length;</span>
+<span class="fc bfc" id="L218" title="All 2 branches covered.">        if (index &gt;= length) {</span>
+<span class="fc" id="L219">            throw new IndexOutOfBoundsException();</span>
+        }
+
+<span class="fc bfc" id="L222" title="All 2 branches covered.">        if (removed != null) {</span>
+<span class="fc" id="L223">            removed[0] = converters[index];</span>
+        }
+
+<span class="fc" id="L226">        Converter[] copy = new Converter[length - 1];</span>
+                
+<span class="fc" id="L228">        int j = 0;</span>
+<span class="fc bfc" id="L229" title="All 2 branches covered.">        for (int i=0; i&lt;length; i++) {</span>
+<span class="fc bfc" id="L230" title="All 2 branches covered.">            if (i != index) {</span>
+<span class="fc" id="L231">                copy[j++] = converters[i];</span>
+            }
+        }
+        
+<span class="fc" id="L235">        return new ConverterSet(copy);</span>
+    }
+
+    /**
+     * Returns the closest matching converter for the given type, but not very
+     * efficiently.
+     */
+    private static Converter selectSlow(ConverterSet set, Class&lt;?&gt; type) {
+<span class="fc" id="L243">        Converter[] converters = set.iConverters;</span>
+<span class="fc" id="L244">        int length = converters.length;</span>
+        Converter converter;
+
+<span class="fc bfc" id="L247" title="All 2 branches covered.">        for (int i=length; --i&gt;=0; ) {</span>
+<span class="fc" id="L248">            converter = converters[i];</span>
+<span class="fc" id="L249">            Class&lt;?&gt; supportedType = converter.getSupportedType();</span>
+
+<span class="fc bfc" id="L251" title="All 2 branches covered.">            if (supportedType == type) {</span>
+                // Exact match.
+<span class="fc" id="L253">                return converter;</span>
+            }
+
+<span class="fc bfc" id="L256" title="All 6 branches covered.">            if (supportedType == null || (type != null &amp;&amp; !supportedType.isAssignableFrom(type))) {</span>
+                // Eliminate the impossible.
+<span class="fc" id="L258">                set = set.remove(i, null);</span>
+<span class="fc" id="L259">                converters = set.iConverters;</span>
+<span class="fc" id="L260">                length = converters.length;</span>
+            }
+<span class="fc" id="L262">        }</span>
+
+        // Haven't found exact match, so check what remains in the set.
+
+<span class="fc bfc" id="L266" title="All 4 branches covered.">        if (type == null || length == 0) {</span>
+<span class="fc" id="L267">            return null;</span>
+        }
+<span class="fc bfc" id="L269" title="All 2 branches covered.">        if (length == 1) {</span>
+            // Found the one best match.
+<span class="fc" id="L271">            return converters[0];</span>
+        }
+
+        // At this point, there exist multiple potential converters.
+
+        // Eliminate supertypes.
+<span class="fc bfc" id="L277" title="All 2 branches covered.">        for (int i=length; --i&gt;=0; ) {</span>
+<span class="fc" id="L278">            converter = converters[i];</span>
+<span class="fc" id="L279">            Class&lt;?&gt; supportedType = converter.getSupportedType();</span>
+<span class="fc bfc" id="L280" title="All 2 branches covered.">            for (int j=length; --j&gt;=0; ) {</span>
+<span class="fc bfc" id="L281" title="All 4 branches covered.">                if (j != i &amp;&amp; converters[j].getSupportedType().isAssignableFrom(supportedType)) {</span>
+                    // Eliminate supertype.
+<span class="fc" id="L283">                    set = set.remove(j, null);</span>
+<span class="fc" id="L284">                    converters = set.iConverters;</span>
+<span class="fc" id="L285">                    length = converters.length;</span>
+<span class="fc" id="L286">                    i = length - 1;</span>
+                }
+            }
+<span class="fc" id="L289">        }        </span>
+        
+        // Check what remains in the set.
+
+<span class="fc bfc" id="L293" title="All 2 branches covered.">        if (length == 1) {</span>
+            // Found the one best match.
+<span class="fc" id="L295">            return converters[0];</span>
+        }
+
+        // Class c implements a, b {}
+        // Converters exist only for a and b. Which is better? Neither.
+
+<span class="fc" id="L301">        StringBuilder msg = new StringBuilder();</span>
+<span class="fc" id="L302">        msg.append(&quot;Unable to find best converter for type \&quot;&quot;);</span>
+<span class="fc" id="L303">        msg.append(type.getName());</span>
+<span class="fc" id="L304">        msg.append(&quot;\&quot; from remaining set: &quot;);</span>
+<span class="fc bfc" id="L305" title="All 2 branches covered.">        for (int i=0; i&lt;length; i++) {</span>
+<span class="fc" id="L306">            converter = converters[i];</span>
+<span class="fc" id="L307">            Class&lt;?&gt; supportedType = converter.getSupportedType();</span>
+
+<span class="fc" id="L309">            msg.append(converter.getClass().getName());</span>
+<span class="fc" id="L310">            msg.append('[');</span>
+<span class="pc bpc" id="L311" title="1 of 2 branches missed.">            msg.append(supportedType == null ? null : supportedType.getName());</span>
+<span class="fc" id="L312">            msg.append(&quot;], &quot;);</span>
+        }
+
+<span class="fc" id="L315">        throw new IllegalStateException(msg.toString());</span>
+    }
+
+    static class Entry {
+        final Class&lt;?&gt; iType;
+        final Converter iConverter;
+
+<span class="fc" id="L322">        Entry(Class&lt;?&gt; type, Converter converter) {</span>
+<span class="fc" id="L323">            iType = type;</span>
+<span class="fc" id="L324">            iConverter = converter;</span>
+<span class="fc" id="L325">        }</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

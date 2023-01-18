@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DelegatedDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">DelegatedDateTimeField.java</span></div><h1>DelegatedDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import java.io.Serializable;
+import java.util.Locale;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+import org.joda.time.ReadablePartial;
+
+/**
+ * &lt;code&gt;DelegatedDateTimeField&lt;/code&gt; delegates each method call to the
+ * date time field it wraps.
+ * &lt;p&gt;
+ * DelegatedDateTimeField is thread-safe and immutable, and its subclasses must
+ * be as well.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ * @see DecoratedDateTimeField
+ */
+public class DelegatedDateTimeField extends DateTimeField implements Serializable {
+
+    /** Serialization version */
+    private static final long serialVersionUID = -4730164440214502503L;
+
+    /** The DateTimeField being wrapped. */
+    private final DateTimeField iField;
+    /** The range duration. */
+    private final DurationField iRangeDurationField;
+    /** The override field type. */
+    private final DateTimeFieldType iType;
+
+    /**
+     * Constructor.
+     * 
+     * @param field  the field being decorated
+     */
+    public DelegatedDateTimeField(DateTimeField field) {
+<span class="fc" id="L54">        this(field, null);</span>
+<span class="fc" id="L55">    }</span>
+
+    /**
+     * Constructor.
+     * 
+     * @param field  the field being decorated
+     * @param type  the field type override
+     */
+    public DelegatedDateTimeField(DateTimeField field, DateTimeFieldType type) {
+<span class="fc" id="L64">        this(field, null, type);</span>
+<span class="fc" id="L65">    }</span>
+
+    /**
+     * Constructor.
+     * 
+     * @param field  the field being decorated
+     * @param rangeField  the range field, null to derive
+     * @param type  the field type override
+     */
+    public DelegatedDateTimeField(DateTimeField field, DurationField rangeField, DateTimeFieldType type) {
+<span class="fc" id="L75">        super();</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (field == null) {</span>
+<span class="nc" id="L77">            throw new IllegalArgumentException(&quot;The field must not be null&quot;);</span>
+        }
+<span class="fc" id="L79">        iField = field;</span>
+<span class="fc" id="L80">        iRangeDurationField = rangeField;</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        iType = (type == null ? field.getType() : type);</span>
+<span class="fc" id="L82">    }</span>
+
+    /**
+     * Gets the wrapped date time field.
+     * 
+     * @return the wrapped DateTimeField
+     */
+    public final DateTimeField getWrappedField() {
+<span class="nc" id="L90">        return iField;</span>
+    }
+
+    public DateTimeFieldType getType() {
+<span class="fc" id="L94">        return iType;</span>
+    }
+
+    public String getName() {
+<span class="nc" id="L98">        return iType.getName();</span>
+    }
+
+    public boolean isSupported() {
+<span class="fc" id="L102">        return iField.isSupported();</span>
+    }
+
+    public boolean isLenient() {
+<span class="fc" id="L106">        return iField.isLenient();</span>
+    }
+
+    public int get(long instant) {
+<span class="fc" id="L110">        return iField.get(instant);</span>
+    }
+
+    public String getAsText(long instant, Locale locale) {
+<span class="nc" id="L114">        return iField.getAsText(instant, locale);</span>
+    }
+
+    public String getAsText(long instant) {
+<span class="nc" id="L118">        return iField.getAsText(instant);</span>
+    }
+
+    public String getAsText(ReadablePartial partial, int fieldValue, Locale locale) {
+<span class="nc" id="L122">        return iField.getAsText(partial, fieldValue, locale);</span>
+    }
+
+    public String getAsText(ReadablePartial partial, Locale locale) {
+<span class="nc" id="L126">        return iField.getAsText(partial, locale);</span>
+    }
+
+    public String getAsText(int fieldValue, Locale locale) {
+<span class="nc" id="L130">        return iField.getAsText(fieldValue, locale);</span>
+    }
+
+    public String getAsShortText(long instant, Locale locale) {
+<span class="nc" id="L134">        return iField.getAsShortText(instant, locale);</span>
+    }
+
+    public String getAsShortText(long instant) {
+<span class="nc" id="L138">        return iField.getAsShortText(instant);</span>
+    }
+
+    public String getAsShortText(ReadablePartial partial, int fieldValue, Locale locale) {
+<span class="nc" id="L142">        return iField.getAsShortText(partial, fieldValue, locale);</span>
+    }
+
+    public String getAsShortText(ReadablePartial partial, Locale locale) {
+<span class="nc" id="L146">        return iField.getAsShortText(partial, locale);</span>
+    }
+
+    public String getAsShortText(int fieldValue, Locale locale) {
+<span class="nc" id="L150">        return iField.getAsShortText(fieldValue, locale);</span>
+    }
+
+    public long add(long instant, int value) {
+<span class="fc" id="L154">        return iField.add(instant, value);</span>
+    }
+
+    public long add(long instant, long value) {
+<span class="fc" id="L158">        return iField.add(instant, value);</span>
+    }
+
+    public int[] add(ReadablePartial instant, int fieldIndex, int[] values, int valueToAdd) {
+<span class="nc" id="L162">        return iField.add(instant, fieldIndex, values, valueToAdd);</span>
+    }
+
+    public int[] addWrapPartial(ReadablePartial instant, int fieldIndex, int[] values, int valueToAdd) {
+<span class="nc" id="L166">        return iField.addWrapPartial(instant, fieldIndex, values, valueToAdd);</span>
+    }
+
+    public long addWrapField(long instant, int value) {
+<span class="nc" id="L170">        return iField.addWrapField(instant, value);</span>
+    }
+
+    public int[] addWrapField(ReadablePartial instant, int fieldIndex, int[] values, int valueToAdd) {
+<span class="nc" id="L174">        return iField.addWrapField(instant, fieldIndex, values, valueToAdd);</span>
+    }
+
+    public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L178">        return iField.getDifference(minuendInstant, subtrahendInstant);</span>
+    }
+
+    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="nc" id="L182">        return iField.getDifferenceAsLong(minuendInstant, subtrahendInstant);</span>
+    }
+
+    public long set(long instant, int value) {
+<span class="fc" id="L186">        return iField.set(instant, value);</span>
+    }
+
+    public long set(long instant, String text, Locale locale) {
+<span class="nc" id="L190">        return iField.set(instant, text, locale);</span>
+    }
+
+    public long set(long instant, String text) {
+<span class="nc" id="L194">        return iField.set(instant, text);</span>
+    }
+
+    public int[] set(ReadablePartial instant, int fieldIndex, int[] values, int newValue) {
+<span class="nc" id="L198">        return iField.set(instant, fieldIndex, values, newValue);</span>
+    }
+
+    public int[] set(ReadablePartial instant, int fieldIndex, int[] values, String text, Locale locale) {
+<span class="nc" id="L202">        return iField.set(instant, fieldIndex, values, text, locale);</span>
+    }
+
+    public DurationField getDurationField() {
+<span class="fc" id="L206">        return iField.getDurationField();</span>
+    }
+
+    public DurationField getRangeDurationField() {
+<span class="fc bfc" id="L210" title="All 2 branches covered.">        if (iRangeDurationField != null) {</span>
+<span class="fc" id="L211">            return iRangeDurationField;</span>
+        }
+<span class="fc" id="L213">        return iField.getRangeDurationField();</span>
+    }
+
+    public boolean isLeap(long instant) {
+<span class="fc" id="L217">        return iField.isLeap(instant);</span>
+    }
+
+    public int getLeapAmount(long instant) {
+<span class="fc" id="L221">        return iField.getLeapAmount(instant);</span>
+    }
+
+    public DurationField getLeapDurationField() {
+<span class="fc" id="L225">        return iField.getLeapDurationField();</span>
+    }
+
+    public int getMinimumValue() {
+<span class="fc" id="L229">        return iField.getMinimumValue();</span>
+    }
+
+    public int getMinimumValue(long instant) {
+<span class="nc" id="L233">        return iField.getMinimumValue(instant);</span>
+    }
+
+    public int getMinimumValue(ReadablePartial instant) {
+<span class="nc" id="L237">        return iField.getMinimumValue(instant);</span>
+    }
+
+    public int getMinimumValue(ReadablePartial instant, int[] values) {
+<span class="fc" id="L241">        return iField.getMinimumValue(instant, values);</span>
+    }
+
+    public int getMaximumValue() {
+<span class="fc" id="L245">        return iField.getMaximumValue();</span>
+    }
+
+    public int getMaximumValue(long instant) {
+<span class="fc" id="L249">        return iField.getMaximumValue(instant);</span>
+    }
+
+    public int getMaximumValue(ReadablePartial instant) {
+<span class="nc" id="L253">        return iField.getMaximumValue(instant);</span>
+    }
+
+    public int getMaximumValue(ReadablePartial instant, int[] values) {
+<span class="fc" id="L257">        return iField.getMaximumValue(instant, values);</span>
+    }
+
+    public int getMaximumTextLength(Locale locale) {
+<span class="nc" id="L261">        return iField.getMaximumTextLength(locale);</span>
+    }
+
+    public int getMaximumShortTextLength(Locale locale) {
+<span class="nc" id="L265">        return iField.getMaximumShortTextLength(locale);</span>
+    }
+
+    public long roundFloor(long instant) {
+<span class="fc" id="L269">        return iField.roundFloor(instant);</span>
+    }
+
+    public long roundCeiling(long instant) {
+<span class="nc" id="L273">        return iField.roundCeiling(instant);</span>
+    }
+
+    public long roundHalfFloor(long instant) {
+<span class="nc" id="L277">        return iField.roundHalfFloor(instant);</span>
+    }
+
+    public long roundHalfCeiling(long instant) {
+<span class="nc" id="L281">        return iField.roundHalfCeiling(instant);</span>
+    }
+
+    public long roundHalfEven(long instant) {
+<span class="nc" id="L285">        return iField.roundHalfEven(instant);</span>
+    }
+
+    public long remainder(long instant) {
+<span class="fc" id="L289">        return iField.remainder(instant);</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L293">        return (&quot;DateTimeField[&quot; + getName() + ']');</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PosixParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Apache Commons CLI</a> &gt; <a href="index.source.html" class="el_package">org.apache.commons.cli</a> &gt; <span class="el_source">PosixParser.java</span></div><h1>PosixParser.java</h1><pre class="source lang-java linenums">/**
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.apache.commons.cli;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * The class PosixParser provides an implementation of the
+ * {@link Parser#flatten(Options,String[],boolean) flatten} method.
+ *
+ * @version $Id$
+ * @deprecated since 1.3, use the {@link DefaultParser} instead
+ */
+@Deprecated
+<span class="fc" id="L33">public class PosixParser extends Parser</span>
+{
+    /** holder for flattened tokens */
+<span class="fc" id="L36">    private final List&lt;String&gt; tokens = new ArrayList&lt;String&gt;();</span>
+
+    /** specifies if bursting should continue */
+    private boolean eatTheRest;
+
+    /** holder for the current option */
+    private Option currentOption;
+
+    /** the command line Options */
+    private Options options;
+
+    /**
+     * Resets the members to their original state i.e. remove
+     * all of &lt;code&gt;tokens&lt;/code&gt; entries and set &lt;code&gt;eatTheRest&lt;/code&gt;
+     * to false.
+     */
+    private void init()
+    {
+<span class="fc" id="L54">        eatTheRest = false;</span>
+<span class="fc" id="L55">        tokens.clear();</span>
+<span class="fc" id="L56">    }</span>
+
+    /**
+     * &lt;p&gt;An implementation of {@link Parser}'s abstract
+     * {@link Parser#flatten(Options,String[],boolean) flatten} method.&lt;/p&gt;
+     *
+     * &lt;p&gt;The following are the rules used by this flatten method.&lt;/p&gt;
+     * &lt;ol&gt;
+     *  &lt;li&gt;if &lt;code&gt;stopAtNonOption&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt; then do not
+     *  burst anymore of &lt;code&gt;arguments&lt;/code&gt; entries, just add each
+     *  successive entry without further processing.  Otherwise, ignore
+     *  &lt;code&gt;stopAtNonOption&lt;/code&gt;.&lt;/li&gt;
+     *  &lt;li&gt;if the current &lt;code&gt;arguments&lt;/code&gt; entry is &quot;&lt;b&gt;--&lt;/b&gt;&quot;
+     *  just add the entry to the list of processed tokens&lt;/li&gt;
+     *  &lt;li&gt;if the current &lt;code&gt;arguments&lt;/code&gt; entry is &quot;&lt;b&gt;-&lt;/b&gt;&quot;
+     *  just add the entry to the list of processed tokens&lt;/li&gt;
+     *  &lt;li&gt;if the current &lt;code&gt;arguments&lt;/code&gt; entry is two characters
+     *  in length and the first character is &quot;&lt;b&gt;-&lt;/b&gt;&quot; then check if this
+     *  is a valid {@link Option} id.  If it is a valid id, then add the
+     *  entry to the list of processed tokens and set the current {@link Option}
+     *  member.  If it is not a valid id and &lt;code&gt;stopAtNonOption&lt;/code&gt;
+     *  is true, then the remaining entries are copied to the list of
+     *  processed tokens.  Otherwise, the current entry is ignored.&lt;/li&gt;
+     *  &lt;li&gt;if the current &lt;code&gt;arguments&lt;/code&gt; entry is more than two
+     *  characters in length and the first character is &quot;&lt;b&gt;-&lt;/b&gt;&quot; then
+     *  we need to burst the entry to determine its constituents.  For more
+     *  information on the bursting algorithm see
+     *  {@link PosixParser#burstToken(String, boolean) burstToken}.&lt;/li&gt;
+     *  &lt;li&gt;if the current &lt;code&gt;arguments&lt;/code&gt; entry is not handled
+     *  by any of the previous rules, then the entry is added to the list
+     *  of processed tokens.&lt;/li&gt;
+     * &lt;/ol&gt;
+     *
+     * @param options The command line {@link Options}
+     * @param arguments The command line arguments to be parsed
+     * @param stopAtNonOption Specifies whether to stop flattening
+     * when an non option is found.
+     * @return The flattened &lt;code&gt;arguments&lt;/code&gt; String array.
+     */
+    @Override
+    protected String[] flatten(Options options, String[] arguments, boolean stopAtNonOption) throws ParseException
+    {
+<span class="fc" id="L98">        init();</span>
+<span class="fc" id="L99">        this.options = options;</span>
+
+        // an iterator for the command line tokens
+<span class="fc" id="L102">        Iterator&lt;String&gt; iter = Arrays.asList(arguments).iterator();</span>
+
+        // process each command line token
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        while (iter.hasNext())</span>
+        {
+            // get the next command line token
+<span class="fc" id="L108">            String token = iter.next();</span>
+
+            // single or double hyphen
+<span class="pc bpc" id="L111" title="2 of 4 branches missed.">            if (&quot;-&quot;.equals(token) || &quot;--&quot;.equals(token))</span>
+            {
+<span class="nc" id="L113">                tokens.add(token);</span>
+            }
+            
+            // handle long option --foo or --foo=bar
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            else if (token.startsWith(&quot;--&quot;))</span>
+            {
+<span class="fc" id="L119">                int pos = token.indexOf('=');</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">                String opt = pos == -1 ? token : token.substring(0, pos); // --foo</span>
+                
+<span class="fc" id="L122">                List&lt;String&gt; matchingOpts = options.getMatchingOptions(opt);</span>
+
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">                if (matchingOpts.isEmpty())</span>
+                {
+<span class="nc" id="L126">                    processNonOptionToken(token, stopAtNonOption);</span>
+                }
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">                else if (matchingOpts.size() &gt; 1)</span>
+                {
+<span class="nc" id="L130">                    throw new AmbiguousOptionException(opt, matchingOpts);</span>
+                }
+                else
+                {
+<span class="fc" id="L134">                    currentOption = options.getOption(matchingOpts.get(0));</span>
+                    
+<span class="fc" id="L136">                    tokens.add(&quot;--&quot; + currentOption.getLongOpt());</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">                    if (pos != -1)</span>
+                    {
+<span class="fc" id="L139">                        tokens.add(token.substring(pos + 1));</span>
+                    }
+                }
+<span class="fc" id="L142">            }</span>
+
+<span class="fc bfc" id="L144" title="All 2 branches covered.">            else if (token.startsWith(&quot;-&quot;))</span>
+            {
+<span class="fc bfc" id="L146" title="All 4 branches covered.">                if (token.length() == 2 || options.hasOption(token))</span>
+                {
+<span class="fc" id="L148">                    processOptionToken(token, stopAtNonOption);</span>
+                }
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">                else if (!options.getMatchingOptions(token).isEmpty())</span>
+                {
+<span class="nc" id="L152">                    List&lt;String&gt; matchingOpts = options.getMatchingOptions(token);</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">                    if (matchingOpts.size() &gt; 1)</span>
+                    {
+<span class="nc" id="L155">                        throw new AmbiguousOptionException(token, matchingOpts);</span>
+                    }
+<span class="nc" id="L157">                    Option opt = options.getOption(matchingOpts.get(0));</span>
+<span class="nc" id="L158">                    processOptionToken(&quot;-&quot; + opt.getLongOpt(), stopAtNonOption);</span>
+<span class="nc" id="L159">                }</span>
+                // requires bursting
+                else
+                {
+<span class="fc" id="L163">                    burstToken(token, stopAtNonOption);</span>
+                }
+            }
+            else
+            {
+<span class="fc" id="L168">                processNonOptionToken(token, stopAtNonOption);</span>
+            }
+
+<span class="fc" id="L171">            gobble(iter);</span>
+<span class="fc" id="L172">        }</span>
+
+<span class="fc" id="L174">        return tokens.toArray(new String[tokens.size()]);</span>
+    }
+
+    /**
+     * Adds the remaining tokens to the processed tokens list.
+     *
+     * @param iter An iterator over the remaining tokens
+     */
+    private void gobble(Iterator&lt;String&gt; iter)
+    {
+<span class="pc bpc" id="L184" title="1 of 2 branches missed.">        if (eatTheRest)</span>
+        {
+<span class="nc bnc" id="L186" title="All 2 branches missed.">            while (iter.hasNext())</span>
+            {
+<span class="nc" id="L188">                tokens.add(iter.next());</span>
+            }
+        }
+<span class="fc" id="L191">    }</span>
+
+    /**
+     * Add the special token &quot;&lt;b&gt;--&lt;/b&gt;&quot; and the current &lt;code&gt;value&lt;/code&gt;
+     * to the processed tokens list. Then add all the remaining
+     * &lt;code&gt;argument&lt;/code&gt; values to the processed tokens list.
+     *
+     * @param value The current token
+     */
+    private void processNonOptionToken(String value, boolean stopAtNonOption)
+    {
+<span class="pc bpc" id="L202" title="2 of 6 branches missed.">        if (stopAtNonOption &amp;&amp; (currentOption == null || !currentOption.hasArg()))</span>
+        {
+<span class="nc" id="L204">            eatTheRest = true;</span>
+<span class="nc" id="L205">            tokens.add(&quot;--&quot;);</span>
+        }
+
+<span class="fc" id="L208">        tokens.add(value);</span>
+<span class="fc" id="L209">    }</span>
+
+    /**
+     * &lt;p&gt;If an {@link Option} exists for &lt;code&gt;token&lt;/code&gt; then
+     * add the token to the processed list.&lt;/p&gt;
+     *
+     * &lt;p&gt;If an {@link Option} does not exist and &lt;code&gt;stopAtNonOption&lt;/code&gt;
+     * is set then add the remaining tokens to the processed tokens list
+     * directly.&lt;/p&gt;
+     *
+     * @param token The current option token
+     * @param stopAtNonOption Specifies whether flattening should halt
+     * at the first non option.
+     */
+    private void processOptionToken(String token, boolean stopAtNonOption)
+    {
+<span class="pc bpc" id="L225" title="1 of 4 branches missed.">        if (stopAtNonOption &amp;&amp; !options.hasOption(token))</span>
+        {
+<span class="nc" id="L227">            eatTheRest = true;</span>
+        }
+
+<span class="pc bpc" id="L230" title="1 of 2 branches missed.">        if (options.hasOption(token))</span>
+        {
+<span class="fc" id="L232">            currentOption = options.getOption(token);</span>
+        }
+
+<span class="fc" id="L235">        tokens.add(token);</span>
+<span class="fc" id="L236">    }</span>
+
+    /**
+     * Breaks &lt;code&gt;token&lt;/code&gt; into its constituent parts
+     * using the following algorithm.
+     *
+     * &lt;ul&gt;
+     *  &lt;li&gt;ignore the first character (&quot;&lt;b&gt;-&lt;/b&gt;&quot;)&lt;/li&gt;
+     *  &lt;li&gt;for each remaining character check if an {@link Option}
+     *  exists with that id.&lt;/li&gt;
+     *  &lt;li&gt;if an {@link Option} does exist then add that character
+     *  prepended with &quot;&lt;b&gt;-&lt;/b&gt;&quot; to the list of processed tokens.&lt;/li&gt;
+     *  &lt;li&gt;if the {@link Option} can have an argument value and there
+     *  are remaining characters in the token then add the remaining
+     *  characters as a token to the list of processed tokens.&lt;/li&gt;
+     *  &lt;li&gt;if an {@link Option} does &lt;b&gt;NOT&lt;/b&gt; exist &lt;b&gt;AND&lt;/b&gt;
+     *  &lt;code&gt;stopAtNonOption&lt;/code&gt; &lt;b&gt;IS&lt;/b&gt; set then add the special token
+     *  &quot;&lt;b&gt;--&lt;/b&gt;&quot; followed by the remaining characters and also
+     *  the remaining tokens directly to the processed tokens list.&lt;/li&gt;
+     *  &lt;li&gt;if an {@link Option} does &lt;b&gt;NOT&lt;/b&gt; exist &lt;b&gt;AND&lt;/b&gt;
+     *  &lt;code&gt;stopAtNonOption&lt;/code&gt; &lt;b&gt;IS NOT&lt;/b&gt; set then add that
+     *  character prepended with &quot;&lt;b&gt;-&lt;/b&gt;&quot;.&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @param token The current token to be &lt;b&gt;burst&lt;/b&gt;
+     * @param stopAtNonOption Specifies whether to stop processing
+     * at the first non-Option encountered.
+     */
+    protected void burstToken(String token, boolean stopAtNonOption)
+    {
+<span class="fc bfc" id="L266" title="All 2 branches covered.">        for (int i = 1; i &lt; token.length(); i++)</span>
+        {
+<span class="fc" id="L268">            String ch = String.valueOf(token.charAt(i));</span>
+
+<span class="pc bpc" id="L270" title="1 of 2 branches missed.">            if (options.hasOption(ch))</span>
+            {
+<span class="fc" id="L272">                tokens.add(&quot;-&quot; + ch);</span>
+<span class="fc" id="L273">                currentOption = options.getOption(ch);</span>
+
+<span class="pc bpc" id="L275" title="1 of 4 branches missed.">                if (currentOption.hasArg() &amp;&amp; token.length() != i + 1)</span>
+                {
+<span class="fc" id="L277">                    tokens.add(token.substring(i + 1));</span>
+
+<span class="fc" id="L279">                    break;</span>
+                }
+            }
+<span class="nc bnc" id="L282" title="All 2 branches missed.">            else if (stopAtNonOption)</span>
+            {
+<span class="nc" id="L284">                processNonOptionToken(token.substring(i), true);</span>
+<span class="nc" id="L285">                break;</span>
+            }
+            else
+            {
+<span class="nc" id="L289">                tokens.add(token);</span>
+<span class="nc" id="L290">                break;</span>
+            }
+        }
+<span class="fc" id="L293">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

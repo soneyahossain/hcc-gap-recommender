@@ -1,0 +1,57 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.3% done, time left: unknown  0.5% done, time left: unknown  0.9% done, time left: unknown  1.6% done, time left: unknown  2.4% done, time left:   0:00:12    3.7% done, time left:   0:00:11  4.9% done, time left:   0:00:10  6.3% done, time left:   0:00:10  7.7% done, time left:   0:00:10  9.2% done, time left:   0:00:10 10.8% done, time left:   0:00:11 12.4% done, time left:   0:00:11 14.0% done, time left:   0:00:11 15.7% done, time left:   0:00:10 17.4% done, time left:   0:00:10 19.1% done, time left:   0:00:09 20.7% done, time left:   0:00:09 22.3% done, time left:   0:00:09 23.2% done, time left:   0:00:08 23.6% done, time left:   0:00:07 24.4% done, time left:   0:00:06 25.0% done, time left:   0:00:06 25.7% done, time left:   0:00:06 27.1% done, time left:   0:00:07 28.6% done, time left:   0:00:07 30.4% done, time left:   0:00:07 32.1% done, time left:   0:00:07 34.0% done, time left:   0:00:06 35.8% done, time left:   0:00:06 37.6% done, time left:   0:00:05 39.3% done, time left:   0:00:05 41.0% done, time left:   0:00:05 42.8% done, time left:   0:00:04 44.5% done, time left:   0:00:04 46.2% done, time left:   0:00:04 47.9% done, time left:   0:00:03 49.7% done, time left:   0:00:03 51.4% done, time left:   0:00:03 53.1% done, time left:   0:00:02 54.8% done, time left:   0:00:02 56.4% done, time left:   0:00:02 57.9% done, time left:   0:00:02 59.5% done, time left:   0:00:02 61.1% done, time left:   0:00:02 62.7% done, time left:   0:00:01 64.4% done, time left:   0:00:01 66.0% done, time left:   0:00:01 67.7% done, time left:   0:00:01 69.3% done, time left:   0:00:01 71.0% done, time left:   0:00:01 72.6% done, time left:   0:00:01 74.2% done, time left:   0:00:00 75.9% done, time left:   0:00:00 77.5% done, time left:   0:00:00 79.1% done, time left:   0:00:00 80.7% done, time left:   0:00:00 82.3% done, time left:   0:00:00 83.9% done, time left:   0:00:00 85.6% done, time left:   0:00:00 87.2% done, time left:   0:00:00 88.8% done, time left:   0:00:00 90.5% done, time left:   0:00:00 92.2% done, time left:   0:00:00 94.0% done, time left:   0:00:00 95.9% done, time left:   0:00:00 97.8% done, time left:   0:00:00 99.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:104:*]:
+org.joda.time.DateTimeZone.<init>:719 ALOAD 0
+org.joda.time.DateTimeZone.<init>:719 ALOAD 1
+org.joda.time.DateTimeZone.<init>:719 PUTFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ALOAD 0
+org.joda.time.DateTimeZone.getID:732 GETFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ARETURN
+org.joda.time.tz.FixedDateTimeZone.<init>:38 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:38 ALOAD 1
+org.joda.time.tz.FixedDateTimeZone.<init>:38 INVOKESPECIAL org/joda/time/DateTimeZone.<init>(Ljava/lang/String;)V
+org.joda.time.tz.FixedDateTimeZone.<init>:40 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.<init>:40 ILOAD 3
+org.joda.time.tz.FixedDateTimeZone.<init>:40 PUTFIELD org/joda/time/tz/FixedDateTimeZone.iWallOffset I
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:77 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:77 INVOKEVIRTUAL org/joda/time/tz/FixedDateTimeZone.getID()Ljava/lang/String;
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:77 ASTORE 1
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:78 ALOAD 1
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:78 INVOKEVIRTUAL java/lang/String.length()I
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:78 BIPUSH 6
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:78 IF_ICMPNE L1 true false
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:84 NEW java/util/SimpleTimeZone
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:84 DUP
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:84 ALOAD 0
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:84 GETFIELD org/joda/time/tz/FixedDateTimeZone.iWallOffset I
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:84 INVOKESPECIAL java/util/SimpleTimeZone.<init>(ILjava/lang/String;)V
+org.joda.time.tz.FixedDateTimeZone.toTimeZone:84 ARETURN
+org.joda.time.tz.TestFixedDateTimeZone.main:34 NEW org/joda/time/tz/TestFixedDateTimeZone
+org.joda.time.tz.TestFixedDateTimeZone.main:34 ASTORE 1
+org.joda.time.tz.TestFixedDateTimeZone.main:38 ALOAD 1
+org.joda.time.tz.TestFixedDateTimeZone.main:38 INVOKEVIRTUAL org/joda/time/tz/TestFixedDateTimeZone.testToTimeZone2()V
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:100 NEW org/joda/time/tz/FixedDateTimeZone
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:100 DUP
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:100 LDC "A"
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:100 ICONST_1
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:100 ICONST_5
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:100 INVOKESPECIAL org/joda/time/tz/FixedDateTimeZone.<init>(Ljava/lang/String;Ljava/lang/String;II)V
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:100 ASTORE 1
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:101 ALOAD 1
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:101 INVOKEVIRTUAL org/joda/time/tz/FixedDateTimeZone.toTimeZone()Ljava/util/TimeZone;
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:101 ASTORE 2
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:104 LCONST_1
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:104 ALOAD 0
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:104 ALOAD 2
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:104 LDC 1167638400000
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:104 INVOKESPECIAL org/joda/time/tz/TestFixedDateTimeZone.getOffset(Ljava/util/TimeZone;J)I
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:104 I2L
+org.joda.time.tz.TestFixedDateTimeZone.testToTimeZone2:104 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.tz.TestFixedDateTimeZone.getOffset:111 ALOAD 1
+org.joda.time.tz.TestFixedDateTimeZone.getOffset:111 INVOKEVIRTUAL java/util/TimeZone.inDaylightTime(Ljava/util/Date;)Z
+org.joda.time.tz.TestFixedDateTimeZone.getOffset:111 IFEQ L0 true false
+org.joda.time.tz.TestFixedDateTimeZone.getOffset:114 ALOAD 1
+org.joda.time.tz.TestFixedDateTimeZone.getOffset:114 INVOKEVIRTUAL java/util/TimeZone.getRawOffset()I
+org.joda.time.tz.TestFixedDateTimeZone.getOffset:114 IRETURN
+
+Slice consists of 73 bytecode instructions.
+Computation took 7.45 seconds.

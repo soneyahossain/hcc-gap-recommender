@@ -1,0 +1,120 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:236:*]:
+org.joda.time.TimeOfDay.<init>:199 ALOAD 0
+org.joda.time.TimeOfDay.<init>:199 INVOKESPECIAL org/joda/time/base/BasePartial.<init>()V
+org.joda.time.TimeOfDay.size:429 ICONST_4
+org.joda.time.TimeOfDay.size:429 IRETURN
+org.joda.time.TimeOfDay.getField:442 ILOAD 1
+org.joda.time.TimeOfDay.getField:442 TABLESWITCH (0 => L0, 1 => L1, 2 => L2, 3 => L3, * => L4)
+org.joda.time.TimeOfDay.getField:446 ALOAD 2
+org.joda.time.TimeOfDay.getField:446 INVOKEVIRTUAL org/joda/time/Chronology.minuteOfHour()Lorg/joda/time/DateTimeField;
+org.joda.time.TimeOfDay.getField:446 ARETURN
+org.joda.time.base.AbstractPartial.getField:105 ILOAD 1
+org.joda.time.base.AbstractPartial.getField:105 ALOAD 0
+org.joda.time.base.AbstractPartial.getField:105 INVOKEVIRTUAL org/joda/time/base/AbstractPartial.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.base.AbstractPartial.getField:105 INVOKEVIRTUAL org/joda/time/base/AbstractPartial.getField(ILorg/joda/time/Chronology;)Lorg/joda/time/DateTimeField;
+org.joda.time.base.AbstractPartial.getField:105 ARETURN
+org.joda.time.base.BasePartial.<init>:65 ALOAD 0
+org.joda.time.base.BasePartial.<init>:65 INVOKESPECIAL org/joda/time/base/BasePartial.<init>(JLorg/joda/time/Chronology;)V
+org.joda.time.base.BasePartial.<init>:110 ALOAD 0
+org.joda.time.base.BasePartial.<init>:110 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.base.BasePartial.<init>:110 PUTFIELD org/joda/time/base/BasePartial.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BasePartial.getChronology:249 ALOAD 0
+org.joda.time.base.BasePartial.getChronology:249 GETFIELD org/joda/time/base/BasePartial.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BasePartial.getChronology:249 ARETURN
+org.joda.time.chrono.AssembledChronology.minuteOfHour:184 ALOAD 0
+org.joda.time.chrono.AssembledChronology.minuteOfHour:184 GETFIELD org/joda/time/chrono/AssembledChronology.iMinuteOfHour Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.minuteOfHour:184 ARETURN
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+org.joda.time.field.BaseDateTimeField.add:298 ILOAD 4
+org.joda.time.field.BaseDateTimeField.add:298 IFNE L0 true false
+org.joda.time.field.BaseDateTimeField.add:304 ACONST_NULL
+org.joda.time.field.BaseDateTimeField.add:304 ASTORE 5
+org.joda.time.field.BaseDateTimeField.add:306 ILOAD 4
+org.joda.time.field.BaseDateTimeField.add:306 IFLE L5 true true
+org.joda.time.field.BaseDateTimeField.add:307 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.getMaximumValue(Lorg/joda/time/ReadablePartial;[I)I
+org.joda.time.field.BaseDateTimeField.add:307 ISTORE 6
+org.joda.time.field.BaseDateTimeField.add:308 ALOAD 3
+org.joda.time.field.BaseDateTimeField.add:308 ILOAD 2
+org.joda.time.field.BaseDateTimeField.add:308 IALOAD
+org.joda.time.field.BaseDateTimeField.add:308 ILOAD 4
+org.joda.time.field.BaseDateTimeField.add:308 IADD
+org.joda.time.field.BaseDateTimeField.add:308 I2L
+org.joda.time.field.BaseDateTimeField.add:308 LSTORE 7
+org.joda.time.field.BaseDateTimeField.add:309 LLOAD 7
+org.joda.time.field.BaseDateTimeField.add:309 ILOAD 6
+org.joda.time.field.BaseDateTimeField.add:309 I2L
+org.joda.time.field.BaseDateTimeField.add:309 LCMP
+org.joda.time.field.BaseDateTimeField.add:309 IFGT L2 true false
+org.joda.time.field.BaseDateTimeField.add:313 ALOAD 5
+org.joda.time.field.BaseDateTimeField.add:313 IFNONNULL L4 false true
+org.joda.time.field.BaseDateTimeField.add:317 ALOAD 1
+org.joda.time.field.BaseDateTimeField.add:317 ILOAD 2
+org.joda.time.field.BaseDateTimeField.add:317 ICONST_1
+org.joda.time.field.BaseDateTimeField.add:317 ISUB
+org.joda.time.field.BaseDateTimeField.add:317 INVOKEINTERFACE org/joda/time/ReadablePartial.getField(I)Lorg/joda/time/DateTimeField;
+org.joda.time.field.BaseDateTimeField.add:317 ASTORE 5
+org.joda.time.field.BaseDateTimeField.add:323 ILOAD 4
+org.joda.time.field.BaseDateTimeField.add:323 ILOAD 6
+org.joda.time.field.BaseDateTimeField.add:323 ICONST_1
+org.joda.time.field.BaseDateTimeField.add:323 IADD
+org.joda.time.field.BaseDateTimeField.add:323 ALOAD 3
+org.joda.time.field.BaseDateTimeField.add:323 ILOAD 2
+org.joda.time.field.BaseDateTimeField.add:323 IALOAD
+org.joda.time.field.BaseDateTimeField.add:323 ISUB
+org.joda.time.field.BaseDateTimeField.add:323 ISUB
+org.joda.time.field.BaseDateTimeField.add:323 ISTORE 4
+org.joda.time.field.BaseDateTimeField.add:324 ALOAD 5
+org.joda.time.field.BaseDateTimeField.add:324 ASTORE 3
+org.joda.time.field.BaseDateTimeField.add:327 ILOAD 4
+org.joda.time.field.BaseDateTimeField.add:327 IFGE L9 true false
+org.joda.time.field.BaseDateTimeField.add:348 ILOAD 2
+org.joda.time.field.BaseDateTimeField.add:348 ALOAD 3
+org.joda.time.field.BaseDateTimeField.add:348 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.set(Lorg/joda/time/ReadablePartial;I[II)[I
+org.joda.time.field.BaseDateTimeField.add:348 ARETURN
+org.joda.time.field.BaseDateTimeField.set:589 ILOAD 2
+org.joda.time.field.BaseDateTimeField.set:589 ICONST_1
+org.joda.time.field.BaseDateTimeField.set:589 IADD
+org.joda.time.field.BaseDateTimeField.set:589 ISTORE 5
+org.joda.time.field.BaseDateTimeField.set:589 ILOAD 5
+org.joda.time.field.BaseDateTimeField.set:589 INVOKEINTERFACE org/joda/time/ReadablePartial.size()I
+org.joda.time.field.BaseDateTimeField.set:589 IF_ICMPGE L3 true true
+org.joda.time.field.BaseDateTimeField.set:589 IINC 5 1
+org.joda.time.field.BaseDateTimeField.set:598 ALOAD 3
+org.joda.time.field.BaseDateTimeField.set:598 ARETURN
+org.joda.time.field.BaseDateTimeField.getMaximumValue:804 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.getMaximumValue()I
+org.joda.time.field.BaseDateTimeField.getMaximumValue:804 IRETURN
+org.joda.time.field.BaseDateTimeField.getMaximumValue:818 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.getMaximumValue(Lorg/joda/time/ReadablePartial;)I
+org.joda.time.field.BaseDateTimeField.getMaximumValue:818 IRETURN
+org.joda.time.field.TestBaseDateTimeField.main:60 INVOKEVIRTUAL org/joda/time/field/TestBaseDateTimeField.test_add_RP_int_intarray_int()V
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:233 ICONST_4
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:233 NEWARRAY T_INT
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:233 DUP
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:233 ICONST_2
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:233 BIPUSH 30
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:233 IASTORE
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:233 ASTORE 1
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:234 ICONST_4
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:234 NEWARRAY T_INT
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:234 ASTORE 2
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:235 NEW org/joda/time/TimeOfDay
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:235 DUP
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:235 INVOKESPECIAL org/joda/time/TimeOfDay.<init>()V
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:235 ICONST_2
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:235 ALOAD 1
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:235 BIPUSH 30
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:235 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.add(Lorg/joda/time/ReadablePartial;I[II)[I
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:235 ASTORE 4
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:236 ICONST_1
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:236 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:236 ALOAD 2
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:236 ALOAD 4
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:236 INVOKESTATIC java/util/Arrays.equals([I[I)Z
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:236 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.field.TestBaseDateTimeField.test_add_RP_int_intarray_int:236 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.field.TestBaseDateTimeField$MockBaseDateTimeField.getMaximumValue:592 BIPUSH 59
+org.joda.time.field.TestBaseDateTimeField$MockBaseDateTimeField.getMaximumValue:592 IRETURN
+
+Slice consists of 119 bytecode instructions.
+Computation took 2.05 seconds.

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OptionGroup.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Apache Commons CLI</a> &gt; <a href="index.source.html" class="el_package">org.apache.commons.cli</a> &gt; <span class="el_source">OptionGroup.java</span></div><h1>OptionGroup.java</h1><pre class="source lang-java linenums">/**
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.apache.commons.cli;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+/**
+ * A group of mutually exclusive options.
+ *
+ * @version $Id$
+ */
+<span class="fc" id="L31">public class OptionGroup implements Serializable</span>
+{
+    /** The serial version UID. */
+    private static final long serialVersionUID = 1L;
+    
+    /** hold the options */
+<span class="fc" id="L37">    private final Map&lt;String, Option&gt; optionMap = new LinkedHashMap&lt;String, Option&gt;();</span>
+
+    /** the name of the selected option */
+    private String selected;
+
+    /** specified whether this group is required */
+    private boolean required;
+
+    /**
+     * Add the specified &lt;code&gt;Option&lt;/code&gt; to this group.
+     *
+     * @param option the option to add to this group
+     * @return this option group with the option added
+     */
+    public OptionGroup addOption(Option option)
+    {
+        // key   - option name
+        // value - the option
+<span class="fc" id="L55">        optionMap.put(option.getKey(), option);</span>
+
+<span class="fc" id="L57">        return this;</span>
+    }
+
+    /**
+     * @return the names of the options in this group as a 
+     * &lt;code&gt;Collection&lt;/code&gt;
+     */
+    public Collection&lt;String&gt; getNames()
+    {
+        // the key set is the collection of names
+<span class="fc" id="L67">        return optionMap.keySet();</span>
+    }
+
+    /**
+     * @return the options in this group as a &lt;code&gt;Collection&lt;/code&gt;
+     */
+    public Collection&lt;Option&gt; getOptions()
+    {
+        // the values are the collection of options
+<span class="fc" id="L76">        return optionMap.values();</span>
+    }
+
+    /**
+     * Set the selected option of this group to &lt;code&gt;name&lt;/code&gt;.
+     *
+     * @param option the option that is selected
+     * @throws AlreadySelectedException if an option from this group has 
+     * already been selected.
+     */
+    public void setSelected(Option option) throws AlreadySelectedException
+    {
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (option == null)</span>
+        {
+            // reset the option previously selected
+<span class="fc" id="L91">            selected = null;</span>
+<span class="fc" id="L92">            return;</span>
+        }
+        
+        // if no option has already been selected or the 
+        // same option is being reselected then set the
+        // selected member variable
+<span class="pc bpc" id="L98" title="1 of 4 branches missed.">        if (selected == null || selected.equals(option.getKey()))</span>
+        {
+<span class="fc" id="L100">            selected = option.getKey();</span>
+        }
+        else
+        {
+<span class="fc" id="L104">            throw new AlreadySelectedException(this, option);</span>
+        }
+<span class="fc" id="L106">    }</span>
+
+    /**
+     * @return the selected option name
+     */
+    public String getSelected()
+    {
+<span class="fc" id="L113">        return selected;</span>
+    }
+
+    /**
+     * @param required specifies if this group is required
+     */
+    public void setRequired(boolean required)
+    {
+<span class="fc" id="L121">        this.required = required;</span>
+<span class="fc" id="L122">    }</span>
+
+    /**
+     * Returns whether this option group is required.
+     *
+     * @return whether this option group is required
+     */
+    public boolean isRequired()
+    {
+<span class="fc" id="L131">        return required;</span>
+    }
+
+    /**
+     * Returns the stringified version of this OptionGroup.
+     * 
+     * @return the stringified representation of this group
+     */
+    @Override
+    public String toString()
+    {
+<span class="fc" id="L142">        StringBuilder buff = new StringBuilder();</span>
+        
+<span class="fc" id="L144">        Iterator&lt;Option&gt; iter = getOptions().iterator();</span>
+
+<span class="fc" id="L146">        buff.append(&quot;[&quot;);</span>
+
+<span class="fc bfc" id="L148" title="All 2 branches covered.">        while (iter.hasNext())</span>
+        {
+<span class="fc" id="L150">            Option option = iter.next();</span>
+
+<span class="fc bfc" id="L152" title="All 2 branches covered.">            if (option.getOpt() != null)</span>
+            {
+<span class="fc" id="L154">                buff.append(&quot;-&quot;);</span>
+<span class="fc" id="L155">                buff.append(option.getOpt());</span>
+            }
+            else
+            {
+<span class="fc" id="L159">                buff.append(&quot;--&quot;);</span>
+<span class="fc" id="L160">                buff.append(option.getLongOpt());</span>
+            }
+            
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">            if (option.getDescription() != null)</span>
+            {
+<span class="fc" id="L165">                buff.append(&quot; &quot;);</span>
+<span class="fc" id="L166">                buff.append(option.getDescription());</span>
+            }
+            
+<span class="fc bfc" id="L169" title="All 2 branches covered.">            if (iter.hasNext())</span>
+            {
+<span class="fc" id="L171">                buff.append(&quot;, &quot;);</span>
+            }
+<span class="fc" id="L173">        }</span>
+
+<span class="fc" id="L175">        buff.append(&quot;]&quot;);</span>
+
+<span class="fc" id="L177">        return buff.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

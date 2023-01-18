@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IllegalInstantException.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">IllegalInstantException.java</span></div><h1>IllegalInstantException.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import org.joda.time.format.DateTimeFormat;
+
+/**
+ * Exception thrown when attempting to create an instant or date-time that cannot exist.
+ * &lt;p&gt;
+ * Classes like {@code DateTime} only store valid date-times.
+ * One of the cases where validity is important is handling daylight savings time (DST).
+ * In many places DST is used, where the local clock moves forward by an hour in spring and back by an hour in autumn/fall.
+ * This means that in spring, there is a &quot;gap&quot; where a local time does not exist.
+ * &lt;p&gt;
+ * This exception refers to this gap, and it means that your application tried to create
+ * a date-time inside the gap - a time that did not exist.
+ * Since Joda-Time objects must be valid, this is not allowed.
+ * &lt;p&gt;
+ * Possible solutions may be as follows:&lt;br /&gt;
+ * Use &lt;code&gt;LocalDateTime&lt;/code&gt;, as all local date-times are valid.&lt;br /&gt;
+ * When converting a &lt;code&gt;LocalDate&lt;/code&gt; to a &lt;code&gt;DateTime&lt;/code&gt;, then use &lt;code&gt;toDateTimeAsStartOfDay()&lt;/code&gt;
+ * as this handles and manages any gaps.&lt;br /&gt;
+ * When parsing, use &lt;code&gt;parseLocalDateTime()&lt;/code&gt; if the string being parsed has no time-zone.
+ *
+ * @author Stephen Colebourne
+ * @since 2.2
+ */
+public class IllegalInstantException extends IllegalArgumentException {
+    
+    /** Serialization lock. */
+    private static final long serialVersionUID = 2858712538216L;
+
+
+    /**
+     * Constructor.
+     * 
+     * @param message  the message
+     */
+    public IllegalInstantException(String message) {
+<span class="fc" id="L53">        super(message);</span>
+<span class="fc" id="L54">    }</span>
+
+    /**
+     * Constructor.
+     * 
+     * @param instantLocal  the local instant
+     * @param zoneId  the time-zone ID, may be null
+     */
+    public IllegalInstantException(long instantLocal, String zoneId) {
+<span class="fc" id="L63">        super(createMessage(instantLocal, zoneId));</span>
+<span class="fc" id="L64">    }</span>
+
+    private static String createMessage(long instantLocal, String zoneId) {
+<span class="fc" id="L67">        String localDateTime = DateTimeFormat.forPattern(&quot;yyyy-MM-dd'T'HH:mm:ss.SSS&quot;).print(new Instant(instantLocal));</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        String zone = (zoneId != null ? &quot; (&quot; + zoneId + &quot;)&quot; : &quot;&quot;);</span>
+<span class="fc" id="L69">        return &quot;Illegal instant due to time zone offset transition (daylight savings time 'gap'): &quot; + localDateTime + zone;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Checks if the exception is, or has a cause, of {@code IllegalInstantException}.
+     * 
+     * @param ex  the exception to check
+     * @return true if an {@code IllegalInstantException}
+     */
+    public static boolean isIllegalInstant(Throwable ex) {
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (ex instanceof IllegalInstantException) {</span>
+<span class="fc" id="L81">            return true;</span>
+        }
+<span class="pc bpc" id="L83" title="2 of 4 branches missed.">        while (ex.getCause() != null &amp;&amp; ex.getCause() != ex) {</span>
+<span class="fc" id="L84">            return isIllegalInstant(ex.getCause());</span>
+        }
+<span class="nc" id="L86">        return false;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

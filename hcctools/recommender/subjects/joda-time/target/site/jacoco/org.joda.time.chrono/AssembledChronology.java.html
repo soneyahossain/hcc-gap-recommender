@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AssembledChronology.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">AssembledChronology.java</span></div><h1>AssembledChronology.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2005 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeZone;
+import org.joda.time.DurationField;
+
+/**
+ * Abstract Chronology that enables chronologies to be assembled from
+ * a container of fields.
+ * &lt;p&gt;
+ * AssembledChronology is thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public abstract class AssembledChronology extends BaseChronology {
+
+    private static final long serialVersionUID = -6728465968995518215L;
+
+    private final Chronology iBase;
+    private final Object iParam;
+
+    private transient DurationField iMillis;
+    private transient DurationField iSeconds;
+    private transient DurationField iMinutes;
+    private transient DurationField iHours;
+    private transient DurationField iHalfdays;
+
+    private transient DurationField iDays;
+    private transient DurationField iWeeks;
+    private transient DurationField iWeekyears;
+    private transient DurationField iMonths;
+    private transient DurationField iYears;
+    private transient DurationField iCenturies;
+    private transient DurationField iEras;
+
+    private transient DateTimeField iMillisOfSecond;
+    private transient DateTimeField iMillisOfDay;
+    private transient DateTimeField iSecondOfMinute;
+    private transient DateTimeField iSecondOfDay;
+    private transient DateTimeField iMinuteOfHour;
+    private transient DateTimeField iMinuteOfDay;
+    private transient DateTimeField iHourOfDay;
+    private transient DateTimeField iClockhourOfDay;
+    private transient DateTimeField iHourOfHalfday;
+    private transient DateTimeField iClockhourOfHalfday;
+    private transient DateTimeField iHalfdayOfDay;
+
+    private transient DateTimeField iDayOfWeek;
+    private transient DateTimeField iDayOfMonth;
+    private transient DateTimeField iDayOfYear;
+    private transient DateTimeField iWeekOfWeekyear;
+    private transient DateTimeField iWeekyear;
+    private transient DateTimeField iWeekyearOfCentury;
+    private transient DateTimeField iMonthOfYear;
+    private transient DateTimeField iYear;
+    private transient DateTimeField iYearOfEra;
+    private transient DateTimeField iYearOfCentury;
+    private transient DateTimeField iCenturyOfEra;
+    private transient DateTimeField iEra;
+
+    // Bit set determines which base fields are used
+    // bit 1 set: hourOfDay, minuteOfHour, secondOfMinute, and millisOfSecond fields
+    // bit 2 set: millisOfDayField
+    // bit 3 set: year, monthOfYear, and dayOfMonth fields
+    private transient int iBaseFlags;
+
+    /**
+     * Constructor calls the assemble method, enabling subclasses to define its
+     * supported fields. If a base chronology is supplied, the field set
+     * initially contains references to each base chronology field.
+     * &lt;p&gt;
+     * Other methods in this class will delegate to the base chronology, if it
+     * can be determined that the base chronology will produce the same results
+     * as AbstractChronology.
+     *
+     * @param base optional base chronology to copy initial fields from
+     * @param param optional param object available for assemble method
+     */
+<span class="fc" id="L99">    protected AssembledChronology(Chronology base, Object param) {</span>
+<span class="fc" id="L100">        iBase = base;</span>
+<span class="fc" id="L101">        iParam = param;</span>
+<span class="fc" id="L102">        setFields();</span>
+<span class="fc" id="L103">    }</span>
+
+    public DateTimeZone getZone() {
+        Chronology base;
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">        if ((base = iBase) != null) {</span>
+<span class="fc" id="L108">            return base.getZone();</span>
+        }
+<span class="nc" id="L110">        return null;</span>
+    }
+
+    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,
+                                  int millisOfDay)
+        throws IllegalArgumentException
+    {
+        Chronology base;
+<span class="pc bpc" id="L118" title="1 of 4 branches missed.">        if ((base = iBase) != null &amp;&amp; (iBaseFlags &amp; 6) == 6) {</span>
+            // Only call specialized implementation if applicable fields are the same.
+<span class="fc" id="L120">            return base.getDateTimeMillis(year, monthOfYear, dayOfMonth, millisOfDay);</span>
+        }
+<span class="fc" id="L122">        return super.getDateTimeMillis(year, monthOfYear, dayOfMonth, millisOfDay);</span>
+    }
+
+    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,
+                                  int hourOfDay, int minuteOfHour,
+                                  int secondOfMinute, int millisOfSecond)
+        throws IllegalArgumentException
+    {
+        Chronology base;
+<span class="pc bpc" id="L131" title="1 of 4 branches missed.">        if ((base = iBase) != null &amp;&amp; (iBaseFlags &amp; 5) == 5) {</span>
+            // Only call specialized implementation if applicable fields are the same.
+<span class="fc" id="L133">            return base.getDateTimeMillis(year, monthOfYear, dayOfMonth,</span>
+                                          hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+        }
+<span class="fc" id="L136">        return super.getDateTimeMillis(year, monthOfYear, dayOfMonth,</span>
+                                       hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+    }
+
+    public long getDateTimeMillis(long instant,
+                                  int hourOfDay, int minuteOfHour,
+                                  int secondOfMinute, int millisOfSecond)
+        throws IllegalArgumentException
+    {
+        Chronology base;
+<span class="pc bpc" id="L146" title="1 of 4 branches missed.">        if ((base = iBase) != null &amp;&amp; (iBaseFlags &amp; 1) == 1) {</span>
+            // Only call specialized implementation if applicable fields are the same.
+<span class="fc" id="L148">            return base.getDateTimeMillis</span>
+<span class="fc" id="L149">                (instant, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);</span>
+        }
+<span class="fc" id="L151">        return super.getDateTimeMillis</span>
+<span class="fc" id="L152">            (instant, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);</span>
+    }
+
+    public final DurationField millis() {
+<span class="fc" id="L156">        return iMillis;</span>
+    }
+
+    public final DateTimeField millisOfSecond() {
+<span class="fc" id="L160">        return iMillisOfSecond;</span>
+    }
+
+    public final DateTimeField millisOfDay() {
+<span class="fc" id="L164">        return iMillisOfDay;</span>
+    }
+
+    public final DurationField seconds() {
+<span class="fc" id="L168">        return iSeconds;</span>
+    }
+
+    public final DateTimeField secondOfMinute() {
+<span class="fc" id="L172">        return iSecondOfMinute;</span>
+    }
+
+    public final DateTimeField secondOfDay() {
+<span class="fc" id="L176">        return iSecondOfDay;</span>
+    }
+
+    public final DurationField minutes() {
+<span class="fc" id="L180">        return iMinutes;</span>
+    }
+
+    public final DateTimeField minuteOfHour() {
+<span class="fc" id="L184">        return iMinuteOfHour;</span>
+    }
+
+    public final DateTimeField minuteOfDay() {
+<span class="fc" id="L188">        return iMinuteOfDay;</span>
+    }
+
+    public final DurationField hours() {
+<span class="fc" id="L192">        return iHours;</span>
+    }
+
+    public final DateTimeField hourOfDay() {
+<span class="fc" id="L196">        return iHourOfDay;</span>
+    }
+
+    public final DateTimeField clockhourOfDay() {
+<span class="fc" id="L200">        return iClockhourOfDay;</span>
+    }
+
+    public final DurationField halfdays() {
+<span class="fc" id="L204">        return iHalfdays;</span>
+    }
+
+    public final DateTimeField hourOfHalfday() {
+<span class="fc" id="L208">        return iHourOfHalfday;</span>
+    }
+
+    public final DateTimeField clockhourOfHalfday() {
+<span class="fc" id="L212">        return iClockhourOfHalfday;</span>
+    }
+
+    public final DateTimeField halfdayOfDay() {
+<span class="fc" id="L216">        return iHalfdayOfDay;</span>
+    }
+
+    public final DurationField days() {
+<span class="fc" id="L220">        return iDays;</span>
+    }
+
+    public final DateTimeField dayOfWeek() {
+<span class="fc" id="L224">        return iDayOfWeek;</span>
+    }
+
+    public final DateTimeField dayOfMonth() {
+<span class="fc" id="L228">        return iDayOfMonth;</span>
+    }
+
+    public final DateTimeField dayOfYear() {
+<span class="fc" id="L232">        return iDayOfYear;</span>
+    }
+
+    public final DurationField weeks() {
+<span class="fc" id="L236">        return iWeeks;</span>
+    }
+
+    public final DateTimeField weekOfWeekyear() {
+<span class="fc" id="L240">        return iWeekOfWeekyear;</span>
+    }
+
+    public final DurationField weekyears() {
+<span class="fc" id="L244">        return iWeekyears;</span>
+    }
+
+    public final DateTimeField weekyear() {
+<span class="fc" id="L248">        return iWeekyear;</span>
+    }
+
+    public final DateTimeField weekyearOfCentury() {
+<span class="fc" id="L252">        return iWeekyearOfCentury;</span>
+    }
+
+    public final DurationField months() {
+<span class="fc" id="L256">        return iMonths;</span>
+    }
+
+    public final DateTimeField monthOfYear() {
+<span class="fc" id="L260">        return iMonthOfYear;</span>
+    }
+
+    public final DurationField years() {
+<span class="fc" id="L264">        return iYears;</span>
+    }
+
+    public final DateTimeField year() {
+<span class="fc" id="L268">        return iYear;</span>
+    }
+
+    public final DateTimeField yearOfEra() {
+<span class="fc" id="L272">        return iYearOfEra;</span>
+    }
+
+    public final DateTimeField yearOfCentury() {
+<span class="fc" id="L276">        return iYearOfCentury;</span>
+    }
+
+    public final DurationField centuries() {
+<span class="fc" id="L280">        return iCenturies;</span>
+    }
+
+    public final DateTimeField centuryOfEra() {
+<span class="fc" id="L284">        return iCenturyOfEra;</span>
+    }
+
+    public final DurationField eras() {
+<span class="fc" id="L288">        return iEras;</span>
+    }
+
+    public final DateTimeField era() {
+<span class="fc" id="L292">        return iEra;</span>
+    }
+
+    /**
+     * Invoked by the constructor and after deserialization to allow subclasses
+     * to define all of its supported fields. All unset fields default to
+     * unsupported instances.
+     *
+     * @param fields container of fields
+     */
+    protected abstract void assemble(Fields fields);
+
+    /**
+     * Returns the same base chronology as passed into the constructor.
+     */
+    protected final Chronology getBase() {
+<span class="fc" id="L308">        return iBase;</span>
+    }
+
+    /**
+     * Returns the same param object as passed into the constructor.
+     */
+    protected final Object getParam() {
+<span class="fc" id="L315">        return iParam;</span>
+    }
+
+    private void setFields() {
+<span class="fc" id="L319">        Fields fields = new Fields();</span>
+<span class="fc bfc" id="L320" title="All 2 branches covered.">        if (iBase != null) {</span>
+<span class="fc" id="L321">            fields.copyFieldsFrom(iBase);</span>
+        }
+<span class="fc" id="L323">        assemble(fields);</span>
+
+        {
+            DurationField f;
+<span class="pc bpc" id="L327" title="1 of 2 branches missed.">            iMillis    = (f = fields.millis)    != null ? f : super.millis();</span>
+<span class="pc bpc" id="L328" title="1 of 2 branches missed.">            iSeconds   = (f = fields.seconds)   != null ? f : super.seconds();</span>
+<span class="pc bpc" id="L329" title="1 of 2 branches missed.">            iMinutes   = (f = fields.minutes)   != null ? f : super.minutes();</span>
+<span class="pc bpc" id="L330" title="1 of 2 branches missed.">            iHours     = (f = fields.hours)     != null ? f : super.hours();</span>
+<span class="pc bpc" id="L331" title="1 of 2 branches missed.">            iHalfdays  = (f = fields.halfdays)  != null ? f : super.halfdays();</span>
+<span class="pc bpc" id="L332" title="1 of 2 branches missed.">            iDays      = (f = fields.days)      != null ? f : super.days();</span>
+<span class="pc bpc" id="L333" title="1 of 2 branches missed.">            iWeeks     = (f = fields.weeks)     != null ? f : super.weeks();</span>
+<span class="pc bpc" id="L334" title="1 of 2 branches missed.">            iWeekyears = (f = fields.weekyears) != null ? f : super.weekyears();</span>
+<span class="pc bpc" id="L335" title="1 of 2 branches missed.">            iMonths    = (f = fields.months)    != null ? f : super.months();</span>
+<span class="pc bpc" id="L336" title="1 of 2 branches missed.">            iYears     = (f = fields.years)     != null ? f : super.years();</span>
+<span class="pc bpc" id="L337" title="1 of 2 branches missed.">            iCenturies = (f = fields.centuries) != null ? f : super.centuries();</span>
+<span class="fc bfc" id="L338" title="All 2 branches covered.">            iEras      = (f = fields.eras)      != null ? f : super.eras();</span>
+        }
+
+        {
+            DateTimeField f;
+<span class="pc bpc" id="L343" title="1 of 2 branches missed.">            iMillisOfSecond     = (f = fields.millisOfSecond)     != null ? f : super.millisOfSecond();</span>
+<span class="pc bpc" id="L344" title="1 of 2 branches missed.">            iMillisOfDay        = (f = fields.millisOfDay)        != null ? f : super.millisOfDay();</span>
+<span class="pc bpc" id="L345" title="1 of 2 branches missed.">            iSecondOfMinute     = (f = fields.secondOfMinute)     != null ? f : super.secondOfMinute();</span>
+<span class="pc bpc" id="L346" title="1 of 2 branches missed.">            iSecondOfDay        = (f = fields.secondOfDay)        != null ? f : super.secondOfDay();</span>
+<span class="pc bpc" id="L347" title="1 of 2 branches missed.">            iMinuteOfHour       = (f = fields.minuteOfHour)       != null ? f : super.minuteOfHour();</span>
+<span class="pc bpc" id="L348" title="1 of 2 branches missed.">            iMinuteOfDay        = (f = fields.minuteOfDay)        != null ? f : super.minuteOfDay();</span>
+<span class="pc bpc" id="L349" title="1 of 2 branches missed.">            iHourOfDay          = (f = fields.hourOfDay)          != null ? f : super.hourOfDay();</span>
+<span class="pc bpc" id="L350" title="1 of 2 branches missed.">            iClockhourOfDay     = (f = fields.clockhourOfDay)     != null ? f : super.clockhourOfDay();</span>
+<span class="pc bpc" id="L351" title="1 of 2 branches missed.">            iHourOfHalfday      = (f = fields.hourOfHalfday)      != null ? f : super.hourOfHalfday();</span>
+<span class="pc bpc" id="L352" title="1 of 2 branches missed.">            iClockhourOfHalfday = (f = fields.clockhourOfHalfday) != null ? f : super.clockhourOfHalfday();</span>
+<span class="pc bpc" id="L353" title="1 of 2 branches missed.">            iHalfdayOfDay       = (f = fields.halfdayOfDay)       != null ? f : super.halfdayOfDay();</span>
+<span class="pc bpc" id="L354" title="1 of 2 branches missed.">            iDayOfWeek          = (f = fields.dayOfWeek)          != null ? f : super.dayOfWeek();</span>
+<span class="pc bpc" id="L355" title="1 of 2 branches missed.">            iDayOfMonth         = (f = fields.dayOfMonth)         != null ? f : super.dayOfMonth();</span>
+<span class="pc bpc" id="L356" title="1 of 2 branches missed.">            iDayOfYear          = (f = fields.dayOfYear)          != null ? f : super.dayOfYear();</span>
+<span class="pc bpc" id="L357" title="1 of 2 branches missed.">            iWeekOfWeekyear     = (f = fields.weekOfWeekyear)     != null ? f : super.weekOfWeekyear();</span>
+<span class="pc bpc" id="L358" title="1 of 2 branches missed.">            iWeekyear           = (f = fields.weekyear)           != null ? f : super.weekyear();</span>
+<span class="pc bpc" id="L359" title="1 of 2 branches missed.">            iWeekyearOfCentury  = (f = fields.weekyearOfCentury)  != null ? f : super.weekyearOfCentury();</span>
+<span class="pc bpc" id="L360" title="1 of 2 branches missed.">            iMonthOfYear        = (f = fields.monthOfYear)        != null ? f : super.monthOfYear();</span>
+<span class="pc bpc" id="L361" title="1 of 2 branches missed.">            iYear               = (f = fields.year)               != null ? f : super.year();</span>
+<span class="pc bpc" id="L362" title="1 of 2 branches missed.">            iYearOfEra          = (f = fields.yearOfEra)          != null ? f : super.yearOfEra();</span>
+<span class="pc bpc" id="L363" title="1 of 2 branches missed.">            iYearOfCentury      = (f = fields.yearOfCentury)      != null ? f : super.yearOfCentury();</span>
+<span class="pc bpc" id="L364" title="1 of 2 branches missed.">            iCenturyOfEra       = (f = fields.centuryOfEra)       != null ? f : super.centuryOfEra();</span>
+<span class="pc bpc" id="L365" title="1 of 2 branches missed.">            iEra                = (f = fields.era)                != null ? f : super.era();</span>
+        }
+
+        int flags;
+<span class="fc bfc" id="L369" title="All 2 branches covered.">        if (iBase == null) {</span>
+<span class="fc" id="L370">            flags = 0;</span>
+        } else {
+<span class="fc" id="L372">            flags = </span>
+<span class="fc bfc" id="L373" title="All 2 branches covered.">                ((iHourOfDay      == iBase.hourOfDay()      &amp;&amp;</span>
+<span class="pc bpc" id="L374" title="1 of 2 branches missed.">                  iMinuteOfHour   == iBase.minuteOfHour()   &amp;&amp;</span>
+<span class="pc bpc" id="L375" title="1 of 2 branches missed.">                  iSecondOfMinute == iBase.secondOfMinute() &amp;&amp;</span>
+<span class="pc bpc" id="L376" title="1 of 2 branches missed.">                  iMillisOfSecond == iBase.millisOfSecond()   ) ? 1 : 0) |</span>
+
+<span class="fc bfc" id="L378" title="All 2 branches covered.">                ((iMillisOfDay == iBase.millisOfDay()) ? 2 : 0) |</span>
+
+<span class="fc bfc" id="L380" title="All 2 branches covered.">                ((iYear        == iBase.year()        &amp;&amp;</span>
+<span class="pc bpc" id="L381" title="1 of 2 branches missed.">                  iMonthOfYear == iBase.monthOfYear() &amp;&amp;</span>
+<span class="pc bpc" id="L382" title="1 of 2 branches missed.">                  iDayOfMonth  == iBase.dayOfMonth()    ) ? 4 : 0);</span>
+        }
+
+<span class="fc" id="L385">        iBaseFlags = flags;</span>
+<span class="fc" id="L386">    }</span>
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+<span class="fc" id="L389">        in.defaultReadObject();</span>
+<span class="fc" id="L390">        setFields();</span>
+<span class="fc" id="L391">    }</span>
+
+    /**
+     * A container of fields used for assembling a chronology.
+     */
+    public static final class Fields {
+        public DurationField millis;
+        public DurationField seconds;
+        public DurationField minutes;
+        public DurationField hours;
+        public DurationField halfdays;
+    
+        public DurationField days;
+        public DurationField weeks;
+        public DurationField weekyears;
+        public DurationField months;
+        public DurationField years;
+        public DurationField centuries;
+        public DurationField eras;
+    
+        public DateTimeField millisOfSecond;
+        public DateTimeField millisOfDay;
+        public DateTimeField secondOfMinute;
+        public DateTimeField secondOfDay;
+        public DateTimeField minuteOfHour;
+        public DateTimeField minuteOfDay;
+        public DateTimeField hourOfDay;
+        public DateTimeField clockhourOfDay;
+        public DateTimeField hourOfHalfday;
+        public DateTimeField clockhourOfHalfday;
+        public DateTimeField halfdayOfDay;
+    
+        public DateTimeField dayOfWeek;
+        public DateTimeField dayOfMonth;
+        public DateTimeField dayOfYear;
+        public DateTimeField weekOfWeekyear;
+        public DateTimeField weekyear;
+        public DateTimeField weekyearOfCentury;
+        public DateTimeField monthOfYear;
+        public DateTimeField year;
+        public DateTimeField yearOfEra;
+        public DateTimeField yearOfCentury;
+        public DateTimeField centuryOfEra;
+        public DateTimeField era;
+
+<span class="fc" id="L436">        Fields() {</span>
+<span class="fc" id="L437">        }</span>
+
+        /**
+         * Copy the supported fields from a chronology into this container.
+         */
+        public void copyFieldsFrom(Chronology chrono) {
+            {
+                DurationField f;
+<span class="pc bpc" id="L445" title="1 of 2 branches missed.">                if (isSupported(f = chrono.millis())) {</span>
+<span class="fc" id="L446">                    millis = f;</span>
+                }
+<span class="pc bpc" id="L448" title="1 of 2 branches missed.">                if (isSupported(f = chrono.seconds())) {</span>
+<span class="fc" id="L449">                    seconds = f;</span>
+                }
+<span class="pc bpc" id="L451" title="1 of 2 branches missed.">                if (isSupported(f = chrono.minutes())) {</span>
+<span class="fc" id="L452">                    minutes = f;</span>
+                }
+<span class="pc bpc" id="L454" title="1 of 2 branches missed.">                if (isSupported(f = chrono.hours())) {</span>
+<span class="fc" id="L455">                    hours = f;</span>
+                }
+<span class="pc bpc" id="L457" title="1 of 2 branches missed.">                if (isSupported(f = chrono.halfdays())) {</span>
+<span class="fc" id="L458">                    halfdays = f;</span>
+                }
+<span class="pc bpc" id="L460" title="1 of 2 branches missed.">                if (isSupported(f = chrono.days())) {</span>
+<span class="fc" id="L461">                    days = f;</span>
+                }
+<span class="pc bpc" id="L463" title="1 of 2 branches missed.">                if (isSupported(f = chrono.weeks())) {</span>
+<span class="fc" id="L464">                    weeks = f;</span>
+                }
+<span class="pc bpc" id="L466" title="1 of 2 branches missed.">                if (isSupported(f = chrono.weekyears())) {</span>
+<span class="fc" id="L467">                    weekyears = f;</span>
+                }
+<span class="pc bpc" id="L469" title="1 of 2 branches missed.">                if (isSupported(f = chrono.months())) {</span>
+<span class="fc" id="L470">                    months = f;</span>
+                }
+<span class="pc bpc" id="L472" title="1 of 2 branches missed.">                if (isSupported(f = chrono.years())) {</span>
+<span class="fc" id="L473">                    years = f;</span>
+                }
+<span class="pc bpc" id="L475" title="1 of 2 branches missed.">                if (isSupported(f = chrono.centuries())) {</span>
+<span class="fc" id="L476">                    centuries = f;</span>
+                }
+<span class="pc bpc" id="L478" title="1 of 2 branches missed.">                if (isSupported(f = chrono.eras())) {</span>
+<span class="nc" id="L479">                    eras = f;</span>
+                }
+            }
+
+            {
+                DateTimeField f;
+<span class="pc bpc" id="L485" title="1 of 2 branches missed.">                if (isSupported(f = chrono.millisOfSecond())) {</span>
+<span class="fc" id="L486">                    millisOfSecond = f;</span>
+                }
+<span class="pc bpc" id="L488" title="1 of 2 branches missed.">                if (isSupported(f = chrono.millisOfDay())) {</span>
+<span class="fc" id="L489">                    millisOfDay = f;</span>
+                }
+<span class="pc bpc" id="L491" title="1 of 2 branches missed.">                if (isSupported(f = chrono.secondOfMinute())) {</span>
+<span class="fc" id="L492">                    secondOfMinute = f;</span>
+                }
+<span class="pc bpc" id="L494" title="1 of 2 branches missed.">                if (isSupported(f = chrono.secondOfDay())) {</span>
+<span class="fc" id="L495">                    secondOfDay = f;</span>
+                }
+<span class="pc bpc" id="L497" title="1 of 2 branches missed.">                if (isSupported(f = chrono.minuteOfHour())) {</span>
+<span class="fc" id="L498">                    minuteOfHour = f;</span>
+                }
+<span class="pc bpc" id="L500" title="1 of 2 branches missed.">                if (isSupported(f = chrono.minuteOfDay())) {</span>
+<span class="fc" id="L501">                    minuteOfDay = f;</span>
+                }
+<span class="pc bpc" id="L503" title="1 of 2 branches missed.">                if (isSupported(f = chrono.hourOfDay())) {</span>
+<span class="fc" id="L504">                    hourOfDay = f;</span>
+                }
+<span class="pc bpc" id="L506" title="1 of 2 branches missed.">                if (isSupported(f = chrono.clockhourOfDay())) {</span>
+<span class="fc" id="L507">                    clockhourOfDay = f;</span>
+                }
+<span class="pc bpc" id="L509" title="1 of 2 branches missed.">                if (isSupported(f = chrono.hourOfHalfday())) {</span>
+<span class="fc" id="L510">                    hourOfHalfday = f;</span>
+                }
+<span class="pc bpc" id="L512" title="1 of 2 branches missed.">                if (isSupported(f = chrono.clockhourOfHalfday())) {</span>
+<span class="fc" id="L513">                    clockhourOfHalfday = f;</span>
+                }
+<span class="pc bpc" id="L515" title="1 of 2 branches missed.">                if (isSupported(f = chrono.halfdayOfDay())) {</span>
+<span class="fc" id="L516">                    halfdayOfDay = f;</span>
+                }
+<span class="pc bpc" id="L518" title="1 of 2 branches missed.">                if (isSupported(f = chrono.dayOfWeek())) {</span>
+<span class="fc" id="L519">                    dayOfWeek = f;</span>
+                }
+<span class="pc bpc" id="L521" title="1 of 2 branches missed.">                if (isSupported(f = chrono.dayOfMonth())) {</span>
+<span class="fc" id="L522">                    dayOfMonth = f;</span>
+                }
+<span class="pc bpc" id="L524" title="1 of 2 branches missed.">                if (isSupported(f = chrono.dayOfYear())) {</span>
+<span class="fc" id="L525">                    dayOfYear = f;</span>
+                }
+<span class="pc bpc" id="L527" title="1 of 2 branches missed.">                if (isSupported(f = chrono.weekOfWeekyear())) {</span>
+<span class="fc" id="L528">                    weekOfWeekyear = f;</span>
+                }
+<span class="pc bpc" id="L530" title="1 of 2 branches missed.">                if (isSupported(f = chrono.weekyear())) {</span>
+<span class="fc" id="L531">                    weekyear = f;</span>
+                }
+<span class="pc bpc" id="L533" title="1 of 2 branches missed.">                if (isSupported(f = chrono.weekyearOfCentury())) {</span>
+<span class="fc" id="L534">                    weekyearOfCentury = f;</span>
+                }
+<span class="pc bpc" id="L536" title="1 of 2 branches missed.">                if (isSupported(f = chrono.monthOfYear())) {</span>
+<span class="fc" id="L537">                    monthOfYear = f;</span>
+                }
+<span class="pc bpc" id="L539" title="1 of 2 branches missed.">                if (isSupported(f = chrono.year())) {</span>
+<span class="fc" id="L540">                    year = f;</span>
+                }
+<span class="pc bpc" id="L542" title="1 of 2 branches missed.">                if (isSupported(f = chrono.yearOfEra())) {</span>
+<span class="fc" id="L543">                    yearOfEra = f;</span>
+                }
+<span class="pc bpc" id="L545" title="1 of 2 branches missed.">                if (isSupported(f = chrono.yearOfCentury())) {</span>
+<span class="fc" id="L546">                    yearOfCentury = f;</span>
+                }
+<span class="pc bpc" id="L548" title="1 of 2 branches missed.">                if (isSupported(f = chrono.centuryOfEra())) {</span>
+<span class="fc" id="L549">                    centuryOfEra = f;</span>
+                }
+<span class="pc bpc" id="L551" title="1 of 2 branches missed.">                if (isSupported(f = chrono.era())) {</span>
+<span class="fc" id="L552">                    era = f;</span>
+                }
+            }
+<span class="fc" id="L555">        }</span>
+
+        private static boolean isSupported(DurationField field) {
+<span class="pc bpc" id="L558" title="1 of 2 branches missed.">            return field == null ? false : field.isSupported();</span>
+        }
+
+        private static boolean isSupported(DateTimeField field) {
+<span class="pc bpc" id="L562" title="1 of 2 branches missed.">            return field == null ? false : field.isSupported();</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

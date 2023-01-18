@@ -1,0 +1,73 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  1.0% done, time left: unknown  2.1% done, time left: unknown  2.5% done, time left: unknown  2.6% done, time left: unknown  2.8% done, time left: unknown  3.0% done, time left: unknown  3.5% done, time left:   0:00:21    3.5% done, time left:   0:00:31  3.5% done, time left:   0:00:41  3.5% done, time left:   0:00:52  3.5% done, time left:   0:01:02  3.5% done, time left:   0:01:12  3.5% done, time left:   0:01:21  4.2% done, time left:   0:01:19  4.9% done, time left:   0:01:16  5.4% done, time left:   0:01:12  6.4% done, time left:   0:01:10  8.1% done, time left:   0:01:08  8.4% done, time left:   0:01:03  8.4% done, time left:   0:00:58  9.3% done, time left:   0:00:56 10.9% done, time left:   0:00:52 10.9% done, time left:   0:00:47 10.9% done, time left:   0:00:43 10.9% done, time left:   0:00:39 10.9% done, time left:   0:00:36 10.9% done, time left:   0:00:34 11.1% done, time left:   0:00:32 13.9% done, time left:   0:00:27 16.6% done, time left:   0:00:22 18.4% done, time left:   0:00:17 21.5% done, time left:   0:00:13 24.9% done, time left:   0:00:09 28.5% done, time left:   0:00:06 30.8% done, time left:   0:00:04 34.1% done, time left:   0:00:03 37.8% done, time left:   0:00:02 41.5% done, time left:   0:00:02 45.3% done, time left:   0:00:01 49.0% done, time left:   0:00:01 52.8% done, time left:   0:00:01 54.2% done, time left:   0:00:00 56.8% done, time left:   0:00:01 58.1% done, time left:   0:00:00 60.1% done, time left:   0:00:01 62.3% done, time left:   0:00:01 65.0% done, time left:   0:00:01 67.9% done, time left:   0:00:00 71.0% done, time left:   0:00:00 73.6% done, time left:   0:00:00 73.7% done, time left:   0:00:00 74.0% done, time left:   0:00:00 77.1% done, time left:   0:00:00 80.0% done, time left:   0:00:00 80.5% done, time left:   0:00:00 81.9% done, time left:   0:00:00 82.6% done, time left:   0:00:00 85.4% done, time left:   0:00:00 88.4% done, time left:   0:00:00 91.7% done, time left:   0:00:00 94.9% done, time left:   0:00:00 98.1% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDays.testMinus_Days:399:*]:
+org.joda.time.Days.days:80 ILOAD 0
+org.joda.time.Days.days:80 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, 5 => L5, 7 => L7, -2147483648 => L9, 0 => L0, 4 => L4, 6 => L6, 2147483647 => L8* => L10)
+org.joda.time.Days.days:86 GETSTATIC org/joda/time/Days.TWO Lorg/joda/time/Days;
+org.joda.time.Days.days:86 ARETURN
+org.joda.time.Days.days:88 GETSTATIC org/joda/time/Days.THREE Lorg/joda/time/Days;
+org.joda.time.Days.days:88 ARETURN
+org.joda.time.Days.days:102 NEW org/joda/time/Days
+org.joda.time.Days.days:102 DUP
+org.joda.time.Days.days:102 ILOAD 0
+org.joda.time.Days.days:102 INVOKESPECIAL org/joda/time/Days.<init>(I)V
+org.joda.time.Days.days:102 ARETURN
+org.joda.time.Days.<init>:216 ALOAD 0
+org.joda.time.Days.<init>:216 ILOAD 1
+org.joda.time.Days.<init>:216 INVOKESPECIAL org/joda/time/base/BaseSingleFieldPeriod.<init>(I)V
+org.joda.time.Days.getDays:343 ALOAD 0
+org.joda.time.Days.getDays:343 INVOKEVIRTUAL org/joda/time/Days.getValue()I
+org.joda.time.Days.getDays:343 IRETURN
+org.joda.time.Days.plus:357 ILOAD 1
+org.joda.time.Days.plus:357 IFNE L0 true false
+org.joda.time.Days.plus:360 ALOAD 0
+org.joda.time.Days.plus:360 INVOKEVIRTUAL org/joda/time/Days.getValue()I
+org.joda.time.Days.plus:360 ILOAD 1
+org.joda.time.Days.plus:360 INVOKESTATIC org/joda/time/field/FieldUtils.safeAdd(II)I
+org.joda.time.Days.plus:360 INVOKESTATIC org/joda/time/Days.days(I)Lorg/joda/time/Days;
+org.joda.time.Days.plus:360 ARETURN
+org.joda.time.Days.minus:390 ALOAD 0
+org.joda.time.Days.minus:390 ILOAD 1
+org.joda.time.Days.minus:390 INVOKESTATIC org/joda/time/field/FieldUtils.safeNegate(I)I
+org.joda.time.Days.minus:390 INVOKEVIRTUAL org/joda/time/Days.plus(I)Lorg/joda/time/Days;
+org.joda.time.Days.minus:390 ARETURN
+org.joda.time.Days.minus:403 ALOAD 1
+org.joda.time.Days.minus:403 IFNONNULL L0 true false
+org.joda.time.Days.minus:406 ALOAD 0
+org.joda.time.Days.minus:406 ALOAD 1
+org.joda.time.Days.minus:406 INVOKEVIRTUAL org/joda/time/Days.getValue()I
+org.joda.time.Days.minus:406 INVOKEVIRTUAL org/joda/time/Days.minus(I)Lorg/joda/time/Days;
+org.joda.time.Days.minus:406 ARETURN
+org.joda.time.TestDays.main:61 INVOKEVIRTUAL org/joda/time/TestDays.testMinus_Days()V
+org.joda.time.TestDays.testMinus_Days:394 ICONST_2
+org.joda.time.TestDays.testMinus_Days:394 INVOKESTATIC org/joda/time/Days.days(I)Lorg/joda/time/Days;
+org.joda.time.TestDays.testMinus_Days:394 ASTORE 1
+org.joda.time.TestDays.testMinus_Days:395 ICONST_3
+org.joda.time.TestDays.testMinus_Days:395 INVOKESTATIC org/joda/time/Days.days(I)Lorg/joda/time/Days;
+org.joda.time.TestDays.testMinus_Days:395 ASTORE 2
+org.joda.time.TestDays.testMinus_Days:396 ALOAD 1
+org.joda.time.TestDays.testMinus_Days:396 ALOAD 2
+org.joda.time.TestDays.testMinus_Days:396 INVOKEVIRTUAL org/joda/time/Days.minus(Lorg/joda/time/Days;)Lorg/joda/time/Days;
+org.joda.time.TestDays.testMinus_Days:396 ASTORE 3
+org.joda.time.TestDays.testMinus_Days:399 LDC -1
+org.joda.time.TestDays.testMinus_Days:399 ALOAD 3
+org.joda.time.TestDays.testMinus_Days:399 INVOKEVIRTUAL org/joda/time/Days.getDays()I
+org.joda.time.TestDays.testMinus_Days:399 I2L
+org.joda.time.TestDays.testMinus_Days:399 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 ILOAD 1
+org.joda.time.base.BaseSingleFieldPeriod.<init>:158 PUTFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 ALOAD 0
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 GETFIELD org/joda/time/base/BaseSingleFieldPeriod.iPeriod I
+org.joda.time.base.BaseSingleFieldPeriod.getValue:168 IRETURN
+org.joda.time.field.FieldUtils.safeNegate:55 ILOAD 0
+org.joda.time.field.FieldUtils.safeNegate:55 INEG
+org.joda.time.field.FieldUtils.safeNegate:55 IRETURN
+org.joda.time.field.FieldUtils.safeAdd:67 ILOAD 0
+org.joda.time.field.FieldUtils.safeAdd:67 ILOAD 1
+org.joda.time.field.FieldUtils.safeAdd:67 IADD
+org.joda.time.field.FieldUtils.safeAdd:67 ISTORE 2
+org.joda.time.field.FieldUtils.safeAdd:73 ILOAD 2
+org.joda.time.field.FieldUtils.safeAdd:73 IRETURN
+
+Slice consists of 68 bytecode instructions.
+Computation took 7.07 seconds.

@@ -1,0 +1,1016 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Option.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Apache Commons CLI</a> &gt; <a href="index.source.html" class="el_package">org.apache.commons.cli</a> &gt; <span class="el_source">Option.java</span></div><h1>Option.java</h1><pre class="source lang-java linenums">/**
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.apache.commons.cli;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Describes a single command-line option.  It maintains
+ * information regarding the short-name of the option, the long-name,
+ * if any exists, a flag indicating if an argument is required for
+ * this option, and a self-documenting description of the option.
+ * &lt;p&gt;
+ * An Option is not created independently, but is created through
+ * an instance of {@link Options}. An Option is required to have
+ * at least a short or a long-name.
+ * &lt;p&gt;
+ * &lt;b&gt;Note:&lt;/b&gt; once an {@link Option} has been added to an instance
+ * of {@link Options}, it's required flag may not be changed anymore.
+ *
+ * @see org.apache.commons.cli.Options
+ * @see org.apache.commons.cli.CommandLine
+ *
+ * @version $Id$
+ */
+public class Option implements Cloneable, Serializable
+{
+    /** constant that specifies the number of argument values has not been specified */
+    public static final int UNINITIALIZED = -1;
+
+    /** constant that specifies the number of argument values is infinite */
+    public static final int UNLIMITED_VALUES = -2;
+
+    /** The serial version UID. */
+    private static final long serialVersionUID = 1L;
+
+    /** the name of the option */
+    private final String opt;
+
+    /** the long representation of the option */
+    private String longOpt;
+
+    /** the name of the argument for this option */
+    private String argName;
+
+    /** description of the option */
+    private String description;
+
+    /** specifies whether this option is required to be present */
+    private boolean required;
+
+    /** specifies whether the argument value of this Option is optional */
+    private boolean optionalArg;
+
+    /** the number of argument values this option can have */
+<span class="fc" id="L72">    private int numberOfArgs = UNINITIALIZED;</span>
+
+    /** the type of this Option */
+<span class="fc" id="L75">    private Class&lt;?&gt; type = String.class;</span>
+
+    /** the list of argument values **/
+<span class="fc" id="L78">    private List&lt;String&gt; values = new ArrayList&lt;String&gt;();</span>
+
+    /** the character that is the value separator */
+    private char valuesep;
+
+    /**
+     * Private constructor used by the nested Builder class.
+     * 
+     * @param builder builder used to create this option
+     */
+    private Option(final Builder builder)
+<span class="fc" id="L89">    {</span>
+<span class="fc" id="L90">        this.argName = builder.argName;</span>
+<span class="fc" id="L91">        this.description = builder.description;</span>
+<span class="fc" id="L92">        this.longOpt = builder.longOpt;</span>
+<span class="fc" id="L93">        this.numberOfArgs = builder.numberOfArgs;</span>
+<span class="fc" id="L94">        this.opt = builder.opt;</span>
+<span class="fc" id="L95">        this.optionalArg = builder.optionalArg;</span>
+<span class="fc" id="L96">        this.required = builder.required;</span>
+<span class="fc" id="L97">        this.type = builder.type;</span>
+<span class="fc" id="L98">        this.valuesep = builder.valuesep;</span>
+<span class="fc" id="L99">    }</span>
+    
+    /**
+     * Creates an Option using the specified parameters.
+     * The option does not take an argument.
+     *
+     * @param opt short representation of the option
+     * @param description describes the function of the option
+     *
+     * @throws IllegalArgumentException if there are any non valid
+     * Option characters in &lt;code&gt;opt&lt;/code&gt;.
+     */
+    public Option(String opt, String description) throws IllegalArgumentException
+    {
+<span class="fc" id="L113">        this(opt, null, false, description);</span>
+<span class="fc" id="L114">    }</span>
+
+    /**
+     * Creates an Option using the specified parameters.
+     *
+     * @param opt short representation of the option
+     * @param hasArg specifies whether the Option takes an argument or not
+     * @param description describes the function of the option
+     *
+     * @throws IllegalArgumentException if there are any non valid
+     * Option characters in &lt;code&gt;opt&lt;/code&gt;.
+     */
+    public Option(String opt, boolean hasArg, String description) throws IllegalArgumentException
+    {
+<span class="fc" id="L128">        this(opt, null, hasArg, description);</span>
+<span class="fc" id="L129">    }</span>
+
+    /**
+     * Creates an Option using the specified parameters.
+     *
+     * @param opt short representation of the option
+     * @param longOpt the long representation of the option
+     * @param hasArg specifies whether the Option takes an argument or not
+     * @param description describes the function of the option
+     *
+     * @throws IllegalArgumentException if there are any non valid
+     * Option characters in &lt;code&gt;opt&lt;/code&gt;.
+     */
+    public Option(String opt, String longOpt, boolean hasArg, String description)
+           throws IllegalArgumentException
+<span class="fc" id="L144">    {</span>
+        // ensure that the option is valid
+<span class="fc" id="L146">        OptionValidator.validateOption(opt);</span>
+
+<span class="fc" id="L148">        this.opt = opt;</span>
+<span class="fc" id="L149">        this.longOpt = longOpt;</span>
+
+        // if hasArg is set then the number of arguments is 1
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        if (hasArg)</span>
+        {
+<span class="fc" id="L154">            this.numberOfArgs = 1;</span>
+        }
+
+<span class="fc" id="L157">        this.description = description;</span>
+<span class="fc" id="L158">    }</span>
+
+    /**
+     * Returns the id of this Option.  This is only set when the
+     * Option shortOpt is a single character.  This is used for switch
+     * statements.
+     *
+     * @return the id of this Option
+     */
+    public int getId()
+    {
+<span class="fc" id="L169">        return getKey().charAt(0);</span>
+    }
+
+    /**
+     * Returns the 'unique' Option identifier.
+     * 
+     * @return the 'unique' Option identifier
+     */
+    String getKey()
+    {
+        // if 'opt' is null, then it is a 'long' option
+<span class="fc bfc" id="L180" title="All 2 branches covered.">        return (opt == null) ? longOpt : opt;</span>
+    }
+
+    /** 
+     * Retrieve the name of this Option.
+     *
+     * It is this String which can be used with
+     * {@link CommandLine#hasOption(String opt)} and
+     * {@link CommandLine#getOptionValue(String opt)} to check
+     * for existence and argument.
+     *
+     * @return The name of this option
+     */
+    public String getOpt()
+    {
+<span class="fc" id="L195">        return opt;</span>
+    }
+
+    /**
+     * Retrieve the type of this Option.
+     * 
+     * @return The type of this option
+     */
+    public Object getType()
+    {
+<span class="fc" id="L205">        return type;</span>
+    }
+
+    /**
+     * Sets the type of this Option.
+     * &lt;p&gt;
+     * &lt;b&gt;Note:&lt;/b&gt; this method is kept for binary compatibility and the
+     * input type is supposed to be a {@link Class} object. 
+     *
+     * @param type the type of this Option
+     * @deprecated since 1.3, use {@link #setType(Class)} instead
+     */
+    @Deprecated
+    public void setType(Object type)
+    {
+<span class="nc" id="L220">        setType((Class&lt;?&gt;) type);</span>
+<span class="nc" id="L221">    }</span>
+
+    /**
+     * Sets the type of this Option.
+     *
+     * @param type the type of this Option
+     * @since 1.3
+     */
+    public void setType(Class&lt;?&gt; type)
+    {
+<span class="fc" id="L231">        this.type = type;</span>
+<span class="fc" id="L232">    }</span>
+
+    /** 
+     * Retrieve the long name of this Option.
+     *
+     * @return Long name of this option, or null, if there is no long name
+     */
+    public String getLongOpt()
+    {
+<span class="fc" id="L241">        return longOpt;</span>
+    }
+
+    /**
+     * Sets the long name of this Option.
+     *
+     * @param longOpt the long name of this Option
+     */
+    public void setLongOpt(String longOpt)
+    {
+<span class="fc" id="L251">        this.longOpt = longOpt;</span>
+<span class="fc" id="L252">    }</span>
+
+    /**
+     * Sets whether this Option can have an optional argument.
+     *
+     * @param optionalArg specifies whether the Option can have
+     * an optional argument.
+     */
+    public void setOptionalArg(boolean optionalArg)
+    {
+<span class="fc" id="L262">        this.optionalArg = optionalArg;</span>
+<span class="fc" id="L263">    }</span>
+
+    /**
+     * @return whether this Option can have an optional argument
+     */
+    public boolean hasOptionalArg()
+    {
+<span class="fc" id="L270">        return optionalArg;</span>
+    }
+
+    /** 
+     * Query to see if this Option has a long name
+     *
+     * @return boolean flag indicating existence of a long name
+     */
+    public boolean hasLongOpt()
+    {
+<span class="fc bfc" id="L280" title="All 2 branches covered.">        return longOpt != null;</span>
+    }
+
+    /** 
+     * Query to see if this Option requires an argument
+     *
+     * @return boolean flag indicating if an argument is required
+     */
+    public boolean hasArg()
+    {
+<span class="fc bfc" id="L290" title="All 4 branches covered.">        return numberOfArgs &gt; 0 || numberOfArgs == UNLIMITED_VALUES;</span>
+    }
+
+    /** 
+     * Retrieve the self-documenting description of this Option
+     *
+     * @return The string description of this option
+     */
+    public String getDescription()
+    {
+<span class="fc" id="L300">        return description;</span>
+    }
+
+    /**
+     * Sets the self-documenting description of this Option
+     *
+     * @param description The description of this option
+     * @since 1.1
+     */
+    public void setDescription(String description)
+    {
+<span class="fc" id="L311">        this.description = description;</span>
+<span class="fc" id="L312">    }</span>
+
+    /** 
+     * Query to see if this Option is mandatory
+     *
+     * @return boolean flag indicating whether this Option is mandatory
+     */
+    public boolean isRequired()
+    {
+<span class="fc" id="L321">        return required;</span>
+    }
+
+    /**
+     * Sets whether this Option is mandatory.
+     *
+     * @param required specifies whether this Option is mandatory
+     */
+    public void setRequired(boolean required)
+    {
+<span class="fc" id="L331">        this.required = required;</span>
+<span class="fc" id="L332">    }</span>
+
+    /**
+     * Sets the display name for the argument value.
+     *
+     * @param argName the display name for the argument value.
+     */
+    public void setArgName(String argName)
+    {
+<span class="fc" id="L341">        this.argName = argName;</span>
+<span class="fc" id="L342">    }</span>
+
+    /**
+     * Gets the display name for the argument value.
+     *
+     * @return the display name for the argument value.
+     */
+    public String getArgName()
+    {
+<span class="fc" id="L351">        return argName;</span>
+    }
+
+    /**
+     * Returns whether the display name for the argument value has been set.
+     *
+     * @return if the display name for the argument value has been set.
+     */
+    public boolean hasArgName()
+    {
+<span class="fc bfc" id="L361" title="All 4 branches covered.">        return argName != null &amp;&amp; argName.length() &gt; 0;</span>
+    }
+
+    /** 
+     * Query to see if this Option can take many values.
+     *
+     * @return boolean flag indicating if multiple values are allowed
+     */
+    public boolean hasArgs()
+    {
+<span class="fc bfc" id="L371" title="All 4 branches covered.">        return numberOfArgs &gt; 1 || numberOfArgs == UNLIMITED_VALUES;</span>
+    }
+
+    /** 
+     * Sets the number of argument values this Option can take.
+     *
+     * @param num the number of argument values
+     */
+    public void setArgs(int num)
+    {
+<span class="fc" id="L381">        this.numberOfArgs = num;</span>
+<span class="fc" id="L382">    }</span>
+
+    /**
+     * Sets the value separator.  For example if the argument value
+     * was a Java property, the value separator would be '='.
+     *
+     * @param sep The value separator.
+     */
+    public void setValueSeparator(char sep)
+    {
+<span class="fc" id="L392">        this.valuesep = sep;</span>
+<span class="fc" id="L393">    }</span>
+
+    /**
+     * Returns the value separator character.
+     *
+     * @return the value separator character.
+     */
+    public char getValueSeparator()
+    {
+<span class="fc" id="L402">        return valuesep;</span>
+    }
+
+    /**
+     * Return whether this Option has specified a value separator.
+     * 
+     * @return whether this Option has specified a value separator.
+     * @since 1.1
+     */
+    public boolean hasValueSeparator()
+    {
+<span class="fc bfc" id="L413" title="All 2 branches covered.">        return valuesep &gt; 0;</span>
+    }
+
+    /** 
+     * Returns the number of argument values this Option can take.
+     * 
+     * &lt;p&gt;
+     * A value equal to the constant {@link #UNINITIALIZED} (= -1) indicates
+     * the number of arguments has not been specified.
+     * A value equal to the constant {@link #UNLIMITED_VALUES} (= -2) indicates
+     * that this options takes an unlimited amount of values.
+     * &lt;/p&gt;
+     *
+     * @return num the number of argument values
+     * @see #UNINITIALIZED
+     * @see #UNLIMITED_VALUES
+     */
+    public int getArgs()
+    {
+<span class="fc" id="L432">        return numberOfArgs;</span>
+    }
+
+    /**
+     * Adds the specified value to this Option.
+     * 
+     * @param value is a/the value of this Option
+     */
+    void addValueForProcessing(String value)
+    {
+<span class="pc bpc" id="L442" title="1 of 2 branches missed.">        if (numberOfArgs == UNINITIALIZED)</span>
+        {
+<span class="nc" id="L444">            throw new RuntimeException(&quot;NO_ARGS_ALLOWED&quot;);</span>
+        }
+<span class="fc" id="L446">        processValue(value);</span>
+<span class="fc" id="L447">    }</span>
+
+    /**
+     * Processes the value.  If this Option has a value separator
+     * the value will have to be parsed into individual tokens.  When
+     * n-1 tokens have been processed and there are more value separators
+     * in the value, parsing is ceased and the remaining characters are
+     * added as a single token.
+     *
+     * @param value The String to be processed.
+     *
+     * @since 1.0.1
+     */
+    private void processValue(String value)
+    {
+        // this Option has a separator character
+<span class="fc bfc" id="L463" title="All 2 branches covered.">        if (hasValueSeparator())</span>
+        {
+            // get the separator character
+<span class="fc" id="L466">            char sep = getValueSeparator();</span>
+
+            // store the index for the value separator
+<span class="fc" id="L469">            int index = value.indexOf(sep);</span>
+
+            // while there are more value separators
+<span class="fc bfc" id="L472" title="All 2 branches covered.">            while (index != -1)</span>
+            {
+                // next value to be added 
+<span class="pc bpc" id="L475" title="1 of 2 branches missed.">                if (values.size() == numberOfArgs - 1)</span>
+                {
+<span class="nc" id="L477">                    break;</span>
+                }
+
+                // store
+<span class="fc" id="L481">                add(value.substring(0, index));</span>
+
+                // parse
+<span class="fc" id="L484">                value = value.substring(index + 1);</span>
+
+                // get new index
+<span class="fc" id="L487">                index = value.indexOf(sep);</span>
+            }
+        }
+
+        // store the actual value or the last value that has been parsed
+<span class="fc" id="L492">        add(value);</span>
+<span class="fc" id="L493">    }</span>
+
+    /**
+     * Add the value to this Option.  If the number of arguments
+     * is greater than zero and there is enough space in the list then
+     * add the value.  Otherwise, throw a runtime exception.
+     *
+     * @param value The value to be added to this Option
+     *
+     * @since 1.0.1
+     */
+    private void add(String value)
+    {
+<span class="fc bfc" id="L506" title="All 2 branches covered.">        if (!acceptsArg())</span>
+        {
+<span class="fc" id="L508">            throw new RuntimeException(&quot;Cannot add value, list full.&quot;);</span>
+        }
+
+        // store value
+<span class="fc" id="L512">        values.add(value);</span>
+<span class="fc" id="L513">    }</span>
+
+    /**
+     * Returns the specified value of this Option or 
+     * &lt;code&gt;null&lt;/code&gt; if there is no value.
+     *
+     * @return the value/first value of this Option or 
+     * &lt;code&gt;null&lt;/code&gt; if there is no value.
+     */
+    public String getValue()
+    {
+<span class="fc bfc" id="L524" title="All 2 branches covered.">        return hasNoValues() ? null : values.get(0);</span>
+    }
+
+    /**
+     * Returns the specified value of this Option or 
+     * &lt;code&gt;null&lt;/code&gt; if there is no value.
+     *
+     * @param index The index of the value to be returned.
+     *
+     * @return the specified value of this Option or 
+     * &lt;code&gt;null&lt;/code&gt; if there is no value.
+     *
+     * @throws IndexOutOfBoundsException if index is less than 1
+     * or greater than the number of the values for this Option.
+     */
+    public String getValue(int index) throws IndexOutOfBoundsException
+    {
+<span class="fc bfc" id="L541" title="All 2 branches covered.">        return hasNoValues() ? null : values.get(index);</span>
+    }
+
+    /**
+     * Returns the value/first value of this Option or the 
+     * &lt;code&gt;defaultValue&lt;/code&gt; if there is no value.
+     *
+     * @param defaultValue The value to be returned if there
+     * is no value.
+     *
+     * @return the value/first value of this Option or the 
+     * &lt;code&gt;defaultValue&lt;/code&gt; if there are no values.
+     */
+    public String getValue(String defaultValue)
+    {
+<span class="fc" id="L556">        String value = getValue();</span>
+
+<span class="fc bfc" id="L558" title="All 2 branches covered.">        return (value != null) ? value : defaultValue;</span>
+    }
+
+    /**
+     * Return the values of this Option as a String array 
+     * or null if there are no values
+     *
+     * @return the values of this Option as a String array 
+     * or null if there are no values
+     */
+    public String[] getValues()
+    {
+<span class="fc bfc" id="L570" title="All 2 branches covered.">        return hasNoValues() ? null : values.toArray(new String[values.size()]);</span>
+    }
+
+    /**
+     * @return the values of this Option as a List
+     * or null if there are no values
+     */
+    public List&lt;String&gt; getValuesList()
+    {
+<span class="fc" id="L579">        return values;</span>
+    }
+
+    /** 
+     * Dump state, suitable for debugging.
+     *
+     * @return Stringified form of this object
+     */
+    @Override
+    public String toString()
+    {
+<span class="fc" id="L590">        StringBuilder buf = new StringBuilder().append(&quot;[ option: &quot;);</span>
+
+<span class="fc" id="L592">        buf.append(opt);</span>
+
+<span class="pc bpc" id="L594" title="1 of 2 branches missed.">        if (longOpt != null)</span>
+        {
+<span class="fc" id="L596">            buf.append(&quot; &quot;).append(longOpt);</span>
+        }
+
+<span class="fc" id="L599">        buf.append(&quot; &quot;);</span>
+
+<span class="pc bpc" id="L601" title="1 of 2 branches missed.">        if (hasArgs())</span>
+        {
+<span class="nc" id="L603">            buf.append(&quot;[ARG...]&quot;);</span>
+        }
+<span class="fc bfc" id="L605" title="All 2 branches covered.">        else if (hasArg())</span>
+        {
+<span class="fc" id="L607">            buf.append(&quot; [ARG]&quot;);</span>
+        }
+
+<span class="fc" id="L610">        buf.append(&quot; :: &quot;).append(description);</span>
+
+<span class="pc bpc" id="L612" title="1 of 2 branches missed.">        if (type != null)</span>
+        {
+<span class="fc" id="L614">            buf.append(&quot; :: &quot;).append(type);</span>
+        }
+
+<span class="fc" id="L617">        buf.append(&quot; ]&quot;);</span>
+
+<span class="fc" id="L619">        return buf.toString();</span>
+    }
+
+    /**
+     * Returns whether this Option has any values.
+     *
+     * @return whether this Option has any values.
+     */
+    private boolean hasNoValues()
+    {
+<span class="fc" id="L629">        return values.isEmpty();</span>
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+<span class="fc bfc" id="L635" title="All 2 branches covered.">        if (this == o)</span>
+        {
+<span class="fc" id="L637">            return true;</span>
+        }
+<span class="pc bpc" id="L639" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass())</span>
+        {
+<span class="nc" id="L641">            return false;</span>
+        }
+
+<span class="fc" id="L644">        Option option = (Option) o;</span>
+
+
+<span class="pc bpc" id="L647" title="1 of 6 branches missed.">        if (opt != null ? !opt.equals(option.opt) : option.opt != null)</span>
+        {
+<span class="fc" id="L649">            return false;</span>
+        }
+<span class="pc bpc" id="L651" title="2 of 6 branches missed.">        if (longOpt != null ? !longOpt.equals(option.longOpt) : option.longOpt != null)</span>
+        {
+<span class="fc" id="L653">            return false;</span>
+        }
+
+<span class="fc" id="L656">        return true;</span>
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result;
+<span class="nc bnc" id="L663" title="All 2 branches missed.">        result = opt != null ? opt.hashCode() : 0;</span>
+<span class="nc bnc" id="L664" title="All 2 branches missed.">        result = 31 * result + (longOpt != null ? longOpt.hashCode() : 0);</span>
+<span class="nc" id="L665">        return result;</span>
+    }
+
+    /**
+     * A rather odd clone method - due to incorrect code in 1.0 it is public 
+     * and in 1.1 rather than throwing a CloneNotSupportedException it throws 
+     * a RuntimeException so as to maintain backwards compat at the API level. 
+     *
+     * After calling this method, it is very likely you will want to call 
+     * clearValues(). 
+     *
+     * @return a clone of this Option instance
+     * @throws RuntimeException if a {@link CloneNotSupportedException} has been thrown
+     * by {@code super.clone()}
+     */
+    @Override
+    public Object clone()
+    {
+        try
+        {
+<span class="fc" id="L685">            Option option = (Option) super.clone();</span>
+<span class="fc" id="L686">            option.values = new ArrayList&lt;String&gt;(values);</span>
+<span class="fc" id="L687">            return option;</span>
+        }
+<span class="nc" id="L689">        catch (CloneNotSupportedException cnse)</span>
+        {
+<span class="nc" id="L691">            throw new RuntimeException(&quot;A CloneNotSupportedException was thrown: &quot; + cnse.getMessage());</span>
+        }
+    }
+
+    /**
+     * Clear the Option values. After a parse is complete, these are left with
+     * data in them and they need clearing if another parse is done.
+     *
+     * See: &lt;a href=&quot;https://issues.apache.org/jira/browse/CLI-71&quot;&gt;CLI-71&lt;/a&gt;
+     */
+    void clearValues()
+    {
+<span class="fc" id="L703">        values.clear();</span>
+<span class="fc" id="L704">    }</span>
+
+    /**
+     * This method is not intended to be used. It was a piece of internal 
+     * API that was made public in 1.0. It currently throws an UnsupportedOperationException.
+     *
+     * @param value the value to add
+     * @return always throws an {@link UnsupportedOperationException}
+     * @throws UnsupportedOperationException always
+     * @deprecated
+     */
+    @Deprecated
+    public boolean addValue(String value)
+    {
+<span class="nc" id="L718">        throw new UnsupportedOperationException(&quot;The addValue method is not intended for client use. &quot;</span>
+                + &quot;Subclasses should use the addValueForProcessing method instead. &quot;);
+    }
+
+    /**
+     * Tells if the option can accept more arguments.
+     * 
+     * @return false if the maximum number of arguments is reached
+     * @since 1.3
+     */
+    boolean acceptsArg()
+    {
+<span class="pc bpc" id="L730" title="5 of 10 branches missed.">        return (hasArg() || hasArgs() || hasOptionalArg()) &amp;&amp; (numberOfArgs &lt;= 0 || values.size() &lt; numberOfArgs);</span>
+    }
+
+    /**
+     * Tells if the option requires more arguments to be valid.
+     * 
+     * @return false if the option doesn't require more arguments
+     * @since 1.3
+     */
+    boolean requiresArg()
+    {
+<span class="pc bpc" id="L741" title="1 of 2 branches missed.">        if (optionalArg)</span>
+        {
+<span class="fc" id="L743">            return false;</span>
+        }
+<span class="nc bnc" id="L745" title="All 2 branches missed.">        if (numberOfArgs == UNLIMITED_VALUES)</span>
+        {
+<span class="nc" id="L747">            return values.isEmpty();</span>
+        }
+<span class="nc" id="L749">        return acceptsArg();</span>
+    }
+    
+    /**
+     * Returns a {@link Builder} to create an {@link Option} using descriptive
+     * methods.  
+     * 
+     * @return a new {@link Builder} instance
+     * @since 1.3
+     */
+    public static Builder builder()
+    {
+<span class="fc" id="L761">        return builder(null);</span>
+    }
+    
+    /**
+     * Returns a {@link Builder} to create an {@link Option} using descriptive
+     * methods.  
+     *
+     * @param opt short representation of the option
+     * @return a new {@link Builder} instance
+     * @throws IllegalArgumentException if there are any non valid Option characters in {@code opt}
+     * @since 1.3
+     */
+    public static Builder builder(final String opt)
+    {
+<span class="fc" id="L775">        return new Builder(opt);</span>
+    }
+    
+    /**
+     * A nested builder class to create &lt;code&gt;Option&lt;/code&gt; instances
+     * using descriptive methods.
+     * &lt;p&gt;
+     * Example usage:
+     * &lt;pre&gt;
+     * Option option = Option.builder(&quot;a&quot;)
+     *     .required(true)
+     *     .longOpt(&quot;arg-name&quot;)
+     *     .build();
+     * &lt;/pre&gt;
+     * 
+     * @since 1.3
+     */
+    public static final class Builder 
+    {
+        /** the name of the option */
+        private final String opt;
+
+        /** description of the option */
+        private String description;
+
+        /** the long representation of the option */
+        private String longOpt;
+
+        /** the name of the argument for this option */
+        private String argName;
+
+        /** specifies whether this option is required to be present */
+        private boolean required;
+
+        /** specifies whether the argument value of this Option is optional */
+        private boolean optionalArg;
+
+        /** the number of argument values this option can have */
+<span class="fc" id="L813">        private int numberOfArgs = UNINITIALIZED;</span>
+
+        /** the type of this Option */
+<span class="fc" id="L816">        private Class&lt;?&gt; type = String.class;</span>
+
+        /** the character that is the value separator */
+        private char valuesep;
+
+        /**
+         * Constructs a new &lt;code&gt;Builder&lt;/code&gt; with the minimum
+         * required parameters for an &lt;code&gt;Option&lt;/code&gt; instance.
+         * 
+         * @param opt short representation of the option
+         * @throws IllegalArgumentException if there are any non valid Option characters in {@code opt}
+         */
+        private Builder(final String opt) throws IllegalArgumentException
+<span class="fc" id="L829">        {</span>
+<span class="fc" id="L830">            OptionValidator.validateOption(opt);</span>
+<span class="fc" id="L831">            this.opt = opt;</span>
+<span class="fc" id="L832">        }</span>
+        
+        /**
+         * Sets the display name for the argument value.
+         *
+         * @param argName the display name for the argument value.
+         * @return this builder, to allow method chaining
+         */
+        public Builder argName(final String argName)
+        {
+<span class="fc" id="L842">            this.argName = argName;</span>
+<span class="fc" id="L843">            return this;</span>
+        }
+
+        /**
+         * Sets the description for this option.
+         *
+         * @param description the description of the option.
+         * @return this builder, to allow method chaining
+         */
+        public Builder desc(final String description)
+        {
+<span class="fc" id="L854">            this.description = description;</span>
+<span class="fc" id="L855">            return this;</span>
+        }
+
+        /**
+         * Sets the long name of the Option.
+         *
+         * @param longOpt the long name of the Option
+         * @return this builder, to allow method chaining
+         */        
+        public Builder longOpt(final String longOpt)
+        {
+<span class="fc" id="L866">            this.longOpt = longOpt;</span>
+<span class="fc" id="L867">            return this;</span>
+        }
+        
+        /** 
+         * Sets the number of argument values the Option can take.
+         *
+         * @param numberOfArgs the number of argument values
+         * @return this builder, to allow method chaining
+         */        
+        public Builder numberOfArgs(final int numberOfArgs)
+        {
+<span class="fc" id="L878">            this.numberOfArgs = numberOfArgs;</span>
+<span class="fc" id="L879">            return this;</span>
+        }
+        
+        /**
+         * Sets whether the Option can have an optional argument.
+         *
+         * @param isOptional specifies whether the Option can have
+         * an optional argument.
+         * @return this builder, to allow method chaining
+         */
+        public Builder optionalArg(final boolean isOptional)
+        {
+<span class="fc" id="L891">            this.optionalArg = isOptional;</span>
+<span class="fc" id="L892">            return this;</span>
+        }
+        
+        /**
+         * Marks this Option as required.
+         *
+         * @return this builder, to allow method chaining
+         */
+        public Builder required()
+        {
+<span class="fc" id="L902">            return required(true);</span>
+        }
+
+        /**
+         * Sets whether the Option is mandatory.
+         *
+         * @param required specifies whether the Option is mandatory
+         * @return this builder, to allow method chaining
+         */
+        public Builder required(final boolean required)
+        {
+<span class="fc" id="L913">            this.required = required;</span>
+<span class="fc" id="L914">            return this;</span>
+        }
+        
+        /**
+         * Sets the type of the Option.
+         *
+         * @param type the type of the Option
+         * @return this builder, to allow method chaining
+         */
+        public Builder type(final Class&lt;?&gt; type)
+        {
+<span class="fc" id="L925">            this.type = type;</span>
+<span class="fc" id="L926">            return this;</span>
+        }
+
+        /**
+         * The Option will use '=' as a means to separate argument value.
+         *
+         * @return this builder, to allow method chaining
+         */
+        public Builder valueSeparator()
+        {
+<span class="fc" id="L936">            return valueSeparator('=');</span>
+        }
+
+        /**
+         * The Option will use &lt;code&gt;sep&lt;/code&gt; as a means to
+         * separate argument values.
+         * &lt;p&gt;
+         * &lt;b&gt;Example:&lt;/b&gt;
+         * &lt;pre&gt;
+         * Option opt = Option.builder(&quot;D&quot;).hasArgs()
+         *                                 .valueSeparator('=')
+         *                                 .build();
+         * Options options = new Options();
+         * options.addOption(opt);
+         * String[] args = {&quot;-Dkey=value&quot;};
+         * CommandLineParser parser = new DefaultParser();
+         * CommandLine line = parser.parse(options, args);
+         * String propertyName = line.getOptionValues(&quot;D&quot;)[0];  // will be &quot;key&quot;
+         * String propertyValue = line.getOptionValues(&quot;D&quot;)[1]; // will be &quot;value&quot;
+         * &lt;/pre&gt;
+         *
+         * @param sep The value separator.
+         * @return this builder, to allow method chaining
+         */
+        public Builder valueSeparator(final char sep)
+        {
+<span class="fc" id="L962">            valuesep = sep;</span>
+<span class="fc" id="L963">            return this;</span>
+        }
+        
+        /**
+         * Indicates that the Option will require an argument.
+         * 
+         * @return this builder, to allow method chaining
+         */
+        public Builder hasArg()
+        {
+<span class="fc" id="L973">            return hasArg(true);</span>
+        }
+
+        /**
+         * Indicates if the Option has an argument or not.
+         * 
+         * @param hasArg specifies whether the Option takes an argument or not
+         * @return this builder, to allow method chaining
+         */
+        public Builder hasArg(final boolean hasArg)
+        {
+            // set to UNINITIALIZED when no arg is specified to be compatible with OptionBuilder
+<span class="fc bfc" id="L985" title="All 2 branches covered.">            numberOfArgs = hasArg ? 1 : Option.UNINITIALIZED;</span>
+<span class="fc" id="L986">            return this;</span>
+        }
+
+        /**
+         * Indicates that the Option can have unlimited argument values.
+         * 
+         * @return this builder, to allow method chaining
+         */
+        public Builder hasArgs()
+        {
+<span class="nc" id="L996">            numberOfArgs = Option.UNLIMITED_VALUES;</span>
+<span class="nc" id="L997">            return this;</span>
+        }
+
+        /**
+         * Constructs an Option with the values declared by this {@link Builder}.
+         * 
+         * @return the new {@link Option}
+         * @throws IllegalArgumentException if neither {@code opt} or {@code longOpt} has been set
+         */
+        public Option build()
+        {
+<span class="fc bfc" id="L1008" title="All 4 branches covered.">            if (opt == null &amp;&amp; longOpt == null)</span>
+            {
+<span class="fc" id="L1010">                throw new IllegalArgumentException(&quot;Either opt or longOpt must be specified&quot;);</span>
+            }
+<span class="fc" id="L1012">            return new Option(this);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

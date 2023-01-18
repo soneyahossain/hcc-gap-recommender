@@ -1,0 +1,53 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  0.7% done, time left: unknown  1.4% done, time left: unknown  1.7% done, time left: unknown  2.7% done, time left: unknown  3.9% done, time left:   0:00:08    5.1% done, time left:   0:00:08  5.3% done, time left:   0:00:09  5.4% done, time left:   0:00:10  5.4% done, time left:   0:00:12  6.5% done, time left:   0:00:13  8.2% done, time left:   0:00:14 10.4% done, time left:   0:00:14 12.0% done, time left:   0:00:13 14.1% done, time left:   0:00:13 16.3% done, time left:   0:00:11 18.2% done, time left:   0:00:10 20.0% done, time left:   0:00:09 22.1% done, time left:   0:00:08 24.8% done, time left:   0:00:07 27.0% done, time left:   0:00:06 30.2% done, time left:   0:00:05 33.5% done, time left:   0:00:04 36.7% done, time left:   0:00:03 39.4% done, time left:   0:00:02 40.7% done, time left:   0:00:02 44.3% done, time left:   0:00:02 48.4% done, time left:   0:00:01 52.4% done, time left:   0:00:01 56.3% done, time left:   0:00:01 60.2% done, time left:   0:00:00 61.0% done, time left:   0:00:00 61.8% done, time left:   0:00:00 64.0% done, time left:   0:00:00 68.3% done, time left:   0:00:00 72.6% done, time left:   0:00:00 76.9% done, time left:   0:00:00 81.2% done, time left:   0:00:00 83.5% done, time left:   0:00:00 86.2% done, time left:   0:00:00 89.2% done, time left:   0:00:00 92.7% done, time left:   0:00:00 96.1% done, time left:   0:00:00 98.1% done, time left:   0:00:00 98.8% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:250:*]:
+org.joda.time.LocalDate.<init>:436 ALOAD 0
+org.joda.time.LocalDate.<init>:436 INVOKESPECIAL org/joda/time/LocalDate.<init>(IIILorg/joda/time/Chronology;)V
+org.joda.time.LocalDate.<init>:456 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.<init>:456 ASTORE 4
+org.joda.time.LocalDate.<init>:458 ALOAD 0
+org.joda.time.LocalDate.<init>:458 ALOAD 4
+org.joda.time.LocalDate.<init>:458 PUTFIELD org/joda/time/LocalDate.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.getChronology:619 ALOAD 0
+org.joda.time.LocalDate.getChronology:619 GETFIELD org/joda/time/LocalDate.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.getChronology:619 ARETURN
+org.joda.time.LocalDate.monthOfYear:1785 NEW org/joda/time/LocalDate$Property
+org.joda.time.LocalDate.monthOfYear:1785 DUP
+org.joda.time.LocalDate.monthOfYear:1785 ALOAD 0
+org.joda.time.LocalDate.monthOfYear:1785 INVOKEVIRTUAL org/joda/time/LocalDate.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.monthOfYear:1785 INVOKEVIRTUAL org/joda/time/Chronology.monthOfYear()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalDate.monthOfYear:1785 INVOKESPECIAL org/joda/time/LocalDate$Property.<init>(Lorg/joda/time/LocalDate;Lorg/joda/time/DateTimeField;)V
+org.joda.time.LocalDate.monthOfYear:1785 ARETURN
+org.joda.time.LocalDate$Property.<init>:1909 ALOAD 0
+org.joda.time.LocalDate$Property.<init>:1909 ALOAD 2
+org.joda.time.LocalDate$Property.<init>:1909 PUTFIELD org/joda/time/LocalDate$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalDate$Property.getField:1936 ALOAD 0
+org.joda.time.LocalDate$Property.getField:1936 GETFIELD org/joda/time/LocalDate$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalDate$Property.getField:1936 ARETURN
+org.joda.time.TestLocalDate_Properties.main:64 INVOKEVIRTUAL org/joda/time/TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth()V
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:246 NEW org/joda/time/LocalDate
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:246 DUP
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:246 BIPUSH 6
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:246 INVOKESPECIAL org/joda/time/LocalDate.<init>(III)V
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:246 ASTORE 1
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:248 LCONST_1
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:250 LDC 12
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:250 ALOAD 1
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:250 INVOKEVIRTUAL org/joda/time/LocalDate.monthOfYear()Lorg/joda/time/LocalDate$Property;
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:250 INVOKEVIRTUAL org/joda/time/LocalDate$Property.getMaximumValueOverall()I
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:250 I2L
+org.joda.time.TestLocalDate_Properties.testPropertyGetMaxMinValuesMonth:250 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.chrono.AssembledChronology.monthOfYear:260 ALOAD 0
+org.joda.time.chrono.AssembledChronology.monthOfYear:260 GETFIELD org/joda/time/chrono/AssembledChronology.iMonthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.monthOfYear:260 ARETURN
+org.joda.time.chrono.BasicMonthOfYearDateTimeField.getMaximumValue:355 ALOAD 0
+org.joda.time.chrono.BasicMonthOfYearDateTimeField.getMaximumValue:355 GETFIELD org/joda/time/chrono/BasicMonthOfYearDateTimeField.iMax I
+org.joda.time.chrono.BasicMonthOfYearDateTimeField.getMaximumValue:355 IRETURN
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+org.joda.time.field.AbstractReadableInstantFieldProperty.getMaximumValueOverall:313 ALOAD 0
+org.joda.time.field.AbstractReadableInstantFieldProperty.getMaximumValueOverall:313 INVOKEVIRTUAL org/joda/time/field/AbstractReadableInstantFieldProperty.getField()Lorg/joda/time/DateTimeField;
+org.joda.time.field.AbstractReadableInstantFieldProperty.getMaximumValueOverall:313 INVOKEVIRTUAL org/joda/time/DateTimeField.getMaximumValue()I
+org.joda.time.field.AbstractReadableInstantFieldProperty.getMaximumValueOverall:313 IRETURN
+
+Slice consists of 48 bytecode instructions.
+Computation took 5.57 seconds.

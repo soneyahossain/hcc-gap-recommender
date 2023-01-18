@@ -1,0 +1,88 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  0.5% done, time left: unknown  0.7% done, time left: unknown  1.2% done, time left: unknown  1.5% done, time left:   0:00:31    1.5% done, time left:   0:00:46  1.8% done, time left:   0:00:45  2.3% done, time left:   0:00:42  2.7% done, time left:   0:00:40  2.8% done, time left:   0:00:39  2.8% done, time left:   0:00:40  2.8% done, time left:   0:00:41  3.0% done, time left:   0:00:41  3.3% done, time left:   0:00:42  3.7% done, time left:   0:00:42  4.1% done, time left:   0:00:41  4.8% done, time left:   0:00:43  5.5% done, time left:   0:00:43  6.3% done, time left:   0:00:44  7.4% done, time left:   0:00:45  8.4% done, time left:   0:00:45  8.9% done, time left:   0:00:43  9.6% done, time left:   0:00:42 10.4% done, time left:   0:00:41 10.6% done, time left:   0:00:38 10.6% done, time left:   0:00:36 10.9% done, time left:   0:00:34 11.4% done, time left:   0:00:34 11.4% done, time left:   0:00:32 11.4% done, time left:   0:00:31 11.4% done, time left:   0:00:29 11.4% done, time left:   0:00:28 11.8% done, time left:   0:00:28 12.9% done, time left:   0:00:29 13.6% done, time left:   0:00:29 14.4% done, time left:   0:00:29 15.5% done, time left:   0:00:29 16.6% done, time left:   0:00:28 17.1% done, time left:   0:00:26 18.0% done, time left:   0:00:25 19.0% done, time left:   0:00:25 20.3% done, time left:   0:00:24 21.4% done, time left:   0:00:22 22.4% done, time left:   0:00:21 23.9% done, time left:   0:00:20 27.7% done, time left:   0:00:13 32.4% done, time left:   0:00:05 36.4% done, time left:   0:00:03 40.8% done, time left:   0:00:02 44.7% done, time left:   0:00:01 48.7% done, time left:   0:00:01 52.1% done, time left:   0:00:01 56.1% done, time left:   0:00:01 60.3% done, time left:   0:00:00 63.9% done, time left:   0:00:00 67.3% done, time left:   0:00:00 70.9% done, time left:   0:00:00 74.8% done, time left:   0:00:00 78.8% done, time left:   0:00:00 83.1% done, time left:   0:00:00 84.5% done, time left:   0:00:00 86.9% done, time left:   0:00:00 89.9% done, time left:   0:00:00 92.3% done, time left:   0:00:00 94.2% done, time left:   0:00:00 94.9% done, time left:   0:00:00 95.1% done, time left:   0:00:00 95.8% done, time left:   0:00:00 96.7% done, time left:   0:00:00 97.7% done, time left:   0:00:00 98.6% done, time left:   0:00:00 99.2% done, time left:   0:00:00 99.5% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:457:*]:
+org.joda.time.LocalTime.<init>:482 ALOAD 0
+org.joda.time.LocalTime.<init>:482 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIIILorg/joda/time/Chronology;)V
+org.joda.time.LocalTime.<init>:505 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:505 ASTORE 5
+org.joda.time.LocalTime.<init>:506 ALOAD 5
+org.joda.time.LocalTime.<init>:506 INVOKEVIRTUAL org/joda/time/Chronology.getDateTimeMillis(JIIII)J
+org.joda.time.LocalTime.<init>:506 LSTORE 6
+org.joda.time.LocalTime.<init>:508 ALOAD 0
+org.joda.time.LocalTime.<init>:508 ALOAD 5
+org.joda.time.LocalTime.<init>:508 PUTFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:509 ALOAD 0
+org.joda.time.LocalTime.<init>:509 LLOAD 6
+org.joda.time.LocalTime.<init>:509 PUTFIELD org/joda/time/LocalTime.iLocalMillis J
+org.joda.time.LocalTime.compareTo:712 ALOAD 0
+org.joda.time.LocalTime.compareTo:712 ALOAD 1
+org.joda.time.LocalTime.compareTo:712 IF_ACMPNE L0 true false
+org.joda.time.LocalTime.compareTo:715 ALOAD 1
+org.joda.time.LocalTime.compareTo:715 INSTANCEOF org/joda/time/LocalTime
+org.joda.time.LocalTime.compareTo:715 IFEQ L4 false true
+org.joda.time.LocalTime.compareTo:716 ALOAD 1
+org.joda.time.LocalTime.compareTo:716 ASTORE 2
+org.joda.time.LocalTime.compareTo:717 ALOAD 0
+org.joda.time.LocalTime.compareTo:717 GETFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.compareTo:717 ALOAD 2
+org.joda.time.LocalTime.compareTo:717 GETFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.compareTo:717 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.joda.time.LocalTime.compareTo:717 IFEQ L4 false true
+org.joda.time.LocalTime.compareTo:718 ALOAD 0
+org.joda.time.LocalTime.compareTo:718 GETFIELD org/joda/time/LocalTime.iLocalMillis J
+org.joda.time.LocalTime.compareTo:718 ALOAD 2
+org.joda.time.LocalTime.compareTo:718 GETFIELD org/joda/time/LocalTime.iLocalMillis J
+org.joda.time.LocalTime.compareTo:718 LCMP
+org.joda.time.LocalTime.compareTo:718 IFGE L1 true false
+org.joda.time.LocalTime.compareTo:718 ALOAD 0
+org.joda.time.LocalTime.compareTo:718 GETFIELD org/joda/time/LocalTime.iLocalMillis J
+org.joda.time.LocalTime.compareTo:718 ALOAD 2
+org.joda.time.LocalTime.compareTo:718 GETFIELD org/joda/time/LocalTime.iLocalMillis J
+org.joda.time.LocalTime.compareTo:718 LCMP
+org.joda.time.LocalTime.compareTo:718 IFNE L2 false true
+org.joda.time.LocalTime.compareTo:718 ICONST_0
+org.joda.time.LocalTime.compareTo:718 IRETURN
+org.joda.time.TestLocalTime_Basics.main:87 INVOKEVIRTUAL org/joda/time/TestLocalTime_Basics.testIsAfter_LocalTime()V
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:454 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:454 DUP
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:454 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:454 ASTORE 1
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:455 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:455 DUP
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:455 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:455 ASTORE 2
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:457 ICONST_0
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:457 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:457 ALOAD 2
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:457 ALOAD 1
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:457 INVOKEVIRTUAL org/joda/time/LocalTime.isAfter(Lorg/joda/time/ReadablePartial;)Z
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:457 INVOKESTATIC java/lang/Boolean.valueOf(Z)Ljava/lang/Boolean;
+org.joda.time.TestLocalTime_Basics.testIsAfter_LocalTime:457 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.base.AbstractPartial.isAfter:353 ALOAD 0
+org.joda.time.base.AbstractPartial.isAfter:353 ALOAD 1
+org.joda.time.base.AbstractPartial.isAfter:353 INVOKEVIRTUAL org/joda/time/base/AbstractPartial.compareTo(Lorg/joda/time/ReadablePartial;)I
+org.joda.time.base.AbstractPartial.isAfter:353 IFLE L1 true false
+org.joda.time.base.AbstractPartial.isAfter:353 ICONST_0
+org.joda.time.base.AbstractPartial.isAfter:353 IRETURN
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 DUP
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ASTORE 7
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 GETFIELD org/joda/time/chrono/AssembledChronology.iBaseFlags I
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ICONST_1
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 IAND
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 ICONST_1
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:146 IF_ICMPNE L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:148 ALOAD 7
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:148 LRETURN
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+org.joda.time.chrono.ISOChronology.equals:179 ALOAD 0
+org.joda.time.chrono.ISOChronology.equals:179 ALOAD 1
+org.joda.time.chrono.ISOChronology.equals:179 IF_ACMPNE L0 false true
+org.joda.time.chrono.ISOChronology.equals:180 ICONST_1
+org.joda.time.chrono.ISOChronology.equals:180 IRETURN
+
+Slice consists of 87 bytecode instructions.
+Computation took 8.27 seconds.

@@ -1,0 +1,46 @@
+ 0.0% done, time left: unknown                                0.6% done, time left: unknown  2.0% done, time left: unknown  3.1% done, time left: unknown  4.9% done, time left: unknown  7.1% done, time left: unknown 10.8% done, time left: unknown 15.2% done, time left: unknown 18.8% done, time left:   0:00:02   22.0% done, time left:   0:00:02 24.3% done, time left:   0:00:03 29.4% done, time left:   0:00:02 35.1% done, time left:   0:00:01 39.0% done, time left:   0:00:01 43.0% done, time left:   0:00:01 49.0% done, time left:   0:00:00 55.2% done, time left:   0:00:00 57.3% done, time left:   0:00:00 57.5% done, time left:   0:00:00 58.5% done, time left:   0:00:00 62.7% done, time left:   0:00:00 68.9% done, time left:   0:00:00 75.8% done, time left:   0:00:00 82.7% done, time left:   0:00:00 88.0% done, time left:   0:00:00 93.8% done, time left:   0:00:00 97.1% done, time left:   0:00:00 97.8% done, time left:   0:00:00 99.4% done, time left:   0:00:00 101.9% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestLocalTime_Properties.testPropertyGetSecond:489:*]:
+org.joda.time.LocalTime.<init>:482 ALOAD 0
+org.joda.time.LocalTime.<init>:482 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIIILorg/joda/time/Chronology;)V
+org.joda.time.LocalTime.<init>:505 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.<init>:505 ASTORE 5
+org.joda.time.LocalTime.<init>:508 ALOAD 0
+org.joda.time.LocalTime.<init>:508 ALOAD 5
+org.joda.time.LocalTime.<init>:508 PUTFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getChronology:669 ALOAD 0
+org.joda.time.LocalTime.getChronology:669 GETFIELD org/joda/time/LocalTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.getChronology:669 ARETURN
+org.joda.time.LocalTime.secondOfMinute:1240 NEW org/joda/time/LocalTime$Property
+org.joda.time.LocalTime.secondOfMinute:1240 DUP
+org.joda.time.LocalTime.secondOfMinute:1240 ALOAD 0
+org.joda.time.LocalTime.secondOfMinute:1240 INVOKEVIRTUAL org/joda/time/LocalTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalTime.secondOfMinute:1240 INVOKEVIRTUAL org/joda/time/Chronology.secondOfMinute()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime.secondOfMinute:1240 INVOKESPECIAL org/joda/time/LocalTime$Property.<init>(Lorg/joda/time/LocalTime;Lorg/joda/time/DateTimeField;)V
+org.joda.time.LocalTime.secondOfMinute:1240 ARETURN
+org.joda.time.LocalTime$Property.<init>:1375 ALOAD 0
+org.joda.time.LocalTime$Property.<init>:1375 ALOAD 2
+org.joda.time.LocalTime$Property.<init>:1375 PUTFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.getField:1402 ALOAD 0
+org.joda.time.LocalTime$Property.getField:1402 GETFIELD org/joda/time/LocalTime$Property.iField Lorg/joda/time/DateTimeField;
+org.joda.time.LocalTime$Property.getField:1402 ARETURN
+org.joda.time.TestLocalTime_Properties.main:76 INVOKEVIRTUAL org/joda/time/TestLocalTime_Properties.testPropertyGetSecond()V
+org.joda.time.TestLocalTime_Properties.testPropertyGetSecond:487 NEW org/joda/time/LocalTime
+org.joda.time.TestLocalTime_Properties.testPropertyGetSecond:487 DUP
+org.joda.time.TestLocalTime_Properties.testPropertyGetSecond:487 INVOKESPECIAL org/joda/time/LocalTime.<init>(IIII)V
+org.joda.time.TestLocalTime_Properties.testPropertyGetSecond:487 ASTORE 1
+org.joda.time.TestLocalTime_Properties.testPropertyGetSecond:489 LDC "secondOfMinute"
+org.joda.time.TestLocalTime_Properties.testPropertyGetSecond:489 ALOAD 1
+org.joda.time.TestLocalTime_Properties.testPropertyGetSecond:489 INVOKEVIRTUAL org/joda/time/LocalTime.secondOfMinute()Lorg/joda/time/LocalTime$Property;
+org.joda.time.TestLocalTime_Properties.testPropertyGetSecond:489 INVOKEVIRTUAL org/joda/time/LocalTime$Property.getName()Ljava/lang/String;
+org.joda.time.TestLocalTime_Properties.testPropertyGetSecond:489 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 ALOAD 0
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 GETFIELD org/joda/time/chrono/AssembledChronology.iSecondOfMinute Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 ARETURN
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+org.joda.time.field.AbstractReadableInstantFieldProperty.getName:81 ALOAD 0
+org.joda.time.field.AbstractReadableInstantFieldProperty.getName:81 INVOKEVIRTUAL org/joda/time/field/AbstractReadableInstantFieldProperty.getField()Lorg/joda/time/DateTimeField;
+org.joda.time.field.AbstractReadableInstantFieldProperty.getName:81 ARETURN
+
+Slice consists of 41 bytecode instructions.
+Computation took 3.43 seconds.

@@ -1,0 +1,28 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.4% done, time left: unknown  0.8% done, time left: unknown  1.1% done, time left: unknown  1.5% done, time left: unknown  1.7% done, time left: unknown  2.1% done, time left:   0:00:24    2.4% done, time left:   0:00:27  2.6% done, time left:   0:00:30  2.6% done, time left:   0:00:34  2.6% done, time left:   0:00:39  2.6% done, time left:   0:00:45  2.6% done, time left:   0:00:50  2.6% done, time left:   0:00:55  2.6% done, time left:   0:01:00  2.6% done, time left:   0:01:05  2.7% done, time left:   0:01:10  2.7% done, time left:   0:01:15  2.7% done, time left:   0:01:19  2.7% done, time left:   0:01:24  2.7% done, time left:   0:01:29  2.7% done, time left:   0:01:33  2.7% done, time left:   0:01:38  2.8% done, time left:   0:01:42  3.0% done, time left:   0:01:45  3.3% done, time left:   0:01:47  3.3% done, time left:   0:01:48  4.3% done, time left:   0:01:51  4.6% done, time left:   0:01:48  5.5% done, time left:   0:01:48  6.3% done, time left:   0:01:46  7.7% done, time left:   0:01:42  8.9% done, time left:   0:01:35 10.4% done, time left:   0:01:27 12.1% done, time left:   0:01:17 12.8% done, time left:   0:01:08 13.5% done, time left:   0:01:00 14.5% done, time left:   0:00:54 15.9% done, time left:   0:00:49 17.4% done, time left:   0:00:43 19.1% done, time left:   0:00:38 20.7% done, time left:   0:00:32 22.1% done, time left:   0:00:28 22.1% done, time left:   0:00:23 22.1% done, time left:   0:00:19 22.1% done, time left:   0:00:16 22.8% done, time left:   0:00:14 23.4% done, time left:   0:00:13 24.3% done, time left:   0:00:12 25.1% done, time left:   0:00:11 26.6% done, time left:   0:00:11 28.1% done, time left:   0:00:11 28.5% done, time left:   0:00:09 28.6% done, time left:   0:00:08 28.9% done, time left:   0:00:07 30.2% done, time left:   0:00:07 31.8% done, time left:   0:00:07 33.5% done, time left:   0:00:07 35.1% done, time left:   0:00:07 36.8% done, time left:   0:00:06 38.4% done, time left:   0:00:06 40.0% done, time left:   0:00:05 41.7% done, time left:   0:00:05 47.8% done, time left:   0:00:00 54.5% done, time left:   0:00:00 60.5% done, time left:   0:00:00 66.5% done, time left:   0:00:00 72.7% done, time left:   0:00:00 78.3% done, time left:   0:00:00 84.7% done, time left:   0:00:00 91.6% done, time left:   0:00:00 98.6% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestIllegalFieldValueException.testSetText:129:*]:
+org.joda.time.IllegalFieldValueException.<init>:215 ALOAD 0
+org.joda.time.IllegalFieldValueException.<init>:215 ALOAD 2
+org.joda.time.IllegalFieldValueException.<init>:215 PUTFIELD org/joda/time/IllegalFieldValueException.iStringValue Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.getIllegalStringValue:301 ALOAD 0
+org.joda.time.IllegalFieldValueException.getIllegalStringValue:301 GETFIELD org/joda/time/IllegalFieldValueException.iStringValue Ljava/lang/String;
+org.joda.time.IllegalFieldValueException.getIllegalStringValue:301 ARETURN
+org.joda.time.TestIllegalFieldValueException.main:37 INVOKEVIRTUAL org/joda/time/TestIllegalFieldValueException.testSetText()V
+org.joda.time.TestIllegalFieldValueException.testSetText:122 ACONST_NULL
+org.joda.time.TestIllegalFieldValueException.testSetText:122 INVOKEVIRTUAL org/joda/time/DateTimeField.set(JLjava/lang/String;Ljava/util/Locale;)J
+org.joda.time.TestIllegalFieldValueException.testSetText:124 ASTORE 1
+org.joda.time.TestIllegalFieldValueException.testSetText:129 ACONST_NULL
+org.joda.time.TestIllegalFieldValueException.testSetText:129 ALOAD 1
+org.joda.time.TestIllegalFieldValueException.testSetText:129 INVOKEVIRTUAL org/joda/time/IllegalFieldValueException.getIllegalStringValue()Ljava/lang/String;
+org.joda.time.TestIllegalFieldValueException.testSetText:129 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.field.BaseDateTimeField.set:618 ALOAD 3
+org.joda.time.field.BaseDateTimeField.set:618 INVOKEVIRTUAL org/joda/time/field/BaseDateTimeField.convertText(Ljava/lang/String;Ljava/util/Locale;)I
+org.joda.time.field.BaseDateTimeField.convertText:668 ALOAD 1
+org.joda.time.field.BaseDateTimeField.convertText:668 INVOKESTATIC java/lang/Integer.parseInt(Ljava/lang/String;)I
+org.joda.time.field.BaseDateTimeField.convertText:670 NEW org/joda/time/IllegalFieldValueException
+org.joda.time.field.BaseDateTimeField.convertText:670 DUP
+org.joda.time.field.BaseDateTimeField.convertText:670 ALOAD 1
+org.joda.time.field.BaseDateTimeField.convertText:670 INVOKESPECIAL org/joda/time/IllegalFieldValueException.<init>(Lorg/joda/time/DateTimeFieldType;Ljava/lang/String;)V
+org.joda.time.field.BaseDateTimeField.convertText:670 ATHROW
+
+Slice consists of 29 bytecode instructions.
+Computation took 7.89 seconds.

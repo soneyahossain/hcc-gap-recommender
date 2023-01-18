@@ -1,0 +1,22 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  1.2% done, time left: unknown  2.4% done, time left: unknown  2.7% done, time left: unknown  3.1% done, time left: unknown  3.6% done, time left: unknown  5.1% done, time left: unknown  6.2% done, time left: unknown  7.8% done, time left:   0:00:05    9.4% done, time left:   0:00:05  9.6% done, time left:   0:00:06  9.6% done, time left:   0:00:07 12.0% done, time left:   0:00:08 12.6% done, time left:   0:00:08 12.7% done, time left:   0:00:08 15.7% done, time left:   0:00:08 18.7% done, time left:   0:00:07 21.6% done, time left:   0:00:06 23.8% done, time left:   0:00:05 27.8% done, time left:   0:00:04 31.7% done, time left:   0:00:03 34.4% done, time left:   0:00:02 37.8% done, time left:   0:00:02 41.6% done, time left:   0:00:02 45.6% done, time left:   0:00:01 49.6% done, time left:   0:00:01 53.7% done, time left:   0:00:01 57.8% done, time left:   0:00:00 61.9% done, time left:   0:00:00 63.7% done, time left:   0:00:00 65.2% done, time left:   0:00:00 68.6% done, time left:   0:00:00 70.8% done, time left:   0:00:00 73.5% done, time left:   0:00:00 75.7% done, time left:   0:00:00 78.9% done, time left:   0:00:00 82.1% done, time left:   0:00:00 85.2% done, time left:   0:00:00 88.8% done, time left:   0:00:00 90.2% done, time left:   0:00:00 90.3% done, time left:   0:00:00 90.5% done, time left:   0:00:00 92.7% done, time left:   0:00:00 96.2% done, time left:   0:00:00 98.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestSeconds.testToString:219:*]:
+org.joda.time.Seconds.seconds:72 ILOAD 0
+org.joda.time.Seconds.seconds:72 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, -2147483648 => L5, 0 => L0, 2147483647 => L4* => L6)
+org.joda.time.Seconds.seconds:86 NEW org/joda/time/Seconds
+org.joda.time.Seconds.seconds:86 ARETURN
+org.joda.time.Seconds.toString:468 NEW java/lang/StringBuilder
+org.joda.time.Seconds.toString:468 INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+org.joda.time.Seconds.toString:468 INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+org.joda.time.Seconds.toString:468 INVOKEVIRTUAL java/lang/StringBuilder.append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+org.joda.time.Seconds.toString:468 ARETURN
+org.joda.time.TestSeconds.main:50 INVOKEVIRTUAL org/joda/time/TestSeconds.testToString()V
+org.joda.time.TestSeconds.testToString:218 BIPUSH -20
+org.joda.time.TestSeconds.testToString:218 INVOKESTATIC org/joda/time/Seconds.seconds(I)Lorg/joda/time/Seconds;
+org.joda.time.TestSeconds.testToString:218 ASTORE 1
+org.joda.time.TestSeconds.testToString:219 LDC "PT-20S"
+org.joda.time.TestSeconds.testToString:219 ALOAD 1
+org.joda.time.TestSeconds.testToString:219 INVOKEVIRTUAL org/joda/time/Seconds.toString()Ljava/lang/String;
+org.joda.time.TestSeconds.testToString:219 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 19 bytecode instructions.
+Computation took 5.16 seconds.

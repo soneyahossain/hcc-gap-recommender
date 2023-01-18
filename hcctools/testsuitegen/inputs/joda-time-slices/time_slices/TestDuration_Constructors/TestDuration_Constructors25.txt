@@ -1,0 +1,117 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.8% done, time left: unknown  3.0% done, time left: unknown  3.6% done, time left: unknown  5.5% done, time left: unknown  7.6% done, time left: unknown 10.3% done, time left: unknown 13.2% done, time left: unknown 14.9% done, time left:   0:00:04   16.4% done, time left:   0:00:05 16.4% done, time left:   0:00:06 16.4% done, time left:   0:00:07 16.4% done, time left:   0:00:08 16.4% done, time left:   0:00:10 16.4% done, time left:   0:00:11 16.5% done, time left:   0:00:12 16.5% done, time left:   0:00:13 16.5% done, time left:   0:00:15 18.8% done, time left:   0:00:15 24.2% done, time left:   0:00:06 30.1% done, time left:   0:00:02 35.6% done, time left:   0:00:01 42.3% done, time left:   0:00:00 49.2% done, time left:   0:00:00 60.3% done, time left:   0:00:00 60.6% done, time left:   0:00:00 61.3% done, time left:   0:00:00 67.4% done, time left:   0:00:00 72.1% done, time left:   0:00:00 78.6% done, time left:   0:00:00 79.3% done, time left:   0:00:00 84.9% done, time left:   0:00:00 91.2% done, time left:   0:00:00 94.1% done, time left:   0:00:00 97.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDuration_Constructors.testConstructor_Object1:250:*]:
+org.joda.time.Duration.<init>:211 ALOAD 0
+org.joda.time.Duration.<init>:211 ALOAD 1
+org.joda.time.Duration.<init>:211 INVOKESPECIAL org/joda/time/base/BaseDuration.<init>(Ljava/lang/Object;)V
+org.joda.time.TestDuration_Constructors.main:80 INVOKEVIRTUAL org/joda/time/TestDuration_Constructors.testConstructor_Object1()V
+org.joda.time.TestDuration_Constructors.testConstructor_Object1:249 NEW org/joda/time/Duration
+org.joda.time.TestDuration_Constructors.testConstructor_Object1:249 DUP
+org.joda.time.TestDuration_Constructors.testConstructor_Object1:249 LDC "PT72.345S"
+org.joda.time.TestDuration_Constructors.testConstructor_Object1:249 INVOKESPECIAL org/joda/time/Duration.<init>(Ljava/lang/Object;)V
+org.joda.time.TestDuration_Constructors.testConstructor_Object1:249 ASTORE 1
+org.joda.time.TestDuration_Constructors.testConstructor_Object1:250 LDC 72345
+org.joda.time.TestDuration_Constructors.testConstructor_Object1:250 ALOAD 1
+org.joda.time.TestDuration_Constructors.testConstructor_Object1:250 INVOKEVIRTUAL org/joda/time/Duration.getMillis()J
+org.joda.time.TestDuration_Constructors.testConstructor_Object1:250 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.BaseDuration.<init>:105 ALOAD 0
+org.joda.time.base.BaseDuration.<init>:105 ALOAD 1
+org.joda.time.base.BaseDuration.<init>:105 INVOKEINTERFACE org/joda/time/convert/DurationConverter.getDurationMillis(Ljava/lang/Object;)J
+org.joda.time.base.BaseDuration.<init>:105 PUTFIELD org/joda/time/base/BaseDuration.iMillis J
+org.joda.time.base.BaseDuration.getMillis:115 ALOAD 0
+org.joda.time.base.BaseDuration.getMillis:115 GETFIELD org/joda/time/base/BaseDuration.iMillis J
+org.joda.time.base.BaseDuration.getMillis:115 LRETURN
+org.joda.time.convert.StringConverter.getDurationMillis:102 ALOAD 1
+org.joda.time.convert.StringConverter.getDurationMillis:102 ASTORE 2
+org.joda.time.convert.StringConverter.getDurationMillis:103 ALOAD 2
+org.joda.time.convert.StringConverter.getDurationMillis:103 ASTORE 3
+org.joda.time.convert.StringConverter.getDurationMillis:104 ALOAD 3
+org.joda.time.convert.StringConverter.getDurationMillis:104 INVOKEVIRTUAL java/lang/String.length()I
+org.joda.time.convert.StringConverter.getDurationMillis:104 ISTORE 4
+org.joda.time.convert.StringConverter.getDurationMillis:113 ALOAD 3
+org.joda.time.convert.StringConverter.getDurationMillis:113 ICONST_2
+org.joda.time.convert.StringConverter.getDurationMillis:113 ILOAD 4
+org.joda.time.convert.StringConverter.getDurationMillis:113 ICONST_1
+org.joda.time.convert.StringConverter.getDurationMillis:113 ISUB
+org.joda.time.convert.StringConverter.getDurationMillis:113 INVOKEVIRTUAL java/lang/String.substring(II)Ljava/lang/String;
+org.joda.time.convert.StringConverter.getDurationMillis:113 ASTORE 3
+org.joda.time.convert.StringConverter.getDurationMillis:114 ICONST_M1
+org.joda.time.convert.StringConverter.getDurationMillis:114 ISTORE 5
+org.joda.time.convert.StringConverter.getDurationMillis:115 ICONST_0
+org.joda.time.convert.StringConverter.getDurationMillis:115 ISTORE 6
+org.joda.time.convert.StringConverter.getDurationMillis:116 ICONST_0
+org.joda.time.convert.StringConverter.getDurationMillis:116 ISTORE 7
+org.joda.time.convert.StringConverter.getDurationMillis:116 ILOAD 7
+org.joda.time.convert.StringConverter.getDurationMillis:116 ALOAD 3
+org.joda.time.convert.StringConverter.getDurationMillis:116 INVOKEVIRTUAL java/lang/String.length()I
+org.joda.time.convert.StringConverter.getDurationMillis:116 IF_ICMPGE L11 true true
+org.joda.time.convert.StringConverter.getDurationMillis:116 IINC 7 1
+org.joda.time.convert.StringConverter.getDurationMillis:117 ALOAD 3
+org.joda.time.convert.StringConverter.getDurationMillis:117 ILOAD 7
+org.joda.time.convert.StringConverter.getDurationMillis:117 INVOKEVIRTUAL java/lang/String.charAt(I)C
+org.joda.time.convert.StringConverter.getDurationMillis:117 BIPUSH 48
+org.joda.time.convert.StringConverter.getDurationMillis:117 IF_ICMPLT L5 true false
+org.joda.time.convert.StringConverter.getDurationMillis:119 ILOAD 7
+org.joda.time.convert.StringConverter.getDurationMillis:119 IFNE L6 true false
+org.joda.time.convert.StringConverter.getDurationMillis:122 ILOAD 7
+org.joda.time.convert.StringConverter.getDurationMillis:122 ILOAD 6
+org.joda.time.convert.StringConverter.getDurationMillis:122 IFEQ L7 true false
+org.joda.time.convert.StringConverter.getDurationMillis:122 ICONST_0
+org.joda.time.convert.StringConverter.getDurationMillis:122 IF_ICMPLE L9 false true
+org.joda.time.convert.StringConverter.getDurationMillis:122 ALOAD 3
+org.joda.time.convert.StringConverter.getDurationMillis:122 ILOAD 7
+org.joda.time.convert.StringConverter.getDurationMillis:122 INVOKEVIRTUAL java/lang/String.charAt(I)C
+org.joda.time.convert.StringConverter.getDurationMillis:122 BIPUSH 46
+org.joda.time.convert.StringConverter.getDurationMillis:122 IF_ICMPNE L9 false true
+org.joda.time.convert.StringConverter.getDurationMillis:122 ILOAD 5
+org.joda.time.convert.StringConverter.getDurationMillis:122 ICONST_M1
+org.joda.time.convert.StringConverter.getDurationMillis:122 IF_ICMPNE L9 false true
+org.joda.time.convert.StringConverter.getDurationMillis:124 ILOAD 7
+org.joda.time.convert.StringConverter.getDurationMillis:124 ISTORE 5
+org.joda.time.convert.StringConverter.getDurationMillis:130 ILOAD 6
+org.joda.time.convert.StringConverter.getDurationMillis:130 IFEQ L12 true false
+org.joda.time.convert.StringConverter.getDurationMillis:130 ICONST_0
+org.joda.time.convert.StringConverter.getDurationMillis:130 ISTORE 11
+org.joda.time.convert.StringConverter.getDurationMillis:131 ILOAD 5
+org.joda.time.convert.StringConverter.getDurationMillis:131 IFLE L15 false true
+org.joda.time.convert.StringConverter.getDurationMillis:132 ALOAD 3
+org.joda.time.convert.StringConverter.getDurationMillis:132 ILOAD 11
+org.joda.time.convert.StringConverter.getDurationMillis:132 ILOAD 5
+org.joda.time.convert.StringConverter.getDurationMillis:132 INVOKEVIRTUAL java/lang/String.substring(II)Ljava/lang/String;
+org.joda.time.convert.StringConverter.getDurationMillis:132 INVOKESTATIC java/lang/Long.parseLong(Ljava/lang/String;)J
+org.joda.time.convert.StringConverter.getDurationMillis:132 LSTORE 9
+org.joda.time.convert.StringConverter.getDurationMillis:133 ALOAD 3
+org.joda.time.convert.StringConverter.getDurationMillis:133 ILOAD 5
+org.joda.time.convert.StringConverter.getDurationMillis:133 ICONST_1
+org.joda.time.convert.StringConverter.getDurationMillis:133 IADD
+org.joda.time.convert.StringConverter.getDurationMillis:133 INVOKEVIRTUAL java/lang/String.substring(I)Ljava/lang/String;
+org.joda.time.convert.StringConverter.getDurationMillis:133 ASTORE 3
+org.joda.time.convert.StringConverter.getDurationMillis:137 ALOAD 3
+org.joda.time.convert.StringConverter.getDurationMillis:137 INVOKESTATIC java/lang/Integer.parseInt(Ljava/lang/String;)I
+org.joda.time.convert.StringConverter.getDurationMillis:137 I2L
+org.joda.time.convert.StringConverter.getDurationMillis:137 LSTORE 7
+org.joda.time.convert.StringConverter.getDurationMillis:143 ILOAD 6
+org.joda.time.convert.StringConverter.getDurationMillis:143 IFEQ L18 true false
+org.joda.time.convert.StringConverter.getDurationMillis:146 LLOAD 9
+org.joda.time.convert.StringConverter.getDurationMillis:146 SIPUSH 1000
+org.joda.time.convert.StringConverter.getDurationMillis:146 INVOKESTATIC org/joda/time/field/FieldUtils.safeMultiply(JI)J
+org.joda.time.convert.StringConverter.getDurationMillis:146 LLOAD 7
+org.joda.time.convert.StringConverter.getDurationMillis:146 INVOKESTATIC org/joda/time/field/FieldUtils.safeAdd(JJ)J
+org.joda.time.convert.StringConverter.getDurationMillis:146 LRETURN
+org.joda.time.field.FieldUtils.safeAdd:85 LLOAD 0
+org.joda.time.field.FieldUtils.safeAdd:85 LLOAD 2
+org.joda.time.field.FieldUtils.safeAdd:85 LADD
+org.joda.time.field.FieldUtils.safeAdd:85 LSTORE 4
+org.joda.time.field.FieldUtils.safeAdd:91 LLOAD 4
+org.joda.time.field.FieldUtils.safeAdd:91 LRETURN
+org.joda.time.field.FieldUtils.safeMultiply:139 ILOAD 2
+org.joda.time.field.FieldUtils.safeMultiply:139 TABLESWITCH (-1 => L0, 0 => L2, 1 => L3, * => L4)
+org.joda.time.field.FieldUtils.safeMultiply:150 LLOAD 0
+org.joda.time.field.FieldUtils.safeMultiply:150 ILOAD 2
+org.joda.time.field.FieldUtils.safeMultiply:150 I2L
+org.joda.time.field.FieldUtils.safeMultiply:150 LMUL
+org.joda.time.field.FieldUtils.safeMultiply:150 LSTORE 3
+org.joda.time.field.FieldUtils.safeMultiply:154 LLOAD 3
+org.joda.time.field.FieldUtils.safeMultiply:154 LRETURN
+
+Slice consists of 200 bytecode instructions.
+Computation took 4.23 seconds.

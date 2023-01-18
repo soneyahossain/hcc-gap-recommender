@@ -1,0 +1,52 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.8% done, time left: unknown  1.2% done, time left: unknown  1.3% done, time left: unknown  1.4% done, time left:   0:02:11    2.3% done, time left:   0:01:16  3.6% done, time left:   0:00:55  4.8% done, time left:   0:00:44  5.7% done, time left:   0:00:37  7.2% done, time left:   0:00:34  9.0% done, time left:   0:00:31  9.9% done, time left:   0:00:28 10.4% done, time left:   0:00:25 11.1% done, time left:   0:00:23 13.3% done, time left:   0:00:22 15.8% done, time left:   0:00:18 17.4% done, time left:   0:00:15 19.1% done, time left:   0:00:13 22.3% done, time left:   0:00:10 25.4% done, time left:   0:00:08 27.3% done, time left:   0:00:06 27.3% done, time left:   0:00:04 29.5% done, time left:   0:00:04 30.3% done, time left:   0:00:03 32.4% done, time left:   0:00:03 35.1% done, time left:   0:00:03 37.9% done, time left:   0:00:03 39.9% done, time left:   0:00:03 43.1% done, time left:   0:00:02 46.7% done, time left:   0:00:02 49.8% done, time left:   0:00:01 53.3% done, time left:   0:00:01 56.7% done, time left:   0:00:01 60.2% done, time left:   0:00:00 63.8% done, time left:   0:00:00 67.1% done, time left:   0:00:00 70.6% done, time left:   0:00:00 74.1% done, time left:   0:00:00 77.7% done, time left:   0:00:00 81.2% done, time left:   0:00:00 84.6% done, time left:   0:00:00 88.2% done, time left:   0:00:00 89.8% done, time left:   0:00:00 90.5% done, time left:   0:00:00 93.8% done, time left:   0:00:00 96.8% done, time left:   0:00:00 99.0% done, time left:   0:00:00 100.4% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestBuddhistChronology.testEpoch:388:*]:
+org.joda.time.DateTime.<init>:532 ALOAD 0
+org.joda.time.DateTime.<init>:532 ALOAD 8
+org.joda.time.DateTime.<init>:532 INVOKESPECIAL org/joda/time/base/BaseDateTime.<init>(IIIIIIILorg/joda/time/Chronology;)V
+org.joda.time.DateTime.withChronology:611 ALOAD 1
+org.joda.time.DateTime.withChronology:611 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.DateTime.withChronology:611 ASTORE 1
+org.joda.time.DateTime.withChronology:612 ALOAD 1
+org.joda.time.DateTime.withChronology:612 ALOAD 0
+org.joda.time.DateTime.withChronology:612 INVOKEVIRTUAL org/joda/time/DateTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.DateTime.withChronology:612 IF_ACMPNE L0 true false
+org.joda.time.DateTime.withChronology:612 NEW org/joda/time/DateTime
+org.joda.time.DateTime.withChronology:612 ARETURN
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.base.BaseDateTime.<init>:256 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:256 ALOAD 8
+org.joda.time.base.BaseDateTime.<init>:256 INVOKEVIRTUAL org/joda/time/base/BaseDateTime.checkChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:256 PUTFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.checkChronology:280 ALOAD 1
+org.joda.time.base.BaseDateTime.checkChronology:280 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.checkChronology:280 ARETURN
+org.joda.time.base.BaseDateTime.getChronology:314 ALOAD 0
+org.joda.time.base.BaseDateTime.getChronology:314 GETFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.getChronology:314 ARETURN
+org.joda.time.chrono.TestBuddhistChronology.main:107 INVOKEVIRTUAL org/joda/time/chrono/TestBuddhistChronology.testEpoch()V
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:387 NEW org/joda/time/DateTime
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:387 DUP
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:387 GETSTATIC org/joda/time/chrono/TestBuddhistChronology.BUDDHIST_UTC Lorg/joda/time/Chronology;
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:387 INVOKESPECIAL org/joda/time/DateTime.<init>(IIIIIIILorg/joda/time/Chronology;)V
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:387 ASTORE 1
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 NEW org/joda/time/DateTime
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 DUP
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 SIPUSH -543
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 ICONST_1
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 ICONST_1
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 ICONST_0
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 ICONST_0
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 ICONST_0
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 ICONST_0
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 GETSTATIC org/joda/time/chrono/TestBuddhistChronology.JULIAN_UTC Lorg/joda/time/Chronology;
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 INVOKESPECIAL org/joda/time/DateTime.<init>(IIIIIIILorg/joda/time/Chronology;)V
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 ALOAD 1
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 GETSTATIC org/joda/time/chrono/TestBuddhistChronology.JULIAN_UTC Lorg/joda/time/Chronology;
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 INVOKEVIRTUAL org/joda/time/DateTime.withChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/DateTime;
+org.joda.time.chrono.TestBuddhistChronology.testEpoch:388 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 47 bytecode instructions.
+Computation took 5.48 seconds.

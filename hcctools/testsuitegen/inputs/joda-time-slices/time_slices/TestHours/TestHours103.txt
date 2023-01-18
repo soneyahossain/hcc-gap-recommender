@@ -1,0 +1,23 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  1.0% done, time left: unknown  2.0% done, time left: unknown  2.8% done, time left: unknown  2.9% done, time left: unknown  3.2% done, time left: unknown  3.4% done, time left:   0:00:49    3.4% done, time left:   0:01:13  3.4% done, time left:   0:01:38  3.5% done, time left:   0:01:45  4.0% done, time left:   0:01:36  5.7% done, time left:   0:01:24  7.4% done, time left:   0:01:15  9.0% done, time left:   0:01:08  9.8% done, time left:   0:01:00 10.0% done, time left:   0:00:54 10.0% done, time left:   0:00:49 12.2% done, time left:   0:00:43 13.0% done, time left:   0:00:37 13.0% done, time left:   0:00:32 13.0% done, time left:   0:00:28 13.0% done, time left:   0:00:25 13.0% done, time left:   0:00:22 15.8% done, time left:   0:00:19 19.2% done, time left:   0:00:14 22.1% done, time left:   0:00:10 24.5% done, time left:   0:00:08 28.4% done, time left:   0:00:05 32.0% done, time left:   0:00:03 35.0% done, time left:   0:00:03 37.6% done, time left:   0:00:02 46.3% done, time left:   0:00:00 51.2% done, time left:   0:00:00 55.3% done, time left:   0:00:00 59.2% done, time left:   0:00:00 62.3% done, time left:   0:00:00 64.3% done, time left:   0:00:00 66.8% done, time left:   0:00:00 69.7% done, time left:   0:00:00 72.2% done, time left:   0:00:00 74.5% done, time left:   0:00:00 78.2% done, time left:   0:00:00 81.4% done, time left:   0:00:00 84.8% done, time left:   0:00:00 88.4% done, time left:   0:00:00 90.0% done, time left:   0:00:00 90.2% done, time left:   0:00:00 90.6% done, time left:   0:00:00 93.6% done, time left:   0:00:00 97.4% done, time left:   0:00:00 98.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestHours.testDividedBy_int:397:*]:
+org.joda.time.Hours.hours:82 ILOAD 0
+org.joda.time.Hours.hours:82 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, 5 => L5, 7 => L7, 2147483647 => L9, -2147483648 => L10, 0 => L0, 4 => L4, 6 => L6, 8 => L8* => L11)
+org.joda.time.Hours.hours:106 NEW org/joda/time/Hours
+org.joda.time.Hours.hours:106 ARETURN
+org.joda.time.Hours.dividedBy:433 ILOAD 1
+org.joda.time.Hours.dividedBy:433 ICONST_1
+org.joda.time.Hours.dividedBy:433 IF_ICMPNE L0 false true
+org.joda.time.Hours.dividedBy:434 ALOAD 0
+org.joda.time.Hours.dividedBy:434 ARETURN
+org.joda.time.TestHours.main:62 INVOKEVIRTUAL org/joda/time/TestHours.testDividedBy_int()V
+org.joda.time.TestHours.testDividedBy_int:390 BIPUSH 12
+org.joda.time.TestHours.testDividedBy_int:390 INVOKESTATIC org/joda/time/Hours.hours(I)Lorg/joda/time/Hours;
+org.joda.time.TestHours.testDividedBy_int:390 ASTORE 1
+org.joda.time.TestHours.testDividedBy_int:397 ALOAD 1
+org.joda.time.TestHours.testDividedBy_int:397 ALOAD 1
+org.joda.time.TestHours.testDividedBy_int:397 ICONST_1
+org.joda.time.TestHours.testDividedBy_int:397 INVOKEVIRTUAL org/joda/time/Hours.dividedBy(I)Lorg/joda/time/Hours;
+org.joda.time.TestHours.testDividedBy_int:397 INVOKESTATIC org/junit/Assert.assertSame(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 18 bytecode instructions.
+Computation took 5.99 seconds.

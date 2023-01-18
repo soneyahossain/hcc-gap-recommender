@@ -1,0 +1,60 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.8% done, time left: unknown  1.2% done, time left: unknown  1.3% done, time left: unknown  2.0% done, time left: unknown  3.4% done, time left: unknown  5.0% done, time left: unknown  6.9% done, time left: unknown  8.9% done, time left: unknown 10.2% done, time left: unknown 10.4% done, time left: unknown 10.8% done, time left: unknown 13.6% done, time left: unknown 16.3% done, time left: unknown 17.5% done, time left: unknown 20.3% done, time left: unknown 23.6% done, time left: unknown 26.7% done, time left: unknown 27.3% done, time left: unknown 28.6% done, time left: unknown 30.3% done, time left: unknown 31.5% done, time left: unknown 33.4% done, time left: unknown 35.1% done, time left: unknown 36.1% done, time left: unknown 37.5% done, time left: unknown 38.9% done, time left: unknown 41.9% done, time left: unknown 45.6% done, time left: unknown 49.1% done, time left: unknown 52.9% done, time left: unknown 56.7% done, time left: unknown 60.6% done, time left: unknown 64.5% done, time left:   0:00:00   68.5% done, time left:   0:00:00 72.3% done, time left:   0:00:00 76.1% done, time left:   0:00:00 80.1% done, time left:   0:00:00 83.9% done, time left:   0:00:00 87.8% done, time left:   0:00:00 89.8% done, time left:   0:00:00 89.9% done, time left:   0:00:00 93.4% done, time left:   0:00:00 96.3% done, time left:   0:00:00 99.0% done, time left:   0:00:00 100.2% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestBuddhistChronology.testKeyYears:428:*]:
+org.joda.time.DateTime.<init>:532 ALOAD 0
+org.joda.time.DateTime.<init>:532 ALOAD 8
+org.joda.time.DateTime.<init>:532 INVOKESPECIAL org/joda/time/base/BaseDateTime.<init>(IIIIIIILorg/joda/time/Chronology;)V
+org.joda.time.DateTime.withChronology:611 ALOAD 1
+org.joda.time.DateTime.withChronology:611 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.DateTime.withChronology:611 ASTORE 1
+org.joda.time.DateTime.withChronology:612 ALOAD 1
+org.joda.time.DateTime.withChronology:612 ALOAD 0
+org.joda.time.DateTime.withChronology:612 INVOKEVIRTUAL org/joda/time/DateTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.DateTime.withChronology:612 IF_ACMPNE L0 true false
+org.joda.time.DateTime.withChronology:612 NEW org/joda/time/DateTime
+org.joda.time.DateTime.withChronology:612 ARETURN
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.base.AbstractDateTime.getYearOfEra:98 ALOAD 0
+org.joda.time.base.AbstractDateTime.getYearOfEra:98 INVOKEVIRTUAL org/joda/time/base/AbstractDateTime.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.base.AbstractDateTime.getYearOfEra:98 INVOKEVIRTUAL org/joda/time/Chronology.yearOfEra()Lorg/joda/time/DateTimeField;
+org.joda.time.base.AbstractDateTime.getYearOfEra:98 INVOKEVIRTUAL org/joda/time/DateTimeField.get(J)I
+org.joda.time.base.AbstractDateTime.getYearOfEra:98 IRETURN
+org.joda.time.base.BaseDateTime.<init>:256 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:256 ALOAD 8
+org.joda.time.base.BaseDateTime.<init>:256 INVOKEVIRTUAL org/joda/time/base/BaseDateTime.checkChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:256 PUTFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.checkChronology:280 ALOAD 1
+org.joda.time.base.BaseDateTime.checkChronology:280 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.checkChronology:280 ARETURN
+org.joda.time.base.BaseDateTime.getChronology:314 ALOAD 0
+org.joda.time.base.BaseDateTime.getChronology:314 GETFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.getChronology:314 ARETURN
+org.joda.time.chrono.AssembledChronology.yearOfEra:272 ALOAD 0
+org.joda.time.chrono.AssembledChronology.yearOfEra:272 GETFIELD org/joda/time/chrono/AssembledChronology.iYearOfEra Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.yearOfEra:272 ARETURN
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 ALOAD 0
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 INVOKEVIRTUAL org/joda/time/chrono/LimitChronology$LimitDateTimeField.getWrappedField()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.LimitChronology$LimitDateTimeField.get:461 IRETURN
+org.joda.time.chrono.TestBuddhistChronology.main:99 INVOKEVIRTUAL org/joda/time/chrono/TestBuddhistChronology.testKeyYears()V
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:424 NEW org/joda/time/DateTime
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:424 DUP
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:424 GETSTATIC org/joda/time/chrono/TestBuddhistChronology.BUDDHIST_UTC Lorg/joda/time/Chronology;
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:424 INVOKESPECIAL org/joda/time/DateTime.<init>(IIIIIIILorg/joda/time/Chronology;)V
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:424 ASTORE 1
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:425 ICONST_1
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:426 ALOAD 1
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:426 GETSTATIC org/joda/time/chrono/TestBuddhistChronology.GJ_UTC Lorg/joda/time/Chronology;
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:426 INVOKEVIRTUAL org/joda/time/DateTime.withChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/DateTime;
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:428 LDC 544
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:428 ALOAD 1
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:428 INVOKEVIRTUAL org/joda/time/DateTime.getYearOfEra()I
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:428 I2L
+org.joda.time.chrono.TestBuddhistChronology.testKeyYears:428 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 ALOAD 0
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 GETFIELD org/joda/time/field/DecoratedDateTimeField.iField Lorg/joda/time/DateTimeField;
+org.joda.time.field.DecoratedDateTimeField.getWrappedField:71 ARETURN
+
+Slice consists of 55 bytecode instructions.
+Computation took 5.37 seconds.

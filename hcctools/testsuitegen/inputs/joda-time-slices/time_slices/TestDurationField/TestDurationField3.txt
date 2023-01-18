@@ -1,0 +1,39 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.joda.time.TestDurationField.test_subtract:58:*]:
+org.joda.time.DurationField.subtract:209 ILOAD 3
+org.joda.time.DurationField.subtract:209 LDC -2147483648
+org.joda.time.DurationField.subtract:209 IF_ICMPNE L0 true false
+org.joda.time.DurationField.subtract:212 LLOAD 1
+org.joda.time.DurationField.subtract:212 ILOAD 3
+org.joda.time.DurationField.subtract:212 INEG
+org.joda.time.DurationField.subtract:212 INVOKEVIRTUAL org/joda/time/DurationField.add(JI)J
+org.joda.time.DurationField.subtract:212 LRETURN
+org.joda.time.TestDurationField.main:32 INVOKEVIRTUAL org/joda/time/TestDurationField.test_subtract()V
+org.joda.time.TestDurationField.test_subtract:55 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstanceUTC()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.TestDurationField.test_subtract:55 INVOKEVIRTUAL org/joda/time/chrono/ISOChronology.millis()Lorg/joda/time/DurationField;
+org.joda.time.TestDurationField.test_subtract:55 ASTORE 1
+org.joda.time.TestDurationField.test_subtract:58 LDC -2147482647
+org.joda.time.TestDurationField.test_subtract:58 ALOAD 1
+org.joda.time.TestDurationField.test_subtract:58 LDC 1000
+org.joda.time.TestDurationField.test_subtract:58 LDC 2147483647
+org.joda.time.TestDurationField.test_subtract:58 INVOKEVIRTUAL org/joda/time/DurationField.subtract(JI)J
+org.joda.time.TestDurationField.test_subtract:58 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.chrono.AssembledChronology.millis:156 ALOAD 0
+org.joda.time.chrono.AssembledChronology.millis:156 GETFIELD org/joda/time/chrono/AssembledChronology.iMillis Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.millis:156 ARETURN
+org.joda.time.chrono.ISOChronology.getInstanceUTC:70 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.getInstanceUTC:70 ARETURN
+org.joda.time.field.FieldUtils.safeAdd:85 LLOAD 0
+org.joda.time.field.FieldUtils.safeAdd:85 LLOAD 2
+org.joda.time.field.FieldUtils.safeAdd:85 LADD
+org.joda.time.field.FieldUtils.safeAdd:85 LSTORE 4
+org.joda.time.field.FieldUtils.safeAdd:91 LLOAD 4
+org.joda.time.field.FieldUtils.safeAdd:91 LRETURN
+org.joda.time.field.MillisDurationField.add:117 LLOAD 1
+org.joda.time.field.MillisDurationField.add:117 ILOAD 3
+org.joda.time.field.MillisDurationField.add:117 I2L
+org.joda.time.field.MillisDurationField.add:117 INVOKESTATIC org/joda/time/field/FieldUtils.safeAdd(JJ)J
+org.joda.time.field.MillisDurationField.add:117 LRETURN
+
+Slice consists of 34 bytecode instructions.
+Computation took 0.53 seconds.

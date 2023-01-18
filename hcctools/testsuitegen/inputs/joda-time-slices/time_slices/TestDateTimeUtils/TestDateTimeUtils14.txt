@@ -1,0 +1,22 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  1.1% done, time left: unknown  3.0% done, time left: unknown  3.4% done, time left: unknown  3.6% done, time left: unknown  4.4% done, time left:   0:00:12    5.0% done, time left:   0:00:13  5.4% done, time left:   0:00:14  5.7% done, time left:   0:00:15  6.7% done, time left:   0:00:15 11.1% done, time left:   0:00:10 12.0% done, time left:   0:00:07 15.9% done, time left:   0:00:05 22.1% done, time left:   0:00:02 28.3% done, time left:   0:00:01 34.4% done, time left:   0:00:01 36.1% done, time left:   0:00:00 37.0% done, time left:   0:00:00 42.0% done, time left:   0:00:01 49.5% done, time left:   0:00:00 55.8% done, time left:   0:00:00 59.2% done, time left:   0:00:00 67.5% done, time left:   0:00:00 72.0% done, time left:   0:00:00 81.9% done, time left:   0:00:00 90.6% done, time left:   0:00:00 95.7% done, time left:   0:00:00 97.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDateTimeUtils.testFixedMillis:227:*]:
+org.joda.time.DateTimeUtils.currentTimeMillis:72 INVOKEINTERFACE org/joda/time/DateTimeUtils$MillisProvider.getMillis()J
+org.joda.time.DateTimeUtils.currentTimeMillis:72 LRETURN
+org.joda.time.DateTimeUtils$SystemMillisProvider.getMillis:547 INVOKESTATIC java/lang/System.currentTimeMillis()J
+org.joda.time.DateTimeUtils$SystemMillisProvider.getMillis:547 LRETURN
+org.joda.time.TestDateTimeUtils.main:126 INVOKEVIRTUAL org/joda/time/TestDateTimeUtils.testFixedMillis()V
+org.joda.time.TestDateTimeUtils.testFixedMillis:224 INVOKESTATIC java/lang/System.currentTimeMillis()J
+org.joda.time.TestDateTimeUtils.testFixedMillis:224 LSTORE 1
+org.joda.time.TestDateTimeUtils.testFixedMillis:225 INVOKESTATIC org/joda/time/DateTimeUtils.currentTimeMillis()J
+org.joda.time.TestDateTimeUtils.testFixedMillis:225 LSTORE 3
+org.joda.time.TestDateTimeUtils.testFixedMillis:227 LLOAD 3
+org.joda.time.TestDateTimeUtils.testFixedMillis:227 LLOAD 1
+org.joda.time.TestDateTimeUtils.testFixedMillis:227 LSUB
+org.joda.time.TestDateTimeUtils.testFixedMillis:227 LDC 10000
+org.joda.time.TestDateTimeUtils.testFixedMillis:227 LCMP
+org.joda.time.TestDateTimeUtils.testFixedMillis:227 IFGE L7 false true
+org.joda.time.TestDateTimeUtils.testFixedMillis:227 ICONST_1
+org.joda.time.TestDateTimeUtils.testFixedMillis:227 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 17 bytecode instructions.
+Computation took 3.62 seconds.

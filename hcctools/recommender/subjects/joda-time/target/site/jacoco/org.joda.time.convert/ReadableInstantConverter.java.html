@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReadableInstantConverter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.convert</a> &gt; <span class="el_source">ReadableInstantConverter.java</span></div><h1>ReadableInstantConverter.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.convert;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.DateTimeZone;
+import org.joda.time.ReadableInstant;
+import org.joda.time.chrono.ISOChronology;
+
+/**
+ * ReadableInstantConverter extracts milliseconds and chronology from a ReadableInstant.
+ *
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+class ReadableInstantConverter extends AbstractConverter
+        implements InstantConverter, PartialConverter {
+
+    /**
+     * Singleton instance.
+     */
+<span class="fc" id="L36">    static final ReadableInstantConverter INSTANCE = new ReadableInstantConverter();</span>
+
+    /**
+     * Restricted constructor.
+     */
+    protected ReadableInstantConverter() {
+<span class="fc" id="L42">        super();</span>
+<span class="fc" id="L43">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the chronology, which is taken from the ReadableInstant.
+     * If the chronology on the instant is null, the ISOChronology in the
+     * specified time zone is used.
+     * If the chronology on the instant is not in the specified zone, it is
+     * adapted.
+     * 
+     * @param object  the ReadableInstant to convert, must not be null
+     * @param zone  the specified zone to use, null means default zone
+     * @return the chronology, never null
+     */
+    public Chronology getChronology(Object object, DateTimeZone zone) {
+<span class="fc" id="L58">        Chronology chrono = ((ReadableInstant) object).getChronology();</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (chrono == null) {</span>
+<span class="fc" id="L60">            return ISOChronology.getInstance(zone);</span>
+        }
+<span class="fc" id="L62">        DateTimeZone chronoZone = chrono.getZone();</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (chronoZone != zone) {</span>
+<span class="fc" id="L64">            chrono = chrono.withZone(zone);</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">            if (chrono == null) {</span>
+<span class="fc" id="L66">                return ISOChronology.getInstance(zone);</span>
+            }
+        }
+<span class="fc" id="L69">        return chrono;</span>
+    }
+
+    /**
+     * Gets the chronology, which is taken from the ReadableInstant.
+     * &lt;p&gt;
+     * If the passed in chronology is non-null, it is used.
+     * Otherwise the chronology from the instant is used.
+     * 
+     * @param object  the ReadableInstant to convert, must not be null
+     * @param chrono  the chronology to use, null means use that from object
+     * @return the chronology, never null
+     */
+    public Chronology getChronology(Object object, Chronology chrono) {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (chrono == null) {</span>
+<span class="fc" id="L84">            chrono = ((ReadableInstant) object).getChronology();</span>
+<span class="fc" id="L85">            chrono = DateTimeUtils.getChronology(chrono);</span>
+        }
+<span class="fc" id="L87">        return chrono;</span>
+    }
+
+    /**
+     * Extracts the millis from an object of this converter's type.
+     * 
+     * @param object  the ReadableInstant to convert, must not be null
+     * @param chrono  the non-null result of getChronology
+     * @return the millisecond value
+     * @throws NullPointerException if the object is null
+     * @throws ClassCastException if the object is an invalid type
+     */
+    public long getInstantMillis(Object object, Chronology chrono) {
+<span class="fc" id="L100">        return ((ReadableInstant) object).getMillis();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns ReadableInstant.class.
+     * 
+     * @return ReadableInstant.class
+     */
+    public Class&lt;?&gt; getSupportedType() {
+<span class="fc" id="L110">        return ReadableInstant.class;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MutablePeriod.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">MutablePeriod.java</span></div><h1>MutablePeriod.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2011 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import java.io.Serializable;
+
+import org.joda.convert.FromString;
+import org.joda.time.base.BasePeriod;
+import org.joda.time.field.FieldUtils;
+import org.joda.time.format.ISOPeriodFormat;
+import org.joda.time.format.PeriodFormatter;
+
+/**
+ * Standard mutable time period implementation.
+ * &lt;p&gt;
+ * A time period is divided into a number of fields, such as hours and seconds.
+ * Which fields are supported is defined by the PeriodType class.
+ * The default is the standard period type, which supports years, months, weeks, days,
+ * hours, minutes, seconds and millis.
+ * &lt;p&gt;
+ * When this time period is added to an instant, the effect is of adding each field in turn.
+ * As a result, this takes into account daylight savings time.
+ * Adding a time period of 1 day to the day before daylight savings starts will only add
+ * 23 hours rather than 24 to ensure that the time remains the same.
+ * If this is not the behaviour you want, then see {@link Duration}.
+ * &lt;p&gt;
+ * The definition of a period also affects the equals method. A period of 1
+ * day is not equal to a period of 24 hours, nor 1 hour equal to 60 minutes.
+ * This is because periods represent an abstracted definition of a time period
+ * (eg. a day may not actually be 24 hours, it might be 23 or 25 at daylight
+ * savings boundary). To compare the actual duration of two periods, convert
+ * both to durations using toDuration, an operation that emphasises that the
+ * result may differ according to the date you choose.
+ * &lt;p&gt;
+ * MutablePeriod is mutable and not thread-safe, unless concurrent threads
+ * are not invoking mutator methods.
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.0
+ * @see Period
+ */
+public class MutablePeriod
+        extends BasePeriod
+        implements ReadWritablePeriod, Cloneable, Serializable {
+
+    /** Serialization version */
+    private static final long serialVersionUID = 3436451121567212165L;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Parses a {@code MutablePeriod} from the specified string.
+     * &lt;p&gt;
+     * This uses {@link ISOPeriodFormat#standard()}.
+     * 
+     * @param str  the string to parse, not null
+     * @since 2.0
+     */
+    @FromString
+    public static MutablePeriod parse(String str) {
+<span class="fc" id="L74">        return parse(str, ISOPeriodFormat.standard());</span>
+    }
+
+    /**
+     * Parses a {@code MutablePeriod} from the specified string using a formatter.
+     * 
+     * @param str  the string to parse, not null
+     * @param formatter  the formatter to use, not null
+     * @since 2.0
+     */
+    public static MutablePeriod parse(String str, PeriodFormatter formatter) {
+<span class="fc" id="L85">        return formatter.parsePeriod(str).toMutablePeriod();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a zero-length period using the standard period type.
+     */
+    public MutablePeriod() {
+<span class="fc" id="L93">        super(0L, null, null);</span>
+<span class="fc" id="L94">    }</span>
+
+    /**
+     * Creates a zero-length period using the specified period type.
+     *
+     * @param type  which set of fields this period supports
+     */
+    public MutablePeriod(PeriodType type) {
+<span class="fc" id="L102">        super(0L, type, null);</span>
+<span class="fc" id="L103">    }</span>
+
+    /**
+     * Create a period from a set of field values using the standard set of fields.
+     *
+     * @param hours  amount of hours in this period
+     * @param minutes  amount of minutes in this period
+     * @param seconds  amount of seconds in this period
+     * @param millis  amount of milliseconds in this period
+     */
+    public MutablePeriod(int hours, int minutes, int seconds, int millis) {
+<span class="fc" id="L114">        super(0, 0, 0, 0, hours, minutes, seconds, millis, PeriodType.standard());</span>
+<span class="fc" id="L115">    }</span>
+
+    /**
+     * Create a period from a set of field values using the standard set of fields.
+     *
+     * @param years  amount of years in this period
+     * @param months  amount of months in this period
+     * @param weeks  amount of weeks in this period
+     * @param days  amount of days in this period
+     * @param hours  amount of hours in this period
+     * @param minutes  amount of minutes in this period
+     * @param seconds  amount of seconds in this period
+     * @param millis  amount of milliseconds in this period
+     */
+    public MutablePeriod(int years, int months, int weeks, int days,
+                  int hours, int minutes, int seconds, int millis) {
+<span class="fc" id="L131">        super(years, months, weeks, days, hours, minutes, seconds, millis, PeriodType.standard());</span>
+<span class="fc" id="L132">    }</span>
+
+    /**
+     * Create a period from a set of field values.
+     *
+     * @param years  amount of years in this period, which must be zero if unsupported
+     * @param months  amount of months in this period, which must be zero if unsupported
+     * @param weeks  amount of weeks in this period, which must be zero if unsupported
+     * @param days  amount of days in this period, which must be zero if unsupported
+     * @param hours  amount of hours in this period, which must be zero if unsupported
+     * @param minutes  amount of minutes in this period, which must be zero if unsupported
+     * @param seconds  amount of seconds in this period, which must be zero if unsupported
+     * @param millis  amount of milliseconds in this period, which must be zero if unsupported
+     * @param type  which set of fields this period supports, null means AllType
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    public MutablePeriod(int years, int months, int weeks, int days,
+                    int hours, int minutes, int seconds, int millis, PeriodType type) {
+<span class="fc" id="L150">        super(years, months, weeks, days, hours, minutes, seconds, millis, type);</span>
+<span class="fc" id="L151">    }</span>
+
+    /**
+     * Creates a period from the given millisecond duration using the standard
+     * set of fields.
+     * &lt;p&gt;
+     * Only precise fields in the period type will be used.
+     * For the standard period type this is the time fields only.
+     * Thus the year, month, week and day fields will not be populated.
+     * &lt;p&gt;
+     * If the duration is small, less than one day, then this method will perform
+     * as you might expect and split the fields evenly.
+     * &lt;p&gt;
+     * If the duration is larger than one day then all the remaining duration will
+     * be stored in the largest available precise field, hours in this case.
+     * &lt;p&gt;
+     * For example, a duration equal to (365 + 60 + 5) days will be converted to
+     * ((365 + 60 + 5) * 24) hours by this constructor.
+     * &lt;p&gt;
+     * For more control over the conversion process, you have two options:
+     * &lt;ul&gt;
+     * &lt;li&gt;convert the duration to an {@link Interval}, and from there obtain the period
+     * &lt;li&gt;specify a period type that contains precise definitions of the day and larger
+     * fields, such as the UTC or precise types.
+     * &lt;/ul&gt;
+     *
+     * @param duration  the duration, in milliseconds
+     */
+    public MutablePeriod(long duration) {
+<span class="fc" id="L180">        super(duration);</span>
+<span class="fc" id="L181">    }</span>
+
+    /**
+     * Creates a period from the given millisecond duration.
+     * &lt;p&gt;
+     * Only precise fields in the period type will be used.
+     * Imprecise fields will not be populated.
+     * &lt;p&gt;
+     * If the duration is small then this method will perform
+     * as you might expect and split the fields evenly.
+     * &lt;p&gt;
+     * If the duration is large then all the remaining duration will
+     * be stored in the largest available precise field.
+     * For details as to which fields are precise, review the period type javadoc.
+     *
+     * @param duration  the duration, in milliseconds
+     * @param type  which set of fields this period supports, null means standard
+     */
+    public MutablePeriod(long duration, PeriodType type) {
+<span class="fc" id="L200">        super(duration, type, null);</span>
+<span class="fc" id="L201">    }</span>
+
+    /**
+     * Creates a period from the given millisecond duration using the standard
+     * set of fields.
+     * &lt;p&gt;
+     * Only precise fields in the period type will be used.
+     * Imprecise fields will not be populated.
+     * &lt;p&gt;
+     * If the duration is small then this method will perform
+     * as you might expect and split the fields evenly.
+     * &lt;p&gt;
+     * If the duration is large then all the remaining duration will
+     * be stored in the largest available precise field.
+     * For details as to which fields are precise, review the period type javadoc.
+     *
+     * @param duration  the duration, in milliseconds
+     * @param chronology  the chronology to use to split the duration, null means ISO default
+     */
+    public MutablePeriod(long duration, Chronology chronology) {
+<span class="fc" id="L221">        super(duration, null, chronology);</span>
+<span class="fc" id="L222">    }</span>
+
+    /**
+     * Creates a period from the given millisecond duration.
+     * &lt;p&gt;
+     * Only precise fields in the period type will be used.
+     * Imprecise fields will not be populated.
+     * &lt;p&gt;
+     * If the duration is small then this method will perform
+     * as you might expect and split the fields evenly.
+     * &lt;p&gt;
+     * If the duration is large then all the remaining duration will
+     * be stored in the largest available precise field.
+     * For details as to which fields are precise, review the period type javadoc.
+     *
+     * @param duration  the duration, in milliseconds
+     * @param type  which set of fields this period supports, null means standard
+     * @param chronology  the chronology to use to split the duration, null means ISO default
+     */
+    public MutablePeriod(long duration, PeriodType type, Chronology chronology) {
+<span class="fc" id="L242">        super(duration, type, chronology);</span>
+<span class="fc" id="L243">    }</span>
+
+    /**
+     * Creates a period from the given interval endpoints using the standard
+     * set of fields.
+     *
+     * @param startInstant  interval start, in milliseconds
+     * @param endInstant  interval end, in milliseconds
+     */
+    public MutablePeriod(long startInstant, long endInstant) {
+<span class="fc" id="L253">        super(startInstant, endInstant, null, null);</span>
+<span class="fc" id="L254">    }</span>
+
+    /**
+     * Creates a period from the given interval endpoints.
+     *
+     * @param startInstant  interval start, in milliseconds
+     * @param endInstant  interval end, in milliseconds
+     * @param type  which set of fields this period supports, null means standard
+     */
+    public MutablePeriod(long startInstant, long endInstant, PeriodType type) {
+<span class="fc" id="L264">        super(startInstant, endInstant, type, null);</span>
+<span class="fc" id="L265">    }</span>
+
+    /**
+     * Creates a period from the given interval endpoints using the standard
+     * set of fields.
+     *
+     * @param startInstant  interval start, in milliseconds
+     * @param endInstant  interval end, in milliseconds
+     * @param chrono  the chronology to use, null means ISO in default zone
+     */
+    public MutablePeriod(long startInstant, long endInstant, Chronology chrono) {
+<span class="fc" id="L276">        super(startInstant, endInstant, null, chrono);</span>
+<span class="fc" id="L277">    }</span>
+
+    /**
+     * Creates a period from the given interval endpoints.
+     *
+     * @param startInstant  interval start, in milliseconds
+     * @param endInstant  interval end, in milliseconds
+     * @param type  which set of fields this period supports, null means standard
+     * @param chrono  the chronology to use, null means ISO in default zone
+     */
+    public MutablePeriod(long startInstant, long endInstant, PeriodType type, Chronology chrono) {
+<span class="fc" id="L288">        super(startInstant, endInstant, type, chrono);</span>
+<span class="fc" id="L289">    }</span>
+
+    /**
+     * Creates a period from the given interval endpoints using the standard
+     * set of fields.
+     * &lt;p&gt;
+     * The chronology of the start instant is used, unless that is null when the
+     * chronology of the end instant is used instead.
+     *
+     * @param startInstant  interval start, null means now
+     * @param endInstant  interval end, null means now
+     */
+    public MutablePeriod(ReadableInstant startInstant, ReadableInstant endInstant) {
+<span class="fc" id="L302">        super(startInstant, endInstant, null);</span>
+<span class="fc" id="L303">    }</span>
+
+    /**
+     * Creates a period from the given interval endpoints.
+     * &lt;p&gt;
+     * The chronology of the start instant is used, unless that is null when the
+     * chronology of the end instant is used instead.
+     *
+     * @param startInstant  interval start, null means now
+     * @param endInstant  interval end, null means now
+     * @param type  which set of fields this period supports, null means AllType
+     */
+    public MutablePeriod(ReadableInstant startInstant, ReadableInstant endInstant, PeriodType type) {
+<span class="fc" id="L316">        super(startInstant, endInstant, type);</span>
+<span class="fc" id="L317">    }</span>
+
+    /**
+     * Creates a period from the given start point and the duration.
+     *
+     * @param startInstant  the interval start, null means now
+     * @param duration  the duration of the interval, null means zero-length
+     */
+    public MutablePeriod(ReadableInstant startInstant, ReadableDuration duration) {
+<span class="fc" id="L326">        super(startInstant, duration, null);</span>
+<span class="fc" id="L327">    }</span>
+
+    /**
+     * Creates a period from the given start point and the duration.
+     *
+     * @param startInstant  the interval start, null means now
+     * @param duration  the duration of the interval, null means zero-length
+     * @param type  which set of fields this period supports, null means standard
+     */
+    public MutablePeriod(ReadableInstant startInstant, ReadableDuration duration, PeriodType type) {
+<span class="fc" id="L337">        super(startInstant, duration, type);</span>
+<span class="fc" id="L338">    }</span>
+
+    /**
+     * Creates a period from the given duration and end point.
+     *
+     * @param duration  the duration of the interval, null means zero-length
+     * @param endInstant  the interval end, null means now
+     */
+    public MutablePeriod(ReadableDuration duration, ReadableInstant endInstant) {
+<span class="nc" id="L347">        super(duration, endInstant, null);</span>
+<span class="nc" id="L348">    }</span>
+
+    /**
+     * Creates a period from the given duration and end point.
+     *
+     * @param duration  the duration of the interval, null means zero-length
+     * @param endInstant  the interval end, null means now
+     * @param type  which set of fields this period supports, null means standard
+     */
+    public MutablePeriod(ReadableDuration duration, ReadableInstant endInstant, PeriodType type) {
+<span class="nc" id="L358">        super(duration, endInstant, type);</span>
+<span class="nc" id="L359">    }</span>
+
+    /**
+     * Creates a period by converting or copying from another object.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadablePeriod, ReadableInterval and String.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
+     *
+     * @param period  period to convert
+     * @throws IllegalArgumentException if period is invalid
+     * @throws UnsupportedOperationException if an unsupported field's value is non-zero
+     */
+    public MutablePeriod(Object period) {
+<span class="fc" id="L374">        super(period, null, null);</span>
+<span class="fc" id="L375">    }</span>
+
+    /**
+     * Creates a period by converting or copying from another object.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadablePeriod, ReadableInterval and String.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
+     *
+     * @param period  period to convert
+     * @param type  which set of fields this period supports, null means use converter
+     * @throws IllegalArgumentException if period is invalid
+     * @throws UnsupportedOperationException if an unsupported field's value is non-zero
+     */
+    public MutablePeriod(Object period, PeriodType type) {
+<span class="fc" id="L391">        super(period, type, null);</span>
+<span class="fc" id="L392">    }</span>
+
+    /**
+     * Creates a period by converting or copying from another object.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadablePeriod, ReadableInterval and String.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
+     *
+     * @param period  period to convert
+     * @param chrono  the chronology to use, null means ISO in default zone
+     * @throws IllegalArgumentException if period is invalid
+     * @throws UnsupportedOperationException if an unsupported field's value is non-zero
+     */
+    public MutablePeriod(Object period, Chronology chrono) {
+<span class="fc" id="L408">        super(period, null, chrono);</span>
+<span class="fc" id="L409">    }</span>
+
+    /**
+     * Creates a period by converting or copying from another object.
+     * &lt;p&gt;
+     * The recognised object types are defined in
+     * {@link org.joda.time.convert.ConverterManager ConverterManager} and
+     * include ReadablePeriod, ReadableInterval and String.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
+     *
+     * @param period  period to convert
+     * @param type  which set of fields this period supports, null means use converter
+     * @param chrono  the chronology to use, null means ISO in default zone
+     * @throws IllegalArgumentException if period is invalid
+     * @throws UnsupportedOperationException if an unsupported field's value is non-zero
+     */
+    public MutablePeriod(Object period, PeriodType type, Chronology chrono) {
+<span class="fc" id="L426">        super(period, type, chrono);</span>
+<span class="fc" id="L427">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Clears the period, setting all values back to zero.
+     */
+    public void clear() {
+<span class="fc" id="L434">        super.setValues(new int[size()]);</span>
+<span class="fc" id="L435">    }</span>
+
+    /**
+     * Sets the value of one of the fields by index.
+     *
+     * @param index  the field index
+     * @param value  the new value for the field
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    public void setValue(int index, int value) {
+<span class="fc" id="L445">        super.setValue(index, value);</span>
+<span class="fc" id="L446">    }</span>
+
+    /**
+     * Sets the value of one of the fields.
+     * &lt;p&gt;
+     * The field type specified must be one of those that is supported by the period.
+     *
+     * @param field  a DurationFieldType instance that is supported by this period, not null
+     * @param value  the new value for the field
+     * @throws IllegalArgumentException if the field is null or not supported
+     */
+    public void set(DurationFieldType field, int value) {
+<span class="fc" id="L458">        super.setField(field, value);</span>
+<span class="fc" id="L459">    }</span>
+
+    /**
+     * Sets all the fields in one go from another ReadablePeriod.
+     * 
+     * @param period  the period to set, null means zero length period
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    public void setPeriod(ReadablePeriod period) {
+<span class="fc" id="L468">        super.setPeriod(period);</span>
+<span class="fc" id="L469">    }</span>
+
+    /**
+     * Sets all the fields in one go.
+     * 
+     * @param years  amount of years in this period, which must be zero if unsupported
+     * @param months  amount of months in this period, which must be zero if unsupported
+     * @param weeks  amount of weeks in this period, which must be zero if unsupported
+     * @param days  amount of days in this period, which must be zero if unsupported
+     * @param hours  amount of hours in this period, which must be zero if unsupported
+     * @param minutes  amount of minutes in this period, which must be zero if unsupported
+     * @param seconds  amount of seconds in this period, which must be zero if unsupported
+     * @param millis  amount of milliseconds in this period, which must be zero if unsupported
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    public void setPeriod(int years, int months, int weeks, int days,
+                          int hours, int minutes, int seconds, int millis) {
+<span class="fc" id="L486">        super.setPeriod(years, months, weeks, days, hours, minutes, seconds, millis);</span>
+<span class="fc" id="L487">    }</span>
+
+    /**
+     * Sets all the fields in one go from an interval using the ISO chronology
+     * and dividing the fields using the period type.
+     * 
+     * @param interval  the interval to set, null means zero length
+     * @throws ArithmeticException if the set exceeds the capacity of the period
+     */
+    public void setPeriod(ReadableInterval interval) {
+<span class="fc bfc" id="L497" title="All 2 branches covered.">        if (interval == null) {</span>
+<span class="fc" id="L498">            setPeriod(0L);</span>
+        } else {
+<span class="fc" id="L500">            Chronology chrono = DateTimeUtils.getChronology(interval.getChronology());</span>
+<span class="fc" id="L501">            setPeriod(interval.getStartMillis(), interval.getEndMillis(), chrono);</span>
+        }
+<span class="fc" id="L503">    }</span>
+
+    /**
+     * Sets all the fields in one go from two instants representing an interval.
+     * &lt;p&gt;
+     * The chronology of the start instant is used, unless that is null when the
+     * chronology of the end instant is used instead.
+     * 
+     * @param start  the start instant, null means now
+     * @param end  the end instant, null means now
+     * @throws ArithmeticException if the set exceeds the capacity of the period
+     */
+    public void setPeriod(ReadableInstant start, ReadableInstant end) {
+<span class="fc bfc" id="L516" title="All 2 branches covered.">        if (start == end) {</span>
+<span class="fc" id="L517">            setPeriod(0L);</span>
+        } else {
+<span class="fc" id="L519">            long startMillis = DateTimeUtils.getInstantMillis(start);</span>
+<span class="fc" id="L520">            long endMillis = DateTimeUtils.getInstantMillis(end);</span>
+<span class="fc" id="L521">            Chronology chrono = DateTimeUtils.getIntervalChronology(start, end);</span>
+<span class="fc" id="L522">            setPeriod(startMillis, endMillis, chrono);</span>
+        }
+<span class="fc" id="L524">    }</span>
+
+    /**
+     * Sets all the fields in one go from a millisecond interval using ISOChronology
+     * and dividing the fields using the period type.
+     * 
+     * @param startInstant  interval start, in milliseconds
+     * @param endInstant  interval end, in milliseconds
+     * @throws ArithmeticException if the set exceeds the capacity of the period
+     */
+    public void setPeriod(long startInstant, long endInstant) {
+<span class="fc" id="L535">        setPeriod(startInstant, endInstant, null);</span>
+<span class="fc" id="L536">    }</span>
+
+    /**
+     * Sets all the fields in one go from a millisecond interval.
+     * 
+     * @param startInstant  interval start, in milliseconds
+     * @param endInstant  interval end, in milliseconds
+     * @param chrono  the chronology to use, null means ISO chronology
+     * @throws ArithmeticException if the set exceeds the capacity of the period
+     */
+    public void setPeriod(long startInstant, long endInstant, Chronology chrono) {
+<span class="fc" id="L547">        chrono = DateTimeUtils.getChronology(chrono);</span>
+<span class="fc" id="L548">        setValues(chrono.get(this, startInstant, endInstant));</span>
+<span class="fc" id="L549">    }</span>
+
+    /**
+     * Sets all the fields in one go from a duration dividing the
+     * fields using the period type.
+     * &lt;p&gt;
+     * When dividing the duration, only precise fields in the period type will be used.
+     * For large durations, all the remaining duration will be stored in the largest
+     * available precise field.
+     * 
+     * @param duration  the duration to set, null means zero length
+     * @throws ArithmeticException if the set exceeds the capacity of the period
+     */
+    public void setPeriod(ReadableDuration duration) {
+<span class="fc" id="L563">        setPeriod(duration, null);</span>
+<span class="fc" id="L564">    }</span>
+
+    /**
+     * Sets all the fields in one go from a duration dividing the
+     * fields using the period type.
+     * &lt;p&gt;
+     * When dividing the duration, only precise fields in the period type will be used.
+     * For large durations, all the remaining duration will be stored in the largest
+     * available precise field.
+     * 
+     * @param duration  the duration to set, null means zero length
+     * @param chrono  the chronology to use, null means ISO default
+     * @throws ArithmeticException if the set exceeds the capacity of the period
+     */
+    public void setPeriod(ReadableDuration duration, Chronology chrono) {
+<span class="fc" id="L579">        long durationMillis = DateTimeUtils.getDurationMillis(duration);</span>
+<span class="fc" id="L580">        setPeriod(durationMillis, chrono);</span>
+<span class="fc" id="L581">    }</span>
+
+    /**
+     * Sets all the fields in one go from a millisecond duration dividing the
+     * fields using the period type.
+     * &lt;p&gt;
+     * When dividing the duration, only precise fields in the period type will be used.
+     * For large durations, all the remaining duration will be stored in the largest
+     * available precise field.
+     * 
+     * @param duration  the duration, in milliseconds
+     * @throws ArithmeticException if the set exceeds the capacity of the period
+     */
+    public void setPeriod(long duration) {
+<span class="fc" id="L595">        setPeriod(duration, null);</span>
+<span class="fc" id="L596">    }</span>
+
+    /**
+     * Sets all the fields in one go from a millisecond duration.
+     * &lt;p&gt;
+     * When dividing the duration, only precise fields in the period type will be used.
+     * For large durations, all the remaining duration will be stored in the largest
+     * available precise field.
+     * 
+     * @param duration  the duration, in milliseconds
+     * @param chrono  the chronology to use, null means ISO chronology
+     * @throws ArithmeticException if the set exceeds the capacity of the period
+     */
+    public void setPeriod(long duration, Chronology chrono) {
+<span class="fc" id="L610">        chrono = DateTimeUtils.getChronology(chrono);</span>
+<span class="fc" id="L611">        setValues(chrono.get(this, duration));</span>
+<span class="fc" id="L612">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Adds to the value of one of the fields.
+     * &lt;p&gt;
+     * The field type specified must be one of those that is supported by the period.
+     *
+     * @param field  a DurationFieldType instance that is supported by this period, not null
+     * @param value  the value to add to the field
+     * @throws IllegalArgumentException if the field is null or not supported
+     */
+    public void add(DurationFieldType field, int value) {
+<span class="fc" id="L625">        super.addField(field, value);</span>
+<span class="fc" id="L626">    }</span>
+
+    /**
+     * Adds a period to this one by adding each field in turn.
+     * 
+     * @param period  the period to add, null means add nothing
+     * @throws IllegalArgumentException if the period being added contains a field
+     * not supported by this period
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void add(ReadablePeriod period) {
+<span class="fc" id="L637">        super.addPeriod(period);</span>
+<span class="fc" id="L638">    }</span>
+
+    /**
+     * Adds to each field of this period.
+     * 
+     * @param years  amount of years to add to this period, which must be zero if unsupported
+     * @param months  amount of months to add to this period, which must be zero if unsupported
+     * @param weeks  amount of weeks to add to this period, which must be zero if unsupported
+     * @param days  amount of days to add to this period, which must be zero if unsupported
+     * @param hours  amount of hours to add to this period, which must be zero if unsupported
+     * @param minutes  amount of minutes to add to this period, which must be zero if unsupported
+     * @param seconds  amount of seconds to add to this period, which must be zero if unsupported
+     * @param millis  amount of milliseconds to add to this period, which must be zero if unsupported
+     * @throws IllegalArgumentException if the period being added contains a field
+     * not supported by this period
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void add(int years, int months, int weeks, int days,
+                       int hours, int minutes, int seconds, int millis) {
+<span class="fc" id="L657">        setPeriod(</span>
+<span class="fc" id="L658">            FieldUtils.safeAdd(getYears(), years),</span>
+<span class="fc" id="L659">            FieldUtils.safeAdd(getMonths(), months),</span>
+<span class="fc" id="L660">            FieldUtils.safeAdd(getWeeks(), weeks),</span>
+<span class="fc" id="L661">            FieldUtils.safeAdd(getDays(), days),</span>
+<span class="fc" id="L662">            FieldUtils.safeAdd(getHours(), hours),</span>
+<span class="fc" id="L663">            FieldUtils.safeAdd(getMinutes(), minutes),</span>
+<span class="fc" id="L664">            FieldUtils.safeAdd(getSeconds(), seconds),</span>
+<span class="fc" id="L665">            FieldUtils.safeAdd(getMillis(), millis)</span>
+        );
+<span class="fc" id="L667">    }</span>
+
+    /**
+     * Adds an interval to this one by dividing the interval into
+     * fields and calling {@link #add(ReadablePeriod)}.
+     * 
+     * @param interval  the interval to add, null means add nothing
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void add(ReadableInterval interval) {
+<span class="fc bfc" id="L677" title="All 2 branches covered.">        if (interval != null) {</span>
+<span class="fc" id="L678">            add(interval.toPeriod(getPeriodType()));</span>
+        }
+<span class="fc" id="L680">    }</span>
+
+    /**
+     * Adds a duration to this one by dividing the duration into
+     * fields and calling {@link #add(ReadablePeriod)}.
+     * 
+     * @param duration  the duration to add, null means add nothing
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void add(ReadableDuration duration) {
+<span class="fc bfc" id="L690" title="All 2 branches covered.">        if (duration != null) {</span>
+<span class="fc" id="L691">            add(new Period(duration.getMillis(), getPeriodType()));</span>
+        }
+<span class="fc" id="L693">    }</span>
+
+    /**
+     * Adds a millisecond duration to this one by dividing the duration into
+     * fields and calling {@link #add(ReadablePeriod)}.
+     * &lt;p&gt;
+     * When dividing the duration, only precise fields in the period type will be used.
+     * For large durations, all the remaining duration will be stored in the largest
+     * available precise field.
+     * 
+     * @param duration  the duration, in milliseconds
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void add(long duration) {
+<span class="fc" id="L707">        add(new Period(duration, getPeriodType()));</span>
+<span class="fc" id="L708">    }</span>
+
+    /**
+     * Adds a millisecond duration to this one by dividing the duration into
+     * fields and calling {@link #add(ReadablePeriod)}.
+     * &lt;p&gt;
+     * When dividing the duration, only precise fields in the period type will be used.
+     * For large durations, all the remaining duration will be stored in the largest
+     * available precise field.
+     * 
+     * @param duration  the duration, in milliseconds
+     * @param chrono  the chronology to use, null means ISO default
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void add(long duration, Chronology chrono) {
+<span class="fc" id="L723">        add(new Period(duration, getPeriodType(), chrono));</span>
+<span class="fc" id="L724">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Merges all the fields from the specified period into this one.
+     * &lt;p&gt;
+     * Fields that are not present in the specified period are left unaltered.
+     * 
+     * @param period  the period to set, null ignored
+     * @throws IllegalArgumentException if an unsupported field's value is non-zero
+     */
+    public void mergePeriod(ReadablePeriod period) {
+<span class="fc" id="L736">        super.mergePeriod(period);</span>
+<span class="fc" id="L737">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the years field part of the period.
+     * 
+     * @return the number of years in the period, zero if unsupported
+     */
+    public int getYears() {
+<span class="fc" id="L746">        return getPeriodType().getIndexedField(this, PeriodType.YEAR_INDEX);</span>
+    }
+
+    /**
+     * Gets the months field part of the period.
+     * 
+     * @return the number of months in the period, zero if unsupported
+     */
+    public int getMonths() {
+<span class="fc" id="L755">        return getPeriodType().getIndexedField(this, PeriodType.MONTH_INDEX);</span>
+    }
+
+    /**
+     * Gets the weeks field part of the period.
+     * 
+     * @return the number of weeks in the period, zero if unsupported
+     */
+    public int getWeeks() {
+<span class="fc" id="L764">        return getPeriodType().getIndexedField(this, PeriodType.WEEK_INDEX);</span>
+    }
+
+    /**
+     * Gets the days field part of the period.
+     * 
+     * @return the number of days in the period, zero if unsupported
+     */
+    public int getDays() {
+<span class="fc" id="L773">        return getPeriodType().getIndexedField(this, PeriodType.DAY_INDEX);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the hours field part of the period.
+     * 
+     * @return the number of hours in the period, zero if unsupported
+     */
+    public int getHours() {
+<span class="fc" id="L783">        return getPeriodType().getIndexedField(this, PeriodType.HOUR_INDEX);</span>
+    }
+
+    /**
+     * Gets the minutes field part of the period.
+     * 
+     * @return the number of minutes in the period, zero if unsupported
+     */
+    public int getMinutes() {
+<span class="fc" id="L792">        return getPeriodType().getIndexedField(this, PeriodType.MINUTE_INDEX);</span>
+    }
+
+    /**
+     * Gets the seconds field part of the period.
+     * 
+     * @return the number of seconds in the period, zero if unsupported
+     */
+    public int getSeconds() {
+<span class="fc" id="L801">        return getPeriodType().getIndexedField(this, PeriodType.SECOND_INDEX);</span>
+    }
+
+    /**
+     * Gets the millis field part of the period.
+     * 
+     * @return the number of millis in the period, zero if unsupported
+     */
+    public int getMillis() {
+<span class="fc" id="L810">        return getPeriodType().getIndexedField(this, PeriodType.MILLI_INDEX);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the number of years of the period.
+     * 
+     * @param years  the number of years
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     */
+    public void setYears(int years) {
+<span class="fc" id="L821">        super.setField(DurationFieldType.years(), years);</span>
+<span class="fc" id="L822">    }</span>
+
+    /**
+     * Adds the specified years to the number of years in the period.
+     * 
+     * @param years  the number of years
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void addYears(int years) {
+<span class="fc" id="L832">        super.addField(DurationFieldType.years(), years);</span>
+<span class="fc" id="L833">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the number of months of the period.
+     * 
+     * @param months  the number of months
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     */
+    public void setMonths(int months) {
+<span class="fc" id="L843">        super.setField(DurationFieldType.months(), months);</span>
+<span class="fc" id="L844">    }</span>
+
+    /**
+     * Adds the specified months to the number of months in the period.
+     * 
+     * @param months  the number of months
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void addMonths(int months) {
+<span class="fc" id="L854">        super.addField(DurationFieldType.months(), months);</span>
+<span class="fc" id="L855">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the number of weeks of the period.
+     * 
+     * @param weeks  the number of weeks
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     */
+    public void setWeeks(int weeks) {
+<span class="fc" id="L865">        super.setField(DurationFieldType.weeks(), weeks);</span>
+<span class="fc" id="L866">    }</span>
+
+    /**
+     * Adds the specified weeks to the number of weeks in the period.
+     * 
+     * @param weeks  the number of weeks
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void addWeeks(int weeks) {
+<span class="fc" id="L876">        super.addField(DurationFieldType.weeks(), weeks);</span>
+<span class="fc" id="L877">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the number of days of the period.
+     * 
+     * @param days  the number of days
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     */
+    public void setDays(int days) {
+<span class="fc" id="L887">        super.setField(DurationFieldType.days(), days);</span>
+<span class="fc" id="L888">    }</span>
+
+    /**
+     * Adds the specified days to the number of days in the period.
+     * 
+     * @param days  the number of days
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void addDays(int days) {
+<span class="fc" id="L898">        super.addField(DurationFieldType.days(), days);</span>
+<span class="fc" id="L899">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the number of hours of the period.
+     * 
+     * @param hours  the number of hours
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     */
+    public void setHours(int hours) {
+<span class="fc" id="L909">        super.setField(DurationFieldType.hours(), hours);</span>
+<span class="fc" id="L910">    }</span>
+
+    /**
+     * Adds the specified hours to the number of hours in the period.
+     * 
+     * @param hours  the number of hours
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void addHours(int hours) {
+<span class="fc" id="L920">        super.addField(DurationFieldType.hours(), hours);</span>
+<span class="fc" id="L921">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the number of minutes of the period.
+     * 
+     * @param minutes  the number of minutes
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     */
+    public void setMinutes(int minutes) {
+<span class="fc" id="L931">        super.setField(DurationFieldType.minutes(), minutes);</span>
+<span class="fc" id="L932">    }</span>
+
+    /**
+     * Adds the specified minutes to the number of minutes in the period.
+     * 
+     * @param minutes  the number of minutes
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void addMinutes(int minutes) {
+<span class="fc" id="L942">        super.addField(DurationFieldType.minutes(), minutes);</span>
+<span class="fc" id="L943">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the number of seconds of the period.
+     * 
+     * @param seconds  the number of seconds
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     */
+    public void setSeconds(int seconds) {
+<span class="fc" id="L953">        super.setField(DurationFieldType.seconds(), seconds);</span>
+<span class="fc" id="L954">    }</span>
+
+    /**
+     * Adds the specified seconds to the number of seconds in the period.
+     * 
+     * @param seconds  the number of seconds
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void addSeconds(int seconds) {
+<span class="fc" id="L964">        super.addField(DurationFieldType.seconds(), seconds);</span>
+<span class="fc" id="L965">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the number of millis of the period.
+     * 
+     * @param millis  the number of millis
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     */
+    public void setMillis(int millis) {
+<span class="fc" id="L975">        super.setField(DurationFieldType.millis(), millis);</span>
+<span class="fc" id="L976">    }</span>
+
+    /**
+     * Adds the specified millis to the number of millis in the period.
+     * 
+     * @param millis  the number of millis
+     * @throws IllegalArgumentException if field is not supported and the value is non-zero
+     * @throws ArithmeticException if the addition exceeds the capacity of the period
+     */
+    public void addMillis(int millis) {
+<span class="fc" id="L986">        super.addField(DurationFieldType.millis(), millis);</span>
+<span class="fc" id="L987">    }</span>
+
+    // Misc
+    //-----------------------------------------------------------------------
+    /**
+     * Clone this object without having to cast the returned object.
+     *
+     * @return a clone of the this object.
+     */
+    public MutablePeriod copy() {
+<span class="fc" id="L997">        return (MutablePeriod) clone();</span>
+    }
+
+    /**
+     * Clone this object.
+     *
+     * @return a clone of this object.
+     */
+    public Object clone() {
+        try {
+<span class="fc" id="L1007">            return super.clone();</span>
+<span class="nc" id="L1008">        } catch (CloneNotSupportedException ex) {</span>
+<span class="nc" id="L1009">            throw new InternalError(&quot;Clone error&quot;);</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

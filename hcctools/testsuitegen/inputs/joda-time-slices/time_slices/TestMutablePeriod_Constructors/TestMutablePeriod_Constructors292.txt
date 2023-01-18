@@ -1,0 +1,1078 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  0.3% done, time left: unknown  0.7% done, time left: unknown  1.0% done, time left: unknown  1.5% done, time left: unknown  1.9% done, time left: unknown  2.1% done, time left:   0:00:38    2.6% done, time left:   0:00:33  2.7% done, time left:   0:00:34  3.0% done, time left:   0:00:35  3.3% done, time left:   0:00:35  3.6% done, time left:   0:00:35  3.9% done, time left:   0:00:35  4.4% done, time left:   0:00:34  5.5% done, time left:   0:00:35  6.7% done, time left:   0:00:35  7.9% done, time left:   0:00:34  9.2% done, time left:   0:00:33 10.5% done, time left:   0:00:32 11.9% done, time left:   0:00:30 13.5% done, time left:   0:00:28 15.0% done, time left:   0:00:26 16.5% done, time left:   0:00:23 18.1% done, time left:   0:00:21 19.8% done, time left:   0:00:19 21.6% done, time left:   0:00:16 24.3% done, time left:   0:00:13 27.0% done, time left:   0:00:10 28.3% done, time left:   0:00:08 29.3% done, time left:   0:00:06 30.9% done, time left:   0:00:06 32.3% done, time left:   0:00:05 33.9% done, time left:   0:00:05 35.5% done, time left:   0:00:05 37.0% done, time left:   0:00:05 38.7% done, time left:   0:00:05 40.2% done, time left:   0:00:04 41.9% done, time left:   0:00:04 43.4% done, time left:   0:00:04 45.0% done, time left:   0:00:04 46.6% done, time left:   0:00:04 48.1% done, time left:   0:00:03 49.8% done, time left:   0:00:03 51.3% done, time left:   0:00:03 53.0% done, time left:   0:00:03 54.6% done, time left:   0:00:03 56.3% done, time left:   0:00:02 57.9% done, time left:   0:00:02 60.4% done, time left:   0:00:02 60.4% done, time left:   0:00:01 60.4% done, time left:   0:00:00 60.6% done, time left:   0:00:00 63.3% done, time left:   0:00:00 68.6% done, time left:   0:00:00 74.6% done, time left:   0:00:00 81.0% done, time left:   0:00:00 84.0% done, time left:   0:00:00 85.2% done, time left:   0:00:00 86.6% done, time left:   0:00:00 88.0% done, time left:   0:00:00 89.4% done, time left:   0:00:00 90.7% done, time left:   0:00:00 92.2% done, time left:   0:00:00 93.5% done, time left:   0:00:00 94.5% done, time left:   0:00:00 96.2% done, time left:   0:00:00 97.4% done, time left:   0:00:00 98.0% done, time left:   0:00:00 99.7% done, time left:   0:00:00 100.8% done, time left:   0:00:00  101.8% done, time left:   0:00:00 102.3% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:703:*]:
+org.joda.time.DateTime.<init>:476 ALOAD 0
+org.joda.time.DateTime.<init>:476 INVOKESPECIAL org/joda/time/base/BaseDateTime.<init>(IIIIIII)V
+org.joda.time.DateTimeUtils.currentTimeMillis:72 GETSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils.currentTimeMillis:72 INVOKEINTERFACE org/joda/time/DateTimeUtils$MillisProvider.getMillis()J
+org.joda.time.DateTimeUtils.currentTimeMillis:72 LRETURN
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 NEW org/joda/time/DateTimeUtils$FixedMillisProvider
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 DUP
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 LLOAD 0
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 INVOKESPECIAL org/joda/time/DateTimeUtils$FixedMillisProvider.<init>(J)V
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 PUTSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils.getInstantMillis:162 ALOAD 0
+org.joda.time.DateTimeUtils.getInstantMillis:162 IFNONNULL L0 true true
+org.joda.time.DateTimeUtils.getInstantMillis:163 INVOKESTATIC org/joda/time/DateTimeUtils.currentTimeMillis()J
+org.joda.time.DateTimeUtils.getInstantMillis:163 LRETURN
+org.joda.time.DateTimeUtils.getInstantMillis:165 ALOAD 0
+org.joda.time.DateTimeUtils.getInstantMillis:165 INVOKEINTERFACE org/joda/time/ReadableInstant.getMillis()J
+org.joda.time.DateTimeUtils.getInstantMillis:165 LRETURN
+org.joda.time.DateTimeUtils.getIntervalChronology:204 ALOAD 0
+org.joda.time.DateTimeUtils.getIntervalChronology:204 IFNULL L0 true false
+org.joda.time.DateTimeUtils.getIntervalChronology:206 ALOAD 1
+org.joda.time.DateTimeUtils.getIntervalChronology:206 IFNULL L1 false true
+org.joda.time.DateTimeUtils.getIntervalChronology:207 ALOAD 1
+org.joda.time.DateTimeUtils.getIntervalChronology:207 INVOKEINTERFACE org/joda/time/ReadableInstant.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.DateTimeUtils.getIntervalChronology:207 ASTORE 2
+org.joda.time.DateTimeUtils.getIntervalChronology:212 ALOAD 2
+org.joda.time.DateTimeUtils.getIntervalChronology:212 ARETURN
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true true
+org.joda.time.DateTimeUtils.getChronology:269 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.DateTimeUtils.getPeriodType:302 ALOAD 0
+org.joda.time.DateTimeUtils.getPeriodType:302 IFNONNULL L0 false true
+org.joda.time.DateTimeUtils.getPeriodType:303 INVOKESTATIC org/joda/time/PeriodType.standard()Lorg/joda/time/PeriodType;
+org.joda.time.DateTimeUtils.getPeriodType:303 ARETURN
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 ALOAD 0
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 LLOAD 1
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 PUTFIELD org/joda/time/DateTimeUtils$FixedMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 ALOAD 0
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 GETFIELD org/joda/time/DateTimeUtils$FixedMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 LRETURN
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:187 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:187 ARETURN
+org.joda.time.DateTimeZone.setDefault:207 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.setDefault:207 ALOAD 0
+org.joda.time.DateTimeZone.setDefault:207 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.set(Ljava/lang/Object;)V
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:282 ALOAD 1
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:282 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:282 ASTORE 1
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:284 ALOAD 0
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:284 GETFIELD org/joda/time/DurationFieldType$StandardDurationFieldType.iOrdinal B
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:284 TABLESWITCH (1 => L0, 2 => L1, 3 => L2, 4 => L3, 5 => L4, 6 => L5, 7 => L6, 8 => L7, 9 => L8, 10 => L9, 11 => L10, 12 => L11, * => L12)
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:294 ALOAD 1
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:294 INVOKEVIRTUAL org/joda/time/Chronology.months()Lorg/joda/time/DurationField;
+org.joda.time.DurationFieldType$StandardDurationFieldType.getField:294 ARETURN
+org.joda.time.MutablePeriod.parse:74 INVOKESTATIC org/joda/time/MutablePeriod.parse(Ljava/lang/String;Lorg/joda/time/format/PeriodFormatter;)Lorg/joda/time/MutablePeriod;
+org.joda.time.MutablePeriod.parse:85 INVOKEVIRTUAL org/joda/time/format/PeriodFormatter.parsePeriod(Ljava/lang/String;)Lorg/joda/time/Period;
+org.joda.time.MutablePeriod.<init>:131 INVOKESTATIC org/joda/time/PeriodType.standard()Lorg/joda/time/PeriodType;
+org.joda.time.MutablePeriod.<init>:200 ACONST_NULL
+org.joda.time.MutablePeriod.<init>:200 INVOKESPECIAL org/joda/time/base/BasePeriod.<init>(JLorg/joda/time/PeriodType;Lorg/joda/time/Chronology;)V
+org.joda.time.MutablePeriod.<init>:302 ALOAD 0
+org.joda.time.MutablePeriod.<init>:302 ALOAD 1
+org.joda.time.MutablePeriod.<init>:302 ALOAD 2
+org.joda.time.MutablePeriod.<init>:302 ACONST_NULL
+org.joda.time.MutablePeriod.<init>:302 INVOKESPECIAL org/joda/time/base/BasePeriod.<init>(Lorg/joda/time/ReadableInstant;Lorg/joda/time/ReadableInstant;Lorg/joda/time/PeriodType;)V
+org.joda.time.MutablePeriod.getMonths:755 ALOAD 0
+org.joda.time.MutablePeriod.getMonths:755 INVOKEVIRTUAL org/joda/time/MutablePeriod.getPeriodType()Lorg/joda/time/PeriodType;
+org.joda.time.MutablePeriod.getMonths:755 ALOAD 0
+org.joda.time.MutablePeriod.getMonths:755 GETSTATIC org/joda/time/PeriodType.MONTH_INDEX I
+org.joda.time.MutablePeriod.getMonths:755 INVOKEVIRTUAL org/joda/time/PeriodType.getIndexedField(Lorg/joda/time/ReadablePeriod;I)I
+org.joda.time.MutablePeriod.getMonths:755 IRETURN
+org.joda.time.PeriodType.standard:102 GETSTATIC org/joda/time/PeriodType.cStandard Lorg/joda/time/PeriodType;
+org.joda.time.PeriodType.standard:102 ASTORE 0
+org.joda.time.PeriodType.standard:103 ALOAD 0
+org.joda.time.PeriodType.standard:103 IFNONNULL L0 false true
+org.joda.time.PeriodType.standard:104 NEW org/joda/time/PeriodType
+org.joda.time.PeriodType.standard:104 DUP
+org.joda.time.PeriodType.standard:104 BIPUSH 8
+org.joda.time.PeriodType.standard:104 NEWARRAY T_INT
+org.joda.time.PeriodType.standard:104 DUP
+org.joda.time.PeriodType.standard:104 ICONST_1
+org.joda.time.PeriodType.standard:104 ICONST_1
+org.joda.time.PeriodType.standard:104 IASTORE
+org.joda.time.PeriodType.standard:104 INVOKESPECIAL org/joda/time/PeriodType.<init>(Ljava/lang/String;[Lorg/joda/time/DurationFieldType;[I)V
+org.joda.time.PeriodType.standard:104 ASTORE 0
+org.joda.time.PeriodType.standard:114 ALOAD 0
+org.joda.time.PeriodType.standard:114 PUTSTATIC org/joda/time/PeriodType.cStandard Lorg/joda/time/PeriodType;
+org.joda.time.PeriodType.standard:116 ALOAD 0
+org.joda.time.PeriodType.standard:116 ARETURN
+org.joda.time.PeriodType.<init>:598 ALOAD 0
+org.joda.time.PeriodType.<init>:598 ALOAD 3
+org.joda.time.PeriodType.<init>:598 PUTFIELD org/joda/time/PeriodType.iIndices [I
+org.joda.time.PeriodType.getIndexedField:674 ALOAD 0
+org.joda.time.PeriodType.getIndexedField:674 GETFIELD org/joda/time/PeriodType.iIndices [I
+org.joda.time.PeriodType.getIndexedField:674 ILOAD 2
+org.joda.time.PeriodType.getIndexedField:674 IALOAD
+org.joda.time.PeriodType.getIndexedField:674 ISTORE 3
+org.joda.time.PeriodType.getIndexedField:675 ILOAD 3
+org.joda.time.PeriodType.getIndexedField:675 ICONST_M1
+org.joda.time.PeriodType.getIndexedField:675 IF_ICMPNE L0 true false
+org.joda.time.PeriodType.getIndexedField:675 ALOAD 1
+org.joda.time.PeriodType.getIndexedField:675 ILOAD 3
+org.joda.time.PeriodType.getIndexedField:675 INVOKEINTERFACE org/joda/time/ReadablePeriod.getValue(I)I
+org.joda.time.PeriodType.getIndexedField:675 IRETURN
+org.joda.time.TestMutablePeriod_Constructors.<init>:39 ALOAD 0
+org.joda.time.TestMutablePeriod_Constructors.<init>:39 LDC 11688
+org.joda.time.TestMutablePeriod_Constructors.<init>:39 PUTFIELD org/joda/time/TestMutablePeriod_Constructors.y2002days J
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 ALOAD 0
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 ALOAD 0
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 GETFIELD org/joda/time/TestMutablePeriod_Constructors.y2002days J
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LDC 31
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LADD
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LDC 28
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LADD
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LDC 31
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LADD
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LDC 30
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LADD
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LDC 31
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LADD
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LDC 9
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LADD
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LCONST_1
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LSUB
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LDC 86400000
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 LMUL
+org.joda.time.TestMutablePeriod_Constructors.<init>:49 PUTFIELD org/joda/time/TestMutablePeriod_Constructors.TEST_TIME_NOW J
+org.joda.time.TestMutablePeriod_Constructors.main:69 NEW org/joda/time/TestMutablePeriod_Constructors
+org.joda.time.TestMutablePeriod_Constructors.main:69 DUP
+org.joda.time.TestMutablePeriod_Constructors.main:69 INVOKESPECIAL org/joda/time/TestMutablePeriod_Constructors.<init>()V
+org.joda.time.TestMutablePeriod_Constructors.main:69 ASTORE 1
+org.joda.time.TestMutablePeriod_Constructors.main:70 INVOKEVIRTUAL org/joda/time/TestMutablePeriod_Constructors.setUp()V
+org.joda.time.TestMutablePeriod_Constructors.main:70 INVOKEVIRTUAL org/joda/time/TestMutablePeriod_Constructors.testParse_noFormatter()V
+org.joda.time.TestMutablePeriod_Constructors.main:104 ALOAD 1
+org.joda.time.TestMutablePeriod_Constructors.main:104 INVOKEVIRTUAL org/joda/time/TestMutablePeriod_Constructors.setUp()V
+org.joda.time.TestMutablePeriod_Constructors.main:104 INVOKEVIRTUAL org/joda/time/TestMutablePeriod_Constructors.testConstructor_RI_RI3()V
+org.joda.time.TestMutablePeriod_Constructors.setUp:141 ALOAD 0
+org.joda.time.TestMutablePeriod_Constructors.setUp:141 GETFIELD org/joda/time/TestMutablePeriod_Constructors.TEST_TIME_NOW J
+org.joda.time.TestMutablePeriod_Constructors.setUp:141 INVOKESTATIC org/joda/time/DateTimeUtils.setCurrentMillisFixed(J)V
+org.joda.time.TestMutablePeriod_Constructors.setUp:145 GETSTATIC org/joda/time/TestMutablePeriod_Constructors.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.TestMutablePeriod_Constructors.setUp:145 INVOKESTATIC org/joda/time/DateTimeZone.setDefault(Lorg/joda/time/DateTimeZone;)V
+org.joda.time.TestMutablePeriod_Constructors.testParse_noFormatter:162 INVOKESPECIAL org/joda/time/MutablePeriod.<init>(IIIIIIII)V
+org.joda.time.TestMutablePeriod_Constructors.testParse_noFormatter:162 INVOKESTATIC org/joda/time/MutablePeriod.parse(Ljava/lang/String;)Lorg/joda/time/MutablePeriod;
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:698 ACONST_NULL
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:698 ASTORE 1
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:699 NEW org/joda/time/DateTime
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:699 DUP
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:699 INVOKESPECIAL org/joda/time/DateTime.<init>(IIIIIII)V
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:699 ASTORE 2
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:700 NEW org/joda/time/MutablePeriod
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:700 DUP
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:700 ALOAD 1
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:700 ALOAD 2
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:700 INVOKESPECIAL org/joda/time/MutablePeriod.<init>(Lorg/joda/time/ReadableInstant;Lorg/joda/time/ReadableInstant;)V
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:700 ASTORE 3
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:703 LCONST_1
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:703 ALOAD 3
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:703 INVOKEVIRTUAL org/joda/time/MutablePeriod.getMonths()I
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:703 I2L
+org.joda.time.TestMutablePeriod_Constructors.testConstructor_RI_RI3:703 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.AbstractPeriod.size:56 ALOAD 0
+org.joda.time.base.AbstractPeriod.size:56 INVOKEVIRTUAL org/joda/time/base/AbstractPeriod.getPeriodType()Lorg/joda/time/PeriodType;
+org.joda.time.base.AbstractPeriod.size:56 IRETURN
+org.joda.time.base.AbstractPeriod.getFieldType:68 ALOAD 0
+org.joda.time.base.AbstractPeriod.getFieldType:68 INVOKEVIRTUAL org/joda/time/base/AbstractPeriod.getPeriodType()Lorg/joda/time/PeriodType;
+org.joda.time.base.AbstractPeriod.getFieldType:68 ARETURN
+org.joda.time.base.BaseDateTime.<init>:198 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:198 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.base.BaseDateTime.<init>:198 INVOKESPECIAL org/joda/time/base/BaseDateTime.<init>(IIIIIIILorg/joda/time/Chronology;)V
+org.joda.time.base.BaseDateTime.<init>:256 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:256 ALOAD 8
+org.joda.time.base.BaseDateTime.<init>:256 INVOKEVIRTUAL org/joda/time/base/BaseDateTime.checkChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:256 PUTFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:257 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:257 GETFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.<init>:257 INVOKEVIRTUAL org/joda/time/Chronology.getDateTimeMillis(IIIIIII)J
+org.joda.time.base.BaseDateTime.<init>:257 LSTORE 9
+org.joda.time.base.BaseDateTime.<init>:259 ALOAD 0
+org.joda.time.base.BaseDateTime.<init>:259 LLOAD 9
+org.joda.time.base.BaseDateTime.<init>:259 INVOKEVIRTUAL org/joda/time/base/BaseDateTime.checkInstant(JLorg/joda/time/Chronology;)J
+org.joda.time.base.BaseDateTime.<init>:259 PUTFIELD org/joda/time/base/BaseDateTime.iMillis J
+org.joda.time.base.BaseDateTime.checkChronology:280 ALOAD 1
+org.joda.time.base.BaseDateTime.checkChronology:280 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.checkChronology:280 ARETURN
+org.joda.time.base.BaseDateTime.checkInstant:294 LLOAD 1
+org.joda.time.base.BaseDateTime.checkInstant:294 LRETURN
+org.joda.time.base.BaseDateTime.getMillis:305 ALOAD 0
+org.joda.time.base.BaseDateTime.getMillis:305 GETFIELD org/joda/time/base/BaseDateTime.iMillis J
+org.joda.time.base.BaseDateTime.getMillis:305 LRETURN
+org.joda.time.base.BaseDateTime.getChronology:314 ALOAD 0
+org.joda.time.base.BaseDateTime.getChronology:314 GETFIELD org/joda/time/base/BaseDateTime.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BaseDateTime.getChronology:314 ARETURN
+org.joda.time.base.BasePeriod.<init>:123 ALOAD 3
+org.joda.time.base.BasePeriod.<init>:123 INVOKEVIRTUAL org/joda/time/base/BasePeriod.checkPeriodType(Lorg/joda/time/PeriodType;)Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.<init>:123 ASTORE 3
+org.joda.time.base.BasePeriod.<init>:124 ALOAD 1
+org.joda.time.base.BasePeriod.<init>:124 IFNONNULL L0 false true
+org.joda.time.base.BasePeriod.<init>:124 ALOAD 2
+org.joda.time.base.BasePeriod.<init>:124 IFNONNULL L0 true false
+org.joda.time.base.BasePeriod.<init>:128 ALOAD 1
+org.joda.time.base.BasePeriod.<init>:128 INVOKESTATIC org/joda/time/DateTimeUtils.getInstantMillis(Lorg/joda/time/ReadableInstant;)J
+org.joda.time.base.BasePeriod.<init>:128 LSTORE 4
+org.joda.time.base.BasePeriod.<init>:129 ALOAD 2
+org.joda.time.base.BasePeriod.<init>:129 INVOKESTATIC org/joda/time/DateTimeUtils.getInstantMillis(Lorg/joda/time/ReadableInstant;)J
+org.joda.time.base.BasePeriod.<init>:129 LSTORE 6
+org.joda.time.base.BasePeriod.<init>:130 ALOAD 1
+org.joda.time.base.BasePeriod.<init>:130 ALOAD 2
+org.joda.time.base.BasePeriod.<init>:130 INVOKESTATIC org/joda/time/DateTimeUtils.getIntervalChronology(Lorg/joda/time/ReadableInstant;Lorg/joda/time/ReadableInstant;)Lorg/joda/time/Chronology;
+org.joda.time.base.BasePeriod.<init>:130 ASTORE 8
+org.joda.time.base.BasePeriod.<init>:131 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:131 ALOAD 3
+org.joda.time.base.BasePeriod.<init>:131 PUTFIELD org/joda/time/base/BasePeriod.iType Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.<init>:132 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:132 ALOAD 8
+org.joda.time.base.BasePeriod.<init>:132 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:132 LLOAD 4
+org.joda.time.base.BasePeriod.<init>:132 LLOAD 6
+org.joda.time.base.BasePeriod.<init>:132 INVOKEVIRTUAL org/joda/time/Chronology.get(Lorg/joda/time/ReadablePeriod;JJ)[I
+org.joda.time.base.BasePeriod.<init>:132 PUTFIELD org/joda/time/base/BasePeriod.iValues [I
+org.joda.time.base.BasePeriod.<init>:256 ALOAD 4
+org.joda.time.base.BasePeriod.<init>:256 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.base.BasePeriod.checkPeriodType:308 ALOAD 1
+org.joda.time.base.BasePeriod.checkPeriodType:308 INVOKESTATIC org/joda/time/DateTimeUtils.getPeriodType(Lorg/joda/time/PeriodType;)Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.checkPeriodType:308 ARETURN
+org.joda.time.base.BasePeriod.getPeriodType:318 ALOAD 0
+org.joda.time.base.BasePeriod.getPeriodType:318 GETFIELD org/joda/time/base/BasePeriod.iType Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.getPeriodType:318 ARETURN
+org.joda.time.base.BasePeriod.getValue:329 ALOAD 0
+org.joda.time.base.BasePeriod.getValue:329 GETFIELD org/joda/time/base/BasePeriod.iValues [I
+org.joda.time.base.BasePeriod.getValue:329 ILOAD 1
+org.joda.time.base.BasePeriod.getValue:329 IALOAD
+org.joda.time.base.BasePeriod.getValue:329 IRETURN
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 0
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 1
+org.joda.time.chrono.AssembledChronology.<init>:100 PUTFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.<init>:102 ALOAD 0
+org.joda.time.chrono.AssembledChronology.<init>:102 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.setFields()V
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 DUP
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 ASTORE 8
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 GETFIELD org/joda/time/chrono/AssembledChronology.iBaseFlags I
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 ICONST_5
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 IAND
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 ICONST_5
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:131 IF_ICMPNE L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:133 ALOAD 8
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:133 LRETURN
+org.joda.time.chrono.AssembledChronology.millis:156 ALOAD 0
+org.joda.time.chrono.AssembledChronology.millis:156 GETFIELD org/joda/time/chrono/AssembledChronology.iMillis Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.millis:156 ARETURN
+org.joda.time.chrono.AssembledChronology.millisOfSecond:160 ALOAD 0
+org.joda.time.chrono.AssembledChronology.millisOfSecond:160 GETFIELD org/joda/time/chrono/AssembledChronology.iMillisOfSecond Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.millisOfSecond:160 ARETURN
+org.joda.time.chrono.AssembledChronology.millisOfDay:164 ALOAD 0
+org.joda.time.chrono.AssembledChronology.millisOfDay:164 GETFIELD org/joda/time/chrono/AssembledChronology.iMillisOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.millisOfDay:164 ARETURN
+org.joda.time.chrono.AssembledChronology.seconds:168 ALOAD 0
+org.joda.time.chrono.AssembledChronology.seconds:168 GETFIELD org/joda/time/chrono/AssembledChronology.iSeconds Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.seconds:168 ARETURN
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 ALOAD 0
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 GETFIELD org/joda/time/chrono/AssembledChronology.iSecondOfMinute Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.secondOfMinute:172 ARETURN
+org.joda.time.chrono.AssembledChronology.secondOfDay:176 ALOAD 0
+org.joda.time.chrono.AssembledChronology.secondOfDay:176 GETFIELD org/joda/time/chrono/AssembledChronology.iSecondOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.secondOfDay:176 ARETURN
+org.joda.time.chrono.AssembledChronology.minutes:180 ALOAD 0
+org.joda.time.chrono.AssembledChronology.minutes:180 GETFIELD org/joda/time/chrono/AssembledChronology.iMinutes Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.minutes:180 ARETURN
+org.joda.time.chrono.AssembledChronology.minuteOfHour:184 ALOAD 0
+org.joda.time.chrono.AssembledChronology.minuteOfHour:184 GETFIELD org/joda/time/chrono/AssembledChronology.iMinuteOfHour Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.minuteOfHour:184 ARETURN
+org.joda.time.chrono.AssembledChronology.minuteOfDay:188 ALOAD 0
+org.joda.time.chrono.AssembledChronology.minuteOfDay:188 GETFIELD org/joda/time/chrono/AssembledChronology.iMinuteOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.minuteOfDay:188 ARETURN
+org.joda.time.chrono.AssembledChronology.hours:192 ALOAD 0
+org.joda.time.chrono.AssembledChronology.hours:192 GETFIELD org/joda/time/chrono/AssembledChronology.iHours Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.hours:192 ARETURN
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 ALOAD 0
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 GETFIELD org/joda/time/chrono/AssembledChronology.iHourOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.hourOfDay:196 ARETURN
+org.joda.time.chrono.AssembledChronology.halfdays:204 ALOAD 0
+org.joda.time.chrono.AssembledChronology.halfdays:204 GETFIELD org/joda/time/chrono/AssembledChronology.iHalfdays Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.halfdays:204 ARETURN
+org.joda.time.chrono.AssembledChronology.days:220 ALOAD 0
+org.joda.time.chrono.AssembledChronology.days:220 GETFIELD org/joda/time/chrono/AssembledChronology.iDays Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.days:220 ARETURN
+org.joda.time.chrono.AssembledChronology.dayOfWeek:224 ALOAD 0
+org.joda.time.chrono.AssembledChronology.dayOfWeek:224 GETFIELD org/joda/time/chrono/AssembledChronology.iDayOfWeek Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.dayOfWeek:224 ARETURN
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 ALOAD 0
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 GETFIELD org/joda/time/chrono/AssembledChronology.iDayOfMonth Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 ARETURN
+org.joda.time.chrono.AssembledChronology.dayOfYear:232 ALOAD 0
+org.joda.time.chrono.AssembledChronology.dayOfYear:232 GETFIELD org/joda/time/chrono/AssembledChronology.iDayOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.dayOfYear:232 ARETURN
+org.joda.time.chrono.AssembledChronology.weeks:236 ALOAD 0
+org.joda.time.chrono.AssembledChronology.weeks:236 GETFIELD org/joda/time/chrono/AssembledChronology.iWeeks Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.weeks:236 ARETURN
+org.joda.time.chrono.AssembledChronology.weekOfWeekyear:240 ALOAD 0
+org.joda.time.chrono.AssembledChronology.weekOfWeekyear:240 GETFIELD org/joda/time/chrono/AssembledChronology.iWeekOfWeekyear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.weekOfWeekyear:240 ARETURN
+org.joda.time.chrono.AssembledChronology.weekyears:244 ALOAD 0
+org.joda.time.chrono.AssembledChronology.weekyears:244 GETFIELD org/joda/time/chrono/AssembledChronology.iWeekyears Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.weekyears:244 ARETURN
+org.joda.time.chrono.AssembledChronology.weekyear:248 ALOAD 0
+org.joda.time.chrono.AssembledChronology.weekyear:248 GETFIELD org/joda/time/chrono/AssembledChronology.iWeekyear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.weekyear:248 ARETURN
+org.joda.time.chrono.AssembledChronology.weekyearOfCentury:252 ALOAD 0
+org.joda.time.chrono.AssembledChronology.weekyearOfCentury:252 GETFIELD org/joda/time/chrono/AssembledChronology.iWeekyearOfCentury Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.weekyearOfCentury:252 ARETURN
+org.joda.time.chrono.AssembledChronology.months:256 ALOAD 0
+org.joda.time.chrono.AssembledChronology.months:256 GETFIELD org/joda/time/chrono/AssembledChronology.iMonths Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.months:256 ARETURN
+org.joda.time.chrono.AssembledChronology.monthOfYear:260 ALOAD 0
+org.joda.time.chrono.AssembledChronology.monthOfYear:260 GETFIELD org/joda/time/chrono/AssembledChronology.iMonthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.monthOfYear:260 ARETURN
+org.joda.time.chrono.AssembledChronology.years:264 ALOAD 0
+org.joda.time.chrono.AssembledChronology.years:264 GETFIELD org/joda/time/chrono/AssembledChronology.iYears Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.years:264 ARETURN
+org.joda.time.chrono.AssembledChronology.year:268 ALOAD 0
+org.joda.time.chrono.AssembledChronology.year:268 GETFIELD org/joda/time/chrono/AssembledChronology.iYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.year:268 ARETURN
+org.joda.time.chrono.AssembledChronology.yearOfEra:272 ALOAD 0
+org.joda.time.chrono.AssembledChronology.yearOfEra:272 GETFIELD org/joda/time/chrono/AssembledChronology.iYearOfEra Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.yearOfEra:272 ARETURN
+org.joda.time.chrono.AssembledChronology.yearOfCentury:276 ALOAD 0
+org.joda.time.chrono.AssembledChronology.yearOfCentury:276 GETFIELD org/joda/time/chrono/AssembledChronology.iYearOfCentury Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.yearOfCentury:276 ARETURN
+org.joda.time.chrono.AssembledChronology.centuries:280 ALOAD 0
+org.joda.time.chrono.AssembledChronology.centuries:280 GETFIELD org/joda/time/chrono/AssembledChronology.iCenturies Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.centuries:280 ARETURN
+org.joda.time.chrono.AssembledChronology.centuryOfEra:284 ALOAD 0
+org.joda.time.chrono.AssembledChronology.centuryOfEra:284 GETFIELD org/joda/time/chrono/AssembledChronology.iCenturyOfEra Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.centuryOfEra:284 ARETURN
+org.joda.time.chrono.AssembledChronology.era:292 ALOAD 0
+org.joda.time.chrono.AssembledChronology.era:292 GETFIELD org/joda/time/chrono/AssembledChronology.iEra Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.era:292 ARETURN
+org.joda.time.chrono.AssembledChronology.setFields:319 NEW org/joda/time/chrono/AssembledChronology$Fields
+org.joda.time.chrono.AssembledChronology.setFields:319 ASTORE 1
+org.joda.time.chrono.AssembledChronology.setFields:320 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:320 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.setFields:320 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.setFields:321 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:321 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:321 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.setFields:321 INVOKEVIRTUAL org/joda/time/chrono/AssembledChronology$Fields.copyFieldsFrom(Lorg/joda/time/Chronology;)V
+org.joda.time.chrono.AssembledChronology.setFields:323 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:323 INVOKEVIRTUAL org/joda/time/chrono/AssembledChronology.assemble(Lorg/joda/time/chrono/AssembledChronology$Fields;)V
+org.joda.time.chrono.AssembledChronology.setFields:335 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:335 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:335 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.months Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.setFields:335 DUP
+org.joda.time.chrono.AssembledChronology.setFields:335 ASTORE 2
+org.joda.time.chrono.AssembledChronology.setFields:335 IFNULL L17 false true
+org.joda.time.chrono.AssembledChronology.setFields:335 ALOAD 2
+org.joda.time.chrono.AssembledChronology.setFields:335 PUTFIELD org/joda/time/chrono/AssembledChronology.iMonths Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.setFields:343 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:343 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:343 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.millisOfSecond Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:343 DUP
+org.joda.time.chrono.AssembledChronology.setFields:343 ASTORE 2
+org.joda.time.chrono.AssembledChronology.setFields:343 IFNULL L25 false true
+org.joda.time.chrono.AssembledChronology.setFields:343 ALOAD 2
+org.joda.time.chrono.AssembledChronology.setFields:343 PUTFIELD org/joda/time/chrono/AssembledChronology.iMillisOfSecond Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:344 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:344 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:344 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.millisOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:344 DUP
+org.joda.time.chrono.AssembledChronology.setFields:344 ASTORE 2
+org.joda.time.chrono.AssembledChronology.setFields:344 IFNULL L27 false true
+org.joda.time.chrono.AssembledChronology.setFields:344 ALOAD 2
+org.joda.time.chrono.AssembledChronology.setFields:344 PUTFIELD org/joda/time/chrono/AssembledChronology.iMillisOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:345 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:345 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:345 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.secondOfMinute Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:345 DUP
+org.joda.time.chrono.AssembledChronology.setFields:345 ASTORE 2
+org.joda.time.chrono.AssembledChronology.setFields:345 IFNULL L29 false true
+org.joda.time.chrono.AssembledChronology.setFields:345 ALOAD 2
+org.joda.time.chrono.AssembledChronology.setFields:345 PUTFIELD org/joda/time/chrono/AssembledChronology.iSecondOfMinute Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:347 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:347 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:347 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.minuteOfHour Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:347 DUP
+org.joda.time.chrono.AssembledChronology.setFields:347 ASTORE 2
+org.joda.time.chrono.AssembledChronology.setFields:347 IFNULL L33 false true
+org.joda.time.chrono.AssembledChronology.setFields:347 ALOAD 2
+org.joda.time.chrono.AssembledChronology.setFields:347 PUTFIELD org/joda/time/chrono/AssembledChronology.iMinuteOfHour Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:349 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:349 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:349 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.hourOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:349 DUP
+org.joda.time.chrono.AssembledChronology.setFields:349 ASTORE 2
+org.joda.time.chrono.AssembledChronology.setFields:349 IFNULL L37 false true
+org.joda.time.chrono.AssembledChronology.setFields:349 ALOAD 2
+org.joda.time.chrono.AssembledChronology.setFields:349 PUTFIELD org/joda/time/chrono/AssembledChronology.iHourOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:355 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:355 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:355 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.dayOfMonth Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:355 DUP
+org.joda.time.chrono.AssembledChronology.setFields:355 ASTORE 2
+org.joda.time.chrono.AssembledChronology.setFields:355 IFNULL L49 false true
+org.joda.time.chrono.AssembledChronology.setFields:355 ALOAD 2
+org.joda.time.chrono.AssembledChronology.setFields:355 PUTFIELD org/joda/time/chrono/AssembledChronology.iDayOfMonth Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:360 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:360 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:360 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.monthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:360 DUP
+org.joda.time.chrono.AssembledChronology.setFields:360 ASTORE 2
+org.joda.time.chrono.AssembledChronology.setFields:360 IFNULL L59 false true
+org.joda.time.chrono.AssembledChronology.setFields:360 ALOAD 2
+org.joda.time.chrono.AssembledChronology.setFields:360 PUTFIELD org/joda/time/chrono/AssembledChronology.iMonthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:361 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:361 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:361 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.year Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:361 DUP
+org.joda.time.chrono.AssembledChronology.setFields:361 ASTORE 2
+org.joda.time.chrono.AssembledChronology.setFields:361 IFNULL L61 false true
+org.joda.time.chrono.AssembledChronology.setFields:361 ALOAD 2
+org.joda.time.chrono.AssembledChronology.setFields:361 PUTFIELD org/joda/time/chrono/AssembledChronology.iYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:369 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:369 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.setFields:369 IFNONNULL L71 true false
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iHourOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.setFields:372 INVOKEVIRTUAL org/joda/time/Chronology.hourOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 IF_ACMPNE L72 false true
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iMinuteOfHour Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.setFields:372 INVOKEVIRTUAL org/joda/time/Chronology.minuteOfHour()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 IF_ACMPNE L72 false true
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iSecondOfMinute Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.setFields:372 INVOKEVIRTUAL org/joda/time/Chronology.secondOfMinute()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 IF_ACMPNE L72 false true
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iMillisOfSecond Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.setFields:372 INVOKEVIRTUAL org/joda/time/Chronology.millisOfSecond()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 IF_ACMPNE L72 false true
+org.joda.time.chrono.AssembledChronology.setFields:372 ICONST_1
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iMillisOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.setFields:372 INVOKEVIRTUAL org/joda/time/Chronology.millisOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 IF_ACMPNE L74 false true
+org.joda.time.chrono.AssembledChronology.setFields:372 ICONST_2
+org.joda.time.chrono.AssembledChronology.setFields:372 IOR
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.setFields:372 INVOKEVIRTUAL org/joda/time/Chronology.year()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 IF_ACMPNE L76 false true
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iMonthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.setFields:372 INVOKEVIRTUAL org/joda/time/Chronology.monthOfYear()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 IF_ACMPNE L76 false true
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iDayOfMonth Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:372 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.setFields:372 INVOKEVIRTUAL org/joda/time/Chronology.dayOfMonth()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.setFields:372 IF_ACMPNE L76 false true
+org.joda.time.chrono.AssembledChronology.setFields:372 ICONST_4
+org.joda.time.chrono.AssembledChronology.setFields:372 IOR
+org.joda.time.chrono.AssembledChronology.setFields:372 ISTORE 2
+org.joda.time.chrono.AssembledChronology.setFields:385 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:385 ILOAD 2
+org.joda.time.chrono.AssembledChronology.setFields:385 PUTFIELD org/joda/time/chrono/AssembledChronology.iBaseFlags I
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:445 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:445 INVOKEVIRTUAL org/joda/time/Chronology.millis()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:445 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:445 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:445 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DurationField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:445 IFEQ L0 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:446 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:446 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:446 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.millis Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:448 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:448 INVOKEVIRTUAL org/joda/time/Chronology.seconds()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:448 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:448 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:448 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DurationField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:448 IFEQ L1 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:449 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:449 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:449 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.seconds Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:451 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:451 INVOKEVIRTUAL org/joda/time/Chronology.minutes()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:451 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:451 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:451 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DurationField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:451 IFEQ L2 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:452 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:452 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:452 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.minutes Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:454 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:454 INVOKEVIRTUAL org/joda/time/Chronology.hours()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:454 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:454 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:454 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DurationField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:454 IFEQ L3 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:455 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:455 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:455 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.hours Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:457 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:457 INVOKEVIRTUAL org/joda/time/Chronology.halfdays()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:457 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:457 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:457 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DurationField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:457 IFEQ L4 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:458 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:458 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:458 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.halfdays Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:460 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:460 INVOKEVIRTUAL org/joda/time/Chronology.days()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:460 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:460 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:460 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DurationField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:460 IFEQ L5 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:461 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:461 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:461 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.days Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:463 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:463 INVOKEVIRTUAL org/joda/time/Chronology.weeks()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:463 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:463 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:463 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DurationField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:463 IFEQ L6 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:464 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:464 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:464 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.weeks Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:466 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:466 INVOKEVIRTUAL org/joda/time/Chronology.weekyears()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:466 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:466 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:466 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DurationField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:466 IFEQ L7 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:467 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:467 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:467 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.weekyears Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:469 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:469 INVOKEVIRTUAL org/joda/time/Chronology.months()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:469 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:469 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:469 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DurationField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:469 IFEQ L8 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:470 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:470 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:470 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.months Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:472 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:472 INVOKEVIRTUAL org/joda/time/Chronology.years()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:472 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:472 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:472 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DurationField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:472 IFEQ L9 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:473 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:473 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:473 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.years Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:475 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:475 INVOKEVIRTUAL org/joda/time/Chronology.centuries()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:475 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:475 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:475 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DurationField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:475 IFEQ L10 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:476 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:476 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:476 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.centuries Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:485 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:485 INVOKEVIRTUAL org/joda/time/Chronology.millisOfSecond()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:485 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:485 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:485 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:485 IFEQ L12 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:486 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:486 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:486 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.millisOfSecond Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:488 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:488 INVOKEVIRTUAL org/joda/time/Chronology.millisOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:488 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:488 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:488 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:488 IFEQ L13 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:489 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:489 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:489 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.millisOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:491 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:491 INVOKEVIRTUAL org/joda/time/Chronology.secondOfMinute()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:491 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:491 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:491 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:491 IFEQ L14 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:492 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:492 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:492 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.secondOfMinute Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:494 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:494 INVOKEVIRTUAL org/joda/time/Chronology.secondOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:494 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:494 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:494 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:494 IFEQ L15 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:495 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:495 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:495 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.secondOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:497 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:497 INVOKEVIRTUAL org/joda/time/Chronology.minuteOfHour()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:497 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:497 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:497 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:497 IFEQ L16 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:498 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:498 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:498 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.minuteOfHour Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:500 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:500 INVOKEVIRTUAL org/joda/time/Chronology.minuteOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:500 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:500 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:500 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:500 IFEQ L17 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:501 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:501 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:501 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.minuteOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:503 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:503 INVOKEVIRTUAL org/joda/time/Chronology.hourOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:503 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:503 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:503 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:503 IFEQ L18 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:504 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:504 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:504 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.hourOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:518 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:518 INVOKEVIRTUAL org/joda/time/Chronology.dayOfWeek()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:518 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:518 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:518 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:518 IFEQ L23 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:519 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:519 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:519 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.dayOfWeek Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:521 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:521 INVOKEVIRTUAL org/joda/time/Chronology.dayOfMonth()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:521 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:521 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:521 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:521 IFEQ L24 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:522 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:522 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:522 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.dayOfMonth Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:524 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:524 INVOKEVIRTUAL org/joda/time/Chronology.dayOfYear()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:524 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:524 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:524 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:524 IFEQ L25 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:525 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:525 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:525 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.dayOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:527 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:527 INVOKEVIRTUAL org/joda/time/Chronology.weekOfWeekyear()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:527 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:527 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:527 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:527 IFEQ L26 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:528 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:528 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:528 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.weekOfWeekyear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:530 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:530 INVOKEVIRTUAL org/joda/time/Chronology.weekyear()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:530 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:530 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:530 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:530 IFEQ L27 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:531 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:531 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:531 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.weekyear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:533 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:533 INVOKEVIRTUAL org/joda/time/Chronology.weekyearOfCentury()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:533 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:533 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:533 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:533 IFEQ L28 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:534 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:534 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:534 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.weekyearOfCentury Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:536 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:536 INVOKEVIRTUAL org/joda/time/Chronology.monthOfYear()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:536 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:536 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:536 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:536 IFEQ L29 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:537 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:537 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:537 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.monthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:539 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:539 INVOKEVIRTUAL org/joda/time/Chronology.year()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:539 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:539 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:539 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:539 IFEQ L30 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:540 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:540 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:540 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.year Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:542 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:542 INVOKEVIRTUAL org/joda/time/Chronology.yearOfEra()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:542 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:542 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:542 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:542 IFEQ L31 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:543 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:543 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:543 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.yearOfEra Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:545 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:545 INVOKEVIRTUAL org/joda/time/Chronology.yearOfCentury()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:545 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:545 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:545 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:545 IFEQ L32 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:546 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:546 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:546 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.yearOfCentury Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:548 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:548 INVOKEVIRTUAL org/joda/time/Chronology.centuryOfEra()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:548 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:548 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:548 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:548 IFEQ L33 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:549 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:549 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:549 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.centuryOfEra Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:551 ALOAD 1
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:551 INVOKEVIRTUAL org/joda/time/Chronology.era()Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:551 DUP
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:551 ASTORE 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:551 INVOKESTATIC org/joda/time/chrono/AssembledChronology$Fields.isSupported(Lorg/joda/time/DateTimeField;)Z
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:551 IFEQ L34 false true
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:552 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:552 ALOAD 2
+org.joda.time.chrono.AssembledChronology$Fields.copyFieldsFrom:552 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.era Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology$Fields.isSupported:558 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.isSupported:558 IFNONNULL L0 true false
+org.joda.time.chrono.AssembledChronology$Fields.isSupported:558 INVOKEVIRTUAL org/joda/time/DurationField.isSupported()Z
+org.joda.time.chrono.AssembledChronology$Fields.isSupported:558 IRETURN
+org.joda.time.chrono.AssembledChronology$Fields.isSupported:562 ALOAD 0
+org.joda.time.chrono.AssembledChronology$Fields.isSupported:562 IFNONNULL L0 true false
+org.joda.time.chrono.AssembledChronology$Fields.isSupported:562 INVOKEVIRTUAL org/joda/time/DateTimeField.isSupported()Z
+org.joda.time.chrono.AssembledChronology$Fields.isSupported:562 IRETURN
+org.joda.time.chrono.BaseChronology.get:255 ALOAD 1
+org.joda.time.chrono.BaseChronology.get:255 INVOKEINTERFACE org/joda/time/ReadablePeriod.size()I
+org.joda.time.chrono.BaseChronology.get:255 ISTORE 6
+org.joda.time.chrono.BaseChronology.get:256 ILOAD 6
+org.joda.time.chrono.BaseChronology.get:256 NEWARRAY T_INT
+org.joda.time.chrono.BaseChronology.get:256 ASTORE 7
+org.joda.time.chrono.BaseChronology.get:257 LLOAD 2
+org.joda.time.chrono.BaseChronology.get:257 LLOAD 4
+org.joda.time.chrono.BaseChronology.get:257 LCMP
+org.joda.time.chrono.BaseChronology.get:257 IFEQ L2 false true
+org.joda.time.chrono.BaseChronology.get:258 ICONST_0
+org.joda.time.chrono.BaseChronology.get:258 ISTORE 8
+org.joda.time.chrono.BaseChronology.get:258 ILOAD 8
+org.joda.time.chrono.BaseChronology.get:258 ILOAD 6
+org.joda.time.chrono.BaseChronology.get:258 IF_ICMPGE L2 true true
+org.joda.time.chrono.BaseChronology.get:258 IINC 8 1
+org.joda.time.chrono.BaseChronology.get:259 ALOAD 1
+org.joda.time.chrono.BaseChronology.get:259 INVOKEINTERFACE org/joda/time/ReadablePeriod.getFieldType(I)Lorg/joda/time/DurationFieldType;
+org.joda.time.chrono.BaseChronology.get:259 ALOAD 0
+org.joda.time.chrono.BaseChronology.get:259 INVOKEVIRTUAL org/joda/time/DurationFieldType.getField(Lorg/joda/time/Chronology;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.BaseChronology.get:259 ASTORE 9
+org.joda.time.chrono.BaseChronology.get:260 ALOAD 9
+org.joda.time.chrono.BaseChronology.get:260 INVOKEVIRTUAL org/joda/time/DurationField.getDifference(JJ)I
+org.joda.time.chrono.BaseChronology.get:260 ISTORE 10
+org.joda.time.chrono.BaseChronology.get:264 ALOAD 7
+org.joda.time.chrono.BaseChronology.get:264 ILOAD 8
+org.joda.time.chrono.BaseChronology.get:264 ILOAD 10
+org.joda.time.chrono.BaseChronology.get:264 IASTORE
+org.joda.time.chrono.BaseChronology.get:267 ALOAD 7
+org.joda.time.chrono.BaseChronology.get:267 ARETURN
+org.joda.time.chrono.ISOChronology.getInstance:79 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.ISOChronology.getInstance:79 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.getInstance:79 ARETURN
+org.joda.time.chrono.ISOChronology.getInstance:92 GETSTATIC org/joda/time/chrono/ISOChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.ISOChronology.getInstance:92 ALOAD 0
+org.joda.time.chrono.ISOChronology.getInstance:92 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.ISOChronology.getInstance:92 ASTORE 1
+org.joda.time.chrono.ISOChronology.getInstance:93 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:93 IFNONNULL L1 false true
+org.joda.time.chrono.ISOChronology.getInstance:94 NEW org/joda/time/chrono/ISOChronology
+org.joda.time.chrono.ISOChronology.getInstance:94 DUP
+org.joda.time.chrono.ISOChronology.getInstance:94 INVOKESTATIC org/joda/time/chrono/ZonedChronology.getInstance(Lorg/joda/time/Chronology;Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/ZonedChronology;
+org.joda.time.chrono.ISOChronology.getInstance:94 INVOKESPECIAL org/joda/time/chrono/ISOChronology.<init>(Lorg/joda/time/Chronology;)V
+org.joda.time.chrono.ISOChronology.getInstance:94 ASTORE 1
+org.joda.time.chrono.ISOChronology.getInstance:95 GETSTATIC org/joda/time/chrono/ISOChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.ISOChronology.getInstance:95 ALOAD 0
+org.joda.time.chrono.ISOChronology.getInstance:95 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:95 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.ISOChronology.getInstance:100 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:100 ARETURN
+org.joda.time.chrono.ISOChronology.<init>:110 ALOAD 0
+org.joda.time.chrono.ISOChronology.<init>:110 ALOAD 1
+org.joda.time.chrono.ISOChronology.<init>:110 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;)V
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+org.joda.time.chrono.ZonedChronology.getInstance:62 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.chrono.ZonedChronology.getInstance:62 ASTORE 0
+org.joda.time.chrono.ZonedChronology.getInstance:69 NEW org/joda/time/chrono/ZonedChronology
+org.joda.time.chrono.ZonedChronology.getInstance:69 DUP
+org.joda.time.chrono.ZonedChronology.getInstance:69 ALOAD 0
+org.joda.time.chrono.ZonedChronology.getInstance:69 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.<init>(Lorg/joda/time/Chronology;Lorg/joda/time/DateTimeZone;)V
+org.joda.time.chrono.ZonedChronology.getInstance:69 ARETURN
+org.joda.time.chrono.ZonedChronology.<init>:85 ALOAD 0
+org.joda.time.chrono.ZonedChronology.<init>:85 ALOAD 1
+org.joda.time.chrono.ZonedChronology.<init>:85 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;)V
+org.joda.time.chrono.ZonedChronology.assemble:165 NEW java/util/HashMap
+org.joda.time.chrono.ZonedChronology.assemble:165 DUP
+org.joda.time.chrono.ZonedChronology.assemble:165 INVOKESPECIAL java/util/HashMap.<init>()V
+org.joda.time.chrono.ZonedChronology.assemble:165 ASTORE 2
+org.joda.time.chrono.ZonedChronology.assemble:170 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:170 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.centuries Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:170 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:170 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DurationField;Ljava/util/HashMap;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:171 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:171 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.years Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:171 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:171 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DurationField;Ljava/util/HashMap;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:172 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:172 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:172 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.months Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:172 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:172 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DurationField;Ljava/util/HashMap;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:172 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.months Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:173 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:173 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.weekyears Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:173 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:173 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DurationField;Ljava/util/HashMap;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:174 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:174 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.weeks Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:174 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:174 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DurationField;Ljava/util/HashMap;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:175 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:175 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.days Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:175 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:175 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DurationField;Ljava/util/HashMap;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:177 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:177 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.halfdays Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:177 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:177 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DurationField;Ljava/util/HashMap;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:178 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:178 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.hours Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:178 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:178 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DurationField;Ljava/util/HashMap;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:179 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:179 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.minutes Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:179 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:179 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DurationField;Ljava/util/HashMap;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:180 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:180 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.seconds Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:180 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:180 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DurationField;Ljava/util/HashMap;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:181 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:181 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.millis Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:181 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:181 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DurationField;Ljava/util/HashMap;)Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology.assemble:185 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:185 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:185 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.year Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:185 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:185 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:185 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.year Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:186 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:186 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.yearOfEra Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:186 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:186 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:187 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:187 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.yearOfCentury Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:187 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:187 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:188 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:188 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.centuryOfEra Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:188 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:188 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:189 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:189 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.era Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:189 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:189 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:190 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:190 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.dayOfWeek Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:190 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:190 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:191 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:191 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:191 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.dayOfMonth Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:191 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:191 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:191 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.dayOfMonth Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:192 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:192 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.dayOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:192 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:192 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:193 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:193 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:193 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.monthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:193 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:193 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:193 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.monthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:194 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:194 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.weekOfWeekyear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:194 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:194 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:195 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:195 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.weekyear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:195 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:195 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:196 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:196 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.weekyearOfCentury Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:196 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:196 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:198 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:198 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:198 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.millisOfSecond Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:198 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:198 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:198 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.millisOfSecond Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:199 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:199 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:199 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.millisOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:199 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:199 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:199 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.millisOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:200 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:200 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:200 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.secondOfMinute Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:200 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:200 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:200 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.secondOfMinute Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:201 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:201 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.secondOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:201 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:201 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:202 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:202 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:202 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.minuteOfHour Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:202 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:202 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:202 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.minuteOfHour Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:203 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:203 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.minuteOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:203 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:203 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:204 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:204 ALOAD 1
+org.joda.time.chrono.ZonedChronology.assemble:204 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.hourOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:204 ALOAD 2
+org.joda.time.chrono.ZonedChronology.assemble:204 INVOKESPECIAL org/joda/time/chrono/ZonedChronology.convertField(Lorg/joda/time/DateTimeField;Ljava/util/HashMap;)Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.assemble:204 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.hourOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.ZonedChronology.convertField:212 ALOAD 1
+org.joda.time.chrono.ZonedChronology.convertField:212 IFNULL L0 false true
+org.joda.time.chrono.ZonedChronology.convertField:212 INVOKEVIRTUAL org/joda/time/DurationField.isSupported()Z
+org.joda.time.chrono.ZonedChronology.convertField:212 IFNE L1 true false
+org.joda.time.chrono.ZonedChronology.convertField:215 ALOAD 2
+org.joda.time.chrono.ZonedChronology.convertField:215 ALOAD 1
+org.joda.time.chrono.ZonedChronology.convertField:215 INVOKEVIRTUAL java/util/HashMap.containsKey(Ljava/lang/Object;)Z
+org.joda.time.chrono.ZonedChronology.convertField:215 IFEQ L2 true false
+org.joda.time.chrono.ZonedChronology.convertField:218 NEW org/joda/time/chrono/ZonedChronology$ZonedDurationField
+org.joda.time.chrono.ZonedChronology.convertField:218 DUP
+org.joda.time.chrono.ZonedChronology.convertField:218 ALOAD 1
+org.joda.time.chrono.ZonedChronology.convertField:218 INVOKESPECIAL org/joda/time/chrono/ZonedChronology$ZonedDurationField.<init>(Lorg/joda/time/DurationField;Lorg/joda/time/DateTimeZone;)V
+org.joda.time.chrono.ZonedChronology.convertField:218 ASTORE 3
+org.joda.time.chrono.ZonedChronology.convertField:219 ALOAD 2
+org.joda.time.chrono.ZonedChronology.convertField:219 ALOAD 1
+org.joda.time.chrono.ZonedChronology.convertField:219 INVOKEVIRTUAL java/util/HashMap.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.ZonedChronology.convertField:220 ALOAD 3
+org.joda.time.chrono.ZonedChronology.convertField:220 ARETURN
+org.joda.time.chrono.ZonedChronology.convertField:224 ALOAD 1
+org.joda.time.chrono.ZonedChronology.convertField:224 IFNULL L0 false true
+org.joda.time.chrono.ZonedChronology.convertField:224 INVOKEVIRTUAL org/joda/time/DateTimeField.isSupported()Z
+org.joda.time.chrono.ZonedChronology.convertField:224 IFNE L1 true false
+org.joda.time.chrono.ZonedChronology.convertField:227 ALOAD 2
+org.joda.time.chrono.ZonedChronology.convertField:227 ALOAD 1
+org.joda.time.chrono.ZonedChronology.convertField:227 INVOKEVIRTUAL java/util/HashMap.containsKey(Ljava/lang/Object;)Z
+org.joda.time.chrono.ZonedChronology.convertField:227 IFEQ L2 true false
+org.joda.time.chrono.ZonedChronology.convertField:230 NEW org/joda/time/chrono/ZonedChronology$ZonedDateTimeField
+org.joda.time.chrono.ZonedChronology.convertField:230 ASTORE 3
+org.joda.time.chrono.ZonedChronology.convertField:235 ALOAD 2
+org.joda.time.chrono.ZonedChronology.convertField:235 ALOAD 1
+org.joda.time.chrono.ZonedChronology.convertField:235 INVOKEVIRTUAL java/util/HashMap.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.ZonedChronology.convertField:236 ALOAD 3
+org.joda.time.chrono.ZonedChronology.convertField:236 ARETURN
+org.joda.time.chrono.ZonedChronology$ZonedDurationField.<init>:300 ALOAD 0
+org.joda.time.chrono.ZonedChronology$ZonedDurationField.<init>:300 ALOAD 1
+org.joda.time.chrono.ZonedChronology$ZonedDurationField.<init>:300 PUTFIELD org/joda/time/chrono/ZonedChronology$ZonedDurationField.iField Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology$ZonedDurationField.getDifference:343 ALOAD 0
+org.joda.time.chrono.ZonedChronology$ZonedDurationField.getDifference:343 GETFIELD org/joda/time/chrono/ZonedChronology$ZonedDurationField.iField Lorg/joda/time/DurationField;
+org.joda.time.chrono.ZonedChronology$ZonedDurationField.getDifference:343 IRETURN
+org.joda.time.field.BaseDateTimeField.isSupported:69 ICONST_1
+org.joda.time.field.BaseDateTimeField.isSupported:69 IRETURN
+org.joda.time.field.BaseDurationField.getType:55 ALOAD 0
+org.joda.time.field.BaseDurationField.getType:55 GETFIELD org/joda/time/field/BaseDurationField.iType Lorg/joda/time/DurationFieldType;
+org.joda.time.field.BaseDurationField.getType:55 ARETURN
+org.joda.time.field.BaseDurationField.isSupported:66 ICONST_1
+org.joda.time.field.BaseDurationField.isSupported:66 IRETURN
+org.joda.time.field.DecoratedDurationField.getWrappedField:69 ALOAD 0
+org.joda.time.field.DecoratedDurationField.getWrappedField:69 GETFIELD org/joda/time/field/DecoratedDurationField.iField Lorg/joda/time/DurationField;
+org.joda.time.field.DecoratedDurationField.getWrappedField:69 ARETURN
+org.joda.time.field.MillisDurationField.isSupported:62 ICONST_1
+org.joda.time.field.MillisDurationField.isSupported:62 IRETURN
+org.joda.time.field.MillisDurationField.getUnitMillis:80 LCONST_1
+org.joda.time.field.MillisDurationField.getUnitMillis:80 LRETURN
+org.joda.time.field.MillisDurationField.hashCode:155 INVOKEVIRTUAL org/joda/time/field/MillisDurationField.getUnitMillis()J
+org.joda.time.field.MillisDurationField.hashCode:155 L2I
+org.joda.time.field.MillisDurationField.hashCode:155 IRETURN
+org.joda.time.field.PreciseDurationField.hashCode:142 ALOAD 0
+org.joda.time.field.PreciseDurationField.hashCode:142 GETFIELD org/joda/time/field/PreciseDurationField.iUnitMillis J
+org.joda.time.field.PreciseDurationField.hashCode:142 LSTORE 1
+org.joda.time.field.PreciseDurationField.hashCode:143 LLOAD 1
+org.joda.time.field.PreciseDurationField.hashCode:143 LLOAD 1
+org.joda.time.field.PreciseDurationField.hashCode:143 BIPUSH 32
+org.joda.time.field.PreciseDurationField.hashCode:143 LUSHR
+org.joda.time.field.PreciseDurationField.hashCode:143 LXOR
+org.joda.time.field.PreciseDurationField.hashCode:143 L2I
+org.joda.time.field.PreciseDurationField.hashCode:143 ISTORE 3
+org.joda.time.field.PreciseDurationField.hashCode:144 ILOAD 3
+org.joda.time.field.PreciseDurationField.hashCode:144 ALOAD 0
+org.joda.time.field.PreciseDurationField.hashCode:144 INVOKEVIRTUAL org/joda/time/field/PreciseDurationField.getType()Lorg/joda/time/DurationFieldType;
+org.joda.time.field.PreciseDurationField.hashCode:144 IADD
+org.joda.time.field.PreciseDurationField.hashCode:144 ISTORE 3
+org.joda.time.field.PreciseDurationField.hashCode:145 ILOAD 3
+org.joda.time.field.PreciseDurationField.hashCode:145 IRETURN
+org.joda.time.field.ScaledDurationField.hashCode:147 ALOAD 0
+org.joda.time.field.ScaledDurationField.hashCode:147 GETFIELD org/joda/time/field/ScaledDurationField.iScalar I
+org.joda.time.field.ScaledDurationField.hashCode:147 I2L
+org.joda.time.field.ScaledDurationField.hashCode:147 LSTORE 1
+org.joda.time.field.ScaledDurationField.hashCode:148 LLOAD 1
+org.joda.time.field.ScaledDurationField.hashCode:148 LLOAD 1
+org.joda.time.field.ScaledDurationField.hashCode:148 BIPUSH 32
+org.joda.time.field.ScaledDurationField.hashCode:148 LUSHR
+org.joda.time.field.ScaledDurationField.hashCode:148 LXOR
+org.joda.time.field.ScaledDurationField.hashCode:148 L2I
+org.joda.time.field.ScaledDurationField.hashCode:148 ISTORE 3
+org.joda.time.field.ScaledDurationField.hashCode:149 ILOAD 3
+org.joda.time.field.ScaledDurationField.hashCode:149 ALOAD 0
+org.joda.time.field.ScaledDurationField.hashCode:149 INVOKEVIRTUAL org/joda/time/field/ScaledDurationField.getType()Lorg/joda/time/DurationFieldType;
+org.joda.time.field.ScaledDurationField.hashCode:149 IADD
+org.joda.time.field.ScaledDurationField.hashCode:149 ISTORE 3
+org.joda.time.field.ScaledDurationField.hashCode:150 ILOAD 3
+org.joda.time.field.ScaledDurationField.hashCode:150 ALOAD 0
+org.joda.time.field.ScaledDurationField.hashCode:150 INVOKEVIRTUAL org/joda/time/field/ScaledDurationField.getWrappedField()Lorg/joda/time/DurationField;
+org.joda.time.field.ScaledDurationField.hashCode:150 INVOKEVIRTUAL java/lang/Object.hashCode()I
+org.joda.time.field.ScaledDurationField.hashCode:150 IADD
+org.joda.time.field.ScaledDurationField.hashCode:150 ISTORE 3
+org.joda.time.field.ScaledDurationField.hashCode:151 ILOAD 3
+org.joda.time.field.ScaledDurationField.hashCode:151 IRETURN
+org.joda.time.format.PeriodFormatter.parsePeriod:308 INVOKEVIRTUAL org/joda/time/format/PeriodFormatter.parseMutablePeriod(Ljava/lang/String;)Lorg/joda/time/MutablePeriod;
+org.joda.time.format.PeriodFormatter.parseMutablePeriod:321 INVOKESPECIAL org/joda/time/MutablePeriod.<init>(JLorg/joda/time/PeriodType;)V
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+
+Slice consists of 1669 bytecode instructions.
+Computation took 7.91 seconds.

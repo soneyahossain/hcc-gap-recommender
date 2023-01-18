@@ -1,0 +1,49 @@
+ 0.0% done, time left: unknown                                0.5% done, time left: unknown  3.1% done, time left: unknown  6.6% done, time left: unknown 10.9% done, time left: unknown 12.7% done, time left: unknown 13.4% done, time left: unknown 16.0% done, time left: unknown 26.0% done, time left: unknown 40.5% done, time left:   0:00:00   51.9% done, time left:   0:00:00 61.0% done, time left:   0:00:00 74.2% done, time left:   0:00:00 83.0% done, time left:   0:00:00 85.7% done, time left:   0:00:00 92.3% done, time left:   0:00:00 92.7% done, time left:   0:00:00 96.7% done, time left:   0:00:00 98.8% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.convert.TestReadablePeriodConverter.testGetPeriodType_Object:107:*]:
+org.joda.time.DateTimeUtils.getPeriodType:302 ALOAD 0
+org.joda.time.DateTimeUtils.getPeriodType:302 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getPeriodType:305 ALOAD 0
+org.joda.time.DateTimeUtils.getPeriodType:305 ARETURN
+org.joda.time.Period.<init>:402 ALOAD 0
+org.joda.time.Period.<init>:402 ALOAD 3
+org.joda.time.Period.<init>:402 INVOKESPECIAL org/joda/time/base/BasePeriod.<init>(JLorg/joda/time/PeriodType;Lorg/joda/time/Chronology;)V
+org.joda.time.PeriodType.yearMonthDayTime:134 GETSTATIC org/joda/time/PeriodType.cYMDTime Lorg/joda/time/PeriodType;
+org.joda.time.PeriodType.yearMonthDayTime:134 ASTORE 0
+org.joda.time.PeriodType.yearMonthDayTime:135 ALOAD 0
+org.joda.time.PeriodType.yearMonthDayTime:135 IFNONNULL L0 false true
+org.joda.time.PeriodType.yearMonthDayTime:136 NEW org/joda/time/PeriodType
+org.joda.time.PeriodType.yearMonthDayTime:136 ASTORE 0
+org.joda.time.PeriodType.yearMonthDayTime:146 ALOAD 0
+org.joda.time.PeriodType.yearMonthDayTime:146 PUTSTATIC org/joda/time/PeriodType.cYMDTime Lorg/joda/time/PeriodType;
+org.joda.time.PeriodType.yearMonthDayTime:148 ALOAD 0
+org.joda.time.PeriodType.yearMonthDayTime:148 ARETURN
+org.joda.time.base.BasePeriod.<init>:255 ALOAD 3
+org.joda.time.base.BasePeriod.<init>:255 INVOKEVIRTUAL org/joda/time/base/BasePeriod.checkPeriodType(Lorg/joda/time/PeriodType;)Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.<init>:255 ASTORE 3
+org.joda.time.base.BasePeriod.<init>:257 ALOAD 0
+org.joda.time.base.BasePeriod.<init>:257 ALOAD 3
+org.joda.time.base.BasePeriod.<init>:257 PUTFIELD org/joda/time/base/BasePeriod.iType Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.checkPeriodType:308 ALOAD 1
+org.joda.time.base.BasePeriod.checkPeriodType:308 INVOKESTATIC org/joda/time/DateTimeUtils.getPeriodType(Lorg/joda/time/PeriodType;)Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.checkPeriodType:308 ARETURN
+org.joda.time.base.BasePeriod.getPeriodType:318 ALOAD 0
+org.joda.time.base.BasePeriod.getPeriodType:318 GETFIELD org/joda/time/base/BasePeriod.iType Lorg/joda/time/PeriodType;
+org.joda.time.base.BasePeriod.getPeriodType:318 ARETURN
+org.joda.time.convert.ReadablePeriodConverter.getPeriodType:70 ALOAD 1
+org.joda.time.convert.ReadablePeriodConverter.getPeriodType:70 ASTORE 2
+org.joda.time.convert.ReadablePeriodConverter.getPeriodType:71 ALOAD 2
+org.joda.time.convert.ReadablePeriodConverter.getPeriodType:71 INVOKEINTERFACE org/joda/time/ReadablePeriod.getPeriodType()Lorg/joda/time/PeriodType;
+org.joda.time.convert.ReadablePeriodConverter.getPeriodType:71 ARETURN
+org.joda.time.convert.TestReadablePeriodConverter.main:56 INVOKEVIRTUAL org/joda/time/convert/TestReadablePeriodConverter.testGetPeriodType_Object()V
+org.joda.time.convert.TestReadablePeriodConverter.testGetPeriodType_Object:107 INVOKESTATIC org/joda/time/PeriodType.yearMonthDayTime()Lorg/joda/time/PeriodType;
+org.joda.time.convert.TestReadablePeriodConverter.testGetPeriodType_Object:107 GETSTATIC org/joda/time/convert/ReadablePeriodConverter.INSTANCE Lorg/joda/time/convert/ReadablePeriodConverter;
+org.joda.time.convert.TestReadablePeriodConverter.testGetPeriodType_Object:107 NEW org/joda/time/Period
+org.joda.time.convert.TestReadablePeriodConverter.testGetPeriodType_Object:107 DUP
+org.joda.time.convert.TestReadablePeriodConverter.testGetPeriodType_Object:107 LDC 123
+org.joda.time.convert.TestReadablePeriodConverter.testGetPeriodType_Object:107 INVOKESTATIC org/joda/time/PeriodType.yearMonthDayTime()Lorg/joda/time/PeriodType;
+org.joda.time.convert.TestReadablePeriodConverter.testGetPeriodType_Object:107 INVOKESPECIAL org/joda/time/Period.<init>(JLorg/joda/time/PeriodType;)V
+org.joda.time.convert.TestReadablePeriodConverter.testGetPeriodType_Object:107 INVOKEVIRTUAL org/joda/time/convert/ReadablePeriodConverter.getPeriodType(Ljava/lang/Object;)Lorg/joda/time/PeriodType;
+org.joda.time.convert.TestReadablePeriodConverter.testGetPeriodType_Object:107 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 44 bytecode instructions.
+Computation took 2.16 seconds.

@@ -1,0 +1,70 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  1.0% done, time left: unknown  2.4% done, time left: unknown  4.5% done, time left: unknown  8.2% done, time left: unknown  9.3% done, time left: unknown  9.4% done, time left: unknown  9.7% done, time left:   0:00:33   11.1% done, time left:   0:00:22 14.6% done, time left:   0:00:17 17.0% done, time left:   0:00:13 19.7% done, time left:   0:00:10 21.0% done, time left:   0:00:08 23.6% done, time left:   0:00:07 26.4% done, time left:   0:00:06 30.2% done, time left:   0:00:04 33.9% done, time left:   0:00:03 35.1% done, time left:   0:00:02 38.7% done, time left:   0:00:02 47.6% done, time left:   0:00:00 55.1% done, time left:   0:00:00 63.4% done, time left:   0:00:00 71.7% done, time left:   0:00:00 80.7% done, time left:   0:00:00 90.4% done, time left:   0:00:00 93.0% done, time left:   0:00:00 96.9% done, time left:   0:00:00 99.0% done, time left:   0:00:00 103.2% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.convert.TestReadablePartialConverter.testGetChronology_Object_Zone:111:*]:
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.TimeOfDay.<init>:242 ALOAD 0
+org.joda.time.TimeOfDay.<init>:242 INVOKESPECIAL org/joda/time/base/BasePartial.<init>(J)V
+org.joda.time.base.BasePartial.<init>:93 ALOAD 0
+org.joda.time.base.BasePartial.<init>:93 INVOKESPECIAL org/joda/time/base/BasePartial.<init>(JLorg/joda/time/Chronology;)V
+org.joda.time.base.BasePartial.<init>:110 ALOAD 0
+org.joda.time.base.BasePartial.<init>:110 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.base.BasePartial.<init>:110 PUTFIELD org/joda/time/base/BasePartial.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BasePartial.getChronology:249 ALOAD 0
+org.joda.time.base.BasePartial.getChronology:249 GETFIELD org/joda/time/base/BasePartial.iChronology Lorg/joda/time/Chronology;
+org.joda.time.base.BasePartial.getChronology:249 ARETURN
+org.joda.time.chrono.AssembledChronology.getZone:107 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getZone:107 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getZone:107 DUP
+org.joda.time.chrono.AssembledChronology.getZone:107 ASTORE 1
+org.joda.time.chrono.AssembledChronology.getZone:107 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getZone:108 ALOAD 1
+org.joda.time.chrono.AssembledChronology.getZone:108 ARETURN
+org.joda.time.chrono.ISOChronology.getInstance:92 GETSTATIC org/joda/time/chrono/ISOChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.ISOChronology.getInstance:92 ALOAD 0
+org.joda.time.chrono.ISOChronology.getInstance:92 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.ISOChronology.getInstance:92 ASTORE 1
+org.joda.time.chrono.ISOChronology.getInstance:100 ALOAD 1
+org.joda.time.chrono.ISOChronology.getInstance:100 ARETURN
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+org.joda.time.chrono.ISOChronology.withZone:134 ALOAD 1
+org.joda.time.chrono.ISOChronology.withZone:134 ALOAD 0
+org.joda.time.chrono.ISOChronology.withZone:134 INVOKEVIRTUAL org/joda/time/chrono/ISOChronology.getZone()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.ISOChronology.withZone:134 IF_ACMPNE L1 true false
+org.joda.time.chrono.ISOChronology.withZone:137 ALOAD 1
+org.joda.time.chrono.ISOChronology.withZone:137 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withZone:137 ARETURN
+org.joda.time.convert.ReadablePartialConverter.getChronology:53 ALOAD 1
+org.joda.time.convert.ReadablePartialConverter.getChronology:53 ACONST_NULL
+org.joda.time.convert.ReadablePartialConverter.getChronology:53 INVOKEVIRTUAL org/joda/time/convert/ReadablePartialConverter.getChronology(Ljava/lang/Object;Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.convert.ReadablePartialConverter.getChronology:53 ALOAD 2
+org.joda.time.convert.ReadablePartialConverter.getChronology:53 INVOKEVIRTUAL org/joda/time/Chronology.withZone(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/Chronology;
+org.joda.time.convert.ReadablePartialConverter.getChronology:53 ARETURN
+org.joda.time.convert.ReadablePartialConverter.getChronology:67 ALOAD 2
+org.joda.time.convert.ReadablePartialConverter.getChronology:67 IFNONNULL L0 false true
+org.joda.time.convert.ReadablePartialConverter.getChronology:68 ALOAD 1
+org.joda.time.convert.ReadablePartialConverter.getChronology:68 INVOKEINTERFACE org/joda/time/ReadablePartial.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.convert.ReadablePartialConverter.getChronology:68 ASTORE 2
+org.joda.time.convert.ReadablePartialConverter.getChronology:69 ALOAD 2
+org.joda.time.convert.ReadablePartialConverter.getChronology:69 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.convert.ReadablePartialConverter.getChronology:69 ASTORE 2
+org.joda.time.convert.ReadablePartialConverter.getChronology:71 ALOAD 2
+org.joda.time.convert.ReadablePartialConverter.getChronology:71 ARETURN
+org.joda.time.convert.TestReadablePartialConverter.main:62 INVOKEVIRTUAL org/joda/time/convert/TestReadablePartialConverter.testGetChronology_Object_Zone()V
+org.joda.time.convert.TestReadablePartialConverter.testGetChronology_Object_Zone:111 GETSTATIC org/joda/time/convert/TestReadablePartialConverter.ISO_PARIS Lorg/joda/time/Chronology;
+org.joda.time.convert.TestReadablePartialConverter.testGetChronology_Object_Zone:111 GETSTATIC org/joda/time/convert/ReadablePartialConverter.INSTANCE Lorg/joda/time/convert/ReadablePartialConverter;
+org.joda.time.convert.TestReadablePartialConverter.testGetChronology_Object_Zone:111 NEW org/joda/time/TimeOfDay
+org.joda.time.convert.TestReadablePartialConverter.testGetChronology_Object_Zone:111 DUP
+org.joda.time.convert.TestReadablePartialConverter.testGetChronology_Object_Zone:111 LDC 123
+org.joda.time.convert.TestReadablePartialConverter.testGetChronology_Object_Zone:111 INVOKESPECIAL org/joda/time/TimeOfDay.<init>(J)V
+org.joda.time.convert.TestReadablePartialConverter.testGetChronology_Object_Zone:111 GETSTATIC org/joda/time/convert/TestReadablePartialConverter.PARIS Lorg/joda/time/DateTimeZone;
+org.joda.time.convert.TestReadablePartialConverter.testGetChronology_Object_Zone:111 INVOKEVIRTUAL org/joda/time/convert/ReadablePartialConverter.getChronology(Ljava/lang/Object;Lorg/joda/time/DateTimeZone;)Lorg/joda/time/Chronology;
+org.joda.time.convert.TestReadablePartialConverter.testGetChronology_Object_Zone:111 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+
+Slice consists of 172 bytecode instructions.
+Computation took 3.34 seconds.

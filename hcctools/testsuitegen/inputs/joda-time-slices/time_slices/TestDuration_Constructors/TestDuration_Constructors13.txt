@@ -1,0 +1,42 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.5% done, time left: unknown  2.8% done, time left: unknown  3.5% done, time left: unknown  5.4% done, time left: unknown  7.1% done, time left: unknown  9.6% done, time left: unknown 11.9% done, time left: unknown 13.8% done, time left:   0:00:05   16.4% done, time left:   0:00:05 16.7% done, time left:   0:00:05 19.2% done, time left:   0:00:06 23.2% done, time left:   0:00:05 29.5% done, time left:   0:00:01 35.8% done, time left:   0:00:01 42.8% done, time left:   0:00:00 48.8% done, time left:   0:00:00 56.0% done, time left:   0:00:00 60.3% done, time left:   0:00:00 60.6% done, time left:   0:00:00 61.3% done, time left:   0:00:00 67.2% done, time left:   0:00:00 74.1% done, time left:   0:00:00 78.6% done, time left:   0:00:00 79.3% done, time left:   0:00:00 81.5% done, time left:   0:00:00 92.7% done, time left:   0:00:00 97.3% done, time left:   0:00:00 100.1% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDuration_Constructors.testFactory_standardSeconds_long:176:*]:
+org.joda.time.Duration.standardSeconds:151 LLOAD 0
+org.joda.time.Duration.standardSeconds:151 LCONST_0
+org.joda.time.Duration.standardSeconds:151 LCMP
+org.joda.time.Duration.standardSeconds:151 IFNE L0 true false
+org.joda.time.Duration.standardSeconds:154 NEW org/joda/time/Duration
+org.joda.time.Duration.standardSeconds:154 DUP
+org.joda.time.Duration.standardSeconds:154 LLOAD 0
+org.joda.time.Duration.standardSeconds:154 SIPUSH 1000
+org.joda.time.Duration.standardSeconds:154 INVOKESTATIC org/joda/time/field/FieldUtils.safeMultiply(JI)J
+org.joda.time.Duration.standardSeconds:154 INVOKESPECIAL org/joda/time/Duration.<init>(J)V
+org.joda.time.Duration.standardSeconds:154 ARETURN
+org.joda.time.Duration.<init>:178 ALOAD 0
+org.joda.time.Duration.<init>:178 LLOAD 1
+org.joda.time.Duration.<init>:178 INVOKESPECIAL org/joda/time/base/BaseDuration.<init>(J)V
+org.joda.time.TestDuration_Constructors.main:72 INVOKEVIRTUAL org/joda/time/TestDuration_Constructors.testFactory_standardSeconds_long()V
+org.joda.time.TestDuration_Constructors.testFactory_standardSeconds_long:175 LCONST_1
+org.joda.time.TestDuration_Constructors.testFactory_standardSeconds_long:175 INVOKESTATIC org/joda/time/Duration.standardSeconds(J)Lorg/joda/time/Duration;
+org.joda.time.TestDuration_Constructors.testFactory_standardSeconds_long:175 ASTORE 1
+org.joda.time.TestDuration_Constructors.testFactory_standardSeconds_long:176 LDC 1000
+org.joda.time.TestDuration_Constructors.testFactory_standardSeconds_long:176 ALOAD 1
+org.joda.time.TestDuration_Constructors.testFactory_standardSeconds_long:176 INVOKEVIRTUAL org/joda/time/Duration.getMillis()J
+org.joda.time.TestDuration_Constructors.testFactory_standardSeconds_long:176 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.BaseDuration.<init>:62 ALOAD 0
+org.joda.time.base.BaseDuration.<init>:62 LLOAD 1
+org.joda.time.base.BaseDuration.<init>:62 PUTFIELD org/joda/time/base/BaseDuration.iMillis J
+org.joda.time.base.BaseDuration.getMillis:115 ALOAD 0
+org.joda.time.base.BaseDuration.getMillis:115 GETFIELD org/joda/time/base/BaseDuration.iMillis J
+org.joda.time.base.BaseDuration.getMillis:115 LRETURN
+org.joda.time.field.FieldUtils.safeMultiply:139 ILOAD 2
+org.joda.time.field.FieldUtils.safeMultiply:139 TABLESWITCH (-1 => L0, 0 => L2, 1 => L3, * => L4)
+org.joda.time.field.FieldUtils.safeMultiply:150 LLOAD 0
+org.joda.time.field.FieldUtils.safeMultiply:150 ILOAD 2
+org.joda.time.field.FieldUtils.safeMultiply:150 I2L
+org.joda.time.field.FieldUtils.safeMultiply:150 LMUL
+org.joda.time.field.FieldUtils.safeMultiply:150 LSTORE 3
+org.joda.time.field.FieldUtils.safeMultiply:154 LLOAD 3
+org.joda.time.field.FieldUtils.safeMultiply:154 LRETURN
+
+Slice consists of 37 bytecode instructions.
+Computation took 3.39 seconds.

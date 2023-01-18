@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Hours.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">Hours.java</span></div><h1>Hours.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2010 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import org.joda.convert.FromString;
+import org.joda.convert.ToString;
+import org.joda.time.base.BaseSingleFieldPeriod;
+import org.joda.time.field.FieldUtils;
+import org.joda.time.format.ISOPeriodFormat;
+import org.joda.time.format.PeriodFormatter;
+
+/**
+ * An immutable time period representing a number of hours.
+ * &lt;p&gt;
+ * &lt;code&gt;Hours&lt;/code&gt; is an immutable period that can only store hours.
+ * It does not store years, months or minutes for example. As such it is a
+ * type-safe way of representing a number of hours in an application.
+ * &lt;p&gt;
+ * The number of hours is set in the constructor, and may be queried using
+ * &lt;code&gt;getHours()&lt;/code&gt;. Basic mathematical operations are provided -
+ * &lt;code&gt;plus()&lt;/code&gt;, &lt;code&gt;minus()&lt;/code&gt;, &lt;code&gt;multipliedBy()&lt;/code&gt; and
+ * &lt;code&gt;dividedBy()&lt;/code&gt;.
+ * &lt;p&gt;
+ * &lt;code&gt;Hours&lt;/code&gt; is thread-safe and immutable.
+ *
+ * @author Stephen Colebourne
+ * @since 1.4
+ */
+public final class Hours extends BaseSingleFieldPeriod {
+
+    /** Constant representing zero hours. */
+<span class="fc" id="L45">    public static final Hours ZERO = new Hours(0);</span>
+    /** Constant representing one hour. */
+<span class="fc" id="L47">    public static final Hours ONE = new Hours(1);</span>
+    /** Constant representing two hours. */
+<span class="fc" id="L49">    public static final Hours TWO = new Hours(2);</span>
+    /** Constant representing three hours. */
+<span class="fc" id="L51">    public static final Hours THREE = new Hours(3);</span>
+    /** Constant representing four hours. */
+<span class="fc" id="L53">    public static final Hours FOUR = new Hours(4);</span>
+    /** Constant representing five hours. */
+<span class="fc" id="L55">    public static final Hours FIVE = new Hours(5);</span>
+    /** Constant representing six hours. */
+<span class="fc" id="L57">    public static final Hours SIX = new Hours(6);</span>
+    /** Constant representing seven hours. */
+<span class="fc" id="L59">    public static final Hours SEVEN = new Hours(7);</span>
+    /** Constant representing eight hours. */
+<span class="fc" id="L61">    public static final Hours EIGHT = new Hours(8);</span>
+    /** Constant representing the maximum number of hours that can be stored in this object. */
+<span class="fc" id="L63">    public static final Hours MAX_VALUE = new Hours(Integer.MAX_VALUE);</span>
+    /** Constant representing the minimum number of hours that can be stored in this object. */
+<span class="fc" id="L65">    public static final Hours MIN_VALUE = new Hours(Integer.MIN_VALUE);</span>
+
+    /** The parser to use for this class. */
+<span class="fc" id="L68">    private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.hours());</span>
+    /** Serialization version. */
+    private static final long serialVersionUID = 87525275727380864L;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Obtains an instance of &lt;code&gt;Hours&lt;/code&gt; that may be cached.
+     * &lt;code&gt;Hours&lt;/code&gt; is immutable, so instances can be cached and shared.
+     * This factory method provides access to shared instances.
+     *
+     * @param hours  the number of hours to obtain an instance for
+     * @return the instance of Hours
+     */
+    public static Hours hours(int hours) {
+<span class="fc bfc" id="L82" title="All 12 branches covered.">        switch (hours) {</span>
+            case 0:
+<span class="fc" id="L84">                return ZERO;</span>
+            case 1:
+<span class="fc" id="L86">                return ONE;</span>
+            case 2:
+<span class="fc" id="L88">                return TWO;</span>
+            case 3:
+<span class="fc" id="L90">                return THREE;</span>
+            case 4:
+<span class="fc" id="L92">                return FOUR;</span>
+            case 5:
+<span class="fc" id="L94">                return FIVE;</span>
+            case 6:
+<span class="fc" id="L96">                return SIX;</span>
+            case 7:
+<span class="fc" id="L98">                return SEVEN;</span>
+            case 8:
+<span class="fc" id="L100">                return EIGHT;</span>
+            case Integer.MAX_VALUE:
+<span class="fc" id="L102">                return MAX_VALUE;</span>
+            case Integer.MIN_VALUE:
+<span class="fc" id="L104">                return MIN_VALUE;</span>
+            default:
+<span class="fc" id="L106">                return new Hours(hours);</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a &lt;code&gt;Hours&lt;/code&gt; representing the number of whole hours
+     * between the two specified datetimes.
+     *
+     * @param start  the start instant, must not be null
+     * @param end  the end instant, must not be null
+     * @return the period in hours
+     * @throws IllegalArgumentException if the instants are null or invalid
+     */
+    public static Hours hoursBetween(ReadableInstant start, ReadableInstant end) {
+<span class="fc" id="L121">        int amount = BaseSingleFieldPeriod.between(start, end, DurationFieldType.hours());</span>
+<span class="fc" id="L122">        return Hours.hours(amount);</span>
+    }
+
+    /**
+     * Creates a &lt;code&gt;Hours&lt;/code&gt; representing the number of whole hours
+     * between the two specified partial datetimes.
+     * &lt;p&gt;
+     * The two partials must contain the same fields, for example you can specify
+     * two &lt;code&gt;LocalTime&lt;/code&gt; objects.
+     *
+     * @param start  the start partial date, must not be null
+     * @param end  the end partial date, must not be null
+     * @return the period in hours
+     * @throws IllegalArgumentException if the partials are null or invalid
+     */
+    public static Hours hoursBetween(ReadablePartial start, ReadablePartial end) {
+<span class="pc bpc" id="L138" title="1 of 4 branches missed.">        if (start instanceof LocalTime &amp;&amp; end instanceof LocalTime)   {</span>
+<span class="fc" id="L139">            Chronology chrono = DateTimeUtils.getChronology(start.getChronology());</span>
+<span class="fc" id="L140">            int hours = chrono.hours().getDifference(</span>
+<span class="fc" id="L141">                    ((LocalTime) end).getLocalMillis(), ((LocalTime) start).getLocalMillis());</span>
+<span class="fc" id="L142">            return Hours.hours(hours);</span>
+        }
+<span class="fc" id="L144">        int amount = BaseSingleFieldPeriod.between(start, end, ZERO);</span>
+<span class="fc" id="L145">        return Hours.hours(amount);</span>
+    }
+
+    /**
+     * Creates a &lt;code&gt;Hours&lt;/code&gt; representing the number of whole hours
+     * in the specified interval.
+     *
+     * @param interval  the interval to extract hours from, null returns zero
+     * @return the period in hours
+     * @throws IllegalArgumentException if the partials are null or invalid
+     */
+    public static Hours hoursIn(ReadableInterval interval) {
+<span class="fc bfc" id="L157" title="All 2 branches covered.">        if (interval == null)   {</span>
+<span class="fc" id="L158">            return Hours.ZERO;</span>
+        }
+<span class="fc" id="L160">        int amount = BaseSingleFieldPeriod.between(interval.getStart(), interval.getEnd(), DurationFieldType.hours());</span>
+<span class="fc" id="L161">        return Hours.hours(amount);</span>
+    }
+
+    /**
+     * Creates a new &lt;code&gt;Hours&lt;/code&gt; representing the number of complete
+     * standard length hours in the specified period.
+     * &lt;p&gt;
+     * This factory method converts all fields from the period to hours using standardised
+     * durations for each field. Only those fields which have a precise duration in
+     * the ISO UTC chronology can be converted.
+     * &lt;ul&gt;
+     * &lt;li&gt;One week consists of 7 days.
+     * &lt;li&gt;One day consists of 24 hours.
+     * &lt;li&gt;One hour consists of 60 minutes.
+     * &lt;li&gt;One minute consists of 60 seconds.
+     * &lt;li&gt;One second consists of 1000 milliseconds.
+     * &lt;/ul&gt;
+     * Months and Years are imprecise and periods containing these values cannot be converted.
+     *
+     * @param period  the period to get the number of hours from, null returns zero
+     * @return the period in hours
+     * @throws IllegalArgumentException if the period contains imprecise duration values
+     */
+    public static Hours standardHoursIn(ReadablePeriod period) {
+<span class="fc" id="L185">        int amount = BaseSingleFieldPeriod.standardPeriodIn(period, DateTimeConstants.MILLIS_PER_HOUR);</span>
+<span class="fc" id="L186">        return Hours.hours(amount);</span>
+    }
+
+    /**
+     * Creates a new &lt;code&gt;Hours&lt;/code&gt; by parsing a string in the ISO8601 format 'PTnH'.
+     * &lt;p&gt;
+     * The parse will accept the full ISO syntax of PnYnMnWnDTnHnMnS however only the
+     * hours component may be non-zero. If any other component is non-zero, an exception
+     * will be thrown.
+     *
+     * @param periodStr  the period string, null returns zero
+     * @return the period in hours
+     * @throws IllegalArgumentException if the string format is invalid
+     */
+    @FromString
+    public static Hours parseHours(String periodStr) {
+<span class="fc bfc" id="L202" title="All 2 branches covered.">        if (periodStr == null) {</span>
+<span class="fc" id="L203">            return Hours.ZERO;</span>
+        }
+<span class="fc" id="L205">        Period p = PARSER.parsePeriod(periodStr);</span>
+<span class="fc" id="L206">        return Hours.hours(p.getHours());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a new instance representing a number of hours.
+     * You should consider using the factory method {@link #hours(int)}
+     * instead of the constructor.
+     *
+     * @param hours  the number of hours to represent
+     */
+    private Hours(int hours) {
+<span class="fc" id="L218">        super(hours);</span>
+<span class="fc" id="L219">    }</span>
+
+    /**
+     * Resolves singletons.
+     * 
+     * @return the singleton instance
+     */
+    private Object readResolve() {
+<span class="fc" id="L227">        return Hours.hours(getValue());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the duration field type, which is &lt;code&gt;hours&lt;/code&gt;.
+     *
+     * @return the period type
+     */
+    public DurationFieldType getFieldType() {
+<span class="fc" id="L237">        return DurationFieldType.hours();</span>
+    }
+
+    /**
+     * Gets the period type, which is &lt;code&gt;hours&lt;/code&gt;.
+     *
+     * @return the period type
+     */
+    public PeriodType getPeriodType() {
+<span class="fc" id="L246">        return PeriodType.hours();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Converts this period in hours to a period in weeks assuming a
+     * 7 day week and 24 hour day.
+     * &lt;p&gt;
+     * This method allows you to convert between different types of period.
+     * However to achieve this it makes the assumption that all weeks are 7 days
+     * long and all days are 24 hours long.
+     * This is not true when daylight savings time is considered, and may also
+     * not be true for some unusual chronologies. However, it is included as it
+     * is a useful operation for many applications and business rules.
+     * 
+     * @return a period representing the number of whole weeks for this number of hours
+     */
+    public Weeks toStandardWeeks() {
+<span class="fc" id="L264">        return Weeks.weeks(getValue() / DateTimeConstants.HOURS_PER_WEEK);</span>
+    }
+
+    /**
+     * Converts this period in hours to a period in days assuming a
+     * 24 hour day.
+     * &lt;p&gt;
+     * This method allows you to convert between different types of period.
+     * However to achieve this it makes the assumption that all days are 24 hours long.
+     * This is not true when daylight savings time is considered, and may also
+     * not be true for some unusual chronologies. However, it is included as it
+     * is a useful operation for many applications and business rules.
+     * 
+     * @return a period representing the number of whole days for this number of hours
+     */
+    public Days toStandardDays() {
+<span class="fc" id="L280">        return Days.days(getValue() / DateTimeConstants.HOURS_PER_DAY);</span>
+    }
+
+    /**
+     * Converts this period in hours to a period in minutes assuming a
+     * 60 minute hour.
+     * &lt;p&gt;
+     * This method allows you to convert between different types of period.
+     * However to achieve this it makes the assumption that all hours are 60 minutes long.
+     * This may not be true for some unusual chronologies. However, it is included
+     * as it is a useful operation for many applications and business rules.
+     * 
+     * @return a period representing the number of minutes for this number of hours
+     * @throws ArithmeticException if the number of minutes is too large to be represented
+     */
+    public Minutes toStandardMinutes() {
+<span class="fc" id="L296">        return Minutes.minutes(FieldUtils.safeMultiply(getValue(), DateTimeConstants.MINUTES_PER_HOUR));</span>
+    }
+
+    /**
+     * Converts this period in hours to a period in seconds assuming a
+     * 60 minute hour and 60 second minute.
+     * &lt;p&gt;
+     * This method allows you to convert between different types of period.
+     * However to achieve this it makes the assumption that all hours are
+     * 60 minutes long and all minutes are 60 seconds long.
+     * This may not be true for some unusual chronologies. However, it is included
+     * as it is a useful operation for many applications and business rules.
+     * 
+     * @return a period representing the number of seconds for this number of hours
+     * @throws ArithmeticException if the number of seconds is too large to be represented
+     */
+    public Seconds toStandardSeconds() {
+<span class="fc" id="L313">        return Seconds.seconds(FieldUtils.safeMultiply(getValue(), DateTimeConstants.SECONDS_PER_HOUR));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Converts this period in hours to a duration in milliseconds assuming a
+     * 60 minute hour and 60 second minute.
+     * &lt;p&gt;
+     * This method allows you to convert from a period to a duration.
+     * However to achieve this it makes the assumption that all hours are
+     * 60 minutes and all minutes are 60 seconds. This might not be true for an
+     * unusual chronology, for example one that takes leap seconds into account.
+     * However, the method is included as it is a useful operation for many
+     * applications and business rules.
+     *
+     * @return a duration equivalent to this number of hours
+     */
+    public Duration toStandardDuration() {
+<span class="fc" id="L331">        long hours = getValue();  // assign to a long</span>
+<span class="fc" id="L332">        return new Duration(hours * DateTimeConstants.MILLIS_PER_HOUR);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the number of hours that this period represents.
+     *
+     * @return the number of hours in the period
+     */
+    public int getHours() {
+<span class="fc" id="L342">        return getValue();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the specified number of hours added.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param hours  the amount of hours to add, may be negative
+     * @return the new period plus the specified number of hours
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Hours plus(int hours) {
+<span class="fc bfc" id="L356" title="All 2 branches covered.">        if (hours == 0) {</span>
+<span class="fc" id="L357">            return this;</span>
+        }
+<span class="fc" id="L359">        return Hours.hours(FieldUtils.safeAdd(getValue(), hours));</span>
+    }
+
+    /**
+     * Returns a new instance with the specified number of hours added.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param hours  the amount of hours to add, may be negative, null means zero
+     * @return the new period plus the specified number of hours
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Hours plus(Hours hours) {
+<span class="fc bfc" id="L372" title="All 2 branches covered.">        if (hours == null) {</span>
+<span class="fc" id="L373">            return this;</span>
+        }
+<span class="fc" id="L375">        return plus(hours.getValue());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the specified number of hours taken away.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param hours  the amount of hours to take away, may be negative
+     * @return the new period minus the specified number of hours
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Hours minus(int hours) {
+<span class="fc" id="L389">        return plus(FieldUtils.safeNegate(hours));</span>
+    }
+
+    /**
+     * Returns a new instance with the specified number of hours taken away.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param hours  the amount of hours to take away, may be negative, null means zero
+     * @return the new period minus the specified number of hours
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Hours minus(Hours hours) {
+<span class="fc bfc" id="L402" title="All 2 branches covered.">        if (hours == null) {</span>
+<span class="fc" id="L403">            return this;</span>
+        }
+<span class="fc" id="L405">        return minus(hours.getValue());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the hours multiplied by the specified scalar.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param scalar  the amount to multiply by, may be negative
+     * @return the new period multiplied by the specified scalar
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Hours multipliedBy(int scalar) {
+<span class="fc" id="L419">        return Hours.hours(FieldUtils.safeMultiply(getValue(), scalar));</span>
+    }
+
+    /**
+     * Returns a new instance with the hours divided by the specified divisor.
+     * The calculation uses integer division, thus 3 divided by 2 is 1.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param divisor  the amount to divide by, may be negative
+     * @return the new period divided by the specified divisor
+     * @throws ArithmeticException if the divisor is zero
+     */
+    public Hours dividedBy(int divisor) {
+<span class="fc bfc" id="L433" title="All 2 branches covered.">        if (divisor == 1) {</span>
+<span class="fc" id="L434">            return this;</span>
+        }
+<span class="fc" id="L436">        return Hours.hours(getValue() / divisor);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the hours value negated.
+     *
+     * @return the new period with a negated value
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Hours negated() {
+<span class="fc" id="L447">        return Hours.hours(FieldUtils.safeNegate(getValue()));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Is this hours instance greater than the specified number of hours.
+     *
+     * @param other  the other period, null means zero
+     * @return true if this hours instance is greater than the specified one
+     */
+    public boolean isGreaterThan(Hours other) {
+<span class="fc bfc" id="L458" title="All 2 branches covered.">        if (other == null) {</span>
+<span class="fc bfc" id="L459" title="All 2 branches covered.">            return getValue() &gt; 0;</span>
+        }
+<span class="fc bfc" id="L461" title="All 2 branches covered.">        return getValue() &gt; other.getValue();</span>
+    }
+
+    /**
+     * Is this hours instance less than the specified number of hours.
+     *
+     * @param other  the other period, null means zero
+     * @return true if this hours instance is less than the specified one
+     */
+    public boolean isLessThan(Hours other) {
+<span class="fc bfc" id="L471" title="All 2 branches covered.">        if (other == null) {</span>
+<span class="fc bfc" id="L472" title="All 2 branches covered.">            return getValue() &lt; 0;</span>
+        }
+<span class="fc bfc" id="L474" title="All 2 branches covered.">        return getValue() &lt; other.getValue();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets this instance as a String in the ISO8601 duration format.
+     * &lt;p&gt;
+     * For example, &quot;PT4H&quot; represents 4 hours.
+     *
+     * @return the value as an ISO8601 string
+     */
+    @ToString
+    public String toString() {
+<span class="fc" id="L487">        return &quot;PT&quot; + String.valueOf(getValue()) + &quot;H&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

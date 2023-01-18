@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SkipDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">SkipDateTimeField.java</span></div><h1>SkipDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2005 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.IllegalFieldValueException;
+
+/**
+ * Wraps another field such that a certain value is skipped.
+ * &lt;p&gt;
+ * This is most useful for years where you want to skip zero, so the
+ * sequence runs ...,2,1,-1,-2,...
+ * &lt;p&gt;
+ * SkipDateTimeField is thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+public final class SkipDateTimeField extends DelegatedDateTimeField {
+
+    /** Serialization version. */
+    private static final long serialVersionUID = -8869148464118507846L;
+
+    /** The chronology to wrap. */
+    private final Chronology iChronology;
+    /** The value to skip. */
+    private final int iSkip;
+    /** The calculated minimum value. */
+    private transient int iMinValue;
+
+    /**
+     * Constructor that skips zero.
+     * 
+     * @param chronology  the chronology to use
+     * @param field  the field to skip zero on
+     */
+    public SkipDateTimeField(Chronology chronology, DateTimeField field) {
+<span class="fc" id="L54">        this(chronology, field, 0);</span>
+<span class="fc" id="L55">    }</span>
+
+    /**
+     * Constructor.
+     * 
+     * @param chronology  the chronology to use
+     * @param field  the field to skip zero on
+     * @param skip  the value to skip
+     */
+    public SkipDateTimeField(Chronology chronology, DateTimeField field, int skip) {
+<span class="fc" id="L65">        super(field);</span>
+<span class="fc" id="L66">        iChronology = chronology;</span>
+<span class="fc" id="L67">        int min = super.getMinimumValue();</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (min &lt; skip) {</span>
+<span class="fc" id="L69">            iMinValue = min - 1;</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        } else if (min == skip) {</span>
+<span class="nc" id="L71">            iMinValue = skip + 1;</span>
+        } else {
+<span class="nc" id="L73">            iMinValue = min;</span>
+        }
+<span class="fc" id="L75">        iSkip = skip;</span>
+<span class="fc" id="L76">    }</span>
+
+    //-----------------------------------------------------------------------
+    public int get(long millis) {
+<span class="fc" id="L80">        int value = super.get(millis);</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        if (value &lt;= iSkip) {</span>
+<span class="fc" id="L82">            value--;</span>
+        }
+<span class="fc" id="L84">        return value;</span>
+    }
+
+    public long set(long millis, int value) {
+<span class="fc" id="L88">        FieldUtils.verifyValueBounds(this, value, iMinValue, getMaximumValue());</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        if (value &lt;= iSkip) {</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">            if (value == iSkip) {</span>
+<span class="fc" id="L91">                throw new IllegalFieldValueException</span>
+<span class="fc" id="L92">                    (DateTimeFieldType.year(), Integer.valueOf(value), null, null);</span>
+            }
+<span class="fc" id="L94">            value++;</span>
+        }
+<span class="fc" id="L96">        return super.set(millis, value);</span>
+    }
+
+    public int getMinimumValue() {
+<span class="fc" id="L100">        return iMinValue;</span>
+    }
+
+    private Object readResolve() {
+<span class="nc" id="L104">        return getType().getField(iChronology);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

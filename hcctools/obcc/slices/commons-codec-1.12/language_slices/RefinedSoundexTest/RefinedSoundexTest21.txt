@@ -1,0 +1,70 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.3% done, time left: unknown  0.7% done, time left: unknown  0.8% done, time left: unknown  0.9% done, time left: unknown  0.9% done, time left:   0:23:53    0.9% done, time left:   0:35:50  1.0% done, time left:   0:26:02  1.0% done, time left:   0:21:40  1.0% done, time left:   0:19:29  1.0% done, time left:   0:18:23  1.1% done, time left:   0:16:27  1.3% done, time left:   0:14:47  1.9% done, time left:   0:13:18  2.4% done, time left:   0:12:05  3.0% done, time left:   0:11:05  4.0% done, time left:   0:10:15  5.1% done, time left:   0:09:31  6.2% done, time left:   0:08:54  7.1% done, time left:   0:08:16  8.1% done, time left:   0:07:38  9.1% done, time left:   0:07:00 10.0% done, time left:   0:06:24 10.9% done, time left:   0:05:50 11.9% done, time left:   0:05:17 13.3% done, time left:   0:04:43 14.7% done, time left:   0:04:08 16.0% done, time left:   0:03:36 17.4% done, time left:   0:03:05 18.7% done, time left:   0:02:39 19.9% done, time left:   0:02:16 21.2% done, time left:   0:01:56 22.6% done, time left:   0:01:38 23.9% done, time left:   0:01:23 25.3% done, time left:   0:01:10 26.5% done, time left:   0:00:59 27.8% done, time left:   0:00:50 29.2% done, time left:   0:00:42 30.6% done, time left:   0:00:35 32.0% done, time left:   0:00:29 33.4% done, time left:   0:00:25 34.7% done, time left:   0:00:21 36.0% done, time left:   0:00:18 37.2% done, time left:   0:00:15 38.5% done, time left:   0:00:13 39.8% done, time left:   0:00:11 41.1% done, time left:   0:00:10 41.2% done, time left:   0:00:08 41.2% done, time left:   0:00:06 41.7% done, time left:   0:00:05 42.6% done, time left:   0:00:05 43.5% done, time left:   0:00:05 44.5% done, time left:   0:00:05 45.1% done, time left:   0:00:05 46.5% done, time left:   0:00:05 47.9% done, time left:   0:00:05 49.2% done, time left:   0:00:05 50.5% done, time left:   0:00:04 51.3% done, time left:   0:00:04 52.8% done, time left:   0:00:04 53.9% done, time left:   0:00:03 55.2% done, time left:   0:00:03 56.6% done, time left:   0:00:03 58.0% done, time left:   0:00:03 60.3% done, time left:   0:00:02 63.8% done, time left:   0:00:01 66.3% done, time left:   0:00:00 70.0% done, time left:   0:00:00 74.0% done, time left:   0:00:00 81.2% done, time left:   0:00:00 87.8% done, time left:   0:00:00 94.4% done, time left:   0:00:00 99.2% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.codec.language.RefinedSoundexTest.testEncode:70:*]:
+org.apache.commons.codec.StringEncoderAbstractTest.<init>:30 ALOAD 0
+org.apache.commons.codec.StringEncoderAbstractTest.<init>:30 INVOKEVIRTUAL org/apache/commons/codec/StringEncoderAbstractTest.createStringEncoder()Lorg/apache/commons/codec/StringEncoder;
+org.apache.commons.codec.StringEncoderAbstractTest.<init>:30 PUTFIELD org/apache/commons/codec/StringEncoderAbstractTest.stringEncoder Lorg/apache/commons/codec/StringEncoder;
+org.apache.commons.codec.StringEncoderAbstractTest.getStringEncoder:51 ALOAD 0
+org.apache.commons.codec.StringEncoderAbstractTest.getStringEncoder:51 GETFIELD org/apache/commons/codec/StringEncoderAbstractTest.stringEncoder Lorg/apache/commons/codec/StringEncoder;
+org.apache.commons.codec.StringEncoderAbstractTest.getStringEncoder:51 ARETURN
+org.apache.commons.codec.language.RefinedSoundex.encode:163 ALOAD 1
+org.apache.commons.codec.language.RefinedSoundex.encode:163 INVOKEVIRTUAL org/apache/commons/codec/language/RefinedSoundex.soundex(Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.codec.language.RefinedSoundex.encode:163 ARETURN
+org.apache.commons.codec.language.RefinedSoundex.soundex:190 ALOAD 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:190 IFNONNULL L0 true false
+org.apache.commons.codec.language.RefinedSoundex.soundex:193 ALOAD 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:193 INVOKESTATIC org/apache/commons/codec/language/SoundexUtils.clean(Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.codec.language.RefinedSoundex.soundex:193 ASTORE 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:194 ALOAD 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:194 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.codec.language.RefinedSoundex.soundex:194 IFNE L1 true false
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 ICONST_0
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 ISTORE 5
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 ILOAD 5
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 ALOAD 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 IF_ICMPGE L6 true true
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 IINC 5 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:217 INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String;
+org.apache.commons.codec.language.RefinedSoundex.soundex:217 ARETURN
+org.apache.commons.codec.language.RefinedSoundexTest.<init>:31 ALOAD 0
+org.apache.commons.codec.language.RefinedSoundexTest.<init>:31 INVOKESPECIAL org/apache/commons/codec/StringEncoderAbstractTest.<init>()V
+org.apache.commons.codec.language.RefinedSoundexTest.createStringEncoder:31 INVOKEVIRTUAL org/apache/commons/codec/language/RefinedSoundexTest.createStringEncoder()Lorg/apache/commons/codec/language/RefinedSoundex;
+org.apache.commons.codec.language.RefinedSoundexTest.createStringEncoder:31 ARETURN
+org.apache.commons.codec.language.RefinedSoundexTest.createStringEncoder:35 NEW org/apache/commons/codec/language/RefinedSoundex
+org.apache.commons.codec.language.RefinedSoundexTest.createStringEncoder:35 ARETURN
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:70 LDC "T60"
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:70 ALOAD 0
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:70 INVOKEVIRTUAL org/apache/commons/codec/language/RefinedSoundexTest.getStringEncoder()Lorg/apache/commons/codec/StringEncoder;
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:70 CHECKCAST org/apache/commons/codec/language/RefinedSoundex
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:70 LDC "the"
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:70 INVOKEVIRTUAL org/apache/commons/codec/language/RefinedSoundex.encode(Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:70 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.codec.language.SoundexUtils.clean:42 ALOAD 0
+org.apache.commons.codec.language.SoundexUtils.clean:42 IFNULL L0 false true
+org.apache.commons.codec.language.SoundexUtils.clean:42 ALOAD 0
+org.apache.commons.codec.language.SoundexUtils.clean:42 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.codec.language.SoundexUtils.clean:42 IFNE L1 true false
+org.apache.commons.codec.language.SoundexUtils.clean:45 ALOAD 0
+org.apache.commons.codec.language.SoundexUtils.clean:45 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.codec.language.SoundexUtils.clean:45 ISTORE 1
+org.apache.commons.codec.language.SoundexUtils.clean:47 ICONST_0
+org.apache.commons.codec.language.SoundexUtils.clean:47 ISTORE 3
+org.apache.commons.codec.language.SoundexUtils.clean:48 ICONST_0
+org.apache.commons.codec.language.SoundexUtils.clean:48 ISTORE 4
+org.apache.commons.codec.language.SoundexUtils.clean:48 ILOAD 4
+org.apache.commons.codec.language.SoundexUtils.clean:48 ILOAD 1
+org.apache.commons.codec.language.SoundexUtils.clean:48 IF_ICMPGE L4 true true
+org.apache.commons.codec.language.SoundexUtils.clean:48 IINC 4 1
+org.apache.commons.codec.language.SoundexUtils.clean:49 ALOAD 0
+org.apache.commons.codec.language.SoundexUtils.clean:49 ILOAD 4
+org.apache.commons.codec.language.SoundexUtils.clean:49 INVOKEVIRTUAL java/lang/String.charAt(I)C
+org.apache.commons.codec.language.SoundexUtils.clean:49 INVOKESTATIC java/lang/Character.isLetter(C)Z
+org.apache.commons.codec.language.SoundexUtils.clean:49 IFEQ L3 false true
+org.apache.commons.codec.language.SoundexUtils.clean:50 IINC 3 1
+org.apache.commons.codec.language.SoundexUtils.clean:53 ILOAD 3
+org.apache.commons.codec.language.SoundexUtils.clean:53 ILOAD 1
+org.apache.commons.codec.language.SoundexUtils.clean:53 IF_ICMPNE L5 false true
+org.apache.commons.codec.language.SoundexUtils.clean:54 ARETURN
+
+Slice consists of 6081 bytecode instructions.
+Computation took 7.99 seconds.

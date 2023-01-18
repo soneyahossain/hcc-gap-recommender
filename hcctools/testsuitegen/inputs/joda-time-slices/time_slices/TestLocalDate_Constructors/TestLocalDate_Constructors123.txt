@@ -1,0 +1,73 @@
+ 0.0% done, time left: unknown                                0.3% done, time left: unknown  1.1% done, time left: unknown  2.7% done, time left: unknown  3.7% done, time left: unknown  4.6% done, time left: unknown  6.4% done, time left: unknown  7.8% done, time left:   0:00:06    8.8% done, time left:   0:00:07  9.3% done, time left:   0:00:08  9.3% done, time left:   0:00:09  9.8% done, time left:   0:00:10  9.9% done, time left:   0:00:11  9.9% done, time left:   0:00:12 10.1% done, time left:   0:00:13 10.7% done, time left:   0:00:13 11.7% done, time left:   0:00:15 12.6% done, time left:   0:00:16 13.5% done, time left:   0:00:17 15.0% done, time left:   0:00:18 16.7% done, time left:   0:00:18 18.4% done, time left:   0:00:17 20.1% done, time left:   0:00:15 21.2% done, time left:   0:00:14 23.1% done, time left:   0:00:13 25.8% done, time left:   0:00:11 28.7% done, time left:   0:00:08 31.3% done, time left:   0:00:06 34.7% done, time left:   0:00:04 37.5% done, time left:   0:00:03 41.3% done, time left:   0:00:02 45.5% done, time left:   0:00:01 49.5% done, time left:   0:00:01 53.7% done, time left:   0:00:01 58.0% done, time left:   0:00:00 59.1% done, time left:   0:00:00 59.9% done, time left:   0:00:00 60.4% done, time left:   0:00:00 63.7% done, time left:   0:00:00 67.3% done, time left:   0:00:00 69.4% done, time left:   0:00:00 72.2% done, time left:   0:00:00 73.6% done, time left:   0:00:00 76.0% done, time left:   0:00:00 76.2% done, time left:   0:00:00 76.5% done, time left:   0:00:00 78.9% done, time left:   0:00:00 82.9% done, time left:   0:00:00 84.4% done, time left:   0:00:00 85.8% done, time left:   0:00:00 89.8% done, time left:   0:00:00 93.9% done, time left:   0:00:00 96.1% done, time left:   0:00:00 98.1% done, time left:   0:00:00 98.2% done, time left:   0:00:00 99.1% done, time left:   0:00:00 99.9% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:519:*]:
+org.joda.time.LocalDate.<init>:388 ALOAD 0
+org.joda.time.LocalDate.<init>:388 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.<init>:388 PUTFIELD org/joda/time/LocalDate.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.<init>:390 ALOAD 0
+org.joda.time.LocalDate.<init>:390 ALOAD 0
+org.joda.time.LocalDate.<init>:390 GETFIELD org/joda/time/LocalDate.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.<init>:390 INVOKEVIRTUAL org/joda/time/Chronology.getDateTimeMillis(IIII)J
+org.joda.time.LocalDate.<init>:390 PUTFIELD org/joda/time/LocalDate.iLocalMillis J
+org.joda.time.LocalDate.getLocalMillis:610 ALOAD 0
+org.joda.time.LocalDate.getLocalMillis:610 GETFIELD org/joda/time/LocalDate.iLocalMillis J
+org.joda.time.LocalDate.getLocalMillis:610 LRETURN
+org.joda.time.LocalDate.getChronology:619 ALOAD 0
+org.joda.time.LocalDate.getChronology:619 GETFIELD org/joda/time/LocalDate.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.getChronology:619 ARETURN
+org.joda.time.LocalDate.getYear:1475 ALOAD 0
+org.joda.time.LocalDate.getYear:1475 INVOKEVIRTUAL org/joda/time/LocalDate.getLocalMillis()J
+org.joda.time.LocalDate.getYear:1475 INVOKEVIRTUAL org/joda/time/DateTimeField.get(J)I
+org.joda.time.LocalDate.getYear:1475 IRETURN
+org.joda.time.TestLocalDate_Constructors.main:107 INVOKEVIRTUAL org/joda/time/TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone()V
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:517 NEW org/joda/time/LocalDate
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:517 DUP
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:517 ACONST_NULL
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:517 INVOKESPECIAL org/joda/time/LocalDate.<init>(Ljava/lang/Object;Lorg/joda/time/DateTimeZone;)V
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:517 ASTORE 2
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:518 ALOAD 2
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:518 INVOKEVIRTUAL org/joda/time/LocalDate.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:519 LDC 1970
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:519 ALOAD 2
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:519 INVOKEVIRTUAL org/joda/time/LocalDate.getYear()I
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:519 I2L
+org.joda.time.TestLocalDate_Constructors.testConstructor_Object_nullDateTimeZone:519 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 DUP
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 ASTORE 5
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 GETFIELD org/joda/time/chrono/AssembledChronology.iBaseFlags I
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 BIPUSH 6
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 IAND
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 BIPUSH 6
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:118 IF_ICMPNE L0 false true
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:120 ALOAD 5
+org.joda.time.chrono.AssembledChronology.getDateTimeMillis:120 LRETURN
+org.joda.time.chrono.BasicChronology.getYear:427 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.getAverageMillisPerYearDividedByTwo()J
+org.joda.time.chrono.BasicChronology.getYear:427 LSTORE 3
+org.joda.time.chrono.BasicChronology.getYear:428 LLOAD 1
+org.joda.time.chrono.BasicChronology.getYear:428 ICONST_1
+org.joda.time.chrono.BasicChronology.getYear:428 LSHR
+org.joda.time.chrono.BasicChronology.getYear:428 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.getApproxMillisAtEpochDividedByTwo()J
+org.joda.time.chrono.BasicChronology.getYear:428 LADD
+org.joda.time.chrono.BasicChronology.getYear:428 LSTORE 5
+org.joda.time.chrono.BasicChronology.getYear:432 LLOAD 5
+org.joda.time.chrono.BasicChronology.getYear:432 LLOAD 3
+org.joda.time.chrono.BasicChronology.getYear:432 LDIV
+org.joda.time.chrono.BasicChronology.getYear:432 L2I
+org.joda.time.chrono.BasicChronology.getYear:432 ISTORE 7
+org.joda.time.chrono.BasicChronology.getYear:456 ILOAD 7
+org.joda.time.chrono.BasicChronology.getYear:456 IRETURN
+org.joda.time.chrono.BasicYearDateTimeField.get:55 LLOAD 1
+org.joda.time.chrono.BasicYearDateTimeField.get:55 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.getYear(J)I
+org.joda.time.chrono.BasicYearDateTimeField.get:55 IRETURN
+org.joda.time.chrono.GregorianChronology.getAverageMillisPerYearDividedByTwo:238 LDC 15778476000
+org.joda.time.chrono.GregorianChronology.getAverageMillisPerYearDividedByTwo:238 LRETURN
+org.joda.time.chrono.GregorianChronology.getApproxMillisAtEpochDividedByTwo:246 LDC 31083597720000
+org.joda.time.chrono.GregorianChronology.getApproxMillisAtEpochDividedByTwo:246 LRETURN
+org.joda.time.chrono.ISOChronology.withUTC:121 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.withUTC:121 ARETURN
+
+Slice consists of 68 bytecode instructions.
+Computation took 6.54 seconds.

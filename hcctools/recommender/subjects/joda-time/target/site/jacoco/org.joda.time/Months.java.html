@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Months.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">Months.java</span></div><h1>Months.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2010 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import org.joda.convert.FromString;
+import org.joda.convert.ToString;
+import org.joda.time.base.BaseSingleFieldPeriod;
+import org.joda.time.field.FieldUtils;
+import org.joda.time.format.ISOPeriodFormat;
+import org.joda.time.format.PeriodFormatter;
+
+/**
+ * An immutable time period representing a number of months.
+ * &lt;p&gt;
+ * &lt;code&gt;Months&lt;/code&gt; is an immutable period that can only store months.
+ * It does not store years, days or hours for example. As such it is a
+ * type-safe way of representing a number of months in an application.
+ * &lt;p&gt;
+ * The number of months is set in the constructor, and may be queried using
+ * &lt;code&gt;getMonths()&lt;/code&gt;. Basic mathematical operations are provided -
+ * &lt;code&gt;plus()&lt;/code&gt;, &lt;code&gt;minus()&lt;/code&gt;, &lt;code&gt;multipliedBy()&lt;/code&gt; and
+ * &lt;code&gt;dividedBy()&lt;/code&gt;.
+ * &lt;p&gt;
+ * &lt;code&gt;Months&lt;/code&gt; is thread-safe and immutable.
+ *
+ * @author Stephen Colebourne
+ * @since 1.4
+ */
+public final class Months extends BaseSingleFieldPeriod {
+
+    /** Constant representing zero months. */
+<span class="fc" id="L45">    public static final Months ZERO = new Months(0);</span>
+    /** Constant representing one month. */
+<span class="fc" id="L47">    public static final Months ONE = new Months(1);</span>
+    /** Constant representing two months. */
+<span class="fc" id="L49">    public static final Months TWO = new Months(2);</span>
+    /** Constant representing three months. */
+<span class="fc" id="L51">    public static final Months THREE = new Months(3);</span>
+    /** Constant representing four months. */
+<span class="fc" id="L53">    public static final Months FOUR = new Months(4);</span>
+    /** Constant representing five months. */
+<span class="fc" id="L55">    public static final Months FIVE = new Months(5);</span>
+    /** Constant representing six months. */
+<span class="fc" id="L57">    public static final Months SIX = new Months(6);</span>
+    /** Constant representing seven months. */
+<span class="fc" id="L59">    public static final Months SEVEN = new Months(7);</span>
+    /** Constant representing eight months. */
+<span class="fc" id="L61">    public static final Months EIGHT = new Months(8);</span>
+    /** Constant representing nine months. */
+<span class="fc" id="L63">    public static final Months NINE = new Months(9);</span>
+    /** Constant representing ten months. */
+<span class="fc" id="L65">    public static final Months TEN = new Months(10);</span>
+    /** Constant representing eleven months. */
+<span class="fc" id="L67">    public static final Months ELEVEN = new Months(11);</span>
+    /** Constant representing twelve months. */
+<span class="fc" id="L69">    public static final Months TWELVE = new Months(12);</span>
+    /** Constant representing the maximum number of months that can be stored in this object. */
+<span class="fc" id="L71">    public static final Months MAX_VALUE = new Months(Integer.MAX_VALUE);</span>
+    /** Constant representing the minimum number of months that can be stored in this object. */
+<span class="fc" id="L73">    public static final Months MIN_VALUE = new Months(Integer.MIN_VALUE);</span>
+
+    /** The parser to use for this class. */
+<span class="fc" id="L76">    private static final PeriodFormatter PARSER = ISOPeriodFormat.standard().withParseType(PeriodType.months());</span>
+    /** Serialization version. */
+    private static final long serialVersionUID = 87525275727380867L;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Obtains an instance of &lt;code&gt;Months&lt;/code&gt; that may be cached.
+     * &lt;code&gt;Months&lt;/code&gt; is immutable, so instances can be cached and shared.
+     * This factory method provides access to shared instances.
+     *
+     * @param months  the number of months to obtain an instance for
+     * @return the instance of Months
+     */
+    public static Months months(int months) {
+<span class="fc bfc" id="L90" title="All 16 branches covered.">        switch (months) {</span>
+            case 0:
+<span class="fc" id="L92">                return ZERO;</span>
+            case 1:
+<span class="fc" id="L94">                return ONE;</span>
+            case 2:
+<span class="fc" id="L96">                return TWO;</span>
+            case 3:
+<span class="fc" id="L98">                return THREE;</span>
+            case 4:
+<span class="fc" id="L100">                return FOUR;</span>
+            case 5:
+<span class="fc" id="L102">                return FIVE;</span>
+            case 6:
+<span class="fc" id="L104">                return SIX;</span>
+            case 7:
+<span class="fc" id="L106">                return SEVEN;</span>
+            case 8:
+<span class="fc" id="L108">                return EIGHT;</span>
+            case 9:
+<span class="fc" id="L110">                return NINE;</span>
+            case 10:
+<span class="fc" id="L112">                return TEN;</span>
+            case 11:
+<span class="fc" id="L114">                return ELEVEN;</span>
+            case 12:
+<span class="fc" id="L116">                return TWELVE;</span>
+            case Integer.MAX_VALUE:
+<span class="fc" id="L118">                return MAX_VALUE;</span>
+            case Integer.MIN_VALUE:
+<span class="fc" id="L120">                return MIN_VALUE;</span>
+            default:
+<span class="fc" id="L122">                return new Months(months);</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a &lt;code&gt;Months&lt;/code&gt; representing the number of whole months
+     * between the two specified datetimes. This method correctly handles
+     * any daylight savings time changes that may occur during the interval.
+     * &lt;p&gt;
+     * This method calculates by adding months to the start date until the result
+     * is past the end date. As such, a period from the end of a &quot;long&quot; month to
+     * the end of a &quot;short&quot; month is counted as a whole month.
+     *
+     * @param start  the start instant, must not be null
+     * @param end  the end instant, must not be null
+     * @return the period in months
+     * @throws IllegalArgumentException if the instants are null or invalid
+     */
+    public static Months monthsBetween(ReadableInstant start, ReadableInstant end) {
+<span class="fc" id="L142">        int amount = BaseSingleFieldPeriod.between(start, end, DurationFieldType.months());</span>
+<span class="fc" id="L143">        return Months.months(amount);</span>
+    }
+
+    /**
+     * Creates a &lt;code&gt;Months&lt;/code&gt; representing the number of whole months
+     * between the two specified partial datetimes.
+     * &lt;p&gt;
+     * The two partials must contain the same fields, for example you can specify
+     * two &lt;code&gt;LocalDate&lt;/code&gt; objects.
+     * &lt;p&gt;
+     * This method calculates by adding months to the start date until the result
+     * is past the end date. As such, a period from the end of a &quot;long&quot; month to
+     * the end of a &quot;short&quot; month is counted as a whole month.
+     *
+     * @param start  the start partial date, must not be null
+     * @param end  the end partial date, must not be null
+     * @return the period in months
+     * @throws IllegalArgumentException if the partials are null or invalid
+     */
+    public static Months monthsBetween(ReadablePartial start, ReadablePartial end) {
+<span class="fc bfc" id="L163" title="All 4 branches covered.">        if (start instanceof LocalDate &amp;&amp; end instanceof LocalDate)   {</span>
+<span class="fc" id="L164">            Chronology chrono = DateTimeUtils.getChronology(start.getChronology());</span>
+<span class="fc" id="L165">            int months = chrono.months().getDifference(</span>
+<span class="fc" id="L166">                    ((LocalDate) end).getLocalMillis(), ((LocalDate) start).getLocalMillis());</span>
+<span class="fc" id="L167">            return Months.months(months);</span>
+        }
+<span class="fc" id="L169">        int amount = BaseSingleFieldPeriod.between(start, end, ZERO);</span>
+<span class="fc" id="L170">        return Months.months(amount);</span>
+    }
+
+    /**
+     * Creates a &lt;code&gt;Months&lt;/code&gt; representing the number of whole months
+     * in the specified interval. This method correctly handles any daylight
+     * savings time changes that may occur during the interval.
+     *
+     * @param interval  the interval to extract months from, null returns zero
+     * @return the period in months
+     * @throws IllegalArgumentException if the partials are null or invalid
+     */
+    public static Months monthsIn(ReadableInterval interval) {
+<span class="fc bfc" id="L183" title="All 2 branches covered.">        if (interval == null)   {</span>
+<span class="fc" id="L184">            return Months.ZERO;</span>
+        }
+<span class="fc" id="L186">        int amount = BaseSingleFieldPeriod.between(interval.getStart(), interval.getEnd(), DurationFieldType.months());</span>
+<span class="fc" id="L187">        return Months.months(amount);</span>
+    }
+
+    /**
+     * Creates a new &lt;code&gt;Months&lt;/code&gt; by parsing a string in the ISO8601 format 'PnM'.
+     * &lt;p&gt;
+     * The parse will accept the full ISO syntax of PnYnMnWnDTnHnMnS however only the
+     * months component may be non-zero. If any other component is non-zero, an exception
+     * will be thrown.
+     *
+     * @param periodStr  the period string, null returns zero
+     * @return the period in months
+     * @throws IllegalArgumentException if the string format is invalid
+     */
+    @FromString
+    public static Months parseMonths(String periodStr) {
+<span class="fc bfc" id="L203" title="All 2 branches covered.">        if (periodStr == null) {</span>
+<span class="fc" id="L204">            return Months.ZERO;</span>
+        }
+<span class="fc" id="L206">        Period p = PARSER.parsePeriod(periodStr);</span>
+<span class="fc" id="L207">        return Months.months(p.getMonths());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a new instance representing a number of months.
+     * You should consider using the factory method {@link #months(int)}
+     * instead of the constructor.
+     *
+     * @param months  the number of months to represent
+     */
+    private Months(int months) {
+<span class="fc" id="L219">        super(months);</span>
+<span class="fc" id="L220">    }</span>
+
+    /**
+     * Resolves singletons.
+     * 
+     * @return the singleton instance
+     */
+    private Object readResolve() {
+<span class="fc" id="L228">        return Months.months(getValue());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the duration field type, which is &lt;code&gt;months&lt;/code&gt;.
+     *
+     * @return the period type
+     */
+    public DurationFieldType getFieldType() {
+<span class="fc" id="L238">        return DurationFieldType.months();</span>
+    }
+
+    /**
+     * Gets the period type, which is &lt;code&gt;months&lt;/code&gt;.
+     *
+     * @return the period type
+     */
+    public PeriodType getPeriodType() {
+<span class="fc" id="L247">        return PeriodType.months();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the number of months that this period represents.
+     *
+     * @return the number of months in the period
+     */
+    public int getMonths() {
+<span class="fc" id="L257">        return getValue();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the specified number of months added.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param months  the amount of months to add, may be negative
+     * @return the new period plus the specified number of months
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Months plus(int months) {
+<span class="fc bfc" id="L271" title="All 2 branches covered.">        if (months == 0) {</span>
+<span class="fc" id="L272">            return this;</span>
+        }
+<span class="fc" id="L274">        return Months.months(FieldUtils.safeAdd(getValue(), months));</span>
+    }
+
+    /**
+     * Returns a new instance with the specified number of months added.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param months  the amount of months to add, may be negative, null means zero
+     * @return the new period plus the specified number of months
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Months plus(Months months) {
+<span class="fc bfc" id="L287" title="All 2 branches covered.">        if (months == null) {</span>
+<span class="fc" id="L288">            return this;</span>
+        }
+<span class="fc" id="L290">        return plus(months.getValue());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the specified number of months taken away.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param months  the amount of months to take away, may be negative
+     * @return the new period minus the specified number of months
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Months minus(int months) {
+<span class="fc" id="L304">        return plus(FieldUtils.safeNegate(months));</span>
+    }
+
+    /**
+     * Returns a new instance with the specified number of months taken away.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param months  the amount of months to take away, may be negative, null means zero
+     * @return the new period minus the specified number of months
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Months minus(Months months) {
+<span class="fc bfc" id="L317" title="All 2 branches covered.">        if (months == null) {</span>
+<span class="fc" id="L318">            return this;</span>
+        }
+<span class="fc" id="L320">        return minus(months.getValue());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the months multiplied by the specified scalar.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param scalar  the amount to multiply by, may be negative
+     * @return the new period multiplied by the specified scalar
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Months multipliedBy(int scalar) {
+<span class="fc" id="L334">        return Months.months(FieldUtils.safeMultiply(getValue(), scalar));</span>
+    }
+
+    /**
+     * Returns a new instance with the months divided by the specified divisor.
+     * The calculation uses integer division, thus 3 divided by 2 is 1.
+     * &lt;p&gt;
+     * This instance is immutable and unaffected by this method call.
+     *
+     * @param divisor  the amount to divide by, may be negative
+     * @return the new period divided by the specified divisor
+     * @throws ArithmeticException if the divisor is zero
+     */
+    public Months dividedBy(int divisor) {
+<span class="fc bfc" id="L348" title="All 2 branches covered.">        if (divisor == 1) {</span>
+<span class="fc" id="L349">            return this;</span>
+        }
+<span class="fc" id="L351">        return Months.months(getValue() / divisor);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new instance with the months value negated.
+     *
+     * @return the new period with a negated value
+     * @throws ArithmeticException if the result overflows an int
+     */
+    public Months negated() {
+<span class="fc" id="L362">        return Months.months(FieldUtils.safeNegate(getValue()));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Is this months instance greater than the specified number of months.
+     *
+     * @param other  the other period, null means zero
+     * @return true if this months instance is greater than the specified one
+     */
+    public boolean isGreaterThan(Months other) {
+<span class="fc bfc" id="L373" title="All 2 branches covered.">        if (other == null) {</span>
+<span class="fc bfc" id="L374" title="All 2 branches covered.">            return getValue() &gt; 0;</span>
+        }
+<span class="fc bfc" id="L376" title="All 2 branches covered.">        return getValue() &gt; other.getValue();</span>
+    }
+
+    /**
+     * Is this months instance less than the specified number of months.
+     *
+     * @param other  the other period, null means zero
+     * @return true if this months instance is less than the specified one
+     */
+    public boolean isLessThan(Months other) {
+<span class="fc bfc" id="L386" title="All 2 branches covered.">        if (other == null) {</span>
+<span class="fc bfc" id="L387" title="All 2 branches covered.">            return getValue() &lt; 0;</span>
+        }
+<span class="fc bfc" id="L389" title="All 2 branches covered.">        return getValue() &lt; other.getValue();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets this instance as a String in the ISO8601 duration format.
+     * &lt;p&gt;
+     * For example, &quot;P4M&quot; represents 4 months.
+     *
+     * @return the value as an ISO8601 string
+     */
+    @ToString
+    public String toString() {
+<span class="fc" id="L402">        return &quot;P&quot; + String.valueOf(getValue()) + &quot;M&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

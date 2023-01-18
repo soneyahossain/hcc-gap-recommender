@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BaseDuration.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.base</a> &gt; <span class="el_source">BaseDuration.java</span></div><h1>BaseDuration.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2011 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.base;
+
+import java.io.Serializable;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.Interval;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
+import org.joda.time.ReadableDuration;
+import org.joda.time.ReadableInstant;
+import org.joda.time.convert.ConverterManager;
+import org.joda.time.convert.DurationConverter;
+import org.joda.time.field.FieldUtils;
+
+/**
+ * BaseDuration is an abstract implementation of ReadableDuration that stores
+ * data in a &lt;code&gt;long&lt;/code&gt; duration milliseconds field.
+ * &lt;p&gt;
+ * This class should generally not be used directly by API users.
+ * The {@link ReadableDuration} interface should be used when different 
+ * kinds of duration objects are to be referenced.
+ * &lt;p&gt;
+ * BaseDuration subclasses may be mutable and not thread-safe.
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+public abstract class BaseDuration
+        extends AbstractDuration
+        implements ReadableDuration, Serializable {
+
+    /** Serialization version */
+    private static final long serialVersionUID = 2581698638990L;
+
+    /** The duration length */
+    private volatile long iMillis;
+
+    /**
+     * Creates a duration from the given millisecond duration.
+     *
+     * @param duration  the duration, in milliseconds
+     */
+    protected BaseDuration(long duration) {
+<span class="fc" id="L61">        super();</span>
+<span class="fc" id="L62">        iMillis = duration;</span>
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Creates a duration from the given interval endpoints.
+     *
+     * @param startInstant  interval start, in milliseconds
+     * @param endInstant  interval end, in milliseconds
+     * @throws ArithmeticException if the duration exceeds a 64-bit long
+     */
+    protected BaseDuration(long startInstant, long endInstant) {
+<span class="fc" id="L73">        super();</span>
+<span class="fc" id="L74">        iMillis = FieldUtils.safeSubtract(endInstant, startInstant);</span>
+<span class="fc" id="L75">    }</span>
+
+    /**
+     * Creates a duration from the given interval endpoints.
+     *
+     * @param start  interval start, null means now
+     * @param end  interval end, null means now
+     * @throws ArithmeticException if the duration exceeds a 64-bit long
+     */
+    protected BaseDuration(ReadableInstant start, ReadableInstant end) {
+<span class="fc" id="L85">        super();</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (start == end) {</span>
+<span class="fc" id="L87">            iMillis = 0L;</span>
+        } else {
+<span class="fc" id="L89">            long startMillis = DateTimeUtils.getInstantMillis(start);</span>
+<span class="fc" id="L90">            long endMillis = DateTimeUtils.getInstantMillis(end);</span>
+<span class="fc" id="L91">            iMillis = FieldUtils.safeSubtract(endMillis, startMillis);</span>
+        }
+<span class="fc" id="L93">    }</span>
+
+    /**
+     * Creates a duration from the specified object using the
+     * {@link org.joda.time.convert.ConverterManager ConverterManager}.
+     *
+     * @param duration  duration to convert
+     * @throws IllegalArgumentException if duration is invalid
+     */
+    protected BaseDuration(Object duration) {
+<span class="fc" id="L103">        super();</span>
+<span class="fc" id="L104">        DurationConverter converter = ConverterManager.getInstance().getDurationConverter(duration);</span>
+<span class="fc" id="L105">        iMillis = converter.getDurationMillis(duration);</span>
+<span class="fc" id="L106">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the length of this duration in milliseconds.
+     *
+     * @return the length of the duration in milliseconds.
+     */
+    public long getMillis() {
+<span class="fc" id="L115">        return iMillis;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Sets the length of this duration in milliseconds.
+     * 
+     * @param duration  the new length of the duration
+     */
+    protected void setMillis(long duration) {
+<span class="fc" id="L125">        iMillis = duration;</span>
+<span class="fc" id="L126">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Converts this duration to a Period instance using the specified period type
+     * and the ISO chronology.
+     * &lt;p&gt;
+     * Only precise fields in the period type will be used.
+     * At most these are hours, minutes, seconds and millis - the period
+     * type may restrict the selection further.
+     * &lt;p&gt;
+     * For more control over the conversion process, you must pair the duration with
+     * an instant, see {@link #toPeriodFrom(ReadableInstant, PeriodType)}.
+     * 
+     * @param type  the period type to use, null means standard
+     * @return a Period created using the millisecond duration from this instance
+     */
+    public Period toPeriod(PeriodType type) {
+<span class="fc" id="L144">        return new Period(getMillis(), type);</span>
+    }
+
+    /**
+     * Converts this duration to a Period instance using the standard period type
+     * and the specified chronology.
+     * &lt;p&gt;
+     * Only precise fields in the period type will be used.
+     * Exactly which fields are precise depends on the chronology.
+     * Only the time fields are precise for ISO chronology with a time zone.
+     * However, ISO UTC also has precise days and weeks.
+     * &lt;p&gt;
+     * For more control over the conversion process, you must pair the duration with
+     * an instant, see {@link #toPeriodFrom(ReadableInstant)} and
+     * {@link #toPeriodTo(ReadableInstant)}
+     * 
+     * @param chrono  the chronology to use, null means ISO default
+     * @return a Period created using the millisecond duration from this instance
+     */
+    public Period toPeriod(Chronology chrono) {
+<span class="fc" id="L164">        return new Period(getMillis(), chrono);</span>
+    }
+
+    /**
+     * Converts this duration to a Period instance using the specified period type
+     * and chronology.
+     * &lt;p&gt;
+     * Only precise fields in the period type will be used.
+     * Exactly which fields are precise depends on the chronology.
+     * Only the time fields are precise for ISO chronology with a time zone.
+     * However, ISO UTC also has precise days and weeks.
+     * &lt;p&gt;
+     * For more control over the conversion process, you must pair the duration with
+     * an instant, see {@link #toPeriodFrom(ReadableInstant, PeriodType)} and
+     * {@link #toPeriodTo(ReadableInstant, PeriodType)}
+     * 
+     * @param type  the period type to use, null means standard
+     * @param chrono  the chronology to use, null means ISO default
+     * @return a Period created using the millisecond duration from this instance
+     */
+    public Period toPeriod(PeriodType type, Chronology chrono) {
+<span class="fc" id="L185">        return new Period(getMillis(), type, chrono);</span>
+    }
+
+    /**
+     * Converts this duration to a Period instance by adding the duration to a start
+     * instant to obtain an interval using the standard period type.
+     * &lt;p&gt;
+     * This conversion will determine the fields of a period accurately.
+     * The results are based on the instant millis, the chronology of the instant,
+     * the standard period type and the length of this duration.
+     * 
+     * @param startInstant  the instant to calculate the period from, null means now
+     * @return a Period created using the millisecond duration from this instance
+     */
+    public Period toPeriodFrom(ReadableInstant startInstant) {
+<span class="fc" id="L200">        return new Period(startInstant, this);</span>
+    }
+
+    /**
+     * Converts this duration to a Period instance by adding the duration to a start
+     * instant to obtain an interval.
+     * &lt;p&gt;
+     * This conversion will determine the fields of a period accurately.
+     * The results are based on the instant millis, the chronology of the instant,
+     * the period type and the length of this duration.
+     * 
+     * @param startInstant  the instant to calculate the period from, null means now
+     * @param type  the period type determining how to split the duration into fields, null means All type
+     * @return a Period created using the millisecond duration from this instance
+     */
+    public Period toPeriodFrom(ReadableInstant startInstant, PeriodType type) {
+<span class="fc" id="L216">        return new Period(startInstant, this, type);</span>
+    }
+
+    /**
+     * Converts this duration to a Period instance by subtracting the duration
+     * from an end instant to obtain an interval using the standard period
+     * type.
+     * &lt;p&gt;
+     * This conversion will determine the fields of a period accurately.
+     * The results are based on the instant millis, the chronology of the instant,
+     * the standard period type and the length of this duration.
+     * 
+     * @param endInstant  the instant to calculate the period to, null means now
+     * @return a Period created using the millisecond duration from this instance
+     */
+    public Period toPeriodTo(ReadableInstant endInstant) {
+<span class="fc" id="L232">        return new Period(this, endInstant);</span>
+    }
+
+    /**
+     * Converts this duration to a Period instance by subtracting the duration
+     * from an end instant to obtain an interval using the standard period
+     * type.
+     * &lt;p&gt;
+     * This conversion will determine the fields of a period accurately.
+     * The results are based on the instant millis, the chronology of the instant,
+     * the period type and the length of this duration.
+     * 
+     * @param endInstant  the instant to calculate the period to, null means now
+     * @param type  the period type determining how to split the duration into fields, null means All type
+     * @return a Period created using the millisecond duration from this instance
+     */
+    public Period toPeriodTo(ReadableInstant endInstant, PeriodType type) {
+<span class="fc" id="L249">        return new Period(this, endInstant, type);</span>
+    }
+
+    /**
+     * Converts this duration to an Interval starting at the specified instant.
+     * 
+     * @param startInstant  the instant to start the interval at, null means now
+     * @return an Interval starting at the specified instant
+     */
+    public Interval toIntervalFrom(ReadableInstant startInstant) {
+<span class="fc" id="L259">        return new Interval(startInstant, this);</span>
+    }
+
+    /**
+     * Converts this duration to an Interval ending at the specified instant.
+     * 
+     * @param endInstant  the instant to end the interval at, null means now
+     * @return an Interval ending at the specified instant
+     */
+    public Interval toIntervalTo(ReadableInstant endInstant) {
+<span class="fc" id="L269">        return new Interval(this, endInstant);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

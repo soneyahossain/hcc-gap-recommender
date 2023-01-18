@@ -1,0 +1,80 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  0.7% done, time left: unknown  1.0% done, time left: unknown  1.1% done, time left: unknown  1.2% done, time left: unknown  1.5% done, time left: unknown  2.1% done, time left: unknown  3.1% done, time left: unknown  4.0% done, time left: unknown  4.9% done, time left: unknown  5.9% done, time left: unknown  6.9% done, time left: unknown  8.5% done, time left: unknown  9.7% done, time left: unknown 10.2% done, time left: unknown 10.4% done, time left: unknown 11.1% done, time left: unknown 12.3% done, time left: unknown 13.7% done, time left: unknown 14.7% done, time left: unknown 15.1% done, time left: unknown 15.6% done, time left: unknown 16.2% done, time left: unknown 17.1% done, time left: unknown 18.3% done, time left: unknown 19.7% done, time left: unknown 22.5% done, time left: unknown 28.3% done, time left: unknown 31.3% done, time left: unknown 32.6% done, time left: unknown 33.9% done, time left: unknown 35.2% done, time left: unknown 36.4% done, time left: unknown 37.6% done, time left: unknown 38.4% done, time left: unknown 38.5% done, time left: unknown 39.2% done, time left: unknown 40.6% done, time left: unknown 41.9% done, time left: unknown 43.3% done, time left: unknown 44.7% done, time left: unknown 46.1% done, time left: unknown 47.5% done, time left: unknown 49.0% done, time left: unknown 50.3% done, time left: unknown 51.6% done, time left: unknown 52.7% done, time left: unknown 53.9% done, time left: unknown 55.3% done, time left: unknown 56.7% done, time left: unknown 58.1% done, time left: unknown 59.5% done, time left: unknown 60.0% done, time left: unknown 61.3% done, time left: unknown 62.7% done, time left: unknown 64.3% done, time left: unknown 65.9% done, time left: unknown 67.4% done, time left: unknown 68.8% done, time left: unknown 70.5% done, time left: unknown 71.8% done, time left: unknown 73.1% done, time left: unknown 74.4% done, time left: unknown 75.7% done, time left: unknown 77.1% done, time left: unknown 78.4% done, time left: unknown 79.7% done, time left: unknown 81.0% done, time left: unknown 82.3% done, time left: unknown 83.6% done, time left: unknown 84.9% done, time left: unknown 86.2% done, time left: unknown 87.5% done, time left:   0:00:00   88.6% done, time left:   0:00:00 89.7% done, time left:   0:00:00 90.9% done, time left:   0:00:00 91.7% done, time left:   0:00:00 92.9% done, time left:   0:00:00 94.1% done, time left:   0:00:00 95.4% done, time left:   0:00:00 96.5% done, time left:   0:00:00 97.4% done, time left:   0:00:00 98.2% done, time left:   0:00:00 99.0% done, time left:   0:00:00 99.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:623:*]:
+org.joda.time.DateTimeUtils.currentTimeMillis:72 GETSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils.currentTimeMillis:72 INVOKEINTERFACE org/joda/time/DateTimeUtils$MillisProvider.getMillis()J
+org.joda.time.DateTimeUtils.currentTimeMillis:72 LRETURN
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 NEW org/joda/time/DateTimeUtils$FixedMillisProvider
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 DUP
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 LLOAD 0
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 INVOKESPECIAL org/joda/time/DateTimeUtils$FixedMillisProvider.<init>(J)V
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 PUTSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils.getInstantMillis:162 ALOAD 0
+org.joda.time.DateTimeUtils.getInstantMillis:162 IFNONNULL L0 false true
+org.joda.time.DateTimeUtils.getInstantMillis:163 INVOKESTATIC org/joda/time/DateTimeUtils.currentTimeMillis()J
+org.joda.time.DateTimeUtils.getInstantMillis:163 LRETURN
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 ALOAD 0
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 LLOAD 1
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 PUTFIELD org/joda/time/DateTimeUtils$FixedMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 ALOAD 0
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 GETFIELD org/joda/time/DateTimeUtils$FixedMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 LRETURN
+org.joda.time.Interval.<init>:211 ALOAD 0
+org.joda.time.Interval.<init>:211 ALOAD 1
+org.joda.time.Interval.<init>:211 INVOKESPECIAL org/joda/time/base/BaseInterval.<init>(Lorg/joda/time/ReadableInstant;Lorg/joda/time/ReadableDuration;)V
+org.joda.time.TestInterval_Constructors.<init>:44 ALOAD 0
+org.joda.time.TestInterval_Constructors.<init>:44 LDC 11688
+org.joda.time.TestInterval_Constructors.<init>:44 PUTFIELD org/joda/time/TestInterval_Constructors.y2002days J
+org.joda.time.TestInterval_Constructors.<init>:54 ALOAD 0
+org.joda.time.TestInterval_Constructors.<init>:54 ALOAD 0
+org.joda.time.TestInterval_Constructors.<init>:54 GETFIELD org/joda/time/TestInterval_Constructors.y2002days J
+org.joda.time.TestInterval_Constructors.<init>:54 LDC 31
+org.joda.time.TestInterval_Constructors.<init>:54 LADD
+org.joda.time.TestInterval_Constructors.<init>:54 LDC 28
+org.joda.time.TestInterval_Constructors.<init>:54 LADD
+org.joda.time.TestInterval_Constructors.<init>:54 LDC 31
+org.joda.time.TestInterval_Constructors.<init>:54 LADD
+org.joda.time.TestInterval_Constructors.<init>:54 LDC 30
+org.joda.time.TestInterval_Constructors.<init>:54 LADD
+org.joda.time.TestInterval_Constructors.<init>:54 LDC 31
+org.joda.time.TestInterval_Constructors.<init>:54 LADD
+org.joda.time.TestInterval_Constructors.<init>:54 LDC 9
+org.joda.time.TestInterval_Constructors.<init>:54 LADD
+org.joda.time.TestInterval_Constructors.<init>:54 LCONST_1
+org.joda.time.TestInterval_Constructors.<init>:54 LSUB
+org.joda.time.TestInterval_Constructors.<init>:54 LDC 86400000
+org.joda.time.TestInterval_Constructors.<init>:54 LMUL
+org.joda.time.TestInterval_Constructors.<init>:54 PUTFIELD org/joda/time/TestInterval_Constructors.TEST_TIME_NOW J
+org.joda.time.TestInterval_Constructors.main:74 NEW org/joda/time/TestInterval_Constructors
+org.joda.time.TestInterval_Constructors.main:74 DUP
+org.joda.time.TestInterval_Constructors.main:74 INVOKESPECIAL org/joda/time/TestInterval_Constructors.<init>()V
+org.joda.time.TestInterval_Constructors.main:74 ASTORE 1
+org.joda.time.TestInterval_Constructors.main:120 ALOAD 1
+org.joda.time.TestInterval_Constructors.main:120 INVOKEVIRTUAL org/joda/time/TestInterval_Constructors.setUp()V
+org.joda.time.TestInterval_Constructors.main:120 ALOAD 1
+org.joda.time.TestInterval_Constructors.main:120 INVOKEVIRTUAL org/joda/time/TestInterval_Constructors.testConstructor_RI_RD4()V
+org.joda.time.TestInterval_Constructors.setUp:149 ALOAD 0
+org.joda.time.TestInterval_Constructors.setUp:149 GETFIELD org/joda/time/TestInterval_Constructors.TEST_TIME_NOW J
+org.joda.time.TestInterval_Constructors.setUp:149 INVOKESTATIC org/joda/time/DateTimeUtils.setCurrentMillisFixed(J)V
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:620 NEW org/joda/time/Duration
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:620 ASTORE 3
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:622 NEW org/joda/time/Interval
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:622 DUP
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:622 ACONST_NULL
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:622 ALOAD 3
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:622 INVOKESPECIAL org/joda/time/Interval.<init>(Lorg/joda/time/ReadableInstant;Lorg/joda/time/ReadableDuration;)V
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:622 ASTORE 4
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:623 ALOAD 0
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:623 GETFIELD org/joda/time/TestInterval_Constructors.TEST_TIME_NOW J
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:623 ALOAD 4
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:623 INVOKEVIRTUAL org/joda/time/Interval.getStartMillis()J
+org.joda.time.TestInterval_Constructors.testConstructor_RI_RD4:623 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.BaseInterval.<init>:109 ALOAD 0
+org.joda.time.base.BaseInterval.<init>:109 ALOAD 1
+org.joda.time.base.BaseInterval.<init>:109 INVOKESTATIC org/joda/time/DateTimeUtils.getInstantMillis(Lorg/joda/time/ReadableInstant;)J
+org.joda.time.base.BaseInterval.<init>:109 PUTFIELD org/joda/time/base/BaseInterval.iStartMillis J
+org.joda.time.base.BaseInterval.getStartMillis:225 ALOAD 0
+org.joda.time.base.BaseInterval.getStartMillis:225 GETFIELD org/joda/time/base/BaseInterval.iStartMillis J
+org.joda.time.base.BaseInterval.getStartMillis:225 LRETURN
+
+Slice consists of 75 bytecode instructions.
+Computation took 9.90 seconds.

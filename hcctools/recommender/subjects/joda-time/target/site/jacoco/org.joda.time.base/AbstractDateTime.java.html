@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractDateTime.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.base</a> &gt; <span class="el_source">AbstractDateTime.java</span></div><h1>AbstractDateTime.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.base;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
+import org.joda.convert.ToString;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DateTimeZone;
+import org.joda.time.ReadableDateTime;
+import org.joda.time.format.DateTimeFormat;
+
+/**
+ * AbstractDateTime provides the common behaviour for datetime classes.
+ * &lt;p&gt;
+ * This class should generally not be used directly by API users.
+ * The {@link ReadableDateTime} interface should be used when different 
+ * kinds of date/time objects are to be referenced.
+ * &lt;p&gt;
+ * Whenever you want to implement &lt;code&gt;ReadableDateTime&lt;/code&gt; you should
+ * extend this class.
+ * &lt;p&gt;
+ * AbstractDateTime subclasses may be mutable and not thread-safe.
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+public abstract class AbstractDateTime
+        extends AbstractInstant
+        implements ReadableDateTime {
+
+    /**
+     * Constructor.
+     */
+    protected AbstractDateTime() {
+<span class="fc" id="L52">        super();</span>
+<span class="fc" id="L53">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the value of one of the fields of a datetime.
+     * &lt;p&gt;
+     * This method uses the chronology of the datetime to obtain the value.
+     * It is essentially a generic way of calling one of the get methods.
+     *
+     * @param type  a field type, usually obtained from DateTimeFieldType
+     * @return the value of that field
+     * @throws IllegalArgumentException if the field type is null
+     */
+    public int get(DateTimeFieldType type) {
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (type == null) {</span>
+<span class="fc" id="L68">            throw new IllegalArgumentException(&quot;The DateTimeFieldType must not be null&quot;);</span>
+        }
+<span class="fc" id="L70">        return type.getField(getChronology()).get(getMillis());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the era field value.
+     * 
+     * @return the era
+     */
+    public int getEra() {
+<span class="fc" id="L80">        return getChronology().era().get(getMillis());</span>
+    }
+
+    /**
+     * Get the year of era field value.
+     * 
+     * @return the year of era
+     */
+    public int getCenturyOfEra() {
+<span class="fc" id="L89">        return getChronology().centuryOfEra().get(getMillis());</span>
+    }
+
+    /**
+     * Get the year of era field value.
+     * 
+     * @return the year of era
+     */
+    public int getYearOfEra() {
+<span class="fc" id="L98">        return getChronology().yearOfEra().get(getMillis());</span>
+    }
+
+    /**
+     * Get the year of century field value.
+     * 
+     * @return the year of century
+     */
+    public int getYearOfCentury() {
+<span class="fc" id="L107">        return getChronology().yearOfCentury().get(getMillis());</span>
+    }
+
+    /**
+     * Get the year field value.
+     * 
+     * @return the year
+     */
+    public int getYear() {
+<span class="fc" id="L116">        return getChronology().year().get(getMillis());</span>
+    }
+
+    /**
+     * Get the weekyear field value.
+     * &lt;p&gt;
+     * The weekyear is the year that matches with the weekOfWeekyear field.
+     * In the standard ISO8601 week algorithm, the first week of the year
+     * is that in which at least 4 days are in the year. As a result of this
+     * definition, day 1 of the first week may be in the previous year.
+     * The weekyear allows you to query the effective year for that day.
+     * 
+     * @return the year of a week based year
+     */
+    public int getWeekyear() {
+<span class="fc" id="L131">        return getChronology().weekyear().get(getMillis());</span>
+    }
+
+    /**
+     * Get the month of year field value.
+     * 
+     * @return the month of year
+     */
+    public int getMonthOfYear() {
+<span class="fc" id="L140">        return getChronology().monthOfYear().get(getMillis());</span>
+    }
+
+    /**
+     * Get the week of weekyear field value.
+     * &lt;p&gt;
+     * This field is associated with the &quot;weekyear&quot; via {@link #getWeekyear()}.
+     * In the standard ISO8601 week algorithm, the first week of the year
+     * is that in which at least 4 days are in the year. As a result of this
+     * definition, day 1 of the first week may be in the previous year.
+     * 
+     * @return the week of a week based year
+     */
+    public int getWeekOfWeekyear() {
+<span class="fc" id="L154">        return getChronology().weekOfWeekyear().get(getMillis());</span>
+    }
+
+    /**
+     * Get the day of year field value.
+     * 
+     * @return the day of year
+     */
+    public int getDayOfYear() {
+<span class="fc" id="L163">        return getChronology().dayOfYear().get(getMillis());</span>
+    }
+
+    /**
+     * Get the day of month field value.
+     * &lt;p&gt;
+     * The values for the day of month are defined in {@link org.joda.time.DateTimeConstants}.
+     * 
+     * @return the day of month
+     */
+    public int getDayOfMonth() {
+<span class="fc" id="L174">        return getChronology().dayOfMonth().get(getMillis());</span>
+    }
+
+    /**
+     * Get the day of week field value.
+     * &lt;p&gt;
+     * The values for the day of week are defined in {@link org.joda.time.DateTimeConstants}.
+     * 
+     * @return the day of week
+     */
+    public int getDayOfWeek() {
+<span class="fc" id="L185">        return getChronology().dayOfWeek().get(getMillis());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the hour of day field value.
+     *
+     * @return the hour of day
+     */
+    public int getHourOfDay() {
+<span class="fc" id="L195">        return getChronology().hourOfDay().get(getMillis());</span>
+    }
+
+    /**
+     * Get the minute of day field value.
+     *
+     * @return the minute of day
+     */
+    public int getMinuteOfDay() {
+<span class="fc" id="L204">        return getChronology().minuteOfDay().get(getMillis());</span>
+    }
+
+    /**
+     * Get the minute of hour field value.
+     *
+     * @return the minute of hour
+     */
+    public int getMinuteOfHour() {
+<span class="fc" id="L213">        return getChronology().minuteOfHour().get(getMillis());</span>
+    }
+
+    /**
+     * Get the second of day field value.
+     *
+     * @return the second of day
+     */
+    public int getSecondOfDay() {
+<span class="fc" id="L222">        return getChronology().secondOfDay().get(getMillis());</span>
+    }
+
+    /**
+     * Get the second of minute field value.
+     *
+     * @return the second of minute
+     */
+    public int getSecondOfMinute() {
+<span class="fc" id="L231">        return getChronology().secondOfMinute().get(getMillis());</span>
+    }
+
+    /**
+     * Get the millis of day field value.
+     *
+     * @return the millis of day
+     */
+    public int getMillisOfDay() {
+<span class="fc" id="L240">        return getChronology().millisOfDay().get(getMillis());</span>
+    }
+
+    /**
+     * Get the millis of second field value.
+     *
+     * @return the millis of second
+     */
+    public int getMillisOfSecond() {
+<span class="fc" id="L249">        return getChronology().millisOfSecond().get(getMillis());</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the date time as a &lt;code&gt;java.util.Calendar&lt;/code&gt;, assigning
+     * exactly the same millisecond instant.
+     * The locale is passed in, enabling Calendar to select the correct
+     * localized subclass.
+     * &lt;p&gt;
+     * The JDK and Joda-Time both have time zone implementations and these
+     * differ in accuracy. Joda-Time's implementation is generally more up to
+     * date and thus more accurate - for example JDK1.3 has no historical data.
+     * The effect of this is that the field values of the &lt;code&gt;Calendar&lt;/code&gt;
+     * may differ from those of this object, even though the millisecond value
+     * is the same. Most of the time this just means that the JDK field values
+     * are wrong, as our time zone information is more up to date.
+     *
+     * @param locale  the locale to get the Calendar for, or default if null
+     * @return a localized Calendar initialised with this datetime
+     */
+    public Calendar toCalendar(Locale locale) {
+<span class="fc bfc" id="L271" title="All 2 branches covered.">        if (locale == null) {</span>
+<span class="fc" id="L272">            locale = Locale.getDefault();</span>
+        }
+<span class="fc" id="L274">        DateTimeZone zone = getZone();</span>
+<span class="fc" id="L275">        Calendar cal = Calendar.getInstance(zone.toTimeZone(), locale);</span>
+<span class="fc" id="L276">        cal.setTime(toDate());</span>
+<span class="fc" id="L277">        return cal;</span>
+    }
+
+    /**
+     * Get the date time as a &lt;code&gt;java.util.GregorianCalendar&lt;/code&gt;,
+     * assigning exactly the same millisecond instant.
+     * &lt;p&gt;
+     * The JDK and Joda-Time both have time zone implementations and these
+     * differ in accuracy. Joda-Time's implementation is generally more up to
+     * date and thus more accurate - for example JDK1.3 has no historical data.
+     * The effect of this is that the field values of the &lt;code&gt;Calendar&lt;/code&gt;
+     * may differ from those of this object, even though the millisecond value
+     * is the same. Most of the time this just means that the JDK field values
+     * are wrong, as our time zone information is more up to date.
+     *
+     * @return a GregorianCalendar initialised with this datetime
+     */
+    public GregorianCalendar toGregorianCalendar() {
+<span class="fc" id="L295">        DateTimeZone zone = getZone();</span>
+<span class="fc" id="L296">        GregorianCalendar cal = new GregorianCalendar(zone.toTimeZone());</span>
+<span class="fc" id="L297">        cal.setTime(toDate());</span>
+<span class="fc" id="L298">        return cal;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Output the date time in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZZ).
+     * &lt;p&gt;
+     * Note that this method does not output the chronology or time-zone.
+     * This can be confusing, as the equals and hashCode methods use both
+     * chronology and time-zone. If two objects are not {@code equal} but have the
+     * same {@code toString} then either the chronology or time-zone differs.
+     * 
+     * @return ISO8601 time formatted string, not null
+     */
+    @ToString
+    public String toString() {
+<span class="fc" id="L314">        return super.toString();</span>
+    }
+
+    /**
+     * Output the instant using the specified format pattern.
+     *
+     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+     * @return the formatted string, not null
+     * @see  org.joda.time.format.DateTimeFormat
+     */
+    public String toString(String pattern) {
+<span class="fc bfc" id="L325" title="All 2 branches covered.">        if (pattern == null) {</span>
+<span class="fc" id="L326">            return toString();</span>
+        }
+<span class="fc" id="L328">        return DateTimeFormat.forPattern(pattern).print(this);</span>
+    }
+
+    /**
+     * Output the instant using the specified format pattern.
+     *
+     * @param pattern  the pattern specification, null means use &lt;code&gt;toString&lt;/code&gt;
+     * @param locale  Locale to use, null means default
+     * @return the formatted string, not null
+     * @see  org.joda.time.format.DateTimeFormat
+     */
+    public String toString(String pattern, Locale locale) throws IllegalArgumentException {
+<span class="fc bfc" id="L340" title="All 2 branches covered.">        if (pattern == null) {</span>
+<span class="fc" id="L341">            return toString();</span>
+        }
+<span class="fc" id="L343">        return DateTimeFormat.forPattern(pattern).withLocale(locale).print(this);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

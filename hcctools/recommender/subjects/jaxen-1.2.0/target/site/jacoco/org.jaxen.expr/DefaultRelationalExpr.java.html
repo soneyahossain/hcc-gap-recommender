@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultRelationalExpr.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.expr</a> &gt; <span class="el_source">DefaultRelationalExpr.java</span></div><h1>DefaultRelationalExpr.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+
+package org.jaxen.expr;
+
+import org.jaxen.Context;
+import org.jaxen.JaxenException;
+import org.jaxen.Navigator;
+import org.jaxen.function.NumberFunction;
+
+import java.util.Iterator;
+import java.util.List;
+
+abstract class DefaultRelationalExpr extends DefaultTruthExpr implements RelationalExpr {
+    DefaultRelationalExpr(Expr lhs, Expr rhs) {
+<span class="fc" id="L61">        super(lhs, rhs);</span>
+<span class="fc" id="L62">    }</span>
+
+    public String toString() {
+<span class="nc" id="L65">        return &quot;[(DefaultRelationalExpr): &quot; + getLHS() + &quot;, &quot; + getRHS() + &quot;]&quot;;</span>
+    }
+
+    public Object evaluate(Context context) throws JaxenException {
+<span class="fc" id="L69">        Object lhsValue = getLHS().evaluate(context);</span>
+<span class="fc" id="L70">        Object rhsValue = getRHS().evaluate(context);</span>
+<span class="fc" id="L71">        Navigator nav = context.getNavigator();</span>
+
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if (bothAreSets(lhsValue, rhsValue)) {</span>
+<span class="nc" id="L74">            return evaluateSetSet((List) lhsValue, (List) rhsValue, nav);</span>
+        }
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (eitherIsSet(lhsValue, rhsValue)) {</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">            if (isSet(lhsValue)) {</span>
+<span class="fc" id="L79">                return evaluateSetSet((List) lhsValue, convertToList(rhsValue), nav);</span>
+            } else {
+<span class="fc" id="L81">                return evaluateSetSet(convertToList(lhsValue), (List) rhsValue, nav);</span>
+            }
+        }
+
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        return evaluateObjectObject(lhsValue, rhsValue, nav) ? Boolean.TRUE : Boolean.FALSE;</span>
+    }
+
+    private Object evaluateSetSet(List lhsSet, List rhsSet, Navigator nav) {
+<span class="pc bpc" id="L89" title="2 of 4 branches missed.">        if (setIsEmpty(lhsSet) || setIsEmpty(rhsSet)) // return false if either is null or empty</span>
+        {
+<span class="nc" id="L91">            return Boolean.FALSE;</span>
+        }
+
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        for (Iterator lhsIterator = lhsSet.iterator(); lhsIterator.hasNext(); ) {</span>
+<span class="fc" id="L95">            Object lhs = lhsIterator.next();</span>
+
+<span class="fc bfc" id="L97" title="All 2 branches covered.">            for (Iterator rhsIterator = rhsSet.iterator(); rhsIterator.hasNext(); ) {</span>
+<span class="fc" id="L98">                Object rhs = rhsIterator.next();</span>
+
+<span class="fc bfc" id="L100" title="All 2 branches covered.">                if (evaluateObjectObject(lhs, rhs, nav)) {</span>
+<span class="fc" id="L101">                    return Boolean.TRUE;</span>
+                }
+<span class="fc" id="L103">            }</span>
+<span class="fc" id="L104">        }</span>
+
+<span class="fc" id="L106">        return Boolean.FALSE;</span>
+    }
+
+    private boolean evaluateObjectObject(Object lhs, Object rhs, Navigator nav) {
+<span class="pc bpc" id="L110" title="2 of 4 branches missed.">        if (lhs == null || rhs == null) {</span>
+<span class="nc" id="L111">            return false;</span>
+        }
+
+<span class="fc" id="L114">        Double lhsNum = NumberFunction.evaluate(lhs, nav);</span>
+<span class="fc" id="L115">        Double rhsNum = NumberFunction.evaluate(rhs, nav);</span>
+
+<span class="pc bpc" id="L117" title="2 of 4 branches missed.">        if (NumberFunction.isNaN(lhsNum) || NumberFunction.isNaN(rhsNum)) {</span>
+<span class="nc" id="L118">            return false;</span>
+        }
+
+<span class="fc" id="L121">        return evaluateDoubleDouble(lhsNum, rhsNum);</span>
+    }
+
+    protected abstract boolean evaluateDoubleDouble(Double lhs, Double rhs);
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,93 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.8% done, time left: unknown  1.9% done, time left: unknown  3.3% done, time left: unknown  4.0% done, time left: unknown  5.6% done, time left: unknown  7.3% done, time left: unknown  9.3% done, time left: unknown 12.9% done, time left:   0:00:02   16.6% done, time left:   0:00:03 20.6% done, time left:   0:00:03 24.3% done, time left:   0:00:03 24.5% done, time left:   0:00:02 24.6% done, time left:   0:00:01 26.3% done, time left:   0:00:02 30.3% done, time left:   0:00:02 33.8% done, time left:   0:00:02 34.4% done, time left:   0:00:01 35.5% done, time left:   0:00:01 35.5% done, time left:   0:00:00 36.9% done, time left:   0:00:01 41.5% done, time left:   0:00:01 45.4% done, time left:   0:00:01 47.7% done, time left:   0:00:01 50.7% done, time left:   0:00:01 53.1% done, time left:   0:00:01 57.0% done, time left:   0:00:01 60.8% done, time left:   0:00:00 64.7% done, time left:   0:00:00 66.8% done, time left:   0:00:00 71.9% done, time left:   0:00:00 77.0% done, time left:   0:00:00 81.8% done, time left:   0:00:00 87.0% done, time left:   0:00:00 90.3% done, time left:   0:00:00 94.3% done, time left:   0:00:00 98.8% done, time left:   0:00:00 102.8% done, time left:   0:00:00  103.6% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.chrono.TestGregorianChronology.testToString:238:*]:
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:187 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:187 ARETURN
+org.joda.time.DateTimeZone.setDefault:207 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.setDefault:207 ALOAD 0
+org.joda.time.DateTimeZone.setDefault:207 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.set(Ljava/lang/Object;)V
+org.joda.time.DateTimeZone.getID:732 ALOAD 0
+org.joda.time.DateTimeZone.getID:732 GETFIELD org/joda/time/DateTimeZone.iID Ljava/lang/String;
+org.joda.time.DateTimeZone.getID:732 ARETURN
+org.joda.time.UTCDateTimeZone.hashCode:80 ALOAD 0
+org.joda.time.UTCDateTimeZone.hashCode:80 INVOKEVIRTUAL org/joda/time/UTCDateTimeZone.getID()Ljava/lang/String;
+org.joda.time.UTCDateTimeZone.hashCode:80 INVOKEVIRTUAL java/lang/String.hashCode()I
+org.joda.time.UTCDateTimeZone.hashCode:80 IRETURN
+org.joda.time.chrono.GregorianChronology.toString:44 ALOAD 0
+org.joda.time.chrono.GregorianChronology.toString:44 ARETURN
+org.joda.time.chrono.GregorianChronology.getInstance:89 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.GregorianChronology.getInstance:89 INVOKESTATIC org/joda/time/chrono/GregorianChronology.getInstance(Lorg/joda/time/DateTimeZone;I)Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.chrono.GregorianChronology.getInstance:99 ALOAD 0
+org.joda.time.chrono.GregorianChronology.getInstance:99 INVOKESTATIC org/joda/time/chrono/GregorianChronology.getInstance(Lorg/joda/time/DateTimeZone;I)Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.chrono.GregorianChronology.getInstance:114 GETSTATIC org/joda/time/chrono/GregorianChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.GregorianChronology.getInstance:114 ALOAD 0
+org.joda.time.chrono.GregorianChronology.getInstance:114 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.GregorianChronology.getInstance:114 ASTORE 3
+org.joda.time.chrono.GregorianChronology.getInstance:115 ALOAD 3
+org.joda.time.chrono.GregorianChronology.getInstance:115 IFNONNULL L1 false true
+org.joda.time.chrono.GregorianChronology.getInstance:116 BIPUSH 7
+org.joda.time.chrono.GregorianChronology.getInstance:116 ANEWARRAY org/joda/time/chrono/GregorianChronology
+org.joda.time.chrono.GregorianChronology.getInstance:116 ASTORE 3
+org.joda.time.chrono.GregorianChronology.getInstance:117 GETSTATIC org/joda/time/chrono/GregorianChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.GregorianChronology.getInstance:117 ALOAD 0
+org.joda.time.chrono.GregorianChronology.getInstance:117 ALOAD 3
+org.joda.time.chrono.GregorianChronology.getInstance:117 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.GregorianChronology.getInstance:123 ALOAD 3
+org.joda.time.chrono.GregorianChronology.getInstance:123 ILOAD 1
+org.joda.time.chrono.GregorianChronology.getInstance:123 ICONST_1
+org.joda.time.chrono.GregorianChronology.getInstance:123 ISUB
+org.joda.time.chrono.GregorianChronology.getInstance:123 AALOAD
+org.joda.time.chrono.GregorianChronology.getInstance:123 ASTORE 2
+org.joda.time.chrono.GregorianChronology.getInstance:128 ALOAD 2
+org.joda.time.chrono.GregorianChronology.getInstance:128 IFNONNULL L12 false true
+org.joda.time.chrono.GregorianChronology.getInstance:130 ALOAD 3
+org.joda.time.chrono.GregorianChronology.getInstance:130 ILOAD 1
+org.joda.time.chrono.GregorianChronology.getInstance:130 ICONST_1
+org.joda.time.chrono.GregorianChronology.getInstance:130 ISUB
+org.joda.time.chrono.GregorianChronology.getInstance:130 AALOAD
+org.joda.time.chrono.GregorianChronology.getInstance:130 ASTORE 2
+org.joda.time.chrono.GregorianChronology.getInstance:131 ALOAD 2
+org.joda.time.chrono.GregorianChronology.getInstance:131 IFNONNULL L8 false true
+org.joda.time.chrono.GregorianChronology.getInstance:132 ALOAD 0
+org.joda.time.chrono.GregorianChronology.getInstance:132 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.GregorianChronology.getInstance:132 IF_ACMPNE L6 true true
+org.joda.time.chrono.GregorianChronology.getInstance:133 NEW org/joda/time/chrono/GregorianChronology
+org.joda.time.chrono.GregorianChronology.getInstance:133 ASTORE 2
+org.joda.time.chrono.GregorianChronology.getInstance:135 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.GregorianChronology.getInstance:135 ILOAD 1
+org.joda.time.chrono.GregorianChronology.getInstance:135 INVOKESTATIC org/joda/time/chrono/GregorianChronology.getInstance(Lorg/joda/time/DateTimeZone;I)Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.chrono.GregorianChronology.getInstance:139 ALOAD 3
+org.joda.time.chrono.GregorianChronology.getInstance:139 ILOAD 1
+org.joda.time.chrono.GregorianChronology.getInstance:139 ICONST_1
+org.joda.time.chrono.GregorianChronology.getInstance:139 ISUB
+org.joda.time.chrono.GregorianChronology.getInstance:139 ALOAD 2
+org.joda.time.chrono.GregorianChronology.getInstance:139 AASTORE
+org.joda.time.chrono.GregorianChronology.getInstance:143 ALOAD 2
+org.joda.time.chrono.GregorianChronology.getInstance:143 ARETURN
+org.joda.time.chrono.TestGregorianChronology.main:68 INVOKEVIRTUAL org/joda/time/chrono/TestGregorianChronology.setUp()V
+org.joda.time.chrono.TestGregorianChronology.main:69 INVOKEVIRTUAL org/joda/time/chrono/TestGregorianChronology.testFactory()V
+org.joda.time.chrono.TestGregorianChronology.main:74 INVOKEVIRTUAL org/joda/time/chrono/TestGregorianChronology.testFactory_Zone()V
+org.joda.time.chrono.TestGregorianChronology.main:79 INVOKEVIRTUAL org/joda/time/chrono/TestGregorianChronology.testFactory_Zone_int()V
+org.joda.time.chrono.TestGregorianChronology.main:98 INVOKEVIRTUAL org/joda/time/chrono/TestGregorianChronology.testToString()V
+org.joda.time.chrono.TestGregorianChronology.setUp:149 GETSTATIC org/joda/time/chrono/TestGregorianChronology.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestGregorianChronology.setUp:149 INVOKESTATIC org/joda/time/DateTimeZone.setDefault(Lorg/joda/time/DateTimeZone;)V
+org.joda.time.chrono.TestGregorianChronology.testFactory:174 INVOKESTATIC org/joda/time/chrono/GregorianChronology.getInstance()Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.chrono.TestGregorianChronology.testFactory_Zone:180 GETSTATIC org/joda/time/chrono/TestGregorianChronology.TOKYO Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestGregorianChronology.testFactory_Zone:180 INVOKESTATIC org/joda/time/chrono/GregorianChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.chrono.TestGregorianChronology.testFactory_Zone_int:188 GETSTATIC org/joda/time/chrono/TestGregorianChronology.TOKYO Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestGregorianChronology.testFactory_Zone_int:188 ICONST_2
+org.joda.time.chrono.TestGregorianChronology.testFactory_Zone_int:188 INVOKESTATIC org/joda/time/chrono/GregorianChronology.getInstance(Lorg/joda/time/DateTimeZone;I)Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.chrono.TestGregorianChronology.testToString:238 LDC "GregorianChronology[UTC,mdfw=2]"
+org.joda.time.chrono.TestGregorianChronology.testToString:238 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestGregorianChronology.testToString:238 ICONST_2
+org.joda.time.chrono.TestGregorianChronology.testToString:238 INVOKESTATIC org/joda/time/chrono/GregorianChronology.getInstance(Lorg/joda/time/DateTimeZone;I)Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.chrono.TestGregorianChronology.testToString:238 INVOKEVIRTUAL org/joda/time/chrono/GregorianChronology.toString()Ljava/lang/String;
+org.joda.time.chrono.TestGregorianChronology.testToString:238 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+
+Slice consists of 456 bytecode instructions.
+Computation took 4.62 seconds.

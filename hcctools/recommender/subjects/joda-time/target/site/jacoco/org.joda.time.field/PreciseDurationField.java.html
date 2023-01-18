@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreciseDurationField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">PreciseDurationField.java</span></div><h1>PreciseDurationField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2005 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import org.joda.time.DurationFieldType;
+
+/**
+ * Duration field class representing a field with a fixed unit length.
+ * &lt;p&gt;
+ * PreciseDurationField is thread-safe and immutable.
+ * 
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public class PreciseDurationField extends BaseDurationField {
+    
+    private static final long serialVersionUID = -8346152187724495365L;
+
+    /** The size of the unit */
+    private final long iUnitMillis;
+
+    /**
+     * Constructor.
+     * 
+     * @param type  the field type
+     * @param unitMillis  the unit milliseconds
+     */    
+    public PreciseDurationField(DurationFieldType type, long unitMillis) {
+<span class="fc" id="L43">        super(type);</span>
+<span class="fc" id="L44">        iUnitMillis = unitMillis;</span>
+<span class="fc" id="L45">    }</span>
+    
+    //------------------------------------------------------------------------
+    /**
+     * This field is precise.
+     * 
+     * @return true always
+     */
+    public final boolean isPrecise() {
+<span class="fc" id="L54">        return true;</span>
+    }
+    
+    /**
+     * Returns the amount of milliseconds per unit value of this field.
+     *
+     * @return the unit size of this field, in milliseconds
+     */
+    public final long getUnitMillis() {
+<span class="fc" id="L63">        return iUnitMillis;</span>
+    }
+
+    //------------------------------------------------------------------------
+    /**
+     * Get the value of this field from the milliseconds.
+     * 
+     * @param duration  the milliseconds to query, which may be negative
+     * @param instant  ignored
+     * @return the value of the field, in the units of the field, which may be
+     * negative
+     */
+    public long getValueAsLong(long duration, long instant) {
+<span class="fc" id="L76">        return duration / iUnitMillis;  // safe</span>
+    }
+
+    /**
+     * Get the millisecond duration of this field from its value.
+     * 
+     * @param value  the value of the field, which may be negative
+     * @param instant  ignored
+     * @return the milliseconds that the field represents, which may be
+     * negative
+     */
+    public long getMillis(int value, long instant) {
+<span class="fc" id="L88">        return value * iUnitMillis;  // safe</span>
+    }
+
+    /**
+     * Get the millisecond duration of this field from its value.
+     * 
+     * @param value  the value of the field, which may be negative
+     * @param instant  ignored
+     * @return the milliseconds that the field represents, which may be
+     * negative
+     */
+    public long getMillis(long value, long instant) {
+<span class="fc" id="L100">        return FieldUtils.safeMultiply(value, iUnitMillis);</span>
+    }
+
+    public long add(long instant, int value) {
+<span class="fc" id="L104">        long addition = value * iUnitMillis;  // safe</span>
+<span class="fc" id="L105">        return FieldUtils.safeAdd(instant, addition);</span>
+    }
+
+    public long add(long instant, long value) {
+<span class="fc" id="L109">        long addition = FieldUtils.safeMultiply(value, iUnitMillis);</span>
+<span class="fc" id="L110">        return FieldUtils.safeAdd(instant, addition);</span>
+    }
+
+    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L114">        long difference = FieldUtils.safeSubtract(minuendInstant, subtrahendInstant);</span>
+<span class="fc" id="L115">        return difference / iUnitMillis;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Compares this duration field to another.
+     * Two fields are equal if of the same type and duration.
+     * 
+     * @param obj  the object to compare to
+     * @return if equal
+     */
+    public boolean equals(Object obj) {
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        if (this == obj) {</span>
+<span class="fc" id="L128">            return true;</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        } else if (obj instanceof PreciseDurationField) {</span>
+<span class="fc" id="L130">            PreciseDurationField other = (PreciseDurationField) obj;</span>
+<span class="fc bfc" id="L131" title="All 4 branches covered.">            return (getType() == other.getType()) &amp;&amp; (iUnitMillis == other.iUnitMillis);</span>
+        }
+<span class="fc" id="L133">        return false;</span>
+    }
+
+    /**
+     * Gets a hash code for this instance.
+     * 
+     * @return a suitable hashcode
+     */
+    public int hashCode() {
+<span class="fc" id="L142">        long millis = iUnitMillis;</span>
+<span class="fc" id="L143">        int hash = (int) (millis ^ (millis &gt;&gt;&gt; 32));</span>
+<span class="fc" id="L144">        hash += getType().hashCode();</span>
+<span class="fc" id="L145">        return hash;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

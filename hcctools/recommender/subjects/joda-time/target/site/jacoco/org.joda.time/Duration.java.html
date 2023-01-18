@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Duration.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">Duration.java</span></div><h1>Duration.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import java.io.Serializable;
+import java.math.RoundingMode;
+
+import org.joda.convert.FromString;
+import org.joda.time.base.BaseDuration;
+import org.joda.time.field.FieldUtils;
+
+/**
+ * An immutable duration specifying a length of time in milliseconds.
+ * &lt;p&gt;
+ * A duration is defined by a fixed number of milliseconds.
+ * There is no concept of fields, such as days or seconds, as these fields can vary in length.
+ * &lt;p&gt;
+ * A duration may be converted to a {@link Period} to obtain field values.
+ * This conversion will typically cause a loss of precision.
+ * &lt;p&gt;
+ * Duration is thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @author Stephen Colebourne
+ * @since 1.0
+ */
+public final class Duration
+        extends BaseDuration
+        implements ReadableDuration, Serializable {
+
+    /** Constant representing zero millisecond duration */
+<span class="fc" id="L45">    public static final Duration ZERO = new Duration(0L);</span>
+
+    /** Serialization version */
+    private static final long serialVersionUID = 2471658376918L;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Parses a {@code Duration} from the specified string.
+     * &lt;p&gt;
+     * This parses the format {@code PTa.bS}, as per {@link #toString()}.
+     * 
+     * @param str  the string to parse, not null
+     * @since 2.0
+     */
+    @FromString
+    public static Duration parse(String str) {
+<span class="fc" id="L61">        return new Duration(str);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Create a duration with the specified number of days assuming that
+     * there are the standard number of milliseconds in a day.
+     * &lt;p&gt;
+     * This method assumes that there are 24 hours in a day,
+     * 60 minutes in an hour, 60 seconds in a minute and 1000 milliseconds in
+     * a second. This will be true for most days, however days with Daylight
+     * Savings changes will not have 24 hours, so use this method with care.
+     * &lt;p&gt;
+     * A Duration is a representation of an amount of time. If you want to express
+     * the concept of 'days' you should consider using the {@link Days} class.
+     *
+     * @param days  the number of standard days in this duration
+     * @return the duration, never null
+     * @throws ArithmeticException if the days value is too large
+     * @since 1.6
+     */
+    public static Duration standardDays(long days) {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (days == 0) {</span>
+<span class="fc" id="L84">            return ZERO;</span>
+        }
+<span class="fc" id="L86">        return new Duration(FieldUtils.safeMultiply(days, DateTimeConstants.MILLIS_PER_DAY));</span>
+    }
+
+    /**
+     * Create a duration with the specified number of hours assuming that
+     * there are the standard number of milliseconds in an hour.
+     * &lt;p&gt;
+     * This method assumes that there are 60 minutes in an hour,
+     * 60 seconds in a minute and 1000 milliseconds in a second.
+     * All currently supplied chronologies use this definition.
+     * &lt;p&gt;
+     * A Duration is a representation of an amount of time. If you want to express
+     * the concept of 'hours' you should consider using the {@link Hours} class.
+     *
+     * @param hours  the number of standard hours in this duration
+     * @return the duration, never null
+     * @throws ArithmeticException if the hours value is too large
+     * @since 1.6
+     */
+    public static Duration standardHours(long hours) {
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (hours == 0) {</span>
+<span class="fc" id="L107">            return ZERO;</span>
+        }
+<span class="fc" id="L109">        return new Duration(FieldUtils.safeMultiply(hours, DateTimeConstants.MILLIS_PER_HOUR));</span>
+    }
+
+    /**
+     * Create a duration with the specified number of minutes assuming that
+     * there are the standard number of milliseconds in a minute.
+     * &lt;p&gt;
+     * This method assumes that there are 60 seconds in a minute and
+     * 1000 milliseconds in a second.
+     * All currently supplied chronologies use this definition.
+     * &lt;p&gt;
+     * A Duration is a representation of an amount of time. If you want to express
+     * the concept of 'minutes' you should consider using the {@link Minutes} class.
+     *
+     * @param minutes  the number of standard minutes in this duration
+     * @return the duration, never null
+     * @throws ArithmeticException if the minutes value is too large
+     * @since 1.6
+     */
+    public static Duration standardMinutes(long minutes) {
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        if (minutes == 0) {</span>
+<span class="fc" id="L130">            return ZERO;</span>
+        }
+<span class="fc" id="L132">        return new Duration(FieldUtils.safeMultiply(minutes, DateTimeConstants.MILLIS_PER_MINUTE));</span>
+    }
+
+    /**
+     * Create a duration with the specified number of seconds assuming that
+     * there are the standard number of milliseconds in a second.
+     * &lt;p&gt;
+     * This method assumes that there are 1000 milliseconds in a second.
+     * All currently supplied chronologies use this definition.
+     * &lt;p&gt;
+     * A Duration is a representation of an amount of time. If you want to express
+     * the concept of 'seconds' you should consider using the {@link Seconds} class.
+     *
+     * @param seconds  the number of standard seconds in this duration
+     * @return the duration, never null
+     * @throws ArithmeticException if the seconds value is too large
+     * @since 1.6
+     */
+    public static Duration standardSeconds(long seconds) {
+<span class="fc bfc" id="L151" title="All 2 branches covered.">        if (seconds == 0) {</span>
+<span class="fc" id="L152">            return ZERO;</span>
+        }
+<span class="fc" id="L154">        return new Duration(FieldUtils.safeMultiply(seconds, DateTimeConstants.MILLIS_PER_SECOND));</span>
+    }
+
+    /**
+     * Create a duration with the specified number of milliseconds.
+     *
+     * @param millis  the number of standard milliseconds in this duration
+     * @return the duration, never null
+     * @since 2.0
+     */
+    public static Duration millis(long millis) {
+<span class="fc bfc" id="L165" title="All 2 branches covered.">        if (millis == 0) {</span>
+<span class="fc" id="L166">            return ZERO;</span>
+        }
+<span class="fc" id="L168">        return new Duration(millis);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a duration from the given millisecond duration.
+     *
+     * @param duration  the duration, in milliseconds
+     */
+    public Duration(long duration) {
+<span class="fc" id="L178">        super(duration);</span>
+<span class="fc" id="L179">    }</span>
+
+    /**
+     * Creates a duration from the given interval endpoints.
+     *
+     * @param startInstant  interval start, in milliseconds
+     * @param endInstant  interval end, in milliseconds
+     * @throws ArithmeticException if the duration exceeds a 64-bit long
+     */
+    public Duration(long startInstant, long endInstant) {
+<span class="fc" id="L189">        super(startInstant, endInstant);</span>
+<span class="fc" id="L190">    }</span>
+
+    /**
+     * Creates a duration from the given interval endpoints.
+     *
+     * @param start  interval start, null means now
+     * @param end  interval end, null means now
+     * @throws ArithmeticException if the duration exceeds a 64-bit long
+     */
+    public Duration(ReadableInstant start, ReadableInstant end) {
+<span class="fc" id="L200">        super(start, end);</span>
+<span class="fc" id="L201">    }</span>
+
+    /**
+     * Creates a duration from the specified object using the
+     * {@link org.joda.time.convert.ConverterManager ConverterManager}.
+     *
+     * @param duration  duration to convert
+     * @throws IllegalArgumentException if duration is invalid
+     */
+    public Duration(Object duration) {
+<span class="fc" id="L211">        super(duration);</span>
+<span class="fc" id="L212">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the length of this duration in days assuming that there are the
+     * standard number of milliseconds in a day.
+     * &lt;p&gt;
+     * This method assumes that there are 24 hours in a day,
+     * 60 minutes in an hour, 60 seconds in a minute and 1000 milliseconds in
+     * a second. This will be true for most days, however days with Daylight
+     * Savings changes will not have 24 hours, so use this method with care.
+     * &lt;p&gt;
+     * This returns &lt;code&gt;getMillis() / MILLIS_PER_DAY&lt;/code&gt;.
+     * The result is an integer division, thus excess milliseconds are truncated.
+     *
+     * @return the length of the duration in standard days
+     * @since 2.0
+     */
+    public long getStandardDays() {
+<span class="fc" id="L231">        return getMillis() / DateTimeConstants.MILLIS_PER_DAY;</span>
+    }
+
+    /**
+     * Gets the length of this duration in hours assuming that there are the
+     * standard number of milliseconds in an hour.
+     * &lt;p&gt;
+     * This method assumes that there are 60 minutes in an hour,
+     * 60 seconds in a minute and 1000 milliseconds in a second.
+     * All currently supplied chronologies use this definition.
+     * &lt;p&gt;
+     * This returns &lt;code&gt;getMillis() / MILLIS_PER_HOUR&lt;/code&gt;.
+     * The result is an integer division, thus excess milliseconds are truncated.
+     *
+     * @return the length of the duration in standard hours
+     * @since 2.0
+     */
+    public long getStandardHours() {
+<span class="fc" id="L249">        return getMillis() / DateTimeConstants.MILLIS_PER_HOUR;</span>
+    }
+
+    /**
+     * Gets the length of this duration in minutes assuming that there are the
+     * standard number of milliseconds in a minute.
+     * &lt;p&gt;
+     * This method assumes that there are 60 seconds in a minute and
+     * 1000 milliseconds in a second.
+     * All currently supplied chronologies use this definition.
+     * &lt;p&gt;
+     * This returns &lt;code&gt;getMillis() / MILLIS_PER_MINUTE&lt;/code&gt;.
+     * The result is an integer division, thus excess milliseconds are truncated.
+     *
+     * @return the length of the duration in standard minutes
+     * @since 2.0
+     */
+    public long getStandardMinutes() {
+<span class="fc" id="L267">        return getMillis() / DateTimeConstants.MILLIS_PER_MINUTE;</span>
+    }
+
+    /**
+     * Gets the length of this duration in seconds assuming that there are the
+     * standard number of milliseconds in a second.
+     * &lt;p&gt;
+     * This method assumes that there are 1000 milliseconds in a second.
+     * All currently supplied chronologies use this definition.
+     * &lt;p&gt;
+     * This returns &lt;code&gt;getMillis() / 1000&lt;/code&gt;.
+     * The result is an integer division, so 2999 millis returns 2 seconds.
+     *
+     * @return the length of the duration in standard seconds
+     * @since 1.6
+     */
+    public long getStandardSeconds() {
+<span class="fc" id="L284">        return getMillis() / DateTimeConstants.MILLIS_PER_SECOND;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get this duration as an immutable &lt;code&gt;Duration&lt;/code&gt; object
+     * by returning &lt;code&gt;this&lt;/code&gt;.
+     * 
+     * @return &lt;code&gt;this&lt;/code&gt;
+     */
+    public Duration toDuration() {
+<span class="fc" id="L295">        return this;</span>
+    }
+
+    /**
+     * Converts this duration to a period in days assuming that there are the
+     * standard number of milliseconds in a day.
+     * &lt;p&gt;
+     * This method assumes that there are 24 hours in a day,
+     * 60 minutes in an hour, 60 seconds in a minute and 1000 milliseconds in
+     * a second. This will be true for most days, however days with Daylight
+     * Savings changes will not have 24 hours, so use this method with care.
+     * 
+     * @return a period representing the number of standard days in this period, never null
+     * @throws ArithmeticException if the number of days is too large to be represented
+     * @since 2.0
+     */
+    public Days toStandardDays() {
+<span class="fc" id="L312">        long days = getStandardDays();</span>
+<span class="fc" id="L313">        return Days.days(FieldUtils.safeToInt(days));</span>
+    }
+
+    /**
+     * Converts this duration to a period in hours assuming that there are the
+     * standard number of milliseconds in an hour.
+     * &lt;p&gt;
+     * This method assumes that there are 60 minutes in an hour,
+     * 60 seconds in a minute and 1000 milliseconds in a second.
+     * All currently supplied chronologies use this definition.
+     * 
+     * @return a period representing the number of standard hours in this period, never null
+     * @throws ArithmeticException if the number of hours is too large to be represented
+     * @since 2.0
+     */
+    public Hours toStandardHours() {
+<span class="fc" id="L329">        long hours = getStandardHours();</span>
+<span class="fc" id="L330">        return Hours.hours(FieldUtils.safeToInt(hours));</span>
+    }
+
+    /**
+     * Converts this duration to a period in minutes assuming that there are the
+     * standard number of milliseconds in a minute.
+     * &lt;p&gt;
+     * This method assumes that there are 60 seconds in a minute and
+     * 1000 milliseconds in a second.
+     * All currently supplied chronologies use this definition.
+     * 
+     * @return a period representing the number of standard minutes in this period, never null
+     * @throws ArithmeticException if the number of minutes is too large to be represented
+     * @since 2.0
+     */
+    public Minutes toStandardMinutes() {
+<span class="fc" id="L346">        long minutes = getStandardMinutes();</span>
+<span class="fc" id="L347">        return Minutes.minutes(FieldUtils.safeToInt(minutes));</span>
+    }
+
+    /**
+     * Converts this duration to a period in seconds assuming that there are the
+     * standard number of milliseconds in a second.
+     * &lt;p&gt;
+     * This method assumes that there are 1000 milliseconds in a second.
+     * All currently supplied chronologies use this definition.
+     * 
+     * @return a period representing the number of standard seconds in this period, never null
+     * @throws ArithmeticException if the number of seconds is too large to be represented
+     * @since 1.6
+     */
+    public Seconds toStandardSeconds() {
+<span class="fc" id="L362">        long seconds = getStandardSeconds();</span>
+<span class="fc" id="L363">        return Seconds.seconds(FieldUtils.safeToInt(seconds));</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Creates a new Duration instance with a different millisecond length.
+     * 
+     * @param duration  the new length of the duration
+     * @return the new duration instance
+     */
+    public Duration withMillis(long duration) {
+<span class="fc bfc" id="L374" title="All 2 branches covered.">        if (duration == getMillis()) {</span>
+<span class="fc" id="L375">            return this;</span>
+        }
+<span class="fc" id="L377">        return new Duration(duration);</span>
+    }
+
+    /**
+     * Returns a new duration with this length plus that specified multiplied by the scalar.
+     * This instance is immutable and is not altered.
+     * &lt;p&gt;
+     * If the addition is zero, this instance is returned.
+     * 
+     * @param durationToAdd  the duration to add to this one
+     * @param scalar  the amount of times to add, such as -1 to subtract once
+     * @return the new duration instance
+     */
+    public Duration withDurationAdded(long durationToAdd, int scalar) {
+<span class="fc bfc" id="L391" title="All 4 branches covered.">        if (durationToAdd == 0 || scalar == 0) {</span>
+<span class="fc" id="L392">            return this;</span>
+        }
+<span class="fc" id="L394">        long add = FieldUtils.safeMultiply(durationToAdd, scalar);</span>
+<span class="fc" id="L395">        long duration = FieldUtils.safeAdd(getMillis(), add);</span>
+<span class="fc" id="L396">        return new Duration(duration);</span>
+    }
+
+    /**
+     * Returns a new duration with this length plus that specified multiplied by the scalar.
+     * This instance is immutable and is not altered.
+     * &lt;p&gt;
+     * If the addition is zero, this instance is returned.
+     * 
+     * @param durationToAdd  the duration to add to this one, null means zero
+     * @param scalar  the amount of times to add, such as -1 to subtract once
+     * @return the new duration instance
+     */
+    public Duration withDurationAdded(ReadableDuration durationToAdd, int scalar) {
+<span class="fc bfc" id="L410" title="All 4 branches covered.">        if (durationToAdd == null || scalar == 0) {</span>
+<span class="fc" id="L411">            return this;</span>
+        }
+<span class="fc" id="L413">        return withDurationAdded(durationToAdd.getMillis(), scalar);</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a new duration with this length plus that specified.
+     * This instance is immutable and is not altered.
+     * &lt;p&gt;
+     * If the addition is zero, this instance is returned.
+     * 
+     * @param amount  the duration to add to this one
+     * @return the new duration instance
+     */
+    public Duration plus(long amount) {
+<span class="fc" id="L427">        return withDurationAdded(amount, 1);</span>
+    }
+
+    /**
+     * Returns a new duration with this length plus that specified.
+     * This instance is immutable and is not altered.
+     * &lt;p&gt;
+     * If the amount is zero, this instance is returned.
+     * 
+     * @param amount  the duration to add to this one, null means zero
+     * @return the new duration instance
+     */
+    public Duration plus(ReadableDuration amount) {
+<span class="fc bfc" id="L440" title="All 2 branches covered.">        if (amount == null) {</span>
+<span class="fc" id="L441">            return this;</span>
+        }
+<span class="fc" id="L443">        return withDurationAdded(amount.getMillis(), 1);</span>
+    }
+
+    /**
+     * Returns a new duration with this length minus that specified.
+     * This instance is immutable and is not altered.
+     * &lt;p&gt;
+     * If the addition is zero, this instance is returned.
+     * 
+     * @param amount  the duration to take away from this one
+     * @return the new duration instance
+     */
+    public Duration minus(long amount) {
+<span class="fc" id="L456">        return withDurationAdded(amount, -1);</span>
+    }
+
+    /**
+     * Returns a new duration with this length minus that specified.
+     * This instance is immutable and is not altered.
+     * &lt;p&gt;
+     * If the amount is zero, this instance is returned.
+     * 
+     * @param amount  the duration to take away from this one, null means zero
+     * @return the new duration instance
+     */
+    public Duration minus(ReadableDuration amount) {
+<span class="fc bfc" id="L469" title="All 2 branches covered.">        if (amount == null) {</span>
+<span class="fc" id="L470">            return this;</span>
+        }
+<span class="fc" id="L472">        return withDurationAdded(amount.getMillis(), -1);</span>
+    }
+
+    /**
+     * Returns a new duration with this length multiplied by the 
+     * specified multiplicand.
+     * This instance is immutable and is not altered.
+     * &lt;p&gt;
+     * If the multiplicand is one, this instance is returned.
+     * 
+     * @param multiplicand  the multiplicand to multiply this one by
+     * @return the new duration instance
+     */
+    public Duration multipliedBy(long multiplicand) {
+<span class="fc bfc" id="L486" title="All 2 branches covered.">        if (multiplicand == 1) {</span>
+<span class="fc" id="L487">            return this;</span>
+        }
+<span class="fc" id="L489">        return new Duration(FieldUtils.safeMultiply(getMillis(), multiplicand));</span>
+    }
+
+    /**
+     * Returns a new duration with this length divided by the 
+     * specified divisor.
+     * This instance is immutable and is not altered.
+     * &lt;p&gt;
+     * If the divisor is one, this instance is returned.
+     * 
+     * @param divisor  the divisor to divide this one by
+     * @return the new duration instance
+     */
+    public Duration dividedBy(long divisor) {
+<span class="fc bfc" id="L503" title="All 2 branches covered.">        if (divisor == 1) {</span>
+<span class="fc" id="L504">            return this;</span>
+        }
+<span class="fc" id="L506">        return new Duration(FieldUtils.safeDivide(getMillis(), divisor));</span>
+    }
+
+    /**
+     * Returns a new duration with its length divided by the
+     * specified divisor. {@code RoundingMode} can be specified.
+     * This instance is immutable and is not altered.
+     * &lt;p&gt;
+     * If the divisor is one, this instance is returned.
+     *
+     * @param divisor  the divisor to divide this one by
+     * @param roundingMode  the type of rounding desired
+     * @return the new duration instance
+     */
+    public Duration dividedBy(long divisor, RoundingMode roundingMode) {
+<span class="fc bfc" id="L521" title="All 2 branches covered.">        if (divisor == 1) {</span>
+<span class="fc" id="L522">            return this;</span>
+        }
+<span class="fc" id="L524">        return new Duration(FieldUtils.safeDivide(getMillis(), divisor, roundingMode));</span>
+    }
+
+    /**
+     * Returns a new duration with this length negated.
+     * This instance is immutable and is not altered.
+     * 
+     * @return the new duration instance
+     */
+    public Duration negated() {
+<span class="fc bfc" id="L534" title="All 2 branches covered.">        if (getMillis() == Long.MIN_VALUE) {</span>
+<span class="fc" id="L535">            throw new ArithmeticException(&quot;Negation of this duration would overflow&quot;);</span>
+        }
+<span class="fc" id="L537">        return new Duration(-getMillis());</span>
+    }
+
+    /**
+     * Returns a duration that has a positive or zero number of milliseconds.
+     * &lt;p&gt;
+     * This instance is immutable and is not altered.
+     * 
+     * @return the absolute duration instance
+     * @since 2.10
+     */
+    public Duration abs() {
+<span class="fc bfc" id="L549" title="All 2 branches covered.">        if (getMillis() &lt; 0) {</span>
+<span class="fc" id="L550">            return negated();</span>
+        }
+<span class="fc" id="L552">        return this;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

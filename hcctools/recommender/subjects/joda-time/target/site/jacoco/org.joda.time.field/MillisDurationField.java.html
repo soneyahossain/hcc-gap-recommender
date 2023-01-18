@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MillisDurationField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.field</a> &gt; <span class="el_source">MillisDurationField.java</span></div><h1>MillisDurationField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.field;
+
+import java.io.Serializable;
+
+import org.joda.time.DurationField;
+import org.joda.time.DurationFieldType;
+
+/**
+ * Duration field class representing a field with a fixed unit length of one
+ * millisecond.
+ * &lt;p&gt;
+ * MillisDurationField is thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public final class MillisDurationField extends DurationField implements Serializable {
+
+    /** Serialization lock. */
+    private static final long serialVersionUID = 2656707858124633367L;
+
+    /** Singleton instance. */
+<span class="fc" id="L38">    public static final DurationField INSTANCE = new MillisDurationField();</span>
+
+    /**
+     * Restricted constructor.
+     */
+    private MillisDurationField() {
+        super();
+    }
+    
+    //------------------------------------------------------------------------
+    public DurationFieldType getType() {
+<span class="fc" id="L49">        return DurationFieldType.millis();</span>
+    }
+
+    public String getName() {
+<span class="fc" id="L53">        return &quot;millis&quot;;</span>
+    }
+
+    /**
+     * Returns true as this field is supported.
+     * 
+     * @return true always
+     */
+    public boolean isSupported() {
+<span class="fc" id="L62">        return true;</span>
+    }
+
+    /**
+     * Returns true as this field is precise.
+     * 
+     * @return true always
+     */
+    public final boolean isPrecise() {
+<span class="fc" id="L71">        return true;</span>
+    }
+
+    /**
+     * Returns the amount of milliseconds per unit value of this field.
+     *
+     * @return one always
+     */
+    public final long getUnitMillis() {
+<span class="fc" id="L80">        return 1;</span>
+    }
+
+    //------------------------------------------------------------------------
+    public int getValue(long duration) {
+<span class="fc" id="L85">        return FieldUtils.safeToInt(duration);</span>
+    }
+
+    public long getValueAsLong(long duration) {
+<span class="fc" id="L89">        return duration;</span>
+    }
+
+    public int getValue(long duration, long instant) {
+<span class="fc" id="L93">        return FieldUtils.safeToInt(duration);</span>
+    }
+
+    public long getValueAsLong(long duration, long instant) {
+<span class="fc" id="L97">        return duration;</span>
+    }
+
+    public long getMillis(int value) {
+<span class="fc" id="L101">        return value;</span>
+    }
+
+    public long getMillis(long value) {
+<span class="fc" id="L105">        return value;</span>
+    }
+
+    public long getMillis(int value, long instant) {
+<span class="fc" id="L109">        return value;</span>
+    }
+
+    public long getMillis(long value, long instant) {
+<span class="fc" id="L113">        return value;</span>
+    }
+
+    public long add(long instant, int value) {
+<span class="fc" id="L117">        return FieldUtils.safeAdd(instant, value);</span>
+    }
+
+    public long add(long instant, long value) {
+<span class="fc" id="L121">        return FieldUtils.safeAdd(instant, value);</span>
+    }
+
+    public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L125">        return FieldUtils.safeToInt(FieldUtils.safeSubtract(minuendInstant, subtrahendInstant));</span>
+    }
+
+    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="fc" id="L129">        return FieldUtils.safeSubtract(minuendInstant, subtrahendInstant);</span>
+    }
+
+    //------------------------------------------------------------------------
+    public int compareTo(DurationField otherField) {
+<span class="fc" id="L134">        long otherMillis = otherField.getUnitMillis();</span>
+<span class="fc" id="L135">        long thisMillis = getUnitMillis();</span>
+        // cannot do (thisMillis - otherMillis) as can overflow
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        if (thisMillis == otherMillis) {</span>
+<span class="fc" id="L138">            return 0;</span>
+        }
+<span class="fc bfc" id="L140" title="All 2 branches covered.">        if (thisMillis &lt; otherMillis) {</span>
+<span class="fc" id="L141">            return -1;</span>
+        } else {
+<span class="fc" id="L143">            return 1;</span>
+        }
+    }
+
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">        if (obj instanceof MillisDurationField) {</span>
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">            return getUnitMillis() == ((MillisDurationField) obj).getUnitMillis();</span>
+        }
+<span class="nc" id="L151">        return false;</span>
+    }
+
+    public int hashCode() {
+<span class="fc" id="L155">        return (int) getUnitMillis();</span>
+    }
+
+    /**
+     * Get a suitable debug string.
+     * 
+     * @return debug string
+     */
+    public String toString() {
+<span class="fc" id="L164">        return &quot;DurationField[millis]&quot;;</span>
+    }
+
+    /**
+     * Deserialize to the singleton.
+     */
+    private Object readResolve() {
+<span class="fc" id="L171">        return INSTANCE;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

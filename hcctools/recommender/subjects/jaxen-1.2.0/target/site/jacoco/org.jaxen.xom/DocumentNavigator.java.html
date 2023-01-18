@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DocumentNavigator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.xom</a> &gt; <span class="el_source">DocumentNavigator.java</span></div><h1>DocumentNavigator.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2003 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+
+package org.jaxen.xom;
+
+
+import nu.xom.*;
+import org.jaxen.*;
+import org.jaxen.saxpath.SAXPathException;
+import org.jaxen.util.SingleObjectIterator;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+/**
+ * Interface for navigating around the XOM object model.
+ *
+ * &lt;p&gt;
+ * This class is not intended for direct usage, but is
+ * used by the Jaxen engine during evaluation.
+ * &lt;/p&gt;
+ *
+ * @see XPath
+ */
+<span class="fc" id="L72">public class DocumentNavigator extends org.jaxen.DefaultNavigator {</span>
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3159311338575942877L;
+
+    public boolean isAttribute(Object o) {
+<span class="nc" id="L79">        return o instanceof Attribute;</span>
+    }
+
+    public boolean isComment(Object o) {
+<span class="nc" id="L83">        return o instanceof Comment;</span>
+    }
+
+    public boolean isDocument(Object o) {
+<span class="nc" id="L87">        return o instanceof Document;</span>
+    }
+
+    public boolean isElement(Object o) {
+<span class="nc" id="L91">        return o instanceof Element;</span>
+    }
+
+    public boolean isNamespace(Object o) {
+<span class="nc" id="L95">        return o instanceof XPathNamespace;</span>
+    }
+
+    public boolean isProcessingInstruction(Object o) {
+<span class="nc" id="L99">        return o instanceof ProcessingInstruction;</span>
+    }
+
+    public boolean isText(Object o) {
+<span class="nc" id="L103">        return o instanceof Text;</span>
+    }
+
+    //
+
+    public String getAttributeName(Object o) {
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        return (isAttribute(o) ? ((Attribute) o).getLocalName() : null);</span>
+    }
+
+    public String getAttributeNamespaceUri(Object o) {
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        return (isAttribute(o) ? ((Attribute) o).getNamespaceURI() : null);</span>
+    }
+
+    public String getAttributeQName(Object o) {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        return (isAttribute(o) ? ((Attribute) o).getQualifiedName() : null);</span>
+    }
+
+    public String getAttributeStringValue(Object o) {
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        return (isAttribute(o) ? ((Attribute) o).getValue() : null);</span>
+    }
+
+    //
+
+    public String getCommentStringValue(Object o) {
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        return (isComment(o) ? ((Comment) o).getValue() : null);</span>
+    }
+
+    public String getElementName(Object o) {
+<span class="nc bnc" id="L131" title="All 2 branches missed.">        return (isElement(o) ? ((Element) o).getLocalName() : null);</span>
+    }
+
+    public String getElementNamespaceUri(Object o) {
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        return (isElement(o) ? ((Element) o).getNamespaceURI() : null);</span>
+    }
+
+    public String getElementQName(Object o) {
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        return (isElement(o) ? ((Element) o).getQualifiedName() : null);</span>
+    }
+
+    public String getElementStringValue(Object o) {
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        return (o instanceof Node ? ((Node) o).getValue() : null);</span>
+    }
+
+    //
+
+    public String getNamespacePrefix(Object o) {
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        if (isElement(o)) {</span>
+<span class="nc" id="L150">            return ((Element) o).getNamespacePrefix();</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">        } else if (isAttribute(o)) {</span>
+<span class="nc" id="L152">            return ((Attribute) o).getNamespacePrefix();</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        } else if (o instanceof XPathNamespace) {</span>
+<span class="nc" id="L154">            return ((XPathNamespace) o).getNamespacePrefix();</span>
+        }
+<span class="nc" id="L156">        return null;</span>
+    }
+
+    public String getNamespaceStringValue(Object o) {
+<span class="nc bnc" id="L160" title="All 2 branches missed.">        if (isElement(o)) {</span>
+<span class="nc" id="L161">            return ((Element) o).getNamespaceURI();</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        } else if (isAttribute(o)) {</span>
+<span class="nc" id="L163">            return ((Attribute) o).getNamespaceURI();</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">        } else if (o instanceof XPathNamespace) {</span>
+<span class="nc" id="L165">            return ((XPathNamespace) o).getNamespaceURI();</span>
+        }
+<span class="nc" id="L167">        return null;</span>
+    }
+
+    //
+
+    public String getTextStringValue(Object o) {
+<span class="nc bnc" id="L173" title="All 2 branches missed.">        return (o instanceof Text ? ((Text) o).getValue() : null);</span>
+    }
+
+    //
+
+    public Object getDocument(String s) throws FunctionCallException {
+        try {
+<span class="nc" id="L180">            return new Builder(new NodeFactory()).build(s);</span>
+<span class="nc" id="L181">        } catch (Exception pe) {</span>
+<span class="nc" id="L182">            throw new FunctionCallException(pe);</span>
+        }
+    }
+
+    public Object getDocumentNode(Object o) {
+<span class="nc" id="L187">        ParentNode parent = null;</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">        if (o instanceof ParentNode) {</span>
+<span class="nc" id="L189">            parent = (ParentNode) o;</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">        } else if (o instanceof Node) {</span>
+<span class="nc" id="L191">            parent = ((Node) o).getParent();</span>
+        }
+<span class="nc" id="L193">        return parent.getDocument();</span>
+    }
+
+    //
+
+    public Iterator getAttributeAxisIterator(Object o) {
+<span class="nc bnc" id="L199" title="All 2 branches missed.">        if (isElement(o)) {</span>
+<span class="nc" id="L200">            return new IndexIterator(o, 0, ((Element) o).getAttributeCount()) {</span>
+                public Object get(Object o, int i) {
+<span class="nc" id="L202">                    return ((Element) o).getAttribute(i);</span>
+                }
+            };
+        }
+<span class="nc" id="L206">        return JaxenConstants.EMPTY_ITERATOR;</span>
+    }
+
+    //
+
+    public Iterator getChildAxisIterator(Object o) {
+<span class="nc bnc" id="L212" title="All 4 branches missed.">        if (isElement(o) || (o instanceof Document)) {</span>
+<span class="nc" id="L213">            return new IndexIterator(o, 0, ((ParentNode) o).getChildCount()) {</span>
+                public Object get(Object o, int i) {
+<span class="nc" id="L215">                    return ((ParentNode) o).getChild(i);</span>
+                }
+            };
+        }
+<span class="nc" id="L219">        return JaxenConstants.EMPTY_ITERATOR;</span>
+    }
+
+    public Iterator getParentAxisIterator(Object o) {
+<span class="nc" id="L223">        Object parent = null;</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">        if (o instanceof Node) {</span>
+<span class="nc" id="L225">            parent = ((Node) o).getParent();</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">        } else if (isNamespace(o)) {</span>
+<span class="nc" id="L227">            parent = ((XPathNamespace) o).getElement();</span>
+        }
+<span class="nc bnc" id="L229" title="All 2 branches missed.">        return (parent != null ? new SingleObjectIterator(parent) : null);</span>
+    }
+
+    //
+
+    public Object getParentNode(Object o) {
+<span class="nc bnc" id="L235" title="All 2 branches missed.">        return (o instanceof Node ? ((Node) o).getParent() : null);</span>
+    }
+
+    public Iterator getPrecedingAxisIterator(Object o) throws UnsupportedAxisException {
+<span class="nc" id="L239">        return super.getPrecedingAxisIterator(o);</span>
+    }
+
+    //
+
+    public Iterator getPrecedingSiblingAxisIterator(Object o) throws UnsupportedAxisException {
+<span class="nc" id="L245">        return super.getPrecedingSiblingAxisIterator(o);</span>
+    }
+
+    public String getProcessingInstructionData(Object o) {
+<span class="nc bnc" id="L249" title="All 2 branches missed.">        return (o instanceof ProcessingInstruction ? ((ProcessingInstruction) o).getValue() : null);</span>
+    }
+
+    //
+
+    public String getProcessingInstructionTarget(Object o) {
+<span class="nc bnc" id="L255" title="All 2 branches missed.">        return (o instanceof ProcessingInstruction ? ((ProcessingInstruction) o).getTarget() : null);</span>
+    }
+
+    public String translateNamespacePrefixToUri(String s, Object o) {
+<span class="nc" id="L259">        Element element = null;</span>
+<span class="nc bnc" id="L260" title="All 2 branches missed.">        if (o instanceof Element) {</span>
+<span class="nc" id="L261">            element = (Element) o;</span>
+<span class="nc bnc" id="L262" title="All 2 branches missed.">        } else if (o instanceof ParentNode) {</span>
+<span class="nc bnc" id="L263" title="All 2 branches missed.">        } else if (o instanceof Node) {</span>
+<span class="nc" id="L264">            element = (Element) ((Node) o).getParent();</span>
+<span class="nc bnc" id="L265" title="All 2 branches missed.">        } else if (o instanceof XPathNamespace) {</span>
+<span class="nc" id="L266">            element = ((XPathNamespace) o).getElement();</span>
+        }
+<span class="nc bnc" id="L268" title="All 2 branches missed.">        if (element != null) {</span>
+<span class="nc" id="L269">            return element.getNamespaceURI(s);</span>
+        }
+<span class="nc" id="L271">        return null;</span>
+    }
+
+    //
+
+    public XPath parseXPath(String s) throws SAXPathException {
+<span class="nc" id="L277">        return new BaseXPath(s, this);</span>
+    }
+
+    //
+
+    private boolean addNamespaceForElement(Element elt, String uri, String prefix, Map map) {
+<span class="nc bnc" id="L283" title="All 6 branches missed.">        if (uri != null &amp;&amp; uri.length() &gt; 0 &amp;&amp; (!map.containsKey(prefix))) {</span>
+<span class="nc" id="L284">            map.put(prefix, new XPathNamespace(elt, uri, prefix));</span>
+<span class="nc" id="L285">            return true;</span>
+        }
+<span class="nc" id="L287">        return false;</span>
+    }
+
+    //
+
+    public Iterator getNamespaceAxisIterator(Object o) {
+<span class="nc bnc" id="L293" title="All 2 branches missed.">        if (!isElement(o)) {</span>
+<span class="nc" id="L294">            return JaxenConstants.EMPTY_ITERATOR;</span>
+        }
+<span class="nc" id="L296">        Map nsMap = new HashMap();</span>
+<span class="nc" id="L297">        Element elt = (Element) o;</span>
+<span class="nc" id="L298">        ParentNode parent = elt;</span>
+
+<span class="nc bnc" id="L300" title="All 2 branches missed.">        while (parent instanceof Element) {</span>
+<span class="nc" id="L301">            elt = (Element) parent;</span>
+<span class="nc" id="L302">            String uri = elt.getNamespaceURI();</span>
+<span class="nc" id="L303">            String prefix = elt.getNamespacePrefix();</span>
+<span class="nc" id="L304">            addNamespaceForElement(elt, uri, prefix, nsMap);</span>
+<span class="nc" id="L305">            int count = elt.getNamespaceDeclarationCount();</span>
+<span class="nc bnc" id="L306" title="All 2 branches missed.">            for (int i = 0; i &lt; count; i++) {</span>
+<span class="nc" id="L307">                prefix = elt.getNamespacePrefix(i);</span>
+<span class="nc" id="L308">                uri = elt.getNamespaceURI(prefix);</span>
+<span class="nc" id="L309">                addNamespaceForElement(elt, uri, prefix, nsMap);</span>
+            }
+<span class="nc" id="L311">            parent = elt.getParent();</span>
+<span class="nc" id="L312">        }</span>
+<span class="nc" id="L313">        addNamespaceForElement(elt, &quot;http://www.w3.org/XML/1998/namespace&quot;, &quot;xml&quot;, nsMap);</span>
+
+<span class="nc" id="L315">        return nsMap.values().iterator();</span>
+    }
+
+    //
+
+    private abstract static class IndexIterator implements Iterator {
+<span class="nc" id="L321">        private Object o = null;</span>
+<span class="nc" id="L322">        private int pos = 0, end = -1;</span>
+
+<span class="nc" id="L324">        public IndexIterator(Object o, int pos, int end) {</span>
+<span class="nc" id="L325">            this.o = o;</span>
+<span class="nc" id="L326">            this.pos = pos;</span>
+<span class="nc" id="L327">            this.end = end;</span>
+<span class="nc" id="L328">        }</span>
+
+        public boolean hasNext() {
+<span class="nc bnc" id="L331" title="All 2 branches missed.">            return pos &lt; end;</span>
+        }
+
+        public abstract Object get(Object o, int i);
+
+        public Object next() {
+<span class="nc" id="L337">            return get(o, pos++);</span>
+        }
+
+        public void remove() {
+<span class="nc" id="L341">            throw new UnsupportedOperationException();</span>
+        }
+    }
+
+    /**
+     * Wrapper for XOM namespace nodes to give them a parent,
+     * as required by the XPath data model.
+     *
+     * @author Erwin Bolwidt
+     */
+    private static class XPathNamespace {
+        private Element element;
+
+        private String uri, prefix;
+
+<span class="nc" id="L356">        public XPathNamespace(Element elt, String uri, String prefix) {</span>
+<span class="nc" id="L357">            element = elt;</span>
+<span class="nc" id="L358">            this.uri = uri;</span>
+<span class="nc" id="L359">            this.prefix = prefix;</span>
+<span class="nc" id="L360">        }</span>
+
+        /**
+         * Returns the XOM element from which this namespace node has been
+         * retrieved. The result may be null when the namespace node has not yet
+         * been assigned to an element.
+         */
+        public Element getElement() {
+<span class="nc" id="L368">            return element;</span>
+        }
+
+        public String getNamespaceURI() {
+<span class="nc" id="L372">            return uri;</span>
+        }
+
+        public String getNamespacePrefix() {
+<span class="nc" id="L376">            return prefix;</span>
+        }
+
+        public String toString() {
+<span class="nc" id="L380">            return (&quot;[xmlns:&quot; + prefix + &quot;=\&quot;&quot; +</span>
+                    uri + &quot;\&quot;, element=&quot; +
+<span class="nc" id="L382">                    element.getLocalName() + &quot;]&quot;);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GJYearOfEraDateTimeField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">GJYearOfEraDateTimeField.java</span></div><h1>GJYearOfEraDateTimeField.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2013 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DurationField;
+import org.joda.time.ReadablePartial;
+import org.joda.time.field.DecoratedDateTimeField;
+import org.joda.time.field.FieldUtils;
+
+/**
+ * Provides time calculations for the year of era component of time.
+ * 
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+final class GJYearOfEraDateTimeField extends DecoratedDateTimeField {
+
+    @SuppressWarnings(&quot;unused&quot;)
+    private static final long serialVersionUID = -5961050944769862059L;
+
+    private final BasicChronology iChronology;
+
+    /**
+     * Restricted constructor.
+     */
+    GJYearOfEraDateTimeField(DateTimeField yearField, BasicChronology chronology) {
+<span class="fc" id="L42">        super(yearField, DateTimeFieldType.yearOfEra());</span>
+<span class="fc" id="L43">        iChronology = chronology;</span>
+<span class="fc" id="L44">    }</span>
+
+    @Override
+    public DurationField getRangeDurationField() {
+<span class="fc" id="L48">        return iChronology.eras();</span>
+    }
+
+    public int get(long instant) {
+<span class="fc" id="L52">        int year = getWrappedField().get(instant);</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (year &lt;= 0) {</span>
+<span class="fc" id="L54">            year = 1 - year;</span>
+        }
+<span class="fc" id="L56">        return year;</span>
+    }
+
+    public long add(long instant, int years) {
+<span class="fc" id="L60">        return getWrappedField().add(instant, years);</span>
+    }
+
+    public long add(long instant, long years) {
+<span class="nc" id="L64">        return getWrappedField().add(instant, years);</span>
+    }
+
+    public long addWrapField(long instant, int years) {
+<span class="nc" id="L68">        return getWrappedField().addWrapField(instant, years);</span>
+    }
+
+    public int[] addWrapField(ReadablePartial instant, int fieldIndex, int[] values, int years) {
+<span class="nc" id="L72">        return getWrappedField().addWrapField(instant, fieldIndex, values, years);</span>
+    }
+
+    public int getDifference(long minuendInstant, long subtrahendInstant) {
+<span class="nc" id="L76">        return getWrappedField().getDifference(minuendInstant, subtrahendInstant);</span>
+    }
+
+    public long getDifferenceAsLong(long minuendInstant, long subtrahendInstant) {
+<span class="nc" id="L80">        return getWrappedField().getDifferenceAsLong(minuendInstant, subtrahendInstant);</span>
+    }
+
+    /**
+     * Set the year component of the specified time instant.
+     * 
+     * @param instant  the time instant in millis to update.
+     * @param year  the year (0,292278994) to update the time to.
+     * @return the updated time instant.
+     * @throws IllegalArgumentException  if year is invalid.
+     */
+    public long set(long instant, int year) {
+<span class="fc" id="L92">        FieldUtils.verifyValueBounds(this, year, 1, getMaximumValue());</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (iChronology.getYear(instant) &lt;= 0) {</span>
+<span class="fc" id="L94">            year = 1 - year;</span>
+        }
+<span class="fc" id="L96">        return super.set(instant, year);</span>
+    }
+
+    public int getMinimumValue() {
+<span class="fc" id="L100">        return 1;</span>
+    }
+
+    public int getMaximumValue() {
+<span class="fc" id="L104">        return getWrappedField().getMaximumValue();</span>
+    }
+
+    public long roundFloor(long instant) {
+<span class="fc" id="L108">        return getWrappedField().roundFloor(instant);</span>
+    }
+
+    public long roundCeiling(long instant) {
+<span class="nc" id="L112">        return getWrappedField().roundCeiling(instant);</span>
+    }
+
+    public long remainder(long instant) {
+<span class="nc" id="L116">        return getWrappedField().remainder(instant);</span>
+    }
+
+    /**
+     * Serialization singleton
+     */
+    private Object readResolve() {
+<span class="nc" id="L123">        return iChronology.yearOfEra();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,56 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.4% done, time left: unknown  0.8% done, time left: unknown  0.9% done, time left: unknown  1.0% done, time left:   0:02:21    1.0% done, time left:   0:03:31  1.0% done, time left:   0:04:42  1.0% done, time left:   0:05:53  1.1% done, time left:   0:05:27  1.4% done, time left:   0:04:53  1.9% done, time left:   0:04:21  2.5% done, time left:   0:03:54  3.0% done, time left:   0:03:33  3.9% done, time left:   0:03:16  4.4% done, time left:   0:03:01  5.5% done, time left:   0:02:50  6.5% done, time left:   0:02:40  7.5% done, time left:   0:02:31  8.4% done, time left:   0:02:21  9.3% done, time left:   0:02:11 10.0% done, time left:   0:02:02 11.0% done, time left:   0:01:53 12.0% done, time left:   0:01:44 13.4% done, time left:   0:01:35 14.7% done, time left:   0:01:25 16.2% done, time left:   0:01:15 17.6% done, time left:   0:01:06 19.1% done, time left:   0:00:57 20.5% done, time left:   0:00:49 21.9% done, time left:   0:00:42 23.4% done, time left:   0:00:36 24.9% done, time left:   0:00:30 26.4% done, time left:   0:00:26 27.3% done, time left:   0:00:22 28.6% done, time left:   0:00:19 30.1% done, time left:   0:00:17 31.6% done, time left:   0:00:15 33.1% done, time left:   0:00:13 34.6% done, time left:   0:00:11 36.0% done, time left:   0:00:10 37.4% done, time left:   0:00:09 38.8% done, time left:   0:00:08 40.2% done, time left:   0:00:07 41.2% done, time left:   0:00:06 41.2% done, time left:   0:00:05 41.5% done, time left:   0:00:04 42.4% done, time left:   0:00:04 43.4% done, time left:   0:00:04 44.5% done, time left:   0:00:04 45.1% done, time left:   0:00:04 46.3% done, time left:   0:00:04 47.5% done, time left:   0:00:04 48.8% done, time left:   0:00:04 50.0% done, time left:   0:00:04 50.6% done, time left:   0:00:04 52.1% done, time left:   0:00:04 53.4% done, time left:   0:00:04 54.6% done, time left:   0:00:03 55.9% done, time left:   0:00:03 57.2% done, time left:   0:00:03 58.6% done, time left:   0:00:03 60.0% done, time left:   0:00:03 61.1% done, time left:   0:00:02 62.4% done, time left:   0:00:02 63.9% done, time left:   0:00:02 65.2% done, time left:   0:00:02 65.5% done, time left:   0:00:01 66.9% done, time left:   0:00:01 68.3% done, time left:   0:00:01 69.7% done, time left:   0:00:01 71.1% done, time left:   0:00:01 72.4% done, time left:   0:00:01 73.5% done, time left:   0:00:01 74.7% done, time left:   0:00:01 78.0% done, time left:   0:00:00 81.3% done, time left:   0:00:00 87.0% done, time left:   0:00:00 93.1% done, time left:   0:00:00 95.7% done, time left:   0:00:00 99.2% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.codec.language.RefinedSoundexTest.testEncode:75:*]:
+org.apache.commons.codec.language.RefinedSoundex.encode:163 ALOAD 1
+org.apache.commons.codec.language.RefinedSoundex.encode:163 INVOKEVIRTUAL org/apache/commons/codec/language/RefinedSoundex.soundex(Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.codec.language.RefinedSoundex.encode:163 ARETURN
+org.apache.commons.codec.language.RefinedSoundex.soundex:190 ALOAD 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:190 IFNONNULL L0 true false
+org.apache.commons.codec.language.RefinedSoundex.soundex:193 ALOAD 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:193 INVOKESTATIC org/apache/commons/codec/language/SoundexUtils.clean(Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.codec.language.RefinedSoundex.soundex:193 ASTORE 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:194 ALOAD 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:194 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.codec.language.RefinedSoundex.soundex:194 IFNE L1 true false
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 ICONST_0
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 ISTORE 5
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 ILOAD 5
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 ALOAD 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 IF_ICMPGE L6 true true
+org.apache.commons.codec.language.RefinedSoundex.soundex:204 IINC 5 1
+org.apache.commons.codec.language.RefinedSoundex.soundex:217 INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String;
+org.apache.commons.codec.language.RefinedSoundex.soundex:217 ARETURN
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:75 LDC "D6043"
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:75 GETSTATIC org/apache/commons/codec/language/RefinedSoundex.US_ENGLISH Lorg/apache/commons/codec/language/RefinedSoundex;
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:75 LDC "dogs"
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:75 INVOKEVIRTUAL org/apache/commons/codec/language/RefinedSoundex.encode(Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.codec.language.RefinedSoundexTest.testEncode:75 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.codec.language.SoundexUtils.clean:42 ALOAD 0
+org.apache.commons.codec.language.SoundexUtils.clean:42 IFNULL L0 false true
+org.apache.commons.codec.language.SoundexUtils.clean:42 ALOAD 0
+org.apache.commons.codec.language.SoundexUtils.clean:42 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.codec.language.SoundexUtils.clean:42 IFNE L1 true false
+org.apache.commons.codec.language.SoundexUtils.clean:45 ALOAD 0
+org.apache.commons.codec.language.SoundexUtils.clean:45 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.codec.language.SoundexUtils.clean:45 ISTORE 1
+org.apache.commons.codec.language.SoundexUtils.clean:47 ICONST_0
+org.apache.commons.codec.language.SoundexUtils.clean:47 ISTORE 3
+org.apache.commons.codec.language.SoundexUtils.clean:48 ICONST_0
+org.apache.commons.codec.language.SoundexUtils.clean:48 ISTORE 4
+org.apache.commons.codec.language.SoundexUtils.clean:48 ILOAD 4
+org.apache.commons.codec.language.SoundexUtils.clean:48 ILOAD 1
+org.apache.commons.codec.language.SoundexUtils.clean:48 IF_ICMPGE L4 true true
+org.apache.commons.codec.language.SoundexUtils.clean:48 IINC 4 1
+org.apache.commons.codec.language.SoundexUtils.clean:49 ALOAD 0
+org.apache.commons.codec.language.SoundexUtils.clean:49 ILOAD 4
+org.apache.commons.codec.language.SoundexUtils.clean:49 INVOKEVIRTUAL java/lang/String.charAt(I)C
+org.apache.commons.codec.language.SoundexUtils.clean:49 INVOKESTATIC java/lang/Character.isLetter(C)Z
+org.apache.commons.codec.language.SoundexUtils.clean:49 IFEQ L3 false true
+org.apache.commons.codec.language.SoundexUtils.clean:50 IINC 3 1
+org.apache.commons.codec.language.SoundexUtils.clean:53 ILOAD 3
+org.apache.commons.codec.language.SoundexUtils.clean:53 ILOAD 1
+org.apache.commons.codec.language.SoundexUtils.clean:53 IF_ICMPNE L5 false true
+org.apache.commons.codec.language.SoundexUtils.clean:54 ARETURN
+
+Slice consists of 6065 bytecode instructions.
+Computation took 8.93 seconds.

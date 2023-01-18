@@ -1,0 +1,149 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  0.4% done, time left: unknown  0.5% done, time left: unknown  0.9% done, time left: unknown  1.4% done, time left: unknown  1.5% done, time left:   0:01:49    1.5% done, time left:   0:02:44  1.6% done, time left:   0:02:44  1.7% done, time left:   0:02:33  2.3% done, time left:   0:02:13  3.4% done, time left:   0:01:57  4.6% done, time left:   0:01:44  6.4% done, time left:   0:01:34  7.4% done, time left:   0:01:26  8.1% done, time left:   0:01:18  8.8% done, time left:   0:01:11  9.4% done, time left:   0:01:06 10.8% done, time left:   0:01:01 12.2% done, time left:   0:00:55 14.1% done, time left:   0:00:48 15.7% done, time left:   0:00:41 17.5% done, time left:   0:00:35 19.3% done, time left:   0:00:30 21.1% done, time left:   0:00:25 22.7% done, time left:   0:00:21 28.7% done, time left:   0:00:04 29.7% done, time left:   0:00:01 31.9% done, time left:   0:00:01 34.1% done, time left:   0:00:01 36.5% done, time left:   0:00:02 38.6% done, time left:   0:00:02 41.3% done, time left:   0:00:02 44.0% done, time left:   0:00:02 46.8% done, time left:   0:00:02 49.5% done, time left:   0:00:02 52.3% done, time left:   0:00:01 54.8% done, time left:   0:00:01 56.8% done, time left:   0:00:01 58.7% done, time left:   0:00:01 61.3% done, time left:   0:00:01 64.0% done, time left:   0:00:01 66.7% done, time left:   0:00:00 67.7% done, time left:   0:00:00 69.1% done, time left:   0:00:00 71.2% done, time left:   0:00:00 73.6% done, time left:   0:00:00 75.7% done, time left:   0:00:00 78.2% done, time left:   0:00:00 80.7% done, time left:   0:00:00 82.9% done, time left:   0:00:00 85.1% done, time left:   0:00:00 86.4% done, time left:   0:00:00 87.4% done, time left:   0:00:00 89.5% done, time left:   0:00:00 91.9% done, time left:   0:00:00 94.1% done, time left:   0:00:00 96.6% done, time left:   0:00:00 98.3% done, time left:   0:00:00 99.3% done, time left:   0:00:00 100.1% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:182:*]:
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:164 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:164 IFNONNULL L8 false true
+org.joda.time.DateTimeZone.getDefault:174 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:174 IFNONNULL L4 false true
+org.joda.time.DateTimeZone.getDefault:175 INVOKESTATIC java/util/TimeZone.getDefault()Ljava/util/TimeZone;
+org.joda.time.DateTimeZone.forTimeZone:353 ALOAD 0
+org.joda.time.DateTimeZone.forTimeZone:353 IFNONNULL L0 true false
+org.joda.time.DateTimeZone.forTimeZone:356 ALOAD 0
+org.joda.time.DateTimeZone.forTimeZone:356 INVOKEVIRTUAL java/util/TimeZone.getID()Ljava/lang/String;
+org.joda.time.DateTimeZone.forTimeZone:356 ASTORE 1
+org.joda.time.DateTimeZone.forTimeZone:360 ALOAD 1
+org.joda.time.DateTimeZone.forTimeZone:360 LDC "UTC"
+org.joda.time.DateTimeZone.forTimeZone:360 INVOKEVIRTUAL java/lang/String.equals(Ljava/lang/Object;)Z
+org.joda.time.DateTimeZone.forTimeZone:360 IFEQ L2 true false
+org.joda.time.DateTimeZone.forTimeZone:365 ACONST_NULL
+org.joda.time.DateTimeZone.forTimeZone:365 ASTORE 2
+org.joda.time.DateTimeZone.forTimeZone:367 INVOKESTATIC org/joda/time/DateTimeZone.getProvider()Lorg/joda/time/tz/Provider;
+org.joda.time.DateTimeZone.forTimeZone:367 ASTORE 4
+org.joda.time.DateTimeZone.forTimeZone:371 ALOAD 2
+org.joda.time.DateTimeZone.forTimeZone:371 IFNONNULL L4 false true
+org.joda.time.DateTimeZone.forTimeZone:372 ALOAD 4
+org.joda.time.DateTimeZone.forTimeZone:372 ALOAD 1
+org.joda.time.DateTimeZone.forTimeZone:372 INVOKEINTERFACE org/joda/time/tz/Provider.getZone(Ljava/lang/String;)Lorg/joda/time/DateTimeZone;
+org.joda.time.DateTimeZone.forTimeZone:372 ASTORE 2
+org.joda.time.DateTimeZone.forTimeZone:374 ALOAD 2
+org.joda.time.DateTimeZone.forTimeZone:374 IFNULL L5 false true
+org.joda.time.DateTimeZone.forTimeZone:375 ALOAD 2
+org.joda.time.DateTimeZone.forTimeZone:375 ARETURN
+org.joda.time.DateTimeZone.getProvider:447 GETSTATIC org/joda/time/DateTimeZone.cProvider Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getProvider:447 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getProvider:447 ASTORE 0
+org.joda.time.DateTimeZone.getProvider:454 ALOAD 0
+org.joda.time.DateTimeZone.getProvider:454 ARETURN
+org.joda.time.chrono.BuddhistChronology.getInstance:108 GETSTATIC org/joda/time/chrono/BuddhistChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.BuddhistChronology.getInstance:108 ALOAD 0
+org.joda.time.chrono.BuddhistChronology.getInstance:108 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.BuddhistChronology.getInstance:108 ASTORE 1
+org.joda.time.chrono.BuddhistChronology.getInstance:109 ALOAD 1
+org.joda.time.chrono.BuddhistChronology.getInstance:109 IFNONNULL L1 false true
+org.joda.time.chrono.BuddhistChronology.getInstance:114 NEW org/joda/time/chrono/BuddhistChronology
+org.joda.time.chrono.BuddhistChronology.getInstance:114 ASTORE 1
+org.joda.time.chrono.BuddhistChronology.getInstance:115 GETSTATIC org/joda/time/chrono/BuddhistChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.BuddhistChronology.getInstance:115 ALOAD 0
+org.joda.time.chrono.BuddhistChronology.getInstance:115 ALOAD 1
+org.joda.time.chrono.BuddhistChronology.getInstance:115 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.BuddhistChronology.getInstance:120 ALOAD 1
+org.joda.time.chrono.BuddhistChronology.getInstance:120 ARETURN
+org.joda.time.chrono.JulianChronology.getInstance:103 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.convert.CalendarConverter.getChronology:68 ALOAD 2
+org.joda.time.convert.CalendarConverter.getChronology:68 IFNULL L0 true false
+org.joda.time.convert.CalendarConverter.getChronology:71 ALOAD 1
+org.joda.time.convert.CalendarConverter.getChronology:71 ASTORE 3
+org.joda.time.convert.CalendarConverter.getChronology:74 ALOAD 3
+org.joda.time.convert.CalendarConverter.getChronology:74 INVOKEVIRTUAL java/util/Calendar.getTimeZone()Ljava/util/TimeZone;
+org.joda.time.convert.CalendarConverter.getChronology:74 INVOKESTATIC org/joda/time/DateTimeZone.forTimeZone(Ljava/util/TimeZone;)Lorg/joda/time/DateTimeZone;
+org.joda.time.convert.CalendarConverter.getChronology:74 ASTORE 4
+org.joda.time.convert.CalendarConverter.getChronology:79 ALOAD 3
+org.joda.time.convert.CalendarConverter.getChronology:79 ALOAD 4
+org.joda.time.convert.CalendarConverter.getChronology:79 INVOKEVIRTUAL org/joda/time/convert/CalendarConverter.getChronology(Ljava/lang/Object;Lorg/joda/time/DateTimeZone;)Lorg/joda/time/Chronology;
+org.joda.time.convert.CalendarConverter.getChronology:79 ARETURN
+org.joda.time.convert.CalendarConverter.getChronology:94 ALOAD 1
+org.joda.time.convert.CalendarConverter.getChronology:94 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.joda.time.convert.CalendarConverter.getChronology:94 INVOKEVIRTUAL java/lang/Class.getName()Ljava/lang/String;
+org.joda.time.convert.CalendarConverter.getChronology:94 LDC ".BuddhistCalendar"
+org.joda.time.convert.CalendarConverter.getChronology:94 INVOKEVIRTUAL java/lang/String.endsWith(Ljava/lang/String;)Z
+org.joda.time.convert.CalendarConverter.getChronology:94 IFEQ L0 false true
+org.joda.time.convert.CalendarConverter.getChronology:95 ALOAD 2
+org.joda.time.convert.CalendarConverter.getChronology:95 INVOKESTATIC org/joda/time/chrono/BuddhistChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/BuddhistChronology;
+org.joda.time.convert.CalendarConverter.getChronology:95 ARETURN
+org.joda.time.convert.TestCalendarConverter.main:62 INVOKEVIRTUAL org/joda/time/convert/TestCalendarConverter.setUp()V
+org.joda.time.convert.TestCalendarConverter.main:65 INVOKEVIRTUAL org/joda/time/convert/TestCalendarConverter.testGetChronology_Object_Zone()V
+org.joda.time.convert.TestCalendarConverter.main:66 INVOKEVIRTUAL org/joda/time/convert/TestCalendarConverter.testGetChronology_Object_nullChronology()V
+org.joda.time.convert.TestCalendarConverter.setUp:86 INVOKESTATIC org/joda/time/chrono/JulianChronology.getInstance()Lorg/joda/time/chrono/JulianChronology;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:125 LDC "Europe/Paris"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:125 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:128 LDC "Europe/Moscow"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:128 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:131 LDC "Europe/Moscow"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:131 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:135 LDC "Europe/Moscow"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:135 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:139 LDC "Europe/Moscow"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:139 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:143 LDC "Europe/Moscow"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:143 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:147 LDC "sun.util.BuddhistCalendar"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:147 INVOKESTATIC java/lang/Class.forName(Ljava/lang/String;)Ljava/lang/Class;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:147 INVOKEVIRTUAL java/lang/Class.newInstance()Ljava/lang/Object;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:147 ASTORE 3
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:148 LDC "Europe/Moscow"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:148 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:149 GETSTATIC org/joda/time/convert/TestCalendarConverter.PARIS Lorg/joda/time/DateTimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:149 INVOKESTATIC org/joda/time/chrono/BuddhistChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/BuddhistChronology;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:149 ALOAD 3
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_Zone:149 INVOKEVIRTUAL org/joda/time/convert/CalendarConverter.getChronology(Ljava/lang/Object;Lorg/joda/time/DateTimeZone;)Lorg/joda/time/Chronology;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:161 LDC "Europe/Moscow"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:161 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:165 LDC "Europe/Moscow"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:165 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:169 LDC "Europe/Moscow"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:169 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:176 LDC "Europe/Moscow"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:176 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:180 LDC "sun.util.BuddhistCalendar"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:180 INVOKESTATIC java/lang/Class.forName(Ljava/lang/String;)Ljava/lang/Class;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:180 INVOKEVIRTUAL java/lang/Class.newInstance()Ljava/lang/Object;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:180 ASTORE 3
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:181 LDC "Europe/Moscow"
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:181 INVOKESTATIC java/util/TimeZone.getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:182 GETSTATIC org/joda/time/convert/TestCalendarConverter.MOSCOW Lorg/joda/time/DateTimeZone;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:182 INVOKESTATIC org/joda/time/chrono/BuddhistChronology.getInstance(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/chrono/BuddhistChronology;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:182 GETSTATIC org/joda/time/convert/CalendarConverter.INSTANCE Lorg/joda/time/convert/CalendarConverter;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:182 ALOAD 3
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:182 ACONST_NULL
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:182 CHECKCAST org/joda/time/Chronology
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:182 INVOKEVIRTUAL org/joda/time/convert/CalendarConverter.getChronology(Ljava/lang/Object;Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.convert.TestCalendarConverter.testGetChronology_Object_nullChronology:182 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+org.joda.time.tz.ZoneInfoProvider.getZone:151 ALOAD 1
+org.joda.time.tz.ZoneInfoProvider.getZone:151 IFNONNULL L0 true false
+org.joda.time.tz.ZoneInfoProvider.getZone:155 ALOAD 0
+org.joda.time.tz.ZoneInfoProvider.getZone:155 GETFIELD org/joda/time/tz/ZoneInfoProvider.iZoneInfoMap Ljava/util/Map;
+org.joda.time.tz.ZoneInfoProvider.getZone:155 ALOAD 1
+org.joda.time.tz.ZoneInfoProvider.getZone:155 INVOKEINTERFACE java/util/Map.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.tz.ZoneInfoProvider.getZone:155 ASTORE 2
+org.joda.time.tz.ZoneInfoProvider.getZone:156 ALOAD 2
+org.joda.time.tz.ZoneInfoProvider.getZone:156 IFNONNULL L1 true false
+org.joda.time.tz.ZoneInfoProvider.getZone:160 ALOAD 2
+org.joda.time.tz.ZoneInfoProvider.getZone:160 INSTANCEOF java/lang/ref/SoftReference
+org.joda.time.tz.ZoneInfoProvider.getZone:160 IFEQ L3 false true
+org.joda.time.tz.ZoneInfoProvider.getZone:162 ALOAD 2
+org.joda.time.tz.ZoneInfoProvider.getZone:162 ASTORE 3
+org.joda.time.tz.ZoneInfoProvider.getZone:163 ALOAD 3
+org.joda.time.tz.ZoneInfoProvider.getZone:163 INVOKEVIRTUAL java/lang/ref/SoftReference.get()Ljava/lang/Object;
+org.joda.time.tz.ZoneInfoProvider.getZone:163 ASTORE 4
+org.joda.time.tz.ZoneInfoProvider.getZone:164 ALOAD 4
+org.joda.time.tz.ZoneInfoProvider.getZone:164 IFNULL L2 false true
+org.joda.time.tz.ZoneInfoProvider.getZone:165 ALOAD 4
+org.joda.time.tz.ZoneInfoProvider.getZone:165 ARETURN
+
+Slice consists of 1533 bytecode instructions.
+Computation took 6.79 seconds.

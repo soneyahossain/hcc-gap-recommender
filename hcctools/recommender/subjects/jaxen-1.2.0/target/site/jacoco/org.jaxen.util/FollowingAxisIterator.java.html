@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FollowingAxisIterator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.util</a> &gt; <span class="el_source">FollowingAxisIterator.java</span></div><h1>FollowingAxisIterator.java</h1><pre class="source lang-java linenums">package org.jaxen.util;
+
+/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2005 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+import org.jaxen.JaxenConstants;
+import org.jaxen.JaxenRuntimeException;
+import org.jaxen.Navigator;
+import org.jaxen.UnsupportedAxisException;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+/**
+ * Represents the XPath &lt;code&gt;following&lt;/code&gt; axis.
+ * The &quot;&lt;code&gt;following&lt;/code&gt; axis contains all nodes in the same document as the context
+ * node that are after the context node in document order, excluding any descendants
+ * and excluding attribute nodes and namespace nodes.&quot;
+ *
+ * @version 1.2b12
+ */
+public class FollowingAxisIterator implements Iterator {
+    private Object contextNode;
+
+    private Navigator navigator;
+
+    private Iterator siblings;
+
+    private Iterator currentSibling;
+
+    /**
+     * Create a new &lt;code&gt;following&lt;/code&gt; axis iterator.
+     *
+     * @param contextNode the node to start from
+     * @param navigator   the object model specific navigator
+     */
+    public FollowingAxisIterator(Object contextNode,
+<span class="fc" id="L83">                                 Navigator navigator) throws UnsupportedAxisException {</span>
+<span class="fc" id="L84">        this.contextNode = contextNode;</span>
+<span class="fc" id="L85">        this.navigator = navigator;</span>
+<span class="fc" id="L86">        this.siblings = navigator.getFollowingSiblingAxisIterator(contextNode);</span>
+<span class="fc" id="L87">        this.currentSibling = JaxenConstants.EMPTY_ITERATOR;</span>
+<span class="fc" id="L88">    }</span>
+
+    private boolean goForward() {
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        while (!siblings.hasNext()) {</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if (!goUp()) {</span>
+<span class="fc" id="L93">                return false;</span>
+            }
+        }
+
+<span class="fc" id="L97">        Object nextSibling = siblings.next();</span>
+
+<span class="fc" id="L99">        this.currentSibling = new DescendantOrSelfAxisIterator(nextSibling, navigator);</span>
+
+<span class="fc" id="L101">        return true;</span>
+    }
+
+    private boolean goUp() {
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">        if (contextNode == null</span>
+                ||
+<span class="fc bfc" id="L107" title="All 2 branches covered.">                navigator.isDocument(contextNode)) {</span>
+<span class="fc" id="L108">            return false;</span>
+        }
+
+        try {
+<span class="fc" id="L112">            contextNode = navigator.getParentNode(contextNode);</span>
+
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">            if (contextNode != null</span>
+                    &amp;&amp;
+<span class="fc bfc" id="L116" title="All 2 branches covered.">                    !navigator.isDocument(contextNode)) {</span>
+<span class="fc" id="L117">                siblings = navigator.getFollowingSiblingAxisIterator(contextNode);</span>
+<span class="fc" id="L118">                return true;</span>
+            } else {
+<span class="fc" id="L120">                return false;</span>
+            }
+<span class="nc" id="L122">        } catch (UnsupportedAxisException e) {</span>
+<span class="nc" id="L123">            throw new JaxenRuntimeException(e);</span>
+        }
+    }
+
+    /**
+     * Returns true if there are any following nodes remaining;
+     * false otherwise.
+     *
+     * @return true if any following nodes remain
+     * @see java.util.Iterator#hasNext()
+     */
+    public boolean hasNext() {
+<span class="fc bfc" id="L135" title="All 2 branches covered.">        while (!currentSibling.hasNext()) {</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">            if (!goForward()) {</span>
+<span class="fc" id="L137">                return false;</span>
+            }
+        }
+
+<span class="fc" id="L141">        return true;</span>
+    }
+
+    /**
+     * Returns the next following node.
+     *
+     * @return the next following node
+     * @throws NoSuchElementException if no following nodes remain
+     * @see java.util.Iterator#next()
+     */
+    public Object next() throws NoSuchElementException {
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        if (!hasNext()) {</span>
+<span class="fc" id="L153">            throw new NoSuchElementException();</span>
+        }
+
+<span class="fc" id="L156">        return currentSibling.next();</span>
+    }
+
+    /**
+     * This operation is not supported.
+     *
+     * @throws UnsupportedOperationException always
+     */
+    public void remove() throws UnsupportedOperationException {
+<span class="fc" id="L165">        throw new UnsupportedOperationException();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

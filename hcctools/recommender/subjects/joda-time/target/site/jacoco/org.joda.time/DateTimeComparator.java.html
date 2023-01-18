@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateTimeComparator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">DateTimeComparator.java</span></div><h1>DateTimeComparator.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2009 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import java.io.Serializable;
+import java.util.Comparator;
+
+import org.joda.time.convert.ConverterManager;
+import org.joda.time.convert.InstantConverter;
+
+/**
+ * DateTimeComparator provides comparators to compare one date with another.
+ * &lt;p&gt;
+ * Dates may be specified using any object recognised by the
+ * {@link org.joda.time.convert.ConverterManager ConverterManager} class.
+ * &lt;p&gt;
+ * The default objects recognised by the comparator are:
+ * &lt;ul&gt;
+ * &lt;li&gt;ReadableInstant
+ * &lt;li&gt;String
+ * &lt;li&gt;Calendar
+ * &lt;li&gt;Date
+ * &lt;li&gt;Long (milliseconds)
+ * &lt;li&gt;null (now)
+ * &lt;/ul&gt;
+ *
+ * &lt;p&gt;
+ * DateTimeComparator is thread-safe and immutable.
+ *
+ * @author Guy Allard
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public class DateTimeComparator implements Comparator&lt;Object&gt;, Serializable {
+
+    /** Serialization lock */
+    private static final long serialVersionUID = -6097339773320178364L;
+
+    /** Singleton instance */
+<span class="fc" id="L54">    private static final DateTimeComparator ALL_INSTANCE = new DateTimeComparator(null, null);</span>
+    /** Singleton instance */
+<span class="fc" id="L56">    private static final DateTimeComparator DATE_INSTANCE = new DateTimeComparator(DateTimeFieldType.dayOfYear(), null);</span>
+    /** Singleton instance */
+<span class="fc" id="L58">    private static final DateTimeComparator TIME_INSTANCE = new DateTimeComparator(null, DateTimeFieldType.dayOfYear());</span>
+
+    /** The lower limit of fields to compare, null if no limit */
+    private final DateTimeFieldType iLowerLimit;
+    /** The upper limit of fields to compare, null if no limit */
+    private final DateTimeFieldType iUpperLimit;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a DateTimeComparator the compares the entire date time value.
+     * 
+     * @return a comparator over all fields
+     */
+    public static DateTimeComparator getInstance() {
+<span class="fc" id="L72">        return ALL_INSTANCE;</span>
+    }
+
+    /**
+     * Returns a DateTimeComparator with a lower limit only. Fields of a
+     * magnitude less than the lower limit are excluded from comparisons.
+     * &lt;p&gt;
+     * The time-zone is considered when using this comparator.
+     * The input millis are truncated using the time-zone of that input value.
+     * Thus, two inputs with different time-zones will typically not be equal
+     *
+     * @param lowerLimit  inclusive lower limit for fields to be compared, null means no limit
+     * @return a comparator over all fields above the lower limit
+     */
+    public static DateTimeComparator getInstance(DateTimeFieldType lowerLimit) {
+<span class="fc" id="L87">        return getInstance(lowerLimit, null);</span>
+    }
+
+    /**
+     * Returns a DateTimeComparator with a lower and upper limit. Fields of a
+     * magnitude less than the lower limit are excluded from comparisons.
+     * Fields of a magnitude greater than or equal to the upper limit are also
+     * excluded from comparisons. Either limit may be specified as null, which
+     * indicates an unbounded limit.
+     * &lt;p&gt;
+     * The time-zone is considered when using this comparator unless both limits are null.
+     * The input millis are rounded/truncated using the time-zone of that input value.
+     * Thus, two inputs with different time-zones will typically not be equal
+     *
+     * @param lowerLimit  inclusive lower limit for fields to be compared, null means no limit
+     * @param upperLimit  exclusive upper limit for fields to be compared, null means no limit
+     * @return a comparator over all fields between the limits
+     */
+    public static DateTimeComparator getInstance(DateTimeFieldType lowerLimit, DateTimeFieldType upperLimit) {
+<span class="fc bfc" id="L106" title="All 4 branches covered.">        if (lowerLimit == null &amp;&amp; upperLimit == null) {</span>
+<span class="fc" id="L107">            return ALL_INSTANCE;</span>
+        }
+<span class="fc bfc" id="L109" title="All 4 branches covered.">        if (lowerLimit == DateTimeFieldType.dayOfYear() &amp;&amp; upperLimit == null) {</span>
+<span class="fc" id="L110">            return DATE_INSTANCE;</span>
+        }
+<span class="fc bfc" id="L112" title="All 4 branches covered.">        if (lowerLimit == null &amp;&amp; upperLimit == DateTimeFieldType.dayOfYear()) {</span>
+<span class="fc" id="L113">            return TIME_INSTANCE;</span>
+        }
+<span class="fc" id="L115">        return new DateTimeComparator(lowerLimit, upperLimit);</span>
+    }
+
+    /**
+     * Returns a comparator that only considers date fields.
+     * Time of day is ignored.
+     * &lt;p&gt;
+     * The time-zone is considered when using this comparator.
+     * The input millis are rounded down to the start of the day
+     * in the time-zone of that input value. Thus, two inputs with
+     * different time-zones will typically not be equal
+     * 
+     * @return a comparator over all date fields
+     */
+    public static DateTimeComparator getDateOnlyInstance() {
+<span class="fc" id="L130">        return DATE_INSTANCE;</span>
+    }
+
+    /**
+     * Returns a comparator that only considers time fields.
+     * Date is ignored.
+     * &lt;p&gt;
+     * The time-zone is considered when using this comparator.
+     * The input millis are truncated to be within the day
+     * in the time-zone of that input value. Thus, two inputs with
+     * different time-zones will typically not be equal
+     * 
+     * @return a comparator over all time fields
+     */
+    public static DateTimeComparator getTimeOnlyInstance() {
+<span class="fc" id="L145">        return TIME_INSTANCE;</span>
+    }
+
+    /**
+     * Restricted constructor.
+     * 
+     * @param lowerLimit  the lower field limit, null means no limit
+     * @param upperLimit  the upper field limit, null means no limit
+     */
+    protected DateTimeComparator(DateTimeFieldType lowerLimit, DateTimeFieldType upperLimit) {
+<span class="fc" id="L155">        super();</span>
+<span class="fc" id="L156">        iLowerLimit = lowerLimit;</span>
+<span class="fc" id="L157">        iUpperLimit = upperLimit;</span>
+<span class="fc" id="L158">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the field type that represents the lower limit of comparison.
+     * 
+     * @return the field type, null if no upper limit
+     */
+    public DateTimeFieldType getLowerLimit() {
+<span class="fc" id="L167">        return iLowerLimit;</span>
+    }
+
+    /**
+     * Gets the field type that represents the upper limit of comparison.
+     * 
+     * @return the field type, null if no upper limit
+     */
+    public DateTimeFieldType getUpperLimit() {
+<span class="fc" id="L176">        return iUpperLimit;</span>
+    }
+
+    /**
+     * Compare two objects against only the range of date time fields as
+     * specified in the constructor.
+     * 
+     * @param lhsObj  the first object,
+     *      logically on the left of a &amp;lt; comparison, null means now
+     * @param rhsObj  the second object,
+     *      logically on the right of a &amp;lt; comparison, null means now
+     * @return zero if order does not matter,
+     *      negative value if lhsObj &amp;lt; rhsObj, positive value otherwise.
+     * @throws IllegalArgumentException if either argument is not supported
+     */
+    public int compare(Object lhsObj, Object rhsObj) {
+<span class="fc" id="L192">        InstantConverter conv = ConverterManager.getInstance().getInstantConverter(lhsObj);</span>
+<span class="fc" id="L193">        Chronology lhsChrono = conv.getChronology(lhsObj, (Chronology) null);</span>
+<span class="fc" id="L194">        long lhsMillis = conv.getInstantMillis(lhsObj, lhsChrono);</span>
+        
+        // handle null==null and other cases where objects are the same
+        // but only do this after checking the input is valid
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        if (lhsObj == rhsObj) {</span>
+<span class="fc" id="L199">            return 0;</span>
+        }
+        
+<span class="fc" id="L202">        conv = ConverterManager.getInstance().getInstantConverter(rhsObj);</span>
+<span class="fc" id="L203">        Chronology rhsChrono = conv.getChronology(rhsObj, (Chronology) null);</span>
+<span class="fc" id="L204">        long rhsMillis = conv.getInstantMillis(rhsObj, rhsChrono);</span>
+
+<span class="fc bfc" id="L206" title="All 2 branches covered.">        if (iLowerLimit != null) {</span>
+<span class="fc" id="L207">            lhsMillis = iLowerLimit.getField(lhsChrono).roundFloor(lhsMillis);</span>
+<span class="fc" id="L208">            rhsMillis = iLowerLimit.getField(rhsChrono).roundFloor(rhsMillis);</span>
+        }
+
+<span class="fc bfc" id="L211" title="All 2 branches covered.">        if (iUpperLimit != null) {</span>
+<span class="fc" id="L212">            lhsMillis = iUpperLimit.getField(lhsChrono).remainder(lhsMillis);</span>
+<span class="fc" id="L213">            rhsMillis = iUpperLimit.getField(rhsChrono).remainder(rhsMillis);</span>
+        }
+
+<span class="fc bfc" id="L216" title="All 2 branches covered.">        if (lhsMillis &lt; rhsMillis) {</span>
+<span class="fc" id="L217">            return -1;</span>
+<span class="fc bfc" id="L218" title="All 2 branches covered.">        } else if (lhsMillis &gt; rhsMillis) {</span>
+<span class="fc" id="L219">            return 1;</span>
+        } else {
+<span class="fc" id="L221">            return 0;</span>
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Support serialization singletons.
+     * 
+     * @return the resolved singleton instance
+     */
+    private Object readResolve() {
+<span class="fc" id="L232">        return getInstance(iLowerLimit, iUpperLimit);</span>
+    }
+
+    /**
+     * Compares this comparator to another.
+     * 
+     * @param object  the object to compare to
+     * @return true if equal
+     */
+    public boolean equals(Object object) {
+<span class="fc bfc" id="L242" title="All 2 branches covered.">        if (object instanceof DateTimeComparator) {</span>
+<span class="fc" id="L243">            DateTimeComparator other = (DateTimeComparator) object;</span>
+<span class="pc bpc" id="L244" title="3 of 4 branches missed.">            return (iLowerLimit == other.getLowerLimit() ||</span>
+<span class="pc bnc" id="L245" title="All 2 branches missed.">                    (iLowerLimit != null &amp;&amp; iLowerLimit.equals(other.getLowerLimit()))) &amp;&amp;</span>
+<span class="fc bfc" id="L246" title="All 4 branches covered.">                   (iUpperLimit == other.getUpperLimit() ||</span>
+<span class="pc bpc" id="L247" title="1 of 2 branches missed.">                    (iUpperLimit != null &amp;&amp; iUpperLimit.equals(other.getUpperLimit())));</span>
+        }
+<span class="fc" id="L249">        return false;</span>
+    }
+
+    /**
+     * Gets a suitable hashcode.
+     * 
+     * @return the hashcode
+     */
+    public int hashCode() {
+<span class="fc bfc" id="L258" title="All 4 branches covered.">        return (iLowerLimit == null ? 0 : iLowerLimit.hashCode()) +</span>
+<span class="fc" id="L259">               (123 * (iUpperLimit == null ? 0 : iUpperLimit.hashCode()));</span>
+    }
+
+    /**
+     * Gets a debugging string.
+     * 
+     * @return a debugging string
+     */
+    public String toString() {
+<span class="fc bfc" id="L268" title="All 2 branches covered.">        if (iLowerLimit == iUpperLimit) {</span>
+<span class="fc bfc" id="L269" title="All 2 branches covered.">            return &quot;DateTimeComparator[&quot;</span>
+<span class="fc" id="L270">                + (iLowerLimit == null ? &quot;&quot; : iLowerLimit.getName())</span>
+                + &quot;]&quot;;
+        } else {
+<span class="fc bfc" id="L273" title="All 2 branches covered.">            return &quot;DateTimeComparator[&quot;</span>
+<span class="fc bfc" id="L274" title="All 2 branches covered.">                + (iLowerLimit == null ? &quot;&quot; : iLowerLimit.getName())</span>
+                + &quot;-&quot;
+<span class="fc" id="L276">                + (iUpperLimit == null ? &quot;&quot; : iUpperLimit.getName())</span>
+                + &quot;]&quot;;
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

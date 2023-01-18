@@ -1,0 +1,114 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  1.0% done, time left: unknown  2.3% done, time left: unknown  3.7% done, time left: unknown  5.5% done, time left: unknown  6.0% done, time left: unknown  6.2% done, time left: unknown  7.5% done, time left: unknown  8.5% done, time left: unknown 10.1% done, time left: unknown 12.5% done, time left: unknown 15.6% done, time left: unknown 16.1% done, time left: unknown 17.6% done, time left: unknown 18.0% done, time left: unknown 18.6% done, time left: unknown 19.7% done, time left: unknown 22.1% done, time left: unknown 24.3% done, time left: unknown 24.5% done, time left: unknown 26.6% done, time left: unknown 28.1% done, time left: unknown 32.5% done, time left: unknown 38.0% done, time left: unknown 41.6% done, time left: unknown 47.7% done, time left:   0:00:00   53.6% done, time left:   0:00:00 55.8% done, time left:   0:00:00 58.0% done, time left:   0:00:00 62.5% done, time left:   0:00:00 67.4% done, time left:   0:00:00 70.2% done, time left:   0:00:00 73.3% done, time left:   0:00:00 77.4% done, time left:   0:00:00 82.4% done, time left:   0:00:00 86.1% done, time left:   0:00:00 88.9% done, time left:   0:00:00 89.9% done, time left:   0:00:00 91.9% done, time left:   0:00:00 96.8% done, time left:   0:00:00 98.8% done, time left:   0:00:00 101.1% done, time left:   0:00:00  102.8% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.TestInstant_Basics.testGet_DateTimeFieldType:174:*]:
+org.joda.time.DateTimeFieldType.secondOfDay:199 GETSTATIC org/joda/time/DateTimeFieldType.SECOND_OF_DAY_TYPE Lorg/joda/time/DateTimeFieldType;
+org.joda.time.DateTimeFieldType.secondOfDay:199 ARETURN
+org.joda.time.DateTimeFieldType$StandardDateTimeFieldType.getField:492 ALOAD 1
+org.joda.time.DateTimeFieldType$StandardDateTimeFieldType.getField:492 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.DateTimeFieldType$StandardDateTimeFieldType.getField:492 ASTORE 1
+org.joda.time.DateTimeFieldType$StandardDateTimeFieldType.getField:494 ALOAD 0
+org.joda.time.DateTimeFieldType$StandardDateTimeFieldType.getField:494 GETFIELD org/joda/time/DateTimeFieldType$StandardDateTimeFieldType.iOrdinal B
+org.joda.time.DateTimeFieldType$StandardDateTimeFieldType.getField:494 TABLESWITCH (1 => L0, 2 => L1, 3 => L2, 4 => L3, 5 => L4, 6 => L5, 7 => L6, 8 => L7, 9 => L8, 10 => L9, 11 => L10, 12 => L11, 13 => L12, 14 => L13, 15 => L14, 16 => L15, 17 => L16, 18 => L17, 19 => L18, 20 => L19, 21 => L20, 22 => L21, 23 => L22, * => L23)
+org.joda.time.DateTimeFieldType$StandardDateTimeFieldType.getField:534 ALOAD 1
+org.joda.time.DateTimeFieldType$StandardDateTimeFieldType.getField:534 INVOKEVIRTUAL org/joda/time/Chronology.secondOfDay()Lorg/joda/time/DateTimeField;
+org.joda.time.DateTimeFieldType$StandardDateTimeFieldType.getField:534 ARETURN
+org.joda.time.DateTimeUtils.currentTimeMillis:72 GETSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils.currentTimeMillis:72 INVOKEINTERFACE org/joda/time/DateTimeUtils$MillisProvider.getMillis()J
+org.joda.time.DateTimeUtils.currentTimeMillis:72 LRETURN
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 NEW org/joda/time/DateTimeUtils$FixedMillisProvider
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 DUP
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 LLOAD 0
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 INVOKESPECIAL org/joda/time/DateTimeUtils$FixedMillisProvider.<init>(J)V
+org.joda.time.DateTimeUtils.setCurrentMillisFixed:99 PUTSTATIC org/joda/time/DateTimeUtils.cMillisProvider Lorg/joda/time/DateTimeUtils$MillisProvider;
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 ALOAD 0
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 LLOAD 1
+org.joda.time.DateTimeUtils$FixedMillisProvider.<init>:563 PUTFIELD org/joda/time/DateTimeUtils$FixedMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 ALOAD 0
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 GETFIELD org/joda/time/DateTimeUtils$FixedMillisProvider.iMillis J
+org.joda.time.DateTimeUtils$FixedMillisProvider.getMillis:571 LRETURN
+org.joda.time.Instant.<init>:137 ALOAD 0
+org.joda.time.Instant.<init>:137 INVOKESTATIC org/joda/time/DateTimeUtils.currentTimeMillis()J
+org.joda.time.Instant.<init>:137 PUTFIELD org/joda/time/Instant.iMillis J
+org.joda.time.Instant.getMillis:288 ALOAD 0
+org.joda.time.Instant.getMillis:288 GETFIELD org/joda/time/Instant.iMillis J
+org.joda.time.Instant.getMillis:288 LRETURN
+org.joda.time.Instant.getChronology:300 INVOKESTATIC org/joda/time/chrono/ISOChronology.getInstanceUTC()Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.Instant.getChronology:300 ARETURN
+org.joda.time.TestInstant_Basics.<init>:46 ALOAD 0
+org.joda.time.TestInstant_Basics.<init>:46 LDC 11688
+org.joda.time.TestInstant_Basics.<init>:46 PUTFIELD org/joda/time/TestInstant_Basics.y2002days J
+org.joda.time.TestInstant_Basics.<init>:56 ALOAD 0
+org.joda.time.TestInstant_Basics.<init>:56 ALOAD 0
+org.joda.time.TestInstant_Basics.<init>:56 GETFIELD org/joda/time/TestInstant_Basics.y2002days J
+org.joda.time.TestInstant_Basics.<init>:56 LDC 31
+org.joda.time.TestInstant_Basics.<init>:56 LADD
+org.joda.time.TestInstant_Basics.<init>:56 LDC 28
+org.joda.time.TestInstant_Basics.<init>:56 LADD
+org.joda.time.TestInstant_Basics.<init>:56 LDC 31
+org.joda.time.TestInstant_Basics.<init>:56 LADD
+org.joda.time.TestInstant_Basics.<init>:56 LDC 30
+org.joda.time.TestInstant_Basics.<init>:56 LADD
+org.joda.time.TestInstant_Basics.<init>:56 LDC 31
+org.joda.time.TestInstant_Basics.<init>:56 LADD
+org.joda.time.TestInstant_Basics.<init>:56 LDC 9
+org.joda.time.TestInstant_Basics.<init>:56 LADD
+org.joda.time.TestInstant_Basics.<init>:56 LCONST_1
+org.joda.time.TestInstant_Basics.<init>:56 LSUB
+org.joda.time.TestInstant_Basics.<init>:56 LDC 86400000
+org.joda.time.TestInstant_Basics.<init>:56 LMUL
+org.joda.time.TestInstant_Basics.<init>:56 PUTFIELD org/joda/time/TestInstant_Basics.TEST_TIME_NOW J
+org.joda.time.TestInstant_Basics.main:76 NEW org/joda/time/TestInstant_Basics
+org.joda.time.TestInstant_Basics.main:76 DUP
+org.joda.time.TestInstant_Basics.main:76 INVOKESPECIAL org/joda/time/TestInstant_Basics.<init>()V
+org.joda.time.TestInstant_Basics.main:76 ASTORE 1
+org.joda.time.TestInstant_Basics.main:78 ALOAD 1
+org.joda.time.TestInstant_Basics.main:78 INVOKEVIRTUAL org/joda/time/TestInstant_Basics.setUp()V
+org.joda.time.TestInstant_Basics.main:78 INVOKEVIRTUAL org/joda/time/TestInstant_Basics.testGet_DateTimeFieldType()V
+org.joda.time.TestInstant_Basics.setUp:126 ALOAD 0
+org.joda.time.TestInstant_Basics.setUp:126 GETFIELD org/joda/time/TestInstant_Basics.TEST_TIME_NOW J
+org.joda.time.TestInstant_Basics.setUp:126 INVOKESTATIC org/joda/time/DateTimeUtils.setCurrentMillisFixed(J)V
+org.joda.time.TestInstant_Basics.testGet_DateTimeFieldType:154 NEW org/joda/time/Instant
+org.joda.time.TestInstant_Basics.testGet_DateTimeFieldType:154 DUP
+org.joda.time.TestInstant_Basics.testGet_DateTimeFieldType:154 INVOKESPECIAL org/joda/time/Instant.<init>()V
+org.joda.time.TestInstant_Basics.testGet_DateTimeFieldType:154 ASTORE 1
+org.joda.time.TestInstant_Basics.testGet_DateTimeFieldType:174 LCONST_0
+org.joda.time.TestInstant_Basics.testGet_DateTimeFieldType:174 ALOAD 1
+org.joda.time.TestInstant_Basics.testGet_DateTimeFieldType:174 INVOKESTATIC org/joda/time/DateTimeFieldType.secondOfDay()Lorg/joda/time/DateTimeFieldType;
+org.joda.time.TestInstant_Basics.testGet_DateTimeFieldType:174 INVOKEVIRTUAL org/joda/time/Instant.get(Lorg/joda/time/DateTimeFieldType;)I
+org.joda.time.TestInstant_Basics.testGet_DateTimeFieldType:174 I2L
+org.joda.time.TestInstant_Basics.testGet_DateTimeFieldType:174 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+org.joda.time.base.AbstractInstant.get:92 ALOAD 1
+org.joda.time.base.AbstractInstant.get:92 INVOKEVIRTUAL org/joda/time/base/AbstractInstant.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.base.AbstractInstant.get:92 INVOKEVIRTUAL org/joda/time/DateTimeFieldType.getField(Lorg/joda/time/Chronology;)Lorg/joda/time/DateTimeField;
+org.joda.time.base.AbstractInstant.get:92 ALOAD 0
+org.joda.time.base.AbstractInstant.get:92 INVOKEVIRTUAL org/joda/time/base/AbstractInstant.getMillis()J
+org.joda.time.base.AbstractInstant.get:92 INVOKEVIRTUAL org/joda/time/DateTimeField.get(J)I
+org.joda.time.base.AbstractInstant.get:92 IRETURN
+org.joda.time.chrono.AssembledChronology.secondOfDay:176 ALOAD 0
+org.joda.time.chrono.AssembledChronology.secondOfDay:176 GETFIELD org/joda/time/chrono/AssembledChronology.iSecondOfDay Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.secondOfDay:176 ARETURN
+org.joda.time.chrono.ISOChronology.getInstanceUTC:70 GETSTATIC org/joda/time/chrono/ISOChronology.INSTANCE_UTC Lorg/joda/time/chrono/ISOChronology;
+org.joda.time.chrono.ISOChronology.getInstanceUTC:70 ARETURN
+org.joda.time.field.PreciseDateTimeField.get:80 LLOAD 1
+org.joda.time.field.PreciseDateTimeField.get:80 LCONST_0
+org.joda.time.field.PreciseDateTimeField.get:80 LCMP
+org.joda.time.field.PreciseDateTimeField.get:80 IFLT L0 false true
+org.joda.time.field.PreciseDateTimeField.get:81 LLOAD 1
+org.joda.time.field.PreciseDateTimeField.get:81 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.get:81 INVOKEVIRTUAL org/joda/time/field/PreciseDateTimeField.getUnitMillis()J
+org.joda.time.field.PreciseDateTimeField.get:81 LDIV
+org.joda.time.field.PreciseDateTimeField.get:81 ALOAD 0
+org.joda.time.field.PreciseDateTimeField.get:81 GETFIELD org/joda/time/field/PreciseDateTimeField.iRange I
+org.joda.time.field.PreciseDateTimeField.get:81 I2L
+org.joda.time.field.PreciseDateTimeField.get:81 LREM
+org.joda.time.field.PreciseDateTimeField.get:81 L2I
+org.joda.time.field.PreciseDateTimeField.get:81 IRETURN
+org.joda.time.field.PreciseDurationDateTimeField.getUnitMillis:155 ALOAD 0
+org.joda.time.field.PreciseDurationDateTimeField.getUnitMillis:155 GETFIELD org/joda/time/field/PreciseDurationDateTimeField.iUnitMillis J
+org.joda.time.field.PreciseDurationDateTimeField.getUnitMillis:155 LRETURN
+
+Slice consists of 109 bytecode instructions.
+Computation took 5.63 seconds.

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ISOChronology.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.chrono</a> &gt; <span class="el_source">ISOChronology.java</span></div><h1>ISOChronology.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.chrono;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.DateTimeZone;
+import org.joda.time.field.DividedDateTimeField;
+import org.joda.time.field.RemainderDateTimeField;
+
+/**
+ * Implements a chronology that follows the rules of the ISO8601 standard,
+ * which is compatible with Gregorian for all modern dates.
+ * When ISO does not define a field, but it can be determined (such as AM/PM)
+ * it is included.
+ * &lt;p&gt;
+ * With the exception of century related fields, ISOChronology is exactly the
+ * same as {@link GregorianChronology}. In this chronology, centuries and year
+ * of century are zero based. For all years, the century is determined by
+ * dropping the last two digits of the year, ignoring sign. The year of century
+ * is the value of the last two year digits.
+ * &lt;p&gt;
+ * ISOChronology is thread-safe and immutable.
+ *
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public final class ISOChronology extends AssembledChronology {
+
+    /** Serialization lock */
+    private static final long serialVersionUID = -6212696554273812441L;
+
+    /** Singleton instance of a UTC ISOChronology */
+    private static final ISOChronology INSTANCE_UTC;
+
+    /** Cache of zone to chronology */
+<span class="fc" id="L57">    private static final ConcurrentHashMap&lt;DateTimeZone, ISOChronology&gt; cCache = new ConcurrentHashMap&lt;DateTimeZone, ISOChronology&gt;();</span>
+    static {
+<span class="fc" id="L59">        INSTANCE_UTC = new ISOChronology(GregorianChronology.getInstanceUTC());</span>
+<span class="fc" id="L60">        cCache.put(DateTimeZone.UTC, INSTANCE_UTC);</span>
+<span class="fc" id="L61">    }</span>
+
+    /**
+     * Gets an instance of the ISOChronology.
+     * The time zone of the returned instance is UTC.
+     * 
+     * @return a singleton UTC instance of the chronology
+     */
+    public static ISOChronology getInstanceUTC() {
+<span class="fc" id="L70">        return INSTANCE_UTC;</span>
+    }
+
+    /**
+     * Gets an instance of the ISOChronology in the default time zone.
+     * 
+     * @return a chronology in the default time zone
+     */
+    public static ISOChronology getInstance() {
+<span class="fc" id="L79">        return getInstance(DateTimeZone.getDefault());</span>
+    }
+
+    /**
+     * Gets an instance of the ISOChronology in the given time zone.
+     * 
+     * @param zone  the time zone to get the chronology in, null is default
+     * @return a chronology in the specified time zone
+     */
+    public static ISOChronology getInstance(DateTimeZone zone) {
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        if (zone == null) {</span>
+<span class="fc" id="L90">            zone = DateTimeZone.getDefault();</span>
+        }
+<span class="fc" id="L92">        ISOChronology chrono = cCache.get(zone);</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (chrono == null) {</span>
+<span class="fc" id="L94">            chrono = new ISOChronology(ZonedChronology.getInstance(INSTANCE_UTC, zone));</span>
+<span class="fc" id="L95">            ISOChronology oldChrono = cCache.putIfAbsent(zone, chrono);</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">            if (oldChrono != null) {</span>
+<span class="nc" id="L97">                chrono = oldChrono;</span>
+            }
+        }
+<span class="fc" id="L100">        return chrono;</span>
+    }
+
+    // Constructors and instance variables
+    //-----------------------------------------------------------------------
+
+    /**
+     * Restricted constructor
+     */
+    private ISOChronology(Chronology base) {
+<span class="fc" id="L110">        super(base, null);</span>
+<span class="fc" id="L111">    }</span>
+
+    // Conversion
+    //-----------------------------------------------------------------------
+    /**
+     * Gets the Chronology in the UTC time zone.
+     * 
+     * @return the chronology in UTC
+     */
+    public Chronology withUTC() {
+<span class="fc" id="L121">        return INSTANCE_UTC;</span>
+    }
+
+    /**
+     * Gets the Chronology in a specific time zone.
+     * 
+     * @param zone  the zone to get the chronology in, null is default
+     * @return the chronology
+     */
+    public Chronology withZone(DateTimeZone zone) {
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        if (zone == null) {</span>
+<span class="fc" id="L132">            zone = DateTimeZone.getDefault();</span>
+        }
+<span class="fc bfc" id="L134" title="All 2 branches covered.">        if (zone == getZone()) {</span>
+<span class="fc" id="L135">            return this;</span>
+        }
+<span class="fc" id="L137">        return getInstance(zone);</span>
+    }
+
+    // Output
+    //-----------------------------------------------------------------------
+    /**
+     * Gets a debugging toString.
+     * 
+     * @return a debugging string
+     */
+    public String toString() {
+<span class="fc" id="L148">        String str = &quot;ISOChronology&quot;;</span>
+<span class="fc" id="L149">        DateTimeZone zone = getZone();</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (zone != null) {</span>
+<span class="fc" id="L151">            str = str + '[' + zone.getID() + ']';</span>
+        }
+<span class="fc" id="L153">        return str;</span>
+    }
+
+    protected void assemble(Fields fields) {
+<span class="fc bfc" id="L157" title="All 2 branches covered.">        if (getBase().getZone() == DateTimeZone.UTC) {</span>
+            // Use zero based century and year of century.
+<span class="fc" id="L159">            fields.centuryOfEra = new DividedDateTimeField(</span>
+<span class="fc" id="L160">                ISOYearOfEraDateTimeField.INSTANCE, DateTimeFieldType.centuryOfEra(), 100);</span>
+<span class="fc" id="L161">            fields.centuries = fields.centuryOfEra.getDurationField();</span>
+            
+<span class="fc" id="L163">            fields.yearOfCentury = new RemainderDateTimeField(</span>
+<span class="fc" id="L164">                (DividedDateTimeField) fields.centuryOfEra, DateTimeFieldType.yearOfCentury());</span>
+<span class="fc" id="L165">            fields.weekyearOfCentury = new RemainderDateTimeField(</span>
+<span class="fc" id="L166">                (DividedDateTimeField) fields.centuryOfEra, fields.weekyears, DateTimeFieldType.weekyearOfCentury());</span>
+        }
+<span class="fc" id="L168">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Checks if this chronology instance equals another.
+     * 
+     * @param obj  the object to compare to
+     * @return true if equal
+     * @since 1.6
+     */
+    public boolean equals(Object obj) {
+<span class="fc bfc" id="L179" title="All 2 branches covered.">        if (this == obj) {</span>
+<span class="fc" id="L180">            return true;</span>
+        }
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        if (obj instanceof ISOChronology) {</span>
+<span class="fc" id="L183">            ISOChronology chrono = (ISOChronology) obj;</span>
+<span class="fc" id="L184">            return getZone().equals(chrono.getZone());</span>
+        }
+<span class="fc" id="L186">        return false;</span>
+    }
+
+    /**
+     * A suitable hash code for the chronology.
+     * 
+     * @return the hash code
+     * @since 1.6
+     */
+    public int hashCode() {
+<span class="fc" id="L196">        return &quot;ISO&quot;.hashCode() * 11 + getZone().hashCode();</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Serialize ISOChronology instances using a small stub. This reduces the
+     * serialized size, and deserialized instances come from the cache.
+     */
+    private Object writeReplace() {
+<span class="fc" id="L205">        return new Stub(getZone());</span>
+    }
+
+    private static final class Stub implements Serializable {
+        private static final long serialVersionUID = -6212696554273812441L;
+
+        private transient DateTimeZone iZone;
+
+<span class="fc" id="L213">        Stub(DateTimeZone zone) {</span>
+<span class="fc" id="L214">            iZone = zone;</span>
+<span class="fc" id="L215">        }</span>
+
+        private Object readResolve() {
+<span class="fc" id="L218">            return ISOChronology.getInstance(iZone);</span>
+        }
+
+        private void writeObject(ObjectOutputStream out) throws IOException {
+<span class="fc" id="L222">            out.writeObject(iZone);</span>
+<span class="fc" id="L223">        }</span>
+
+        private void readObject(ObjectInputStream in)
+            throws IOException, ClassNotFoundException
+        {
+<span class="fc" id="L228">            iZone = (DateTimeZone)in.readObject();</span>
+<span class="fc" id="L229">        }</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

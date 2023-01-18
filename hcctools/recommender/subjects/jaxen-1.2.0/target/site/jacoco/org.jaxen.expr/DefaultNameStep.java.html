@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultNameStep.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.expr</a> &gt; <span class="el_source">DefaultNameStep.java</span></div><h1>DefaultNameStep.java</h1><pre class="source lang-java linenums">/*
+ $Id$
+
+ Copyright 2003 The Werken Company. All Rights Reserved.
+ 
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+  * Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+
+  * Neither the name of the Jaxen Project nor the names of its
+    contributors may be used to endorse or promote products derived 
+    from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+ */
+package org.jaxen.expr;
+
+import org.jaxen.*;
+import org.jaxen.expr.iter.IterableAxis;
+import org.jaxen.saxpath.Axis;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * Expression object that represents any flavor
+ * of name-test steps within an XPath.
+ * &lt;p&gt;
+ * This includes simple steps, such as &quot;foo&quot;,
+ * non-default-axis steps, such as &quot;following-sibling::foo&quot;
+ * or &quot;@foo&quot;, and namespace-aware steps, such
+ * as &quot;foo:bar&quot;.
+ *
+ * @author bob mcwhirter (bob@werken.com)
+ * @author Stephen Colebourne
+ * @deprecated this class will become non-public in the future;
+ * use the interface instead
+ */
+public class DefaultNameStep extends DefaultStep implements NameStep {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 428414912247718390L;
+
+    /**
+     * Our prefix, bound through the current Context.
+     * The empty-string (&quot;&quot;) if no prefix was specified.
+     * Decidedly NOT-NULL, due to SAXPath constraints.
+     * This is the 'foo' in 'foo:bar'.
+     */
+    private String prefix;
+
+    /**
+     * Our local-name.
+     * This is the 'bar' in 'foo:bar'.
+     */
+    private String localName;
+
+    /**
+     * Quick flag denoting if the local name was '*'
+     */
+    private boolean matchesAnyName;
+
+    /**
+     * Quick flag denoting if we have a namespace prefix
+     **/
+    private boolean hasPrefix;
+
+    /**
+     * Constructor.
+     *
+     * @param axis         the axis to work through
+     * @param prefix       the name prefix
+     * @param localName    the local name
+     * @param predicateSet the set of predicates
+     */
+    public DefaultNameStep(IterableAxis axis,
+                           String prefix,
+                           String localName,
+                           PredicateSet predicateSet) {
+<span class="fc" id="L102">        super(axis, predicateSet);</span>
+
+<span class="fc" id="L104">        this.prefix = prefix;</span>
+<span class="fc" id="L105">        this.localName = localName;</span>
+<span class="fc" id="L106">        this.matchesAnyName = &quot;*&quot;.equals(localName);</span>
+<span class="pc bpc" id="L107" title="1 of 4 branches missed.">        this.hasPrefix = (this.prefix != null &amp;&amp; this.prefix.length() &gt; 0);</span>
+<span class="fc" id="L108">    }</span>
+
+    /**
+     * Gets the namespace prefix.
+     *
+     * @return the prefix
+     */
+    public String getPrefix() {
+<span class="fc" id="L116">        return this.prefix;</span>
+    }
+
+    /**
+     * Gets the local name.
+     *
+     * @return the local name
+     */
+    public String getLocalName() {
+<span class="fc" id="L125">        return this.localName;</span>
+    }
+
+    /**
+     * Does this step match any name? (i.e. Is it '*'?)
+     *
+     * @return true if it matches any name
+     */
+    public boolean isMatchesAnyName() {
+<span class="fc" id="L134">        return matchesAnyName;</span>
+    }
+
+    /**
+     * Gets the step as a fully defined XPath.
+     *
+     * @return the full XPath for this step
+     */
+    public String getText() {
+<span class="fc" id="L143">        StringBuffer buf = new StringBuffer(64);</span>
+<span class="fc" id="L144">        buf.append(getAxisName()).append(&quot;::&quot;);</span>
+<span class="pc bpc" id="L145" title="1 of 4 branches missed.">        if (getPrefix() != null &amp;&amp; getPrefix().length() &gt; 0) {</span>
+<span class="fc" id="L146">            buf.append(getPrefix()).append(':');</span>
+        }
+<span class="fc" id="L148">        return buf.append(getLocalName()).append(super.getText()).toString();</span>
+    }
+
+    /**
+     * Evaluate the context node set to find the new node set.
+     * &lt;p&gt;
+     * This method overrides the version in &lt;code&gt;DefaultStep&lt;/code&gt; for performance.
+     */
+    public List evaluate(Context context) throws JaxenException {
+
+<span class="fc" id="L158">        List contextNodeSet = context.getNodeSet();</span>
+<span class="fc" id="L159">        int contextSize = contextNodeSet.size();</span>
+        // optimize for context size 0
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        if (contextSize == 0) {</span>
+<span class="fc" id="L162">            return Collections.EMPTY_LIST;</span>
+        }
+<span class="fc" id="L164">        ContextSupport support = context.getContextSupport();</span>
+<span class="fc" id="L165">        IterableAxis iterableAxis = getIterableAxis();</span>
+<span class="fc bfc" id="L166" title="All 4 branches covered.">        boolean namedAccess = (!matchesAnyName &amp;&amp; iterableAxis.supportsNamedAccess(support));</span>
+
+        // optimize for context size 1 (common case, avoids lots of object creation)
+<span class="fc bfc" id="L169" title="All 2 branches covered.">        if (contextSize == 1) {</span>
+<span class="fc" id="L170">            Object contextNode = contextNodeSet.get(0);</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">            if (namedAccess) {</span>
+                // get the iterator over the nodes and check it
+<span class="fc" id="L173">                String uri = null;</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">                if (hasPrefix) {</span>
+<span class="fc" id="L175">                    uri = support.translateNamespacePrefixToUri(prefix);</span>
+<span class="pc bpc" id="L176" title="1 of 2 branches missed.">                    if (uri == null) {</span>
+<span class="nc" id="L177">                        throw new UnresolvableException(&quot;XPath expression uses unbound namespace prefix &quot; + prefix);</span>
+                    }
+                }
+<span class="fc" id="L180">                Iterator axisNodeIter = iterableAxis.namedAccessIterator(</span>
+                        contextNode, support, localName, prefix, uri);
+<span class="pc bpc" id="L182" title="1 of 4 branches missed.">                if (axisNodeIter == null || !axisNodeIter.hasNext()) {</span>
+<span class="fc" id="L183">                    return Collections.EMPTY_LIST;</span>
+                }
+
+                // convert iterator to list for predicate test
+                // no need to filter as named access guarantees this
+<span class="fc" id="L188">                List newNodeSet = new ArrayList();</span>
+<span class="fc bfc" id="L189" title="All 2 branches covered.">                while (axisNodeIter.hasNext()) {</span>
+<span class="fc" id="L190">                    newNodeSet.add(axisNodeIter.next());</span>
+                }
+
+                // evaluate the predicates
+<span class="fc" id="L194">                return getPredicateSet().evaluatePredicates(newNodeSet, support);</span>
+
+            } else {
+                // get the iterator over the nodes and check it
+<span class="fc" id="L198">                Iterator axisNodeIter = iterableAxis.iterator(contextNode, support);</span>
+<span class="pc bpc" id="L199" title="1 of 4 branches missed.">                if (axisNodeIter == null || !axisNodeIter.hasNext()) {</span>
+<span class="fc" id="L200">                    return Collections.EMPTY_LIST;</span>
+                }
+
+                // run through iterator, filtering using matches()
+                // adding to list for predicate test
+<span class="fc" id="L205">                List newNodeSet = new ArrayList(contextSize);</span>
+<span class="fc bfc" id="L206" title="All 2 branches covered.">                while (axisNodeIter.hasNext()) {</span>
+<span class="fc" id="L207">                    Object eachAxisNode = axisNodeIter.next();</span>
+<span class="fc bfc" id="L208" title="All 2 branches covered.">                    if (matches(eachAxisNode, support)) {</span>
+<span class="fc" id="L209">                        newNodeSet.add(eachAxisNode);</span>
+                    }
+<span class="fc" id="L211">                }</span>
+
+                // evaluate the predicates
+<span class="fc" id="L214">                return getPredicateSet().evaluatePredicates(newNodeSet, support);</span>
+            }
+        }
+
+        // full case
+<span class="fc" id="L219">        IdentitySet unique = new IdentitySet();</span>
+<span class="fc" id="L220">        List interimSet = new ArrayList(contextSize);</span>
+<span class="fc" id="L221">        List newNodeSet = new ArrayList(contextSize);</span>
+
+<span class="fc bfc" id="L223" title="All 2 branches covered.">        if (namedAccess) {</span>
+<span class="fc" id="L224">            String uri = null;</span>
+<span class="pc bpc" id="L225" title="1 of 2 branches missed.">            if (hasPrefix) {</span>
+<span class="nc" id="L226">                uri = support.translateNamespacePrefixToUri(prefix);</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">                if (uri == null) {</span>
+<span class="nc" id="L228">                    throw new UnresolvableException(&quot;XPath expression uses unbound namespace prefix &quot; + prefix);</span>
+                }
+            }
+<span class="fc bfc" id="L231" title="All 2 branches covered.">            for (int i = 0; i &lt; contextSize; ++i) {</span>
+<span class="fc" id="L232">                Object eachContextNode = contextNodeSet.get(i);</span>
+
+<span class="fc" id="L234">                Iterator axisNodeIter = iterableAxis.namedAccessIterator(</span>
+                        eachContextNode, support, localName, prefix, uri);
+<span class="pc bpc" id="L236" title="1 of 4 branches missed.">                if (axisNodeIter == null || !axisNodeIter.hasNext()) {</span>
+<span class="fc" id="L237">                    continue;</span>
+                }
+
+<span class="fc bfc" id="L240" title="All 2 branches covered.">                while (axisNodeIter.hasNext()) {</span>
+<span class="fc" id="L241">                    Object eachAxisNode = axisNodeIter.next();</span>
+<span class="fc" id="L242">                    interimSet.add(eachAxisNode);</span>
+<span class="fc" id="L243">                }</span>
+
+                // evaluate the predicates
+<span class="fc" id="L246">                List predicateNodes = getPredicateSet().evaluatePredicates(interimSet, support);</span>
+
+                // ensure only one of each node in the result
+<span class="fc" id="L249">                Iterator predicateNodeIter = predicateNodes.iterator();</span>
+<span class="fc bfc" id="L250" title="All 2 branches covered.">                while (predicateNodeIter.hasNext()) {</span>
+<span class="fc" id="L251">                    Object eachPredicateNode = predicateNodeIter.next();</span>
+<span class="pc bpc" id="L252" title="1 of 2 branches missed.">                    if (!unique.contains(eachPredicateNode)) {</span>
+<span class="fc" id="L253">                        unique.add(eachPredicateNode);</span>
+<span class="fc" id="L254">                        newNodeSet.add(eachPredicateNode);</span>
+                    }
+<span class="fc" id="L256">                }</span>
+<span class="fc" id="L257">                interimSet.clear();</span>
+            }
+
+<span class="fc" id="L260">        } else {</span>
+<span class="fc bfc" id="L261" title="All 2 branches covered.">            for (int i = 0; i &lt; contextSize; ++i) {</span>
+<span class="fc" id="L262">                Object eachContextNode = contextNodeSet.get(i);</span>
+
+<span class="fc" id="L264">                Iterator axisNodeIter = axisIterator(eachContextNode, support);</span>
+<span class="pc bpc" id="L265" title="1 of 4 branches missed.">                if (axisNodeIter == null || !axisNodeIter.hasNext()) {</span>
+<span class="fc" id="L266">                    continue;</span>
+                }
+
+                /* See jaxen-106. Might be able to optimize this by doing
+                 * specific matching for individual axes. For instance on namespace axis
+                 * we should only get namespace nodes and on attribute axes we only get
+                 * attribute nodes. Self and parent axes have single members.
+                 * Children, descendant, ancestor, and sibling axes never
+                 * see any attributes or namespaces
+                 */
+
+                // ensure only unique matching nodes in the result
+<span class="fc bfc" id="L278" title="All 2 branches covered.">                while (axisNodeIter.hasNext()) {</span>
+<span class="fc" id="L279">                    Object eachAxisNode = axisNodeIter.next();</span>
+
+<span class="fc bfc" id="L281" title="All 2 branches covered.">                    if (matches(eachAxisNode, support)) {</span>
+<span class="fc" id="L282">                        interimSet.add(eachAxisNode);</span>
+                    }
+<span class="fc" id="L284">                }</span>
+
+                // evaluate the predicates
+<span class="fc" id="L287">                List predicateNodes = getPredicateSet().evaluatePredicates(interimSet, support);</span>
+
+                // ensure only one of each node in the result
+<span class="fc" id="L290">                Iterator predicateNodeIter = predicateNodes.iterator();</span>
+<span class="fc bfc" id="L291" title="All 2 branches covered.">                while (predicateNodeIter.hasNext()) {</span>
+<span class="fc" id="L292">                    Object eachPredicateNode = predicateNodeIter.next();</span>
+<span class="fc bfc" id="L293" title="All 2 branches covered.">                    if (!unique.contains(eachPredicateNode)) {</span>
+<span class="fc" id="L294">                        unique.add(eachPredicateNode);</span>
+<span class="fc" id="L295">                        newNodeSet.add(eachPredicateNode);</span>
+                    }
+<span class="fc" id="L297">                }</span>
+<span class="fc" id="L298">                interimSet.clear();</span>
+            }
+        }
+
+<span class="fc" id="L302">        return newNodeSet;</span>
+    }
+
+    /**
+     * Checks whether the node matches this step.
+     *
+     * @param node           the node to check
+     * @param contextSupport the context support
+     * @return true if matches
+     * @throws JaxenException
+     */
+    public boolean matches(Object node, ContextSupport contextSupport) throws JaxenException {
+
+<span class="fc" id="L315">        Navigator nav = contextSupport.getNavigator();</span>
+<span class="fc" id="L316">        String myUri = null;</span>
+<span class="fc" id="L317">        String nodeName = null;</span>
+<span class="fc" id="L318">        String nodeUri = null;</span>
+
+<span class="fc bfc" id="L320" title="All 2 branches covered.">        if (nav.isElement(node)) {</span>
+<span class="fc" id="L321">            nodeName = nav.getElementName(node);</span>
+<span class="fc" id="L322">            nodeUri = nav.getElementNamespaceUri(node);</span>
+<span class="fc bfc" id="L323" title="All 2 branches covered.">        } else if (nav.isText(node)) {</span>
+<span class="fc" id="L324">            return false;</span>
+<span class="fc bfc" id="L325" title="All 2 branches covered.">        } else if (nav.isAttribute(node)) {</span>
+<span class="fc bfc" id="L326" title="All 2 branches covered.">            if (getAxis() != Axis.ATTRIBUTE) {</span>
+<span class="fc" id="L327">                return false;</span>
+            }
+<span class="fc" id="L329">            nodeName = nav.getAttributeName(node);</span>
+<span class="fc" id="L330">            nodeUri = nav.getAttributeNamespaceUri(node);</span>
+
+<span class="fc bfc" id="L332" title="All 2 branches covered.">        } else if (nav.isDocument(node)) {</span>
+<span class="fc" id="L333">            return false;</span>
+<span class="fc bfc" id="L334" title="All 2 branches covered.">        } else if (nav.isNamespace(node)) {</span>
+<span class="fc bfc" id="L335" title="All 2 branches covered.">            if (getAxis() != Axis.NAMESPACE) {</span>
+                // Only works for namespace::*
+<span class="fc" id="L337">                return false;</span>
+            }
+<span class="fc" id="L339">            nodeName = nav.getNamespacePrefix(node);</span>
+        } else {
+<span class="fc" id="L341">            return false;</span>
+        }
+
+<span class="fc bfc" id="L344" title="All 2 branches covered.">        if (hasPrefix) {</span>
+<span class="fc" id="L345">            myUri = contextSupport.translateNamespacePrefixToUri(this.prefix);</span>
+<span class="fc bfc" id="L346" title="All 2 branches covered.">            if (myUri == null) {</span>
+<span class="fc" id="L347">                throw new UnresolvableException(&quot;Cannot resolve namespace prefix '&quot; + this.prefix + &quot;'&quot;);</span>
+            }
+<span class="fc bfc" id="L349" title="All 2 branches covered.">        } else if (matchesAnyName) {</span>
+<span class="fc" id="L350">            return true;</span>
+        }
+
+        // If we map to a non-empty namespace and the node does not
+        // or vice-versa, fail-fast.
+<span class="fc bfc" id="L355" title="All 2 branches covered.">        if (hasNamespace(myUri) != hasNamespace(nodeUri)) {</span>
+<span class="fc" id="L356">            return false;</span>
+        }
+
+        // To fail-fast, we check the equality of
+        // local-names first.  Shorter strings compare
+        // quicker.
+<span class="fc bfc" id="L362" title="All 4 branches covered.">        if (matchesAnyName || nodeName.equals(getLocalName())) {</span>
+<span class="fc" id="L363">            return matchesNamespaceURIs(myUri, nodeUri);</span>
+        }
+
+<span class="fc" id="L366">        return false;</span>
+    }
+
+    /**
+     * Checks whether the URI represents a namespace.
+     *
+     * @param uri the URI to check
+     * @return true if non-null and non-empty
+     */
+    private boolean hasNamespace(String uri) {
+<span class="fc bfc" id="L376" title="All 4 branches covered.">        return (uri != null &amp;&amp; uri.length() &gt; 0);</span>
+    }
+
+    /**
+     * Compares two namespace URIs, handling null.
+     *
+     * @param uri1 the first URI
+     * @param uri2 the second URI
+     * @return true if equal, where null==&quot;&quot;
+     */
+    protected boolean matchesNamespaceURIs(String uri1, String uri2) {
+<span class="fc bfc" id="L387" title="All 2 branches covered.">        if (uri1 == uri2) {</span>
+<span class="fc" id="L388">            return true;</span>
+        }
+<span class="fc bfc" id="L390" title="All 2 branches covered.">        if (uri1 == null) {</span>
+<span class="pc bpc" id="L391" title="1 of 2 branches missed.">            return (uri2.length() == 0);</span>
+        }
+<span class="pc bpc" id="L393" title="1 of 2 branches missed.">        if (uri2 == null) {</span>
+<span class="nc bnc" id="L394" title="All 2 branches missed.">            return (uri1.length() == 0);</span>
+        }
+<span class="fc" id="L396">        return uri1.equals(uri2);</span>
+    }
+
+    /**
+     * Returns a full information debugging string.
+     *
+     * @return a debugging string
+     */
+    public String toString() {
+<span class="fc" id="L405">        String prefix = getPrefix();</span>
+<span class="pc bpc" id="L406" title="1 of 2 branches missed.">        String qName = &quot;&quot;.equals(prefix) ? getLocalName() : getPrefix() + &quot;:&quot; + getLocalName();</span>
+<span class="fc" id="L407">        return &quot;[(DefaultNameStep): &quot; + qName + &quot;]&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

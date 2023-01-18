@@ -1,0 +1,21 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  0.7% done, time left: unknown  1.6% done, time left: unknown  2.6% done, time left: unknown  3.0% done, time left: unknown  3.4% done, time left: unknown  3.6% done, time left: unknown  4.8% done, time left:   0:00:07    4.9% done, time left:   0:00:11  5.3% done, time left:   0:00:12  6.1% done, time left:   0:00:13  6.4% done, time left:   0:00:14  6.6% done, time left:   0:00:14  7.4% done, time left:   0:00:15  7.8% done, time left:   0:00:15  8.3% done, time left:   0:00:15  8.4% done, time left:   0:00:16 10.4% done, time left:   0:00:17 10.9% done, time left:   0:00:16 10.9% done, time left:   0:00:15 10.9% done, time left:   0:00:14 11.7% done, time left:   0:00:14 14.8% done, time left:   0:00:12 18.0% done, time left:   0:00:10 19.8% done, time left:   0:00:08 23.3% done, time left:   0:00:06 26.7% done, time left:   0:00:05 29.2% done, time left:   0:00:04 32.3% done, time left:   0:00:03 35.7% done, time left:   0:00:03 38.8% done, time left:   0:00:03 42.2% done, time left:   0:00:02 46.3% done, time left:   0:00:01 49.9% done, time left:   0:00:01 53.3% done, time left:   0:00:01 54.4% done, time left:   0:00:00 56.5% done, time left:   0:00:01 58.6% done, time left:   0:00:01 61.0% done, time left:   0:00:01 63.1% done, time left:   0:00:01 65.9% done, time left:   0:00:01 73.6% done, time left:   0:00:00 73.7% done, time left:   0:00:00 78.5% done, time left:   0:00:00 80.3% done, time left:   0:00:00 81.9% done, time left:   0:00:00 83.0% done, time left:   0:00:00 85.9% done, time left:   0:00:00 88.4% done, time left:   0:00:00 91.2% done, time left:   0:00:00 94.5% done, time left:   0:00:00 97.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.TestDays.testGetFieldType:234:*]:
+org.joda.time.Days.days:80 ILOAD 0
+org.joda.time.Days.days:80 LOOKUPSWITCH (1 => L1, 2 => L2, 3 => L3, 5 => L5, 7 => L7, -2147483648 => L9, 0 => L0, 4 => L4, 6 => L6, 2147483647 => L8* => L10)
+org.joda.time.Days.days:102 NEW org/joda/time/Days
+org.joda.time.Days.days:102 ARETURN
+org.joda.time.Days.getFieldType:235 INVOKESTATIC org/joda/time/DurationFieldType.days()Lorg/joda/time/DurationFieldType;
+org.joda.time.Days.getFieldType:235 ARETURN
+org.joda.time.DurationFieldType.days:151 GETSTATIC org/joda/time/DurationFieldType.DAYS_TYPE Lorg/joda/time/DurationFieldType;
+org.joda.time.DurationFieldType.days:151 ARETURN
+org.joda.time.TestDays.main:47 INVOKEVIRTUAL org/joda/time/TestDays.testGetFieldType()V
+org.joda.time.TestDays.testGetFieldType:233 BIPUSH 20
+org.joda.time.TestDays.testGetFieldType:233 INVOKESTATIC org/joda/time/Days.days(I)Lorg/joda/time/Days;
+org.joda.time.TestDays.testGetFieldType:233 ASTORE 1
+org.joda.time.TestDays.testGetFieldType:234 INVOKESTATIC org/joda/time/DurationFieldType.days()Lorg/joda/time/DurationFieldType;
+org.joda.time.TestDays.testGetFieldType:234 ALOAD 1
+org.joda.time.TestDays.testGetFieldType:234 INVOKEVIRTUAL org/joda/time/Days.getFieldType()Lorg/joda/time/DurationFieldType;
+org.joda.time.TestDays.testGetFieldType:234 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 16 bytecode instructions.
+Computation took 6.41 seconds.

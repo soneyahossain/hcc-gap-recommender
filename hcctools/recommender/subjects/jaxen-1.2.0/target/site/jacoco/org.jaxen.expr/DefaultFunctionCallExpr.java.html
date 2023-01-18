@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultFunctionCallExpr.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.expr</a> &gt; <span class="el_source">DefaultFunctionCallExpr.java</span></div><h1>DefaultFunctionCallExpr.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2004 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+package org.jaxen.expr;
+
+import org.jaxen.Context;
+import org.jaxen.Function;
+import org.jaxen.JaxenException;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * @deprecated this class will become non-public in the future;
+ * use the interface instead
+ */
+public class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4747789292572193708L;
+    private String prefix;
+    private String functionName;
+    private List parameters;
+
+<span class="fc" id="L72">    public DefaultFunctionCallExpr(String prefix, String functionName) {</span>
+<span class="fc" id="L73">        this.prefix = prefix;</span>
+<span class="fc" id="L74">        this.functionName = functionName;</span>
+<span class="fc" id="L75">        this.parameters = new ArrayList();</span>
+<span class="fc" id="L76">    }</span>
+
+    public void addParameter(Expr parameter) {
+<span class="fc" id="L79">        this.parameters.add(parameter);</span>
+<span class="fc" id="L80">    }</span>
+
+
+    public List getParameters() {
+<span class="fc" id="L84">        return this.parameters;</span>
+    }
+
+    public String getPrefix() {
+<span class="fc" id="L88">        return this.prefix;</span>
+    }
+
+    public String getFunctionName() {
+<span class="fc" id="L92">        return this.functionName;</span>
+    }
+
+
+    public String getText() {
+<span class="fc" id="L97">        StringBuffer buf = new StringBuffer();</span>
+<span class="fc" id="L98">        String prefix = getPrefix();</span>
+
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        if (prefix != null &amp;&amp;</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">                prefix.length() &gt; 0) {</span>
+<span class="nc" id="L102">            buf.append(prefix);</span>
+<span class="nc" id="L103">            buf.append(&quot;:&quot;);</span>
+        }
+
+<span class="fc" id="L106">        buf.append(getFunctionName());</span>
+<span class="fc" id="L107">        buf.append(&quot;(&quot;);</span>
+
+<span class="fc" id="L109">        Iterator paramIter = getParameters().iterator();</span>
+
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        while (paramIter.hasNext()) {</span>
+<span class="fc" id="L112">            Expr eachParam = (Expr) paramIter.next();</span>
+
+<span class="fc" id="L114">            buf.append(eachParam.getText());</span>
+
+<span class="fc bfc" id="L116" title="All 2 branches covered.">            if (paramIter.hasNext()) {</span>
+<span class="fc" id="L117">                buf.append(&quot;, &quot;);</span>
+            }
+<span class="fc" id="L119">        }</span>
+
+<span class="fc" id="L121">        buf.append(&quot;)&quot;);</span>
+
+<span class="fc" id="L123">        return buf.toString();</span>
+    }
+
+    public Expr simplify() {
+<span class="fc" id="L127">        List paramExprs = getParameters();</span>
+<span class="fc" id="L128">        int paramSize = paramExprs.size();</span>
+
+<span class="fc" id="L130">        List newParams = new ArrayList(paramSize);</span>
+
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        for (int i = 0; i &lt; paramSize; ++i) {</span>
+<span class="fc" id="L133">            Expr eachParam = (Expr) paramExprs.get(i);</span>
+
+<span class="fc" id="L135">            newParams.add(eachParam.simplify());</span>
+        }
+
+<span class="fc" id="L138">        this.parameters = newParams;</span>
+
+<span class="fc" id="L140">        return this;</span>
+    }
+
+
+    public String toString() {
+<span class="nc" id="L145">        String prefix = getPrefix();</span>
+
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (prefix == null) {</span>
+<span class="nc" id="L148">            return &quot;[(DefaultFunctionCallExpr): &quot; + getFunctionName() + &quot;(&quot; + getParameters() + &quot;) ]&quot;;</span>
+        }
+
+<span class="nc" id="L151">        return &quot;[(DefaultFunctionCallExpr): &quot; + getPrefix() + &quot;:&quot; + getFunctionName() + &quot;(&quot; + getParameters() + &quot;) ]&quot;;</span>
+    }
+
+    public Object evaluate(Context context) throws JaxenException {
+<span class="fc" id="L155">        String prefix = getPrefix();</span>
+<span class="fc" id="L156">        String namespaceURI = null;</span>
+        // default namespace is not used within XPath expressions
+<span class="pc bpc" id="L158" title="1 of 4 branches missed.">        if (prefix != null &amp;&amp; !&quot;&quot;.equals(prefix)) {</span>
+<span class="fc" id="L159">            namespaceURI = context.translateNamespacePrefixToUri(prefix);</span>
+        }
+
+<span class="fc" id="L162">        Function func = context.getFunction(namespaceURI,</span>
+                prefix,
+<span class="fc" id="L164">                getFunctionName());</span>
+<span class="fc" id="L165">        List paramValues = evaluateParams(context);</span>
+
+<span class="fc" id="L167">        return func.call(context, paramValues);</span>
+    }
+
+    public List evaluateParams(Context context) throws JaxenException {
+<span class="fc" id="L171">        List paramExprs = getParameters();</span>
+<span class="fc" id="L172">        int paramSize = paramExprs.size();</span>
+
+<span class="fc" id="L174">        List paramValues = new ArrayList(paramSize);</span>
+
+<span class="fc bfc" id="L176" title="All 2 branches covered.">        for (int i = 0; i &lt; paramSize; ++i) {</span>
+<span class="fc" id="L177">            Expr eachParam = (Expr) paramExprs.get(i);</span>
+
+<span class="fc" id="L179">            Object eachValue = eachParam.evaluate(context);</span>
+
+<span class="fc" id="L181">            paramValues.add(eachValue);</span>
+        }
+<span class="fc" id="L183">        return paramValues;</span>
+    }
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DurationFieldType.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time</a> &gt; <span class="el_source">DurationFieldType.java</span></div><h1>DurationFieldType.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2005 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time;
+
+import java.io.Serializable;
+
+/**
+ * Identifies a duration field, such as years or minutes, in a chronology-neutral way.
+ * &lt;p&gt;
+ * A duration field type defines the type of the field, such as hours.
+ * If does not directly enable any calculations, however it does provide a
+ * {@link #getField(Chronology)} method that returns the actual calculation engine
+ * for a particular chronology.
+ * &lt;p&gt;
+ * Instances of &lt;code&gt;DurationFieldType&lt;/code&gt; are singletons.
+ * They can be compared using &lt;code&gt;==&lt;/code&gt;.
+ * &lt;p&gt;
+ * If required, you can create your own field, for example a quarters.
+ * You must create a subclass of &lt;code&gt;DurationFieldType&lt;/code&gt; that defines the field type.
+ * This class returns the actual calculation engine from {@link #getField(Chronology)}.
+ *
+ * @author Stephen Colebourne
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public abstract class DurationFieldType implements Serializable {
+
+    /** Serialization version */
+    private static final long serialVersionUID = 8765135187319L;
+
+    // Ordinals for standard field types.
+    static final byte
+        ERAS = 1,
+        CENTURIES = 2,
+        WEEKYEARS = 3,
+        YEARS = 4,
+        MONTHS = 5,
+        WEEKS = 6,
+        DAYS = 7,
+        HALFDAYS = 8,
+        HOURS = 9,
+        MINUTES = 10,
+        SECONDS = 11,
+        MILLIS = 12;
+
+    /** The eras field type. */
+<span class="fc" id="L60">    static final DurationFieldType ERAS_TYPE = new StandardDurationFieldType(&quot;eras&quot;, ERAS);</span>
+    /** The centuries field type. */
+<span class="fc" id="L62">    static final DurationFieldType CENTURIES_TYPE = new StandardDurationFieldType(&quot;centuries&quot;, CENTURIES);</span>
+    /** The weekyears field type. */
+<span class="fc" id="L64">    static final DurationFieldType WEEKYEARS_TYPE = new StandardDurationFieldType(&quot;weekyears&quot;, WEEKYEARS);</span>
+    /** The years field type. */
+<span class="fc" id="L66">    static final DurationFieldType YEARS_TYPE = new StandardDurationFieldType(&quot;years&quot;, YEARS);</span>
+    /** The months field type. */
+<span class="fc" id="L68">    static final DurationFieldType MONTHS_TYPE = new StandardDurationFieldType(&quot;months&quot;, MONTHS);</span>
+    /** The weeks field type. */
+<span class="fc" id="L70">    static final DurationFieldType WEEKS_TYPE = new StandardDurationFieldType(&quot;weeks&quot;, WEEKS);</span>
+    /** The days field type. */
+<span class="fc" id="L72">    static final DurationFieldType DAYS_TYPE = new StandardDurationFieldType(&quot;days&quot;, DAYS);</span>
+    /** The halfdays field type. */
+<span class="fc" id="L74">    static final DurationFieldType HALFDAYS_TYPE = new StandardDurationFieldType(&quot;halfdays&quot;, HALFDAYS);</span>
+    /** The hours field type. */
+<span class="fc" id="L76">    static final DurationFieldType HOURS_TYPE = new StandardDurationFieldType(&quot;hours&quot;, HOURS);</span>
+    /** The minutes field type. */
+<span class="fc" id="L78">    static final DurationFieldType MINUTES_TYPE = new StandardDurationFieldType(&quot;minutes&quot;, MINUTES);</span>
+    /** The seconds field type. */
+<span class="fc" id="L80">    static final DurationFieldType SECONDS_TYPE = new StandardDurationFieldType(&quot;seconds&quot;, SECONDS);</span>
+    /** The millis field type. */
+<span class="fc" id="L82">    static final DurationFieldType MILLIS_TYPE = new StandardDurationFieldType(&quot;millis&quot;, MILLIS);</span>
+
+    /** The name of the field type. */
+    private final String iName;
+
+    //-----------------------------------------------------------------------
+    /**
+     * Constructor.
+     * 
+     * @param name  the name to use, which by convention, are plural.
+     */
+    protected DurationFieldType(String name) {
+<span class="fc" id="L94">        super();</span>
+<span class="fc" id="L95">        iName = name;</span>
+<span class="fc" id="L96">    }</span>
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the millis field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType millis() {
+<span class="fc" id="L105">        return MILLIS_TYPE;</span>
+    }
+
+    /**
+     * Get the seconds field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType seconds() {
+<span class="fc" id="L114">        return SECONDS_TYPE;</span>
+    }
+
+    /**
+     * Get the minutes field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType minutes() {
+<span class="fc" id="L123">        return MINUTES_TYPE;</span>
+    }
+
+    /**
+     * Get the hours field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType hours() {
+<span class="fc" id="L132">        return HOURS_TYPE;</span>
+    }
+
+    /**
+     * Get the halfdays field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType halfdays() {
+<span class="fc" id="L141">        return HALFDAYS_TYPE;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the days field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType days() {
+<span class="fc" id="L151">        return DAYS_TYPE;</span>
+    }
+
+    /**
+     * Get the weeks field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType weeks() {
+<span class="fc" id="L160">        return WEEKS_TYPE;</span>
+    }
+
+    /**
+     * Get the weekyears field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType weekyears() {
+<span class="fc" id="L169">        return WEEKYEARS_TYPE;</span>
+    }
+
+    /**
+     * Get the months field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType months() {
+<span class="fc" id="L178">        return MONTHS_TYPE;</span>
+    }
+
+    /**
+     * Get the years field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType years() {
+<span class="fc" id="L187">        return YEARS_TYPE;</span>
+    }
+
+    /**
+     * Get the centuries field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType centuries() {
+<span class="fc" id="L196">        return CENTURIES_TYPE;</span>
+    }
+
+    /**
+     * Get the eras field type.
+     * 
+     * @return the DurationFieldType constant
+     */
+    public static DurationFieldType eras() {
+<span class="fc" id="L205">        return ERAS_TYPE;</span>
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Get the name of the field.
+     * By convention, names are plural.
+     * 
+     * @return field name
+     */
+    public String getName() {
+<span class="fc" id="L216">        return iName;</span>
+    }
+
+    /**
+     * Gets a suitable field for this type from the given Chronology.
+     *
+     * @param chronology  the chronology to use, null means ISOChronology in default zone
+     * @return a suitable field
+     */
+    public abstract DurationField getField(Chronology chronology);
+
+    /**
+     * Checks whether this field supported in the given Chronology.
+     *
+     * @param chronology  the chronology to use, null means ISOChronology in default zone
+     * @return true if supported
+     */
+    public boolean isSupported(Chronology chronology) {
+<span class="fc" id="L234">        return getField(chronology).isSupported();</span>
+    }
+
+    /**
+     * Get a suitable debug string.
+     * 
+     * @return debug string
+     */
+    public String toString() {
+<span class="fc" id="L243">        return getName();</span>
+    }
+
+    private static class StandardDurationFieldType extends DurationFieldType {
+        /** Serialization version */
+        private static final long serialVersionUID = 31156755687123L;
+
+        /** The ordinal of the standard field type, for switch statements */
+        private final byte iOrdinal;
+
+        /**
+         * Constructor.
+         * 
+         * @param name  the name to use
+         */
+        StandardDurationFieldType(String name, byte ordinal) {
+<span class="fc" id="L259">            super(name);</span>
+<span class="fc" id="L260">            iOrdinal = ordinal;</span>
+<span class="fc" id="L261">        }</span>
+
+        /** @inheritdoc */
+        @Override
+        public boolean equals(Object obj) {
+<span class="fc bfc" id="L266" title="All 2 branches covered.">            if (this == obj) {</span>
+<span class="fc" id="L267">                return true;</span>
+            }
+<span class="pc bpc" id="L269" title="1 of 2 branches missed.">            if (obj instanceof StandardDurationFieldType) {</span>
+<span class="pc bpc" id="L270" title="1 of 2 branches missed.">                return iOrdinal == ((StandardDurationFieldType) obj).iOrdinal;</span>
+            }
+<span class="nc" id="L272">            return false;</span>
+        }
+
+        /** @inheritdoc */
+        @Override
+        public int hashCode() {
+<span class="fc" id="L278">            return (1 &lt;&lt; iOrdinal);</span>
+        }
+
+        public DurationField getField(Chronology chronology) {
+<span class="fc" id="L282">            chronology = DateTimeUtils.getChronology(chronology);</span>
+            
+<span class="pc bpc" id="L284" title="1 of 13 branches missed.">            switch (iOrdinal) {</span>
+                case ERAS:
+<span class="fc" id="L286">                    return chronology.eras();</span>
+                case CENTURIES:
+<span class="fc" id="L288">                    return chronology.centuries();</span>
+                case WEEKYEARS:
+<span class="fc" id="L290">                    return chronology.weekyears();</span>
+                case YEARS:
+<span class="fc" id="L292">                    return chronology.years();</span>
+                case MONTHS:
+<span class="fc" id="L294">                    return chronology.months();</span>
+                case WEEKS:
+<span class="fc" id="L296">                    return chronology.weeks();</span>
+                case DAYS:
+<span class="fc" id="L298">                    return chronology.days();</span>
+                case HALFDAYS:
+<span class="fc" id="L300">                    return chronology.halfdays();</span>
+                case HOURS:
+<span class="fc" id="L302">                    return chronology.hours();</span>
+                case MINUTES:
+<span class="fc" id="L304">                    return chronology.minutes();</span>
+                case SECONDS:
+<span class="fc" id="L306">                    return chronology.seconds();</span>
+                case MILLIS:
+<span class="fc" id="L308">                    return chronology.millis();</span>
+                default:
+                    // Shouldn't happen.
+<span class="nc" id="L311">                    throw new InternalError();</span>
+            }
+        }
+
+        /**
+         * Ensure a singleton is returned.
+         * 
+         * @return the singleton type
+         */
+        private Object readResolve() {
+<span class="pc bpc" id="L321" title="1 of 13 branches missed.">            switch (iOrdinal) {</span>
+                case ERAS:
+<span class="fc" id="L323">                    return ERAS_TYPE;</span>
+                case CENTURIES:
+<span class="fc" id="L325">                    return CENTURIES_TYPE;</span>
+                case WEEKYEARS:
+<span class="fc" id="L327">                    return WEEKYEARS_TYPE;</span>
+                case YEARS:
+<span class="fc" id="L329">                    return YEARS_TYPE;</span>
+                case MONTHS:
+<span class="fc" id="L331">                    return MONTHS_TYPE;</span>
+                case WEEKS:
+<span class="fc" id="L333">                    return WEEKS_TYPE;</span>
+                case DAYS:
+<span class="fc" id="L335">                    return DAYS_TYPE;</span>
+                case HALFDAYS:
+<span class="fc" id="L337">                    return HALFDAYS_TYPE;</span>
+                case HOURS:
+<span class="fc" id="L339">                    return HOURS_TYPE;</span>
+                case MINUTES:
+<span class="fc" id="L341">                    return MINUTES_TYPE;</span>
+                case SECONDS:
+<span class="fc" id="L343">                    return SECONDS_TYPE;</span>
+                case MILLIS:
+<span class="fc" id="L345">                    return MILLIS_TYPE;</span>
+                default:
+                    // Shouldn't happen.
+<span class="nc" id="L348">                    return this;</span>
+            }
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

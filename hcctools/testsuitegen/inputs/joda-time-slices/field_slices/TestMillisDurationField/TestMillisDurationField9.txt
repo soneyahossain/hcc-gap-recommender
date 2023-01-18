@@ -1,0 +1,28 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.3% done, time left: unknown  0.4% done, time left: unknown  0.7% done, time left:   0:00:33    0.8% done, time left:   0:00:38  1.3% done, time left:   0:00:37  2.0% done, time left:   0:00:34  2.2% done, time left:   0:00:32  2.9% done, time left:   0:00:31  3.5% done, time left:   0:00:31  3.5% done, time left:   0:00:32  4.9% done, time left:   0:00:34  6.7% done, time left:   0:00:34  7.8% done, time left:   0:00:32  9.8% done, time left:   0:00:29 11.8% done, time left:   0:00:26 13.2% done, time left:   0:00:23 13.2% done, time left:   0:00:19 13.3% done, time left:   0:00:16 13.6% done, time left:   0:00:14 15.2% done, time left:   0:00:13 16.6% done, time left:   0:00:13 17.4% done, time left:   0:00:12 17.5% done, time left:   0:00:10 17.9% done, time left:   0:00:09 19.0% done, time left:   0:00:09 20.7% done, time left:   0:00:10 22.2% done, time left:   0:00:09 24.0% done, time left:   0:00:09 25.8% done, time left:   0:00:09 27.7% done, time left:   0:00:08 29.6% done, time left:   0:00:07 31.5% done, time left:   0:00:07 33.5% done, time left:   0:00:06 35.4% done, time left:   0:00:05 37.3% done, time left:   0:00:05 39.2% done, time left:   0:00:04 41.1% done, time left:   0:00:04 43.0% done, time left:   0:00:04 46.7% done, time left:   0:00:02 52.9% done, time left:   0:00:00 58.8% done, time left:   0:00:00 65.1% done, time left:   0:00:00 71.4% done, time left:   0:00:00 75.8% done, time left:   0:00:00 80.9% done, time left:   0:00:00 87.2% done, time left:   0:00:00 94.7% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.field.TestMillisDurationField.test_getValue_long:107:*]:
+org.joda.time.field.FieldUtils.safeToInt:226 LDC -2147483648
+org.joda.time.field.FieldUtils.safeToInt:226 LLOAD 0
+org.joda.time.field.FieldUtils.safeToInt:226 LCMP
+org.joda.time.field.FieldUtils.safeToInt:226 IFGT L0 false true
+org.joda.time.field.FieldUtils.safeToInt:226 LLOAD 0
+org.joda.time.field.FieldUtils.safeToInt:226 LDC 2147483647
+org.joda.time.field.FieldUtils.safeToInt:226 LCMP
+org.joda.time.field.FieldUtils.safeToInt:226 IFGT L0 false true
+org.joda.time.field.FieldUtils.safeToInt:227 LLOAD 0
+org.joda.time.field.FieldUtils.safeToInt:227 L2I
+org.joda.time.field.FieldUtils.safeToInt:227 IRETURN
+org.joda.time.field.MillisDurationField.getValue:85 LLOAD 1
+org.joda.time.field.MillisDurationField.getValue:85 INVOKESTATIC org/joda/time/field/FieldUtils.safeToInt(J)I
+org.joda.time.field.MillisDurationField.getValue:85 IRETURN
+org.joda.time.field.TestMillisDurationField.main:45 INVOKEVIRTUAL org/joda/time/field/TestMillisDurationField.test_getValue_long()V
+org.joda.time.field.TestMillisDurationField.test_getValue_long:105 LCONST_0
+org.joda.time.field.TestMillisDurationField.test_getValue_long:105 LCONST_0
+org.joda.time.field.TestMillisDurationField.test_getValue_long:107 LDC -1234
+org.joda.time.field.TestMillisDurationField.test_getValue_long:107 GETSTATIC org/joda/time/field/MillisDurationField.INSTANCE Lorg/joda/time/DurationField;
+org.joda.time.field.TestMillisDurationField.test_getValue_long:107 LDC -1234
+org.joda.time.field.TestMillisDurationField.test_getValue_long:107 INVOKEVIRTUAL org/joda/time/DurationField.getValue(J)I
+org.joda.time.field.TestMillisDurationField.test_getValue_long:107 I2L
+org.joda.time.field.TestMillisDurationField.test_getValue_long:107 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 23 bytecode instructions.
+Computation took 6.24 seconds.

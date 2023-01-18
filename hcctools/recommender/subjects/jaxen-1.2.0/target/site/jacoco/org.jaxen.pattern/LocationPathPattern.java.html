@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocationPathPattern.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jaxen</a> &gt; <a href="index.source.html" class="el_package">org.jaxen.pattern</a> &gt; <span class="el_source">LocationPathPattern.java</span></div><h1>LocationPathPattern.java</h1><pre class="source lang-java linenums">/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright 2000-2002 bob mcwhirter &amp; James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   * Neither the name of the Jaxen Project nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS
+ * IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the
+ * Jaxen Project, please see &lt;http://www.jaxen.org/&gt;.
+ *
+ * $Id$
+ */
+
+package org.jaxen.pattern;
+
+import org.jaxen.Context;
+import org.jaxen.JaxenException;
+import org.jaxen.Navigator;
+import org.jaxen.expr.FilterExpr;
+import org.jaxen.util.SingletonList;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * &lt;p&gt;&lt;code&gt;LocationPathPattern&lt;/code&gt; matches any node using a
+ * location path such as A/B/C.
+ * The parentPattern and ancestorPattern properties are used to
+ * chain location path patterns together&lt;/p&gt;
+ *
+ * @author &lt;a href=&quot;mailto:jstrachan@apache.org&quot;&gt;James Strachan&lt;/a&gt;
+ * @version $Revision$
+ * @deprecated will be removed in Jaxen 2.0
+ */
+public class LocationPathPattern extends Pattern {
+
+    /**
+     * The node test to perform on this step of the path
+     */
+<span class="fc" id="L75">    private NodeTest nodeTest = AnyNodeTest.getInstance();</span>
+
+    /**
+     * Patterns matching my parent node
+     */
+    private Pattern parentPattern;
+
+    /**
+     * Patterns matching one of my ancestors
+     */
+    private Pattern ancestorPattern;
+
+    /**
+     * The filters to match against
+     */
+    private List filters;
+
+    /**
+     * Whether this lcoation path is absolute or not
+     */
+    private boolean absolute;
+
+
+<span class="fc" id="L98">    public LocationPathPattern() {</span>
+<span class="fc" id="L99">    }</span>
+
+<span class="fc" id="L101">    public LocationPathPattern(NodeTest nodeTest) {</span>
+<span class="fc" id="L102">        this.nodeTest = nodeTest;</span>
+<span class="fc" id="L103">    }</span>
+
+    public Pattern simplify() {
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (parentPattern != null) {</span>
+<span class="fc" id="L107">            parentPattern = parentPattern.simplify();</span>
+        }
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (ancestorPattern != null) {</span>
+<span class="fc" id="L110">            ancestorPattern = ancestorPattern.simplify();</span>
+        }
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (filters == null) {</span>
+<span class="fc bfc" id="L113" title="All 4 branches covered.">            if (parentPattern == null &amp;&amp; ancestorPattern == null) {</span>
+<span class="fc" id="L114">                return nodeTest;</span>
+            }
+<span class="pc bpc" id="L116" title="1 of 4 branches missed.">            if (parentPattern != null &amp;&amp; ancestorPattern == null) {</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">                if (nodeTest instanceof AnyNodeTest) {</span>
+<span class="fc" id="L118">                    return parentPattern;</span>
+                }
+            }
+        }
+<span class="fc" id="L122">        return this;</span>
+    }
+
+    /**
+     * Adds a filter to this pattern
+     */
+    public void addFilter(FilterExpr filter) {
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">        if (filters == null) {</span>
+<span class="fc" id="L130">            filters = new ArrayList();</span>
+        }
+<span class="fc" id="L132">        filters.add(filter);</span>
+<span class="fc" id="L133">    }</span>
+
+    /**
+     * Adds a pattern for the parent of the current
+     * context node used in this pattern.
+     */
+    public void setParentPattern(Pattern parentPattern) {
+<span class="fc" id="L140">        this.parentPattern = parentPattern;</span>
+<span class="fc" id="L141">    }</span>
+
+    /**
+     * Adds a pattern for an ancestor of the current
+     * context node used in this pattern.
+     */
+    public void setAncestorPattern(Pattern ancestorPattern) {
+<span class="fc" id="L148">        this.ancestorPattern = ancestorPattern;</span>
+<span class="fc" id="L149">    }</span>
+
+    /**
+     * Allows the NodeTest to be set
+     */
+    public void setNodeTest(NodeTest nodeTest) throws JaxenException {
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        if (this.nodeTest instanceof AnyNodeTest) {</span>
+<span class="fc" id="L156">            this.nodeTest = nodeTest;</span>
+        } else {
+<span class="nc" id="L158">            throw new JaxenException(&quot;Attempt to overwrite nodeTest: &quot; + this.nodeTest + &quot; with: &quot; + nodeTest);</span>
+        }
+<span class="fc" id="L160">    }</span>
+
+    /**
+     * @return true if the pattern matches the given node
+     */
+    public boolean matches(Object node, Context context) throws JaxenException {
+<span class="nc" id="L166">        Navigator navigator = context.getNavigator();</span>
+
+/*        
+        if ( isAbsolute() )
+        {
+            node = navigator.getDocumentNode( node );
+        }
+*/
+<span class="nc bnc" id="L174" title="All 2 branches missed.">        if (!nodeTest.matches(node, context)) {</span>
+<span class="nc" id="L175">            return false;</span>
+        }
+
+<span class="nc bnc" id="L178" title="All 2 branches missed.">        if (parentPattern != null) {</span>
+<span class="nc" id="L179">            Object parent = navigator.getParentNode(node);</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">            if (parent == null) {</span>
+<span class="nc" id="L181">                return false;</span>
+            }
+<span class="nc bnc" id="L183" title="All 2 branches missed.">            if (!parentPattern.matches(parent, context)) {</span>
+<span class="nc" id="L184">                return false;</span>
+            }
+        }
+
+<span class="nc bnc" id="L188" title="All 2 branches missed.">        if (ancestorPattern != null) {</span>
+<span class="nc" id="L189">            Object ancestor = navigator.getParentNode(node);</span>
+            while (true) {
+<span class="nc bnc" id="L191" title="All 2 branches missed.">                if (ancestorPattern.matches(ancestor, context)) {</span>
+<span class="nc" id="L192">                    break;</span>
+                }
+<span class="nc bnc" id="L194" title="All 2 branches missed.">                if (ancestor == null) {</span>
+<span class="nc" id="L195">                    return false;</span>
+                }
+<span class="nc bnc" id="L197" title="All 2 branches missed.">                if (navigator.isDocument(ancestor)) {</span>
+<span class="nc" id="L198">                    return false;</span>
+                }
+<span class="nc" id="L200">                ancestor = navigator.getParentNode(ancestor);</span>
+            }
+        }
+
+<span class="nc bnc" id="L204" title="All 2 branches missed.">        if (filters != null) {</span>
+<span class="nc" id="L205">            List list = new SingletonList(node);</span>
+
+<span class="nc" id="L207">            context.setNodeSet(list);</span>
+
+            // XXXX: filters aren't positional, so should we clone context?
+
+<span class="nc" id="L211">            boolean answer = true;</span>
+
+<span class="nc bnc" id="L213" title="All 2 branches missed.">            for (Iterator iter = filters.iterator(); iter.hasNext(); ) {</span>
+<span class="nc" id="L214">                FilterExpr filter = (FilterExpr) iter.next();</span>
+
+<span class="nc bnc" id="L216" title="All 2 branches missed.">                if (!filter.asBoolean(context)) {</span>
+<span class="nc" id="L217">                    answer = false;</span>
+<span class="nc" id="L218">                    break;</span>
+                }
+<span class="nc" id="L220">            }</span>
+            // restore context
+
+<span class="nc" id="L223">            context.setNodeSet(list);</span>
+
+<span class="nc" id="L225">            return answer;</span>
+        }
+<span class="nc" id="L227">        return true;</span>
+    }
+
+    public double getPriority() {
+<span class="pc bpc" id="L231" title="1 of 2 branches missed.">        if (filters != null) {</span>
+<span class="fc" id="L232">            return 0.5;</span>
+        }
+<span class="nc" id="L234">        return nodeTest.getPriority();</span>
+    }
+
+
+    public short getMatchType() {
+<span class="fc" id="L239">        return nodeTest.getMatchType();</span>
+    }
+
+    public String getText() {
+<span class="nc" id="L243">        StringBuffer buffer = new StringBuffer();</span>
+<span class="nc bnc" id="L244" title="All 2 branches missed.">        if (absolute) {</span>
+<span class="nc" id="L245">            buffer.append(&quot;/&quot;);</span>
+        }
+<span class="nc bnc" id="L247" title="All 2 branches missed.">        if (ancestorPattern != null) {</span>
+<span class="nc" id="L248">            String text = ancestorPattern.getText();</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">            if (text.length() &gt; 0) {</span>
+<span class="nc" id="L250">                buffer.append(text);</span>
+<span class="nc" id="L251">                buffer.append(&quot;//&quot;);</span>
+            }
+        }
+<span class="nc bnc" id="L254" title="All 2 branches missed.">        if (parentPattern != null) {</span>
+<span class="nc" id="L255">            String text = parentPattern.getText();</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">            if (text.length() &gt; 0) {</span>
+<span class="nc" id="L257">                buffer.append(text);</span>
+<span class="nc" id="L258">                buffer.append(&quot;/&quot;);</span>
+            }
+        }
+<span class="nc" id="L261">        buffer.append(nodeTest.getText());</span>
+
+<span class="nc bnc" id="L263" title="All 2 branches missed.">        if (filters != null) {</span>
+<span class="nc" id="L264">            buffer.append(&quot;[&quot;);</span>
+<span class="nc bnc" id="L265" title="All 2 branches missed.">            for (Iterator iter = filters.iterator(); iter.hasNext(); ) {</span>
+<span class="nc" id="L266">                FilterExpr filter = (FilterExpr) iter.next();</span>
+<span class="nc" id="L267">                buffer.append(filter.getText());</span>
+<span class="nc" id="L268">            }</span>
+<span class="nc" id="L269">            buffer.append(&quot;]&quot;);</span>
+        }
+<span class="nc" id="L271">        return buffer.toString();</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L275">        return super.toString() + &quot;[ absolute: &quot; + absolute + &quot; parent: &quot; + parentPattern + &quot; ancestor: &quot;</span>
+                + ancestorPattern + &quot; filters: &quot; + filters + &quot; nodeTest: &quot;
+                + nodeTest + &quot; ]&quot;;
+    }
+
+    public boolean isAbsolute() {
+<span class="nc" id="L281">        return absolute;</span>
+    }
+
+    public void setAbsolute(boolean absolute) {
+<span class="nc" id="L285">        this.absolute = absolute;</span>
+<span class="nc" id="L286">    }</span>
+
+    public boolean hasAnyNodeTest() {
+<span class="nc" id="L289">        return nodeTest instanceof AnyNodeTest;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

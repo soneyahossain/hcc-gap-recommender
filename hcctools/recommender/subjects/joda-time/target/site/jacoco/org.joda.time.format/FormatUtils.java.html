@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FormatUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Joda-Time</a> &gt; <a href="index.source.html" class="el_package">org.joda.time.format</a> &gt; <span class="el_source">FormatUtils.java</span></div><h1>FormatUtils.java</h1><pre class="source lang-java linenums">/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package org.joda.time.format;
+
+import java.io.IOException;
+import java.io.Writer;
+
+/**
+ * Utility methods used by formatters.
+ * &lt;p&gt;
+ * FormatUtils is thread-safe and immutable.
+ *
+ * @author Brian S O'Neill
+ * @since 1.0
+ */
+public class FormatUtils {
+
+<span class="fc" id="L31">    private static final double LOG_10 = Math.log(10);</span>
+
+    /**
+     * Restricted constructor.
+     */
+    private FormatUtils() {
+    }
+
+    /**
+     * Converts an integer to a string, prepended with a variable amount of '0'
+     * pad characters, and appends it to the given buffer.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param buf receives integer converted to a string
+     * @param value value to convert to a string
+     * @param size minimum amount of digits to append
+     */
+    public static void appendPaddedInteger(StringBuffer buf, int value, int size) {
+        try {
+<span class="fc" id="L51">            appendPaddedInteger((Appendable)buf, value, size);</span>
+<span class="nc" id="L52">        } catch (IOException e) {</span>
+            // StringBuffer does not throw IOException
+<span class="fc" id="L54">        }</span>
+<span class="fc" id="L55">    }</span>
+
+    /**
+     * Converts an integer to a string, prepended with a variable amount of '0'
+     * pad characters, and appends it to the given appendable.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param appenadble receives integer converted to a string
+     * @param value value to convert to a string
+     * @param size minimum amount of digits to append
+     * @since 2.4
+     */
+    public static void appendPaddedInteger(Appendable appenadble, int value, int size) throws IOException {
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (value &lt; 0) {</span>
+<span class="fc" id="L70">            appenadble.append('-');</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">            if (value != Integer.MIN_VALUE) {</span>
+<span class="fc" id="L72">                value = -value;</span>
+            } else {
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                for (; size &gt; 10; size--) {</span>
+<span class="nc" id="L75">                    appenadble.append('0');</span>
+                }
+<span class="nc" id="L77">                appenadble.append(&quot;&quot; + -(long)Integer.MIN_VALUE);</span>
+<span class="nc" id="L78">                return;</span>
+            }
+        }
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        if (value &lt; 10) {</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">            for (; size &gt; 1; size--) {</span>
+<span class="fc" id="L83">                appenadble.append('0');</span>
+            }
+<span class="fc" id="L85">            appenadble.append((char)(value + '0'));</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        } else if (value &lt; 100) {</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">            for (; size &gt; 2; size--) {</span>
+<span class="fc" id="L88">                appenadble.append('0');</span>
+            }
+            // Calculate value div/mod by 10 without using two expensive
+            // division operations. (2 ^ 27) / 10 = 13421772. Add one to
+            // value to correct rounding error.
+<span class="fc" id="L93">            int d = ((value + 1) * 13421772) &gt;&gt; 27;</span>
+<span class="fc" id="L94">            appenadble.append((char) (d + '0'));</span>
+            // Append remainder by calculating (value - d * 10).
+<span class="fc" id="L96">            appenadble.append((char) (value - (d &lt;&lt; 3) - (d &lt;&lt; 1) + '0'));</span>
+<span class="fc" id="L97">        } else {</span>
+            int digits;
+<span class="fc bfc" id="L99" title="All 2 branches covered.">            if (value &lt; 1000) {</span>
+<span class="fc" id="L100">                digits = 3;</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">            } else if (value &lt; 10000) {</span>
+<span class="fc" id="L102">                digits = 4;</span>
+            } else {
+<span class="fc" id="L104">                digits = (int)(Math.log(value) / LOG_10) + 1;</span>
+            }
+<span class="fc bfc" id="L106" title="All 2 branches covered.">            for (; size &gt; digits; size--) {</span>
+<span class="fc" id="L107">                appenadble.append('0');</span>
+            }
+<span class="fc" id="L109">            appenadble.append(Integer.toString(value));</span>
+        }
+<span class="fc" id="L111">    }</span>
+
+    /**
+     * Converts an integer to a string, prepended with a variable amount of '0'
+     * pad characters, and appends it to the given buffer.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param buf receives integer converted to a string
+     * @param value value to convert to a string
+     * @param size minimum amount of digits to append
+     */
+    public static void appendPaddedInteger(StringBuffer buf, long value, int size) {
+        try {
+<span class="nc" id="L125">            appendPaddedInteger((Appendable)buf, value, size);</span>
+<span class="nc" id="L126">        } catch (IOException e) {</span>
+            // StringBuffer does not throw IOException
+<span class="nc" id="L128">        }</span>
+<span class="nc" id="L129">    }</span>
+
+    /**
+     * Converts an integer to a string, prepended with a variable amount of '0'
+     * pad characters, and appends it to the given buffer.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param appendable receives integer converted to a string
+     * @param value value to convert to a string
+     * @param size minimum amount of digits to append
+     * @since 2.4
+     */
+    public static void appendPaddedInteger(Appendable appendable, long value, int size) throws IOException {
+<span class="nc" id="L143">        int intValue = (int)value;</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        if (intValue == value) {</span>
+<span class="nc" id="L145">            appendPaddedInteger(appendable, intValue, size);</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        } else if (size &lt;= 19) {</span>
+<span class="nc" id="L147">            appendable.append(Long.toString(value));</span>
+        } else {
+<span class="nc bnc" id="L149" title="All 2 branches missed.">            if (value &lt; 0) {</span>
+<span class="nc" id="L150">                appendable.append('-');</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">                if (value != Long.MIN_VALUE) {</span>
+<span class="nc" id="L152">                    value = -value;</span>
+                } else {
+<span class="nc bnc" id="L154" title="All 2 branches missed.">                    for (; size &gt; 19; size--) {</span>
+<span class="nc" id="L155">                        appendable.append('0');</span>
+                    }
+<span class="nc" id="L157">                    appendable.append(&quot;9223372036854775808&quot;);</span>
+<span class="nc" id="L158">                    return;</span>
+                }
+            }
+<span class="nc" id="L161">            int digits = (int)(Math.log(value) / LOG_10) + 1;</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">            for (; size &gt; digits; size--) {</span>
+<span class="nc" id="L163">                appendable.append('0');</span>
+            }
+<span class="nc" id="L165">            appendable.append(Long.toString(value));</span>
+        }
+<span class="nc" id="L167">    }</span>
+
+    /**
+     * Converts an integer to a string, prepended with a variable amount of '0'
+     * pad characters, and writes it to the given writer.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param out receives integer converted to a string
+     * @param value value to convert to a string
+     * @param size minimum amount of digits to append
+     */
+    public static void writePaddedInteger(Writer out, int value, int size)
+        throws IOException
+    {
+<span class="pc bpc" id="L182" title="1 of 2 branches missed.">        if (value &lt; 0) {</span>
+<span class="nc" id="L183">            out.write('-');</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">            if (value != Integer.MIN_VALUE) {</span>
+<span class="nc" id="L185">                value = -value;</span>
+            } else {
+<span class="nc bnc" id="L187" title="All 2 branches missed.">                for (; size &gt; 10; size--) {</span>
+<span class="nc" id="L188">                    out.write('0');</span>
+                }
+<span class="nc" id="L190">                out.write(&quot;&quot; + -(long)Integer.MIN_VALUE);</span>
+<span class="nc" id="L191">                return;</span>
+            }
+        }
+<span class="pc bpc" id="L194" title="1 of 2 branches missed.">        if (value &lt; 10) {</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">            for (; size &gt; 1; size--) {</span>
+<span class="fc" id="L196">                out.write('0');</span>
+            }
+<span class="fc" id="L198">            out.write(value + '0');</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">        } else if (value &lt; 100) {</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">            for (; size &gt; 2; size--) {</span>
+<span class="nc" id="L201">                out.write('0');</span>
+            }
+            // Calculate value div/mod by 10 without using two expensive
+            // division operations. (2 ^ 27) / 10 = 13421772. Add one to
+            // value to correct rounding error.
+<span class="nc" id="L206">            int d = ((value + 1) * 13421772) &gt;&gt; 27;</span>
+<span class="nc" id="L207">            out.write(d + '0');</span>
+            // Append remainder by calculating (value - d * 10).
+<span class="nc" id="L209">            out.write(value - (d &lt;&lt; 3) - (d &lt;&lt; 1) + '0');</span>
+<span class="nc" id="L210">        } else {</span>
+            int digits;
+<span class="nc bnc" id="L212" title="All 2 branches missed.">            if (value &lt; 1000) {</span>
+<span class="nc" id="L213">                digits = 3;</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">            } else if (value &lt; 10000) {</span>
+<span class="nc" id="L215">                digits = 4;</span>
+            } else {
+<span class="nc" id="L217">                digits = (int)(Math.log(value) / LOG_10) + 1;</span>
+            }
+<span class="nc bnc" id="L219" title="All 2 branches missed.">            for (; size &gt; digits; size--) {</span>
+<span class="nc" id="L220">                out.write('0');</span>
+            }
+<span class="nc" id="L222">            out.write(Integer.toString(value));</span>
+        }
+<span class="fc" id="L224">    }</span>
+
+    /**
+     * Converts an integer to a string, prepended with a variable amount of '0'
+     * pad characters, and writes it to the given writer.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param out receives integer converted to a string
+     * @param value value to convert to a string
+     * @param size minimum amount of digits to append
+     */
+    public static void writePaddedInteger(Writer out, long value, int size)
+        throws IOException
+    {
+<span class="nc" id="L239">        int intValue = (int)value;</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">        if (intValue == value) {</span>
+<span class="nc" id="L241">            writePaddedInteger(out, intValue, size);</span>
+<span class="nc bnc" id="L242" title="All 2 branches missed.">        } else if (size &lt;= 19) {</span>
+<span class="nc" id="L243">            out.write(Long.toString(value));</span>
+        } else {
+<span class="nc bnc" id="L245" title="All 2 branches missed.">            if (value &lt; 0) {</span>
+<span class="nc" id="L246">                out.write('-');</span>
+<span class="nc bnc" id="L247" title="All 2 branches missed.">                if (value != Long.MIN_VALUE) {</span>
+<span class="nc" id="L248">                    value = -value;</span>
+                } else {
+<span class="nc bnc" id="L250" title="All 2 branches missed.">                    for (; size &gt; 19; size--) {</span>
+<span class="nc" id="L251">                        out.write('0');</span>
+                    }
+<span class="nc" id="L253">                    out.write(&quot;9223372036854775808&quot;);</span>
+<span class="nc" id="L254">                    return;</span>
+                }
+            }
+<span class="nc" id="L257">            int digits = (int)(Math.log(value) / LOG_10) + 1;</span>
+<span class="nc bnc" id="L258" title="All 2 branches missed.">            for (; size &gt; digits; size--) {</span>
+<span class="nc" id="L259">                out.write('0');</span>
+            }
+<span class="nc" id="L261">            out.write(Long.toString(value));</span>
+        }
+<span class="nc" id="L263">    }</span>
+
+    /**
+     * Converts an integer to a string, and appends it to the given buffer.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param buf receives integer converted to a string
+     * @param value value to convert to a string
+     */
+    public static void appendUnpaddedInteger(StringBuffer buf, int value) {
+        try {
+<span class="fc" id="L275">            appendUnpaddedInteger((Appendable) buf, value);</span>
+<span class="nc" id="L276">        } catch (IOException e) {</span>
+            // StringBuffer do not throw IOException
+<span class="fc" id="L278">        }</span>
+<span class="fc" id="L279">    }</span>
+
+    /**
+     * Converts an integer to a string, and appends it to the given appendable.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param appendable receives integer converted to a string
+     * @param value value to convert to a string
+     * @since 2.4
+     */
+    public static void appendUnpaddedInteger(Appendable appendable, int value) throws IOException {
+<span class="fc bfc" id="L291" title="All 2 branches covered.">        if (value &lt; 0) {</span>
+<span class="fc" id="L292">            appendable.append('-');</span>
+<span class="pc bpc" id="L293" title="1 of 2 branches missed.">            if (value != Integer.MIN_VALUE) {</span>
+<span class="fc" id="L294">                value = -value;</span>
+            } else {
+<span class="nc" id="L296">                appendable.append(&quot;&quot; + -(long)Integer.MIN_VALUE);</span>
+<span class="nc" id="L297">                return;</span>
+            }
+        }
+<span class="fc bfc" id="L300" title="All 2 branches covered.">        if (value &lt; 10) {</span>
+<span class="fc" id="L301">            appendable.append((char)(value + '0'));</span>
+<span class="fc bfc" id="L302" title="All 2 branches covered.">        } else if (value &lt; 100) {</span>
+            // Calculate value div/mod by 10 without using two expensive
+            // division operations. (2 ^ 27) / 10 = 13421772. Add one to
+            // value to correct rounding error.
+<span class="fc" id="L306">            int d = ((value + 1) * 13421772) &gt;&gt; 27;</span>
+<span class="fc" id="L307">            appendable.append((char) (d + '0'));</span>
+            // Append remainder by calculating (value - d * 10).
+<span class="fc" id="L309">            appendable.append((char) (value - (d &lt;&lt; 3) - (d &lt;&lt; 1) + '0'));</span>
+<span class="fc" id="L310">        } else {</span>
+<span class="fc" id="L311">            appendable.append(Integer.toString(value));</span>
+        }
+<span class="fc" id="L313">    }</span>
+
+    /**
+     * Converts an integer to a string, and appends it to the given buffer.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param buf receives integer converted to a string
+     * @param value value to convert to a string
+     */
+    public static void appendUnpaddedInteger(StringBuffer buf, long value) {
+        try {
+<span class="fc" id="L325">            appendUnpaddedInteger((Appendable) buf, value);</span>
+<span class="nc" id="L326">        } catch (IOException e) {</span>
+            // StringBuffer do not throw IOException
+<span class="fc" id="L328">        }</span>
+<span class="fc" id="L329">    }</span>
+
+    /**
+     * Converts an integer to a string, and appends it to the given appendable.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param appendable receives integer converted to a string
+     * @param value value to convert to a string
+     */
+    public static void appendUnpaddedInteger(Appendable appendable, long value) throws IOException {
+<span class="fc" id="L340">        int intValue = (int)value;</span>
+<span class="fc bfc" id="L341" title="All 2 branches covered.">        if (intValue == value) {</span>
+<span class="fc" id="L342">            appendUnpaddedInteger(appendable, intValue);</span>
+        } else {
+<span class="fc" id="L344">            appendable.append(Long.toString(value));</span>
+        }
+<span class="fc" id="L346">    }</span>
+
+    /**
+     * Converts an integer to a string, and writes it to the given writer.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param out receives integer converted to a string
+     * @param value value to convert to a string
+     */
+    public static void writeUnpaddedInteger(Writer out, int value)
+        throws IOException
+    {
+<span class="pc bpc" id="L359" title="1 of 2 branches missed.">        if (value &lt; 0) {</span>
+<span class="nc" id="L360">            out.write('-');</span>
+<span class="nc bnc" id="L361" title="All 2 branches missed.">            if (value != Integer.MIN_VALUE) {</span>
+<span class="nc" id="L362">                value = -value;</span>
+            } else {
+<span class="nc" id="L364">                out.write(&quot;&quot; + -(long)Integer.MIN_VALUE);</span>
+<span class="nc" id="L365">                return;</span>
+            }
+        }
+<span class="pc bpc" id="L368" title="1 of 2 branches missed.">        if (value &lt; 10) {</span>
+<span class="fc" id="L369">            out.write(value + '0');</span>
+<span class="nc bnc" id="L370" title="All 2 branches missed.">        } else if (value &lt; 100) {</span>
+            // Calculate value div/mod by 10 without using two expensive
+            // division operations. (2 ^ 27) / 10 = 13421772. Add one to
+            // value to correct rounding error.
+<span class="nc" id="L374">            int d = ((value + 1) * 13421772) &gt;&gt; 27;</span>
+<span class="nc" id="L375">            out.write(d + '0');</span>
+            // Append remainder by calculating (value - d * 10).
+<span class="nc" id="L377">            out.write(value - (d &lt;&lt; 3) - (d &lt;&lt; 1) + '0');</span>
+<span class="nc" id="L378">        } else {</span>
+<span class="nc" id="L379">            out.write(Integer.toString(value));</span>
+        }
+<span class="fc" id="L381">    }</span>
+
+    /**
+     * Converts an integer to a string, and writes it to the given writer.
+     *
+     * &lt;p&gt;This method is optimized for converting small values to strings.
+     *
+     * @param out receives integer converted to a string
+     * @param value value to convert to a string
+     */
+    public static void writeUnpaddedInteger(Writer out, long value)
+        throws IOException
+    {
+<span class="nc" id="L394">        int intValue = (int)value;</span>
+<span class="nc bnc" id="L395" title="All 2 branches missed.">        if (intValue == value) {</span>
+<span class="nc" id="L396">            writeUnpaddedInteger(out, intValue);</span>
+        } else {
+<span class="nc" id="L398">            out.write(Long.toString(value));</span>
+        }
+<span class="nc" id="L400">    }</span>
+
+    /**
+     * Calculates the number of decimal digits for the given value,
+     * including the sign.
+     */
+    public static int calculateDigitCount(long value) {
+<span class="fc bfc" id="L407" title="All 2 branches covered.">        if (value &lt; 0) {</span>
+<span class="pc bpc" id="L408" title="1 of 2 branches missed.">            if (value != Long.MIN_VALUE) {</span>
+<span class="fc" id="L409">                return calculateDigitCount(-value) + 1;</span>
+            } else {
+<span class="nc" id="L411">                return 20;</span>
+            }
+        }
+<span class="fc bfc" id="L414" title="All 8 branches covered.">        return </span>
+            (value &lt; 10 ? 1 :
+             (value &lt; 100 ? 2 :
+              (value &lt; 1000 ? 3 :
+               (value &lt; 10000 ? 4 :
+<span class="fc" id="L419">                ((int)(Math.log(value) / LOG_10) + 1)))));</span>
+    }
+
+    static int parseTwoDigits(CharSequence text, int position) {
+<span class="fc" id="L423">        int value = text.charAt(position) - '0';</span>
+<span class="fc" id="L424">        return ((value &lt;&lt; 3) + (value &lt;&lt; 1)) + text.charAt(position + 1) - '0';</span>
+    }
+
+    static String createErrorMessage(final String text, final int errorPos) {
+<span class="fc" id="L428">        int sampleLen = errorPos + 32;</span>
+        String sampleText;
+<span class="pc bpc" id="L430" title="1 of 2 branches missed.">        if (text.length() &lt;= sampleLen + 3) {</span>
+<span class="fc" id="L431">            sampleText = text;</span>
+        } else {
+<span class="nc" id="L433">            sampleText = text.substring(0, sampleLen).concat(&quot;...&quot;);</span>
+        }
+        
+<span class="fc bfc" id="L436" title="All 2 branches covered.">        if (errorPos &lt;= 0) {</span>
+<span class="fc" id="L437">            return &quot;Invalid format: \&quot;&quot; + sampleText + '&quot;';</span>
+        }
+        
+<span class="fc bfc" id="L440" title="All 2 branches covered.">        if (errorPos &gt;= text.length()) {</span>
+<span class="fc" id="L441">            return &quot;Invalid format: \&quot;&quot; + sampleText + &quot;\&quot; is too short&quot;;</span>
+        }
+        
+<span class="fc" id="L444">        return &quot;Invalid format: \&quot;&quot; + sampleText + &quot;\&quot; is malformed at \&quot;&quot; +</span>
+<span class="fc" id="L445">            sampleText.substring(errorPos) + '&quot;';</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
