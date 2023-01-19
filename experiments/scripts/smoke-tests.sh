@@ -111,7 +111,7 @@ ls -ltR $HCC_EXPERIMENTS/slices/$PROJECT_NAME/cli_slices/
 # Compute Checked Coverage (statement)
 header "Compute checked coverage statement metric"
 ./compute_hcc.stmt.sh $PROJECT_NAME > $PROJECT_NAME.hcc 2>&1
-cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/ssc.csv
+cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/scc.csv
 report $? "Checked Coverage (statement) computed"
 
 # Compute Checked Coverage (object-branch)
@@ -122,6 +122,6 @@ report $? "Checked Coverage (object-branch) computed"
 
 # Run recommender/evaluator tool
 header "Run recommender/evaluator"
-time ./evaluator.sh $PROJECT_NAME > $PROJECT_NAME.evaluator 2>&1
-cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/evaluation/result/summary.csv
+./evaluator.sh $PROJECT_NAME > $PROJECT_NAME.evaluator 2>&1
+cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/evaluator/result/summary.csv
 report $? "Recommender/evalutor ran"

@@ -38,7 +38,7 @@ if [ ! -d "$target_classes" ]; then
 	exit 1
 fi 
 
-per_assert_cov=$HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/hcc_per_assertion.txt
+per_assert_cov=$HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/scc_per_assertion.txt
 if [ ! -f "$per_assert_cov" ]; then
 	echo "Could not find per assert coverage file: $per_assert_cov"
 	exit 1
