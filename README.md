@@ -30,10 +30,12 @@ Verify the version of the JDK:
 
 The output should look like this:
 
-        openjdk version "1.8.0_242"
-        OpenJDK Runtime Environment (build 1.8.0_242-b09)
-        OpenJDK 64-Bit Server VM (build 25.242-b09, mixed mode)
+        openjdk version "1.8.0_312"
+        OpenJDK Runtime Environment (build 1.8.0_312-8u312-b07-0ubuntu1~20.04-b07)
+        OpenJDK 64-Bit Server VM (build 25.312-b07, mixed mode)
+
 - Apache Maven 3.6.3 (https://maven.apache.org/)
+
 
         sudo apt update        
         sudo apt install maven
