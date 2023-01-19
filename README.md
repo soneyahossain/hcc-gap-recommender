@@ -3,7 +3,7 @@
 To run HCC, you will need to install both Java JDK 1.7 and JDK 1.8
 
 Once this is done:
-* update the environment variables in the file `experiments/setenv`
+* update the Java-related environment variables in the file `experiments/setenv`
 * `cd` into `experiments` and type: ```. setenv```
 
 To build the HCC support libraries:
