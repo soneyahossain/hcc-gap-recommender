@@ -97,15 +97,15 @@ public class TestConverterSet {//extends TestCase {
     @Test
     public void testClass() throws Exception {
         Class cls = ConverterSet.class;
-NoAssert.donothing(false, Modifier.isPublic(cls.getModifiers()));
-NoAssert.donothing(false, Modifier.isProtected(cls.getModifiers()));
-NoAssert.donothing(false, Modifier.isPrivate(cls.getModifiers()));
+        assertEquals(false, Modifier.isPublic(cls.getModifiers()));
+        assertEquals(false, Modifier.isProtected(cls.getModifiers()));
+        assertEquals(false, Modifier.isPrivate(cls.getModifiers()));
         
-NoAssert.donothing(1, cls.getDeclaredConstructors().length);
+        assertEquals(1, cls.getDeclaredConstructors().length);
         Constructor con = cls.getDeclaredConstructors()[0];
-NoAssert.donothing(false, Modifier.isPublic(con.getModifiers()));
+        assertEquals(false, Modifier.isPublic(con.getModifiers()));
 NoAssert.donothing(false, Modifier.isProtected(con.getModifiers()));
-NoAssert.donothing(false, Modifier.isPrivate(con.getModifiers()));
+        assertEquals(false, Modifier.isPrivate(con.getModifiers()));
     }
 
 
@@ -143,8 +143,8 @@ NoAssert.donothing(4, set.size());
         };
         ConverterSet set = new ConverterSet(array);
         ConverterSet result = set.add(c5, null);
-NoAssert.donothing(4, set.size());
-NoAssert.donothing(5, result.size());
+        assertEquals(4, set.size());
+        assertEquals(5, result.size());
     }
 
     @Test public void testAddNullRemoved2() {
@@ -153,7 +153,7 @@ NoAssert.donothing(5, result.size());
         };
         ConverterSet set = new ConverterSet(array);
         ConverterSet result = set.add(c4, null);
-NoAssert.donothing(set, result);
+        assertSame(set, result);
     }
 
     @Test public void testAddNullRemoved3() {
@@ -162,9 +162,9 @@ NoAssert.donothing(set, result);
         };
         ConverterSet set = new ConverterSet(array);
         ConverterSet result = set.add(c4a, null);
-NoAssert.donothing(set != result);
-NoAssert.donothing(4, set.size());
-NoAssert.donothing(4, result.size());
+        assertTrue(set != result);
+        assertEquals(4, set.size());
+        assertEquals(4, result.size());
     }
 
     //-----------------------------------------------------------------------
@@ -174,7 +174,7 @@ NoAssert.donothing(4, result.size());
         };
         ConverterSet set = new ConverterSet(array);
         ConverterSet result = set.remove(c3, null);
-NoAssert.donothing(4, set.size());
+        assertEquals(4, set.size());
 NoAssert.donothing(3, result.size());
     }
 
@@ -184,7 +184,7 @@ NoAssert.donothing(3, result.size());
         };
         ConverterSet set = new ConverterSet(array);
         ConverterSet result = set.remove(c5, null);
-NoAssert.donothing(set, result);
+        assertSame(set, result);
     }
 
     //-----------------------------------------------------------------------
@@ -197,7 +197,7 @@ NoAssert.donothing(set, result);
             set.remove(200, null);
             fail();
         } catch (IndexOutOfBoundsException ex) {}
-NoAssert.donothing(4, set.size());
+        assertEquals(4, set.size());
     }
 
     @Test public void testRemoveBadIndex2() {

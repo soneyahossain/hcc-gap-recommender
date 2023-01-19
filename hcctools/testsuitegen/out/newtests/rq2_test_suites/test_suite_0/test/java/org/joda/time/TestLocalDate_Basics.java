@@ -374,13 +374,13 @@ public class TestLocalDate_Basics { //extends TestCase {
     @Test
     public void testGet_DateTimeFieldType() {
         LocalDate test = new LocalDate();
-NoAssert.donothing(1970, test.get(DateTimeFieldType.year()));
-NoAssert.donothing(6, test.get(DateTimeFieldType.monthOfYear()));
-NoAssert.donothing(9, test.get(DateTimeFieldType.dayOfMonth()));
-NoAssert.donothing(2, test.get(DateTimeFieldType.dayOfWeek()));
-NoAssert.donothing(160, test.get(DateTimeFieldType.dayOfYear()));
-NoAssert.donothing(24, test.get(DateTimeFieldType.weekOfWeekyear()));
-NoAssert.donothing(1970, test.get(DateTimeFieldType.weekyear()));
+        assertEquals(1970, test.get(DateTimeFieldType.year()));
+        assertEquals(6, test.get(DateTimeFieldType.monthOfYear()));
+        assertEquals(9, test.get(DateTimeFieldType.dayOfMonth()));
+        assertEquals(2, test.get(DateTimeFieldType.dayOfWeek()));
+        assertEquals(160, test.get(DateTimeFieldType.dayOfYear()));
+        assertEquals(24, test.get(DateTimeFieldType.weekOfWeekyear()));
+        assertEquals(1970, test.get(DateTimeFieldType.weekyear()));
         try {
             test.get(null);
             fail();
@@ -396,15 +396,15 @@ NoAssert.donothing(1970, test.get(DateTimeFieldType.weekyear()));
     @Test
     public void testSize() {
         LocalDate test = new LocalDate();
-NoAssert.donothing(3, test.size());
+        assertEquals(3, test.size());
     }
 
     @Test
     public void testGetFieldType_int() {
         LocalDate test = new LocalDate(COPTIC_PARIS);
-NoAssert.donothing(DateTimeFieldType.year(), test.getFieldType(0));
-NoAssert.donothing(DateTimeFieldType.monthOfYear(), test.getFieldType(1));
-NoAssert.donothing(DateTimeFieldType.dayOfMonth(), test.getFieldType(2));
+        assertSame(DateTimeFieldType.year(), test.getFieldType(0));
+        assertSame(DateTimeFieldType.monthOfYear(), test.getFieldType(1));
+        assertSame(DateTimeFieldType.dayOfMonth(), test.getFieldType(2));
         try {
             test.getFieldType(-1);
         } catch (IndexOutOfBoundsException ex) {
@@ -419,18 +419,18 @@ NoAssert.donothing(DateTimeFieldType.dayOfMonth(), test.getFieldType(2));
     public void testGetFieldTypes() {
         LocalDate test = new LocalDate(COPTIC_PARIS);
         DateTimeFieldType[] fields = test.getFieldTypes();
-NoAssert.donothing(DateTimeFieldType.year(), fields[0]);
-NoAssert.donothing(DateTimeFieldType.monthOfYear(), fields[1]);
-NoAssert.donothing(DateTimeFieldType.dayOfMonth(), fields[2]);
-NoAssert.donothing(test.getFieldTypes(), test.getFieldTypes());
+        assertSame(DateTimeFieldType.year(), fields[0]);
+        assertSame(DateTimeFieldType.monthOfYear(), fields[1]);
+        assertSame(DateTimeFieldType.dayOfMonth(), fields[2]);
+        assertNotSame(test.getFieldTypes(), test.getFieldTypes());
     }
 
     @Test
     public void testGetField_int() {
         LocalDate test = new LocalDate(COPTIC_PARIS);
 NoAssert.donothing(COPTIC_UTC.year(), test.getField(0));
-NoAssert.donothing(COPTIC_UTC.monthOfYear(), test.getField(1));
-NoAssert.donothing(COPTIC_UTC.dayOfMonth(), test.getField(2));
+        assertSame(COPTIC_UTC.monthOfYear(), test.getField(1));
+        assertSame(COPTIC_UTC.dayOfMonth(), test.getField(2));
         try {
             test.getField(-1);
         } catch (IndexOutOfBoundsException ex) {
@@ -445,18 +445,18 @@ NoAssert.donothing(COPTIC_UTC.dayOfMonth(), test.getField(2));
     public void testGetFields() {
         LocalDate test = new LocalDate(COPTIC_PARIS);
         DateTimeField[] fields = test.getFields();
-NoAssert.donothing(COPTIC_UTC.year(), fields[0]);
+        assertSame(COPTIC_UTC.year(), fields[0]);
 NoAssert.donothing(COPTIC_UTC.monthOfYear(), fields[1]);
-NoAssert.donothing(COPTIC_UTC.dayOfMonth(), fields[2]);
-NoAssert.donothing(test.getFields(), test.getFields());
+        assertSame(COPTIC_UTC.dayOfMonth(), fields[2]);
+        assertNotSame(test.getFields(), test.getFields());
     }
 
     @Test
     public void testGetValue_int() {
         LocalDate test = new LocalDate();
-NoAssert.donothing(1970, test.getValue(0));
-NoAssert.donothing(6, test.getValue(1));
-NoAssert.donothing(9, test.getValue(2));
+        assertEquals(1970, test.getValue(0));
+        assertEquals(6, test.getValue(1));
+        assertEquals(9, test.getValue(2));
         try {
             test.getValue(-1);
         } catch (IndexOutOfBoundsException ex) {
@@ -472,43 +472,43 @@ NoAssert.donothing(9, test.getValue(2));
         LocalDate test = new LocalDate();
         int[] values = test.getValues();
 NoAssert.donothing(1970, values[0]);
-NoAssert.donothing(6, values[1]);
-NoAssert.donothing(9, values[2]);
-NoAssert.donothing(test.getValues(), test.getValues());
+        assertEquals(6, values[1]);
+        assertEquals(9, values[2]);
+        assertNotSame(test.getValues(), test.getValues());
     }
 
     @Test
     public void testIsSupported_DateTimeFieldType() {
         LocalDate test = new LocalDate(COPTIC_PARIS);
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.year()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.monthOfYear()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfMonth()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfWeek()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfYear()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.year()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.monthOfYear()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.dayOfMonth()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.dayOfWeek()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.dayOfYear()));
 NoAssert.donothing(true, test.isSupported(DateTimeFieldType.weekOfWeekyear()));
 NoAssert.donothing(true, test.isSupported(DateTimeFieldType.weekyear()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.yearOfCentury()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.yearOfCentury()));
 NoAssert.donothing(true, test.isSupported(DateTimeFieldType.yearOfEra()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.centuryOfEra()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.weekyearOfCentury()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.era()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.centuryOfEra()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.weekyearOfCentury()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.era()));
 NoAssert.donothing(false, test.isSupported(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(false, test.isSupported((DateTimeFieldType) null));
+        assertEquals(false, test.isSupported((DateTimeFieldType) null));
     }
 
     @Test
     public void testIsSupported_DurationFieldType() {
         LocalDate test = new LocalDate(1970, 6, 9);
-NoAssert.donothing(false, test.isSupported(DurationFieldType.eras()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.centuries()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.years()));
+        assertEquals(false, test.isSupported(DurationFieldType.eras()));
+        assertEquals(true, test.isSupported(DurationFieldType.centuries()));
+        assertEquals(true, test.isSupported(DurationFieldType.years()));
 NoAssert.donothing(true, test.isSupported(DurationFieldType.months()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.weekyears()));
+        assertEquals(true, test.isSupported(DurationFieldType.weekyears()));
 NoAssert.donothing(true, test.isSupported(DurationFieldType.weeks()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.days()));
+        assertEquals(true, test.isSupported(DurationFieldType.days()));
 
-NoAssert.donothing(false, test.isSupported(DurationFieldType.hours()));
-NoAssert.donothing(false, test.isSupported((DurationFieldType) null));
+        assertEquals(false, test.isSupported(DurationFieldType.hours()));
+        assertEquals(false, test.isSupported((DurationFieldType) null));
     }
 
     @SuppressWarnings("deprecation")
@@ -516,27 +516,27 @@ NoAssert.donothing(false, test.isSupported((DurationFieldType) null));
     public void testEqualsHashCode() {
         LocalDate test1 = new LocalDate(1970, 6, 9, COPTIC_PARIS);
         LocalDate test2 = new LocalDate(1970, 6, 9, COPTIC_PARIS);
-NoAssert.donothing(true, test1.equals(test2));
+        assertEquals(true, test1.equals(test2));
 NoAssert.donothing(true, test2.equals(test1));
-NoAssert.donothing(true, test1.equals(test1));
-NoAssert.donothing(true, test2.equals(test2));
+        assertEquals(true, test1.equals(test1));
+        assertEquals(true, test2.equals(test2));
 NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
-NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
-NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
+        assertEquals(true, test1.hashCode() == test1.hashCode());
+        assertEquals(true, test2.hashCode() == test2.hashCode());
 
         LocalDate test3 = new LocalDate(1971, 6, 9);
 NoAssert.donothing(false, test1.equals(test3));
-NoAssert.donothing(false, test2.equals(test3));
+        assertEquals(false, test2.equals(test3));
 NoAssert.donothing(false, test3.equals(test1));
-NoAssert.donothing(false, test3.equals(test2));
-NoAssert.donothing(false, test1.hashCode() == test3.hashCode());
+        assertEquals(false, test3.equals(test2));
+        assertEquals(false, test1.hashCode() == test3.hashCode());
 NoAssert.donothing(false, test2.hashCode() == test3.hashCode());
 
-NoAssert.donothing(false, test1.equals("Hello"));
-NoAssert.donothing(true, test1.equals(new MockInstant()));
-NoAssert.donothing(true, test1.equals(new YearMonthDay(1970, 6, 9, COPTIC_PARIS)));
-NoAssert.donothing(true, test1.hashCode() == new YearMonthDay(1970, 6, 9, COPTIC_PARIS).hashCode());
-NoAssert.donothing(false, test1.equals(MockPartial.EMPTY_INSTANCE));
+        assertEquals(false, test1.equals("Hello"));
+        assertEquals(true, test1.equals(new MockInstant()));
+        assertEquals(true, test1.equals(new YearMonthDay(1970, 6, 9, COPTIC_PARIS)));
+        assertEquals(true, test1.hashCode() == new YearMonthDay(1970, 6, 9, COPTIC_PARIS).hashCode());
+        assertEquals(false, test1.equals(MockPartial.EMPTY_INSTANCE));
     }
 
     class MockInstant extends MockPartial {
@@ -561,26 +561,26 @@ NoAssert.donothing(false, test1.equals(MockPartial.EMPTY_INSTANCE));
     public void testEqualsHashCodeLenient() {
         LocalDate test1 = new LocalDate(1970, 6, 9, LenientChronology.getInstance(COPTIC_PARIS));
         LocalDate test2 = new LocalDate(1970, 6, 9, LenientChronology.getInstance(COPTIC_PARIS));
-NoAssert.donothing(true, test1.equals(test2));
-NoAssert.donothing(true, test2.equals(test1));
+        assertEquals(true, test1.equals(test2));
+        assertEquals(true, test2.equals(test1));
 NoAssert.donothing(true, test1.equals(test1));
-NoAssert.donothing(true, test2.equals(test2));
-NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
-NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
-NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
+        assertEquals(true, test2.equals(test2));
+        assertEquals(true, test1.hashCode() == test2.hashCode());
+        assertEquals(true, test1.hashCode() == test1.hashCode());
+        assertEquals(true, test2.hashCode() == test2.hashCode());
     }
 
     @Test
     public void testEqualsHashCodeStrict() {
         LocalDate test1 = new LocalDate(1970, 6, 9, StrictChronology.getInstance(COPTIC_PARIS));
         LocalDate test2 = new LocalDate(1970, 6, 9, StrictChronology.getInstance(COPTIC_PARIS));
-NoAssert.donothing(true, test1.equals(test2));
-NoAssert.donothing(true, test2.equals(test1));
-NoAssert.donothing(true, test1.equals(test1));
-NoAssert.donothing(true, test2.equals(test2));
-NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
+        assertEquals(true, test1.equals(test2));
+        assertEquals(true, test2.equals(test1));
+        assertEquals(true, test1.equals(test1));
+        assertEquals(true, test2.equals(test2));
+        assertEquals(true, test1.hashCode() == test2.hashCode());
 NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
-NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
+        assertEquals(true, test2.hashCode() == test2.hashCode());
     }
 
     @Test
@@ -594,7 +594,7 @@ NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
         expected = 23 * expected + 9;
         expected = 23 * expected + COPTIC_UTC.dayOfMonth().getType().hashCode();
         expected += COPTIC_UTC.hashCode();
-NoAssert.donothing(expected, test.hashCode());
+        assertEquals(expected, test.hashCode());
     }
 
     //-----------------------------------------------------------------------
@@ -603,19 +603,19 @@ NoAssert.donothing(expected, test.hashCode());
     public void testCompareTo() {
         LocalDate test1 = new LocalDate(2005, 6, 2);
         LocalDate test1a = new LocalDate(2005, 6, 2);
-NoAssert.donothing(0, test1.compareTo(test1a));
-NoAssert.donothing(0, test1a.compareTo(test1));
-NoAssert.donothing(0, test1.compareTo(test1));
-NoAssert.donothing(0, test1a.compareTo(test1a));
+        assertEquals(0, test1.compareTo(test1a));
+        assertEquals(0, test1a.compareTo(test1));
+        assertEquals(0, test1.compareTo(test1));
+        assertEquals(0, test1a.compareTo(test1a));
 
         LocalDate test2 = new LocalDate(2005, 7, 2);
-NoAssert.donothing(-1, test1.compareTo(test2));
-NoAssert.donothing(+1, test2.compareTo(test1));
+        assertEquals(-1, test1.compareTo(test2));
+        assertEquals(+1, test2.compareTo(test1));
 
         LocalDate test3 = new LocalDate(2005, 7, 2, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(-1, test1.compareTo(test3));
-NoAssert.donothing(+1, test3.compareTo(test1));
-NoAssert.donothing(0, test3.compareTo(test2));
+        assertEquals(-1, test1.compareTo(test3));
+        assertEquals(+1, test3.compareTo(test1));
+        assertEquals(0, test3.compareTo(test2));
 
         DateTimeFieldType[] types = new DateTimeFieldType[]{
                 DateTimeFieldType.year(),
@@ -624,8 +624,8 @@ NoAssert.donothing(0, test3.compareTo(test2));
         };
         int[] values = new int[]{2005, 6, 2};
         Partial p = new Partial(types, values);
-NoAssert.donothing(0, test1.compareTo(p));
-NoAssert.donothing(0, test1.compareTo(new YearMonthDay(2005, 6, 2)));
+        assertEquals(0, test1.compareTo(p));
+        assertEquals(0, test1.compareTo(new YearMonthDay(2005, 6, 2)));
         try {
             test1.compareTo(null);
             fail();
@@ -658,17 +658,17 @@ NoAssert.donothing(0, test1.compareTo(new YearMonthDay(2005, 6, 2)));
         LocalDate test1a = new LocalDate(2005, 6, 2);
 NoAssert.donothing(true, test1.isEqual(test1a));
 NoAssert.donothing(true, test1a.isEqual(test1));
-NoAssert.donothing(true, test1.isEqual(test1));
+        assertEquals(true, test1.isEqual(test1));
 NoAssert.donothing(true, test1a.isEqual(test1a));
 
         LocalDate test2 = new LocalDate(2005, 7, 2);
-NoAssert.donothing(false, test1.isEqual(test2));
+        assertEquals(false, test1.isEqual(test2));
 NoAssert.donothing(false, test2.isEqual(test1));
 
         LocalDate test3 = new LocalDate(2005, 7, 2, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(false, test1.isEqual(test3));
+        assertEquals(false, test1.isEqual(test3));
 NoAssert.donothing(false, test3.isEqual(test1));
-NoAssert.donothing(true, test3.isEqual(test2));
+        assertEquals(true, test3.isEqual(test2));
 
         try {
             new LocalDate(2005, 7, 2).isEqual(null);
@@ -682,19 +682,19 @@ NoAssert.donothing(true, test3.isEqual(test2));
     public void testIsBefore_LocalDate() {
         LocalDate test1 = new LocalDate(2005, 6, 2);
         LocalDate test1a = new LocalDate(2005, 6, 2);
-NoAssert.donothing(false, test1.isBefore(test1a));
-NoAssert.donothing(false, test1a.isBefore(test1));
-NoAssert.donothing(false, test1.isBefore(test1));
-NoAssert.donothing(false, test1a.isBefore(test1a));
+        assertEquals(false, test1.isBefore(test1a));
+        assertEquals(false, test1a.isBefore(test1));
+        assertEquals(false, test1.isBefore(test1));
+        assertEquals(false, test1a.isBefore(test1a));
 
         LocalDate test2 = new LocalDate(2005, 7, 2);
-NoAssert.donothing(true, test1.isBefore(test2));
-NoAssert.donothing(false, test2.isBefore(test1));
+        assertEquals(true, test1.isBefore(test2));
+        assertEquals(false, test2.isBefore(test1));
 
         LocalDate test3 = new LocalDate(2005, 7, 2, GregorianChronology.getInstanceUTC());
 NoAssert.donothing(true, test1.isBefore(test3));
-NoAssert.donothing(false, test3.isBefore(test1));
-NoAssert.donothing(false, test3.isBefore(test2));
+        assertEquals(false, test3.isBefore(test1));
+        assertEquals(false, test3.isBefore(test2));
 
         try {
             new LocalDate(2005, 7, 2).isBefore(null);
@@ -709,18 +709,18 @@ NoAssert.donothing(false, test3.isBefore(test2));
         LocalDate test1 = new LocalDate(2005, 6, 2);
         LocalDate test1a = new LocalDate(2005, 6, 2);
 NoAssert.donothing(false, test1.isAfter(test1a));
-NoAssert.donothing(false, test1a.isAfter(test1));
-NoAssert.donothing(false, test1.isAfter(test1));
-NoAssert.donothing(false, test1a.isAfter(test1a));
+        assertEquals(false, test1a.isAfter(test1));
+        assertEquals(false, test1.isAfter(test1));
+        assertEquals(false, test1a.isAfter(test1a));
 
         LocalDate test2 = new LocalDate(2005, 7, 2);
-NoAssert.donothing(false, test1.isAfter(test2));
-NoAssert.donothing(true, test2.isAfter(test1));
+        assertEquals(false, test1.isAfter(test2));
+        assertEquals(true, test2.isAfter(test1));
 
         LocalDate test3 = new LocalDate(2005, 7, 2, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(false, test1.isAfter(test3));
-NoAssert.donothing(true, test3.isAfter(test1));
-NoAssert.donothing(false, test3.isAfter(test2));
+        assertEquals(false, test1.isAfter(test3));
+        assertEquals(true, test3.isAfter(test1));
+        assertEquals(false, test3.isAfter(test2));
 
         try {
             new LocalDate(2005, 7, 2).isAfter(null);
@@ -735,8 +735,8 @@ NoAssert.donothing(false, test3.isAfter(test2));
         LocalDate test = new LocalDate(2004, 6, 9);
         LocalDate result = test.withField(DateTimeFieldType.year(), 2006);
 
-NoAssert.donothing(new LocalDate(2004, 6, 9), test);
-NoAssert.donothing(new LocalDate(2006, 6, 9), result);
+        assertEquals(new LocalDate(2004, 6, 9), test);
+        assertEquals(new LocalDate(2006, 6, 9), result);
     }
 
     @Test
@@ -773,8 +773,8 @@ NoAssert.donothing(test, result);
         LocalDate test = new LocalDate(2004, 6, 9);
         LocalDate result = test.withFieldAdded(DurationFieldType.years(), 6);
 
-NoAssert.donothing(new LocalDate(2004, 6, 9), test);
-NoAssert.donothing(new LocalDate(2010, 6, 9), result);
+        assertEquals(new LocalDate(2004, 6, 9), test);
+        assertEquals(new LocalDate(2010, 6, 9), result);
     }
 
     @Test
@@ -801,7 +801,7 @@ NoAssert.donothing(new LocalDate(2010, 6, 9), result);
     public void testWithFieldAdded_DurationFieldType_int_4() {
         LocalDate test = new LocalDate(2004, 6, 9);
         LocalDate result = test.withFieldAdded(DurationFieldType.years(), 0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test
@@ -823,7 +823,7 @@ NoAssert.donothing(test, result);
 NoAssert.donothing(expected, result);
 
         result = test.plus((ReadablePeriod) null);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test
@@ -834,7 +834,7 @@ NoAssert.donothing(test, result);
 NoAssert.donothing(expected, result);
 
         result = test.plusYears(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test
@@ -842,10 +842,10 @@ NoAssert.donothing(test, result);
         LocalDate test = new LocalDate(2002, 5, 3, BUDDHIST_LONDON);
         LocalDate result = test.plusMonths(1);
         LocalDate expected = new LocalDate(2002, 6, 3, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
 
         result = test.plusMonths(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test
@@ -853,10 +853,10 @@ NoAssert.donothing(test, result);
         LocalDate test = new LocalDate(2002, 5, 3, BUDDHIST_LONDON);
         LocalDate result = test.plusWeeks(1);
         LocalDate expected = new LocalDate(2002, 5, 10, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
 
         result = test.plusWeeks(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test
@@ -864,7 +864,7 @@ NoAssert.donothing(test, result);
         LocalDate test = new LocalDate(2002, 5, 3, BUDDHIST_LONDON);
         LocalDate result = test.plusDays(1);
         LocalDate expected = new LocalDate(2002, 5, 4, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
 
         result = test.plusDays(0);
 NoAssert.donothing(test, result);
@@ -880,10 +880,10 @@ NoAssert.donothing(test, result);
         // into the previous day
 
         LocalDate expected = new LocalDate(2001, 3, 26, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
 
         result = test.minus((ReadablePeriod) null);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test
@@ -891,10 +891,10 @@ NoAssert.donothing(test, result);
         LocalDate test = new LocalDate(2002, 5, 3, BUDDHIST_LONDON);
         LocalDate result = test.minusYears(1);
         LocalDate expected = new LocalDate(2001, 5, 3, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
 
         result = test.minusYears(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test
@@ -902,10 +902,10 @@ NoAssert.donothing(test, result);
         LocalDate test = new LocalDate(2002, 5, 3, BUDDHIST_LONDON);
         LocalDate result = test.minusMonths(1);
         LocalDate expected = new LocalDate(2002, 4, 3, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
 
         result = test.minusMonths(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test
@@ -913,10 +913,10 @@ NoAssert.donothing(test, result);
         LocalDate test = new LocalDate(2002, 5, 3, BUDDHIST_LONDON);
         LocalDate result = test.minusWeeks(1);
         LocalDate expected = new LocalDate(2002, 4, 26, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
 
         result = test.minusWeeks(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test
@@ -924,27 +924,27 @@ NoAssert.donothing(test, result);
         LocalDate test = new LocalDate(2002, 5, 3, BUDDHIST_LONDON);
         LocalDate result = test.minusDays(1);
         LocalDate expected = new LocalDate(2002, 5, 2, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
 
         result = test.minusDays(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testGetters() {
         LocalDate test = new LocalDate(1970, 6, 9, GJ_UTC);
-NoAssert.donothing(1970, test.getYear());
+        assertEquals(1970, test.getYear());
 NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
-NoAssert.donothing(160, test.getDayOfYear());
+        assertEquals(9, test.getDayOfMonth());
+        assertEquals(160, test.getDayOfYear());
 NoAssert.donothing(2, test.getDayOfWeek());
-NoAssert.donothing(24, test.getWeekOfWeekyear());
-NoAssert.donothing(1970, test.getWeekyear());
-NoAssert.donothing(70, test.getYearOfCentury());
-NoAssert.donothing(20, test.getCenturyOfEra());
-NoAssert.donothing(1970, test.getYearOfEra());
-NoAssert.donothing(DateTimeConstants.AD, test.getEra());
+        assertEquals(24, test.getWeekOfWeekyear());
+        assertEquals(1970, test.getWeekyear());
+        assertEquals(70, test.getYearOfCentury());
+        assertEquals(20, test.getCenturyOfEra());
+        assertEquals(1970, test.getYearOfEra());
+        assertEquals(DateTimeConstants.AD, test.getEra());
     }
 
     //-----------------------------------------------------------------------
@@ -981,7 +981,7 @@ NoAssert.donothing(DateTimeConstants.AD, test.getEra());
 
         DateTime test = base.toDateTimeAtStartOfDay();
         check(base, 2005, 6, 9);
-NoAssert.donothing(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_LONDON), test);
+        assertEquals(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_LONDON), test);
     }
 
     @Test
@@ -991,7 +991,7 @@ NoAssert.donothing(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_LONDON), test);
         DateTimeZone.setDefault(MOCK_GAZA);
         DateTime test = base.toDateTimeAtStartOfDay();
         check(base, 2007, 4, 1);
-NoAssert.donothing(new DateTime(2007, 4, 1, 1, 0, 0, 0, MOCK_GAZA), test);
+        assertEquals(new DateTime(2007, 4, 1, 1, 0, 0, 0, MOCK_GAZA), test);
     }
 
     @Test
@@ -999,7 +999,7 @@ NoAssert.donothing(new DateTime(2007, 4, 1, 1, 0, 0, 0, MOCK_GAZA), test);
         LocalDate test = new LocalDate(2018, 10, 28);
         DateTime result = test.toDateTimeAtStartOfDay(DateTimeZone.forID("Atlantic/Azores"));
         DateTime expected = new DateTime(2018, 10, 28, 0, 0, DateTimeZone.forID("Atlantic/Azores"));
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     //-----------------------------------------------------------------------
@@ -1009,7 +1009,7 @@ NoAssert.donothing(expected, result);
 
         DateTime test = base.toDateTimeAtStartOfDay(TOKYO);
         check(base, 2005, 6, 9);
-NoAssert.donothing(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_TOKYO), test);
+        assertEquals(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_TOKYO), test);
     }
 
     @Test
@@ -1018,7 +1018,7 @@ NoAssert.donothing(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_TOKYO), test);
 
         DateTime test = base.toDateTimeAtStartOfDay(MOCK_GAZA);
         check(base, 2007, 4, 1);
-NoAssert.donothing(new DateTime(2007, 4, 1, 1, 0, 0, 0, MOCK_GAZA), test);
+        assertEquals(new DateTime(2007, 4, 1, 1, 0, 0, 0, MOCK_GAZA), test);
     }
 
     @Test
@@ -1027,7 +1027,7 @@ NoAssert.donothing(new DateTime(2007, 4, 1, 1, 0, 0, 0, MOCK_GAZA), test);
 
         DateTime test = base.toDateTimeAtStartOfDay((DateTimeZone) null);
         check(base, 2005, 6, 9);
-NoAssert.donothing(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_LONDON), test);
+        assertEquals(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_LONDON), test);
     }
 
     //-----------------------------------------------------------------------
@@ -1038,7 +1038,7 @@ NoAssert.donothing(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_LONDON), test);
 
         DateTime test = base.toDateTimeAtMidnight();
         check(base, 2005, 6, 9);
-NoAssert.donothing(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_LONDON), test);
+        assertEquals(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_LONDON), test);
     }
 
     //-----------------------------------------------------------------------
@@ -1049,7 +1049,7 @@ NoAssert.donothing(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_LONDON), test);
 
         DateTime test = base.toDateTimeAtMidnight(TOKYO);
         check(base, 2005, 6, 9);
-NoAssert.donothing(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_TOKYO), test);
+        assertEquals(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_TOKYO), test);
     }
 
     @SuppressWarnings("deprecation")
@@ -1075,7 +1075,7 @@ NoAssert.donothing(new DateTime(2005, 6, 9, 0, 0, 0, 0, COPTIC_LONDON), test);
         expected = expected.year().setCopy(2005);
         expected = expected.monthOfYear().setCopy(6);
         expected = expected.dayOfMonth().setCopy(9);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     //-----------------------------------------------------------------------
@@ -1091,7 +1091,7 @@ NoAssert.donothing(expected, test);
         expected = expected.year().setCopy(2005);
         expected = expected.monthOfYear().setCopy(6);
         expected = expected.dayOfMonth().setCopy(9);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     @Test
@@ -1118,7 +1118,7 @@ NoAssert.donothing(expected, test);
         LocalDateTime test = base.toLocalDateTime(tod);
         check(base, 2005, 6, 9);
         LocalDateTime expected = new LocalDateTime(2005, 6, 9, 12, 13, 14, 15, COPTIC_UTC);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     @Test
@@ -1155,7 +1155,7 @@ NoAssert.donothing(expected, test);
         DateTime test = base.toDateTime(tod);
         check(base, 2005, 6, 9);
         DateTime expected = new DateTime(2005, 6, 9, 12, 13, 14, 15, COPTIC_LONDON);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     @Test
@@ -1179,7 +1179,7 @@ NoAssert.donothing(expected, test);
         DateTime test = base.toDateTime(tod, TOKYO);
         check(base, 2005, 6, 9);
         DateTime expected = new DateTime(2005, 6, 9, 12, 13, 14, 15, COPTIC_TOKYO);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     @Test
@@ -1190,7 +1190,7 @@ NoAssert.donothing(expected, test);
         DateTime test = base.toDateTime(tod, null);
         check(base, 2005, 6, 9);
         DateTime expected = new DateTime(2005, 6, 9, 12, 13, 14, 15, COPTIC_LONDON);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     @Test
@@ -1202,7 +1202,7 @@ NoAssert.donothing(expected, test);
         DateTime test = base.toDateTime((LocalTime) null, TOKYO);
         check(base, 2005, 6, 9);
         DateTime expected = new DateTime(2005, 6, 9, 12, 13, 14, 15, COPTIC_TOKYO);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     @Test
@@ -1231,7 +1231,7 @@ NoAssert.donothing(expected, test);
         LocalTime tod = new LocalTime(1, 30, 0, 0, ISO_NEW_YORK);
         DateTime test = base.toDateTime(tod, NEW_YORK);
         DateTime expected = new DateTime(2007, 11, 4, 1, 30, ISO_NEW_YORK).withEarlierOffsetAtOverlap();
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     @Test
@@ -1254,7 +1254,7 @@ NoAssert.donothing(expected, test);
 
         DateMidnight test = base.toDateMidnight();
         check(base, 2005, 6, 9);
-NoAssert.donothing(new DateMidnight(2005, 6, 9, COPTIC_LONDON), test);
+        assertEquals(new DateMidnight(2005, 6, 9, COPTIC_LONDON), test);
     }
 
     //-----------------------------------------------------------------------
@@ -1265,7 +1265,7 @@ NoAssert.donothing(new DateMidnight(2005, 6, 9, COPTIC_LONDON), test);
 
         DateMidnight test = base.toDateMidnight(TOKYO);
         check(base, 2005, 6, 9);
-NoAssert.donothing(new DateMidnight(2005, 6, 9, COPTIC_TOKYO), test);
+        assertEquals(new DateMidnight(2005, 6, 9, COPTIC_TOKYO), test);
     }
 
     @SuppressWarnings("deprecation")
@@ -1275,7 +1275,7 @@ NoAssert.donothing(new DateMidnight(2005, 6, 9, COPTIC_TOKYO), test);
 
         DateMidnight test = base.toDateMidnight((DateTimeZone) null);
         check(base, 2005, 6, 9);
-NoAssert.donothing(new DateMidnight(2005, 6, 9, COPTIC_LONDON), test);
+        assertEquals(new DateMidnight(2005, 6, 9, COPTIC_LONDON), test);
     }
 
     //-----------------------------------------------------------------------
@@ -1305,7 +1305,7 @@ NoAssert.donothing(expected, test);
         expected = expected.year().setCopy(2005);
         expected = expected.monthOfYear().setCopy(6);
         expected = expected.dayOfMonth().setCopy(9);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     //-----------------------------------------------------------------------
@@ -1317,7 +1317,7 @@ NoAssert.donothing(expected, test);
         DateTime start = base.toDateTimeAtStartOfDay();
         DateTime end = start.plus(Period.days(1));
         Interval expected = new Interval(start, end);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     //-----------------------------------------------------------------------
@@ -1368,7 +1368,7 @@ NoAssert.donothing(expected, test);
         gcal.set(Calendar.YEAR, 2005);
         gcal.set(Calendar.MONTH, Calendar.JULY);
         gcal.set(Calendar.DAY_OF_MONTH, 9);
-NoAssert.donothing(gcal.getTime(), test);
+        assertEquals(gcal.getTime(), test);
     }
 
     @Test
@@ -1414,7 +1414,7 @@ NoAssert.donothing("Mon Apr 02 01:00:00 GMT+02:00 2007", test.toString());
             TimeZone.setDefault(testZone);
             Date test = base.toDate();
             check(base, 2007, 4, 2);
-NoAssert.donothing("Mon Apr 02 02:40:00 GMT+03:40 2007", test.toString());
+            assertEquals("Mon Apr 02 02:40:00 GMT+03:40 2007", test.toString());
         } finally {
             TimeZone.setDefault(currentZone);
         }
@@ -1431,7 +1431,7 @@ NoAssert.donothing("Mon Apr 02 02:40:00 GMT+03:40 2007", test.toString());
             TimeZone.setDefault(testZone);
             Date test = base.toDate();
             check(base, 2007, 10, 2);
-NoAssert.donothing("Tue Oct 02 00:00:00 GMT+02:00 2007", test.toString());
+            assertEquals("Tue Oct 02 00:00:00 GMT+02:00 2007", test.toString());
         } finally {
             TimeZone.setDefault(currentZone);
         }
@@ -1443,15 +1443,15 @@ NoAssert.donothing("Tue Oct 02 00:00:00 GMT+02:00 2007", test.toString());
         LocalDate test = new LocalDate(2005, 6, 9, GJ_UTC);
 NoAssert.donothing(test.year(), test.property(DateTimeFieldType.year()));
 NoAssert.donothing(test.monthOfYear(), test.property(DateTimeFieldType.monthOfYear()));
-NoAssert.donothing(test.dayOfMonth(), test.property(DateTimeFieldType.dayOfMonth()));
-NoAssert.donothing(test.dayOfWeek(), test.property(DateTimeFieldType.dayOfWeek()));
-NoAssert.donothing(test.dayOfYear(), test.property(DateTimeFieldType.dayOfYear()));
+        assertEquals(test.dayOfMonth(), test.property(DateTimeFieldType.dayOfMonth()));
+        assertEquals(test.dayOfWeek(), test.property(DateTimeFieldType.dayOfWeek()));
+        assertEquals(test.dayOfYear(), test.property(DateTimeFieldType.dayOfYear()));
 NoAssert.donothing(test.weekOfWeekyear(), test.property(DateTimeFieldType.weekOfWeekyear()));
-NoAssert.donothing(test.weekyear(), test.property(DateTimeFieldType.weekyear()));
-NoAssert.donothing(test.yearOfCentury(), test.property(DateTimeFieldType.yearOfCentury()));
+        assertEquals(test.weekyear(), test.property(DateTimeFieldType.weekyear()));
+        assertEquals(test.yearOfCentury(), test.property(DateTimeFieldType.yearOfCentury()));
 NoAssert.donothing(test.yearOfEra(), test.property(DateTimeFieldType.yearOfEra()));
 NoAssert.donothing(test.centuryOfEra(), test.property(DateTimeFieldType.centuryOfEra()));
-NoAssert.donothing(test.era(), test.property(DateTimeFieldType.era()));
+        assertEquals(test.era(), test.property(DateTimeFieldType.era()));
         try {
             test.property(DateTimeFieldType.millisOfDay());
             fail();
@@ -1480,50 +1480,50 @@ NoAssert.donothing(test.era(), test.property(DateTimeFieldType.era()));
         LocalDate result = (LocalDate) ois.readObject();
         ois.close();
 
-NoAssert.donothing(test, result);
-NoAssert.donothing(Arrays.equals(test.getValues(), result.getValues()));
-NoAssert.donothing(Arrays.equals(test.getFields(), result.getFields()));
-NoAssert.donothing(test.getChronology(), result.getChronology());
+        assertEquals(test, result);
+        assertTrue(Arrays.equals(test.getValues(), result.getValues()));
+        assertTrue(Arrays.equals(test.getFields(), result.getFields()));
+        assertEquals(test.getChronology(), result.getChronology());
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testToString() {
         LocalDate test = new LocalDate(2002, 6, 9);
-NoAssert.donothing("2002-06-09", test.toString());
+        assertEquals("2002-06-09", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testToString_String() {
         LocalDate test = new LocalDate(2002, 6, 9);
-NoAssert.donothing("2002 \ufffd\ufffd", test.toString("yyyy HH"));
-NoAssert.donothing("2002-06-09", test.toString((String) null));
+        assertEquals("2002 \ufffd\ufffd", test.toString("yyyy HH"));
+        assertEquals("2002-06-09", test.toString((String) null));
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testToString_String_Locale() {
         LocalDate test = new LocalDate(1970, 6, 9);
-NoAssert.donothing("Tue 9/6", test.toString("EEE d/M", Locale.ENGLISH));
-NoAssert.donothing("mar. 9/6", test.toString("EEE d/M", Locale.FRENCH));
+        assertEquals("Tue 9/6", test.toString("EEE d/M", Locale.ENGLISH));
+        assertEquals("mar. 9/6", test.toString("EEE d/M", Locale.FRENCH));
 NoAssert.donothing("1970-06-09", test.toString(null, Locale.ENGLISH));
-NoAssert.donothing("Tue 9/6", test.toString("EEE d/M", null));
-NoAssert.donothing("1970-06-09", test.toString(null, null));
+        assertEquals("Tue 9/6", test.toString("EEE d/M", null));
+        assertEquals("1970-06-09", test.toString(null, null));
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testToString_DTFormatter() {
         LocalDate test = new LocalDate(2002, 6, 9);
-NoAssert.donothing("2002 \ufffd\ufffd", test.toString(DateTimeFormat.forPattern("yyyy HH")));
+        assertEquals("2002 \ufffd\ufffd", test.toString(DateTimeFormat.forPattern("yyyy HH")));
 NoAssert.donothing("2002-06-09", test.toString((DateTimeFormatter) null));
     }
 
     //-----------------------------------------------------------------------
     private void check(LocalDate test, int hour, int min, int sec) {
-NoAssert.donothing(hour, test.getYear());
-NoAssert.donothing(min, test.getMonthOfYear());
-NoAssert.donothing(sec, test.getDayOfMonth());
+        assertEquals(hour, test.getYear());
+        assertEquals(min, test.getMonthOfYear());
+        assertEquals(sec, test.getDayOfMonth());
     }
 }

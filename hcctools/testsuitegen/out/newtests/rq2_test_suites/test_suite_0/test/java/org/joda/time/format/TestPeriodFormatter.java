@@ -110,7 +110,7 @@ public class TestPeriodFormatter  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testPrint_simple() {
         Period p = new Period(1, 2, 3, 4, 5, 6, 7, 8);
-NoAssert.donothing("P1Y2M3W4DT5H6M7.008S", f.print(p));
+        assertEquals("P1Y2M3W4DT5H6M7.008S", f.print(p));
     }
 
     //-----------------------------------------------------------------------
@@ -118,7 +118,7 @@ NoAssert.donothing("P1Y2M3W4DT5H6M7.008S", f.print(p));
         Period p = new Period(1, 2, 3, 4, 5, 6, 7, 8);
         StringBuffer buf = new StringBuffer();
         f.printTo(buf, p);
-NoAssert.donothing("P1Y2M3W4DT5H6M7.008S", buf.toString());
+        assertEquals("P1Y2M3W4DT5H6M7.008S", buf.toString());
         
         buf = new StringBuffer();
         try {
@@ -132,7 +132,7 @@ NoAssert.donothing("P1Y2M3W4DT5H6M7.008S", buf.toString());
         Period p = new Period(1, 2, 3, 4, 5, 6, 7, 8);
         CharArrayWriter out = new CharArrayWriter();
         f.printTo(out, p);
-NoAssert.donothing("P1Y2M3W4DT5H6M7.008S", out.toString());
+        assertEquals("P1Y2M3W4DT5H6M7.008S", out.toString());
         
         out = new CharArrayWriter();
         try {
@@ -144,61 +144,61 @@ NoAssert.donothing("P1Y2M3W4DT5H6M7.008S", out.toString());
     //-----------------------------------------------------------------------
     @Test public void testWithGetLocaleMethods() {
         PeriodFormatter f2 = f.withLocale(Locale.FRENCH);
-NoAssert.donothing(Locale.FRENCH, f2.getLocale());
-NoAssert.donothing(f2, f2.withLocale(Locale.FRENCH));
+        assertEquals(Locale.FRENCH, f2.getLocale());
+        assertSame(f2, f2.withLocale(Locale.FRENCH));
         
         f2 = f.withLocale(null);
-NoAssert.donothing(null, f2.getLocale());
-NoAssert.donothing(f2, f2.withLocale(null));
+        assertEquals(null, f2.getLocale());
+        assertSame(f2, f2.withLocale(null));
     }
 
     @Test public void testWithGetParseTypeMethods() {
         PeriodFormatter f2 = f.withParseType(PeriodType.dayTime());
 NoAssert.donothing(PeriodType.dayTime(), f2.getParseType());
-NoAssert.donothing(f2, f2.withParseType(PeriodType.dayTime()));
+        assertSame(f2, f2.withParseType(PeriodType.dayTime()));
         
         f2 = f.withParseType(null);
-NoAssert.donothing(null, f2.getParseType());
+        assertEquals(null, f2.getParseType());
 NoAssert.donothing(f2, f2.withParseType(null));
     }
 
     @Test public void testPrinterParserMethods() {
         Period p = new Period(1, 2, 3, 4, 5, 6, 7, 8);
         PeriodFormatter f2 = new PeriodFormatter(f.getPrinter(), f.getParser());
-NoAssert.donothing(f.getPrinter(), f2.getPrinter());
-NoAssert.donothing(f.getParser(), f2.getParser());
-NoAssert.donothing(true, f2.isPrinter());
-NoAssert.donothing(true, f2.isParser());
+        assertEquals(f.getPrinter(), f2.getPrinter());
+        assertEquals(f.getParser(), f2.getParser());
+        assertEquals(true, f2.isPrinter());
+        assertEquals(true, f2.isParser());
 NoAssert.donothing(f2.print(p));
-NoAssert.donothing(f2.parsePeriod("P1Y2M3W4DT5H6M7.008S"));
+        assertNotNull(f2.parsePeriod("P1Y2M3W4DT5H6M7.008S"));
         
         f2 = new PeriodFormatter(f.getPrinter(), null);
 NoAssert.donothing(f.getPrinter(), f2.getPrinter());
-NoAssert.donothing(null, f2.getParser());
+        assertEquals(null, f2.getParser());
 NoAssert.donothing(true, f2.isPrinter());
 NoAssert.donothing(false, f2.isParser());
-NoAssert.donothing(f2.print(p));
+        assertNotNull(f2.print(p));
         try {
-NoAssert.donothing(f2.parsePeriod("P1Y2M3W4DT5H6M7.008S"));
+            assertNotNull(f2.parsePeriod("P1Y2M3W4DT5H6M7.008S"));
             fail();
         } catch (UnsupportedOperationException ex) {}
         
         f2 = new PeriodFormatter(null, f.getParser());
 NoAssert.donothing(null, f2.getPrinter());
-NoAssert.donothing(f.getParser(), f2.getParser());
-NoAssert.donothing(false, f2.isPrinter());
+        assertEquals(f.getParser(), f2.getParser());
+        assertEquals(false, f2.isPrinter());
 NoAssert.donothing(true, f2.isParser());
         try {
             f2.print(p);
             fail();
         } catch (UnsupportedOperationException ex) {}
-NoAssert.donothing(f2.parsePeriod("P1Y2M3W4DT5H6M7.008S"));
+        assertNotNull(f2.parsePeriod("P1Y2M3W4DT5H6M7.008S"));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testParsePeriod_simple() {
         Period expect = new Period(1, 2, 3, 4, 5, 6, 7, 8);
-NoAssert.donothing(expect, f.parsePeriod("P1Y2M3W4DT5H6M7.008S"));
+        assertEquals(expect, f.parsePeriod("P1Y2M3W4DT5H6M7.008S"));
         
         try {
             f.parsePeriod("ABC");
@@ -208,7 +208,7 @@ NoAssert.donothing(expect, f.parsePeriod("P1Y2M3W4DT5H6M7.008S"));
 
     @Test public void testParsePeriod_parseType() {
         Period expect = new Period(0, 0, 0, 4, 5, 6, 7, 8, PeriodType.dayTime());
-NoAssert.donothing(expect, f.withParseType(PeriodType.dayTime()).parsePeriod("P4DT5H6M7.008S"));
+        assertEquals(expect, f.withParseType(PeriodType.dayTime()).parsePeriod("P4DT5H6M7.008S"));
         try {
             f.withParseType(PeriodType.dayTime()).parsePeriod("P3W4DT5H6M7.008S");
             fail();
@@ -218,7 +218,7 @@ NoAssert.donothing(expect, f.withParseType(PeriodType.dayTime()).parsePeriod("P4
     //-----------------------------------------------------------------------
     @Test public void testParseMutablePeriod_simple() {
         MutablePeriod expect = new MutablePeriod(1, 2, 3, 4, 5, 6, 7, 8);
-NoAssert.donothing(expect, f.parseMutablePeriod("P1Y2M3W4DT5H6M7.008S"));
+        assertEquals(expect, f.parseMutablePeriod("P1Y2M3W4DT5H6M7.008S"));
         
         try {
             f.parseMutablePeriod("ABC");
@@ -238,7 +238,7 @@ NoAssert.donothing(expect, result);
             fail();
         } catch (IllegalArgumentException ex) {}
         
-NoAssert.donothing(~0, f.parseInto(result, "ABC", 0));
+        assertEquals(~0, f.parseInto(result, "ABC", 0));
     }
 
 }

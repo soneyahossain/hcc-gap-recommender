@@ -207,51 +207,51 @@ public class TestPeriod_Basics  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
 NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
-NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
+        assertEquals("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetPeriodType() {
         Period test = new Period(0L);
-NoAssert.donothing(PeriodType.standard(), test.getPeriodType());
+        assertEquals(PeriodType.standard(), test.getPeriodType());
     }
 
     @Test public void testGetMethods() {
         Period test = new Period(0L);
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
 NoAssert.donothing(0, test.getMillis());
     }
 
     @Test public void testValueIndexMethods() {
         Period test = new Period(1, 0, 0, 4, 5, 6, 7, 8, PeriodType.yearDayTime());
-NoAssert.donothing(6, test.size());
-NoAssert.donothing(1, test.getValue(0));
+        assertEquals(6, test.size());
+        assertEquals(1, test.getValue(0));
 NoAssert.donothing(4, test.getValue(1));
-NoAssert.donothing(5, test.getValue(2));
+        assertEquals(5, test.getValue(2));
 NoAssert.donothing(6, test.getValue(3));
-NoAssert.donothing(7, test.getValue(4));
-NoAssert.donothing(8, test.getValue(5));
+        assertEquals(7, test.getValue(4));
+        assertEquals(8, test.getValue(5));
 NoAssert.donothing(true, Arrays.equals(new int[] {1, 4, 5, 6, 7, 8}, test.getValues()));
     }
 
     @Test public void testTypeIndexMethods() {
         Period test = new Period(1, 0, 0, 4, 5, 6, 7, 8, PeriodType.yearDayTime());
 NoAssert.donothing(6, test.size());
-NoAssert.donothing(DurationFieldType.years(), test.getFieldType(0));
-NoAssert.donothing(DurationFieldType.days(), test.getFieldType(1));
-NoAssert.donothing(DurationFieldType.hours(), test.getFieldType(2));
+        assertEquals(DurationFieldType.years(), test.getFieldType(0));
+        assertEquals(DurationFieldType.days(), test.getFieldType(1));
+        assertEquals(DurationFieldType.hours(), test.getFieldType(2));
 NoAssert.donothing(DurationFieldType.minutes(), test.getFieldType(3));
-NoAssert.donothing(DurationFieldType.seconds(), test.getFieldType(4));
-NoAssert.donothing(DurationFieldType.millis(), test.getFieldType(5));
-NoAssert.donothing(true, Arrays.equals(new DurationFieldType[] {
+        assertEquals(DurationFieldType.seconds(), test.getFieldType(4));
+        assertEquals(DurationFieldType.millis(), test.getFieldType(5));
+        assertEquals(true, Arrays.equals(new DurationFieldType[] {
             DurationFieldType.years(), DurationFieldType.days(), DurationFieldType.hours(),
             DurationFieldType.minutes(), DurationFieldType.seconds(), DurationFieldType.millis()},
             test.getFieldTypes()));
@@ -259,62 +259,62 @@ NoAssert.donothing(true, Arrays.equals(new DurationFieldType[] {
 
     @Test public void testIsSupported() {
         Period test = new Period(1, 0, 0, 4, 5, 6, 7, 8, PeriodType.yearDayTime());
-NoAssert.donothing(true, test.isSupported(DurationFieldType.years()));
+        assertEquals(true, test.isSupported(DurationFieldType.years()));
 NoAssert.donothing(false, test.isSupported(DurationFieldType.months()));
-NoAssert.donothing(false, test.isSupported(DurationFieldType.weeks()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.days()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.hours()));
+        assertEquals(false, test.isSupported(DurationFieldType.weeks()));
+        assertEquals(true, test.isSupported(DurationFieldType.days()));
+        assertEquals(true, test.isSupported(DurationFieldType.hours()));
 NoAssert.donothing(true, test.isSupported(DurationFieldType.minutes()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.seconds()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.millis()));
+        assertEquals(true, test.isSupported(DurationFieldType.seconds()));
+        assertEquals(true, test.isSupported(DurationFieldType.millis()));
     }        
 
     @Test public void testIndexOf() {
         Period test = new Period(1, 0, 0, 4, 5, 6, 7, 8, PeriodType.yearDayTime());
-NoAssert.donothing(0, test.indexOf(DurationFieldType.years()));
-NoAssert.donothing(-1, test.indexOf(DurationFieldType.months()));
-NoAssert.donothing(-1, test.indexOf(DurationFieldType.weeks()));
+        assertEquals(0, test.indexOf(DurationFieldType.years()));
+        assertEquals(-1, test.indexOf(DurationFieldType.months()));
+        assertEquals(-1, test.indexOf(DurationFieldType.weeks()));
 NoAssert.donothing(1, test.indexOf(DurationFieldType.days()));
-NoAssert.donothing(2, test.indexOf(DurationFieldType.hours()));
+        assertEquals(2, test.indexOf(DurationFieldType.hours()));
 NoAssert.donothing(3, test.indexOf(DurationFieldType.minutes()));
-NoAssert.donothing(4, test.indexOf(DurationFieldType.seconds()));
-NoAssert.donothing(5, test.indexOf(DurationFieldType.millis()));
+        assertEquals(4, test.indexOf(DurationFieldType.seconds()));
+        assertEquals(5, test.indexOf(DurationFieldType.millis()));
     }
 
     @Test public void testGet() {
         Period test = new Period(1, 0, 0, 4, 5, 6, 7, 8, PeriodType.yearDayTime());
-NoAssert.donothing(1, test.get(DurationFieldType.years()));
-NoAssert.donothing(0, test.get(DurationFieldType.months()));
+        assertEquals(1, test.get(DurationFieldType.years()));
+        assertEquals(0, test.get(DurationFieldType.months()));
 NoAssert.donothing(0, test.get(DurationFieldType.weeks()));
 NoAssert.donothing(4, test.get(DurationFieldType.days()));
-NoAssert.donothing(5, test.get(DurationFieldType.hours()));
-NoAssert.donothing(6, test.get(DurationFieldType.minutes()));
-NoAssert.donothing(7, test.get(DurationFieldType.seconds()));
+        assertEquals(5, test.get(DurationFieldType.hours()));
+        assertEquals(6, test.get(DurationFieldType.minutes()));
+        assertEquals(7, test.get(DurationFieldType.seconds()));
 NoAssert.donothing(8, test.get(DurationFieldType.millis()));
     }
 
     @Test public void testEqualsHashCode() {
         Period test1 = new Period(123L);
         Period test2 = new Period(123L);
-NoAssert.donothing(true, test1.equals(test2));
-NoAssert.donothing(true, test2.equals(test1));
+        assertEquals(true, test1.equals(test2));
+        assertEquals(true, test2.equals(test1));
 NoAssert.donothing(true, test1.equals(test1));
-NoAssert.donothing(true, test2.equals(test2));
-NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
-NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
-NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
+        assertEquals(true, test2.equals(test2));
+        assertEquals(true, test1.hashCode() == test2.hashCode());
+        assertEquals(true, test1.hashCode() == test1.hashCode());
+        assertEquals(true, test2.hashCode() == test2.hashCode());
         
         Period test3 = new Period(321L);
-NoAssert.donothing(false, test1.equals(test3));
-NoAssert.donothing(false, test2.equals(test3));
-NoAssert.donothing(false, test3.equals(test1));
-NoAssert.donothing(false, test3.equals(test2));
-NoAssert.donothing(false, test1.hashCode() == test3.hashCode());
-NoAssert.donothing(false, test2.hashCode() == test3.hashCode());
+        assertEquals(false, test1.equals(test3));
+        assertEquals(false, test2.equals(test3));
+        assertEquals(false, test3.equals(test1));
+        assertEquals(false, test3.equals(test2));
+        assertEquals(false, test1.hashCode() == test3.hashCode());
+        assertEquals(false, test2.hashCode() == test3.hashCode());
         
-NoAssert.donothing(false, test1.equals("Hello"));
-NoAssert.donothing(true, test1.equals(new MockPeriod(123L)));
-NoAssert.donothing(false, test1.equals(new Period(123L, PeriodType.dayTime())));
+        assertEquals(false, test1.equals("Hello"));
+        assertEquals(true, test1.equals(new MockPeriod(123L)));
+        assertEquals(false, test1.equals(new Period(123L, PeriodType.dayTime())));
     }
     
     class MockPeriod extends BasePeriod {
@@ -339,7 +339,7 @@ NoAssert.donothing(false, test1.equals(new Period(123L, PeriodType.dayTime())));
         Period result = (Period) ois.readObject();
         ois.close();
         
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
     }
 
 //    //-----------------------------------------------------------------------
@@ -573,7 +573,7 @@ NoAssert.donothing(test, result);
 NoAssert.donothing("P1Y2M3W4DT5H6M7.008S", test.toString());
         
         test = new Period(0, 0, 0, 0, 0, 0, 0, 0);
-NoAssert.donothing("PT0S", test.toString());
+        assertEquals("PT0S", test.toString());
         
         test = new Period(12345L);
 NoAssert.donothing("PT12.345S", test.toString());
@@ -582,28 +582,28 @@ NoAssert.donothing("PT12.345S", test.toString());
     //-----------------------------------------------------------------------
     @Test public void testToString_PeriodFormatter() {
         Period test = new Period(1, 2, 3, 4, 5, 6, 7, 8);
-NoAssert.donothing("1 year, 2 months, 3 weeks, 4 days, 5 hours, 6 minutes, 7 seconds and 8 milliseconds", test.toString(PeriodFormat.getDefault()));
+        assertEquals("1 year, 2 months, 3 weeks, 4 days, 5 hours, 6 minutes, 7 seconds and 8 milliseconds", test.toString(PeriodFormat.getDefault()));
         
         test = new Period(0, 0, 0, 0, 0, 0, 0, 0);
-NoAssert.donothing("0 milliseconds", test.toString(PeriodFormat.getDefault()));
+        assertEquals("0 milliseconds", test.toString(PeriodFormat.getDefault()));
     }
 
     @Test public void testToString_nullPeriodFormatter() {
         Period test = new Period(1, 2, 3, 4, 5, 6, 7, 8);
-NoAssert.donothing("P1Y2M3W4DT5H6M7.008S", test.toString((PeriodFormatter) null));
+        assertEquals("P1Y2M3W4DT5H6M7.008S", test.toString((PeriodFormatter) null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToPeriod() {
         Period test = new Period(123L);
         Period result = test.toPeriod();
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testToMutablePeriod() {
         Period test = new Period(123L);
         MutablePeriod result = test.toMutablePeriod();
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -614,27 +614,27 @@ NoAssert.donothing(test, result);
 
     @Test public void testToDurationFrom() {
         Period test = new Period(123L);
-NoAssert.donothing(new Duration(123L), test.toDurationFrom(new Instant(0L)));
+        assertEquals(new Duration(123L), test.toDurationFrom(new Instant(0L)));
     }
 
     @Test public void testToDurationTo() {
         Period test = new Period(123L);
-NoAssert.donothing(new Duration(123L), test.toDurationTo(new Instant(123L)));
+        assertEquals(new Duration(123L), test.toDurationTo(new Instant(123L)));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testWithPeriodType1() {
         Period test = new Period(123L);
         Period result = test.withPeriodType(PeriodType.standard());
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testWithPeriodType2() {
         Period test = new Period(3123L);
         Period result = test.withPeriodType(PeriodType.dayTime());
-NoAssert.donothing(3, result.getSeconds());
-NoAssert.donothing(123, result.getMillis());
-NoAssert.donothing(PeriodType.dayTime(), result.getPeriodType());
+        assertEquals(3, result.getSeconds());
+        assertEquals(123, result.getMillis());
+        assertEquals(PeriodType.dayTime(), result.getPeriodType());
     }
 
     @Test public void testWithPeriodType3() {
@@ -648,8 +648,8 @@ NoAssert.donothing(PeriodType.dayTime(), result.getPeriodType());
     @Test public void testWithPeriodType4() {
         Period test = new Period(3123L);
         Period result = test.withPeriodType(null);
-NoAssert.donothing(3, result.getSeconds());
-NoAssert.donothing(123, result.getMillis());
+        assertEquals(3, result.getSeconds());
+        assertEquals(123, result.getMillis());
 NoAssert.donothing(PeriodType.standard(), result.getPeriodType());
     }
 
@@ -658,13 +658,13 @@ NoAssert.donothing(PeriodType.standard(), result.getPeriodType());
         Period result = test.withPeriodType(PeriodType.yearMonthDayTime());
 NoAssert.donothing(PeriodType.yearMonthDayTime(), result.getPeriodType());
 NoAssert.donothing(1, result.getYears());
-NoAssert.donothing(2, result.getMonths());
-NoAssert.donothing(0, result.getWeeks());
-NoAssert.donothing(4, result.getDays());
-NoAssert.donothing(5, result.getHours());
-NoAssert.donothing(6, result.getMinutes());
-NoAssert.donothing(7, result.getSeconds());
-NoAssert.donothing(8, result.getMillis());
+        assertEquals(2, result.getMonths());
+        assertEquals(0, result.getWeeks());
+        assertEquals(4, result.getDays());
+        assertEquals(5, result.getHours());
+        assertEquals(6, result.getMinutes());
+        assertEquals(7, result.getSeconds());
+        assertEquals(8, result.getMillis());
     }
 
     //-----------------------------------------------------------------------
@@ -673,9 +673,9 @@ NoAssert.donothing(8, result.getMillis());
         Period test2 = new Period(0, 0, 0, 0, 0, 0, 0, 9, PeriodType.millis());
         Period result = test1.withFields(test2);
         
-NoAssert.donothing(new Period(1, 2, 3, 4, 5, 6, 7, 8), test1);
-NoAssert.donothing(new Period(0, 0, 0, 0, 0, 0, 0, 9, PeriodType.millis()), test2);
-NoAssert.donothing(new Period(1, 2, 3, 4, 5, 6, 7, 9), result);
+        assertEquals(new Period(1, 2, 3, 4, 5, 6, 7, 8), test1);
+        assertEquals(new Period(0, 0, 0, 0, 0, 0, 0, 9, PeriodType.millis()), test2);
+        assertEquals(new Period(1, 2, 3, 4, 5, 6, 7, 9), result);
     }
 
     @Test public void testWithFields2() {
@@ -683,8 +683,8 @@ NoAssert.donothing(new Period(1, 2, 3, 4, 5, 6, 7, 9), result);
         Period test2 = null;
         Period result = test1.withFields(test2);
         
-NoAssert.donothing(new Period(1, 2, 3, 4, 5, 6, 7, 8), test1);
-NoAssert.donothing(test1, result);
+        assertEquals(new Period(1, 2, 3, 4, 5, 6, 7, 8), test1);
+        assertSame(test1, result);
     }
 
     @Test public void testWithFields3() {
@@ -695,7 +695,7 @@ NoAssert.donothing(test1, result);
             fail();
         } catch (IllegalArgumentException ex) {}
 NoAssert.donothing(new Period(0, 0, 0, 0, 0, 0, 0, 9, PeriodType.millis()), test1);
-NoAssert.donothing(new Period(1, 2, 3, 4, 5, 6, 7, 8), test2);
+        assertEquals(new Period(1, 2, 3, 4, 5, 6, 7, 8), test2);
     }
 
     //-----------------------------------------------------------------------
@@ -703,8 +703,8 @@ NoAssert.donothing(new Period(1, 2, 3, 4, 5, 6, 7, 8), test2);
         Period test = new Period(1, 2, 3, 4, 5, 6, 7, 8);
         Period result = test.withField(DurationFieldType.years(), 6);
         
-NoAssert.donothing(new Period(1, 2, 3, 4, 5, 6, 7, 8), test);
-NoAssert.donothing(new Period(6, 2, 3, 4, 5, 6, 7, 8), result);
+        assertEquals(new Period(1, 2, 3, 4, 5, 6, 7, 8), test);
+        assertEquals(new Period(6, 2, 3, 4, 5, 6, 7, 8), result);
     }
 
     @Test public void testWithField2() {
@@ -726,7 +726,7 @@ NoAssert.donothing(new Period(6, 2, 3, 4, 5, 6, 7, 8), result);
     @Test public void testWithField4() {
         Period test = new Period(0, 0, 0, 0, 5, 6, 7, 8, PeriodType.time());
         Period result = test.withField(DurationFieldType.years(), 0);
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -734,8 +734,8 @@ NoAssert.donothing(test, result);
         Period test = new Period(1, 2, 3, 4, 5, 6, 7, 8);
         Period result = test.withFieldAdded(DurationFieldType.years(), 6);
         
-NoAssert.donothing(new Period(1, 2, 3, 4, 5, 6, 7, 8), test);
-NoAssert.donothing(new Period(7, 2, 3, 4, 5, 6, 7, 8), result);
+        assertEquals(new Period(1, 2, 3, 4, 5, 6, 7, 8), test);
+        assertEquals(new Period(7, 2, 3, 4, 5, 6, 7, 8), result);
     }
 
     @Test public void testWithFieldAdded2() {
@@ -764,42 +764,42 @@ NoAssert.donothing(test, result);
     @Test public void testPeriodStatics() {
         Period test;
         test = Period.years(1);
-NoAssert.donothing(test, new Period(1, 0, 0, 0, 0, 0, 0, 0, PeriodType.standard()));
+        assertEquals(test, new Period(1, 0, 0, 0, 0, 0, 0, 0, PeriodType.standard()));
         test = Period.months(1);
 NoAssert.donothing(test, new Period(0, 1, 0, 0, 0, 0, 0, 0, PeriodType.standard()));
         test = Period.weeks(1);
-NoAssert.donothing(test, new Period(0, 0, 1, 0, 0, 0, 0, 0, PeriodType.standard()));
+        assertEquals(test, new Period(0, 0, 1, 0, 0, 0, 0, 0, PeriodType.standard()));
         test = Period.days(1);
-NoAssert.donothing(test, new Period(0, 0, 0, 1, 0, 0, 0, 0, PeriodType.standard()));
+        assertEquals(test, new Period(0, 0, 0, 1, 0, 0, 0, 0, PeriodType.standard()));
         test = Period.hours(1);
 NoAssert.donothing(test, new Period(0, 0, 0, 0, 1, 0, 0, 0, PeriodType.standard()));
         test = Period.minutes(1);
 NoAssert.donothing(test, new Period(0, 0, 0, 0, 0, 1, 0, 0, PeriodType.standard()));
         test = Period.seconds(1);
-NoAssert.donothing(test, new Period(0, 0, 0, 0, 0, 0, 1, 0, PeriodType.standard()));
+        assertEquals(test, new Period(0, 0, 0, 0, 0, 0, 1, 0, PeriodType.standard()));
         test = Period.millis(1);
-NoAssert.donothing(test, new Period(0, 0, 0, 0, 0, 0, 0, 1, PeriodType.standard()));
+        assertEquals(test, new Period(0, 0, 0, 0, 0, 0, 0, 1, PeriodType.standard()));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testWith() {
         Period test;
         test = Period.years(5).withYears(1);
-NoAssert.donothing(test, new Period(1, 0, 0, 0, 0, 0, 0, 0, PeriodType.standard()));
+        assertEquals(test, new Period(1, 0, 0, 0, 0, 0, 0, 0, PeriodType.standard()));
         test = Period.months(5).withMonths(1);
 NoAssert.donothing(test, new Period(0, 1, 0, 0, 0, 0, 0, 0, PeriodType.standard()));
         test = Period.weeks(5).withWeeks(1);
-NoAssert.donothing(test, new Period(0, 0, 1, 0, 0, 0, 0, 0, PeriodType.standard()));
+        assertEquals(test, new Period(0, 0, 1, 0, 0, 0, 0, 0, PeriodType.standard()));
         test = Period.days(5).withDays(1);
-NoAssert.donothing(test, new Period(0, 0, 0, 1, 0, 0, 0, 0, PeriodType.standard()));
+        assertEquals(test, new Period(0, 0, 0, 1, 0, 0, 0, 0, PeriodType.standard()));
         test = Period.hours(5).withHours(1);
-NoAssert.donothing(test, new Period(0, 0, 0, 0, 1, 0, 0, 0, PeriodType.standard()));
+        assertEquals(test, new Period(0, 0, 0, 0, 1, 0, 0, 0, PeriodType.standard()));
         test = Period.minutes(5).withMinutes(1);
-NoAssert.donothing(test, new Period(0, 0, 0, 0, 0, 1, 0, 0, PeriodType.standard()));
+        assertEquals(test, new Period(0, 0, 0, 0, 0, 1, 0, 0, PeriodType.standard()));
         test = Period.seconds(5).withSeconds(1);
-NoAssert.donothing(test, new Period(0, 0, 0, 0, 0, 0, 1, 0, PeriodType.standard()));
+        assertEquals(test, new Period(0, 0, 0, 0, 0, 0, 1, 0, PeriodType.standard()));
         test = Period.millis(5).withMillis(1);
-NoAssert.donothing(test, new Period(0, 0, 0, 0, 0, 0, 0, 1, PeriodType.standard()));
+        assertEquals(test, new Period(0, 0, 0, 0, 0, 0, 0, 1, PeriodType.standard()));
         
         test = new Period(0L, PeriodType.millis());
         try {
@@ -814,56 +814,56 @@ NoAssert.donothing(test, new Period(0, 0, 0, 0, 0, 0, 0, 1, PeriodType.standard(
         Period baseDaysOnly = new Period(0, 0, 0, 10, 0, 0, 0, 0, PeriodType.days());
         
         Period test = base.plus((ReadablePeriod) null);
-NoAssert.donothing(base, test);
+        assertSame(base, test);
         
         test = base.plus(Period.years(10));
 NoAssert.donothing(11, test.getYears());
-NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(3, test.getWeeks());
-NoAssert.donothing(4, test.getDays());
-NoAssert.donothing(5, test.getHours());
+        assertEquals(2, test.getMonths());
+        assertEquals(3, test.getWeeks());
+        assertEquals(4, test.getDays());
+        assertEquals(5, test.getHours());
 NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
+        assertEquals(7, test.getSeconds());
 NoAssert.donothing(8, test.getMillis());
         
         test = base.plus(Years.years(10));
 NoAssert.donothing(11, test.getYears());
-NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(3, test.getWeeks());
+        assertEquals(2, test.getMonths());
+        assertEquals(3, test.getWeeks());
 NoAssert.donothing(4, test.getDays());
 NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(8, test.getMillis());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
+        assertEquals(8, test.getMillis());
         
         test = base.plus(Period.days(10));
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(3, test.getWeeks());
-NoAssert.donothing(14, test.getDays());
-NoAssert.donothing(5, test.getHours());
+        assertEquals(1, test.getYears());
+        assertEquals(2, test.getMonths());
+        assertEquals(3, test.getWeeks());
+        assertEquals(14, test.getDays());
+        assertEquals(5, test.getHours());
 NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(8, test.getMillis());
+        assertEquals(7, test.getSeconds());
+        assertEquals(8, test.getMillis());
         
         test = baseDaysOnly.plus(Period.years(0));
-NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(10, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(0, test.getMillis());
+        assertEquals(0, test.getYears());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(10, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
+        assertEquals(0, test.getMillis());
         
         test = baseDaysOnly.plus(baseDaysOnly);
-NoAssert.donothing(0, test.getYears());
+        assertEquals(0, test.getYears());
 NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(20, test.getDays());
-NoAssert.donothing(0, test.getHours());
+        assertEquals(0, test.getWeeks());
+        assertEquals(20, test.getDays());
+        assertEquals(0, test.getHours());
 NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
+        assertEquals(0, test.getSeconds());
 NoAssert.donothing(0, test.getMillis());
         
         try {
@@ -891,53 +891,53 @@ NoAssert.donothing(0, test.getMillis());
 NoAssert.donothing(base, test);
         
         test = base.minus(Period.years(10));
-NoAssert.donothing(-9, test.getYears());
-NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(3, test.getWeeks());
-NoAssert.donothing(4, test.getDays());
-NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(8, test.getMillis());
+        assertEquals(-9, test.getYears());
+        assertEquals(2, test.getMonths());
+        assertEquals(3, test.getWeeks());
+        assertEquals(4, test.getDays());
+        assertEquals(5, test.getHours());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
+        assertEquals(8, test.getMillis());
         
         test = base.minus(Years.years(10));
 NoAssert.donothing(-9, test.getYears());
 NoAssert.donothing(2, test.getMonths());
 NoAssert.donothing(3, test.getWeeks());
-NoAssert.donothing(4, test.getDays());
+        assertEquals(4, test.getDays());
 NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
 NoAssert.donothing(8, test.getMillis());
         
         test = base.minus(Period.days(10));
-NoAssert.donothing(1, test.getYears());
-NoAssert.donothing(2, test.getMonths());
-NoAssert.donothing(3, test.getWeeks());
+        assertEquals(1, test.getYears());
+        assertEquals(2, test.getMonths());
+        assertEquals(3, test.getWeeks());
 NoAssert.donothing(-6, test.getDays());
-NoAssert.donothing(5, test.getHours());
-NoAssert.donothing(6, test.getMinutes());
-NoAssert.donothing(7, test.getSeconds());
-NoAssert.donothing(8, test.getMillis());
+        assertEquals(5, test.getHours());
+        assertEquals(6, test.getMinutes());
+        assertEquals(7, test.getSeconds());
+        assertEquals(8, test.getMillis());
         
         test = baseDaysOnly.minus(Period.years(0));
 NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(10, test.getDays());
-NoAssert.donothing(0, test.getHours());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(10, test.getDays());
+        assertEquals(0, test.getHours());
 NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
-NoAssert.donothing(0, test.getMillis());
+        assertEquals(0, test.getSeconds());
+        assertEquals(0, test.getMillis());
         
         test = baseDaysOnly.minus(baseDaysOnly);
 NoAssert.donothing(0, test.getYears());
-NoAssert.donothing(0, test.getMonths());
-NoAssert.donothing(0, test.getWeeks());
-NoAssert.donothing(0, test.getDays());
-NoAssert.donothing(0, test.getHours());
-NoAssert.donothing(0, test.getMinutes());
-NoAssert.donothing(0, test.getSeconds());
+        assertEquals(0, test.getMonths());
+        assertEquals(0, test.getWeeks());
+        assertEquals(0, test.getDays());
+        assertEquals(0, test.getHours());
+        assertEquals(0, test.getMinutes());
+        assertEquals(0, test.getSeconds());
 NoAssert.donothing(0, test.getMillis());
         
         try {
@@ -960,19 +960,19 @@ NoAssert.donothing(0, test.getMillis());
     @Test public void testPlusFields() {
         Period test;
         test = Period.years(1).plusYears(1);
-NoAssert.donothing(new Period(2, 0, 0, 0, 0, 0, 0, 0, PeriodType.standard()), test);
+        assertEquals(new Period(2, 0, 0, 0, 0, 0, 0, 0, PeriodType.standard()), test);
         test = Period.months(1).plusMonths(1);
 NoAssert.donothing(new Period(0, 2, 0, 0, 0, 0, 0, 0, PeriodType.standard()), test);
         test = Period.weeks(1).plusWeeks(1);
-NoAssert.donothing(new Period(0, 0, 2, 0, 0, 0, 0, 0, PeriodType.standard()), test);
+        assertEquals(new Period(0, 0, 2, 0, 0, 0, 0, 0, PeriodType.standard()), test);
         test = Period.days(1).plusDays(1);
-NoAssert.donothing(new Period(0, 0, 0, 2, 0, 0, 0, 0, PeriodType.standard()), test);
+        assertEquals(new Period(0, 0, 0, 2, 0, 0, 0, 0, PeriodType.standard()), test);
         test = Period.hours(1).plusHours(1);
-NoAssert.donothing(new Period(0, 0, 0, 0, 2, 0, 0, 0, PeriodType.standard()), test);
+        assertEquals(new Period(0, 0, 0, 0, 2, 0, 0, 0, PeriodType.standard()), test);
         test = Period.minutes(1).plusMinutes(1);
-NoAssert.donothing(new Period(0, 0, 0, 0, 0, 2, 0, 0, PeriodType.standard()), test);
+        assertEquals(new Period(0, 0, 0, 0, 0, 2, 0, 0, PeriodType.standard()), test);
         test = Period.seconds(1).plusSeconds(1);
-NoAssert.donothing(new Period(0, 0, 0, 0, 0, 0, 2, 0, PeriodType.standard()), test);
+        assertEquals(new Period(0, 0, 0, 0, 0, 0, 2, 0, PeriodType.standard()), test);
         test = Period.millis(1).plusMillis(1);
 NoAssert.donothing(new Period(0, 0, 0, 0, 0, 0, 0, 2, PeriodType.standard()), test);
         
@@ -990,45 +990,45 @@ NoAssert.donothing(new Period(0, 0, 0, 0, 0, 0, 0, 2, PeriodType.standard()), te
 NoAssert.donothing(test, result);
         test = Period.months(1);
         result = test.plusMonths(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
         test = Period.weeks(1);
         result = test.plusWeeks(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
         test = Period.days(1);
         result = test.plusDays(0);
 NoAssert.donothing(test, result);
         test = Period.hours(1);
         result = test.plusHours(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
         test = Period.minutes(1);
         result = test.plusMinutes(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
         test = Period.seconds(1);
         result = test.plusSeconds(0);
 NoAssert.donothing(test, result);
         test = Period.millis(1);
         result = test.plusMillis(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testMinusFields() {
         Period test;
         test = Period.years(3).minusYears(1);
-NoAssert.donothing(new Period(2, 0, 0, 0, 0, 0, 0, 0, PeriodType.standard()), test);
+        assertEquals(new Period(2, 0, 0, 0, 0, 0, 0, 0, PeriodType.standard()), test);
         test = Period.months(3).minusMonths(1);
-NoAssert.donothing(new Period(0, 2, 0, 0, 0, 0, 0, 0, PeriodType.standard()), test);
+        assertEquals(new Period(0, 2, 0, 0, 0, 0, 0, 0, PeriodType.standard()), test);
         test = Period.weeks(3).minusWeeks(1);
-NoAssert.donothing(new Period(0, 0, 2, 0, 0, 0, 0, 0, PeriodType.standard()), test);
+        assertEquals(new Period(0, 0, 2, 0, 0, 0, 0, 0, PeriodType.standard()), test);
         test = Period.days(3).minusDays(1);
-NoAssert.donothing(new Period(0, 0, 0, 2, 0, 0, 0, 0, PeriodType.standard()), test);
+        assertEquals(new Period(0, 0, 0, 2, 0, 0, 0, 0, PeriodType.standard()), test);
         test = Period.hours(3).minusHours(1);
-NoAssert.donothing(new Period(0, 0, 0, 0, 2, 0, 0, 0, PeriodType.standard()), test);
+        assertEquals(new Period(0, 0, 0, 0, 2, 0, 0, 0, PeriodType.standard()), test);
         test = Period.minutes(3).minusMinutes(1);
-NoAssert.donothing(new Period(0, 0, 0, 0, 0, 2, 0, 0, PeriodType.standard()), test);
+        assertEquals(new Period(0, 0, 0, 0, 0, 2, 0, 0, PeriodType.standard()), test);
         test = Period.seconds(3).minusSeconds(1);
-NoAssert.donothing(new Period(0, 0, 0, 0, 0, 0, 2, 0, PeriodType.standard()), test);
+        assertEquals(new Period(0, 0, 0, 0, 0, 0, 2, 0, PeriodType.standard()), test);
         test = Period.millis(3).minusMillis(1);
-NoAssert.donothing(new Period(0, 0, 0, 0, 0, 0, 0, 2, PeriodType.standard()), test);
+        assertEquals(new Period(0, 0, 0, 0, 0, 0, 0, 2, PeriodType.standard()), test);
         
         test = new Period(0L, PeriodType.millis());
         try {
@@ -1042,40 +1042,40 @@ NoAssert.donothing(new Period(0, 0, 0, 0, 0, 0, 0, 2, PeriodType.standard()), te
         Period base = new Period(1, 2, 3, 4, 5, 6, 7, 8);
         
         Period test = base.multipliedBy(1);
-NoAssert.donothing(base, test);
+        assertSame(base, test);
         
         test = base.multipliedBy(0);
 NoAssert.donothing(Period.ZERO, test);
         
         test = base.multipliedBy(2);
 NoAssert.donothing(2, test.getYears());
-NoAssert.donothing(4, test.getMonths());
-NoAssert.donothing(6, test.getWeeks());
-NoAssert.donothing(8, test.getDays());
+        assertEquals(4, test.getMonths());
+        assertEquals(6, test.getWeeks());
+        assertEquals(8, test.getDays());
 NoAssert.donothing(10, test.getHours());
-NoAssert.donothing(12, test.getMinutes());
+        assertEquals(12, test.getMinutes());
 NoAssert.donothing(14, test.getSeconds());
-NoAssert.donothing(16, test.getMillis());
+        assertEquals(16, test.getMillis());
         
         test = base.multipliedBy(3);
-NoAssert.donothing(3, test.getYears());
-NoAssert.donothing(6, test.getMonths());
-NoAssert.donothing(9, test.getWeeks());
-NoAssert.donothing(12, test.getDays());
-NoAssert.donothing(15, test.getHours());
+        assertEquals(3, test.getYears());
+        assertEquals(6, test.getMonths());
+        assertEquals(9, test.getWeeks());
+        assertEquals(12, test.getDays());
+        assertEquals(15, test.getHours());
 NoAssert.donothing(18, test.getMinutes());
-NoAssert.donothing(21, test.getSeconds());
-NoAssert.donothing(24, test.getMillis());
+        assertEquals(21, test.getSeconds());
+        assertEquals(24, test.getMillis());
         
         test = base.multipliedBy(-4);
-NoAssert.donothing(-4, test.getYears());
+        assertEquals(-4, test.getYears());
 NoAssert.donothing(-8, test.getMonths());
 NoAssert.donothing(-12, test.getWeeks());
 NoAssert.donothing(-16, test.getDays());
 NoAssert.donothing(-20, test.getHours());
-NoAssert.donothing(-24, test.getMinutes());
-NoAssert.donothing(-28, test.getSeconds());
-NoAssert.donothing(-32, test.getMillis());
+        assertEquals(-24, test.getMinutes());
+        assertEquals(-28, test.getSeconds());
+        assertEquals(-32, test.getMillis());
         
         try {
             Period.days(Integer.MAX_VALUE).multipliedBy(2);
@@ -1096,17 +1096,17 @@ NoAssert.donothing(-32, test.getMillis());
 NoAssert.donothing(Period.ZERO, test);
         
         test = base.negated();
-NoAssert.donothing(-1, test.getYears());
-NoAssert.donothing(-2, test.getMonths());
+        assertEquals(-1, test.getYears());
+        assertEquals(-2, test.getMonths());
 NoAssert.donothing(-3, test.getWeeks());
-NoAssert.donothing(-4, test.getDays());
-NoAssert.donothing(-5, test.getHours());
-NoAssert.donothing(-6, test.getMinutes());
-NoAssert.donothing(-7, test.getSeconds());
-NoAssert.donothing(-8, test.getMillis());
+        assertEquals(-4, test.getDays());
+        assertEquals(-5, test.getHours());
+        assertEquals(-6, test.getMinutes());
+        assertEquals(-7, test.getSeconds());
+        assertEquals(-8, test.getMillis());
         
         test = Period.days(Integer.MAX_VALUE).negated();
-NoAssert.donothing(-Integer.MAX_VALUE, test.getDays());
+        assertEquals(-Integer.MAX_VALUE, test.getDays());
         
         try {
             Period.days(Integer.MIN_VALUE).negated();
@@ -1117,16 +1117,16 @@ NoAssert.donothing(-Integer.MAX_VALUE, test.getDays());
     //-----------------------------------------------------------------------
     @Test public void testToStandardWeeks() {
         Period test = new Period(0, 0, 3, 4, 5, 6, 7, 8);
-NoAssert.donothing(3, test.toStandardWeeks().getWeeks());
+        assertEquals(3, test.toStandardWeeks().getWeeks());
         
         test = new Period(0, 0, 3, 7, 0, 0, 0, 0);
-NoAssert.donothing(4, test.toStandardWeeks().getWeeks());
+        assertEquals(4, test.toStandardWeeks().getWeeks());
         
         test = new Period(0, 0, 0, 6, 23, 59, 59, 1000);
-NoAssert.donothing(1, test.toStandardWeeks().getWeeks());
+        assertEquals(1, test.toStandardWeeks().getWeeks());
         
         test = new Period(0, 0, Integer.MAX_VALUE, 0, 0, 0, 0, 0);
-NoAssert.donothing(Integer.MAX_VALUE, test.toStandardWeeks().getWeeks());
+        assertEquals(Integer.MAX_VALUE, test.toStandardWeeks().getWeeks());
         
         test = new Period(0, 0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
         long intMax = Integer.MAX_VALUE;
@@ -1137,7 +1137,7 @@ NoAssert.donothing(Integer.MAX_VALUE, test.toStandardWeeks().getWeeks());
         expected = expected.add(BigInteger.valueOf(intMax * DateTimeConstants.MILLIS_PER_DAY));
         expected = expected.divide(BigInteger.valueOf(DateTimeConstants.MILLIS_PER_WEEK));
 NoAssert.donothing(expected.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0);
-NoAssert.donothing(expected.longValue(), test.toStandardWeeks().getWeeks());
+        assertEquals(expected.longValue(), test.toStandardWeeks().getWeeks());
         
         test = new Period(0, 0, Integer.MAX_VALUE, 7, 0, 0, 0, 0);
         try {
@@ -1160,7 +1160,7 @@ NoAssert.donothing(expected.longValue(), test.toStandardWeeks().getWeeks());
         } catch (UnsupportedOperationException ex) {}
         
         test = Period.years(0);
-NoAssert.donothing(0, test.toStandardWeeks().getWeeks());
+        assertEquals(0, test.toStandardWeeks().getWeeks());
     }
 
     @Test public void testToStandardWeeks_months() {
@@ -1177,22 +1177,22 @@ NoAssert.donothing(0, test.toStandardWeeks().getWeeks());
         } catch (UnsupportedOperationException ex) {}
         
         test = Period.months(0);
-NoAssert.donothing(0, test.toStandardWeeks().getWeeks());
+        assertEquals(0, test.toStandardWeeks().getWeeks());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToStandardDays() {
         Period test = new Period(0, 0, 0, 4, 5, 6, 7, 8);
-NoAssert.donothing(4, test.toStandardDays().getDays());
+        assertEquals(4, test.toStandardDays().getDays());
         
         test = new Period(0, 0, 1, 4, 0, 0, 0, 0);
-NoAssert.donothing(11, test.toStandardDays().getDays());
+        assertEquals(11, test.toStandardDays().getDays());
         
         test = new Period(0, 0, 0, 0, 23, 59, 59, 1000);
-NoAssert.donothing(1, test.toStandardDays().getDays());
+        assertEquals(1, test.toStandardDays().getDays());
         
         test = new Period(0, 0, 0, Integer.MAX_VALUE, 0, 0, 0, 0);
-NoAssert.donothing(Integer.MAX_VALUE, test.toStandardDays().getDays());
+        assertEquals(Integer.MAX_VALUE, test.toStandardDays().getDays());
         
         test = new Period(0, 0, 0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
         long intMax = Integer.MAX_VALUE;
@@ -1201,7 +1201,7 @@ NoAssert.donothing(Integer.MAX_VALUE, test.toStandardDays().getDays());
         expected = expected.add(BigInteger.valueOf(intMax * DateTimeConstants.MILLIS_PER_MINUTE));
         expected = expected.add(BigInteger.valueOf(intMax * DateTimeConstants.MILLIS_PER_HOUR));
         expected = expected.divide(BigInteger.valueOf(DateTimeConstants.MILLIS_PER_DAY));
-NoAssert.donothing(expected.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0);
+        assertTrue(expected.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0);
 NoAssert.donothing(expected.longValue(), test.toStandardDays().getDays());
         
         test = new Period(0, 0, 0, Integer.MAX_VALUE, 24, 0, 0, 0);
@@ -1225,7 +1225,7 @@ NoAssert.donothing(expected.longValue(), test.toStandardDays().getDays());
         } catch (UnsupportedOperationException ex) {}
         
         test = Period.years(0);
-NoAssert.donothing(0, test.toStandardDays().getDays());
+        assertEquals(0, test.toStandardDays().getDays());
     }
 
     @Test public void testToStandardDays_months() {
@@ -1242,22 +1242,22 @@ NoAssert.donothing(0, test.toStandardDays().getDays());
         } catch (UnsupportedOperationException ex) {}
         
         test = Period.months(0);
-NoAssert.donothing(0, test.toStandardDays().getDays());
+        assertEquals(0, test.toStandardDays().getDays());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToStandardHours() {
         Period test = new Period(0, 0, 0, 0, 5, 6, 7, 8);
-NoAssert.donothing(5, test.toStandardHours().getHours());
+        assertEquals(5, test.toStandardHours().getHours());
         
         test = new Period(0, 0, 0, 1, 5, 0, 0, 0);
-NoAssert.donothing(29, test.toStandardHours().getHours());
+        assertEquals(29, test.toStandardHours().getHours());
         
         test = new Period(0, 0, 0, 0, 0, 59, 59, 1000);
-NoAssert.donothing(1, test.toStandardHours().getHours());
+        assertEquals(1, test.toStandardHours().getHours());
         
         test = new Period(0, 0, 0, 0, Integer.MAX_VALUE, 0, 0, 0);
-NoAssert.donothing(Integer.MAX_VALUE, test.toStandardHours().getHours());
+        assertEquals(Integer.MAX_VALUE, test.toStandardHours().getHours());
         
         test = new Period(0, 0, 0, 0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
         long intMax = Integer.MAX_VALUE;
@@ -1266,7 +1266,7 @@ NoAssert.donothing(Integer.MAX_VALUE, test.toStandardHours().getHours());
         expected = expected.add(BigInteger.valueOf(intMax * DateTimeConstants.MILLIS_PER_MINUTE));
         expected = expected.divide(BigInteger.valueOf(DateTimeConstants.MILLIS_PER_HOUR));
 NoAssert.donothing(expected.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0);
-NoAssert.donothing(expected.longValue(), test.toStandardHours().getHours());
+        assertEquals(expected.longValue(), test.toStandardHours().getHours());
         
         test = new Period(0, 0, 0, 0, Integer.MAX_VALUE, 60, 0, 0);
         try {
@@ -1306,30 +1306,30 @@ NoAssert.donothing(0, test.toStandardHours().getHours());
         } catch (UnsupportedOperationException ex) {}
         
         test = Period.months(0);
-NoAssert.donothing(0, test.toStandardHours().getHours());
+        assertEquals(0, test.toStandardHours().getHours());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToStandardMinutes() {
         Period test = new Period(0, 0, 0, 0, 0, 6, 7, 8);
-NoAssert.donothing(6, test.toStandardMinutes().getMinutes());
+        assertEquals(6, test.toStandardMinutes().getMinutes());
         
         test = new Period(0, 0, 0, 0, 1, 6, 0, 0);
-NoAssert.donothing(66, test.toStandardMinutes().getMinutes());
+        assertEquals(66, test.toStandardMinutes().getMinutes());
         
         test = new Period(0, 0, 0, 0, 0, 0, 59, 1000);
-NoAssert.donothing(1, test.toStandardMinutes().getMinutes());
+        assertEquals(1, test.toStandardMinutes().getMinutes());
         
         test = new Period(0, 0, 0, 0, 0, Integer.MAX_VALUE, 0, 0);
-NoAssert.donothing(Integer.MAX_VALUE, test.toStandardMinutes().getMinutes());
+        assertEquals(Integer.MAX_VALUE, test.toStandardMinutes().getMinutes());
         
         test = new Period(0, 0, 0, 0, 0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
         long intMax = Integer.MAX_VALUE;
         BigInteger expected = BigInteger.valueOf(intMax);
         expected = expected.add(BigInteger.valueOf(intMax * DateTimeConstants.MILLIS_PER_SECOND));
         expected = expected.divide(BigInteger.valueOf(DateTimeConstants.MILLIS_PER_MINUTE));
-NoAssert.donothing(expected.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0);
-NoAssert.donothing(expected.longValue(), test.toStandardMinutes().getMinutes());
+        assertTrue(expected.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0);
+        assertEquals(expected.longValue(), test.toStandardMinutes().getMinutes());
         
         test = new Period(0, 0, 0, 0, 0, Integer.MAX_VALUE, 60, 0);
         try {
@@ -1352,7 +1352,7 @@ NoAssert.donothing(expected.longValue(), test.toStandardMinutes().getMinutes());
         } catch (UnsupportedOperationException ex) {}
         
         test = Period.years(0);
-NoAssert.donothing(0, test.toStandardMinutes().getMinutes());
+        assertEquals(0, test.toStandardMinutes().getMinutes());
     }
 
     @Test public void testToStandardMinutes_months() {
@@ -1369,27 +1369,27 @@ NoAssert.donothing(0, test.toStandardMinutes().getMinutes());
         } catch (UnsupportedOperationException ex) {}
         
         test = Period.months(0);
-NoAssert.donothing(0, test.toStandardMinutes().getMinutes());
+        assertEquals(0, test.toStandardMinutes().getMinutes());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToStandardSeconds() {
         Period test = new Period(0, 0, 0, 0, 0, 0, 7, 8);
-NoAssert.donothing(7, test.toStandardSeconds().getSeconds());
+        assertEquals(7, test.toStandardSeconds().getSeconds());
         
         test = new Period(0, 0, 0, 0, 0, 1, 3, 0);
-NoAssert.donothing(63, test.toStandardSeconds().getSeconds());
+        assertEquals(63, test.toStandardSeconds().getSeconds());
         
         test = new Period(0, 0, 0, 0, 0, 0, 0, 1000);
-NoAssert.donothing(1, test.toStandardSeconds().getSeconds());
+        assertEquals(1, test.toStandardSeconds().getSeconds());
         
         test = new Period(0, 0, 0, 0, 0, 0, Integer.MAX_VALUE, 0);
-NoAssert.donothing(Integer.MAX_VALUE, test.toStandardSeconds().getSeconds());
+        assertEquals(Integer.MAX_VALUE, test.toStandardSeconds().getSeconds());
         
         test = new Period(0, 0, 0, 0, 0, 0, 20, Integer.MAX_VALUE);
         long expected = 20;
         expected += ((long) Integer.MAX_VALUE) / DateTimeConstants.MILLIS_PER_SECOND;
-NoAssert.donothing(expected, test.toStandardSeconds().getSeconds());
+        assertEquals(expected, test.toStandardSeconds().getSeconds());
         
         test = new Period(0, 0, 0, 0, 0, 0, Integer.MAX_VALUE, 1000);
         try {
@@ -1412,7 +1412,7 @@ NoAssert.donothing(expected, test.toStandardSeconds().getSeconds());
         } catch (UnsupportedOperationException ex) {}
         
         test = Period.years(0);
-NoAssert.donothing(0, test.toStandardSeconds().getSeconds());
+        assertEquals(0, test.toStandardSeconds().getSeconds());
     }
 
     @Test public void testToStandardSeconds_months() {
@@ -1429,16 +1429,16 @@ NoAssert.donothing(0, test.toStandardSeconds().getSeconds());
         } catch (UnsupportedOperationException ex) {}
         
         test = Period.months(0);
-NoAssert.donothing(0, test.toStandardSeconds().getSeconds());
+        assertEquals(0, test.toStandardSeconds().getSeconds());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToStandardDuration() {
         Period test = new Period(0, 0, 0, 0, 0, 0, 0, 8);
-NoAssert.donothing(8, test.toStandardDuration().getMillis());
+        assertEquals(8, test.toStandardDuration().getMillis());
         
         test = new Period(0, 0, 0, 0, 0, 0, 1, 20);
-NoAssert.donothing(1020, test.toStandardDuration().getMillis());
+        assertEquals(1020, test.toStandardDuration().getMillis());
         
         test = new Period(0, 0, 0, 0, 0, 0, 0, Integer.MAX_VALUE);
 NoAssert.donothing(Integer.MAX_VALUE, test.toStandardDuration().getMillis());
@@ -1447,7 +1447,7 @@ NoAssert.donothing(Integer.MAX_VALUE, test.toStandardDuration().getMillis());
         long expected = Integer.MAX_VALUE;
         expected += 10L * ((long) DateTimeConstants.MILLIS_PER_MINUTE);
         expected += 20L * ((long) DateTimeConstants.MILLIS_PER_SECOND);
-NoAssert.donothing(expected, test.toStandardDuration().getMillis());
+        assertEquals(expected, test.toStandardDuration().getMillis());
         
         // proof that overflow does not occur
         BigInteger intMax = BigInteger.valueOf(Integer.MAX_VALUE);
@@ -1457,7 +1457,7 @@ NoAssert.donothing(expected, test.toStandardDuration().getMillis());
         exp = exp.add(intMax.multiply(BigInteger.valueOf(DateTimeConstants.MILLIS_PER_HOUR)));
         exp = exp.add(intMax.multiply(BigInteger.valueOf(DateTimeConstants.MILLIS_PER_DAY)));
         exp = exp.add(intMax.multiply(BigInteger.valueOf(DateTimeConstants.MILLIS_PER_WEEK)));
-NoAssert.donothing(exp.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0);
+        assertTrue(exp.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0);
 //        test = new Period(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
 //        try {
 //            test.toStandardDuration();
@@ -1479,7 +1479,7 @@ NoAssert.donothing(exp.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0);
         } catch (UnsupportedOperationException ex) {}
         
         test = Period.years(0);
-NoAssert.donothing(0, test.toStandardDuration().getMillis());
+        assertEquals(0, test.toStandardDuration().getMillis());
     }
 
     @Test public void testToStandardDuration_months() {
@@ -1496,15 +1496,15 @@ NoAssert.donothing(0, test.toStandardDuration().getMillis());
         } catch (UnsupportedOperationException ex) {}
         
         test = Period.months(0);
-NoAssert.donothing(0, test.toStandardDuration().getMillis());
+        assertEquals(0, test.toStandardDuration().getMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testNormalizedStandard_yearMonth1() {
         Period test = new Period(1, 15, 0, 0, 0, 0, 0, 0);
         Period result = test.normalizedStandard();
-NoAssert.donothing(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);
-NoAssert.donothing(new Period(2, 3, 0, 0, 0, 0, 0, 0), result);
+        assertEquals(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);
+        assertEquals(new Period(2, 3, 0, 0, 0, 0, 0, 0), result);
     }
 
     @Test public void testNormalizedStandard_yearMonth2() {
@@ -1518,8 +1518,8 @@ NoAssert.donothing(new Period(2, 3, 0, 0, 0, 0, 0, 0), result);
     @Test public void testNormalizedStandard_weekDay1() {
         Period test = new Period(0, 0, 1, 12, 0, 0, 0, 0);
         Period result = test.normalizedStandard();
-NoAssert.donothing(new Period(0, 0, 1, 12, 0, 0, 0, 0), test);
-NoAssert.donothing(new Period(0, 0, 2, 5, 0, 0, 0, 0), result);
+        assertEquals(new Period(0, 0, 1, 12, 0, 0, 0, 0), test);
+        assertEquals(new Period(0, 0, 2, 5, 0, 0, 0, 0), result);
     }
 
     @Test public void testNormalizedStandard_weekDay2() {
@@ -1533,14 +1533,14 @@ NoAssert.donothing(new Period(0, 0, 2, 5, 0, 0, 0, 0), result);
     @Test public void testNormalizedStandard_yearMonthWeekDay() {
         Period test = new Period(1, 15, 1, 12, 0, 0, 0, 0);
         Period result = test.normalizedStandard();
-NoAssert.donothing(new Period(1, 15, 1, 12, 0, 0, 0, 0), test);
-NoAssert.donothing(new Period(2, 3, 2, 5, 0, 0, 0, 0), result);
+        assertEquals(new Period(1, 15, 1, 12, 0, 0, 0, 0), test);
+        assertEquals(new Period(2, 3, 2, 5, 0, 0, 0, 0), result);
     }
 
     @Test public void testNormalizedStandard_yearMonthDay() {
         Period test = new Period(1, 15, 0, 36, 0, 0, 0, 0);
         Period result = test.normalizedStandard();
-NoAssert.donothing(new Period(1, 15, 0, 36, 0, 0, 0, 0), test);
+        assertEquals(new Period(1, 15, 0, 36, 0, 0, 0, 0), test);
 NoAssert.donothing(new Period(2, 3, 5, 1, 0, 0, 0, 0), result);
     }
 
@@ -1554,16 +1554,16 @@ NoAssert.donothing(new Period(0, 0, 0, 0, 1, 50, 0, 0), result);
     @Test public void testNormalizedStandard_fullNegative() {
         Period test = new Period(0, 0, 0, 0, 1, -70, 0, 0);
         Period result = test.normalizedStandard();
-NoAssert.donothing(new Period(0, 0, 0, 0, 1, -70, 0, 0), test);
-NoAssert.donothing(new Period(0, 0, 0, 0, 0, -10, 0, 0), result);
+        assertEquals(new Period(0, 0, 0, 0, 1, -70, 0, 0), test);
+        assertEquals(new Period(0, 0, 0, 0, 0, -10, 0, 0), result);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testNormalizedStandard_periodType_yearMonth1() {
         Period test = new Period(1, 15, 0, 0, 0, 0, 0, 0);
         Period result = test.normalizedStandard((PeriodType) null);
-NoAssert.donothing(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);
-NoAssert.donothing(new Period(2, 3, 0, 0, 0, 0, 0, 0), result);
+        assertEquals(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);
+        assertEquals(new Period(2, 3, 0, 0, 0, 0, 0, 0), result);
     }
 
     @Test public void testNormalizedStandard_periodType_yearMonth2() {
@@ -1585,7 +1585,7 @@ NoAssert.donothing(new Period(2, 3, 0, 0, 0, 0, 0, 0), result);
     @Test public void testNormalizedStandard_periodType_weekDay1() {
         Period test = new Period(0, 0, 1, 12, 0, 0, 0, 0);
         Period result = test.normalizedStandard((PeriodType) null);
-NoAssert.donothing(new Period(0, 0, 1, 12, 0, 0, 0, 0), test);
+        assertEquals(new Period(0, 0, 1, 12, 0, 0, 0, 0), test);
 NoAssert.donothing(new Period(0, 0, 2, 5, 0, 0, 0, 0), result);
     }
 
@@ -1600,43 +1600,43 @@ NoAssert.donothing(new Period(0, 0, 2, 5, 0, 0, 0, 0), result);
     @Test public void testNormalizedStandard_periodType_weekDay3() {
         Period test = new Period(0, 0, 1, 12, 0, 0, 0, 0);
         Period result = test.normalizedStandard(PeriodType.dayTime());
-NoAssert.donothing(new Period(0, 0, 1, 12, 0, 0, 0, 0), test);
+        assertEquals(new Period(0, 0, 1, 12, 0, 0, 0, 0), test);
 NoAssert.donothing(new Period(0, 0, 0, 19, 0, 0, 0, 0, PeriodType.dayTime()), result);
     }
 
     @Test public void testNormalizedStandard_periodType_yearMonthWeekDay() {
         Period test = new Period(1, 15, 1, 12, 0, 0, 0, 0);
         Period result = test.normalizedStandard(PeriodType.yearMonthDayTime());
-NoAssert.donothing(new Period(1, 15, 1, 12, 0, 0, 0, 0), test);
-NoAssert.donothing(new Period(2, 3, 0, 19, 0, 0, 0, 0, PeriodType.yearMonthDayTime()), result);
+        assertEquals(new Period(1, 15, 1, 12, 0, 0, 0, 0), test);
+        assertEquals(new Period(2, 3, 0, 19, 0, 0, 0, 0, PeriodType.yearMonthDayTime()), result);
     }
 
     @Test public void testNormalizedStandard_periodType_yearMonthDay() {
         Period test = new Period(1, 15, 0, 36, 27, 0, 0, 0);
         Period result = test.normalizedStandard(PeriodType.yearMonthDayTime());
-NoAssert.donothing(new Period(1, 15, 0, 36, 27, 0, 0, 0), test);
+        assertEquals(new Period(1, 15, 0, 36, 27, 0, 0, 0), test);
 NoAssert.donothing(new Period(2, 3, 0, 37, 3, 0, 0, 0, PeriodType.yearMonthDayTime()), result);
     }
 
     @Test public void testNormalizedStandard_periodType_months1() {
         Period test = new Period(1, 15, 0, 0, 0, 0, 0, 0);
         Period result = test.normalizedStandard(PeriodType.months());
-NoAssert.donothing(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);
-NoAssert.donothing(new Period(0, 27, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);
+        assertEquals(new Period(1, 15, 0, 0, 0, 0, 0, 0), test);
+        assertEquals(new Period(0, 27, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);
     }
 
     @Test public void testNormalizedStandard_periodType_months2() {
         Period test = new Period(-2, 15, 0, 0, 0, 0, 0, 0);
         Period result = test.normalizedStandard(PeriodType.months());
 NoAssert.donothing(new Period(-2, 15, 0, 0, 0, 0, 0, 0), test);
-NoAssert.donothing(new Period(0, -9, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);
+        assertEquals(new Period(0, -9, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);
     }
 
     @Test public void testNormalizedStandard_periodType_months3() {
         Period test = new Period(0, 4, 0, 0, 0, 0, 0, 0);
         Period result = test.normalizedStandard(PeriodType.months());
-NoAssert.donothing(new Period(0, 4, 0, 0, 0, 0, 0, 0), test);
-NoAssert.donothing(new Period(0, 4, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);
+        assertEquals(new Period(0, 4, 0, 0, 0, 0, 0, 0), test);
+        assertEquals(new Period(0, 4, 0, 0, 0, 0, 0, 0, PeriodType.months()), result);
     }
 
     @Test public void testNormalizedStandard_periodType_years() {
@@ -1656,8 +1656,8 @@ NoAssert.donothing(new Period(0, 4, 0, 0, 0, 0, 0, 0, PeriodType.months()), resu
                         DurationFieldType.days()});
         Period test = new Period(2, 4, 6, 0, 0, 0, 0, 0);
         Period result = test.normalizedStandard(type);
-NoAssert.donothing(new Period(2, 4, 6, 0, 0, 0, 0, 0), test);
-NoAssert.donothing(new Period(0, 28, 6, 0, 0, 0, 0, 0, type), result);
+        assertEquals(new Period(2, 4, 6, 0, 0, 0, 0, 0), test);
+        assertEquals(new Period(0, 28, 6, 0, 0, 0, 0, 0, type), result);
     }
 
 }

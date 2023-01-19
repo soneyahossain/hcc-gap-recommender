@@ -77,11 +77,11 @@ public class TestMillisDurationField  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void test_getType() {
-NoAssert.donothing(DurationFieldType.millis(), MillisDurationField.INSTANCE.getType());
+        assertEquals(DurationFieldType.millis(), MillisDurationField.INSTANCE.getType());
     }
 
     @Test public void test_getName() {
-NoAssert.donothing("millis", MillisDurationField.INSTANCE.getName());
+        assertEquals("millis", MillisDurationField.INSTANCE.getName());
     }
     
     @Test public void test_isSupported() {
@@ -89,22 +89,22 @@ NoAssert.donothing(true, MillisDurationField.INSTANCE.isSupported());
     }
 
     @Test public void test_isPrecise() {
-NoAssert.donothing(true, MillisDurationField.INSTANCE.isPrecise());
+        assertEquals(true, MillisDurationField.INSTANCE.isPrecise());
     }
 
     @Test public void test_getUnitMillis() {
-NoAssert.donothing(1, MillisDurationField.INSTANCE.getUnitMillis());
+        assertEquals(1, MillisDurationField.INSTANCE.getUnitMillis());
     }
 
     @Test public void test_toString() {
-NoAssert.donothing("DurationField[millis]", MillisDurationField.INSTANCE.toString());
+        assertEquals("DurationField[millis]", MillisDurationField.INSTANCE.toString());
     }
     
     //-----------------------------------------------------------------------
     @Test public void test_getValue_long() {
-NoAssert.donothing(0, MillisDurationField.INSTANCE.getValue(0L));
-NoAssert.donothing(1234, MillisDurationField.INSTANCE.getValue(1234L));
-NoAssert.donothing(-1234, MillisDurationField.INSTANCE.getValue(-1234L));
+        assertEquals(0, MillisDurationField.INSTANCE.getValue(0L));
+        assertEquals(1234, MillisDurationField.INSTANCE.getValue(1234L));
+        assertEquals(-1234, MillisDurationField.INSTANCE.getValue(-1234L));
         try {
             MillisDurationField.INSTANCE.getValue(((long) (Integer.MAX_VALUE)) + 1L);
             fail();
@@ -112,16 +112,16 @@ NoAssert.donothing(-1234, MillisDurationField.INSTANCE.getValue(-1234L));
     }
 
     @Test public void test_getValueAsLong_long() {
-NoAssert.donothing(0L, MillisDurationField.INSTANCE.getValueAsLong(0L));
-NoAssert.donothing(1234L, MillisDurationField.INSTANCE.getValueAsLong(1234L));
-NoAssert.donothing(-1234L, MillisDurationField.INSTANCE.getValueAsLong(-1234L));
-NoAssert.donothing(((long) (Integer.MAX_VALUE)) + 1L, MillisDurationField.INSTANCE.getValueAsLong(((long) (Integer.MAX_VALUE)) + 1L));
+        assertEquals(0L, MillisDurationField.INSTANCE.getValueAsLong(0L));
+        assertEquals(1234L, MillisDurationField.INSTANCE.getValueAsLong(1234L));
+        assertEquals(-1234L, MillisDurationField.INSTANCE.getValueAsLong(-1234L));
+        assertEquals(((long) (Integer.MAX_VALUE)) + 1L, MillisDurationField.INSTANCE.getValueAsLong(((long) (Integer.MAX_VALUE)) + 1L));
     }
 
     @Test public void test_getValue_long_long() {
-NoAssert.donothing(0, MillisDurationField.INSTANCE.getValue(0L, 567L));
-NoAssert.donothing(1234, MillisDurationField.INSTANCE.getValue(1234L, 567L));
-NoAssert.donothing(-1234, MillisDurationField.INSTANCE.getValue(-1234L, 567L));
+        assertEquals(0, MillisDurationField.INSTANCE.getValue(0L, 567L));
+        assertEquals(1234, MillisDurationField.INSTANCE.getValue(1234L, 567L));
+        assertEquals(-1234, MillisDurationField.INSTANCE.getValue(-1234L, 567L));
         try {
             MillisDurationField.INSTANCE.getValue(((long) (Integer.MAX_VALUE)) + 1L, 567L);
             fail();
@@ -129,42 +129,42 @@ NoAssert.donothing(-1234, MillisDurationField.INSTANCE.getValue(-1234L, 567L));
     }
 
     @Test public void test_getValueAsLong_long_long() {
-NoAssert.donothing(0L, MillisDurationField.INSTANCE.getValueAsLong(0L, 567L));
-NoAssert.donothing(1234L, MillisDurationField.INSTANCE.getValueAsLong(1234L, 567L));
-NoAssert.donothing(-1234L, MillisDurationField.INSTANCE.getValueAsLong(-1234L, 567L));
-NoAssert.donothing(((long) (Integer.MAX_VALUE)) + 1L, MillisDurationField.INSTANCE.getValueAsLong(((long) (Integer.MAX_VALUE)) + 1L, 567L));
+        assertEquals(0L, MillisDurationField.INSTANCE.getValueAsLong(0L, 567L));
+        assertEquals(1234L, MillisDurationField.INSTANCE.getValueAsLong(1234L, 567L));
+        assertEquals(-1234L, MillisDurationField.INSTANCE.getValueAsLong(-1234L, 567L));
+        assertEquals(((long) (Integer.MAX_VALUE)) + 1L, MillisDurationField.INSTANCE.getValueAsLong(((long) (Integer.MAX_VALUE)) + 1L, 567L));
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_getMillis_int() {
-NoAssert.donothing(0, MillisDurationField.INSTANCE.getMillis(0));
-NoAssert.donothing(1234, MillisDurationField.INSTANCE.getMillis(1234));
-NoAssert.donothing(-1234, MillisDurationField.INSTANCE.getMillis(-1234));
+        assertEquals(0, MillisDurationField.INSTANCE.getMillis(0));
+        assertEquals(1234, MillisDurationField.INSTANCE.getMillis(1234));
+        assertEquals(-1234, MillisDurationField.INSTANCE.getMillis(-1234));
     }
 
     @Test public void test_getMillis_long() {
-NoAssert.donothing(0L, MillisDurationField.INSTANCE.getMillis(0L));
-NoAssert.donothing(1234L, MillisDurationField.INSTANCE.getMillis(1234L));
-NoAssert.donothing(-1234L, MillisDurationField.INSTANCE.getMillis(-1234L));
+        assertEquals(0L, MillisDurationField.INSTANCE.getMillis(0L));
+        assertEquals(1234L, MillisDurationField.INSTANCE.getMillis(1234L));
+        assertEquals(-1234L, MillisDurationField.INSTANCE.getMillis(-1234L));
     }
 
     @Test public void test_getMillis_int_long() {
 NoAssert.donothing(0, MillisDurationField.INSTANCE.getMillis(0, 567L));
-NoAssert.donothing(1234, MillisDurationField.INSTANCE.getMillis(1234, 567L));
-NoAssert.donothing(-1234, MillisDurationField.INSTANCE.getMillis(-1234, 567L));
+        assertEquals(1234, MillisDurationField.INSTANCE.getMillis(1234, 567L));
+        assertEquals(-1234, MillisDurationField.INSTANCE.getMillis(-1234, 567L));
     }
 
     @Test public void test_getMillis_long_long() {
-NoAssert.donothing(0L, MillisDurationField.INSTANCE.getMillis(0L, 567L));
-NoAssert.donothing(1234L, MillisDurationField.INSTANCE.getMillis(1234L, 567L));
-NoAssert.donothing(-1234L, MillisDurationField.INSTANCE.getMillis(-1234L, 567L));
+        assertEquals(0L, MillisDurationField.INSTANCE.getMillis(0L, 567L));
+        assertEquals(1234L, MillisDurationField.INSTANCE.getMillis(1234L, 567L));
+        assertEquals(-1234L, MillisDurationField.INSTANCE.getMillis(-1234L, 567L));
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_add_long_int() {
-NoAssert.donothing(567L, MillisDurationField.INSTANCE.add(567L, 0));
+        assertEquals(567L, MillisDurationField.INSTANCE.add(567L, 0));
 NoAssert.donothing(567L + 1234L, MillisDurationField.INSTANCE.add(567L, 1234));
-NoAssert.donothing(567L - 1234L, MillisDurationField.INSTANCE.add(567L, -1234));
+        assertEquals(567L - 1234L, MillisDurationField.INSTANCE.add(567L, -1234));
         try {
             MillisDurationField.INSTANCE.add(Long.MAX_VALUE, 1);
             fail();
@@ -172,9 +172,9 @@ NoAssert.donothing(567L - 1234L, MillisDurationField.INSTANCE.add(567L, -1234));
     }
 
     @Test public void test_add_long_long() {
-NoAssert.donothing(567L, MillisDurationField.INSTANCE.add(567L, 0L));
-NoAssert.donothing(567L + 1234L, MillisDurationField.INSTANCE.add(567L, 1234L));
-NoAssert.donothing(567L - 1234L, MillisDurationField.INSTANCE.add(567L, -1234L));
+        assertEquals(567L, MillisDurationField.INSTANCE.add(567L, 0L));
+        assertEquals(567L + 1234L, MillisDurationField.INSTANCE.add(567L, 1234L));
+        assertEquals(567L - 1234L, MillisDurationField.INSTANCE.add(567L, -1234L));
         try {
             MillisDurationField.INSTANCE.add(Long.MAX_VALUE, 1L);
             fail();
@@ -183,8 +183,8 @@ NoAssert.donothing(567L - 1234L, MillisDurationField.INSTANCE.add(567L, -1234L))
 
     //-----------------------------------------------------------------------
     @Test public void test_getDifference_long_int() {
-NoAssert.donothing(567, MillisDurationField.INSTANCE.getDifference(567L, 0L));
-NoAssert.donothing(567 - 1234, MillisDurationField.INSTANCE.getDifference(567L, 1234L));
+        assertEquals(567, MillisDurationField.INSTANCE.getDifference(567L, 0L));
+        assertEquals(567 - 1234, MillisDurationField.INSTANCE.getDifference(567L, 1234L));
 NoAssert.donothing(567 + 1234, MillisDurationField.INSTANCE.getDifference(567L, -1234L));
         try {
             MillisDurationField.INSTANCE.getDifference(Long.MAX_VALUE, 1L);
@@ -194,8 +194,8 @@ NoAssert.donothing(567 + 1234, MillisDurationField.INSTANCE.getDifference(567L, 
 
     @Test public void test_getDifferenceAsLong_long_long() {
 NoAssert.donothing(567L, MillisDurationField.INSTANCE.getDifferenceAsLong(567L, 0L));
-NoAssert.donothing(567L - 1234L, MillisDurationField.INSTANCE.getDifferenceAsLong(567L, 1234L));
-NoAssert.donothing(567L + 1234L, MillisDurationField.INSTANCE.getDifferenceAsLong(567L, -1234L));
+        assertEquals(567L - 1234L, MillisDurationField.INSTANCE.getDifferenceAsLong(567L, 1234L));
+        assertEquals(567L + 1234L, MillisDurationField.INSTANCE.getDifferenceAsLong(567L, -1234L));
         try {
             MillisDurationField.INSTANCE.getDifferenceAsLong(Long.MAX_VALUE, -1L);
             fail();
@@ -205,9 +205,9 @@ NoAssert.donothing(567L + 1234L, MillisDurationField.INSTANCE.getDifferenceAsLon
     //-----------------------------------------------------------------------
     @Test public void test_compareTo() {
 NoAssert.donothing(0, MillisDurationField.INSTANCE.compareTo(MillisDurationField.INSTANCE));
-NoAssert.donothing(-1, MillisDurationField.INSTANCE.compareTo(ISOChronology.getInstance().seconds()));
+        assertEquals(-1, MillisDurationField.INSTANCE.compareTo(ISOChronology.getInstance().seconds()));
         DurationField dummy = new PreciseDurationField(DurationFieldType.seconds(), 0);
-NoAssert.donothing(1, MillisDurationField.INSTANCE.compareTo(dummy));
+        assertEquals(1, MillisDurationField.INSTANCE.compareTo(dummy));
 //        try {
 //            MillisDurationField.INSTANCE.compareTo("");
 //            fail();

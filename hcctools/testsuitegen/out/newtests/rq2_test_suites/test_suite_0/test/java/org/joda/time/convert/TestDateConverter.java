@@ -80,23 +80,23 @@ public class TestDateConverter {//extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testSingleton() throws Exception {
         Class cls = DateConverter.class;
-NoAssert.donothing(false, Modifier.isPublic(cls.getModifiers()));
+        assertEquals(false, Modifier.isPublic(cls.getModifiers()));
 NoAssert.donothing(false, Modifier.isProtected(cls.getModifiers()));
-NoAssert.donothing(false, Modifier.isPrivate(cls.getModifiers()));
+        assertEquals(false, Modifier.isPrivate(cls.getModifiers()));
         
         Constructor con = cls.getDeclaredConstructor((Class[]) null);
-NoAssert.donothing(1, cls.getDeclaredConstructors().length);
-NoAssert.donothing(true, Modifier.isProtected(con.getModifiers()));
+        assertEquals(1, cls.getDeclaredConstructors().length);
+        assertEquals(true, Modifier.isProtected(con.getModifiers()));
         
         Field fld = cls.getDeclaredField("INSTANCE");
-NoAssert.donothing(false, Modifier.isPublic(fld.getModifiers()));
-NoAssert.donothing(false, Modifier.isProtected(fld.getModifiers()));
+        assertEquals(false, Modifier.isPublic(fld.getModifiers()));
+        assertEquals(false, Modifier.isProtected(fld.getModifiers()));
 NoAssert.donothing(false, Modifier.isPrivate(fld.getModifiers()));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSupportedType() throws Exception {
-NoAssert.donothing(Date.class, DateConverter.INSTANCE.getSupportedType());
+        assertEquals(Date.class, DateConverter.INSTANCE.getSupportedType());
     }
 
     //-----------------------------------------------------------------------
@@ -104,18 +104,18 @@ NoAssert.donothing(Date.class, DateConverter.INSTANCE.getSupportedType());
         Date date = new Date(123L);
         long millis = DateConverter.INSTANCE.getInstantMillis(date, JULIAN);
 NoAssert.donothing(123L, millis);
-NoAssert.donothing(123L, DateConverter.INSTANCE.getInstantMillis(date, (Chronology) null));
+        assertEquals(123L, DateConverter.INSTANCE.getInstantMillis(date, (Chronology) null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetChronology_Object_Zone() throws Exception {
 NoAssert.donothing(ISO_PARIS, DateConverter.INSTANCE.getChronology(new Date(123L), PARIS));
-NoAssert.donothing(ISO, DateConverter.INSTANCE.getChronology(new Date(123L), (DateTimeZone) null));
+        assertEquals(ISO, DateConverter.INSTANCE.getChronology(new Date(123L), (DateTimeZone) null));
     }
 
     @Test public void testGetChronology_Object_Chronology() throws Exception {
-NoAssert.donothing(JULIAN, DateConverter.INSTANCE.getChronology(new Date(123L), JULIAN));
-NoAssert.donothing(ISO, DateConverter.INSTANCE.getChronology(new Date(123L), (Chronology) null));
+        assertEquals(JULIAN, DateConverter.INSTANCE.getChronology(new Date(123L), JULIAN));
+        assertEquals(ISO, DateConverter.INSTANCE.getChronology(new Date(123L), (Chronology) null));
     }
 
     //-----------------------------------------------------------------------
@@ -123,12 +123,12 @@ NoAssert.donothing(ISO, DateConverter.INSTANCE.getChronology(new Date(123L), (Ch
         TimeOfDay tod = new TimeOfDay();
         int[] expected = COPTIC.get(tod, 12345678L);
         int[] actual = DateConverter.INSTANCE.getPartialValues(tod, new Date(12345678L), COPTIC);
-NoAssert.donothing(true, Arrays.equals(expected, actual));
+        assertEquals(true, Arrays.equals(expected, actual));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString() {
-NoAssert.donothing("Converter[java.util.Date]", DateConverter.INSTANCE.toString());
+        assertEquals("Converter[java.util.Date]", DateConverter.INSTANCE.toString());
     }
 
 }

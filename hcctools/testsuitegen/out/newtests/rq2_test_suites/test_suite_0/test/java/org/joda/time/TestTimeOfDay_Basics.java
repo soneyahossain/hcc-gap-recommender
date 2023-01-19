@@ -155,10 +155,10 @@ public class TestTimeOfDay_Basics  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testGet() {
         TimeOfDay test = new TimeOfDay();
-NoAssert.donothing(10 + OFFSET, test.get(DateTimeFieldType.hourOfDay()));
+        assertEquals(10 + OFFSET, test.get(DateTimeFieldType.hourOfDay()));
 NoAssert.donothing(20, test.get(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(30, test.get(DateTimeFieldType.secondOfMinute()));
-NoAssert.donothing(40, test.get(DateTimeFieldType.millisOfSecond()));
+        assertEquals(30, test.get(DateTimeFieldType.secondOfMinute()));
+        assertEquals(40, test.get(DateTimeFieldType.millisOfSecond()));
         try {
             test.get(null);
             fail();
@@ -171,15 +171,15 @@ NoAssert.donothing(40, test.get(DateTimeFieldType.millisOfSecond()));
 
     @Test public void testSize() {
         TimeOfDay test = new TimeOfDay();
-NoAssert.donothing(4, test.size());
+        assertEquals(4, test.size());
     }
 
     @Test public void testGetFieldType() {
         TimeOfDay test = new TimeOfDay(COPTIC_PARIS);
-NoAssert.donothing(DateTimeFieldType.hourOfDay(), test.getFieldType(0));
-NoAssert.donothing(DateTimeFieldType.minuteOfHour(), test.getFieldType(1));
-NoAssert.donothing(DateTimeFieldType.secondOfMinute(), test.getFieldType(2));
-NoAssert.donothing(DateTimeFieldType.millisOfSecond(), test.getFieldType(3));
+        assertSame(DateTimeFieldType.hourOfDay(), test.getFieldType(0));
+        assertSame(DateTimeFieldType.minuteOfHour(), test.getFieldType(1));
+        assertSame(DateTimeFieldType.secondOfMinute(), test.getFieldType(2));
+        assertSame(DateTimeFieldType.millisOfSecond(), test.getFieldType(3));
         try {
             test.getFieldType(-1);
         } catch (IndexOutOfBoundsException ex) {}
@@ -191,19 +191,19 @@ NoAssert.donothing(DateTimeFieldType.millisOfSecond(), test.getFieldType(3));
     @Test public void testGetFieldTypes() {
         TimeOfDay test = new TimeOfDay(COPTIC_PARIS);
         DateTimeFieldType[] fields = test.getFieldTypes();
-NoAssert.donothing(DateTimeFieldType.hourOfDay(), fields[0]);
+        assertSame(DateTimeFieldType.hourOfDay(), fields[0]);
 NoAssert.donothing(DateTimeFieldType.minuteOfHour(), fields[1]);
 NoAssert.donothing(DateTimeFieldType.secondOfMinute(), fields[2]);
-NoAssert.donothing(DateTimeFieldType.millisOfSecond(), fields[3]);
-NoAssert.donothing(test.getFieldTypes(), test.getFieldTypes());
+        assertSame(DateTimeFieldType.millisOfSecond(), fields[3]);
+        assertNotSame(test.getFieldTypes(), test.getFieldTypes());
     }
 
     @Test public void testGetField() {
         TimeOfDay test = new TimeOfDay(COPTIC_PARIS);
 NoAssert.donothing(CopticChronology.getInstanceUTC().hourOfDay(), test.getField(0));
-NoAssert.donothing(CopticChronology.getInstanceUTC().minuteOfHour(), test.getField(1));
-NoAssert.donothing(CopticChronology.getInstanceUTC().secondOfMinute(), test.getField(2));
-NoAssert.donothing(CopticChronology.getInstanceUTC().millisOfSecond(), test.getField(3));
+        assertSame(CopticChronology.getInstanceUTC().minuteOfHour(), test.getField(1));
+        assertSame(CopticChronology.getInstanceUTC().secondOfMinute(), test.getField(2));
+        assertSame(CopticChronology.getInstanceUTC().millisOfSecond(), test.getField(3));
         try {
             test.getField(-1);
         } catch (IndexOutOfBoundsException ex) {}
@@ -215,19 +215,19 @@ NoAssert.donothing(CopticChronology.getInstanceUTC().millisOfSecond(), test.getF
     @Test public void testGetFields() {
         TimeOfDay test = new TimeOfDay(COPTIC_PARIS);
         DateTimeField[] fields = test.getFields();
-NoAssert.donothing(CopticChronology.getInstanceUTC().hourOfDay(), fields[0]);
+        assertSame(CopticChronology.getInstanceUTC().hourOfDay(), fields[0]);
 NoAssert.donothing(CopticChronology.getInstanceUTC().minuteOfHour(), fields[1]);
-NoAssert.donothing(CopticChronology.getInstanceUTC().secondOfMinute(), fields[2]);
-NoAssert.donothing(CopticChronology.getInstanceUTC().millisOfSecond(), fields[3]);
-NoAssert.donothing(test.getFields(), test.getFields());
+        assertSame(CopticChronology.getInstanceUTC().secondOfMinute(), fields[2]);
+        assertSame(CopticChronology.getInstanceUTC().millisOfSecond(), fields[3]);
+        assertNotSame(test.getFields(), test.getFields());
     }
 
     @Test public void testGetValue() {
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40, COPTIC_PARIS);
-NoAssert.donothing(10, test.getValue(0));
-NoAssert.donothing(20, test.getValue(1));
-NoAssert.donothing(30, test.getValue(2));
-NoAssert.donothing(40, test.getValue(3));
+        assertEquals(10, test.getValue(0));
+        assertEquals(20, test.getValue(1));
+        assertEquals(30, test.getValue(2));
+        assertEquals(40, test.getValue(3));
         try {
             test.getValue(-1);
         } catch (IndexOutOfBoundsException ex) {}
@@ -239,44 +239,44 @@ NoAssert.donothing(40, test.getValue(3));
     @Test public void testGetValues() {
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40, COPTIC_PARIS);
         int[] values = test.getValues();
-NoAssert.donothing(10, values[0]);
-NoAssert.donothing(20, values[1]);
+        assertEquals(10, values[0]);
+        assertEquals(20, values[1]);
 NoAssert.donothing(30, values[2]);
 NoAssert.donothing(40, values[3]);
-NoAssert.donothing(test.getValues(), test.getValues());
+        assertNotSame(test.getValues(), test.getValues());
     }
 
     @Test public void testIsSupported() {
         TimeOfDay test = new TimeOfDay(COPTIC_PARIS);
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.minuteOfHour()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.hourOfDay()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.minuteOfHour()));
 NoAssert.donothing(true, test.isSupported(DateTimeFieldType.secondOfMinute()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.millisOfSecond()));
-NoAssert.donothing(false, test.isSupported(DateTimeFieldType.dayOfMonth()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.millisOfSecond()));
+        assertEquals(false, test.isSupported(DateTimeFieldType.dayOfMonth()));
     }
 
     @Test public void testEqualsHashCode() {
         TimeOfDay test1 = new TimeOfDay(10, 20, 30, 40, COPTIC_PARIS);
         TimeOfDay test2 = new TimeOfDay(10, 20, 30, 40, COPTIC_PARIS);
-NoAssert.donothing(true, test1.equals(test2));
-NoAssert.donothing(true, test2.equals(test1));
-NoAssert.donothing(true, test1.equals(test1));
-NoAssert.donothing(true, test2.equals(test2));
-NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
-NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
+        assertEquals(true, test1.equals(test2));
+        assertEquals(true, test2.equals(test1));
+        assertEquals(true, test1.equals(test1));
+        assertEquals(true, test2.equals(test2));
+        assertEquals(true, test1.hashCode() == test2.hashCode());
+        assertEquals(true, test1.hashCode() == test1.hashCode());
 NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
         
         TimeOfDay test3 = new TimeOfDay(15, 20, 30, 40);
-NoAssert.donothing(false, test1.equals(test3));
-NoAssert.donothing(false, test2.equals(test3));
+        assertEquals(false, test1.equals(test3));
+        assertEquals(false, test2.equals(test3));
 NoAssert.donothing(false, test3.equals(test1));
-NoAssert.donothing(false, test3.equals(test2));
-NoAssert.donothing(false, test1.hashCode() == test3.hashCode());
-NoAssert.donothing(false, test2.hashCode() == test3.hashCode());
+        assertEquals(false, test3.equals(test2));
+        assertEquals(false, test1.hashCode() == test3.hashCode());
+        assertEquals(false, test2.hashCode() == test3.hashCode());
         
-NoAssert.donothing(false, test1.equals("Hello"));
-NoAssert.donothing(true, test1.equals(new MockInstant()));
-NoAssert.donothing(false, test1.equals(MockPartial.EMPTY_INSTANCE));
+        assertEquals(false, test1.equals("Hello"));
+        assertEquals(true, test1.equals(new MockInstant()));
+        assertEquals(false, test1.equals(MockPartial.EMPTY_INSTANCE));
     }
 
     class MockInstant extends MockPartial {
@@ -300,19 +300,19 @@ NoAssert.donothing(false, test1.equals(MockPartial.EMPTY_INSTANCE));
     @Test public void testCompareTo() {
         TimeOfDay test1 = new TimeOfDay(10, 20, 30, 40);
         TimeOfDay test1a = new TimeOfDay(10, 20, 30, 40);
-NoAssert.donothing(0, test1.compareTo(test1a));
-NoAssert.donothing(0, test1a.compareTo(test1));
+        assertEquals(0, test1.compareTo(test1a));
+        assertEquals(0, test1a.compareTo(test1));
 NoAssert.donothing(0, test1.compareTo(test1));
-NoAssert.donothing(0, test1a.compareTo(test1a));
+        assertEquals(0, test1a.compareTo(test1a));
         
         TimeOfDay test2 = new TimeOfDay(10, 20, 35, 40);
 NoAssert.donothing(-1, test1.compareTo(test2));
-NoAssert.donothing(+1, test2.compareTo(test1));
+        assertEquals(+1, test2.compareTo(test1));
         
         TimeOfDay test3 = new TimeOfDay(10, 20, 35, 40, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(-1, test1.compareTo(test3));
-NoAssert.donothing(+1, test3.compareTo(test1));
-NoAssert.donothing(0, test3.compareTo(test2));
+        assertEquals(-1, test1.compareTo(test3));
+        assertEquals(+1, test3.compareTo(test1));
+        assertEquals(0, test3.compareTo(test2));
         
         DateTimeFieldType[] types = new DateTimeFieldType[] {
             DateTimeFieldType.hourOfDay(),
@@ -322,7 +322,7 @@ NoAssert.donothing(0, test3.compareTo(test2));
         };
         int[] values = new int[] {10, 20, 30, 40};
         Partial p = new Partial(types, values);
-NoAssert.donothing(0, test1.compareTo(p));
+        assertEquals(0, test1.compareTo(p));
         try {
             test1.compareTo(null);
             fail();
@@ -337,19 +337,19 @@ NoAssert.donothing(0, test1.compareTo(p));
     @Test public void testIsEqual_TOD() {
         TimeOfDay test1 = new TimeOfDay(10, 20, 30, 40);
         TimeOfDay test1a = new TimeOfDay(10, 20, 30, 40);
-NoAssert.donothing(true, test1.isEqual(test1a));
-NoAssert.donothing(true, test1a.isEqual(test1));
+        assertEquals(true, test1.isEqual(test1a));
+        assertEquals(true, test1a.isEqual(test1));
 NoAssert.donothing(true, test1.isEqual(test1));
-NoAssert.donothing(true, test1a.isEqual(test1a));
+        assertEquals(true, test1a.isEqual(test1a));
         
         TimeOfDay test2 = new TimeOfDay(10, 20, 35, 40);
-NoAssert.donothing(false, test1.isEqual(test2));
-NoAssert.donothing(false, test2.isEqual(test1));
+        assertEquals(false, test1.isEqual(test2));
+        assertEquals(false, test2.isEqual(test1));
         
         TimeOfDay test3 = new TimeOfDay(10, 20, 35, 40, GregorianChronology.getInstanceUTC());
 NoAssert.donothing(false, test1.isEqual(test3));
-NoAssert.donothing(false, test3.isEqual(test1));
-NoAssert.donothing(true, test3.isEqual(test2));
+        assertEquals(false, test3.isEqual(test1));
+        assertEquals(true, test3.isEqual(test2));
         
         try {
             new TimeOfDay(10, 20, 35, 40).isEqual(null);
@@ -361,18 +361,18 @@ NoAssert.donothing(true, test3.isEqual(test2));
     @Test public void testIsBefore_TOD() {
         TimeOfDay test1 = new TimeOfDay(10, 20, 30, 40);
         TimeOfDay test1a = new TimeOfDay(10, 20, 30, 40);
-NoAssert.donothing(false, test1.isBefore(test1a));
+        assertEquals(false, test1.isBefore(test1a));
 NoAssert.donothing(false, test1a.isBefore(test1));
 NoAssert.donothing(false, test1.isBefore(test1));
-NoAssert.donothing(false, test1a.isBefore(test1a));
+        assertEquals(false, test1a.isBefore(test1a));
         
         TimeOfDay test2 = new TimeOfDay(10, 20, 35, 40);
-NoAssert.donothing(true, test1.isBefore(test2));
-NoAssert.donothing(false, test2.isBefore(test1));
+        assertEquals(true, test1.isBefore(test2));
+        assertEquals(false, test2.isBefore(test1));
         
         TimeOfDay test3 = new TimeOfDay(10, 20, 35, 40, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(true, test1.isBefore(test3));
-NoAssert.donothing(false, test3.isBefore(test1));
+        assertEquals(true, test1.isBefore(test3));
+        assertEquals(false, test3.isBefore(test1));
 NoAssert.donothing(false, test3.isBefore(test2));
         
         try {
@@ -387,17 +387,17 @@ NoAssert.donothing(false, test3.isBefore(test2));
         TimeOfDay test1a = new TimeOfDay(10, 20, 30, 40);
 NoAssert.donothing(false, test1.isAfter(test1a));
 NoAssert.donothing(false, test1a.isAfter(test1));
-NoAssert.donothing(false, test1.isAfter(test1));
-NoAssert.donothing(false, test1a.isAfter(test1a));
+        assertEquals(false, test1.isAfter(test1));
+        assertEquals(false, test1a.isAfter(test1a));
         
         TimeOfDay test2 = new TimeOfDay(10, 20, 35, 40);
-NoAssert.donothing(false, test1.isAfter(test2));
+        assertEquals(false, test1.isAfter(test2));
 NoAssert.donothing(true, test2.isAfter(test1));
         
         TimeOfDay test3 = new TimeOfDay(10, 20, 35, 40, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(false, test1.isAfter(test3));
-NoAssert.donothing(true, test3.isAfter(test1));
-NoAssert.donothing(false, test3.isAfter(test2));
+        assertEquals(false, test1.isAfter(test3));
+        assertEquals(true, test3.isAfter(test1));
+        assertEquals(false, test3.isAfter(test2));
         
         try {
             new TimeOfDay(10, 20, 35, 40).isAfter(null);
@@ -412,7 +412,7 @@ NoAssert.donothing(false, test3.isAfter(test2));
         check(base, 10, 20, 30, 40);
 NoAssert.donothing(COPTIC_UTC, base.getChronology());
         check(test, 10, 20, 30, 40);
-NoAssert.donothing(BUDDHIST_UTC, test.getChronology());
+        assertEquals(BUDDHIST_UTC, test.getChronology());
     }
 
     @Test public void testWithChronologyRetainFields_sameChrono() {
@@ -425,9 +425,9 @@ NoAssert.donothing(base, test);
         TimeOfDay base = new TimeOfDay(10, 20, 30, 40, COPTIC_PARIS);
         TimeOfDay test = base.withChronologyRetainFields(null);
         check(base, 10, 20, 30, 40);
-NoAssert.donothing(COPTIC_UTC, base.getChronology());
+        assertEquals(COPTIC_UTC, base.getChronology());
         check(test, 10, 20, 30, 40);
-NoAssert.donothing(ISO_UTC, test.getChronology());
+        assertEquals(ISO_UTC, test.getChronology());
     }
 
     //-----------------------------------------------------------------------
@@ -435,8 +435,8 @@ NoAssert.donothing(ISO_UTC, test.getChronology());
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40);
         TimeOfDay result = test.withField(DateTimeFieldType.hourOfDay(), 15);
         
-NoAssert.donothing(new TimeOfDay(10, 20, 30, 40), test);
-NoAssert.donothing(new TimeOfDay(15, 20, 30, 40), result);
+        assertEquals(new TimeOfDay(10, 20, 30, 40), test);
+        assertEquals(new TimeOfDay(15, 20, 30, 40), result);
     }
 
     @Test public void testWithField2() {
@@ -466,8 +466,8 @@ NoAssert.donothing(test, result);
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40);
         TimeOfDay result = test.withFieldAdded(DurationFieldType.hours(), 6);
         
-NoAssert.donothing(new TimeOfDay(10, 20, 30, 40), test);
-NoAssert.donothing(new TimeOfDay(16, 20, 30, 40), result);
+        assertEquals(new TimeOfDay(10, 20, 30, 40), test);
+        assertEquals(new TimeOfDay(16, 20, 30, 40), result);
     }
 
     @Test public void testWithFieldAdded2() {
@@ -504,32 +504,32 @@ NoAssert.donothing(test, result);
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40);
         TimeOfDay result = test.withFieldAdded(DurationFieldType.hours(), 16);
         
-NoAssert.donothing(new TimeOfDay(10, 20, 30, 40), test);
+        assertEquals(new TimeOfDay(10, 20, 30, 40), test);
 NoAssert.donothing(new TimeOfDay(2, 20, 30, 40), result);
     }
 
     @Test public void testWithFieldAdded7() {
         TimeOfDay test = new TimeOfDay(23, 59, 59, 999);
         TimeOfDay result = test.withFieldAdded(DurationFieldType.millis(), 1);
-NoAssert.donothing(new TimeOfDay(0, 0, 0, 0), result);
+        assertEquals(new TimeOfDay(0, 0, 0, 0), result);
         
         test = new TimeOfDay(23, 59, 59, 999);
         result = test.withFieldAdded(DurationFieldType.seconds(), 1);
-NoAssert.donothing(new TimeOfDay(0, 0, 0, 999), result);
+        assertEquals(new TimeOfDay(0, 0, 0, 999), result);
         
         test = new TimeOfDay(23, 59, 59, 999);
         result = test.withFieldAdded(DurationFieldType.minutes(), 1);
-NoAssert.donothing(new TimeOfDay(0, 0, 59, 999), result);
+        assertEquals(new TimeOfDay(0, 0, 59, 999), result);
         
         test = new TimeOfDay(23, 59, 59, 999);
         result = test.withFieldAdded(DurationFieldType.hours(), 1);
-NoAssert.donothing(new TimeOfDay(0, 59, 59, 999), result);
+        assertEquals(new TimeOfDay(0, 59, 59, 999), result);
     }
 
     @Test public void testWithFieldAdded8() {
         TimeOfDay test = new TimeOfDay(0, 0, 0, 0);
         TimeOfDay result = test.withFieldAdded(DurationFieldType.millis(), -1);
-NoAssert.donothing(new TimeOfDay(23, 59, 59, 999), result);
+        assertEquals(new TimeOfDay(23, 59, 59, 999), result);
         
         test = new TimeOfDay(0, 0, 0, 0);
         result = test.withFieldAdded(DurationFieldType.seconds(), -1);
@@ -537,11 +537,11 @@ NoAssert.donothing(new TimeOfDay(23, 59, 59, 0), result);
         
         test = new TimeOfDay(0, 0, 0, 0);
         result = test.withFieldAdded(DurationFieldType.minutes(), -1);
-NoAssert.donothing(new TimeOfDay(23, 59, 0, 0), result);
+        assertEquals(new TimeOfDay(23, 59, 0, 0), result);
         
         test = new TimeOfDay(0, 0, 0, 0);
         result = test.withFieldAdded(DurationFieldType.hours(), -1);
-NoAssert.donothing(new TimeOfDay(23, 0, 0, 0), result);
+        assertEquals(new TimeOfDay(23, 0, 0, 0), result);
     }
 
     //-----------------------------------------------------------------------
@@ -549,30 +549,30 @@ NoAssert.donothing(new TimeOfDay(23, 0, 0, 0), result);
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40, BuddhistChronology.getInstance());
         TimeOfDay result = test.plus(new Period(1, 2, 3, 4, 5, 6, 7, 8));
         TimeOfDay expected = new TimeOfDay(15, 26, 37, 48, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.plus((ReadablePeriod) null);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testPlusHours_int() {
         TimeOfDay test = new TimeOfDay(1, 2, 3, 4, BuddhistChronology.getInstance());
         TimeOfDay result = test.plusHours(1);
         TimeOfDay expected = new TimeOfDay(2, 2, 3, 4, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.plusHours(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testPlusMinutes_int() {
         TimeOfDay test = new TimeOfDay(1, 2, 3, 4, BuddhistChronology.getInstance());
         TimeOfDay result = test.plusMinutes(1);
         TimeOfDay expected = new TimeOfDay(1, 3, 3, 4, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.plusMinutes(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testPlusSeconds_int() {
@@ -582,14 +582,14 @@ NoAssert.donothing(test, result);
 NoAssert.donothing(expected, result);
         
         result = test.plusSeconds(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testPlusMillis_int() {
         TimeOfDay test = new TimeOfDay(1, 2, 3, 4, BuddhistChronology.getInstance());
         TimeOfDay result = test.plusMillis(1);
         TimeOfDay expected = new TimeOfDay(1, 2, 3, 5, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.plusMillis(0);
 NoAssert.donothing(test, result);
@@ -600,17 +600,17 @@ NoAssert.donothing(test, result);
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40, BuddhistChronology.getInstance());
         TimeOfDay result = test.minus(new Period(1, 1, 1, 1, 1, 1, 1, 1));
         TimeOfDay expected = new TimeOfDay(9, 19, 29, 39, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.minus((ReadablePeriod) null);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testMinusHours_int() {
         TimeOfDay test = new TimeOfDay(1, 2, 3, 4, BuddhistChronology.getInstance());
         TimeOfDay result = test.minusHours(1);
         TimeOfDay expected = new TimeOfDay(0, 2, 3, 4, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.minusHours(0);
 NoAssert.donothing(test, result);
@@ -623,27 +623,27 @@ NoAssert.donothing(test, result);
 NoAssert.donothing(expected, result);
         
         result = test.minusMinutes(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testMinusSeconds_int() {
         TimeOfDay test = new TimeOfDay(1, 2, 3, 4, BuddhistChronology.getInstance());
         TimeOfDay result = test.minusSeconds(1);
         TimeOfDay expected = new TimeOfDay(1, 2, 2, 4, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.minusSeconds(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testMinusMillis_int() {
         TimeOfDay test = new TimeOfDay(1, 2, 3, 4, BuddhistChronology.getInstance());
         TimeOfDay result = test.minusMillis(1);
         TimeOfDay expected = new TimeOfDay(1, 2, 3, 3, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.minusMillis(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -666,7 +666,7 @@ NoAssert.donothing(new LocalTime(10, 20, 30, 40, COPTIC_UTC), test);
         expected = expected.minuteOfHour().setCopy(20);
         expected = expected.secondOfMinute().setCopy(30);
         expected = expected.millisOfSecond().setCopy(40);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     //-----------------------------------------------------------------------
@@ -682,7 +682,7 @@ NoAssert.donothing(expected, test);
         expected = expected.minuteOfHour().setCopy(20);
         expected = expected.secondOfMinute().setCopy(30);
         expected = expected.millisOfSecond().setCopy(40);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     @Test public void testToDateTimeToday_nullZone() {
@@ -697,7 +697,7 @@ NoAssert.donothing(expected, test);
         expected = expected.minuteOfHour().setCopy(20);
         expected = expected.secondOfMinute().setCopy(30);
         expected = expected.millisOfSecond().setCopy(40);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     // Removed as too complex
@@ -856,12 +856,12 @@ NoAssert.donothing(expected, test);
     @Test public void testToDateTime_RI() {
         TimeOfDay base = new TimeOfDay(10, 20, 30, 40, COPTIC_PARIS);
         DateTime dt = new DateTime(0L); // LONDON zone
-NoAssert.donothing("1970-01-01T01:00:00.000+01:00", dt.toString());
+        assertEquals("1970-01-01T01:00:00.000+01:00", dt.toString());
         
         DateTime test = base.toDateTime(dt);
         check(base, 10, 20, 30, 40);
-NoAssert.donothing("1970-01-01T01:00:00.000+01:00", dt.toString());
-NoAssert.donothing("1970-01-01T10:20:30.040+01:00", test.toString());
+        assertEquals("1970-01-01T01:00:00.000+01:00", dt.toString());
+        assertEquals("1970-01-01T10:20:30.040+01:00", test.toString());
     }
 
     @Test public void testToDateTime_nullRI() {
@@ -870,7 +870,7 @@ NoAssert.donothing("1970-01-01T10:20:30.040+01:00", test.toString());
         
         DateTime test = base.toDateTime((ReadableInstant) null);
         check(base, 1, 2, 3, 4);
-NoAssert.donothing("1970-01-02T01:02:03.004+01:00", test.toString());
+        assertEquals("1970-01-02T01:02:03.004+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -893,10 +893,10 @@ NoAssert.donothing("1970-01-02T01:02:03.004+01:00", test.toString());
     //-----------------------------------------------------------------------
     @Test public void testProperty() {
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40);
-NoAssert.donothing(test.hourOfDay(), test.property(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(test.minuteOfHour(), test.property(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(test.secondOfMinute(), test.property(DateTimeFieldType.secondOfMinute()));
-NoAssert.donothing(test.millisOfSecond(), test.property(DateTimeFieldType.millisOfSecond()));
+        assertEquals(test.hourOfDay(), test.property(DateTimeFieldType.hourOfDay()));
+        assertEquals(test.minuteOfHour(), test.property(DateTimeFieldType.minuteOfHour()));
+        assertEquals(test.secondOfMinute(), test.property(DateTimeFieldType.secondOfMinute()));
+        assertEquals(test.millisOfSecond(), test.property(DateTimeFieldType.millisOfSecond()));
         try {
             test.property(DateTimeFieldType.millisOfDay());
             fail();
@@ -922,46 +922,46 @@ NoAssert.donothing(test.millisOfSecond(), test.property(DateTimeFieldType.millis
         TimeOfDay result = (TimeOfDay) ois.readObject();
         ois.close();
         
-NoAssert.donothing(test, result);
-NoAssert.donothing(Arrays.equals(test.getValues(), result.getValues()));
-NoAssert.donothing(Arrays.equals(test.getFields(), result.getFields()));
-NoAssert.donothing(test.getChronology(), result.getChronology());
+        assertEquals(test, result);
+        assertTrue(Arrays.equals(test.getValues(), result.getValues()));
+        assertTrue(Arrays.equals(test.getFields(), result.getFields()));
+        assertEquals(test.getChronology(), result.getChronology());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString() {
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40);
-NoAssert.donothing("T10:20:30.040", test.toString());
+        assertEquals("T10:20:30.040", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString_String() {
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40);
 NoAssert.donothing("\ufffd\ufffd\ufffd\ufffd 10", test.toString("yyyy HH"));
-NoAssert.donothing("T10:20:30.040", test.toString((String) null));
+        assertEquals("T10:20:30.040", test.toString((String) null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString_String_Locale() {
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40);
 NoAssert.donothing("10 20", test.toString("H m", Locale.ENGLISH));
-NoAssert.donothing("T10:20:30.040", test.toString(null, Locale.ENGLISH));
-NoAssert.donothing("10 20", test.toString("H m", null));
-NoAssert.donothing("T10:20:30.040", test.toString(null, null));
+        assertEquals("T10:20:30.040", test.toString(null, Locale.ENGLISH));
+        assertEquals("10 20", test.toString("H m", null));
+        assertEquals("T10:20:30.040", test.toString(null, null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString_DTFormatter() {
         TimeOfDay test = new TimeOfDay(10, 20, 30, 40);
-NoAssert.donothing("\ufffd\ufffd\ufffd\ufffd 10", test.toString(DateTimeFormat.forPattern("yyyy HH")));
-NoAssert.donothing("T10:20:30.040", test.toString((DateTimeFormatter) null));
+        assertEquals("\ufffd\ufffd\ufffd\ufffd 10", test.toString(DateTimeFormat.forPattern("yyyy HH")));
+        assertEquals("T10:20:30.040", test.toString((DateTimeFormatter) null));
     }
 
     //-----------------------------------------------------------------------
     private void check(TimeOfDay test, int hour, int min, int sec, int milli) {
-NoAssert.donothing(hour, test.getHourOfDay());
-NoAssert.donothing(min, test.getMinuteOfHour());
-NoAssert.donothing(sec, test.getSecondOfMinute());
-NoAssert.donothing(milli, test.getMillisOfSecond());
+        assertEquals(hour, test.getHourOfDay());
+        assertEquals(min, test.getMinuteOfHour());
+        assertEquals(sec, test.getSecondOfMinute());
+        assertEquals(milli, test.getMillisOfSecond());
     }
 }

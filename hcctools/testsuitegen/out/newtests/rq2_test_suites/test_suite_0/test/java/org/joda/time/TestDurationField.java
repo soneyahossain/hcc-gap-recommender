@@ -53,10 +53,10 @@ public class TestDurationField  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void test_subtract() throws Exception {
         DurationField fld = ISOChronology.getInstanceUTC().millis();
-NoAssert.donothing(900, fld.subtract(1000L, 100));
-NoAssert.donothing(900L, fld.subtract(1000L, 100L));
-NoAssert.donothing((1000L - Integer.MAX_VALUE), fld.subtract(1000L, Integer.MAX_VALUE));
-NoAssert.donothing((1000L - Integer.MIN_VALUE), fld.subtract(1000L, Integer.MIN_VALUE));
+        assertEquals(900, fld.subtract(1000L, 100));
+        assertEquals(900L, fld.subtract(1000L, 100L));
+        assertEquals((1000L - Integer.MAX_VALUE), fld.subtract(1000L, Integer.MAX_VALUE));
+        assertEquals((1000L - Integer.MIN_VALUE), fld.subtract(1000L, Integer.MIN_VALUE));
 NoAssert.donothing((1000L - Long.MAX_VALUE), fld.subtract(1000L, Long.MAX_VALUE));
         try {
             fld.subtract(-1000L, Long.MIN_VALUE);

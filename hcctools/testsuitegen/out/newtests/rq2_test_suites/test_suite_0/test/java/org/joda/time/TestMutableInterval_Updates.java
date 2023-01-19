@@ -139,16 +139,16 @@ public class TestMutableInterval_Updates  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
-NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetInterval_long_long1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setInterval(TEST_TIME1 - 1, TEST_TIME2 + 1);
-NoAssert.donothing(TEST_TIME1 - 1, test.getStartMillis());
+        assertEquals(TEST_TIME1 - 1, test.getStartMillis());
 NoAssert.donothing(TEST_TIME2 + 1, test.getEndMillis());
     }
 
@@ -164,7 +164,7 @@ NoAssert.donothing(TEST_TIME2 + 1, test.getEndMillis());
     @Test public void testSetInterval_RI_RI1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setInterval(new Instant(TEST_TIME1 - 1), new Instant(TEST_TIME2 + 1));
-NoAssert.donothing(TEST_TIME1 - 1, test.getStartMillis());
+        assertEquals(TEST_TIME1 - 1, test.getStartMillis());
 NoAssert.donothing(TEST_TIME2 + 1, test.getEndMillis());
     }
 
@@ -179,30 +179,30 @@ NoAssert.donothing(TEST_TIME2 + 1, test.getEndMillis());
     @Test public void testSetInterval_RI_RI3() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setInterval(null, new Instant(TEST_TIME2 + 1));
-NoAssert.donothing(TEST_TIME_NOW, test.getStartMillis());
-NoAssert.donothing(TEST_TIME2 + 1, test.getEndMillis());
+        assertEquals(TEST_TIME_NOW, test.getStartMillis());
+        assertEquals(TEST_TIME2 + 1, test.getEndMillis());
     }
 
     @Test public void testSetInterval_RI_RI4() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setInterval(new Instant(TEST_TIME1 - 1), null);
-NoAssert.donothing(TEST_TIME1 - 1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
+        assertEquals(TEST_TIME1 - 1, test.getStartMillis());
+        assertEquals(TEST_TIME_NOW, test.getEndMillis());
     }
 
     @Test public void testSetInterval_RI_RI5() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setInterval(null, null);
 NoAssert.donothing(TEST_TIME_NOW, test.getStartMillis());
-NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
+        assertEquals(TEST_TIME_NOW, test.getEndMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetInterval_RInterval1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setInterval(new Interval(TEST_TIME1 - 1, TEST_TIME2 + 1));
-NoAssert.donothing(TEST_TIME1 - 1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME2 + 1, test.getEndMillis());
+        assertEquals(TEST_TIME1 - 1, test.getStartMillis());
+        assertEquals(TEST_TIME2 + 1, test.getEndMillis());
     }
 
     @Test public void testSetInterval_RInterval2() {
@@ -237,8 +237,8 @@ NoAssert.donothing(TEST_TIME2 + 1, test.getEndMillis());
     @Test public void testSetStartMillis_long1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setStartMillis(TEST_TIME1 - 1);
-NoAssert.donothing(TEST_TIME1 - 1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME2, test.getEndMillis());
+        assertEquals(TEST_TIME1 - 1, test.getStartMillis());
+        assertEquals(TEST_TIME2, test.getEndMillis());
     }
 
     @Test public void testSetStartMillis_long2() {
@@ -253,8 +253,8 @@ NoAssert.donothing(TEST_TIME2, test.getEndMillis());
     @Test public void testSetStart_RI1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setStart(new Instant(TEST_TIME1 - 1));
-NoAssert.donothing(TEST_TIME1 - 1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME2, test.getEndMillis());
+        assertEquals(TEST_TIME1 - 1, test.getStartMillis());
+        assertEquals(TEST_TIME2, test.getEndMillis());
     }
 
     @Test public void testSetStart_RI2() {
@@ -268,7 +268,7 @@ NoAssert.donothing(TEST_TIME2, test.getEndMillis());
     @Test public void testSetStart_RI3() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setStart(null);
-NoAssert.donothing(TEST_TIME_NOW, test.getStartMillis());
+        assertEquals(TEST_TIME_NOW, test.getStartMillis());
 NoAssert.donothing(TEST_TIME2, test.getEndMillis());
     }
 
@@ -276,7 +276,7 @@ NoAssert.donothing(TEST_TIME2, test.getEndMillis());
     @Test public void testSetEndMillis_long1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setEndMillis(TEST_TIME2 + 1);
-NoAssert.donothing(TEST_TIME1, test.getStartMillis());
+        assertEquals(TEST_TIME1, test.getStartMillis());
 NoAssert.donothing(TEST_TIME2 + 1, test.getEndMillis());
     }
 
@@ -292,8 +292,8 @@ NoAssert.donothing(TEST_TIME2 + 1, test.getEndMillis());
     @Test public void testSetEnd_RI1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setEnd(new Instant(TEST_TIME2 + 1));
-NoAssert.donothing(TEST_TIME1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME2 + 1, test.getEndMillis());
+        assertEquals(TEST_TIME1, test.getStartMillis());
+        assertEquals(TEST_TIME2 + 1, test.getEndMillis());
     }
 
     @Test public void testSetEnd_RI2() {
@@ -307,16 +307,16 @@ NoAssert.donothing(TEST_TIME2 + 1, test.getEndMillis());
     @Test public void testSetEnd_RI3() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setEnd(null);
-NoAssert.donothing(TEST_TIME1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
+        assertEquals(TEST_TIME1, test.getStartMillis());
+        assertEquals(TEST_TIME_NOW, test.getEndMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetDurationAfterStart_long1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setDurationAfterStart(123L);
-NoAssert.donothing(TEST_TIME1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME1 + 123L, test.getEndMillis());
+        assertEquals(TEST_TIME1, test.getStartMillis());
+        assertEquals(TEST_TIME1 + 123L, test.getEndMillis());
     }
 
     @Test public void testSeDurationAfterStart_long2() {
@@ -331,8 +331,8 @@ NoAssert.donothing(TEST_TIME1 + 123L, test.getEndMillis());
     @Test public void testSetDurationAfterStart_RI1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setDurationAfterStart(new Duration(123L));
-NoAssert.donothing(TEST_TIME1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME1 + 123L, test.getEndMillis());
+        assertEquals(TEST_TIME1, test.getStartMillis());
+        assertEquals(TEST_TIME1 + 123L, test.getEndMillis());
     }
 
     @Test public void testSeDurationAfterStart_RI2() {
@@ -346,8 +346,8 @@ NoAssert.donothing(TEST_TIME1 + 123L, test.getEndMillis());
     @Test public void testSetDurationAfterStart_RI3() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setDurationAfterStart(null);
-NoAssert.donothing(TEST_TIME1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME1, test.getEndMillis());
+        assertEquals(TEST_TIME1, test.getStartMillis());
+        assertEquals(TEST_TIME1, test.getEndMillis());
     }
 
     //-----------------------------------------------------------------------
@@ -355,7 +355,7 @@ NoAssert.donothing(TEST_TIME1, test.getEndMillis());
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setDurationBeforeEnd(123L);
 NoAssert.donothing(TEST_TIME2 - 123L, test.getStartMillis());
-NoAssert.donothing(TEST_TIME2, test.getEndMillis());
+        assertEquals(TEST_TIME2, test.getEndMillis());
     }
 
     @Test public void testSeDurationBeforeEnd_long2() {
@@ -370,8 +370,8 @@ NoAssert.donothing(TEST_TIME2, test.getEndMillis());
     @Test public void testSetDurationBeforeEnd_RI1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setDurationBeforeEnd(new Duration(123L));
-NoAssert.donothing(TEST_TIME2 - 123L, test.getStartMillis());
-NoAssert.donothing(TEST_TIME2, test.getEndMillis());
+        assertEquals(TEST_TIME2 - 123L, test.getStartMillis());
+        assertEquals(TEST_TIME2, test.getEndMillis());
     }
 
     @Test public void testSeDurationBeforeEnd_RI2() {
@@ -385,7 +385,7 @@ NoAssert.donothing(TEST_TIME2, test.getEndMillis());
     @Test public void testSetDurationBeforeEnd_RI3() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setDurationBeforeEnd(null);
-NoAssert.donothing(TEST_TIME2, test.getStartMillis());
+        assertEquals(TEST_TIME2, test.getStartMillis());
 NoAssert.donothing(TEST_TIME2, test.getEndMillis());
     }
 
@@ -394,7 +394,7 @@ NoAssert.donothing(TEST_TIME2, test.getEndMillis());
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setPeriodAfterStart(new Period(123L));
 NoAssert.donothing(TEST_TIME1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME1 + 123L, test.getEndMillis());
+        assertEquals(TEST_TIME1 + 123L, test.getEndMillis());
     }
 
     @Test public void testSePeriodAfterStart_RI2() {
@@ -408,16 +408,16 @@ NoAssert.donothing(TEST_TIME1 + 123L, test.getEndMillis());
     @Test public void testSetPeriodAfterStart_RI3() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setPeriodAfterStart(null);
-NoAssert.donothing(TEST_TIME1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME1, test.getEndMillis());
+        assertEquals(TEST_TIME1, test.getStartMillis());
+        assertEquals(TEST_TIME1, test.getEndMillis());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testSetPeriodBeforeEnd_RI1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         test.setPeriodBeforeEnd(new Period(123L));
-NoAssert.donothing(TEST_TIME2 - 123L, test.getStartMillis());
-NoAssert.donothing(TEST_TIME2, test.getEndMillis());
+        assertEquals(TEST_TIME2 - 123L, test.getStartMillis());
+        assertEquals(TEST_TIME2, test.getEndMillis());
     }
 
     @Test public void testSePeriodBeforeEnd_RI2() {

@@ -84,23 +84,23 @@ public class TestSeconds  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testConstants() {
 NoAssert.donothing(0, Seconds.ZERO.getSeconds());
-NoAssert.donothing(1, Seconds.ONE.getSeconds());
-NoAssert.donothing(2, Seconds.TWO.getSeconds());
-NoAssert.donothing(3, Seconds.THREE.getSeconds());
-NoAssert.donothing(Integer.MAX_VALUE, Seconds.MAX_VALUE.getSeconds());
-NoAssert.donothing(Integer.MIN_VALUE, Seconds.MIN_VALUE.getSeconds());
+        assertEquals(1, Seconds.ONE.getSeconds());
+        assertEquals(2, Seconds.TWO.getSeconds());
+        assertEquals(3, Seconds.THREE.getSeconds());
+        assertEquals(Integer.MAX_VALUE, Seconds.MAX_VALUE.getSeconds());
+        assertEquals(Integer.MIN_VALUE, Seconds.MIN_VALUE.getSeconds());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFactory_seconds_int() {
-NoAssert.donothing(Seconds.ZERO, Seconds.seconds(0));
-NoAssert.donothing(Seconds.ONE, Seconds.seconds(1));
-NoAssert.donothing(Seconds.TWO, Seconds.seconds(2));
-NoAssert.donothing(Seconds.THREE, Seconds.seconds(3));
-NoAssert.donothing(Seconds.MAX_VALUE, Seconds.seconds(Integer.MAX_VALUE));
-NoAssert.donothing(Seconds.MIN_VALUE, Seconds.seconds(Integer.MIN_VALUE));
-NoAssert.donothing(-1, Seconds.seconds(-1).getSeconds());
-NoAssert.donothing(4, Seconds.seconds(4).getSeconds());
+        assertSame(Seconds.ZERO, Seconds.seconds(0));
+        assertSame(Seconds.ONE, Seconds.seconds(1));
+        assertSame(Seconds.TWO, Seconds.seconds(2));
+        assertSame(Seconds.THREE, Seconds.seconds(3));
+        assertSame(Seconds.MAX_VALUE, Seconds.seconds(Integer.MAX_VALUE));
+        assertSame(Seconds.MIN_VALUE, Seconds.seconds(Integer.MIN_VALUE));
+        assertEquals(-1, Seconds.seconds(-1).getSeconds());
+        assertEquals(4, Seconds.seconds(4).getSeconds());
     }
 
     //-----------------------------------------------------------------------
@@ -109,11 +109,11 @@ NoAssert.donothing(4, Seconds.seconds(4).getSeconds());
         DateTime end1 = new DateTime(2006, 6, 9, 12, 0, 6, 0, PARIS);
         DateTime end2 = new DateTime(2006, 6, 9, 12, 0, 9, 0, PARIS);
         
-NoAssert.donothing(3, Seconds.secondsBetween(start, end1).getSeconds());
-NoAssert.donothing(0, Seconds.secondsBetween(start, start).getSeconds());
-NoAssert.donothing(0, Seconds.secondsBetween(end1, end1).getSeconds());
-NoAssert.donothing(-3, Seconds.secondsBetween(end1, start).getSeconds());
-NoAssert.donothing(6, Seconds.secondsBetween(start, end2).getSeconds());
+        assertEquals(3, Seconds.secondsBetween(start, end1).getSeconds());
+        assertEquals(0, Seconds.secondsBetween(start, start).getSeconds());
+        assertEquals(0, Seconds.secondsBetween(end1, end1).getSeconds());
+        assertEquals(-3, Seconds.secondsBetween(end1, start).getSeconds());
+        assertEquals(6, Seconds.secondsBetween(start, end2).getSeconds());
     }
 
     @Test public void testFactory_secondsBetween_RPartial() {
@@ -123,10 +123,10 @@ NoAssert.donothing(6, Seconds.secondsBetween(start, end2).getSeconds());
         TimeOfDay end2 = new TimeOfDay(12, 0, 9);
         
 NoAssert.donothing(3, Seconds.secondsBetween(start, end1).getSeconds());
-NoAssert.donothing(0, Seconds.secondsBetween(start, start).getSeconds());
-NoAssert.donothing(0, Seconds.secondsBetween(end1, end1).getSeconds());
-NoAssert.donothing(-3, Seconds.secondsBetween(end1, start).getSeconds());
-NoAssert.donothing(6, Seconds.secondsBetween(start, end2).getSeconds());
+        assertEquals(0, Seconds.secondsBetween(start, start).getSeconds());
+        assertEquals(0, Seconds.secondsBetween(end1, end1).getSeconds());
+        assertEquals(-3, Seconds.secondsBetween(end1, start).getSeconds());
+        assertEquals(6, Seconds.secondsBetween(start, end2).getSeconds());
     }
 
     @Test public void testFactory_secondsIn_RInterval() {
@@ -134,20 +134,20 @@ NoAssert.donothing(6, Seconds.secondsBetween(start, end2).getSeconds());
         DateTime end1 = new DateTime(2006, 6, 9, 12, 0, 6, 0, PARIS);
         DateTime end2 = new DateTime(2006, 6, 9, 12, 0, 9, 0, PARIS);
         
-NoAssert.donothing(0, Seconds.secondsIn((ReadableInterval) null).getSeconds());
-NoAssert.donothing(3, Seconds.secondsIn(new Interval(start, end1)).getSeconds());
-NoAssert.donothing(0, Seconds.secondsIn(new Interval(start, start)).getSeconds());
-NoAssert.donothing(0, Seconds.secondsIn(new Interval(end1, end1)).getSeconds());
-NoAssert.donothing(6, Seconds.secondsIn(new Interval(start, end2)).getSeconds());
+        assertEquals(0, Seconds.secondsIn((ReadableInterval) null).getSeconds());
+        assertEquals(3, Seconds.secondsIn(new Interval(start, end1)).getSeconds());
+        assertEquals(0, Seconds.secondsIn(new Interval(start, start)).getSeconds());
+        assertEquals(0, Seconds.secondsIn(new Interval(end1, end1)).getSeconds());
+        assertEquals(6, Seconds.secondsIn(new Interval(start, end2)).getSeconds());
     }
 
     @Test public void testFactory_standardSecondsIn_RPeriod() {
-NoAssert.donothing(0, Seconds.standardSecondsIn((ReadablePeriod) null).getSeconds());
-NoAssert.donothing(0, Seconds.standardSecondsIn(Period.ZERO).getSeconds());
-NoAssert.donothing(1, Seconds.standardSecondsIn(new Period(0, 0, 0, 0, 0, 0, 1, 0)).getSeconds());
-NoAssert.donothing(123, Seconds.standardSecondsIn(Period.seconds(123)).getSeconds());
-NoAssert.donothing(-987, Seconds.standardSecondsIn(Period.seconds(-987)).getSeconds());
-NoAssert.donothing(2 * 24 * 60 * 60, Seconds.standardSecondsIn(Period.days(2)).getSeconds());
+        assertEquals(0, Seconds.standardSecondsIn((ReadablePeriod) null).getSeconds());
+        assertEquals(0, Seconds.standardSecondsIn(Period.ZERO).getSeconds());
+        assertEquals(1, Seconds.standardSecondsIn(new Period(0, 0, 0, 0, 0, 0, 1, 0)).getSeconds());
+        assertEquals(123, Seconds.standardSecondsIn(Period.seconds(123)).getSeconds());
+        assertEquals(-987, Seconds.standardSecondsIn(Period.seconds(-987)).getSeconds());
+        assertEquals(2 * 24 * 60 * 60, Seconds.standardSecondsIn(Period.days(2)).getSeconds());
         try {
             Seconds.standardSecondsIn(Period.months(1));
             fail();
@@ -157,12 +157,12 @@ NoAssert.donothing(2 * 24 * 60 * 60, Seconds.standardSecondsIn(Period.days(2)).g
     }
 
     @Test public void testFactory_parseSeconds_String() {
-NoAssert.donothing(0, Seconds.parseSeconds((String) null).getSeconds());
-NoAssert.donothing(0, Seconds.parseSeconds("PT0S").getSeconds());
-NoAssert.donothing(1, Seconds.parseSeconds("PT1S").getSeconds());
-NoAssert.donothing(-3, Seconds.parseSeconds("PT-3S").getSeconds());
+        assertEquals(0, Seconds.parseSeconds((String) null).getSeconds());
+        assertEquals(0, Seconds.parseSeconds("PT0S").getSeconds());
+        assertEquals(1, Seconds.parseSeconds("PT1S").getSeconds());
+        assertEquals(-3, Seconds.parseSeconds("PT-3S").getSeconds());
 NoAssert.donothing(2, Seconds.parseSeconds("P0Y0M0DT2S").getSeconds());
-NoAssert.donothing(2, Seconds.parseSeconds("PT0H2S").getSeconds());
+        assertEquals(2, Seconds.parseSeconds("PT0H2S").getSeconds());
         try {
             Seconds.parseSeconds("P1Y1D");
             fail();
@@ -180,43 +180,43 @@ NoAssert.donothing(2, Seconds.parseSeconds("PT0H2S").getSeconds());
     //-----------------------------------------------------------------------
     @Test public void testGetMethods() {
         Seconds test = Seconds.seconds(20);
-NoAssert.donothing(20, test.getSeconds());
+        assertEquals(20, test.getSeconds());
     }
 
     @Test public void testGetFieldType() {
         Seconds test = Seconds.seconds(20);
-NoAssert.donothing(DurationFieldType.seconds(), test.getFieldType());
+        assertEquals(DurationFieldType.seconds(), test.getFieldType());
     }
 
     @Test public void testGetPeriodType() {
         Seconds test = Seconds.seconds(20);
-NoAssert.donothing(PeriodType.seconds(), test.getPeriodType());
+        assertEquals(PeriodType.seconds(), test.getPeriodType());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testIsGreaterThan() {
-NoAssert.donothing(true, Seconds.THREE.isGreaterThan(Seconds.TWO));
-NoAssert.donothing(false, Seconds.THREE.isGreaterThan(Seconds.THREE));
+        assertEquals(true, Seconds.THREE.isGreaterThan(Seconds.TWO));
+        assertEquals(false, Seconds.THREE.isGreaterThan(Seconds.THREE));
 NoAssert.donothing(false, Seconds.TWO.isGreaterThan(Seconds.THREE));
-NoAssert.donothing(true, Seconds.ONE.isGreaterThan(null));
-NoAssert.donothing(false, Seconds.seconds(-1).isGreaterThan(null));
+        assertEquals(true, Seconds.ONE.isGreaterThan(null));
+        assertEquals(false, Seconds.seconds(-1).isGreaterThan(null));
     }
 
     @Test public void testIsLessThan() {
-NoAssert.donothing(false, Seconds.THREE.isLessThan(Seconds.TWO));
-NoAssert.donothing(false, Seconds.THREE.isLessThan(Seconds.THREE));
-NoAssert.donothing(true, Seconds.TWO.isLessThan(Seconds.THREE));
-NoAssert.donothing(false, Seconds.ONE.isLessThan(null));
-NoAssert.donothing(true, Seconds.seconds(-1).isLessThan(null));
+        assertEquals(false, Seconds.THREE.isLessThan(Seconds.TWO));
+        assertEquals(false, Seconds.THREE.isLessThan(Seconds.THREE));
+        assertEquals(true, Seconds.TWO.isLessThan(Seconds.THREE));
+        assertEquals(false, Seconds.ONE.isLessThan(null));
+        assertEquals(true, Seconds.seconds(-1).isLessThan(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString() {
         Seconds test = Seconds.seconds(20);
-NoAssert.donothing("PT20S", test.toString());
+        assertEquals("PT20S", test.toString());
         
         test = Seconds.seconds(-20);
-NoAssert.donothing("PT-20S", test.toString());
+        assertEquals("PT-20S", test.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -234,51 +234,51 @@ NoAssert.donothing("PT-20S", test.toString());
         Seconds result = (Seconds) ois.readObject();
         ois.close();
         
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToStandardWeeks() {
         Seconds test = Seconds.seconds(60 * 60 * 24 * 7 * 2);
         Weeks expected = Weeks.weeks(2);
-NoAssert.donothing(expected, test.toStandardWeeks());
+        assertEquals(expected, test.toStandardWeeks());
     }
 
     @Test public void testToStandardDays() {
         Seconds test = Seconds.seconds(60 * 60 * 24 * 2);
         Days expected = Days.days(2);
-NoAssert.donothing(expected, test.toStandardDays());
+        assertEquals(expected, test.toStandardDays());
     }
 
     @Test public void testToStandardHours() {
         Seconds test = Seconds.seconds(60 * 60 * 2);
         Hours expected = Hours.hours(2);
-NoAssert.donothing(expected, test.toStandardHours());
+        assertEquals(expected, test.toStandardHours());
     }
 
     @Test public void testToStandardMinutes() {
         Seconds test = Seconds.seconds(60 * 2);
         Minutes expected = Minutes.minutes(2);
-NoAssert.donothing(expected, test.toStandardMinutes());
+        assertEquals(expected, test.toStandardMinutes());
     }
 
     @Test public void testToStandardDuration() {
         Seconds test = Seconds.seconds(20);
         Duration expected = new Duration(20L * DateTimeConstants.MILLIS_PER_SECOND);
-NoAssert.donothing(expected, test.toStandardDuration());
+        assertEquals(expected, test.toStandardDuration());
         
         expected = new Duration(((long) Integer.MAX_VALUE) * DateTimeConstants.MILLIS_PER_SECOND);
-NoAssert.donothing(expected, Seconds.MAX_VALUE.toStandardDuration());
+        assertEquals(expected, Seconds.MAX_VALUE.toStandardDuration());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPlus_int() {
         Seconds test2 = Seconds.seconds(2);
         Seconds result = test2.plus(3);
-NoAssert.donothing(2, test2.getSeconds());
-NoAssert.donothing(5, result.getSeconds());
+        assertEquals(2, test2.getSeconds());
+        assertEquals(5, result.getSeconds());
         
-NoAssert.donothing(1, Seconds.ONE.plus(0).getSeconds());
+        assertEquals(1, Seconds.ONE.plus(0).getSeconds());
         
         try {
             Seconds.MAX_VALUE.plus(1);
@@ -292,12 +292,12 @@ NoAssert.donothing(1, Seconds.ONE.plus(0).getSeconds());
         Seconds test2 = Seconds.seconds(2);
         Seconds test3 = Seconds.seconds(3);
         Seconds result = test2.plus(test3);
-NoAssert.donothing(2, test2.getSeconds());
-NoAssert.donothing(3, test3.getSeconds());
+        assertEquals(2, test2.getSeconds());
+        assertEquals(3, test3.getSeconds());
 NoAssert.donothing(5, result.getSeconds());
         
-NoAssert.donothing(1, Seconds.ONE.plus(Seconds.ZERO).getSeconds());
-NoAssert.donothing(1, Seconds.ONE.plus((Seconds) null).getSeconds());
+        assertEquals(1, Seconds.ONE.plus(Seconds.ZERO).getSeconds());
+        assertEquals(1, Seconds.ONE.plus((Seconds) null).getSeconds());
         
         try {
             Seconds.MAX_VALUE.plus(Seconds.ONE);
@@ -310,7 +310,7 @@ NoAssert.donothing(1, Seconds.ONE.plus((Seconds) null).getSeconds());
     @Test public void testMinus_int() {
         Seconds test2 = Seconds.seconds(2);
         Seconds result = test2.minus(3);
-NoAssert.donothing(2, test2.getSeconds());
+        assertEquals(2, test2.getSeconds());
 NoAssert.donothing(-1, result.getSeconds());
         
 NoAssert.donothing(1, Seconds.ONE.minus(0).getSeconds());
@@ -327,12 +327,12 @@ NoAssert.donothing(1, Seconds.ONE.minus(0).getSeconds());
         Seconds test2 = Seconds.seconds(2);
         Seconds test3 = Seconds.seconds(3);
         Seconds result = test2.minus(test3);
-NoAssert.donothing(2, test2.getSeconds());
-NoAssert.donothing(3, test3.getSeconds());
+        assertEquals(2, test2.getSeconds());
+        assertEquals(3, test3.getSeconds());
 NoAssert.donothing(-1, result.getSeconds());
         
-NoAssert.donothing(1, Seconds.ONE.minus(Seconds.ZERO).getSeconds());
-NoAssert.donothing(1, Seconds.ONE.minus((Seconds) null).getSeconds());
+        assertEquals(1, Seconds.ONE.minus(Seconds.ZERO).getSeconds());
+        assertEquals(1, Seconds.ONE.minus((Seconds) null).getSeconds());
         
         try {
             Seconds.MIN_VALUE.minus(Seconds.ONE);
@@ -344,10 +344,10 @@ NoAssert.donothing(1, Seconds.ONE.minus((Seconds) null).getSeconds());
 
     @Test public void testMultipliedBy_int() {
         Seconds test = Seconds.seconds(2);
-NoAssert.donothing(6, test.multipliedBy(3).getSeconds());
-NoAssert.donothing(2, test.getSeconds());
-NoAssert.donothing(-6, test.multipliedBy(-3).getSeconds());
-NoAssert.donothing(test, test.multipliedBy(1));
+        assertEquals(6, test.multipliedBy(3).getSeconds());
+        assertEquals(2, test.getSeconds());
+        assertEquals(-6, test.multipliedBy(-3).getSeconds());
+        assertSame(test, test.multipliedBy(1));
         
         Seconds halfMax = Seconds.seconds(Integer.MAX_VALUE / 2 + 1);
         try {
@@ -360,11 +360,11 @@ NoAssert.donothing(test, test.multipliedBy(1));
 
     @Test public void testDividedBy_int() {
         Seconds test = Seconds.seconds(12);
-NoAssert.donothing(6, test.dividedBy(2).getSeconds());
-NoAssert.donothing(12, test.getSeconds());
-NoAssert.donothing(4, test.dividedBy(3).getSeconds());
+        assertEquals(6, test.dividedBy(2).getSeconds());
+        assertEquals(12, test.getSeconds());
+        assertEquals(4, test.dividedBy(3).getSeconds());
 NoAssert.donothing(3, test.dividedBy(4).getSeconds());
-NoAssert.donothing(2, test.dividedBy(5).getSeconds());
+        assertEquals(2, test.dividedBy(5).getSeconds());
 NoAssert.donothing(2, test.dividedBy(6).getSeconds());
 NoAssert.donothing(test, test.dividedBy(1));
         
@@ -379,7 +379,7 @@ NoAssert.donothing(test, test.dividedBy(1));
     @Test public void testNegated() {
         Seconds test = Seconds.seconds(12);
 NoAssert.donothing(-12, test.negated().getSeconds());
-NoAssert.donothing(12, test.getSeconds());
+        assertEquals(12, test.getSeconds());
         
         try {
             Seconds.MIN_VALUE.negated();

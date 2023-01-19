@@ -135,264 +135,264 @@ public class TestDateMidnight_Properties  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
 NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetEra() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing(test.getChronology().era(), test.era().getField());
-NoAssert.donothing("era", test.era().getName());
-NoAssert.donothing("Property[era]", test.era().toString());
-NoAssert.donothing(test, test.era().getDateMidnight());
-NoAssert.donothing(1, test.era().get());
-NoAssert.donothing("AD", test.era().getAsText());
-NoAssert.donothing("ap. J.-C.", test.era().getAsText(Locale.FRENCH));
-NoAssert.donothing("AD", test.era().getAsShortText());
-NoAssert.donothing("ap. J.-C.", test.era().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().eras(), test.era().getDurationField());
-NoAssert.donothing(null, test.era().getRangeDurationField());
-NoAssert.donothing(2, test.era().getMaximumTextLength(null));
+        assertSame(test.getChronology().era(), test.era().getField());
+        assertEquals("era", test.era().getName());
+        assertEquals("Property[era]", test.era().toString());
+        assertSame(test, test.era().getDateMidnight());
+        assertEquals(1, test.era().get());
+        assertEquals("AD", test.era().getAsText());
+        assertEquals("ap. J.-C.", test.era().getAsText(Locale.FRENCH));
+        assertEquals("AD", test.era().getAsShortText());
+        assertEquals("ap. J.-C.", test.era().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().eras(), test.era().getDurationField());
+        assertEquals(null, test.era().getRangeDurationField());
+        assertEquals(2, test.era().getMaximumTextLength(null));
 NoAssert.donothing(9, test.era().getMaximumTextLength(Locale.FRENCH));
-NoAssert.donothing(2, test.era().getMaximumShortTextLength(null));
-NoAssert.donothing(9, test.era().getMaximumShortTextLength(Locale.FRENCH));
+        assertEquals(2, test.era().getMaximumShortTextLength(null));
+        assertEquals(9, test.era().getMaximumShortTextLength(Locale.FRENCH));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetYearOfEra() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing(test.getChronology().yearOfEra(), test.yearOfEra().getField());
+        assertSame(test.getChronology().yearOfEra(), test.yearOfEra().getField());
 NoAssert.donothing("yearOfEra", test.yearOfEra().getName());
-NoAssert.donothing("Property[yearOfEra]", test.yearOfEra().toString());
-NoAssert.donothing(test, test.yearOfEra().getDateMidnight());
-NoAssert.donothing(2004, test.yearOfEra().get());
-NoAssert.donothing("2004", test.yearOfEra().getAsText());
-NoAssert.donothing("2004", test.yearOfEra().getAsText(Locale.FRENCH));
-NoAssert.donothing("2004", test.yearOfEra().getAsShortText());
-NoAssert.donothing("2004", test.yearOfEra().getAsShortText(Locale.FRENCH));
+        assertEquals("Property[yearOfEra]", test.yearOfEra().toString());
+        assertSame(test, test.yearOfEra().getDateMidnight());
+        assertEquals(2004, test.yearOfEra().get());
+        assertEquals("2004", test.yearOfEra().getAsText());
+        assertEquals("2004", test.yearOfEra().getAsText(Locale.FRENCH));
+        assertEquals("2004", test.yearOfEra().getAsShortText());
+        assertEquals("2004", test.yearOfEra().getAsShortText(Locale.FRENCH));
 NoAssert.donothing(test.getChronology().years(), test.yearOfEra().getDurationField());
-NoAssert.donothing(test.getChronology().eras(), test.yearOfEra().getRangeDurationField());
-NoAssert.donothing(9, test.yearOfEra().getMaximumTextLength(null));
-NoAssert.donothing(9, test.yearOfEra().getMaximumShortTextLength(null));
+        assertEquals(test.getChronology().eras(), test.yearOfEra().getRangeDurationField());
+        assertEquals(9, test.yearOfEra().getMaximumTextLength(null));
+        assertEquals(9, test.yearOfEra().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetCenturyOfEra() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing(test.getChronology().centuryOfEra(), test.centuryOfEra().getField());
-NoAssert.donothing("centuryOfEra", test.centuryOfEra().getName());
+        assertSame(test.getChronology().centuryOfEra(), test.centuryOfEra().getField());
+        assertEquals("centuryOfEra", test.centuryOfEra().getName());
 NoAssert.donothing("Property[centuryOfEra]", test.centuryOfEra().toString());
 NoAssert.donothing(test, test.centuryOfEra().getDateMidnight());
-NoAssert.donothing(20, test.centuryOfEra().get());
-NoAssert.donothing("20", test.centuryOfEra().getAsText());
-NoAssert.donothing("20", test.centuryOfEra().getAsText(Locale.FRENCH));
-NoAssert.donothing("20", test.centuryOfEra().getAsShortText());
-NoAssert.donothing("20", test.centuryOfEra().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().centuries(), test.centuryOfEra().getDurationField());
-NoAssert.donothing(test.getChronology().eras(), test.centuryOfEra().getRangeDurationField());
+        assertEquals(20, test.centuryOfEra().get());
+        assertEquals("20", test.centuryOfEra().getAsText());
+        assertEquals("20", test.centuryOfEra().getAsText(Locale.FRENCH));
+        assertEquals("20", test.centuryOfEra().getAsShortText());
+        assertEquals("20", test.centuryOfEra().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().centuries(), test.centuryOfEra().getDurationField());
+        assertEquals(test.getChronology().eras(), test.centuryOfEra().getRangeDurationField());
 NoAssert.donothing(7, test.centuryOfEra().getMaximumTextLength(null));
-NoAssert.donothing(7, test.centuryOfEra().getMaximumShortTextLength(null));
+        assertEquals(7, test.centuryOfEra().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetYearOfCentury() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing(test.getChronology().yearOfCentury(), test.yearOfCentury().getField());
-NoAssert.donothing("yearOfCentury", test.yearOfCentury().getName());
-NoAssert.donothing("Property[yearOfCentury]", test.yearOfCentury().toString());
-NoAssert.donothing(test, test.yearOfCentury().getDateMidnight());
-NoAssert.donothing(4, test.yearOfCentury().get());
-NoAssert.donothing("4", test.yearOfCentury().getAsText());
+        assertSame(test.getChronology().yearOfCentury(), test.yearOfCentury().getField());
+        assertEquals("yearOfCentury", test.yearOfCentury().getName());
+        assertEquals("Property[yearOfCentury]", test.yearOfCentury().toString());
+        assertSame(test, test.yearOfCentury().getDateMidnight());
+        assertEquals(4, test.yearOfCentury().get());
+        assertEquals("4", test.yearOfCentury().getAsText());
 NoAssert.donothing("4", test.yearOfCentury().getAsText(Locale.FRENCH));
-NoAssert.donothing("4", test.yearOfCentury().getAsShortText());
-NoAssert.donothing("4", test.yearOfCentury().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().years(), test.yearOfCentury().getDurationField());
-NoAssert.donothing(test.getChronology().centuries(), test.yearOfCentury().getRangeDurationField());
-NoAssert.donothing(2, test.yearOfCentury().getMaximumTextLength(null));
-NoAssert.donothing(2, test.yearOfCentury().getMaximumShortTextLength(null));
+        assertEquals("4", test.yearOfCentury().getAsShortText());
+        assertEquals("4", test.yearOfCentury().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().years(), test.yearOfCentury().getDurationField());
+        assertEquals(test.getChronology().centuries(), test.yearOfCentury().getRangeDurationField());
+        assertEquals(2, test.yearOfCentury().getMaximumTextLength(null));
+        assertEquals(2, test.yearOfCentury().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetWeekyear() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing(test.getChronology().weekyear(), test.weekyear().getField());
-NoAssert.donothing("weekyear", test.weekyear().getName());
-NoAssert.donothing("Property[weekyear]", test.weekyear().toString());
-NoAssert.donothing(test, test.weekyear().getDateMidnight());
-NoAssert.donothing(2004, test.weekyear().get());
+        assertSame(test.getChronology().weekyear(), test.weekyear().getField());
+        assertEquals("weekyear", test.weekyear().getName());
+        assertEquals("Property[weekyear]", test.weekyear().toString());
+        assertSame(test, test.weekyear().getDateMidnight());
+        assertEquals(2004, test.weekyear().get());
 NoAssert.donothing("2004", test.weekyear().getAsText());
-NoAssert.donothing("2004", test.weekyear().getAsText(Locale.FRENCH));
-NoAssert.donothing("2004", test.weekyear().getAsShortText());
-NoAssert.donothing("2004", test.weekyear().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().weekyears(), test.weekyear().getDurationField());
-NoAssert.donothing(null, test.weekyear().getRangeDurationField());
-NoAssert.donothing(9, test.weekyear().getMaximumTextLength(null));
-NoAssert.donothing(9, test.weekyear().getMaximumShortTextLength(null));
+        assertEquals("2004", test.weekyear().getAsText(Locale.FRENCH));
+        assertEquals("2004", test.weekyear().getAsShortText());
+        assertEquals("2004", test.weekyear().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().weekyears(), test.weekyear().getDurationField());
+        assertEquals(null, test.weekyear().getRangeDurationField());
+        assertEquals(9, test.weekyear().getMaximumTextLength(null));
+        assertEquals(9, test.weekyear().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetYear() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing(test.getChronology().year(), test.year().getField());
-NoAssert.donothing("year", test.year().getName());
-NoAssert.donothing("Property[year]", test.year().toString());
-NoAssert.donothing(test, test.year().getDateMidnight());
-NoAssert.donothing(2004, test.year().get());
+        assertSame(test.getChronology().year(), test.year().getField());
+        assertEquals("year", test.year().getName());
+        assertEquals("Property[year]", test.year().toString());
+        assertSame(test, test.year().getDateMidnight());
+        assertEquals(2004, test.year().get());
 NoAssert.donothing("2004", test.year().getAsText());
-NoAssert.donothing("2004", test.year().getAsText(Locale.FRENCH));
-NoAssert.donothing("2004", test.year().getAsShortText());
+        assertEquals("2004", test.year().getAsText(Locale.FRENCH));
+        assertEquals("2004", test.year().getAsShortText());
 NoAssert.donothing("2004", test.year().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().years(), test.year().getDurationField());
-NoAssert.donothing(null, test.year().getRangeDurationField());
-NoAssert.donothing(9, test.year().getMaximumTextLength(null));
-NoAssert.donothing(9, test.year().getMaximumShortTextLength(null));
+        assertEquals(test.getChronology().years(), test.year().getDurationField());
+        assertEquals(null, test.year().getRangeDurationField());
+        assertEquals(9, test.year().getMaximumTextLength(null));
+        assertEquals(9, test.year().getMaximumShortTextLength(null));
 NoAssert.donothing(-292275054, test.year().getMinimumValue());
-NoAssert.donothing(-292275054, test.year().getMinimumValueOverall());
-NoAssert.donothing(292278993, test.year().getMaximumValue());
-NoAssert.donothing(292278993, test.year().getMaximumValueOverall());
+        assertEquals(-292275054, test.year().getMinimumValueOverall());
+        assertEquals(292278993, test.year().getMaximumValue());
+        assertEquals(292278993, test.year().getMaximumValueOverall());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing(test.getChronology().monthOfYear(), test.monthOfYear().getField());
-NoAssert.donothing("monthOfYear", test.monthOfYear().getName());
+        assertSame(test.getChronology().monthOfYear(), test.monthOfYear().getField());
+        assertEquals("monthOfYear", test.monthOfYear().getName());
 NoAssert.donothing("Property[monthOfYear]", test.monthOfYear().toString());
-NoAssert.donothing(test, test.monthOfYear().getDateMidnight());
-NoAssert.donothing(6, test.monthOfYear().get());
+        assertSame(test, test.monthOfYear().getDateMidnight());
+        assertEquals(6, test.monthOfYear().get());
 NoAssert.donothing("6", test.monthOfYear().getAsString());
-NoAssert.donothing("June", test.monthOfYear().getAsText());
-NoAssert.donothing("juin", test.monthOfYear().getAsText(Locale.FRENCH));
-NoAssert.donothing("Jun", test.monthOfYear().getAsShortText());
-NoAssert.donothing("juin", test.monthOfYear().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().months(), test.monthOfYear().getDurationField());
-NoAssert.donothing(test.getChronology().years(), test.monthOfYear().getRangeDurationField());
-NoAssert.donothing(9, test.monthOfYear().getMaximumTextLength(null));
-NoAssert.donothing(3, test.monthOfYear().getMaximumShortTextLength(null));
+        assertEquals("June", test.monthOfYear().getAsText());
+        assertEquals("juin", test.monthOfYear().getAsText(Locale.FRENCH));
+        assertEquals("Jun", test.monthOfYear().getAsShortText());
+        assertEquals("juin", test.monthOfYear().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().months(), test.monthOfYear().getDurationField());
+        assertEquals(test.getChronology().years(), test.monthOfYear().getRangeDurationField());
+        assertEquals(9, test.monthOfYear().getMaximumTextLength(null));
+        assertEquals(3, test.monthOfYear().getMaximumShortTextLength(null));
         test = new DateMidnight(2004, 7, 9);
-NoAssert.donothing("juillet", test.monthOfYear().getAsText(Locale.FRENCH));
-NoAssert.donothing("juil.", test.monthOfYear().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(1, test.monthOfYear().getMinimumValue());
-NoAssert.donothing(1, test.monthOfYear().getMinimumValueOverall());
-NoAssert.donothing(12, test.monthOfYear().getMaximumValue());
-NoAssert.donothing(12, test.monthOfYear().getMaximumValueOverall());
-NoAssert.donothing(1, test.monthOfYear().getMinimumValue());
-NoAssert.donothing(1, test.monthOfYear().getMinimumValueOverall());
-NoAssert.donothing(12, test.monthOfYear().getMaximumValue());
-NoAssert.donothing(12, test.monthOfYear().getMaximumValueOverall());
+        assertEquals("juillet", test.monthOfYear().getAsText(Locale.FRENCH));
+        assertEquals("juil.", test.monthOfYear().getAsShortText(Locale.FRENCH));
+        assertEquals(1, test.monthOfYear().getMinimumValue());
+        assertEquals(1, test.monthOfYear().getMinimumValueOverall());
+        assertEquals(12, test.monthOfYear().getMaximumValue());
+        assertEquals(12, test.monthOfYear().getMaximumValueOverall());
+        assertEquals(1, test.monthOfYear().getMinimumValue());
+        assertEquals(1, test.monthOfYear().getMinimumValueOverall());
+        assertEquals(12, test.monthOfYear().getMaximumValue());
+        assertEquals(12, test.monthOfYear().getMaximumValueOverall());
     }
 
     @Test public void testPropertySetMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
         DateMidnight copy = test.monthOfYear().setCopy(8);
-NoAssert.donothing(2004, copy.getYear());
-NoAssert.donothing(8, copy.getMonthOfYear());
-NoAssert.donothing(9, copy.getDayOfMonth());
+        assertEquals(2004, copy.getYear());
+        assertEquals(8, copy.getMonthOfYear());
+        assertEquals(9, copy.getDayOfMonth());
     }
 
     @Test public void testPropertySetTextMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
         DateMidnight copy = test.monthOfYear().setCopy("8");
 NoAssert.donothing(2004, copy.getYear());
-NoAssert.donothing(8, copy.getMonthOfYear());
+        assertEquals(8, copy.getMonthOfYear());
 NoAssert.donothing(9, copy.getDayOfMonth());
     }
 
     @Test public void testPropertySetTextLocaleMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
         DateMidnight copy = test.monthOfYear().setCopy("mars", Locale.FRENCH);
-NoAssert.donothing(2004, copy.getYear());
-NoAssert.donothing(3, copy.getMonthOfYear());
-NoAssert.donothing(9, copy.getDayOfMonth());
+        assertEquals(2004, copy.getYear());
+        assertEquals(3, copy.getMonthOfYear());
+        assertEquals(9, copy.getDayOfMonth());
     }
 
     @Test public void testPropertyAddMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
         DateMidnight copy = test.monthOfYear().addToCopy(8);
-NoAssert.donothing(2005, copy.getYear());
-NoAssert.donothing(2, copy.getMonthOfYear());
-NoAssert.donothing(9, copy.getDayOfMonth());
+        assertEquals(2005, copy.getYear());
+        assertEquals(2, copy.getMonthOfYear());
+        assertEquals(9, copy.getDayOfMonth());
     }
 
     @Test public void testPropertyAddLongMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
         DateMidnight copy = test.monthOfYear().addToCopy(8L);
-NoAssert.donothing(2005, copy.getYear());
-NoAssert.donothing(2, copy.getMonthOfYear());
-NoAssert.donothing(9, copy.getDayOfMonth());
+        assertEquals(2005, copy.getYear());
+        assertEquals(2, copy.getMonthOfYear());
+        assertEquals(9, copy.getDayOfMonth());
     }
 
     @Test public void testPropertyAddWrapFieldMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
         DateMidnight copy = test.monthOfYear().addWrapFieldToCopy(8);
 NoAssert.donothing(2004, copy.getYear());
-NoAssert.donothing(2, copy.getMonthOfYear());
-NoAssert.donothing(9, copy.getDayOfMonth());
+        assertEquals(2, copy.getMonthOfYear());
+        assertEquals(9, copy.getDayOfMonth());
     }
 
     @Test public void testPropertyGetDifferenceMonthOfYear() {
         DateMidnight test1 = new DateMidnight(2004, 6, 9);
         DateMidnight test2 = new DateMidnight(2004, 8, 9);
-NoAssert.donothing(-2, test1.monthOfYear().getDifference(test2));
-NoAssert.donothing(2, test2.monthOfYear().getDifference(test1));
+        assertEquals(-2, test1.monthOfYear().getDifference(test2));
+        assertEquals(2, test2.monthOfYear().getDifference(test1));
 NoAssert.donothing(-2L, test1.monthOfYear().getDifferenceAsLong(test2));
-NoAssert.donothing(2L, test2.monthOfYear().getDifferenceAsLong(test1));
+        assertEquals(2L, test2.monthOfYear().getDifferenceAsLong(test1));
     }
 
     @Test public void testPropertyRoundFloorMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 16);
         DateMidnight copy = test.monthOfYear().roundFloorCopy();
-NoAssert.donothing("2004-06-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-06-01T00:00:00.000+01:00", copy.toString());
     }
 
     @Test public void testPropertyRoundCeilingMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 16);
         DateMidnight copy = test.monthOfYear().roundCeilingCopy();
-NoAssert.donothing("2004-07-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-07-01T00:00:00.000+01:00", copy.toString());
     }
 
     @Test public void testPropertyRoundHalfFloorMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 16);
         DateMidnight copy = test.monthOfYear().roundHalfFloorCopy();
-NoAssert.donothing("2004-06-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-06-01T00:00:00.000+01:00", copy.toString());
         
         test = new DateMidnight(2004, 6, 17);
         copy = test.monthOfYear().roundHalfFloorCopy();
-NoAssert.donothing("2004-07-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-07-01T00:00:00.000+01:00", copy.toString());
         
         test = new DateMidnight(2004, 6, 15);
         copy = test.monthOfYear().roundHalfFloorCopy();
-NoAssert.donothing("2004-06-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-06-01T00:00:00.000+01:00", copy.toString());
     }
 
     @Test public void testPropertyRoundHalfCeilingMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 16);
         DateMidnight copy = test.monthOfYear().roundHalfCeilingCopy();
-NoAssert.donothing("2004-07-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-07-01T00:00:00.000+01:00", copy.toString());
         
         test = new DateMidnight(2004, 6, 17);
         copy = test.monthOfYear().roundHalfCeilingCopy();
-NoAssert.donothing("2004-07-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-07-01T00:00:00.000+01:00", copy.toString());
         
         test = new DateMidnight(2004, 6, 15);
         copy = test.monthOfYear().roundHalfCeilingCopy();
-NoAssert.donothing("2004-06-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-06-01T00:00:00.000+01:00", copy.toString());
     }
 
     @Test public void testPropertyRoundHalfEvenMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 16);
         DateMidnight copy = test.monthOfYear().roundHalfEvenCopy();
-NoAssert.donothing("2004-06-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-06-01T00:00:00.000+01:00", copy.toString());
         
         test = new DateMidnight(2004, 9, 16);
         copy = test.monthOfYear().roundHalfEvenCopy();
-NoAssert.donothing("2004-10-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-10-01T00:00:00.000+01:00", copy.toString());
         
         test = new DateMidnight(2004, 6, 17);
         copy = test.monthOfYear().roundHalfEvenCopy();
-NoAssert.donothing("2004-07-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-07-01T00:00:00.000+01:00", copy.toString());
         
         test = new DateMidnight(2004, 6, 15);
         copy = test.monthOfYear().roundHalfEvenCopy();
@@ -401,181 +401,181 @@ NoAssert.donothing("2004-06-01T00:00:00.000+01:00", copy.toString());
 
     @Test public void testPropertyRemainderMonthOfYear() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing((9L - 1L) * DateTimeConstants.MILLIS_PER_DAY, test.monthOfYear().remainder());
+        assertEquals((9L - 1L) * DateTimeConstants.MILLIS_PER_DAY, test.monthOfYear().remainder());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetDayOfMonth() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing(test.getChronology().dayOfMonth(), test.dayOfMonth().getField());
-NoAssert.donothing("dayOfMonth", test.dayOfMonth().getName());
-NoAssert.donothing("Property[dayOfMonth]", test.dayOfMonth().toString());
-NoAssert.donothing(test, test.dayOfMonth().getDateMidnight());
+        assertSame(test.getChronology().dayOfMonth(), test.dayOfMonth().getField());
+        assertEquals("dayOfMonth", test.dayOfMonth().getName());
+        assertEquals("Property[dayOfMonth]", test.dayOfMonth().toString());
+        assertSame(test, test.dayOfMonth().getDateMidnight());
 NoAssert.donothing(9, test.dayOfMonth().get());
 NoAssert.donothing("9", test.dayOfMonth().getAsText());
-NoAssert.donothing("9", test.dayOfMonth().getAsText(Locale.FRENCH));
-NoAssert.donothing("9", test.dayOfMonth().getAsShortText());
-NoAssert.donothing("9", test.dayOfMonth().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().days(), test.dayOfMonth().getDurationField());
-NoAssert.donothing(test.getChronology().months(), test.dayOfMonth().getRangeDurationField());
+        assertEquals("9", test.dayOfMonth().getAsText(Locale.FRENCH));
+        assertEquals("9", test.dayOfMonth().getAsShortText());
+        assertEquals("9", test.dayOfMonth().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().days(), test.dayOfMonth().getDurationField());
+        assertEquals(test.getChronology().months(), test.dayOfMonth().getRangeDurationField());
 NoAssert.donothing(2, test.dayOfMonth().getMaximumTextLength(null));
-NoAssert.donothing(2, test.dayOfMonth().getMaximumShortTextLength(null));
-NoAssert.donothing(1, test.dayOfMonth().getMinimumValue());
-NoAssert.donothing(1, test.dayOfMonth().getMinimumValueOverall());
+        assertEquals(2, test.dayOfMonth().getMaximumShortTextLength(null));
+        assertEquals(1, test.dayOfMonth().getMinimumValue());
+        assertEquals(1, test.dayOfMonth().getMinimumValueOverall());
 NoAssert.donothing(30, test.dayOfMonth().getMaximumValue());
-NoAssert.donothing(31, test.dayOfMonth().getMaximumValueOverall());
-NoAssert.donothing(false, test.dayOfMonth().isLeap());
-NoAssert.donothing(0, test.dayOfMonth().getLeapAmount());
-NoAssert.donothing(null, test.dayOfMonth().getLeapDurationField());
+        assertEquals(31, test.dayOfMonth().getMaximumValueOverall());
+        assertEquals(false, test.dayOfMonth().isLeap());
+        assertEquals(0, test.dayOfMonth().getLeapAmount());
+        assertEquals(null, test.dayOfMonth().getLeapDurationField());
     }
 
     @Test public void testPropertyWithMaximumValueDayOfMonth() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
         DateMidnight copy = test.dayOfMonth().withMaximumValue();
-NoAssert.donothing("2004-06-09T00:00:00.000+01:00", test.toString());
-NoAssert.donothing("2004-06-30T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-06-09T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-30T00:00:00.000+01:00", copy.toString());
     }
 
     @Test public void testPropertyWithMinimumValueDayOfMonth() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
         DateMidnight copy = test.dayOfMonth().withMinimumValue();
-NoAssert.donothing("2004-06-09T00:00:00.000+01:00", test.toString());
-NoAssert.donothing("2004-06-01T00:00:00.000+01:00", copy.toString());
+        assertEquals("2004-06-09T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-01T00:00:00.000+01:00", copy.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetDayOfYear() {
         // 31+29+31+30+31+9 = 161
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing(test.getChronology().dayOfYear(), test.dayOfYear().getField());
+        assertSame(test.getChronology().dayOfYear(), test.dayOfYear().getField());
 NoAssert.donothing("dayOfYear", test.dayOfYear().getName());
 NoAssert.donothing("Property[dayOfYear]", test.dayOfYear().toString());
-NoAssert.donothing(test, test.dayOfYear().getDateMidnight());
-NoAssert.donothing(161, test.dayOfYear().get());
-NoAssert.donothing("161", test.dayOfYear().getAsText());
-NoAssert.donothing("161", test.dayOfYear().getAsText(Locale.FRENCH));
-NoAssert.donothing("161", test.dayOfYear().getAsShortText());
-NoAssert.donothing("161", test.dayOfYear().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().days(), test.dayOfYear().getDurationField());
-NoAssert.donothing(test.getChronology().years(), test.dayOfYear().getRangeDurationField());
-NoAssert.donothing(3, test.dayOfYear().getMaximumTextLength(null));
+        assertSame(test, test.dayOfYear().getDateMidnight());
+        assertEquals(161, test.dayOfYear().get());
+        assertEquals("161", test.dayOfYear().getAsText());
+        assertEquals("161", test.dayOfYear().getAsText(Locale.FRENCH));
+        assertEquals("161", test.dayOfYear().getAsShortText());
+        assertEquals("161", test.dayOfYear().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().days(), test.dayOfYear().getDurationField());
+        assertEquals(test.getChronology().years(), test.dayOfYear().getRangeDurationField());
+        assertEquals(3, test.dayOfYear().getMaximumTextLength(null));
 NoAssert.donothing(3, test.dayOfYear().getMaximumShortTextLength(null));
 NoAssert.donothing(false, test.dayOfYear().isLeap());
-NoAssert.donothing(0, test.dayOfYear().getLeapAmount());
-NoAssert.donothing(null, test.dayOfYear().getLeapDurationField());
+        assertEquals(0, test.dayOfYear().getLeapAmount());
+        assertEquals(null, test.dayOfYear().getLeapDurationField());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetWeekOfWeekyear() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing(test.getChronology().weekOfWeekyear(), test.weekOfWeekyear().getField());
-NoAssert.donothing("weekOfWeekyear", test.weekOfWeekyear().getName());
+        assertSame(test.getChronology().weekOfWeekyear(), test.weekOfWeekyear().getField());
+        assertEquals("weekOfWeekyear", test.weekOfWeekyear().getName());
 NoAssert.donothing("Property[weekOfWeekyear]", test.weekOfWeekyear().toString());
-NoAssert.donothing(test, test.weekOfWeekyear().getDateMidnight());
-NoAssert.donothing(24, test.weekOfWeekyear().get());
-NoAssert.donothing("24", test.weekOfWeekyear().getAsText());
-NoAssert.donothing("24", test.weekOfWeekyear().getAsText(Locale.FRENCH));
-NoAssert.donothing("24", test.weekOfWeekyear().getAsShortText());
+        assertSame(test, test.weekOfWeekyear().getDateMidnight());
+        assertEquals(24, test.weekOfWeekyear().get());
+        assertEquals("24", test.weekOfWeekyear().getAsText());
+        assertEquals("24", test.weekOfWeekyear().getAsText(Locale.FRENCH));
+        assertEquals("24", test.weekOfWeekyear().getAsShortText());
 NoAssert.donothing("24", test.weekOfWeekyear().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().weeks(), test.weekOfWeekyear().getDurationField());
-NoAssert.donothing(test.getChronology().weekyears(), test.weekOfWeekyear().getRangeDurationField());
+        assertEquals(test.getChronology().weeks(), test.weekOfWeekyear().getDurationField());
+        assertEquals(test.getChronology().weekyears(), test.weekOfWeekyear().getRangeDurationField());
 NoAssert.donothing(2, test.weekOfWeekyear().getMaximumTextLength(null));
-NoAssert.donothing(2, test.weekOfWeekyear().getMaximumShortTextLength(null));
-NoAssert.donothing(false, test.weekOfWeekyear().isLeap());
+        assertEquals(2, test.weekOfWeekyear().getMaximumShortTextLength(null));
+        assertEquals(false, test.weekOfWeekyear().isLeap());
 NoAssert.donothing(0, test.weekOfWeekyear().getLeapAmount());
-NoAssert.donothing(null, test.weekOfWeekyear().getLeapDurationField());
+        assertEquals(null, test.weekOfWeekyear().getLeapDurationField());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetDayOfWeek() {
         DateMidnight test = new DateMidnight(2004, 6, 9);
-NoAssert.donothing(test.getChronology().dayOfWeek(), test.dayOfWeek().getField());
-NoAssert.donothing("dayOfWeek", test.dayOfWeek().getName());
-NoAssert.donothing("Property[dayOfWeek]", test.dayOfWeek().toString());
+        assertSame(test.getChronology().dayOfWeek(), test.dayOfWeek().getField());
+        assertEquals("dayOfWeek", test.dayOfWeek().getName());
+        assertEquals("Property[dayOfWeek]", test.dayOfWeek().toString());
 NoAssert.donothing(test, test.dayOfWeek().getDateMidnight());
-NoAssert.donothing(3, test.dayOfWeek().get());
-NoAssert.donothing("3", test.dayOfWeek().getAsString());
-NoAssert.donothing("Wednesday", test.dayOfWeek().getAsText());
-NoAssert.donothing("mercredi", test.dayOfWeek().getAsText(Locale.FRENCH));
-NoAssert.donothing("Wed", test.dayOfWeek().getAsShortText());
-NoAssert.donothing("mer.", test.dayOfWeek().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().days(), test.dayOfWeek().getDurationField());
-NoAssert.donothing(test.getChronology().weeks(), test.dayOfWeek().getRangeDurationField());
-NoAssert.donothing(9, test.dayOfWeek().getMaximumTextLength(null));
-NoAssert.donothing(8, test.dayOfWeek().getMaximumTextLength(Locale.FRENCH));
-NoAssert.donothing(3, test.dayOfWeek().getMaximumShortTextLength(null));
-NoAssert.donothing(4, test.dayOfWeek().getMaximumShortTextLength(Locale.FRENCH));
-NoAssert.donothing(1, test.dayOfWeek().getMinimumValue());
-NoAssert.donothing(1, test.dayOfWeek().getMinimumValueOverall());
-NoAssert.donothing(7, test.dayOfWeek().getMaximumValue());
-NoAssert.donothing(7, test.dayOfWeek().getMaximumValueOverall());
-NoAssert.donothing(false, test.dayOfWeek().isLeap());
-NoAssert.donothing(0, test.dayOfWeek().getLeapAmount());
-NoAssert.donothing(null, test.dayOfWeek().getLeapDurationField());
+        assertEquals(3, test.dayOfWeek().get());
+        assertEquals("3", test.dayOfWeek().getAsString());
+        assertEquals("Wednesday", test.dayOfWeek().getAsText());
+        assertEquals("mercredi", test.dayOfWeek().getAsText(Locale.FRENCH));
+        assertEquals("Wed", test.dayOfWeek().getAsShortText());
+        assertEquals("mer.", test.dayOfWeek().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().days(), test.dayOfWeek().getDurationField());
+        assertEquals(test.getChronology().weeks(), test.dayOfWeek().getRangeDurationField());
+        assertEquals(9, test.dayOfWeek().getMaximumTextLength(null));
+        assertEquals(8, test.dayOfWeek().getMaximumTextLength(Locale.FRENCH));
+        assertEquals(3, test.dayOfWeek().getMaximumShortTextLength(null));
+        assertEquals(4, test.dayOfWeek().getMaximumShortTextLength(Locale.FRENCH));
+        assertEquals(1, test.dayOfWeek().getMinimumValue());
+        assertEquals(1, test.dayOfWeek().getMinimumValueOverall());
+        assertEquals(7, test.dayOfWeek().getMaximumValue());
+        assertEquals(7, test.dayOfWeek().getMaximumValueOverall());
+        assertEquals(false, test.dayOfWeek().isLeap());
+        assertEquals(0, test.dayOfWeek().getLeapAmount());
+        assertEquals(null, test.dayOfWeek().getLeapDurationField());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyToIntervalYearOfEra() {
       DateMidnight test = new DateMidnight(2004, 6, 9);
       Interval testInterval = test.yearOfEra().toInterval();
-NoAssert.donothing(new DateMidnight(2004, 1, 1), testInterval.getStart());
-NoAssert.donothing(new DateMidnight(2005, 1, 1), testInterval.getEnd());
+      assertEquals(new DateMidnight(2004, 1, 1), testInterval.getStart());
+      assertEquals(new DateMidnight(2005, 1, 1), testInterval.getEnd());
     }
 
     @Test public void testPropertyToIntervalYearOfCentury() {
       DateMidnight test = new DateMidnight(2004, 6, 9);
       Interval testInterval = test.yearOfCentury().toInterval();
-NoAssert.donothing(new DateMidnight(2004, 1, 1), testInterval.getStart());
-NoAssert.donothing(new DateMidnight(2005, 1, 1), testInterval.getEnd());
+      assertEquals(new DateMidnight(2004, 1, 1), testInterval.getStart());
+      assertEquals(new DateMidnight(2005, 1, 1), testInterval.getEnd());
     }
 
     @Test public void testPropertyToIntervalYear() {
       DateMidnight test = new DateMidnight(2004, 6, 9);
       Interval testInterval = test.year().toInterval();
-NoAssert.donothing(new DateMidnight(2004, 1, 1), testInterval.getStart());
-NoAssert.donothing(new DateMidnight(2005, 1, 1), testInterval.getEnd());
+      assertEquals(new DateMidnight(2004, 1, 1), testInterval.getStart());
+      assertEquals(new DateMidnight(2005, 1, 1), testInterval.getEnd());
     }
 
     @Test public void testPropertyToIntervalMonthOfYear() {
       DateMidnight test = new DateMidnight(2004, 6, 9);
       Interval testInterval = test.monthOfYear().toInterval();
 NoAssert.donothing(new DateMidnight(2004, 6, 1), testInterval.getStart());
-NoAssert.donothing(new DateMidnight(2004, 7, 1), testInterval.getEnd());
+      assertEquals(new DateMidnight(2004, 7, 1), testInterval.getEnd());
     }
 
     @Test public void testPropertyToIntervalDayOfMonth() {
       DateMidnight test = new DateMidnight(2004, 6, 9);
       Interval testInterval = test.dayOfMonth().toInterval();
 NoAssert.donothing(new DateMidnight(2004, 6, 9), testInterval.getStart());
-NoAssert.donothing(new DateMidnight(2004, 6, 10), testInterval.getEnd());
+      assertEquals(new DateMidnight(2004, 6, 10), testInterval.getEnd());
 
       DateMidnight febTest = new DateMidnight(2004, 2, 29);
       Interval febTestInterval = febTest.dayOfMonth().toInterval();
 NoAssert.donothing(new DateMidnight(2004, 2, 29), febTestInterval.getStart());
-NoAssert.donothing(new DateMidnight(2004, 3, 1), febTestInterval.getEnd());
+      assertEquals(new DateMidnight(2004, 3, 1), febTestInterval.getEnd());
     }
 
     @Test public void testPropertyEqualsHashCodeLenient() {
         DateMidnight test1 = new DateMidnight(1970, 6, 9, LenientChronology.getInstance(COPTIC_PARIS));
         DateMidnight test2 = new DateMidnight(1970, 6, 9, LenientChronology.getInstance(COPTIC_PARIS));
-NoAssert.donothing(true, test1.dayOfMonth().equals(test2.dayOfMonth()));
-NoAssert.donothing(true, test2.dayOfMonth().equals(test1.dayOfMonth()));
-NoAssert.donothing(true, test1.dayOfMonth().equals(test1.dayOfMonth()));
-NoAssert.donothing(true, test2.dayOfMonth().equals(test2.dayOfMonth()));
-NoAssert.donothing(true, test1.dayOfMonth().hashCode() == test2.dayOfMonth().hashCode());
-NoAssert.donothing(true, test1.dayOfMonth().hashCode() == test1.dayOfMonth().hashCode());
-NoAssert.donothing(true, test2.dayOfMonth().hashCode() == test2.dayOfMonth().hashCode());
+        assertEquals(true, test1.dayOfMonth().equals(test2.dayOfMonth()));
+        assertEquals(true, test2.dayOfMonth().equals(test1.dayOfMonth()));
+        assertEquals(true, test1.dayOfMonth().equals(test1.dayOfMonth()));
+        assertEquals(true, test2.dayOfMonth().equals(test2.dayOfMonth()));
+        assertEquals(true, test1.dayOfMonth().hashCode() == test2.dayOfMonth().hashCode());
+        assertEquals(true, test1.dayOfMonth().hashCode() == test1.dayOfMonth().hashCode());
+        assertEquals(true, test2.dayOfMonth().hashCode() == test2.dayOfMonth().hashCode());
     }
 
     @Test public void testPropertyEqualsHashCodeStrict() {
         DateMidnight test1 = new DateMidnight(1970, 6, 9, StrictChronology.getInstance(COPTIC_PARIS));
         DateMidnight test2 = new DateMidnight(1970, 6, 9, StrictChronology.getInstance(COPTIC_PARIS));
-NoAssert.donothing(true, test1.dayOfMonth().equals(test2.dayOfMonth()));
-NoAssert.donothing(true, test2.dayOfMonth().equals(test1.dayOfMonth()));
+        assertEquals(true, test1.dayOfMonth().equals(test2.dayOfMonth()));
+        assertEquals(true, test2.dayOfMonth().equals(test1.dayOfMonth()));
 NoAssert.donothing(true, test1.dayOfMonth().equals(test1.dayOfMonth()));
-NoAssert.donothing(true, test2.dayOfMonth().equals(test2.dayOfMonth()));
-NoAssert.donothing(true, test1.dayOfMonth().hashCode() == test2.dayOfMonth().hashCode());
-NoAssert.donothing(true, test1.dayOfMonth().hashCode() == test1.dayOfMonth().hashCode());
+        assertEquals(true, test2.dayOfMonth().equals(test2.dayOfMonth()));
+        assertEquals(true, test1.dayOfMonth().hashCode() == test2.dayOfMonth().hashCode());
+        assertEquals(true, test1.dayOfMonth().hashCode() == test1.dayOfMonth().hashCode());
 NoAssert.donothing(true, test2.dayOfMonth().hashCode() == test2.dayOfMonth().hashCode());
     }
 

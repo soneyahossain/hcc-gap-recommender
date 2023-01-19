@@ -145,44 +145,44 @@ public class TestMutableDateTime_Properties  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testTest() {
 NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
 NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetEra() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
-NoAssert.donothing(test.getChronology().era(), test.era().getField());
-NoAssert.donothing("era", test.era().getName());
-NoAssert.donothing("Property[era]", test.era().toString());
+        assertSame(test.getChronology().era(), test.era().getField());
+        assertEquals("era", test.era().getName());
+        assertEquals("Property[era]", test.era().toString());
 NoAssert.donothing(test, test.era().getMutableDateTime());
-NoAssert.donothing(1, test.era().get());
-NoAssert.donothing("AD", test.era().getAsText());
+        assertEquals(1, test.era().get());
+        assertEquals("AD", test.era().getAsText());
 NoAssert.donothing("ap. J.-C.", test.era().getAsText(Locale.FRENCH));
-NoAssert.donothing("AD", test.era().getAsShortText());
+        assertEquals("AD", test.era().getAsShortText());
 NoAssert.donothing("ap. J.-C.", test.era().getAsShortText(Locale.FRENCH));
 NoAssert.donothing(test.getChronology().eras(), test.era().getDurationField());
-NoAssert.donothing(null, test.era().getRangeDurationField());
-NoAssert.donothing(2, test.era().getMaximumTextLength(null));
-NoAssert.donothing(9, test.era().getMaximumTextLength(Locale.FRENCH));
-NoAssert.donothing(2, test.era().getMaximumShortTextLength(null));
-NoAssert.donothing(9, test.era().getMaximumShortTextLength(Locale.FRENCH));
+        assertEquals(null, test.era().getRangeDurationField());
+        assertEquals(2, test.era().getMaximumTextLength(null));
+        assertEquals(9, test.era().getMaximumTextLength(Locale.FRENCH));
+        assertEquals(2, test.era().getMaximumShortTextLength(null));
+        assertEquals(9, test.era().getMaximumShortTextLength(Locale.FRENCH));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetYearOfEra() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
-NoAssert.donothing(test.getChronology().yearOfEra(), test.yearOfEra().getField());
-NoAssert.donothing("yearOfEra", test.yearOfEra().getName());
+        assertSame(test.getChronology().yearOfEra(), test.yearOfEra().getField());
+        assertEquals("yearOfEra", test.yearOfEra().getName());
 NoAssert.donothing("Property[yearOfEra]", test.yearOfEra().toString());
-NoAssert.donothing(2004, test.yearOfEra().get());
+        assertEquals(2004, test.yearOfEra().get());
 NoAssert.donothing("2004", test.yearOfEra().getAsText());
-NoAssert.donothing("2004", test.yearOfEra().getAsText(Locale.FRENCH));
-NoAssert.donothing("2004", test.yearOfEra().getAsShortText());
+        assertEquals("2004", test.yearOfEra().getAsText(Locale.FRENCH));
+        assertEquals("2004", test.yearOfEra().getAsShortText());
 NoAssert.donothing("2004", test.yearOfEra().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().years(), test.yearOfEra().getDurationField());
-NoAssert.donothing(test.getChronology().eras(), test.yearOfEra().getRangeDurationField());
-NoAssert.donothing(9, test.yearOfEra().getMaximumTextLength(null));
+        assertEquals(test.getChronology().years(), test.yearOfEra().getDurationField());
+        assertEquals(test.getChronology().eras(), test.yearOfEra().getRangeDurationField());
+        assertEquals(9, test.yearOfEra().getMaximumTextLength(null));
 NoAssert.donothing(9, test.yearOfEra().getMaximumShortTextLength(null));
     }
 
@@ -190,90 +190,90 @@ NoAssert.donothing(9, test.yearOfEra().getMaximumShortTextLength(null));
     @Test public void testPropertyGetCenturyOfEra() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
 NoAssert.donothing(test.getChronology().centuryOfEra(), test.centuryOfEra().getField());
-NoAssert.donothing("centuryOfEra", test.centuryOfEra().getName());
+        assertEquals("centuryOfEra", test.centuryOfEra().getName());
 NoAssert.donothing("Property[centuryOfEra]", test.centuryOfEra().toString());
-NoAssert.donothing(20, test.centuryOfEra().get());
-NoAssert.donothing("20", test.centuryOfEra().getAsText());
-NoAssert.donothing("20", test.centuryOfEra().getAsText(Locale.FRENCH));
+        assertEquals(20, test.centuryOfEra().get());
+        assertEquals("20", test.centuryOfEra().getAsText());
+        assertEquals("20", test.centuryOfEra().getAsText(Locale.FRENCH));
 NoAssert.donothing("20", test.centuryOfEra().getAsShortText());
-NoAssert.donothing("20", test.centuryOfEra().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().centuries(), test.centuryOfEra().getDurationField());
-NoAssert.donothing(test.getChronology().eras(), test.centuryOfEra().getRangeDurationField());
-NoAssert.donothing(7, test.centuryOfEra().getMaximumTextLength(null));
-NoAssert.donothing(7, test.centuryOfEra().getMaximumShortTextLength(null));
+        assertEquals("20", test.centuryOfEra().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().centuries(), test.centuryOfEra().getDurationField());
+        assertEquals(test.getChronology().eras(), test.centuryOfEra().getRangeDurationField());
+        assertEquals(7, test.centuryOfEra().getMaximumTextLength(null));
+        assertEquals(7, test.centuryOfEra().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetYearOfCentury() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
-NoAssert.donothing(test.getChronology().yearOfCentury(), test.yearOfCentury().getField());
+        assertSame(test.getChronology().yearOfCentury(), test.yearOfCentury().getField());
 NoAssert.donothing("yearOfCentury", test.yearOfCentury().getName());
-NoAssert.donothing("Property[yearOfCentury]", test.yearOfCentury().toString());
-NoAssert.donothing(4, test.yearOfCentury().get());
+        assertEquals("Property[yearOfCentury]", test.yearOfCentury().toString());
+        assertEquals(4, test.yearOfCentury().get());
 NoAssert.donothing("4", test.yearOfCentury().getAsText());
-NoAssert.donothing("4", test.yearOfCentury().getAsText(Locale.FRENCH));
-NoAssert.donothing("4", test.yearOfCentury().getAsShortText());
-NoAssert.donothing("4", test.yearOfCentury().getAsShortText(Locale.FRENCH));
+        assertEquals("4", test.yearOfCentury().getAsText(Locale.FRENCH));
+        assertEquals("4", test.yearOfCentury().getAsShortText());
+        assertEquals("4", test.yearOfCentury().getAsShortText(Locale.FRENCH));
 NoAssert.donothing(test.getChronology().years(), test.yearOfCentury().getDurationField());
 NoAssert.donothing(test.getChronology().centuries(), test.yearOfCentury().getRangeDurationField());
-NoAssert.donothing(2, test.yearOfCentury().getMaximumTextLength(null));
-NoAssert.donothing(2, test.yearOfCentury().getMaximumShortTextLength(null));
+        assertEquals(2, test.yearOfCentury().getMaximumTextLength(null));
+        assertEquals(2, test.yearOfCentury().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetWeekyear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
 NoAssert.donothing(test.getChronology().weekyear(), test.weekyear().getField());
-NoAssert.donothing("weekyear", test.weekyear().getName());
+        assertEquals("weekyear", test.weekyear().getName());
 NoAssert.donothing("Property[weekyear]", test.weekyear().toString());
-NoAssert.donothing(2004, test.weekyear().get());
-NoAssert.donothing("2004", test.weekyear().getAsText());
-NoAssert.donothing("2004", test.weekyear().getAsText(Locale.FRENCH));
-NoAssert.donothing("2004", test.weekyear().getAsShortText());
-NoAssert.donothing("2004", test.weekyear().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().weekyears(), test.weekyear().getDurationField());
+        assertEquals(2004, test.weekyear().get());
+        assertEquals("2004", test.weekyear().getAsText());
+        assertEquals("2004", test.weekyear().getAsText(Locale.FRENCH));
+        assertEquals("2004", test.weekyear().getAsShortText());
+        assertEquals("2004", test.weekyear().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().weekyears(), test.weekyear().getDurationField());
 NoAssert.donothing(null, test.weekyear().getRangeDurationField());
-NoAssert.donothing(9, test.weekyear().getMaximumTextLength(null));
-NoAssert.donothing(9, test.weekyear().getMaximumShortTextLength(null));
+        assertEquals(9, test.weekyear().getMaximumTextLength(null));
+        assertEquals(9, test.weekyear().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
-NoAssert.donothing(test.getChronology().year(), test.year().getField());
-NoAssert.donothing("year", test.year().getName());
+        assertSame(test.getChronology().year(), test.year().getField());
+        assertEquals("year", test.year().getName());
 NoAssert.donothing("Property[year]", test.year().toString());
-NoAssert.donothing(2004, test.year().get());
-NoAssert.donothing("2004", test.year().getAsText());
-NoAssert.donothing("2004", test.year().getAsText(Locale.FRENCH));
-NoAssert.donothing("2004", test.year().getAsShortText());
-NoAssert.donothing("2004", test.year().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().years(), test.year().getDurationField());
+        assertEquals(2004, test.year().get());
+        assertEquals("2004", test.year().getAsText());
+        assertEquals("2004", test.year().getAsText(Locale.FRENCH));
+        assertEquals("2004", test.year().getAsShortText());
+        assertEquals("2004", test.year().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().years(), test.year().getDurationField());
 NoAssert.donothing(null, test.year().getRangeDurationField());
-NoAssert.donothing(9, test.year().getMaximumTextLength(null));
+        assertEquals(9, test.year().getMaximumTextLength(null));
 NoAssert.donothing(9, test.year().getMaximumShortTextLength(null));
-NoAssert.donothing(-292275054, test.year().getMinimumValue());
-NoAssert.donothing(-292275054, test.year().getMinimumValueOverall());
-NoAssert.donothing(292278993, test.year().getMaximumValue());
+        assertEquals(-292275054, test.year().getMinimumValue());
+        assertEquals(-292275054, test.year().getMinimumValueOverall());
+        assertEquals(292278993, test.year().getMaximumValue());
 NoAssert.donothing(292278993, test.year().getMaximumValueOverall());
     }
 
     @Test public void testPropertyAddYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.year().add(9);
-NoAssert.donothing("2013-06-09T00:00:00.000+01:00", test.toString());
+        assertEquals("2013-06-09T00:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertyAddWrapFieldYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.year().addWrapField(9);
-NoAssert.donothing("2013-06-09T00:00:00.000+01:00", test.toString());
+        assertEquals("2013-06-09T00:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertySetYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.year().set(1960);
-NoAssert.donothing("1960-06-09T00:00:00.000+01:00", test.toString());
+        assertEquals("1960-06-09T00:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertySetTextYear() {
@@ -285,103 +285,103 @@ NoAssert.donothing("1960-06-09T00:00:00.000+01:00", test.toString());
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetMonthOfYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
-NoAssert.donothing(test.getChronology().monthOfYear(), test.monthOfYear().getField());
-NoAssert.donothing("monthOfYear", test.monthOfYear().getName());
-NoAssert.donothing("Property[monthOfYear]", test.monthOfYear().toString());
-NoAssert.donothing(6, test.monthOfYear().get());
+        assertSame(test.getChronology().monthOfYear(), test.monthOfYear().getField());
+        assertEquals("monthOfYear", test.monthOfYear().getName());
+        assertEquals("Property[monthOfYear]", test.monthOfYear().toString());
+        assertEquals(6, test.monthOfYear().get());
 NoAssert.donothing("June", test.monthOfYear().getAsText());
-NoAssert.donothing("juin", test.monthOfYear().getAsText(Locale.FRENCH));
-NoAssert.donothing("Jun", test.monthOfYear().getAsShortText());
-NoAssert.donothing("juin", test.monthOfYear().getAsShortText(Locale.FRENCH));
+        assertEquals("juin", test.monthOfYear().getAsText(Locale.FRENCH));
+        assertEquals("Jun", test.monthOfYear().getAsShortText());
+        assertEquals("juin", test.monthOfYear().getAsShortText(Locale.FRENCH));
 NoAssert.donothing(test.getChronology().months(), test.monthOfYear().getDurationField());
-NoAssert.donothing(test.getChronology().years(), test.monthOfYear().getRangeDurationField());
+        assertEquals(test.getChronology().years(), test.monthOfYear().getRangeDurationField());
 NoAssert.donothing(9, test.monthOfYear().getMaximumTextLength(null));
-NoAssert.donothing(3, test.monthOfYear().getMaximumShortTextLength(null));
+        assertEquals(3, test.monthOfYear().getMaximumShortTextLength(null));
         test = new MutableDateTime(2004, 7, 9, 0, 0, 0, 0);
 NoAssert.donothing("juillet", test.monthOfYear().getAsText(Locale.FRENCH));
-NoAssert.donothing("juil.", test.monthOfYear().getAsShortText(Locale.FRENCH));
+        assertEquals("juil.", test.monthOfYear().getAsShortText(Locale.FRENCH));
+        assertEquals(1, test.monthOfYear().getMinimumValue());
+        assertEquals(1, test.monthOfYear().getMinimumValueOverall());
+        assertEquals(12, test.monthOfYear().getMaximumValue());
+        assertEquals(12, test.monthOfYear().getMaximumValueOverall());
 NoAssert.donothing(1, test.monthOfYear().getMinimumValue());
 NoAssert.donothing(1, test.monthOfYear().getMinimumValueOverall());
-NoAssert.donothing(12, test.monthOfYear().getMaximumValue());
-NoAssert.donothing(12, test.monthOfYear().getMaximumValueOverall());
-NoAssert.donothing(1, test.monthOfYear().getMinimumValue());
-NoAssert.donothing(1, test.monthOfYear().getMinimumValueOverall());
-NoAssert.donothing(12, test.monthOfYear().getMaximumValue());
+        assertEquals(12, test.monthOfYear().getMaximumValue());
 NoAssert.donothing(12, test.monthOfYear().getMaximumValueOverall());
     }
 
     @Test public void testPropertyAddMonthOfYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.monthOfYear().add(6);
-NoAssert.donothing("2004-12-09T00:00:00.000Z", test.toString());
+        assertEquals("2004-12-09T00:00:00.000Z", test.toString());
     }
 
     @Test public void testPropertyAddWrapFieldMonthOfYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.monthOfYear().addWrapField(8);
-NoAssert.donothing("2004-02-09T00:00:00.000Z", test.toString());
+        assertEquals("2004-02-09T00:00:00.000Z", test.toString());
     }
 
     @Test public void testPropertySetMonthOfYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.monthOfYear().set(12);
-NoAssert.donothing("2004-12-09T00:00:00.000Z", test.toString());
+        assertEquals("2004-12-09T00:00:00.000Z", test.toString());
     }
 
     @Test public void testPropertySetTextMonthOfYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.monthOfYear().set("12");
-NoAssert.donothing("2004-12-09T00:00:00.000Z", test.toString());
+        assertEquals("2004-12-09T00:00:00.000Z", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.monthOfYear().set("December");
-NoAssert.donothing("2004-12-09T00:00:00.000Z", test.toString());
+        assertEquals("2004-12-09T00:00:00.000Z", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.monthOfYear().set("Dec");
-NoAssert.donothing("2004-12-09T00:00:00.000Z", test.toString());
+        assertEquals("2004-12-09T00:00:00.000Z", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetDayOfMonth() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
-NoAssert.donothing(test.getChronology().dayOfMonth(), test.dayOfMonth().getField());
-NoAssert.donothing("dayOfMonth", test.dayOfMonth().getName());
-NoAssert.donothing("Property[dayOfMonth]", test.dayOfMonth().toString());
-NoAssert.donothing(9, test.dayOfMonth().get());
-NoAssert.donothing("9", test.dayOfMonth().getAsText());
-NoAssert.donothing("9", test.dayOfMonth().getAsText(Locale.FRENCH));
-NoAssert.donothing("9", test.dayOfMonth().getAsShortText());
-NoAssert.donothing("9", test.dayOfMonth().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().days(), test.dayOfMonth().getDurationField());
-NoAssert.donothing(test.getChronology().months(), test.dayOfMonth().getRangeDurationField());
+        assertSame(test.getChronology().dayOfMonth(), test.dayOfMonth().getField());
+        assertEquals("dayOfMonth", test.dayOfMonth().getName());
+        assertEquals("Property[dayOfMonth]", test.dayOfMonth().toString());
+        assertEquals(9, test.dayOfMonth().get());
+        assertEquals("9", test.dayOfMonth().getAsText());
+        assertEquals("9", test.dayOfMonth().getAsText(Locale.FRENCH));
+        assertEquals("9", test.dayOfMonth().getAsShortText());
+        assertEquals("9", test.dayOfMonth().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().days(), test.dayOfMonth().getDurationField());
+        assertEquals(test.getChronology().months(), test.dayOfMonth().getRangeDurationField());
 NoAssert.donothing(2, test.dayOfMonth().getMaximumTextLength(null));
-NoAssert.donothing(2, test.dayOfMonth().getMaximumShortTextLength(null));
-NoAssert.donothing(1, test.dayOfMonth().getMinimumValue());
+        assertEquals(2, test.dayOfMonth().getMaximumShortTextLength(null));
+        assertEquals(1, test.dayOfMonth().getMinimumValue());
 NoAssert.donothing(1, test.dayOfMonth().getMinimumValueOverall());
-NoAssert.donothing(30, test.dayOfMonth().getMaximumValue());
-NoAssert.donothing(31, test.dayOfMonth().getMaximumValueOverall());
-NoAssert.donothing(false, test.dayOfMonth().isLeap());
-NoAssert.donothing(0, test.dayOfMonth().getLeapAmount());
-NoAssert.donothing(null, test.dayOfMonth().getLeapDurationField());
+        assertEquals(30, test.dayOfMonth().getMaximumValue());
+        assertEquals(31, test.dayOfMonth().getMaximumValueOverall());
+        assertEquals(false, test.dayOfMonth().isLeap());
+        assertEquals(0, test.dayOfMonth().getLeapAmount());
+        assertEquals(null, test.dayOfMonth().getLeapDurationField());
     }
 
     @Test public void testPropertyAddDayOfMonth() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfMonth().add(9);
-NoAssert.donothing("2004-06-18T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-18T00:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertyAddWrapFieldDayOfMonth() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfMonth().addWrapField(22);
-NoAssert.donothing("2004-06-01T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-01T00:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertySetDayOfMonth() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfMonth().set(12);
-NoAssert.donothing("2004-06-12T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-12T00:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertySetTextDayOfMonth() {
@@ -394,45 +394,45 @@ NoAssert.donothing("2004-06-12T00:00:00.000+01:00", test.toString());
     @Test public void testPropertyGetDayOfYear() {
         // 31+29+31+30+31+9 = 161
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
-NoAssert.donothing(test.getChronology().dayOfYear(), test.dayOfYear().getField());
+        assertSame(test.getChronology().dayOfYear(), test.dayOfYear().getField());
 NoAssert.donothing("dayOfYear", test.dayOfYear().getName());
-NoAssert.donothing("Property[dayOfYear]", test.dayOfYear().toString());
-NoAssert.donothing(161, test.dayOfYear().get());
+        assertEquals("Property[dayOfYear]", test.dayOfYear().toString());
+        assertEquals(161, test.dayOfYear().get());
 NoAssert.donothing("161", test.dayOfYear().getAsText());
-NoAssert.donothing("161", test.dayOfYear().getAsText(Locale.FRENCH));
-NoAssert.donothing("161", test.dayOfYear().getAsShortText());
-NoAssert.donothing("161", test.dayOfYear().getAsShortText(Locale.FRENCH));
+        assertEquals("161", test.dayOfYear().getAsText(Locale.FRENCH));
+        assertEquals("161", test.dayOfYear().getAsShortText());
+        assertEquals("161", test.dayOfYear().getAsShortText(Locale.FRENCH));
 NoAssert.donothing(test.getChronology().days(), test.dayOfYear().getDurationField());
-NoAssert.donothing(test.getChronology().years(), test.dayOfYear().getRangeDurationField());
-NoAssert.donothing(3, test.dayOfYear().getMaximumTextLength(null));
-NoAssert.donothing(3, test.dayOfYear().getMaximumShortTextLength(null));
-NoAssert.donothing(false, test.dayOfYear().isLeap());
-NoAssert.donothing(0, test.dayOfYear().getLeapAmount());
+        assertEquals(test.getChronology().years(), test.dayOfYear().getRangeDurationField());
+        assertEquals(3, test.dayOfYear().getMaximumTextLength(null));
+        assertEquals(3, test.dayOfYear().getMaximumShortTextLength(null));
+        assertEquals(false, test.dayOfYear().isLeap());
+        assertEquals(0, test.dayOfYear().getLeapAmount());
 NoAssert.donothing(null, test.dayOfYear().getLeapDurationField());
     }
 
     @Test public void testPropertyAddDayOfYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfYear().add(9);
-NoAssert.donothing("2004-06-18T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-18T00:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertyAddWrapFieldDayOfYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfYear().addWrapField(206);
-NoAssert.donothing("2004-01-01T00:00:00.000Z", test.toString());
+        assertEquals("2004-01-01T00:00:00.000Z", test.toString());
     }
 
     @Test public void testPropertySetDayOfYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfYear().set(12);
-NoAssert.donothing("2004-01-12T00:00:00.000Z", test.toString());
+        assertEquals("2004-01-12T00:00:00.000Z", test.toString());
     }
 
     @Test public void testPropertySetTextDayOfYear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfYear().set("12");
-NoAssert.donothing("2004-01-12T00:00:00.000Z", test.toString());
+        assertEquals("2004-01-12T00:00:00.000Z", test.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -452,20 +452,20 @@ NoAssert.donothing("2004-01-12T00:00:00.000Z", test.toString());
         // 2005-01-01 = Mon             W1
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
 NoAssert.donothing(test.getChronology().weekOfWeekyear(), test.weekOfWeekyear().getField());
-NoAssert.donothing("weekOfWeekyear", test.weekOfWeekyear().getName());
-NoAssert.donothing("Property[weekOfWeekyear]", test.weekOfWeekyear().toString());
-NoAssert.donothing(24, test.weekOfWeekyear().get());
-NoAssert.donothing("24", test.weekOfWeekyear().getAsText());
-NoAssert.donothing("24", test.weekOfWeekyear().getAsText(Locale.FRENCH));
-NoAssert.donothing("24", test.weekOfWeekyear().getAsShortText());
-NoAssert.donothing("24", test.weekOfWeekyear().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().weeks(), test.weekOfWeekyear().getDurationField());
-NoAssert.donothing(test.getChronology().weekyears(), test.weekOfWeekyear().getRangeDurationField());
-NoAssert.donothing(2, test.weekOfWeekyear().getMaximumTextLength(null));
-NoAssert.donothing(2, test.weekOfWeekyear().getMaximumShortTextLength(null));
+        assertEquals("weekOfWeekyear", test.weekOfWeekyear().getName());
+        assertEquals("Property[weekOfWeekyear]", test.weekOfWeekyear().toString());
+        assertEquals(24, test.weekOfWeekyear().get());
+        assertEquals("24", test.weekOfWeekyear().getAsText());
+        assertEquals("24", test.weekOfWeekyear().getAsText(Locale.FRENCH));
+        assertEquals("24", test.weekOfWeekyear().getAsShortText());
+        assertEquals("24", test.weekOfWeekyear().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().weeks(), test.weekOfWeekyear().getDurationField());
+        assertEquals(test.getChronology().weekyears(), test.weekOfWeekyear().getRangeDurationField());
+        assertEquals(2, test.weekOfWeekyear().getMaximumTextLength(null));
+        assertEquals(2, test.weekOfWeekyear().getMaximumShortTextLength(null));
 NoAssert.donothing(false, test.weekOfWeekyear().isLeap());
-NoAssert.donothing(0, test.weekOfWeekyear().getLeapAmount());
-NoAssert.donothing(null, test.weekOfWeekyear().getLeapDurationField());
+        assertEquals(0, test.weekOfWeekyear().getLeapAmount());
+        assertEquals(null, test.weekOfWeekyear().getLeapDurationField());
     }
 
     @Test public void testPropertyAddWeekOfWeekyear() {
@@ -477,7 +477,7 @@ NoAssert.donothing("2004-06-14T00:00:00.000+01:00", test.toString());
     @Test public void testPropertyAddWrapFieldWeekOfWeekyear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 7, 0, 0, 0, 0);
         test.weekOfWeekyear().addWrapField(30);
-NoAssert.donothing("2003-12-29T00:00:00.000Z", test.toString());
+        assertEquals("2003-12-29T00:00:00.000Z", test.toString());
     }
 
     @Test public void testPropertySetWeekOfWeekyear() {
@@ -489,39 +489,39 @@ NoAssert.donothing("2004-01-19T00:00:00.000Z", test.toString());
     @Test public void testPropertySetTextWeekOfWeekyear() {
         MutableDateTime test = new MutableDateTime(2004, 6, 7, 0, 0, 0, 0);
         test.weekOfWeekyear().set("4");
-NoAssert.donothing("2004-01-19T00:00:00.000Z", test.toString());
+        assertEquals("2004-01-19T00:00:00.000Z", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetDayOfWeek() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
-NoAssert.donothing(test.getChronology().dayOfWeek(), test.dayOfWeek().getField());
-NoAssert.donothing("dayOfWeek", test.dayOfWeek().getName());
+        assertSame(test.getChronology().dayOfWeek(), test.dayOfWeek().getField());
+        assertEquals("dayOfWeek", test.dayOfWeek().getName());
 NoAssert.donothing("Property[dayOfWeek]", test.dayOfWeek().toString());
-NoAssert.donothing(3, test.dayOfWeek().get());
-NoAssert.donothing("Wednesday", test.dayOfWeek().getAsText());
-NoAssert.donothing("mercredi", test.dayOfWeek().getAsText(Locale.FRENCH));
-NoAssert.donothing("Wed", test.dayOfWeek().getAsShortText());
-NoAssert.donothing("mer.", test.dayOfWeek().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().days(), test.dayOfWeek().getDurationField());
-NoAssert.donothing(test.getChronology().weeks(), test.dayOfWeek().getRangeDurationField());
-NoAssert.donothing(9, test.dayOfWeek().getMaximumTextLength(null));
-NoAssert.donothing(8, test.dayOfWeek().getMaximumTextLength(Locale.FRENCH));
-NoAssert.donothing(3, test.dayOfWeek().getMaximumShortTextLength(null));
-NoAssert.donothing(4, test.dayOfWeek().getMaximumShortTextLength(Locale.FRENCH));
-NoAssert.donothing(1, test.dayOfWeek().getMinimumValue());
-NoAssert.donothing(1, test.dayOfWeek().getMinimumValueOverall());
-NoAssert.donothing(7, test.dayOfWeek().getMaximumValue());
-NoAssert.donothing(7, test.dayOfWeek().getMaximumValueOverall());
+        assertEquals(3, test.dayOfWeek().get());
+        assertEquals("Wednesday", test.dayOfWeek().getAsText());
+        assertEquals("mercredi", test.dayOfWeek().getAsText(Locale.FRENCH));
+        assertEquals("Wed", test.dayOfWeek().getAsShortText());
+        assertEquals("mer.", test.dayOfWeek().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().days(), test.dayOfWeek().getDurationField());
+        assertEquals(test.getChronology().weeks(), test.dayOfWeek().getRangeDurationField());
+        assertEquals(9, test.dayOfWeek().getMaximumTextLength(null));
+        assertEquals(8, test.dayOfWeek().getMaximumTextLength(Locale.FRENCH));
+        assertEquals(3, test.dayOfWeek().getMaximumShortTextLength(null));
+        assertEquals(4, test.dayOfWeek().getMaximumShortTextLength(Locale.FRENCH));
+        assertEquals(1, test.dayOfWeek().getMinimumValue());
+        assertEquals(1, test.dayOfWeek().getMinimumValueOverall());
+        assertEquals(7, test.dayOfWeek().getMaximumValue());
+        assertEquals(7, test.dayOfWeek().getMaximumValueOverall());
 NoAssert.donothing(false, test.dayOfWeek().isLeap());
-NoAssert.donothing(0, test.dayOfWeek().getLeapAmount());
-NoAssert.donothing(null, test.dayOfWeek().getLeapDurationField());
+        assertEquals(0, test.dayOfWeek().getLeapAmount());
+        assertEquals(null, test.dayOfWeek().getLeapDurationField());
     }
 
     @Test public void testPropertyAddDayOfWeek() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfWeek().add(1);
-NoAssert.donothing("2004-06-10T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-10T00:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertyAddLongDayOfWeek() {
@@ -533,27 +533,27 @@ NoAssert.donothing("2004-06-10T00:00:00.000+01:00", test.toString());
     @Test public void testPropertyAddWrapFieldDayOfWeek() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);  // Wed
         test.dayOfWeek().addWrapField(5);
-NoAssert.donothing("2004-06-07T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-07T00:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertySetDayOfWeek() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfWeek().set(4);
-NoAssert.donothing("2004-06-10T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-10T00:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertySetTextDayOfWeek() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfWeek().set("4");
-NoAssert.donothing("2004-06-10T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-10T00:00:00.000+01:00", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfWeek().set("Mon");
-NoAssert.donothing("2004-06-07T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-07T00:00:00.000+01:00", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfWeek().set("Tuesday");
-NoAssert.donothing("2004-06-08T00:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-08T00:00:00.000+01:00", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 0, 0, 0, 0);
         test.dayOfWeek().set("lundi", Locale.FRENCH);
@@ -563,36 +563,36 @@ NoAssert.donothing("2004-06-07T00:00:00.000+01:00", test.toString());
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetHourOfDay() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
-NoAssert.donothing(test.getChronology().hourOfDay(), test.hourOfDay().getField());
-NoAssert.donothing("hourOfDay", test.hourOfDay().getName());
-NoAssert.donothing("Property[hourOfDay]", test.hourOfDay().toString());
+        assertSame(test.getChronology().hourOfDay(), test.hourOfDay().getField());
+        assertEquals("hourOfDay", test.hourOfDay().getName());
+        assertEquals("Property[hourOfDay]", test.hourOfDay().toString());
 NoAssert.donothing(13, test.hourOfDay().get());
-NoAssert.donothing("13", test.hourOfDay().getAsText());
-NoAssert.donothing("13", test.hourOfDay().getAsText(Locale.FRENCH));
-NoAssert.donothing("13", test.hourOfDay().getAsShortText());
-NoAssert.donothing("13", test.hourOfDay().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().hours(), test.hourOfDay().getDurationField());
-NoAssert.donothing(test.getChronology().days(), test.hourOfDay().getRangeDurationField());
-NoAssert.donothing(2, test.hourOfDay().getMaximumTextLength(null));
-NoAssert.donothing(2, test.hourOfDay().getMaximumShortTextLength(null));
+        assertEquals("13", test.hourOfDay().getAsText());
+        assertEquals("13", test.hourOfDay().getAsText(Locale.FRENCH));
+        assertEquals("13", test.hourOfDay().getAsShortText());
+        assertEquals("13", test.hourOfDay().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().hours(), test.hourOfDay().getDurationField());
+        assertEquals(test.getChronology().days(), test.hourOfDay().getRangeDurationField());
+        assertEquals(2, test.hourOfDay().getMaximumTextLength(null));
+        assertEquals(2, test.hourOfDay().getMaximumShortTextLength(null));
     }
 
     @Test public void testPropertyRoundFloorHourOfDay() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 30, 0, 0);
         test.hourOfDay().roundFloor();
-NoAssert.donothing("2004-06-09T13:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-09T13:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertyRoundCeilingHourOfDay() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 30, 0, 0);
         test.hourOfDay().roundCeiling();
-NoAssert.donothing("2004-06-09T14:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-09T14:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertyRoundHalfFloorHourOfDay() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 30, 0, 0);
         test.hourOfDay().roundHalfFloor();
-NoAssert.donothing("2004-06-09T13:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-09T13:00:00.000+01:00", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 13, 30, 0, 1);
         test.hourOfDay().roundHalfFloor();
@@ -600,7 +600,7 @@ NoAssert.donothing("2004-06-09T14:00:00.000+01:00", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 13, 29, 59, 999);
         test.hourOfDay().roundHalfFloor();
-NoAssert.donothing("2004-06-09T13:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-09T13:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertyRoundHalfCeilingHourOfDay() {
@@ -610,25 +610,25 @@ NoAssert.donothing("2004-06-09T14:00:00.000+01:00", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 13, 30, 0, 1);
         test.hourOfDay().roundHalfCeiling();
-NoAssert.donothing("2004-06-09T14:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-09T14:00:00.000+01:00", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 13, 29, 59, 999);
         test.hourOfDay().roundHalfCeiling();
-NoAssert.donothing("2004-06-09T13:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-09T13:00:00.000+01:00", test.toString());
     }
 
     @Test public void testPropertyRoundHalfEvenHourOfDay() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 30, 0, 0);
         test.hourOfDay().roundHalfEven();
-NoAssert.donothing("2004-06-09T14:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-09T14:00:00.000+01:00", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 14, 30, 0, 0);
         test.hourOfDay().roundHalfEven();
-NoAssert.donothing("2004-06-09T14:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-09T14:00:00.000+01:00", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 13, 30, 0, 1);
         test.hourOfDay().roundHalfEven();
-NoAssert.donothing("2004-06-09T14:00:00.000+01:00", test.toString());
+        assertEquals("2004-06-09T14:00:00.000+01:00", test.toString());
         
         test = new MutableDateTime(2004, 6, 9, 13, 29, 59, 999);
         test.hourOfDay().roundHalfEven();
@@ -637,177 +637,177 @@ NoAssert.donothing("2004-06-09T13:00:00.000+01:00", test.toString());
 
     @Test public void testPropertyRemainderHourOfDay() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 30, 0, 0);
-NoAssert.donothing(30L * DateTimeConstants.MILLIS_PER_MINUTE, test.hourOfDay().remainder());
+        assertEquals(30L * DateTimeConstants.MILLIS_PER_MINUTE, test.hourOfDay().remainder());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetMinuteOfHour() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
-NoAssert.donothing(test.getChronology().minuteOfHour(), test.minuteOfHour().getField());
-NoAssert.donothing("minuteOfHour", test.minuteOfHour().getName());
-NoAssert.donothing("Property[minuteOfHour]", test.minuteOfHour().toString());
-NoAssert.donothing(23, test.minuteOfHour().get());
-NoAssert.donothing("23", test.minuteOfHour().getAsText());
-NoAssert.donothing("23", test.minuteOfHour().getAsText(Locale.FRENCH));
-NoAssert.donothing("23", test.minuteOfHour().getAsShortText());
-NoAssert.donothing("23", test.minuteOfHour().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().minutes(), test.minuteOfHour().getDurationField());
-NoAssert.donothing(test.getChronology().hours(), test.minuteOfHour().getRangeDurationField());
-NoAssert.donothing(2, test.minuteOfHour().getMaximumTextLength(null));
-NoAssert.donothing(2, test.minuteOfHour().getMaximumShortTextLength(null));
+        assertSame(test.getChronology().minuteOfHour(), test.minuteOfHour().getField());
+        assertEquals("minuteOfHour", test.minuteOfHour().getName());
+        assertEquals("Property[minuteOfHour]", test.minuteOfHour().toString());
+        assertEquals(23, test.minuteOfHour().get());
+        assertEquals("23", test.minuteOfHour().getAsText());
+        assertEquals("23", test.minuteOfHour().getAsText(Locale.FRENCH));
+        assertEquals("23", test.minuteOfHour().getAsShortText());
+        assertEquals("23", test.minuteOfHour().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().minutes(), test.minuteOfHour().getDurationField());
+        assertEquals(test.getChronology().hours(), test.minuteOfHour().getRangeDurationField());
+        assertEquals(2, test.minuteOfHour().getMaximumTextLength(null));
+        assertEquals(2, test.minuteOfHour().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetMinuteOfDay() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
-NoAssert.donothing(test.getChronology().minuteOfDay(), test.minuteOfDay().getField());
-NoAssert.donothing("minuteOfDay", test.minuteOfDay().getName());
-NoAssert.donothing("Property[minuteOfDay]", test.minuteOfDay().toString());
-NoAssert.donothing(803, test.minuteOfDay().get());
-NoAssert.donothing("803", test.minuteOfDay().getAsText());
-NoAssert.donothing("803", test.minuteOfDay().getAsText(Locale.FRENCH));
+        assertSame(test.getChronology().minuteOfDay(), test.minuteOfDay().getField());
+        assertEquals("minuteOfDay", test.minuteOfDay().getName());
+        assertEquals("Property[minuteOfDay]", test.minuteOfDay().toString());
+        assertEquals(803, test.minuteOfDay().get());
+        assertEquals("803", test.minuteOfDay().getAsText());
+        assertEquals("803", test.minuteOfDay().getAsText(Locale.FRENCH));
 NoAssert.donothing("803", test.minuteOfDay().getAsShortText());
-NoAssert.donothing("803", test.minuteOfDay().getAsShortText(Locale.FRENCH));
+        assertEquals("803", test.minuteOfDay().getAsShortText(Locale.FRENCH));
 NoAssert.donothing(test.getChronology().minutes(), test.minuteOfDay().getDurationField());
 NoAssert.donothing(test.getChronology().days(), test.minuteOfDay().getRangeDurationField());
-NoAssert.donothing(4, test.minuteOfDay().getMaximumTextLength(null));
-NoAssert.donothing(4, test.minuteOfDay().getMaximumShortTextLength(null));
+        assertEquals(4, test.minuteOfDay().getMaximumTextLength(null));
+        assertEquals(4, test.minuteOfDay().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetSecondOfMinute() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
-NoAssert.donothing(test.getChronology().secondOfMinute(), test.secondOfMinute().getField());
+        assertSame(test.getChronology().secondOfMinute(), test.secondOfMinute().getField());
 NoAssert.donothing("secondOfMinute", test.secondOfMinute().getName());
-NoAssert.donothing("Property[secondOfMinute]", test.secondOfMinute().toString());
-NoAssert.donothing(43, test.secondOfMinute().get());
-NoAssert.donothing("43", test.secondOfMinute().getAsText());
-NoAssert.donothing("43", test.secondOfMinute().getAsText(Locale.FRENCH));
-NoAssert.donothing("43", test.secondOfMinute().getAsShortText());
+        assertEquals("Property[secondOfMinute]", test.secondOfMinute().toString());
+        assertEquals(43, test.secondOfMinute().get());
+        assertEquals("43", test.secondOfMinute().getAsText());
+        assertEquals("43", test.secondOfMinute().getAsText(Locale.FRENCH));
+        assertEquals("43", test.secondOfMinute().getAsShortText());
 NoAssert.donothing("43", test.secondOfMinute().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().seconds(), test.secondOfMinute().getDurationField());
-NoAssert.donothing(test.getChronology().minutes(), test.secondOfMinute().getRangeDurationField());
-NoAssert.donothing(2, test.secondOfMinute().getMaximumTextLength(null));
-NoAssert.donothing(2, test.secondOfMinute().getMaximumShortTextLength(null));
+        assertEquals(test.getChronology().seconds(), test.secondOfMinute().getDurationField());
+        assertEquals(test.getChronology().minutes(), test.secondOfMinute().getRangeDurationField());
+        assertEquals(2, test.secondOfMinute().getMaximumTextLength(null));
+        assertEquals(2, test.secondOfMinute().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetSecondOfDay() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
-NoAssert.donothing(test.getChronology().secondOfDay(), test.secondOfDay().getField());
-NoAssert.donothing("secondOfDay", test.secondOfDay().getName());
-NoAssert.donothing("Property[secondOfDay]", test.secondOfDay().toString());
-NoAssert.donothing(48223, test.secondOfDay().get());
-NoAssert.donothing("48223", test.secondOfDay().getAsText());
-NoAssert.donothing("48223", test.secondOfDay().getAsText(Locale.FRENCH));
-NoAssert.donothing("48223", test.secondOfDay().getAsShortText());
+        assertSame(test.getChronology().secondOfDay(), test.secondOfDay().getField());
+        assertEquals("secondOfDay", test.secondOfDay().getName());
+        assertEquals("Property[secondOfDay]", test.secondOfDay().toString());
+        assertEquals(48223, test.secondOfDay().get());
+        assertEquals("48223", test.secondOfDay().getAsText());
+        assertEquals("48223", test.secondOfDay().getAsText(Locale.FRENCH));
+        assertEquals("48223", test.secondOfDay().getAsShortText());
 NoAssert.donothing("48223", test.secondOfDay().getAsShortText(Locale.FRENCH));
 NoAssert.donothing(test.getChronology().seconds(), test.secondOfDay().getDurationField());
 NoAssert.donothing(test.getChronology().days(), test.secondOfDay().getRangeDurationField());
-NoAssert.donothing(5, test.secondOfDay().getMaximumTextLength(null));
-NoAssert.donothing(5, test.secondOfDay().getMaximumShortTextLength(null));
+        assertEquals(5, test.secondOfDay().getMaximumTextLength(null));
+        assertEquals(5, test.secondOfDay().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetMillisOfSecond() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
-NoAssert.donothing(test.getChronology().millisOfSecond(), test.millisOfSecond().getField());
-NoAssert.donothing("millisOfSecond", test.millisOfSecond().getName());
+        assertSame(test.getChronology().millisOfSecond(), test.millisOfSecond().getField());
+        assertEquals("millisOfSecond", test.millisOfSecond().getName());
 NoAssert.donothing("Property[millisOfSecond]", test.millisOfSecond().toString());
-NoAssert.donothing(53, test.millisOfSecond().get());
-NoAssert.donothing("53", test.millisOfSecond().getAsText());
+        assertEquals(53, test.millisOfSecond().get());
+        assertEquals("53", test.millisOfSecond().getAsText());
 NoAssert.donothing("53", test.millisOfSecond().getAsText(Locale.FRENCH));
 NoAssert.donothing("53", test.millisOfSecond().getAsShortText());
-NoAssert.donothing("53", test.millisOfSecond().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().millis(), test.millisOfSecond().getDurationField());
-NoAssert.donothing(test.getChronology().seconds(), test.millisOfSecond().getRangeDurationField());
+        assertEquals("53", test.millisOfSecond().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().millis(), test.millisOfSecond().getDurationField());
+        assertEquals(test.getChronology().seconds(), test.millisOfSecond().getRangeDurationField());
 NoAssert.donothing(3, test.millisOfSecond().getMaximumTextLength(null));
-NoAssert.donothing(3, test.millisOfSecond().getMaximumShortTextLength(null));
+        assertEquals(3, test.millisOfSecond().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyGetMillisOfDay() {
         MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
-NoAssert.donothing(test.getChronology().millisOfDay(), test.millisOfDay().getField());
-NoAssert.donothing("millisOfDay", test.millisOfDay().getName());
-NoAssert.donothing("Property[millisOfDay]", test.millisOfDay().toString());
-NoAssert.donothing(48223053, test.millisOfDay().get());
-NoAssert.donothing("48223053", test.millisOfDay().getAsText());
-NoAssert.donothing("48223053", test.millisOfDay().getAsText(Locale.FRENCH));
+        assertSame(test.getChronology().millisOfDay(), test.millisOfDay().getField());
+        assertEquals("millisOfDay", test.millisOfDay().getName());
+        assertEquals("Property[millisOfDay]", test.millisOfDay().toString());
+        assertEquals(48223053, test.millisOfDay().get());
+        assertEquals("48223053", test.millisOfDay().getAsText());
+        assertEquals("48223053", test.millisOfDay().getAsText(Locale.FRENCH));
 NoAssert.donothing("48223053", test.millisOfDay().getAsShortText());
-NoAssert.donothing("48223053", test.millisOfDay().getAsShortText(Locale.FRENCH));
-NoAssert.donothing(test.getChronology().millis(), test.millisOfDay().getDurationField());
+        assertEquals("48223053", test.millisOfDay().getAsShortText(Locale.FRENCH));
+        assertEquals(test.getChronology().millis(), test.millisOfDay().getDurationField());
 NoAssert.donothing(test.getChronology().days(), test.millisOfDay().getRangeDurationField());
-NoAssert.donothing(8, test.millisOfDay().getMaximumTextLength(null));
-NoAssert.donothing(8, test.millisOfDay().getMaximumShortTextLength(null));
+        assertEquals(8, test.millisOfDay().getMaximumTextLength(null));
+        assertEquals(8, test.millisOfDay().getMaximumShortTextLength(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPropertyToIntervalYearOfEra() {
       MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
       Interval testInterval = test.yearOfEra().toInterval();
-NoAssert.donothing(new MutableDateTime(2004, 1, 1, 0, 0, 0, 0), testInterval.getStart());
-NoAssert.donothing(new MutableDateTime(2005, 1, 1, 0, 0, 0, 0), testInterval.getEnd());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
+      assertEquals(new MutableDateTime(2004, 1, 1, 0, 0, 0, 0), testInterval.getStart());
+      assertEquals(new MutableDateTime(2005, 1, 1, 0, 0, 0, 0), testInterval.getEnd());
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
     }
 
     @Test public void testPropertyToIntervalYearOfCentury() {
       MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
       Interval testInterval = test.yearOfCentury().toInterval();
-NoAssert.donothing(new MutableDateTime(2004, 1, 1, 0, 0, 0, 0), testInterval.getStart());
-NoAssert.donothing(new MutableDateTime(2005, 1, 1, 0, 0, 0, 0), testInterval.getEnd());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
+      assertEquals(new MutableDateTime(2004, 1, 1, 0, 0, 0, 0), testInterval.getStart());
+      assertEquals(new MutableDateTime(2005, 1, 1, 0, 0, 0, 0), testInterval.getEnd());
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
     }
 
     @Test public void testPropertyToIntervalYear() {
       MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
       Interval testInterval = test.year().toInterval();
 NoAssert.donothing(new MutableDateTime(2004, 1, 1, 0, 0, 0, 0), testInterval.getStart());
-NoAssert.donothing(new MutableDateTime(2005, 1, 1, 0, 0, 0, 0), testInterval.getEnd());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
+      assertEquals(new MutableDateTime(2005, 1, 1, 0, 0, 0, 0), testInterval.getEnd());
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
     }
 
     @Test public void testPropertyToIntervalMonthOfYear() {
       MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
       Interval testInterval = test.monthOfYear().toInterval();
-NoAssert.donothing(new MutableDateTime(2004, 6, 1, 0, 0, 0, 0), testInterval.getStart());
-NoAssert.donothing(new MutableDateTime(2004, 7, 1, 0, 0, 0, 0), testInterval.getEnd());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
+      assertEquals(new MutableDateTime(2004, 6, 1, 0, 0, 0, 0), testInterval.getStart());
+      assertEquals(new MutableDateTime(2004, 7, 1, 0, 0, 0, 0), testInterval.getEnd());
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
     }
 
     @Test public void testPropertyToIntervalDayOfMonth() {
       MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
       Interval testInterval = test.dayOfMonth().toInterval();
 NoAssert.donothing(new MutableDateTime(2004, 6, 9, 0, 0, 0, 0), testInterval.getStart());
-NoAssert.donothing(new MutableDateTime(2004, 6, 10, 0, 0, 0, 0), testInterval.getEnd());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
+      assertEquals(new MutableDateTime(2004, 6, 10, 0, 0, 0, 0), testInterval.getEnd());
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
 
       MutableDateTime febTest = new MutableDateTime(2004, 2, 29, 13, 23, 43, 53);
       Interval febTestInterval = febTest.dayOfMonth().toInterval();
-NoAssert.donothing(new MutableDateTime(2004, 2, 29, 0, 0, 0, 0), febTestInterval.getStart());
-NoAssert.donothing(new MutableDateTime(2004, 3, 1, 0, 0, 0, 0), febTestInterval.getEnd());
-NoAssert.donothing(new MutableDateTime(2004, 2, 29, 13, 23, 43, 53), febTest);
+      assertEquals(new MutableDateTime(2004, 2, 29, 0, 0, 0, 0), febTestInterval.getStart());
+      assertEquals(new MutableDateTime(2004, 3, 1, 0, 0, 0, 0), febTestInterval.getEnd());
+      assertEquals(new MutableDateTime(2004, 2, 29, 13, 23, 43, 53), febTest);
     }
 
     @Test public void testPropertyToIntervalHourOfDay() {
       MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
       Interval testInterval = test.hourOfDay().toInterval();
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 0, 0, 0), testInterval.getStart());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 14, 0, 0, 0), testInterval.getEnd());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 0, 0, 0), testInterval.getStart());
+      assertEquals(new MutableDateTime(2004, 6, 9, 14, 0, 0, 0), testInterval.getEnd());
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
 
       MutableDateTime midnightTest = new MutableDateTime(2004, 6, 9, 23, 23, 43, 53);
       Interval midnightTestInterval = midnightTest.hourOfDay().toInterval();
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 23, 0, 0, 0), midnightTestInterval.getStart());
-NoAssert.donothing(new MutableDateTime(2004, 6, 10, 0, 0, 0, 0), midnightTestInterval.getEnd());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 23, 23, 43, 53), midnightTest);
+      assertEquals(new MutableDateTime(2004, 6, 9, 23, 0, 0, 0), midnightTestInterval.getStart());
+      assertEquals(new MutableDateTime(2004, 6, 10, 0, 0, 0, 0), midnightTestInterval.getEnd());
+      assertEquals(new MutableDateTime(2004, 6, 9, 23, 23, 43, 53), midnightTest);
     }
 
     @Test public void testPropertyToIntervalMinuteOfHour() {
       MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
       Interval testInterval = test.minuteOfHour().toInterval();
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 0, 0), testInterval.getStart());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 24, 0, 0), testInterval.getEnd());
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 0, 0), testInterval.getStart());
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 24, 0, 0), testInterval.getEnd());
 NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
     }
 
@@ -815,16 +815,16 @@ NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
       MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
       Interval testInterval = test.secondOfMinute().toInterval();
 NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 0), testInterval.getStart());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 44, 0), testInterval.getEnd());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 44, 0), testInterval.getEnd());
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
     }
 
     @Test public void testPropertyToIntervalMillisOfSecond() {
       MutableDateTime test = new MutableDateTime(2004, 6, 9, 13, 23, 43, 53);
       Interval testInterval = test.millisOfSecond().toInterval();
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), testInterval.getStart());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 54), testInterval.getEnd());
-NoAssert.donothing(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), testInterval.getStart());
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 43, 54), testInterval.getEnd());
+      assertEquals(new MutableDateTime(2004, 6, 9, 13, 23, 43, 53), test);
     }
 
 }

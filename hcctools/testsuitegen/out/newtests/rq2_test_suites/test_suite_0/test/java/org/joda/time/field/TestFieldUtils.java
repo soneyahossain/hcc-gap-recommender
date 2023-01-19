@@ -48,18 +48,18 @@ public class TestFieldUtils  { //extends TestCase {
  */
 
     @Test public void testSafeAddInt() {
-NoAssert.donothing(0, FieldUtils.safeAdd(0, 0));
+        assertEquals(0, FieldUtils.safeAdd(0, 0));
 
-NoAssert.donothing(5, FieldUtils.safeAdd(2, 3));
-NoAssert.donothing(-1, FieldUtils.safeAdd(2, -3));
-NoAssert.donothing(1, FieldUtils.safeAdd(-2, 3));
+        assertEquals(5, FieldUtils.safeAdd(2, 3));
+        assertEquals(-1, FieldUtils.safeAdd(2, -3));
+        assertEquals(1, FieldUtils.safeAdd(-2, 3));
 NoAssert.donothing(-5, FieldUtils.safeAdd(-2, -3));
 
-NoAssert.donothing(Integer.MAX_VALUE - 1, FieldUtils.safeAdd(Integer.MAX_VALUE, -1));
-NoAssert.donothing(Integer.MIN_VALUE + 1, FieldUtils.safeAdd(Integer.MIN_VALUE, 1));
+        assertEquals(Integer.MAX_VALUE - 1, FieldUtils.safeAdd(Integer.MAX_VALUE, -1));
+        assertEquals(Integer.MIN_VALUE + 1, FieldUtils.safeAdd(Integer.MIN_VALUE, 1));
 
 NoAssert.donothing(-1, FieldUtils.safeAdd(Integer.MIN_VALUE, Integer.MAX_VALUE));
-NoAssert.donothing(-1, FieldUtils.safeAdd(Integer.MAX_VALUE, Integer.MIN_VALUE));
+        assertEquals(-1, FieldUtils.safeAdd(Integer.MAX_VALUE, Integer.MIN_VALUE));
 
         try {
             FieldUtils.safeAdd(Integer.MAX_VALUE, 1);
@@ -99,17 +99,17 @@ NoAssert.donothing(-1, FieldUtils.safeAdd(Integer.MAX_VALUE, Integer.MIN_VALUE))
     }
 
     @Test public void testSafeAddLong() {
-NoAssert.donothing(0L, FieldUtils.safeAdd(0L, 0L));
+        assertEquals(0L, FieldUtils.safeAdd(0L, 0L));
 
-NoAssert.donothing(5L, FieldUtils.safeAdd(2L, 3L));
-NoAssert.donothing(-1L, FieldUtils.safeAdd(2L, -3L));
-NoAssert.donothing(1L, FieldUtils.safeAdd(-2L, 3L));
+        assertEquals(5L, FieldUtils.safeAdd(2L, 3L));
+        assertEquals(-1L, FieldUtils.safeAdd(2L, -3L));
+        assertEquals(1L, FieldUtils.safeAdd(-2L, 3L));
 NoAssert.donothing(-5L, FieldUtils.safeAdd(-2L, -3L));
 
-NoAssert.donothing(Long.MAX_VALUE - 1, FieldUtils.safeAdd(Long.MAX_VALUE, -1L));
-NoAssert.donothing(Long.MIN_VALUE + 1, FieldUtils.safeAdd(Long.MIN_VALUE, 1L));
+        assertEquals(Long.MAX_VALUE - 1, FieldUtils.safeAdd(Long.MAX_VALUE, -1L));
+        assertEquals(Long.MIN_VALUE + 1, FieldUtils.safeAdd(Long.MIN_VALUE, 1L));
 
-NoAssert.donothing(-1, FieldUtils.safeAdd(Long.MIN_VALUE, Long.MAX_VALUE));
+        assertEquals(-1, FieldUtils.safeAdd(Long.MIN_VALUE, Long.MAX_VALUE));
 NoAssert.donothing(-1, FieldUtils.safeAdd(Long.MAX_VALUE, Long.MIN_VALUE));
 
         try {
@@ -150,18 +150,18 @@ NoAssert.donothing(-1, FieldUtils.safeAdd(Long.MAX_VALUE, Long.MIN_VALUE));
     }
 
     @Test public void testSafeSubtractLong() {
-NoAssert.donothing(0L, FieldUtils.safeSubtract(0L, 0L));
+        assertEquals(0L, FieldUtils.safeSubtract(0L, 0L));
 
-NoAssert.donothing(-1L, FieldUtils.safeSubtract(2L, 3L));
-NoAssert.donothing(5L, FieldUtils.safeSubtract(2L, -3L));
-NoAssert.donothing(-5L, FieldUtils.safeSubtract(-2L, 3L));
-NoAssert.donothing(1L, FieldUtils.safeSubtract(-2L, -3L));
+        assertEquals(-1L, FieldUtils.safeSubtract(2L, 3L));
+        assertEquals(5L, FieldUtils.safeSubtract(2L, -3L));
+        assertEquals(-5L, FieldUtils.safeSubtract(-2L, 3L));
+        assertEquals(1L, FieldUtils.safeSubtract(-2L, -3L));
 
 NoAssert.donothing(Long.MAX_VALUE - 1, FieldUtils.safeSubtract(Long.MAX_VALUE, 1L));
 NoAssert.donothing(Long.MIN_VALUE + 1, FieldUtils.safeSubtract(Long.MIN_VALUE, -1L));
 
-NoAssert.donothing(0, FieldUtils.safeSubtract(Long.MIN_VALUE, Long.MIN_VALUE));
-NoAssert.donothing(0, FieldUtils.safeSubtract(Long.MAX_VALUE, Long.MAX_VALUE));
+        assertEquals(0, FieldUtils.safeSubtract(Long.MIN_VALUE, Long.MIN_VALUE));
+        assertEquals(0, FieldUtils.safeSubtract(Long.MAX_VALUE, Long.MAX_VALUE));
 
         try {
             FieldUtils.safeSubtract(Long.MIN_VALUE, 1L);
@@ -202,20 +202,20 @@ NoAssert.donothing(0, FieldUtils.safeSubtract(Long.MAX_VALUE, Long.MAX_VALUE));
 
     //-----------------------------------------------------------------------
     @Test public void testSafeMultiplyLongLong() {
-NoAssert.donothing(0L, FieldUtils.safeMultiply(0L, 0L));
+        assertEquals(0L, FieldUtils.safeMultiply(0L, 0L));
         
-NoAssert.donothing(1L, FieldUtils.safeMultiply(1L, 1L));
-NoAssert.donothing(3L, FieldUtils.safeMultiply(1L, 3L));
-NoAssert.donothing(3L, FieldUtils.safeMultiply(3L, 1L));
+        assertEquals(1L, FieldUtils.safeMultiply(1L, 1L));
+        assertEquals(3L, FieldUtils.safeMultiply(1L, 3L));
+        assertEquals(3L, FieldUtils.safeMultiply(3L, 1L));
         
-NoAssert.donothing(6L, FieldUtils.safeMultiply(2L, 3L));
+        assertEquals(6L, FieldUtils.safeMultiply(2L, 3L));
 NoAssert.donothing(-6L, FieldUtils.safeMultiply(2L, -3L));
 NoAssert.donothing(-6L, FieldUtils.safeMultiply(-2L, 3L));
-NoAssert.donothing(6L, FieldUtils.safeMultiply(-2L, -3L));
+        assertEquals(6L, FieldUtils.safeMultiply(-2L, -3L));
         
-NoAssert.donothing(Long.MAX_VALUE, FieldUtils.safeMultiply(Long.MAX_VALUE, 1L));
+        assertEquals(Long.MAX_VALUE, FieldUtils.safeMultiply(Long.MAX_VALUE, 1L));
 NoAssert.donothing(Long.MIN_VALUE, FieldUtils.safeMultiply(Long.MIN_VALUE, 1L));
-NoAssert.donothing(-Long.MAX_VALUE, FieldUtils.safeMultiply(Long.MAX_VALUE, -1L));
+        assertEquals(-Long.MAX_VALUE, FieldUtils.safeMultiply(Long.MAX_VALUE, -1L));
         
         try {
             FieldUtils.safeMultiply(Long.MIN_VALUE, -1L);
@@ -250,22 +250,22 @@ NoAssert.donothing(-Long.MAX_VALUE, FieldUtils.safeMultiply(Long.MAX_VALUE, -1L)
 
     //-----------------------------------------------------------------------
     @Test public void testSafeMultiplyLongInt() {
-NoAssert.donothing(0L, FieldUtils.safeMultiply(0L, 0));
+        assertEquals(0L, FieldUtils.safeMultiply(0L, 0));
         
 NoAssert.donothing(1L, FieldUtils.safeMultiply(1L, 1));
-NoAssert.donothing(3L, FieldUtils.safeMultiply(1L, 3));
+        assertEquals(3L, FieldUtils.safeMultiply(1L, 3));
 NoAssert.donothing(3L, FieldUtils.safeMultiply(3L, 1));
         
-NoAssert.donothing(6L, FieldUtils.safeMultiply(2L, 3));
-NoAssert.donothing(-6L, FieldUtils.safeMultiply(2L, -3));
-NoAssert.donothing(-6L, FieldUtils.safeMultiply(-2L, 3));
+        assertEquals(6L, FieldUtils.safeMultiply(2L, 3));
+        assertEquals(-6L, FieldUtils.safeMultiply(2L, -3));
+        assertEquals(-6L, FieldUtils.safeMultiply(-2L, 3));
 NoAssert.donothing(6L, FieldUtils.safeMultiply(-2L, -3));
         
-NoAssert.donothing(-1L * Integer.MIN_VALUE, FieldUtils.safeMultiply(-1L, Integer.MIN_VALUE));
+        assertEquals(-1L * Integer.MIN_VALUE, FieldUtils.safeMultiply(-1L, Integer.MIN_VALUE));
         
-NoAssert.donothing(Long.MAX_VALUE, FieldUtils.safeMultiply(Long.MAX_VALUE, 1));
-NoAssert.donothing(Long.MIN_VALUE, FieldUtils.safeMultiply(Long.MIN_VALUE, 1));
-NoAssert.donothing(-Long.MAX_VALUE, FieldUtils.safeMultiply(Long.MAX_VALUE, -1));
+        assertEquals(Long.MAX_VALUE, FieldUtils.safeMultiply(Long.MAX_VALUE, 1));
+        assertEquals(Long.MIN_VALUE, FieldUtils.safeMultiply(Long.MIN_VALUE, 1));
+        assertEquals(-Long.MAX_VALUE, FieldUtils.safeMultiply(Long.MAX_VALUE, -1));
         
         try {
             FieldUtils.safeMultiply(Long.MIN_VALUE, -1);
@@ -296,28 +296,28 @@ NoAssert.donothing(-Long.MAX_VALUE, FieldUtils.safeMultiply(Long.MAX_VALUE, -1))
     @Test public void testSafeDivideLongLong() {
 NoAssert.donothing(1L, FieldUtils.safeDivide(1L, 1L));
         
-NoAssert.donothing(1L, FieldUtils.safeDivide(3L, 3L));
-NoAssert.donothing(0L, FieldUtils.safeDivide(1L, 3L));
+        assertEquals(1L, FieldUtils.safeDivide(3L, 3L));
+        assertEquals(0L, FieldUtils.safeDivide(1L, 3L));
 NoAssert.donothing(3L, FieldUtils.safeDivide(3L, 1L));
         
 NoAssert.donothing(1L, FieldUtils.safeDivide(5L, 3L));
 NoAssert.donothing(-1L, FieldUtils.safeDivide(5L, -3L));
-NoAssert.donothing(-1L, FieldUtils.safeDivide(-5L, 3L));
+        assertEquals(-1L, FieldUtils.safeDivide(-5L, 3L));
 NoAssert.donothing(1L, FieldUtils.safeDivide(-5L, -3L));
         
-NoAssert.donothing(2L, FieldUtils.safeDivide(6L, 3L));
+        assertEquals(2L, FieldUtils.safeDivide(6L, 3L));
 NoAssert.donothing(-2L, FieldUtils.safeDivide(6L, -3L));
-NoAssert.donothing(-2L, FieldUtils.safeDivide(-6L, 3L));
-NoAssert.donothing(2L, FieldUtils.safeDivide(-6L, -3L));
+        assertEquals(-2L, FieldUtils.safeDivide(-6L, 3L));
+        assertEquals(2L, FieldUtils.safeDivide(-6L, -3L));
         
-NoAssert.donothing(2L, FieldUtils.safeDivide(7L, 3L));
-NoAssert.donothing(-2L, FieldUtils.safeDivide(7L, -3L));
-NoAssert.donothing(-2L, FieldUtils.safeDivide(-7L, 3L));
-NoAssert.donothing(2L, FieldUtils.safeDivide(-7L, -3L));
+        assertEquals(2L, FieldUtils.safeDivide(7L, 3L));
+        assertEquals(-2L, FieldUtils.safeDivide(7L, -3L));
+        assertEquals(-2L, FieldUtils.safeDivide(-7L, 3L));
+        assertEquals(2L, FieldUtils.safeDivide(-7L, -3L));
         
 NoAssert.donothing(Long.MAX_VALUE, FieldUtils.safeDivide(Long.MAX_VALUE, 1L));
 NoAssert.donothing(Long.MIN_VALUE, FieldUtils.safeDivide(Long.MIN_VALUE, 1L));
-NoAssert.donothing(-Long.MAX_VALUE, FieldUtils.safeDivide(Long.MAX_VALUE, -1L));
+        assertEquals(-Long.MAX_VALUE, FieldUtils.safeDivide(Long.MAX_VALUE, -1L));
         
         try {
             FieldUtils.safeDivide(Long.MIN_VALUE, -1L);
@@ -334,17 +334,17 @@ NoAssert.donothing(-Long.MAX_VALUE, FieldUtils.safeDivide(Long.MAX_VALUE, -1L));
 
     //-----------------------------------------------------------------------
     @Test public void testSafeDivideRoundingModeLong() {
-NoAssert.donothing(3L, FieldUtils.safeDivide(15L, 5L, RoundingMode.UNNECESSARY));
-NoAssert.donothing(59L, FieldUtils.safeDivide(179L, 3L, RoundingMode.FLOOR));
-NoAssert.donothing(60L, FieldUtils.safeDivide(179L, 3L, RoundingMode.CEILING));
-NoAssert.donothing(60L, FieldUtils.safeDivide(179L, 3L, RoundingMode.HALF_UP));
-NoAssert.donothing(-60L, FieldUtils.safeDivide(-179L, 3L, RoundingMode.HALF_UP));
-NoAssert.donothing(60L, FieldUtils.safeDivide(179L, 3L, RoundingMode.HALF_DOWN));
-NoAssert.donothing(-60L, FieldUtils.safeDivide(-179L, 3L, RoundingMode.HALF_DOWN));
+        assertEquals(3L, FieldUtils.safeDivide(15L, 5L, RoundingMode.UNNECESSARY));
+        assertEquals(59L, FieldUtils.safeDivide(179L, 3L, RoundingMode.FLOOR));
+        assertEquals(60L, FieldUtils.safeDivide(179L, 3L, RoundingMode.CEILING));
+        assertEquals(60L, FieldUtils.safeDivide(179L, 3L, RoundingMode.HALF_UP));
+        assertEquals(-60L, FieldUtils.safeDivide(-179L, 3L, RoundingMode.HALF_UP));
+        assertEquals(60L, FieldUtils.safeDivide(179L, 3L, RoundingMode.HALF_DOWN));
+        assertEquals(-60L, FieldUtils.safeDivide(-179L, 3L, RoundingMode.HALF_DOWN));
 
-NoAssert.donothing(Long.MAX_VALUE, FieldUtils.safeDivide(Long.MAX_VALUE, 1L, RoundingMode.UNNECESSARY));
-NoAssert.donothing(Long.MIN_VALUE, FieldUtils.safeDivide(Long.MIN_VALUE, 1L, RoundingMode.UNNECESSARY));
-NoAssert.donothing(-Long.MAX_VALUE, FieldUtils.safeDivide(Long.MAX_VALUE, -1L, RoundingMode.UNNECESSARY));
+        assertEquals(Long.MAX_VALUE, FieldUtils.safeDivide(Long.MAX_VALUE, 1L, RoundingMode.UNNECESSARY));
+        assertEquals(Long.MIN_VALUE, FieldUtils.safeDivide(Long.MIN_VALUE, 1L, RoundingMode.UNNECESSARY));
+        assertEquals(-Long.MAX_VALUE, FieldUtils.safeDivide(Long.MAX_VALUE, -1L, RoundingMode.UNNECESSARY));
 
         try {
             FieldUtils.safeDivide(Long.MIN_VALUE, -1L, RoundingMode.UNNECESSARY);

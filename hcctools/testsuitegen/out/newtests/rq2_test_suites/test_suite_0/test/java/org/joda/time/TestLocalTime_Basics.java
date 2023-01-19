@@ -149,28 +149,28 @@ public class TestLocalTime_Basics  { //extends TestCase {
     @Test public void testGet_DateTimeFieldType() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
 NoAssert.donothing(10, test.get(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(20, test.get(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(30, test.get(DateTimeFieldType.secondOfMinute()));
-NoAssert.donothing(40, test.get(DateTimeFieldType.millisOfSecond()));
-NoAssert.donothing(TEST_TIME_NOW / 60000 , test.get(DateTimeFieldType.minuteOfDay()));
+        assertEquals(20, test.get(DateTimeFieldType.minuteOfHour()));
+        assertEquals(30, test.get(DateTimeFieldType.secondOfMinute()));
+        assertEquals(40, test.get(DateTimeFieldType.millisOfSecond()));
+        assertEquals(TEST_TIME_NOW / 60000 , test.get(DateTimeFieldType.minuteOfDay()));
 NoAssert.donothing(TEST_TIME_NOW / 1000 , test.get(DateTimeFieldType.secondOfDay()));
-NoAssert.donothing(TEST_TIME_NOW , test.get(DateTimeFieldType.millisOfDay()));
-NoAssert.donothing(10, test.get(DateTimeFieldType.hourOfHalfday()));
-NoAssert.donothing(DateTimeConstants.AM, test.get(DateTimeFieldType.halfdayOfDay()));
+        assertEquals(TEST_TIME_NOW , test.get(DateTimeFieldType.millisOfDay()));
+        assertEquals(10, test.get(DateTimeFieldType.hourOfHalfday()));
+        assertEquals(DateTimeConstants.AM, test.get(DateTimeFieldType.halfdayOfDay()));
         test = new LocalTime(12, 30);
 NoAssert.donothing(0, test.get(DateTimeFieldType.hourOfHalfday()));
-NoAssert.donothing(12, test.get(DateTimeFieldType.clockhourOfHalfday()));
-NoAssert.donothing(12, test.get(DateTimeFieldType.clockhourOfDay()));
-NoAssert.donothing(DateTimeConstants.PM, test.get(DateTimeFieldType.halfdayOfDay()));
+        assertEquals(12, test.get(DateTimeFieldType.clockhourOfHalfday()));
+        assertEquals(12, test.get(DateTimeFieldType.clockhourOfDay()));
+        assertEquals(DateTimeConstants.PM, test.get(DateTimeFieldType.halfdayOfDay()));
         test = new LocalTime(14, 30);
 NoAssert.donothing(2, test.get(DateTimeFieldType.hourOfHalfday()));
-NoAssert.donothing(2, test.get(DateTimeFieldType.clockhourOfHalfday()));
-NoAssert.donothing(14, test.get(DateTimeFieldType.clockhourOfDay()));
+        assertEquals(2, test.get(DateTimeFieldType.clockhourOfHalfday()));
+        assertEquals(14, test.get(DateTimeFieldType.clockhourOfDay()));
 NoAssert.donothing(DateTimeConstants.PM, test.get(DateTimeFieldType.halfdayOfDay()));
         test = new LocalTime(0, 30);
-NoAssert.donothing(0, test.get(DateTimeFieldType.hourOfHalfday()));
-NoAssert.donothing(12, test.get(DateTimeFieldType.clockhourOfHalfday()));
-NoAssert.donothing(24, test.get(DateTimeFieldType.clockhourOfDay()));
+        assertEquals(0, test.get(DateTimeFieldType.hourOfHalfday()));
+        assertEquals(12, test.get(DateTimeFieldType.clockhourOfHalfday()));
+        assertEquals(24, test.get(DateTimeFieldType.clockhourOfDay()));
 NoAssert.donothing(DateTimeConstants.AM, test.get(DateTimeFieldType.halfdayOfDay()));
         try {
             test.get(null);
@@ -184,14 +184,14 @@ NoAssert.donothing(DateTimeConstants.AM, test.get(DateTimeFieldType.halfdayOfDay
 
     @Test public void testSize() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(4, test.size());
+        assertEquals(4, test.size());
     }
 
     @Test public void testGetFieldType_int() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
 NoAssert.donothing(DateTimeFieldType.hourOfDay(), test.getFieldType(0));
-NoAssert.donothing(DateTimeFieldType.minuteOfHour(), test.getFieldType(1));
-NoAssert.donothing(DateTimeFieldType.secondOfMinute(), test.getFieldType(2));
+        assertSame(DateTimeFieldType.minuteOfHour(), test.getFieldType(1));
+        assertSame(DateTimeFieldType.secondOfMinute(), test.getFieldType(2));
 NoAssert.donothing(DateTimeFieldType.millisOfSecond(), test.getFieldType(3));
         try {
             test.getFieldType(-1);
@@ -204,19 +204,19 @@ NoAssert.donothing(DateTimeFieldType.millisOfSecond(), test.getFieldType(3));
     @Test public void testGetFieldTypes() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
         DateTimeFieldType[] fields = test.getFieldTypes();
-NoAssert.donothing(DateTimeFieldType.hourOfDay(), fields[0]);
-NoAssert.donothing(DateTimeFieldType.minuteOfHour(), fields[1]);
+        assertSame(DateTimeFieldType.hourOfDay(), fields[0]);
+        assertSame(DateTimeFieldType.minuteOfHour(), fields[1]);
 NoAssert.donothing(DateTimeFieldType.secondOfMinute(), fields[2]);
-NoAssert.donothing(DateTimeFieldType.millisOfSecond(), fields[3]);
+        assertSame(DateTimeFieldType.millisOfSecond(), fields[3]);
 NoAssert.donothing(test.getFieldTypes(), test.getFieldTypes());
     }
 
     @Test public void testGetField_int() {
         LocalTime test = new LocalTime(10, 20, 30, 40, COPTIC_UTC);
 NoAssert.donothing(COPTIC_UTC.hourOfDay(), test.getField(0));
-NoAssert.donothing(COPTIC_UTC.minuteOfHour(), test.getField(1));
-NoAssert.donothing(COPTIC_UTC.secondOfMinute(), test.getField(2));
-NoAssert.donothing(COPTIC_UTC.millisOfSecond(), test.getField(3));
+        assertSame(COPTIC_UTC.minuteOfHour(), test.getField(1));
+        assertSame(COPTIC_UTC.secondOfMinute(), test.getField(2));
+        assertSame(COPTIC_UTC.millisOfSecond(), test.getField(3));
         try {
             test.getField(-1);
         } catch (IndexOutOfBoundsException ex) {}
@@ -228,18 +228,18 @@ NoAssert.donothing(COPTIC_UTC.millisOfSecond(), test.getField(3));
     @Test public void testGetFields() {
         LocalTime test = new LocalTime(10, 20, 30, 40, COPTIC_UTC);
         DateTimeField[] fields = test.getFields();
-NoAssert.donothing(COPTIC_UTC.hourOfDay(), fields[0]);
-NoAssert.donothing(COPTIC_UTC.minuteOfHour(), fields[1]);
+        assertSame(COPTIC_UTC.hourOfDay(), fields[0]);
+        assertSame(COPTIC_UTC.minuteOfHour(), fields[1]);
 NoAssert.donothing(COPTIC_UTC.secondOfMinute(), fields[2]);
 NoAssert.donothing(COPTIC_UTC.millisOfSecond(), fields[3]);
-NoAssert.donothing(test.getFields(), test.getFields());
+        assertNotSame(test.getFields(), test.getFields());
     }
 
     @Test public void testGetValue_int() {
         LocalTime test = new LocalTime(10, 20, 30, 40, COPTIC_PARIS);
-NoAssert.donothing(10, test.getValue(0));
-NoAssert.donothing(20, test.getValue(1));
-NoAssert.donothing(30, test.getValue(2));
+        assertEquals(10, test.getValue(0));
+        assertEquals(20, test.getValue(1));
+        assertEquals(30, test.getValue(2));
 NoAssert.donothing(40, test.getValue(3));
         try {
             test.getValue(-1);
@@ -255,27 +255,27 @@ NoAssert.donothing(40, test.getValue(3));
 NoAssert.donothing(10, values[0]);
 NoAssert.donothing(20, values[1]);
 NoAssert.donothing(30, values[2]);
-NoAssert.donothing(40, values[3]);
+        assertEquals(40, values[3]);
 NoAssert.donothing(test.getValues(), test.getValues());
     }
 
     @Test public void testIsSupported_DateTimeFieldType() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.secondOfMinute()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.hourOfDay()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.minuteOfHour()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.secondOfMinute()));
 NoAssert.donothing(true, test.isSupported(DateTimeFieldType.millisOfSecond()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.minuteOfDay()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.secondOfDay()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.minuteOfDay()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.secondOfDay()));
 NoAssert.donothing(true, test.isSupported(DateTimeFieldType.millisOfDay()));
         
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.hourOfHalfday()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.halfdayOfDay()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.clockhourOfHalfday()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.clockhourOfDay()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.hourOfHalfday()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.halfdayOfDay()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.clockhourOfHalfday()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.clockhourOfDay()));
         
-NoAssert.donothing(false, test.isSupported(DateTimeFieldType.dayOfMonth()));
-NoAssert.donothing(false, test.isSupported((DateTimeFieldType) null));
+        assertEquals(false, test.isSupported(DateTimeFieldType.dayOfMonth()));
+        assertEquals(false, test.isSupported((DateTimeFieldType) null));
         
         DateTimeFieldType d = new DateTimeFieldType("hours") {
             private static final long serialVersionUID = 1L;
@@ -308,13 +308,13 @@ NoAssert.donothing(false, test.isSupported((DateTimeFieldType) null));
 
     @Test public void testIsSupported_DurationFieldType() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(true, test.isSupported(DurationFieldType.hours()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.minutes()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.seconds()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.millis()));
-NoAssert.donothing(true, test.isSupported(DurationFieldType.halfdays()));
+        assertEquals(true, test.isSupported(DurationFieldType.hours()));
+        assertEquals(true, test.isSupported(DurationFieldType.minutes()));
+        assertEquals(true, test.isSupported(DurationFieldType.seconds()));
+        assertEquals(true, test.isSupported(DurationFieldType.millis()));
+        assertEquals(true, test.isSupported(DurationFieldType.halfdays()));
         
-NoAssert.donothing(false, test.isSupported(DurationFieldType.days()));
+        assertEquals(false, test.isSupported(DurationFieldType.days()));
 NoAssert.donothing(false, test.isSupported((DurationFieldType) null));
     }
 
@@ -322,27 +322,27 @@ NoAssert.donothing(false, test.isSupported((DurationFieldType) null));
     @Test public void testEqualsHashCode() {
         LocalTime test1 = new LocalTime(10, 20, 30, 40, COPTIC_PARIS);
         LocalTime test2 = new LocalTime(10, 20, 30, 40, COPTIC_PARIS);
-NoAssert.donothing(true, test1.equals(test2));
-NoAssert.donothing(true, test2.equals(test1));
-NoAssert.donothing(true, test1.equals(test1));
-NoAssert.donothing(true, test2.equals(test2));
+        assertEquals(true, test1.equals(test2));
+        assertEquals(true, test2.equals(test1));
+        assertEquals(true, test1.equals(test1));
+        assertEquals(true, test2.equals(test2));
 NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
-NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
-NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
+        assertEquals(true, test1.hashCode() == test1.hashCode());
+        assertEquals(true, test2.hashCode() == test2.hashCode());
         
         LocalTime test3 = new LocalTime(15, 20, 30, 40);
-NoAssert.donothing(false, test1.equals(test3));
-NoAssert.donothing(false, test2.equals(test3));
-NoAssert.donothing(false, test3.equals(test1));
-NoAssert.donothing(false, test3.equals(test2));
-NoAssert.donothing(false, test1.hashCode() == test3.hashCode());
-NoAssert.donothing(false, test2.hashCode() == test3.hashCode());
+        assertEquals(false, test1.equals(test3));
+        assertEquals(false, test2.equals(test3));
+        assertEquals(false, test3.equals(test1));
+        assertEquals(false, test3.equals(test2));
+        assertEquals(false, test1.hashCode() == test3.hashCode());
+        assertEquals(false, test2.hashCode() == test3.hashCode());
         
-NoAssert.donothing(false, test1.equals("Hello"));
-NoAssert.donothing(true, test1.equals(new TimeOfDay(10, 20, 30, 40, COPTIC_UTC)));
-NoAssert.donothing(true, test1.hashCode() == new TimeOfDay(10, 20, 30, 40, COPTIC_UTC).hashCode());
-NoAssert.donothing(true, test1.equals(new MockInstant()));
-NoAssert.donothing(false, test1.equals(MockPartial.EMPTY_INSTANCE));
+        assertEquals(false, test1.equals("Hello"));
+        assertEquals(true, test1.equals(new TimeOfDay(10, 20, 30, 40, COPTIC_UTC)));
+        assertEquals(true, test1.hashCode() == new TimeOfDay(10, 20, 30, 40, COPTIC_UTC).hashCode());
+        assertEquals(true, test1.equals(new MockInstant()));
+        assertEquals(false, test1.equals(MockPartial.EMPTY_INSTANCE));
     }
 
     class MockInstant extends MockPartial {
@@ -367,19 +367,19 @@ NoAssert.donothing(false, test1.equals(MockPartial.EMPTY_INSTANCE));
     @Test public void testCompareTo() {
         LocalTime test1 = new LocalTime(10, 20, 30, 40);
         LocalTime test1a = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(0, test1.compareTo(test1a));
+        assertEquals(0, test1.compareTo(test1a));
 NoAssert.donothing(0, test1a.compareTo(test1));
 NoAssert.donothing(0, test1.compareTo(test1));
-NoAssert.donothing(0, test1a.compareTo(test1a));
+        assertEquals(0, test1a.compareTo(test1a));
         
         LocalTime test2 = new LocalTime(10, 20, 35, 40);
-NoAssert.donothing(-1, test1.compareTo(test2));
-NoAssert.donothing(+1, test2.compareTo(test1));
+        assertEquals(-1, test1.compareTo(test2));
+        assertEquals(+1, test2.compareTo(test1));
         
         LocalTime test3 = new LocalTime(10, 20, 35, 40, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(-1, test1.compareTo(test3));
+        assertEquals(-1, test1.compareTo(test3));
 NoAssert.donothing(+1, test3.compareTo(test1));
-NoAssert.donothing(0, test3.compareTo(test2));
+        assertEquals(0, test3.compareTo(test2));
         
         DateTimeFieldType[] types = new DateTimeFieldType[] {
             DateTimeFieldType.hourOfDay(),
@@ -390,7 +390,7 @@ NoAssert.donothing(0, test3.compareTo(test2));
         int[] values = new int[] {10, 20, 30, 40};
         Partial p = new Partial(types, values);
 NoAssert.donothing(0, test1.compareTo(p));
-NoAssert.donothing(0, test1.compareTo(new TimeOfDay(10, 20, 30, 40)));
+        assertEquals(0, test1.compareTo(new TimeOfDay(10, 20, 30, 40)));
         try {
             test1.compareTo(null);
             fail();
@@ -405,19 +405,19 @@ NoAssert.donothing(0, test1.compareTo(new TimeOfDay(10, 20, 30, 40)));
     @Test public void testIsEqual_LocalTime() {
         LocalTime test1 = new LocalTime(10, 20, 30, 40);
         LocalTime test1a = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(true, test1.isEqual(test1a));
-NoAssert.donothing(true, test1a.isEqual(test1));
-NoAssert.donothing(true, test1.isEqual(test1));
-NoAssert.donothing(true, test1a.isEqual(test1a));
+        assertEquals(true, test1.isEqual(test1a));
+        assertEquals(true, test1a.isEqual(test1));
+        assertEquals(true, test1.isEqual(test1));
+        assertEquals(true, test1a.isEqual(test1a));
         
         LocalTime test2 = new LocalTime(10, 20, 35, 40);
-NoAssert.donothing(false, test1.isEqual(test2));
-NoAssert.donothing(false, test2.isEqual(test1));
+        assertEquals(false, test1.isEqual(test2));
+        assertEquals(false, test2.isEqual(test1));
         
         LocalTime test3 = new LocalTime(10, 20, 35, 40, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(false, test1.isEqual(test3));
+        assertEquals(false, test1.isEqual(test3));
 NoAssert.donothing(false, test3.isEqual(test1));
-NoAssert.donothing(true, test3.isEqual(test2));
+        assertEquals(true, test3.isEqual(test2));
         
         try {
             new LocalTime(10, 20, 35, 40).isEqual(null);
@@ -429,19 +429,19 @@ NoAssert.donothing(true, test3.isEqual(test2));
     @Test public void testIsBefore_LocalTime() {
         LocalTime test1 = new LocalTime(10, 20, 30, 40);
         LocalTime test1a = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(false, test1.isBefore(test1a));
-NoAssert.donothing(false, test1a.isBefore(test1));
+        assertEquals(false, test1.isBefore(test1a));
+        assertEquals(false, test1a.isBefore(test1));
 NoAssert.donothing(false, test1.isBefore(test1));
-NoAssert.donothing(false, test1a.isBefore(test1a));
+        assertEquals(false, test1a.isBefore(test1a));
         
         LocalTime test2 = new LocalTime(10, 20, 35, 40);
-NoAssert.donothing(true, test1.isBefore(test2));
-NoAssert.donothing(false, test2.isBefore(test1));
+        assertEquals(true, test1.isBefore(test2));
+        assertEquals(false, test2.isBefore(test1));
         
         LocalTime test3 = new LocalTime(10, 20, 35, 40, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(true, test1.isBefore(test3));
-NoAssert.donothing(false, test3.isBefore(test1));
-NoAssert.donothing(false, test3.isBefore(test2));
+        assertEquals(true, test1.isBefore(test3));
+        assertEquals(false, test3.isBefore(test1));
+        assertEquals(false, test3.isBefore(test2));
         
         try {
             new LocalTime(10, 20, 35, 40).isBefore(null);
@@ -453,19 +453,19 @@ NoAssert.donothing(false, test3.isBefore(test2));
     @Test public void testIsAfter_LocalTime() {
         LocalTime test1 = new LocalTime(10, 20, 30, 40);
         LocalTime test1a = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(false, test1.isAfter(test1a));
+        assertEquals(false, test1.isAfter(test1a));
 NoAssert.donothing(false, test1a.isAfter(test1));
-NoAssert.donothing(false, test1.isAfter(test1));
-NoAssert.donothing(false, test1a.isAfter(test1a));
+        assertEquals(false, test1.isAfter(test1));
+        assertEquals(false, test1a.isAfter(test1a));
         
         LocalTime test2 = new LocalTime(10, 20, 35, 40);
 NoAssert.donothing(false, test1.isAfter(test2));
 NoAssert.donothing(true, test2.isAfter(test1));
         
         LocalTime test3 = new LocalTime(10, 20, 35, 40, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(false, test1.isAfter(test3));
-NoAssert.donothing(true, test3.isAfter(test1));
-NoAssert.donothing(false, test3.isAfter(test2));
+        assertEquals(false, test1.isAfter(test3));
+        assertEquals(true, test3.isAfter(test1));
+        assertEquals(false, test3.isAfter(test2));
         
         try {
             new LocalTime(10, 20, 35, 40).isAfter(null);
@@ -478,8 +478,8 @@ NoAssert.donothing(false, test3.isAfter(test2));
         LocalTime test = new LocalTime(10, 20, 30, 40);
         LocalTime result = test.withField(DateTimeFieldType.hourOfDay(), 15);
         
-NoAssert.donothing(new LocalTime(10, 20, 30, 40), test);
-NoAssert.donothing(new LocalTime(15, 20, 30, 40), result);
+        assertEquals(new LocalTime(10, 20, 30, 40), test);
+        assertEquals(new LocalTime(15, 20, 30, 40), result);
     }
 
     @Test public void testWithField_DateTimeFieldType_int_2() {
@@ -501,7 +501,7 @@ NoAssert.donothing(new LocalTime(15, 20, 30, 40), result);
     @Test public void testWithField_DateTimeFieldType_int_4() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
         LocalTime result = test.withField(DateTimeFieldType.hourOfDay(), 10);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -509,8 +509,8 @@ NoAssert.donothing(test, result);
         LocalTime test = new LocalTime(10, 20, 30, 40);
         LocalTime result = test.withFieldAdded(DurationFieldType.hours(), 6);
         
-NoAssert.donothing(new LocalTime(10, 20, 30, 40), test);
-NoAssert.donothing(new LocalTime(16, 20, 30, 40), result);
+        assertEquals(new LocalTime(10, 20, 30, 40), test);
+        assertEquals(new LocalTime(16, 20, 30, 40), result);
     }
 
     @Test public void testWithFieldAdded_DurationFieldType_int_2() {
@@ -532,7 +532,7 @@ NoAssert.donothing(new LocalTime(16, 20, 30, 40), result);
     @Test public void testWithFieldAdded_DurationFieldType_int_4() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
         LocalTime result = test.withFieldAdded(DurationFieldType.hours(), 0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testWithFieldAdded_DurationFieldType_int_5() {
@@ -547,7 +547,7 @@ NoAssert.donothing(test, result);
         LocalTime test = new LocalTime(10, 20, 30, 40);
         LocalTime result = test.withFieldAdded(DurationFieldType.hours(), 16);
         
-NoAssert.donothing(new LocalTime(10, 20, 30, 40), test);
+        assertEquals(new LocalTime(10, 20, 30, 40), test);
 NoAssert.donothing(new LocalTime(2, 20, 30, 40), result);
     }
 
@@ -558,7 +558,7 @@ NoAssert.donothing(new LocalTime(0, 0, 0, 0), result);
         
         test = new LocalTime(23, 59, 59, 999);
         result = test.withFieldAdded(DurationFieldType.seconds(), 1);
-NoAssert.donothing(new LocalTime(0, 0, 0, 999), result);
+        assertEquals(new LocalTime(0, 0, 0, 999), result);
         
         test = new LocalTime(23, 59, 59, 999);
         result = test.withFieldAdded(DurationFieldType.minutes(), 1);
@@ -566,25 +566,25 @@ NoAssert.donothing(new LocalTime(0, 0, 59, 999), result);
         
         test = new LocalTime(23, 59, 59, 999);
         result = test.withFieldAdded(DurationFieldType.hours(), 1);
-NoAssert.donothing(new LocalTime(0, 59, 59, 999), result);
+        assertEquals(new LocalTime(0, 59, 59, 999), result);
     }
 
     @Test public void testWithFieldAdded_DurationFieldType_int_8() {
         LocalTime test = new LocalTime(0, 0, 0, 0);
         LocalTime result = test.withFieldAdded(DurationFieldType.millis(), -1);
-NoAssert.donothing(new LocalTime(23, 59, 59, 999), result);
+        assertEquals(new LocalTime(23, 59, 59, 999), result);
         
         test = new LocalTime(0, 0, 0, 0);
         result = test.withFieldAdded(DurationFieldType.seconds(), -1);
-NoAssert.donothing(new LocalTime(23, 59, 59, 0), result);
+        assertEquals(new LocalTime(23, 59, 59, 0), result);
         
         test = new LocalTime(0, 0, 0, 0);
         result = test.withFieldAdded(DurationFieldType.minutes(), -1);
-NoAssert.donothing(new LocalTime(23, 59, 0, 0), result);
+        assertEquals(new LocalTime(23, 59, 0, 0), result);
         
         test = new LocalTime(0, 0, 0, 0);
         result = test.withFieldAdded(DurationFieldType.hours(), -1);
-NoAssert.donothing(new LocalTime(23, 0, 0, 0), result);
+        assertEquals(new LocalTime(23, 0, 0, 0), result);
     }
 
     //-----------------------------------------------------------------------
@@ -592,10 +592,10 @@ NoAssert.donothing(new LocalTime(23, 0, 0, 0), result);
         LocalTime test = new LocalTime(10, 20, 30, 40, BUDDHIST_LONDON);
         LocalTime result = test.plus(new Period(1, 2, 3, 4, 5, 6, 7, 8));
         LocalTime expected = new LocalTime(15, 26, 37, 48, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.plus((ReadablePeriod) null);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testPlusHours_int() {
@@ -605,37 +605,37 @@ NoAssert.donothing(test, result);
 NoAssert.donothing(expected, result);
         
         result = test.plusHours(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testPlusMinutes_int() {
         LocalTime test = new LocalTime(1, 2, 3, 4, BUDDHIST_LONDON);
         LocalTime result = test.plusMinutes(1);
         LocalTime expected = new LocalTime(1, 3, 3, 4, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.plusMinutes(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testPlusSeconds_int() {
         LocalTime test = new LocalTime(1, 2, 3, 4, BUDDHIST_LONDON);
         LocalTime result = test.plusSeconds(1);
         LocalTime expected = new LocalTime(1, 2, 4, 4, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.plusSeconds(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testPlusMillis_int() {
         LocalTime test = new LocalTime(1, 2, 3, 4, BUDDHIST_LONDON);
         LocalTime result = test.plusMillis(1);
         LocalTime expected = new LocalTime(1, 2, 3, 5, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.plusMillis(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -643,7 +643,7 @@ NoAssert.donothing(test, result);
         LocalTime test = new LocalTime(10, 20, 30, 40, BUDDHIST_LONDON);
         LocalTime result = test.minus(new Period(1, 1, 1, 1, 1, 1, 1, 1));
         LocalTime expected = new LocalTime(9, 19, 29, 39, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.minus((ReadablePeriod) null);
 NoAssert.donothing(test, result);
@@ -653,7 +653,7 @@ NoAssert.donothing(test, result);
         LocalTime test = new LocalTime(1, 2, 3, 4, BUDDHIST_LONDON);
         LocalTime result = test.minusHours(1);
         LocalTime expected = new LocalTime(0, 2, 3, 4, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.minusHours(0);
 NoAssert.donothing(test, result);
@@ -663,20 +663,20 @@ NoAssert.donothing(test, result);
         LocalTime test = new LocalTime(1, 2, 3, 4, BUDDHIST_LONDON);
         LocalTime result = test.minusMinutes(1);
         LocalTime expected = new LocalTime(1, 1, 3, 4, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.minusMinutes(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testMinusSeconds_int() {
         LocalTime test = new LocalTime(1, 2, 3, 4, BUDDHIST_LONDON);
         LocalTime result = test.minusSeconds(1);
         LocalTime expected = new LocalTime(1, 2, 2, 4, BUDDHIST_LONDON);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.minusSeconds(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testMinusMillis_int() {
@@ -686,17 +686,17 @@ NoAssert.donothing(test, result);
 NoAssert.donothing(expected, result);
         
         result = test.minusMillis(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetters() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(10, test.getHourOfDay());
-NoAssert.donothing(20, test.getMinuteOfHour());
+        assertEquals(10, test.getHourOfDay());
+        assertEquals(20, test.getMinuteOfHour());
 NoAssert.donothing(30, test.getSecondOfMinute());
-NoAssert.donothing(40, test.getMillisOfSecond());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillisOfDay());
+        assertEquals(40, test.getMillisOfSecond());
+        assertEquals(TEST_TIME_NOW, test.getMillisOfDay());
     }
 
     //-----------------------------------------------------------------------
@@ -730,7 +730,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillisOfDay());
         expected = expected.minuteOfHour().setCopy(20);
         expected = expected.secondOfMinute().setCopy(30);
         expected = expected.millisOfSecond().setCopy(40);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     //-----------------------------------------------------------------------
@@ -746,7 +746,7 @@ NoAssert.donothing(expected, test);
         expected = expected.minuteOfHour().setCopy(20);
         expected = expected.secondOfMinute().setCopy(30);
         expected = expected.millisOfSecond().setCopy(40);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     @Test public void testToDateTimeToday_nullZone() {
@@ -761,19 +761,19 @@ NoAssert.donothing(expected, test);
         expected = expected.minuteOfHour().setCopy(20);
         expected = expected.secondOfMinute().setCopy(30);
         expected = expected.millisOfSecond().setCopy(40);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToDateTime_RI() {
         LocalTime base = new LocalTime(10, 20, 30, 40, COPTIC_PARIS);
         DateTime dt = new DateTime(0L); // LONDON zone
-NoAssert.donothing("1970-01-01T01:00:00.000+01:00", dt.toString());
+        assertEquals("1970-01-01T01:00:00.000+01:00", dt.toString());
         
         DateTime test = base.toDateTime(dt);
         check(base, 10, 20, 30, 40);
-NoAssert.donothing("1970-01-01T01:00:00.000+01:00", dt.toString());
-NoAssert.donothing("1970-01-01T10:20:30.040+01:00", test.toString());
+        assertEquals("1970-01-01T01:00:00.000+01:00", dt.toString());
+        assertEquals("1970-01-01T10:20:30.040+01:00", test.toString());
     }
 
     @Test public void testToDateTime_nullRI() {
@@ -782,25 +782,25 @@ NoAssert.donothing("1970-01-01T10:20:30.040+01:00", test.toString());
         
         DateTime test = base.toDateTime((ReadableInstant) null);
         check(base, 1, 2, 3, 4);
-NoAssert.donothing("1970-01-02T01:02:03.004+01:00", test.toString());
+        assertEquals("1970-01-02T01:02:03.004+01:00", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testProperty() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing(test.hourOfDay(), test.property(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(test.minuteOfHour(), test.property(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(test.secondOfMinute(), test.property(DateTimeFieldType.secondOfMinute()));
-NoAssert.donothing(test.millisOfSecond(), test.property(DateTimeFieldType.millisOfSecond()));
-NoAssert.donothing(test.millisOfDay(), test.property(DateTimeFieldType.millisOfDay()));
+        assertEquals(test.hourOfDay(), test.property(DateTimeFieldType.hourOfDay()));
+        assertEquals(test.minuteOfHour(), test.property(DateTimeFieldType.minuteOfHour()));
+        assertEquals(test.secondOfMinute(), test.property(DateTimeFieldType.secondOfMinute()));
+        assertEquals(test.millisOfSecond(), test.property(DateTimeFieldType.millisOfSecond()));
+        assertEquals(test.millisOfDay(), test.property(DateTimeFieldType.millisOfDay()));
         
-NoAssert.donothing(test, test.property(DateTimeFieldType.minuteOfDay()).getLocalTime());
-NoAssert.donothing(test, test.property(DateTimeFieldType.secondOfDay()).getLocalTime());
+        assertEquals(test, test.property(DateTimeFieldType.minuteOfDay()).getLocalTime());
+        assertEquals(test, test.property(DateTimeFieldType.secondOfDay()).getLocalTime());
 NoAssert.donothing(test, test.property(DateTimeFieldType.millisOfDay()).getLocalTime());
-NoAssert.donothing(test, test.property(DateTimeFieldType.hourOfHalfday()).getLocalTime());
-NoAssert.donothing(test, test.property(DateTimeFieldType.halfdayOfDay()).getLocalTime());
-NoAssert.donothing(test, test.property(DateTimeFieldType.clockhourOfHalfday()).getLocalTime());
-NoAssert.donothing(test, test.property(DateTimeFieldType.clockhourOfDay()).getLocalTime());
+        assertEquals(test, test.property(DateTimeFieldType.hourOfHalfday()).getLocalTime());
+        assertEquals(test, test.property(DateTimeFieldType.halfdayOfDay()).getLocalTime());
+        assertEquals(test, test.property(DateTimeFieldType.clockhourOfHalfday()).getLocalTime());
+        assertEquals(test, test.property(DateTimeFieldType.clockhourOfDay()).getLocalTime());
         
         try {
             test.property(DateTimeFieldType.dayOfWeek());
@@ -827,46 +827,46 @@ NoAssert.donothing(test, test.property(DateTimeFieldType.clockhourOfDay()).getLo
         LocalTime result = (LocalTime) ois.readObject();
         ois.close();
         
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
 NoAssert.donothing(Arrays.equals(test.getValues(), result.getValues()));
-NoAssert.donothing(Arrays.equals(test.getFields(), result.getFields()));
-NoAssert.donothing(test.getChronology(), result.getChronology());
+        assertTrue(Arrays.equals(test.getFields(), result.getFields()));
+        assertEquals(test.getChronology(), result.getChronology());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing("10:20:30.040", test.toString());
+        assertEquals("10:20:30.040", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString_String() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
 NoAssert.donothing("\ufffd\ufffd\ufffd\ufffd 10", test.toString("yyyy HH"));
-NoAssert.donothing("10:20:30.040", test.toString((String) null));
+        assertEquals("10:20:30.040", test.toString((String) null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString_String_Locale() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing("10 20", test.toString("H m", Locale.ENGLISH));
-NoAssert.donothing("10:20:30.040", test.toString(null, Locale.ENGLISH));
+        assertEquals("10 20", test.toString("H m", Locale.ENGLISH));
+        assertEquals("10:20:30.040", test.toString(null, Locale.ENGLISH));
 NoAssert.donothing("10 20", test.toString("H m", null));
-NoAssert.donothing("10:20:30.040", test.toString(null, null));
+        assertEquals("10:20:30.040", test.toString(null, null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString_DTFormatter() {
         LocalTime test = new LocalTime(10, 20, 30, 40);
-NoAssert.donothing("\ufffd\ufffd\ufffd\ufffd 10", test.toString(DateTimeFormat.forPattern("yyyy HH")));
-NoAssert.donothing("10:20:30.040", test.toString((DateTimeFormatter) null));
+        assertEquals("\ufffd\ufffd\ufffd\ufffd 10", test.toString(DateTimeFormat.forPattern("yyyy HH")));
+        assertEquals("10:20:30.040", test.toString((DateTimeFormatter) null));
     }
 
     //-----------------------------------------------------------------------
     private void check(LocalTime test, int hour, int min, int sec, int milli) {
-NoAssert.donothing(hour, test.getHourOfDay());
-NoAssert.donothing(min, test.getMinuteOfHour());
-NoAssert.donothing(sec, test.getSecondOfMinute());
-NoAssert.donothing(milli, test.getMillisOfSecond());
+        assertEquals(hour, test.getHourOfDay());
+        assertEquals(min, test.getMinuteOfHour());
+        assertEquals(sec, test.getSecondOfMinute());
+        assertEquals(milli, test.getMillisOfSecond());
     }
 }

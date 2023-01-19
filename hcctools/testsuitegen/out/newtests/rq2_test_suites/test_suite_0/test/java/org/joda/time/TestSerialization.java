@@ -151,8 +151,8 @@ public class TestSerialization  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testTest() {
 NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
-NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
@@ -326,9 +326,9 @@ NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString(
         Object obj = ois.readObject();
         ois.close();
         if (same) {
-NoAssert.donothing(test, obj);
+            assertSame(test, obj);
         } else {
-NoAssert.donothing(test, obj);
+            assertEquals(test, obj);
         }
 //        try {
 //            fis = new FileInputStream("src/test/resources/" + filename + "2.dat");
@@ -357,9 +357,9 @@ NoAssert.donothing(test, obj);
         ois.close();
         
         if (same) {
-NoAssert.donothing(test, obj);
+            assertSame(test, obj);
         } else {
-NoAssert.donothing(test, obj);
+            assertEquals(test, obj);
         }
     }
 

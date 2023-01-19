@@ -161,8 +161,8 @@ public class TestMonthDay_Basics  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testGet() {
         MonthDay test = new MonthDay();
-NoAssert.donothing(6, test.get(DateTimeFieldType.monthOfYear()));
-NoAssert.donothing(9, test.get(DateTimeFieldType.dayOfMonth()));
+        assertEquals(6, test.get(DateTimeFieldType.monthOfYear()));
+        assertEquals(9, test.get(DateTimeFieldType.dayOfMonth()));
         try {
             test.get(null);
             fail();
@@ -175,13 +175,13 @@ NoAssert.donothing(9, test.get(DateTimeFieldType.dayOfMonth()));
 
     @Test public void testSize() {
         MonthDay test = new MonthDay();
-NoAssert.donothing(2, test.size());
+        assertEquals(2, test.size());
     }
 
     @Test public void testGetFieldType() {
         MonthDay test = new MonthDay(COPTIC_PARIS);
-NoAssert.donothing(DateTimeFieldType.monthOfYear(), test.getFieldType(0));
-NoAssert.donothing(DateTimeFieldType.dayOfMonth(), test.getFieldType(1));
+        assertSame(DateTimeFieldType.monthOfYear(), test.getFieldType(0));
+        assertSame(DateTimeFieldType.dayOfMonth(), test.getFieldType(1));
 
         try {
             test.getFieldType(-1);
@@ -196,14 +196,14 @@ NoAssert.donothing(DateTimeFieldType.dayOfMonth(), test.getFieldType(1));
         DateTimeFieldType[] fields = test.getFieldTypes();
 NoAssert.donothing(2, fields.length);
 NoAssert.donothing(DateTimeFieldType.monthOfYear(), fields[0]);
-NoAssert.donothing(DateTimeFieldType.dayOfMonth(), fields[1]);
-NoAssert.donothing(test.getFieldTypes(), test.getFieldTypes());
+        assertSame(DateTimeFieldType.dayOfMonth(), fields[1]);
+        assertNotSame(test.getFieldTypes(), test.getFieldTypes());
     }
 
     @Test public void testGetField() {
         MonthDay test = new MonthDay(COPTIC_PARIS);
-NoAssert.donothing(COPTIC_UTC.monthOfYear(), test.getField(0));
-NoAssert.donothing(COPTIC_UTC.dayOfMonth(), test.getField(1));
+        assertSame(COPTIC_UTC.monthOfYear(), test.getField(0));
+        assertSame(COPTIC_UTC.dayOfMonth(), test.getField(1));
         try {
             test.getField(-1);
         } catch (IndexOutOfBoundsException ex) {}
@@ -215,15 +215,15 @@ NoAssert.donothing(COPTIC_UTC.dayOfMonth(), test.getField(1));
     @Test public void testGetFields() {
         MonthDay test = new MonthDay(COPTIC_PARIS);
         DateTimeField[] fields = test.getFields();
-NoAssert.donothing(2, fields.length);
-NoAssert.donothing(COPTIC_UTC.monthOfYear(), fields[0]);
-NoAssert.donothing(COPTIC_UTC.dayOfMonth(), fields[1]);
-NoAssert.donothing(test.getFields(), test.getFields());
+        assertEquals(2, fields.length);
+        assertSame(COPTIC_UTC.monthOfYear(), fields[0]);
+        assertSame(COPTIC_UTC.dayOfMonth(), fields[1]);
+        assertNotSame(test.getFields(), test.getFields());
     }
 
     @Test public void testGetValue() {
         MonthDay test = new MonthDay();
-NoAssert.donothing(6, test.getValue(0));
+        assertEquals(6, test.getValue(0));
 NoAssert.donothing(9, test.getValue(1));
         try {
             test.getValue(-1);
@@ -236,42 +236,42 @@ NoAssert.donothing(9, test.getValue(1));
     @Test public void testGetValues() {
         MonthDay test = new MonthDay();
         int[] values = test.getValues();
-NoAssert.donothing(2, values.length);
-NoAssert.donothing(6, values[0]);
-NoAssert.donothing(9, values[1]);
-NoAssert.donothing(test.getValues(), test.getValues());
+        assertEquals(2, values.length);
+        assertEquals(6, values[0]);
+        assertEquals(9, values[1]);
+        assertNotSame(test.getValues(), test.getValues());
     }
 
     @Test public void testIsSupported() {
         MonthDay test = new MonthDay(COPTIC_PARIS);
-NoAssert.donothing(false, test.isSupported(DateTimeFieldType.year()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.monthOfYear()));
-NoAssert.donothing(true, test.isSupported(DateTimeFieldType.dayOfMonth()));
-NoAssert.donothing(false, test.isSupported(DateTimeFieldType.hourOfDay()));
+        assertEquals(false, test.isSupported(DateTimeFieldType.year()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.monthOfYear()));
+        assertEquals(true, test.isSupported(DateTimeFieldType.dayOfMonth()));
+        assertEquals(false, test.isSupported(DateTimeFieldType.hourOfDay()));
     }
 
     @Test public void testEqualsHashCode() {
         MonthDay test1 = new MonthDay(10, 6, COPTIC_PARIS);
         MonthDay test2 = new MonthDay(10, 6, COPTIC_PARIS);
-NoAssert.donothing(true, test1.equals(test2));
-NoAssert.donothing(true, test2.equals(test1));
-NoAssert.donothing(true, test1.equals(test1));
-NoAssert.donothing(true, test2.equals(test2));
-NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
-NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
-NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
+        assertEquals(true, test1.equals(test2));
+        assertEquals(true, test2.equals(test1));
+        assertEquals(true, test1.equals(test1));
+        assertEquals(true, test2.equals(test2));
+        assertEquals(true, test1.hashCode() == test2.hashCode());
+        assertEquals(true, test1.hashCode() == test1.hashCode());
+        assertEquals(true, test2.hashCode() == test2.hashCode());
         
         MonthDay test3 = new MonthDay(10, 6);
-NoAssert.donothing(false, test1.equals(test3));
-NoAssert.donothing(false, test2.equals(test3));
-NoAssert.donothing(false, test3.equals(test1));
-NoAssert.donothing(false, test3.equals(test2));
-NoAssert.donothing(false, test1.hashCode() == test3.hashCode());
+        assertEquals(false, test1.equals(test3));
+        assertEquals(false, test2.equals(test3));
+        assertEquals(false, test3.equals(test1));
+        assertEquals(false, test3.equals(test2));
+        assertEquals(false, test1.hashCode() == test3.hashCode());
 NoAssert.donothing(false, test2.hashCode() == test3.hashCode());
         
-NoAssert.donothing(false, test1.equals("Hello"));
-NoAssert.donothing(true, test1.equals(new MockMD()));
-NoAssert.donothing(false, test1.equals(MockPartial.EMPTY_INSTANCE));
+        assertEquals(false, test1.equals("Hello"));
+        assertEquals(true, test1.equals(new MockMD()));
+        assertEquals(false, test1.equals(MockPartial.EMPTY_INSTANCE));
     }
     
     class MockMD extends MockPartial {
@@ -299,19 +299,19 @@ NoAssert.donothing(false, test1.equals(MockPartial.EMPTY_INSTANCE));
     @Test public void testCompareTo() {
         MonthDay test1 = new MonthDay(6, 6);
         MonthDay test1a = new MonthDay(6, 6);
-NoAssert.donothing(0, test1.compareTo(test1a));
-NoAssert.donothing(0, test1a.compareTo(test1));
-NoAssert.donothing(0, test1.compareTo(test1));
-NoAssert.donothing(0, test1a.compareTo(test1a));
+        assertEquals(0, test1.compareTo(test1a));
+        assertEquals(0, test1a.compareTo(test1));
+        assertEquals(0, test1.compareTo(test1));
+        assertEquals(0, test1a.compareTo(test1a));
         
         MonthDay test2 = new MonthDay(6, 7);
-NoAssert.donothing(-1, test1.compareTo(test2));
+        assertEquals(-1, test1.compareTo(test2));
 NoAssert.donothing(+1, test2.compareTo(test1));
         
         MonthDay test3 = new MonthDay(6, 7, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(-1, test1.compareTo(test3));
-NoAssert.donothing(+1, test3.compareTo(test1));
-NoAssert.donothing(0, test3.compareTo(test2));
+        assertEquals(-1, test1.compareTo(test3));
+        assertEquals(+1, test3.compareTo(test1));
+        assertEquals(0, test3.compareTo(test2));
         
         DateTimeFieldType[] types = new DateTimeFieldType[] {
             DateTimeFieldType.monthOfYear(),
@@ -342,19 +342,19 @@ NoAssert.donothing(0, test1.compareTo(p));
     @Test public void testIsEqual_MD() {
         MonthDay test1 = new MonthDay(6, 6);
         MonthDay test1a = new MonthDay(6, 6);
-NoAssert.donothing(true, test1.isEqual(test1a));
+        assertEquals(true, test1.isEqual(test1a));
 NoAssert.donothing(true, test1a.isEqual(test1));
-NoAssert.donothing(true, test1.isEqual(test1));
-NoAssert.donothing(true, test1a.isEqual(test1a));
+        assertEquals(true, test1.isEqual(test1));
+        assertEquals(true, test1a.isEqual(test1a));
         
         MonthDay test2 = new MonthDay(6, 7);
 NoAssert.donothing(false, test1.isEqual(test2));
-NoAssert.donothing(false, test2.isEqual(test1));
+        assertEquals(false, test2.isEqual(test1));
         
         MonthDay test3 = new MonthDay(6, 7, GregorianChronology.getInstanceUTC());
 NoAssert.donothing(false, test1.isEqual(test3));
-NoAssert.donothing(false, test3.isEqual(test1));
-NoAssert.donothing(true, test3.isEqual(test2));
+        assertEquals(false, test3.isEqual(test1));
+        assertEquals(true, test3.isEqual(test2));
         
         try {
             new MonthDay(6, 7).isEqual(null);
@@ -366,19 +366,19 @@ NoAssert.donothing(true, test3.isEqual(test2));
     @Test public void testIsBefore_MD() {
         MonthDay test1 = new MonthDay(6, 6);
         MonthDay test1a = new MonthDay(6, 6);
-NoAssert.donothing(false, test1.isBefore(test1a));
+        assertEquals(false, test1.isBefore(test1a));
 NoAssert.donothing(false, test1a.isBefore(test1));
 NoAssert.donothing(false, test1.isBefore(test1));
 NoAssert.donothing(false, test1a.isBefore(test1a));
         
         MonthDay test2 = new MonthDay(6, 7);
 NoAssert.donothing(true, test1.isBefore(test2));
-NoAssert.donothing(false, test2.isBefore(test1));
+        assertEquals(false, test2.isBefore(test1));
         
         MonthDay test3 = new MonthDay(6, 7, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(true, test1.isBefore(test3));
-NoAssert.donothing(false, test3.isBefore(test1));
-NoAssert.donothing(false, test3.isBefore(test2));
+        assertEquals(true, test1.isBefore(test3));
+        assertEquals(false, test3.isBefore(test1));
+        assertEquals(false, test3.isBefore(test2));
         
         try {
             new MonthDay(6, 7).isBefore(null);
@@ -390,19 +390,19 @@ NoAssert.donothing(false, test3.isBefore(test2));
     @Test public void testIsAfter_MD() {
         MonthDay test1 = new MonthDay(6, 6);
         MonthDay test1a = new MonthDay(6, 6);
-NoAssert.donothing(false, test1.isAfter(test1a));
+        assertEquals(false, test1.isAfter(test1a));
 NoAssert.donothing(false, test1a.isAfter(test1));
-NoAssert.donothing(false, test1.isAfter(test1));
-NoAssert.donothing(false, test1a.isAfter(test1a));
+        assertEquals(false, test1.isAfter(test1));
+        assertEquals(false, test1a.isAfter(test1a));
         
         MonthDay test2 = new MonthDay(6, 7);
-NoAssert.donothing(false, test1.isAfter(test2));
-NoAssert.donothing(true, test2.isAfter(test1));
+        assertEquals(false, test1.isAfter(test2));
+        assertEquals(true, test2.isAfter(test1));
         
         MonthDay test3 = new MonthDay(6, 7, GregorianChronology.getInstanceUTC());
-NoAssert.donothing(false, test1.isAfter(test3));
-NoAssert.donothing(true, test3.isAfter(test1));
-NoAssert.donothing(false, test3.isAfter(test2));
+        assertEquals(false, test1.isAfter(test3));
+        assertEquals(true, test3.isAfter(test1));
+        assertEquals(false, test3.isAfter(test2));
         
         try {
             new MonthDay(6, 7).isAfter(null);
@@ -415,7 +415,7 @@ NoAssert.donothing(false, test3.isAfter(test2));
         MonthDay base = new MonthDay(6, 6, COPTIC_PARIS);
         MonthDay test = base.withChronologyRetainFields(BUDDHIST_TOKYO);
         check(base, 6, 6);
-NoAssert.donothing(COPTIC_UTC, base.getChronology());
+        assertEquals(COPTIC_UTC, base.getChronology());
         check(test, 6, 6);
 NoAssert.donothing(BUDDHIST_UTC, test.getChronology());
     }
@@ -423,16 +423,16 @@ NoAssert.donothing(BUDDHIST_UTC, test.getChronology());
     @Test public void testWithChronologyRetainFields_sameChrono() {
         MonthDay base = new MonthDay(6, 6, COPTIC_PARIS);
         MonthDay test = base.withChronologyRetainFields(COPTIC_TOKYO);
-NoAssert.donothing(base, test);
+        assertSame(base, test);
     }
 
     @Test public void testWithChronologyRetainFields_nullChrono() {
         MonthDay base = new MonthDay(6, 6, COPTIC_PARIS);
         MonthDay test = base.withChronologyRetainFields(null);
         check(base, 6, 6);
-NoAssert.donothing(COPTIC_UTC, base.getChronology());
+        assertEquals(COPTIC_UTC, base.getChronology());
         check(test, 6, 6);
-NoAssert.donothing(ISO_UTC, test.getChronology());
+        assertEquals(ISO_UTC, test.getChronology());
     }
 
     //-----------------------------------------------------------------------
@@ -440,8 +440,8 @@ NoAssert.donothing(ISO_UTC, test.getChronology());
         MonthDay test = new MonthDay(9, 6);
         MonthDay result = test.withField(DateTimeFieldType.monthOfYear(), 10);
         
-NoAssert.donothing(new MonthDay(9, 6), test);
-NoAssert.donothing(new MonthDay(10, 6), result);
+        assertEquals(new MonthDay(9, 6), test);
+        assertEquals(new MonthDay(10, 6), result);
     }
 
     @Test public void testWithField_nullField() {
@@ -463,8 +463,8 @@ NoAssert.donothing(new MonthDay(10, 6), result);
     @Test public void testWithField_same() {
         MonthDay test = new MonthDay(9, 6);
         MonthDay result = test.withField(DateTimeFieldType.monthOfYear(), 9);
-NoAssert.donothing(new MonthDay(9, 6), test);
-NoAssert.donothing(test, result);
+        assertEquals(new MonthDay(9, 6), test);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -472,8 +472,8 @@ NoAssert.donothing(test, result);
         MonthDay test = new MonthDay(9, 6);
         MonthDay result = test.withFieldAdded(DurationFieldType.months(), 1);
         
-NoAssert.donothing(new MonthDay(9, 6), test);
-NoAssert.donothing(new MonthDay(10, 6), result);
+        assertEquals(new MonthDay(9, 6), test);
+        assertEquals(new MonthDay(10, 6), result);
     }
 
     @Test public void testWithFieldAdded_nullField_zero() {
@@ -495,7 +495,7 @@ NoAssert.donothing(new MonthDay(10, 6), result);
     @Test public void testWithFieldAdded_zero() {
         MonthDay test = new MonthDay(9, 6);
         MonthDay result = test.withFieldAdded(DurationFieldType.months(), 0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testWithFieldAdded_unknownField() {
@@ -521,21 +521,21 @@ NoAssert.donothing(test, result);
         MonthDay test = new MonthDay(6, 5, BuddhistChronology.getInstance());
         MonthDay result = test.plusMonths(1);
         MonthDay expected = new MonthDay(7, 5, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testPlusMonths_int_fromLeap() {
         MonthDay test = new MonthDay(2, 29, ISOChronology.getInstanceUTC());
         MonthDay result = test.plusMonths(1);
         MonthDay expected = new MonthDay(3, 29, ISOChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testPlusMonths_int_negativeFromLeap() {
         MonthDay test = new MonthDay(2, 29, ISOChronology.getInstanceUTC());
         MonthDay result = test.plusMonths(-1);
         MonthDay expected = new MonthDay(1, 29, ISOChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testPlusMonths_int_endOfMonthAdjust() {
@@ -549,27 +549,27 @@ NoAssert.donothing(expected, result);
         MonthDay test = new MonthDay(3, 31, ISOChronology.getInstanceUTC());
         MonthDay result = test.plusMonths(-1);
         MonthDay expected = new MonthDay(2, 29, ISOChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testPlusMonths_int_same() {
         MonthDay test = new MonthDay(6, 5, ISO_UTC);
         MonthDay result = test.plusMonths(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testPlusMonths_int_wrap() {
         MonthDay test = new MonthDay(6, 5, ISO_UTC);
         MonthDay result = test.plusMonths(10);
         MonthDay expected = new MonthDay(4, 5, ISO_UTC);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testPlusMonths_int_adjust() {
         MonthDay test = new MonthDay(7, 31, ISO_UTC);
         MonthDay result = test.plusMonths(2);
         MonthDay expected = new MonthDay(9, 30, ISO_UTC);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     //-------------------------------------------------------------------------
@@ -577,7 +577,7 @@ NoAssert.donothing(expected, result);
         MonthDay test = new MonthDay(5, 10, BuddhistChronology.getInstance());
         MonthDay result = test.plusDays(1);
         MonthDay expected = new MonthDay(5, 11, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testPlusDays_int_wrapMonth() {
@@ -605,21 +605,21 @@ NoAssert.donothing(expected, result);
         MonthDay test = new MonthDay(11, 30, ISOChronology.getInstanceUTC());
         MonthDay result = test.plusDays(32);
         MonthDay expected = new MonthDay(1, 1, ISOChronology.getInstanceUTC());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testPlusDays_int_wrap50() {
         MonthDay test = new MonthDay(5, 15, ISOChronology.getInstanceUTC());
         MonthDay result = test.plusDays(50);
         MonthDay expected = new MonthDay(7, 4, ISOChronology.getInstanceUTC());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testPlusDays_int_toLeap() {
         MonthDay test = new MonthDay(2, 28, ISOChronology.getInstanceUTC());
         MonthDay result = test.plusDays(1);
         MonthDay expected = new MonthDay(2, 29, ISOChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testPlusDays_int_fromLeap() {
@@ -633,13 +633,13 @@ NoAssert.donothing(expected, result);
         MonthDay test = new MonthDay(2, 29, ISOChronology.getInstanceUTC());
         MonthDay result = test.plusDays(-1);
         MonthDay expected = new MonthDay(2, 28, ISOChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testPlusDays_same() {
         MonthDay test = new MonthDay(5, 10, BuddhistChronology.getInstance());
         MonthDay result = test.plusDays(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
     
     //-----------------------------------------------------------------------
@@ -657,55 +657,55 @@ NoAssert.donothing(test, result);
         MonthDay test = new MonthDay(6, 5, BuddhistChronology.getInstance());
         MonthDay result = test.minusMonths(1);
         MonthDay expected = new MonthDay(5, 5, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusMonths_int_fromLeap() {
         MonthDay test = new MonthDay(2, 29, ISOChronology.getInstanceUTC());
         MonthDay result = test.minusMonths(1);
         MonthDay expected = new MonthDay(1, 29, ISOChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusMonths_int_negativeFromLeap() {
         MonthDay test = new MonthDay(2, 29, ISOChronology.getInstanceUTC());
         MonthDay result = test.minusMonths(-1);
         MonthDay expected = new MonthDay(3, 29, ISOChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusMonths_int_endOfMonthAdjust() {
         MonthDay test = new MonthDay(3, 31, ISOChronology.getInstanceUTC());
         MonthDay result = test.minusMonths(1);
         MonthDay expected = new MonthDay(2, 29, ISOChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusMonths_int_negativeEndOfMonthAdjust() {
         MonthDay test = new MonthDay(3, 31, ISOChronology.getInstanceUTC());
         MonthDay result = test.minusMonths(-1);
         MonthDay expected = new MonthDay(4, 30, ISOChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusMonths_int_same() {
         MonthDay test = new MonthDay(6, 5, ISO_UTC);
         MonthDay result = test.minusMonths(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testMinusMonths_int_wrap() {
         MonthDay test = new MonthDay(6, 5, ISO_UTC);
         MonthDay result = test.minusMonths(10);
         MonthDay expected = new MonthDay(8, 5, ISO_UTC);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusMonths_int_adjust() {
         MonthDay test = new MonthDay(7, 31, ISO_UTC);
         MonthDay result = test.minusMonths(3);
         MonthDay expected = new MonthDay(4, 30, ISO_UTC);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     //-------------------------------------------------------------------------
@@ -713,42 +713,42 @@ NoAssert.donothing(expected, result);
         MonthDay test = new MonthDay(5, 11, BuddhistChronology.getInstance());
         MonthDay result = test.minusDays(1);
         MonthDay expected = new MonthDay(5, 10, BuddhistChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusDays_int_wrapMonth() {
         MonthDay test = new MonthDay(12, 1, ISOChronology.getInstanceUTC());
         MonthDay result = test.minusDays(30);
         MonthDay expected = new MonthDay(11, 1, ISOChronology.getInstanceUTC());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusDays_int_wrapMonthTwice() {
         MonthDay test = new MonthDay(12, 1, ISOChronology.getInstanceUTC());
         MonthDay result = test.minusDays(31);
         MonthDay expected = new MonthDay(10, 31, ISOChronology.getInstanceUTC());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusDays_int_wrapMonthIntoLastYear() {
         MonthDay test = new MonthDay(1, 1, ISOChronology.getInstanceUTC());
         MonthDay result = test.minusDays(31);
         MonthDay expected = new MonthDay(12, 1, ISOChronology.getInstanceUTC());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusDays_int_wrapMonthTwiceIntoLastYear() {
         MonthDay test = new MonthDay(1, 1, ISOChronology.getInstanceUTC());
         MonthDay result = test.minusDays(32);
         MonthDay expected = new MonthDay(11, 30, ISOChronology.getInstanceUTC());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusDays_int_toLeap() {
         MonthDay test = new MonthDay(3, 1, ISOChronology.getInstanceUTC());
         MonthDay result = test.minusDays(1);
         MonthDay expected = new MonthDay(2, 29, ISOChronology.getInstance());
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test public void testMinusDays_int_fromLeap() {
@@ -768,14 +768,14 @@ NoAssert.donothing(expected, result);
     @Test public void testMinusDays_same() {
         MonthDay test = new MonthDay(5, 11, BuddhistChronology.getInstance());
         MonthDay result = test.minusDays(0);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
     
     //-----------------------------------------------------------------------
     @Test public void testToLocalDate() {
         MonthDay base = new MonthDay(6, 6, COPTIC_UTC);
         LocalDate test = base.toLocalDate(2009);
-NoAssert.donothing(new LocalDate(2009, 6, 6, COPTIC_UTC), test);
+        assertEquals(new LocalDate(2009, 6, 6, COPTIC_UTC), test);
         try {
             base.toLocalDate(0);
             fail();
@@ -792,7 +792,7 @@ NoAssert.donothing(new LocalDate(2009, 6, 6, COPTIC_UTC), test);
         DateTime expected = dt;
         expected = expected.monthOfYear().setCopy(6);
         expected = expected.dayOfMonth().setCopy(6);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     @Test public void testToDateTime_nullRI() {
@@ -805,7 +805,7 @@ NoAssert.donothing(expected, test);
         DateTime expected = dt;
         expected = expected.monthOfYear().setCopy(6);
         expected = expected.dayOfMonth().setCopy(6);
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     //-----------------------------------------------------------------------
@@ -826,8 +826,8 @@ NoAssert.donothing(expected, test);
     //-----------------------------------------------------------------------
     @Test public void testProperty() {
         MonthDay test = new MonthDay(6, 6);
-NoAssert.donothing(test.monthOfYear(), test.property(DateTimeFieldType.monthOfYear()));
-NoAssert.donothing(test.dayOfMonth(), test.property(DateTimeFieldType.dayOfMonth()));
+        assertEquals(test.monthOfYear(), test.property(DateTimeFieldType.monthOfYear()));
+        assertEquals(test.dayOfMonth(), test.property(DateTimeFieldType.dayOfMonth()));
         try {
             test.property(DateTimeFieldType.millisOfDay());
             fail();
@@ -853,10 +853,10 @@ NoAssert.donothing(test.dayOfMonth(), test.property(DateTimeFieldType.dayOfMonth
         MonthDay result = (MonthDay) ois.readObject();
         ois.close();
         
-NoAssert.donothing(test, result);
-NoAssert.donothing(Arrays.equals(test.getValues(), result.getValues()));
-NoAssert.donothing(Arrays.equals(test.getFields(), result.getFields()));
-NoAssert.donothing(test.getChronology(), result.getChronology());
+        assertEquals(test, result);
+        assertTrue(Arrays.equals(test.getValues(), result.getValues()));
+        assertTrue(Arrays.equals(test.getFields(), result.getFields()));
+        assertEquals(test.getChronology(), result.getChronology());
     }
 
     //-----------------------------------------------------------------------
@@ -868,30 +868,30 @@ NoAssert.donothing("--05-06", test.toString());
     //-----------------------------------------------------------------------
     @Test public void testToString_String() {
         MonthDay test = new MonthDay(5, 6);
-NoAssert.donothing("05 \ufffd\ufffd", test.toString("MM HH"));
+        assertEquals("05 \ufffd\ufffd", test.toString("MM HH"));
 NoAssert.donothing("--05-06", test.toString((String) null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString_String_Locale() {
         MonthDay test = new MonthDay(5, 6);
-NoAssert.donothing("\ufffd 6/5", test.toString("EEE d/M", Locale.ENGLISH));
-NoAssert.donothing("\ufffd 6/5", test.toString("EEE d/M", Locale.FRENCH));
+        assertEquals("\ufffd 6/5", test.toString("EEE d/M", Locale.ENGLISH));
+        assertEquals("\ufffd 6/5", test.toString("EEE d/M", Locale.FRENCH));
 NoAssert.donothing("--05-06", test.toString(null, Locale.ENGLISH));
-NoAssert.donothing("\ufffd 6/5", test.toString("EEE d/M", null));
-NoAssert.donothing("--05-06", test.toString(null, null));
+        assertEquals("\ufffd 6/5", test.toString("EEE d/M", null));
+        assertEquals("--05-06", test.toString(null, null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString_DTFormatter() {
         MonthDay test = new MonthDay(5, 6);
-NoAssert.donothing("05 \ufffd\ufffd", test.toString(DateTimeFormat.forPattern("MM HH")));
-NoAssert.donothing("--05-06", test.toString((DateTimeFormatter) null));
+        assertEquals("05 \ufffd\ufffd", test.toString(DateTimeFormat.forPattern("MM HH")));
+        assertEquals("--05-06", test.toString((DateTimeFormatter) null));
     }
 
     //-----------------------------------------------------------------------
     private void check(MonthDay test, int month, int day) {
-NoAssert.donothing(month, test.getMonthOfYear());
-NoAssert.donothing(day, test.getDayOfMonth());
+        assertEquals(month, test.getMonthOfYear());
+        assertEquals(day, test.getDayOfMonth());
     }
 }

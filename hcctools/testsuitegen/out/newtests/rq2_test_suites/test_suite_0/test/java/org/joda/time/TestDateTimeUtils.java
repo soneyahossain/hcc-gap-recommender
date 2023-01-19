@@ -164,19 +164,19 @@ public class TestDateTimeUtils  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
 NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testClass() {
         Class<?> cls = DateTimeUtils.class;
-NoAssert.donothing(true, Modifier.isPublic(cls.getModifiers()));
-NoAssert.donothing(false, Modifier.isFinal(cls.getModifiers()));
+        assertEquals(true, Modifier.isPublic(cls.getModifiers()));
+        assertEquals(false, Modifier.isFinal(cls.getModifiers()));
         
-NoAssert.donothing(1, cls.getDeclaredConstructors().length);
-NoAssert.donothing(true, Modifier.isProtected(cls.getDeclaredConstructors()[0].getModifiers()));
+        assertEquals(1, cls.getDeclaredConstructors().length);
+        assertEquals(true, Modifier.isProtected(cls.getDeclaredConstructors()[0].getModifiers()));
         
         new DateTimeUtils() {};
     }
@@ -185,8 +185,8 @@ NoAssert.donothing(true, Modifier.isProtected(cls.getDeclaredConstructors()[0].g
     @Test public void testSystemMillis() {
         long nowSystem = System.currentTimeMillis();
         long now = DateTimeUtils.currentTimeMillis();
-NoAssert.donothing((now >= nowSystem));
-NoAssert.donothing((now - nowSystem) < 10000L);
+        assertTrue((now >= nowSystem));
+        assertTrue((now - nowSystem) < 10000L);
     }
 
     //-----------------------------------------------------------------------
@@ -215,16 +215,16 @@ NoAssert.donothing((now - nowSystem) < 10000L);
     @Test public void testFixedMillis() {
         try {
             DateTimeUtils.setCurrentMillisFixed(0L);
-NoAssert.donothing(0L, DateTimeUtils.currentTimeMillis());
-NoAssert.donothing(0L, DateTimeUtils.currentTimeMillis());
-NoAssert.donothing(0L, DateTimeUtils.currentTimeMillis());
+            assertEquals(0L, DateTimeUtils.currentTimeMillis());
+            assertEquals(0L, DateTimeUtils.currentTimeMillis());
+            assertEquals(0L, DateTimeUtils.currentTimeMillis());
         } finally {
             DateTimeUtils.setCurrentMillisSystem();
         }
         long nowSystem = System.currentTimeMillis();
         long now = DateTimeUtils.currentTimeMillis();
-NoAssert.donothing((now >= nowSystem));
-NoAssert.donothing((now - nowSystem) < 10000L);
+        assertTrue((now >= nowSystem));
+        assertTrue((now - nowSystem) < 10000L);
     }
 
     //-----------------------------------------------------------------------
@@ -257,16 +257,16 @@ NoAssert.donothing((now - nowSystem) < 10000L);
             long nowSystem = System.currentTimeMillis();
             long now = DateTimeUtils.currentTimeMillis();
             long nowAdjustDay = now + (24 * 60 *  60 * 1000);
-NoAssert.donothing((now < nowSystem));
-NoAssert.donothing((nowAdjustDay >= nowSystem));
+            assertTrue((now < nowSystem));
+            assertTrue((nowAdjustDay >= nowSystem));
 NoAssert.donothing((nowAdjustDay - nowSystem) < 10000L);
         } finally {
             DateTimeUtils.setCurrentMillisSystem();
         }
         long nowSystem = System.currentTimeMillis();
         long now = DateTimeUtils.currentTimeMillis();
-NoAssert.donothing((now >= nowSystem));
-NoAssert.donothing((now - nowSystem) < 10000L);
+        assertTrue((now >= nowSystem));
+        assertTrue((now - nowSystem) < 10000L);
     }
 
     //-----------------------------------------------------------------------
@@ -280,7 +280,7 @@ NoAssert.donothing((now - nowSystem) < 10000L);
             DateTimeUtils.setCurrentMillisSystem();
         }
         long now2 = DateTimeUtils.currentTimeMillis();
-NoAssert.donothing(Math.abs(now1 - now2) < 100, true);
+        assertEquals(Math.abs(now1 - now2) < 100, true);
     }
 
     //-----------------------------------------------------------------------
@@ -313,7 +313,7 @@ NoAssert.donothing(Math.abs(now1 - now2) < 100, true);
                     return 1L;
                 }
             });
-NoAssert.donothing(1L, DateTimeUtils.currentTimeMillis());
+            assertEquals(1L, DateTimeUtils.currentTimeMillis());
         } finally {
             DateTimeUtils.setCurrentMillisSystem();
         }
@@ -356,7 +356,7 @@ NoAssert.donothing(1L, DateTimeUtils.currentTimeMillis());
     //-----------------------------------------------------------------------
     @Test public void testGetInstantMillis_RI() {
         Instant i = new Instant(123L);
-NoAssert.donothing(123L, DateTimeUtils.getInstantMillis(i));
+        assertEquals(123L, DateTimeUtils.getInstantMillis(i));
         try {
             DateTimeUtils.setCurrentMillisFixed(TEST_TIME_NOW);
 NoAssert.donothing(TEST_TIME_NOW, DateTimeUtils.getInstantMillis(null));
@@ -368,7 +368,7 @@ NoAssert.donothing(TEST_TIME_NOW, DateTimeUtils.getInstantMillis(null));
     //-----------------------------------------------------------------------
     @Test public void testGetInstantChronology_RI() {
         DateTime dt = new DateTime(123L, BuddhistChronology.getInstance());
-NoAssert.donothing(BuddhistChronology.getInstance(), DateTimeUtils.getInstantChronology(dt));
+        assertEquals(BuddhistChronology.getInstance(), DateTimeUtils.getInstantChronology(dt));
         
         Instant i = new Instant(123L);
 NoAssert.donothing(ISOChronology.getInstanceUTC(), DateTimeUtils.getInstantChronology(i));
@@ -389,9 +389,9 @@ NoAssert.donothing(ISOChronology.getInstanceUTC(), DateTimeUtils.getInstantChron
     //-----------------------------------------------------------------------
     @Test public void testGetIntervalChronology_RInterval() {
         Interval dt = new Interval(123L, 456L, BuddhistChronology.getInstance());
-NoAssert.donothing(BuddhistChronology.getInstance(), DateTimeUtils.getIntervalChronology(dt));
+        assertEquals(BuddhistChronology.getInstance(), DateTimeUtils.getIntervalChronology(dt));
         
-NoAssert.donothing(ISOChronology.getInstance(), DateTimeUtils.getIntervalChronology(null));
+        assertEquals(ISOChronology.getInstance(), DateTimeUtils.getIntervalChronology(null));
         
         MutableInterval ai = new MutableInterval() {
             private static final long serialVersionUID = 1L;
@@ -407,20 +407,20 @@ NoAssert.donothing(ISOChronology.getInstance(), DateTimeUtils.getIntervalChronol
     @Test public void testGetIntervalChronology_RI_RI() {
         DateTime dt1 = new DateTime(123L, BuddhistChronology.getInstance());
         DateTime dt2 = new DateTime(123L, CopticChronology.getInstance());
-NoAssert.donothing(BuddhistChronology.getInstance(), DateTimeUtils.getIntervalChronology(dt1, dt2));
-NoAssert.donothing(BuddhistChronology.getInstance(), DateTimeUtils.getIntervalChronology(dt1, null));
+        assertEquals(BuddhistChronology.getInstance(), DateTimeUtils.getIntervalChronology(dt1, dt2));
+        assertEquals(BuddhistChronology.getInstance(), DateTimeUtils.getIntervalChronology(dt1, null));
 NoAssert.donothing(CopticChronology.getInstance(), DateTimeUtils.getIntervalChronology(null, dt2));
-NoAssert.donothing(ISOChronology.getInstance(), DateTimeUtils.getIntervalChronology(null, null));
+        assertEquals(ISOChronology.getInstance(), DateTimeUtils.getIntervalChronology(null, null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetReadableInterval_ReadableInterval() {
         ReadableInterval input = new Interval(0, 100L);
-NoAssert.donothing(input, DateTimeUtils.getReadableInterval(input));
+        assertEquals(input, DateTimeUtils.getReadableInterval(input));
         
         try {
             DateTimeUtils.setCurrentMillisFixed(TEST_TIME_NOW);
-NoAssert.donothing(new Interval(TEST_TIME_NOW, TEST_TIME_NOW), DateTimeUtils.getReadableInterval(null));
+            assertEquals(new Interval(TEST_TIME_NOW, TEST_TIME_NOW), DateTimeUtils.getReadableInterval(null));
         } finally {
             DateTimeUtils.setCurrentMillisSystem();
         }
@@ -428,19 +428,19 @@ NoAssert.donothing(new Interval(TEST_TIME_NOW, TEST_TIME_NOW), DateTimeUtils.get
 
     //-----------------------------------------------------------------------
     @Test public void testGetChronology_Chronology() {
-NoAssert.donothing(BuddhistChronology.getInstance(), DateTimeUtils.getChronology(BuddhistChronology.getInstance()));
+        assertEquals(BuddhistChronology.getInstance(), DateTimeUtils.getChronology(BuddhistChronology.getInstance()));
 NoAssert.donothing(ISOChronology.getInstance(), DateTimeUtils.getChronology(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetZone_Zone() {
-NoAssert.donothing(PARIS, DateTimeUtils.getZone(PARIS));
+        assertEquals(PARIS, DateTimeUtils.getZone(PARIS));
 NoAssert.donothing(DateTimeZone.getDefault(), DateTimeUtils.getZone(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetPeriodType_PeriodType() {
-NoAssert.donothing(PeriodType.dayTime(), DateTimeUtils.getPeriodType(PeriodType.dayTime()));
+        assertEquals(PeriodType.dayTime(), DateTimeUtils.getPeriodType(PeriodType.dayTime()));
 NoAssert.donothing(PeriodType.standard(), DateTimeUtils.getPeriodType(null));
     }
 
@@ -448,24 +448,24 @@ NoAssert.donothing(PeriodType.standard(), DateTimeUtils.getPeriodType(null));
     @Test public void testGetDurationMillis_RI() {
         Duration dur = new Duration(123L);
 NoAssert.donothing(123L, DateTimeUtils.getDurationMillis(dur));
-NoAssert.donothing(0L, DateTimeUtils.getDurationMillis(null));
+        assertEquals(0L, DateTimeUtils.getDurationMillis(null));
     }
 
     //-----------------------------------------------------------------------
     @SuppressWarnings("deprecation")
     @Test public void testIsContiguous_RP() {
         YearMonthDay ymd = new YearMonthDay(2005, 6, 9);
-NoAssert.donothing(true, DateTimeUtils.isContiguous(ymd));
+        assertEquals(true, DateTimeUtils.isContiguous(ymd));
         TimeOfDay tod = new TimeOfDay(12, 20, 30, 0);
-NoAssert.donothing(true, DateTimeUtils.isContiguous(tod));
+        assertEquals(true, DateTimeUtils.isContiguous(tod));
         Partial year = new Partial(DateTimeFieldType.year(), 2005);
-NoAssert.donothing(true, DateTimeUtils.isContiguous(year));
+        assertEquals(true, DateTimeUtils.isContiguous(year));
         Partial hourOfDay = new Partial(DateTimeFieldType.hourOfDay(), 12);
-NoAssert.donothing(true, DateTimeUtils.isContiguous(hourOfDay));
+        assertEquals(true, DateTimeUtils.isContiguous(hourOfDay));
         Partial yearHour = year.with(DateTimeFieldType.hourOfDay(), 12);
 NoAssert.donothing(false, DateTimeUtils.isContiguous(yearHour));
         Partial ymdd = new Partial(ymd).with(DateTimeFieldType.dayOfWeek(), 2);
-NoAssert.donothing(false, DateTimeUtils.isContiguous(ymdd));
+        assertEquals(false, DateTimeUtils.isContiguous(ymdd));
         Partial dd = new Partial(DateTimeFieldType.dayOfMonth(), 13).with(DateTimeFieldType.dayOfWeek(), 5);
 NoAssert.donothing(false, DateTimeUtils.isContiguous(dd));
         
@@ -479,17 +479,17 @@ NoAssert.donothing(false, DateTimeUtils.isContiguous(dd));
     @SuppressWarnings("deprecation")
     @Test public void testIsContiguous_RP_GJChronology() {
         YearMonthDay ymd = new YearMonthDay(2005, 6, 9, GJ);
-NoAssert.donothing(true, DateTimeUtils.isContiguous(ymd));
+        assertEquals(true, DateTimeUtils.isContiguous(ymd));
         TimeOfDay tod = new TimeOfDay(12, 20, 30, 0, GJ);
-NoAssert.donothing(true, DateTimeUtils.isContiguous(tod));
+        assertEquals(true, DateTimeUtils.isContiguous(tod));
         Partial year = new Partial(DateTimeFieldType.year(), 2005, GJ);
-NoAssert.donothing(true, DateTimeUtils.isContiguous(year));
+        assertEquals(true, DateTimeUtils.isContiguous(year));
         Partial hourOfDay = new Partial(DateTimeFieldType.hourOfDay(), 12, GJ);
-NoAssert.donothing(true, DateTimeUtils.isContiguous(hourOfDay));
+        assertEquals(true, DateTimeUtils.isContiguous(hourOfDay));
         Partial yearHour = year.with(DateTimeFieldType.hourOfDay(), 12);
-NoAssert.donothing(false, DateTimeUtils.isContiguous(yearHour));
+        assertEquals(false, DateTimeUtils.isContiguous(yearHour));
         Partial ymdd = new Partial(ymd).with(DateTimeFieldType.dayOfWeek(), 2);
-NoAssert.donothing(false, DateTimeUtils.isContiguous(ymdd));
+        assertEquals(false, DateTimeUtils.isContiguous(ymdd));
         Partial dd = new Partial(DateTimeFieldType.dayOfMonth(), 13).with(DateTimeFieldType.dayOfWeek(), 5);
 NoAssert.donothing(false, DateTimeUtils.isContiguous(dd));
         
@@ -503,43 +503,43 @@ NoAssert.donothing(false, DateTimeUtils.isContiguous(dd));
     @Test public void test_julianDay() {
         DateTime base = new DateTime(1970, 1, 1, 0, 0, DateTimeZone.UTC);
         
-NoAssert.donothing(2440587.5d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
-NoAssert.donothing(2440588, DateTimeUtils.toJulianDayNumber(base.getMillis()));
-NoAssert.donothing(base.getMillis(), DateTimeUtils.fromJulianDay(2440587.5d));
+        assertEquals(2440587.5d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
+        assertEquals(2440588, DateTimeUtils.toJulianDayNumber(base.getMillis()));
+        assertEquals(base.getMillis(), DateTimeUtils.fromJulianDay(2440587.5d));
         
         base = base.plusHours(6);
 NoAssert.donothing(2440587.75d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
-NoAssert.donothing(2440588, DateTimeUtils.toJulianDayNumber(base.getMillis()));
-NoAssert.donothing(base.getMillis(), DateTimeUtils.fromJulianDay(2440587.75d));
+        assertEquals(2440588, DateTimeUtils.toJulianDayNumber(base.getMillis()));
+        assertEquals(base.getMillis(), DateTimeUtils.fromJulianDay(2440587.75d));
         
         base = base.plusHours(6);
-NoAssert.donothing(2440588d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
+        assertEquals(2440588d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
 NoAssert.donothing(2440588, DateTimeUtils.toJulianDayNumber(base.getMillis()));
-NoAssert.donothing(base.getMillis(), DateTimeUtils.fromJulianDay(2440588d));
+        assertEquals(base.getMillis(), DateTimeUtils.fromJulianDay(2440588d));
         
         base = base.plusHours(6);
-NoAssert.donothing(2440588.25d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
+        assertEquals(2440588.25d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
 NoAssert.donothing(2440588, DateTimeUtils.toJulianDayNumber(base.getMillis()));
-NoAssert.donothing(base.getMillis(), DateTimeUtils.fromJulianDay(2440588.25d));
+        assertEquals(base.getMillis(), DateTimeUtils.fromJulianDay(2440588.25d));
         
         base = base.plusHours(6);
-NoAssert.donothing(2440588.5d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
-NoAssert.donothing(2440589, DateTimeUtils.toJulianDayNumber(base.getMillis()));
-NoAssert.donothing(base.getMillis(), DateTimeUtils.fromJulianDay(2440588.5d));
+        assertEquals(2440588.5d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
+        assertEquals(2440589, DateTimeUtils.toJulianDayNumber(base.getMillis()));
+        assertEquals(base.getMillis(), DateTimeUtils.fromJulianDay(2440588.5d));
         
         base = new DateTime(2012, 8, 31, 23, 50, DateTimeZone.UTC);
-NoAssert.donothing(2456171.4930555555, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
-NoAssert.donothing(2456171, DateTimeUtils.toJulianDayNumber(base.getMillis()));
+        assertEquals(2456171.4930555555, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
+        assertEquals(2456171, DateTimeUtils.toJulianDayNumber(base.getMillis()));
         
         base = new DateTime(-4713, 1, 1, 12, 0, JulianChronology.getInstanceUTC());
-NoAssert.donothing(0d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
-NoAssert.donothing(0, DateTimeUtils.toJulianDayNumber(base.getMillis()));
+        assertEquals(0d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
+        assertEquals(0, DateTimeUtils.toJulianDayNumber(base.getMillis()));
 NoAssert.donothing(base.getMillis(), DateTimeUtils.fromJulianDay(0d));
         
         base = new DateTime(-4713, 1, 1, 0, 0, JulianChronology.getInstanceUTC());
-NoAssert.donothing(-0.5d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
-NoAssert.donothing(0, DateTimeUtils.toJulianDayNumber(base.getMillis()));
-NoAssert.donothing(base.getMillis(), DateTimeUtils.fromJulianDay(-0.5d));
+        assertEquals(-0.5d, DateTimeUtils.toJulianDay(base.getMillis()), 0.0001d);
+        assertEquals(0, DateTimeUtils.toJulianDayNumber(base.getMillis()));
+        assertEquals(base.getMillis(), DateTimeUtils.fromJulianDay(-0.5d));
     }
 
 }

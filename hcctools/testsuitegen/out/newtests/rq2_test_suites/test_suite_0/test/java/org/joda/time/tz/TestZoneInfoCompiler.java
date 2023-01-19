@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.joda.time.tz;import org.joda.time.NoAssert;
+package org.joda.time.tz;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -73,7 +73,7 @@ public class TestZoneInfoCompiler {//extends TestCase {
     public void testTestOne() {
         DateTimeZone dateTimeZone = DateTimeZone.forOffsetMillis(8);
 
-NoAssert.donothing(ZoneInfoCompiler.test("+02:15", dateTimeZone));
+        assertTrue(ZoneInfoCompiler.test("+02:15", dateTimeZone));
     }
 
     @Test
@@ -81,27 +81,27 @@ NoAssert.donothing(ZoneInfoCompiler.test("+02:15", dateTimeZone));
         DateTimeZoneBuilder dateTimeZoneBuilder = new DateTimeZoneBuilder();
         DateTimeZone dateTimeZone = dateTimeZoneBuilder.toDateTimeZone("7M6 _n'63", true);
 
-NoAssert.donothing(ZoneInfoCompiler.test("7M6 _n'63", dateTimeZone));
+        assertTrue(ZoneInfoCompiler.test("7M6 _n'63", dateTimeZone));
     }
 
     @Test
     public void testParseZoneCharFive() {
-NoAssert.donothing('s', ZoneInfoCompiler.parseZoneChar('s'));
+        assertEquals('s', ZoneInfoCompiler.parseZoneChar('s'));
     }
 
     @Test
     public void testParseYearAndParseYearReturningPositiveAndParseYearWithNegative() {
-NoAssert.donothing(Integer.MAX_VALUE, ZoneInfoCompiler.parseYear("maximum", (-2512)));
+        assertEquals(Integer.MAX_VALUE, ZoneInfoCompiler.parseYear("maximum", (-2512)));
     }
 
     @Test
     public void testParseYearAndParseYearReturningNegativeOne() {
-NoAssert.donothing(Integer.MIN_VALUE, ZoneInfoCompiler.parseYear("min", (-1881443201)));
+        assertEquals(Integer.MIN_VALUE, ZoneInfoCompiler.parseYear("min", (-1881443201)));
     }
 
     @Test
     public void testParseYearAndParseYearReturningNegativeTwo() {
-NoAssert.donothing(Integer.MIN_VALUE, ZoneInfoCompiler.parseYear("minimum", (-1971487955)));
+        assertEquals(Integer.MIN_VALUE, ZoneInfoCompiler.parseYear("minimum", (-1971487955)));
     }
 
     @Test
@@ -116,7 +116,7 @@ NoAssert.donothing(Integer.MIN_VALUE, ZoneInfoCompiler.parseYear("minimum", (-19
             ZoneInfoCompiler.writeZoneInfoMap(null, hashMapTwo);
             fail("Expecting exception: IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-NoAssert.donothing(ZoneInfoCompiler.class.getName(), e.getStackTrace()[0].getClassName());
+            assertEquals(ZoneInfoCompiler.class.getName(), e.getStackTrace()[0].getClassName());
         }
     }
 

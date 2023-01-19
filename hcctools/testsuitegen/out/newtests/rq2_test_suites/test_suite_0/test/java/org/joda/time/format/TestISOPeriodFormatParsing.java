@@ -112,7 +112,7 @@ public class TestISOPeriodFormatParsing  { //extends TestCase {
     @Test public void testParseStandard1() {
         PeriodFormatter parser = ISOPeriodFormat.standard();
         Period p = parser.parsePeriod("P1Y2M3W4DT5H6M7.008S");
-NoAssert.donothing(new Period(1, 2, 3, 4, 5, 6, 7, 8), p);
+        assertEquals(new Period(1, 2, 3, 4, 5, 6, 7, 8), p);
     }
 
     //-----------------------------------------------------------------------
@@ -126,7 +126,7 @@ NoAssert.donothing(new Period(0, 0, 0, 0, 5, 6, 7, 8), p);
     @Test public void testParseStandard3() {
         PeriodFormatter parser = ISOPeriodFormat.standard();
         Period p = parser.parsePeriod("P0DT5H6M7.008S");
-NoAssert.donothing(new Period(0, 0, 0, 0, 5, 6, 7, 8), p);
+        assertEquals(new Period(0, 0, 0, 0, 5, 6, 7, 8), p);
     }
 
     //-----------------------------------------------------------------------
@@ -140,21 +140,21 @@ NoAssert.donothing(new Period(2, 0, 0, 3, 5, 6, 7, 8), p);
     @Test public void testParseStandard5() {
         PeriodFormatter parser = ISOPeriodFormat.standard();
         Period p = parser.parsePeriod("P2YT5H6M7.008S");
-NoAssert.donothing(new Period(2, 0, 0, 0, 5, 6, 7, 8), p);
+        assertEquals(new Period(2, 0, 0, 0, 5, 6, 7, 8), p);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testParseStandard6() {
         PeriodFormatter parser = ISOPeriodFormat.standard();
         Period p = parser.parsePeriod("PT5H6M7.008S");
-NoAssert.donothing(new Period(0, 0, 0, 0, 5, 6, 7, 8), p);
+        assertEquals(new Period(0, 0, 0, 0, 5, 6, 7, 8), p);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testParseStandard7() {
         PeriodFormatter parser = ISOPeriodFormat.standard();
         Period p = parser.parsePeriod("P1Y2M3W4D");
-NoAssert.donothing(new Period(1, 2, 3, 4, 0, 0, 0, 0), p);
+        assertEquals(new Period(1, 2, 3, 4, 0, 0, 0, 0), p);
     }
 
     //-----------------------------------------------------------------------
@@ -168,14 +168,14 @@ NoAssert.donothing(new Period(0, 0, 0, 0, 5, 6, 7, 0), p);
     @Test public void testParseStandard9() {
         PeriodFormatter parser = ISOPeriodFormat.standard();
         Period p = parser.parsePeriod("PT0S");
-NoAssert.donothing(new Period(0, 0, 0, 0, 0, 0, 0, 0), p);
+        assertEquals(new Period(0, 0, 0, 0, 0, 0, 0, 0), p);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testParseStandard10() {
         PeriodFormatter parser = ISOPeriodFormat.standard();
         Period p = parser.parsePeriod("P0D");
-NoAssert.donothing(new Period(0, 0, 0, 0, 0, 0, 0, 0), p);
+        assertEquals(new Period(0, 0, 0, 0, 0, 0, 0, 0), p);
     }
 
     //-----------------------------------------------------------------------

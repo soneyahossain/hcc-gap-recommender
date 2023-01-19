@@ -104,9 +104,9 @@ NoAssert.donothing(new Period(6, 3, 0, 2, 0, 0, 0, 0), p);
     @Test public void testParseNegativeMillis1() {
         Period period = new Period(0, 0, 0, -1);
         String formatted = period.toString();
-NoAssert.donothing("PT-0.001S", formatted);
+        assertEquals("PT-0.001S", formatted);
         Period parsed = Period.parse(formatted);
-NoAssert.donothing(period, parsed);
+        assertEquals(period, parsed);
     }
 
     @Test public void testParseNegativeMillis2() {
@@ -114,7 +114,7 @@ NoAssert.donothing(period, parsed);
         String formatted = period.toString();
 NoAssert.donothing("PT-0.999S", formatted);
         Period parsed = Period.parse(formatted);
-NoAssert.donothing(period, parsed);
+        assertEquals(period, parsed);
     }
 
     @Test public void testParseCustom1() {
@@ -129,28 +129,28 @@ NoAssert.donothing(period, parsed);
         Period p;
 
         p = new Period(47, 55, 0, 0);
-NoAssert.donothing("47:55", formatter.print(p));
-NoAssert.donothing(p, formatter.parsePeriod("47:55"));
-NoAssert.donothing(p, formatter.parsePeriod("047:055"));
+        assertEquals("47:55", formatter.print(p));
+        assertEquals(p, formatter.parsePeriod("47:55"));
+        assertEquals(p, formatter.parsePeriod("047:055"));
 
         p = new Period(7, 5, 0, 0);
-NoAssert.donothing("7:05", formatter.print(p));
+        assertEquals("7:05", formatter.print(p));
 NoAssert.donothing(p, formatter.parsePeriod("7:05"));
-NoAssert.donothing(p, formatter.parsePeriod("7:5"));
-NoAssert.donothing(p, formatter.parsePeriod("07:05"));
+        assertEquals(p, formatter.parsePeriod("7:5"));
+        assertEquals(p, formatter.parsePeriod("07:05"));
 
         p = new Period(0, 5, 0, 0);
-NoAssert.donothing("0:05", formatter.print(p));
-NoAssert.donothing(p, formatter.parsePeriod("0:05"));
+        assertEquals("0:05", formatter.print(p));
+        assertEquals(p, formatter.parsePeriod("0:05"));
 NoAssert.donothing(p, formatter.parsePeriod("0:5"));
 NoAssert.donothing(p, formatter.parsePeriod("00:005"));
 NoAssert.donothing(p, formatter.parsePeriod("0:005"));
 
         p = new Period(0, 0, 0, 0);
-NoAssert.donothing("0:00", formatter.print(p));
-NoAssert.donothing(p, formatter.parsePeriod("0:00"));
+        assertEquals("0:00", formatter.print(p));
+        assertEquals(p, formatter.parsePeriod("0:00"));
 NoAssert.donothing(p, formatter.parsePeriod("0:0"));
-NoAssert.donothing(p, formatter.parsePeriod("00:00"));
+        assertEquals(p, formatter.parsePeriod("00:00"));
     }
 
 }

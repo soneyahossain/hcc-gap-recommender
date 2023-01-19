@@ -178,36 +178,36 @@ public class TestDateTimeFormat  { //extends TestCase {
         DateTimeFormat f = new DateTimeFormat() {
             // test constructor is protected
         };
-NoAssert.donothing(f);
+        assertNotNull(f);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_era() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("G").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "AD", f.print(dt));
+        assertEquals(dt.toString(), "AD", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "AD", f.print(dt));
+        assertEquals(dt.toString(), "AD", f.print(dt));
         
         dt = dt.withZone(PARIS);
-NoAssert.donothing(dt.toString(), "AD", f.print(dt));
+        assertEquals(dt.toString(), "AD", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_centuryOfEra() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("C").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "20", f.print(dt));
+        assertEquals(dt.toString(), "20", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "20", f.print(dt));
+        assertEquals(dt.toString(), "20", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "20", f.print(dt));
+        assertEquals(dt.toString(), "20", f.print(dt));
         
         dt = new DateTime(-123, 6, 9, 10, 20, 30, 40, UTC);
-NoAssert.donothing(dt.toString(), "1", f.print(dt));
+        assertEquals(dt.toString(), "1", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
@@ -217,31 +217,31 @@ NoAssert.donothing(dt.toString(), "1", f.print(dt));
 NoAssert.donothing(dt.toString(), "2004", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "2004", f.print(dt));
+        assertEquals(dt.toString(), "2004", f.print(dt));
         
         dt = dt.withZone(TOKYO);
 NoAssert.donothing(dt.toString(), "2004", f.print(dt));
         
         dt = new DateTime(-123, 6, 9, 10, 20, 30, 40, UTC);
-NoAssert.donothing(dt.toString(), "124", f.print(dt));  // 124th year of BCE
+        assertEquals(dt.toString(), "124", f.print(dt));  // 124th year of BCE
     }        
 
     @Test public void testFormat_yearOfEra_twoDigit() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("YY").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "04", f.print(dt));
+        assertEquals(dt.toString(), "04", f.print(dt));
         
         dt = new DateTime(-123, 6, 9, 10, 20, 30, 40, UTC);
-NoAssert.donothing(dt.toString(), "23", f.print(dt));
+        assertEquals(dt.toString(), "23", f.print(dt));
         
         // current time set to 2002-06-09
         f = f.withZoneUTC();
         DateTime expect = null;
         expect = new DateTime(2004, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("04"));
+        assertEquals(expect, f.parseDateTime("04"));
         
         expect = new DateTime(1922, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("22"));
+        assertEquals(expect, f.parseDateTime("22"));
         
         expect = new DateTime(2021, 1, 1, 0, 0, 0, 0, UTC);
 NoAssert.donothing(expect, f.parseDateTime("21"));
@@ -283,28 +283,28 @@ NoAssert.donothing(expect, f.parseDateTime("99"));
             .withLocale(Locale.UK);
 
         DateTime dt = new DateTime(2005, 10, 1, 0, 0, 0, 0, chrono);
-NoAssert.donothing(dt, f.parseDateTime("2005-10 AD"));
+        assertEquals(dt, f.parseDateTime("2005-10 AD"));
 NoAssert.donothing(dt, f.parseDateTime("2005-10 CE"));
 
         dt = new DateTime(-2005, 10, 1, 0, 0, 0, 0, chrono);
-NoAssert.donothing(dt, f.parseDateTime("2005-10 BC"));
-NoAssert.donothing(dt, f.parseDateTime("2005-10 BCE"));
+        assertEquals(dt, f.parseDateTime("2005-10 BC"));
+        assertEquals(dt, f.parseDateTime("2005-10 BCE"));
     }        
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_year() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("y").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "2004", f.print(dt));
+        assertEquals(dt.toString(), "2004", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "2004", f.print(dt));
+        assertEquals(dt.toString(), "2004", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "2004", f.print(dt));
+        assertEquals(dt.toString(), "2004", f.print(dt));
         
         dt = new DateTime(-123, 6, 9, 10, 20, 30, 40, UTC);
-NoAssert.donothing(dt.toString(), "-123", f.print(dt));
+        assertEquals(dt.toString(), "-123", f.print(dt));
 
         // Added tests to ensure single sign digit parse fails properly
         try {
@@ -321,22 +321,22 @@ NoAssert.donothing(dt.toString(), "-123", f.print(dt));
     @Test public void testFormat_year_twoDigit() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("yy").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "04", f.print(dt));
+        assertEquals(dt.toString(), "04", f.print(dt));
         
         dt = new DateTime(-123, 6, 9, 10, 20, 30, 40, UTC);
-NoAssert.donothing(dt.toString(), "23", f.print(dt));
+        assertEquals(dt.toString(), "23", f.print(dt));
         
         // current time set to 2002-06-09
         f = f.withZoneUTC();
         DateTime expect = null;
         expect = new DateTime(2004, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("04"));
+        assertEquals(expect, f.parseDateTime("04"));
         
         expect = new DateTime(1922, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("22"));
+        assertEquals(expect, f.parseDateTime("22"));
         
         expect = new DateTime(2021, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("21"));
+        assertEquals(expect, f.parseDateTime("21"));
 
         // Added tests to ensure single sign digit parse fails properly
         try {
@@ -352,7 +352,7 @@ NoAssert.donothing(expect, f.parseDateTime("21"));
         // Added tests for pivot year setting
         f = f.withPivotYear(new Integer(2050));
         expect = new DateTime(2000, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("00"));
+        assertEquals(expect, f.parseDateTime("00"));
 
         expect = new DateTime(2099, 1, 1, 0, 0, 0, 0, UTC);
 NoAssert.donothing(expect, f.parseDateTime("99"));
@@ -390,28 +390,28 @@ NoAssert.donothing(expect, f.parseDateTime("99"));
         f = new DateTimeFormatterBuilder().appendTwoDigitYear(2000, true).toFormatter();
         f = f.withZoneUTC();
         expect = new DateTime(2004, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("04"));
+        assertEquals(expect, f.parseDateTime("04"));
 
         expect = new DateTime(4, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("+04"));
+        assertEquals(expect, f.parseDateTime("+04"));
 
         expect = new DateTime(-4, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("-04"));
+        assertEquals(expect, f.parseDateTime("-04"));
 
         expect = new DateTime(4, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("4"));
+        assertEquals(expect, f.parseDateTime("4"));
 
         expect = new DateTime(-4, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("-4"));
+        assertEquals(expect, f.parseDateTime("-4"));
 
         expect = new DateTime(4, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("004"));
+        assertEquals(expect, f.parseDateTime("004"));
 
         expect = new DateTime(4, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("+004"));
+        assertEquals(expect, f.parseDateTime("+004"));
 
         expect = new DateTime(-4, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("-004"));
+        assertEquals(expect, f.parseDateTime("-004"));
 
         expect = new DateTime(3004, 1, 1, 0, 0, 0, 0, UTC);
 NoAssert.donothing(expect, f.parseDateTime("3004"));
@@ -420,7 +420,7 @@ NoAssert.donothing(expect, f.parseDateTime("3004"));
 NoAssert.donothing(expect, f.parseDateTime("+3004"));
 
         expect = new DateTime(-3004, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("-3004"));
+        assertEquals(expect, f.parseDateTime("-3004"));
 
         try {
             f.parseDateTime("-");
@@ -440,7 +440,7 @@ NoAssert.donothing(dt.toString(), "278004", f.print(dt));
         
         // for coverage
         f = DateTimeFormat.forPattern("yyyyMMdd");
-NoAssert.donothing(dt.toString(), "2780040609", f.print(dt));
+        assertEquals(dt.toString(), "2780040609", f.print(dt));
         
         // for coverage
         f = DateTimeFormat.forPattern("yyyyddMM");
@@ -454,31 +454,31 @@ NoAssert.donothing(dt.toString(), "2780040906", f.print(dt));
 NoAssert.donothing(dt.toString(), "2004", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "2004", f.print(dt));
+        assertEquals(dt.toString(), "2004", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "2004", f.print(dt));
+        assertEquals(dt.toString(), "2004", f.print(dt));
         
         dt = new DateTime(-123, 6, 9, 10, 20, 30, 40, UTC);
-NoAssert.donothing(dt.toString(), "-123", f.print(dt));
+        assertEquals(dt.toString(), "-123", f.print(dt));
     }
 
     @Test public void testFormat_weekyearOfEra_twoDigit() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("xx").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "04", f.print(dt));
+        assertEquals(dt.toString(), "04", f.print(dt));
         
         dt = new DateTime(-123, 6, 9, 10, 20, 30, 40, UTC);
-NoAssert.donothing(dt.toString(), "23", f.print(dt));
+        assertEquals(dt.toString(), "23", f.print(dt));
         
         // current time set to 2002-06-09
         f = f.withZoneUTC();
         DateTime expect = null;
         expect = new DateTime(2003, 12, 29, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("04"));
+        assertEquals(expect, f.parseDateTime("04"));
         
         expect = new DateTime(1922, 1, 2, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("22"));
+        assertEquals(expect, f.parseDateTime("22"));
         
         expect = new DateTime(2021, 1, 4, 0, 0, 0, 0, UTC);
 NoAssert.donothing(expect, f.parseDateTime("21"));
@@ -497,10 +497,10 @@ NoAssert.donothing(expect, f.parseDateTime("21"));
         // Added tests for pivot year setting
         f = f.withPivotYear(new Integer(2050));
         expect = new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeZone.UTC);
-NoAssert.donothing(expect, f.parseDateTime("00"));
+        assertEquals(expect, f.parseDateTime("00"));
 
         expect = new DateTime(2098, 12, 29, 0, 0, 0, 0, DateTimeZone.UTC);
-NoAssert.donothing(expect, f.parseDateTime("99"));
+        assertEquals(expect, f.parseDateTime("99"));
 
         // Added tests to ensure two digit parsing is strict by default for
         // DateTimeFormatterBuilder
@@ -535,37 +535,37 @@ NoAssert.donothing(expect, f.parseDateTime("99"));
         f = new DateTimeFormatterBuilder().appendTwoDigitWeekyear(2000, true).toFormatter();
         f = f.withZoneUTC();
         expect = new DateTime(2003, 12, 29, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("04"));
+        assertEquals(expect, f.parseDateTime("04"));
 
         expect = new DateTime(3, 12, 29, 0, 0, 0, 0, UTC);
 NoAssert.donothing(expect, f.parseDateTime("+04"));
 
         expect = new DateTime(-4, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("-04"));
+        assertEquals(expect, f.parseDateTime("-04"));
 
         expect = new DateTime(3, 12, 29, 0, 0, 0, 0, UTC);
 NoAssert.donothing(expect, f.parseDateTime("4"));
 
         expect = new DateTime(-4, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("-4"));
+        assertEquals(expect, f.parseDateTime("-4"));
 
         expect = new DateTime(3, 12, 29, 0, 0, 0, 0, UTC);
 NoAssert.donothing(expect, f.parseDateTime("004"));
 
         expect = new DateTime(3, 12, 29, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("+004"));
+        assertEquals(expect, f.parseDateTime("+004"));
 
         expect = new DateTime(-4, 1, 1, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("-004"));
+        assertEquals(expect, f.parseDateTime("-004"));
 
         expect = new DateTime(3004, 1, 2, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("3004"));
+        assertEquals(expect, f.parseDateTime("3004"));
 
         expect = new DateTime(3004, 1, 2, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("+3004"));
+        assertEquals(expect, f.parseDateTime("+3004"));
 
         expect = new DateTime(-3004, 1, 4, 0, 0, 0, 0, UTC);
-NoAssert.donothing(expect, f.parseDateTime("-3004"));
+        assertEquals(expect, f.parseDateTime("-3004"));
 
         try {
             f.parseDateTime("-");
@@ -585,39 +585,39 @@ NoAssert.donothing(expect, f.parseDateTime("-3004"));
 NoAssert.donothing(dt.toString(), "24", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "24", f.print(dt));
+        assertEquals(dt.toString(), "24", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "24", f.print(dt));
+        assertEquals(dt.toString(), "24", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_dayOfWeek() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("e").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "3", f.print(dt));
+        assertEquals(dt.toString(), "3", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
 NoAssert.donothing(dt.toString(), "3", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "3", f.print(dt));
+        assertEquals(dt.toString(), "3", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_dayOfWeekShortText() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("E").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "Wed", f.print(dt));
+        assertEquals(dt.toString(), "Wed", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
 NoAssert.donothing(dt.toString(), "Wed", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "Wed", f.print(dt));
+        assertEquals(dt.toString(), "Wed", f.print(dt));
         
         f = f.withLocale(Locale.FRENCH);
-NoAssert.donothing(dt.toString(), "mer.", f.print(dt));
+        assertEquals(dt.toString(), "mer.", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
@@ -627,52 +627,52 @@ NoAssert.donothing(dt.toString(), "mer.", f.print(dt));
 NoAssert.donothing(dt.toString(), "Wednesday", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "Wednesday", f.print(dt));
+        assertEquals(dt.toString(), "Wednesday", f.print(dt));
         
         dt = dt.withZone(TOKYO);
 NoAssert.donothing(dt.toString(), "Wednesday", f.print(dt));
         
         f = f.withLocale(Locale.FRENCH);
-NoAssert.donothing(dt.toString(), "mercredi", f.print(dt));
+        assertEquals(dt.toString(), "mercredi", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_dayOfYearText() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("D").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "161", f.print(dt));
+        assertEquals(dt.toString(), "161", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "161", f.print(dt));
+        assertEquals(dt.toString(), "161", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "161", f.print(dt));
+        assertEquals(dt.toString(), "161", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_monthOfYear() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("M").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "6", f.print(dt));
+        assertEquals(dt.toString(), "6", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
 NoAssert.donothing(dt.toString(), "6", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "6", f.print(dt));
+        assertEquals(dt.toString(), "6", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_monthOfYearShortText() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("MMM").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "Jun", f.print(dt));
+        assertEquals(dt.toString(), "Jun", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "Jun", f.print(dt));
+        assertEquals(dt.toString(), "Jun", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "Jun", f.print(dt));
+        assertEquals(dt.toString(), "Jun", f.print(dt));
         
         f = f.withLocale(Locale.FRENCH);
 NoAssert.donothing(dt.toString(), "juin", f.print(dt));
@@ -682,13 +682,13 @@ NoAssert.donothing(dt.toString(), "juin", f.print(dt));
     @Test public void testFormat_monthOfYearText() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("MMMM").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "June", f.print(dt));
+        assertEquals(dt.toString(), "June", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "June", f.print(dt));
+        assertEquals(dt.toString(), "June", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "June", f.print(dt));
+        assertEquals(dt.toString(), "June", f.print(dt));
         
         f = f.withLocale(Locale.FRENCH);
 NoAssert.donothing(dt.toString(), "juin", f.print(dt));
@@ -698,126 +698,126 @@ NoAssert.donothing(dt.toString(), "juin", f.print(dt));
     @Test public void testFormat_dayOfMonth() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("d").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "9", f.print(dt));
+        assertEquals(dt.toString(), "9", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "9", f.print(dt));
+        assertEquals(dt.toString(), "9", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "9", f.print(dt));
+        assertEquals(dt.toString(), "9", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_halfdayOfDay() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("a").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "AM", f.print(dt).toUpperCase(Locale.ENGLISH));
+        assertEquals(dt.toString(), "AM", f.print(dt).toUpperCase(Locale.ENGLISH));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "AM", f.print(dt).toUpperCase(Locale.ENGLISH));
+        assertEquals(dt.toString(), "AM", f.print(dt).toUpperCase(Locale.ENGLISH));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "PM", f.print(dt).toUpperCase(Locale.ENGLISH));
+        assertEquals(dt.toString(), "PM", f.print(dt).toUpperCase(Locale.ENGLISH));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_hourOfHalfday() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("K").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "10", f.print(dt));
+        assertEquals(dt.toString(), "10", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "6", f.print(dt));
+        assertEquals(dt.toString(), "6", f.print(dt));
         
         dt = dt.withZone(TOKYO);
 NoAssert.donothing(dt.toString(), "7", f.print(dt));
         
         dt = new DateTime(2004, 6, 9, 0, 0, 0, 0, UTC);
-NoAssert.donothing(dt.toString(), "0", f.print(dt));
+        assertEquals(dt.toString(), "0", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_clockhourOfHalfday() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("h").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "10", f.print(dt));
+        assertEquals(dt.toString(), "10", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "6", f.print(dt));
+        assertEquals(dt.toString(), "6", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "7", f.print(dt));
+        assertEquals(dt.toString(), "7", f.print(dt));
         
         dt = new DateTime(2004, 6, 9, 0, 0, 0, 0, UTC);
-NoAssert.donothing(dt.toString(), "12", f.print(dt));
+        assertEquals(dt.toString(), "12", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_hourOfDay() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("H").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "10", f.print(dt));
+        assertEquals(dt.toString(), "10", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "6", f.print(dt));
+        assertEquals(dt.toString(), "6", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "19", f.print(dt));
+        assertEquals(dt.toString(), "19", f.print(dt));
         
         dt = new DateTime(2004, 6, 9, 0, 0, 0, 0, UTC);
-NoAssert.donothing(dt.toString(), "0", f.print(dt));
+        assertEquals(dt.toString(), "0", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_clockhourOfDay() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("k").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "10", f.print(dt));
+        assertEquals(dt.toString(), "10", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
 NoAssert.donothing(dt.toString(), "6", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "19", f.print(dt));
+        assertEquals(dt.toString(), "19", f.print(dt));
         
         dt = new DateTime(2004, 6, 9, 0, 0, 0, 0, UTC);
-NoAssert.donothing(dt.toString(), "24", f.print(dt));
+        assertEquals(dt.toString(), "24", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_minute() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("m").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "20", f.print(dt));
+        assertEquals(dt.toString(), "20", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "20", f.print(dt));
+        assertEquals(dt.toString(), "20", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "20", f.print(dt));
+        assertEquals(dt.toString(), "20", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_second() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("s").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "30", f.print(dt));
+        assertEquals(dt.toString(), "30", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "30", f.print(dt));
+        assertEquals(dt.toString(), "30", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "30", f.print(dt));
+        assertEquals(dt.toString(), "30", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_fractionOfSecond() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("SSS").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "040", f.print(dt));
+        assertEquals(dt.toString(), "040", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "040", f.print(dt));
+        assertEquals(dt.toString(), "040", f.print(dt));
         
         dt = dt.withZone(TOKYO);
 NoAssert.donothing(dt.toString(), "040", f.print(dt));
@@ -827,13 +827,13 @@ NoAssert.donothing(dt.toString(), "040", f.print(dt));
     @Test public void testFormat_fractionOfSecondLong() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("SSSSSS").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "040000", f.print(dt));
+        assertEquals(dt.toString(), "040000", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
 NoAssert.donothing(dt.toString(), "040000", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "040000", f.print(dt));
+        assertEquals(dt.toString(), "040000", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
@@ -841,70 +841,70 @@ NoAssert.donothing(dt.toString(), "040000", f.print(dt));
     public void testFormat_zoneText() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("z").withLocale(Locale.ENGLISH);
-NoAssert.donothing(dt.toString(), "UTC", f.print(dt));
+        assertEquals(dt.toString(), "UTC", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "EDT", f.print(dt));
+        assertEquals(dt.toString(), "EDT", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "JST", f.print(dt));
+        assertEquals(dt.toString(), "JST", f.print(dt));
     }
 
     //@Test
     public void testFormat_zoneLongText() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("zzzz").withLocale(Locale.ENGLISH);
-NoAssert.donothing(dt.toString(), "Coordinated Universal Time", f.print(dt));
+        assertEquals(dt.toString(), "Coordinated Universal Time", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "Eastern Daylight Time", f.print(dt));
+        assertEquals(dt.toString(), "Eastern Daylight Time", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "Japan Standard Time", f.print(dt));
+        assertEquals(dt.toString(), "Japan Standard Time", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_zoneAmount() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("Z").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "+0000", f.print(dt));
+        assertEquals(dt.toString(), "+0000", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "-0400", f.print(dt));
+        assertEquals(dt.toString(), "-0400", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "+0900", f.print(dt));
+        assertEquals(dt.toString(), "+0900", f.print(dt));
     }
 
     @Test public void testFormat_zoneAmountColon() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("ZZ").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "+00:00", f.print(dt));
+        assertEquals(dt.toString(), "+00:00", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "-04:00", f.print(dt));
+        assertEquals(dt.toString(), "-04:00", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "+09:00", f.print(dt));
+        assertEquals(dt.toString(), "+09:00", f.print(dt));
     }
 
     @Test public void testFormat_zoneAmountID() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("ZZZ").withLocale(Locale.UK);
-NoAssert.donothing(dt.toString(), "UTC", f.print(dt));
+        assertEquals(dt.toString(), "UTC", f.print(dt));
         
         dt = dt.withZone(NEWYORK);
-NoAssert.donothing(dt.toString(), "America/New_York", f.print(dt));
+        assertEquals(dt.toString(), "America/New_York", f.print(dt));
         
         dt = dt.withZone(TOKYO);
-NoAssert.donothing(dt.toString(), "Asia/Tokyo", f.print(dt));
+        assertEquals(dt.toString(), "Asia/Tokyo", f.print(dt));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFormat_other() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("'Hello' ''");
-NoAssert.donothing("Hello '", f.print(dt));
+        assertEquals("Hello '", f.print(dt));
     }
 
     @Test public void testFormat_invalid() {
@@ -929,7 +929,7 @@ NoAssert.donothing("Hello '", f.print(dt));
     @Test public void testFormat_samples() {
         DateTime dt = new DateTime(2004, 6, 9, 10, 20, 30, 40, UTC);
         DateTimeFormatter f = DateTimeFormat.forPattern("yyyy-MM-dd HH.mm.ss");
-NoAssert.donothing("2004-06-09 10.20.30", f.print(dt));
+        assertEquals("2004-06-09 10.20.30", f.print(dt));
     }
 
     @Test public void testFormat_shortBasicParse() {
@@ -939,15 +939,15 @@ NoAssert.donothing("2004-06-09 10.20.30", f.print(dt));
         DateTime dt = new DateTime(2004, 3, 9, 0, 0, 0, 0);
 
         DateTimeFormatter f = DateTimeFormat.forPattern("yyMMdd");
-NoAssert.donothing(dt, f.parseDateTime("040309"));
+        assertEquals(dt, f.parseDateTime("040309"));
         try {
-NoAssert.donothing(dt, f.parseDateTime("20040309"));
+            assertEquals(dt, f.parseDateTime("20040309"));
             fail();
         } catch (IllegalArgumentException ex) {}
 
         f = DateTimeFormat.forPattern("yy/MM/dd");
-NoAssert.donothing(dt, f.parseDateTime("04/03/09"));
-NoAssert.donothing(dt, f.parseDateTime("2004/03/09"));
+        assertEquals(dt, f.parseDateTime("04/03/09"));
+        assertEquals(dt, f.parseDateTime("2004/03/09"));
     }
 
     //-----------------------------------------------------------------------
@@ -955,13 +955,13 @@ NoAssert.donothing(dt, f.parseDateTime("2004/03/09"));
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("dd.MM.yy").withPivotYear(2050).withZoneUTC();
         
         DateTime date = dateFormatter.parseDateTime("25.12.15");
-NoAssert.donothing(date.getYear(), 2015);
+        assertEquals(date.getYear(), 2015);
         
         date = dateFormatter.parseDateTime("25.12.00");
-NoAssert.donothing(date.getYear(), 2000);
+        assertEquals(date.getYear(), 2000);
         
         date = dateFormatter.parseDateTime("25.12.99");
-NoAssert.donothing(date.getYear(), 2099);
+        assertEquals(date.getYear(), 2099);
     }
 
     @Test public void testParse_pivotYear_ignored4DigitYear() {
@@ -971,10 +971,10 @@ NoAssert.donothing(date.getYear(), 2099);
 NoAssert.donothing(date.getYear(), 15);
         
         date = dateFormatter.parseDateTime("25.12.00");
-NoAssert.donothing(date.getYear(), 0);
+        assertEquals(date.getYear(), 0);
         
         date = dateFormatter.parseDateTime("25.12.99");
-NoAssert.donothing(date.getYear(), 99);
+        assertEquals(date.getYear(), 99);
     }
 
     //-----------------------------------------------------------------------
@@ -983,7 +983,7 @@ NoAssert.donothing(date.getYear(), 99);
             .withLocale(Locale.UK).withZoneUTC();
         
         String str = new DateTime(2007, 1, 23, 0, 0, 0, 0, UTC).toString(dateFormatter);
-NoAssert.donothing(str, "23 Jan 2007");
+        assertEquals(str, "23 Jan 2007");
         DateTime date = dateFormatter.parseDateTime(str);
         check(date, 2007, 1, 23);
     }
@@ -1029,7 +1029,7 @@ NoAssert.donothing(str, "23 Jan 2007");
             .withLocale(Locale.FRANCE).withZoneUTC();
         
         String str = new DateTime(2007, 1, 23, 0, 0, 0, 0, UTC).toString(dateFormatter);
-NoAssert.donothing("23 janv. 2007", str);
+        assertEquals("23 janv. 2007", str);
         DateTime date = dateFormatter.parseDateTime(str);
         check(date, 2007, 1, 23);
     }
@@ -1047,7 +1047,7 @@ NoAssert.donothing("23 janv. 2007", str);
             .withLocale(Locale.FRANCE).withZoneUTC();
         
         String str = new DateTime(2007, 2, 23, 0, 0, 0, 0, UTC).toString(dateFormatter);
-NoAssert.donothing("23 f\u00E9vr. 2007", str);  // e acute
+        assertEquals("23 f\u00E9vr. 2007", str);  // e acute
         DateTime date = dateFormatter.parseDateTime(str);
         check(date, 2007, 2, 23);
     }
@@ -1067,7 +1067,7 @@ NoAssert.donothing("23 juin", str);
             .withLocale(Locale.FRANCE).withZoneUTC().withDefaultYear(1980);
         
         String str = new DateTime(2007, 6, 23, 0, 0, 0, 0, UTC).toString(dateFormatter);
-NoAssert.donothing("23 juin", str);
+        assertEquals("23 juin", str);
         DateTime date = dateFormatter.parseDateTime(str);
         check(date, 1980, 6, 23);
     }
@@ -1078,7 +1078,7 @@ NoAssert.donothing("23 juin", str);
         
         String str = new DateTime(2007, 3, 8, 22, 0, 0, 0, UTC).toString(dateFormatter);
         DateTime date = dateFormatter.parseDateTime(str);
-NoAssert.donothing(new DateTime(2007, 3, 8, 22, 0, 0, 0, UTC), date);
+        assertEquals(new DateTime(2007, 3, 8, 22, 0, 0, 0, UTC), date);
     }
 
     //-----------------------------------------------------------------------
@@ -1094,7 +1094,7 @@ NoAssert.donothing(new DateTime(2007, 3, 8, 22, 0, 0, 0, UTC), date);
             .withLocale(Locale.UK).withZoneUTC();
         
         String str = new DateTime(2007, 6, 23, 18, 0, 0, 0, UTC).toString(dateFormatter);
-NoAssert.donothing("$06-PM-2007", str.toUpperCase(Locale.ENGLISH));
+        assertEquals("$06-PM-2007", str.toUpperCase(Locale.ENGLISH));
         DateTime date = dateFormatter.parseDateTime(str);
         check(date, 2007, 1, 1);
     }
@@ -1111,7 +1111,7 @@ NoAssert.donothing("$06-PM-2007", str.toUpperCase(Locale.ENGLISH));
             .withLocale(Locale.FRANCE).withZoneUTC();
         
         String str = new DateTime(2007, 6, 23, 18, 0, 0, 0, UTC).toString(dateFormatter);
-NoAssert.donothing("$06-PM-2007", str);
+        assertEquals("$06-PM-2007", str);
         DateTime date = dateFormatter.parseDateTime(str);
         check(date, 2007, 1, 1);
     }
@@ -1126,7 +1126,7 @@ NoAssert.donothing("$06-PM-2007", str);
             .withLocale(Locale.UK).withZoneUTC();
         
         String str = new DateTime(2007, 6, 23, 0, 0, 0, 0, UTC).toString(dateFormatter);
-NoAssert.donothing("$AD2007", str);
+        assertEquals("$AD2007", str);
         DateTime date = dateFormatter.parseDateTime(str);
         check(date, 2007, 1, 1);
     }
@@ -1154,7 +1154,7 @@ NoAssert.donothing("$ap. J.-C.2007", str);
             .withLocale(Locale.FRANCE).withZoneUTC();
         
         String str = new DateTime(-1, 6, 23, 0, 0, 0, 0, UTC).toString(dateFormatter);
-NoAssert.donothing(str.equals("$BC-0001") || str.equals("$av. J.-C.-0001"));
+        assertTrue(str.equals("$BC-0001") || str.equals("$av. J.-C.-0001"));
         DateTime date = dateFormatter.parseDateTime(str);
         check(date, -1, 1, 1);
     }
@@ -1185,7 +1185,7 @@ NoAssert.donothing("$2007", str);
             .withLocale(Locale.FRANCE).withZoneUTC();
         
         String str = new DateTime(2007, 6, 23, 0, 0, 0, 0, UTC).toString(dateFormatter);
-NoAssert.donothing("$2007", str);
+        assertEquals("$2007", str);
         try {
             dateFormatter.parseDateTime(str);
             fail();
@@ -1219,7 +1219,7 @@ NoAssert.donothing("$23JunHelloWorld", str);
             .withLocale(Locale.UK).withZoneUTC();
         
         String str = new DateTime(2007, 6, 23, 0, 0, 0, 0, UTC).toString(dateFormatter);
-NoAssert.donothing("$23JunSat", str);
+        assertEquals("$23JunSat", str);
         dateFormatter.parseDateTime(str);
     }
 
@@ -1227,17 +1227,17 @@ NoAssert.donothing("$23JunSat", str);
     @Test public void testFormatParse_zoneId_noColon() {
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("HH:mm Z").withZoneUTC();
         String str = new DateTime(2007, 6, 23, 1, 2, 0, 0, UTC).toString(dateFormatter);
-NoAssert.donothing("01:02 +0000", str);
+        assertEquals("01:02 +0000", str);
         DateTime parsed = dateFormatter.parseDateTime(str);
-NoAssert.donothing(1, parsed.getHourOfDay());
-NoAssert.donothing(2, parsed.getMinuteOfHour());
+        assertEquals(1, parsed.getHourOfDay());
+        assertEquals(2, parsed.getMinuteOfHour());
     }
 
     @Test public void testFormatParse_zoneId_noColon_parseZ() {
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("HH:mm Z").withZoneUTC();
         DateTime parsed = dateFormatter.parseDateTime("01:02 Z");
-NoAssert.donothing(1, parsed.getHourOfDay());
-NoAssert.donothing(2, parsed.getMinuteOfHour());
+        assertEquals(1, parsed.getHourOfDay());
+        assertEquals(2, parsed.getMinuteOfHour());
     }
 
     @Test public void testFormatParse_zoneId_colon() {
@@ -1245,22 +1245,22 @@ NoAssert.donothing(2, parsed.getMinuteOfHour());
         String str = new DateTime(2007, 6, 23, 1, 2, 0, 0, UTC).toString(dateFormatter);
 NoAssert.donothing("01:02 +00:00", str);
         DateTime parsed = dateFormatter.parseDateTime(str);
-NoAssert.donothing(1, parsed.getHourOfDay());
-NoAssert.donothing(2, parsed.getMinuteOfHour());
+        assertEquals(1, parsed.getHourOfDay());
+        assertEquals(2, parsed.getMinuteOfHour());
     }
 
     @Test public void testFormatParse_zoneId_colon_parseZ() {
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("HH:mm ZZ").withZoneUTC();
         DateTime parsed = dateFormatter.parseDateTime("01:02 Z");
-NoAssert.donothing(1, parsed.getHourOfDay());
-NoAssert.donothing(2, parsed.getMinuteOfHour());
+        assertEquals(1, parsed.getHourOfDay());
+        assertEquals(2, parsed.getMinuteOfHour());
     }
 
     //-----------------------------------------------------------------------
     private void check(DateTime test, int hour, int min, int sec) {
 NoAssert.donothing(hour, test.getYear());
-NoAssert.donothing(min, test.getMonthOfYear());
-NoAssert.donothing(sec, test.getDayOfMonth());
+        assertEquals(min, test.getMonthOfYear());
+        assertEquals(sec, test.getDayOfMonth());
     }
 
 }

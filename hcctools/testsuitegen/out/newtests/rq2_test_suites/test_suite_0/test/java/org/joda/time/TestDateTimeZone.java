@@ -316,7 +316,7 @@ public class TestDateTimeZone { //extends TestCase {
 NoAssert.donothing(DateTimeZone.getDefault());
 
         DateTimeZone.setDefault(PARIS);
-NoAssert.donothing(PARIS, DateTimeZone.getDefault());
+        assertSame(PARIS, DateTimeZone.getDefault());
 
         try {
             DateTimeZone.setDefault(null);
@@ -346,33 +346,33 @@ NoAssert.donothing(PARIS, DateTimeZone.getDefault());
     //-----------------------------------------------------------------------
     @Test
     public void testForID_String() {
-NoAssert.donothing(DateTimeZone.getDefault(), DateTimeZone.forID((String) null));
+        assertEquals(DateTimeZone.getDefault(), DateTimeZone.forID((String) null));
 
         DateTimeZone zone = DateTimeZone.forID("Europe/London");
-NoAssert.donothing("Europe/London", zone.getID());
+        assertEquals("Europe/London", zone.getID());
 
         zone = DateTimeZone.forID("UTC");
-NoAssert.donothing(DateTimeZone.UTC, zone);
+        assertSame(DateTimeZone.UTC, zone);
 
         zone = DateTimeZone.forID("+00:00");
-NoAssert.donothing(DateTimeZone.UTC, zone);
+        assertSame(DateTimeZone.UTC, zone);
 
         zone = DateTimeZone.forID("+00");
-NoAssert.donothing(DateTimeZone.UTC, zone);
+        assertSame(DateTimeZone.UTC, zone);
 
         zone = DateTimeZone.forID("+01:23");
-NoAssert.donothing("+01:23", zone.getID());
-NoAssert.donothing(DateTimeConstants.MILLIS_PER_HOUR + (23L * DateTimeConstants.MILLIS_PER_MINUTE),
+        assertEquals("+01:23", zone.getID());
+        assertEquals(DateTimeConstants.MILLIS_PER_HOUR + (23L * DateTimeConstants.MILLIS_PER_MINUTE),
                 zone.getOffset(TEST_TIME_SUMMER));
 
         zone = DateTimeZone.forID("-02:00");
 NoAssert.donothing("-02:00", zone.getID());
-NoAssert.donothing((-2L * DateTimeConstants.MILLIS_PER_HOUR),
+        assertEquals((-2L * DateTimeConstants.MILLIS_PER_HOUR),
                 zone.getOffset(TEST_TIME_SUMMER));
 
         zone = DateTimeZone.forID("-07:05:34.0");
-NoAssert.donothing("-07:05:34", zone.getID());
-NoAssert.donothing((-7L * DateTimeConstants.MILLIS_PER_HOUR) +
+        assertEquals("-07:05:34", zone.getID());
+        assertEquals((-7L * DateTimeConstants.MILLIS_PER_HOUR) +
                         (-5L * DateTimeConstants.MILLIS_PER_MINUTE) +
                         (-34L * DateTimeConstants.MILLIS_PER_SECOND),
                 zone.getOffset(TEST_TIME_SUMMER));
@@ -444,7 +444,7 @@ NoAssert.donothing((-7L * DateTimeConstants.MILLIS_PER_HOUR) +
             String value = map.get(key);
             TimeZone juZone = TimeZone.getTimeZone(key);
             DateTimeZone zone = DateTimeZone.forTimeZone(juZone);
-NoAssert.donothing(DateTimeZone.forID(value), zone);
+            assertEquals(DateTimeZone.forID(value), zone);
 //            System.out.println(juZone);
 //            System.out.println(juZone.getDisplayName());
 //            System.out.println(zone);
@@ -458,8 +458,8 @@ NoAssert.donothing(DateTimeZone.forID(value), zone);
     @Test
     public void testForOffsetHours_int() {
 NoAssert.donothing(DateTimeZone.UTC, DateTimeZone.forOffsetHours(0));
-NoAssert.donothing(DateTimeZone.forID("+03:00"), DateTimeZone.forOffsetHours(3));
-NoAssert.donothing(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHours(-2));
+        assertEquals(DateTimeZone.forID("+03:00"), DateTimeZone.forOffsetHours(3));
+        assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHours(-2));
         try {
             DateTimeZone.forOffsetHours(999999);
             fail();
@@ -470,26 +470,26 @@ NoAssert.donothing(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHours(-2)
     //-----------------------------------------------------------------------
     @Test
     public void testForOffsetHoursMinutes_int_int() {
-NoAssert.donothing(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));
-NoAssert.donothing(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));
+        assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));
+        assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));
 
-NoAssert.donothing(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));
-NoAssert.donothing(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));
+        assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));
+        assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));
         try {
             DateTimeZone.forOffsetHoursMinutes(2, -15);
             fail();
         } catch (IllegalArgumentException ex) {
         }
 
-NoAssert.donothing(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));
-NoAssert.donothing(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));
+        assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));
+        assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));
 NoAssert.donothing(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));
 
-NoAssert.donothing(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));
-NoAssert.donothing(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));
+        assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));
+        assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));
 NoAssert.donothing(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));
 
-NoAssert.donothing(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));
+        assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));
         try {
             DateTimeZone.forOffsetHoursMinutes(2, 60);
             fail();
@@ -515,12 +515,12 @@ NoAssert.donothing(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinu
     //-----------------------------------------------------------------------
     @Test
     public void testForOffsetMillis_int() {
-NoAssert.donothing(DateTimeZone.UTC, DateTimeZone.forOffsetMillis(0));
-NoAssert.donothing(DateTimeZone.forID("+23:59:59.999"), DateTimeZone.forOffsetMillis((24 * 60 * 60 * 1000) - 1));
-NoAssert.donothing(DateTimeZone.forID("+03:00"), DateTimeZone.forOffsetMillis(3 * 60 * 60 * 1000));
-NoAssert.donothing(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetMillis(-2 * 60 * 60 * 1000));
-NoAssert.donothing(DateTimeZone.forID("-23:59:59.999"), DateTimeZone.forOffsetMillis((-24 * 60 * 60 * 1000) + 1));
-NoAssert.donothing(DateTimeZone.forID("+04:45:17.045"),
+        assertSame(DateTimeZone.UTC, DateTimeZone.forOffsetMillis(0));
+        assertEquals(DateTimeZone.forID("+23:59:59.999"), DateTimeZone.forOffsetMillis((24 * 60 * 60 * 1000) - 1));
+        assertEquals(DateTimeZone.forID("+03:00"), DateTimeZone.forOffsetMillis(3 * 60 * 60 * 1000));
+        assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetMillis(-2 * 60 * 60 * 1000));
+        assertEquals(DateTimeZone.forID("-23:59:59.999"), DateTimeZone.forOffsetMillis((-24 * 60 * 60 * 1000) + 1));
+        assertEquals(DateTimeZone.forID("+04:45:17.045"),
                 DateTimeZone.forOffsetMillis(
                         4 * 60 * 60 * 1000 + 45 * 60 * 1000 + 17 * 1000 + 45));
     }
@@ -531,20 +531,20 @@ NoAssert.donothing(DateTimeZone.forID("+04:45:17.045"),
 NoAssert.donothing(DateTimeZone.getDefault(), DateTimeZone.forTimeZone((TimeZone) null));
 
         DateTimeZone zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/London"));
-NoAssert.donothing("Europe/London", zone.getID());
-NoAssert.donothing(DateTimeZone.UTC, DateTimeZone.forTimeZone(TimeZone.getTimeZone("UTC")));
+        assertEquals("Europe/London", zone.getID());
+        assertSame(DateTimeZone.UTC, DateTimeZone.forTimeZone(TimeZone.getTimeZone("UTC")));
 
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("+00:00"));
-NoAssert.donothing(DateTimeZone.UTC, zone);
+        assertSame(DateTimeZone.UTC, zone);
 
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+00:00"));
-NoAssert.donothing(DateTimeZone.UTC, zone);
+        assertSame(DateTimeZone.UTC, zone);
 
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+00:00"));
-NoAssert.donothing(DateTimeZone.UTC, zone);
+        assertSame(DateTimeZone.UTC, zone);
 
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+00"));
-NoAssert.donothing(DateTimeZone.UTC, zone);
+        assertSame(DateTimeZone.UTC, zone);
 
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+01:23"));
 NoAssert.donothing("+01:23", zone.getID());
@@ -552,25 +552,25 @@ NoAssert.donothing(DateTimeConstants.MILLIS_PER_HOUR + (23L * DateTimeConstants.
                 zone.getOffset(TEST_TIME_SUMMER));
 
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+1:23"));
-NoAssert.donothing("+01:23", zone.getID());
-NoAssert.donothing(DateTimeConstants.MILLIS_PER_HOUR + (23L * DateTimeConstants.MILLIS_PER_MINUTE),
+        assertEquals("+01:23", zone.getID());
+        assertEquals(DateTimeConstants.MILLIS_PER_HOUR + (23L * DateTimeConstants.MILLIS_PER_MINUTE),
                 zone.getOffset(TEST_TIME_SUMMER));
 
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT-02:00"));
-NoAssert.donothing("-02:00", zone.getID());
-NoAssert.donothing((-2L * DateTimeConstants.MILLIS_PER_HOUR), zone.getOffset(TEST_TIME_SUMMER));
+        assertEquals("-02:00", zone.getID());
+        assertEquals((-2L * DateTimeConstants.MILLIS_PER_HOUR), zone.getOffset(TEST_TIME_SUMMER));
 
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+2"));
-NoAssert.donothing("+02:00", zone.getID());
-NoAssert.donothing((2L * DateTimeConstants.MILLIS_PER_HOUR), zone.getOffset(TEST_TIME_SUMMER));
+        assertEquals("+02:00", zone.getID());
+        assertEquals((2L * DateTimeConstants.MILLIS_PER_HOUR), zone.getOffset(TEST_TIME_SUMMER));
 
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("EST"));
-NoAssert.donothing("America/New_York", zone.getID());
+        assertEquals("America/New_York", zone.getID());
 
         TimeZone tz = TimeZone.getTimeZone("GMT-08:00");
         tz.setID("GMT-\u0660\u0668:\u0660\u0660");
         zone = DateTimeZone.forTimeZone(tz);
-NoAssert.donothing("-08:00", zone.getID());
+        assertEquals("-08:00", zone.getID());
     }
 
     @Test
@@ -618,23 +618,23 @@ NoAssert.donothing("-08:00", zone.getID());
     @Test
     public void testTimeZoneConversion() {
         TimeZone jdkTimeZone = TimeZone.getTimeZone("GMT-10");
-NoAssert.donothing("GMT-10:00", jdkTimeZone.getID());
+        assertEquals("GMT-10:00", jdkTimeZone.getID());
 
         DateTimeZone jodaTimeZone = DateTimeZone.forTimeZone(jdkTimeZone);
-NoAssert.donothing("-10:00", jodaTimeZone.getID());
-NoAssert.donothing(jdkTimeZone.getRawOffset(), jodaTimeZone.getOffset(0L));
+        assertEquals("-10:00", jodaTimeZone.getID());
+        assertEquals(jdkTimeZone.getRawOffset(), jodaTimeZone.getOffset(0L));
 
         TimeZone convertedTimeZone = jodaTimeZone.toTimeZone();
-NoAssert.donothing("GMT-10:00", jdkTimeZone.getID());
+        assertEquals("GMT-10:00", jdkTimeZone.getID());
 
-NoAssert.donothing(jdkTimeZone.getID(), convertedTimeZone.getID());
-NoAssert.donothing(jdkTimeZone.getRawOffset(), convertedTimeZone.getRawOffset());
+        assertEquals(jdkTimeZone.getID(), convertedTimeZone.getID());
+        assertEquals(jdkTimeZone.getRawOffset(), convertedTimeZone.getRawOffset());
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testGetAvailableIDs() {
-NoAssert.donothing(DateTimeZone.getAvailableIDs().contains("UTC"));
+        assertTrue(DateTimeZone.getAvailableIDs().contains("UTC"));
     }
 
     //-----------------------------------------------------------------------
@@ -645,7 +645,7 @@ NoAssert.donothing(DateTimeZone.getProvider());
 
             Provider provider = DateTimeZone.getProvider();
             DateTimeZone.setProvider(null);
-NoAssert.donothing(provider.getClass(), DateTimeZone.getProvider().getClass());
+            assertEquals(provider.getClass(), DateTimeZone.getProvider().getClass());
 
             try {
                 DateTimeZone.setProvider(new MockNullIDSProvider());
@@ -670,38 +670,38 @@ NoAssert.donothing(provider.getClass(), DateTimeZone.getProvider().getClass());
 
             Provider prov = new MockOKProvider();
             DateTimeZone.setProvider(prov);
-NoAssert.donothing(prov, DateTimeZone.getProvider());
-NoAssert.donothing(2, DateTimeZone.getAvailableIDs().size());
-NoAssert.donothing(DateTimeZone.getAvailableIDs().contains("UTC"));
-NoAssert.donothing(DateTimeZone.getAvailableIDs().contains("Europe/London"));
+            assertSame(prov, DateTimeZone.getProvider());
+            assertEquals(2, DateTimeZone.getAvailableIDs().size());
+            assertTrue(DateTimeZone.getAvailableIDs().contains("UTC"));
+            assertTrue(DateTimeZone.getAvailableIDs().contains("Europe/London"));
         } finally {
             DateTimeZone.setProvider(null);
-NoAssert.donothing(ZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
+            assertEquals(ZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
         }
 
         try {
             System.setProperty("org.joda.time.DateTimeZone.Provider", "org.joda.time.tz.UTCProvider");
             DateTimeZone.setProvider(null);
-NoAssert.donothing(UTCProvider.class, DateTimeZone.getProvider().getClass());
+            assertEquals(UTCProvider.class, DateTimeZone.getProvider().getClass());
         } finally {
             System.getProperties().remove("org.joda.time.DateTimeZone.Provider");
             DateTimeZone.setProvider(null);
-NoAssert.donothing(ZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
+            assertEquals(ZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
         }
 
         try {
             System.setProperty("org.joda.time.DateTimeZone.Folder", "src/test/resources/tzdata");
             DateTimeZone.setProvider(null);
-NoAssert.donothing(ZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
+            assertEquals(ZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
 NoAssert.donothing(2, DateTimeZone.getAvailableIDs().size());
-NoAssert.donothing(true, DateTimeZone.getAvailableIDs().contains("UTC"));
-NoAssert.donothing(true, DateTimeZone.getAvailableIDs().contains("CET"));
+            assertEquals(true, DateTimeZone.getAvailableIDs().contains("UTC"));
+            assertEquals(true, DateTimeZone.getAvailableIDs().contains("CET"));
 
         } finally {
             System.getProperties().remove("org.joda.time.DateTimeZone.Folder");
             DateTimeZone.setProvider(null);
 NoAssert.donothing(ZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
-NoAssert.donothing(true, DateTimeZone.getAvailableIDs().size() > 2);
+            assertEquals(true, DateTimeZone.getAvailableIDs().size() > 2);
         }
     }
 
@@ -713,7 +713,7 @@ NoAssert.donothing(true, DateTimeZone.getAvailableIDs().size() > 2);
 
         } catch (RuntimeException ex) {
             // expected
-NoAssert.donothing(ZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
+            assertEquals(ZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
         } finally {
             System.getProperties().remove("org.joda.time.DateTimeZone.Provider");
             DateTimeZone.setProvider(null);
@@ -834,18 +834,18 @@ NoAssert.donothing(zone);
     @Test
     public void testNameProvider() {
         try {
-NoAssert.donothing(DateTimeZone.getNameProvider());
+            assertNotNull(DateTimeZone.getNameProvider());
 
             NameProvider provider = DateTimeZone.getNameProvider();
             DateTimeZone.setNameProvider(null);
-NoAssert.donothing(provider.getClass(), DateTimeZone.getNameProvider().getClass());
+            assertEquals(provider.getClass(), DateTimeZone.getNameProvider().getClass());
 
             provider = new MockOKButNullNameProvider();
             DateTimeZone.setNameProvider(provider);
-NoAssert.donothing(provider, DateTimeZone.getNameProvider());
+            assertSame(provider, DateTimeZone.getNameProvider());
 
 NoAssert.donothing("+00:00", DateTimeZone.UTC.getShortName(TEST_TIME_SUMMER));
-NoAssert.donothing("+00:00", DateTimeZone.UTC.getName(TEST_TIME_SUMMER));
+            assertEquals("+00:00", DateTimeZone.UTC.getName(TEST_TIME_SUMMER));
         } finally {
             DateTimeZone.setNameProvider(null);
         }
@@ -853,11 +853,11 @@ NoAssert.donothing("+00:00", DateTimeZone.UTC.getName(TEST_TIME_SUMMER));
         try {
             System.setProperty("org.joda.time.DateTimeZone.NameProvider", "org.joda.time.tz.DefaultNameProvider");
             DateTimeZone.setNameProvider(null);
-NoAssert.donothing(DefaultNameProvider.class, DateTimeZone.getNameProvider().getClass());
+            assertEquals(DefaultNameProvider.class, DateTimeZone.getNameProvider().getClass());
         } finally {
             System.getProperties().remove("org.joda.time.DateTimeZone.NameProvider");
             DateTimeZone.setNameProvider(null);
-NoAssert.donothing(DefaultNameProvider.class, DateTimeZone.getNameProvider().getClass());
+            assertEquals(DefaultNameProvider.class, DateTimeZone.getNameProvider().getClass());
         }
     }
 
@@ -907,8 +907,8 @@ NoAssert.donothing(DefaultNameProvider.class, DateTimeZone.getNameProvider().get
     //-----------------------------------------------------------------------
     @Test
     public void testConstructor() {
-NoAssert.donothing(1, DateTimeZone.class.getDeclaredConstructors().length);
-NoAssert.donothing(Modifier.isProtected(DateTimeZone.class.getDeclaredConstructors()[0].getModifiers()));
+        assertEquals(1, DateTimeZone.class.getDeclaredConstructors().length);
+        assertTrue(Modifier.isProtected(DateTimeZone.class.getDeclaredConstructors()[0].getModifiers()));
         try {
             new DateTimeZone(null) {
                 public String getNameKey(long instant) {
@@ -947,14 +947,14 @@ NoAssert.donothing(Modifier.isProtected(DateTimeZone.class.getDeclaredConstructo
     @Test
     public void testGetID() {
         DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
-NoAssert.donothing("Europe/Paris", zone.getID());
+        assertEquals("Europe/Paris", zone.getID());
     }
 
     @Test
     public void testGetNameKey() {
         DateTimeZone zone = DateTimeZone.forID("Europe/London");
-NoAssert.donothing("BST", zone.getNameKey(TEST_TIME_SUMMER));
-NoAssert.donothing("GMT", zone.getNameKey(TEST_TIME_WINTER));
+        assertEquals("BST", zone.getNameKey(TEST_TIME_SUMMER));
+        assertEquals("GMT", zone.getNameKey(TEST_TIME_WINTER));
     }
 
     static final boolean JDK6PLUS;
@@ -985,7 +985,7 @@ NoAssert.donothing("GMT", zone.getNameKey(TEST_TIME_WINTER));
     //@Test
     public void testGetShortName() {
         DateTimeZone zone = DateTimeZone.forID("Europe/London");
-NoAssert.donothing("BST", zone.getShortName(TEST_TIME_SUMMER));
+        assertEquals("BST", zone.getShortName(TEST_TIME_SUMMER));
 NoAssert.donothing("GMT", zone.getShortName(TEST_TIME_WINTER));
 NoAssert.donothing("BST", zone.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
     }
@@ -994,35 +994,35 @@ NoAssert.donothing("BST", zone.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
     public void testGetShortName_berlin() {
         DateTimeZone berlin = DateTimeZone.forID("Europe/Berlin");
 NoAssert.donothing("CET", berlin.getShortName(TEST_TIME_WINTER, Locale.ENGLISH));
-NoAssert.donothing("CEST", berlin.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
+        assertEquals("CEST", berlin.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
         if (JDK6PLUS) {
-NoAssert.donothing("MEZ", berlin.getShortName(TEST_TIME_WINTER, Locale.GERMAN));
+            assertEquals("MEZ", berlin.getShortName(TEST_TIME_WINTER, Locale.GERMAN));
 NoAssert.donothing("MESZ", berlin.getShortName(TEST_TIME_SUMMER, Locale.GERMAN));
         } else {
-NoAssert.donothing("CET", berlin.getShortName(TEST_TIME_WINTER, Locale.GERMAN));
-NoAssert.donothing("CEST", berlin.getShortName(TEST_TIME_SUMMER, Locale.GERMAN));
+            assertEquals("CET", berlin.getShortName(TEST_TIME_WINTER, Locale.GERMAN));
+            assertEquals("CEST", berlin.getShortName(TEST_TIME_SUMMER, Locale.GERMAN));
         }
     }
 
     @Test
     public void testGetShortNameProviderName() {
-NoAssert.donothing(null, DateTimeZone.getNameProvider().getShortName(null, "Europe/London", "BST"));
-NoAssert.donothing(null, DateTimeZone.getNameProvider().getShortName(Locale.ENGLISH, null, "BST"));
-NoAssert.donothing(null, DateTimeZone.getNameProvider().getShortName(Locale.ENGLISH, "Europe/London", null));
-NoAssert.donothing(null, DateTimeZone.getNameProvider().getShortName(null, null, null));
+        assertEquals(null, DateTimeZone.getNameProvider().getShortName(null, "Europe/London", "BST"));
+        assertEquals(null, DateTimeZone.getNameProvider().getShortName(Locale.ENGLISH, null, "BST"));
+        assertEquals(null, DateTimeZone.getNameProvider().getShortName(Locale.ENGLISH, "Europe/London", null));
+        assertEquals(null, DateTimeZone.getNameProvider().getShortName(null, null, null));
     }
 
     @Test
     public void testGetShortNameNullKey() {
         DateTimeZone zone = new MockDateTimeZone("Europe/London");
-NoAssert.donothing("Europe/London", zone.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
+        assertEquals("Europe/London", zone.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
     }
 
     //@Test
     public void testGetName() {
         DateTimeZone zone = DateTimeZone.forID("Europe/London");
-NoAssert.donothing("British Summer Time", zone.getName(TEST_TIME_SUMMER));
-NoAssert.donothing("Greenwich Mean Time", zone.getName(TEST_TIME_WINTER));
+        assertEquals("British Summer Time", zone.getName(TEST_TIME_SUMMER));
+        assertEquals("Greenwich Mean Time", zone.getName(TEST_TIME_WINTER));
 NoAssert.donothing("British Summer Time", zone.getName(TEST_TIME_SUMMER, Locale.ENGLISH));
     }
 
@@ -1053,16 +1053,16 @@ NoAssert.donothing("British Summer Time", zone.getName(TEST_TIME_SUMMER, Locale.
     */
     @Test
     public void testGetNameProviderName() {
-NoAssert.donothing(null, DateTimeZone.getNameProvider().getName(null, "Europe/London", "BST"));
+        assertEquals(null, DateTimeZone.getNameProvider().getName(null, "Europe/London", "BST"));
 NoAssert.donothing(null, DateTimeZone.getNameProvider().getName(Locale.ENGLISH, null, "BST"));
-NoAssert.donothing(null, DateTimeZone.getNameProvider().getName(Locale.ENGLISH, "Europe/London", null));
-NoAssert.donothing(null, DateTimeZone.getNameProvider().getName(null, null, null));
+        assertEquals(null, DateTimeZone.getNameProvider().getName(Locale.ENGLISH, "Europe/London", null));
+        assertEquals(null, DateTimeZone.getNameProvider().getName(null, null, null));
     }
 
     @Test
     public void testGetNameNullKey() {
         DateTimeZone zone = new MockDateTimeZone("Europe/London");
-NoAssert.donothing("Europe/London", zone.getName(TEST_TIME_SUMMER, Locale.ENGLISH));
+        assertEquals("Europe/London", zone.getName(TEST_TIME_SUMMER, Locale.ENGLISH));
     }
 
     static class MockDateTimeZone extends DateTimeZone {
@@ -1103,24 +1103,24 @@ NoAssert.donothing("Europe/London", zone.getName(TEST_TIME_SUMMER, Locale.ENGLIS
     @Test
     public void testGetOffset_long() {
         DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
-NoAssert.donothing(2L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_SUMMER));
-NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_WINTER));
+        assertEquals(2L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_SUMMER));
+        assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_WINTER));
 
-NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getStandardOffset(TEST_TIME_SUMMER));
+        assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getStandardOffset(TEST_TIME_SUMMER));
 NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getStandardOffset(TEST_TIME_WINTER));
 
-NoAssert.donothing(2L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffsetFromLocal(TEST_TIME_SUMMER));
-NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffsetFromLocal(TEST_TIME_WINTER));
+        assertEquals(2L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffsetFromLocal(TEST_TIME_SUMMER));
+        assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffsetFromLocal(TEST_TIME_WINTER));
 
-NoAssert.donothing(false, zone.isStandardOffset(TEST_TIME_SUMMER));
+        assertEquals(false, zone.isStandardOffset(TEST_TIME_SUMMER));
 NoAssert.donothing(true, zone.isStandardOffset(TEST_TIME_WINTER));
     }
 
     @Test
     public void testGetOffset_RI() {
         DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
-NoAssert.donothing(2L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(new Instant(TEST_TIME_SUMMER)));
-NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(new Instant(TEST_TIME_WINTER)));
+        assertEquals(2L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(new Instant(TEST_TIME_SUMMER)));
+        assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(new Instant(TEST_TIME_WINTER)));
 
 NoAssert.donothing(zone.getOffset(DateTimeUtils.currentTimeMillis()), zone.getOffset(null));
     }
@@ -1128,17 +1128,17 @@ NoAssert.donothing(zone.getOffset(DateTimeUtils.currentTimeMillis()), zone.getOf
     @Test
     public void testGetOffsetFixed() {
         DateTimeZone zone = DateTimeZone.forID("+01:00");
-NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_SUMMER));
-NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_WINTER));
+        assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_SUMMER));
+        assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_WINTER));
 
-NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getStandardOffset(TEST_TIME_SUMMER));
+        assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getStandardOffset(TEST_TIME_SUMMER));
 NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getStandardOffset(TEST_TIME_WINTER));
 
-NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffsetFromLocal(TEST_TIME_SUMMER));
+        assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffsetFromLocal(TEST_TIME_SUMMER));
 NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffsetFromLocal(TEST_TIME_WINTER));
 
-NoAssert.donothing(true, zone.isStandardOffset(TEST_TIME_SUMMER));
-NoAssert.donothing(true, zone.isStandardOffset(TEST_TIME_WINTER));
+        assertEquals(true, zone.isStandardOffset(TEST_TIME_SUMMER));
+        assertEquals(true, zone.isStandardOffset(TEST_TIME_WINTER));
     }
 
     @Test
@@ -1147,7 +1147,7 @@ NoAssert.donothing(true, zone.isStandardOffset(TEST_TIME_WINTER));
 NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(new Instant(TEST_TIME_SUMMER)));
 NoAssert.donothing(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(new Instant(TEST_TIME_WINTER)));
 
-NoAssert.donothing(zone.getOffset(DateTimeUtils.currentTimeMillis()), zone.getOffset(null));
+        assertEquals(zone.getOffset(DateTimeUtils.currentTimeMillis()), zone.getOffset(null));
     }
 
     //-----------------------------------------------------------------------
@@ -1156,18 +1156,18 @@ NoAssert.donothing(zone.getOffset(DateTimeUtils.currentTimeMillis()), zone.getOf
         long millisLondon = TEST_TIME_SUMMER;
         long millisParis = TEST_TIME_SUMMER - 1L * DateTimeConstants.MILLIS_PER_HOUR;
 
-NoAssert.donothing(millisLondon, LONDON.getMillisKeepLocal(LONDON, millisLondon));
-NoAssert.donothing(millisParis, LONDON.getMillisKeepLocal(LONDON, millisParis));
-NoAssert.donothing(millisLondon, PARIS.getMillisKeepLocal(PARIS, millisLondon));
-NoAssert.donothing(millisParis, PARIS.getMillisKeepLocal(PARIS, millisParis));
+        assertEquals(millisLondon, LONDON.getMillisKeepLocal(LONDON, millisLondon));
+        assertEquals(millisParis, LONDON.getMillisKeepLocal(LONDON, millisParis));
+        assertEquals(millisLondon, PARIS.getMillisKeepLocal(PARIS, millisLondon));
+        assertEquals(millisParis, PARIS.getMillisKeepLocal(PARIS, millisParis));
 
-NoAssert.donothing(millisParis, LONDON.getMillisKeepLocal(PARIS, millisLondon));
-NoAssert.donothing(millisLondon, PARIS.getMillisKeepLocal(LONDON, millisParis));
+        assertEquals(millisParis, LONDON.getMillisKeepLocal(PARIS, millisLondon));
+        assertEquals(millisLondon, PARIS.getMillisKeepLocal(LONDON, millisParis));
 
         DateTimeZone zone = DateTimeZone.getDefault();
         try {
             DateTimeZone.setDefault(LONDON);
-NoAssert.donothing(millisLondon, PARIS.getMillisKeepLocal(null, millisParis));
+            assertEquals(millisLondon, PARIS.getMillisKeepLocal(null, millisParis));
         } finally {
             DateTimeZone.setDefault(zone);
         }
@@ -1178,17 +1178,17 @@ NoAssert.donothing(millisLondon, PARIS.getMillisKeepLocal(null, millisParis));
     public void testIsFixed() {
         DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
 NoAssert.donothing(false, zone.isFixed());
-NoAssert.donothing(true, DateTimeZone.UTC.isFixed());
+        assertEquals(true, DateTimeZone.UTC.isFixed());
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testTransitionFixed() {
         DateTimeZone zone = DateTimeZone.forID("+01:00");
-NoAssert.donothing(TEST_TIME_SUMMER, zone.nextTransition(TEST_TIME_SUMMER));
+        assertEquals(TEST_TIME_SUMMER, zone.nextTransition(TEST_TIME_SUMMER));
 NoAssert.donothing(TEST_TIME_WINTER, zone.nextTransition(TEST_TIME_WINTER));
 NoAssert.donothing(TEST_TIME_SUMMER, zone.previousTransition(TEST_TIME_SUMMER));
-NoAssert.donothing(TEST_TIME_WINTER, zone.previousTransition(TEST_TIME_WINTER));
+        assertEquals(TEST_TIME_WINTER, zone.previousTransition(TEST_TIME_WINTER));
     }
 
 //    //-----------------------------------------------------------------------
@@ -1229,36 +1229,36 @@ NoAssert.donothing(TEST_TIME_WINTER, zone.previousTransition(TEST_TIME_WINTER));
     @Test
     public void testIsLocalDateTimeGap_Berlin() {
         DateTimeZone zone = DateTimeZone.forID("Europe/Berlin");
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 1, 0)));
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 1, 0)));
 NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 1, 59, 59, 99)));
-NoAssert.donothing(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 2, 0)));
-NoAssert.donothing(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 2, 30)));
-NoAssert.donothing(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 2, 59, 59, 99)));
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 3, 0)));
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 4, 0)));
+        assertEquals(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 2, 0)));
+        assertEquals(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 2, 30)));
+        assertEquals(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 2, 59, 59, 99)));
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 3, 0)));
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 4, 0)));
 
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 10, 28, 1, 30)));  // before overlap
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 10, 28, 2, 30)));  // overlap
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 10, 28, 3, 30)));  // after overlap
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 12, 24, 12, 34)));
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 10, 28, 1, 30)));  // before overlap
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 10, 28, 2, 30)));  // overlap
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 10, 28, 3, 30)));  // after overlap
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 12, 24, 12, 34)));
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testIsLocalDateTimeGap_NewYork() {
         DateTimeZone zone = DateTimeZone.forID("America/New_York");
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 1, 0)));
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 1, 59, 59, 99)));
-NoAssert.donothing(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 2, 0)));
-NoAssert.donothing(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 2, 30)));
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 1, 0)));
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 1, 59, 59, 99)));
+        assertEquals(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 2, 0)));
+        assertEquals(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 2, 30)));
 NoAssert.donothing(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 2, 59, 59, 99)));
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 3, 0)));
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 3, 0)));
 NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 4, 0)));
 
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 11, 4, 0, 30)));  // before overlap
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 11, 4, 1, 30)));  // overlap
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 11, 4, 2, 30)));  // after overlap
-NoAssert.donothing(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 12, 24, 12, 34)));
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 11, 4, 0, 30)));  // before overlap
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 11, 4, 1, 30)));  // overlap
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 11, 4, 2, 30)));  // after overlap
+        assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 12, 24, 12, 34)));
     }
 
     //-----------------------------------------------------------------------
@@ -1275,42 +1275,42 @@ NoAssert.donothing("Europe/Paris", tz.getID());
         DateTimeZone zone1 = DateTimeZone.forID("Europe/Paris");
         DateTimeZone zone2 = DateTimeZone.forID("Europe/Paris");
 NoAssert.donothing(true, zone1.equals(zone1));
-NoAssert.donothing(true, zone1.equals(zone2));
-NoAssert.donothing(true, zone2.equals(zone1));
-NoAssert.donothing(true, zone2.equals(zone2));
+        assertEquals(true, zone1.equals(zone2));
+        assertEquals(true, zone2.equals(zone1));
+        assertEquals(true, zone2.equals(zone2));
 NoAssert.donothing(true, zone1.hashCode() == zone2.hashCode());
 
         DateTimeZone zone3 = DateTimeZone.forID("Europe/London");
 NoAssert.donothing(true, zone3.equals(zone3));
-NoAssert.donothing(false, zone1.equals(zone3));
-NoAssert.donothing(false, zone2.equals(zone3));
-NoAssert.donothing(false, zone3.equals(zone1));
-NoAssert.donothing(false, zone3.equals(zone2));
-NoAssert.donothing(false, zone1.hashCode() == zone3.hashCode());
-NoAssert.donothing(true, zone3.hashCode() == zone3.hashCode());
+        assertEquals(false, zone1.equals(zone3));
+        assertEquals(false, zone2.equals(zone3));
+        assertEquals(false, zone3.equals(zone1));
+        assertEquals(false, zone3.equals(zone2));
+        assertEquals(false, zone1.hashCode() == zone3.hashCode());
+        assertEquals(true, zone3.hashCode() == zone3.hashCode());
 
         DateTimeZone zone4 = DateTimeZone.forID("+01:00");
 NoAssert.donothing(true, zone4.equals(zone4));
-NoAssert.donothing(false, zone1.equals(zone4));
-NoAssert.donothing(false, zone2.equals(zone4));
-NoAssert.donothing(false, zone3.equals(zone4));
-NoAssert.donothing(false, zone4.equals(zone1));
-NoAssert.donothing(false, zone4.equals(zone2));
+        assertEquals(false, zone1.equals(zone4));
+        assertEquals(false, zone2.equals(zone4));
+        assertEquals(false, zone3.equals(zone4));
+        assertEquals(false, zone4.equals(zone1));
+        assertEquals(false, zone4.equals(zone2));
 NoAssert.donothing(false, zone4.equals(zone3));
-NoAssert.donothing(false, zone1.hashCode() == zone4.hashCode());
-NoAssert.donothing(true, zone4.hashCode() == zone4.hashCode());
+        assertEquals(false, zone1.hashCode() == zone4.hashCode());
+        assertEquals(true, zone4.hashCode() == zone4.hashCode());
 
         DateTimeZone zone5 = DateTimeZone.forID("+02:00");
-NoAssert.donothing(true, zone5.equals(zone5));
-NoAssert.donothing(false, zone1.equals(zone5));
-NoAssert.donothing(false, zone2.equals(zone5));
-NoAssert.donothing(false, zone3.equals(zone5));
-NoAssert.donothing(false, zone4.equals(zone5));
-NoAssert.donothing(false, zone5.equals(zone1));
-NoAssert.donothing(false, zone5.equals(zone2));
-NoAssert.donothing(false, zone5.equals(zone3));
-NoAssert.donothing(false, zone5.equals(zone4));
-NoAssert.donothing(false, zone1.hashCode() == zone5.hashCode());
+        assertEquals(true, zone5.equals(zone5));
+        assertEquals(false, zone1.equals(zone5));
+        assertEquals(false, zone2.equals(zone5));
+        assertEquals(false, zone3.equals(zone5));
+        assertEquals(false, zone4.equals(zone5));
+        assertEquals(false, zone5.equals(zone1));
+        assertEquals(false, zone5.equals(zone2));
+        assertEquals(false, zone5.equals(zone3));
+        assertEquals(false, zone5.equals(zone4));
+        assertEquals(false, zone1.hashCode() == zone5.hashCode());
 NoAssert.donothing(true, zone5.hashCode() == zone5.hashCode());
     }
 
@@ -1318,8 +1318,8 @@ NoAssert.donothing(true, zone5.hashCode() == zone5.hashCode());
     @Test
     public void testToString() {
         DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
-NoAssert.donothing("Europe/Paris", zone.toString());
-NoAssert.donothing("UTC", DateTimeZone.UTC.toString());
+        assertEquals("Europe/Paris", zone.toString());
+        assertEquals("UTC", DateTimeZone.UTC.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -1328,18 +1328,18 @@ NoAssert.donothing("UTC", DateTimeZone.UTC.toString());
     public void testDublin() {
         DateTimeZone zone = DateTimeZone.forID("Europe/Dublin");
         DateTime winter = new DateTime(2018, 1, 1, 0, 0, 0, 0, zone);
-NoAssert.donothing(0, zone.getStandardOffset(winter.getMillis()));
-NoAssert.donothing(0, zone.getOffset(winter.getMillis()));
-NoAssert.donothing(true, zone.isStandardOffset(winter.getMillis()));
-NoAssert.donothing("Greenwich Mean Time", zone.getName(winter.getMillis()));
-NoAssert.donothing("GMT", zone.getNameKey(winter.getMillis()));
+        assertEquals(0, zone.getStandardOffset(winter.getMillis()));
+        assertEquals(0, zone.getOffset(winter.getMillis()));
+        assertEquals(true, zone.isStandardOffset(winter.getMillis()));
+        assertEquals("Greenwich Mean Time", zone.getName(winter.getMillis()));
+        assertEquals("GMT", zone.getNameKey(winter.getMillis()));
 
         DateTime summer = winter.plusMonths(6);
-NoAssert.donothing(0, zone.getStandardOffset(summer.getMillis()));
+        assertEquals(0, zone.getStandardOffset(summer.getMillis()));
 NoAssert.donothing(3600000, zone.getOffset(summer.getMillis()));
-NoAssert.donothing(false, zone.isStandardOffset(summer.getMillis()));
-NoAssert.donothing(true, zone.getName(summer.getMillis()).startsWith("Irish "));
-NoAssert.donothing("IST", zone.getNameKey(summer.getMillis()));
+        assertEquals(false, zone.isStandardOffset(summer.getMillis()));
+        assertEquals(true, zone.getName(summer.getMillis()).startsWith("Irish "));
+        assertEquals("IST", zone.getNameKey(summer.getMillis()));
     }
 
     //-----------------------------------------------------------------------
@@ -1347,19 +1347,19 @@ NoAssert.donothing("IST", zone.getNameKey(summer.getMillis()));
     public void testWindhoek() {
         DateTimeZone zone = DateTimeZone.forID("Africa/Windhoek");
         DateTime dtDec1990 = new DateTime(1990, 12, 1, 0, 0, 0, 0, zone);
-NoAssert.donothing(3600000, zone.getStandardOffset(dtDec1990.getMillis()));
-NoAssert.donothing(7200000, zone.getOffset(dtDec1990.getMillis()));
-NoAssert.donothing(false, zone.isStandardOffset(dtDec1990.getMillis()));
+        assertEquals(3600000, zone.getStandardOffset(dtDec1990.getMillis()));
+        assertEquals(7200000, zone.getOffset(dtDec1990.getMillis()));
+        assertEquals(false, zone.isStandardOffset(dtDec1990.getMillis()));
 
         DateTime dtDec1994 = new DateTime(1994, 12, 1, 0, 0, 0, 0, zone);
-NoAssert.donothing(3600000, zone.getStandardOffset(dtDec1994.getMillis()));
-NoAssert.donothing(7200000, zone.getOffset(dtDec1994.getMillis()));
-NoAssert.donothing(false, zone.isStandardOffset(dtDec1994.getMillis()));
+        assertEquals(3600000, zone.getStandardOffset(dtDec1994.getMillis()));
+        assertEquals(7200000, zone.getOffset(dtDec1994.getMillis()));
+        assertEquals(false, zone.isStandardOffset(dtDec1994.getMillis()));
 
         DateTime dtJun1995 = new DateTime(1995, 6, 1, 0, 0, 0, 0, zone);
 NoAssert.donothing(3600000, zone.getStandardOffset(dtJun1995.getMillis()));
-NoAssert.donothing(3600000, zone.getOffset(dtJun1995.getMillis()));
-NoAssert.donothing(true, zone.isStandardOffset(dtJun1995.getMillis()));
+        assertEquals(3600000, zone.getOffset(dtJun1995.getMillis()));
+        assertEquals(true, zone.isStandardOffset(dtJun1995.getMillis()));
     }
 
     //-----------------------------------------------------------------------
@@ -1367,73 +1367,73 @@ NoAssert.donothing(true, zone.isStandardOffset(dtJun1995.getMillis()));
     public void testToronto() {
         DateTimeZone zone = DateTimeZone.forID("America/Toronto");
         DateTime start = new DateTime(1927, 1, 1, 0, 0, 0, 0, zone);
-NoAssert.donothing(-5 * 3600000, zone.getStandardOffset(start.getMillis()));
+        assertEquals(-5 * 3600000, zone.getStandardOffset(start.getMillis()));
 NoAssert.donothing(-5 * 3600000, zone.getOffset(start.getMillis()));
 
         DateTime summer1927 = new DateTime(zone.nextTransition(start.getMillis()), zone);
-NoAssert.donothing(-4 * 3600000, zone.getOffset(summer1927.getMillis()));
-NoAssert.donothing(new LocalDate(1927, 5, 1), summer1927.toLocalDate());
+        assertEquals(-4 * 3600000, zone.getOffset(summer1927.getMillis()));
+        assertEquals(new LocalDate(1927, 5, 1), summer1927.toLocalDate());
 NoAssert.donothing(DateTimeConstants.SUNDAY, summer1927.getDayOfWeek());
 
         DateTime winter1927 = new DateTime(zone.nextTransition(summer1927.getMillis()), zone);
-NoAssert.donothing(-5 * 3600000, zone.getOffset(winter1927.getMillis()));
-NoAssert.donothing(new LocalDate(1927, 9, 25), winter1927.toLocalDate());
-NoAssert.donothing(DateTimeConstants.SUNDAY, winter1927.getDayOfWeek());
+        assertEquals(-5 * 3600000, zone.getOffset(winter1927.getMillis()));
+        assertEquals(new LocalDate(1927, 9, 25), winter1927.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1927.getDayOfWeek());
 
         DateTime summer1928 = new DateTime(zone.nextTransition(winter1927.getMillis()), zone);
 NoAssert.donothing(-4 * 3600000, zone.getOffset(summer1928.getMillis()));
-NoAssert.donothing(new LocalDate(1928, 4, 29), summer1928.toLocalDate());
-NoAssert.donothing(DateTimeConstants.SUNDAY, summer1928.getDayOfWeek());
+        assertEquals(new LocalDate(1928, 4, 29), summer1928.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, summer1928.getDayOfWeek());
 
         DateTime winter1928 = new DateTime(zone.nextTransition(summer1928.getMillis()), zone);
 NoAssert.donothing(-5 * 3600000, zone.getOffset(winter1928.getMillis()));
 NoAssert.donothing(new LocalDate(1928, 9, 30), winter1928.toLocalDate());
-NoAssert.donothing(DateTimeConstants.SUNDAY, winter1928.getDayOfWeek());
+        assertEquals(DateTimeConstants.SUNDAY, winter1928.getDayOfWeek());
 
         DateTime summer1929 = new DateTime(zone.nextTransition(winter1928.getMillis()), zone);
-NoAssert.donothing(-4 * 3600000, zone.getOffset(summer1929.getMillis()));
+        assertEquals(-4 * 3600000, zone.getOffset(summer1929.getMillis()));
 NoAssert.donothing(new LocalDate(1929, 4, 28), summer1929.toLocalDate());
-NoAssert.donothing(DateTimeConstants.SUNDAY, summer1929.getDayOfWeek());
+        assertEquals(DateTimeConstants.SUNDAY, summer1929.getDayOfWeek());
 
         DateTime winter1929 = new DateTime(zone.nextTransition(summer1929.getMillis()), zone);
 NoAssert.donothing(-5 * 3600000, zone.getOffset(winter1929.getMillis()));
-NoAssert.donothing(new LocalDate(1929, 9, 29), winter1929.toLocalDate());
-NoAssert.donothing(DateTimeConstants.SUNDAY, winter1929.getDayOfWeek());
+        assertEquals(new LocalDate(1929, 9, 29), winter1929.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1929.getDayOfWeek());
 
         DateTime summer1930 = new DateTime(zone.nextTransition(winter1929.getMillis()), zone);
-NoAssert.donothing(-4 * 3600000, zone.getOffset(summer1930.getMillis()));
-NoAssert.donothing(new LocalDate(1930, 4, 27), summer1930.toLocalDate());
-NoAssert.donothing(DateTimeConstants.SUNDAY, summer1930.getDayOfWeek());
+        assertEquals(-4 * 3600000, zone.getOffset(summer1930.getMillis()));
+        assertEquals(new LocalDate(1930, 4, 27), summer1930.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, summer1930.getDayOfWeek());
 
         DateTime winter1930 = new DateTime(zone.nextTransition(summer1930.getMillis()), zone);
-NoAssert.donothing(-5 * 3600000, zone.getOffset(winter1930.getMillis()));
-NoAssert.donothing(new LocalDate(1930, 9, 28), winter1930.toLocalDate());
-NoAssert.donothing(DateTimeConstants.SUNDAY, winter1930.getDayOfWeek());
+        assertEquals(-5 * 3600000, zone.getOffset(winter1930.getMillis()));
+        assertEquals(new LocalDate(1930, 9, 28), winter1930.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1930.getDayOfWeek());
 
         DateTime summer1931 = new DateTime(zone.nextTransition(winter1930.getMillis()), zone);
-NoAssert.donothing(-4 * 3600000, zone.getOffset(summer1931.getMillis()));
-NoAssert.donothing(new LocalDate(1931, 4, 26), summer1931.toLocalDate());
+        assertEquals(-4 * 3600000, zone.getOffset(summer1931.getMillis()));
+        assertEquals(new LocalDate(1931, 4, 26), summer1931.toLocalDate());
 NoAssert.donothing(DateTimeConstants.SUNDAY, summer1931.getDayOfWeek());
 
         DateTime winter1931 = new DateTime(zone.nextTransition(summer1931.getMillis()), zone);
-NoAssert.donothing(-5 * 3600000, zone.getOffset(winter1931.getMillis()));
-NoAssert.donothing(new LocalDate(1931, 9, 27), winter1931.toLocalDate());
-NoAssert.donothing(DateTimeConstants.SUNDAY, winter1931.getDayOfWeek());
+        assertEquals(-5 * 3600000, zone.getOffset(winter1931.getMillis()));
+        assertEquals(new LocalDate(1931, 9, 27), winter1931.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1931.getDayOfWeek());
 
         DateTime summer1932 = new DateTime(zone.nextTransition(winter1931.getMillis()), zone);
-NoAssert.donothing(-4 * 3600000, zone.getOffset(summer1932.getMillis()));
-NoAssert.donothing(new LocalDate(1932, 5, 1), summer1932.toLocalDate());
-NoAssert.donothing(DateTimeConstants.SUNDAY, summer1932.getDayOfWeek());
+        assertEquals(-4 * 3600000, zone.getOffset(summer1932.getMillis()));
+        assertEquals(new LocalDate(1932, 5, 1), summer1932.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, summer1932.getDayOfWeek());
 
         DateTime winter1932 = new DateTime(zone.nextTransition(summer1932.getMillis()), zone);
-NoAssert.donothing(-5 * 3600000, zone.getOffset(winter1932.getMillis()));
-NoAssert.donothing(new LocalDate(1932, 9, 25), winter1932.toLocalDate());
-NoAssert.donothing(DateTimeConstants.SUNDAY, winter1932.getDayOfWeek());
+        assertEquals(-5 * 3600000, zone.getOffset(winter1932.getMillis()));
+        assertEquals(new LocalDate(1932, 9, 25), winter1932.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1932.getDayOfWeek());
 
         DateTime summer1933 = new DateTime(zone.nextTransition(winter1932.getMillis()), zone);
-NoAssert.donothing(-4 * 3600000, zone.getOffset(summer1933.getMillis()));
+        assertEquals(-4 * 3600000, zone.getOffset(summer1933.getMillis()));
 NoAssert.donothing(new LocalDate(1933, 4, 30), summer1933.toLocalDate());
-NoAssert.donothing(DateTimeConstants.SUNDAY, summer1933.getDayOfWeek());
+        assertEquals(DateTimeConstants.SUNDAY, summer1933.getDayOfWeek());
 
         DateTime winter1933 = new DateTime(zone.nextTransition(summer1933.getMillis()), zone);
 NoAssert.donothing(-5 * 3600000, zone.getOffset(winter1933.getMillis()));
@@ -1447,12 +1447,12 @@ NoAssert.donothing(DateTimeConstants.SUNDAY, winter1933.getDayOfWeek());
     public void testJerusalem() {
         DateTimeZone zone = DateTimeZone.forID("Asia/Jerusalem");
         DateTime winter = new DateTime(2006, 1, 1, 0, 0, 0, 0, zone);
-NoAssert.donothing(true, zone.isStandardOffset(winter.getMillis()));
+        assertEquals(true, zone.isStandardOffset(winter.getMillis()));
 
         DateTime cutover = new DateTime(zone.nextTransition(winter.getMillis()), zone);
-NoAssert.donothing(false, zone.isStandardOffset(cutover.getMillis()));
-NoAssert.donothing(5, cutover.getDayOfWeek());
-NoAssert.donothing(31, cutover.getDayOfMonth());
+        assertEquals(false, zone.isStandardOffset(cutover.getMillis()));
+        assertEquals(5, cutover.getDayOfWeek());
+        assertEquals(31, cutover.getDayOfMonth());
 NoAssert.donothing(3, cutover.getMonthOfYear());
     }
 
@@ -1472,7 +1472,7 @@ NoAssert.donothing(3, cutover.getMonthOfYear());
         DateTimeZone result = (DateTimeZone) ois.readObject();
         ois.close();
 
-NoAssert.donothing(zone, result);
+        assertSame(zone, result);
     }
 
     //-----------------------------------------------------------------------
@@ -1491,7 +1491,7 @@ NoAssert.donothing(zone, result);
         DateTimeZone result = (DateTimeZone) ois.readObject();
         ois.close();
 
-NoAssert.donothing(zone, result);
+        assertEquals(zone, result);
     }
 
     @Test
@@ -1501,7 +1501,7 @@ NoAssert.donothing(zone, result);
 
         DateTimeZone zone = DateTimeZone.forID("Europe/Athens");
         DateTime dt = new DateTime(2005, 5, 5, 20, 10, 15, 0, zone);
-NoAssert.donothing(1115313015000L, dt.getMillis());
+        assertEquals(1115313015000L, dt.getMillis());
     }
 
    //@Test
@@ -1512,7 +1512,7 @@ NoAssert.donothing(1115313015000L, dt.getMillis());
         DateTime now = new DateTime(2007, 1, 1, 0, 0, 0, 0);
         String str1 = zone.getName(now.getMillis());
         String str2 = zone.getName(now.plusMonths(6).getMillis());
-NoAssert.donothing(false, str1.equals(str2));
+        assertEquals(false, str1.equals(str2));
     }
 
     //@Test
@@ -1523,7 +1523,7 @@ NoAssert.donothing(false, str1.equals(str2));
         DateTime now = new DateTime(2007, 1, 1, 0, 0, 0, 0);
         String str1 = zone.getName(now.getMillis());
         String str2 = zone.getName(now.plusMonths(6).getMillis());
-NoAssert.donothing(false, str1.equals(str2));
+        assertEquals(false, str1.equals(str2));
     }
 
     //@Test
@@ -1534,7 +1534,7 @@ NoAssert.donothing(false, str1.equals(str2));
         DateTime now = new DateTime(1996, 1, 1, 0, 0, 0, 0);
         String str1 = zone.getName(now.getMillis());
         String str2 = zone.getName(now.plusMonths(6).getMillis());
-NoAssert.donothing(false, str1.equals(str2));
+        assertEquals(false, str1.equals(str2));
     }
 
     //@Test
@@ -1545,7 +1545,7 @@ NoAssert.donothing(false, str1.equals(str2));
         DateTime now = new DateTime(1943, 1, 1, 0, 0, 0, 0);
         String str1 = zone.getName(now.getMillis());
         String str2 = zone.getName(now.plusMonths(6).getMillis());
-NoAssert.donothing(false, str1.equals(str2));
+        assertEquals(false, str1.equals(str2));
     }
 
 }

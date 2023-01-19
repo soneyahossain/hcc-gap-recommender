@@ -165,8 +165,8 @@ public class TestDateTime_Constructors  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
 NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
@@ -176,8 +176,8 @@ NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString(
      */
     @Test public void test_now() throws Throwable {
         DateTime test = DateTime.now();
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -185,8 +185,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void test_now_DateTimeZone() throws Throwable {
         DateTime test = DateTime.now(PARIS);
-NoAssert.donothing(ISOChronology.getInstance(PARIS), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(PARIS), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -204,8 +204,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void test_now_Chronology() throws Throwable {
         DateTime test = DateTime.now(GregorianChronology.getInstance());
-NoAssert.donothing(GregorianChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(GregorianChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -220,23 +220,23 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
 
     //-----------------------------------------------------------------------
     @Test public void testParse_noFormatter() throws Throwable {
-NoAssert.donothing(new DateTime(2010, 6, 30, 1, 20, ISOChronology.getInstance(DateTimeZone.forOffsetHours(2))), DateTime.parse("2010-06-30T01:20+02:00"));
-NoAssert.donothing(new DateTime(2010, 1, 2, 14, 50, ISOChronology.getInstance(LONDON)), DateTime.parse("2010-002T14:50"));
+        assertEquals(new DateTime(2010, 6, 30, 1, 20, ISOChronology.getInstance(DateTimeZone.forOffsetHours(2))), DateTime.parse("2010-06-30T01:20+02:00"));
+        assertEquals(new DateTime(2010, 1, 2, 14, 50, ISOChronology.getInstance(LONDON)), DateTime.parse("2010-002T14:50"));
     }
 
     @Test public void testParse_noFormatter_vs_constructor_noOffset() throws Throwable {
         DateTime parsed = DateTime.parse("2010-06-30T01:20");
         DateTime constructed = new DateTime("2010-06-30T01:20");
-NoAssert.donothing(constructed, parsed);
-NoAssert.donothing(DateTimeZone.getDefault(), constructed.getZone());
-NoAssert.donothing(DateTimeZone.getDefault(), parsed.getZone());
+        assertEquals(constructed, parsed);
+        assertEquals(DateTimeZone.getDefault(), constructed.getZone());
+        assertEquals(DateTimeZone.getDefault(), parsed.getZone());
     }
 
     @Test public void testParse_noFormatter_vs_constructor_correctOffset() throws Throwable {
         DateTime parsed = DateTime.parse("2010-06-30T01:20+01:00");
         DateTime constructed = new DateTime("2010-06-30T01:20+01:00");
-NoAssert.donothing(DateTimeZone.getDefault(), constructed.getZone());
-NoAssert.donothing(DateTimeZone.forOffsetHours(1), parsed.getZone());
+        assertEquals(DateTimeZone.getDefault(), constructed.getZone());
+        assertEquals(DateTimeZone.forOffsetHours(1), parsed.getZone());
     }
 
     @Test public void testParse_formatter() throws Throwable {
@@ -251,7 +251,7 @@ NoAssert.donothing(new DateTime(2010, 6, 30, 13, 0, ISOChronology.getInstance(PA
     @Test public void testConstructor() throws Throwable {
         DateTime test = new DateTime();
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -259,8 +259,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_DateTimeZone() throws Throwable {
         DateTime test = new DateTime(PARIS);
-NoAssert.donothing(ISOChronology.getInstance(PARIS), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(PARIS), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -268,7 +268,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_nullDateTimeZone() throws Throwable {
         DateTime test = new DateTime((DateTimeZone) null);
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
 NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
     }
 
@@ -278,7 +278,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
     @Test public void testConstructor_Chronology() throws Throwable {
         DateTime test = new DateTime(GregorianChronology.getInstance());
 NoAssert.donothing(GregorianChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -286,7 +286,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_nullChronology() throws Throwable {
         DateTime test = new DateTime((Chronology) null);
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
 NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
     }
 
@@ -297,7 +297,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
     @Test public void testConstructor_long1() throws Throwable {
         DateTime test = new DateTime(TEST_TIME1);
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     /**
@@ -315,7 +315,7 @@ NoAssert.donothing(TEST_TIME2, test.getMillis());
     @Test public void testConstructor_long1_DateTimeZone() throws Throwable {
         DateTime test = new DateTime(TEST_TIME1, PARIS);
 NoAssert.donothing(ISOChronology.getInstance(PARIS), test.getChronology());
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     /**
@@ -323,8 +323,8 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
      */
     @Test public void testConstructor_long2_DateTimeZone() throws Throwable {
         DateTime test = new DateTime(TEST_TIME2, PARIS);
-NoAssert.donothing(ISOChronology.getInstance(PARIS), test.getChronology());
-NoAssert.donothing(TEST_TIME2, test.getMillis());
+        assertEquals(ISOChronology.getInstance(PARIS), test.getChronology());
+        assertEquals(TEST_TIME2, test.getMillis());
     }
 
     /**
@@ -332,7 +332,7 @@ NoAssert.donothing(TEST_TIME2, test.getMillis());
      */
     @Test public void testConstructor_long_nullDateTimeZone() throws Throwable {
         DateTime test = new DateTime(TEST_TIME1, (DateTimeZone) null);
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
 NoAssert.donothing(TEST_TIME1, test.getMillis());
     }
 
@@ -341,8 +341,8 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
      */
     @Test public void testConstructor_long1_Chronology() throws Throwable {
         DateTime test = new DateTime(TEST_TIME1, GregorianChronology.getInstance());
-NoAssert.donothing(GregorianChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(GregorianChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     /**
@@ -350,8 +350,8 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
      */
     @Test public void testConstructor_long2_Chronology() throws Throwable {
         DateTime test = new DateTime(TEST_TIME2, GregorianChronology.getInstance());
-NoAssert.donothing(GregorianChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME2, test.getMillis());
+        assertEquals(GregorianChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME2, test.getMillis());
     }
 
     /**
@@ -359,7 +359,7 @@ NoAssert.donothing(TEST_TIME2, test.getMillis());
      */
     @Test public void testConstructor_long_nullChronology() throws Throwable {
         DateTime test = new DateTime(TEST_TIME1, (Chronology) null);
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
 NoAssert.donothing(TEST_TIME1, test.getMillis());
     }
 
@@ -371,7 +371,7 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
         Date date = new Date(TEST_TIME1);
         DateTime test = new DateTime(date);
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     /**
@@ -389,7 +389,7 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
      */
     @Test public void testConstructor_nullObject() throws Throwable {
         DateTime test = new DateTime((Object) null);
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
 NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
     }
 
@@ -401,7 +401,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
             ConverterManager.getInstance().addInstantConverter(MockZeroNullIntegerConverter.INSTANCE);
             DateTime test = new DateTime(new Integer(0));
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(0L, test.getMillis());
+            assertEquals(0L, test.getMillis());
         } finally {
             ConverterManager.getInstance().removeInstantConverter(MockZeroNullIntegerConverter.INSTANCE);
         }
@@ -409,86 +409,86 @@ NoAssert.donothing(0L, test.getMillis());
 
     @Test public void testConstructor_ObjectString1() throws Throwable {
         DateTime test = new DateTime("1972-12-03");
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(1972, test.getYear());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(1972, test.getYear());
 NoAssert.donothing(12, test.getMonthOfYear());
-NoAssert.donothing(3, test.getDayOfMonth());
-NoAssert.donothing(0, test.getHourOfDay());
-NoAssert.donothing(0, test.getMinuteOfHour());
+        assertEquals(3, test.getDayOfMonth());
+        assertEquals(0, test.getHourOfDay());
+        assertEquals(0, test.getMinuteOfHour());
 NoAssert.donothing(0, test.getSecondOfMinute());
-NoAssert.donothing(0, test.getMillisOfSecond());
+        assertEquals(0, test.getMillisOfSecond());
     }
 
     @Test public void testConstructor_ObjectString2() throws Throwable {
         DateTime test = new DateTime("2006-06-03T+14:00");
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
 NoAssert.donothing(2006, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(2, test.getDayOfMonth());  // timezone
-NoAssert.donothing(11, test.getHourOfDay());  // test zone is +1, so shift back (14 - 1) hours from midnight
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(2, test.getDayOfMonth());  // timezone
+        assertEquals(11, test.getHourOfDay());  // test zone is +1, so shift back (14 - 1) hours from midnight
 NoAssert.donothing(0, test.getMinuteOfHour());
-NoAssert.donothing(0, test.getSecondOfMinute());
-NoAssert.donothing(0, test.getMillisOfSecond());
+        assertEquals(0, test.getSecondOfMinute());
+        assertEquals(0, test.getMillisOfSecond());
     }
 
     @Test public void testConstructor_ObjectString3() throws Throwable {
         DateTime test = new DateTime("1972-12-03T10:20:30.040");
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(1972, test.getYear());
-NoAssert.donothing(12, test.getMonthOfYear());
-NoAssert.donothing(3, test.getDayOfMonth());
-NoAssert.donothing(10, test.getHourOfDay());
-NoAssert.donothing(20, test.getMinuteOfHour());
-NoAssert.donothing(30, test.getSecondOfMinute());
-NoAssert.donothing(40, test.getMillisOfSecond());
+        assertEquals(1972, test.getYear());
+        assertEquals(12, test.getMonthOfYear());
+        assertEquals(3, test.getDayOfMonth());
+        assertEquals(10, test.getHourOfDay());
+        assertEquals(20, test.getMinuteOfHour());
+        assertEquals(30, test.getSecondOfMinute());
+        assertEquals(40, test.getMillisOfSecond());
     }
 
     @Test public void testConstructor_ObjectString4() throws Throwable {
         DateTime test = new DateTime("2006-06-03T10:20:30.040+14:00");
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(2006, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(2, test.getDayOfMonth());  // timezone
-NoAssert.donothing(21, test.getHourOfDay());  // test zone is +1, so shift back (14 - 1) hours from 10am
-NoAssert.donothing(20, test.getMinuteOfHour());
-NoAssert.donothing(30, test.getSecondOfMinute());
-NoAssert.donothing(40, test.getMillisOfSecond());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(2006, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(2, test.getDayOfMonth());  // timezone
+        assertEquals(21, test.getHourOfDay());  // test zone is +1, so shift back (14 - 1) hours from 10am
+        assertEquals(20, test.getMinuteOfHour());
+        assertEquals(30, test.getSecondOfMinute());
+        assertEquals(40, test.getMillisOfSecond());
     }
 
     @Test public void testConstructor_ObjectString5() throws Throwable {
         DateTime test = new DateTime("T10:20:30.040");
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(1970, test.getYear());
-NoAssert.donothing(1, test.getMonthOfYear());
-NoAssert.donothing(1, test.getDayOfMonth());
-NoAssert.donothing(10, test.getHourOfDay());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(1970, test.getYear());
+        assertEquals(1, test.getMonthOfYear());
+        assertEquals(1, test.getDayOfMonth());
+        assertEquals(10, test.getHourOfDay());
 NoAssert.donothing(20, test.getMinuteOfHour());
 NoAssert.donothing(30, test.getSecondOfMinute());
-NoAssert.donothing(40, test.getMillisOfSecond());
+        assertEquals(40, test.getMillisOfSecond());
     }
 
     @Test public void testConstructor_ObjectString6() throws Throwable {
         DateTime test = new DateTime("T10:20:30.040+14:00");
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(1969, test.getYear());  // timezone
-NoAssert.donothing(12, test.getMonthOfYear());  // timezone
-NoAssert.donothing(31, test.getDayOfMonth());  // timezone
-NoAssert.donothing(21, test.getHourOfDay());  // test zone is +1, so shift back (14 - 1) hours from 10am
-NoAssert.donothing(20, test.getMinuteOfHour());
-NoAssert.donothing(30, test.getSecondOfMinute());
-NoAssert.donothing(40, test.getMillisOfSecond());
+        assertEquals(1969, test.getYear());  // timezone
+        assertEquals(12, test.getMonthOfYear());  // timezone
+        assertEquals(31, test.getDayOfMonth());  // timezone
+        assertEquals(21, test.getHourOfDay());  // test zone is +1, so shift back (14 - 1) hours from 10am
+        assertEquals(20, test.getMinuteOfHour());
+        assertEquals(30, test.getSecondOfMinute());
+        assertEquals(40, test.getMillisOfSecond());
     }
 
     @Test public void testConstructor_ObjectString7() throws Throwable {
         DateTime test = new DateTime("10");
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
 NoAssert.donothing(10, test.getYear());
-NoAssert.donothing(1, test.getMonthOfYear());
-NoAssert.donothing(1, test.getDayOfMonth());
-NoAssert.donothing(0, test.getHourOfDay());
-NoAssert.donothing(0, test.getMinuteOfHour());
-NoAssert.donothing(0, test.getSecondOfMinute());
-NoAssert.donothing(0, test.getMillisOfSecond());
+        assertEquals(1, test.getMonthOfYear());
+        assertEquals(1, test.getDayOfMonth());
+        assertEquals(0, test.getHourOfDay());
+        assertEquals(0, test.getMinuteOfHour());
+        assertEquals(0, test.getSecondOfMinute());
+        assertEquals(0, test.getMillisOfSecond());
     }
 
     @Test public void testConstructor_ObjectStringEx1() throws Throwable {
@@ -516,8 +516,8 @@ NoAssert.donothing(0, test.getMillisOfSecond());
     @Test public void testConstructor_Object_DateTimeZone() throws Throwable {
         Date date = new Date(TEST_TIME1);
         DateTime test = new DateTime(date, PARIS);
-NoAssert.donothing(ISOChronology.getInstance(PARIS), test.getChronology());
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(ISOChronology.getInstance(PARIS), test.getChronology());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     /**
@@ -535,8 +535,8 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
      */
     @Test public void testConstructor_nullObject_DateTimeZone() throws Throwable {
         DateTime test = new DateTime((Object) null, PARIS);
-NoAssert.donothing(ISOChronology.getInstance(PARIS), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(PARIS), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -545,8 +545,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
     @Test public void testConstructor_Object_nullDateTimeZone() throws Throwable {
         Date date = new Date(TEST_TIME1);
         DateTime test = new DateTime(date, (DateTimeZone) null);
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     /**
@@ -554,8 +554,8 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
      */
     @Test public void testConstructor_nullObject_nullDateTimeZone() throws Throwable {
         DateTime test = new DateTime((Object) null, (DateTimeZone) null);
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -565,8 +565,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
         try {
             ConverterManager.getInstance().addInstantConverter(MockZeroNullIntegerConverter.INSTANCE);
             DateTime test = new DateTime(new Integer(0), GregorianChronology.getInstance());
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(0L, test.getMillis());
+            assertEquals(ISOChronology.getInstance(), test.getChronology());
+            assertEquals(0L, test.getMillis());
         } finally {
             ConverterManager.getInstance().removeInstantConverter(MockZeroNullIntegerConverter.INSTANCE);
         }
@@ -579,7 +579,7 @@ NoAssert.donothing(0L, test.getMillis());
         Date date = new Date(TEST_TIME1);
         DateTime test = new DateTime(date, GregorianChronology.getInstance());
 NoAssert.donothing(GregorianChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     /**
@@ -598,7 +598,7 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
     @Test public void testConstructor_nullObject_Chronology() throws Throwable {
         DateTime test = new DateTime((Object) null, GregorianChronology.getInstance());
 NoAssert.donothing(GregorianChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -608,7 +608,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
         Date date = new Date(TEST_TIME1);
         DateTime test = new DateTime(date, (Chronology) null);
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME1, test.getMillis());
+        assertEquals(TEST_TIME1, test.getMillis());
     }
 
     /**
@@ -616,8 +616,8 @@ NoAssert.donothing(TEST_TIME1, test.getMillis());
      */
     @Test public void testConstructor_nullObject_nullChronology() throws Throwable {
         DateTime test = new DateTime((Object) null, (Chronology) null);
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -627,8 +627,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
         try {
             ConverterManager.getInstance().addInstantConverter(MockZeroNullIntegerConverter.INSTANCE);
             DateTime test = new DateTime(new Integer(0), GregorianChronology.getInstance());
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(0L, test.getMillis());
+            assertEquals(ISOChronology.getInstance(), test.getChronology());
+            assertEquals(0L, test.getMillis());
         } finally {
             ConverterManager.getInstance().removeInstantConverter(MockZeroNullIntegerConverter.INSTANCE);
         }
@@ -640,9 +640,9 @@ NoAssert.donothing(0L, test.getMillis());
      */
     @Test public void testConstructor_int_int_int_int_int() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 1, 0);  // +01:00
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(LONDON, test.getZone());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(LONDON, test.getZone());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -650,8 +650,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_int_int_int_int_int_DateTimeZone() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 2, 0, PARIS);  // +02:00
-NoAssert.donothing(ISOChronology.getInstance(PARIS), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(PARIS), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -660,7 +660,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
     @Test public void testConstructor_int_int_int_int_int_nullDateTimeZone() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 1, 0, (DateTimeZone) null);  // +01:00
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -668,8 +668,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_int_int_int_int_int_Chronology() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 1, 0, GregorianChronology.getInstance());  // +01:00
-NoAssert.donothing(GregorianChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(GregorianChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -677,8 +677,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_int_int_int_int_int_nullChronology() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 1, 0, (Chronology) null);  // +01:00
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
@@ -687,9 +687,9 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_int_int_int_int_int_int() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 1, 0, 0);  // +01:00
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
 NoAssert.donothing(LONDON, test.getZone());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -697,8 +697,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_int_int_int_int_int_int_DateTimeZone() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 2, 0, 0, PARIS);  // +02:00
-NoAssert.donothing(ISOChronology.getInstance(PARIS), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(PARIS), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -706,8 +706,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_int_int_int_int_int_int_nullDateTimeZone() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 1, 0, 0, (DateTimeZone) null);  // +01:00
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -715,7 +715,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_int_int_int_int_int_int_Chronology() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 1, 0, 0, GregorianChronology.getInstance());  // +01:00
-NoAssert.donothing(GregorianChronology.getInstance(), test.getChronology());
+        assertEquals(GregorianChronology.getInstance(), test.getChronology());
 NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
     }
 
@@ -724,8 +724,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_int_int_int_int_int_int_nullChronology() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 1, 0, 0, (Chronology) null);  // +01:00
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     //-----------------------------------------------------------------------
@@ -736,7 +736,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
         DateTime test = new DateTime(2002, 6, 9, 1, 0, 0, 0);  // +01:00
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
 NoAssert.donothing(LONDON, test.getZone());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
         try {
             new DateTime(Integer.MIN_VALUE, 6, 9, 0, 0, 0, 0);
             fail();
@@ -774,7 +774,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
     @Test public void testConstructor_int_int_int_int_int_int_int_DateTimeZone() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 2, 0, 0, 0, PARIS);  // +02:00
 NoAssert.donothing(ISOChronology.getInstance(PARIS), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
         try {
             new DateTime(Integer.MIN_VALUE, 6, 9, 0, 0, 0, 0, PARIS);
             fail();
@@ -811,8 +811,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_int_int_int_int_int_int_int_nullDateTimeZone() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 1, 0, 0, 0, (DateTimeZone) null);  // +01:00
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
     /**
@@ -821,7 +821,7 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
     @Test public void testConstructor_int_int_int_int_int_int_int_Chronology() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 1, 0, 0, 0, GregorianChronology.getInstance());  // +01:00
 NoAssert.donothing(GregorianChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
         try {
             new DateTime(Integer.MIN_VALUE, 6, 9, 0, 0, 0, 0, GregorianChronology.getInstance());
             fail();
@@ -858,8 +858,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
      */
     @Test public void testConstructor_int_int_int_int_int_int_int_nullChronology() throws Throwable {
         DateTime test = new DateTime(2002, 6, 9, 1, 0, 0, 0, (Chronology) null);  // +01:00
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
-NoAssert.donothing(TEST_TIME_NOW, test.getMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(TEST_TIME_NOW, test.getMillis());
     }
 
 }

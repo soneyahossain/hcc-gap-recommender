@@ -149,8 +149,8 @@ public class TestCompiler  { //extends TestCase {
         Provider provider = compileAndLoad(AMERICA_LOS_ANGELES_FILE);
         DateTimeZone tz = provider.getZone("America/Los_Angeles");
 
-NoAssert.donothing("America/Los_Angeles", tz.getID());
-NoAssert.donothing(false, tz.isFixed());
+        assertEquals("America/Los_Angeles", tz.getID());
+        assertEquals(false, tz.isFixed());
         TestBuilder.testForwardTransitions(tz, TestBuilder.AMERICA_LOS_ANGELES_DATA);
         TestBuilder.testReverseTransitions(tz, TestBuilder.AMERICA_LOS_ANGELES_DATA);
     }
@@ -175,7 +175,7 @@ NoAssert.donothing("Attempting to create a Rule from an incomplete tokenizer", i
             // This thrown from the Zone constructor
             fail("NoSuchElementException was thrown; broken timezone file?");
         } catch (IllegalArgumentException iae) {
-NoAssert.donothing("Attempting to create a Zone from an incomplete tokenizer", iae.getMessage());
+            assertEquals("Attempting to create a Zone from an incomplete tokenizer", iae.getMessage());
         }
     }
 
@@ -237,21 +237,21 @@ NoAssert.donothing("Attempting to create a Zone from an incomplete tokenizer", i
     @Test public void test_2400_fromDay() {
         StringTokenizer st = new StringTokenizer("Apr Sun>=1  24:00");
         DateTimeOfYear test = new DateTimeOfYear(st);
-NoAssert.donothing(4, test.iMonthOfYear);  // Apr
-NoAssert.donothing(2, test.iDayOfMonth);   // 2nd
-NoAssert.donothing(1, test.iDayOfWeek);    // Mon
-NoAssert.donothing(0, test.iMillisOfDay);  // 00:00
-NoAssert.donothing(true, test.iAdvanceDayOfWeek);
+        assertEquals(4, test.iMonthOfYear);  // Apr
+        assertEquals(2, test.iDayOfMonth);   // 2nd
+        assertEquals(1, test.iDayOfWeek);    // Mon
+        assertEquals(0, test.iMillisOfDay);  // 00:00
+        assertEquals(true, test.iAdvanceDayOfWeek);
     }
 
     @Test public void test_2400_last() {
         StringTokenizer st = new StringTokenizer("Mar lastSun 24:00");
         DateTimeOfYear test = new DateTimeOfYear(st);
 NoAssert.donothing(4, test.iMonthOfYear);  // Apr
-NoAssert.donothing(1, test.iDayOfMonth);   // 1st
+        assertEquals(1, test.iDayOfMonth);   // 1st
 NoAssert.donothing(1, test.iDayOfWeek);    // Mon
-NoAssert.donothing(0, test.iMillisOfDay);  // 00:00
-NoAssert.donothing(false, test.iAdvanceDayOfWeek);
+        assertEquals(0, test.iMillisOfDay);  // 00:00
+        assertEquals(false, test.iAdvanceDayOfWeek);
     }
 
     @Test public void test_2400_specific_day() {
@@ -261,14 +261,14 @@ NoAssert.donothing(9, test.iMonthOfYear);  // Sep
 NoAssert.donothing(22, test.iDayOfMonth);   // 22st
 NoAssert.donothing(0, test.iDayOfWeek);    // Ignored
 NoAssert.donothing(0, test.iMillisOfDay);  // 00:00
-NoAssert.donothing(false, test.iAdvanceDayOfWeek);
+        assertEquals(false, test.iAdvanceDayOfWeek);
     }
 
     @Test public void test_Amman_2003() {
         DateTimeZone zone = DateTimeZone.forID("Asia/Amman");
         DateTime dt = new DateTime(2003, 3, 1, 0, 0, zone);
         long next = zone.nextTransition(dt.getMillis());
-NoAssert.donothing(next, new DateTime(2003, 3, 28, 0, 0, DateTimeZone.forOffsetHours(2)).getMillis());
+        assertEquals(next, new DateTime(2003, 3, 28, 0, 0, DateTimeZone.forOffsetHours(2)).getMillis());
     }
 
     @Test public void test_Amman_2004() {
@@ -282,7 +282,7 @@ NoAssert.donothing(next, new DateTime(2004, 3, 26, 0, 0, DateTimeZone.forOffsetH
         DateTimeZone zone = DateTimeZone.forID("Asia/Amman");
         DateTime dt = new DateTime(2005, 3, 1, 0, 0, zone);
         long next = zone.nextTransition(dt.getMillis());
-NoAssert.donothing(next, new DateTime(2005, 4, 1, 0, 0, DateTimeZone.forOffsetHours(2)).getMillis());
+        assertEquals(next, new DateTime(2005, 4, 1, 0, 0, DateTimeZone.forOffsetHours(2)).getMillis());
     }
 
     @Test public void test_Amman_2006() {
@@ -297,8 +297,8 @@ NoAssert.donothing(next, new DateTime(2006, 3, 31, 0, 0, DateTimeZone.forOffsetH
         DateTime dt = new DateTime(1949, 9, 7, 0, 0, zone);
         long next = zone.nextTransition(dt.getMillis());
         DateTime expected = new DateTime(1949, 9, 11, 0, 0, DateTimeZone.forOffsetHours(9));
-NoAssert.donothing(DateTimeConstants.SUNDAY, expected.getDayOfWeek());
-NoAssert.donothing(expected.getMillis(), next);
+        assertEquals(DateTimeConstants.SUNDAY, expected.getDayOfWeek());
+        assertEquals(expected.getMillis(), next);
     }
 
 }

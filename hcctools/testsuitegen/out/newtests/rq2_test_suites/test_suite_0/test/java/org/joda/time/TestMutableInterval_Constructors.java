@@ -156,25 +156,25 @@ public class TestMutableInterval_Constructors  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
-NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testParse_noFormatter() throws Throwable {
         DateTime start = new DateTime(2010, 6, 30, 12, 30, ISOChronology.getInstance(PARIS));
         DateTime end = new DateTime(2010, 7, 1, 14, 30, ISOChronology.getInstance(PARIS));
-NoAssert.donothing(new MutableInterval(start, end), MutableInterval.parse("2010-06-30T12:30/2010-07-01T14:30"));
-NoAssert.donothing(new MutableInterval(start, end), MutableInterval.parse("2010-06-30T12:30/P1DT2H"));
+        assertEquals(new MutableInterval(start, end), MutableInterval.parse("2010-06-30T12:30/2010-07-01T14:30"));
+        assertEquals(new MutableInterval(start, end), MutableInterval.parse("2010-06-30T12:30/P1DT2H"));
 NoAssert.donothing(new MutableInterval(start, end), MutableInterval.parse("P1DT2H/2010-07-01T14:30"));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testConstructor() throws Throwable {
         MutableInterval test = new MutableInterval();
-NoAssert.donothing(0L, test.getStartMillis());
-NoAssert.donothing(0L, test.getEndMillis());
+        assertEquals(0L, test.getStartMillis());
+        assertEquals(0L, test.getEndMillis());
     }
 
     //-----------------------------------------------------------------------
@@ -183,16 +183,16 @@ NoAssert.donothing(0L, test.getEndMillis());
         DateTime dt2 = new DateTime(2005, 7, 10, 1, 1, 1, 1);
         MutableInterval test = new MutableInterval(dt1.getMillis(), dt2.getMillis());
 NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(dt2.getMillis(), test.getEndMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
     }
 
     @Test public void testConstructor_long_long2() throws Throwable {
         DateTime dt1 = new DateTime(2004, 6, 9, 0, 0, 0, 0);
         MutableInterval test = new MutableInterval(dt1.getMillis(), dt1.getMillis());
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt1.getMillis(), test.getEndMillis());
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
+        assertEquals(dt1.getMillis(), test.getEndMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
     }
 
     @Test public void testConstructor_long_long3() throws Throwable {
@@ -209,16 +209,16 @@ NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
         DateTime dt1 = new DateTime(2004, 6, 9, 0, 0, 0, 0);
         DateTime dt2 = new DateTime(2005, 7, 10, 1, 1, 1, 1);
         MutableInterval test = new MutableInterval(dt1.getMillis(), dt2.getMillis(), GJChronology.getInstance());
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
-NoAssert.donothing(GJChronology.getInstance(), test.getChronology());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
+        assertEquals(dt2.getMillis(), test.getEndMillis());
+        assertEquals(GJChronology.getInstance(), test.getChronology());
     }
 
     @Test public void testConstructor_long_long_Chronology2() throws Throwable {
         DateTime dt1 = new DateTime(2004, 6, 9, 0, 0, 0, 0);
         DateTime dt2 = new DateTime(2005, 7, 10, 1, 1, 1, 1);
         MutableInterval test = new MutableInterval(dt1.getMillis(), dt2.getMillis(), null);
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
 NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
     }
@@ -228,43 +228,43 @@ NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
         DateTime dt1 = new DateTime(2004, 6, 9, 0, 0, 0, 0);
         DateTime dt2 = new DateTime(2005, 7, 10, 1, 1, 1, 1);
         MutableInterval test = new MutableInterval(dt1, dt2);
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
+        assertEquals(dt2.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RI2() throws Throwable {
         Instant dt1 = new Instant(new DateTime(2004, 6, 9, 0, 0, 0, 0));
         Instant dt2 = new Instant(new DateTime(2005, 7, 10, 1, 1, 1, 1));
         MutableInterval test = new MutableInterval(dt1, dt2);
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
+        assertEquals(dt2.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RI3() throws Throwable {
         MutableInterval test = new MutableInterval((ReadableInstant) null, (ReadableInstant) null);
-NoAssert.donothing(TEST_TIME_NOW, test.getStartMillis());
-NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
+        assertEquals(TEST_TIME_NOW, test.getStartMillis());
+        assertEquals(TEST_TIME_NOW, test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RI4() throws Throwable {
         DateTime dt1 = new DateTime(2000, 6, 9, 0, 0, 0, 0);
         MutableInterval test = new MutableInterval(dt1, (ReadableInstant) null);
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
+        assertEquals(TEST_TIME_NOW, test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RI5() throws Throwable {
         DateTime dt2 = new DateTime(2005, 7, 10, 1, 1, 1, 1);
         MutableInterval test = new MutableInterval((ReadableInstant) null, dt2);
-NoAssert.donothing(TEST_TIME_NOW, test.getStartMillis());
-NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
+        assertEquals(TEST_TIME_NOW, test.getStartMillis());
+        assertEquals(dt2.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RI6() throws Throwable {
         DateTime dt1 = new DateTime(2004, 6, 9, 0, 0, 0, 0);
         MutableInterval test = new MutableInterval(dt1, dt1);
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt1.getMillis(), test.getEndMillis());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
+        assertEquals(dt1.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RI7() throws Throwable {
@@ -280,18 +280,18 @@ NoAssert.donothing(dt1.getMillis(), test.getEndMillis());
         DateTime dt1 = new DateTime(2004, 6, 9, 0, 0, 0, 0, GJChronology.getInstance());
         DateTime dt2 = new DateTime(2005, 7, 10, 1, 1, 1, 1);
         MutableInterval test = new MutableInterval(dt1, dt2);
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
-NoAssert.donothing(GJChronology.getInstance(), test.getChronology());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
+        assertEquals(dt2.getMillis(), test.getEndMillis());
+        assertEquals(GJChronology.getInstance(), test.getChronology());
     }
 
     @Test public void testConstructor_RI_RI9() throws Throwable {
         DateTime dt1 = new DateTime(2004, 6, 9, 0, 0, 0, 0);
         DateTime dt2 = new DateTime(2005, 7, 10, 1, 1, 1, 1, GJChronology.getInstance());
         MutableInterval test = new MutableInterval(dt1, dt2);
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
-NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
+        assertEquals(dt2.getMillis(), test.getEndMillis());
+        assertEquals(ISOChronology.getInstance(), test.getChronology());
     }
 
     //-----------------------------------------------------------------------
@@ -303,8 +303,8 @@ NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
         result = ISOChronology.getInstance().hours().add(result, 1);
         
         MutableInterval test = new MutableInterval(dt, dur);
-NoAssert.donothing(dt.getMillis(), test.getStartMillis());
-NoAssert.donothing(result, test.getEndMillis());
+        assertEquals(dt.getMillis(), test.getStartMillis());
+        assertEquals(result, test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RP2() throws Throwable {
@@ -316,7 +316,7 @@ NoAssert.donothing(result, test.getEndMillis());
         result = ISOChronology.getInstanceUTC().hours().add(result, 1);
         
         MutableInterval test = new MutableInterval(dt, dur);
-NoAssert.donothing(dt.getMillis(), test.getStartMillis());
+        assertEquals(dt.getMillis(), test.getStartMillis());
 NoAssert.donothing(result, test.getEndMillis());
     }
 
@@ -329,8 +329,8 @@ NoAssert.donothing(result, test.getEndMillis());
         result = ISOChronology.getInstanceUTC().hours().add(result, 1);
         
         MutableInterval test = new MutableInterval(dt, dur);
-NoAssert.donothing(dt.getMillis(), test.getStartMillis());
-NoAssert.donothing(result, test.getEndMillis());
+        assertEquals(dt.getMillis(), test.getStartMillis());
+        assertEquals(result, test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RP4() throws Throwable {
@@ -341,21 +341,21 @@ NoAssert.donothing(result, test.getEndMillis());
         result = ISOChronology.getInstance().millis().add(result, 23);
         
         MutableInterval test = new MutableInterval(dt, dur);
-NoAssert.donothing(dt.getMillis(), test.getStartMillis());
-NoAssert.donothing(result, test.getEndMillis());
+        assertEquals(dt.getMillis(), test.getStartMillis());
+        assertEquals(result, test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RP5() throws Throwable {
         MutableInterval test = new MutableInterval((ReadableInstant) null, (ReadablePeriod) null);
 NoAssert.donothing(TEST_TIME_NOW, test.getStartMillis());
-NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
+        assertEquals(TEST_TIME_NOW, test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RP6() throws Throwable {
         DateTime dt = new DateTime(TEST_TIME_NOW);
         MutableInterval test = new MutableInterval(dt, (ReadablePeriod) null);
-NoAssert.donothing(dt.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt.getMillis(), test.getEndMillis());
+        assertEquals(dt.getMillis(), test.getStartMillis());
+        assertEquals(dt.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RP7() throws Throwable {
@@ -365,8 +365,8 @@ NoAssert.donothing(dt.getMillis(), test.getEndMillis());
         result = ISOChronology.getInstance().hourOfDay().add(result, 1);
         
         MutableInterval test = new MutableInterval((ReadableInstant) null, dur);
-NoAssert.donothing(TEST_TIME_NOW, test.getStartMillis());
-NoAssert.donothing(result, test.getEndMillis());
+        assertEquals(TEST_TIME_NOW, test.getStartMillis());
+        assertEquals(result, test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RP8() throws Throwable {
@@ -400,7 +400,7 @@ NoAssert.donothing(dt.getMillis(), test.getEndMillis());
         result = ISOChronology.getInstanceUTC().hours().add(result, -1);
         
         MutableInterval test = new MutableInterval(dur, dt);
-NoAssert.donothing(result, test.getStartMillis());
+        assertEquals(result, test.getStartMillis());
 NoAssert.donothing(dt.getMillis(), test.getEndMillis());
     }
 
@@ -413,8 +413,8 @@ NoAssert.donothing(dt.getMillis(), test.getEndMillis());
         result = ISOChronology.getInstanceUTC().hours().add(result, -1);
         
         MutableInterval test = new MutableInterval(dur, dt);
-NoAssert.donothing(result, test.getStartMillis());
-NoAssert.donothing(dt.getMillis(), test.getEndMillis());
+        assertEquals(result, test.getStartMillis());
+        assertEquals(dt.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_RP_RI4() throws Throwable {
@@ -425,21 +425,21 @@ NoAssert.donothing(dt.getMillis(), test.getEndMillis());
         result = ISOChronology.getInstance().millis().add(result, -23);
         
         MutableInterval test = new MutableInterval(dur, dt);
-NoAssert.donothing(result, test.getStartMillis());
-NoAssert.donothing(dt.getMillis(), test.getEndMillis());
+        assertEquals(result, test.getStartMillis());
+        assertEquals(dt.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_RP_RI5() throws Throwable {
         MutableInterval test = new MutableInterval((ReadablePeriod) null, (ReadableInstant) null);
-NoAssert.donothing(TEST_TIME_NOW, test.getStartMillis());
-NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
+        assertEquals(TEST_TIME_NOW, test.getStartMillis());
+        assertEquals(TEST_TIME_NOW, test.getEndMillis());
     }
 
     @Test public void testConstructor_RP_RI6() throws Throwable {
         DateTime dt = new DateTime(TEST_TIME_NOW);
         MutableInterval test = new MutableInterval((ReadablePeriod) null, dt);
-NoAssert.donothing(dt.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt.getMillis(), test.getEndMillis());
+        assertEquals(dt.getMillis(), test.getStartMillis());
+        assertEquals(dt.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_RP_RI7() throws Throwable {
@@ -449,8 +449,8 @@ NoAssert.donothing(dt.getMillis(), test.getEndMillis());
         result = ISOChronology.getInstance().hourOfDay().add(result, -1);
         
         MutableInterval test = new MutableInterval(dur, (ReadableInstant) null);
-NoAssert.donothing(result, test.getStartMillis());
-NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
+        assertEquals(result, test.getStartMillis());
+        assertEquals(TEST_TIME_NOW, test.getEndMillis());
     }
 
     @Test public void testConstructor_RP_RI8() throws Throwable {
@@ -472,21 +472,21 @@ NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
         Duration dur = new Duration(result - TEST_TIME_NOW);
         
         MutableInterval test = new MutableInterval(dt, dur);
-NoAssert.donothing(dt.getMillis(), test.getStartMillis());
-NoAssert.donothing(result, test.getEndMillis());
+        assertEquals(dt.getMillis(), test.getStartMillis());
+        assertEquals(result, test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RD2() throws Throwable {
         MutableInterval test = new MutableInterval((ReadableInstant) null, (ReadableDuration) null);
 NoAssert.donothing(TEST_TIME_NOW, test.getStartMillis());
-NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
+        assertEquals(TEST_TIME_NOW, test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RD3() throws Throwable {
         DateTime dt = new DateTime(TEST_TIME_NOW);
         MutableInterval test = new MutableInterval(dt, (ReadableDuration) null);
-NoAssert.donothing(dt.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt.getMillis(), test.getEndMillis());
+        assertEquals(dt.getMillis(), test.getStartMillis());
+        assertEquals(dt.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RD4() throws Throwable {
@@ -497,8 +497,8 @@ NoAssert.donothing(dt.getMillis(), test.getEndMillis());
         Duration dur = new Duration(result - TEST_TIME_NOW);
         
         MutableInterval test = new MutableInterval((ReadableInstant) null, dur);
-NoAssert.donothing(TEST_TIME_NOW, test.getStartMillis());
-NoAssert.donothing(result, test.getEndMillis());
+        assertEquals(TEST_TIME_NOW, test.getStartMillis());
+        assertEquals(result, test.getEndMillis());
     }
 
     @Test public void testConstructor_RI_RD5() throws Throwable {
@@ -520,21 +520,21 @@ NoAssert.donothing(result, test.getEndMillis());
         Duration dur = new Duration(TEST_TIME_NOW - result);
         
         MutableInterval test = new MutableInterval(dur, dt);
-NoAssert.donothing(result, test.getStartMillis());
-NoAssert.donothing(dt.getMillis(), test.getEndMillis());
+        assertEquals(result, test.getStartMillis());
+        assertEquals(dt.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_RD_RI2() throws Throwable {
         MutableInterval test = new MutableInterval((ReadableDuration) null, (ReadableInstant) null);
-NoAssert.donothing(TEST_TIME_NOW, test.getStartMillis());
-NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
+        assertEquals(TEST_TIME_NOW, test.getStartMillis());
+        assertEquals(TEST_TIME_NOW, test.getEndMillis());
     }
 
     @Test public void testConstructor_RD_RI3() throws Throwable {
         DateTime dt = new DateTime(TEST_TIME_NOW);
         MutableInterval test = new MutableInterval((ReadableDuration) null, dt);
-NoAssert.donothing(dt.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt.getMillis(), test.getEndMillis());
+        assertEquals(dt.getMillis(), test.getStartMillis());
+        assertEquals(dt.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_RD_RI4() throws Throwable {
@@ -546,7 +546,7 @@ NoAssert.donothing(dt.getMillis(), test.getEndMillis());
         
         MutableInterval test = new MutableInterval(dur, (ReadableInstant) null);
 NoAssert.donothing(result, test.getStartMillis());
-NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
+        assertEquals(TEST_TIME_NOW, test.getEndMillis());
     }
 
     @Test public void testConstructor_RD_RI5() throws Throwable {
@@ -563,8 +563,8 @@ NoAssert.donothing(TEST_TIME_NOW, test.getEndMillis());
         DateTime dt1 = new DateTime(2004, 6, 9, 0, 0, 0, 0);
         DateTime dt2 = new DateTime(2005, 7, 10, 1, 1, 1, 1);
         MutableInterval test = new MutableInterval(dt1.toString() + '/' + dt2.toString());
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
+        assertEquals(dt2.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_Object2() throws Throwable {
@@ -573,7 +573,7 @@ NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
         MutableInterval base = new MutableInterval(dt1, dt2);
         
         MutableInterval test = new MutableInterval(base);
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
 NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
     }
 
@@ -584,14 +584,14 @@ NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
         
         MutableInterval test = new MutableInterval(base);
 NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
+        assertEquals(dt2.getMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_Object4() throws Throwable {
         MockInterval base = new MockInterval();
         MutableInterval test = new MutableInterval(base);
 NoAssert.donothing(base.getStartMillis(), test.getStartMillis());
-NoAssert.donothing(base.getEndMillis(), test.getEndMillis());
+        assertEquals(base.getEndMillis(), test.getEndMillis());
     }
 
     @Test public void testConstructor_Object5() throws Throwable {
@@ -715,9 +715,9 @@ NoAssert.donothing(base.getEndMillis(), test.getEndMillis());
         Interval base = new Interval(dt1, dt2);
         
         MutableInterval test = new MutableInterval(base, BuddhistChronology.getInstance());
-NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
-NoAssert.donothing(BuddhistChronology.getInstance(), test.getChronology());
+        assertEquals(dt1.getMillis(), test.getStartMillis());
+        assertEquals(dt2.getMillis(), test.getEndMillis());
+        assertEquals(BuddhistChronology.getInstance(), test.getChronology());
     }
 
     @Test public void testConstructor_Object_Chronology2() throws Throwable {
@@ -727,7 +727,7 @@ NoAssert.donothing(BuddhistChronology.getInstance(), test.getChronology());
         
         MutableInterval test = new MutableInterval(base, null);
 NoAssert.donothing(dt1.getMillis(), test.getStartMillis());
-NoAssert.donothing(dt2.getMillis(), test.getEndMillis());
+        assertEquals(dt2.getMillis(), test.getEndMillis());
 NoAssert.donothing(ISOChronology.getInstance(), test.getChronology());
     }
 

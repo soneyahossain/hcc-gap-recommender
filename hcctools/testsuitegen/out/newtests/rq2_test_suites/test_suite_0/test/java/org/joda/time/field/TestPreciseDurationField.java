@@ -96,7 +96,7 @@ public class TestPreciseDurationField  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void test_getType() {
-NoAssert.donothing(DurationFieldType.seconds(), iField.getType());
+        assertEquals(DurationFieldType.seconds(), iField.getType());
     }
 
     @Test public void test_getName() {
@@ -104,11 +104,11 @@ NoAssert.donothing("seconds", iField.getName());
     }
     
     @Test public void test_isSupported() {
-NoAssert.donothing(true, iField.isSupported());
+        assertEquals(true, iField.isSupported());
     }
 
     @Test public void test_isPrecise() {
-NoAssert.donothing(true, iField.isPrecise());
+        assertEquals(true, iField.isPrecise());
     }
 
     @Test public void test_getUnitMillis() {
@@ -116,15 +116,15 @@ NoAssert.donothing(1000, iField.getUnitMillis());
     }
 
     @Test public void test_toString() {
-NoAssert.donothing("DurationField[seconds]", iField.toString());
+        assertEquals("DurationField[seconds]", iField.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_getValue_long() {
-NoAssert.donothing(0, iField.getValue(0L));
-NoAssert.donothing(12345, iField.getValue(12345678L));
-NoAssert.donothing(-1, iField.getValue(-1234L));
-NoAssert.donothing(INTEGER_MAX, iField.getValue(LONG_INTEGER_MAX * 1000L + 999L));
+        assertEquals(0, iField.getValue(0L));
+        assertEquals(12345, iField.getValue(12345678L));
+        assertEquals(-1, iField.getValue(-1234L));
+        assertEquals(INTEGER_MAX, iField.getValue(LONG_INTEGER_MAX * 1000L + 999L));
         try {
             iField.getValue(LONG_INTEGER_MAX * 1000L + 1000L);
             fail();
@@ -132,17 +132,17 @@ NoAssert.donothing(INTEGER_MAX, iField.getValue(LONG_INTEGER_MAX * 1000L + 999L)
     }
 
     @Test public void test_getValueAsLong_long() {
-NoAssert.donothing(0L, iField.getValueAsLong(0L));
-NoAssert.donothing(12345L, iField.getValueAsLong(12345678L));
-NoAssert.donothing(-1L, iField.getValueAsLong(-1234L));
-NoAssert.donothing(LONG_INTEGER_MAX + 1L, iField.getValueAsLong(LONG_INTEGER_MAX * 1000L + 1000L));
+        assertEquals(0L, iField.getValueAsLong(0L));
+        assertEquals(12345L, iField.getValueAsLong(12345678L));
+        assertEquals(-1L, iField.getValueAsLong(-1234L));
+        assertEquals(LONG_INTEGER_MAX + 1L, iField.getValueAsLong(LONG_INTEGER_MAX * 1000L + 1000L));
     }
 
     @Test public void test_getValue_long_long() {
-NoAssert.donothing(0, iField.getValue(0L, 567L));
-NoAssert.donothing(12345, iField.getValue(12345678L, 567L));
-NoAssert.donothing(-1, iField.getValue(-1234L, 567L));
-NoAssert.donothing(INTEGER_MAX, iField.getValue(LONG_INTEGER_MAX * 1000L + 999L, 567L));
+        assertEquals(0, iField.getValue(0L, 567L));
+        assertEquals(12345, iField.getValue(12345678L, 567L));
+        assertEquals(-1, iField.getValue(-1234L, 567L));
+        assertEquals(INTEGER_MAX, iField.getValue(LONG_INTEGER_MAX * 1000L + 999L, 567L));
         try {
             iField.getValue(LONG_INTEGER_MAX * 1000L + 1000L, 567L);
             fail();
@@ -150,24 +150,24 @@ NoAssert.donothing(INTEGER_MAX, iField.getValue(LONG_INTEGER_MAX * 1000L + 999L,
     }
 
     @Test public void test_getValueAsLong_long_long() {
-NoAssert.donothing(0L, iField.getValueAsLong(0L, 567L));
-NoAssert.donothing(12345L, iField.getValueAsLong(12345678L, 567L));
-NoAssert.donothing(-1L, iField.getValueAsLong(-1234L, 567L));
-NoAssert.donothing(LONG_INTEGER_MAX + 1L, iField.getValueAsLong(LONG_INTEGER_MAX * 1000L + 1000L, 567L));
+        assertEquals(0L, iField.getValueAsLong(0L, 567L));
+        assertEquals(12345L, iField.getValueAsLong(12345678L, 567L));
+        assertEquals(-1L, iField.getValueAsLong(-1234L, 567L));
+        assertEquals(LONG_INTEGER_MAX + 1L, iField.getValueAsLong(LONG_INTEGER_MAX * 1000L + 1000L, 567L));
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_getMillis_int() {
 NoAssert.donothing(0, iField.getMillis(0));
-NoAssert.donothing(1234000L, iField.getMillis(1234));
-NoAssert.donothing(-1234000L, iField.getMillis(-1234));
-NoAssert.donothing(LONG_INTEGER_MAX * 1000L, iField.getMillis(INTEGER_MAX));
+        assertEquals(1234000L, iField.getMillis(1234));
+        assertEquals(-1234000L, iField.getMillis(-1234));
+        assertEquals(LONG_INTEGER_MAX * 1000L, iField.getMillis(INTEGER_MAX));
     }
 
     @Test public void test_getMillis_long() {
-NoAssert.donothing(0L, iField.getMillis(0L));
-NoAssert.donothing(1234000L, iField.getMillis(1234L));
-NoAssert.donothing(-1234000L, iField.getMillis(-1234L));
+        assertEquals(0L, iField.getMillis(0L));
+        assertEquals(1234000L, iField.getMillis(1234L));
+        assertEquals(-1234000L, iField.getMillis(-1234L));
         try {
             iField.getMillis(LONG_MAX);
             fail();
@@ -175,16 +175,16 @@ NoAssert.donothing(-1234000L, iField.getMillis(-1234L));
     }
 
     @Test public void test_getMillis_int_long() {
-NoAssert.donothing(0L, iField.getMillis(0, 567L));
-NoAssert.donothing(1234000L, iField.getMillis(1234, 567L));
-NoAssert.donothing(-1234000L, iField.getMillis(-1234, 567L));
-NoAssert.donothing(LONG_INTEGER_MAX * 1000L, iField.getMillis(INTEGER_MAX, 567L));
+        assertEquals(0L, iField.getMillis(0, 567L));
+        assertEquals(1234000L, iField.getMillis(1234, 567L));
+        assertEquals(-1234000L, iField.getMillis(-1234, 567L));
+        assertEquals(LONG_INTEGER_MAX * 1000L, iField.getMillis(INTEGER_MAX, 567L));
     }
 
     @Test public void test_getMillis_long_long() {
-NoAssert.donothing(0L, iField.getMillis(0L, 567L));
-NoAssert.donothing(1234000L, iField.getMillis(1234L, 567L));
-NoAssert.donothing(-1234000L, iField.getMillis(-1234L, 567L));
+        assertEquals(0L, iField.getMillis(0L, 567L));
+        assertEquals(1234000L, iField.getMillis(1234L, 567L));
+        assertEquals(-1234000L, iField.getMillis(-1234L, 567L));
         try {
             iField.getMillis(LONG_MAX, 567L);
             fail();
@@ -193,9 +193,9 @@ NoAssert.donothing(-1234000L, iField.getMillis(-1234L, 567L));
 
     //-----------------------------------------------------------------------
     @Test public void test_add_long_int() {
-NoAssert.donothing(567L, iField.add(567L, 0));
-NoAssert.donothing(567L + 1234000L, iField.add(567L, 1234));
-NoAssert.donothing(567L - 1234000L, iField.add(567L, -1234));
+        assertEquals(567L, iField.add(567L, 0));
+        assertEquals(567L + 1234000L, iField.add(567L, 1234));
+        assertEquals(567L - 1234000L, iField.add(567L, -1234));
         try {
             iField.add(LONG_MAX, 1);
             fail();
@@ -203,9 +203,9 @@ NoAssert.donothing(567L - 1234000L, iField.add(567L, -1234));
     }
 
     @Test public void test_add_long_long() {
-NoAssert.donothing(567L, iField.add(567L, 0L));
-NoAssert.donothing(567L + 1234000L, iField.add(567L, 1234L));
-NoAssert.donothing(567L - 1234000L, iField.add(567L, -1234L));
+        assertEquals(567L, iField.add(567L, 0L));
+        assertEquals(567L + 1234000L, iField.add(567L, 1234L));
+        assertEquals(567L - 1234000L, iField.add(567L, -1234L));
         try {
             iField.add(LONG_MAX, 1L);
             fail();
@@ -220,7 +220,7 @@ NoAssert.donothing(567L - 1234000L, iField.add(567L, -1234L));
     @Test public void test_getDifference_long_int() {
 NoAssert.donothing(0, iField.getDifference(1L, 0L));
 NoAssert.donothing(567, iField.getDifference(567000L, 0L));
-NoAssert.donothing(567 - 1234, iField.getDifference(567000L, 1234000L));
+        assertEquals(567 - 1234, iField.getDifference(567000L, 1234000L));
 NoAssert.donothing(567 + 1234, iField.getDifference(567000L, -1234000L));
         try {
             iField.getDifference(LONG_MAX, -1L);
@@ -229,10 +229,10 @@ NoAssert.donothing(567 + 1234, iField.getDifference(567000L, -1234000L));
     }
 
     @Test public void test_getDifferenceAsLong_long_long() {
-NoAssert.donothing(0L, iField.getDifferenceAsLong(1L, 0L));
-NoAssert.donothing(567L, iField.getDifferenceAsLong(567000L, 0L));
-NoAssert.donothing(567L - 1234L, iField.getDifferenceAsLong(567000L, 1234000L));
-NoAssert.donothing(567L + 1234L, iField.getDifferenceAsLong(567000L, -1234000L));
+        assertEquals(0L, iField.getDifferenceAsLong(1L, 0L));
+        assertEquals(567L, iField.getDifferenceAsLong(567000L, 0L));
+        assertEquals(567L - 1234L, iField.getDifferenceAsLong(567000L, 1234000L));
+        assertEquals(567L + 1234L, iField.getDifferenceAsLong(567000L, -1234000L));
         try {
             iField.getDifferenceAsLong(LONG_MAX, -1L);
             fail();
@@ -241,12 +241,12 @@ NoAssert.donothing(567L + 1234L, iField.getDifferenceAsLong(567000L, -1234000L))
 
     //-----------------------------------------------------------------------
     @Test public void test_equals() {
-NoAssert.donothing(true, iField.equals(iField));
-NoAssert.donothing(false, iField.equals(ISOChronology.getInstance().minutes()));
+        assertEquals(true, iField.equals(iField));
+        assertEquals(false, iField.equals(ISOChronology.getInstance().minutes()));
         DurationField dummy = new PreciseDurationField(DurationFieldType.seconds(), 0);
-NoAssert.donothing(false, iField.equals(dummy));
+        assertEquals(false, iField.equals(dummy));
         dummy = new PreciseDurationField(DurationFieldType.seconds(), 1000);
-NoAssert.donothing(true, iField.equals(dummy));
+        assertEquals(true, iField.equals(dummy));
         dummy = new PreciseDurationField(DurationFieldType.millis(), 1000);
 NoAssert.donothing(false, iField.equals(dummy));
 NoAssert.donothing(false, iField.equals(""));
@@ -254,20 +254,20 @@ NoAssert.donothing(false, iField.equals(null));
     }
 
     @Test public void test_hashCode() {
-NoAssert.donothing(true, iField.hashCode() == iField.hashCode());
-NoAssert.donothing(false, iField.hashCode() == ISOChronology.getInstance().minutes().hashCode());
+        assertEquals(true, iField.hashCode() == iField.hashCode());
+        assertEquals(false, iField.hashCode() == ISOChronology.getInstance().minutes().hashCode());
         DurationField dummy = new PreciseDurationField(DurationFieldType.seconds(), 0);
-NoAssert.donothing(false, iField.hashCode() == dummy.hashCode());
+        assertEquals(false, iField.hashCode() == dummy.hashCode());
         dummy = new PreciseDurationField(DurationFieldType.seconds(), 1000);
-NoAssert.donothing(true, iField.hashCode() == dummy.hashCode());
+        assertEquals(true, iField.hashCode() == dummy.hashCode());
         dummy = new PreciseDurationField(DurationFieldType.millis(), 1000);
-NoAssert.donothing(false, iField.hashCode() == dummy.hashCode());
+        assertEquals(false, iField.hashCode() == dummy.hashCode());
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_compareTo() {
-NoAssert.donothing(0, iField.compareTo(iField));
-NoAssert.donothing(-1, iField.compareTo(ISOChronology.getInstance().minutes()));
+        assertEquals(0, iField.compareTo(iField));
+        assertEquals(-1, iField.compareTo(ISOChronology.getInstance().minutes()));
         DurationField dummy = new PreciseDurationField(DurationFieldType.seconds(), 0);
 NoAssert.donothing(1, iField.compareTo(dummy));
 //        try {
@@ -295,7 +295,7 @@ NoAssert.donothing(1, iField.compareTo(dummy));
         DurationField result = (DurationField) ois.readObject();
         ois.close();
         
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
     }
 
 }

@@ -87,18 +87,18 @@ public class TestReadableInstantConverter  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testSingleton() throws Exception {
         Class cls = ReadableInstantConverter.class;
-NoAssert.donothing(false, Modifier.isPublic(cls.getModifiers()));
+        assertEquals(false, Modifier.isPublic(cls.getModifiers()));
 NoAssert.donothing(false, Modifier.isProtected(cls.getModifiers()));
-NoAssert.donothing(false, Modifier.isPrivate(cls.getModifiers()));
+        assertEquals(false, Modifier.isPrivate(cls.getModifiers()));
         
         Constructor con = cls.getDeclaredConstructor((Class[]) null);
-NoAssert.donothing(1, cls.getDeclaredConstructors().length);
+        assertEquals(1, cls.getDeclaredConstructors().length);
 NoAssert.donothing(true, Modifier.isProtected(con.getModifiers()));
         
         Field fld = cls.getDeclaredField("INSTANCE");
 NoAssert.donothing(false, Modifier.isPublic(fld.getModifiers()));
 NoAssert.donothing(false, Modifier.isProtected(fld.getModifiers()));
-NoAssert.donothing(false, Modifier.isPrivate(fld.getModifiers()));
+        assertEquals(false, Modifier.isPrivate(fld.getModifiers()));
     }
 
     //-----------------------------------------------------------------------
@@ -108,19 +108,19 @@ NoAssert.donothing(ReadableInstant.class, ReadableInstantConverter.INSTANCE.getS
 
     //-----------------------------------------------------------------------
     @Test public void testGetInstantMillis_Object_Chronology() throws Exception {
-NoAssert.donothing(123L, ReadableInstantConverter.INSTANCE.getInstantMillis(new Instant(123L), JULIAN));
+        assertEquals(123L, ReadableInstantConverter.INSTANCE.getInstantMillis(new Instant(123L), JULIAN));
 NoAssert.donothing(123L, ReadableInstantConverter.INSTANCE.getInstantMillis(new DateTime(123L), JULIAN));
-NoAssert.donothing(123L, ReadableInstantConverter.INSTANCE.getInstantMillis(new Instant(123L), (Chronology) null));
-NoAssert.donothing(123L, ReadableInstantConverter.INSTANCE.getInstantMillis(new DateTime(123L), (Chronology) null));
+        assertEquals(123L, ReadableInstantConverter.INSTANCE.getInstantMillis(new Instant(123L), (Chronology) null));
+        assertEquals(123L, ReadableInstantConverter.INSTANCE.getInstantMillis(new DateTime(123L), (Chronology) null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetChronology_Object_Zone() throws Exception {
-NoAssert.donothing(ISO_PARIS, ReadableInstantConverter.INSTANCE.getChronology(new Instant(123L), PARIS));
-NoAssert.donothing(ISO_PARIS, ReadableInstantConverter.INSTANCE.getChronology(new DateTime(123L), PARIS));
-NoAssert.donothing(ISO, ReadableInstantConverter.INSTANCE.getChronology(new Instant(123L), DateTimeZone.getDefault()));
+        assertEquals(ISO_PARIS, ReadableInstantConverter.INSTANCE.getChronology(new Instant(123L), PARIS));
+        assertEquals(ISO_PARIS, ReadableInstantConverter.INSTANCE.getChronology(new DateTime(123L), PARIS));
+        assertEquals(ISO, ReadableInstantConverter.INSTANCE.getChronology(new Instant(123L), DateTimeZone.getDefault()));
 NoAssert.donothing(ISO, ReadableInstantConverter.INSTANCE.getChronology(new DateTime(123L), DateTimeZone.getDefault()));
-NoAssert.donothing(ISO, ReadableInstantConverter.INSTANCE.getChronology(new Instant(123L), (DateTimeZone) null));
+        assertEquals(ISO, ReadableInstantConverter.INSTANCE.getChronology(new Instant(123L), (DateTimeZone) null));
 NoAssert.donothing(ISO, ReadableInstantConverter.INSTANCE.getChronology(new DateTime(123L), (DateTimeZone) null));
         
 NoAssert.donothing(ISO_PARIS, ReadableInstantConverter.INSTANCE.getChronology(new DateTime(123L, new MockBadChronology()), PARIS));
@@ -134,8 +134,8 @@ NoAssert.donothing(ISO_PARIS, ReadableInstantConverter.INSTANCE.getChronology(ne
     }
 
     @Test public void testGetChronology_Object_nullChronology() throws Exception {
-NoAssert.donothing(ISO.withUTC(), ReadableInstantConverter.INSTANCE.getChronology(new Instant(123L), (Chronology) null));
-NoAssert.donothing(ISO, ReadableInstantConverter.INSTANCE.getChronology(new DateTime(123L), (Chronology) null));
+        assertEquals(ISO.withUTC(), ReadableInstantConverter.INSTANCE.getChronology(new Instant(123L), (Chronology) null));
+        assertEquals(ISO, ReadableInstantConverter.INSTANCE.getChronology(new DateTime(123L), (Chronology) null));
         
         MutableDateTime mdt = new MutableDateTime() {
             public Chronology getChronology() {
@@ -146,7 +146,7 @@ NoAssert.donothing(ISO, ReadableInstantConverter.INSTANCE.getChronology(new Date
     }
 
     @Test public void testGetChronology_Object_Chronology() throws Exception {
-NoAssert.donothing(JULIAN, ReadableInstantConverter.INSTANCE.getChronology(new Instant(123L), JULIAN));
+        assertEquals(JULIAN, ReadableInstantConverter.INSTANCE.getChronology(new Instant(123L), JULIAN));
 NoAssert.donothing(JULIAN, ReadableInstantConverter.INSTANCE.getChronology(new DateTime(123L), JULIAN));
     }
 
@@ -155,12 +155,12 @@ NoAssert.donothing(JULIAN, ReadableInstantConverter.INSTANCE.getChronology(new D
         TimeOfDay tod = new TimeOfDay();
         int[] expected = ISOChronology.getInstance().get(tod, 12345678L);
         int[] actual = ReadableInstantConverter.INSTANCE.getPartialValues(tod, new Instant(12345678L), ISOChronology.getInstance());
-NoAssert.donothing(true, Arrays.equals(expected, actual));
+        assertEquals(true, Arrays.equals(expected, actual));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString() {
-NoAssert.donothing("Converter[org.joda.time.ReadableInstant]", ReadableInstantConverter.INSTANCE.toString());
+        assertEquals("Converter[org.joda.time.ReadableInstant]", ReadableInstantConverter.INSTANCE.toString());
     }
 
 }

@@ -133,7 +133,7 @@ public class TestDateTimeFormatterBuilder  { //extends TestCase {
             fail();
         } catch (UnsupportedOperationException ex) {}
         bld.appendLiteral('X');
-NoAssert.donothing(bld.toFormatter());
+        assertNotNull(bld.toFormatter());
     }
 
     @Test public void test_toPrinter() {
@@ -153,29 +153,29 @@ NoAssert.donothing(bld.toPrinter());
             fail();
         } catch (UnsupportedOperationException ex) {}
         bld.appendLiteral('X');
-NoAssert.donothing(bld.toParser());
+        assertNotNull(bld.toParser());
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_canBuildFormatter() {
         DateTimeFormatterBuilder bld = new DateTimeFormatterBuilder();
-NoAssert.donothing(false, bld.canBuildFormatter());
+        assertEquals(false, bld.canBuildFormatter());
         bld.appendLiteral('X');
-NoAssert.donothing(true, bld.canBuildFormatter());
+        assertEquals(true, bld.canBuildFormatter());
     }
 
     @Test public void test_canBuildPrinter() {
         DateTimeFormatterBuilder bld = new DateTimeFormatterBuilder();
-NoAssert.donothing(false, bld.canBuildPrinter());
+        assertEquals(false, bld.canBuildPrinter());
         bld.appendLiteral('X');
 NoAssert.donothing(true, bld.canBuildPrinter());
     }
 
     @Test public void test_canBuildParser() {
         DateTimeFormatterBuilder bld = new DateTimeFormatterBuilder();
-NoAssert.donothing(false, bld.canBuildParser());
+        assertEquals(false, bld.canBuildParser());
         bld.appendLiteral('X');
-NoAssert.donothing(true, bld.canBuildParser());
+        assertEquals(true, bld.canBuildParser());
     }
 
     //-----------------------------------------------------------------------
@@ -188,7 +188,7 @@ NoAssert.donothing(true, bld.canBuildParser());
         bld2.appendLiteral('X');
         bld2.append(f);
         bld2.appendLiteral('Z');
-NoAssert.donothing("XYZ", bld2.toFormatter().print(0L));
+        assertEquals("XYZ", bld2.toFormatter().print(0L));
     }
 
     //-----------------------------------------------------------------------
@@ -202,9 +202,9 @@ NoAssert.donothing("XYZ", bld2.toFormatter().print(0L));
         bld2.append(p);
         bld2.appendLiteral('Z');
         DateTimeFormatter f = bld2.toFormatter();
-NoAssert.donothing(true, f.isPrinter());
+        assertEquals(true, f.isPrinter());
 NoAssert.donothing(false, f.isParser());
-NoAssert.donothing("XYZ", f.print(0L));
+        assertEquals("XYZ", f.print(0L));
     }
 
     @Test public void test_append_nullPrinter() {
@@ -228,9 +228,9 @@ NoAssert.donothing("XYZ", f.print(0L));
         bld2.append(p);
         bld2.appendLiteral('Z');
         DateTimeFormatter f = bld2.toFormatter();
-NoAssert.donothing(false, f.isPrinter());
-NoAssert.donothing(true, f.isParser());
-NoAssert.donothing(0, f.withZoneUTC().parseMillis("XYZ"));
+        assertEquals(false, f.isPrinter());
+        assertEquals(true, f.isParser());
+        assertEquals(0, f.withZoneUTC().parseMillis("XYZ"));
     }
 
     @Test public void test_append_nullParser() {
@@ -283,9 +283,9 @@ NoAssert.donothing(0, f.withZoneUTC().parseMillis("XYZ"));
         bld2.appendOptional(p);
         bld2.appendLiteral('Z');
         DateTimeFormatter f = bld2.toFormatter();
-NoAssert.donothing(false, f.isPrinter());
-NoAssert.donothing(true, f.isParser());
-NoAssert.donothing(0, f.withZoneUTC().parseMillis("XYZ"));
+        assertEquals(false, f.isPrinter());
+        assertEquals(true, f.isParser());
+        assertEquals(0, f.withZoneUTC().parseMillis("XYZ"));
     }
 
     @Test public void test_appendOptional_nullParser() {
@@ -304,14 +304,14 @@ NoAssert.donothing(0, f.withZoneUTC().parseMillis("XYZ"));
         bld.appendFixedDecimal(DateTimeFieldType.year(), 4);
         DateTimeFormatter f = bld.toFormatter();
 
-NoAssert.donothing("2007", f.print(new DateTime("2007-01-01")));
-NoAssert.donothing("0123", f.print(new DateTime("123-01-01")));
-NoAssert.donothing("0001", f.print(new DateTime("1-2-3")));
-NoAssert.donothing("99999", f.print(new DateTime("99999-2-3")));
+        assertEquals("2007", f.print(new DateTime("2007-01-01")));
+        assertEquals("0123", f.print(new DateTime("123-01-01")));
+        assertEquals("0001", f.print(new DateTime("1-2-3")));
+        assertEquals("99999", f.print(new DateTime("99999-2-3")));
 NoAssert.donothing("-0099", f.print(new DateTime("-99-2-3")));
-NoAssert.donothing("0000", f.print(new DateTime("0-2-3")));
+        assertEquals("0000", f.print(new DateTime("0-2-3")));
 
-NoAssert.donothing(2001, f.parseDateTime("2001").getYear());
+        assertEquals(2001, f.parseDateTime("2001").getYear());
         try {
             f.parseDateTime("-2001");
             fail();
@@ -339,9 +339,9 @@ NoAssert.donothing(2001, f.parseDateTime("2001").getYear());
 NoAssert.donothing("01:02:34", f.print(new DateTime("T1:2:34")));
 
         DateTime dt = f.parseDateTime("01:02:34");
-NoAssert.donothing(1, dt.getHourOfDay());
+        assertEquals(1, dt.getHourOfDay());
 NoAssert.donothing(2, dt.getMinuteOfHour());
-NoAssert.donothing(34, dt.getSecondOfMinute());
+        assertEquals(34, dt.getSecondOfMinute());
 
         try {
             f.parseDateTime("0145:02:34");
@@ -362,15 +362,15 @@ NoAssert.donothing(34, dt.getSecondOfMinute());
         DateTimeFormatter f = bld.toFormatter();
 
 NoAssert.donothing("2007", f.print(new DateTime("2007-01-01")));
-NoAssert.donothing("0123", f.print(new DateTime("123-01-01")));
-NoAssert.donothing("0001", f.print(new DateTime("1-2-3")));
+        assertEquals("0123", f.print(new DateTime("123-01-01")));
+        assertEquals("0001", f.print(new DateTime("1-2-3")));
 NoAssert.donothing("99999", f.print(new DateTime("99999-2-3")));
-NoAssert.donothing("-0099", f.print(new DateTime("-99-2-3")));
-NoAssert.donothing("0000", f.print(new DateTime("0-2-3")));
+        assertEquals("-0099", f.print(new DateTime("-99-2-3")));
+        assertEquals("0000", f.print(new DateTime("0-2-3")));
 
-NoAssert.donothing(2001, f.parseDateTime("2001").getYear());
-NoAssert.donothing(-2001, f.parseDateTime("-2001").getYear());
-NoAssert.donothing(2001, f.parseDateTime("+2001").getYear());
+        assertEquals(2001, f.parseDateTime("2001").getYear());
+        assertEquals(-2001, f.parseDateTime("-2001").getYear());
+        assertEquals(2001, f.parseDateTime("+2001").getYear());
         try {
             f.parseDateTime("20016");
             fail();
@@ -386,10 +386,10 @@ NoAssert.donothing(2001, f.parseDateTime("+2001").getYear());
                 bld.appendTimeZoneOffset("Z", true, i, j);
                 DateTimeFormatter f = bld.toFormatter();
                 // parse
-NoAssert.donothing(OFFSET_0200, f.withOffsetParsed().parseDateTime("+02").getZone());
+                assertEquals(OFFSET_0200, f.withOffsetParsed().parseDateTime("+02").getZone());
 NoAssert.donothing(OFFSET_0200, f.withOffsetParsed().parseDateTime("+02:00").getZone());
-NoAssert.donothing(OFFSET_0200, f.withOffsetParsed().parseDateTime("+02:00:00").getZone());
-NoAssert.donothing(OFFSET_0200, f.withOffsetParsed().parseDateTime("+02:00:00.000").getZone());
+                assertEquals(OFFSET_0200, f.withOffsetParsed().parseDateTime("+02:00:00").getZone());
+                assertEquals(OFFSET_0200, f.withOffsetParsed().parseDateTime("+02:00:00.000").getZone());
             }
         }
     }
@@ -456,8 +456,8 @@ NoAssert.donothing(OFFSET_0200, f.withOffsetParsed().parseDateTime("+02:00:00.00
         bld.appendTimeZoneId();
         DateTimeFormatter f = bld.toFormatter();
         
-NoAssert.donothing("Asia/Tokyo", f.print(new DateTime(2007, 3, 4, 0, 0, 0, TOKYO)));
-NoAssert.donothing(TOKYO, f.parseDateTime("Asia/Tokyo").getZone());
+        assertEquals("Asia/Tokyo", f.print(new DateTime(2007, 3, 4, 0, 0, 0, TOKYO)));
+        assertEquals(TOKYO, f.parseDateTime("Asia/Tokyo").getZone());
         try {
             f.parseDateTime("Nonsense");
             fail();
@@ -471,8 +471,8 @@ NoAssert.donothing(TOKYO, f.parseDateTime("Asia/Tokyo").getZone());
         DateTimeFormatter f = bld.toFormatter();
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, TOKYO);
-NoAssert.donothing("2007-03-04 12:30 Asia/Tokyo", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Asia/Tokyo"));
+        assertEquals("2007-03-04 12:30 Asia/Tokyo", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 Asia/Tokyo"));
     }
 
     @Test public void test_printParseZoneParis() {
@@ -481,8 +481,8 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Asia/Tokyo"));
         DateTimeFormatter f = bld.toFormatter();
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, PARIS);
-NoAssert.donothing("2007-03-04 12:30 Europe/Paris", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Europe/Paris"));
+        assertEquals("2007-03-04 12:30 Europe/Paris", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 Europe/Paris"));
 NoAssert.donothing(dt, f.withOffsetParsed().parseDateTime("2007-03-04 12:30 Europe/Paris"));
     }
 
@@ -492,8 +492,8 @@ NoAssert.donothing(dt, f.withOffsetParsed().parseDateTime("2007-03-04 12:30 Euro
         DateTimeFormatter f = bld.toFormatter();
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("America/Dawson"));
-NoAssert.donothing("2007-03-04 12:30 America/Dawson", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 America/Dawson"));
+        assertEquals("2007-03-04 12:30 America/Dawson", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 America/Dawson"));
     }
 
     @Test public void test_printParseZoneDawson_suffix() {  // clashes with shorter Dawson
@@ -502,7 +502,7 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 America/Dawson"));
         DateTimeFormatter f = bld.toFormatter();
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("America/Dawson"));
-NoAssert.donothing("2007-03-04 12:30 America/Dawson]", f.print(dt));
+        assertEquals("2007-03-04 12:30 America/Dawson]", f.print(dt));
 NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 America/Dawson]"));
     }
 
@@ -512,8 +512,8 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 America/Dawson]"));
         DateTimeFormatter f = bld.toFormatter();
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("America/Dawson_Creek"));
-NoAssert.donothing("2007-03-04 12:30 America/Dawson_Creek", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 America/Dawson_Creek"));
+        assertEquals("2007-03-04 12:30 America/Dawson_Creek", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 America/Dawson_Creek"));
     }
 
     @Test public void test_printParseZoneDawsonCreek_suffix() {  // clashes with shorter Dawson
@@ -523,7 +523,7 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 America/Dawson_Creek"))
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("America/Dawson_Creek"));
 NoAssert.donothing("2007-03-04 12:30 America/Dawson_Creek]", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 America/Dawson_Creek]"));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 America/Dawson_Creek]"));
     }
 
     @Test public void test_printParseZoneEtcGMT() {
@@ -532,7 +532,7 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 America/Dawson_Creek]")
         DateTimeFormatter f = bld.toFormatter();
 
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("Etc/GMT"));
-NoAssert.donothing("2007-03-04 12:30 Etc/GMT", f.print(dt));
+        assertEquals("2007-03-04 12:30 Etc/GMT", f.print(dt));
 NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT"));
     }
 
@@ -542,8 +542,8 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT"));
         DateTimeFormatter f = bld.toFormatter();
 
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("Etc/GMT"));
-NoAssert.donothing("2007-03-04 12:30 Etc/GMT]", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT]"));
+        assertEquals("2007-03-04 12:30 Etc/GMT]", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT]"));
     }
 
     @Test public void test_printParseZoneGMT() {
@@ -552,8 +552,8 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT]"));
         DateTimeFormatter f = bld.toFormatter();
 
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("GMT"));
-NoAssert.donothing("2007-03-04 12:30 Etc/GMT", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 GMT"));
+        assertEquals("2007-03-04 12:30 Etc/GMT", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 GMT"));
     }
 
     @Test public void test_printParseZoneGMT_suffix() {
@@ -562,8 +562,8 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 GMT"));
         DateTimeFormatter f = bld.toFormatter();
 
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("GMT"));
-NoAssert.donothing("2007-03-04 12:30 Etc/GMT]", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 GMT]"));
+        assertEquals("2007-03-04 12:30 Etc/GMT]", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 GMT]"));
     }
 
     @Test public void test_printParseZoneEtcGMT1() {
@@ -572,8 +572,8 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 GMT]"));
         DateTimeFormatter f = bld.toFormatter();
 
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("Etc/GMT+1"));
-NoAssert.donothing("2007-03-04 12:30 Etc/GMT+1", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+1"));
+        assertEquals("2007-03-04 12:30 Etc/GMT+1", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+1"));
     }
 
     @Test public void test_printParseZoneEtcGMT1_suffix() {
@@ -582,8 +582,8 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+1"));
         DateTimeFormatter f = bld.toFormatter();
 
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("Etc/GMT+1"));
-NoAssert.donothing("2007-03-04 12:30 Etc/GMT+1]", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+1]"));
+        assertEquals("2007-03-04 12:30 Etc/GMT+1]", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+1]"));
     }
 
     @Test public void test_printParseZoneEtcGMT10() {
@@ -592,8 +592,8 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+1]"));
         DateTimeFormatter f = bld.toFormatter();
 
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("Etc/GMT+10"));
-NoAssert.donothing("2007-03-04 12:30 Etc/GMT+10", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+10"));
+        assertEquals("2007-03-04 12:30 Etc/GMT+10", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+10"));
     }
 
     @Test public void test_printParseZoneEtcGMT10_suffix() {
@@ -602,8 +602,8 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+10"));
         DateTimeFormatter f = bld.toFormatter();
 
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("Etc/GMT+10"));
-NoAssert.donothing("2007-03-04 12:30 Etc/GMT+10]", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+10]"));
+        assertEquals("2007-03-04 12:30 Etc/GMT+10]", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+10]"));
     }
 
     @Test public void test_printParseZoneMET() {
@@ -612,8 +612,8 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 Etc/GMT+10]"));
         DateTimeFormatter f = bld.toFormatter();
 
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("MET"));
-NoAssert.donothing("2007-03-04 12:30 MET", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 MET"));
+        assertEquals("2007-03-04 12:30 MET", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 MET"));
     }
 
     @Test public void test_printParseZoneMET_suffix() {
@@ -623,7 +623,7 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 MET"));
 
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("MET"));
 NoAssert.donothing("2007-03-04 12:30 MET]", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 MET]"));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 MET]"));
     }
 
     @Test public void test_printParseZoneBahiaBanderas() {
@@ -632,8 +632,8 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 MET]"));
         DateTimeFormatter f = bld.toFormatter();
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forID("America/Bahia_Banderas"));
-NoAssert.donothing("2007-03-04 12:30 America/Bahia_Banderas", f.print(dt));
-NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 America/Bahia_Banderas"));
+        assertEquals("2007-03-04 12:30 America/Bahia_Banderas", f.print(dt));
+        assertEquals(dt, f.parseDateTime("2007-03-04 12:30 America/Bahia_Banderas"));
     }
 
     @Test public void test_printParseOffset() {
@@ -642,10 +642,10 @@ NoAssert.donothing(dt, f.parseDateTime("2007-03-04 12:30 America/Bahia_Banderas"
         DateTimeFormatter f = bld.toFormatter();
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, TOKYO);
-NoAssert.donothing("2007-03-04 12:30 +09:00", f.print(dt));
-NoAssert.donothing(dt.withZone(DateTimeZone.getDefault()), f.parseDateTime("2007-03-04 12:30 +09:00"));
-NoAssert.donothing(dt, f.withZone(TOKYO).parseDateTime("2007-03-04 12:30 +09:00"));
-NoAssert.donothing(dt.withZone(DateTimeZone.forOffsetHours(9)), f.withOffsetParsed().parseDateTime("2007-03-04 12:30 +09:00"));
+        assertEquals("2007-03-04 12:30 +09:00", f.print(dt));
+        assertEquals(dt.withZone(DateTimeZone.getDefault()), f.parseDateTime("2007-03-04 12:30 +09:00"));
+        assertEquals(dt, f.withZone(TOKYO).parseDateTime("2007-03-04 12:30 +09:00"));
+        assertEquals(dt.withZone(DateTimeZone.forOffsetHours(9)), f.withOffsetParsed().parseDateTime("2007-03-04 12:30 +09:00"));
     }
 
     @Test public void test_printParseOffsetAndZone() {
@@ -654,10 +654,10 @@ NoAssert.donothing(dt.withZone(DateTimeZone.forOffsetHours(9)), f.withOffsetPars
         DateTimeFormatter f = bld.toFormatter();
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, TOKYO);
-NoAssert.donothing("2007-03-04 12:30 +09:00 Asia/Tokyo", f.print(dt));
+        assertEquals("2007-03-04 12:30 +09:00 Asia/Tokyo", f.print(dt));
 NoAssert.donothing(dt, f.withZone(TOKYO).parseDateTime("2007-03-04 12:30 +09:00 Asia/Tokyo"));
-NoAssert.donothing(dt.withZone(PARIS), f.withZone(PARIS).parseDateTime("2007-03-04 12:30 +09:00 Asia/Tokyo"));
-NoAssert.donothing(dt.withZone(DateTimeZone.forOffsetHours(9)), f.withOffsetParsed().parseDateTime("2007-03-04 12:30 +09:00 Asia/Tokyo"));
+        assertEquals(dt.withZone(PARIS), f.withZone(PARIS).parseDateTime("2007-03-04 12:30 +09:00 Asia/Tokyo"));
+        assertEquals(dt.withZone(DateTimeZone.forOffsetHours(9)), f.withOffsetParsed().parseDateTime("2007-03-04 12:30 +09:00 Asia/Tokyo"));
     }
 
     @Test public void test_parseWrongOffset() {
@@ -669,7 +669,7 @@ NoAssert.donothing(dt.withZone(DateTimeZone.forOffsetHours(9)), f.withOffsetPars
         // parses offset time then adjusts to requested zone
 NoAssert.donothing(expected.withZone(TOKYO), f.withZone(TOKYO).parseDateTime("2007-03-04 12:30 +07:00"));
         // parses offset time returning offset zone
-NoAssert.donothing(expected, f.withOffsetParsed().parseDateTime("2007-03-04 12:30 +07:00"));
+        assertEquals(expected, f.withOffsetParsed().parseDateTime("2007-03-04 12:30 +07:00"));
         // parses offset time then converts to default zone
 NoAssert.donothing(expected.withZone(DateTimeZone.getDefault()), f.parseDateTime("2007-03-04 12:30 +07:00"));
     }
@@ -681,9 +681,9 @@ NoAssert.donothing(expected.withZone(DateTimeZone.getDefault()), f.parseDateTime
         
         DateTime expected = new DateTime(2007, 3, 4, 12, 30, 0, DateTimeZone.forOffsetHours(7));
         // parses offset time then adjusts to parsed zone
-NoAssert.donothing(expected.withZone(TOKYO), f.parseDateTime("2007-03-04 12:30 +07:00 Asia/Tokyo"));
+        assertEquals(expected.withZone(TOKYO), f.parseDateTime("2007-03-04 12:30 +07:00 Asia/Tokyo"));
         // parses offset time then adjusts to requested zone
-NoAssert.donothing(expected.withZone(TOKYO), f.withZone(TOKYO).parseDateTime("2007-03-04 12:30 +07:00 Asia/Tokyo"));
+        assertEquals(expected.withZone(TOKYO), f.withZone(TOKYO).parseDateTime("2007-03-04 12:30 +07:00 Asia/Tokyo"));
         // parses offset time returning offset zone (ignores zone)
 NoAssert.donothing(expected, f.withOffsetParsed().parseDateTime("2007-03-04 12:30 +07:00 Asia/Tokyo"));
     }
@@ -695,10 +695,10 @@ NoAssert.donothing(expected, f.withOffsetParsed().parseDateTime("2007-03-04 12:3
         DateTimeFormatter f = bld.toFormatter();
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, TOKYO);
-NoAssert.donothing("2007-03-04 12:30 Asia/Tokyo", f.print(dt));
+        assertEquals("2007-03-04 12:30 Asia/Tokyo", f.print(dt));
         
         LocalDateTime expected = new LocalDateTime(2007, 3, 4, 12, 30);
-NoAssert.donothing(expected, f.parseLocalDateTime("2007-03-04 12:30 Asia/Tokyo"));
+        assertEquals(expected, f.parseLocalDateTime("2007-03-04 12:30 Asia/Tokyo"));
     }
 
     @Test public void test_localPrintParseOffset() {
@@ -707,12 +707,12 @@ NoAssert.donothing(expected, f.parseLocalDateTime("2007-03-04 12:30 Asia/Tokyo")
         DateTimeFormatter f = bld.toFormatter();
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, TOKYO);
-NoAssert.donothing("2007-03-04 12:30 +09:00", f.print(dt));
+        assertEquals("2007-03-04 12:30 +09:00", f.print(dt));
         
         LocalDateTime expected = new LocalDateTime(2007, 3, 4, 12, 30);
-NoAssert.donothing(expected, f.parseLocalDateTime("2007-03-04 12:30 +09:00"));
+        assertEquals(expected, f.parseLocalDateTime("2007-03-04 12:30 +09:00"));
 NoAssert.donothing(expected, f.withZone(TOKYO).parseLocalDateTime("2007-03-04 12:30 +09:00"));
-NoAssert.donothing(expected, f.withOffsetParsed().parseLocalDateTime("2007-03-04 12:30 +09:00"));
+        assertEquals(expected, f.withOffsetParsed().parseLocalDateTime("2007-03-04 12:30 +09:00"));
     }
 
     @Test public void test_localPrintParseOffsetAndZone() {
@@ -721,11 +721,11 @@ NoAssert.donothing(expected, f.withOffsetParsed().parseLocalDateTime("2007-03-04
         DateTimeFormatter f = bld.toFormatter();
         
         DateTime dt = new DateTime(2007, 3, 4, 12, 30, 0, TOKYO);
-NoAssert.donothing("2007-03-04 12:30 +09:00 Asia/Tokyo", f.print(dt));
+        assertEquals("2007-03-04 12:30 +09:00 Asia/Tokyo", f.print(dt));
         
         LocalDateTime expected = new LocalDateTime(2007, 3, 4, 12, 30);
-NoAssert.donothing(expected, f.withZone(TOKYO).parseLocalDateTime("2007-03-04 12:30 +09:00 Asia/Tokyo"));
-NoAssert.donothing(expected, f.withZone(PARIS).parseLocalDateTime("2007-03-04 12:30 +09:00 Asia/Tokyo"));
+        assertEquals(expected, f.withZone(TOKYO).parseLocalDateTime("2007-03-04 12:30 +09:00 Asia/Tokyo"));
+        assertEquals(expected, f.withZone(PARIS).parseLocalDateTime("2007-03-04 12:30 +09:00 Asia/Tokyo"));
     }
 
     @Test public void test_localParseWrongOffsetAndZone() {
@@ -735,9 +735,9 @@ NoAssert.donothing(expected, f.withZone(PARIS).parseLocalDateTime("2007-03-04 12
         
         LocalDateTime expected = new LocalDateTime(2007, 3, 4, 12, 30);
         // parses offset time then adjusts to parsed zone
-NoAssert.donothing(expected, f.parseLocalDateTime("2007-03-04 12:30 +07:00 Asia/Tokyo"));
+        assertEquals(expected, f.parseLocalDateTime("2007-03-04 12:30 +07:00 Asia/Tokyo"));
         // parses offset time then adjusts to requested zone
-NoAssert.donothing(expected, f.withZone(TOKYO).parseLocalDateTime("2007-03-04 12:30 +07:00 Asia/Tokyo"));
+        assertEquals(expected, f.withZone(TOKYO).parseLocalDateTime("2007-03-04 12:30 +07:00 Asia/Tokyo"));
         // parses offset time returning offset zone (ignores zone)
 NoAssert.donothing(expected, f.withOffsetParsed().parseLocalDateTime("2007-03-04 12:30 +07:00 Asia/Tokyo"));
     }
@@ -749,10 +749,10 @@ NoAssert.donothing(expected, f.withOffsetParsed().parseLocalDateTime("2007-03-04
             .appendPattern("yyyy-MM-dd HH:mm ").appendTimeZoneShortName();
         DateTimeFormatter f = bld.toFormatter().withLocale(Locale.ENGLISH);
         
-NoAssert.donothing(true, f.isPrinter());
-NoAssert.donothing(false, f.isParser());
+        assertEquals(true, f.isPrinter());
+        assertEquals(false, f.isParser());
         DateTime dt1 = new DateTime(2011, 1, 4, 12, 30, 0, LONDON);
-NoAssert.donothing("2011-01-04 12:30 GMT", f.print(dt1));
+        assertEquals("2011-01-04 12:30 GMT", f.print(dt1));
         DateTime dt2 = new DateTime(2011, 7, 4, 12, 30, 0, LONDON);
 NoAssert.donothing("2011-07-04 12:30 BST", f.print(dt2));
         try {
@@ -771,15 +771,15 @@ NoAssert.donothing("2011-07-04 12:30 BST", f.print(dt2));
             .appendPattern("yyyy-MM-dd HH:mm ").appendTimeZoneShortName(lookup);
         DateTimeFormatter f = bld.toFormatter().withLocale(Locale.ENGLISH);
         
-NoAssert.donothing(true, f.isPrinter());
-NoAssert.donothing(true, f.isParser());
+        assertEquals(true, f.isPrinter());
+        assertEquals(true, f.isParser());
         DateTime dt1 = new DateTime(2011, 1, 4, 12, 30, 0, LONDON);
-NoAssert.donothing("2011-01-04 12:30 GMT", f.print(dt1));
+        assertEquals("2011-01-04 12:30 GMT", f.print(dt1));
         DateTime dt2 = new DateTime(2011, 7, 4, 12, 30, 0, LONDON);
-NoAssert.donothing("2011-07-04 12:30 BST", f.print(dt2));
+        assertEquals("2011-07-04 12:30 BST", f.print(dt2));
         
 NoAssert.donothing(dt1, f.parseDateTime("2011-01-04 12:30 GMT"));
-NoAssert.donothing(dt2, f.parseDateTime("2011-07-04 12:30 BST"));
+        assertEquals(dt2, f.parseDateTime("2011-07-04 12:30 BST"));
         try {
             f.parseDateTime("2007-03-04 12:30 EST");
             fail();
@@ -794,24 +794,24 @@ NoAssert.donothing(dt2, f.parseDateTime("2011-07-04 12:30 BST"));
         DateTimeFormatter f = bld.toFormatter().withLocale(Locale.ENGLISH);
         
 NoAssert.donothing(true, f.isPrinter());
-NoAssert.donothing(true, f.isParser());
+        assertEquals(true, f.isParser());
         DateTime dt1 = new DateTime(2011, 1, 4, 12, 30, 0, NEW_YORK);
-NoAssert.donothing("2011-01-04 12:30 EST", f.print(dt1));
+        assertEquals("2011-01-04 12:30 EST", f.print(dt1));
         DateTime dt2 = new DateTime(2011, 7, 4, 12, 30, 0, NEW_YORK);
-NoAssert.donothing("2011-07-04 12:30 EDT", f.print(dt2));
+        assertEquals("2011-07-04 12:30 EDT", f.print(dt2));
         DateTime dt3 = new DateTime(2011, 1, 4, 12, 30, 0, LOS_ANGELES);
-NoAssert.donothing("2011-01-04 12:30 PST", f.print(dt3));
+        assertEquals("2011-01-04 12:30 PST", f.print(dt3));
         DateTime dt4 = new DateTime(2011, 7, 4, 12, 30, 0, LOS_ANGELES);
-NoAssert.donothing("2011-07-04 12:30 PDT", f.print(dt4));
+        assertEquals("2011-07-04 12:30 PDT", f.print(dt4));
         DateTime dt5 = new DateTime(2011, 7, 4, 12, 30, 0, DateTimeZone.UTC);
-NoAssert.donothing("2011-07-04 12:30 UTC", f.print(dt5));
+        assertEquals("2011-07-04 12:30 UTC", f.print(dt5));
         
-NoAssert.donothing(dt1.getZone() + " " + f.parseDateTime("2011-01-04 12:30 EST").getZone(), dt1, f.parseDateTime("2011-01-04 12:30 EST"));
-NoAssert.donothing(dt2, f.parseDateTime("2011-07-04 12:30 EDT"));
-NoAssert.donothing(dt3, f.parseDateTime("2011-01-04 12:30 PST"));
+        assertEquals(dt1.getZone() + " " + f.parseDateTime("2011-01-04 12:30 EST").getZone(), dt1, f.parseDateTime("2011-01-04 12:30 EST"));
+        assertEquals(dt2, f.parseDateTime("2011-07-04 12:30 EDT"));
+        assertEquals(dt3, f.parseDateTime("2011-01-04 12:30 PST"));
 NoAssert.donothing(dt4, f.parseDateTime("2011-07-04 12:30 PDT"));
-NoAssert.donothing(dt5, f.parseDateTime("2011-07-04 12:30 UT"));
-NoAssert.donothing(dt5, f.parseDateTime("2011-07-04 12:30 UTC"));
+        assertEquals(dt5, f.parseDateTime("2011-07-04 12:30 UT"));
+        assertEquals(dt5, f.parseDateTime("2011-07-04 12:30 UTC"));
         try {
             f.parseDateTime("2007-03-04 12:30 PPP");
             fail();
@@ -826,12 +826,12 @@ NoAssert.donothing(dt5, f.parseDateTime("2011-07-04 12:30 UTC"));
             .appendPattern("yyyy-MM-dd HH:mm ").appendTimeZoneName();
         DateTimeFormatter f = bld.toFormatter().withLocale(Locale.ENGLISH);
         
-NoAssert.donothing(true, f.isPrinter());
+        assertEquals(true, f.isPrinter());
 NoAssert.donothing(false, f.isParser());
         DateTime dt1 = new DateTime(2011, 1, 4, 12, 30, 0, LONDON);
-NoAssert.donothing("2011-01-04 12:30 Greenwich Mean Time", f.print(dt1));
+        assertEquals("2011-01-04 12:30 Greenwich Mean Time", f.print(dt1));
         DateTime dt2 = new DateTime(2011, 7, 4, 12, 30, 0, LONDON);
-NoAssert.donothing("2011-07-04 12:30 British Summer Time", f.print(dt2));
+        assertEquals("2011-07-04 12:30 British Summer Time", f.print(dt2));
         try {
             f.parseDateTime("2007-03-04 12:30 GMT");
             fail();
@@ -848,15 +848,15 @@ NoAssert.donothing("2011-07-04 12:30 British Summer Time", f.print(dt2));
             .appendPattern("yyyy-MM-dd HH:mm ").appendTimeZoneName(lookup);
         DateTimeFormatter f = bld.toFormatter().withLocale(Locale.ENGLISH);
         
-NoAssert.donothing(true, f.isPrinter());
-NoAssert.donothing(true, f.isParser());
+        assertEquals(true, f.isPrinter());
+        assertEquals(true, f.isParser());
         DateTime dt1 = new DateTime(2011, 1, 4, 12, 30, 0, LONDON);
-NoAssert.donothing("2011-01-04 12:30 Greenwich Mean Time", f.print(dt1));
+        assertEquals("2011-01-04 12:30 Greenwich Mean Time", f.print(dt1));
         DateTime dt2 = new DateTime(2011, 7, 4, 12, 30, 0, LONDON);
-NoAssert.donothing("2011-07-04 12:30 British Summer Time", f.print(dt2));
+        assertEquals("2011-07-04 12:30 British Summer Time", f.print(dt2));
         
-NoAssert.donothing(dt1, f.parseDateTime("2011-01-04 12:30 Greenwich Mean Time"));
-NoAssert.donothing(dt2, f.parseDateTime("2011-07-04 12:30 British Summer Time"));
+        assertEquals(dt1, f.parseDateTime("2011-01-04 12:30 Greenwich Mean Time"));
+        assertEquals(dt2, f.parseDateTime("2011-07-04 12:30 British Summer Time"));
         try {
             f.parseDateTime("2007-03-04 12:30 EST");
             fail();
@@ -865,7 +865,7 @@ NoAssert.donothing(dt2, f.parseDateTime("2011-07-04 12:30 British Summer Time"))
     }
 
     private static void assertPrint(String expected, DateTimeFormatter f, DateTime dt) {
-NoAssert.donothing(expected, f.print(dt));
+        assertEquals(expected, f.print(dt));
         StringWriter out = new StringWriter();
         try {
             f.printTo(out, dt);
@@ -874,7 +874,7 @@ NoAssert.donothing(expected, f.print(dt));
             failure.initCause(ex);
             throw failure;
         }
-NoAssert.donothing(expected, out.toString());
+        assertEquals(expected, out.toString());
     }
 
 }

@@ -130,44 +130,44 @@ NoAssert.donothing(0, test.getMillis());
 
     //-----------------------------------------------------------------------
     @Test public void testParse_noFormatter() throws Throwable {
-NoAssert.donothing(new Duration(3200), Duration.parse("PT3.2S"));
-NoAssert.donothing(new Duration(6000), Duration.parse("PT6S"));
+        assertEquals(new Duration(3200), Duration.parse("PT3.2S"));
+        assertEquals(new Duration(6000), Duration.parse("PT6S"));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFactory_standardDays_long() throws Throwable {
         Duration test = Duration.standardDays(1);
-NoAssert.donothing(24L * 60L * 60L * 1000L, test.getMillis());
+        assertEquals(24L * 60L * 60L * 1000L, test.getMillis());
         
         test = Duration.standardDays(2);
-NoAssert.donothing(2L * 24L * 60L * 60L * 1000L, test.getMillis());
+        assertEquals(2L * 24L * 60L * 60L * 1000L, test.getMillis());
         
         test = Duration.standardDays(0);
-NoAssert.donothing(Duration.ZERO, test);
+        assertSame(Duration.ZERO, test);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFactory_standardHours_long() throws Throwable {
         Duration test = Duration.standardHours(1);
-NoAssert.donothing(60L * 60L * 1000L, test.getMillis());
+        assertEquals(60L * 60L * 1000L, test.getMillis());
         
         test = Duration.standardHours(2);
 NoAssert.donothing(2L * 60L * 60L * 1000L, test.getMillis());
         
         test = Duration.standardHours(0);
-NoAssert.donothing(Duration.ZERO, test);
+        assertSame(Duration.ZERO, test);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFactory_standardMinutes_long() throws Throwable {
         Duration test = Duration.standardMinutes(1);
-NoAssert.donothing(60L * 1000L, test.getMillis());
+        assertEquals(60L * 1000L, test.getMillis());
         
         test = Duration.standardMinutes(2);
-NoAssert.donothing(2L * 60L * 1000L, test.getMillis());
+        assertEquals(2L * 60L * 1000L, test.getMillis());
         
         test = Duration.standardMinutes(0);
-NoAssert.donothing(Duration.ZERO, test);
+        assertSame(Duration.ZERO, test);
     }
 
     //-----------------------------------------------------------------------
@@ -176,10 +176,10 @@ NoAssert.donothing(Duration.ZERO, test);
 NoAssert.donothing(1000L, test.getMillis());
         
         test = Duration.standardSeconds(2);
-NoAssert.donothing(2L * 1000L, test.getMillis());
+        assertEquals(2L * 1000L, test.getMillis());
         
         test = Duration.standardSeconds(0);
-NoAssert.donothing(Duration.ZERO, test);
+        assertSame(Duration.ZERO, test);
     }
 
     //-----------------------------------------------------------------------
@@ -188,10 +188,10 @@ NoAssert.donothing(Duration.ZERO, test);
 NoAssert.donothing(1L, test.getMillis());
         
         test = Duration.millis(2);
-NoAssert.donothing(2L, test.getMillis());
+        assertEquals(2L, test.getMillis());
         
         test = Duration.millis(0);
-NoAssert.donothing(Duration.ZERO, test);
+        assertSame(Duration.ZERO, test);
     }
 
     //-----------------------------------------------------------------------
@@ -217,21 +217,21 @@ NoAssert.donothing(dt2.getMillis() - dt1.getMillis(), test.getMillis());
         DateTime dt1 = new DateTime(2004, 6, 9, 0, 0, 0, 0);
         DateTime dt2 = new DateTime(2005, 7, 10, 1, 1, 1, 1);
         Duration test = new Duration(dt1, dt2);
-NoAssert.donothing(dt2.getMillis() - dt1.getMillis(), test.getMillis());
+        assertEquals(dt2.getMillis() - dt1.getMillis(), test.getMillis());
     }
 
     @Test public void testConstructor_RI_RI2() throws Throwable {
         DateTime dt1 = null;  // 2002-06-09T01:00+01:00
         DateTime dt2 = new DateTime(2005, 7, 17, 1, 1, 1, 1);
         Duration test = new Duration(dt1, dt2);
-NoAssert.donothing(dt2.getMillis() - TEST_TIME_NOW, test.getMillis());
+        assertEquals(dt2.getMillis() - TEST_TIME_NOW, test.getMillis());
     }
 
     @Test public void testConstructor_RI_RI3() throws Throwable {
         DateTime dt1 = new DateTime(2005, 7, 17, 1, 1, 1, 1);
         DateTime dt2 = null;  // 2002-06-09T01:00+01:00
         Duration test = new Duration(dt1, dt2);
-NoAssert.donothing(TEST_TIME_NOW - dt1.getMillis(), test.getMillis());
+        assertEquals(TEST_TIME_NOW - dt1.getMillis(), test.getMillis());
     }
 
     @Test public void testConstructor_RI_RI4() throws Throwable {
@@ -252,7 +252,7 @@ NoAssert.donothing(72345, test.getMillis());
 
     @Test public void testConstructor_Object2() throws Throwable {
         Duration test = new Duration((Object) null);
-NoAssert.donothing(0L, test.getMillis());
+        assertEquals(0L, test.getMillis());
     }
 
     @Test public void testConstructor_Object3() throws Throwable {
@@ -262,7 +262,7 @@ NoAssert.donothing(0L, test.getMillis());
                 7 * DateTimeConstants.MILLIS_PER_SECOND + 8;
         Long base = new Long(length);
         Duration test = new Duration(base);
-NoAssert.donothing(length, test.getMillis());
+        assertEquals(length, test.getMillis());
     }
 
     @Test public void testConstructor_Object4() throws Throwable {
@@ -270,7 +270,7 @@ NoAssert.donothing(length, test.getMillis());
         DateTime dt2 = new DateTime(2005, 7, 10, 1, 1, 1, 1);
         Duration base = new Duration(dt1, dt2);
         Duration test = new Duration(base);
-NoAssert.donothing(dt2.getMillis() - dt1.getMillis(), test.getMillis());
+        assertEquals(dt2.getMillis() - dt1.getMillis(), test.getMillis());
     }
 
     @Test public void testConstructor_Object5() throws Throwable {

@@ -193,55 +193,55 @@ public class TestIslamicChronology { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test
     public void testFactoryUTC() {
-NoAssert.donothing(DateTimeZone.UTC, IslamicChronology.getInstanceUTC().getZone());
-NoAssert.donothing(IslamicChronology.class, IslamicChronology.getInstanceUTC().getClass());
+        assertEquals(DateTimeZone.UTC, IslamicChronology.getInstanceUTC().getZone());
+        assertSame(IslamicChronology.class, IslamicChronology.getInstanceUTC().getClass());
     }
     @Test
     public void testFactory() {
-NoAssert.donothing(LONDON, IslamicChronology.getInstance().getZone());
+        assertEquals(LONDON, IslamicChronology.getInstance().getZone());
 NoAssert.donothing(IslamicChronology.class, IslamicChronology.getInstance().getClass());
     }
     @Test
     public void testFactory_Zone() {
 NoAssert.donothing(TOKYO, IslamicChronology.getInstance(TOKYO).getZone());
-NoAssert.donothing(PARIS, IslamicChronology.getInstance(PARIS).getZone());
-NoAssert.donothing(LONDON, IslamicChronology.getInstance(null).getZone());
-NoAssert.donothing(IslamicChronology.class, IslamicChronology.getInstance(TOKYO).getClass());
+        assertEquals(PARIS, IslamicChronology.getInstance(PARIS).getZone());
+        assertEquals(LONDON, IslamicChronology.getInstance(null).getZone());
+        assertSame(IslamicChronology.class, IslamicChronology.getInstance(TOKYO).getClass());
     }
 
     //-----------------------------------------------------------------------
     @Test
     public void testEquality() {
 NoAssert.donothing(IslamicChronology.getInstance(TOKYO), IslamicChronology.getInstance(TOKYO));
-NoAssert.donothing(IslamicChronology.getInstance(LONDON), IslamicChronology.getInstance(LONDON));
-NoAssert.donothing(IslamicChronology.getInstance(PARIS), IslamicChronology.getInstance(PARIS));
-NoAssert.donothing(IslamicChronology.getInstanceUTC(), IslamicChronology.getInstanceUTC());
-NoAssert.donothing(IslamicChronology.getInstance(), IslamicChronology.getInstance(LONDON));
+        assertSame(IslamicChronology.getInstance(LONDON), IslamicChronology.getInstance(LONDON));
+        assertSame(IslamicChronology.getInstance(PARIS), IslamicChronology.getInstance(PARIS));
+        assertSame(IslamicChronology.getInstanceUTC(), IslamicChronology.getInstanceUTC());
+        assertSame(IslamicChronology.getInstance(), IslamicChronology.getInstance(LONDON));
     }
     @Test
     public void testWithUTC() {
 NoAssert.donothing(IslamicChronology.getInstanceUTC(), IslamicChronology.getInstance(LONDON).withUTC());
 NoAssert.donothing(IslamicChronology.getInstanceUTC(), IslamicChronology.getInstance(TOKYO).withUTC());
-NoAssert.donothing(IslamicChronology.getInstanceUTC(), IslamicChronology.getInstanceUTC().withUTC());
+        assertSame(IslamicChronology.getInstanceUTC(), IslamicChronology.getInstanceUTC().withUTC());
 NoAssert.donothing(IslamicChronology.getInstanceUTC(), IslamicChronology.getInstance().withUTC());
     }
 
     @Test
     public void testWithZone() {
-NoAssert.donothing(IslamicChronology.getInstance(TOKYO), IslamicChronology.getInstance(TOKYO).withZone(TOKYO));
-NoAssert.donothing(IslamicChronology.getInstance(LONDON), IslamicChronology.getInstance(TOKYO).withZone(LONDON));
-NoAssert.donothing(IslamicChronology.getInstance(PARIS), IslamicChronology.getInstance(TOKYO).withZone(PARIS));
+        assertSame(IslamicChronology.getInstance(TOKYO), IslamicChronology.getInstance(TOKYO).withZone(TOKYO));
+        assertSame(IslamicChronology.getInstance(LONDON), IslamicChronology.getInstance(TOKYO).withZone(LONDON));
+        assertSame(IslamicChronology.getInstance(PARIS), IslamicChronology.getInstance(TOKYO).withZone(PARIS));
 NoAssert.donothing(IslamicChronology.getInstance(LONDON), IslamicChronology.getInstance(TOKYO).withZone(null));
-NoAssert.donothing(IslamicChronology.getInstance(PARIS), IslamicChronology.getInstance().withZone(PARIS));
-NoAssert.donothing(IslamicChronology.getInstance(PARIS), IslamicChronology.getInstanceUTC().withZone(PARIS));
+        assertSame(IslamicChronology.getInstance(PARIS), IslamicChronology.getInstance().withZone(PARIS));
+        assertSame(IslamicChronology.getInstance(PARIS), IslamicChronology.getInstanceUTC().withZone(PARIS));
     }
 
     @Test
     public void testToString() {
-NoAssert.donothing("IslamicChronology[Europe/London]", IslamicChronology.getInstance(LONDON).toString());
-NoAssert.donothing("IslamicChronology[Asia/Tokyo]", IslamicChronology.getInstance(TOKYO).toString());
-NoAssert.donothing("IslamicChronology[Europe/London]", IslamicChronology.getInstance().toString());
-NoAssert.donothing("IslamicChronology[UTC]", IslamicChronology.getInstanceUTC().toString());
+        assertEquals("IslamicChronology[Europe/London]", IslamicChronology.getInstance(LONDON).toString());
+        assertEquals("IslamicChronology[Asia/Tokyo]", IslamicChronology.getInstance(TOKYO).toString());
+        assertEquals("IslamicChronology[Europe/London]", IslamicChronology.getInstance().toString());
+        assertEquals("IslamicChronology[UTC]", IslamicChronology.getInstanceUTC().toString());
     }
 
     //-----------------------------------------------------------------------
@@ -249,66 +249,66 @@ NoAssert.donothing("IslamicChronology[UTC]", IslamicChronology.getInstanceUTC().
     public void testDurationFields() {
         final IslamicChronology islamic = IslamicChronology.getInstance();
 NoAssert.donothing("eras", islamic.eras().getName());
-NoAssert.donothing("centuries", islamic.centuries().getName());
+        assertEquals("centuries", islamic.centuries().getName());
 NoAssert.donothing("years", islamic.years().getName());
 NoAssert.donothing("weekyears", islamic.weekyears().getName());
-NoAssert.donothing("months", islamic.months().getName());
-NoAssert.donothing("weeks", islamic.weeks().getName());
+        assertEquals("months", islamic.months().getName());
+        assertEquals("weeks", islamic.weeks().getName());
 NoAssert.donothing("days", islamic.days().getName());
-NoAssert.donothing("halfdays", islamic.halfdays().getName());
-NoAssert.donothing("hours", islamic.hours().getName());
+        assertEquals("halfdays", islamic.halfdays().getName());
+        assertEquals("hours", islamic.hours().getName());
 NoAssert.donothing("minutes", islamic.minutes().getName());
 NoAssert.donothing("seconds", islamic.seconds().getName());
-NoAssert.donothing("millis", islamic.millis().getName());
+        assertEquals("millis", islamic.millis().getName());
         
 NoAssert.donothing(false, islamic.eras().isSupported());
-NoAssert.donothing(true, islamic.centuries().isSupported());
-NoAssert.donothing(true, islamic.years().isSupported());
-NoAssert.donothing(true, islamic.weekyears().isSupported());
-NoAssert.donothing(true, islamic.months().isSupported());
+        assertEquals(true, islamic.centuries().isSupported());
+        assertEquals(true, islamic.years().isSupported());
+        assertEquals(true, islamic.weekyears().isSupported());
+        assertEquals(true, islamic.months().isSupported());
 NoAssert.donothing(true, islamic.weeks().isSupported());
-NoAssert.donothing(true, islamic.days().isSupported());
-NoAssert.donothing(true, islamic.halfdays().isSupported());
-NoAssert.donothing(true, islamic.hours().isSupported());
-NoAssert.donothing(true, islamic.minutes().isSupported());
-NoAssert.donothing(true, islamic.seconds().isSupported());
-NoAssert.donothing(true, islamic.millis().isSupported());
+        assertEquals(true, islamic.days().isSupported());
+        assertEquals(true, islamic.halfdays().isSupported());
+        assertEquals(true, islamic.hours().isSupported());
+        assertEquals(true, islamic.minutes().isSupported());
+        assertEquals(true, islamic.seconds().isSupported());
+        assertEquals(true, islamic.millis().isSupported());
         
 NoAssert.donothing(false, islamic.centuries().isPrecise());
-NoAssert.donothing(false, islamic.years().isPrecise());
-NoAssert.donothing(false, islamic.weekyears().isPrecise());
-NoAssert.donothing(false, islamic.months().isPrecise());
-NoAssert.donothing(false, islamic.weeks().isPrecise());
-NoAssert.donothing(false, islamic.days().isPrecise());
-NoAssert.donothing(false, islamic.halfdays().isPrecise());
-NoAssert.donothing(true, islamic.hours().isPrecise());
-NoAssert.donothing(true, islamic.minutes().isPrecise());
-NoAssert.donothing(true, islamic.seconds().isPrecise());
-NoAssert.donothing(true, islamic.millis().isPrecise());
+        assertEquals(false, islamic.years().isPrecise());
+        assertEquals(false, islamic.weekyears().isPrecise());
+        assertEquals(false, islamic.months().isPrecise());
+        assertEquals(false, islamic.weeks().isPrecise());
+        assertEquals(false, islamic.days().isPrecise());
+        assertEquals(false, islamic.halfdays().isPrecise());
+        assertEquals(true, islamic.hours().isPrecise());
+        assertEquals(true, islamic.minutes().isPrecise());
+        assertEquals(true, islamic.seconds().isPrecise());
+        assertEquals(true, islamic.millis().isPrecise());
         
         final IslamicChronology islamicUTC = IslamicChronology.getInstanceUTC();
-NoAssert.donothing(false, islamicUTC.centuries().isPrecise());
-NoAssert.donothing(false, islamicUTC.years().isPrecise());
+        assertEquals(false, islamicUTC.centuries().isPrecise());
+        assertEquals(false, islamicUTC.years().isPrecise());
 NoAssert.donothing(false, islamicUTC.weekyears().isPrecise());
-NoAssert.donothing(false, islamicUTC.months().isPrecise());
+        assertEquals(false, islamicUTC.months().isPrecise());
 NoAssert.donothing(true, islamicUTC.weeks().isPrecise());
-NoAssert.donothing(true, islamicUTC.days().isPrecise());
-NoAssert.donothing(true, islamicUTC.halfdays().isPrecise());
-NoAssert.donothing(true, islamicUTC.hours().isPrecise());
-NoAssert.donothing(true, islamicUTC.minutes().isPrecise());
-NoAssert.donothing(true, islamicUTC.seconds().isPrecise());
-NoAssert.donothing(true, islamicUTC.millis().isPrecise());
+        assertEquals(true, islamicUTC.days().isPrecise());
+        assertEquals(true, islamicUTC.halfdays().isPrecise());
+        assertEquals(true, islamicUTC.hours().isPrecise());
+        assertEquals(true, islamicUTC.minutes().isPrecise());
+        assertEquals(true, islamicUTC.seconds().isPrecise());
+        assertEquals(true, islamicUTC.millis().isPrecise());
         
         final DateTimeZone gmt = DateTimeZone.forID("Etc/GMT");
         final IslamicChronology islamicGMT = IslamicChronology.getInstance(gmt);
-NoAssert.donothing(false, islamicGMT.centuries().isPrecise());
-NoAssert.donothing(false, islamicGMT.years().isPrecise());
-NoAssert.donothing(false, islamicGMT.weekyears().isPrecise());
-NoAssert.donothing(false, islamicGMT.months().isPrecise());
-NoAssert.donothing(true, islamicGMT.weeks().isPrecise());
-NoAssert.donothing(true, islamicGMT.days().isPrecise());
-NoAssert.donothing(true, islamicGMT.halfdays().isPrecise());
-NoAssert.donothing(true, islamicGMT.hours().isPrecise());
+        assertEquals(false, islamicGMT.centuries().isPrecise());
+        assertEquals(false, islamicGMT.years().isPrecise());
+        assertEquals(false, islamicGMT.weekyears().isPrecise());
+        assertEquals(false, islamicGMT.months().isPrecise());
+        assertEquals(true, islamicGMT.weeks().isPrecise());
+        assertEquals(true, islamicGMT.days().isPrecise());
+        assertEquals(true, islamicGMT.halfdays().isPrecise());
+        assertEquals(true, islamicGMT.hours().isPrecise());
 NoAssert.donothing(true, islamicGMT.minutes().isPrecise());
 NoAssert.donothing(true, islamicGMT.seconds().isPrecise());
 NoAssert.donothing(true, islamicGMT.millis().isPrecise());
@@ -318,85 +318,85 @@ NoAssert.donothing(true, islamicGMT.millis().isPrecise());
     @Test
     public void testDateFields() {
         final IslamicChronology islamic = IslamicChronology.getInstance();
-NoAssert.donothing("era", islamic.era().getName());
-NoAssert.donothing("centuryOfEra", islamic.centuryOfEra().getName());
-NoAssert.donothing("yearOfCentury", islamic.yearOfCentury().getName());
-NoAssert.donothing("yearOfEra", islamic.yearOfEra().getName());
-NoAssert.donothing("year", islamic.year().getName());
-NoAssert.donothing("monthOfYear", islamic.monthOfYear().getName());
-NoAssert.donothing("weekyearOfCentury", islamic.weekyearOfCentury().getName());
+        assertEquals("era", islamic.era().getName());
+        assertEquals("centuryOfEra", islamic.centuryOfEra().getName());
+        assertEquals("yearOfCentury", islamic.yearOfCentury().getName());
+        assertEquals("yearOfEra", islamic.yearOfEra().getName());
+        assertEquals("year", islamic.year().getName());
+        assertEquals("monthOfYear", islamic.monthOfYear().getName());
+        assertEquals("weekyearOfCentury", islamic.weekyearOfCentury().getName());
 NoAssert.donothing("weekyear", islamic.weekyear().getName());
-NoAssert.donothing("weekOfWeekyear", islamic.weekOfWeekyear().getName());
+        assertEquals("weekOfWeekyear", islamic.weekOfWeekyear().getName());
 NoAssert.donothing("dayOfYear", islamic.dayOfYear().getName());
-NoAssert.donothing("dayOfMonth", islamic.dayOfMonth().getName());
-NoAssert.donothing("dayOfWeek", islamic.dayOfWeek().getName());
+        assertEquals("dayOfMonth", islamic.dayOfMonth().getName());
+        assertEquals("dayOfWeek", islamic.dayOfWeek().getName());
         
-NoAssert.donothing(true, islamic.era().isSupported());
-NoAssert.donothing(true, islamic.centuryOfEra().isSupported());
-NoAssert.donothing(true, islamic.yearOfCentury().isSupported());
-NoAssert.donothing(true, islamic.yearOfEra().isSupported());
+        assertEquals(true, islamic.era().isSupported());
+        assertEquals(true, islamic.centuryOfEra().isSupported());
+        assertEquals(true, islamic.yearOfCentury().isSupported());
+        assertEquals(true, islamic.yearOfEra().isSupported());
 NoAssert.donothing(true, islamic.year().isSupported());
-NoAssert.donothing(true, islamic.monthOfYear().isSupported());
-NoAssert.donothing(true, islamic.weekyearOfCentury().isSupported());
-NoAssert.donothing(true, islamic.weekyear().isSupported());
+        assertEquals(true, islamic.monthOfYear().isSupported());
+        assertEquals(true, islamic.weekyearOfCentury().isSupported());
+        assertEquals(true, islamic.weekyear().isSupported());
 NoAssert.donothing(true, islamic.weekOfWeekyear().isSupported());
-NoAssert.donothing(true, islamic.dayOfYear().isSupported());
-NoAssert.donothing(true, islamic.dayOfMonth().isSupported());
-NoAssert.donothing(true, islamic.dayOfWeek().isSupported());
+        assertEquals(true, islamic.dayOfYear().isSupported());
+        assertEquals(true, islamic.dayOfMonth().isSupported());
+        assertEquals(true, islamic.dayOfWeek().isSupported());
         
-NoAssert.donothing(islamic.eras(), islamic.era().getDurationField());
-NoAssert.donothing(islamic.centuries(), islamic.centuryOfEra().getDurationField());
-NoAssert.donothing(islamic.years(), islamic.yearOfCentury().getDurationField());
-NoAssert.donothing(islamic.years(), islamic.yearOfEra().getDurationField());
-NoAssert.donothing(islamic.years(), islamic.year().getDurationField());
-NoAssert.donothing(islamic.months(), islamic.monthOfYear().getDurationField());
+        assertEquals(islamic.eras(), islamic.era().getDurationField());
+        assertEquals(islamic.centuries(), islamic.centuryOfEra().getDurationField());
+        assertEquals(islamic.years(), islamic.yearOfCentury().getDurationField());
+        assertEquals(islamic.years(), islamic.yearOfEra().getDurationField());
+        assertEquals(islamic.years(), islamic.year().getDurationField());
+        assertEquals(islamic.months(), islamic.monthOfYear().getDurationField());
 NoAssert.donothing(islamic.weekyears(), islamic.weekyearOfCentury().getDurationField());
-NoAssert.donothing(islamic.weekyears(), islamic.weekyear().getDurationField());
+        assertEquals(islamic.weekyears(), islamic.weekyear().getDurationField());
 NoAssert.donothing(islamic.weeks(), islamic.weekOfWeekyear().getDurationField());
-NoAssert.donothing(islamic.days(), islamic.dayOfYear().getDurationField());
-NoAssert.donothing(islamic.days(), islamic.dayOfMonth().getDurationField());
-NoAssert.donothing(islamic.days(), islamic.dayOfWeek().getDurationField());
+        assertEquals(islamic.days(), islamic.dayOfYear().getDurationField());
+        assertEquals(islamic.days(), islamic.dayOfMonth().getDurationField());
+        assertEquals(islamic.days(), islamic.dayOfWeek().getDurationField());
         
-NoAssert.donothing(null, islamic.era().getRangeDurationField());
-NoAssert.donothing(islamic.eras(), islamic.centuryOfEra().getRangeDurationField());
-NoAssert.donothing(islamic.centuries(), islamic.yearOfCentury().getRangeDurationField());
-NoAssert.donothing(islamic.eras(), islamic.yearOfEra().getRangeDurationField());
-NoAssert.donothing(null, islamic.year().getRangeDurationField());
-NoAssert.donothing(islamic.years(), islamic.monthOfYear().getRangeDurationField());
-NoAssert.donothing(islamic.centuries(), islamic.weekyearOfCentury().getRangeDurationField());
-NoAssert.donothing(null, islamic.weekyear().getRangeDurationField());
-NoAssert.donothing(islamic.weekyears(), islamic.weekOfWeekyear().getRangeDurationField());
+        assertEquals(null, islamic.era().getRangeDurationField());
+        assertEquals(islamic.eras(), islamic.centuryOfEra().getRangeDurationField());
+        assertEquals(islamic.centuries(), islamic.yearOfCentury().getRangeDurationField());
+        assertEquals(islamic.eras(), islamic.yearOfEra().getRangeDurationField());
+        assertEquals(null, islamic.year().getRangeDurationField());
+        assertEquals(islamic.years(), islamic.monthOfYear().getRangeDurationField());
+        assertEquals(islamic.centuries(), islamic.weekyearOfCentury().getRangeDurationField());
+        assertEquals(null, islamic.weekyear().getRangeDurationField());
+        assertEquals(islamic.weekyears(), islamic.weekOfWeekyear().getRangeDurationField());
 NoAssert.donothing(islamic.years(), islamic.dayOfYear().getRangeDurationField());
-NoAssert.donothing(islamic.months(), islamic.dayOfMonth().getRangeDurationField());
-NoAssert.donothing(islamic.weeks(), islamic.dayOfWeek().getRangeDurationField());
+        assertEquals(islamic.months(), islamic.dayOfMonth().getRangeDurationField());
+        assertEquals(islamic.weeks(), islamic.dayOfWeek().getRangeDurationField());
     }
 
     @Test
     public void testTimeFields() {
         final IslamicChronology islamic = IslamicChronology.getInstance();
-NoAssert.donothing("halfdayOfDay", islamic.halfdayOfDay().getName());
-NoAssert.donothing("clockhourOfHalfday", islamic.clockhourOfHalfday().getName());
-NoAssert.donothing("hourOfHalfday", islamic.hourOfHalfday().getName());
-NoAssert.donothing("clockhourOfDay", islamic.clockhourOfDay().getName());
-NoAssert.donothing("hourOfDay", islamic.hourOfDay().getName());
-NoAssert.donothing("minuteOfDay", islamic.minuteOfDay().getName());
-NoAssert.donothing("minuteOfHour", islamic.minuteOfHour().getName());
-NoAssert.donothing("secondOfDay", islamic.secondOfDay().getName());
-NoAssert.donothing("secondOfMinute", islamic.secondOfMinute().getName());
-NoAssert.donothing("millisOfDay", islamic.millisOfDay().getName());
-NoAssert.donothing("millisOfSecond", islamic.millisOfSecond().getName());
+        assertEquals("halfdayOfDay", islamic.halfdayOfDay().getName());
+        assertEquals("clockhourOfHalfday", islamic.clockhourOfHalfday().getName());
+        assertEquals("hourOfHalfday", islamic.hourOfHalfday().getName());
+        assertEquals("clockhourOfDay", islamic.clockhourOfDay().getName());
+        assertEquals("hourOfDay", islamic.hourOfDay().getName());
+        assertEquals("minuteOfDay", islamic.minuteOfDay().getName());
+        assertEquals("minuteOfHour", islamic.minuteOfHour().getName());
+        assertEquals("secondOfDay", islamic.secondOfDay().getName());
+        assertEquals("secondOfMinute", islamic.secondOfMinute().getName());
+        assertEquals("millisOfDay", islamic.millisOfDay().getName());
+        assertEquals("millisOfSecond", islamic.millisOfSecond().getName());
         
-NoAssert.donothing(true, islamic.halfdayOfDay().isSupported());
+        assertEquals(true, islamic.halfdayOfDay().isSupported());
 NoAssert.donothing(true, islamic.clockhourOfHalfday().isSupported());
 NoAssert.donothing(true, islamic.hourOfHalfday().isSupported());
-NoAssert.donothing(true, islamic.clockhourOfDay().isSupported());
-NoAssert.donothing(true, islamic.hourOfDay().isSupported());
-NoAssert.donothing(true, islamic.minuteOfDay().isSupported());
-NoAssert.donothing(true, islamic.minuteOfHour().isSupported());
-NoAssert.donothing(true, islamic.secondOfDay().isSupported());
-NoAssert.donothing(true, islamic.secondOfMinute().isSupported());
-NoAssert.donothing(true, islamic.millisOfDay().isSupported());
-NoAssert.donothing(true, islamic.millisOfSecond().isSupported());
+        assertEquals(true, islamic.clockhourOfDay().isSupported());
+        assertEquals(true, islamic.hourOfDay().isSupported());
+        assertEquals(true, islamic.minuteOfDay().isSupported());
+        assertEquals(true, islamic.minuteOfHour().isSupported());
+        assertEquals(true, islamic.secondOfDay().isSupported());
+        assertEquals(true, islamic.secondOfMinute().isSupported());
+        assertEquals(true, islamic.millisOfDay().isSupported());
+        assertEquals(true, islamic.millisOfSecond().isSupported());
     }
 
     //-----------------------------------------------------------------------
@@ -404,12 +404,12 @@ NoAssert.donothing(true, islamic.millisOfSecond().isSupported());
     public void testEpoch() {
         DateTime epoch = new DateTime(1, 1, 1, 0, 0, 0, 0, ISLAMIC_UTC);
         DateTime expectedEpoch = new DateTime(622, 7, 16, 0, 0, 0, 0, JULIAN_UTC);
-NoAssert.donothing(expectedEpoch.getMillis(), epoch.getMillis());
+        assertEquals(expectedEpoch.getMillis(), epoch.getMillis());
     }
 
     @Test
     public void testEra() {
-NoAssert.donothing(1, IslamicChronology.AH);
+        assertEquals(1, IslamicChronology.AH);
         try {
             new DateTime(-1, 13, 5, 0, 0, 0, 0, ISLAMIC_UTC);
             fail();
@@ -463,21 +463,21 @@ NoAssert.donothing(expectedDate.getMillis(), date.getMillis());
             }
             
             // test era
-NoAssert.donothing(1, era.get(millis));
-NoAssert.donothing("AH", era.getAsText(millis));
-NoAssert.donothing("AH", era.getAsShortText(millis));
+            assertEquals(1, era.get(millis));
+            assertEquals("AH", era.getAsText(millis));
+            assertEquals("AH", era.getAsShortText(millis));
             
             // test date
-NoAssert.donothing(expectedDOY, doyValue);
+            assertEquals(expectedDOY, doyValue);
 NoAssert.donothing(expectedMonth, monthValue);
 NoAssert.donothing(expectedDay, dayValue);
-NoAssert.donothing(expectedDOW, dowValue);
-NoAssert.donothing(expectedYear, yearValue);
+            assertEquals(expectedDOW, dowValue);
+            assertEquals(expectedYear, yearValue);
 NoAssert.donothing(expectedYear, yearOfEraValue);
             
             // test leap year
             boolean leap = ((11 * yearValue + 14) % 30) < 11;
-NoAssert.donothing(leap, year.isLeap(millis));
+            assertEquals(leap, year.isLeap(millis));
             
             // test month length
             switch (monthValue) {
@@ -497,7 +497,7 @@ NoAssert.donothing(30, monthLen);
 NoAssert.donothing(29, monthLen);
                     break;
                 case 12:
-NoAssert.donothing((leap ? 30 : 29), monthLen);
+                    assertEquals((leap ? 30 : 29), monthLen);
                     break;
             }
             
@@ -527,339 +527,339 @@ NoAssert.donothing((leap ? 355 : 354), dayOfYearLen);
     public void testSampleDate1() {
         DateTime dt = new DateTime(1945, 11, 12, 0, 0, 0, 0, ISO_UTC);
         dt = dt.withChronology(ISLAMIC_UTC);
-NoAssert.donothing(IslamicChronology.AH, dt.getEra());
-NoAssert.donothing(14, dt.getCenturyOfEra());  // TODO confirm
-NoAssert.donothing(64, dt.getYearOfCentury());
-NoAssert.donothing(1364, dt.getYearOfEra());
+        assertEquals(IslamicChronology.AH, dt.getEra());
+        assertEquals(14, dt.getCenturyOfEra());  // TODO confirm
+        assertEquals(64, dt.getYearOfCentury());
+        assertEquals(1364, dt.getYearOfEra());
         
 NoAssert.donothing(1364, dt.getYear());
         Property fld = dt.year();
-NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(DurationFieldType.days(), fld.getLeapDurationField().getType());
-NoAssert.donothing(new DateTime(1365, 12, 6, 0, 0, 0, 0, ISLAMIC_UTC), fld.addToCopy(1));
+        assertEquals(false, fld.isLeap());
+        assertEquals(0, fld.getLeapAmount());
+        assertEquals(DurationFieldType.days(), fld.getLeapDurationField().getType());
+        assertEquals(new DateTime(1365, 12, 6, 0, 0, 0, 0, ISLAMIC_UTC), fld.addToCopy(1));
         
-NoAssert.donothing(12, dt.getMonthOfYear());
+        assertEquals(12, dt.getMonthOfYear());
         fld = dt.monthOfYear();
-NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(DurationFieldType.days(), fld.getLeapDurationField().getType());
-NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
+        assertEquals(false, fld.isLeap());
+        assertEquals(0, fld.getLeapAmount());
+        assertEquals(DurationFieldType.days(), fld.getLeapDurationField().getType());
+        assertEquals(1, fld.getMinimumValue());
+        assertEquals(1, fld.getMinimumValueOverall());
 NoAssert.donothing(12, fld.getMaximumValue());
-NoAssert.donothing(12, fld.getMaximumValueOverall());
+        assertEquals(12, fld.getMaximumValueOverall());
 NoAssert.donothing(new DateTime(1365, 1, 6, 0, 0, 0, 0, ISLAMIC_UTC), fld.addToCopy(1));
-NoAssert.donothing(new DateTime(1364, 1, 6, 0, 0, 0, 0, ISLAMIC_UTC), fld.addWrapFieldToCopy(1));
+        assertEquals(new DateTime(1364, 1, 6, 0, 0, 0, 0, ISLAMIC_UTC), fld.addWrapFieldToCopy(1));
         
-NoAssert.donothing(6, dt.getDayOfMonth());
+        assertEquals(6, dt.getDayOfMonth());
         fld = dt.dayOfMonth();
 NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(null, fld.getLeapDurationField());
-NoAssert.donothing(1, fld.getMinimumValue());
+        assertEquals(0, fld.getLeapAmount());
+        assertEquals(null, fld.getLeapDurationField());
+        assertEquals(1, fld.getMinimumValue());
 NoAssert.donothing(1, fld.getMinimumValueOverall());
 NoAssert.donothing(29, fld.getMaximumValue());
-NoAssert.donothing(30, fld.getMaximumValueOverall());
-NoAssert.donothing(new DateTime(1364, 12, 7, 0, 0, 0, 0, ISLAMIC_UTC), fld.addToCopy(1));
+        assertEquals(30, fld.getMaximumValueOverall());
+        assertEquals(new DateTime(1364, 12, 7, 0, 0, 0, 0, ISLAMIC_UTC), fld.addToCopy(1));
         
-NoAssert.donothing(DateTimeConstants.MONDAY, dt.getDayOfWeek());
+        assertEquals(DateTimeConstants.MONDAY, dt.getDayOfWeek());
         fld = dt.dayOfWeek();
-NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
+        assertEquals(false, fld.isLeap());
+        assertEquals(0, fld.getLeapAmount());
 NoAssert.donothing(null, fld.getLeapDurationField());
-NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(7, fld.getMaximumValue());
-NoAssert.donothing(7, fld.getMaximumValueOverall());
+        assertEquals(1, fld.getMinimumValue());
+        assertEquals(1, fld.getMinimumValueOverall());
+        assertEquals(7, fld.getMaximumValue());
+        assertEquals(7, fld.getMaximumValueOverall());
 NoAssert.donothing(new DateTime(1364, 12, 7, 0, 0, 0, 0, ISLAMIC_UTC), fld.addToCopy(1));
         
 NoAssert.donothing(6 * 30 + 5 * 29 + 6, dt.getDayOfYear());
         fld = dt.dayOfYear();
-NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(null, fld.getLeapDurationField());
+        assertEquals(false, fld.isLeap());
+        assertEquals(0, fld.getLeapAmount());
+        assertEquals(null, fld.getLeapDurationField());
 NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(354, fld.getMaximumValue());
-NoAssert.donothing(355, fld.getMaximumValueOverall());
-NoAssert.donothing(new DateTime(1364, 12, 7, 0, 0, 0, 0, ISLAMIC_UTC), fld.addToCopy(1));
+        assertEquals(1, fld.getMinimumValueOverall());
+        assertEquals(354, fld.getMaximumValue());
+        assertEquals(355, fld.getMaximumValueOverall());
+        assertEquals(new DateTime(1364, 12, 7, 0, 0, 0, 0, ISLAMIC_UTC), fld.addToCopy(1));
         
 NoAssert.donothing(0, dt.getHourOfDay());
-NoAssert.donothing(0, dt.getMinuteOfHour());
-NoAssert.donothing(0, dt.getSecondOfMinute());
-NoAssert.donothing(0, dt.getMillisOfSecond());
+        assertEquals(0, dt.getMinuteOfHour());
+        assertEquals(0, dt.getSecondOfMinute());
+        assertEquals(0, dt.getMillisOfSecond());
     }
 
     @Test
     public void testSampleDate2() {
         DateTime dt = new DateTime(2005, 11, 26, 0, 0, 0, 0, ISO_UTC);
         dt = dt.withChronology(ISLAMIC_UTC);
-NoAssert.donothing(IslamicChronology.AH, dt.getEra());
-NoAssert.donothing(15, dt.getCenturyOfEra());  // TODO confirm
-NoAssert.donothing(26, dt.getYearOfCentury());
-NoAssert.donothing(1426, dt.getYearOfEra());
+        assertEquals(IslamicChronology.AH, dt.getEra());
+        assertEquals(15, dt.getCenturyOfEra());  // TODO confirm
+        assertEquals(26, dt.getYearOfCentury());
+        assertEquals(1426, dt.getYearOfEra());
         
-NoAssert.donothing(1426, dt.getYear());
+        assertEquals(1426, dt.getYear());
         Property fld = dt.year();
 NoAssert.donothing(true, fld.isLeap());
-NoAssert.donothing(1, fld.getLeapAmount());
+        assertEquals(1, fld.getLeapAmount());
 NoAssert.donothing(DurationFieldType.days(), fld.getLeapDurationField().getType());
         
-NoAssert.donothing(10, dt.getMonthOfYear());
+        assertEquals(10, dt.getMonthOfYear());
         fld = dt.monthOfYear();
-NoAssert.donothing(false, fld.isLeap());
+        assertEquals(false, fld.isLeap());
 NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(DurationFieldType.days(), fld.getLeapDurationField().getType());
+        assertEquals(DurationFieldType.days(), fld.getLeapDurationField().getType());
 NoAssert.donothing(1, fld.getMinimumValue());
 NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(12, fld.getMaximumValue());
-NoAssert.donothing(12, fld.getMaximumValueOverall());
+        assertEquals(12, fld.getMaximumValue());
+        assertEquals(12, fld.getMaximumValueOverall());
         
-NoAssert.donothing(24, dt.getDayOfMonth());
+        assertEquals(24, dt.getDayOfMonth());
         fld = dt.dayOfMonth();
 NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(null, fld.getLeapDurationField());
+        assertEquals(0, fld.getLeapAmount());
+        assertEquals(null, fld.getLeapDurationField());
 NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(29, fld.getMaximumValue());
+        assertEquals(1, fld.getMinimumValueOverall());
+        assertEquals(29, fld.getMaximumValue());
 NoAssert.donothing(30, fld.getMaximumValueOverall());
         
 NoAssert.donothing(DateTimeConstants.SATURDAY, dt.getDayOfWeek());
         fld = dt.dayOfWeek();
 NoAssert.donothing(false, fld.isLeap());
 NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(null, fld.getLeapDurationField());
-NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(7, fld.getMaximumValue());
-NoAssert.donothing(7, fld.getMaximumValueOverall());
+        assertEquals(null, fld.getLeapDurationField());
+        assertEquals(1, fld.getMinimumValue());
+        assertEquals(1, fld.getMinimumValueOverall());
+        assertEquals(7, fld.getMaximumValue());
+        assertEquals(7, fld.getMaximumValueOverall());
         
-NoAssert.donothing(5 * 30 + 4 * 29 + 24, dt.getDayOfYear());
+        assertEquals(5 * 30 + 4 * 29 + 24, dt.getDayOfYear());
         fld = dt.dayOfYear();
 NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(null, fld.getLeapDurationField());
+        assertEquals(0, fld.getLeapAmount());
+        assertEquals(null, fld.getLeapDurationField());
 NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(355, fld.getMaximumValue());
+        assertEquals(1, fld.getMinimumValueOverall());
+        assertEquals(355, fld.getMaximumValue());
 NoAssert.donothing(355, fld.getMaximumValueOverall());
         
-NoAssert.donothing(0, dt.getHourOfDay());
-NoAssert.donothing(0, dt.getMinuteOfHour());
-NoAssert.donothing(0, dt.getSecondOfMinute());
-NoAssert.donothing(0, dt.getMillisOfSecond());
+        assertEquals(0, dt.getHourOfDay());
+        assertEquals(0, dt.getMinuteOfHour());
+        assertEquals(0, dt.getSecondOfMinute());
+        assertEquals(0, dt.getMillisOfSecond());
     }
 
 
     @Test
     public void testSampleDate3() {
         DateTime dt = new DateTime(1426, 12, 24, 0, 0, 0, 0, ISLAMIC_UTC);
-NoAssert.donothing(IslamicChronology.AH, dt.getEra());
+        assertEquals(IslamicChronology.AH, dt.getEra());
         
-NoAssert.donothing(1426, dt.getYear());
+        assertEquals(1426, dt.getYear());
         Property fld = dt.year();
-NoAssert.donothing(true, fld.isLeap());
-NoAssert.donothing(1, fld.getLeapAmount());
+        assertEquals(true, fld.isLeap());
+        assertEquals(1, fld.getLeapAmount());
 NoAssert.donothing(DurationFieldType.days(), fld.getLeapDurationField().getType());
         
-NoAssert.donothing(12, dt.getMonthOfYear());
+        assertEquals(12, dt.getMonthOfYear());
         fld = dt.monthOfYear();
-NoAssert.donothing(true, fld.isLeap());
+        assertEquals(true, fld.isLeap());
 NoAssert.donothing(1, fld.getLeapAmount());
-NoAssert.donothing(DurationFieldType.days(), fld.getLeapDurationField().getType());
-NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(12, fld.getMaximumValue());
-NoAssert.donothing(12, fld.getMaximumValueOverall());
+        assertEquals(DurationFieldType.days(), fld.getLeapDurationField().getType());
+        assertEquals(1, fld.getMinimumValue());
+        assertEquals(1, fld.getMinimumValueOverall());
+        assertEquals(12, fld.getMaximumValue());
+        assertEquals(12, fld.getMaximumValueOverall());
         
-NoAssert.donothing(24, dt.getDayOfMonth());
+        assertEquals(24, dt.getDayOfMonth());
         fld = dt.dayOfMonth();
 NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(null, fld.getLeapDurationField());
+        assertEquals(0, fld.getLeapAmount());
+        assertEquals(null, fld.getLeapDurationField());
 NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(30, fld.getMaximumValue());
-NoAssert.donothing(30, fld.getMaximumValueOverall());
+        assertEquals(1, fld.getMinimumValueOverall());
+        assertEquals(30, fld.getMaximumValue());
+        assertEquals(30, fld.getMaximumValueOverall());
         
-NoAssert.donothing(DateTimeConstants.TUESDAY, dt.getDayOfWeek());
+        assertEquals(DateTimeConstants.TUESDAY, dt.getDayOfWeek());
         fld = dt.dayOfWeek();
-NoAssert.donothing(false, fld.isLeap());
-NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(null, fld.getLeapDurationField());
-NoAssert.donothing(1, fld.getMinimumValue());
+        assertEquals(false, fld.isLeap());
+        assertEquals(0, fld.getLeapAmount());
+        assertEquals(null, fld.getLeapDurationField());
+        assertEquals(1, fld.getMinimumValue());
 NoAssert.donothing(1, fld.getMinimumValueOverall());
-NoAssert.donothing(7, fld.getMaximumValue());
+        assertEquals(7, fld.getMaximumValue());
 NoAssert.donothing(7, fld.getMaximumValueOverall());
         
-NoAssert.donothing(6 * 30 + 5 * 29 + 24, dt.getDayOfYear());
+        assertEquals(6 * 30 + 5 * 29 + 24, dt.getDayOfYear());
         fld = dt.dayOfYear();
 NoAssert.donothing(false, fld.isLeap());
 NoAssert.donothing(0, fld.getLeapAmount());
-NoAssert.donothing(null, fld.getLeapDurationField());
-NoAssert.donothing(1, fld.getMinimumValue());
-NoAssert.donothing(1, fld.getMinimumValueOverall());
+        assertEquals(null, fld.getLeapDurationField());
+        assertEquals(1, fld.getMinimumValue());
+        assertEquals(1, fld.getMinimumValueOverall());
 NoAssert.donothing(355, fld.getMaximumValue());
 NoAssert.donothing(355, fld.getMaximumValueOverall());
         
 NoAssert.donothing(0, dt.getHourOfDay());
-NoAssert.donothing(0, dt.getMinuteOfHour());
-NoAssert.donothing(0, dt.getSecondOfMinute());
-NoAssert.donothing(0, dt.getMillisOfSecond());
+        assertEquals(0, dt.getMinuteOfHour());
+        assertEquals(0, dt.getSecondOfMinute());
+        assertEquals(0, dt.getMillisOfSecond());
     }
 
 
     @Test
     public void testSampleDateWithZone() {
         DateTime dt = new DateTime(2005, 11, 26, 12, 0, 0, 0, PARIS).withChronology(ISLAMIC_UTC);
-NoAssert.donothing(IslamicChronology.AH, dt.getEra());
+        assertEquals(IslamicChronology.AH, dt.getEra());
 NoAssert.donothing(1426, dt.getYear());
-NoAssert.donothing(10, dt.getMonthOfYear());
-NoAssert.donothing(24, dt.getDayOfMonth());
-NoAssert.donothing(11, dt.getHourOfDay());  // PARIS is UTC+1 in summer (12-1=11)
-NoAssert.donothing(0, dt.getMinuteOfHour());
-NoAssert.donothing(0, dt.getSecondOfMinute());
-NoAssert.donothing(0, dt.getMillisOfSecond());
+        assertEquals(10, dt.getMonthOfYear());
+        assertEquals(24, dt.getDayOfMonth());
+        assertEquals(11, dt.getHourOfDay());  // PARIS is UTC+1 in summer (12-1=11)
+        assertEquals(0, dt.getMinuteOfHour());
+        assertEquals(0, dt.getSecondOfMinute());
+        assertEquals(0, dt.getMillisOfSecond());
     }
 
     @Test
     public void test15BasedLeapYear() {
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(1));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(2));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(1));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(2));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(3));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(4));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(4));
 NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(5));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(6));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(7));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(6));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(7));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(8));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(9));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(10));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(11));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(12));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(13));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(14));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(15));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(16));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(17));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(18));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(19));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(20));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(21));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(22));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(23));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(24));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(25));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(26));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(27));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(28));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(29));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(30));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(9));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(10));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(11));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(12));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(13));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(14));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(15));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(16));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(17));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(18));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(19));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(20));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(21));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(22));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(23));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(24));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(25));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(26));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(27));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(28));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(29));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_15_BASED.isLeapYear(30));
     }
 
     @Test
     public void test16BasedLeapYear() {
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(1));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(1));
 NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(2));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(3));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(4));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(5));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(6));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(7));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(3));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(4));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(5));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(6));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(7));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(8));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(9));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(10));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(11));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(12));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(13));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(14));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(9));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(10));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(11));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(12));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(13));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(14));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(15));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(16));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(17));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(16));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(17));
 NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(18));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(19));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(20));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(21));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(22));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(23));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(24));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(25));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(26));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(27));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(20));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(21));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(22));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(23));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(24));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(25));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(26));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(27));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(28));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(29));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(30));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(29));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_16_BASED.isLeapYear(30));
     }
 
     @Test
     public void testIndianBasedLeapYear() {
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(1));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(2));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(3));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(4));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(5));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(6));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(7));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(8));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(9));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(1));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(2));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(3));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(4));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(5));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(6));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(7));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(8));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(9));
 NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(10));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(11));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(12));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(13));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(14));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(15));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(16));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(11));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(12));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(13));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(14));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(15));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(16));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(17));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(18));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(19));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(20));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(21));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(22));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(19));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(20));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(21));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(22));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(23));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(24));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(25));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(26));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(27));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(28));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(29));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(24));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(25));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(26));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(27));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(28));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(29));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_INDIAN.isLeapYear(30));
     }
 
     @Test
     public void testHabashAlHasibBasedLeapYear() {
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(1));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(1));
 NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(2));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(3));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(4));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(5));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(3));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(4));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(5));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(6));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(7));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(8));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(9));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(10));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(11));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(12));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(13));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(14));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(15));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(16));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(7));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(8));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(9));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(10));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(11));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(12));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(13));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(14));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(15));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(16));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(17));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(18));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(19));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(20));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(21));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(18));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(19));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(20));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(21));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(22));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(23));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(24));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(25));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(23));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(24));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(25));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(26));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(27));
-NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(28));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(27));
+        assertEquals(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(28));
 NoAssert.donothing(false, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(29));
-NoAssert.donothing(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(30));
+        assertEquals(true, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.isLeapYear(30));
 
 	/* test Leap Year Pattern an7s */
-NoAssert.donothing(3, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.index);
+        assertEquals(3, IslamicChronology.LEAP_YEAR_HABASH_AL_HASIB.index);
     }
 
 }

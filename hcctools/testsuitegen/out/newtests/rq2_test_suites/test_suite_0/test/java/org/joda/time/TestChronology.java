@@ -118,8 +118,8 @@ public class TestChronology  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testTest() {
 NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
-NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
+        assertEquals("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
@@ -129,17 +129,17 @@ NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString(
         Chronology chrono3 = ISOChronology.getInstance();
         
 NoAssert.donothing(true, chrono1.equals(chrono2));
-NoAssert.donothing(false, chrono1.equals(chrono3));
+        assertEquals(false, chrono1.equals(chrono3));
         
         DateTime dt1 = new DateTime(0L, chrono1);
         DateTime dt2 = new DateTime(0L, chrono2);
         DateTime dt3 = new DateTime(0L, chrono3);
         
 NoAssert.donothing(true, dt1.equals(dt2));
-NoAssert.donothing(false, dt1.equals(dt3));
+        assertEquals(false, dt1.equals(dt3));
         
-NoAssert.donothing(true, chrono1.hashCode() == chrono2.hashCode());
-NoAssert.donothing(false, chrono1.hashCode() == chrono3.hashCode());
+        assertEquals(true, chrono1.hashCode() == chrono2.hashCode());
+        assertEquals(false, chrono1.hashCode() == chrono3.hashCode());
     }
 
     //-----------------------------------------------------------------------
@@ -148,8 +148,8 @@ NoAssert.donothing(false, chrono1.hashCode() == chrono3.hashCode());
         Chronology chrono2 = LenientChronology.getInstance(ISOChronology.getInstanceUTC());
         Chronology chrono3 = LenientChronology.getInstance(ISOChronology.getInstance());
         
-NoAssert.donothing(true, chrono1.equals(chrono2));
-NoAssert.donothing(false, chrono1.equals(chrono3));
+        assertEquals(true, chrono1.equals(chrono2));
+        assertEquals(false, chrono1.equals(chrono3));
         
         DateTime dt1 = new DateTime(0L, chrono1);
         DateTime dt2 = new DateTime(0L, chrono2);
@@ -158,8 +158,8 @@ NoAssert.donothing(false, chrono1.equals(chrono3));
 NoAssert.donothing(true, dt1.equals(dt2));
 NoAssert.donothing(false, dt1.equals(dt3));
         
-NoAssert.donothing(true, chrono1.hashCode() == chrono2.hashCode());
-NoAssert.donothing(false, chrono1.hashCode() == chrono3.hashCode());
+        assertEquals(true, chrono1.hashCode() == chrono2.hashCode());
+        assertEquals(false, chrono1.hashCode() == chrono3.hashCode());
     }
 
     //-----------------------------------------------------------------------
@@ -168,18 +168,18 @@ NoAssert.donothing(false, chrono1.hashCode() == chrono3.hashCode());
         Chronology chrono2 = StrictChronology.getInstance(ISOChronology.getInstanceUTC());
         Chronology chrono3 = StrictChronology.getInstance(ISOChronology.getInstance());
         
-NoAssert.donothing(true, chrono1.equals(chrono2));
-NoAssert.donothing(false, chrono1.equals(chrono3));
+        assertEquals(true, chrono1.equals(chrono2));
+        assertEquals(false, chrono1.equals(chrono3));
         
         DateTime dt1 = new DateTime(0L, chrono1);
         DateTime dt2 = new DateTime(0L, chrono2);
         DateTime dt3 = new DateTime(0L, chrono3);
         
-NoAssert.donothing(true, dt1.equals(dt2));
-NoAssert.donothing(false, dt1.equals(dt3));
+        assertEquals(true, dt1.equals(dt2));
+        assertEquals(false, dt1.equals(dt3));
         
-NoAssert.donothing(true, chrono1.hashCode() == chrono2.hashCode());
-NoAssert.donothing(false, chrono1.hashCode() == chrono3.hashCode());
+        assertEquals(true, chrono1.hashCode() == chrono2.hashCode());
+        assertEquals(false, chrono1.hashCode() == chrono3.hashCode());
     }
 
     //-----------------------------------------------------------------------
@@ -193,22 +193,22 @@ NoAssert.donothing(false, chrono1.hashCode() == chrono3.hashCode());
         Chronology chrono2B = LimitChronology.getInstance(ISOChronology.getInstanceUTC(), lower, higherB);
         Chronology chrono3 = LimitChronology.getInstance(ISOChronology.getInstance(), lower, higherA);
         
-NoAssert.donothing(true, chrono1.equals(chrono2A));
-NoAssert.donothing(false, chrono1.equals(chrono2B));
-NoAssert.donothing(false, chrono1.equals(chrono3));
+        assertEquals(true, chrono1.equals(chrono2A));
+        assertEquals(false, chrono1.equals(chrono2B));
+        assertEquals(false, chrono1.equals(chrono3));
         
         DateTime dt1 = new DateTime(0L, chrono1);
         DateTime dt2A = new DateTime(0L, chrono2A);
         DateTime dt2B = new DateTime(0L, chrono2B);
         DateTime dt3 = new DateTime(0L, chrono3);
         
-NoAssert.donothing(true, dt1.equals(dt2A));
-NoAssert.donothing(false, dt1.equals(dt2B));
-NoAssert.donothing(false, dt1.equals(dt3));
+        assertEquals(true, dt1.equals(dt2A));
+        assertEquals(false, dt1.equals(dt2B));
+        assertEquals(false, dt1.equals(dt3));
         
 NoAssert.donothing(true, chrono1.hashCode() == chrono2A.hashCode());
-NoAssert.donothing(false, chrono1.hashCode() == chrono2B.hashCode());
-NoAssert.donothing(false, chrono1.hashCode() == chrono3.hashCode());
+        assertEquals(false, chrono1.hashCode() == chrono2B.hashCode());
+        assertEquals(false, chrono1.hashCode() == chrono3.hashCode());
     }
 
     //-----------------------------------------------------------------------
@@ -220,7 +220,7 @@ NoAssert.donothing(false, chrono1.hashCode() == chrono3.hashCode());
         Chronology chrono2 = ZonedChronology.getInstance(ISOChronology.getInstanceUTC(), zoneA);
         Chronology chrono3 = ZonedChronology.getInstance(ISOChronology.getInstanceUTC(), zoneB);
         
-NoAssert.donothing(true, chrono1.equals(chrono2));
+        assertEquals(true, chrono1.equals(chrono2));
 NoAssert.donothing(false, chrono1.equals(chrono3));
         
         DateTime dt1 = new DateTime(0L, chrono1);
@@ -228,10 +228,10 @@ NoAssert.donothing(false, chrono1.equals(chrono3));
         DateTime dt3 = new DateTime(0L, chrono3);
         
 NoAssert.donothing(true, dt1.equals(dt2));
-NoAssert.donothing(false, dt1.equals(dt3));
+        assertEquals(false, dt1.equals(dt3));
         
-NoAssert.donothing(true, chrono1.hashCode() == chrono2.hashCode());
-NoAssert.donothing(false, chrono1.hashCode() == chrono3.hashCode());
+        assertEquals(true, chrono1.hashCode() == chrono2.hashCode());
+        assertEquals(false, chrono1.hashCode() == chrono3.hashCode());
     }
 
     //-----------------------------------------------------------------------
@@ -239,19 +239,19 @@ NoAssert.donothing(false, chrono1.hashCode() == chrono3.hashCode());
         DateTimeZone paris = DateTimeZone.forID("Europe/Paris");
         ISOChronology isoParis = ISOChronology.getInstance(paris);
         
-NoAssert.donothing("ISOChronology[Europe/Paris]", isoParis.toString());
-NoAssert.donothing("GJChronology[Europe/Paris]", GJChronology.getInstance(paris).toString());
-NoAssert.donothing("GregorianChronology[Europe/Paris]", GregorianChronology.getInstance(paris).toString());
+        assertEquals("ISOChronology[Europe/Paris]", isoParis.toString());
+        assertEquals("GJChronology[Europe/Paris]", GJChronology.getInstance(paris).toString());
+        assertEquals("GregorianChronology[Europe/Paris]", GregorianChronology.getInstance(paris).toString());
 NoAssert.donothing("JulianChronology[Europe/Paris]", JulianChronology.getInstance(paris).toString());
 NoAssert.donothing("BuddhistChronology[Europe/Paris]", BuddhistChronology.getInstance(paris).toString());
-NoAssert.donothing("CopticChronology[Europe/Paris]", CopticChronology.getInstance(paris).toString());
-NoAssert.donothing("EthiopicChronology[Europe/Paris]", EthiopicChronology.getInstance(paris).toString());
-NoAssert.donothing("IslamicChronology[Europe/Paris]", IslamicChronology.getInstance(paris).toString());
+        assertEquals("CopticChronology[Europe/Paris]", CopticChronology.getInstance(paris).toString());
+        assertEquals("EthiopicChronology[Europe/Paris]", EthiopicChronology.getInstance(paris).toString());
+        assertEquals("IslamicChronology[Europe/Paris]", IslamicChronology.getInstance(paris).toString());
         
-NoAssert.donothing("LenientChronology[ISOChronology[Europe/Paris]]", LenientChronology.getInstance(isoParis).toString());
-NoAssert.donothing("StrictChronology[ISOChronology[Europe/Paris]]", StrictChronology.getInstance(isoParis).toString());
+        assertEquals("LenientChronology[ISOChronology[Europe/Paris]]", LenientChronology.getInstance(isoParis).toString());
+        assertEquals("StrictChronology[ISOChronology[Europe/Paris]]", StrictChronology.getInstance(isoParis).toString());
 NoAssert.donothing("LimitChronology[ISOChronology[Europe/Paris], NoLimit, NoLimit]", LimitChronology.getInstance(isoParis, null, null).toString());
-NoAssert.donothing("ZonedChronology[ISOChronology[UTC], Europe/Paris]", ZonedChronology.getInstance(isoParis, paris).toString());
+        assertEquals("ZonedChronology[ISOChronology[UTC], Europe/Paris]", ZonedChronology.getInstance(isoParis, paris).toString());
     }
 
 }

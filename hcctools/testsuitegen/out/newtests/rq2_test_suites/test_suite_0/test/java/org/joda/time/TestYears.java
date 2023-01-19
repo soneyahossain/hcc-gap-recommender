@@ -79,24 +79,24 @@ public class TestYears  { //extends TestCase {
     //-----------------------------------------------------------------------
     @Test public void testConstants() {
 
-NoAssert.donothing(0, Years.ZERO.getYears());
+        assertEquals(0, Years.ZERO.getYears());
 NoAssert.donothing(1, Years.ONE.getYears());
 NoAssert.donothing(2, Years.TWO.getYears());
-NoAssert.donothing(3, Years.THREE.getYears());
-NoAssert.donothing(Integer.MAX_VALUE, Years.MAX_VALUE.getYears());
-NoAssert.donothing(Integer.MIN_VALUE, Years.MIN_VALUE.getYears());
+        assertEquals(3, Years.THREE.getYears());
+        assertEquals(Integer.MAX_VALUE, Years.MAX_VALUE.getYears());
+        assertEquals(Integer.MIN_VALUE, Years.MIN_VALUE.getYears());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testFactory_years_int() {
-NoAssert.donothing(Years.ZERO, Years.years(0));
-NoAssert.donothing(Years.ONE, Years.years(1));
-NoAssert.donothing(Years.TWO, Years.years(2));
-NoAssert.donothing(Years.THREE, Years.years(3));
-NoAssert.donothing(Years.MAX_VALUE, Years.years(Integer.MAX_VALUE));
-NoAssert.donothing(Years.MIN_VALUE, Years.years(Integer.MIN_VALUE));
+        assertSame(Years.ZERO, Years.years(0));
+        assertSame(Years.ONE, Years.years(1));
+        assertSame(Years.TWO, Years.years(2));
+        assertSame(Years.THREE, Years.years(3));
+        assertSame(Years.MAX_VALUE, Years.years(Integer.MAX_VALUE));
+        assertSame(Years.MIN_VALUE, Years.years(Integer.MIN_VALUE));
 NoAssert.donothing(-1, Years.years(-1).getYears());
-NoAssert.donothing(4, Years.years(4).getYears());
+        assertEquals(4, Years.years(4).getYears());
     }
 
     //-----------------------------------------------------------------------
@@ -105,11 +105,11 @@ NoAssert.donothing(4, Years.years(4).getYears());
         DateTime end1 = new DateTime(2009, 6, 9, 12, 0, 0, 0, PARIS);
         DateTime end2 = new DateTime(2012, 6, 9, 12, 0, 0, 0, PARIS);
 
-NoAssert.donothing(3, Years.yearsBetween(start, end1).getYears());
-NoAssert.donothing(0, Years.yearsBetween(start, start).getYears());
-NoAssert.donothing(0, Years.yearsBetween(end1, end1).getYears());
-NoAssert.donothing(-3, Years.yearsBetween(end1, start).getYears());
-NoAssert.donothing(6, Years.yearsBetween(start, end2).getYears());
+        assertEquals(3, Years.yearsBetween(start, end1).getYears());
+        assertEquals(0, Years.yearsBetween(start, start).getYears());
+        assertEquals(0, Years.yearsBetween(end1, end1).getYears());
+        assertEquals(-3, Years.yearsBetween(end1, start).getYears());
+        assertEquals(6, Years.yearsBetween(start, end2).getYears());
     }
 
     @SuppressWarnings("deprecation")
@@ -118,10 +118,10 @@ NoAssert.donothing(6, Years.yearsBetween(start, end2).getYears());
         LocalDate end1 = new LocalDate(2009, 6, 9);
         YearMonthDay end2 = new YearMonthDay(2012, 6, 9);
 
-NoAssert.donothing(3, Years.yearsBetween(start, end1).getYears());
-NoAssert.donothing(0, Years.yearsBetween(start, start).getYears());
-NoAssert.donothing(0, Years.yearsBetween(end1, end1).getYears());
-NoAssert.donothing(-3, Years.yearsBetween(end1, start).getYears());
+        assertEquals(3, Years.yearsBetween(start, end1).getYears());
+        assertEquals(0, Years.yearsBetween(start, start).getYears());
+        assertEquals(0, Years.yearsBetween(end1, end1).getYears());
+        assertEquals(-3, Years.yearsBetween(end1, start).getYears());
 NoAssert.donothing(6, Years.yearsBetween(start, end2).getYears());
     }
 
@@ -130,20 +130,20 @@ NoAssert.donothing(6, Years.yearsBetween(start, end2).getYears());
         DateTime end1 = new DateTime(2009, 6, 9, 12, 0, 0, 0, PARIS);
         DateTime end2 = new DateTime(2012, 6, 9, 12, 0, 0, 0, PARIS);
 
-NoAssert.donothing(0, Years.yearsIn((ReadableInterval) null).getYears());
-NoAssert.donothing(3, Years.yearsIn(new Interval(start, end1)).getYears());
-NoAssert.donothing(0, Years.yearsIn(new Interval(start, start)).getYears());
+        assertEquals(0, Years.yearsIn((ReadableInterval) null).getYears());
+        assertEquals(3, Years.yearsIn(new Interval(start, end1)).getYears());
+        assertEquals(0, Years.yearsIn(new Interval(start, start)).getYears());
 NoAssert.donothing(0, Years.yearsIn(new Interval(end1, end1)).getYears());
-NoAssert.donothing(6, Years.yearsIn(new Interval(start, end2)).getYears());
+        assertEquals(6, Years.yearsIn(new Interval(start, end2)).getYears());
     }
 
     @Test public void testFactory_parseYears_String() {
-NoAssert.donothing(0, Years.parseYears((String) null).getYears());
-NoAssert.donothing(0, Years.parseYears("P0Y").getYears());
-NoAssert.donothing(1, Years.parseYears("P1Y").getYears());
-NoAssert.donothing(-3, Years.parseYears("P-3Y").getYears());
-NoAssert.donothing(2, Years.parseYears("P2Y0M").getYears());
-NoAssert.donothing(2, Years.parseYears("P2YT0H0M").getYears());
+        assertEquals(0, Years.parseYears((String) null).getYears());
+        assertEquals(0, Years.parseYears("P0Y").getYears());
+        assertEquals(1, Years.parseYears("P1Y").getYears());
+        assertEquals(-3, Years.parseYears("P-3Y").getYears());
+        assertEquals(2, Years.parseYears("P2Y0M").getYears());
+        assertEquals(2, Years.parseYears("P2YT0H0M").getYears());
         try {
             Years.parseYears("P1M1D");
             fail();
@@ -161,7 +161,7 @@ NoAssert.donothing(2, Years.parseYears("P2YT0H0M").getYears());
     //-----------------------------------------------------------------------
     @Test public void testGetMethods() {
         Years test = Years.years(20);
-NoAssert.donothing(20, test.getYears());
+        assertEquals(20, test.getYears());
     }
 
     @Test public void testGetFieldType() {
@@ -171,33 +171,33 @@ NoAssert.donothing(DurationFieldType.years(), test.getFieldType());
 
     @Test public void testGetPeriodType() {
         Years test = Years.years(20);
-NoAssert.donothing(PeriodType.years(), test.getPeriodType());
+        assertEquals(PeriodType.years(), test.getPeriodType());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testIsGreaterThan() {
-NoAssert.donothing(true, Years.THREE.isGreaterThan(Years.TWO));
-NoAssert.donothing(false, Years.THREE.isGreaterThan(Years.THREE));
+        assertEquals(true, Years.THREE.isGreaterThan(Years.TWO));
+        assertEquals(false, Years.THREE.isGreaterThan(Years.THREE));
 NoAssert.donothing(false, Years.TWO.isGreaterThan(Years.THREE));
-NoAssert.donothing(true, Years.ONE.isGreaterThan(null));
-NoAssert.donothing(false, Years.years(-1).isGreaterThan(null));
+        assertEquals(true, Years.ONE.isGreaterThan(null));
+        assertEquals(false, Years.years(-1).isGreaterThan(null));
     }
 
     @Test public void testIsLessThan() {
-NoAssert.donothing(false, Years.THREE.isLessThan(Years.TWO));
-NoAssert.donothing(false, Years.THREE.isLessThan(Years.THREE));
-NoAssert.donothing(true, Years.TWO.isLessThan(Years.THREE));
-NoAssert.donothing(false, Years.ONE.isLessThan(null));
-NoAssert.donothing(true, Years.years(-1).isLessThan(null));
+        assertEquals(false, Years.THREE.isLessThan(Years.TWO));
+        assertEquals(false, Years.THREE.isLessThan(Years.THREE));
+        assertEquals(true, Years.TWO.isLessThan(Years.THREE));
+        assertEquals(false, Years.ONE.isLessThan(null));
+        assertEquals(true, Years.years(-1).isLessThan(null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToString() {
         Years test = Years.years(20);
-NoAssert.donothing("P20Y", test.toString());
+        assertEquals("P20Y", test.toString());
 
         test = Years.years(-20);
-NoAssert.donothing("P-20Y", test.toString());
+        assertEquals("P-20Y", test.toString());
     }
 
     //-----------------------------------------------------------------------
@@ -215,17 +215,17 @@ NoAssert.donothing("P-20Y", test.toString());
         Years result = (Years) ois.readObject();
         ois.close();
 
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testPlus_int() {
         Years test2 = Years.years(2);
         Years result = test2.plus(3);
-NoAssert.donothing(2, test2.getYears());
-NoAssert.donothing(5, result.getYears());
+        assertEquals(2, test2.getYears());
+        assertEquals(5, result.getYears());
 
-NoAssert.donothing(1, Years.ONE.plus(0).getYears());
+        assertEquals(1, Years.ONE.plus(0).getYears());
 
         try {
             Years.MAX_VALUE.plus(1);
@@ -239,12 +239,12 @@ NoAssert.donothing(1, Years.ONE.plus(0).getYears());
         Years test2 = Years.years(2);
         Years test3 = Years.years(3);
         Years result = test2.plus(test3);
-NoAssert.donothing(2, test2.getYears());
-NoAssert.donothing(3, test3.getYears());
-NoAssert.donothing(5, result.getYears());
+        assertEquals(2, test2.getYears());
+        assertEquals(3, test3.getYears());
+        assertEquals(5, result.getYears());
 
-NoAssert.donothing(1, Years.ONE.plus(Years.ZERO).getYears());
-NoAssert.donothing(1, Years.ONE.plus((Years) null).getYears());
+        assertEquals(1, Years.ONE.plus(Years.ZERO).getYears());
+        assertEquals(1, Years.ONE.plus((Years) null).getYears());
 
         try {
             Years.MAX_VALUE.plus(Years.ONE);
@@ -257,10 +257,10 @@ NoAssert.donothing(1, Years.ONE.plus((Years) null).getYears());
     @Test public void testMinus_int() {
         Years test2 = Years.years(2);
         Years result = test2.minus(3);
-NoAssert.donothing(2, test2.getYears());
-NoAssert.donothing(-1, result.getYears());
+        assertEquals(2, test2.getYears());
+        assertEquals(-1, result.getYears());
 
-NoAssert.donothing(1, Years.ONE.minus(0).getYears());
+        assertEquals(1, Years.ONE.minus(0).getYears());
 
         try {
             Years.MIN_VALUE.minus(1);
@@ -274,12 +274,12 @@ NoAssert.donothing(1, Years.ONE.minus(0).getYears());
         Years test2 = Years.years(2);
         Years test3 = Years.years(3);
         Years result = test2.minus(test3);
-NoAssert.donothing(2, test2.getYears());
-NoAssert.donothing(3, test3.getYears());
-NoAssert.donothing(-1, result.getYears());
+        assertEquals(2, test2.getYears());
+        assertEquals(3, test3.getYears());
+        assertEquals(-1, result.getYears());
 
 NoAssert.donothing(1, Years.ONE.minus(Years.ZERO).getYears());
-NoAssert.donothing(1, Years.ONE.minus((Years) null).getYears());
+        assertEquals(1, Years.ONE.minus((Years) null).getYears());
 
         try {
             Years.MIN_VALUE.minus(Years.ONE);
@@ -291,10 +291,10 @@ NoAssert.donothing(1, Years.ONE.minus((Years) null).getYears());
 
     @Test public void testMultipliedBy_int() {
         Years test = Years.years(2);
-NoAssert.donothing(6, test.multipliedBy(3).getYears());
-NoAssert.donothing(2, test.getYears());
+        assertEquals(6, test.multipliedBy(3).getYears());
+        assertEquals(2, test.getYears());
 NoAssert.donothing(-6, test.multipliedBy(-3).getYears());
-NoAssert.donothing(test, test.multipliedBy(1));
+        assertSame(test, test.multipliedBy(1));
 
         Years halfMax = Years.years(Integer.MAX_VALUE / 2 + 1);
         try {
@@ -307,13 +307,13 @@ NoAssert.donothing(test, test.multipliedBy(1));
 
     @Test public void testDividedBy_int() {
         Years test = Years.years(12);
-NoAssert.donothing(6, test.dividedBy(2).getYears());
-NoAssert.donothing(12, test.getYears());
-NoAssert.donothing(4, test.dividedBy(3).getYears());
-NoAssert.donothing(3, test.dividedBy(4).getYears());
-NoAssert.donothing(2, test.dividedBy(5).getYears());
-NoAssert.donothing(2, test.dividedBy(6).getYears());
-NoAssert.donothing(test, test.dividedBy(1));
+        assertEquals(6, test.dividedBy(2).getYears());
+        assertEquals(12, test.getYears());
+        assertEquals(4, test.dividedBy(3).getYears());
+        assertEquals(3, test.dividedBy(4).getYears());
+        assertEquals(2, test.dividedBy(5).getYears());
+        assertEquals(2, test.dividedBy(6).getYears());
+        assertSame(test, test.dividedBy(1));
 
         try {
             Years.ONE.dividedBy(0);
@@ -325,8 +325,8 @@ NoAssert.donothing(test, test.dividedBy(1));
 
     @Test public void testNegated() {
         Years test = Years.years(12);
-NoAssert.donothing(-12, test.negated().getYears());
-NoAssert.donothing(12, test.getYears());
+        assertEquals(-12, test.negated().getYears());
+        assertEquals(12, test.getYears());
 
         try {
             Years.MIN_VALUE.negated();

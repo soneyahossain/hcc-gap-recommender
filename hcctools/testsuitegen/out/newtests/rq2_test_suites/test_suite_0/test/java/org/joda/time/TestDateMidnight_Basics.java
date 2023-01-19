@@ -203,9 +203,9 @@ public class TestDateMidnight_Basics  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW_UTC).toString());
-NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1_UTC).toString());
-NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2_UTC).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW_UTC).toString());
+        assertEquals("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1_UTC).toString());
+        assertEquals("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2_UTC).toString());
     }
 
     //-----------------------------------------------------------------------
@@ -213,26 +213,26 @@ NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2_UTC).toStr
         DateMidnight test = new DateMidnight();
 NoAssert.donothing(1, test.get(ISO_DEFAULT.era()));
 NoAssert.donothing(20, test.get(ISO_DEFAULT.centuryOfEra()));
-NoAssert.donothing(2, test.get(ISO_DEFAULT.yearOfCentury()));
-NoAssert.donothing(2002, test.get(ISO_DEFAULT.yearOfEra()));
-NoAssert.donothing(2002, test.get(ISO_DEFAULT.year()));
-NoAssert.donothing(6, test.get(ISO_DEFAULT.monthOfYear()));
+        assertEquals(2, test.get(ISO_DEFAULT.yearOfCentury()));
+        assertEquals(2002, test.get(ISO_DEFAULT.yearOfEra()));
+        assertEquals(2002, test.get(ISO_DEFAULT.year()));
+        assertEquals(6, test.get(ISO_DEFAULT.monthOfYear()));
 NoAssert.donothing(9, test.get(ISO_DEFAULT.dayOfMonth()));
-NoAssert.donothing(2002, test.get(ISO_DEFAULT.weekyear()));
-NoAssert.donothing(23, test.get(ISO_DEFAULT.weekOfWeekyear()));
-NoAssert.donothing(7, test.get(ISO_DEFAULT.dayOfWeek()));
-NoAssert.donothing(160, test.get(ISO_DEFAULT.dayOfYear()));
-NoAssert.donothing(0, test.get(ISO_DEFAULT.halfdayOfDay()));
-NoAssert.donothing(0, test.get(ISO_DEFAULT.hourOfHalfday()));
-NoAssert.donothing(24, test.get(ISO_DEFAULT.clockhourOfDay()));
+        assertEquals(2002, test.get(ISO_DEFAULT.weekyear()));
+        assertEquals(23, test.get(ISO_DEFAULT.weekOfWeekyear()));
+        assertEquals(7, test.get(ISO_DEFAULT.dayOfWeek()));
+        assertEquals(160, test.get(ISO_DEFAULT.dayOfYear()));
+        assertEquals(0, test.get(ISO_DEFAULT.halfdayOfDay()));
+        assertEquals(0, test.get(ISO_DEFAULT.hourOfHalfday()));
+        assertEquals(24, test.get(ISO_DEFAULT.clockhourOfDay()));
 NoAssert.donothing(12, test.get(ISO_DEFAULT.clockhourOfHalfday()));
-NoAssert.donothing(0, test.get(ISO_DEFAULT.hourOfDay()));
+        assertEquals(0, test.get(ISO_DEFAULT.hourOfDay()));
 NoAssert.donothing(0, test.get(ISO_DEFAULT.minuteOfHour()));
-NoAssert.donothing(0, test.get(ISO_DEFAULT.minuteOfDay()));
-NoAssert.donothing(0, test.get(ISO_DEFAULT.secondOfMinute()));
+        assertEquals(0, test.get(ISO_DEFAULT.minuteOfDay()));
+        assertEquals(0, test.get(ISO_DEFAULT.secondOfMinute()));
 NoAssert.donothing(0, test.get(ISO_DEFAULT.secondOfDay()));
-NoAssert.donothing(0, test.get(ISO_DEFAULT.millisOfSecond()));
-NoAssert.donothing(0, test.get(ISO_DEFAULT.millisOfDay()));
+        assertEquals(0, test.get(ISO_DEFAULT.millisOfSecond()));
+        assertEquals(0, test.get(ISO_DEFAULT.millisOfDay()));
         try {
             test.get((DateTimeField) null);
             fail();
@@ -241,28 +241,28 @@ NoAssert.donothing(0, test.get(ISO_DEFAULT.millisOfDay()));
 
     @Test public void testGet_DateTimeFieldType() {
         DateMidnight test = new DateMidnight();
-NoAssert.donothing(1, test.get(DateTimeFieldType.era()));
-NoAssert.donothing(20, test.get(DateTimeFieldType.centuryOfEra()));
-NoAssert.donothing(2, test.get(DateTimeFieldType.yearOfCentury()));
-NoAssert.donothing(2002, test.get(DateTimeFieldType.yearOfEra()));
+        assertEquals(1, test.get(DateTimeFieldType.era()));
+        assertEquals(20, test.get(DateTimeFieldType.centuryOfEra()));
+        assertEquals(2, test.get(DateTimeFieldType.yearOfCentury()));
+        assertEquals(2002, test.get(DateTimeFieldType.yearOfEra()));
 NoAssert.donothing(2002, test.get(DateTimeFieldType.year()));
-NoAssert.donothing(6, test.get(DateTimeFieldType.monthOfYear()));
-NoAssert.donothing(9, test.get(DateTimeFieldType.dayOfMonth()));
-NoAssert.donothing(2002, test.get(DateTimeFieldType.weekyear()));
-NoAssert.donothing(23, test.get(DateTimeFieldType.weekOfWeekyear()));
+        assertEquals(6, test.get(DateTimeFieldType.monthOfYear()));
+        assertEquals(9, test.get(DateTimeFieldType.dayOfMonth()));
+        assertEquals(2002, test.get(DateTimeFieldType.weekyear()));
+        assertEquals(23, test.get(DateTimeFieldType.weekOfWeekyear()));
 NoAssert.donothing(7, test.get(DateTimeFieldType.dayOfWeek()));
-NoAssert.donothing(160, test.get(DateTimeFieldType.dayOfYear()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.halfdayOfDay()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.hourOfHalfday()));
-NoAssert.donothing(24, test.get(DateTimeFieldType.clockhourOfDay()));
+        assertEquals(160, test.get(DateTimeFieldType.dayOfYear()));
+        assertEquals(0, test.get(DateTimeFieldType.halfdayOfDay()));
+        assertEquals(0, test.get(DateTimeFieldType.hourOfHalfday()));
+        assertEquals(24, test.get(DateTimeFieldType.clockhourOfDay()));
 NoAssert.donothing(12, test.get(DateTimeFieldType.clockhourOfHalfday()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.hourOfDay()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.minuteOfHour()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.minuteOfDay()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.secondOfMinute()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.secondOfDay()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.millisOfSecond()));
-NoAssert.donothing(0, test.get(DateTimeFieldType.millisOfDay()));
+        assertEquals(0, test.get(DateTimeFieldType.hourOfDay()));
+        assertEquals(0, test.get(DateTimeFieldType.minuteOfHour()));
+        assertEquals(0, test.get(DateTimeFieldType.minuteOfDay()));
+        assertEquals(0, test.get(DateTimeFieldType.secondOfMinute()));
+        assertEquals(0, test.get(DateTimeFieldType.secondOfDay()));
+        assertEquals(0, test.get(DateTimeFieldType.millisOfSecond()));
+        assertEquals(0, test.get(DateTimeFieldType.millisOfDay()));
         try {
             test.get((DateTimeFieldType) null);
             fail();
@@ -274,27 +274,27 @@ NoAssert.donothing(0, test.get(DateTimeFieldType.millisOfDay()));
         DateMidnight test = new DateMidnight();
         
 NoAssert.donothing(ISO_DEFAULT, test.getChronology());
-NoAssert.donothing(LONDON, test.getZone());
-NoAssert.donothing(TEST_TIME_NOW_LONDON, test.getMillis());
+        assertEquals(LONDON, test.getZone());
+        assertEquals(TEST_TIME_NOW_LONDON, test.getMillis());
         
-NoAssert.donothing(1, test.getEra());
-NoAssert.donothing(20, test.getCenturyOfEra());
+        assertEquals(1, test.getEra());
+        assertEquals(20, test.getCenturyOfEra());
 NoAssert.donothing(2, test.getYearOfCentury());
-NoAssert.donothing(2002, test.getYearOfEra());
-NoAssert.donothing(2002, test.getYear());
-NoAssert.donothing(6, test.getMonthOfYear());
-NoAssert.donothing(9, test.getDayOfMonth());
-NoAssert.donothing(2002, test.getWeekyear());
-NoAssert.donothing(23, test.getWeekOfWeekyear());
-NoAssert.donothing(7, test.getDayOfWeek());
-NoAssert.donothing(160, test.getDayOfYear());
-NoAssert.donothing(0, test.getHourOfDay());
-NoAssert.donothing(0, test.getMinuteOfHour());
-NoAssert.donothing(0, test.getMinuteOfDay());
-NoAssert.donothing(0, test.getSecondOfMinute());
-NoAssert.donothing(0, test.getSecondOfDay());
-NoAssert.donothing(0, test.getMillisOfSecond());
-NoAssert.donothing(0, test.getMillisOfDay());
+        assertEquals(2002, test.getYearOfEra());
+        assertEquals(2002, test.getYear());
+        assertEquals(6, test.getMonthOfYear());
+        assertEquals(9, test.getDayOfMonth());
+        assertEquals(2002, test.getWeekyear());
+        assertEquals(23, test.getWeekOfWeekyear());
+        assertEquals(7, test.getDayOfWeek());
+        assertEquals(160, test.getDayOfYear());
+        assertEquals(0, test.getHourOfDay());
+        assertEquals(0, test.getMinuteOfHour());
+        assertEquals(0, test.getMinuteOfDay());
+        assertEquals(0, test.getSecondOfMinute());
+        assertEquals(0, test.getSecondOfDay());
+        assertEquals(0, test.getMillisOfSecond());
+        assertEquals(0, test.getMillisOfDay());
     }
 
     @Test public void testWithers() {
@@ -326,24 +326,24 @@ NoAssert.donothing(0, test.getMillisOfDay());
         DateMidnight test1 = new DateMidnight(TEST_TIME1_UTC);
         DateMidnight test2 = new DateMidnight(TEST_TIME1_UTC);
 NoAssert.donothing(true, test1.equals(test2));
-NoAssert.donothing(true, test2.equals(test1));
-NoAssert.donothing(true, test1.equals(test1));
+        assertEquals(true, test2.equals(test1));
+        assertEquals(true, test1.equals(test1));
 NoAssert.donothing(true, test2.equals(test2));
-NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
+        assertEquals(true, test1.hashCode() == test2.hashCode());
 NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
-NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
+        assertEquals(true, test2.hashCode() == test2.hashCode());
         
         DateMidnight test3 = new DateMidnight(TEST_TIME2_UTC);
-NoAssert.donothing(false, test1.equals(test3));
-NoAssert.donothing(false, test2.equals(test3));
-NoAssert.donothing(false, test3.equals(test1));
-NoAssert.donothing(false, test3.equals(test2));
-NoAssert.donothing(false, test1.hashCode() == test3.hashCode());
+        assertEquals(false, test1.equals(test3));
+        assertEquals(false, test2.equals(test3));
+        assertEquals(false, test3.equals(test1));
+        assertEquals(false, test3.equals(test2));
+        assertEquals(false, test1.hashCode() == test3.hashCode());
 NoAssert.donothing(false, test2.hashCode() == test3.hashCode());
         
 NoAssert.donothing(false, test1.equals("Hello"));
-NoAssert.donothing(true, test1.equals(new MockInstant()));
-NoAssert.donothing(false, test1.equals(new DateMidnight(TEST_TIME1_UTC, GREGORIAN_DEFAULT)));
+        assertEquals(true, test1.equals(new MockInstant()));
+        assertEquals(false, test1.equals(new DateMidnight(TEST_TIME1_UTC, GREGORIAN_DEFAULT)));
     }
     
     class MockInstant extends AbstractInstant {
@@ -362,21 +362,21 @@ NoAssert.donothing(false, test1.equals(new DateMidnight(TEST_TIME1_UTC, GREGORIA
         DateMidnight test1 = new DateMidnight(TEST_TIME1_UTC);
         DateMidnight test1a = new DateMidnight(TEST_TIME1_UTC);
 NoAssert.donothing(0, test1.compareTo(test1a));
-NoAssert.donothing(0, test1a.compareTo(test1));
-NoAssert.donothing(0, test1.compareTo(test1));
-NoAssert.donothing(0, test1a.compareTo(test1a));
+        assertEquals(0, test1a.compareTo(test1));
+        assertEquals(0, test1.compareTo(test1));
+        assertEquals(0, test1a.compareTo(test1a));
         
         DateMidnight test2 = new DateMidnight(TEST_TIME2_UTC);
-NoAssert.donothing(-1, test1.compareTo(test2));
-NoAssert.donothing(+1, test2.compareTo(test1));
+        assertEquals(-1, test1.compareTo(test2));
+        assertEquals(+1, test2.compareTo(test1));
         
         DateMidnight test3 = new DateMidnight(TEST_TIME2_UTC, GREGORIAN_PARIS);
 NoAssert.donothing(-1, test1.compareTo(test3));
-NoAssert.donothing(+1, test3.compareTo(test1));
-NoAssert.donothing(-1, test3.compareTo(test2));  // midnight paris before london
+        assertEquals(+1, test3.compareTo(test1));
+        assertEquals(-1, test3.compareTo(test2));  // midnight paris before london
         
-NoAssert.donothing(+1, test2.compareTo(new MockInstant()));
-NoAssert.donothing(0, test1.compareTo(new MockInstant()));
+        assertEquals(+1, test2.compareTo(new MockInstant()));
+        assertEquals(0, test1.compareTo(new MockInstant()));
         
         try {
             test1.compareTo(null);
@@ -391,30 +391,30 @@ NoAssert.donothing(0, test1.compareTo(new MockInstant()));
     @Test public void testIsEqual() {
         DateMidnight test1 = new DateMidnight(TEST_TIME1_UTC);
         DateMidnight test1a = new DateMidnight(TEST_TIME1_UTC);
-NoAssert.donothing(true, test1.isEqual(test1a));
-NoAssert.donothing(true, test1a.isEqual(test1));
-NoAssert.donothing(true, test1.isEqual(test1));
-NoAssert.donothing(true, test1a.isEqual(test1a));
+        assertEquals(true, test1.isEqual(test1a));
+        assertEquals(true, test1a.isEqual(test1));
+        assertEquals(true, test1.isEqual(test1));
+        assertEquals(true, test1a.isEqual(test1a));
         
         DateMidnight test2 = new DateMidnight(TEST_TIME2_UTC);
-NoAssert.donothing(false, test1.isEqual(test2));
-NoAssert.donothing(false, test2.isEqual(test1));
+        assertEquals(false, test1.isEqual(test2));
+        assertEquals(false, test2.isEqual(test1));
         
         DateMidnight test3 = new DateMidnight(TEST_TIME2_UTC, GREGORIAN_PARIS);
-NoAssert.donothing(false, test1.isEqual(test3));
-NoAssert.donothing(false, test3.isEqual(test1));
-NoAssert.donothing(false, test3.isEqual(test2));  // midnight paris before london
+        assertEquals(false, test1.isEqual(test3));
+        assertEquals(false, test3.isEqual(test1));
+        assertEquals(false, test3.isEqual(test2));  // midnight paris before london
         
-NoAssert.donothing(false, test2.isEqual(new MockInstant()));
-NoAssert.donothing(true, test1.isEqual(new MockInstant()));
+        assertEquals(false, test2.isEqual(new MockInstant()));
+        assertEquals(true, test1.isEqual(new MockInstant()));
         
-NoAssert.donothing(false, new DateMidnight(TEST_TIME_NOW_UTC + DateTimeConstants.MILLIS_PER_DAY, DateTimeZone.UTC).isEqual(null));
-NoAssert.donothing(true, new DateMidnight(TEST_TIME_NOW_UTC, DateTimeZone.UTC).isEqual(null));
-NoAssert.donothing(false, new DateMidnight(TEST_TIME_NOW_UTC - DateTimeConstants.MILLIS_PER_DAY, DateTimeZone.UTC).isEqual(null));
+        assertEquals(false, new DateMidnight(TEST_TIME_NOW_UTC + DateTimeConstants.MILLIS_PER_DAY, DateTimeZone.UTC).isEqual(null));
+        assertEquals(true, new DateMidnight(TEST_TIME_NOW_UTC, DateTimeZone.UTC).isEqual(null));
+        assertEquals(false, new DateMidnight(TEST_TIME_NOW_UTC - DateTimeConstants.MILLIS_PER_DAY, DateTimeZone.UTC).isEqual(null));
         
-NoAssert.donothing(false, new DateMidnight(2004, 6, 9).isEqual(new DateTime(2004, 6, 8, 23, 59, 59, 999)));
-NoAssert.donothing(true, new DateMidnight(2004, 6, 9).isEqual(new DateTime(2004, 6, 9, 0, 0, 0, 0)));
-NoAssert.donothing(false, new DateMidnight(2004, 6, 9).isEqual(new DateTime(2004, 6, 9, 0, 0, 0, 1)));
+        assertEquals(false, new DateMidnight(2004, 6, 9).isEqual(new DateTime(2004, 6, 8, 23, 59, 59, 999)));
+        assertEquals(true, new DateMidnight(2004, 6, 9).isEqual(new DateTime(2004, 6, 9, 0, 0, 0, 0)));
+        assertEquals(false, new DateMidnight(2004, 6, 9).isEqual(new DateTime(2004, 6, 9, 0, 0, 0, 1)));
     }
     
     @Test public void testIsBefore() {
@@ -422,57 +422,57 @@ NoAssert.donothing(false, new DateMidnight(2004, 6, 9).isEqual(new DateTime(2004
         DateMidnight test1a = new DateMidnight(TEST_TIME1_UTC);
 NoAssert.donothing(false, test1.isBefore(test1a));
 NoAssert.donothing(false, test1a.isBefore(test1));
-NoAssert.donothing(false, test1.isBefore(test1));
-NoAssert.donothing(false, test1a.isBefore(test1a));
+        assertEquals(false, test1.isBefore(test1));
+        assertEquals(false, test1a.isBefore(test1a));
         
         DateMidnight test2 = new DateMidnight(TEST_TIME2_UTC);
-NoAssert.donothing(true, test1.isBefore(test2));
-NoAssert.donothing(false, test2.isBefore(test1));
+        assertEquals(true, test1.isBefore(test2));
+        assertEquals(false, test2.isBefore(test1));
         
         DateMidnight test3 = new DateMidnight(TEST_TIME2_UTC, GREGORIAN_PARIS);
 NoAssert.donothing(true, test1.isBefore(test3));
-NoAssert.donothing(false, test3.isBefore(test1));
-NoAssert.donothing(true, test3.isBefore(test2));  // midnight paris before london
+        assertEquals(false, test3.isBefore(test1));
+        assertEquals(true, test3.isBefore(test2));  // midnight paris before london
         
-NoAssert.donothing(false, test2.isBefore(new MockInstant()));
-NoAssert.donothing(false, test1.isBefore(new MockInstant()));
+        assertEquals(false, test2.isBefore(new MockInstant()));
+        assertEquals(false, test1.isBefore(new MockInstant()));
         
 NoAssert.donothing(false, new DateMidnight(TEST_TIME_NOW_UTC + DateTimeConstants.MILLIS_PER_DAY, DateTimeZone.UTC).isBefore(null));
-NoAssert.donothing(false, new DateMidnight(TEST_TIME_NOW_UTC, DateTimeZone.UTC).isBefore(null));
-NoAssert.donothing(true, new DateMidnight(TEST_TIME_NOW_UTC - DateTimeConstants.MILLIS_PER_DAY, DateTimeZone.UTC).isBefore(null));
+        assertEquals(false, new DateMidnight(TEST_TIME_NOW_UTC, DateTimeZone.UTC).isBefore(null));
+        assertEquals(true, new DateMidnight(TEST_TIME_NOW_UTC - DateTimeConstants.MILLIS_PER_DAY, DateTimeZone.UTC).isBefore(null));
         
-NoAssert.donothing(false, new DateMidnight(2004, 6, 9).isBefore(new DateTime(2004, 6, 8, 23, 59, 59, 999)));
-NoAssert.donothing(false, new DateMidnight(2004, 6, 9).isBefore(new DateTime(2004, 6, 9, 0, 0, 0, 0)));
+        assertEquals(false, new DateMidnight(2004, 6, 9).isBefore(new DateTime(2004, 6, 8, 23, 59, 59, 999)));
+        assertEquals(false, new DateMidnight(2004, 6, 9).isBefore(new DateTime(2004, 6, 9, 0, 0, 0, 0)));
 NoAssert.donothing(true, new DateMidnight(2004, 6, 9).isBefore(new DateTime(2004, 6, 9, 0, 0, 0, 1)));
     }
     
     @Test public void testIsAfter() {
         DateMidnight test1 = new DateMidnight(TEST_TIME1_UTC);
         DateMidnight test1a = new DateMidnight(TEST_TIME1_UTC);
-NoAssert.donothing(false, test1.isAfter(test1a));
+        assertEquals(false, test1.isAfter(test1a));
 NoAssert.donothing(false, test1a.isAfter(test1));
-NoAssert.donothing(false, test1.isAfter(test1));
-NoAssert.donothing(false, test1a.isAfter(test1a));
+        assertEquals(false, test1.isAfter(test1));
+        assertEquals(false, test1a.isAfter(test1a));
         
         DateMidnight test2 = new DateMidnight(TEST_TIME2_UTC);
-NoAssert.donothing(false, test1.isAfter(test2));
-NoAssert.donothing(true, test2.isAfter(test1));
+        assertEquals(false, test1.isAfter(test2));
+        assertEquals(true, test2.isAfter(test1));
         
         DateMidnight test3 = new DateMidnight(TEST_TIME2_UTC, GREGORIAN_PARIS);
-NoAssert.donothing(false, test1.isAfter(test3));
-NoAssert.donothing(true, test3.isAfter(test1));
-NoAssert.donothing(false, test3.isAfter(test2));  // midnight paris before london
+        assertEquals(false, test1.isAfter(test3));
+        assertEquals(true, test3.isAfter(test1));
+        assertEquals(false, test3.isAfter(test2));  // midnight paris before london
         
-NoAssert.donothing(true, test2.isAfter(new MockInstant()));
-NoAssert.donothing(false, test1.isAfter(new MockInstant()));
+        assertEquals(true, test2.isAfter(new MockInstant()));
+        assertEquals(false, test1.isAfter(new MockInstant()));
         
-NoAssert.donothing(true, new DateMidnight(TEST_TIME_NOW_UTC + DateTimeConstants.MILLIS_PER_DAY, DateTimeZone.UTC).isAfter(null));
+        assertEquals(true, new DateMidnight(TEST_TIME_NOW_UTC + DateTimeConstants.MILLIS_PER_DAY, DateTimeZone.UTC).isAfter(null));
 NoAssert.donothing(false, new DateMidnight(TEST_TIME_NOW_UTC, DateTimeZone.UTC).isAfter(null));
-NoAssert.donothing(false, new DateMidnight(TEST_TIME_NOW_UTC - DateTimeConstants.MILLIS_PER_DAY, DateTimeZone.UTC).isAfter(null));
+        assertEquals(false, new DateMidnight(TEST_TIME_NOW_UTC - DateTimeConstants.MILLIS_PER_DAY, DateTimeZone.UTC).isAfter(null));
         
-NoAssert.donothing(true, new DateMidnight(2004, 6, 9).isAfter(new DateTime(2004, 6, 8, 23, 59, 59, 999)));
-NoAssert.donothing(false, new DateMidnight(2004, 6, 9).isAfter(new DateTime(2004, 6, 9, 0, 0, 0, 0)));
-NoAssert.donothing(false, new DateMidnight(2004, 6, 9).isAfter(new DateTime(2004, 6, 9, 0, 0, 0, 1)));
+        assertEquals(true, new DateMidnight(2004, 6, 9).isAfter(new DateTime(2004, 6, 8, 23, 59, 59, 999)));
+        assertEquals(false, new DateMidnight(2004, 6, 9).isAfter(new DateTime(2004, 6, 9, 0, 0, 0, 0)));
+        assertEquals(false, new DateMidnight(2004, 6, 9).isAfter(new DateTime(2004, 6, 9, 0, 0, 0, 1)));
     }
     
     //-----------------------------------------------------------------------
@@ -490,7 +490,7 @@ NoAssert.donothing(false, new DateMidnight(2004, 6, 9).isAfter(new DateTime(2004
         DateMidnight result = (DateMidnight) ois.readObject();
         ois.close();
         
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -499,7 +499,7 @@ NoAssert.donothing(test, result);
 NoAssert.donothing("2002-06-09T00:00:00.000+01:00", test.toString());
         
         test = new DateMidnight(TEST_TIME_NOW_UTC, PARIS);
-NoAssert.donothing("2002-06-09T00:00:00.000+02:00", test.toString());
+        assertEquals("2002-06-09T00:00:00.000+02:00", test.toString());
         
         test = new DateMidnight(TEST_TIME_NOW_UTC, NEWYORK);
 NoAssert.donothing("2002-06-08T00:00:00.000-04:00", test.toString());  // the 8th
@@ -507,22 +507,22 @@ NoAssert.donothing("2002-06-08T00:00:00.000-04:00", test.toString());  // the 8t
 
     @Test public void testToString_String() {
         DateMidnight test = new DateMidnight(TEST_TIME_NOW_UTC);
-NoAssert.donothing("2002 00", test.toString("yyyy HH"));
+        assertEquals("2002 00", test.toString("yyyy HH"));
 NoAssert.donothing("2002-06-09T00:00:00.000+01:00", test.toString((String) null));
     }
 
     @Test public void testToString_String_String() {
         DateMidnight test = new DateMidnight(TEST_TIME_NOW_UTC);
 NoAssert.donothing("Sun 9/6", test.toString("EEE d/M", Locale.ENGLISH));
-NoAssert.donothing("dim. 9/6", test.toString("EEE d/M", Locale.FRENCH));
-NoAssert.donothing("2002-06-09T00:00:00.000+01:00", test.toString(null, Locale.ENGLISH));
-NoAssert.donothing("Sun 9/6", test.toString("EEE d/M", null));
-NoAssert.donothing("2002-06-09T00:00:00.000+01:00", test.toString(null, null));
+        assertEquals("dim. 9/6", test.toString("EEE d/M", Locale.FRENCH));
+        assertEquals("2002-06-09T00:00:00.000+01:00", test.toString(null, Locale.ENGLISH));
+        assertEquals("Sun 9/6", test.toString("EEE d/M", null));
+        assertEquals("2002-06-09T00:00:00.000+01:00", test.toString(null, null));
     }
 
     @Test public void testToString_DTFormatter() {
         DateMidnight test = new DateMidnight(TEST_TIME_NOW_UTC);
-NoAssert.donothing("2002 00", test.toString(DateTimeFormat.forPattern("yyyy HH")));
+        assertEquals("2002 00", test.toString(DateTimeFormat.forPattern("yyyy HH")));
 NoAssert.donothing("2002-06-09T00:00:00.000+01:00", test.toString((DateTimeFormatter) null));
     }
 
@@ -530,22 +530,22 @@ NoAssert.donothing("2002-06-09T00:00:00.000+01:00", test.toString((DateTimeForma
     @Test public void testToInstant() {
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC);
         Instant result = test.toInstant();
-NoAssert.donothing(TEST_TIME1_LONDON, result.getMillis());
+        assertEquals(TEST_TIME1_LONDON, result.getMillis());
     }
 
     @Test public void testToDateTime() {
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC, PARIS);
         DateTime result = test.toDateTime();
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(TEST_TIME1_PARIS, result.getMillis());
-NoAssert.donothing(PARIS, result.getZone());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(TEST_TIME1_PARIS, result.getMillis());
+        assertEquals(PARIS, result.getZone());
     }
 
     @Test public void testToDateTimeISO() {
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC, PARIS);
         DateTime result = test.toDateTimeISO();
 NoAssert.donothing(DateTime.class, result.getClass());
-NoAssert.donothing(ISOChronology.class, result.getChronology().getClass());
+        assertSame(ISOChronology.class, result.getChronology().getClass());
 NoAssert.donothing(test.getMillis(), result.getMillis());
 NoAssert.donothing(ISO_PARIS, result.getChronology());
     }
@@ -554,111 +554,111 @@ NoAssert.donothing(ISO_PARIS, result.getChronology());
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC);
         DateTime result = test.toDateTime(LONDON);
 NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(TEST_TIME1_LONDON, result.getMillis());
-NoAssert.donothing(LONDON, result.getZone());
+        assertEquals(TEST_TIME1_LONDON, result.getMillis());
+        assertEquals(LONDON, result.getZone());
 
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.toDateTime(PARIS);
 NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(TEST_TIME1_LONDON, result.getMillis());
-NoAssert.donothing(PARIS, result.getZone());
+        assertEquals(TEST_TIME1_LONDON, result.getMillis());
+        assertEquals(PARIS, result.getZone());
 
         test = new DateMidnight(TEST_TIME1_UTC, PARIS);
         result = test.toDateTime((DateTimeZone) null);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(TEST_TIME1_PARIS, result.getMillis());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(TEST_TIME1_PARIS, result.getMillis());
 NoAssert.donothing(LONDON, result.getZone());
 
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.toDateTime((DateTimeZone) null);
 NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(TEST_TIME1_LONDON, result.getMillis());
-NoAssert.donothing(LONDON, result.getZone());
+        assertEquals(TEST_TIME1_LONDON, result.getMillis());
+        assertEquals(LONDON, result.getZone());
     }
 
     @Test public void testToDateTime_Chronology() {
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC);
         DateTime result = test.toDateTime(ISO_DEFAULT);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(TEST_TIME1_LONDON, result.getMillis());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(TEST_TIME1_LONDON, result.getMillis());
 NoAssert.donothing(LONDON, result.getZone());
 
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.toDateTime(GREGORIAN_PARIS);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(TEST_TIME1_LONDON, result.getMillis());
-NoAssert.donothing(GREGORIAN_PARIS, result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(TEST_TIME1_LONDON, result.getMillis());
+        assertEquals(GREGORIAN_PARIS, result.getChronology());
 
         test = new DateMidnight(TEST_TIME1_UTC, GREGORIAN_PARIS);
         result = test.toDateTime((Chronology) null);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(TEST_TIME1_PARIS, result.getMillis());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(TEST_TIME1_PARIS, result.getMillis());
 NoAssert.donothing(ISO_DEFAULT, result.getChronology());
 
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.toDateTime((Chronology) null);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(TEST_TIME1_LONDON, result.getMillis());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(TEST_TIME1_LONDON, result.getMillis());
 NoAssert.donothing(ISO_DEFAULT, result.getChronology());
     }
 
     @Test public void testToMutableDateTime() {
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC, PARIS);
         MutableDateTime result = test.toMutableDateTime();
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISO_PARIS, result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISO_PARIS, result.getChronology());
     }
 
     @Test public void testToMutableDateTimeISO() {
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC, PARIS);
         MutableDateTime result = test.toMutableDateTimeISO();
 NoAssert.donothing(MutableDateTime.class, result.getClass());
-NoAssert.donothing(ISOChronology.class, result.getChronology().getClass());
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISO_PARIS, result.getChronology());
+        assertSame(ISOChronology.class, result.getChronology().getClass());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISO_PARIS, result.getChronology());
     }
 
     @Test public void testToMutableDateTime_DateTimeZone() {
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC);
         MutableDateTime result = test.toMutableDateTime(LONDON);
 NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISO_DEFAULT, result.getChronology());
+        assertEquals(ISO_DEFAULT, result.getChronology());
 
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.toMutableDateTime(PARIS);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISO_PARIS, result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISO_PARIS, result.getChronology());
 
         test = new DateMidnight(TEST_TIME1_UTC, PARIS);
         result = test.toMutableDateTime((DateTimeZone) null);
 NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISO_DEFAULT, result.getChronology());
+        assertEquals(ISO_DEFAULT, result.getChronology());
 
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.toMutableDateTime((DateTimeZone) null);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISO_DEFAULT, result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISO_DEFAULT, result.getChronology());
     }
 
     @Test public void testToMutableDateTime_Chronology() {
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC);
         MutableDateTime result = test.toMutableDateTime(ISO_DEFAULT);
-NoAssert.donothing(test.getMillis(), result.getMillis());
+        assertEquals(test.getMillis(), result.getMillis());
 NoAssert.donothing(ISO_DEFAULT, result.getChronology());
 
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.toMutableDateTime(GREGORIAN_PARIS);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(GREGORIAN_PARIS, result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(GREGORIAN_PARIS, result.getChronology());
 
         test = new DateMidnight(TEST_TIME1_UTC, GREGORIAN_PARIS);
         result = test.toMutableDateTime((Chronology) null);
-NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISO_DEFAULT, result.getChronology());
+        assertEquals(test.getMillis(), result.getMillis());
+        assertEquals(ISO_DEFAULT, result.getChronology());
 
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.toMutableDateTime((Chronology) null);
-NoAssert.donothing(test.getMillis(), result.getMillis());
+        assertEquals(test.getMillis(), result.getMillis());
 NoAssert.donothing(ISO_DEFAULT, result.getChronology());
     }
 
@@ -672,62 +672,62 @@ NoAssert.donothing(test.getMillis(), result.getTime());
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC);
         Calendar result = test.toCalendar(null);
 NoAssert.donothing(test.getMillis(), result.getTime().getTime());
-NoAssert.donothing(TimeZone.getTimeZone("Europe/London"), result.getTimeZone());
+        assertEquals(TimeZone.getTimeZone("Europe/London"), result.getTimeZone());
 
         test = new DateMidnight(TEST_TIME1_UTC, PARIS);
         result = test.toCalendar(null);
-NoAssert.donothing(test.getMillis(), result.getTime().getTime());
-NoAssert.donothing(TimeZone.getTimeZone("Europe/Paris"), result.getTimeZone());
+        assertEquals(test.getMillis(), result.getTime().getTime());
+        assertEquals(TimeZone.getTimeZone("Europe/Paris"), result.getTimeZone());
 
         test = new DateMidnight(TEST_TIME1_UTC, PARIS);
         result = test.toCalendar(Locale.UK);
-NoAssert.donothing(test.getMillis(), result.getTime().getTime());
-NoAssert.donothing(TimeZone.getTimeZone("Europe/Paris"), result.getTimeZone());
+        assertEquals(test.getMillis(), result.getTime().getTime());
+        assertEquals(TimeZone.getTimeZone("Europe/Paris"), result.getTimeZone());
     }
 
     @Test public void testToGregorianCalendar() {
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC);
         GregorianCalendar result = test.toGregorianCalendar();
 NoAssert.donothing(test.getMillis(), result.getTime().getTime());
-NoAssert.donothing(TimeZone.getTimeZone("Europe/London"), result.getTimeZone());
+        assertEquals(TimeZone.getTimeZone("Europe/London"), result.getTimeZone());
 
         test = new DateMidnight(TEST_TIME1_UTC, PARIS);
         result = test.toGregorianCalendar();
 NoAssert.donothing(test.getMillis(), result.getTime().getTime());
-NoAssert.donothing(TimeZone.getTimeZone("Europe/Paris"), result.getTimeZone());
+        assertEquals(TimeZone.getTimeZone("Europe/Paris"), result.getTimeZone());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToYearMonthDay() {
         DateMidnight base = new DateMidnight(TEST_TIME1_UTC, COPTIC_DEFAULT);
         YearMonthDay test = base.toYearMonthDay();
-NoAssert.donothing(new YearMonthDay(TEST_TIME1_UTC, COPTIC_DEFAULT), test);
+        assertEquals(new YearMonthDay(TEST_TIME1_UTC, COPTIC_DEFAULT), test);
     }
 
     @Test public void testToLocalDate() {
         DateMidnight base = new DateMidnight(TEST_TIME1_UTC, COPTIC_DEFAULT);
         LocalDate test = base.toLocalDate();
-NoAssert.donothing(new LocalDate(TEST_TIME1_UTC, COPTIC_DEFAULT), test);
+        assertEquals(new LocalDate(TEST_TIME1_UTC, COPTIC_DEFAULT), test);
     }
 
     @Test public void testToInterval() {
         DateMidnight base = new DateMidnight(TEST_TIME1_UTC, COPTIC_DEFAULT);
         Interval test = base.toInterval();
         DateMidnight end = base.plus(Period.days(1));
-NoAssert.donothing(new Interval(base, end), test);
+        assertEquals(new Interval(base, end), test);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testWithMillis_long() {
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC);
         DateMidnight result = test.withMillis(TEST_TIME2_UTC);
-NoAssert.donothing(TEST_TIME2_LONDON, result.getMillis());
-NoAssert.donothing(test.getChronology(), result.getChronology());
+        assertEquals(TEST_TIME2_LONDON, result.getMillis());
+        assertEquals(test.getChronology(), result.getChronology());
         
         test = new DateMidnight(TEST_TIME1_UTC, GREGORIAN_PARIS);
         result = test.withMillis(TEST_TIME2_UTC);
-NoAssert.donothing(TEST_TIME2_PARIS, result.getMillis());
-NoAssert.donothing(test.getChronology(), result.getChronology());
+        assertEquals(TEST_TIME2_PARIS, result.getMillis());
+        assertEquals(test.getChronology(), result.getChronology());
         
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.withMillis(TEST_TIME1_UTC);
@@ -738,38 +738,38 @@ NoAssert.donothing(test, result);
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC);
         DateMidnight result = test.withChronology(GREGORIAN_PARIS);
 NoAssert.donothing(TEST_TIME1_LONDON, test.getMillis());
-NoAssert.donothing(TEST_TIME1_PARIS, result.getMillis());
-NoAssert.donothing(GREGORIAN_PARIS, result.getChronology());
+        assertEquals(TEST_TIME1_PARIS, result.getMillis());
+        assertEquals(GREGORIAN_PARIS, result.getChronology());
         
         test = new DateMidnight(TEST_TIME1_UTC, GREGORIAN_PARIS);
         result = test.withChronology(null);
 NoAssert.donothing(TEST_TIME1_PARIS, test.getMillis());
         // midnight Paris is previous day in London
-NoAssert.donothing(TEST_TIME1_LONDON - DateTimeConstants.MILLIS_PER_DAY, result.getMillis());
-NoAssert.donothing(ISO_DEFAULT, result.getChronology());
+        assertEquals(TEST_TIME1_LONDON - DateTimeConstants.MILLIS_PER_DAY, result.getMillis());
+        assertEquals(ISO_DEFAULT, result.getChronology());
         
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.withChronology(null);
 NoAssert.donothing(test.getMillis(), result.getMillis());
-NoAssert.donothing(ISO_DEFAULT, result.getChronology());
+        assertEquals(ISO_DEFAULT, result.getChronology());
         
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.withChronology(ISO_DEFAULT);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     @Test public void testWithZoneRetainFields_DateTimeZone() {
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC);
         DateMidnight result = test.withZoneRetainFields(PARIS);
-NoAssert.donothing(TEST_TIME1_LONDON, test.getMillis());
+        assertEquals(TEST_TIME1_LONDON, test.getMillis());
 NoAssert.donothing(TEST_TIME1_PARIS, result.getMillis());
-NoAssert.donothing(ISO_PARIS, result.getChronology());
+        assertEquals(ISO_PARIS, result.getChronology());
         
         test = new DateMidnight(TEST_TIME1_UTC, GREGORIAN_PARIS);
         result = test.withZoneRetainFields(null);
-NoAssert.donothing(TEST_TIME1_PARIS, test.getMillis());
-NoAssert.donothing(TEST_TIME1_LONDON, result.getMillis());
-NoAssert.donothing(GREGORIAN_DEFAULT, result.getChronology());
+        assertEquals(TEST_TIME1_PARIS, test.getMillis());
+        assertEquals(TEST_TIME1_LONDON, result.getMillis());
+        assertEquals(GREGORIAN_DEFAULT, result.getChronology());
         
 	/*
         test = new DateMidnight(TEST_TIME1_UTC);
@@ -791,11 +791,11 @@ NoAssert.donothing(GREGORIAN_DEFAULT, result.getChronology());
         DateMidnight test = new DateMidnight(2004, 5, 6);
         DateMidnight result = test.withFields(new YearMonthDay(2003, 4, 5));
         DateMidnight expected = new DateMidnight(2003, 4, 5);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         test = new DateMidnight(TEST_TIME1_UTC);
         result = test.withFields(null);
-NoAssert.donothing(test, result);
+        assertSame(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -803,8 +803,8 @@ NoAssert.donothing(test, result);
         DateMidnight test = new DateMidnight(2004, 6, 9);
         DateMidnight result = test.withField(DateTimeFieldType.year(), 2006);
         
-NoAssert.donothing(new DateMidnight(2004, 6, 9), test);
-NoAssert.donothing(new DateMidnight(2006, 6, 9), result);
+        assertEquals(new DateMidnight(2004, 6, 9), test);
+        assertEquals(new DateMidnight(2006, 6, 9), result);
     }
 
     @Test public void testWithField2() {
@@ -820,7 +820,7 @@ NoAssert.donothing(new DateMidnight(2006, 6, 9), result);
         DateMidnight test = new DateMidnight(2004, 6, 9);
         DateMidnight result = test.withFieldAdded(DurationFieldType.years(), 6);
         
-NoAssert.donothing(new DateMidnight(2004, 6, 9), test);
+        assertEquals(new DateMidnight(2004, 6, 9), test);
 NoAssert.donothing(new DateMidnight(2010, 6, 9), result);
     }
 
@@ -851,234 +851,20 @@ NoAssert.donothing(test, result);
         DateMidnight test = new DateMidnight(TEST_TIME1_UTC, BUDDHIST_DEFAULT);
         DateMidnight result = test.withDurationAdded(123456789L, 1);
         DateMidnight expected = new DateMidnight(test.getMillis() + 123456789L, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.withDurationAdded(123456789L, 0);
 NoAssert.donothing(test, result);
         
         result = test.withDurationAdded(123456789L, 2);
         expected = new DateMidnight(test.getMillis() + (2L * 123456789L), BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
         
         result = test.withDurationAdded(123456789L, -3);
         expected = new DateMidnight(test.getMillis() - (3L * 123456789L), BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
+        assertEquals(expected, result);
     }
     
     //-----------------------------------------------------------------------
     @Test public void testWithDurationAdded_RD_int() {
-        DateMidnight test = new DateMidnight(TEST_TIME1_UTC, BUDDHIST_DEFAULT);
-        DateMidnight result = test.withDurationAdded(new Duration(123456789L), 1);
-        DateMidnight expected = new DateMidnight(test.getMillis() + 123456789L, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.withDurationAdded(null, 1);
-NoAssert.donothing(test, result);
-        
-        result = test.withDurationAdded(new Duration(123456789L), 0);
-NoAssert.donothing(test, result);
-        
-        result = test.withDurationAdded(new Duration(123456789L), 2);
-        expected = new DateMidnight(test.getMillis() + (2L * 123456789L), BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.withDurationAdded(new Duration(123456789L), -3);
-        expected = new DateMidnight(test.getMillis() - (3L * 123456789L), BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-    }
-
-    //-----------------------------------------------------------------------
-    @Test public void testWithDurationAdded_RP_int() {
-        DateMidnight test = new DateMidnight(2002, 5, 3, BUDDHIST_DEFAULT);
-        DateMidnight result = test.withPeriodAdded(new Period(1, 2, 3, 4, 5, 6, 7, 8), 1);
-        DateMidnight expected = new DateMidnight(2003, 7, 28, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.withPeriodAdded(null, 1);
-NoAssert.donothing(test, result);
-        
-        result = test.withPeriodAdded(new Period(1, 2, 3, 4, 5, 6, 7, 8), 0);
-NoAssert.donothing(test, result);
-        
-        result = test.withPeriodAdded(new Period(1, 2, 0, 4, 5, 6, 7, 8), 3);
-        expected = new DateMidnight(2005, 11, 15, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.withPeriodAdded(new Period(1, 2, 0, 1, 1, 2, 3, 4), -1);
-        expected = new DateMidnight(2001, 3, 1, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-    }
-
-    //-----------------------------------------------------------------------    
-    @Test public void testPlus_long() {
-        DateMidnight test = new DateMidnight(TEST_TIME1_UTC, BUDDHIST_DEFAULT);
-        DateMidnight result = test.plus(123456789L);
-        DateMidnight expected = new DateMidnight(test.getMillis() + 123456789L, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-    }
-    
-    @Test public void testPlus_RD() {
-        DateMidnight test = new DateMidnight(TEST_TIME1_UTC, BUDDHIST_DEFAULT);
-        DateMidnight result = test.plus(new Duration(123456789L));
-        DateMidnight expected = new DateMidnight(test.getMillis() + 123456789L, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.plus((ReadableDuration) null);
-NoAssert.donothing(test, result);
-    }
-
-    @Test public void testPlus_RP() {
-        DateMidnight test = new DateMidnight(2002, 5, 3, BUDDHIST_DEFAULT);
-        DateMidnight result = test.plus(new Period(1, 2, 3, 4, 5, 6, 7, 8));
-        DateMidnight expected = new DateMidnight(2003, 7, 28, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.plus((ReadablePeriod) null);
-NoAssert.donothing(test, result);
-    }
-
-    @Test public void testPlusYears_int() {
-        DateMidnight test = new DateMidnight(2002, 5, 3, BUDDHIST_DEFAULT);
-        DateMidnight result = test.plusYears(1);
-        DateMidnight expected = new DateMidnight(2003, 5, 3, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.plusYears(0);
-NoAssert.donothing(test, result);
-    }
-
-    @Test public void testPlusMonths_int() {
-        DateMidnight test = new DateMidnight(2002, 5, 3, BUDDHIST_DEFAULT);
-        DateMidnight result = test.plusMonths(1);
-        DateMidnight expected = new DateMidnight(2002, 6, 3, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.plusMonths(0);
-NoAssert.donothing(test, result);
-    }
-
-    @Test public void testPlusWeeks_int() {
-        DateMidnight test = new DateMidnight(2002, 5, 3, BUDDHIST_DEFAULT);
-        DateMidnight result = test.plusWeeks(1);
-        DateMidnight expected = new DateMidnight(2002, 5, 10, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.plusWeeks(0);
-NoAssert.donothing(test, result);
-    }
-
-    @Test public void testPlusDays_int() {
-        DateMidnight test = new DateMidnight(2002, 5, 3, BUDDHIST_DEFAULT);
-        DateMidnight result = test.plusDays(1);
-        DateMidnight expected = new DateMidnight(2002, 5, 4, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.plusDays(0);
-NoAssert.donothing(test, result);
-    }
-
-    //-----------------------------------------------------------------------    
-    @Test public void testMinus_long() {
-        DateMidnight test = new DateMidnight(TEST_TIME1_UTC, BUDDHIST_DEFAULT);
-        DateMidnight result = test.minus(123456789L);
-        DateMidnight expected = new DateMidnight(test.getMillis() - 123456789L, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-    }
-
-    @Test public void testMinus_RD() {
-        DateMidnight test = new DateMidnight(TEST_TIME1_UTC, BUDDHIST_DEFAULT);
-        DateMidnight result = test.minus(new Duration(123456789L));
-        DateMidnight expected = new DateMidnight(test.getMillis() - 123456789L, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.minus((ReadableDuration) null);
-NoAssert.donothing(test, result);
-    }
-
-    @Test public void testMinus_RP() {
-        DateMidnight test = new DateMidnight(2002, 5, 3, BUDDHIST_DEFAULT);
-        DateMidnight result = test.minus(new Period(1, 1, 1, 1, 1, 1, 1, 1));
-        DateMidnight expected = new DateMidnight(2001, 3, 25, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.minus((ReadablePeriod) null);
-NoAssert.donothing(test, result);
-    }
-
-    @Test public void testMinusYears_int() {
-        DateMidnight test = new DateMidnight(2002, 5, 3, BUDDHIST_DEFAULT);
-        DateMidnight result = test.minusYears(1);
-        DateMidnight expected = new DateMidnight(2001, 5, 3, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.minusYears(0);
-NoAssert.donothing(test, result);
-    }
-
-    @Test public void testMinusMonths_int() {
-        DateMidnight test = new DateMidnight(2002, 5, 3, BUDDHIST_DEFAULT);
-        DateMidnight result = test.minusMonths(1);
-        DateMidnight expected = new DateMidnight(2002, 4, 3, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.minusMonths(0);
-NoAssert.donothing(test, result);
-    }
-
-    @Test public void testMinusWeeks_int() {
-        DateMidnight test = new DateMidnight(2002, 5, 3, BUDDHIST_DEFAULT);
-        DateMidnight result = test.minusWeeks(1);
-        DateMidnight expected = new DateMidnight(2002, 4, 26, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.minusWeeks(0);
-NoAssert.donothing(test, result);
-    }
-
-    @Test public void testMinusDays_int() {
-        DateMidnight test = new DateMidnight(2002, 5, 3, BUDDHIST_DEFAULT);
-        DateMidnight result = test.minusDays(1);
-        DateMidnight expected = new DateMidnight(2002, 5, 2, BUDDHIST_DEFAULT);
-NoAssert.donothing(expected, result);
-        
-        result = test.minusDays(0);
-NoAssert.donothing(test, result);
-    }
-
-    //-----------------------------------------------------------------------
-    @Test public void testProperty() {
-        DateMidnight test = new DateMidnight();
-NoAssert.donothing(test.year(), test.property(DateTimeFieldType.year()));
-NoAssert.donothing(test.dayOfWeek(), test.property(DateTimeFieldType.dayOfWeek()));
-NoAssert.donothing(test.weekOfWeekyear(), test.property(DateTimeFieldType.weekOfWeekyear()));
-NoAssert.donothing(test.property(DateTimeFieldType.millisOfSecond()), test.property(DateTimeFieldType.millisOfSecond()));
-        DateTimeFieldType bad = new DateTimeFieldType("bad") {
-            private static final long serialVersionUID = 1L;
-            public DurationFieldType getDurationType() {
-                return DurationFieldType.weeks();
-            }
-            public DurationFieldType getRangeDurationType() {
-                return null;
-            }
-            public DateTimeField getField(Chronology chronology) {
-                return UnsupportedDateTimeField.getInstance(this, UnsupportedDurationField.getInstance(getDurationType()));
-            }
-        };
-        try {
-            test.property(bad);
-            fail();
-        } catch (IllegalArgumentException ex) {}
-        try {
-            test.property(null);
-            fail();
-        } catch (IllegalArgumentException ex) {}
-    }
-
-    //-----------------------------------------------------------------------
-    private void check(DateMidnight test, int year, int month, int day) {
-NoAssert.donothing(year, test.getYear());
-NoAssert.donothing(month, test.getMonthOfYear());
-NoAssert.donothing(day, test.getDayOfMonth());
-    }
-
-}
+        DateMidnight test = new DateMidnight(TEST_TIME1_UTC, BUDDHIST

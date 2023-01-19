@@ -111,8 +111,8 @@ public class TestOffsetDateTimeField  { //extends TestCase {
         OffsetDateTimeField field = new OffsetDateTimeField(
             ISOChronology.getInstance().secondOfMinute(), 3
         );
-NoAssert.donothing(DateTimeFieldType.secondOfMinute(), field.getType());
-NoAssert.donothing(3, field.getOffset());
+        assertEquals(DateTimeFieldType.secondOfMinute(), field.getType());
+        assertEquals(3, field.getOffset());
         
         try {
             field = new OffsetDateTimeField(null, 3);
@@ -136,7 +136,7 @@ NoAssert.donothing(3, field.getOffset());
             ISOChronology.getInstance().secondOfMinute(), DateTimeFieldType.secondOfDay(), 3
         );
 NoAssert.donothing(DateTimeFieldType.secondOfDay(), field.getType());
-NoAssert.donothing(3, field.getOffset());
+        assertEquals(3, field.getOffset());
         
         try {
             field = new OffsetDateTimeField(null, DateTimeFieldType.secondOfDay(), 3);
@@ -158,21 +158,21 @@ NoAssert.donothing(3, field.getOffset());
         OffsetDateTimeField field = new OffsetDateTimeField(
             ISOChronology.getInstance().secondOfMinute(), 3
         );
-NoAssert.donothing(DateTimeFieldType.secondOfMinute(), field.getType());
+        assertEquals(DateTimeFieldType.secondOfMinute(), field.getType());
     }
 
     @Test public void test_getName() {
         OffsetDateTimeField field = new OffsetDateTimeField(
             ISOChronology.getInstance().secondOfMinute(), 3
         );
-NoAssert.donothing("secondOfMinute", field.getName());
+        assertEquals("secondOfMinute", field.getName());
     }
 
     @Test public void test_toString() {
         OffsetDateTimeField field = new OffsetDateTimeField(
             ISOChronology.getInstance().secondOfMinute(), 3
         );
-NoAssert.donothing("DateTimeField[secondOfMinute]", field.toString());
+        assertEquals("DateTimeField[secondOfMinute]", field.toString());
     }
 
     @Test public void test_isSupported() {
@@ -182,27 +182,27 @@ NoAssert.donothing(true, field.isSupported());
 
     @Test public void test_isLenient() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(false, field.isLenient());
+        assertEquals(false, field.isLenient());
     }
 
     @Test public void test_getOffset() {
         OffsetDateTimeField field = new OffsetDateTimeField(
             ISOChronology.getInstance().secondOfMinute(), 5
         );
-NoAssert.donothing(5, field.getOffset());
+        assertEquals(5, field.getOffset());
     }
 
     @Test public void test_get() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(0 + 3, field.get(0));
-NoAssert.donothing(6 + 3, field.get(6000));
+        assertEquals(0 + 3, field.get(0));
+        assertEquals(6 + 3, field.get(6000));
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_getAsText_long_Locale() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
 NoAssert.donothing("32", field.getAsText(1000L * 29, Locale.ENGLISH));
-NoAssert.donothing("32", field.getAsText(1000L * 29, null));
+        assertEquals("32", field.getAsText(1000L * 29, null));
     }
 
     @Test public void test_getAsText_long() {
@@ -212,27 +212,27 @@ NoAssert.donothing("32", field.getAsText(1000L * 29));
 
     @Test public void test_getAsText_RP_int_Locale() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing("20", field.getAsText(new TimeOfDay(12, 30, 40, 50), 20, Locale.ENGLISH));
+        assertEquals("20", field.getAsText(new TimeOfDay(12, 30, 40, 50), 20, Locale.ENGLISH));
 NoAssert.donothing("20", field.getAsText(new TimeOfDay(12, 30, 40, 50), 20, null));
     }
 
     @Test public void test_getAsText_RP_Locale() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing("40", field.getAsText(new TimeOfDay(12, 30, 40, 50), Locale.ENGLISH));
-NoAssert.donothing("40", field.getAsText(new TimeOfDay(12, 30, 40, 50), null));
+        assertEquals("40", field.getAsText(new TimeOfDay(12, 30, 40, 50), Locale.ENGLISH));
+        assertEquals("40", field.getAsText(new TimeOfDay(12, 30, 40, 50), null));
     }
 
     @Test public void test_getAsText_int_Locale() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing("80", field.getAsText(80, Locale.ENGLISH));
-NoAssert.donothing("80", field.getAsText(80, null));
+        assertEquals("80", field.getAsText(80, Locale.ENGLISH));
+        assertEquals("80", field.getAsText(80, null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_getAsShortText_long_Locale() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing("32", field.getAsShortText(1000L * 29, Locale.ENGLISH));
-NoAssert.donothing("32", field.getAsShortText(1000L * 29, null));
+        assertEquals("32", field.getAsShortText(1000L * 29, Locale.ENGLISH));
+        assertEquals("32", field.getAsShortText(1000L * 29, null));
     }
 
     @Test public void test_getAsShortText_long() {
@@ -242,31 +242,31 @@ NoAssert.donothing("32", field.getAsShortText(1000L * 29));
 
     @Test public void test_getAsShortText_RP_int_Locale() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing("20", field.getAsShortText(new TimeOfDay(12, 30, 40, 50), 20, Locale.ENGLISH));
-NoAssert.donothing("20", field.getAsShortText(new TimeOfDay(12, 30, 40, 50), 20, null));
+        assertEquals("20", field.getAsShortText(new TimeOfDay(12, 30, 40, 50), 20, Locale.ENGLISH));
+        assertEquals("20", field.getAsShortText(new TimeOfDay(12, 30, 40, 50), 20, null));
     }
 
     @Test public void test_getAsShortText_RP_Locale() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing("40", field.getAsShortText(new TimeOfDay(12, 30, 40, 50), Locale.ENGLISH));
+        assertEquals("40", field.getAsShortText(new TimeOfDay(12, 30, 40, 50), Locale.ENGLISH));
 NoAssert.donothing("40", field.getAsShortText(new TimeOfDay(12, 30, 40, 50), null));
     }
 
     @Test public void test_getAsShortText_int_Locale() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
 NoAssert.donothing("80", field.getAsShortText(80, Locale.ENGLISH));
-NoAssert.donothing("80", field.getAsShortText(80, null));
+        assertEquals("80", field.getAsShortText(80, null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_add_long_int() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(1001, field.add(1L, 1));
+        assertEquals(1001, field.add(1L, 1));
     }
 
     @Test public void test_add_long_long() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(1001, field.add(1L, 1L));
+        assertEquals(1001, field.add(1L, 1L));
     }
 
     @Test public void test_add_RP_int_intarray_int() {
@@ -274,22 +274,22 @@ NoAssert.donothing(1001, field.add(1L, 1L));
         int[] expected = new int[] {10, 20, 30, 40};
         OffsetDateTimeField field = new MockStandardDateTimeField();
         int[] result = field.add(new TimeOfDay(), 2, values, 0);
-NoAssert.donothing(true, Arrays.equals(expected, result));
+        assertEquals(true, Arrays.equals(expected, result));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 20, 31, 40};
         result = field.add(new TimeOfDay(), 2, values, 1);
-NoAssert.donothing(true, Arrays.equals(expected, result));
+        assertEquals(true, Arrays.equals(expected, result));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 20, 62, 40};
         result = field.add(new TimeOfDay(), 2, values, 32);
-NoAssert.donothing(true, Arrays.equals(expected, result));
+        assertEquals(true, Arrays.equals(expected, result));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 21, 3, 40};
         result = field.add(new TimeOfDay(), 2, values, 33);
-NoAssert.donothing(true, Arrays.equals(expected, result));
+        assertEquals(true, Arrays.equals(expected, result));
         
         values = new int[] {23, 59, 30, 40};
         try {
@@ -300,7 +300,7 @@ NoAssert.donothing(true, Arrays.equals(expected, result));
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 20, 29, 40};
         result = field.add(new TimeOfDay(), 2, values, -1);
-NoAssert.donothing(true, Arrays.equals(expected, result));
+        assertEquals(true, Arrays.equals(expected, result));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 19, 59, 40};
@@ -317,9 +317,9 @@ NoAssert.donothing(true, Arrays.equals(expected, result));
     //-----------------------------------------------------------------------
     @Test public void test_addWrapField_long_int() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(29 * 1000L, field.addWrapField(1000L * 29, 0));
-NoAssert.donothing(59 * 1000L, field.addWrapField(1000L * 29, 30));
-NoAssert.donothing(0L, field.addWrapField(1000L * 29, 31));
+        assertEquals(29 * 1000L, field.addWrapField(1000L * 29, 0));
+        assertEquals(59 * 1000L, field.addWrapField(1000L * 29, 30));
+        assertEquals(0L, field.addWrapField(1000L * 29, 31));
     }
 
     @Test public void test_addWrapField_RP_int_intarray_int() {
@@ -327,28 +327,28 @@ NoAssert.donothing(0L, field.addWrapField(1000L * 29, 31));
         int[] values = new int[] {10, 20, 30, 40};
         int[] expected = new int[] {10, 20, 30, 40};
         int[] result = field.addWrapField(new TimeOfDay(), 2, values, 0);
-NoAssert.donothing(true, Arrays.equals(result, expected));
+        assertEquals(true, Arrays.equals(result, expected));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 20, 59, 40};
         result = field.addWrapField(new TimeOfDay(), 2, values, 29);
-NoAssert.donothing(true, Arrays.equals(result, expected));
+        assertEquals(true, Arrays.equals(result, expected));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 20, 3, 40};
         result = field.addWrapField(new TimeOfDay(), 2, values, 33);
-NoAssert.donothing(true, Arrays.equals(result, expected));
+        assertEquals(true, Arrays.equals(result, expected));
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_getDifference_long_long() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(-21, field.getDifference(20000L, 41000L));
+        assertEquals(-21, field.getDifference(20000L, 41000L));
     }
 
     @Test public void test_getDifferenceAsLong_long_long() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(-21L, field.getDifferenceAsLong(20000L, 41000L));
+        assertEquals(-21L, field.getDifferenceAsLong(20000L, 41000L));
     }
 
     //-----------------------------------------------------------------------
@@ -356,7 +356,7 @@ NoAssert.donothing(-21L, field.getDifferenceAsLong(20000L, 41000L));
         OffsetDateTimeField field = new MockOffsetDateTimeField();
 NoAssert.donothing(3120L, field.set(2120L, 6));
 NoAssert.donothing(26120L, field.set(120L, 29));
-NoAssert.donothing(57120L, field.set(2120L, 60));
+        assertEquals(57120L, field.set(2120L, 60));
     }
 
     @Test public void test_set_RP_int_intarray_int() {
@@ -364,12 +364,12 @@ NoAssert.donothing(57120L, field.set(2120L, 60));
         int[] values = new int[] {10, 20, 30, 40};
         int[] expected = new int[] {10, 20, 30, 40};
         int[] result = field.set(new TimeOfDay(), 2, values, 30);
-NoAssert.donothing(true, Arrays.equals(result, expected));
+        assertEquals(true, Arrays.equals(result, expected));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 20, 29, 40};
         result = field.set(new TimeOfDay(), 2, values, 29);
-NoAssert.donothing(true, Arrays.equals(result, expected));
+        assertEquals(true, Arrays.equals(result, expected));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 20, 30, 40};
@@ -377,7 +377,7 @@ NoAssert.donothing(true, Arrays.equals(result, expected));
             field.set(new TimeOfDay(), 2, values, 63);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(true, Arrays.equals(values, expected));
+        assertEquals(true, Arrays.equals(values, expected));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 20, 30, 40};
@@ -385,18 +385,18 @@ NoAssert.donothing(true, Arrays.equals(values, expected));
             field.set(new TimeOfDay(), 2, values, 2);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(true, Arrays.equals(values, expected));
+        assertEquals(true, Arrays.equals(values, expected));
     }
 
     @Test public void test_set_long_String_Locale() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(3050L, field.set(50L, "6", null));
-NoAssert.donothing(26050L, field.set(50L, "29", Locale.ENGLISH));
+        assertEquals(3050L, field.set(50L, "6", null));
+        assertEquals(26050L, field.set(50L, "29", Locale.ENGLISH));
     }
 
     @Test public void test_set_long_String() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(3050L, field.set(50L, "6"));
+        assertEquals(3050L, field.set(50L, "6"));
 NoAssert.donothing(26050L, field.set(50L, "29"));
     }
 
@@ -405,12 +405,12 @@ NoAssert.donothing(26050L, field.set(50L, "29"));
         int[] values = new int[] {10, 20, 30, 40};
         int[] expected = new int[] {10, 20, 30, 40};
         int[] result = field.set(new TimeOfDay(), 2, values, "30", null);
-NoAssert.donothing(true, Arrays.equals(result, expected));
+        assertEquals(true, Arrays.equals(result, expected));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 20, 29, 40};
         result = field.set(new TimeOfDay(), 2, values, "29", Locale.ENGLISH);
-NoAssert.donothing(true, Arrays.equals(result, expected));
+        assertEquals(true, Arrays.equals(result, expected));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 20, 30, 40};
@@ -418,7 +418,7 @@ NoAssert.donothing(true, Arrays.equals(result, expected));
             field.set(new TimeOfDay(), 2, values, "63", null);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(true, Arrays.equals(values, expected));
+        assertEquals(true, Arrays.equals(values, expected));
         
         values = new int[] {10, 20, 30, 40};
         expected = new int[] {10, 20, 30, 40};
@@ -426,13 +426,13 @@ NoAssert.donothing(true, Arrays.equals(values, expected));
             field.set(new TimeOfDay(), 2, values, "2", null);
             fail();
         } catch (IllegalArgumentException ex) {}
-NoAssert.donothing(true, Arrays.equals(values, expected));
+        assertEquals(true, Arrays.equals(values, expected));
     }
 
     @Test public void test_convertText() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(0, field.convertText("0", null));
-NoAssert.donothing(29, field.convertText("29", null));
+        assertEquals(0, field.convertText("0", null));
+        assertEquals(29, field.convertText("29", null));
         try {
             field.convertText("2A", null);
             fail();
@@ -450,23 +450,23 @@ NoAssert.donothing(29, field.convertText("29", null));
 
     @Test public void test_isLeap_long() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(false, field.isLeap(0L));
+        assertEquals(false, field.isLeap(0L));
     }
 
     @Test public void test_getLeapAmount_long() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(0, field.getLeapAmount(0L));
+        assertEquals(0, field.getLeapAmount(0L));
     }
 
     @Test public void test_getLeapDurationField() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(null, field.getLeapDurationField());
+        assertEquals(null, field.getLeapDurationField());
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_getMinimumValue() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(3, field.getMinimumValue());
+        assertEquals(3, field.getMinimumValue());
     }
 
     @Test public void test_getMinimumValue_long() {
@@ -486,7 +486,7 @@ NoAssert.donothing(3, field.getMinimumValue(new TimeOfDay(), new int[4]));
 
     @Test public void test_getMaximumValue() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(62, field.getMaximumValue());
+        assertEquals(62, field.getMaximumValue());
     }
 
     @Test public void test_getMaximumValue_long() {
@@ -496,91 +496,91 @@ NoAssert.donothing(62, field.getMaximumValue(0L));
 
     @Test public void test_getMaximumValue_RP() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(62, field.getMaximumValue(new TimeOfDay()));
+        assertEquals(62, field.getMaximumValue(new TimeOfDay()));
     }
 
     @Test public void test_getMaximumValue_RP_intarray() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(62, field.getMaximumValue(new TimeOfDay(), new int[4]));
+        assertEquals(62, field.getMaximumValue(new TimeOfDay(), new int[4]));
     }
 
     //-----------------------------------------------------------------------
     @Test public void test_getMaximumTextLength_Locale() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(2, field.getMaximumTextLength(Locale.ENGLISH));
+        assertEquals(2, field.getMaximumTextLength(Locale.ENGLISH));
     }
 
     @Test public void test_getMaximumShortTextLength_Locale() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(2, field.getMaximumShortTextLength(Locale.ENGLISH));
+        assertEquals(2, field.getMaximumShortTextLength(Locale.ENGLISH));
     }
 
     //------------------------------------------------------------------------
     @Test public void test_roundFloor_long() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(-2000L, field.roundFloor(-1001L));
+        assertEquals(-2000L, field.roundFloor(-1001L));
 NoAssert.donothing(-1000L, field.roundFloor(-1000L));
-NoAssert.donothing(-1000L, field.roundFloor(-999L));
-NoAssert.donothing(-1000L, field.roundFloor(-1L));
-NoAssert.donothing(0L, field.roundFloor(0L));
-NoAssert.donothing(0L, field.roundFloor(1L));
-NoAssert.donothing(0L, field.roundFloor(499L));
-NoAssert.donothing(0L, field.roundFloor(500L));
-NoAssert.donothing(0L, field.roundFloor(501L));
-NoAssert.donothing(1000L, field.roundFloor(1000L));
+        assertEquals(-1000L, field.roundFloor(-999L));
+        assertEquals(-1000L, field.roundFloor(-1L));
+        assertEquals(0L, field.roundFloor(0L));
+        assertEquals(0L, field.roundFloor(1L));
+        assertEquals(0L, field.roundFloor(499L));
+        assertEquals(0L, field.roundFloor(500L));
+        assertEquals(0L, field.roundFloor(501L));
+        assertEquals(1000L, field.roundFloor(1000L));
     }
 
     @Test public void test_roundCeiling_long() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(-1000L, field.roundCeiling(-1001L));
-NoAssert.donothing(-1000L, field.roundCeiling(-1000L));
-NoAssert.donothing(0L, field.roundCeiling(-999L));
+        assertEquals(-1000L, field.roundCeiling(-1001L));
+        assertEquals(-1000L, field.roundCeiling(-1000L));
+        assertEquals(0L, field.roundCeiling(-999L));
 NoAssert.donothing(0L, field.roundCeiling(-1L));
 NoAssert.donothing(0L, field.roundCeiling(0L));
-NoAssert.donothing(1000L, field.roundCeiling(1L));
-NoAssert.donothing(1000L, field.roundCeiling(499L));
-NoAssert.donothing(1000L, field.roundCeiling(500L));
-NoAssert.donothing(1000L, field.roundCeiling(501L));
-NoAssert.donothing(1000L, field.roundCeiling(1000L));
+        assertEquals(1000L, field.roundCeiling(1L));
+        assertEquals(1000L, field.roundCeiling(499L));
+        assertEquals(1000L, field.roundCeiling(500L));
+        assertEquals(1000L, field.roundCeiling(501L));
+        assertEquals(1000L, field.roundCeiling(1000L));
     }
 
     @Test public void test_roundHalfFloor_long() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(0L, field.roundHalfFloor(0L));
-NoAssert.donothing(0L, field.roundHalfFloor(499L));
-NoAssert.donothing(0L, field.roundHalfFloor(500L));
-NoAssert.donothing(1000L, field.roundHalfFloor(501L));
-NoAssert.donothing(1000L, field.roundHalfFloor(1000L));
+        assertEquals(0L, field.roundHalfFloor(0L));
+        assertEquals(0L, field.roundHalfFloor(499L));
+        assertEquals(0L, field.roundHalfFloor(500L));
+        assertEquals(1000L, field.roundHalfFloor(501L));
+        assertEquals(1000L, field.roundHalfFloor(1000L));
     }
 
     @Test public void test_roundHalfCeiling_long() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(0L, field.roundHalfCeiling(0L));
-NoAssert.donothing(0L, field.roundHalfCeiling(499L));
+        assertEquals(0L, field.roundHalfCeiling(0L));
+        assertEquals(0L, field.roundHalfCeiling(499L));
 NoAssert.donothing(1000L, field.roundHalfCeiling(500L));
-NoAssert.donothing(1000L, field.roundHalfCeiling(501L));
+        assertEquals(1000L, field.roundHalfCeiling(501L));
 NoAssert.donothing(1000L, field.roundHalfCeiling(1000L));
     }
 
     @Test public void test_roundHalfEven_long() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(0L, field.roundHalfEven(0L));
-NoAssert.donothing(0L, field.roundHalfEven(499L));
+        assertEquals(0L, field.roundHalfEven(0L));
+        assertEquals(0L, field.roundHalfEven(499L));
 NoAssert.donothing(0L, field.roundHalfEven(500L));
 NoAssert.donothing(1000L, field.roundHalfEven(501L));
-NoAssert.donothing(1000L, field.roundHalfEven(1000L));
-NoAssert.donothing(1000L, field.roundHalfEven(1499L));
-NoAssert.donothing(2000L, field.roundHalfEven(1500L));
-NoAssert.donothing(2000L, field.roundHalfEven(1501L));
+        assertEquals(1000L, field.roundHalfEven(1000L));
+        assertEquals(1000L, field.roundHalfEven(1499L));
+        assertEquals(2000L, field.roundHalfEven(1500L));
+        assertEquals(2000L, field.roundHalfEven(1501L));
     }
 
     @Test public void test_remainder_long() {
         OffsetDateTimeField field = new MockOffsetDateTimeField();
-NoAssert.donothing(0L, field.remainder(0L));
-NoAssert.donothing(499L, field.remainder(499L));
-NoAssert.donothing(500L, field.remainder(500L));
-NoAssert.donothing(501L, field.remainder(501L));
-NoAssert.donothing(0L, field.remainder(1000L));
+        assertEquals(0L, field.remainder(0L));
+        assertEquals(499L, field.remainder(499L));
+        assertEquals(500L, field.remainder(500L));
+        assertEquals(501L, field.remainder(501L));
+        assertEquals(0L, field.remainder(1000L));
     }
 
     //-----------------------------------------------------------------------

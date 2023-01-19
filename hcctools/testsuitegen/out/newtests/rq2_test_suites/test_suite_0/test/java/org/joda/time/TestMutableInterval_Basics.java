@@ -137,75 +137,75 @@ public class TestMutableInterval_Basics  { //extends TestCase {
 
     //-----------------------------------------------------------------------
     @Test public void testTest() {
-NoAssert.donothing("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
+        assertEquals("2002-06-09T00:00:00.000Z", new Instant(TEST_TIME_NOW).toString());
 NoAssert.donothing("2002-04-05T12:24:00.000Z", new Instant(TEST_TIME1).toString());
-NoAssert.donothing("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
+        assertEquals("2003-05-06T14:28:00.000Z", new Instant(TEST_TIME2).toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testGetMillis() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
 NoAssert.donothing(TEST_TIME1, test.getStartMillis());
-NoAssert.donothing(TEST_TIME1, test.getStart().getMillis());
-NoAssert.donothing(TEST_TIME2, test.getEndMillis());
-NoAssert.donothing(TEST_TIME2, test.getEnd().getMillis());
-NoAssert.donothing(TEST_TIME2 - TEST_TIME1, test.toDurationMillis());
+        assertEquals(TEST_TIME1, test.getStart().getMillis());
+        assertEquals(TEST_TIME2, test.getEndMillis());
+        assertEquals(TEST_TIME2, test.getEnd().getMillis());
+        assertEquals(TEST_TIME2 - TEST_TIME1, test.toDurationMillis());
 NoAssert.donothing(TEST_TIME2 - TEST_TIME1, test.toDuration().getMillis());
     }
 
     @Test public void testGetDuration1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
-NoAssert.donothing(TEST_TIME2 - TEST_TIME1, test.toDurationMillis());
-NoAssert.donothing(TEST_TIME2 - TEST_TIME1, test.toDuration().getMillis());
+        assertEquals(TEST_TIME2 - TEST_TIME1, test.toDurationMillis());
+        assertEquals(TEST_TIME2 - TEST_TIME1, test.toDuration().getMillis());
     }
 
     @Test public void testGetDuration2() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME1);
-NoAssert.donothing(Duration.ZERO, test.toDuration());
+        assertSame(Duration.ZERO, test.toDuration());
     }
 
     @Test public void testEqualsHashCode() {
         MutableInterval test1 = new MutableInterval(TEST_TIME1, TEST_TIME2);
         MutableInterval test2 = new MutableInterval(TEST_TIME1, TEST_TIME2);
-NoAssert.donothing(true, test1.equals(test2));
-NoAssert.donothing(true, test2.equals(test1));
-NoAssert.donothing(true, test1.equals(test1));
-NoAssert.donothing(true, test2.equals(test2));
-NoAssert.donothing(true, test1.hashCode() == test2.hashCode());
-NoAssert.donothing(true, test1.hashCode() == test1.hashCode());
+        assertEquals(true, test1.equals(test2));
+        assertEquals(true, test2.equals(test1));
+        assertEquals(true, test1.equals(test1));
+        assertEquals(true, test2.equals(test2));
+        assertEquals(true, test1.hashCode() == test2.hashCode());
+        assertEquals(true, test1.hashCode() == test1.hashCode());
 NoAssert.donothing(true, test2.hashCode() == test2.hashCode());
         
         MutableInterval test3 = new MutableInterval(TEST_TIME_NOW, TEST_TIME2);
-NoAssert.donothing(false, test1.equals(test3));
-NoAssert.donothing(false, test2.equals(test3));
+        assertEquals(false, test1.equals(test3));
+        assertEquals(false, test2.equals(test3));
 NoAssert.donothing(false, test3.equals(test1));
-NoAssert.donothing(false, test3.equals(test2));
-NoAssert.donothing(false, test1.hashCode() == test3.hashCode());
-NoAssert.donothing(false, test2.hashCode() == test3.hashCode());
+        assertEquals(false, test3.equals(test2));
+        assertEquals(false, test1.hashCode() == test3.hashCode());
+        assertEquals(false, test2.hashCode() == test3.hashCode());
         
         MutableInterval test4 = new MutableInterval(TEST_TIME1, TEST_TIME2, GJChronology.getInstance());
-NoAssert.donothing(true, test4.equals(test4));
+        assertEquals(true, test4.equals(test4));
 NoAssert.donothing(false, test1.equals(test4));
-NoAssert.donothing(false, test2.equals(test4));
-NoAssert.donothing(false, test4.equals(test1));
-NoAssert.donothing(false, test4.equals(test2));
-NoAssert.donothing(false, test1.hashCode() == test4.hashCode());
-NoAssert.donothing(false, test2.hashCode() == test4.hashCode());
+        assertEquals(false, test2.equals(test4));
+        assertEquals(false, test4.equals(test1));
+        assertEquals(false, test4.equals(test2));
+        assertEquals(false, test1.hashCode() == test4.hashCode());
+        assertEquals(false, test2.hashCode() == test4.hashCode());
         
         MutableInterval test5 = new MutableInterval(TEST_TIME1, TEST_TIME2);
 NoAssert.donothing(true, test1.equals(test5));
-NoAssert.donothing(true, test2.equals(test5));
+        assertEquals(true, test2.equals(test5));
 NoAssert.donothing(false, test3.equals(test5));
-NoAssert.donothing(true, test5.equals(test1));
-NoAssert.donothing(true, test5.equals(test2));
-NoAssert.donothing(false, test5.equals(test3));
-NoAssert.donothing(true, test1.hashCode() == test5.hashCode());
-NoAssert.donothing(true, test2.hashCode() == test5.hashCode());
-NoAssert.donothing(false, test3.hashCode() == test5.hashCode());
+        assertEquals(true, test5.equals(test1));
+        assertEquals(true, test5.equals(test2));
+        assertEquals(false, test5.equals(test3));
+        assertEquals(true, test1.hashCode() == test5.hashCode());
+        assertEquals(true, test2.hashCode() == test5.hashCode());
+        assertEquals(false, test3.hashCode() == test5.hashCode());
         
-NoAssert.donothing(false, test1.equals("Hello"));
-NoAssert.donothing(true, test1.equals(new MockInterval()));
-NoAssert.donothing(false, test1.equals(new DateTime(TEST_TIME1)));
+        assertEquals(false, test1.equals("Hello"));
+        assertEquals(true, test1.equals(new MockInterval()));
+        assertEquals(false, test1.equals(new DateTime(TEST_TIME1)));
     }
     
     class MockInterval extends AbstractInterval {
@@ -227,221 +227,221 @@ NoAssert.donothing(false, test1.equals(new DateTime(TEST_TIME1)));
     @Test public void testContains_long() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
 NoAssert.donothing(true, test.contains(TEST_TIME1));
-NoAssert.donothing(false, test.contains(TEST_TIME1 - 1));
-NoAssert.donothing(true, test.contains(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2));
-NoAssert.donothing(false, test.contains(TEST_TIME2));
-NoAssert.donothing(true, test.contains(TEST_TIME2 - 1));
+        assertEquals(false, test.contains(TEST_TIME1 - 1));
+        assertEquals(true, test.contains(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2));
+        assertEquals(false, test.contains(TEST_TIME2));
+        assertEquals(true, test.contains(TEST_TIME2 - 1));
     }
 
     @Test public void testContainsNow() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         
         DateTimeUtils.setCurrentMillisFixed(TEST_TIME1);
-NoAssert.donothing(true, test.containsNow());
+        assertEquals(true, test.containsNow());
         DateTimeUtils.setCurrentMillisFixed(TEST_TIME1 - 1);
-NoAssert.donothing(false, test.containsNow());
+        assertEquals(false, test.containsNow());
         DateTimeUtils.setCurrentMillisFixed(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2);
-NoAssert.donothing(true, test.containsNow());
+        assertEquals(true, test.containsNow());
         DateTimeUtils.setCurrentMillisFixed(TEST_TIME2);
-NoAssert.donothing(false, test.containsNow());
+        assertEquals(false, test.containsNow());
         DateTimeUtils.setCurrentMillisFixed(TEST_TIME2 - 1);
-NoAssert.donothing(true, test.containsNow());
+        assertEquals(true, test.containsNow());
     }
 
     @Test public void testContains_RI() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
-NoAssert.donothing(true, test.contains(new Instant(TEST_TIME1)));
-NoAssert.donothing(false, test.contains(new Instant(TEST_TIME1 - 1)));
-NoAssert.donothing(true, test.contains(new Instant(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2)));
-NoAssert.donothing(false, test.contains(new Instant(TEST_TIME2)));
-NoAssert.donothing(true, test.contains(new Instant(TEST_TIME2 - 1)));
-NoAssert.donothing(true, test.contains((ReadableInstant) null));
+        assertEquals(true, test.contains(new Instant(TEST_TIME1)));
+        assertEquals(false, test.contains(new Instant(TEST_TIME1 - 1)));
+        assertEquals(true, test.contains(new Instant(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2)));
+        assertEquals(false, test.contains(new Instant(TEST_TIME2)));
+        assertEquals(true, test.contains(new Instant(TEST_TIME2 - 1)));
+        assertEquals(true, test.contains((ReadableInstant) null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testContains_RInterval() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         
-NoAssert.donothing(true, test.contains(new Interval(TEST_TIME1, TEST_TIME1)));
+        assertEquals(true, test.contains(new Interval(TEST_TIME1, TEST_TIME1)));
 NoAssert.donothing(false, test.contains(new Interval(TEST_TIME1 - 1, TEST_TIME1)));
         
-NoAssert.donothing(true, test.contains(new Interval(TEST_TIME1, TEST_TIME1 + 1)));
+        assertEquals(true, test.contains(new Interval(TEST_TIME1, TEST_TIME1 + 1)));
 NoAssert.donothing(false, test.contains(new Interval(TEST_TIME1 - 1, TEST_TIME1 + 1)));
-NoAssert.donothing(true, test.contains(new Interval(TEST_TIME1 + 1, TEST_TIME1 + 1)));
+        assertEquals(true, test.contains(new Interval(TEST_TIME1 + 1, TEST_TIME1 + 1)));
         
-NoAssert.donothing(true, test.contains(new Interval(TEST_TIME1, TEST_TIME2)));
-NoAssert.donothing(false, test.contains(new Interval(TEST_TIME1 - 1, TEST_TIME2)));
-NoAssert.donothing(true, test.contains(new Interval(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2, TEST_TIME2)));
-NoAssert.donothing(false, test.contains(new Interval(TEST_TIME2, TEST_TIME2)));
-NoAssert.donothing(true, test.contains(new Interval(TEST_TIME2 - 1, TEST_TIME2)));
+        assertEquals(true, test.contains(new Interval(TEST_TIME1, TEST_TIME2)));
+        assertEquals(false, test.contains(new Interval(TEST_TIME1 - 1, TEST_TIME2)));
+        assertEquals(true, test.contains(new Interval(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2, TEST_TIME2)));
+        assertEquals(false, test.contains(new Interval(TEST_TIME2, TEST_TIME2)));
+        assertEquals(true, test.contains(new Interval(TEST_TIME2 - 1, TEST_TIME2)));
         
 NoAssert.donothing(true, test.contains(new Interval(TEST_TIME1, TEST_TIME2 - 1)));
 NoAssert.donothing(false, test.contains(new Interval(TEST_TIME1 - 1, TEST_TIME2 - 1)));
-NoAssert.donothing(true, test.contains(new Interval(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2, TEST_TIME2 - 1)));
-NoAssert.donothing(true, test.contains(new Interval(TEST_TIME2 - 1, TEST_TIME2 - 1)));
-NoAssert.donothing(true, test.contains(new Interval(TEST_TIME2 - 2, TEST_TIME2 - 1)));
+        assertEquals(true, test.contains(new Interval(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2, TEST_TIME2 - 1)));
+        assertEquals(true, test.contains(new Interval(TEST_TIME2 - 1, TEST_TIME2 - 1)));
+        assertEquals(true, test.contains(new Interval(TEST_TIME2 - 2, TEST_TIME2 - 1)));
         
-NoAssert.donothing(false, test.contains(new Interval(TEST_TIME1, TEST_TIME2 + 1)));
-NoAssert.donothing(false, test.contains(new Interval(TEST_TIME1 - 1, TEST_TIME2 + 1)));
-NoAssert.donothing(false, test.contains(new Interval(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2, TEST_TIME2 + 1)));
-NoAssert.donothing(false, test.contains(new Interval(TEST_TIME2, TEST_TIME2 + 1)));
+        assertEquals(false, test.contains(new Interval(TEST_TIME1, TEST_TIME2 + 1)));
+        assertEquals(false, test.contains(new Interval(TEST_TIME1 - 1, TEST_TIME2 + 1)));
+        assertEquals(false, test.contains(new Interval(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2, TEST_TIME2 + 1)));
+        assertEquals(false, test.contains(new Interval(TEST_TIME2, TEST_TIME2 + 1)));
 NoAssert.donothing(false, test.contains(new Interval(TEST_TIME2 - 1, TEST_TIME2 + 1)));
-NoAssert.donothing(false, test.contains(new Interval(TEST_TIME1 - 2, TEST_TIME1 - 1)));
+        assertEquals(false, test.contains(new Interval(TEST_TIME1 - 2, TEST_TIME1 - 1)));
         
-NoAssert.donothing(true, test.contains((ReadableInterval) null));
+        assertEquals(true, test.contains((ReadableInterval) null));
     }
 
     @Test public void testOverlaps_RInterval() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         
-NoAssert.donothing(false, test.overlaps(new Interval(TEST_TIME1, TEST_TIME1)));
-NoAssert.donothing(false, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME1)));
+        assertEquals(false, test.overlaps(new Interval(TEST_TIME1, TEST_TIME1)));
+        assertEquals(false, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME1)));
         
-NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME1, TEST_TIME1 + 1)));
-NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME1 + 1)));
-NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME1 + 1, TEST_TIME1 + 1)));
+        assertEquals(true, test.overlaps(new Interval(TEST_TIME1, TEST_TIME1 + 1)));
+        assertEquals(true, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME1 + 1)));
+        assertEquals(true, test.overlaps(new Interval(TEST_TIME1 + 1, TEST_TIME1 + 1)));
         
-NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME1, TEST_TIME2)));
-NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME2)));
-NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2, TEST_TIME2)));
-NoAssert.donothing(false, test.overlaps(new Interval(TEST_TIME2, TEST_TIME2)));
-NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME2 - 1, TEST_TIME2)));
+        assertEquals(true, test.overlaps(new Interval(TEST_TIME1, TEST_TIME2)));
+        assertEquals(true, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME2)));
+        assertEquals(true, test.overlaps(new Interval(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2, TEST_TIME2)));
+        assertEquals(false, test.overlaps(new Interval(TEST_TIME2, TEST_TIME2)));
+        assertEquals(true, test.overlaps(new Interval(TEST_TIME2 - 1, TEST_TIME2)));
         
-NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME1, TEST_TIME2 + 1)));
+        assertEquals(true, test.overlaps(new Interval(TEST_TIME1, TEST_TIME2 + 1)));
 NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME2 + 1)));
-NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2, TEST_TIME2 + 1)));
-NoAssert.donothing(false, test.overlaps(new Interval(TEST_TIME2, TEST_TIME2 + 1)));
-NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME2 - 1, TEST_TIME2 + 1)));
+        assertEquals(true, test.overlaps(new Interval(TEST_TIME1 + (TEST_TIME2 - TEST_TIME1) / 2, TEST_TIME2 + 1)));
+        assertEquals(false, test.overlaps(new Interval(TEST_TIME2, TEST_TIME2 + 1)));
+        assertEquals(true, test.overlaps(new Interval(TEST_TIME2 - 1, TEST_TIME2 + 1)));
         
-NoAssert.donothing(false, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME1 - 1)));
-NoAssert.donothing(false, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME1)));
-NoAssert.donothing(true, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME1 + 1)));
+        assertEquals(false, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME1 - 1)));
+        assertEquals(false, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME1)));
+        assertEquals(true, test.overlaps(new Interval(TEST_TIME1 - 1, TEST_TIME1 + 1)));
         
 NoAssert.donothing(true, test.overlaps((ReadableInterval) null));
         
         MutableInterval empty = new MutableInterval(TEST_TIME1, TEST_TIME1);
-NoAssert.donothing(false, empty.overlaps(empty));
+        assertEquals(false, empty.overlaps(empty));
 NoAssert.donothing(false, empty.overlaps(test));
-NoAssert.donothing(false, test.overlaps(empty));
+        assertEquals(false, test.overlaps(empty));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testIsBefore_long() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         
-NoAssert.donothing(false, test.isBefore(TEST_TIME1 - 1));
-NoAssert.donothing(false, test.isBefore(TEST_TIME1));
-NoAssert.donothing(false, test.isBefore(TEST_TIME1 + 1));
+        assertEquals(false, test.isBefore(TEST_TIME1 - 1));
+        assertEquals(false, test.isBefore(TEST_TIME1));
+        assertEquals(false, test.isBefore(TEST_TIME1 + 1));
         
 NoAssert.donothing(false, test.isBefore(TEST_TIME2 - 1));
 NoAssert.donothing(true, test.isBefore(TEST_TIME2));
-NoAssert.donothing(true, test.isBefore(TEST_TIME2 + 1));
+        assertEquals(true, test.isBefore(TEST_TIME2 + 1));
     }
 
     @Test public void testIsBeforeNow() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         
         DateTimeUtils.setCurrentMillisFixed(TEST_TIME2 - 1);
-NoAssert.donothing(false, test.isBeforeNow());
+        assertEquals(false, test.isBeforeNow());
         DateTimeUtils.setCurrentMillisFixed(TEST_TIME2);
-NoAssert.donothing(true, test.isBeforeNow());
+        assertEquals(true, test.isBeforeNow());
         DateTimeUtils.setCurrentMillisFixed(TEST_TIME2 + 1);
-NoAssert.donothing(true, test.isBeforeNow());
+        assertEquals(true, test.isBeforeNow());
     }
 
     @Test public void testIsBefore_RI() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         
-NoAssert.donothing(false, test.isBefore(new Instant(TEST_TIME1 - 1)));
-NoAssert.donothing(false, test.isBefore(new Instant(TEST_TIME1)));
-NoAssert.donothing(false, test.isBefore(new Instant(TEST_TIME1 + 1)));
+        assertEquals(false, test.isBefore(new Instant(TEST_TIME1 - 1)));
+        assertEquals(false, test.isBefore(new Instant(TEST_TIME1)));
+        assertEquals(false, test.isBefore(new Instant(TEST_TIME1 + 1)));
         
-NoAssert.donothing(false, test.isBefore(new Instant(TEST_TIME2 - 1)));
-NoAssert.donothing(true, test.isBefore(new Instant(TEST_TIME2)));
+        assertEquals(false, test.isBefore(new Instant(TEST_TIME2 - 1)));
+        assertEquals(true, test.isBefore(new Instant(TEST_TIME2)));
 NoAssert.donothing(true, test.isBefore(new Instant(TEST_TIME2 + 1)));
         
-NoAssert.donothing(false, test.isBefore((ReadableInstant) null));
+        assertEquals(false, test.isBefore((ReadableInstant) null));
     }
 
     @Test public void testIsBefore_RInterval() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         
-NoAssert.donothing(false, test.isBefore(new Interval(Long.MIN_VALUE, TEST_TIME1 - 1)));
-NoAssert.donothing(false, test.isBefore(new Interval(Long.MIN_VALUE, TEST_TIME1)));
+        assertEquals(false, test.isBefore(new Interval(Long.MIN_VALUE, TEST_TIME1 - 1)));
+        assertEquals(false, test.isBefore(new Interval(Long.MIN_VALUE, TEST_TIME1)));
 NoAssert.donothing(false, test.isBefore(new Interval(Long.MIN_VALUE, TEST_TIME1 + 1)));
         
 NoAssert.donothing(false, test.isBefore(new Interval(TEST_TIME2 - 1, Long.MAX_VALUE)));
-NoAssert.donothing(true, test.isBefore(new Interval(TEST_TIME2, Long.MAX_VALUE)));
-NoAssert.donothing(true, test.isBefore(new Interval(TEST_TIME2 + 1, Long.MAX_VALUE)));
+        assertEquals(true, test.isBefore(new Interval(TEST_TIME2, Long.MAX_VALUE)));
+        assertEquals(true, test.isBefore(new Interval(TEST_TIME2 + 1, Long.MAX_VALUE)));
         
-NoAssert.donothing(false, test.isBefore((ReadableInterval) null));
+        assertEquals(false, test.isBefore((ReadableInterval) null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testIsAfter_long() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         
-NoAssert.donothing(true, test.isAfter(TEST_TIME1 - 1));
-NoAssert.donothing(false, test.isAfter(TEST_TIME1));
-NoAssert.donothing(false, test.isAfter(TEST_TIME1 + 1));
+        assertEquals(true, test.isAfter(TEST_TIME1 - 1));
+        assertEquals(false, test.isAfter(TEST_TIME1));
+        assertEquals(false, test.isAfter(TEST_TIME1 + 1));
         
-NoAssert.donothing(false, test.isAfter(TEST_TIME2 - 1));
-NoAssert.donothing(false, test.isAfter(TEST_TIME2));
-NoAssert.donothing(false, test.isAfter(TEST_TIME2 + 1));
+        assertEquals(false, test.isAfter(TEST_TIME2 - 1));
+        assertEquals(false, test.isAfter(TEST_TIME2));
+        assertEquals(false, test.isAfter(TEST_TIME2 + 1));
     }
 
     @Test public void testIsAfterNow() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         
         DateTimeUtils.setCurrentMillisFixed(TEST_TIME1 - 1);
-NoAssert.donothing(true, test.isAfterNow());
+        assertEquals(true, test.isAfterNow());
         DateTimeUtils.setCurrentMillisFixed(TEST_TIME1);
-NoAssert.donothing(false, test.isAfterNow());
+        assertEquals(false, test.isAfterNow());
         DateTimeUtils.setCurrentMillisFixed(TEST_TIME1 + 1);
-NoAssert.donothing(false, test.isAfterNow());
+        assertEquals(false, test.isAfterNow());
     }
 
     @Test public void testIsAfter_RI() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         
-NoAssert.donothing(true, test.isAfter(new Instant(TEST_TIME1 - 1)));
-NoAssert.donothing(false, test.isAfter(new Instant(TEST_TIME1)));
-NoAssert.donothing(false, test.isAfter(new Instant(TEST_TIME1 + 1)));
+        assertEquals(true, test.isAfter(new Instant(TEST_TIME1 - 1)));
+        assertEquals(false, test.isAfter(new Instant(TEST_TIME1)));
+        assertEquals(false, test.isAfter(new Instant(TEST_TIME1 + 1)));
         
-NoAssert.donothing(false, test.isAfter(new Instant(TEST_TIME2 - 1)));
-NoAssert.donothing(false, test.isAfter(new Instant(TEST_TIME2)));
-NoAssert.donothing(false, test.isAfter(new Instant(TEST_TIME2 + 1)));
+        assertEquals(false, test.isAfter(new Instant(TEST_TIME2 - 1)));
+        assertEquals(false, test.isAfter(new Instant(TEST_TIME2)));
+        assertEquals(false, test.isAfter(new Instant(TEST_TIME2 + 1)));
         
-NoAssert.donothing(false, test.isAfter((ReadableInstant) null));
+        assertEquals(false, test.isAfter((ReadableInstant) null));
     }
 
     @Test public void testIsAfter_RInterval() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2);
         
-NoAssert.donothing(true, test.isAfter(new Interval(Long.MIN_VALUE, TEST_TIME1 - 1)));
-NoAssert.donothing(true, test.isAfter(new Interval(Long.MIN_VALUE, TEST_TIME1)));
-NoAssert.donothing(false, test.isAfter(new Interval(Long.MIN_VALUE, TEST_TIME1 + 1)));
+        assertEquals(true, test.isAfter(new Interval(Long.MIN_VALUE, TEST_TIME1 - 1)));
+        assertEquals(true, test.isAfter(new Interval(Long.MIN_VALUE, TEST_TIME1)));
+        assertEquals(false, test.isAfter(new Interval(Long.MIN_VALUE, TEST_TIME1 + 1)));
         
 NoAssert.donothing(false, test.isAfter(new Interval(TEST_TIME2 - 1, Long.MAX_VALUE)));
-NoAssert.donothing(false, test.isAfter(new Interval(TEST_TIME2, Long.MAX_VALUE)));
-NoAssert.donothing(false, test.isAfter(new Interval(TEST_TIME2 + 1, Long.MAX_VALUE)));
+        assertEquals(false, test.isAfter(new Interval(TEST_TIME2, Long.MAX_VALUE)));
+        assertEquals(false, test.isAfter(new Interval(TEST_TIME2 + 1, Long.MAX_VALUE)));
         
-NoAssert.donothing(false, test.isAfter((ReadableInterval) null));
+        assertEquals(false, test.isAfter((ReadableInterval) null));
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToInterval1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2, COPTIC_PARIS);
         Interval result = test.toInterval();
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
     }
 
     //-----------------------------------------------------------------------
     @Test public void testToMutableInterval1() {
         MutableInterval test = new MutableInterval(TEST_TIME1, TEST_TIME2, COPTIC_PARIS);
         MutableInterval result = test.toMutableInterval();
-NoAssert.donothing(test, result);
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
+        assertNotSame(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -452,7 +452,7 @@ NoAssert.donothing(test, result);
         
         Period test = base.toPeriod();
         Period expected = new Period(dt1, dt2, PeriodType.standard());
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     //-----------------------------------------------------------------------
@@ -463,7 +463,7 @@ NoAssert.donothing(expected, test);
         
         Period test = base.toPeriod(null);
         Period expected = new Period(dt1, dt2, PeriodType.standard());
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     @Test public void testToPeriod_PeriodType2() {
@@ -473,7 +473,7 @@ NoAssert.donothing(expected, test);
         
         Period test = base.toPeriod(PeriodType.yearWeekDayTime());
         Period expected = new Period(dt1, dt2, PeriodType.yearWeekDayTime());
-NoAssert.donothing(expected, test);
+        assertEquals(expected, test);
     }
 
     //-----------------------------------------------------------------------
@@ -491,7 +491,7 @@ NoAssert.donothing(expected, test);
         MutableInterval result = (MutableInterval) ois.readObject();
         ois.close();
         
-NoAssert.donothing(test, result);
+        assertEquals(test, result);
     }
 
     //-----------------------------------------------------------------------
@@ -499,20 +499,20 @@ NoAssert.donothing(test, result);
         DateTime dt1 = new DateTime(2004, 6, 9, 7, 8, 9, 10, DateTimeZone.UTC);
         DateTime dt2 = new DateTime(2005, 8, 13, 12, 14, 16, 18, DateTimeZone.UTC);
         MutableInterval test = new MutableInterval(dt1, dt2);
-NoAssert.donothing("2004-06-09T07:08:09.010Z/2005-08-13T12:14:16.018Z", test.toString());
+        assertEquals("2004-06-09T07:08:09.010Z/2005-08-13T12:14:16.018Z", test.toString());
     }
 
     //-----------------------------------------------------------------------
     @Test public void testCopy() {
         MutableInterval test = new MutableInterval(123L, 456L, COPTIC_PARIS);
         MutableInterval cloned = test.copy();
-NoAssert.donothing(test, cloned);
-NoAssert.donothing(test, cloned);
+        assertEquals(test, cloned);
+        assertNotSame(test, cloned);
     }
     @Test public void testClone() {
         MutableInterval test = new MutableInterval(123L, 456L, COPTIC_PARIS);
         MutableInterval cloned = (MutableInterval) test.clone();
-NoAssert.donothing(test, cloned);
+        assertEquals(test, cloned);
 NoAssert.donothing(test, cloned);
     }
 
