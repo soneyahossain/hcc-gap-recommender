@@ -2,7 +2,7 @@
 
 export e_jar="assembly/evaluator.jar"
 subject=subjects/jaxen-1.2.0
-export per_assert_cov="$subject/omc_per_assertion.txt"
+export per_assert_cov="$subject/scc_per_assertion.txt"
 export targetDir="$subject/target"
 export outDir="$subject/evaluation/"
 

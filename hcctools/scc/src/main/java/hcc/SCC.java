@@ -124,7 +124,7 @@ public class SCC {
         for (String criterion : per_assertion_cov.keySet()) {
             total_criterion++;
             Set<String> stmts = per_assertion_cov.get(criterion);
-            builder.append("assertion: " + criterion + "\n");
+            builder.append("criterion: " + criterion + "\n");
             if (stmts != null) {
                 for (String stmt : stmts) {
                     builder.append("\t" + stmt + "\n");

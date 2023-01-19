@@ -147,7 +147,7 @@ public class SCC {
 
         builder = new StringBuilder();
         try {
-            pw = new PrintWriter(outputDir + "/omc_per_assertion.txt");
+            pw = new PrintWriter(outputDir + "/scc_per_assertion.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
