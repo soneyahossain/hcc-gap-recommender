@@ -123,5 +123,5 @@ report $? "Checked Coverage (object-branch) computed"
 # Run recommender/evaluator tool
 header "Run recommender/evaluator"
 ./evaluator.sh $PROJECT_NAME > $PROJECT_NAME.evaluator 2>&1
-cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/evaluation/result/summary.csv
+cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/evaluator/result/summary.csv
 report $? "Recommender/evalutor ran"
