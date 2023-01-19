@@ -18,6 +18,21 @@ HCC framework requires the following software on your machine:
 
 - JDK 1.7 (https://www.oracle.com/java/technologies/javase/javase7-archive-downloads.html)
 - JDK 1.8 (https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
+
+Run the following commands to install:
+
+        sudo apt-get update
+        sudo apt-get install openjdk-8-jdk
+
+Verify the version of the JDK:
+
+        java -version
+
+The output should look like this:
+
+        openjdk version "1.8.0_242"
+        OpenJDK Runtime Environment (build 1.8.0_242-b09)
+        OpenJDK 64-Bit Server VM (build 25.242-b09, mixed mode)
 - Apache Maven 3.6.3 (https://maven.apache.org/)
 
         sudo apt update        
