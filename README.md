@@ -102,5 +102,17 @@ total 436
 -rw-rw-r-- 1 stg stg 45389 Jan 18 20:23 CommandLineTest2.txt
 -rw-rw-r-- 1 stg stg 34564 Jan 18 20:23 CommandLineTest1.txt
 
-FIXME: PASTE THE REST OF THE OUTPUT
+==========================================================================================
+[SmokeTest] commons-cli-limited: Compute checked coverage statement metric
+==========================================================================================
+Checked Coverage (statement) computed: OK
+
+==========================================================================================
+[SmokeTest] commons-cli-limited: Compute checked coverage object branch metric
+==========================================================================================
+Checked Coverage (object-branch) computed: OK
+
+==========================================================================================
+[SmokeTest] commons-cli-limited: Run recommender/evaluator
+==========================================================================================
 ```
