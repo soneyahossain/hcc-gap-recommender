@@ -157,19 +157,26 @@ total 436
 -rw-rw-r-- 1 stg stg 45389 Jan 18 20:23 CommandLineTest2.txt
 -rw-rw-r-- 1 stg stg 34564 Jan 18 20:23 CommandLineTest1.txt
 
-==========================================================================================
-[SmokeTest] commons-cli-limited: Compute checked coverage statement metric
-==========================================================================================
-Checked Coverage (statement) computed: OK
-
-==========================================================================================
-[SmokeTest] commons-cli-limited: Compute checked coverage object branch metric
-==========================================================================================
-Checked Coverage (object-branch) computed: OK
-
-==========================================================================================
-[SmokeTest] commons-cli-limited: Run recommender/evaluator
-==========================================================================================
+==========================================================================================                                                       
+[SmokeTest] commons-cli-limited: Compute checked coverage statement metric                                                                       
+==========================================================================================                                                       
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion                                                                    
+1009,288,721,197,15                                                                                                                              
+Checked Coverage (statement) computed: OK                                                                                                        
+                                                                                                                                                 
+==========================================================================================                                                       
+[SmokeTest] commons-cli-limited: Compute checked coverage object branch metric                                                                   
+==========================================================================================                                                       
+total_branch,total_executed,total_missed,total_checked,total_criteria                                                                            
+698,137,561,86,15                                                                                                                                
+Checked Coverage (object-branch) computed: OK                                                                                                    
+                                                                                                                                                 
+==========================================================================================                                                       
+[SmokeTest] commons-cli-limited: Run evaluator                                                                                       
+==========================================================================================                                                       
+subject,total_assertion,top_1(%),top_5(%),top_10(%)                                                                                              
+project,9,55.56,100.00,100.00,                                                                                                                   
+Evaluator ran successfully: OK 
 ```
 
 # Experimental Subjects
