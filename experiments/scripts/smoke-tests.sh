@@ -9,8 +9,6 @@
 # test should take about 10 mns.
 #
 
-set -e
-
 # source env. variables
 if [ -z $HCC_EXPERIMENTS ]; then
 	cd ..
@@ -113,14 +111,17 @@ ls -ltR $HCC_EXPERIMENTS/slices/$PROJECT_NAME/cli_slices/
 # Compute Checked Coverage (statement)
 header "Compute checked coverage statement metric"
 ./compute_hcc.stmt.sh $PROJECT_NAME > $PROJECT_NAME.hcc 2>&1
+cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/ssc.csv
 report $? "Checked Coverage (statement) computed"
 
 # Compute Checked Coverage (object-branch)
 header "Compute checked coverage object branch metric"
 ./compute_hcc.ob.sh $PROJECT_NAME > $PROJECT_NAME.hcc.ob 2>&1
+cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/obcc.csv
 report $? "Checked Coverage (object-branch) computed"
 
 # Run recommender/evaluator tool
 header "Run recommender/evaluator"
 time ./evaluator.sh $PROJECT_NAME > $PROJECT_NAME.evaluator 2>&1
+cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/evaluation/result/summary.csv
 report $? "Recommender/evalutor ran"

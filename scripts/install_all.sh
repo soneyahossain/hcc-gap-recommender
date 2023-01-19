@@ -35,6 +35,10 @@ do
 
 	mvn package
 	sh run.sh
+
+	if [ "$t" == "recommender" ]; then
+		sh run-evaluator.sh
+	fi
 	
 	popd
 done
