@@ -1,4 +1,16 @@
-# hcc-gap-recommender
+# Artifact: Measuring and Mitigating Gaps in Structural Testing
+
+This repository contains the artifact for testing the host checked coverage (hcc), coverage gap, and the recommender for closing that gap. It is implemented primarily on Java and includes all data, codes, and scripts required for replicating the studies in the paper "Measuring and Mitigating Gaps in Structural Testing".
+
+
+#Introduction
+
+The artifact implements the host checked coverage (hcc) metric, the coverage gap computed from hcc, and the assertion recommendations to close the gap. HCC is calculated for the statement (SCC) and object branch criteria (OBCC). To compute hcc, we used and extended the JavaSlicer (https://github.com/backes/javaslicer). Once hcc is calculated, we compute the coverage gap from hcc and regular code coverage (RQ1), where regular statement and object branch coverage are calculated from the clover and JaCoCo tools.
+We have shown that the gap strongly and negatively correlates with fault detection effectiveness (RQ2). We can utilize the gap to generate recommendations to add more assertions to a test suite and improve the fault-detection power (RqQ3+RQ4).
+In this replication package, we have shown how to run the end-to-end experiment, and then we have provided RQ-wise instructions to regenerate the results presented in the paper.
+
+
+#Setup
 
 The following instructions have been tested on Ubuntu 20. We recommend starting with a clean Ubuntu 20 virtual machine to familiarize yourselfs with HCC.
 
