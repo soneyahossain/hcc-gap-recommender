@@ -6,7 +6,7 @@ This repository contains the artifact for testing the host checked coverage (hcc
 ## Introduction
 
 The artifact implements the host checked coverage (hcc) metric, the coverage gap computed from hcc, and the assertion recommendations to close the gap. HCC is calculated for the statement (SCC) and object branch criteria (OBCC). To compute hcc, we used and extended the JavaSlicer (https://github.com/backes/javaslicer). Once hcc is calculated, we compute the coverage gap from hcc and regular code coverage (RQ1), where regular statement and object branch coverage are calculated from the clover and JaCoCo tools.
-We have shown that the gap strongly and negatively correlates with fault detection effectiveness (RQ2). We can utilize the gap to generate recommendations to add more assertions to a test suite and improve the fault-detection power (RqQ3+RQ4).
+We have shown that the gap strongly and negatively correlates with fault detection effectiveness (RQ2). We utilize the gap to generate recommendations to add more assertions to a test suite and improve the fault-detection power (RQ3+RQ4).
 In this replication package, we have shown how to run the end-to-end experiment, and then we have provided RQ-wise instructions to regenerate the results presented in the paper.
 
 
@@ -18,7 +18,7 @@ HCC framework requires the following software on your machine:
 
 - JDK 1.7 (https://www.oracle.com/java/technologies/javase/javase7-archive-downloads.html)
 - JDK 1.8 (https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
-- Apache Maven 3.6.6 (https://maven.apache.org/)
+- Apache Maven 3.6.3 (https://maven.apache.org/)
 
 Once this is done, update the maven and Java-related environment variables in the file `experiments/setenv`
 
