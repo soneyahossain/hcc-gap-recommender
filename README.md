@@ -20,6 +20,21 @@ HCC framework requires the following software on your machine:
 - JDK 1.8 (https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
 - Apache Maven 3.6.3 (https://maven.apache.org/)
 
+        sudo apt update        
+        sudo apt install maven
+
+  To verify the installation, run mvn -version:
+  
+        mvn -version
+  The output should look something like this:
+     
+       Apache Maven 3.6.3
+       Maven home: /usr/share/maven
+       Java version: 1.8.0_312, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+       Default locale: en_US, platform encoding: UTF-8
+       OS name: "linux", version: "5.13.0-41-generic", arch: "amd64", family: "unix"
+
+
 Once this is done, update the maven and Java-related environment variables in the file `experiments/setenv`
 
 Then set the needed environment variables in your shell by running (remember to set these environment variables for each shell you will be using):
