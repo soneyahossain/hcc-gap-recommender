@@ -2,10 +2,14 @@
 
 To run HCC, you will need to install both Java JDK 1.7 and JDK 1.8
 
-Once this is done:
-* update the Java-related environment variables in the file `experiments/setenv`
-* `cd` into `experiments` and type: ```. setenv```
+Once this is done, update the Java-related environment variables in the file `experiments/setenv`
 
+Then set the needed environment variables in your shell by running (remember to set these environment variables for each shell you will be using):
+```
+# Assuming that you are in the top level of this project...
+cd experiments
+. setenv
+```
 To build the HCC support libraries:
 ```
 cd $HCC_HOME
@@ -21,7 +25,7 @@ cd $HCC_EXPERIMENTS/scripts
 The smoke tests should take approximately 10mns and will exercise an end-to-end workflow of the HCC toolset. 
 You should see output that looks like the following:
 
-``` PASTE COMPLETE OUTPUT HERE ONCE IT IS STABLE 
+```
 *****************************************************************
 Smoke tests for end-to-end checked coverage computation workflow
 *****************************************************************
