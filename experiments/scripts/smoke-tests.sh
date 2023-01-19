@@ -120,8 +120,8 @@ header "Compute checked coverage object branch metric"
 cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/obcc.csv
 report $? "Checked Coverage (object-branch) computed"
 
-# Run recommender/evaluator tool
-header "Run recommender/evaluator"
+# Run evaluator tool
+header "Run evaluator tool"
 ./evaluator.sh $PROJECT_NAME > $PROJECT_NAME.evaluator 2>&1
 cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/evaluator/result/summary.csv
-report $? "Recommender/evalutor ran"
+report $? "Evaluator ran successfully"
