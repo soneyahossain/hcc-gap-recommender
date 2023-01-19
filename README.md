@@ -1,5 +1,7 @@
 # hcc-gap-recommender
 
+The following instructions have been tested on Ubuntu 20.
+
 To run HCC, you will need to install both Java JDK 1.7 and JDK 1.8
 
 Once this is done, update the Java-related environment variables in the file `experiments/setenv`
