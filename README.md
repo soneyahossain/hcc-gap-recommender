@@ -1,6 +1,6 @@
 # hcc-gap-recommender
 
-The following instructions have been tested on Ubuntu 20.
+The following instructions have been tested on Ubuntu 20. We recommend starting with a clean Ubuntu 20 virtual machine to familiarize yourselfs with HCC.
 
 To run HCC, you will need to install both Java JDK 1.7 and JDK 1.8
 
