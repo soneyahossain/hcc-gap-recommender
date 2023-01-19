@@ -11,7 +11,9 @@ export PROJECT_HOME=$HCC_EXPERIMENTS/subjects/$PROJECT_NAME
 export HCC_SLICES=$HCC_EXPERIMENTS/slices/$PROJECT_NAME
 
 # verify project existence
-if [ ! -d $PROJECT_HOME ]; then
+if [ ! -d "$PROJECT_HOME" ]; then
+	echo $HCC_EXPERIMENTS
+	echo $PROJECT_NAME
 	echo $PROJECT_HOME does not exist
 	exit 1
 fi
