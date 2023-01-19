@@ -12,11 +12,15 @@ In this replication package, we have shown how to run the end-to-end experiment,
 
 ## Setup
 
-The following instructions have been tested on Ubuntu 20. We recommend starting with a clean Ubuntu 20 virtual machine to familiarize yourselfs with HCC.
+The artifact has been tested on Ubuntu 20. We recommend starting with a clean Ubuntu 20 virtual machine to familiarize yourselves with HCC.
 
-To run HCC, you will need to install both Java JDK 1.7 and JDK 1.8
+HCC framework requires the following software on your machine:
 
-Once this is done, update the Java-related environment variables in the file `experiments/setenv`
+- JDK 1.7 (https://www.oracle.com/java/technologies/javase/javase7-archive-downloads.html)
+- JDK 1.8 (https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
+- Apache Maven 3.6.6 (https://maven.apache.org/)
+
+Once this is done, update the maven and Java-related environment variables in the file `experiments/setenv`
 
 Then set the needed environment variables in your shell by running (remember to set these environment variables for each shell you will be using):
 ```
