@@ -16,7 +16,7 @@ The artifact has been tested on Ubuntu 20. We recommend starting with a clean Ub
 
 HCC framework requires the following software on your machine:
 
-- JDK 1.7 (https://www.oracle.com/java/technologies/javase/javase7-archive-downloads.html)
+- JDK 1.7 (https://www.oracle.com/java/technologies/javase/javase7-archive-downloads.html, https://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html#install-64)
 - JDK 1.8 (https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
 
 Run the following commands to install:
@@ -63,6 +63,7 @@ To build the HCC support libraries:
 cd $HCC_HOME
 ./scripts/install_all.sh
 ```
+## Running end-to-end
 
 To make sure everything is working properly, run the following smoke tests:
 ```
