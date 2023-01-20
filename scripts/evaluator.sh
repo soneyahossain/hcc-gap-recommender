@@ -8,7 +8,7 @@ set -e
 export JAVA_HOME=$JDK_1_8
 export PATH=$JAVA_HOME/bin:$PATH
 
-e_jar="$HCC_LIBS/reco-evaluator.jar"
+e_jar="$HCC_LIBS/evaluator.jar"
 
 per_assert_cov=$1
 source_target=$2
