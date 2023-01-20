@@ -7,7 +7,7 @@ if [ -z $1 ]; then
 	exit 1
 fi
 
-export JAVA_HOME=$JDK_18
+export JAVA_HOME=$JDK_1_8
 export PATH=$JAVA_HOME/bin:$PATH
 
 pushd $HCC_EXPERIMENTS/subjects/$PROJECT_NAME

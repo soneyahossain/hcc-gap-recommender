@@ -3,7 +3,7 @@
 # Compute HCC statistics
 #
 # HCC works with 1.8 only (whereas slicer works with 1.7)
-export JAVA_HOME=$JDK_18
+export JAVA_HOME=$JDK_1_8
 export PATH=$JAVA_HOME/bin:$PATH
 #hcc_ob_jar=$HCC_LIBS/hcc_ob.jar
 hcc_ob_jar=$HCC_LIBS/obcc.jar

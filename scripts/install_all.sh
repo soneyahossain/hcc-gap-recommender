@@ -3,13 +3,13 @@
 # Exit on any errors
 set -e
 
-if [ -z "$JDK_17" ]; then
-	echo Environment variable JDK_17 is undefined. Please set it to point at your Java JDK 1.7 installation
+if [ -z "$JDK_1_7" ]; then
+	echo Environment variable JDK_1_7 is undefined. Please set it to point at your Java JDK 1.7 installation
 	exit 1
 fi
 
-if [ -z "$JDK_18" ]; then
-	echo Environment variable JDK_18 is undefined. Please set it to point at your Java JDK 1.8 installation
+if [ -z "$JDK_1_8" ]; then
+	echo Environment variable JDK_1_8 is undefined. Please set it to point at your Java JDK 1.8 installation
 	exit 1
 fi
 
@@ -22,7 +22,7 @@ fi
 #
 # HCC tools required jdk 1.8
 #
-export JAVA_HOME=$JDK_18
+export JAVA_HOME=$JDK_1_8
 export PATH=$JAVA_HOME/bin:$PATH
 
 cd $HCC_HOME/hcctools
