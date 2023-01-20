@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export JAVA_HOME=$JDK_18
+export JAVA_HOME=$JDK_1_8
 export PATH=$JAVA_HOME/bin:$PATH
 
 PROJECT_NAME=$1

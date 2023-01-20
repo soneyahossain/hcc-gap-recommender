@@ -1,5 +1,5 @@
 
-export JAVA_HOME=$JDK_18
+export JAVA_HOME=$JDK_1_8
 export PATH=$JAVA_HOME/bin:$PATH
 
 #export CLASSPATH=$CLASSPATH:$PROJECT_HOME/target/test-classes:$PROJECT_HOME/target/classes:$MAVEN_REPO/org/joda/joda-convert/1.9.2/joda-convert-1.9.2.jar:$MAVEN_REPO/junit/junit/4.11/junit-4.11.jar:$MAVEN_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:$MAVEN_REPO/commons-io/commons-io/2.6/commons-io-2.6.jar:$MAVEN_REPO/com/fasterxml/jackson/core/jackson-databind/2.9.10/jackson-databind-2.9.10.jar:$MAVEN_REPO/com/fasterxml/jackson/core/jackson-core/2.9.10/jackson-core-2.9.10.jar

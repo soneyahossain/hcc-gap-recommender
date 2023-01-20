@@ -21,7 +21,7 @@ export cri_gen_jar=$HCC_LIBS/hcc_cri_gen.singles.jar
 export slicer_jar=$HCC_LIBS/slicer.jar
 
 # need to run with java 1.8 or above
-export JAVA_HOME=$JDK_18
+export JAVA_HOME=$JDK_1_8
 export PATH=$JAVA_HOME/bin:$PATH
 
 # use same convention for layout as tracer

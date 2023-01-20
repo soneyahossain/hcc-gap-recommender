@@ -1,6 +1,6 @@
 #!/bin/bash
 
-JAVA_HOME=$JDK_18
+JAVA_HOME=$JDK_1_8
 PATH=$JAVA_HOME/bin:$PATH
 
 R_JAR=$HCC_HOME/lib/testsuite-gen.jar

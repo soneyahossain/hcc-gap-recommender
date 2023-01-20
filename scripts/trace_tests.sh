@@ -12,7 +12,7 @@
 #
 
 # these env vars should already be defined
-export JAVA_HOME=$JDK_17
+export JAVA_HOME=$JDK_1_7
 export PATH=$JAVA_HOME/bin:$PATH
 
 TRACER_JAR=$HCC_LIBS/tracer.jar
