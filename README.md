@@ -90,91 +90,30 @@ Verify ability to generate:
    - checked coverage (object branch)
    - recommender/evaluator tool output
 
+= Computing statement coverage =
+   Statements: 288/1009 (28.5%)  
 
-==========================================================================================
-[SmokeTest] commons-cli-limited: Cleaning up any old experimental artifacts
-==========================================================================================
-Cleaning up traces directory
-Cleaning up slices directory
-Cleaning up results directory
+= Computing object-branch coverage =
+Object-branch coverage output file created: OK
 
-==========================================================================================
-[SmokeTest] commons-cli-limited: Compute baseline coverage information with clover (< 1mn)
-==========================================================================================
-Clover baseline coverage: OK
-Coverage Overview -
-Coverage:-
-      Methods: 99/253 (39.1%)                                                                                                   
-   Statements: 288/1009 (28.5%)                                                                                                 
-     Branches: 96/468 (20.5%)                                                                                                   
-        Total: 27.9%                                                                                                            
-Complexity:-
-   Avg Method: 2.217
-      Density: 0.556
-        Total: 561
-
-==========================================================================================
-[SmokeTest] commons-cli-limited: Compute baseline coverage information with jacoco (< 1mn)
-==========================================================================================
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  11.179 s
-[INFO] Finished at: 2023-01-18T20:22:27Z
-[INFO] ------------------------------------------------------------------------
-Save jacoco.xml in /home/stg/hcc-gap-recommender/experiments/hcc_results/commons-cli-limited/jacoco/
-
-==========================================================================================
-[SmokeTest] commons-cli-limited: Generate trace information for unit tests (< 2mns)
-==========================================================================================
+= Generating trace files =
 Trace file generated: OK
-total 7588
--rw-rw-r-- 1 stg stg 7768597 Jan 18 20:23 CommandLineTest.trace
 
-==========================================================================================
-[SmokeTest] commons-cli-limited: Slice traces (~10mns)
-==========================================================================================
+= Generating slices =
 Slice file(s) generated: OK
-/home/stg/hcc-gap-recommender/experiments/slices/commons-cli-limited/cli_slices/:
-total 4
-drwxrwxr-x 2 stg stg 4096 Jan 18 20:25 CommandLineTest
 
-/home/stg/hcc-gap-recommender/experiments/slices/commons-cli-limited/cli_slices/CommandLineTest:
-total 436
--rw-rw-r-- 1 stg stg  8939 Jan 18 20:25 CommandLineTest15.txt
--rw-rw-r-- 1 stg stg  6510 Jan 18 20:25 CommandLineTest14.txt
--rw-rw-r-- 1 stg stg  7106 Jan 18 20:25 CommandLineTest13.txt
--rw-rw-r-- 1 stg stg 41426 Jan 18 20:24 CommandLineTest12.txt
--rw-rw-r-- 1 stg stg 40431 Jan 18 20:24 CommandLineTest11.txt
--rw-rw-r-- 1 stg stg  5326 Jan 18 20:24 CommandLineTest10.txt
--rw-rw-r-- 1 stg stg  4012 Jan 18 20:24 CommandLineTest9.txt
--rw-rw-r-- 1 stg stg  4273 Jan 18 20:24 CommandLineTest8.txt
--rw-rw-r-- 1 stg stg 44125 Jan 18 20:24 CommandLineTest7.txt
--rw-rw-r-- 1 stg stg 43454 Jan 18 20:24 CommandLineTest6.txt
--rw-rw-r-- 1 stg stg 42567 Jan 18 20:23 CommandLineTest5.txt
--rw-rw-r-- 1 stg stg 43728 Jan 18 20:23 CommandLineTest4.txt
--rw-rw-r-- 1 stg stg 43592 Jan 18 20:23 CommandLineTest3.txt
--rw-rw-r-- 1 stg stg 45389 Jan 18 20:23 CommandLineTest2.txt
--rw-rw-r-- 1 stg stg 34564 Jan 18 20:23 CommandLineTest1.txt
-
-==========================================================================================                                                       
-[SmokeTest] commons-cli-limited: Compute checked coverage statement metric                                                                       
-==========================================================================================                                                       
-total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion                                                                    
-1009,288,721,197,15                                                                                                                              
-Checked Coverage (statement) computed: OK                                                                                                        
+= Computing statement checked coverage (SCC) =                                                     
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion                                                                   
+1009,288,721,197,15                                                                                                                             
+SCC computed: OK                                                                                                        
+                                                                  
+= Computing object-branch checked coverage (OBCC) =                                                                                                     
+total_branch,total_executed,total_missed,total_checked,total_criteria                                                                           
+698,137,561,86,15                                                                                                                               
+OBCC computed: OK                                                                                                    
                                                                                                                                                  
-==========================================================================================                                                       
-[SmokeTest] commons-cli-limited: Compute checked coverage object branch metric                                                                   
-==========================================================================================                                                       
-total_branch,total_executed,total_missed,total_checked,total_criteria                                                                            
-698,137,561,86,15                                                                                                                                
-Checked Coverage (object-branch) computed: OK                                                                                                    
-                                                                                                                                                 
-==========================================================================================                                                       
-[SmokeTest] commons-cli-limited: Run evaluator                                                                                       
-==========================================================================================                                                       
-subject,total_assertion,top_1(%),top_5(%),top_10(%)                                                                                              
+= Running recommendation evaluator =                                                       
+subject,total_assertion,top_1(%),top_5(%),top_10(%)                                                                                             
 project,9,55.56,100.00,100.00,                                                                                                                   
 Evaluator ran successfully: OK 
 ```
