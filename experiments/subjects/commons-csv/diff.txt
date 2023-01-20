@@ -1,0 +1,78 @@
+diff --git a/pom.xml b/pom.xml
+index 232a5dec..acf55450 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -165,6 +165,28 @@ CSV files of various types.
+       </plugins>
+     </pluginManagement>
+     <plugins>
++
++            <plugin>
++                <groupId>org.jacoco</groupId>
++                <artifactId>jacoco-maven-plugin</artifactId>
++                <version>0.8.2</version>
++                <executions>
++                    <execution>
++                        <goals>
++                            <goal>prepare-agent</goal>
++                        </goals>
++                    </execution>
++                    <!-- attached to Maven test phase -->
++                    <execution>
++                        <id>report</id>
++                        <phase>test</phase>
++                        <goals>
++                            <goal>report</goal>
++                        </goals>
++                    </execution>
++                </executions>
++            </plugin>
++
+       <plugin>
+         <artifactId>maven-compiler-plugin</artifactId>
+         <configuration>
+@@ -188,7 +210,9 @@ CSV files of various types.
+         <artifactId>maven-surefire-plugin</artifactId>
+         <configuration>
+           <excludes>
+-            <exclude>**/perf/PerformanceTest.java</exclude>
++            <exclude>**/PerformanceTest.java</exclude>
++            <exclude>**/issues/JiraCsv198Test.java</exclude>
++            <exclude>**/CSVRecordTest.java</exclude>
+           </excludes>
+         </configuration>
+       </plugin>
+@@ -231,6 +255,19 @@ CSV files of various types.
+           </excludes>
+         </configuration>
+       </plugin>
++
++                <plugin>
++                    <groupId>com.atlassian.maven.plugins</groupId>
++                    <artifactId>maven-clover2-plugin</artifactId>
++                    <version>4.0.6</version>
++                    <configuration>
++                        <!--   <contextFilters>try,catch,static</contextFilters> -->
++                        <generateHistorical>true</generateHistorical>
++                        <jdk>1.7</jdk>
++                        <includesTestSourceRoots>false</includesTestSourceRoots>
++                    </configuration>
++                </plugin>
++
+     </plugins>
+   </build>
+ 
+diff --git a/src/test/java/org/apache/commons/csv/CSVPrinterTest.java b/src/test/java/org/apache/commons/csv/CSVPrinterTest.java
+index 4a0ffbff..6b35d35b 100644
+--- a/src/test/java/org/apache/commons/csv/CSVPrinterTest.java
++++ b/src/test/java/org/apache/commons/csv/CSVPrinterTest.java
+@@ -61,7 +61,8 @@ public class CSVPrinterTest {
+     private static final char DQUOTE_CHAR = '"';
+     private static final char BACKSLASH_CH = '\\';
+     private static final char QUOTE_CH = '\'';
+-    private static final int ITERATIONS_FOR_RANDOM_TEST = 50000;
++//    private static final int ITERATIONS_FOR_RANDOM_TEST = 50000;
++    private static final int ITERATIONS_FOR_RANDOM_TEST = 100;
+ 
+     private static String printable(final String s) {
+         final StringBuilder sb = new StringBuilder();

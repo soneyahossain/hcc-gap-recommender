@@ -1,0 +1,54 @@
+diff --git a/pom.xml b/pom.xml
+index a9e51a7c..a5c00f8f 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -200,8 +200,49 @@
+           <!-- Needed to define config_loc -->
+           <propertyExpansion>config_loc=${basedir}</propertyExpansion>
+           <enableRulesSummary>false</enableRulesSummary>
++          <excludes>
++            <exclude>**/AbstractCommonTest.java</exclude>
++            <exclude>**/AbstractNumberTest.java</exclude>
++            <exclude>**/AbstractCalendarValidatorTest.java</exclude>
++            <exclude>**/AbstractNumberValidatorTest.java</exclude>
++            <exclude>**/AbstractCheckDigitTest.java</exclude>
++          </excludes>
+         </configuration>
+       </plugin>
++
++            <plugin>
++                <groupId>org.jacoco</groupId>
++                <artifactId>jacoco-maven-plugin</artifactId>
++                <version>0.8.2</version>
++                <executions>
++                    <execution>
++                        <goals>
++                            <goal>prepare-agent</goal>
++                        </goals>
++                    </execution>
++                    <!-- attached to Maven test phase -->
++                    <execution>
++                        <id>report</id>
++                        <phase>test</phase>
++                        <goals>
++                            <goal>report</goal>
++                        </goals>
++                    </execution>
++                </executions>
++            </plugin>
++
++                <plugin>
++                    <groupId>com.atlassian.maven.plugins</groupId>
++                    <artifactId>maven-clover2-plugin</artifactId>
++                    <version>4.0.6</version>
++                    <configuration>
++                        <!--   <contextFilters>try,catch,static</contextFilters> -->
++                        <generateHistorical>true</generateHistorical>
++                        <jdk>1.7</jdk>
++                        <includesTestSourceRoots>false</includesTestSourceRoots>
++                    </configuration>
++                </plugin>
++
+     </plugins>
+   </build>
+ 

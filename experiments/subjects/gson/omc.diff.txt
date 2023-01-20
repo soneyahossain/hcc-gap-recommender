@@ -1,0 +1,49 @@
+diff --git a/pom.xml b/pom.xml
+index d16b4123..5850429f 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -96,8 +96,44 @@
+           <autoVersionSubmodules>true</autoVersionSubmodules>
+         </configuration>
+       </plugin>
++
++            <plugin>
++                <groupId>org.jacoco</groupId>
++                <artifactId>jacoco-maven-plugin</artifactId>
++                <version>0.8.2</version>
++                <executions>
++                    <execution>
++                        <goals>
++                            <goal>prepare-agent</goal>
++                        </goals>
++                    </execution>
++                    <!-- attached to Maven test phase -->
++                    <execution>
++                        <id>report</id>
++                        <phase>test</phase>
++                        <goals>
++                            <goal>report</goal>
++                        </goals>
++                    </execution>
++                </executions>
++            </plugin>
++
++                <plugin>
++                    <groupId>com.atlassian.maven.plugins</groupId>
++                    <artifactId>maven-clover2-plugin</artifactId>
++                    <version>4.0.6</version>
++                    <configuration>
++                        <!--   <contextFilters>try,catch,static</contextFilters> -->
++                        <generateHistorical>true</generateHistorical>
++                        <jdk>1.7</jdk>
++                        <includesTestSourceRoots>false</includesTestSourceRoots>
++                    </configuration>
++                </plugin>
++
++
+     </plugins>
+   </build>
++
+   <profiles>
+     <profile>
+       <id>doclint-java8-disable</id>

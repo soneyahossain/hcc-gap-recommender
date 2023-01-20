@@ -1,0 +1,114 @@
+diff --git a/pom.xml b/pom.xml
+index 2f82a01c..ae75fca5 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -112,6 +112,10 @@ Some data-binding types overridden as well (ObjectMapper sub-classed as XmlMappe
+   </repositories>
+ 
+   <build>
++<!--
++        <testSourceDirectory>${project.basedir}/rq2_test_suites/test_suite_${alt.dir}/test/java</testSourceDirectory>
++        <directory>${project.basedir}/rq2_test_suites/test_suite_${alt.dir}/target</directory>
++-->
+     <plugins>
+       <plugin>
+         <!-- Inherited from oss-base. Generate PackageVersion.java.-->
+@@ -139,7 +143,98 @@ Some data-binding types overridden as well (ObjectMapper sub-classed as XmlMappe
+             </includes>
+           </configuration>
+         </plugin>
++
++            <plugin>
++                <groupId>org.jacoco</groupId>
++                <artifactId>jacoco-maven-plugin</artifactId>
++                <version>0.8.2</version>
++                <executions>
++                    <execution>
++                        <goals>
++                            <goal>prepare-agent</goal>
++                        </goals>
++                    </execution>
++                    <!-- attached to Maven test phase -->
++                    <execution>
++                        <id>report</id>
++                        <phase>test</phase>
++                        <goals>
++                            <goal>report</goal>
++                        </goals>
++                    </execution>
++                </executions>
++            </plugin>
++
++                <plugin>
++                    <groupId>com.atlassian.maven.plugins</groupId>
++                    <artifactId>maven-clover2-plugin</artifactId>
++                    <version>4.0.6</version>
++                    <configuration>
++                        <!--   <contextFilters>try,catch,static</contextFilters> -->
++                        <generateHistorical>true</generateHistorical>
++                        <jdk>1.7</jdk>
++                        <includesTestSourceRoots>false</includesTestSourceRoots>
++                    </configuration>
++                </plugin>
++
++            <plugin>
++                <groupId>org.pitest</groupId>
++                <artifactId>pitest-maven</artifactId>
++                <version>1.6.7</version>
++                <configuration>
++                    <threads>8</threads>
++                    <!-- <historyInputFile>target/pitHistory.txt</historyInputFile>
++                    <historyOutputFile>target/pitHistory.txt</historyOutputFile> -->
++                    <timeoutConstant>8000</timeoutConstant>
++                    <mutators>
++                        <mutator>STRONGER</mutator>
++                    </mutators>
++                    <avoidCallsTo>
++                        <avoidCallsTo>java.*</avoidCallsTo>
++                        <avoidCallsTo>org.apache.log4j</avoidCallsTo>
++                        <avoidCallsTo>org.slf4j</avoidCallsTo>
++                        <avoidCallsTo>org.apache.commons.logging</avoidCallsTo>
++                    </avoidCallsTo>
++                    <verbose>false</verbose>
++                    <targetClasses>
++                        <param>com.fasterxml.jackson.dataformat.xml.*</param>
++                    </targetClasses>
++                    <targetTests>
++                        <param>com.fasterxml.jackson.dataformat.xml.*</param>
++                    </targetTests>
++
++                    <excludedClasses>
++                        <param>com.fasterxml.jackson.dataformat.xml.failing.*</param>
++                    </excludedClasses>
++                    <excludedTestClasses>
++                        <param>com.fasterxml.jackson.dataformat.xml.failing.*</param>
++                    </excludedTestClasses>
++
++                    <exportLineCoverage>true</exportLineCoverage>
++                    <outputFormats>XML</outputFormats>
++                </configuration>
++                <executions>
++                    <execution>
++                        <id>run-mutation-tests</id>
++                        <goals>
++                            <goal>mutationCoverage</goal>
++                        </goals>
++                    </execution>
++                </executions>
++            </plugin>
++
+     </plugins>
+   </build>
++  <profiles>
++        <profile>
++            <id>dirID</id>
++            <activation>
++                <property>
++                    <name>alt.dir</name>
++                </property>
++            </activation>
++        </profile>
++  </profiles>
++
+ 
+ </project>

@@ -1,0 +1,24 @@
+diff --git a/pom.xml b/pom.xml
+index 1a65965..993059e 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -211,6 +211,19 @@
+             </ignorePathsToDelete>
+           </configuration>
+         </plugin>
++
++                <plugin>
++                    <groupId>com.atlassian.maven.plugins</groupId>
++                    <artifactId>maven-clover2-plugin</artifactId>
++                    <version>4.0.6</version>
++                    <configuration>
++                        <!--   <contextFilters>try,catch,static</contextFilters> -->
++                        <generateHistorical>true</generateHistorical>
++                        <jdk>1.7</jdk>
++                        <includesTestSourceRoots>false</includesTestSourceRoots>
++                    </configuration>
++                </plugin>
++
+       </plugins>
+     </pluginManagement>
+   </build>
