@@ -73,7 +73,7 @@ cd $HCC_EXPERIMENTS/scripts
 ./smoke-tests.sh
 ```
 
-The smoke tests should take approximately 10mns and will exercise an end-to-end workflow of the HCC toolset. 
+The smoke tests should take less than 15 mns and will exercise the HCC toolset workflow end-to-end. 
 You should see output that looks like the following:
 
 ```
@@ -83,36 +83,37 @@ Smoke tests for end-to-end checked coverage computation workflow
 
 Verify ability to generate:
    - statement coverage via clover
-   - object branch coverage via jacoco
-   - traces
-   - slices
-   - checked coverage (statement)
-   - checked coverage (object branch)
-   - recommender/evaluator tool output
+   - object branch coverage via JaCoCo
+   - traces via JavaSlicer
+   - slices via JavaSlicer
+   - statement checked coverage (SCC)
+   - object branch coverage (OBCC)
+   - recommendations via recommender
 
-= Computing statement coverage =
-   Statements: 288/1009 (28.5%)  
+= Compute baseline statement coverage = 
+SCC output file created: OK
+   Statements: 288/1009 (28.5%)                                                                                                 
 
-= Computing object-branch coverage =
-Object-branch coverage output file created: OK
+= Compute baseline object branch coverage = 
+OBCC output file created: OK
 
-= Generating trace files =
+= Generate traces (~2mns) = 
 Trace file generated: OK
 
-= Generating slices =
+= Generate slices =
 Slice file(s) generated: OK
 
-= Computing statement checked coverage (SCC) =                                                     
+= Compute SCC =                                                     
 total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion                                                                   
 1009,288,721,197,15                                                                                                                             
 SCC computed: OK                                                                                                        
                                                                   
-= Computing object-branch checked coverage (OBCC) =                                                                                                     
+= Compute OBCC =                                                                                                     
 total_branch,total_executed,total_missed,total_checked,total_criteria                                                                           
 698,137,561,86,15                                                                                                                               
 OBCC computed: OK                                                                                                    
                                                                                                                                                  
-= Running recommendation evaluator =                                                       
+= Run recommendation evaluator =                                                       
 subject,total_assertion,top_1(%),top_5(%),top_10(%)                                                                                             
 project,9,55.56,100.00,100.00,                                                                                                                   
 Evaluator ran successfully: OK 
