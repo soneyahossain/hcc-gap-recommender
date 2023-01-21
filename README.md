@@ -12,7 +12,11 @@ In this replication package, we have shown how to run the end-to-end experiment,
 
 ## Setup
 
-The artifact has been tested on Ubuntu 20. We recommend starting with a clean Ubuntu 20 virtual machine to familiarize yourselves with HCC. However, we strongly suggest using the VirtualBox VM provided at `FIXME: final location` as it will have all relevant dependencies and environment variables already setup.
+### Setup: the easy way
+Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already setup.
+
+### Setup on your own machine
+The artifact has been tested on Ubuntu 20. We recommend starting with a clean Ubuntu 20 virtual machine to familiarize yourselves with HCC. 
 
 HCC framework requires the following software on your machine:
 
