@@ -119,7 +119,7 @@ project,9,55.56,100.00,100.00,
 Evaluator ran successfully: OK 
 ```
 
-# RQ1
+# RQ1 and RQ3
 To assess RQ1 (computation of SCC and OBCC), you first must download the relevant slices for all subjects. If you are running the provided Virtual Box VM, this is already done for you.
 
 You can download a zipped tar file of slices from `FINAL_LOCATION_FOR_SLICES`. The tar file should be saved in `$HCC_EXPERIMENTS`.
@@ -199,6 +199,36 @@ total_branch,total_executed,total_missed,total_checked,total_criteria
 total_branch,total_executed,total_missed,total_checked,total_criteria
 4466,3375,1091,843,122
 ```
+## RQ3
+Once RQ1 successfully completes, you can run scripts for RQ3:
+```
+./rq3.sh
+```
+The output will display data for each subject program and will be of the form:
+```
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,9,55.56,100.00,100.00,
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,331,16.01,51.06,69.79,
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,510,84.90,95.49,96.67,
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,601,69.05,84.19,90.02,
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,9121,79.86,96.52,98.00,
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,1434,49.58,77.13,88.70,
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,82,32.93,43.90,63.41,
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,3197,82.67,93.31,97.62,
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,1062,21.00,31.45,37.57,
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,362,55.25,74.59,77.90,
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,6,33.33,50.00,50.00,
+```
 
 # RQ2
 To assess the functionality and reusuability of RQ2, run the following commands:
@@ -209,3 +239,4 @@ To assess the functionality and reusuability of RQ2, run the following commands:
 This should take approximately 2 minutes to generate 15 different test suites from the commons-cli-limited subject and run mutation test on those 15 test suites. 
 Upon successful completion, the outputs are stored in the $HCC_EXPERIMENTS/hcc_results/commons-cli-limited/rq2 directory, result.txt stores the statement checked coverage
 gap for 15 test suites and mutation_result.txt stores the mutation scores. All 15 test suites are stored $HCC_EXPERIMENTS/subjects/commons-cli-limited/rq2_test_suites directory.
+
