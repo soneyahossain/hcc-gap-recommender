@@ -126,7 +126,7 @@ You can download a zipped tar file of slices from `FIXME: FINAL_LOCATION_FOR_SLI
 To untar:
 
 ```
-# be sure to save the dowloaded file into $HCC_EXPERIMENTS
+# be sure to save the downloaded file into $HCC_EXPERIMENTS
 tar xvfz icse-2023-slices.tar.gz
 ```
 
