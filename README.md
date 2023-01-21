@@ -12,7 +12,11 @@ In this replication package, we have shown how to run the end-to-end experiment,
 
 ## Setup
 
-The artifact has been tested on Ubuntu 20. We recommend starting with a clean Ubuntu 20 virtual machine to familiarize yourselves with HCC.
+### Setup: the easy way
+Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already setup.
+
+### Setup on your own machine
+The artifact has been tested on Ubuntu 20. We recommend starting with a clean Ubuntu 20 virtual machine to familiarize yourselves with HCC. 
 
 HCC framework requires the following software on your machine:
 
@@ -65,7 +69,7 @@ To build the HCC support libraries:
 cd $HCC_HOME
 ./scripts/install_all.sh
 ```
-## Running end-to-end
+## Running HCC end-to-end
 
 To make sure everything is working properly, run the following smoke tests:
 ```
@@ -122,11 +126,11 @@ Evaluator ran successfully: OK
 # RQ1 and RQ3
 To assess RQ1 (computation of SCC and OBCC), you first must download the relevant slices for all subjects. If you are running the provided Virtual Box VM, this is already done for you.
 
-You can download a zipped tar file of slices from `FINAL_LOCATION_FOR_SLICES`. The tar file should be saved in `$HCC_EXPERIMENTS`.
+You can download a zipped tar file of slices from `FIXME: FINAL_LOCATION_FOR_SLICES`. The tar file should be saved in `$HCC_EXPERIMENTS`.
 To untar:
 
 ```
-# be sure to save the dowloaded file into $HCC_EXPERIMENTS
+# be sure to save the downloaded file into $HCC_EXPERIMENTS
 tar xvfz icse-2023-slices.tar.gz
 ```
 
@@ -137,14 +141,22 @@ commons-cli          commons-codec-1.12  commons-lang-3.6  commons-validator  ja
 commons-cli-limited  commons-csv         commons-text      gson               jaxen-1.2.0             joda-time   plexus-utils
 ```
 
-To compute HCC and OBCC metrics, i.e., RQ1, run the following:
+To compute HCC and OBCC metrics for a specific subject program, e.g. `commons-cli`, run:
 
 ```
+# this will take about 3 mns
+cd $HCC_EXPERIMENTS/scripts
+./rq1.sh commons-cli 
+```
+
+To compute HCC and OBCC for all subject programs:
+```
+# this will take about 15-20 mns to run for all subjects
 cd $HCC_EXPERIMENTS/scripts
 ./rq1.sh
 ```
 
-This should take approximately 5 mns. The script will output HCC and OBCC data for all subject programs upon completion, and should look like:
+The script will output HCC and OBCC data for all subject programs upon completion, and should look like:
 
 ```
 === Show HCC statement (SCC) output for each subject
@@ -173,6 +185,7 @@ total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
 total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
 9446,7682,1764,2345,122
 ```
+This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/scc.csv`
 
 ```
 === Show HCC object-branch (OBCC) output for each subject
@@ -199,11 +212,17 @@ total_branch,total_executed,total_missed,total_checked,total_criteria
 total_branch,total_executed,total_missed,total_checked,total_criteria
 4466,3375,1091,843,122
 ```
+This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/obcc.csv`
 
 ## RQ3
 Once RQ1 successfully completes, you can run scripts for RQ3.
 ```
+# for a single subject
+./rq3.sh commons-cli
+
+# for all subjects
 ./rq3.sh
+
 ```
 
 This should only take 1-2 mns to run. The output will display data for each subject program:
@@ -231,7 +250,8 @@ project,362,55.25,74.59,77.90,
 subject,total_assertion,top_1(%),top_5(%),top_10(%)
 project,6,33.33,50.00,50.00,
 ```
-
+This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/evaluator/summary.csv`
+        
 # RQ2
 To assess the functionality and reusuability of RQ2, run the following commands:
 
