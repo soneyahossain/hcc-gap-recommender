@@ -151,7 +151,7 @@ cd $HCC_EXPERIMENTS/scripts
 
 To compute HCC and OBCC for all subject programs:
 ```
-# this will take about 15-20 mns to run for all subjects
+# this can easily take up 1hr to run for all subjects
 cd $HCC_EXPERIMENTS/scripts
 ./rq1.sh
 ```
