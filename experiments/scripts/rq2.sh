@@ -19,6 +19,11 @@ fi
 
 PROJECT_NAME=commons-lang-3.6
 
+if [ -z $PROJECT_NAME ]; then
+	echo "Please specify project"
+	exit 1
+fi
+
 Red='\033[0;31m'     # Red
 Green='\033[0;32m'   # Green
 Blue='\033[0;34m'    # Blue
@@ -32,31 +37,6 @@ header() {
 	echo "=========================================================================================="
 }
 
-
-cd $HCC_EXPERIMENTS/subjects/commons-lang-3.6
-mvn test
-
-header "commons-lang-3.6: BUILD success(< 1mn)"
-
-echo
-echo "*****************************************************************"
-echo -e "${BBlue}Compiling source codes${NC}"
-echo "*****************************************************************"
-echo
-echo "Verify ability to generate:"
-echo "   - different version of test suites "
-echo "   - running mutation testing on the generated suites"
-
-
-if [ -d $HCC_EXPERIMENTS/$PROJECT_NAME/rq2_test_suites ]; then
-		echo "Cleaning up traces directory"
-		rm -fr $HCC_EXPERIMENTS/$PROJECT_NAME/rq2_test_suites/*
-	fi
-
-
-echo "$PWD"
-
-
 pushd $HCC_EXPERIMENTS/subjects/$PROJECT_NAME
 
 OUTPUT_CLOVER_DIR=$HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/clover/
@@ -64,31 +44,52 @@ if [ ! -d $OUTPUT_CLOVER_DIR ]; then
 	mkdir -p $OUTPUT_CLOVER_DIR
 fi
 
-# nb: ant is not supported
 mvn -Dhttps.protocols=TLSv1.2 clean clover2:setup test clover2:aggregate clover2:clover clover2:log
 echo "Save clover.xml in $OUTPUT_CLOVER_DIR"
 cp target/site/clover/clover.xml $OUTPUT_CLOVER_DIR
 
 popd
 
+
+cd $HCC_EXPERIMENTS/subjects/$PROJECT_NAME
+mvn test > $HCC_EXPERIMENTS/subjects/$PROJECT_NAME/$PROJECT_NAME.testrun
+
+if grep -q "BUILD SUCCESS" $HCC_EXPERIMENTS/subjects/$PROJECT_NAME/$PROJECT_NAME.testrun; then
+    header "commons-lang-3.6: BUILD success(< 1mn)"
+    rm -rf $HCC_EXPERIMENTS/subjects/$PROJECT_NAME/$PROJECT_NAME.testrun
+else
+    echo "test execution failed"
+    exit 1
+fi
+
+echo
+echo "*****************************************************************"
+echo -e "${BBlue}Reproducing RQ2 results ${NC}"
+echo "*****************************************************************"
+echo
+echo "Verify ability to generate:"
+echo "   - different version of test suites "
+echo "   - running mutation testing on the generated suites"
+
+
+
+if [ -d $HCC_EXPERIMENTS/subjects/$PROJECT_NAME/rq2_test_suites ]; then
+		echo "Cleaning up test suite directory"
+		rm -fr $HCC_EXPERIMENTS/subjects/$PROJECT_NAME/rq2_test_suites/*
+fi
+
 JAVA_HOME=$JDK_1_8
 PATH=$JAVA_HOME/bin:$PATH
 
 R_JAR=$HCC_HOME/lib/testsuite-gen.jar
-
-if [ -z $PROJECT_NAME ]; then
-	echo "Please specify project"
-	exit 1
-fi
-
-
 PROJECT_HOME=$HCC_EXPERIMENTS/subjects/$PROJECT_NAME
 SLICE_DIR=$HCC_EXPERIMENTS/slices/$PROJECT_NAME
 CLOVER=$HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/clover/clover.xml
 PREFIX=$HCC_EXPERIMENTS/specs/$PROJECT_NAME/prefix.txt
-
 PROJECT_TEST_DIR=$PROJECT_HOME/src/test
 TEST_DIR_PACKAGE=org.apache.commons.lang3
+NEW_TEST_SUITE_DIR=$PROJECT_HOME
+
 
 if [ ! -f $CLOVER ]; then
 	echo Clover file not found at $CLOVER
@@ -105,7 +106,6 @@ if [ ! -d $SLICE_DIR ]; then
 	exit 1
 fi
 
-NEW_TEST_SUITE_DIR=$PROJECT_HOME
 pushd $PROJECT_HOME
 
 echo === Test suite generator
@@ -119,3 +119,7 @@ echo TEST_DIR_PACKAGE: $TEST_DIR_PACKAGE
 
 echo "java -jar $R_JAR $SLICE_DIR $CLOVER $PROJECT_TEST_DIR $NEW_TEST_SUITE_DIR $PREFIX $TEST_DIR_PACKAGE"
 java -jar $R_JAR $SLICE_DIR $CLOVER $PROJECT_TEST_DIR "$NEW_TEST_SUITE_DIR" $PREFIX $TEST_DIR_PACKAGE
+
+#now run mutation test on the newly generating test suites
+
+echo === running mutation test on the newly generating test suites
