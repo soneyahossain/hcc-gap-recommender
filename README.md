@@ -137,14 +137,22 @@ commons-cli          commons-codec-1.12  commons-lang-3.6  commons-validator  ja
 commons-cli-limited  commons-csv         commons-text      gson               jaxen-1.2.0             joda-time   plexus-utils
 ```
 
-To compute HCC and OBCC metrics, i.e., RQ1, run the following:
+To compute HCC and OBCC metrics for a specific subject program, e.g. `commons-cli`, run:
 
 ```
+# this will take about 3 mns
+cd $HCC_EXPERIMENTS/scripts
+./rq1.sh commons-cli 
+```
+
+To compute HCC and OBCC for all subject programs:
+```
+# this will take about 15-20 mns to run for all subjects
 cd $HCC_EXPERIMENTS/scripts
 ./rq1.sh
 ```
 
-This should take approximately 5 mns. The script will output HCC and OBCC data for all subject programs upon completion, and should look like:
+The script will output HCC and OBCC data for all subject programs upon completion, and should look like:
 
 ```
 === Show HCC statement (SCC) output for each subject
@@ -205,7 +213,12 @@ This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/obcc.csv`
 ## RQ3
 Once RQ1 successfully completes, you can run scripts for RQ3.
 ```
+# for a single subject
+./rq3.sh commons-cli
+
+# for all subjects
 ./rq3.sh
+
 ```
 
 This should only take 1-2 mns to run. The output will display data for each subject program:
