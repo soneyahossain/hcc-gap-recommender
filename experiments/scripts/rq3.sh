@@ -32,4 +32,8 @@ done
 
 echo
 echo "=== Show evalution of recommendations"
-cat $HCC_EXPERIMENTS/hcc_results/*/evaluator/result/summary.csv
+for s in $subjects
+do
+	echo $s
+	cat $HCC_EXPERIMENTS/hcc_results/$s/evaluator/result/summary.csv
+done
