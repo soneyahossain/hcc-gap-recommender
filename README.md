@@ -179,8 +179,7 @@ In general, data for a given subject program can be found in `$HCC_EXPERIMENTS/h
 cd $HCC_EXPERIMENTS/scripts
 ./rq1.sh
 ```
-Warning: this can easily take 1hr or more
-        
+
 # RQ2
 To assess the functionality and reusuability of RQ2, run the following commands:
 
@@ -214,3 +213,5 @@ subject,total_assertion,top_1(%),top_5(%),top_10(%)
 project,601,69.05,84.19,90.02,
 ```
 This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/evaluator/summary.csv`
+
+# RQ4
