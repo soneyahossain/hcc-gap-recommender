@@ -173,6 +173,7 @@ total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
 total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
 9446,7682,1764,2345,122
 ```
+This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/scc.csv`
 
 ```
 === Show HCC object-branch (OBCC) output for each subject
@@ -199,6 +200,7 @@ total_branch,total_executed,total_missed,total_checked,total_criteria
 total_branch,total_executed,total_missed,total_checked,total_criteria
 4466,3375,1091,843,122
 ```
+This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/obcc.csv`
 
 ## RQ3
 Once RQ1 successfully completes, you can run scripts for RQ3.
@@ -231,7 +233,8 @@ project,362,55.25,74.59,77.90,
 subject,total_assertion,top_1(%),top_5(%),top_10(%)
 project,6,33.33,50.00,50.00,
 ```
-
+This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/evaluator/summary.csv`
+        
 # RQ2
 To assess the functionality and reusuability of RQ2, run the following commands:
 
