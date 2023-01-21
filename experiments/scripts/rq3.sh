@@ -1,3 +1,5 @@
+set -e
+
 subjects="commons-cli commons-codec-1.12 commons-csv commons-validator commons-lang-3.6 jaxen-1.2.0 joda-time gson jackson-dataformat-xml jfreechart jsoup-1.10.1 plexus-utils xstream"
 
 env | grep HCC_HOME
@@ -11,7 +13,7 @@ date
 echo "Run recommendation evaluator tool"
 for s in $subjects
 do
-	./compute_hcc_from_slices $s
+	./evaluator.sh $s
 done
 
 echo

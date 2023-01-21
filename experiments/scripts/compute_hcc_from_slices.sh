@@ -30,6 +30,6 @@ header "Compute HCC_ob metric"
 echo HCC object branch coverage results:
 cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/obcc.csv
 
-header "Run evaluator"
-./evaluator.sh $PROJECT_NAME > $PROJECT_NAME.evaluator 2>&1
-cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/evaluator/result/summary.csv
+#header "Run evaluator"
+#./evaluator.sh $PROJECT_NAME > $PROJECT_NAME.evaluator 2>&1
+#cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/evaluator/result/summary.csv
