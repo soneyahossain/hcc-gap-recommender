@@ -65,7 +65,7 @@ To build the HCC support libraries:
 cd $HCC_HOME
 ./scripts/install_all.sh
 ```
-## Running end-to-end
+## Running HCC end-to-end
 
 To make sure everything is working properly, run the following smoke tests:
 ```
