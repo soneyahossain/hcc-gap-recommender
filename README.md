@@ -215,3 +215,6 @@ project,601,69.05,84.19,90.02,
 This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/evaluator/summary.csv`
 
 # RQ4
+
+# Other
+TODO: say something about collecting traces (for ex. for a new program) and that it can take both a long time and requires gobs of memory. 
