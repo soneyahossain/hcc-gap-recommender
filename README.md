@@ -119,6 +119,85 @@ project,9,55.56,100.00,100.00,
 Evaluator ran successfully: OK 
 ```
 
+# RQ1
+To assess RQ1 (computation of SCC and OBCC), you first must download the relevant slices for all subjects. If you are running the provided Virtual Box VM, this is already done for you.
+
+You can download a zipped tar file of slices from `FINAL_LOCATION_FOR_SLICES`. The tar file should be saved in `$HCC_EXPERIMENTS`.
+To untar:
+
+```
+tar xvfz icse-2023-slices.tar.gz
+```
+
+Issue the command `ls slices`. You should see output of the form:
+
+```
+commons-cli          commons-codec-1.12  commons-lang-3.6  commons-validator  jackson-dataformat-xml  jfreechart  jsoup-1.10.1  xstream
+commons-cli-limited  commons-csv         commons-text      gson               jaxen-1.2.0             joda-time   plexus-utils
+```
+
+To compute HCC and OBCC metrics, i.e., RQ1, run the following:
+
+```
+cd $HCC_EXPERIMENTS/scripts
+./rq1.sh
+```
+
+This should take approximately 5 mns. The script will output HCC and OBCC data for all subject programs upon completion, and should look like:
+
+```
+=== Show HCC statement (SCC) output for each subject
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+1009,288,721,197,15
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+1009,836,173,559,405
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+3600,2693,907,1145,1030
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+748,688,60,367,898
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+13735,11231,2504,7411,14152
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+2542,1938,604,1298,2268
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+3880,3328,552,1867,1707
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+2205,1511,694,1043,530
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+45767,26154,19613,9457,5420
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+6172,4506,1666,2240,1645
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+7588,3628,3960,1965,780
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+9446,7682,1764,2345,122
+```
+
+```
+=== Show HCC object-branch (OBCC) output for each subject
+total_branch,total_executed,total_missed,total_checked,total_criteria
+698,137,561,86,15
+total_branch,total_executed,total_missed,total_checked,total_criteria
+698,519,179,310,405
+total_branch,total_executed,total_missed,total_checked,total_criteria
+2203,1686,517,704,1030
+total_branch,total_executed,total_missed,total_checked,total_criteria
+576,507,69,234,898
+total_branch,total_executed,total_missed,total_checked,total_criteria
+9875,8011,1864,5108,14153
+total_branch,total_executed,total_missed,total_checked,total_criteria
+1696,1249,447,771,2276
+total_branch,total_executed,total_missed,total_checked,total_criteria
+1217,735,482,495,530
+total_branch,total_executed,total_missed,total_checked,total_criteria
+21732,10110,11622,3624,5420
+total_branch,total_executed,total_missed,total_checked,total_criteria
+3432,2500,932,1216,1645
+total_branch,total_executed,total_missed,total_checked,total_criteria
+5525,2044,3481,1014,780
+total_branch,total_executed,total_missed,total_checked,total_criteria
+4466,3375,1091,843,122
+```
 
 # RQ2
 To assess the functionality and reusuability of RQ2, run the following commands:
