@@ -123,3 +123,8 @@ java -jar $R_JAR $SLICE_DIR $CLOVER $PROJECT_TEST_DIR "$NEW_TEST_SUITE_DIR" $PRE
 #now run mutation test on the newly generating test suites
 
 echo === running mutation test on the newly generating test suites
+
+cd $HCC_EXPERIMENTS/scripts
+
+./prep-mutations.sh $PROJECT_NAME >$HCC_EXPERIMENTS/subjects/$PROJECT_NAME/$PROJECT_NAME.prep_mutation_tests
+./run-mutations.sh $PROJECT_NAME >$HCC_EXPERIMENTS/subjects/$PROJECT_NAME/$PROJECT_NAME.run_mutation_tests
