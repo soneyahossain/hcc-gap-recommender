@@ -2,13 +2,14 @@
 
 #
 # RQ2: To what extent do faults hide in the gap between host coverage and HCC?
-# In this RQ, we manipulate a test suite by to vary the coverage gaps, and then perform mutation tests to calculate the R^2 value, correlation coefficient tau and slope.
-# To regenerate th results for all 13 subjects will take several hours, to address this issue, we only consider single subject commons-lang-3.6 for the application level
+# In this RQ, we manipulate a test suite to vary the coverage gaps, and then perform mutation test to calculate the R^2 value, correlation coefficient tau and slope.
+# To regenerate the results for all 13 subjects will take several hours, to address this issue, in this script, we only consider single subject commons-cli-limited for the application level
 # one can easily extend this to conduct experiments for all subjects
 #
-# step 1: compile the subject and generate the target directory
-# generate different version of test suites using testsuite-gen.jar
-# perform mutation testing on the generated test suites and plot them
+# step 1: compile the subject and generate the target directory, generate clover coverage
+# step2: generate different versions of test suites using testsuite-gen.jar
+# step3: perform mutation testing on the generated test suites and plot them
+#Note: this same script can be run for the entire subjects also
 
 # source env. variables
 if [ -z $HCC_EXPERIMENTS ]; then
@@ -17,7 +18,7 @@ if [ -z $HCC_EXPERIMENTS ]; then
 	cd -
 fi
 
-PROJECT_NAME=commons-lang-3.6
+PROJECT_NAME=commons-cli-limited
 
 if [ -z $PROJECT_NAME ]; then
 	echo "Please specify project"
@@ -55,7 +56,7 @@ cd $HCC_EXPERIMENTS/subjects/$PROJECT_NAME
 mvn test > $HCC_EXPERIMENTS/subjects/$PROJECT_NAME/$PROJECT_NAME.testrun
 
 if grep -q "BUILD SUCCESS" $HCC_EXPERIMENTS/subjects/$PROJECT_NAME/$PROJECT_NAME.testrun; then
-    header "commons-lang-3.6: BUILD success(< 1mn)"
+    header "commons-cli-limited: BUILD success(< 1mn)"
     rm -rf $HCC_EXPERIMENTS/subjects/$PROJECT_NAME/$PROJECT_NAME.testrun
 else
     echo "test execution failed"
@@ -87,7 +88,7 @@ SLICE_DIR=$HCC_EXPERIMENTS/slices/$PROJECT_NAME
 CLOVER=$HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/clover/clover.xml
 PREFIX=$HCC_EXPERIMENTS/specs/$PROJECT_NAME/prefix.txt
 PROJECT_TEST_DIR=$PROJECT_HOME/src/test
-TEST_DIR_PACKAGE=org.apache.commons.lang3
+TEST_DIR_PACKAGE=org.apache.commons.cli
 NEW_TEST_SUITE_DIR=$PROJECT_HOME
 
 
