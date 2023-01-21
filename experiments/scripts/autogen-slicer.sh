@@ -29,13 +29,13 @@ case $PROJECT_NAME in
 	commons-math)
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/apache/commons/math3
 		;;
-	fse-joda-time)
+	joda-time)
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/joda/time
 		;;
-	fse-jaxen-1.2.0)
+	jaxen-1.2.0)
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/java/test/org/jaxen/test
 		;;
-	fse-commons-lang-3.6)
+	commons-lang-3.6)
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/apache/commons/lang3
 		;;
 	jackson-core-2.9.10)
