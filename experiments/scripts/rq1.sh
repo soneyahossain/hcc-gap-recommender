@@ -25,10 +25,10 @@ done
 echo
 date
 echo "=== Show HCC statement (SCC) output for each subject"
-ls $HCC_EXPERIMENTS/hcc_results/*/scc.csv
+cat $HCC_EXPERIMENTS/hcc_results/*/scc.csv
 
 echo
 date
 echo "=== Show HCC object-branch (OBCC) output for each subject"
-ls $HCC_EXPERIMENTS/hcc_results/*/obcc.csv
+cat $HCC_EXPERIMENTS/hcc_results/*/obcc.csv
 

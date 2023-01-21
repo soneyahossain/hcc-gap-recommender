@@ -46,9 +46,9 @@ echo "Prefix to compute HCC:"
 cat $prefix 
 
 #
-# compute HCC information
+# compute HCC statement coverage information
 #
-echo "Computing HCC statement coverage"
+echo "Computing SCC"
 echo "    slices_dir: $HCC_SLICES"
 echo "    output_dir: $hcc_output_dir"
 java -jar $hcc_s_jar $HCC_SLICES $clover_xml $hcc_output_dir $prefix
