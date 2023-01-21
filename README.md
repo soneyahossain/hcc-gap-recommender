@@ -199,12 +199,14 @@ total_branch,total_executed,total_missed,total_checked,total_criteria
 total_branch,total_executed,total_missed,total_checked,total_criteria
 4466,3375,1091,843,122
 ```
+
 ## RQ3
-Once RQ1 successfully completes, you can run scripts for RQ3:
+Once RQ1 successfully completes, you can run scripts for RQ3.
 ```
 ./rq3.sh
 ```
-The output will display data for each subject program and will be of the form:
+
+This should only take 1-2 mns to run. The output will display data for each subject program:
 ```
 subject,total_assertion,top_1(%),top_5(%),top_10(%)
 project,9,55.56,100.00,100.00,
