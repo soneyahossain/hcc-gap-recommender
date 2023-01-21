@@ -1,0 +1,35 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveIntArray:260:*]:
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
+org.apache.commons.lang3.ArrayUtils.remove:6385 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.remove:6385 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.remove(Ljava/lang/Object;I)Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.remove:6385 ARETURN
+org.apache.commons.lang3.ArrayUtils.remove:6573 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.remove:6573 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.remove:6573 ISTORE 2
+org.apache.commons.lang3.ArrayUtils.remove:6578 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.remove:6578 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtils.remove:6578 INVOKEVIRTUAL java/lang/Class.getComponentType()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtils.remove:6578 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.remove:6578 ICONST_1
+org.apache.commons.lang3.ArrayUtils.remove:6578 ISUB
+org.apache.commons.lang3.ArrayUtils.remove:6578 INVOKESTATIC java/lang/reflect/Array.newInstance(Ljava/lang/Class;I)Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.remove:6578 ASTORE 3
+org.apache.commons.lang3.ArrayUtils.remove:6584 ALOAD 3
+org.apache.commons.lang3.ArrayUtils.remove:6584 ARETURN
+org.apache.commons.lang3.ArrayUtilsRemoveTest.main:43 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsRemoveTest.testRemoveIntArray()V
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveIntArray:259 ICONST_1
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveIntArray:259 NEWARRAY T_INT
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveIntArray:259 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.remove([II)[I
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveIntArray:259 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveIntArray:260 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_INT_ARRAY [I
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveIntArray:260 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveIntArray:260 INVOKESTATIC java/util/Arrays.equals([I[I)Z
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveIntArray:260 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 34 bytecode instructions.
+Computation took 1.64 seconds.

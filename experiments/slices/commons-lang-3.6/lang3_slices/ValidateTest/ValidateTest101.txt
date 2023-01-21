@@ -1,0 +1,29 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  0.4% done, time left: unknown  0.9% done, time left: unknown  1.4% done, time left: unknown  2.1% done, time left: unknown  2.4% done, time left: unknown  3.3% done, time left: unknown  5.3% done, time left:   0:00:04    7.3% done, time left:   0:00:04 10.2% done, time left:   0:00:05 10.8% done, time left:   0:00:05 13.4% done, time left:   0:00:06 16.2% done, time left:   0:00:06 18.3% done, time left:   0:00:05 20.0% done, time left:   0:00:05 23.3% done, time left:   0:00:05 26.9% done, time left:   0:00:04 30.6% done, time left:   0:00:03 33.9% done, time left:   0:00:03 37.3% done, time left:   0:00:02 40.8% done, time left:   0:00:02 44.0% done, time left:   0:00:02 47.4% done, time left:   0:00:01 47.5% done, time left:   0:00:00 50.4% done, time left:   0:00:01 53.2% done, time left:   0:00:01 56.4% done, time left:   0:00:01 60.0% done, time left:   0:00:01 63.5% done, time left:   0:00:00 66.7% done, time left:   0:00:00 70.2% done, time left:   0:00:00 73.8% done, time left:   0:00:00 77.8% done, time left:   0:00:00 81.7% done, time left:   0:00:00 85.0% done, time left:   0:00:00 88.5% done, time left:   0:00:00 91.6% done, time left:   0:00:00 94.9% done, time left:   0:00:00 95.3% done, time left:   0:00:00 95.9% done, time left:   0:00:00 97.4% done, time left:   0:00:00 99.2% done, time left:   0:00:00 99.9% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong_withMessage:1107:*]:
+org.apache.commons.lang3.Validate.exclusiveBetween:1192 LLOAD 4
+org.apache.commons.lang3.Validate.exclusiveBetween:1192 LLOAD 0
+org.apache.commons.lang3.Validate.exclusiveBetween:1192 LCMP
+org.apache.commons.lang3.Validate.exclusiveBetween:1192 IFLE L0 false true
+org.apache.commons.lang3.Validate.exclusiveBetween:1192 LLOAD 4
+org.apache.commons.lang3.Validate.exclusiveBetween:1192 LLOAD 2
+org.apache.commons.lang3.Validate.exclusiveBetween:1192 LCMP
+org.apache.commons.lang3.Validate.exclusiveBetween:1192 IFLT L1 false true
+org.apache.commons.lang3.Validate.exclusiveBetween:1193 NEW java/lang/IllegalArgumentException
+org.apache.commons.lang3.Validate.exclusiveBetween:1193 DUP
+org.apache.commons.lang3.Validate.exclusiveBetween:1193 ALOAD 6
+org.apache.commons.lang3.Validate.exclusiveBetween:1193 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.apache.commons.lang3.Validate.exclusiveBetween:1193 ATHROW
+org.apache.commons.lang3.ValidateTest.main:105 INVOKEVIRTUAL org/apache/commons/lang3/ValidateTest.testExclusiveBetweenLong_withMessage()V
+org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong_withMessage:1104 LCONST_0
+org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong_withMessage:1104 LDC 5
+org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong_withMessage:1104 LDC 6
+org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong_withMessage:1104 LDC "Error"
+org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong_withMessage:1104 INVOKESTATIC org/apache/commons/lang3/Validate.exclusiveBetween(JJJLjava/lang/String;)V
+org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong_withMessage:1106 ASTORE 1
+org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong_withMessage:1107 LDC "Error"
+org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong_withMessage:1107 ALOAD 1
+org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong_withMessage:1107 INVOKEVIRTUAL java/lang/IllegalArgumentException.getMessage()Ljava/lang/String;
+org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong_withMessage:1107 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 39 bytecode instructions.
+Computation took 4.88 seconds.

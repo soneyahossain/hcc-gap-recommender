@@ -1,0 +1,53 @@
+ 0.0% done, time left: unknown                                0.3% done, time left: unknown  0.5% done, time left: unknown  2.9% done, time left: unknown  6.7% done, time left: unknown 11.3% done, time left: unknown 13.4% done, time left: unknown 15.4% done, time left: unknown 15.6% done, time left: unknown 17.3% done, time left:   0:00:04   19.7% done, time left:   0:00:04 22.1% done, time left:   0:00:04 24.6% done, time left:   0:00:04 27.0% done, time left:   0:00:04 30.1% done, time left:   0:00:04 33.3% done, time left:   0:00:03 39.1% done, time left:   0:00:01 46.6% done, time left:   0:00:00 54.6% done, time left:   0:00:00 62.5% done, time left:   0:00:00 71.4% done, time left:   0:00:00 75.5% done, time left:   0:00:00 80.2% done, time left:   0:00:00 84.5% done, time left:   0:00:00 91.3% done, time left:   0:00:00 92.9% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsTrimStripTest.testStrip_StringString:147:*]:
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.StringUtils.strip:771 ALOAD 0
+org.apache.commons.lang3.StringUtils.strip:771 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.strip:771 IFEQ L0 true false
+org.apache.commons.lang3.StringUtils.strip:774 ALOAD 0
+org.apache.commons.lang3.StringUtils.strip:774 ALOAD 1
+org.apache.commons.lang3.StringUtils.strip:774 INVOKESTATIC org/apache/commons/lang3/StringUtils.stripStart(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.lang3.StringUtils.strip:774 ASTORE 0
+org.apache.commons.lang3.StringUtils.strip:775 ALOAD 0
+org.apache.commons.lang3.StringUtils.strip:775 ALOAD 1
+org.apache.commons.lang3.StringUtils.strip:775 INVOKESTATIC org/apache/commons/lang3/StringUtils.stripEnd(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.lang3.StringUtils.strip:775 ARETURN
+org.apache.commons.lang3.StringUtils.stripStart:804 ALOAD 0
+org.apache.commons.lang3.StringUtils.stripStart:804 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.stripStart:804 ALOAD 0
+org.apache.commons.lang3.StringUtils.stripStart:804 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.lang3.StringUtils.stripStart:804 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.stripStart:808 ALOAD 1
+org.apache.commons.lang3.StringUtils.stripStart:808 IFNONNULL L3 true false
+org.apache.commons.lang3.StringUtils.stripStart:812 ALOAD 1
+org.apache.commons.lang3.StringUtils.stripStart:812 INVOKEVIRTUAL java/lang/String.isEmpty()Z
+org.apache.commons.lang3.StringUtils.stripStart:812 IFEQ L4 false true
+org.apache.commons.lang3.StringUtils.stripStart:813 ALOAD 0
+org.apache.commons.lang3.StringUtils.stripStart:813 ARETURN
+org.apache.commons.lang3.StringUtils.stripEnd:849 ALOAD 0
+org.apache.commons.lang3.StringUtils.stripEnd:849 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.stripEnd:849 ALOAD 0
+org.apache.commons.lang3.StringUtils.stripEnd:849 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.lang3.StringUtils.stripEnd:849 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.stripEnd:853 ALOAD 1
+org.apache.commons.lang3.StringUtils.stripEnd:853 IFNONNULL L3 true false
+org.apache.commons.lang3.StringUtils.stripEnd:857 ALOAD 1
+org.apache.commons.lang3.StringUtils.stripEnd:857 INVOKEVIRTUAL java/lang/String.isEmpty()Z
+org.apache.commons.lang3.StringUtils.stripEnd:857 IFEQ L4 false true
+org.apache.commons.lang3.StringUtils.stripEnd:858 ALOAD 0
+org.apache.commons.lang3.StringUtils.stripEnd:858 ARETURN
+org.apache.commons.lang3.StringUtilsTrimStripTest.main:39 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsTrimStripTest.testStrip_StringString()V
+org.apache.commons.lang3.StringUtilsTrimStripTest.testStrip_StringString:147 GETSTATIC org/apache/commons/lang3/StringUtilsTest.WHITESPACE Ljava/lang/String;
+org.apache.commons.lang3.StringUtilsTrimStripTest.testStrip_StringString:147 GETSTATIC org/apache/commons/lang3/StringUtilsTest.WHITESPACE Ljava/lang/String;
+org.apache.commons.lang3.StringUtilsTrimStripTest.testStrip_StringString:147 LDC ""
+org.apache.commons.lang3.StringUtilsTrimStripTest.testStrip_StringString:147 INVOKESTATIC org/apache/commons/lang3/StringUtils.strip(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.lang3.StringUtilsTrimStripTest.testStrip_StringString:147 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 48 bytecode instructions.
+Computation took 2.80 seconds.

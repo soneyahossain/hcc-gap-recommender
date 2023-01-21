@@ -20,8 +20,8 @@ public class SCC {
         if (args.length == 0)
             throw new IllegalArgumentException("insufficient parameters! param 1: slice path, param2: clover.xml path, param3: output dir, param4: prefix.txt");
 
-        String slice_parent_dir = args[0];   //"/media/soneya/extradrive1/OMC/joda_time_qual/slices/";
-        String clover_cov_dir = args[1];     //"/media/soneya/extradrive1/OMC/joda_time_qual/coverage/clover.xml";
+        String slice_parent_dir = args[0];
+        String clover_cov_dir = args[1];
         if (clover_cov_dir.endsWith("/"))
             clover_cov_dir = clover_cov_dir.substring(0, clover_cov_dir.length() - 1);
         String outputDir = args[2];
@@ -58,16 +58,16 @@ public class SCC {
 
 
         SCC cov_cal = new SCC();
-        HashMap<String, CovRecord> omc_sc_per_method = new HashMap<>();  //class, stats
-        HashMap<String, CovRecord> omc_sc_per_class = new HashMap<>();   //method, stats
+        HashMap<String, CovRecord> scc_per_method = new HashMap<>();  //class, stats
+        HashMap<String, CovRecord> scc_per_class = new HashMap<>();   //method, stats
 
         HashMap<String,Set<String>> per_assertion_cov= new HashMap<>();
 
         for (String slice_path : all_slices) {
-            cov_cal.get_coverage(slice_path, omc_sc_per_method, omc_sc_per_class, all_executed_stmts,per_assertion_cov,prefix);
+            cov_cal.get_coverage(slice_path, scc_per_method, scc_per_class, all_executed_stmts,per_assertion_cov,prefix);
         }
 
-        printcoverage(omc_sc_per_method,omc_sc_per_class, sc_per_class,sc_per_method,per_assertion_cov,outputDir);
+        printcoverage(scc_per_method,scc_per_class, sc_per_class,sc_per_method,per_assertion_cov,outputDir);
     }
 
     public static Set<String> readPrefixes(String prefixPath) throws IOException {
@@ -90,54 +90,54 @@ public class SCC {
     }
 
 
-    static void printcoverage(HashMap<String, CovRecord> omc_sc_per_method, HashMap<String, CovRecord> omc_sc_per_class,HashMap<String, CloverHandler.StmtCov> sc_per_class,HashMap<String, CloverHandler.StmtCov> sc_per_method, HashMap<String,Set<String>> per_assertion_cov,String outputDir) throws Exception {
+    static void printcoverage(HashMap<String, CovRecord> scc_per_method, HashMap<String, CovRecord> scc_per_class,HashMap<String, CloverHandler.StmtCov> sc_per_class,HashMap<String, CloverHandler.StmtCov> sc_per_method, HashMap<String,Set<String>> per_assertion_cov,String outputDir) throws Exception {
         int total_cov=0;
 
         PrintWriter pw = null;
         try {
-            pw = new PrintWriter(outputDir + "/omc_sc_per_class.csv");
+            pw = new PrintWriter(outputDir + "/ssc_per_class.csv");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         StringBuilder builder = new StringBuilder();
-        String columnNamesList = "class,sc,omc_sc,cov_gap";
+        String columnNamesList = "class,sc,ssc,cov_gap";
         builder.append(columnNamesList + "\n");
 
-        for (String c_name : omc_sc_per_class.keySet()) {
-            Set<String> stmts = omc_sc_per_class.get(c_name).covered_stmts;
+        for (String c_name : scc_per_class.keySet()) {
+            Set<String> stmts = scc_per_class.get(c_name).covered_stmts;
             total_cov+=stmts.size();
 
 
             CloverHandler.StmtCov sc  = sc_per_class.get(c_name);
-            float omc_sc = ((float)stmts.size()/(float)sc.total())*100;
-            if(sc.getCoverage()-omc_sc<0) throw new Exception();
-            builder.append(c_name + "," + sc.getCoverage() + ","+omc_sc+ ","+(sc.getCoverage()-omc_sc) +"\n");
+            float scc = ((float)stmts.size()/(float)sc.total())*100;
+            if(sc.getCoverage()-scc<0) throw new Exception();
+            builder.append(c_name + "," + sc.getCoverage() + ","+scc+ ","+(sc.getCoverage()-scc) +"\n");
         }
         pw.write(builder.toString());
         pw.close();
         System.out.println("total checked statements in class: "+total_cov);
 
         try {
-            pw = new PrintWriter(outputDir + "/omc_sc_per_method.csv");
+            pw = new PrintWriter(outputDir + "/scc_per_method.csv");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
 
         builder = new StringBuilder();
-        columnNamesList = "method,sc,omc_sc,cov_gap";
+        columnNamesList = "method,sc,scc,cov_gap";
         builder.append(columnNamesList + "\n");
         total_cov=0;
 
-        for (String m_name : omc_sc_per_method.keySet()) {
-            Set<String> stmts = omc_sc_per_method.get(m_name).covered_stmts;
+        for (String m_name : scc_per_method.keySet()) {
+            Set<String> stmts = scc_per_method.get(m_name).covered_stmts;
             total_cov+=stmts.size();
 
             CloverHandler.StmtCov sc  = sc_per_method.get(m_name);
-            float omc_sc = ((float)stmts.size()/(float)sc.total())*100;
+            float ssc = ((float)stmts.size()/(float)sc.total())*100;
 
-            if(sc.getCoverage()-omc_sc<0) throw new Exception();
-            builder.append(m_name + "," + sc.getCoverage() + ","+omc_sc+ ","+(sc.getCoverage()-omc_sc) +"\n");
+            if(sc.getCoverage()-ssc<0) throw new Exception();
+            builder.append(m_name + "," + sc.getCoverage() + ","+ssc+ ","+(sc.getCoverage()-ssc) +"\n");
         }
         pw.write(builder.toString());
         pw.close();
@@ -169,8 +169,8 @@ public class SCC {
         System.out.println("total criterion: "+total_criterion);
     }
 
-    public void get_coverage(String path, HashMap<String, CovRecord> omc_sc_per_method,
-                             HashMap<String, CovRecord> omc_sc_per_class, Set<String> all_executed_stmts,
+    public void get_coverage(String path, HashMap<String, CovRecord> scc_per_method,
+                             HashMap<String, CovRecord> scc_per_class, Set<String> all_executed_stmts,
                              HashMap<String, Set<String>> per_assertion_cov, Set<String> prefixes) throws FileNotFoundException {
 
         boolean start_cov_cal = false;
@@ -265,24 +265,24 @@ public class SCC {
                 if (all_executed_stmts.contains(pkg_class_method_line)) {
                     //System.out.println("found");
 
-                    //omc_sc for class
+                    //SCC for class
                     String class_key = pkg+"."+className;
-                    CovRecord cr = omc_sc_per_class.get(class_key);
+                    CovRecord cr = scc_per_class.get(class_key);
                     if(cr==null)
                     {
                         cr = new CovRecord();
-                        omc_sc_per_class.put(class_key,cr);
+                        scc_per_class.put(class_key,cr);
                     }
                     cr.covered_stmts.add(location);
 
 
-                    //omc_sc for method
+                    //scc for method
                     String method_key = pkg+"."+className+"."+method_name;
-                    CovRecord mr = omc_sc_per_method.get(method_key);
+                    CovRecord mr = scc_per_method.get(method_key);
                     if(mr==null)
                     {
                         mr = new CovRecord();
-                        omc_sc_per_method.put(method_key,mr);
+                        scc_per_method.put(method_key,mr);
                     }
                     mr.covered_stmts.add(location);
                     checked_stmt_for_assertion.add(location);

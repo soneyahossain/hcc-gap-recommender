@@ -1,0 +1,44 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  1.4% done, time left: unknown  3.4% done, time left: unknown  5.3% done, time left: unknown  8.3% done, time left: unknown 11.3% done, time left: unknown 14.9% done, time left: unknown 18.6% done, time left: unknown 22.7% done, time left:   0:00:01   27.3% done, time left:   0:00:02 31.6% done, time left:   0:00:02 34.7% done, time left:   0:00:02 36.1% done, time left:   0:00:01 37.7% done, time left:   0:00:02 39.7% done, time left:   0:00:02 41.6% done, time left:   0:00:02 43.4% done, time left:   0:00:02 45.4% done, time left:   0:00:02 47.9% done, time left:   0:00:02 51.4% done, time left:   0:00:02 55.5% done, time left:   0:00:01 59.6% done, time left:   0:00:00 62.6% done, time left:   0:00:00 63.8% done, time left:   0:00:00 64.6% done, time left:   0:00:00 66.3% done, time left:   0:00:00 68.5% done, time left:   0:00:00 70.7% done, time left:   0:00:00 74.4% done, time left:   0:00:00 76.6% done, time left:   0:00:00 79.9% done, time left:   0:00:00 80.9% done, time left:   0:00:00 83.7% done, time left:   0:00:00 85.1% done, time left:   0:00:00 87.4% done, time left:   0:00:00 89.4% done, time left:   0:00:00 92.3% done, time left:   0:00:00 95.0% done, time left:   0:00:00 98.3% done, time left:   0:00:00 99.5% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_ClassArray_ClassArray_NoAutoboxing:492:*]:
+org.apache.commons.lang3.ArrayUtils.isSameLength:1255 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isSameLength:1255 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isSameLength:1255 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.isSameLength:1255 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isSameLength:1255 IF_ICMPNE L0 false true
+org.apache.commons.lang3.ArrayUtils.isSameLength:1255 ICONST_1
+org.apache.commons.lang3.ArrayUtils.isSameLength:1255 IRETURN
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true true
+org.apache.commons.lang3.ArrayUtils.getLength:1385 ICONST_0
+org.apache.commons.lang3.ArrayUtils.getLength:1385 IRETURN
+org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
+org.apache.commons.lang3.ClassUtils.isAssignable:610 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:610 ALOAD 1
+org.apache.commons.lang3.ClassUtils.isAssignable:610 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isSameLength([Ljava/lang/Object;[Ljava/lang/Object;)Z
+org.apache.commons.lang3.ClassUtils.isAssignable:610 IFNE L0 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:613 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:613 IFNONNULL L1 false true
+org.apache.commons.lang3.ClassUtils.isAssignable:614 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_CLASS_ARRAY [Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.isAssignable:614 ASTORE 0
+org.apache.commons.lang3.ClassUtils.isAssignable:619 ICONST_0
+org.apache.commons.lang3.ClassUtils.isAssignable:619 ISTORE 3
+org.apache.commons.lang3.ClassUtils.isAssignable:619 ILOAD 3
+org.apache.commons.lang3.ClassUtils.isAssignable:619 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:619 ARRAYLENGTH
+org.apache.commons.lang3.ClassUtils.isAssignable:619 IF_ICMPGE L5 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:624 ICONST_1
+org.apache.commons.lang3.ClassUtils.isAssignable:624 IRETURN
+org.apache.commons.lang3.ClassUtilsTest.main:63 INVOKEVIRTUAL org/apache/commons/lang3/ClassUtilsTest.test_isAssignable_ClassArray_ClassArray_NoAutoboxing()V
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_ClassArray_ClassArray_NoAutoboxing:486 ICONST_0
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_ClassArray_ClassArray_NoAutoboxing:486 ANEWARRAY java/lang/Class
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_ClassArray_ClassArray_NoAutoboxing:486 ASTORE 4
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_ClassArray_ClassArray_NoAutoboxing:492 ACONST_NULL
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_ClassArray_ClassArray_NoAutoboxing:492 ALOAD 4
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_ClassArray_ClassArray_NoAutoboxing:492 ICONST_0
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_ClassArray_ClassArray_NoAutoboxing:492 INVOKESTATIC org/apache/commons/lang3/ClassUtils.isAssignable([Ljava/lang/Class;[Ljava/lang/Class;Z)Z
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_ClassArray_ClassArray_NoAutoboxing:492 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 39 bytecode instructions.
+Computation took 4.58 seconds.

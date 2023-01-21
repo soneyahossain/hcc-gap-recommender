@@ -1,0 +1,37 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsSubstringTest.testMid_String:147:*]:
+org.apache.commons.lang3.StringUtils.mid:2815 ALOAD 0
+org.apache.commons.lang3.StringUtils.mid:2815 IFNONNULL L0 true false
+org.apache.commons.lang3.StringUtils.mid:2818 ILOAD 2
+org.apache.commons.lang3.StringUtils.mid:2818 IFLT L1 false true
+org.apache.commons.lang3.StringUtils.mid:2818 ILOAD 1
+org.apache.commons.lang3.StringUtils.mid:2818 ALOAD 0
+org.apache.commons.lang3.StringUtils.mid:2818 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.lang3.StringUtils.mid:2818 IF_ICMPLE L2 true false
+org.apache.commons.lang3.StringUtils.mid:2821 ILOAD 1
+org.apache.commons.lang3.StringUtils.mid:2821 IFGE L3 false true
+org.apache.commons.lang3.StringUtils.mid:2822 ICONST_0
+org.apache.commons.lang3.StringUtils.mid:2822 ISTORE 1
+org.apache.commons.lang3.StringUtils.mid:2824 ALOAD 0
+org.apache.commons.lang3.StringUtils.mid:2824 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.lang3.StringUtils.mid:2824 ILOAD 1
+org.apache.commons.lang3.StringUtils.mid:2824 ILOAD 2
+org.apache.commons.lang3.StringUtils.mid:2824 IADD
+org.apache.commons.lang3.StringUtils.mid:2824 IF_ICMPGT L4 true false
+org.apache.commons.lang3.StringUtils.mid:2827 ALOAD 0
+org.apache.commons.lang3.StringUtils.mid:2827 ILOAD 1
+org.apache.commons.lang3.StringUtils.mid:2827 ILOAD 1
+org.apache.commons.lang3.StringUtils.mid:2827 ILOAD 2
+org.apache.commons.lang3.StringUtils.mid:2827 IADD
+org.apache.commons.lang3.StringUtils.mid:2827 INVOKEVIRTUAL java/lang/String.substring(II)Ljava/lang/String;
+org.apache.commons.lang3.StringUtils.mid:2827 ARETURN
+org.apache.commons.lang3.StringUtilsSubstringTest.main:44 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsSubstringTest.testMid_String()V
+org.apache.commons.lang3.StringUtilsSubstringTest.testMid_String:147 LDC "foo"
+org.apache.commons.lang3.StringUtilsSubstringTest.testMid_String:147 LDC "foobar"
+org.apache.commons.lang3.StringUtilsSubstringTest.testMid_String:147 ICONST_M1
+org.apache.commons.lang3.StringUtilsSubstringTest.testMid_String:147 ICONST_3
+org.apache.commons.lang3.StringUtilsSubstringTest.testMid_String:147 INVOKESTATIC org/apache/commons/lang3/StringUtils.mid(Ljava/lang/String;II)Ljava/lang/String;
+org.apache.commons.lang3.StringUtilsSubstringTest.testMid_String:147 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 32 bytecode instructions.
+Computation took 1.65 seconds.

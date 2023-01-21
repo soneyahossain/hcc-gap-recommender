@@ -1,0 +1,53 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_String:339:*]:
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 ALOAD 0
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 INVOKEINTERFACE java/lang/CharSequence.toString()Ljava/lang/String;
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 ALOAD 1
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 INVOKEINTERFACE java/lang/CharSequence.toString()Ljava/lang/String;
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 ILOAD 2
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 INVOKEVIRTUAL java/lang/String.indexOf(Ljava/lang/String;I)I
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 IRETURN
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.StringUtils.countMatches:6857 ALOAD 0
+org.apache.commons.lang3.StringUtils.countMatches:6857 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.countMatches:6857 IFNE L0 false true
+org.apache.commons.lang3.StringUtils.countMatches:6857 ALOAD 1
+org.apache.commons.lang3.StringUtils.countMatches:6857 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.countMatches:6857 IFEQ L1 true false
+org.apache.commons.lang3.StringUtils.countMatches:6860 ICONST_0
+org.apache.commons.lang3.StringUtils.countMatches:6860 ISTORE 2
+org.apache.commons.lang3.StringUtils.countMatches:6861 ICONST_0
+org.apache.commons.lang3.StringUtils.countMatches:6861 ISTORE 3
+org.apache.commons.lang3.StringUtils.countMatches:6862 ALOAD 0
+org.apache.commons.lang3.StringUtils.countMatches:6862 ALOAD 1
+org.apache.commons.lang3.StringUtils.countMatches:6862 ILOAD 3
+org.apache.commons.lang3.StringUtils.countMatches:6862 INVOKESTATIC org/apache/commons/lang3/CharSequenceUtils.indexOf(Ljava/lang/CharSequence;Ljava/lang/CharSequence;I)I
+org.apache.commons.lang3.StringUtils.countMatches:6862 DUP
+org.apache.commons.lang3.StringUtils.countMatches:6862 ISTORE 3
+org.apache.commons.lang3.StringUtils.countMatches:6862 ICONST_M1
+org.apache.commons.lang3.StringUtils.countMatches:6862 IF_ICMPEQ L3 true true
+org.apache.commons.lang3.StringUtils.countMatches:6863 IINC 2 1
+org.apache.commons.lang3.StringUtils.countMatches:6864 ILOAD 3
+org.apache.commons.lang3.StringUtils.countMatches:6864 ALOAD 1
+org.apache.commons.lang3.StringUtils.countMatches:6864 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.countMatches:6864 IADD
+org.apache.commons.lang3.StringUtils.countMatches:6864 ISTORE 3
+org.apache.commons.lang3.StringUtils.countMatches:6866 ILOAD 2
+org.apache.commons.lang3.StringUtils.countMatches:6866 IRETURN
+org.apache.commons.lang3.StringUtilsSubstringTest.main:52 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsSubstringTest.testCountMatches_String()V
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_String:337 LCONST_0
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_String:339 LDC 4
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_String:339 LDC "oooooooooooo"
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_String:339 LDC "ooo"
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_String:339 INVOKESTATIC org/apache/commons/lang3/StringUtils.countMatches(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_String:339 I2L
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_String:339 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 48 bytecode instructions.
+Computation took 0.91 seconds.

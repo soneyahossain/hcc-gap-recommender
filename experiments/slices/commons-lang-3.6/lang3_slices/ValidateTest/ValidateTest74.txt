@@ -1,0 +1,32 @@
+ 0.0% done, time left: unknown                                0.4% done, time left: unknown  0.5% done, time left: unknown  1.0% done, time left: unknown  1.6% done, time left: unknown  2.2% done, time left: unknown  2.5% done, time left: unknown  4.2% done, time left: unknown  6.2% done, time left:   0:00:04    7.6% done, time left:   0:00:05  8.6% done, time left:   0:00:05 10.2% done, time left:   0:00:06 11.5% done, time left:   0:00:07 14.5% done, time left:   0:00:07 17.2% done, time left:   0:00:07 20.3% done, time left:   0:00:06 24.0% done, time left:   0:00:05 27.6% done, time left:   0:00:04 31.3% done, time left:   0:00:03 34.7% done, time left:   0:00:02 38.1% done, time left:   0:00:02 41.5% done, time left:   0:00:02 44.8% done, time left:   0:00:02 47.4% done, time left:   0:00:01 48.3% done, time left:   0:00:01 51.6% done, time left:   0:00:01 54.8% done, time left:   0:00:01 56.7% done, time left:   0:00:01 59.6% done, time left:   0:00:01 63.2% done, time left:   0:00:00 66.3% done, time left:   0:00:00 69.7% done, time left:   0:00:00 73.3% done, time left:   0:00:00 77.2% done, time left:   0:00:00 81.0% done, time left:   0:00:00 84.3% done, time left:   0:00:00 87.8% done, time left:   0:00:00 90.9% done, time left:   0:00:00 94.4% done, time left:   0:00:00 95.3% done, time left:   0:00:00 95.9% done, time left:   0:00:00 97.4% done, time left:   0:00:00 99.3% done, time left:   0:00:00 100.4% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:843:*]:
+org.apache.commons.lang3.Validate.validIndex:749 ILOAD 1
+org.apache.commons.lang3.Validate.validIndex:749 IFLT L0 false true
+org.apache.commons.lang3.Validate.validIndex:749 ILOAD 1
+org.apache.commons.lang3.Validate.validIndex:749 ALOAD 0
+org.apache.commons.lang3.Validate.validIndex:749 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.Validate.validIndex:749 IF_ICMPLT L1 false true
+org.apache.commons.lang3.Validate.validIndex:750 NEW java/lang/IndexOutOfBoundsException
+org.apache.commons.lang3.Validate.validIndex:750 DUP
+org.apache.commons.lang3.Validate.validIndex:750 ALOAD 2
+org.apache.commons.lang3.Validate.validIndex:750 ALOAD 3
+org.apache.commons.lang3.Validate.validIndex:750 INVOKESTATIC java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+org.apache.commons.lang3.Validate.validIndex:750 INVOKESPECIAL java/lang/IndexOutOfBoundsException.<init>(Ljava/lang/String;)V
+org.apache.commons.lang3.Validate.validIndex:750 ATHROW
+org.apache.commons.lang3.ValidateTest.main:88 INVOKEVIRTUAL org/apache/commons/lang3/ValidateTest.testValidIndex_withMessage_charSequence()V
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:830 LDC "Hi"
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:830 ASTORE 1
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:840 ALOAD 1
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:840 ICONST_2
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:840 LDC "Broken: "
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:840 ICONST_0
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:840 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:840 INVOKESTATIC org/apache/commons/lang3/Validate.validIndex(Ljava/lang/CharSequence;ILjava/lang/String;[Ljava/lang/Object;)Ljava/lang/CharSequence;
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:842 ASTORE 2
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:843 LDC "Broken: "
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:843 ALOAD 2
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:843 INVOKEVIRTUAL java/lang/IndexOutOfBoundsException.getMessage()Ljava/lang/String;
+org.apache.commons.lang3.ValidateTest.testValidIndex_withMessage_charSequence:843 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 51 bytecode instructions.
+Computation took 4.87 seconds.

@@ -1,0 +1,42 @@
+ 0.0% done, time left: unknown                                0.7% done, time left: unknown  4.0% done, time left: unknown  8.1% done, time left: unknown 11.8% done, time left: unknown 19.1% done, time left: unknown 24.4% done, time left: unknown 32.8% done, time left: unknown 36.8% done, time left: unknown 42.6% done, time left:   0:00:00   49.5% done, time left:   0:00:00 54.6% done, time left:   0:00:00 63.7% done, time left:   0:00:00 71.6% done, time left:   0:00:00 81.4% done, time left:   0:00:00 92.0% done, time left:   0:00:00 96.1% done, time left:   0:00:00 97.1% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.CharSetTest.testEquals_Object:369:*]:
+org.apache.commons.lang3.CharSet.getInstance:156 ALOAD 0
+org.apache.commons.lang3.CharSet.getInstance:156 IFNONNULL L0 true false
+org.apache.commons.lang3.CharSet.getInstance:159 ALOAD 0
+org.apache.commons.lang3.CharSet.getInstance:159 ARRAYLENGTH
+org.apache.commons.lang3.CharSet.getInstance:159 ICONST_1
+org.apache.commons.lang3.CharSet.getInstance:159 IF_ICMPNE L1 false true
+org.apache.commons.lang3.CharSet.getInstance:160 GETSTATIC org/apache/commons/lang3/CharSet.COMMON Ljava/util/Map;
+org.apache.commons.lang3.CharSet.getInstance:160 ALOAD 0
+org.apache.commons.lang3.CharSet.getInstance:160 ICONST_0
+org.apache.commons.lang3.CharSet.getInstance:160 AALOAD
+org.apache.commons.lang3.CharSet.getInstance:160 INVOKEINTERFACE java/util/Map.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.CharSet.getInstance:160 ASTORE 1
+org.apache.commons.lang3.CharSet.getInstance:161 ALOAD 1
+org.apache.commons.lang3.CharSet.getInstance:161 IFNULL L1 true false
+org.apache.commons.lang3.CharSet.getInstance:165 NEW org/apache/commons/lang3/CharSet
+org.apache.commons.lang3.CharSet.getInstance:165 ARETURN
+org.apache.commons.lang3.CharSet.equals:263 ALOAD 1
+org.apache.commons.lang3.CharSet.equals:263 ALOAD 0
+org.apache.commons.lang3.CharSet.equals:263 IF_ACMPNE L0 true false
+org.apache.commons.lang3.CharSet.equals:266 ALOAD 1
+org.apache.commons.lang3.CharSet.equals:266 INSTANCEOF org/apache/commons/lang3/CharSet
+org.apache.commons.lang3.CharSet.equals:266 IFNE L1 false true
+org.apache.commons.lang3.CharSet.equals:267 ICONST_0
+org.apache.commons.lang3.CharSet.equals:267 IRETURN
+org.apache.commons.lang3.CharSetTest.main:45 INVOKEVIRTUAL org/apache/commons/lang3/CharSetTest.testEquals_Object()V
+org.apache.commons.lang3.CharSetTest.testEquals_Object:362 ICONST_1
+org.apache.commons.lang3.CharSetTest.testEquals_Object:362 ANEWARRAY java/lang/String
+org.apache.commons.lang3.CharSetTest.testEquals_Object:362 DUP
+org.apache.commons.lang3.CharSetTest.testEquals_Object:362 ICONST_0
+org.apache.commons.lang3.CharSetTest.testEquals_Object:362 LDC "abc"
+org.apache.commons.lang3.CharSetTest.testEquals_Object:362 AASTORE
+org.apache.commons.lang3.CharSetTest.testEquals_Object:362 INVOKESTATIC org/apache/commons/lang3/CharSet.getInstance([Ljava/lang/String;)Lorg/apache/commons/lang3/CharSet;
+org.apache.commons.lang3.CharSetTest.testEquals_Object:362 ASTORE 1
+org.apache.commons.lang3.CharSetTest.testEquals_Object:369 ALOAD 1
+org.apache.commons.lang3.CharSetTest.testEquals_Object:369 ACONST_NULL
+org.apache.commons.lang3.CharSetTest.testEquals_Object:369 INVOKEVIRTUAL org/apache/commons/lang3/CharSet.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.CharSetTest.testEquals_Object:369 INVOKESTATIC org/junit/Assert.assertFalse(Z)V
+
+Slice consists of 107 bytecode instructions.
+Computation took 2.01 seconds.

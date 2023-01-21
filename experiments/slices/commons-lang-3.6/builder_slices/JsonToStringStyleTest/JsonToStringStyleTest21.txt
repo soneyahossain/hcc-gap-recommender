@@ -1,0 +1,58 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237:*]:
+org.apache.commons.lang3.builder.JsonToStringStyleTest.main:46 INVOKEVIRTUAL org/apache/commons/lang3/builder/JsonToStringStyleTest.testPerson()V
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:232 NEW org/apache/commons/lang3/builder/ToStringStyleTest$Person
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:232 ASTORE 1
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:233 ALOAD 1
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:233 LDC "Jane Doe"
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:233 PUTFIELD org/apache/commons/lang3/builder/ToStringStyleTest$Person.name Ljava/lang/String;
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:234 ALOAD 1
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:234 BIPUSH 25
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:234 PUTFIELD org/apache/commons/lang3/builder/ToStringStyleTest$Person.age I
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:235 ALOAD 1
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:235 ICONST_1
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:235 PUTFIELD org/apache/commons/lang3/builder/ToStringStyleTest$Person.smoker Z
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 LDC "{"name":"Jane Doe","age":25,"smoker":true}"
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 NEW org/apache/commons/lang3/builder/ToStringBuilder
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 DUP
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 ALOAD 1
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 INVOKESPECIAL org/apache/commons/lang3/builder/ToStringBuilder.<init>(Ljava/lang/Object;)V
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 LDC "name"
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 ALOAD 1
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 GETFIELD org/apache/commons/lang3/builder/ToStringStyleTest$Person.name Ljava/lang/String;
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 INVOKEVIRTUAL org/apache/commons/lang3/builder/ToStringBuilder.append(Ljava/lang/String;Ljava/lang/Object;)Lorg/apache/commons/lang3/builder/ToStringBuilder;
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 LDC "age"
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 ALOAD 1
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 GETFIELD org/apache/commons/lang3/builder/ToStringStyleTest$Person.age I
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 INVOKEVIRTUAL org/apache/commons/lang3/builder/ToStringBuilder.append(Ljava/lang/String;I)Lorg/apache/commons/lang3/builder/ToStringBuilder;
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 LDC "smoker"
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 ALOAD 1
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 GETFIELD org/apache/commons/lang3/builder/ToStringStyleTest$Person.smoker Z
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 INVOKEVIRTUAL org/apache/commons/lang3/builder/ToStringBuilder.append(Ljava/lang/String;Z)Lorg/apache/commons/lang3/builder/ToStringBuilder;
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 INVOKEVIRTUAL org/apache/commons/lang3/builder/ToStringBuilder.toString()Ljava/lang/String;
+org.apache.commons.lang3.builder.JsonToStringStyleTest.testPerson:237 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.lang3.builder.ToStringBuilder.<init>:120 ALOAD 0
+org.apache.commons.lang3.builder.ToStringBuilder.<init>:120 ACONST_NULL
+org.apache.commons.lang3.builder.ToStringBuilder.<init>:120 INVOKESPECIAL org/apache/commons/lang3/builder/ToStringBuilder.<init>(Ljava/lang/Object;Lorg/apache/commons/lang3/builder/ToStringStyle;Ljava/lang/StringBuffer;)V
+org.apache.commons.lang3.builder.ToStringBuilder.<init>:150 ALOAD 3
+org.apache.commons.lang3.builder.ToStringBuilder.<init>:150 IFNONNULL L1 false true
+org.apache.commons.lang3.builder.ToStringBuilder.<init>:151 NEW java/lang/StringBuffer
+org.apache.commons.lang3.builder.ToStringBuilder.<init>:151 ASTORE 3
+org.apache.commons.lang3.builder.ToStringBuilder.<init>:153 ALOAD 0
+org.apache.commons.lang3.builder.ToStringBuilder.<init>:153 ALOAD 3
+org.apache.commons.lang3.builder.ToStringBuilder.<init>:153 PUTFIELD org/apache/commons/lang3/builder/ToStringBuilder.buffer Ljava/lang/StringBuffer;
+org.apache.commons.lang3.builder.ToStringBuilder.append:526 ALOAD 0
+org.apache.commons.lang3.builder.ToStringBuilder.append:526 ARETURN
+org.apache.commons.lang3.builder.ToStringBuilder.append:755 ALOAD 0
+org.apache.commons.lang3.builder.ToStringBuilder.append:755 ARETURN
+org.apache.commons.lang3.builder.ToStringBuilder.append:847 ALOAD 0
+org.apache.commons.lang3.builder.ToStringBuilder.append:847 ARETURN
+org.apache.commons.lang3.builder.ToStringBuilder.getStringBuffer:1029 ALOAD 0
+org.apache.commons.lang3.builder.ToStringBuilder.getStringBuffer:1029 GETFIELD org/apache/commons/lang3/builder/ToStringBuilder.buffer Ljava/lang/StringBuffer;
+org.apache.commons.lang3.builder.ToStringBuilder.getStringBuffer:1029 ARETURN
+org.apache.commons.lang3.builder.ToStringBuilder.toString:1061 ALOAD 0
+org.apache.commons.lang3.builder.ToStringBuilder.toString:1061 INVOKEVIRTUAL org/apache/commons/lang3/builder/ToStringBuilder.getStringBuffer()Ljava/lang/StringBuffer;
+org.apache.commons.lang3.builder.ToStringBuilder.toString:1061 ARETURN
+
+Slice consists of 53 bytecode instructions.
+Computation took 1.37 seconds.

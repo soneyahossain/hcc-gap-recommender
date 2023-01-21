@@ -1,0 +1,88 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.6% done, time left: unknown  0.9% done, time left: unknown  1.2% done, time left: unknown  1.5% done, time left: unknown  2.5% done, time left: unknown  3.7% done, time left:   0:00:07    4.7% done, time left:   0:00:08  5.8% done, time left:   0:00:08  7.6% done, time left:   0:00:08  8.5% done, time left:   0:00:08 10.4% done, time left:   0:00:09 12.4% done, time left:   0:00:09 14.3% done, time left:   0:00:09 16.3% done, time left:   0:00:09 17.2% done, time left:   0:00:08 19.2% done, time left:   0:00:08 21.3% done, time left:   0:00:08 23.5% done, time left:   0:00:07 25.7% done, time left:   0:00:06 27.9% done, time left:   0:00:06 30.1% done, time left:   0:00:05 32.3% done, time left:   0:00:05 34.5% done, time left:   0:00:04 36.7% done, time left:   0:00:04 38.8% done, time left:   0:00:04 40.9% done, time left:   0:00:03 43.0% done, time left:   0:00:03 45.1% done, time left:   0:00:03 47.3% done, time left:   0:00:03 49.3% done, time left:   0:00:02 51.4% done, time left:   0:00:02 53.5% done, time left:   0:00:02 55.5% done, time left:   0:00:02 57.6% done, time left:   0:00:01 59.2% done, time left:   0:00:01 60.4% done, time left:   0:00:01 61.3% done, time left:   0:00:01 62.4% done, time left:   0:00:01 64.0% done, time left:   0:00:01 65.5% done, time left:   0:00:01 67.0% done, time left:   0:00:01 68.5% done, time left:   0:00:01 70.2% done, time left:   0:00:01 72.2% done, time left:   0:00:01 73.6% done, time left:   0:00:00 74.8% done, time left:   0:00:00 76.7% done, time left:   0:00:00 78.8% done, time left:   0:00:00 80.8% done, time left:   0:00:00 82.7% done, time left:   0:00:00 84.5% done, time left:   0:00:00 86.4% done, time left:   0:00:00 88.6% done, time left:   0:00:00 89.9% done, time left:   0:00:00 91.1% done, time left:   0:00:00 91.8% done, time left:   0:00:00 93.5% done, time left:   0:00:00 95.1% done, time left:   0:00:00 96.8% done, time left:   0:00:00 98.4% done, time left:   0:00:00 99.6% done, time left:   0:00:00 99.7% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:428:*]:
+org.apache.commons.lang3.LocaleUtils.toLocale:91 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.toLocale:91 IFNONNULL L0 true false
+org.apache.commons.lang3.LocaleUtils.toLocale:94 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.toLocale:94 INVOKEVIRTUAL java/lang/String.isEmpty()Z
+org.apache.commons.lang3.LocaleUtils.toLocale:94 IFEQ L1 true false
+org.apache.commons.lang3.LocaleUtils.toLocale:104 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.toLocale:104 ICONST_0
+org.apache.commons.lang3.LocaleUtils.toLocale:104 INVOKEVIRTUAL java/lang/String.charAt(I)C
+org.apache.commons.lang3.LocaleUtils.toLocale:104 ISTORE 2
+org.apache.commons.lang3.LocaleUtils.toLocale:105 ILOAD 2
+org.apache.commons.lang3.LocaleUtils.toLocale:105 BIPUSH 95
+org.apache.commons.lang3.LocaleUtils.toLocale:105 IF_ICMPNE L10 true false
+org.apache.commons.lang3.LocaleUtils.toLocale:126 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.toLocale:126 INVOKESTATIC org/apache/commons/lang3/LocaleUtils.parseLocale(Ljava/lang/String;)Ljava/util/Locale;
+org.apache.commons.lang3.LocaleUtils.toLocale:126 ARETURN
+org.apache.commons.lang3.LocaleUtils.parseLocale:137 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.parseLocale:137 INVOKESTATIC org/apache/commons/lang3/LocaleUtils.isISO639LanguageCode(Ljava/lang/String;)Z
+org.apache.commons.lang3.LocaleUtils.parseLocale:137 IFEQ L0 false true
+org.apache.commons.lang3.LocaleUtils.parseLocale:138 NEW java/util/Locale
+org.apache.commons.lang3.LocaleUtils.parseLocale:138 DUP
+org.apache.commons.lang3.LocaleUtils.parseLocale:138 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.parseLocale:138 INVOKESPECIAL java/util/Locale.<init>(Ljava/lang/String;)V
+org.apache.commons.lang3.LocaleUtils.parseLocale:138 ARETURN
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 INVOKESTATIC org/apache/commons/lang3/StringUtils.isAllLowerCase(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 IFEQ L1 false true
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 ICONST_2
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 IF_ICMPEQ L0 false true
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 ICONST_3
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 IF_ICMPNE L1 false true
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 ICONST_1
+org.apache.commons.lang3.LocaleUtils.isISO639LanguageCode:168 IRETURN
+org.apache.commons.lang3.LocaleUtilsTest.main:64 INVOKEVIRTUAL org/apache/commons/lang3/LocaleUtilsTest.testThreeCharsLocale()V
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:425 ICONST_2
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:425 ANEWARRAY java/lang/String
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:425 INVOKESTATIC java/util/Arrays.asList([Ljava/lang/Object;)Ljava/util/List;
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:425 INVOKEINTERFACE java/util/List.iterator()Ljava/util/Iterator;
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:425 ASTORE 1
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:425 ALOAD 1
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:425 INVOKEINTERFACE java/util/Iterator.hasNext()Z
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:425 IFEQ L1 false true
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:425 ALOAD 1
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:425 INVOKEINTERFACE java/util/Iterator.next()Ljava/lang/Object;
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:425 ASTORE 2
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:426 ALOAD 2
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:426 INVOKESTATIC org/apache/commons/lang3/LocaleUtils.toLocale(Ljava/lang/String;)Ljava/util/Locale;
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:426 ASTORE 3
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:428 ALOAD 2
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:428 ALOAD 3
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:428 INVOKEVIRTUAL java/util/Locale.getLanguage()Ljava/lang/String;
+org.apache.commons.lang3.LocaleUtilsTest.testThreeCharsLocale:428 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7259 ALOAD 0
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7259 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7259 ALOAD 0
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7259 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7259 IFEQ L1 true false
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7262 ALOAD 0
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7262 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7262 ISTORE 1
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7263 ICONST_0
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7263 ISTORE 2
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7263 ILOAD 2
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7263 ILOAD 1
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7263 IF_ICMPGE L4 true true
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7263 IINC 2 1
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7264 ALOAD 0
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7264 ILOAD 2
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7264 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7264 INVOKESTATIC java/lang/Character.isLowerCase(C)Z
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7264 IFNE L3 true false
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7268 ICONST_1
+org.apache.commons.lang3.StringUtils.isAllLowerCase:7268 IRETURN
+
+Slice consists of 508 bytecode instructions.
+Computation took 6.92 seconds.

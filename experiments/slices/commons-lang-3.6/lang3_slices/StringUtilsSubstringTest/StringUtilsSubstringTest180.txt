@@ -1,0 +1,40 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_char:347:*]:
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.StringUtils.countMatches:6889 ALOAD 0
+org.apache.commons.lang3.StringUtils.countMatches:6889 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.countMatches:6889 IFEQ L0 true false
+org.apache.commons.lang3.StringUtils.countMatches:6892 ICONST_0
+org.apache.commons.lang3.StringUtils.countMatches:6892 ISTORE 2
+org.apache.commons.lang3.StringUtils.countMatches:6894 ICONST_0
+org.apache.commons.lang3.StringUtils.countMatches:6894 ISTORE 3
+org.apache.commons.lang3.StringUtils.countMatches:6894 ILOAD 3
+org.apache.commons.lang3.StringUtils.countMatches:6894 ALOAD 0
+org.apache.commons.lang3.StringUtils.countMatches:6894 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.countMatches:6894 IF_ICMPGE L3 true true
+org.apache.commons.lang3.StringUtils.countMatches:6894 IINC 3 1
+org.apache.commons.lang3.StringUtils.countMatches:6895 ILOAD 1
+org.apache.commons.lang3.StringUtils.countMatches:6895 ALOAD 0
+org.apache.commons.lang3.StringUtils.countMatches:6895 ILOAD 3
+org.apache.commons.lang3.StringUtils.countMatches:6895 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.apache.commons.lang3.StringUtils.countMatches:6895 IF_ICMPNE L2 false true
+org.apache.commons.lang3.StringUtils.countMatches:6896 IINC 2 1
+org.apache.commons.lang3.StringUtils.countMatches:6899 ILOAD 2
+org.apache.commons.lang3.StringUtils.countMatches:6899 IRETURN
+org.apache.commons.lang3.StringUtilsSubstringTest.main:53 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsSubstringTest.testCountMatches_char()V
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_char:345 LCONST_0
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_char:347 LDC 6
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_char:347 LDC "one long someone sentence of one"
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_char:347 BIPUSH 111
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_char:347 INVOKESTATIC org/apache/commons/lang3/StringUtils.countMatches(Ljava/lang/CharSequence;C)I
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_char:347 I2L
+org.apache.commons.lang3.StringUtilsSubstringTest.testCountMatches_char:347 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 35 bytecode instructions.
+Computation took 1.37 seconds.

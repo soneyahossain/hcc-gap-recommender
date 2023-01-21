@@ -1,0 +1,35 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsIsTest.testIsAsciiPrintable_String:128:*]:
+org.apache.commons.lang3.CharUtils.isAsciiPrintable:422 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiPrintable:422 BIPUSH 32
+org.apache.commons.lang3.CharUtils.isAsciiPrintable:422 IF_ICMPLT L0 false true
+org.apache.commons.lang3.CharUtils.isAsciiPrintable:422 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiPrintable:422 BIPUSH 127
+org.apache.commons.lang3.CharUtils.isAsciiPrintable:422 IF_ICMPGE L0 false true
+org.apache.commons.lang3.CharUtils.isAsciiPrintable:422 ICONST_1
+org.apache.commons.lang3.CharUtils.isAsciiPrintable:422 IRETURN
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7069 ALOAD 0
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7069 IFNONNULL L0 true false
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7072 ALOAD 0
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7072 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7072 ISTORE 1
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7073 ICONST_0
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7073 ISTORE 2
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7073 ILOAD 2
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7073 ILOAD 1
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7073 IF_ICMPGE L3 true true
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7073 IINC 2 1
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7074 ALOAD 0
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7074 ILOAD 2
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7074 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7074 INVOKESTATIC org/apache/commons/lang3/CharUtils.isAsciiPrintable(C)Z
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7074 IFNE L2 true false
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7078 ICONST_1
+org.apache.commons.lang3.StringUtils.isAsciiPrintable:7078 IRETURN
+org.apache.commons.lang3.StringUtilsIsTest.main:36 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsIsTest.testIsAsciiPrintable_String()V
+org.apache.commons.lang3.StringUtilsIsTest.testIsAsciiPrintable_String:128 LDC "1000"
+org.apache.commons.lang3.StringUtilsIsTest.testIsAsciiPrintable_String:128 INVOKESTATIC org/apache/commons/lang3/StringUtils.isAsciiPrintable(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtilsIsTest.testIsAsciiPrintable_String:128 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 30 bytecode instructions.
+Computation took 0.91 seconds.

@@ -1,0 +1,181 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  0.3% done, time left: unknown  0.5% done, time left: unknown  0.9% done, time left: unknown  1.6% done, time left: unknown  2.3% done, time left: unknown  3.3% done, time left: unknown  4.2% done, time left:   0:00:10    4.6% done, time left:   0:00:12  6.7% done, time left:   0:00:11  8.5% done, time left:   0:00:10 11.0% done, time left:   0:00:10 13.6% done, time left:   0:00:09 16.4% done, time left:   0:00:08 19.3% done, time left:   0:00:07 21.9% done, time left:   0:00:06 23.7% done, time left:   0:00:05 25.8% done, time left:   0:00:05 27.7% done, time left:   0:00:05 29.0% done, time left:   0:00:04 31.1% done, time left:   0:00:04 33.9% done, time left:   0:00:04 36.6% done, time left:   0:00:04 39.3% done, time left:   0:00:03 41.0% done, time left:   0:00:02 43.1% done, time left:   0:00:02 45.8% done, time left:   0:00:02 48.4% done, time left:   0:00:02 51.3% done, time left:   0:00:02 53.9% done, time left:   0:00:01 56.6% done, time left:   0:00:01 59.3% done, time left:   0:00:01 62.0% done, time left:   0:00:01 64.6% done, time left:   0:00:00 67.3% done, time left:   0:00:00 69.9% done, time left:   0:00:00 72.5% done, time left:   0:00:00 75.1% done, time left:   0:00:00 80.6% done, time left:   0:00:00 88.1% done, time left:   0:00:00 91.2% done, time left:   0:00:00 93.4% done, time left:   0:00:00 95.1% done, time left:   0:00:00 96.7% done, time left:   0:00:00 98.7% done, time left:   0:00:00 99.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542:*]:
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ICONST_0
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([Ljava/lang/Object;Ljava/lang/Object;I)I
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 IRETURN
+org.apache.commons.lang3.ArrayUtils.indexOf:3217 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3217 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3223 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3223 IFNONNULL L5 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ISTORE 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ARRAYLENGTH
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 IF_ICMPGE L8 true true
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 IINC 3 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 AALOAD
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 IFEQ L7 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3236 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.indexOf:3236 IRETURN
+org.apache.commons.lang3.ArrayUtils.contains:3302 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.contains:3302 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.contains:3302 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([Ljava/lang/Object;Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.contains:3302 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.contains:3302 IF_ICMPEQ L0 true false
+org.apache.commons.lang3.ArrayUtils.contains:3302 ICONST_0
+org.apache.commons.lang3.ArrayUtils.contains:3302 IRETURN
+org.apache.commons.lang3.builder.HashCodeBuilder.<init>:175 ALOAD 0
+org.apache.commons.lang3.builder.HashCodeBuilder.<init>:175 ILOAD 2
+org.apache.commons.lang3.builder.HashCodeBuilder.<init>:175 PUTFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iConstant I
+org.apache.commons.lang3.builder.HashCodeBuilder.<init>:176 ALOAD 0
+org.apache.commons.lang3.builder.HashCodeBuilder.<init>:176 ILOAD 1
+org.apache.commons.lang3.builder.HashCodeBuilder.<init>:176 PUTFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iTotal I
+org.apache.commons.lang3.builder.HashCodeBuilder.getRegistry:188 GETSTATIC org/apache/commons/lang3/builder/HashCodeBuilder.REGISTRY Ljava/lang/ThreadLocal;
+org.apache.commons.lang3.builder.HashCodeBuilder.getRegistry:188 INVOKEVIRTUAL java/lang/ThreadLocal.get()Ljava/lang/Object;
+org.apache.commons.lang3.builder.HashCodeBuilder.getRegistry:188 ARETURN
+org.apache.commons.lang3.builder.HashCodeBuilder.isRegistered:202 INVOKESTATIC org/apache/commons/lang3/builder/HashCodeBuilder.getRegistry()Ljava/util/Set;
+org.apache.commons.lang3.builder.HashCodeBuilder.isRegistered:202 ASTORE 1
+org.apache.commons.lang3.builder.HashCodeBuilder.isRegistered:203 ALOAD 1
+org.apache.commons.lang3.builder.HashCodeBuilder.isRegistered:203 IFNULL L0 true false
+org.apache.commons.lang3.builder.HashCodeBuilder.isRegistered:203 ICONST_0
+org.apache.commons.lang3.builder.HashCodeBuilder.isRegistered:203 IRETURN
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:219 INVOKESTATIC org/apache/commons/lang3/builder/HashCodeBuilder.isRegistered(Ljava/lang/Object;)Z
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:219 IFEQ L0 true false
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:224 ALOAD 1
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:224 INVOKEVIRTUAL java/lang/Class.getDeclaredFields()[Ljava/lang/reflect/Field;
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:224 ASTORE 5
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:225 ALOAD 5
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:225 ICONST_1
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:225 INVOKESTATIC java/lang/reflect/AccessibleObject.setAccessible([Ljava/lang/reflect/AccessibleObject;Z)V
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ALOAD 5
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ASTORE 6
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ALOAD 6
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ARRAYLENGTH
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ISTORE 7
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ICONST_0
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ISTORE 8
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ILOAD 8
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ILOAD 7
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 IF_ICMPGE L7 false true
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ALOAD 6
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ILOAD 8
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 AALOAD
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:226 ASTORE 9
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 ALOAD 4
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 ALOAD 9
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 INVOKEVIRTUAL java/lang/reflect/Field.getName()Ljava/lang/String;
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.contains([Ljava/lang/Object;Ljava/lang/Object;)Z
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 IFNE L6 false true
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 ALOAD 9
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 INVOKEVIRTUAL java/lang/reflect/Field.getName()Ljava/lang/String;
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 LDC "$"
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 INVOKEVIRTUAL java/lang/String.contains(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 IFNE L6 false true
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 ILOAD 3
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 IFNE L2 false true
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 ALOAD 9
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 INVOKEVIRTUAL java/lang/reflect/Field.getModifiers()I
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 INVOKESTATIC java/lang/reflect/Modifier.isTransient(I)Z
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 IFNE L6 false true
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 ALOAD 9
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 INVOKEVIRTUAL java/lang/reflect/Field.getModifiers()I
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 INVOKESTATIC java/lang/reflect/Modifier.isStatic(I)Z
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 IFNE L6 false true
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 ALOAD 9
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 LDC Lorg/apache/commons/lang3/builder/HashCodeExclude;
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 INVOKEVIRTUAL java/lang/reflect/Field.isAnnotationPresent(Ljava/lang/Class;)Z
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:227 IFNE L6 false true
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:233 ALOAD 9
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:233 ALOAD 0
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:233 INVOKEVIRTUAL java/lang/reflect/Field.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:233 ASTORE 10
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:234 ALOAD 2
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:234 ALOAD 10
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionAppend:234 INVOKEVIRTUAL org/apache/commons/lang3/builder/HashCodeBuilder.append(Ljava/lang/Object;)Lorg/apache/commons/lang3/builder/HashCodeBuilder;
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:370 NEW org/apache/commons/lang3/builder/HashCodeBuilder
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:370 DUP
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:370 ILOAD 0
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:370 ILOAD 1
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:370 INVOKESPECIAL org/apache/commons/lang3/builder/HashCodeBuilder.<init>(II)V
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:370 ASTORE 6
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:371 ALOAD 2
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:371 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:371 ASTORE 7
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:372 ALOAD 2
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:372 ALOAD 7
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:372 ALOAD 6
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:372 ILOAD 3
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:372 ALOAD 5
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:372 INVOKESTATIC org/apache/commons/lang3/builder/HashCodeBuilder.reflectionAppend(Ljava/lang/Object;Ljava/lang/Class;Lorg/apache/commons/lang3/builder/HashCodeBuilder;Z[Ljava/lang/String;)V
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:373 ALOAD 7
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:373 INVOKEVIRTUAL java/lang/Class.getSuperclass()Ljava/lang/Class;
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:373 IFNULL L3 true true
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:373 ALOAD 7
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:373 ALOAD 4
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:373 IF_ACMPEQ L3 false true
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:374 ALOAD 7
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:374 INVOKEVIRTUAL java/lang/Class.getSuperclass()Ljava/lang/Class;
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:374 ASTORE 7
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:377 ALOAD 6
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:377 INVOKEVIRTUAL org/apache/commons/lang3/builder/HashCodeBuilder.toHashCode()I
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:377 IRETURN
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:483 BIPUSH 17
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:483 BIPUSH 37
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:483 ALOAD 0
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:483 ICONST_0
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:483 ACONST_NULL
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:483 ALOAD 1
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:483 INVOKESTATIC org/apache/commons/lang3/builder/HashCodeBuilder.reflectionHashCode(IILjava/lang/Object;ZLjava/lang/Class;[Ljava/lang/String;)I
+org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode:483 IRETURN
+org.apache.commons.lang3.builder.HashCodeBuilder.append:776 ALOAD 1
+org.apache.commons.lang3.builder.HashCodeBuilder.append:776 IFNONNULL L0 true false
+org.apache.commons.lang3.builder.HashCodeBuilder.append:780 ALOAD 1
+org.apache.commons.lang3.builder.HashCodeBuilder.append:780 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.builder.HashCodeBuilder.append:780 INVOKEVIRTUAL java/lang/Class.isArray()Z
+org.apache.commons.lang3.builder.HashCodeBuilder.append:780 IFEQ L1 true false
+org.apache.commons.lang3.builder.HashCodeBuilder.append:785 ALOAD 0
+org.apache.commons.lang3.builder.HashCodeBuilder.append:785 ALOAD 0
+org.apache.commons.lang3.builder.HashCodeBuilder.append:785 GETFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iTotal I
+org.apache.commons.lang3.builder.HashCodeBuilder.append:785 ALOAD 0
+org.apache.commons.lang3.builder.HashCodeBuilder.append:785 GETFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iConstant I
+org.apache.commons.lang3.builder.HashCodeBuilder.append:785 IMUL
+org.apache.commons.lang3.builder.HashCodeBuilder.append:785 ALOAD 1
+org.apache.commons.lang3.builder.HashCodeBuilder.append:785 INVOKEVIRTUAL java/lang/Object.hashCode()I
+org.apache.commons.lang3.builder.HashCodeBuilder.append:785 IADD
+org.apache.commons.lang3.builder.HashCodeBuilder.append:785 PUTFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iTotal I
+org.apache.commons.lang3.builder.HashCodeBuilder.toHashCode:896 ALOAD 0
+org.apache.commons.lang3.builder.HashCodeBuilder.toHashCode:896 GETFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iTotal I
+org.apache.commons.lang3.builder.HashCodeBuilder.toHashCode:896 IRETURN
+org.apache.commons.lang3.builder.HashCodeBuilderTest.main:178 INVOKEVIRTUAL org/apache/commons/lang3/builder/HashCodeBuilderTest.testReflectionHashCodeExcludeFields()V
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:531 NEW org/apache/commons/lang3/builder/HashCodeBuilderTest$TestObjectWithMultipleFields
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:531 DUP
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:531 ASTORE 1
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:533 ALOAD 1
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:533 ICONST_0
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:533 ANEWARRAY java/lang/String
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:533 INVOKESTATIC org/apache/commons/lang3/builder/HashCodeBuilder.reflectionHashCode(Ljava/lang/Object;[Ljava/lang/String;)I
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 LDC 630
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 ALOAD 1
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 ICONST_2
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 ANEWARRAY java/lang/String
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 DUP
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 ICONST_0
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 LDC "two"
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 AASTORE
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 DUP
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 ICONST_1
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 LDC "three"
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 AASTORE
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 INVOKESTATIC org/apache/commons/lang3/builder/HashCodeBuilder.reflectionHashCode(Ljava/lang/Object;[Ljava/lang/String;)I
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 I2L
+org.apache.commons.lang3.builder.HashCodeBuilderTest.testReflectionHashCodeExcludeFields:542 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 617 bytecode instructions.
+Computation took 5.05 seconds.

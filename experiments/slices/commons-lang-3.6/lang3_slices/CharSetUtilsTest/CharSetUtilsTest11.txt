@@ -1,0 +1,60 @@
+ 0.0% done, time left: unknown                                0.3% done, time left: unknown  2.1% done, time left: unknown  5.3% done, time left: unknown 10.1% done, time left: unknown 14.7% done, time left: unknown 21.9% done, time left: unknown 25.7% done, time left: unknown 35.2% done, time left: unknown 44.7% done, time left:   0:00:00   53.4% done, time left:   0:00:00 60.1% done, time left:   0:00:00 68.8% done, time left:   0:00:00 78.1% done, time left:   0:00:00 85.2% done, time left:   0:00:00 93.5% done, time left:   0:00:00 95.2% done, time left:   0:00:00 96.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70:*]:
+org.apache.commons.lang3.CharSetUtils.squeeze:64 ALOAD 0
+org.apache.commons.lang3.CharSetUtils.squeeze:64 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.CharSetUtils.squeeze:64 IFNE L0 false true
+org.apache.commons.lang3.CharSetUtils.squeeze:64 ALOAD 1
+org.apache.commons.lang3.CharSetUtils.squeeze:64 INVOKESTATIC org/apache/commons/lang3/CharSetUtils.deepEmpty([Ljava/lang/String;)Z
+org.apache.commons.lang3.CharSetUtils.squeeze:64 IFEQ L1 false true
+org.apache.commons.lang3.CharSetUtils.squeeze:65 ALOAD 0
+org.apache.commons.lang3.CharSetUtils.squeeze:65 ARETURN
+org.apache.commons.lang3.CharSetUtils.deepEmpty:251 ALOAD 0
+org.apache.commons.lang3.CharSetUtils.deepEmpty:251 IFNULL L2 false true
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ALOAD 0
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ASTORE 1
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ALOAD 1
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ARRAYLENGTH
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ISTORE 2
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ICONST_0
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ISTORE 3
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ILOAD 3
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ILOAD 2
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 IF_ICMPGE L2 true true
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ALOAD 1
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ILOAD 3
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 AALOAD
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 ASTORE 4
+org.apache.commons.lang3.CharSetUtils.deepEmpty:252 IINC 3 1
+org.apache.commons.lang3.CharSetUtils.deepEmpty:253 ALOAD 4
+org.apache.commons.lang3.CharSetUtils.deepEmpty:253 INVOKESTATIC org/apache/commons/lang3/StringUtils.isNotEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.CharSetUtils.deepEmpty:253 IFEQ L1 true false
+org.apache.commons.lang3.CharSetUtils.deepEmpty:258 ICONST_1
+org.apache.commons.lang3.CharSetUtils.deepEmpty:258 IRETURN
+org.apache.commons.lang3.CharSetUtilsTest.main:37 INVOKEVIRTUAL org/apache/commons/lang3/CharSetUtilsTest.testSqueeze_StringString()V
+org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70 LDC "hello"
+org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70 LDC "hello"
+org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70 ICONST_1
+org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70 ANEWARRAY java/lang/String
+org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70 DUP
+org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70 ICONST_0
+org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70 ACONST_NULL
+org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70 CHECKCAST java/lang/String
+org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70 AASTORE
+org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70 INVOKESTATIC org/apache/commons/lang3/CharSetUtils.squeeze(Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.lang3.CharSetUtilsTest.testSqueeze_StringString:70 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 true true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_1
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.StringUtils.isNotEmpty:229 ALOAD 0
+org.apache.commons.lang3.StringUtils.isNotEmpty:229 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.isNotEmpty:229 IFNE L0 true false
+org.apache.commons.lang3.StringUtils.isNotEmpty:229 ICONST_0
+org.apache.commons.lang3.StringUtils.isNotEmpty:229 IRETURN
+
+Slice consists of 55 bytecode instructions.
+Computation took 2.02 seconds.

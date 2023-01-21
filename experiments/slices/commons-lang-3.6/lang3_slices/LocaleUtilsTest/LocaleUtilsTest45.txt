@@ -1,0 +1,128 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.7% done, time left: unknown  1.0% done, time left: unknown  1.9% done, time left: unknown  3.0% done, time left: unknown  4.3% done, time left:   0:00:07    5.2% done, time left:   0:00:08  5.7% done, time left:   0:00:09  7.2% done, time left:   0:00:09  8.8% done, time left:   0:00:10 10.5% done, time left:   0:00:10 12.3% done, time left:   0:00:10 14.1% done, time left:   0:00:10 15.9% done, time left:   0:00:10 17.6% done, time left:   0:00:09 19.4% done, time left:   0:00:09 21.1% done, time left:   0:00:08 22.9% done, time left:   0:00:08 24.9% done, time left:   0:00:08 27.0% done, time left:   0:00:07 29.0% done, time left:   0:00:06 29.9% done, time left:   0:00:05 32.0% done, time left:   0:00:05 34.2% done, time left:   0:00:05 36.2% done, time left:   0:00:04 37.9% done, time left:   0:00:04 39.9% done, time left:   0:00:04 42.0% done, time left:   0:00:04 44.0% done, time left:   0:00:03 46.1% done, time left:   0:00:03 48.1% done, time left:   0:00:03 50.1% done, time left:   0:00:02 52.1% done, time left:   0:00:02 54.2% done, time left:   0:00:02 56.2% done, time left:   0:00:02 58.2% done, time left:   0:00:01 60.1% done, time left:   0:00:01 61.4% done, time left:   0:00:01 63.1% done, time left:   0:00:01 65.1% done, time left:   0:00:01 65.9% done, time left:   0:00:01 66.8% done, time left:   0:00:00 67.9% done, time left:   0:00:01 69.3% done, time left:   0:00:01 71.0% done, time left:   0:00:01 72.9% done, time left:   0:00:01 74.8% done, time left:   0:00:00 76.8% done, time left:   0:00:00 78.7% done, time left:   0:00:00 80.6% done, time left:   0:00:00 82.4% done, time left:   0:00:00 84.1% done, time left:   0:00:00 86.0% done, time left:   0:00:00 88.1% done, time left:   0:00:00 89.6% done, time left:   0:00:00 90.6% done, time left:   0:00:00 92.4% done, time left:   0:00:00 94.3% done, time left:   0:00:00 96.2% done, time left:   0:00:00 98.1% done, time left:   0:00:00 99.6% done, time left:   0:00:00 99.7% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:511:*]:
+org.apache.commons.lang3.LocaleUtils.availableLocaleList:254 INVOKESTATIC org/apache/commons/lang3/LocaleUtils$SyncAvoid.access$000()Ljava/util/List;
+org.apache.commons.lang3.LocaleUtils.availableLocaleList:254 ARETURN
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:325 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:325 IFNONNULL L0 true false
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:328 GETSTATIC org/apache/commons/lang3/LocaleUtils.cCountriesByLanguage Ljava/util/concurrent/ConcurrentMap;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:328 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:328 INVOKEINTERFACE java/util/concurrent/ConcurrentMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:328 ASTORE 1
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:329 ALOAD 1
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:329 IFNONNULL L4 false true
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:330 NEW java/util/ArrayList
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:330 DUP
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:330 INVOKESPECIAL java/util/ArrayList.<init>()V
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:330 ASTORE 1
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:331 INVOKESTATIC org/apache/commons/lang3/LocaleUtils.availableLocaleList()Ljava/util/List;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:331 ASTORE 2
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 ICONST_0
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 ISTORE 3
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 ILOAD 3
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 ALOAD 2
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 INVOKEINTERFACE java/util/List.size()I
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 IF_ICMPGE L3 true true
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 IINC 3 1
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:333 ALOAD 2
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:333 ILOAD 3
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:333 INVOKEINTERFACE java/util/List.get(I)Ljava/lang/Object;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:333 ASTORE 4
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 ALOAD 4
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 INVOKEVIRTUAL java/util/Locale.getLanguage()Ljava/lang/String;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 INVOKEVIRTUAL java/lang/String.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 IFEQ L2 false true
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 ALOAD 4
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 INVOKEVIRTUAL java/util/Locale.getCountry()Ljava/lang/String;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 IFEQ L2 false true
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 ALOAD 4
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 INVOKEVIRTUAL java/util/Locale.getVariant()Ljava/lang/String;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 INVOKEVIRTUAL java/lang/String.isEmpty()Z
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:334 IFEQ L2 false true
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:337 ALOAD 1
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:337 ALOAD 4
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:337 INVOKEINTERFACE java/util/List.add(Ljava/lang/Object;)Z
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:340 ALOAD 1
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:340 INVOKESTATIC java/util/Collections.unmodifiableList(Ljava/util/List;)Ljava/util/List;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:340 ASTORE 1
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:341 GETSTATIC org/apache/commons/lang3/LocaleUtils.cCountriesByLanguage Ljava/util/concurrent/ConcurrentMap;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:341 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:341 ALOAD 1
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:341 INVOKEINTERFACE java/util/concurrent/ConcurrentMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:342 GETSTATIC org/apache/commons/lang3/LocaleUtils.cCountriesByLanguage Ljava/util/concurrent/ConcurrentMap;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:342 ALOAD 0
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:342 INVOKEINTERFACE java/util/concurrent/ConcurrentMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:342 ASTORE 1
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:344 ALOAD 1
+org.apache.commons.lang3.LocaleUtils.countriesByLanguage:344 ARETURN
+org.apache.commons.lang3.LocaleUtils$SyncAvoid.access$000:349 GETSTATIC org/apache/commons/lang3/LocaleUtils$SyncAvoid.AVAILABLE_LOCALE_LIST Ljava/util/List;
+org.apache.commons.lang3.LocaleUtils$SyncAvoid.access$000:349 ARETURN
+org.apache.commons.lang3.LocaleUtilsTest.main:68 INVOKEVIRTUAL org/apache/commons/lang3/LocaleUtilsTest.testCountriesByLanguage()V
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:497 ALOAD 0
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:497 INVOKESTATIC org/apache/commons/lang3/LocaleUtils.countriesByLanguage(Ljava/lang/String;)Ljava/util/List;
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:497 ASTORE 2
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ALOAD 1
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ASTORE 4
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ALOAD 4
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ARRAYLENGTH
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ISTORE 5
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ICONST_0
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ISTORE 6
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ILOAD 6
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ILOAD 5
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 IF_ICMPGE L8 false true
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ALOAD 4
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ILOAD 6
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 AALOAD
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 ASTORE 7
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:502 IINC 6 1
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:503 ALOAD 2
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:503 INVOKEINTERFACE java/util/List.iterator()Ljava/util/Iterator;
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:503 ASTORE 8
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:506 ALOAD 8
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:506 INVOKEINTERFACE java/util/Iterator.hasNext()Z
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:506 IFEQ L6 false true
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:507 ALOAD 8
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:507 INVOKEINTERFACE java/util/Iterator.next()Ljava/lang/Object;
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:507 ASTORE 10
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:511 ALOAD 0
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:511 ALOAD 10
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:511 INVOKEVIRTUAL java/util/Locale.getLanguage()Ljava/lang/String;
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:511 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:512 ALOAD 7
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:512 ALOAD 10
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:512 INVOKEVIRTUAL java/util/Locale.getCountry()Ljava/lang/String;
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:512 INVOKEVIRTUAL java/lang/String.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:512 IFEQ L5 true true
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 LDC "de"
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 ICONST_4
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 ANEWARRAY java/lang/String
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 DUP
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 ICONST_0
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 LDC "DE"
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 AASTORE
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 DUP
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 ICONST_1
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 LDC "CH"
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 AASTORE
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 DUP
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 ICONST_2
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 LDC "AT"
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 AASTORE
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 DUP
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 ICONST_3
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 LDC "LU"
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 AASTORE
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 INVOKESTATIC org/apache/commons/lang3/LocaleUtilsTest.assertCountriesByLanguage(Ljava/lang/String;[Ljava/lang/String;)V
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:533 LDC "it"
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:533 ICONST_2
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:533 ANEWARRAY java/lang/String
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:533 DUP
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:533 ICONST_0
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:533 LDC "IT"
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:533 AASTORE
+org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:533 INVOKESTATIC org/apache/commons/lang3/LocaleUtilsTest.assertCountriesByLanguage(Ljava/lang/String;[Ljava/lang/String;)V
+
+Slice consists of 539 bytecode instructions.
+Computation took 6.88 seconds.

@@ -1,0 +1,32 @@
+ 0.0% done, time left: unknown                                0.7% done, time left: unknown  1.7% done, time left: unknown  1.8% done, time left: unknown  2.0% done, time left: unknown  3.2% done, time left: unknown  4.1% done, time left: unknown  5.1% done, time left: unknown  6.0% done, time left:   0:00:10    6.6% done, time left:   0:00:11  6.6% done, time left:   0:00:14  6.6% done, time left:   0:00:17  7.3% done, time left:   0:00:18  9.7% done, time left:   0:00:18 12.3% done, time left:   0:00:16 14.6% done, time left:   0:00:14 16.2% done, time left:   0:00:12 17.9% done, time left:   0:00:10 20.6% done, time left:   0:00:09 23.4% done, time left:   0:00:08 26.0% done, time left:   0:00:06 28.7% done, time left:   0:00:05 31.4% done, time left:   0:00:04 34.0% done, time left:   0:00:04 36.7% done, time left:   0:00:03 38.4% done, time left:   0:00:03 41.5% done, time left:   0:00:03 43.1% done, time left:   0:00:02 45.5% done, time left:   0:00:02 48.8% done, time left:   0:00:02 52.0% done, time left:   0:00:01 55.2% done, time left:   0:00:01 58.4% done, time left:   0:00:01 61.7% done, time left:   0:00:00 64.9% done, time left:   0:00:00 68.1% done, time left:   0:00:00 71.4% done, time left:   0:00:00 78.2% done, time left:   0:00:00 86.6% done, time left:   0:00:00 99.1% done, time left:   0:00:00 99.5% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.text.WordUtilsTest.testSwapCase_String:428:*]:
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.text.WordUtils.swapCase:578 ALOAD 0
+org.apache.commons.lang3.text.WordUtils.swapCase:578 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.text.WordUtils.swapCase:578 IFEQ L0 true false
+org.apache.commons.lang3.text.WordUtils.swapCase:581 ALOAD 0
+org.apache.commons.lang3.text.WordUtils.swapCase:581 INVOKEVIRTUAL java/lang/String.toCharArray()[C
+org.apache.commons.lang3.text.WordUtils.swapCase:581 ASTORE 1
+org.apache.commons.lang3.text.WordUtils.swapCase:585 ICONST_0
+org.apache.commons.lang3.text.WordUtils.swapCase:585 ISTORE 3
+org.apache.commons.lang3.text.WordUtils.swapCase:585 ILOAD 3
+org.apache.commons.lang3.text.WordUtils.swapCase:585 ALOAD 1
+org.apache.commons.lang3.text.WordUtils.swapCase:585 ARRAYLENGTH
+org.apache.commons.lang3.text.WordUtils.swapCase:585 IF_ICMPGE L7 true true
+org.apache.commons.lang3.text.WordUtils.swapCase:585 IINC 3 1
+org.apache.commons.lang3.text.WordUtils.swapCase:604 NEW java/lang/String
+org.apache.commons.lang3.text.WordUtils.swapCase:604 ARETURN
+org.apache.commons.lang3.text.WordUtilsTest.main:50 INVOKEVIRTUAL org/apache/commons/lang3/text/WordUtilsTest.testSwapCase_String()V
+org.apache.commons.lang3.text.WordUtilsTest.testSwapCase_String:428 LDC "i"
+org.apache.commons.lang3.text.WordUtilsTest.testSwapCase_String:428 LDC "I"
+org.apache.commons.lang3.text.WordUtilsTest.testSwapCase_String:428 INVOKESTATIC org/apache/commons/lang3/text/WordUtils.swapCase(Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.lang3.text.WordUtilsTest.testSwapCase_String:428 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 27 bytecode instructions.
+Computation took 4.42 seconds.

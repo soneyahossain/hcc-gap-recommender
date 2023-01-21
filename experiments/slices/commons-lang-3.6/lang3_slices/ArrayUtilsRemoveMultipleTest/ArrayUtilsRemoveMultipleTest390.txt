@@ -1,0 +1,30 @@
+ 0.0% done, time left: unknown                                0.9% done, time left: unknown  2.5% done, time left: unknown  5.0% done, time left: unknown  7.7% done, time left: unknown  8.8% done, time left: unknown 12.2% done, time left: unknown 15.6% done, time left:   0:00:02   15.6% done, time left:   0:00:03 21.4% done, time left:   0:00:02 23.4% done, time left:   0:00:01 25.9% done, time left:   0:00:02 29.8% done, time left:   0:00:02 32.5% done, time left:   0:00:02 32.5% done, time left:   0:00:01 38.2% done, time left:   0:00:01 41.7% done, time left:   0:00:01 44.5% done, time left:   0:00:01 49.4% done, time left:   0:00:01 51.0% done, time left:   0:00:00 57.1% done, time left:   0:00:00 63.0% done, time left:   0:00:00 64.9% done, time left:   0:00:00 67.9% done, time left:   0:00:00 72.5% done, time left:   0:00:00 72.6% done, time left:   0:00:00 73.6% done, time left:   0:00:00 74.9% done, time left:   0:00:00 76.3% done, time left:   0:00:00 77.2% done, time left:   0:00:00 79.6% done, time left:   0:00:00 82.0% done, time left:   0:00:00 82.1% done, time left:   0:00:00 84.5% done, time left:   0:00:00 86.8% done, time left:   0:00:00 89.0% done, time left:   0:00:00 91.5% done, time left:   0:00:00 93.2% done, time left:   0:00:00 97.0% done, time left:   0:00:00 98.9% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementFloatArray:1103:*]:
+org.apache.commons.lang3.ArrayUtils.clone:437 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.clone:437 IFNONNULL L0 false true
+org.apache.commons.lang3.ArrayUtils.clone:438 ACONST_NULL
+org.apache.commons.lang3.ArrayUtils.clone:438 ARETURN
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 false true
+org.apache.commons.lang3.ArrayUtils.getLength:1385 ICONST_0
+org.apache.commons.lang3.ArrayUtils.getLength:1385 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4923 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4923 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4923 IFNE L0 false true
+org.apache.commons.lang3.ArrayUtils.isEmpty:4923 ICONST_1
+org.apache.commons.lang3.ArrayUtils.isEmpty:4923 IRETURN
+org.apache.commons.lang3.ArrayUtils.removeElements:7177 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeElements:7177 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([F)Z
+org.apache.commons.lang3.ArrayUtils.removeElements:7177 IFNE L0 true false
+org.apache.commons.lang3.ArrayUtils.removeElements:7178 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeElements:7178 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.clone([F)[F
+org.apache.commons.lang3.ArrayUtils.removeElements:7178 ARETURN
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.main:61 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsRemoveMultipleTest.testRemoveElementFloatArray()V
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementFloatArray:1102 ACONST_NULL
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementFloatArray:1102 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.removeElements([F[F)[F
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementFloatArray:1102 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementFloatArray:1103 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementFloatArray:1103 INVOKESTATIC org/junit/Assert.assertNull(Ljava/lang/Object;)V
+
+Slice consists of 25 bytecode instructions.
+Computation took 5.79 seconds.

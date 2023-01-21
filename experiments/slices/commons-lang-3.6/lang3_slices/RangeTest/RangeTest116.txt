@@ -1,0 +1,77 @@
+ 0.0% done, time left: unknown                                2.0% done, time left: unknown  6.4% done, time left: unknown 13.2% done, time left: unknown 20.4% done, time left: unknown 22.7% done, time left: unknown 26.0% done, time left: unknown 33.6% done, time left: unknown 39.1% done, time left: unknown 41.6% done, time left:   0:00:02   48.4% done, time left:   0:00:00 48.6% done, time left:   0:00:00 48.7% done, time left:   0:00:00 49.7% done, time left:   0:00:00 52.5% done, time left:   0:00:01 54.6% done, time left:   0:00:01 54.6% done, time left:   0:00:00 55.4% done, time left:   0:00:00 61.9% done, time left:   0:00:00 69.1% done, time left:   0:00:00 78.7% done, time left:   0:00:00 91.1% done, time left:   0:00:00 94.0% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.RangeTest.testIsOverlappedBy:381:*]:
+org.apache.commons.lang3.Range.<init>:80 ALOAD 1
+org.apache.commons.lang3.Range.<init>:80 ALOAD 2
+org.apache.commons.lang3.Range.<init>:80 INVOKEINTERFACE java/util/Comparator.compare(Ljava/lang/Object;Ljava/lang/Object;)I
+org.apache.commons.lang3.Range.<init>:80 ICONST_1
+org.apache.commons.lang3.Range.<init>:80 IF_ICMPGE L4 false true
+org.apache.commons.lang3.Range.<init>:81 ALOAD 0
+org.apache.commons.lang3.Range.<init>:81 ALOAD 1
+org.apache.commons.lang3.Range.<init>:81 PUTFIELD org/apache/commons/lang3/Range.minimum Ljava/lang/Object;
+org.apache.commons.lang3.Range.<init>:82 ALOAD 0
+org.apache.commons.lang3.Range.<init>:82 ALOAD 2
+org.apache.commons.lang3.Range.<init>:82 PUTFIELD org/apache/commons/lang3/Range.maximum Ljava/lang/Object;
+org.apache.commons.lang3.Range.between:141 ALOAD 0
+org.apache.commons.lang3.Range.between:141 ALOAD 1
+org.apache.commons.lang3.Range.between:141 INVOKESTATIC org/apache/commons/lang3/Range.between(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Comparator;)Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.Range.between:141 ARETURN
+org.apache.commons.lang3.Range.between:162 NEW org/apache/commons/lang3/Range
+org.apache.commons.lang3.Range.between:162 DUP
+org.apache.commons.lang3.Range.between:162 ALOAD 0
+org.apache.commons.lang3.Range.between:162 ALOAD 1
+org.apache.commons.lang3.Range.between:162 INVOKESPECIAL org/apache/commons/lang3/Range.<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Comparator;)V
+org.apache.commons.lang3.Range.between:162 ARETURN
+org.apache.commons.lang3.Range.contains:220 ALOAD 1
+org.apache.commons.lang3.Range.contains:220 IFNONNULL L0 true false
+org.apache.commons.lang3.Range.contains:223 ALOAD 1
+org.apache.commons.lang3.Range.contains:223 ALOAD 0
+org.apache.commons.lang3.Range.contains:223 GETFIELD org/apache/commons/lang3/Range.minimum Ljava/lang/Object;
+org.apache.commons.lang3.Range.contains:223 INVOKEINTERFACE java/util/Comparator.compare(Ljava/lang/Object;Ljava/lang/Object;)I
+org.apache.commons.lang3.Range.contains:223 ICONST_M1
+org.apache.commons.lang3.Range.contains:223 IF_ICMPLE L1 false true
+org.apache.commons.lang3.Range.contains:223 ALOAD 1
+org.apache.commons.lang3.Range.contains:223 ALOAD 0
+org.apache.commons.lang3.Range.contains:223 GETFIELD org/apache/commons/lang3/Range.maximum Ljava/lang/Object;
+org.apache.commons.lang3.Range.contains:223 INVOKEINTERFACE java/util/Comparator.compare(Ljava/lang/Object;Ljava/lang/Object;)I
+org.apache.commons.lang3.Range.contains:223 ICONST_1
+org.apache.commons.lang3.Range.contains:223 IF_ICMPGE L1 false true
+org.apache.commons.lang3.Range.contains:223 ICONST_1
+org.apache.commons.lang3.Range.contains:223 IRETURN
+org.apache.commons.lang3.Range.isOverlappedBy:349 ALOAD 1
+org.apache.commons.lang3.Range.isOverlappedBy:349 IFNONNULL L0 true false
+org.apache.commons.lang3.Range.isOverlappedBy:352 ALOAD 1
+org.apache.commons.lang3.Range.isOverlappedBy:352 ALOAD 0
+org.apache.commons.lang3.Range.isOverlappedBy:352 GETFIELD org/apache/commons/lang3/Range.minimum Ljava/lang/Object;
+org.apache.commons.lang3.Range.isOverlappedBy:352 INVOKEVIRTUAL org/apache/commons/lang3/Range.contains(Ljava/lang/Object;)Z
+org.apache.commons.lang3.Range.isOverlappedBy:352 IFNE L1 true false
+org.apache.commons.lang3.Range.isOverlappedBy:352 ICONST_1
+org.apache.commons.lang3.Range.isOverlappedBy:352 IRETURN
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 ALOAD 1
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 ALOAD 2
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 INVOKEINTERFACE java/lang/Comparable.compareTo(Ljava/lang/Object;)I
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 IRETURN
+org.apache.commons.lang3.RangeTest.main:47 NEW org/apache/commons/lang3/RangeTest
+org.apache.commons.lang3.RangeTest.main:47 ASTORE 1
+org.apache.commons.lang3.RangeTest.main:84 ALOAD 1
+org.apache.commons.lang3.RangeTest.main:84 INVOKEVIRTUAL org/apache/commons/lang3/RangeTest.setUp()V
+org.apache.commons.lang3.RangeTest.main:85 ALOAD 1
+org.apache.commons.lang3.RangeTest.main:85 INVOKEVIRTUAL org/apache/commons/lang3/RangeTest.testIsOverlappedBy()V
+org.apache.commons.lang3.RangeTest.setUp:101 ALOAD 0
+org.apache.commons.lang3.RangeTest.setUp:101 BIPUSH 10
+org.apache.commons.lang3.RangeTest.setUp:101 INVOKESTATIC java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+org.apache.commons.lang3.RangeTest.setUp:101 BIPUSH 20
+org.apache.commons.lang3.RangeTest.setUp:101 INVOKESTATIC java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+org.apache.commons.lang3.RangeTest.setUp:101 INVOKESTATIC org/apache/commons/lang3/Range.between(Ljava/lang/Comparable;Ljava/lang/Comparable;)Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.setUp:101 PUTFIELD org/apache/commons/lang3/RangeTest.intRange Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.testIsOverlappedBy:381 ALOAD 0
+org.apache.commons.lang3.RangeTest.testIsOverlappedBy:381 GETFIELD org/apache/commons/lang3/RangeTest.intRange Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.testIsOverlappedBy:381 BIPUSH 9
+org.apache.commons.lang3.RangeTest.testIsOverlappedBy:381 INVOKESTATIC java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+org.apache.commons.lang3.RangeTest.testIsOverlappedBy:381 BIPUSH 14
+org.apache.commons.lang3.RangeTest.testIsOverlappedBy:381 INVOKESTATIC java/lang/Integer.valueOf(I)Ljava/lang/Integer;
+org.apache.commons.lang3.RangeTest.testIsOverlappedBy:381 INVOKESTATIC org/apache/commons/lang3/Range.between(Ljava/lang/Comparable;Ljava/lang/Comparable;)Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.testIsOverlappedBy:381 INVOKEVIRTUAL org/apache/commons/lang3/Range.isOverlappedBy(Lorg/apache/commons/lang3/Range;)Z
+org.apache.commons.lang3.RangeTest.testIsOverlappedBy:381 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 103 bytecode instructions.
+Computation took 2.80 seconds.

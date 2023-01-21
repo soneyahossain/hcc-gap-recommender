@@ -53,7 +53,7 @@ public class TestSuiteGenerator {
         //-----------end reading arguments-----------
 
         StringBuilder sb = new StringBuilder();
-        sb.append("project,0, 1, 2, 5, 7, 10, 15, 20, 25, 30, 45, 55, 65, 75, 100\n");
+        sb.append("assertion_enabled(%),0, 1, 2, 5, 7, 10, 15, 20, 25, 30, 45, 55, 65, 75, 100\n");
         int[] interval = {0, 1, 2, 5, 7, 10, 15, 20, 25, 30, 45, 55, 65, 75, 100};
 
         int total_stmt_in_project;
@@ -68,7 +68,7 @@ public class TestSuiteGenerator {
         } else Util.search(".*\\.txt", dir, all_slices);
         logger.info("total slices = total criteria = total assertions = " + all_slices.size());
 
-        sb.append(basename + "_gap,");
+        sb.append("coverage_gap(PP),");
         Set<String> all_executed_stmts = new HashSet<>();
         Set<String> all_missed_stmts = new HashSet<>();
         CloverHandler ch = new CloverHandler();

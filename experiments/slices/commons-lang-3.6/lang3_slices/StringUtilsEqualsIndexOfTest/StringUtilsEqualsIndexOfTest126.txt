@@ -1,0 +1,36 @@
+ 0.0% done, time left: unknown                                0.9% done, time left: unknown  1.9% done, time left: unknown  3.9% done, time left: unknown  9.6% done, time left: unknown 15.5% done, time left: unknown 23.1% done, time left: unknown 28.4% done, time left: unknown 28.7% done, time left:   0:00:24   28.7% done, time left:   0:00:37 28.7% done, time left:   0:00:49 28.8% done, time left:   0:00:53 33.5% done, time left:   0:00:19 37.0% done, time left:   0:00:09 44.2% done, time left:   0:00:00 53.0% done, time left:   0:00:00 61.4% done, time left:   0:00:00 67.2% done, time left:   0:00:00 74.2% done, time left:   0:00:00 80.2% done, time left:   0:00:00 83.6% done, time left:   0:00:00 91.0% done, time left:   0:00:00 95.8% done, time left:   0:00:00 100.1% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testIndexOf_char:342:*]:
+org.apache.commons.lang3.CharSequenceUtils.indexOf:100 ALOAD 0
+org.apache.commons.lang3.CharSequenceUtils.indexOf:100 INSTANCEOF java/lang/String
+org.apache.commons.lang3.CharSequenceUtils.indexOf:100 IFEQ L0 false true
+org.apache.commons.lang3.CharSequenceUtils.indexOf:101 ALOAD 0
+org.apache.commons.lang3.CharSequenceUtils.indexOf:101 ILOAD 1
+org.apache.commons.lang3.CharSequenceUtils.indexOf:101 ILOAD 2
+org.apache.commons.lang3.CharSequenceUtils.indexOf:101 INVOKEVIRTUAL java/lang/String.indexOf(II)I
+org.apache.commons.lang3.CharSequenceUtils.indexOf:101 IRETURN
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.StringUtils.indexOf:1321 ALOAD 0
+org.apache.commons.lang3.StringUtils.indexOf:1321 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.indexOf:1321 IFEQ L0 true false
+org.apache.commons.lang3.StringUtils.indexOf:1324 ALOAD 0
+org.apache.commons.lang3.StringUtils.indexOf:1324 ILOAD 1
+org.apache.commons.lang3.StringUtils.indexOf:1324 ICONST_0
+org.apache.commons.lang3.StringUtils.indexOf:1324 INVOKESTATIC org/apache/commons/lang3/CharSequenceUtils.indexOf(Ljava/lang/CharSequence;II)I
+org.apache.commons.lang3.StringUtils.indexOf:1324 IRETURN
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.main:115 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.testIndexOf_char()V
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testIndexOf_char:341 LCONST_0
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testIndexOf_char:342 LDC 2
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testIndexOf_char:342 LDC "aabaabaa"
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testIndexOf_char:342 BIPUSH 98
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testIndexOf_char:342 INVOKESTATIC org/apache/commons/lang3/StringUtils.indexOf(Ljava/lang/CharSequence;I)I
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testIndexOf_char:342 I2L
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testIndexOf_char:342 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 31 bytecode instructions.
+Computation took 2.71 seconds.

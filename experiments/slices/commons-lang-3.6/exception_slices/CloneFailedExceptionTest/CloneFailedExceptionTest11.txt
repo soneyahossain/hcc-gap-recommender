@@ -1,0 +1,27 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:82:*]:
+org.apache.commons.lang3.exception.AbstractExceptionTest.generateCause:32 NEW java/lang/Exception
+org.apache.commons.lang3.exception.AbstractExceptionTest.generateCause:32 DUP
+org.apache.commons.lang3.exception.AbstractExceptionTest.generateCause:32 LDC "Cause message"
+org.apache.commons.lang3.exception.AbstractExceptionTest.generateCause:32 INVOKESPECIAL java/lang/Exception.<init>(Ljava/lang/String;)V
+org.apache.commons.lang3.exception.AbstractExceptionTest.generateCause:32 ARETURN
+org.apache.commons.lang3.exception.CloneFailedException.<init>:49 ALOAD 0
+org.apache.commons.lang3.exception.CloneFailedException.<init>:49 ALOAD 1
+org.apache.commons.lang3.exception.CloneFailedException.<init>:49 INVOKESPECIAL java/lang/RuntimeException.<init>(Ljava/lang/Throwable;)V
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.main:34 INVOKEVIRTUAL org/apache/commons/lang3/exception/CloneFailedExceptionTest.testWithoutMessage()V
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:76 NEW org/apache/commons/lang3/exception/CloneFailedException
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:76 DUP
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:76 INVOKEVIRTUAL org/apache/commons/lang3/exception/CloneFailedExceptionTest.generateCause()Ljava/lang/Exception;
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:76 INVOKESPECIAL org/apache/commons/lang3/exception/CloneFailedException.<init>(Ljava/lang/Throwable;)V
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:76 ASTORE 1
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:80 ALOAD 1
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:80 INVOKEVIRTUAL java/lang/Exception.getCause()Ljava/lang/Throwable;
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:80 ASTORE 2
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:82 LDC "Wrong cause message"
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:82 LDC "Cause message"
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:82 ALOAD 2
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:82 INVOKEVIRTUAL java/lang/Throwable.getMessage()Ljava/lang/String;
+org.apache.commons.lang3.exception.CloneFailedExceptionTest.testWithoutMessage:82 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 47 bytecode instructions.
+Computation took 0.55 seconds.

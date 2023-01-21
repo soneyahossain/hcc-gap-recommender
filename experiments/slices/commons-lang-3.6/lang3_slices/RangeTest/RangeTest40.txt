@@ -1,0 +1,88 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  2.3% done, time left: unknown  7.1% done, time left: unknown 14.2% done, time left: unknown 21.1% done, time left: unknown 24.8% done, time left: unknown 32.6% done, time left: unknown 38.1% done, time left: unknown 40.8% done, time left: unknown 47.1% done, time left:   0:00:00   48.6% done, time left:   0:00:00 49.0% done, time left:   0:00:01 50.4% done, time left:   0:00:01 50.5% done, time left:   0:00:01 50.9% done, time left:   0:00:01 54.6% done, time left:   0:00:01 54.6% done, time left:   0:00:00 57.5% done, time left:   0:00:01 63.9% done, time left:   0:00:00 69.3% done, time left:   0:00:00 80.8% done, time left:   0:00:00 88.1% done, time left:   0:00:00 94.0% done, time left:   0:00:00 95.0% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.RangeTest.testHashCode:205:*]:
+org.apache.commons.lang3.Range.<init>:80 ALOAD 1
+org.apache.commons.lang3.Range.<init>:80 ALOAD 2
+org.apache.commons.lang3.Range.<init>:80 INVOKEINTERFACE java/util/Comparator.compare(Ljava/lang/Object;Ljava/lang/Object;)I
+org.apache.commons.lang3.Range.<init>:80 ICONST_1
+org.apache.commons.lang3.Range.<init>:80 IF_ICMPGE L4 false true
+org.apache.commons.lang3.Range.<init>:81 ALOAD 0
+org.apache.commons.lang3.Range.<init>:81 ALOAD 1
+org.apache.commons.lang3.Range.<init>:81 PUTFIELD org/apache/commons/lang3/Range.minimum Ljava/lang/Object;
+org.apache.commons.lang3.Range.<init>:82 ALOAD 0
+org.apache.commons.lang3.Range.<init>:82 ALOAD 2
+org.apache.commons.lang3.Range.<init>:82 PUTFIELD org/apache/commons/lang3/Range.maximum Ljava/lang/Object;
+org.apache.commons.lang3.Range.between:141 ALOAD 0
+org.apache.commons.lang3.Range.between:141 ALOAD 1
+org.apache.commons.lang3.Range.between:141 INVOKESTATIC org/apache/commons/lang3/Range.between(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Comparator;)Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.Range.between:141 ARETURN
+org.apache.commons.lang3.Range.between:162 NEW org/apache/commons/lang3/Range
+org.apache.commons.lang3.Range.between:162 DUP
+org.apache.commons.lang3.Range.between:162 ALOAD 0
+org.apache.commons.lang3.Range.between:162 ALOAD 1
+org.apache.commons.lang3.Range.between:162 INVOKESPECIAL org/apache/commons/lang3/Range.<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Comparator;)V
+org.apache.commons.lang3.Range.between:162 ARETURN
+org.apache.commons.lang3.Range.hashCode:428 ALOAD 0
+org.apache.commons.lang3.Range.hashCode:428 GETFIELD org/apache/commons/lang3/Range.hashCode I
+org.apache.commons.lang3.Range.hashCode:428 IFNE L0 false true
+org.apache.commons.lang3.Range.hashCode:429 BIPUSH 17
+org.apache.commons.lang3.Range.hashCode:429 ISTORE 1
+org.apache.commons.lang3.Range.hashCode:430 BIPUSH 37
+org.apache.commons.lang3.Range.hashCode:430 ILOAD 1
+org.apache.commons.lang3.Range.hashCode:430 IMUL
+org.apache.commons.lang3.Range.hashCode:430 ALOAD 0
+org.apache.commons.lang3.Range.hashCode:430 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.Range.hashCode:430 INVOKEVIRTUAL java/lang/Object.hashCode()I
+org.apache.commons.lang3.Range.hashCode:430 IADD
+org.apache.commons.lang3.Range.hashCode:430 ISTORE 1
+org.apache.commons.lang3.Range.hashCode:431 BIPUSH 37
+org.apache.commons.lang3.Range.hashCode:431 ILOAD 1
+org.apache.commons.lang3.Range.hashCode:431 IMUL
+org.apache.commons.lang3.Range.hashCode:431 ALOAD 0
+org.apache.commons.lang3.Range.hashCode:431 GETFIELD org/apache/commons/lang3/Range.minimum Ljava/lang/Object;
+org.apache.commons.lang3.Range.hashCode:431 IADD
+org.apache.commons.lang3.Range.hashCode:431 ISTORE 1
+org.apache.commons.lang3.Range.hashCode:432 BIPUSH 37
+org.apache.commons.lang3.Range.hashCode:432 ILOAD 1
+org.apache.commons.lang3.Range.hashCode:432 IMUL
+org.apache.commons.lang3.Range.hashCode:432 ALOAD 0
+org.apache.commons.lang3.Range.hashCode:432 GETFIELD org/apache/commons/lang3/Range.maximum Ljava/lang/Object;
+org.apache.commons.lang3.Range.hashCode:432 IADD
+org.apache.commons.lang3.Range.hashCode:432 ISTORE 1
+org.apache.commons.lang3.Range.hashCode:435 ILOAD 1
+org.apache.commons.lang3.Range.hashCode:435 IRETURN
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 ALOAD 1
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 ALOAD 2
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 INVOKEINTERFACE java/lang/Comparable.compareTo(Ljava/lang/Object;)I
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 IRETURN
+org.apache.commons.lang3.RangeTest.main:47 NEW org/apache/commons/lang3/RangeTest
+org.apache.commons.lang3.RangeTest.main:47 ASTORE 1
+org.apache.commons.lang3.RangeTest.main:58 ALOAD 1
+org.apache.commons.lang3.RangeTest.main:58 INVOKEVIRTUAL org/apache/commons/lang3/RangeTest.setUp()V
+org.apache.commons.lang3.RangeTest.main:59 ALOAD 1
+org.apache.commons.lang3.RangeTest.main:59 INVOKEVIRTUAL org/apache/commons/lang3/RangeTest.testHashCode()V
+org.apache.commons.lang3.RangeTest.setUp:97 ALOAD 0
+org.apache.commons.lang3.RangeTest.setUp:97 ICONST_0
+org.apache.commons.lang3.RangeTest.setUp:97 INVOKESTATIC java/lang/Byte.valueOf(B)Ljava/lang/Byte;
+org.apache.commons.lang3.RangeTest.setUp:97 ICONST_5
+org.apache.commons.lang3.RangeTest.setUp:97 INVOKESTATIC java/lang/Byte.valueOf(B)Ljava/lang/Byte;
+org.apache.commons.lang3.RangeTest.setUp:97 INVOKESTATIC org/apache/commons/lang3/Range.between(Ljava/lang/Comparable;Ljava/lang/Comparable;)Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.setUp:97 PUTFIELD org/apache/commons/lang3/RangeTest.byteRange Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.setUp:98 ALOAD 0
+org.apache.commons.lang3.RangeTest.setUp:98 ICONST_0
+org.apache.commons.lang3.RangeTest.setUp:98 INVOKESTATIC java/lang/Byte.valueOf(B)Ljava/lang/Byte;
+org.apache.commons.lang3.RangeTest.setUp:98 ICONST_5
+org.apache.commons.lang3.RangeTest.setUp:98 INVOKESTATIC java/lang/Byte.valueOf(B)Ljava/lang/Byte;
+org.apache.commons.lang3.RangeTest.setUp:98 INVOKESTATIC org/apache/commons/lang3/Range.between(Ljava/lang/Comparable;Ljava/lang/Comparable;)Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.setUp:98 PUTFIELD org/apache/commons/lang3/RangeTest.byteRange2 Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.testHashCode:205 ALOAD 0
+org.apache.commons.lang3.RangeTest.testHashCode:205 GETFIELD org/apache/commons/lang3/RangeTest.byteRange Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.testHashCode:205 INVOKEVIRTUAL org/apache/commons/lang3/Range.hashCode()I
+org.apache.commons.lang3.RangeTest.testHashCode:205 I2L
+org.apache.commons.lang3.RangeTest.testHashCode:205 ALOAD 0
+org.apache.commons.lang3.RangeTest.testHashCode:205 GETFIELD org/apache/commons/lang3/RangeTest.byteRange2 Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.testHashCode:205 INVOKEVIRTUAL org/apache/commons/lang3/Range.hashCode()I
+org.apache.commons.lang3.RangeTest.testHashCode:205 I2L
+org.apache.commons.lang3.RangeTest.testHashCode:205 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 103 bytecode instructions.
+Computation took 2.85 seconds.

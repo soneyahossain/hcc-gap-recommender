@@ -1,0 +1,42 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.RandomUtilsTest.testNextLongRandomResult:250:*]:
+org.apache.commons.lang3.RandomUtils.nextLong:136 LLOAD 0
+org.apache.commons.lang3.RandomUtils.nextLong:136 LLOAD 2
+org.apache.commons.lang3.RandomUtils.nextLong:136 LCMP
+org.apache.commons.lang3.RandomUtils.nextLong:136 IFNE L4 true false
+org.apache.commons.lang3.RandomUtils.nextLong:140 LLOAD 0
+org.apache.commons.lang3.RandomUtils.nextLong:140 L2D
+org.apache.commons.lang3.RandomUtils.nextLong:140 LLOAD 2
+org.apache.commons.lang3.RandomUtils.nextLong:140 L2D
+org.apache.commons.lang3.RandomUtils.nextLong:140 INVOKESTATIC org/apache/commons/lang3/RandomUtils.nextDouble(DD)D
+org.apache.commons.lang3.RandomUtils.nextLong:140 D2L
+org.apache.commons.lang3.RandomUtils.nextLong:140 LRETURN
+org.apache.commons.lang3.RandomUtils.nextLong:151 LCONST_0
+org.apache.commons.lang3.RandomUtils.nextLong:151 LDC 9223372036854775807
+org.apache.commons.lang3.RandomUtils.nextLong:151 INVOKESTATIC org/apache/commons/lang3/RandomUtils.nextLong(JJ)J
+org.apache.commons.lang3.RandomUtils.nextLong:151 LRETURN
+org.apache.commons.lang3.RandomUtils.nextDouble:173 DLOAD 0
+org.apache.commons.lang3.RandomUtils.nextDouble:173 DLOAD 2
+org.apache.commons.lang3.RandomUtils.nextDouble:173 DCMPL
+org.apache.commons.lang3.RandomUtils.nextDouble:173 IFNE L4 true false
+org.apache.commons.lang3.RandomUtils.nextDouble:177 DLOAD 0
+org.apache.commons.lang3.RandomUtils.nextDouble:177 DLOAD 2
+org.apache.commons.lang3.RandomUtils.nextDouble:177 DLOAD 0
+org.apache.commons.lang3.RandomUtils.nextDouble:177 DSUB
+org.apache.commons.lang3.RandomUtils.nextDouble:177 GETSTATIC org/apache/commons/lang3/RandomUtils.RANDOM Ljava/util/Random;
+org.apache.commons.lang3.RandomUtils.nextDouble:177 INVOKEVIRTUAL java/util/Random.nextDouble()D
+org.apache.commons.lang3.RandomUtils.nextDouble:177 DMUL
+org.apache.commons.lang3.RandomUtils.nextDouble:177 DADD
+org.apache.commons.lang3.RandomUtils.nextDouble:177 DRETURN
+org.apache.commons.lang3.RandomUtilsTest.main:57 INVOKEVIRTUAL org/apache/commons/lang3/RandomUtilsTest.testNextLongRandomResult()V
+org.apache.commons.lang3.RandomUtilsTest.testNextLongRandomResult:249 INVOKESTATIC org/apache/commons/lang3/RandomUtils.nextLong()J
+org.apache.commons.lang3.RandomUtilsTest.testNextLongRandomResult:249 LSTORE 1
+org.apache.commons.lang3.RandomUtilsTest.testNextLongRandomResult:250 LLOAD 1
+org.apache.commons.lang3.RandomUtilsTest.testNextLongRandomResult:250 LCONST_0
+org.apache.commons.lang3.RandomUtilsTest.testNextLongRandomResult:250 LCMP
+org.apache.commons.lang3.RandomUtilsTest.testNextLongRandomResult:250 IFLE L0 false true
+org.apache.commons.lang3.RandomUtilsTest.testNextLongRandomResult:250 ICONST_1
+org.apache.commons.lang3.RandomUtilsTest.testNextLongRandomResult:250 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 88 bytecode instructions.
+Computation took 0.61 seconds.

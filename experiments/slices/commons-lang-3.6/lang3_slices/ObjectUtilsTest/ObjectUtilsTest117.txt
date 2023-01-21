@@ -1,0 +1,43 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  2.8% done, time left: unknown  4.6% done, time left: unknown  7.4% done, time left: unknown 12.1% done, time left: unknown 14.5% done, time left: unknown 19.3% done, time left: unknown 27.7% done, time left: unknown 30.4% done, time left:   0:00:02   30.4% done, time left:   0:00:03 30.4% done, time left:   0:00:05 30.4% done, time left:   0:00:06 30.4% done, time left:   0:00:07 30.4% done, time left:   0:00:09 31.6% done, time left:   0:00:10 31.6% done, time left:   0:00:11 31.7% done, time left:   0:00:11 31.7% done, time left:   0:00:12 33.3% done, time left:   0:00:14 36.2% done, time left:   0:00:11 42.2% done, time left:   0:00:00 46.5% done, time left:   0:00:01 48.2% done, time left:   0:00:00 48.7% done, time left:   0:00:00 51.5% done, time left:   0:00:01 55.6% done, time left:   0:00:01 59.6% done, time left:   0:00:00 68.6% done, time left:   0:00:00 76.5% done, time left:   0:00:00 79.7% done, time left:   0:00:00 86.3% done, time left:   0:00:00 94.8% done, time left:   0:00:00 102.7% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513:*]:
+org.apache.commons.lang3.ObjectUtils.clone:671 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.clone:671 INSTANCEOF java/lang/Cloneable
+org.apache.commons.lang3.ObjectUtils.clone:671 IFEQ L9 false true
+org.apache.commons.lang3.ObjectUtils.clone:673 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.clone:673 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.ObjectUtils.clone:673 INVOKEVIRTUAL java/lang/Class.isArray()Z
+org.apache.commons.lang3.ObjectUtils.clone:673 IFEQ L3 false true
+org.apache.commons.lang3.ObjectUtils.clone:674 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.clone:674 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.ObjectUtils.clone:674 INVOKEVIRTUAL java/lang/Class.getComponentType()Ljava/lang/Class;
+org.apache.commons.lang3.ObjectUtils.clone:674 ASTORE 2
+org.apache.commons.lang3.ObjectUtils.clone:675 ALOAD 2
+org.apache.commons.lang3.ObjectUtils.clone:675 INVOKEVIRTUAL java/lang/Class.isPrimitive()Z
+org.apache.commons.lang3.ObjectUtils.clone:675 IFNE L0 false true
+org.apache.commons.lang3.ObjectUtils.clone:676 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.clone:676 INVOKEVIRTUAL [Ljava/lang/Object;.clone()Ljava/lang/Object;
+org.apache.commons.lang3.ObjectUtils.clone:676 ASTORE 1
+org.apache.commons.lang3.ObjectUtils.clone:701 ALOAD 1
+org.apache.commons.lang3.ObjectUtils.clone:701 ASTORE 2
+org.apache.commons.lang3.ObjectUtils.clone:702 ALOAD 2
+org.apache.commons.lang3.ObjectUtils.clone:702 ARETURN
+org.apache.commons.lang3.ObjectUtilsTest.main:79 INVOKEVIRTUAL org/apache/commons/lang3/ObjectUtilsTest.testCloneOfStringArray()V
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 ICONST_1
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 ANEWARRAY java/lang/String
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 DUP
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 ICONST_0
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 LDC "string"
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 AASTORE
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 ICONST_1
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 ANEWARRAY java/lang/String
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 DUP
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 ICONST_0
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 LDC "string"
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 AASTORE
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 INVOKESTATIC org/apache/commons/lang3/ObjectUtils.clone(Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 CHECKCAST [Ljava/lang/Object;
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 INVOKESTATIC java/util/Arrays.deepEquals([Ljava/lang/Object;[Ljava/lang/Object;)Z
+org.apache.commons.lang3.ObjectUtilsTest.testCloneOfStringArray:513 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 38 bytecode instructions.
+Computation took 4.14 seconds.

@@ -1,0 +1,23 @@
+ 0.0% done, time left: unknown                                0.3% done, time left: unknown  0.4% done, time left: unknown  2.3% done, time left: unknown  5.7% done, time left: unknown 10.6% done, time left: unknown 13.4% done, time left: unknown 15.3% done, time left: unknown 15.6% done, time left: unknown 16.7% done, time left:   0:00:07   17.3% done, time left:   0:00:08 17.3% done, time left:   0:00:10 17.3% done, time left:   0:00:12 19.5% done, time left:   0:00:13 22.5% done, time left:   0:00:11 26.3% done, time left:   0:00:07 30.3% done, time left:   0:00:04 34.2% done, time left:   0:00:03 38.4% done, time left:   0:00:02 42.7% done, time left:   0:00:01 50.1% done, time left:   0:00:00 57.9% done, time left:   0:00:00 65.3% done, time left:   0:00:00 69.0% done, time left:   0:00:00 72.9% done, time left:   0:00:00 76.3% done, time left:   0:00:00 82.9% done, time left:   0:00:00 91.8% done, time left:   0:00:00 93.0% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsTrimStripTest.testStripAccents:238:*]:
+org.apache.commons.lang3.StringUtils.stripAccents:948 ALOAD 0
+org.apache.commons.lang3.StringUtils.stripAccents:948 IFNONNULL L0 true false
+org.apache.commons.lang3.StringUtils.stripAccents:951 LDC "\p{InCombiningDiacriticalMarks}+"
+org.apache.commons.lang3.StringUtils.stripAccents:951 INVOKESTATIC java/util/regex/Pattern.compile(Ljava/lang/String;)Ljava/util/regex/Pattern;
+org.apache.commons.lang3.StringUtils.stripAccents:951 ASTORE 1
+org.apache.commons.lang3.StringUtils.stripAccents:952 NEW java/lang/StringBuilder
+org.apache.commons.lang3.StringUtils.stripAccents:952 ASTORE 2
+org.apache.commons.lang3.StringUtils.stripAccents:955 ALOAD 1
+org.apache.commons.lang3.StringUtils.stripAccents:955 ALOAD 2
+org.apache.commons.lang3.StringUtils.stripAccents:955 INVOKEVIRTUAL java/util/regex/Pattern.matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+org.apache.commons.lang3.StringUtils.stripAccents:955 INVOKEVIRTUAL java/util/regex/Matcher.replaceAll(Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.lang3.StringUtils.stripAccents:955 ARETURN
+org.apache.commons.lang3.StringUtilsTrimStripTest.main:43 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsTrimStripTest.testStripAccents()V
+org.apache.commons.lang3.StringUtilsTrimStripTest.testStripAccents:238 LDC "Failed to strip accents from Çúê"
+org.apache.commons.lang3.StringUtilsTrimStripTest.testStripAccents:238 LDC "Cue"
+org.apache.commons.lang3.StringUtilsTrimStripTest.testStripAccents:238 LDC "Çúê"
+org.apache.commons.lang3.StringUtilsTrimStripTest.testStripAccents:238 INVOKESTATIC org/apache/commons/lang3/StringUtils.stripAccents(Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.lang3.StringUtilsTrimStripTest.testStripAccents:238 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 744 bytecode instructions.
+Computation took 3.12 seconds.

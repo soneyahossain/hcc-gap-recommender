@@ -1,0 +1,28 @@
+ 0.0% done, time left: unknown                                0.4% done, time left: unknown  0.6% done, time left: unknown  1.0% done, time left: unknown  1.7% done, time left: unknown  2.4% done, time left: unknown  3.6% done, time left: unknown  5.5% done, time left: unknown  7.5% done, time left:   0:00:04    8.6% done, time left:   0:00:05 10.1% done, time left:   0:00:05 10.2% done, time left:   0:00:06 11.2% done, time left:   0:00:06 14.0% done, time left:   0:00:07 16.8% done, time left:   0:00:07 19.6% done, time left:   0:00:06 23.1% done, time left:   0:00:05 26.7% done, time left:   0:00:04 30.3% done, time left:   0:00:03 33.7% done, time left:   0:00:03 37.1% done, time left:   0:00:02 40.5% done, time left:   0:00:02 43.6% done, time left:   0:00:02 46.6% done, time left:   0:00:01 47.5% done, time left:   0:00:01 48.8% done, time left:   0:00:01 51.6% done, time left:   0:00:01 55.0% done, time left:   0:00:01 58.1% done, time left:   0:00:01 61.7% done, time left:   0:00:00 64.9% done, time left:   0:00:00 68.3% done, time left:   0:00:00 71.8% done, time left:   0:00:00 75.5% done, time left:   0:00:00 79.5% done, time left:   0:00:00 83.0% done, time left:   0:00:00 86.5% done, time left:   0:00:00 89.5% done, time left:   0:00:00 93.3% done, time left:   0:00:00 95.3% done, time left:   0:00:00 96.2% done, time left:   0:00:00 97.7% done, time left:   0:00:00 99.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ValidateTest.testNotNaN1:910:*]:
+org.apache.commons.lang3.Validate.notNaN:901 DLOAD 0
+org.apache.commons.lang3.Validate.notNaN:901 LDC "The validated value is not a number"
+org.apache.commons.lang3.Validate.notNaN:901 ICONST_0
+org.apache.commons.lang3.Validate.notNaN:901 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.Validate.notNaN:901 INVOKESTATIC org/apache/commons/lang3/Validate.notNaN(DLjava/lang/String;[Ljava/lang/Object;)V
+org.apache.commons.lang3.Validate.notNaN:919 DLOAD 0
+org.apache.commons.lang3.Validate.notNaN:919 INVOKESTATIC java/lang/Double.isNaN(D)Z
+org.apache.commons.lang3.Validate.notNaN:919 IFEQ L0 false true
+org.apache.commons.lang3.Validate.notNaN:920 NEW java/lang/IllegalArgumentException
+org.apache.commons.lang3.Validate.notNaN:920 DUP
+org.apache.commons.lang3.Validate.notNaN:920 ALOAD 2
+org.apache.commons.lang3.Validate.notNaN:920 ALOAD 3
+org.apache.commons.lang3.Validate.notNaN:920 INVOKESTATIC java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+org.apache.commons.lang3.Validate.notNaN:920 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.apache.commons.lang3.Validate.notNaN:920 ATHROW
+org.apache.commons.lang3.ValidateTest.main:92 INVOKEVIRTUAL org/apache/commons/lang3/ValidateTest.testNotNaN1()V
+org.apache.commons.lang3.ValidateTest.testNotNaN1:907 LDC NaN
+org.apache.commons.lang3.ValidateTest.testNotNaN1:907 INVOKESTATIC org/apache/commons/lang3/Validate.notNaN(D)V
+org.apache.commons.lang3.ValidateTest.testNotNaN1:909 ASTORE 1
+org.apache.commons.lang3.ValidateTest.testNotNaN1:910 LDC "The validated value is not a number"
+org.apache.commons.lang3.ValidateTest.testNotNaN1:910 ALOAD 1
+org.apache.commons.lang3.ValidateTest.testNotNaN1:910 INVOKEVIRTUAL java/lang/IllegalArgumentException.getMessage()Ljava/lang/String;
+org.apache.commons.lang3.ValidateTest.testNotNaN1:910 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 53 bytecode instructions.
+Computation took 4.84 seconds.

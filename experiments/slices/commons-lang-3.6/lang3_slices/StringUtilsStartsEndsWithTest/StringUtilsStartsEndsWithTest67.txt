@@ -1,0 +1,54 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:165:*]:
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:264 ALOAD 0
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:264 INSTANCEOF java/lang/String
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:264 IFEQ L0 false true
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:264 ALOAD 3
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:264 INSTANCEOF java/lang/String
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:264 IFEQ L0 false true
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:265 ALOAD 0
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:265 ILOAD 1
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:265 ILOAD 2
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:265 ALOAD 3
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:265 ILOAD 4
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:265 ILOAD 5
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:265 INVOKEVIRTUAL java/lang/String.regionMatches(ZILjava/lang/String;II)Z
+org.apache.commons.lang3.CharSequenceUtils.regionMatches:265 IRETURN
+org.apache.commons.lang3.StringUtils.endsWithIgnoreCase:8620 ALOAD 0
+org.apache.commons.lang3.StringUtils.endsWithIgnoreCase:8620 ALOAD 1
+org.apache.commons.lang3.StringUtils.endsWithIgnoreCase:8620 ICONST_1
+org.apache.commons.lang3.StringUtils.endsWithIgnoreCase:8620 INVOKESTATIC org/apache/commons/lang3/StringUtils.endsWith(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Z)Z
+org.apache.commons.lang3.StringUtils.endsWithIgnoreCase:8620 IRETURN
+org.apache.commons.lang3.StringUtils.endsWith:8635 ALOAD 0
+org.apache.commons.lang3.StringUtils.endsWith:8635 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.endsWith:8635 ALOAD 1
+org.apache.commons.lang3.StringUtils.endsWith:8635 IFNONNULL L3 true false
+org.apache.commons.lang3.StringUtils.endsWith:8638 ALOAD 1
+org.apache.commons.lang3.StringUtils.endsWith:8638 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.endsWith:8638 ALOAD 0
+org.apache.commons.lang3.StringUtils.endsWith:8638 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.endsWith:8638 IF_ICMPLE L4 true false
+org.apache.commons.lang3.StringUtils.endsWith:8641 ALOAD 0
+org.apache.commons.lang3.StringUtils.endsWith:8641 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.endsWith:8641 ALOAD 1
+org.apache.commons.lang3.StringUtils.endsWith:8641 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.endsWith:8641 ISUB
+org.apache.commons.lang3.StringUtils.endsWith:8641 ISTORE 3
+org.apache.commons.lang3.StringUtils.endsWith:8642 ALOAD 0
+org.apache.commons.lang3.StringUtils.endsWith:8642 ILOAD 2
+org.apache.commons.lang3.StringUtils.endsWith:8642 ILOAD 3
+org.apache.commons.lang3.StringUtils.endsWith:8642 ALOAD 1
+org.apache.commons.lang3.StringUtils.endsWith:8642 ICONST_0
+org.apache.commons.lang3.StringUtils.endsWith:8642 ALOAD 1
+org.apache.commons.lang3.StringUtils.endsWith:8642 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.endsWith:8642 INVOKESTATIC org/apache/commons/lang3/CharSequenceUtils.regionMatches(Ljava/lang/CharSequence;ZILjava/lang/CharSequence;II)Z
+org.apache.commons.lang3.StringUtils.endsWith:8642 IRETURN
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.main:49 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase()V
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:165 LDC "endsWithIgnoreCase(foobar, bar)"
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:165 LDC "foobar"
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:165 LDC "bar"
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:165 INVOKESTATIC org/apache/commons/lang3/StringUtils.endsWithIgnoreCase(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:165 INVOKESTATIC org/junit/Assert.assertTrue(Ljava/lang/String;Z)V
+
+Slice consists of 49 bytecode instructions.
+Computation took 1.01 seconds.

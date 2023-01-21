@@ -1,0 +1,29 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsContainsTest.testContainsIgnoreCase_StringString:324:*]:
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2007 ALOAD 0
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2007 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2007 ALOAD 1
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2007 IFNONNULL L1 true false
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2010 ALOAD 1
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2010 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2010 ISTORE 2
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2011 ALOAD 0
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2011 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2011 ILOAD 2
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2011 ISUB
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2011 ISTORE 3
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2012 ICONST_0
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2012 ISTORE 4
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2012 ILOAD 4
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2012 ILOAD 3
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2012 IF_ICMPGT L4 true false
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2017 ICONST_0
+org.apache.commons.lang3.StringUtils.containsIgnoreCase:2017 IRETURN
+org.apache.commons.lang3.StringUtilsContainsTest.main:53 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsContainsTest.testContainsIgnoreCase_StringString()V
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsIgnoreCase_StringString:324 LDC "a"
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsIgnoreCase_StringString:324 LDC "ABC"
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsIgnoreCase_StringString:324 INVOKESTATIC org/apache/commons/lang3/StringUtils.containsIgnoreCase(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsIgnoreCase_StringString:324 INVOKESTATIC org/junit/Assert.assertFalse(Z)V
+
+Slice consists of 24 bytecode instructions.
+Computation took 1.35 seconds.

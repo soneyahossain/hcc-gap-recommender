@@ -1,0 +1,27 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.RandomUtilsTest.testNextIntRandomResult:169:*]:
+org.apache.commons.lang3.RandomUtils.nextInt:99 ILOAD 0
+org.apache.commons.lang3.RandomUtils.nextInt:99 ILOAD 1
+org.apache.commons.lang3.RandomUtils.nextInt:99 IF_ICMPNE L4 true false
+org.apache.commons.lang3.RandomUtils.nextInt:103 ILOAD 0
+org.apache.commons.lang3.RandomUtils.nextInt:103 GETSTATIC org/apache/commons/lang3/RandomUtils.RANDOM Ljava/util/Random;
+org.apache.commons.lang3.RandomUtils.nextInt:103 ILOAD 1
+org.apache.commons.lang3.RandomUtils.nextInt:103 ILOAD 0
+org.apache.commons.lang3.RandomUtils.nextInt:103 ISUB
+org.apache.commons.lang3.RandomUtils.nextInt:103 INVOKEVIRTUAL java/util/Random.nextInt(I)I
+org.apache.commons.lang3.RandomUtils.nextInt:103 IADD
+org.apache.commons.lang3.RandomUtils.nextInt:103 IRETURN
+org.apache.commons.lang3.RandomUtils.nextInt:114 ICONST_0
+org.apache.commons.lang3.RandomUtils.nextInt:114 LDC 2147483647
+org.apache.commons.lang3.RandomUtils.nextInt:114 INVOKESTATIC org/apache/commons/lang3/RandomUtils.nextInt(II)I
+org.apache.commons.lang3.RandomUtils.nextInt:114 IRETURN
+org.apache.commons.lang3.RandomUtilsTest.main:48 INVOKEVIRTUAL org/apache/commons/lang3/RandomUtilsTest.testNextIntRandomResult()V
+org.apache.commons.lang3.RandomUtilsTest.testNextIntRandomResult:168 INVOKESTATIC org/apache/commons/lang3/RandomUtils.nextInt()I
+org.apache.commons.lang3.RandomUtilsTest.testNextIntRandomResult:168 ISTORE 1
+org.apache.commons.lang3.RandomUtilsTest.testNextIntRandomResult:169 ILOAD 1
+org.apache.commons.lang3.RandomUtilsTest.testNextIntRandomResult:169 IFLE L0 false true
+org.apache.commons.lang3.RandomUtilsTest.testNextIntRandomResult:169 ICONST_1
+org.apache.commons.lang3.RandomUtilsTest.testNextIntRandomResult:169 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 82 bytecode instructions.
+Computation took 0.65 seconds.

@@ -1,0 +1,31 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsIsTest.testIsNumericSpace:181:*]:
+org.apache.commons.lang3.StringUtils.isNumericSpace:7152 ALOAD 0
+org.apache.commons.lang3.StringUtils.isNumericSpace:7152 IFNONNULL L0 true false
+org.apache.commons.lang3.StringUtils.isNumericSpace:7155 ALOAD 0
+org.apache.commons.lang3.StringUtils.isNumericSpace:7155 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isNumericSpace:7155 ISTORE 1
+org.apache.commons.lang3.StringUtils.isNumericSpace:7156 ICONST_0
+org.apache.commons.lang3.StringUtils.isNumericSpace:7156 ISTORE 2
+org.apache.commons.lang3.StringUtils.isNumericSpace:7156 ILOAD 2
+org.apache.commons.lang3.StringUtils.isNumericSpace:7156 ILOAD 1
+org.apache.commons.lang3.StringUtils.isNumericSpace:7156 IF_ICMPGE L3 false true
+org.apache.commons.lang3.StringUtils.isNumericSpace:7157 ALOAD 0
+org.apache.commons.lang3.StringUtils.isNumericSpace:7157 ILOAD 2
+org.apache.commons.lang3.StringUtils.isNumericSpace:7157 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.apache.commons.lang3.StringUtils.isNumericSpace:7157 INVOKESTATIC java/lang/Character.isDigit(C)Z
+org.apache.commons.lang3.StringUtils.isNumericSpace:7157 IFNE L2 false true
+org.apache.commons.lang3.StringUtils.isNumericSpace:7157 ALOAD 0
+org.apache.commons.lang3.StringUtils.isNumericSpace:7157 ILOAD 2
+org.apache.commons.lang3.StringUtils.isNumericSpace:7157 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.apache.commons.lang3.StringUtils.isNumericSpace:7157 BIPUSH 32
+org.apache.commons.lang3.StringUtils.isNumericSpace:7157 IF_ICMPEQ L2 false true
+org.apache.commons.lang3.StringUtils.isNumericSpace:7158 ICONST_0
+org.apache.commons.lang3.StringUtils.isNumericSpace:7158 IRETURN
+org.apache.commons.lang3.StringUtilsIsTest.main:38 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsIsTest.testIsNumericSpace()V
+org.apache.commons.lang3.StringUtilsIsTest.testIsNumericSpace:181 LDC "hkHKHik6iUGHKJgU7tUJgKJGI87GIkug"
+org.apache.commons.lang3.StringUtilsIsTest.testIsNumericSpace:181 INVOKESTATIC org/apache/commons/lang3/StringUtils.isNumericSpace(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtilsIsTest.testIsNumericSpace:181 INVOKESTATIC org/junit/Assert.assertFalse(Z)V
+
+Slice consists of 44 bytecode instructions.
+Computation took 0.90 seconds.

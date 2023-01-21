@@ -1,0 +1,52 @@
+ 0.0% done, time left: unknown                                0.2% done, time left: unknown  0.8% done, time left: unknown  1.8% done, time left: unknown  3.6% done, time left: unknown  6.2% done, time left: unknown  9.2% done, time left: unknown 12.8% done, time left: unknown 15.9% done, time left: unknown 20.0% done, time left: unknown 23.3% done, time left:   0:00:02   28.6% done, time left:   0:00:02 31.8% done, time left:   0:00:02 35.3% done, time left:   0:00:02 38.9% done, time left:   0:00:02 45.0% done, time left:   0:00:00 51.3% done, time left:   0:00:00 55.8% done, time left:   0:00:00 59.6% done, time left:   0:00:00 63.8% done, time left:   0:00:00 69.9% done, time left:   0:00:00 76.2% done, time left:   0:00:00 83.6% done, time left:   0:00:00 90.9% done, time left:   0:00:00 98.4% done, time left:   0:00:00 99.5% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.text.StrTokenizerTest.testConstructor_String_char:714:*]:
+org.apache.commons.lang3.text.StrTokenizer.<init>:170 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.<init>:170 IFNULL L0 true false
+org.apache.commons.lang3.text.StrTokenizer.<init>:173 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.<init>:173 ACONST_NULL
+org.apache.commons.lang3.text.StrTokenizer.<init>:173 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.chars [C
+org.apache.commons.lang3.text.StrTokenizer.<init>:184 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.<init>:184 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.<init>:184 INVOKESPECIAL org/apache/commons/lang3/text/StrTokenizer.<init>(Ljava/lang/String;)V
+org.apache.commons.lang3.text.StrTokenizer.hasNext:530 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.hasNext:530 INVOKESPECIAL org/apache/commons/lang3/text/StrTokenizer.checkTokenized()V
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 GETFIELD org/apache/commons/lang3/text/StrTokenizer.tokenPos I
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 GETFIELD org/apache/commons/lang3/text/StrTokenizer.tokens [Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ARRAYLENGTH
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 IF_ICMPGE L0 true false
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ICONST_0
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 IRETURN
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:631 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:631 GETFIELD org/apache/commons/lang3/text/StrTokenizer.tokens [Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:631 IFNONNULL L1 false true
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:632 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:632 GETFIELD org/apache/commons/lang3/text/StrTokenizer.chars [C
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:632 IFNONNULL L0 false true
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:634 ACONST_NULL
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:634 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.tokenize([CII)Ljava/util/List;
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:634 ASTORE 1
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 INVOKEINTERFACE java/util/List.size()I
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 ANEWARRAY java/lang/String
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 INVOKEINTERFACE java/util/List.toArray([Ljava/lang/Object;)[Ljava/lang/Object;
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.tokens [Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizer.tokenize:664 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.tokenize:664 IFNULL L0 true false
+org.apache.commons.lang3.text.StrTokenizer.tokenize:665 INVOKESTATIC java/util/Collections.emptyList()Ljava/util/List;
+org.apache.commons.lang3.text.StrTokenizer.tokenize:665 ARETURN
+org.apache.commons.lang3.text.StrTokenizerTest.main:93 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizerTest.testConstructor_String_char()V
+org.apache.commons.lang3.text.StrTokenizerTest.testConstructor_String_char:713 NEW org/apache/commons/lang3/text/StrTokenizer
+org.apache.commons.lang3.text.StrTokenizerTest.testConstructor_String_char:713 DUP
+org.apache.commons.lang3.text.StrTokenizerTest.testConstructor_String_char:713 ACONST_NULL
+org.apache.commons.lang3.text.StrTokenizerTest.testConstructor_String_char:713 INVOKESPECIAL org/apache/commons/lang3/text/StrTokenizer.<init>(Ljava/lang/String;C)V
+org.apache.commons.lang3.text.StrTokenizerTest.testConstructor_String_char:713 ASTORE 1
+org.apache.commons.lang3.text.StrTokenizerTest.testConstructor_String_char:714 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizerTest.testConstructor_String_char:714 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.hasNext()Z
+org.apache.commons.lang3.text.StrTokenizerTest.testConstructor_String_char:714 INVOKESTATIC org/junit/Assert.assertFalse(Z)V
+
+Slice consists of 47 bytecode instructions.
+Computation took 2.73 seconds.

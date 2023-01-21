@@ -1,0 +1,46 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.reflect.InheritanceUtilsTest.testDistanceGreaterThanZero:56:*]:
+org.apache.commons.lang3.BooleanUtils.toInteger:392 ILOAD 0
+org.apache.commons.lang3.BooleanUtils.toInteger:392 IFEQ L0 true false
+org.apache.commons.lang3.BooleanUtils.toInteger:392 ICONST_0
+org.apache.commons.lang3.BooleanUtils.toInteger:392 IRETURN
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:50 ALOAD 0
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:50 IFNULL L0 false true
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:50 ALOAD 1
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:50 IFNONNULL L1 true false
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:54 ALOAD 0
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:54 ALOAD 1
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:54 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:54 IFEQ L2 true false
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:58 ALOAD 0
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:58 INVOKEVIRTUAL java/lang/Class.getSuperclass()Ljava/lang/Class;
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:58 ASTORE 2
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:59 ALOAD 1
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:59 ALOAD 2
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:59 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:59 INVOKESTATIC org/apache/commons/lang3/BooleanUtils.toInteger(Z)I
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:59 ISTORE 3
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:61 ILOAD 3
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:61 ICONST_1
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:61 IF_ICMPNE L3 true false
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:64 ILOAD 3
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:64 ALOAD 2
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:64 IADD
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:64 ISTORE 3
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:65 ILOAD 3
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:65 IFLE L4 false true
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:65 ILOAD 3
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:65 ICONST_1
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:65 IADD
+org.apache.commons.lang3.reflect.InheritanceUtils.distance:65 IRETURN
+org.apache.commons.lang3.reflect.InheritanceUtilsTest.main:35 INVOKEVIRTUAL org/apache/commons/lang3/reflect/InheritanceUtilsTest.testDistanceGreaterThanZero()V
+org.apache.commons.lang3.reflect.InheritanceUtilsTest.testDistanceGreaterThanZero:54 LCONST_1
+org.apache.commons.lang3.reflect.InheritanceUtilsTest.testDistanceGreaterThanZero:56 LDC 3
+org.apache.commons.lang3.reflect.InheritanceUtilsTest.testDistanceGreaterThanZero:56 LDC Lorg/apache/commons/lang3/reflect/testbed/Grandchild;
+org.apache.commons.lang3.reflect.InheritanceUtilsTest.testDistanceGreaterThanZero:56 LDC Ljava/lang/Object;
+org.apache.commons.lang3.reflect.InheritanceUtilsTest.testDistanceGreaterThanZero:56 INVOKESTATIC org/apache/commons/lang3/reflect/InheritanceUtils.distance(Ljava/lang/Class;Ljava/lang/Class;)I
+org.apache.commons.lang3.reflect.InheritanceUtilsTest.testDistanceGreaterThanZero:56 I2L
+org.apache.commons.lang3.reflect.InheritanceUtilsTest.testDistanceGreaterThanZero:56 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 41 bytecode instructions.
+Computation took 0.62 seconds.

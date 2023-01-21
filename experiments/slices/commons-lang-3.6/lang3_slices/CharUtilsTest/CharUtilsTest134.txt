@@ -1,0 +1,74 @@
+ 0.0% done, time left: unknown                                0.4% done, time left: unknown  0.7% done, time left: unknown  1.4% done, time left: unknown  2.9% done, time left: unknown  4.5% done, time left: unknown  7.2% done, time left: unknown  9.8% done, time left: unknown 13.5% done, time left: unknown 15.9% done, time left:   0:00:03   17.9% done, time left:   0:00:03 19.3% done, time left:   0:00:03 20.9% done, time left:   0:00:04 23.2% done, time left:   0:00:05 26.5% done, time left:   0:00:04 30.0% done, time left:   0:00:04 32.5% done, time left:   0:00:03 36.1% done, time left:   0:00:02 40.1% done, time left:   0:00:02 44.1% done, time left:   0:00:01 48.1% done, time left:   0:00:01 52.1% done, time left:   0:00:01 56.1% done, time left:   0:00:00 60.2% done, time left:   0:00:00 63.3% done, time left:   0:00:00 65.5% done, time left:   0:00:00 69.2% done, time left:   0:00:00 72.9% done, time left:   0:00:00 76.6% done, time left:   0:00:00 78.0% done, time left:   0:00:00 78.6% done, time left:   0:00:00 80.1% done, time left:   0:00:00 81.7% done, time left:   0:00:00 82.7% done, time left:   0:00:00 83.0% done, time left:   0:00:00 84.0% done, time left:   0:00:00 85.2% done, time left:   0:00:00 87.1% done, time left:   0:00:00 90.1% done, time left:   0:00:00 93.8% done, time left:   0:00:00 97.2% done, time left:   0:00:00 97.8% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:381:*]:
+org.apache.commons.lang3.CharUtils.isAsciiAlpha:460 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiAlpha:460 INVOKESTATIC org/apache/commons/lang3/CharUtils.isAsciiAlphaUpper(C)Z
+org.apache.commons.lang3.CharUtils.isAsciiAlpha:460 IFNE L0 false true
+org.apache.commons.lang3.CharUtils.isAsciiAlpha:460 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiAlpha:460 INVOKESTATIC org/apache/commons/lang3/CharUtils.isAsciiAlphaLower(C)Z
+org.apache.commons.lang3.CharUtils.isAsciiAlpha:460 IFEQ L1 true false
+org.apache.commons.lang3.CharUtils.isAsciiAlpha:460 ICONST_0
+org.apache.commons.lang3.CharUtils.isAsciiAlpha:460 IRETURN
+org.apache.commons.lang3.CharUtils.isAsciiAlphaUpper:479 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiAlphaUpper:479 BIPUSH 65
+org.apache.commons.lang3.CharUtils.isAsciiAlphaUpper:479 IF_ICMPLT L0 true true
+org.apache.commons.lang3.CharUtils.isAsciiAlphaUpper:479 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiAlphaUpper:479 BIPUSH 90
+org.apache.commons.lang3.CharUtils.isAsciiAlphaUpper:479 IF_ICMPGT L0 true false
+org.apache.commons.lang3.CharUtils.isAsciiAlphaUpper:479 ICONST_0
+org.apache.commons.lang3.CharUtils.isAsciiAlphaUpper:479 IRETURN
+org.apache.commons.lang3.CharUtils.isAsciiAlphaLower:498 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiAlphaLower:498 BIPUSH 97
+org.apache.commons.lang3.CharUtils.isAsciiAlphaLower:498 IF_ICMPLT L0 true true
+org.apache.commons.lang3.CharUtils.isAsciiAlphaLower:498 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiAlphaLower:498 BIPUSH 122
+org.apache.commons.lang3.CharUtils.isAsciiAlphaLower:498 IF_ICMPGT L0 true false
+org.apache.commons.lang3.CharUtils.isAsciiAlphaLower:498 ICONST_0
+org.apache.commons.lang3.CharUtils.isAsciiAlphaLower:498 IRETURN
+org.apache.commons.lang3.CharUtils.isAsciiNumeric:517 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiNumeric:517 BIPUSH 48
+org.apache.commons.lang3.CharUtils.isAsciiNumeric:517 IF_ICMPLT L0 true true
+org.apache.commons.lang3.CharUtils.isAsciiNumeric:517 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiNumeric:517 BIPUSH 57
+org.apache.commons.lang3.CharUtils.isAsciiNumeric:517 IF_ICMPGT L0 true false
+org.apache.commons.lang3.CharUtils.isAsciiNumeric:517 ICONST_0
+org.apache.commons.lang3.CharUtils.isAsciiNumeric:517 IRETURN
+org.apache.commons.lang3.CharUtils.isAsciiAlphanumeric:536 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiAlphanumeric:536 INVOKESTATIC org/apache/commons/lang3/CharUtils.isAsciiAlpha(C)Z
+org.apache.commons.lang3.CharUtils.isAsciiAlphanumeric:536 IFNE L0 false true
+org.apache.commons.lang3.CharUtils.isAsciiAlphanumeric:536 ILOAD 0
+org.apache.commons.lang3.CharUtils.isAsciiAlphanumeric:536 INVOKESTATIC org/apache/commons/lang3/CharUtils.isAsciiNumeric(C)Z
+org.apache.commons.lang3.CharUtils.isAsciiAlphanumeric:536 IFEQ L1 true false
+org.apache.commons.lang3.CharUtils.isAsciiAlphanumeric:536 ICONST_0
+org.apache.commons.lang3.CharUtils.isAsciiAlphanumeric:536 IRETURN
+org.apache.commons.lang3.CharUtilsTest.main:64 INVOKEVIRTUAL org/apache/commons/lang3/CharUtilsTest.testIsAsciiAlphanumeric_char()V
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:377 ICONST_0
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:377 ISTORE 1
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:377 ILOAD 1
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:377 SIPUSH 196
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:377 IF_ICMPGE L6 false true
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:377 IINC 1 1
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 ILOAD 1
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 BIPUSH 65
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 IF_ICMPLT L1 true true
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 ILOAD 1
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 BIPUSH 90
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 IF_ICMPLE L3 false true
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 ILOAD 1
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 BIPUSH 97
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 IF_ICMPLT L2 true true
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 ILOAD 1
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 BIPUSH 122
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 IF_ICMPLE L3 false true
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 ILOAD 1
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 BIPUSH 48
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 IF_ICMPLT L4 true true
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 ILOAD 1
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 BIPUSH 57
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:378 IF_ICMPGT L4 true false
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:381 ILOAD 1
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:381 I2C
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:381 INVOKESTATIC org/apache/commons/lang3/CharUtils.isAsciiAlphanumeric(C)Z
+org.apache.commons.lang3.CharUtilsTest.testIsAsciiAlphanumeric_char:381 INVOKESTATIC org/junit/Assert.assertFalse(Z)V
+
+Slice consists of 69 bytecode instructions.
+Computation took 4.50 seconds.

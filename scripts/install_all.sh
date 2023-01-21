@@ -28,17 +28,17 @@ export PATH=$JAVA_HOME/bin:$PATH
 cd $HCC_HOME/hcctools
 
 # Build jars
-hcctools="criteriagen obcc recommender scc"
+hcctools="criteriagen obcc recommender scc testsuitegen"
 for t in $hcctools
 do
 	pushd $t
 
 	mvn package
-	sh run.sh
+	#sh run.sh
 
-	if [ "$t" == "recommender" ]; then
-		sh run-evaluator.sh
-	fi
+	#if [ "$t" == "recommender" ]; then
+		#sh run-evaluator.sh
+	#fi
 	
 	popd
 done

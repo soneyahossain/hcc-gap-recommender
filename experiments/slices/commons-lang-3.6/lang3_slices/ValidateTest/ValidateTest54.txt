@@ -1,0 +1,67 @@
+ 0.0% done, time left: unknown                                0.4% done, time left: unknown  0.5% done, time left: unknown  1.0% done, time left: unknown  1.5% done, time left: unknown  2.1% done, time left: unknown  2.4% done, time left: unknown  2.8% done, time left: unknown  4.6% done, time left:   0:00:05    6.2% done, time left:   0:00:05  7.3% done, time left:   0:00:05  8.2% done, time left:   0:00:06  9.7% done, time left:   0:00:06 10.2% done, time left:   0:00:06 10.2% done, time left:   0:00:07 10.2% done, time left:   0:00:08 11.6% done, time left:   0:00:10 14.2% done, time left:   0:00:10 17.0% done, time left:   0:00:09 19.9% done, time left:   0:00:08 23.3% done, time left:   0:00:06 27.0% done, time left:   0:00:04 30.5% done, time left:   0:00:03 33.9% done, time left:   0:00:03 37.3% done, time left:   0:00:02 40.7% done, time left:   0:00:02 43.8% done, time left:   0:00:02 46.2% done, time left:   0:00:01 47.5% done, time left:   0:00:01 50.2% done, time left:   0:00:01 53.1% done, time left:   0:00:01 56.2% done, time left:   0:00:01 59.5% done, time left:   0:00:01 63.1% done, time left:   0:00:00 65.7% done, time left:   0:00:00 67.7% done, time left:   0:00:00 70.9% done, time left:   0:00:00 74.3% done, time left:   0:00:00 77.9% done, time left:   0:00:00 81.2% done, time left:   0:00:00 84.7% done, time left:   0:00:00 88.4% done, time left:   0:00:00 92.9% done, time left:   0:00:00 95.3% done, time left:   0:00:00 96.8% done, time left:   0:00:00 98.3% done, time left:   0:00:00 99.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:706:*]:
+org.apache.commons.lang3.ArrayUtils.addAll:5063 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.addAll:5063 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.addAll:5065 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.addAll:5065 IFNONNULL L1 true false
+org.apache.commons.lang3.ArrayUtils.addAll:5068 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.addAll:5068 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtils.addAll:5068 INVOKEVIRTUAL java/lang/Class.getComponentType()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtils.addAll:5068 ASTORE 2
+org.apache.commons.lang3.ArrayUtils.addAll:5070 ALOAD 2
+org.apache.commons.lang3.ArrayUtils.addAll:5070 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.addAll:5070 ARRAYLENGTH
+org.apache.commons.lang3.ArrayUtils.addAll:5070 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.addAll:5070 ARRAYLENGTH
+org.apache.commons.lang3.ArrayUtils.addAll:5070 IADD
+org.apache.commons.lang3.ArrayUtils.addAll:5070 INVOKESTATIC java/lang/reflect/Array.newInstance(Ljava/lang/Class;I)Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.addAll:5070 ASTORE 3
+org.apache.commons.lang3.ArrayUtils.addAll:5088 ALOAD 3
+org.apache.commons.lang3.ArrayUtils.addAll:5088 ARETURN
+org.apache.commons.lang3.Validate.noNullElements:573 ALOAD 0
+org.apache.commons.lang3.Validate.noNullElements:573 INVOKEINTERFACE java/lang/Iterable.iterator()Ljava/util/Iterator;
+org.apache.commons.lang3.Validate.noNullElements:573 ASTORE 4
+org.apache.commons.lang3.Validate.noNullElements:573 ALOAD 4
+org.apache.commons.lang3.Validate.noNullElements:573 INVOKEINTERFACE java/util/Iterator.hasNext()Z
+org.apache.commons.lang3.Validate.noNullElements:573 IFEQ L2 false true
+org.apache.commons.lang3.Validate.noNullElements:574 ALOAD 4
+org.apache.commons.lang3.Validate.noNullElements:574 INVOKEINTERFACE java/util/Iterator.next()Ljava/lang/Object;
+org.apache.commons.lang3.Validate.noNullElements:574 IFNONNULL L1 false true
+org.apache.commons.lang3.Validate.noNullElements:575 ALOAD 2
+org.apache.commons.lang3.Validate.noNullElements:575 ICONST_1
+org.apache.commons.lang3.Validate.noNullElements:575 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.Validate.noNullElements:575 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.addAll([Ljava/lang/Object;[Ljava/lang/Object;)[Ljava/lang/Object;
+org.apache.commons.lang3.Validate.noNullElements:575 ASTORE 5
+org.apache.commons.lang3.Validate.noNullElements:576 NEW java/lang/IllegalArgumentException
+org.apache.commons.lang3.Validate.noNullElements:576 DUP
+org.apache.commons.lang3.Validate.noNullElements:576 ALOAD 1
+org.apache.commons.lang3.Validate.noNullElements:576 ALOAD 5
+org.apache.commons.lang3.Validate.noNullElements:576 INVOKESTATIC java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+org.apache.commons.lang3.Validate.noNullElements:576 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.apache.commons.lang3.Validate.noNullElements:576 ATHROW
+org.apache.commons.lang3.ValidateTest.main:82 INVOKEVIRTUAL org/apache/commons/lang3/ValidateTest.testNoNullElementsCollection2()V
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:691 NEW java/util/ArrayList
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:691 DUP
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:691 INVOKESPECIAL java/util/ArrayList.<init>()V
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:691 ASTORE 1
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:692 ALOAD 1
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:692 INVOKEINTERFACE java/util/List.add(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:693 ALOAD 1
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:693 INVOKEINTERFACE java/util/List.add(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:701 ALOAD 1
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:701 ICONST_1
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:701 ACONST_NULL
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:701 INVOKEINTERFACE java/util/List.set(ILjava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:703 ALOAD 1
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:703 LDC "MSG"
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:703 ICONST_0
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:703 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:703 INVOKESTATIC org/apache/commons/lang3/Validate.noNullElements(Ljava/lang/Iterable;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Iterable;
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:705 ASTORE 2
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:706 LDC "MSG"
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:706 ALOAD 2
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:706 INVOKEVIRTUAL java/lang/IllegalArgumentException.getMessage()Ljava/lang/String;
+org.apache.commons.lang3.ValidateTest.testNoNullElementsCollection2:706 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 196 bytecode instructions.
+Computation took 5.46 seconds.

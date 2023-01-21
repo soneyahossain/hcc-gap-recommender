@@ -1,0 +1,33 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  2.5% done, time left: unknown  6.0% done, time left: unknown 13.2% done, time left: unknown 19.1% done, time left: unknown 28.0% done, time left:   0:00:00   34.2% done, time left:   0:00:01 38.4% done, time left:   0:00:01 42.8% done, time left:   0:00:01 43.8% done, time left:   0:00:00 47.2% done, time left:   0:00:01 54.8% done, time left:   0:00:00 61.8% done, time left:   0:00:00 64.6% done, time left:   0:00:00 70.2% done, time left:   0:00:00 77.6% done, time left:   0:00:00 84.7% done, time left:   0:00:00 90.4% done, time left:   0:00:00 93.2% done, time left:   0:00:00 97.6% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.EnumUtilsTest.test_generateBitVector:218:*]:
+org.apache.commons.lang3.EnumUtils.generateBitVector:144 LCONST_0
+org.apache.commons.lang3.EnumUtils.generateBitVector:144 LSTORE 2
+org.apache.commons.lang3.EnumUtils.generateBitVector:145 ALOAD 1
+org.apache.commons.lang3.EnumUtils.generateBitVector:145 INVOKEINTERFACE java/lang/Iterable.iterator()Ljava/util/Iterator;
+org.apache.commons.lang3.EnumUtils.generateBitVector:145 ASTORE 4
+org.apache.commons.lang3.EnumUtils.generateBitVector:145 ALOAD 4
+org.apache.commons.lang3.EnumUtils.generateBitVector:145 INVOKEINTERFACE java/util/Iterator.hasNext()Z
+org.apache.commons.lang3.EnumUtils.generateBitVector:145 IFEQ L3 true true
+org.apache.commons.lang3.EnumUtils.generateBitVector:145 ALOAD 4
+org.apache.commons.lang3.EnumUtils.generateBitVector:145 INVOKEINTERFACE java/util/Iterator.next()Ljava/lang/Object;
+org.apache.commons.lang3.EnumUtils.generateBitVector:145 ASTORE 5
+org.apache.commons.lang3.EnumUtils.generateBitVector:147 LLOAD 2
+org.apache.commons.lang3.EnumUtils.generateBitVector:147 LCONST_1
+org.apache.commons.lang3.EnumUtils.generateBitVector:147 ALOAD 5
+org.apache.commons.lang3.EnumUtils.generateBitVector:147 INVOKEVIRTUAL java/lang/Enum.ordinal()I
+org.apache.commons.lang3.EnumUtils.generateBitVector:147 LSHL
+org.apache.commons.lang3.EnumUtils.generateBitVector:147 LOR
+org.apache.commons.lang3.EnumUtils.generateBitVector:147 LSTORE 2
+org.apache.commons.lang3.EnumUtils.generateBitVector:149 LLOAD 2
+org.apache.commons.lang3.EnumUtils.generateBitVector:149 LRETURN
+org.apache.commons.lang3.EnumUtilsTest.main:41 INVOKEVIRTUAL org/apache/commons/lang3/EnumUtilsTest.test_generateBitVector()V
+org.apache.commons.lang3.EnumUtilsTest.test_generateBitVector:209 LCONST_1
+org.apache.commons.lang3.EnumUtilsTest.test_generateBitVector:218 LDC 2147483648
+org.apache.commons.lang3.EnumUtilsTest.test_generateBitVector:218 LDC Lorg/apache/commons/lang3/Enum64;
+org.apache.commons.lang3.EnumUtilsTest.test_generateBitVector:218 GETSTATIC org/apache/commons/lang3/Enum64.A31 Lorg/apache/commons/lang3/Enum64;
+org.apache.commons.lang3.EnumUtilsTest.test_generateBitVector:218 INVOKESTATIC java/util/EnumSet.of(Ljava/lang/Enum;)Ljava/util/EnumSet;
+org.apache.commons.lang3.EnumUtilsTest.test_generateBitVector:218 INVOKESTATIC org/apache/commons/lang3/EnumUtils.generateBitVector(Ljava/lang/Class;Ljava/lang/Iterable;)J
+org.apache.commons.lang3.EnumUtilsTest.test_generateBitVector:218 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 450 bytecode instructions.
+Computation took 3.08 seconds.

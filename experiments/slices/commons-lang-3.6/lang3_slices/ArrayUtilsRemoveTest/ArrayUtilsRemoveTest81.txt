@@ -1,0 +1,46 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementObjectArray:349:*]:
+org.apache.commons.lang3.ArrayUtils.clone:325 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.clone:325 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.clone:328 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.clone:328 INVOKEVIRTUAL [Ljava/lang/Object;.clone()Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.clone:328 ARETURN
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ICONST_0
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([Ljava/lang/Object;Ljava/lang/Object;I)I
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 IRETURN
+org.apache.commons.lang3.ArrayUtils.indexOf:3217 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3217 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3223 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3223 IFNONNULL L5 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ISTORE 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ARRAYLENGTH
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 IF_ICMPGE L8 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3236 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.indexOf:3236 IRETURN
+org.apache.commons.lang3.ArrayUtils.removeElement:6024 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeElement:6024 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.removeElement:6024 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([Ljava/lang/Object;Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.removeElement:6024 ISTORE 2
+org.apache.commons.lang3.ArrayUtils.removeElement:6025 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.removeElement:6025 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.removeElement:6025 IF_ICMPNE L0 false true
+org.apache.commons.lang3.ArrayUtils.removeElement:6026 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeElement:6026 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.clone([Ljava/lang/Object;)[Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.removeElement:6026 ARETURN
+org.apache.commons.lang3.ArrayUtilsRemoveTest.main:46 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsRemoveTest.testRemoveElementObjectArray()V
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementObjectArray:348 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_OBJECT_ARRAY [Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementObjectArray:348 LDC "a"
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementObjectArray:348 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.removeElement([Ljava/lang/Object;Ljava/lang/Object;)[Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementObjectArray:348 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementObjectArray:349 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_OBJECT_ARRAY [Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementObjectArray:349 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementObjectArray:349 INVOKESTATIC java/util/Arrays.equals([Ljava/lang/Object;[Ljava/lang/Object;)Z
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementObjectArray:349 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 41 bytecode instructions.
+Computation took 1.54 seconds.

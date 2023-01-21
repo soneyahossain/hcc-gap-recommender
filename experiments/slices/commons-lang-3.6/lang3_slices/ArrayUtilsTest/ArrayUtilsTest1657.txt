@@ -1,0 +1,27 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.1% done, time left:   0:05:51    0.1% done, time left:   0:08:47  1.0% done, time left:   0:06:01  2.7% done, time left:   0:04:35  4.4% done, time left:   0:03:43  6.0% done, time left:   0:03:08  7.7% done, time left:   0:02:42  9.1% done, time left:   0:02:19 11.1% done, time left:   0:01:56 13.4% done, time left:   0:01:32 14.6% done, time left:   0:01:14 15.2% done, time left:   0:01:01 17.4% done, time left:   0:00:49 18.9% done, time left:   0:00:39 20.3% done, time left:   0:00:33 21.9% done, time left:   0:00:27 23.3% done, time left:   0:00:23 24.9% done, time left:   0:00:19 27.3% done, time left:   0:00:16 29.3% done, time left:   0:00:13 32.1% done, time left:   0:00:10 35.5% done, time left:   0:00:06 39.0% done, time left:   0:00:04 42.3% done, time left:   0:00:02 45.6% done, time left:   0:00:02 49.1% done, time left:   0:00:01 52.0% done, time left:   0:00:01 54.9% done, time left:   0:00:01 56.4% done, time left:   0:00:01 58.5% done, time left:   0:00:01 60.2% done, time left:   0:00:01 62.5% done, time left:   0:00:01 64.3% done, time left:   0:00:01 66.7% done, time left:   0:00:01 69.0% done, time left:   0:00:00 70.4% done, time left:   0:00:00 71.9% done, time left:   0:00:00 74.0% done, time left:   0:00:00 75.3% done, time left:   0:00:00 75.9% done, time left:   0:00:00 77.6% done, time left:   0:00:00 81.5% done, time left:   0:00:00 83.2% done, time left:   0:00:00 83.5% done, time left:   0:00:00 89.0% done, time left:   0:00:00 92.0% done, time left:   0:00:00 95.9% done, time left:   0:00:00 98.1% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsTest.testIsNotEmptyPrimitives:5018:*]:
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4868 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4868 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4868 IFNE L0 false true
+org.apache.commons.lang3.ArrayUtils.isEmpty:4868 ICONST_1
+org.apache.commons.lang3.ArrayUtils.isEmpty:4868 IRETURN
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4969 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4969 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([I)Z
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4969 IFNE L0 true false
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4969 ICONST_0
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4969 IRETURN
+org.apache.commons.lang3.ArrayUtilsTest.main:330 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsTest.testIsNotEmptyPrimitives()V
+org.apache.commons.lang3.ArrayUtilsTest.testIsNotEmptyPrimitives:5015 ICONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testIsNotEmptyPrimitives:5015 NEWARRAY T_INT
+org.apache.commons.lang3.ArrayUtilsTest.testIsNotEmptyPrimitives:5015 ASTORE 3
+org.apache.commons.lang3.ArrayUtilsTest.testIsNotEmptyPrimitives:5018 ALOAD 3
+org.apache.commons.lang3.ArrayUtilsTest.testIsNotEmptyPrimitives:5018 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isNotEmpty([I)Z
+org.apache.commons.lang3.ArrayUtilsTest.testIsNotEmptyPrimitives:5018 INVOKESTATIC org/junit/Assert.assertFalse(Z)V
+
+Slice consists of 22 bytecode instructions.
+Computation took 6.12 seconds.

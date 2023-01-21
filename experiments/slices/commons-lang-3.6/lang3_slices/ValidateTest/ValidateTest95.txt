@@ -1,0 +1,31 @@
+ 0.0% done, time left: unknown                                0.3% done, time left: unknown  0.4% done, time left: unknown  0.9% done, time left: unknown  1.5% done, time left: unknown  2.1% done, time left: unknown  2.4% done, time left: unknown  3.2% done, time left: unknown  5.1% done, time left:   0:00:05    6.5% done, time left:   0:00:05  7.6% done, time left:   0:00:05  8.6% done, time left:   0:00:06 10.0% done, time left:   0:00:06 10.2% done, time left:   0:00:07 10.2% done, time left:   0:00:08 10.9% done, time left:   0:00:09 13.2% done, time left:   0:00:10 16.0% done, time left:   0:00:09 18.7% done, time left:   0:00:08 22.1% done, time left:   0:00:06 25.5% done, time left:   0:00:05 28.3% done, time left:   0:00:04 30.7% done, time left:   0:00:03 33.9% done, time left:   0:00:03 37.2% done, time left:   0:00:03 40.6% done, time left:   0:00:02 43.4% done, time left:   0:00:02 47.0% done, time left:   0:00:01 47.6% done, time left:   0:00:00 51.3% done, time left:   0:00:01 54.1% done, time left:   0:00:01 57.1% done, time left:   0:00:01 60.4% done, time left:   0:00:01 63.9% done, time left:   0:00:00 66.9% done, time left:   0:00:00 70.1% done, time left:   0:00:00 73.3% done, time left:   0:00:00 76.6% done, time left:   0:00:00 80.1% done, time left:   0:00:00 83.4% done, time left:   0:00:00 86.7% done, time left:   0:00:00 90.0% done, time left:   0:00:00 93.4% done, time left:   0:00:00 95.3% done, time left:   0:00:00 95.8% done, time left:   0:00:00 96.8% done, time left:   0:00:00 97.7% done, time left:   0:00:00 99.2% done, time left:   0:00:00 99.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ValidateTest.testExclusiveBetween:1056:*]:
+org.apache.commons.lang3.Validate.exclusiveBetween:1123 ALOAD 2
+org.apache.commons.lang3.Validate.exclusiveBetween:1123 ALOAD 0
+org.apache.commons.lang3.Validate.exclusiveBetween:1123 INVOKEINTERFACE java/lang/Comparable.compareTo(Ljava/lang/Object;)I
+org.apache.commons.lang3.Validate.exclusiveBetween:1123 IFLE L0 false true
+org.apache.commons.lang3.Validate.exclusiveBetween:1123 ALOAD 2
+org.apache.commons.lang3.Validate.exclusiveBetween:1123 ALOAD 1
+org.apache.commons.lang3.Validate.exclusiveBetween:1123 INVOKEINTERFACE java/lang/Comparable.compareTo(Ljava/lang/Object;)I
+org.apache.commons.lang3.Validate.exclusiveBetween:1123 IFLT L1 false true
+org.apache.commons.lang3.Validate.exclusiveBetween:1124 NEW java/lang/IllegalArgumentException
+org.apache.commons.lang3.Validate.exclusiveBetween:1124 DUP
+org.apache.commons.lang3.Validate.exclusiveBetween:1124 LDC "The value %s is not in the specified exclusive range of %s to %s"
+org.apache.commons.lang3.Validate.exclusiveBetween:1124 ICONST_3
+org.apache.commons.lang3.Validate.exclusiveBetween:1124 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.Validate.exclusiveBetween:1124 INVOKESTATIC java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+org.apache.commons.lang3.Validate.exclusiveBetween:1124 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.apache.commons.lang3.Validate.exclusiveBetween:1124 ATHROW
+org.apache.commons.lang3.ValidateTest.main:102 INVOKEVIRTUAL org/apache/commons/lang3/ValidateTest.testExclusiveBetween()V
+org.apache.commons.lang3.ValidateTest.testExclusiveBetween:1053 LDC "0"
+org.apache.commons.lang3.ValidateTest.testExclusiveBetween:1053 LDC "5"
+org.apache.commons.lang3.ValidateTest.testExclusiveBetween:1053 LDC "6"
+org.apache.commons.lang3.ValidateTest.testExclusiveBetween:1053 INVOKESTATIC org/apache/commons/lang3/Validate.exclusiveBetween(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Comparable;)V
+org.apache.commons.lang3.ValidateTest.testExclusiveBetween:1055 ASTORE 1
+org.apache.commons.lang3.ValidateTest.testExclusiveBetween:1056 LDC "The value 6 is not in the specified exclusive range of 0 to 5"
+org.apache.commons.lang3.ValidateTest.testExclusiveBetween:1056 ALOAD 1
+org.apache.commons.lang3.ValidateTest.testExclusiveBetween:1056 INVOKEVIRTUAL java/lang/IllegalArgumentException.getMessage()Ljava/lang/String;
+org.apache.commons.lang3.ValidateTest.testExclusiveBetween:1056 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 50 bytecode instructions.
+Computation took 5.60 seconds.

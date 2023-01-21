@@ -1,0 +1,39 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.4% done, time left: unknown  0.7% done, time left: unknown  0.9% done, time left: unknown  1.0% done, time left: unknown  1.4% done, time left: unknown  1.8% done, time left: unknown  1.9% done, time left: unknown  2.2% done, time left: unknown  2.8% done, time left: unknown  3.3% done, time left: unknown  4.2% done, time left: unknown  4.9% done, time left: unknown  6.3% done, time left: unknown  7.5% done, time left: unknown  9.0% done, time left: unknown 10.6% done, time left: unknown 12.1% done, time left: unknown 13.3% done, time left: unknown 14.9% done, time left: unknown 16.4% done, time left: unknown 18.3% done, time left: unknown 19.8% done, time left: unknown 20.7% done, time left: unknown 21.1% done, time left: unknown 21.6% done, time left: unknown 22.5% done, time left: unknown 23.1% done, time left: unknown 23.3% done, time left: unknown 23.5% done, time left: unknown 24.0% done, time left: unknown 24.6% done, time left: unknown 25.5% done, time left: unknown 26.6% done, time left: unknown 28.2% done, time left: unknown 29.6% done, time left: unknown 31.2% done, time left: unknown 32.8% done, time left: unknown 33.9% done, time left: unknown 35.3% done, time left: unknown 36.6% done, time left: unknown 38.2% done, time left: unknown 39.8% done, time left: unknown 41.4% done, time left: unknown 43.0% done, time left: unknown 44.6% done, time left: unknown 46.3% done, time left: unknown 47.7% done, time left: unknown 49.2% done, time left: unknown 50.8% done, time left: unknown 52.5% done, time left: unknown 54.0% done, time left: unknown 54.9% done, time left: unknown 56.6% done, time left: unknown 58.3% done, time left: unknown 59.9% done, time left: unknown 61.6% done, time left: unknown 63.2% done, time left: unknown 65.0% done, time left: unknown 67.0% done, time left: unknown 68.9% done, time left: unknown 70.8% done, time left: unknown 72.7% done, time left: unknown 74.6% done, time left: unknown 76.4% done, time left: unknown 78.4% done, time left: unknown 80.1% done, time left: unknown 84.8% done, time left:   0:00:00   86.5% done, time left:   0:00:00 88.1% done, time left:   0:00:00 89.5% done, time left:   0:00:00 91.2% done, time left:   0:00:00 93.0% done, time left:   0:00:00 94.7% done, time left:   0:00:00 96.5% done, time left:   0:00:00 98.1% done, time left:   0:00:00 98.9% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.math.NumberUtilsTest.testIsDigits:1286:*]:
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.StringUtils.isNumeric:7113 ALOAD 0
+org.apache.commons.lang3.StringUtils.isNumeric:7113 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.isNumeric:7113 IFEQ L0 true false
+org.apache.commons.lang3.StringUtils.isNumeric:7116 ALOAD 0
+org.apache.commons.lang3.StringUtils.isNumeric:7116 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isNumeric:7116 ISTORE 1
+org.apache.commons.lang3.StringUtils.isNumeric:7117 ICONST_0
+org.apache.commons.lang3.StringUtils.isNumeric:7117 ISTORE 2
+org.apache.commons.lang3.StringUtils.isNumeric:7117 ILOAD 2
+org.apache.commons.lang3.StringUtils.isNumeric:7117 ILOAD 1
+org.apache.commons.lang3.StringUtils.isNumeric:7117 IF_ICMPGE L3 true true
+org.apache.commons.lang3.StringUtils.isNumeric:7117 IINC 2 1
+org.apache.commons.lang3.StringUtils.isNumeric:7118 ALOAD 0
+org.apache.commons.lang3.StringUtils.isNumeric:7118 ILOAD 2
+org.apache.commons.lang3.StringUtils.isNumeric:7118 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.apache.commons.lang3.StringUtils.isNumeric:7118 INVOKESTATIC java/lang/Character.isDigit(C)Z
+org.apache.commons.lang3.StringUtils.isNumeric:7118 IFNE L2 true false
+org.apache.commons.lang3.StringUtils.isNumeric:7122 ICONST_1
+org.apache.commons.lang3.StringUtils.isNumeric:7122 IRETURN
+org.apache.commons.lang3.math.NumberUtils.isDigits:1388 ALOAD 0
+org.apache.commons.lang3.math.NumberUtils.isDigits:1388 INVOKESTATIC org/apache/commons/lang3/StringUtils.isNumeric(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.math.NumberUtils.isDigits:1388 IRETURN
+org.apache.commons.lang3.math.NumberUtilsTest.main:90 INVOKEVIRTUAL org/apache/commons/lang3/math/NumberUtilsTest.testIsDigits()V
+org.apache.commons.lang3.math.NumberUtilsTest.testIsDigits:1286 LDC "isDigits(String) failed"
+org.apache.commons.lang3.math.NumberUtilsTest.testIsDigits:1286 LDC "12345"
+org.apache.commons.lang3.math.NumberUtilsTest.testIsDigits:1286 INVOKESTATIC org/apache/commons/lang3/math/NumberUtils.isDigits(Ljava/lang/String;)Z
+org.apache.commons.lang3.math.NumberUtilsTest.testIsDigits:1286 INVOKESTATIC org/junit/Assert.assertTrue(Ljava/lang/String;Z)V
+
+Slice consists of 52 bytecode instructions.
+Computation took 10.26 seconds.

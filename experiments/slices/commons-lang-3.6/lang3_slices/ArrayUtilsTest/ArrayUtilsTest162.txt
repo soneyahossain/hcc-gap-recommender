@@ -1,0 +1,62 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.9% done, time left: unknown  2.5% done, time left: unknown  4.2% done, time left: unknown  5.9% done, time left: unknown  7.4% done, time left: unknown  9.2% done, time left: unknown 10.7% done, time left: unknown 12.7% done, time left: unknown 14.6% done, time left: unknown 16.2% done, time left: unknown 18.1% done, time left: unknown 19.3% done, time left: unknown 20.9% done, time left: unknown 22.9% done, time left: unknown 24.7% done, time left: unknown 27.2% done, time left: unknown 29.6% done, time left: unknown 32.5% done, time left: unknown 35.6% done, time left: unknown 38.8% done, time left: unknown 41.6% done, time left: unknown 45.0% done, time left: unknown 48.6% done, time left: unknown 52.0% done, time left: unknown 55.0% done, time left: unknown 56.7% done, time left: unknown 59.4% done, time left: unknown 61.1% done, time left: unknown 63.3% done, time left: unknown 65.2% done, time left: unknown 67.7% done, time left: unknown 69.5% done, time left: unknown 71.6% done, time left: unknown 73.1% done, time left: unknown 74.9% done, time left: unknown 76.7% done, time left: unknown 78.7% done, time left: unknown 81.4% done, time left:   0:00:00   83.2% done, time left:   0:00:00 86.4% done, time left:   0:00:00 90.5% done, time left:   0:00:00 93.1% done, time left:   0:00:00 96.8% done, time left:   0:00:00 98.1% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1079:*]:
+org.apache.commons.lang3.ArrayUtils.subarray:898 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.subarray:898 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.subarray:907 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.subarray:907 ILOAD 1
+org.apache.commons.lang3.ArrayUtils.subarray:907 ISUB
+org.apache.commons.lang3.ArrayUtils.subarray:907 ISTORE 3
+org.apache.commons.lang3.ArrayUtils.subarray:908 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.subarray:908 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtils.subarray:908 INVOKEVIRTUAL java/lang/Class.getComponentType()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtils.subarray:908 ASTORE 4
+org.apache.commons.lang3.ArrayUtils.subarray:909 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.subarray:909 IFGT L3 true false
+org.apache.commons.lang3.ArrayUtils.subarray:916 ALOAD 4
+org.apache.commons.lang3.ArrayUtils.subarray:916 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.subarray:916 INVOKESTATIC java/lang/reflect/Array.newInstance(Ljava/lang/Class;I)Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.subarray:916 ASTORE 5
+org.apache.commons.lang3.ArrayUtils.subarray:918 ALOAD 5
+org.apache.commons.lang3.ArrayUtils.subarray:918 ARETURN
+org.apache.commons.lang3.ArrayUtilsTest.main:129 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsTest.testSubarrayObject()V
+org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1077 BIPUSH 6
+org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1077 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1077 ASTORE 2
+org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1079 LDC "0 start, mid end"
+org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1079 LDC "abcd"
+org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1079 ALOAD 2
+org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1079 ICONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1079 ICONST_4
+org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1079 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.subarray([Ljava/lang/Object;II)[Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1079 INVOKESTATIC org/apache/commons/lang3/StringUtils.join([Ljava/lang/Object;)Ljava/lang/String;
+org.apache.commons.lang3.ArrayUtilsTest.testSubarrayObject:1079 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.lang3.StringUtils.join:3849 ALOAD 0
+org.apache.commons.lang3.StringUtils.join:3849 INVOKESTATIC org/apache/commons/lang3/StringUtils.join([Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.lang3.StringUtils.join:3849 ARETURN
+org.apache.commons.lang3.StringUtils.join:4520 ALOAD 0
+org.apache.commons.lang3.StringUtils.join:4520 IFNONNULL L0 true false
+org.apache.commons.lang3.StringUtils.join:4523 ALOAD 0
+org.apache.commons.lang3.StringUtils.join:4523 ICONST_0
+org.apache.commons.lang3.StringUtils.join:4523 ALOAD 0
+org.apache.commons.lang3.StringUtils.join:4523 ARRAYLENGTH
+org.apache.commons.lang3.StringUtils.join:4523 INVOKESTATIC org/apache/commons/lang3/StringUtils.join([Ljava/lang/Object;Ljava/lang/String;II)Ljava/lang/String;
+org.apache.commons.lang3.StringUtils.join:4523 ARETURN
+org.apache.commons.lang3.StringUtils.join:4562 ALOAD 0
+org.apache.commons.lang3.StringUtils.join:4562 IFNONNULL L0 true false
+org.apache.commons.lang3.StringUtils.join:4571 ILOAD 3
+org.apache.commons.lang3.StringUtils.join:4571 ILOAD 2
+org.apache.commons.lang3.StringUtils.join:4571 ISUB
+org.apache.commons.lang3.StringUtils.join:4571 ISTORE 4
+org.apache.commons.lang3.StringUtils.join:4572 ILOAD 4
+org.apache.commons.lang3.StringUtils.join:4572 IFGT L2 true false
+org.apache.commons.lang3.StringUtils.join:4578 ILOAD 2
+org.apache.commons.lang3.StringUtils.join:4578 ISTORE 6
+org.apache.commons.lang3.StringUtils.join:4578 ILOAD 6
+org.apache.commons.lang3.StringUtils.join:4578 ILOAD 3
+org.apache.commons.lang3.StringUtils.join:4578 IF_ICMPGE L6 true true
+org.apache.commons.lang3.StringUtils.join:4578 IINC 6 1
+org.apache.commons.lang3.StringUtils.join:4586 INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String;
+org.apache.commons.lang3.StringUtils.join:4586 ARETURN
+
+Slice consists of 63 bytecode instructions.
+Computation took 5.98 seconds.

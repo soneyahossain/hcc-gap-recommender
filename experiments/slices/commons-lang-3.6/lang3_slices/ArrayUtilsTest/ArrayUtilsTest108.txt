@@ -1,0 +1,30 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left:   0:01:43    2.0% done, time left:   0:00:57  3.6% done, time left:   0:00:41  5.5% done, time left:   0:00:33  7.0% done, time left:   0:00:28  8.8% done, time left:   0:00:26 10.7% done, time left:   0:00:23 12.2% done, time left:   0:00:20 14.4% done, time left:   0:00:18 14.6% done, time left:   0:00:14 16.1% done, time left:   0:00:13 18.1% done, time left:   0:00:12 19.5% done, time left:   0:00:11 21.1% done, time left:   0:00:10 23.2% done, time left:   0:00:09 25.4% done, time left:   0:00:08 27.9% done, time left:   0:00:07 30.5% done, time left:   0:00:06 33.4% done, time left:   0:00:05 36.7% done, time left:   0:00:04 39.9% done, time left:   0:00:03 42.8% done, time left:   0:00:02 46.4% done, time left:   0:00:02 49.6% done, time left:   0:00:01 52.8% done, time left:   0:00:01 55.0% done, time left:   0:00:01 57.0% done, time left:   0:00:01 58.6% done, time left:   0:00:01 61.1% done, time left:   0:00:01 63.8% done, time left:   0:00:01 65.9% done, time left:   0:00:00 68.7% done, time left:   0:00:00 70.4% done, time left:   0:00:00 72.8% done, time left:   0:00:00 74.9% done, time left:   0:00:00 76.7% done, time left:   0:00:00 78.9% done, time left:   0:00:00 81.6% done, time left:   0:00:00 83.2% done, time left:   0:00:00 87.2% done, time left:   0:00:00 90.9% done, time left:   0:00:00 93.9% done, time left:   0:00:00 97.8% done, time left:   0:00:00 98.6% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyByteEmptyArray:816:*]:
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:640 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:640 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([B)Z
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:640 IFEQ L0 false true
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:641 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_BYTE_ARRAY [B
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:641 ARETURN
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4901 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4901 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4901 IFNE L0 false true
+org.apache.commons.lang3.ArrayUtils.isEmpty:4901 ICONST_1
+org.apache.commons.lang3.ArrayUtils.isEmpty:4901 IRETURN
+org.apache.commons.lang3.ArrayUtilsTest.main:88 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsTest.testNullToEmptyByteEmptyArray()V
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyByteEmptyArray:813 ICONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyByteEmptyArray:813 NEWARRAY T_BYTE
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyByteEmptyArray:813 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyByteEmptyArray:814 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyByteEmptyArray:814 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.nullToEmpty([B)[B
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyByteEmptyArray:814 ASTORE 2
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyByteEmptyArray:816 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyByteEmptyArray:816 ALOAD 2
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyByteEmptyArray:816 INVOKESTATIC org/junit/Assert.assertNotSame(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 25 bytecode instructions.
+Computation took 5.74 seconds.

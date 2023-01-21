@@ -1,0 +1,37 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:115:*]:
+org.apache.commons.lang3.ArrayUtils.add:5444 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.add:5444 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.copyArrayGrow1(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.add:5444 ASTORE 2
+org.apache.commons.lang3.ArrayUtils.add:5446 ALOAD 2
+org.apache.commons.lang3.ArrayUtils.add:5446 ARETURN
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5594 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5594 IFNULL L0 false true
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5595 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5595 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5595 ISTORE 2
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5596 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5596 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5596 INVOKEVIRTUAL java/lang/Class.getComponentType()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5596 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5596 ICONST_1
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5596 IADD
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5596 INVOKESTATIC java/lang/reflect/Array.newInstance(Ljava/lang/Class;I)Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5596 ASTORE 3
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5598 ALOAD 3
+org.apache.commons.lang3.ArrayUtils.copyArrayGrow1:5598 ARETURN
+org.apache.commons.lang3.ArrayUtilsAddTest.main:41 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsAddTest.testAddObjectArrayChar()V
+org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:112 ICONST_3
+org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:112 NEWARRAY T_CHAR
+org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:112 ASTORE 2
+org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:113 ALOAD 2
+org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:113 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.add([CC)[C
+org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:113 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:115 GETSTATIC java/lang/Character.TYPE Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:115 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:115 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:115 INVOKEVIRTUAL java/lang/Class.getComponentType()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtilsAddTest.testAddObjectArrayChar:115 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 36 bytecode instructions.
+Computation took 5.69 seconds.

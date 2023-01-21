@@ -1,0 +1,80 @@
+ 0.0% done, time left: unknown                                1.0% done, time left: unknown  2.9% done, time left: unknown  6.2% done, time left: unknown  7.7% done, time left: unknown  9.0% done, time left: unknown 12.0% done, time left: unknown 15.6% done, time left:   0:00:02   15.6% done, time left:   0:00:03 15.6% done, time left:   0:00:04 16.2% done, time left:   0:00:05 22.6% done, time left:   0:00:02 23.4% done, time left:   0:00:00 26.6% done, time left:   0:00:01 30.6% done, time left:   0:00:02 32.5% done, time left:   0:00:01 33.5% done, time left:   0:00:01 40.1% done, time left:   0:00:00 41.7% done, time left:   0:00:00 46.6% done, time left:   0:00:01 49.4% done, time left:   0:00:01 52.1% done, time left:   0:00:01 57.1% done, time left:   0:00:00 57.6% done, time left:   0:00:00 64.7% done, time left:   0:00:00 64.9% done, time left:   0:00:00 70.0% done, time left:   0:00:00 72.5% done, time left:   0:00:00 72.6% done, time left:   0:00:00 74.9% done, time left:   0:00:00 77.2% done, time left:   0:00:00 78.8% done, time left:   0:00:00 79.6% done, time left:   0:00:00 82.0% done, time left:   0:00:00 83.4% done, time left:   0:00:00 84.5% done, time left:   0:00:00 86.8% done, time left:   0:00:00 86.9% done, time left:   0:00:00 89.0% done, time left:   0:00:00 91.5% done, time left:   0:00:00 93.2% done, time left:   0:00:00 97.0% done, time left:   0:00:00 99.0% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray:493:*]:
+org.apache.commons.lang3.ArrayUtils.clone:357 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.clone:357 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.clone:360 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.clone:360 INVOKEVIRTUAL [I.clone()Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.clone:360 ARETURN
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4868 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4868 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4868 IFNE L0 true false
+org.apache.commons.lang3.ArrayUtils.isEmpty:4868 ICONST_0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4868 IRETURN
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4969 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4969 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([I)Z
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4969 IFNE L0 false true
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4969 ICONST_1
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4969 IRETURN
+org.apache.commons.lang3.ArrayUtils.removeAll:7146 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeAll:7146 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.removeAll:7146 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.removeAll(Ljava/lang/Object;[I)Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.removeAll:7146 ARETURN
+org.apache.commons.lang3.ArrayUtils.removeAll:7385 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeAll:7385 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.removeAll:7385 ISTORE 2
+org.apache.commons.lang3.ArrayUtils.removeAll:7386 ICONST_0
+org.apache.commons.lang3.ArrayUtils.removeAll:7386 ISTORE 3
+org.apache.commons.lang3.ArrayUtils.removeAll:7387 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.removeAll:7387 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.clone([I)[I
+org.apache.commons.lang3.ArrayUtils.removeAll:7387 ASTORE 4
+org.apache.commons.lang3.ArrayUtils.removeAll:7391 ALOAD 4
+org.apache.commons.lang3.ArrayUtils.removeAll:7391 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isNotEmpty([I)Z
+org.apache.commons.lang3.ArrayUtils.removeAll:7391 IFEQ L4 false true
+org.apache.commons.lang3.ArrayUtils.removeAll:7392 ALOAD 4
+org.apache.commons.lang3.ArrayUtils.removeAll:7392 ARRAYLENGTH
+org.apache.commons.lang3.ArrayUtils.removeAll:7392 ISTORE 5
+org.apache.commons.lang3.ArrayUtils.removeAll:7393 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.removeAll:7393 ISTORE 6
+org.apache.commons.lang3.ArrayUtils.removeAll:7394 IINC 5 -1
+org.apache.commons.lang3.ArrayUtils.removeAll:7394 ILOAD 5
+org.apache.commons.lang3.ArrayUtils.removeAll:7394 IFLT L4 true true
+org.apache.commons.lang3.ArrayUtils.removeAll:7395 ALOAD 4
+org.apache.commons.lang3.ArrayUtils.removeAll:7395 ILOAD 5
+org.apache.commons.lang3.ArrayUtils.removeAll:7395 IALOAD
+org.apache.commons.lang3.ArrayUtils.removeAll:7395 ISTORE 7
+org.apache.commons.lang3.ArrayUtils.removeAll:7399 ILOAD 7
+org.apache.commons.lang3.ArrayUtils.removeAll:7399 ILOAD 6
+org.apache.commons.lang3.ArrayUtils.removeAll:7399 IF_ICMPLT L3 true false
+org.apache.commons.lang3.ArrayUtils.removeAll:7402 IINC 3 1
+org.apache.commons.lang3.ArrayUtils.removeAll:7408 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeAll:7408 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtils.removeAll:7408 INVOKEVIRTUAL java/lang/Class.getComponentType()Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtils.removeAll:7408 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.removeAll:7408 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.removeAll:7408 ISUB
+org.apache.commons.lang3.ArrayUtils.removeAll:7408 INVOKESTATIC java/lang/reflect/Array.newInstance(Ljava/lang/Class;I)Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.removeAll:7408 ASTORE 5
+org.apache.commons.lang3.ArrayUtils.removeAll:7409 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.removeAll:7409 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.removeAll:7409 IF_ICMPGE L8 true false
+org.apache.commons.lang3.ArrayUtils.removeAll:7426 ALOAD 5
+org.apache.commons.lang3.ArrayUtils.removeAll:7426 ARETURN
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.main:48 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray()V
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray:492 ICONST_1
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray:492 NEWARRAY T_FLOAT
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray:492 ICONST_1
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray:492 NEWARRAY T_INT
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray:492 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.removeAll([F[I)[F
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray:492 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray:493 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_FLOAT_ARRAY [F
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray:493 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray:493 INVOKESTATIC java/util/Arrays.equals([F[F)Z
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveAllFloatArray:493 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 79 bytecode instructions.
+Computation took 5.98 seconds.

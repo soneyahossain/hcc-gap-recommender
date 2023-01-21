@@ -1,0 +1,29 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  0.7% done, time left: unknown  1.1% done, time left: unknown  1.7% done, time left: unknown  2.3% done, time left: unknown  2.7% done, time left: unknown  4.5% done, time left: unknown  6.5% done, time left:   0:00:04    8.0% done, time left:   0:00:05  9.2% done, time left:   0:00:05 10.2% done, time left:   0:00:05 10.2% done, time left:   0:00:06 10.2% done, time left:   0:00:07 10.2% done, time left:   0:00:08 10.3% done, time left:   0:00:08 12.8% done, time left:   0:00:10 15.7% done, time left:   0:00:09 18.4% done, time left:   0:00:08 21.8% done, time left:   0:00:06 25.4% done, time left:   0:00:05 29.0% done, time left:   0:00:04 32.5% done, time left:   0:00:03 35.8% done, time left:   0:00:02 39.2% done, time left:   0:00:02 41.6% done, time left:   0:00:02 44.0% done, time left:   0:00:02 47.3% done, time left:   0:00:02 47.5% done, time left:   0:00:01 50.3% done, time left:   0:00:01 53.2% done, time left:   0:00:01 56.4% done, time left:   0:00:01 59.8% done, time left:   0:00:01 63.3% done, time left:   0:00:00 66.3% done, time left:   0:00:00 69.8% done, time left:   0:00:00 73.3% done, time left:   0:00:00 77.1% done, time left:   0:00:00 80.9% done, time left:   0:00:00 84.5% done, time left:   0:00:00 88.0% done, time left:   0:00:00 91.5% done, time left:   0:00:00 94.3% done, time left:   0:00:00 95.3% done, time left:   0:00:00 95.8% done, time left:   0:00:00 97.2% done, time left:   0:00:00 99.1% done, time left:   0:00:00 100.1% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ValidateTest.testFinite2:966:*]:
+org.apache.commons.lang3.Validate.finite:960 DLOAD 0
+org.apache.commons.lang3.Validate.finite:960 INVOKESTATIC java/lang/Double.isNaN(D)Z
+org.apache.commons.lang3.Validate.finite:960 IFNE L0 false true
+org.apache.commons.lang3.Validate.finite:960 DLOAD 0
+org.apache.commons.lang3.Validate.finite:960 INVOKESTATIC java/lang/Double.isInfinite(D)Z
+org.apache.commons.lang3.Validate.finite:960 IFEQ L1 false true
+org.apache.commons.lang3.Validate.finite:961 NEW java/lang/IllegalArgumentException
+org.apache.commons.lang3.Validate.finite:961 DUP
+org.apache.commons.lang3.Validate.finite:961 ALOAD 2
+org.apache.commons.lang3.Validate.finite:961 ALOAD 3
+org.apache.commons.lang3.Validate.finite:961 INVOKESTATIC java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+org.apache.commons.lang3.Validate.finite:961 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.apache.commons.lang3.Validate.finite:961 ATHROW
+org.apache.commons.lang3.ValidateTest.main:95 INVOKEVIRTUAL org/apache/commons/lang3/ValidateTest.testFinite2()V
+org.apache.commons.lang3.ValidateTest.testFinite2:963 LDC -Infinity
+org.apache.commons.lang3.ValidateTest.testFinite2:963 LDC "MSG"
+org.apache.commons.lang3.ValidateTest.testFinite2:963 ICONST_0
+org.apache.commons.lang3.ValidateTest.testFinite2:963 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.ValidateTest.testFinite2:963 INVOKESTATIC org/apache/commons/lang3/Validate.finite(DLjava/lang/String;[Ljava/lang/Object;)V
+org.apache.commons.lang3.ValidateTest.testFinite2:965 ASTORE 1
+org.apache.commons.lang3.ValidateTest.testFinite2:966 LDC "MSG"
+org.apache.commons.lang3.ValidateTest.testFinite2:966 ALOAD 1
+org.apache.commons.lang3.ValidateTest.testFinite2:966 INVOKEVIRTUAL java/lang/IllegalArgumentException.getMessage()Ljava/lang/String;
+org.apache.commons.lang3.ValidateTest.testFinite2:966 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 64 bytecode instructions.
+Computation took 5.28 seconds.

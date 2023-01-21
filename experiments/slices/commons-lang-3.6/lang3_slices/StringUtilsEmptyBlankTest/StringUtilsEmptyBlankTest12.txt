@@ -1,0 +1,24 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsEmptyBlankTest.testIsAnyEmpty:64:*]:
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 false true
+org.apache.commons.lang3.ArrayUtils.getLength:1385 ICONST_0
+org.apache.commons.lang3.ArrayUtils.getLength:1385 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IFNE L0 false true
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ICONST_1
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IRETURN
+org.apache.commons.lang3.StringUtils.isAnyEmpty:252 ALOAD 0
+org.apache.commons.lang3.StringUtils.isAnyEmpty:252 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([Ljava/lang/Object;)Z
+org.apache.commons.lang3.StringUtils.isAnyEmpty:252 IFEQ L0 false true
+org.apache.commons.lang3.StringUtils.isAnyEmpty:253 ICONST_0
+org.apache.commons.lang3.StringUtils.isAnyEmpty:253 IRETURN
+org.apache.commons.lang3.StringUtilsEmptyBlankTest.main:33 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsEmptyBlankTest.testIsAnyEmpty()V
+org.apache.commons.lang3.StringUtilsEmptyBlankTest.testIsAnyEmpty:64 ACONST_NULL
+org.apache.commons.lang3.StringUtilsEmptyBlankTest.testIsAnyEmpty:64 CHECKCAST [Ljava/lang/String;
+org.apache.commons.lang3.StringUtilsEmptyBlankTest.testIsAnyEmpty:64 INVOKESTATIC org/apache/commons/lang3/StringUtils.isAnyEmpty([Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtilsEmptyBlankTest.testIsAnyEmpty:64 INVOKESTATIC org/junit/Assert.assertFalse(Z)V
+
+Slice consists of 19 bytecode instructions.
+Computation took 0.71 seconds.

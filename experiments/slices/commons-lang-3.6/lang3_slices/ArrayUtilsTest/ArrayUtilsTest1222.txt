@@ -1,0 +1,52 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.1% done, time left:   4:26:04    0.2% done, time left:   2:16:59  1.6% done, time left:   1:31:26  3.1% done, time left:   1:08:38  5.0% done, time left:   0:54:57  6.6% done, time left:   0:45:50  8.4% done, time left:   0:38:25 10.3% done, time left:   0:31:23 12.2% done, time left:   0:25:46 14.6% done, time left:   0:20:12 14.6% done, time left:   0:16:13 16.9% done, time left:   0:12:27 18.5% done, time left:   0:09:39 20.2% done, time left:   0:07:31 22.0% done, time left:   0:05:49 23.7% done, time left:   0:04:30 26.5% done, time left:   0:03:06 29.4% done, time left:   0:01:58 32.0% done, time left:   0:01:14 34.0% done, time left:   0:00:48 36.7% done, time left:   0:00:30 39.0% done, time left:   0:00:19 40.8% done, time left:   0:00:13 43.1% done, time left:   0:00:09 46.0% done, time left:   0:00:05 48.8% done, time left:   0:00:03 52.0% done, time left:   0:00:02 54.6% done, time left:   0:00:01 56.4% done, time left:   0:00:01 58.5% done, time left:   0:00:01 60.2% done, time left:   0:00:01 62.6% done, time left:   0:00:01 65.2% done, time left:   0:00:01 68.1% done, time left:   0:00:00 70.4% done, time left:   0:00:00 72.9% done, time left:   0:00:00 74.9% done, time left:   0:00:00 76.7% done, time left:   0:00:00 79.9% done, time left:   0:00:00 83.2% done, time left:   0:00:00 85.4% done, time left:   0:00:00 90.5% done, time left:   0:00:00 92.8% done, time left:   0:00:00 97.0% done, time left:   0:00:00 98.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsTest.testContains:3784:*]:
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ICONST_0
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([Ljava/lang/Object;Ljava/lang/Object;I)I
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 IRETURN
+org.apache.commons.lang3.ArrayUtils.indexOf:3217 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3217 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3223 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3223 IFNONNULL L5 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ISTORE 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ARRAYLENGTH
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 IF_ICMPGE L8 false true
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 IINC 3 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 AALOAD
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ArrayUtils.indexOf:3231 IFEQ L7 true true
+org.apache.commons.lang3.ArrayUtils.indexOf:3232 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3232 IRETURN
+org.apache.commons.lang3.ArrayUtils.contains:3302 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.contains:3302 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.contains:3302 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([Ljava/lang/Object;Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.contains:3302 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.contains:3302 IF_ICMPEQ L0 false true
+org.apache.commons.lang3.ArrayUtils.contains:3302 ICONST_1
+org.apache.commons.lang3.ArrayUtils.contains:3302 IRETURN
+org.apache.commons.lang3.ArrayUtilsTest.main:255 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsTest.testContains()V
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3780 BIPUSH 6
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3780 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3780 DUP
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3780 ICONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3780 LDC "0"
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3780 AASTORE
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3780 DUP
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3780 ICONST_1
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3780 LDC "1"
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3780 AASTORE
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3780 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3784 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3784 LDC "1"
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3784 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.contains([Ljava/lang/Object;Ljava/lang/Object;)Z
+org.apache.commons.lang3.ArrayUtilsTest.testContains:3784 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 47 bytecode instructions.
+Computation took 5.92 seconds.

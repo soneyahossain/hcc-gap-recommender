@@ -1,0 +1,62 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  2.9% done, time left: unknown  8.0% done, time left: unknown 15.8% done, time left: unknown 21.1% done, time left: unknown 24.0% done, time left: unknown 31.7% done, time left: unknown 38.1% done, time left: unknown 41.7% done, time left: unknown 49.0% done, time left:   0:00:00   50.6% done, time left:   0:00:00 54.4% done, time left:   0:00:00 54.6% done, time left:   0:00:00 54.6% done, time left:   0:00:01 56.5% done, time left:   0:00:02 63.9% done, time left:   0:00:00 70.7% done, time left:   0:00:00 83.8% done, time left:   0:00:00 93.7% done, time left:   0:00:00 99.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.RangeTest.testGetMinimum:233:*]:
+org.apache.commons.lang3.Range.<init>:80 ALOAD 1
+org.apache.commons.lang3.Range.<init>:80 ALOAD 2
+org.apache.commons.lang3.Range.<init>:80 INVOKEINTERFACE java/util/Comparator.compare(Ljava/lang/Object;Ljava/lang/Object;)I
+org.apache.commons.lang3.Range.<init>:80 ICONST_1
+org.apache.commons.lang3.Range.<init>:80 IF_ICMPGE L4 false true
+org.apache.commons.lang3.Range.<init>:81 ALOAD 0
+org.apache.commons.lang3.Range.<init>:81 ALOAD 1
+org.apache.commons.lang3.Range.<init>:81 PUTFIELD org/apache/commons/lang3/Range.minimum Ljava/lang/Object;
+org.apache.commons.lang3.Range.between:141 ALOAD 0
+org.apache.commons.lang3.Range.between:141 ALOAD 1
+org.apache.commons.lang3.Range.between:141 INVOKESTATIC org/apache/commons/lang3/Range.between(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Comparator;)Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.Range.between:141 ARETURN
+org.apache.commons.lang3.Range.between:162 NEW org/apache/commons/lang3/Range
+org.apache.commons.lang3.Range.between:162 DUP
+org.apache.commons.lang3.Range.between:162 ALOAD 0
+org.apache.commons.lang3.Range.between:162 ALOAD 1
+org.apache.commons.lang3.Range.between:162 INVOKESPECIAL org/apache/commons/lang3/Range.<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Comparator;)V
+org.apache.commons.lang3.Range.between:162 ARETURN
+org.apache.commons.lang3.Range.getMinimum:174 ALOAD 0
+org.apache.commons.lang3.Range.getMinimum:174 GETFIELD org/apache/commons/lang3/Range.minimum Ljava/lang/Object;
+org.apache.commons.lang3.Range.getMinimum:174 ARETURN
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 ALOAD 1
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 ALOAD 2
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 INVOKEINTERFACE java/lang/Comparable.compareTo(Ljava/lang/Object;)I
+org.apache.commons.lang3.Range$ComparableComparator.compare:483 IRETURN
+org.apache.commons.lang3.RangeTest.main:47 NEW org/apache/commons/lang3/RangeTest
+org.apache.commons.lang3.RangeTest.main:47 ASTORE 1
+org.apache.commons.lang3.RangeTest.main:64 ALOAD 1
+org.apache.commons.lang3.RangeTest.main:64 INVOKEVIRTUAL org/apache/commons/lang3/RangeTest.setUp()V
+org.apache.commons.lang3.RangeTest.main:65 ALOAD 1
+org.apache.commons.lang3.RangeTest.main:65 INVOKEVIRTUAL org/apache/commons/lang3/RangeTest.testGetMinimum()V
+org.apache.commons.lang3.RangeTest.setUp:103 ALOAD 0
+org.apache.commons.lang3.RangeTest.setUp:103 LDC 10.0
+org.apache.commons.lang3.RangeTest.setUp:103 INVOKESTATIC java/lang/Float.valueOf(F)Ljava/lang/Float;
+org.apache.commons.lang3.RangeTest.setUp:103 LDC 20.0
+org.apache.commons.lang3.RangeTest.setUp:103 INVOKESTATIC java/lang/Float.valueOf(F)Ljava/lang/Float;
+org.apache.commons.lang3.RangeTest.setUp:103 INVOKESTATIC org/apache/commons/lang3/Range.between(Ljava/lang/Comparable;Ljava/lang/Comparable;)Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.setUp:103 PUTFIELD org/apache/commons/lang3/RangeTest.floatRange Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.setUp:104 ALOAD 0
+org.apache.commons.lang3.RangeTest.setUp:104 LDC 10.0
+org.apache.commons.lang3.RangeTest.setUp:104 INVOKESTATIC java/lang/Double.valueOf(D)Ljava/lang/Double;
+org.apache.commons.lang3.RangeTest.setUp:104 LDC 20.0
+org.apache.commons.lang3.RangeTest.setUp:104 INVOKESTATIC java/lang/Double.valueOf(D)Ljava/lang/Double;
+org.apache.commons.lang3.RangeTest.setUp:104 INVOKESTATIC org/apache/commons/lang3/Range.between(Ljava/lang/Comparable;Ljava/lang/Comparable;)Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.setUp:104 PUTFIELD org/apache/commons/lang3/RangeTest.doubleRange Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.testGetMinimum:232 ALOAD 0
+org.apache.commons.lang3.RangeTest.testGetMinimum:232 GETFIELD org/apache/commons/lang3/RangeTest.floatRange Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.testGetMinimum:232 INVOKEVIRTUAL org/apache/commons/lang3/Range.getMinimum()Ljava/lang/Object;
+org.apache.commons.lang3.RangeTest.testGetMinimum:232 INVOKEVIRTUAL java/lang/Float.floatValue()F
+org.apache.commons.lang3.RangeTest.testGetMinimum:233 LDC 10.0
+org.apache.commons.lang3.RangeTest.testGetMinimum:233 ALOAD 0
+org.apache.commons.lang3.RangeTest.testGetMinimum:233 GETFIELD org/apache/commons/lang3/RangeTest.doubleRange Lorg/apache/commons/lang3/Range;
+org.apache.commons.lang3.RangeTest.testGetMinimum:233 INVOKEVIRTUAL org/apache/commons/lang3/Range.getMinimum()Ljava/lang/Object;
+org.apache.commons.lang3.RangeTest.testGetMinimum:233 CHECKCAST java/lang/Double
+org.apache.commons.lang3.RangeTest.testGetMinimum:233 INVOKEVIRTUAL java/lang/Double.doubleValue()D
+org.apache.commons.lang3.RangeTest.testGetMinimum:233 LDC 1.0E-5
+org.apache.commons.lang3.RangeTest.testGetMinimum:233 INVOKESTATIC org/junit/Assert.assertEquals(DDD)V
+
+Slice consists of 111 bytecode instructions.
+Computation took 2.77 seconds.

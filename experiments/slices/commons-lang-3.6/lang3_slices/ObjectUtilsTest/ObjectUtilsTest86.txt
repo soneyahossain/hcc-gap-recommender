@@ -1,0 +1,101 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  2.6% done, time left: unknown  4.4% done, time left: unknown  7.4% done, time left: unknown 11.7% done, time left: unknown 15.5% done, time left: unknown 22.2% done, time left: unknown 30.4% done, time left: unknown 31.6% done, time left:   0:00:05   31.7% done, time left:   0:00:08 31.7% done, time left:   0:00:10 32.5% done, time left:   0:00:11 33.9% done, time left:   0:00:11 38.9% done, time left:   0:00:03 43.6% done, time left:   0:00:01 48.2% done, time left:   0:00:01 48.2% done, time left:   0:00:00 51.4% done, time left:   0:00:01 53.6% done, time left:   0:00:01 61.4% done, time left:   0:00:00 71.8% done, time left:   0:00:00 76.5% done, time left:   0:00:00 83.1% done, time left:   0:00:00 92.1% done, time left:   0:00:00 100.9% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ObjectUtilsTest.testMin:378:*]:
+org.apache.commons.lang3.ObjectUtils.identityToString:403 ALOAD 1
+org.apache.commons.lang3.ObjectUtils.identityToString:403 LDC "Cannot get the toString of a null identity"
+org.apache.commons.lang3.ObjectUtils.identityToString:403 ICONST_0
+org.apache.commons.lang3.ObjectUtils.identityToString:403 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.ObjectUtils.identityToString:403 INVOKESTATIC org/apache/commons/lang3/Validate.notNull(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.ObjectUtils.min:501 ACONST_NULL
+org.apache.commons.lang3.ObjectUtils.min:501 ASTORE 1
+org.apache.commons.lang3.ObjectUtils.min:502 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.min:502 IFNULL L2 false true
+org.apache.commons.lang3.ObjectUtils.min:503 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.min:503 ASTORE 2
+org.apache.commons.lang3.ObjectUtils.min:503 ALOAD 2
+org.apache.commons.lang3.ObjectUtils.min:503 ARRAYLENGTH
+org.apache.commons.lang3.ObjectUtils.min:503 ISTORE 3
+org.apache.commons.lang3.ObjectUtils.min:503 ICONST_0
+org.apache.commons.lang3.ObjectUtils.min:503 ISTORE 4
+org.apache.commons.lang3.ObjectUtils.min:503 ILOAD 4
+org.apache.commons.lang3.ObjectUtils.min:503 ILOAD 3
+org.apache.commons.lang3.ObjectUtils.min:503 IF_ICMPGE L2 true true
+org.apache.commons.lang3.ObjectUtils.min:503 ALOAD 2
+org.apache.commons.lang3.ObjectUtils.min:503 ILOAD 4
+org.apache.commons.lang3.ObjectUtils.min:503 AALOAD
+org.apache.commons.lang3.ObjectUtils.min:503 ASTORE 5
+org.apache.commons.lang3.ObjectUtils.min:503 IINC 4 1
+org.apache.commons.lang3.ObjectUtils.min:504 ALOAD 5
+org.apache.commons.lang3.ObjectUtils.min:504 ALOAD 1
+org.apache.commons.lang3.ObjectUtils.min:504 ICONST_1
+org.apache.commons.lang3.ObjectUtils.min:504 INVOKESTATIC org/apache/commons/lang3/ObjectUtils.compare(Ljava/lang/Comparable;Ljava/lang/Comparable;Z)I
+org.apache.commons.lang3.ObjectUtils.min:504 IFGE L1 false true
+org.apache.commons.lang3.ObjectUtils.min:505 ALOAD 5
+org.apache.commons.lang3.ObjectUtils.min:505 ASTORE 1
+org.apache.commons.lang3.ObjectUtils.min:509 ALOAD 1
+org.apache.commons.lang3.ObjectUtils.min:509 ARETURN
+org.apache.commons.lang3.ObjectUtils.compare:566 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.compare:566 ALOAD 1
+org.apache.commons.lang3.ObjectUtils.compare:566 IF_ACMPNE L0 true false
+org.apache.commons.lang3.ObjectUtils.compare:568 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.compare:568 IFNONNULL L3 true false
+org.apache.commons.lang3.ObjectUtils.compare:570 ALOAD 1
+org.apache.commons.lang3.ObjectUtils.compare:570 IFNONNULL L6 true true
+org.apache.commons.lang3.ObjectUtils.compare:571 ILOAD 2
+org.apache.commons.lang3.ObjectUtils.compare:571 IFEQ L4 false true
+org.apache.commons.lang3.ObjectUtils.compare:571 ICONST_M1
+org.apache.commons.lang3.ObjectUtils.compare:571 IRETURN
+org.apache.commons.lang3.ObjectUtils.compare:573 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.compare:573 ALOAD 1
+org.apache.commons.lang3.ObjectUtils.compare:573 INVOKEINTERFACE java/lang/Comparable.compareTo(Ljava/lang/Object;)I
+org.apache.commons.lang3.ObjectUtils.compare:573 IRETURN
+org.apache.commons.lang3.ObjectUtilsTest.main:64 INVOKEVIRTUAL org/apache/commons/lang3/ObjectUtilsTest.testIdentityToStringStringBuffer()V
+org.apache.commons.lang3.ObjectUtilsTest.main:71 INVOKEVIRTUAL org/apache/commons/lang3/ObjectUtilsTest.testMax()V
+org.apache.commons.lang3.ObjectUtilsTest.main:72 INVOKEVIRTUAL org/apache/commons/lang3/ObjectUtilsTest.testMin()V
+org.apache.commons.lang3.ObjectUtilsTest.testIdentityToStringStringBuffer:224 ACONST_NULL
+org.apache.commons.lang3.ObjectUtilsTest.testIdentityToStringStringBuffer:224 INVOKESTATIC org/apache/commons/lang3/ObjectUtils.identityToString(Ljava/lang/StringBuffer;Ljava/lang/Object;)V
+org.apache.commons.lang3.ObjectUtilsTest.testMax:333 INVOKESTATIC java/util/Calendar.getInstance()Ljava/util/Calendar;
+org.apache.commons.lang3.ObjectUtilsTest.testMin:359 INVOKESTATIC java/util/Calendar.getInstance()Ljava/util/Calendar;
+org.apache.commons.lang3.ObjectUtilsTest.testMin:359 ASTORE 1
+org.apache.commons.lang3.ObjectUtilsTest.testMin:360 ALOAD 1
+org.apache.commons.lang3.ObjectUtilsTest.testMin:360 INVOKEVIRTUAL java/util/Calendar.getTime()Ljava/util/Date;
+org.apache.commons.lang3.ObjectUtilsTest.testMin:360 ASTORE 2
+org.apache.commons.lang3.ObjectUtilsTest.testMin:364 ALOAD 1
+org.apache.commons.lang3.ObjectUtilsTest.testMin:364 ICONST_1
+org.apache.commons.lang3.ObjectUtilsTest.testMin:364 ALOAD 1
+org.apache.commons.lang3.ObjectUtilsTest.testMin:364 ICONST_1
+org.apache.commons.lang3.ObjectUtilsTest.testMin:364 INVOKEVIRTUAL java/util/Calendar.get(I)I
+org.apache.commons.lang3.ObjectUtilsTest.testMin:364 ICONST_1
+org.apache.commons.lang3.ObjectUtilsTest.testMin:364 ISUB
+org.apache.commons.lang3.ObjectUtilsTest.testMin:364 INVOKEVIRTUAL java/util/Calendar.set(II)V
+org.apache.commons.lang3.ObjectUtilsTest.testMin:365 ALOAD 1
+org.apache.commons.lang3.ObjectUtilsTest.testMin:365 INVOKEVIRTUAL java/util/Calendar.getTime()Ljava/util/Date;
+org.apache.commons.lang3.ObjectUtilsTest.testMin:365 ASTORE 5
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 ALOAD 5
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 ICONST_4
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 ANEWARRAY java/util/Date
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 DUP
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 ICONST_0
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 ACONST_NULL
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 AASTORE
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 DUP
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 ICONST_1
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 ALOAD 2
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 AASTORE
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 DUP
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 ICONST_2
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 ACONST_NULL
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 AASTORE
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 DUP
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 ICONST_3
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 ALOAD 5
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 AASTORE
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 INVOKESTATIC org/apache/commons/lang3/ObjectUtils.min([Ljava/lang/Comparable;)Ljava/lang/Comparable;
+org.apache.commons.lang3.ObjectUtilsTest.testMin:378 INVOKESTATIC org/junit/Assert.assertSame(Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.lang3.Validate.notNull:224 ALOAD 0
+org.apache.commons.lang3.Validate.notNull:224 IFNONNULL L0 false true
+org.apache.commons.lang3.Validate.notNull:225 ALOAD 1
+org.apache.commons.lang3.Validate.notNull:225 ALOAD 2
+org.apache.commons.lang3.Validate.notNull:225 INVOKESTATIC java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+
+Slice consists of 1564 bytecode instructions.
+Computation took 3.02 seconds.

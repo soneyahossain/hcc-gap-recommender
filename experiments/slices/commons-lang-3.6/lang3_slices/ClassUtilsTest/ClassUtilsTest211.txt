@@ -1,0 +1,41 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  1.4% done, time left: unknown  3.3% done, time left: unknown  5.1% done, time left: unknown  8.1% done, time left: unknown 11.1% done, time left: unknown 14.8% done, time left: unknown 18.5% done, time left: unknown 22.5% done, time left:   0:00:01   27.2% done, time left:   0:00:02 31.4% done, time left:   0:00:02 34.7% done, time left:   0:00:02 36.2% done, time left:   0:00:01 37.8% done, time left:   0:00:02 39.8% done, time left:   0:00:02 41.8% done, time left:   0:00:02 43.7% done, time left:   0:00:02 45.7% done, time left:   0:00:02 47.8% done, time left:   0:00:02 50.2% done, time left:   0:00:02 54.3% done, time left:   0:00:01 58.5% done, time left:   0:00:00 62.1% done, time left:   0:00:00 63.5% done, time left:   0:00:00 63.8% done, time left:   0:00:00 64.6% done, time left:   0:00:00 66.3% done, time left:   0:00:00 68.4% done, time left:   0:00:00 70.6% done, time left:   0:00:00 74.1% done, time left:   0:00:00 76.6% done, time left:   0:00:00 79.9% done, time left:   0:00:00 80.3% done, time left:   0:00:00 83.7% done, time left:   0:00:00 84.8% done, time left:   0:00:00 87.1% done, time left:   0:00:00 88.7% done, time left:   0:00:00 92.0% done, time left:   0:00:00 94.7% done, time left:   0:00:00 97.8% done, time left:   0:00:00 98.9% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_Autoboxing:548:*]:
+org.apache.commons.lang3.ClassUtils.isAssignable:721 ALOAD 1
+org.apache.commons.lang3.ClassUtils.isAssignable:721 IFNONNULL L0 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:725 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:725 IFNONNULL L3 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:729 ILOAD 2
+org.apache.commons.lang3.ClassUtils.isAssignable:729 IFEQ L5 false true
+org.apache.commons.lang3.ClassUtils.isAssignable:730 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:730 INVOKEVIRTUAL java/lang/Class.isPrimitive()Z
+org.apache.commons.lang3.ClassUtils.isAssignable:730 IFEQ L4 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:736 ALOAD 1
+org.apache.commons.lang3.ClassUtils.isAssignable:736 INVOKEVIRTUAL java/lang/Class.isPrimitive()Z
+org.apache.commons.lang3.ClassUtils.isAssignable:736 IFEQ L5 false true
+org.apache.commons.lang3.ClassUtils.isAssignable:736 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:736 INVOKEVIRTUAL java/lang/Class.isPrimitive()Z
+org.apache.commons.lang3.ClassUtils.isAssignable:736 IFNE L5 false true
+org.apache.commons.lang3.ClassUtils.isAssignable:737 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:737 INVOKESTATIC org/apache/commons/lang3/ClassUtils.wrapperToPrimitive(Ljava/lang/Class;)Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.isAssignable:737 ASTORE 0
+org.apache.commons.lang3.ClassUtils.isAssignable:738 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:738 IFNONNULL L5 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:743 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:743 ALOAD 1
+org.apache.commons.lang3.ClassUtils.isAssignable:743 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ClassUtils.isAssignable:743 IFEQ L6 false true
+org.apache.commons.lang3.ClassUtils.isAssignable:744 ICONST_1
+org.apache.commons.lang3.ClassUtils.isAssignable:744 IRETURN
+org.apache.commons.lang3.ClassUtils.wrapperToPrimitive:856 GETSTATIC org/apache/commons/lang3/ClassUtils.wrapperPrimitiveMap Ljava/util/Map;
+org.apache.commons.lang3.ClassUtils.wrapperToPrimitive:856 ALOAD 0
+org.apache.commons.lang3.ClassUtils.wrapperToPrimitive:856 INVOKEINTERFACE java/util/Map.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.ClassUtils.wrapperToPrimitive:856 ARETURN
+org.apache.commons.lang3.ClassUtilsTest.main:65 INVOKEVIRTUAL org/apache/commons/lang3/ClassUtilsTest.test_isAssignable_Autoboxing()V
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_Autoboxing:548 LDC Ljava/lang/Integer;
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_Autoboxing:548 GETSTATIC java/lang/Integer.TYPE Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_Autoboxing:548 ICONST_1
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_Autoboxing:548 INVOKESTATIC org/apache/commons/lang3/ClassUtils.isAssignable(Ljava/lang/Class;Ljava/lang/Class;Z)Z
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_Autoboxing:548 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 118 bytecode instructions.
+Computation took 4.60 seconds.

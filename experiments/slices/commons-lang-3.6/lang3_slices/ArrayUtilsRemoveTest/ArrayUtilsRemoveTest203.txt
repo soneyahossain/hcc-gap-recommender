@@ -1,0 +1,42 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveAllDoubleOccurences:668:*]:
+org.apache.commons.lang3.ArrayUtils.clone:421 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.clone:421 IFNONNULL L0 false true
+org.apache.commons.lang3.ArrayUtils.clone:422 ACONST_NULL
+org.apache.commons.lang3.ArrayUtils.clone:422 ARETURN
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 false true
+org.apache.commons.lang3.ArrayUtils.getLength:1385 ICONST_0
+org.apache.commons.lang3.ArrayUtils.getLength:1385 IRETURN
+org.apache.commons.lang3.ArrayUtils.indexOf:3838 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3838 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([DDI)I
+org.apache.commons.lang3.ArrayUtils.indexOf:3838 IRETURN
+org.apache.commons.lang3.ArrayUtils.indexOf:3873 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3873 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([D)Z
+org.apache.commons.lang3.ArrayUtils.indexOf:3873 IFEQ L0 false true
+org.apache.commons.lang3.ArrayUtils.indexOf:3874 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.indexOf:3874 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4912 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4912 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4912 IFNE L0 false true
+org.apache.commons.lang3.ArrayUtils.isEmpty:4912 ICONST_1
+org.apache.commons.lang3.ArrayUtils.isEmpty:4912 IRETURN
+org.apache.commons.lang3.ArrayUtils.removeAllOccurences:7958 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeAllOccurences:7958 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([DD)I
+org.apache.commons.lang3.ArrayUtils.removeAllOccurences:7958 ISTORE 3
+org.apache.commons.lang3.ArrayUtils.removeAllOccurences:7959 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.removeAllOccurences:7959 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.removeAllOccurences:7959 IF_ICMPNE L0 false true
+org.apache.commons.lang3.ArrayUtils.removeAllOccurences:7960 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeAllOccurences:7960 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.clone([D)[D
+org.apache.commons.lang3.ArrayUtils.removeAllOccurences:7960 ARETURN
+org.apache.commons.lang3.ArrayUtilsRemoveTest.main:62 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsRemoveTest.testRemoveAllDoubleOccurences()V
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveAllDoubleOccurences:667 ACONST_NULL
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveAllDoubleOccurences:667 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveAllDoubleOccurences:668 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveAllDoubleOccurences:668 LDC 2.0
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveAllDoubleOccurences:668 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.removeAllOccurences([DD)[D
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveAllDoubleOccurences:668 INVOKESTATIC org/junit/Assert.assertNull(Ljava/lang/Object;)V
+
+Slice consists of 37 bytecode instructions.
+Computation took 1.75 seconds.

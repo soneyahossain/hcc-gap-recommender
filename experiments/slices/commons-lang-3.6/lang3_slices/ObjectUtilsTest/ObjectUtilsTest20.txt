@@ -1,0 +1,39 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  2.1% done, time left: unknown  4.1% done, time left: unknown  6.5% done, time left: unknown 10.8% done, time left: unknown 13.3% done, time left: unknown 18.1% done, time left: unknown 25.4% done, time left:   0:00:01   29.5% done, time left:   0:00:01 30.4% done, time left:   0:00:01 30.4% done, time left:   0:00:02 31.6% done, time left:   0:00:03 31.7% done, time left:   0:00:03 31.7% done, time left:   0:00:04 33.3% done, time left:   0:00:05 38.1% done, time left:   0:00:02 43.2% done, time left:   0:00:01 48.2% done, time left:   0:00:01 48.2% done, time left:   0:00:00 50.5% done, time left:   0:00:00 53.4% done, time left:   0:00:01 62.0% done, time left:   0:00:00 73.0% done, time left:   0:00:00 76.5% done, time left:   0:00:00 79.8% done, time left:   0:00:00 87.1% done, time left:   0:00:00 96.0% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ObjectUtilsTest.testAnyNotNull:135:*]:
+org.apache.commons.lang3.ObjectUtils.firstNonNull:124 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.firstNonNull:124 IFNULL L2 false true
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ASTORE 1
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ALOAD 1
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ARRAYLENGTH
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ISTORE 2
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ICONST_0
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ISTORE 3
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ILOAD 3
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ILOAD 2
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 IF_ICMPGE L2 false true
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ALOAD 1
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ILOAD 3
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 AALOAD
+org.apache.commons.lang3.ObjectUtils.firstNonNull:125 ASTORE 4
+org.apache.commons.lang3.ObjectUtils.firstNonNull:126 ALOAD 4
+org.apache.commons.lang3.ObjectUtils.firstNonNull:126 IFNULL L1 false true
+org.apache.commons.lang3.ObjectUtils.firstNonNull:127 ALOAD 4
+org.apache.commons.lang3.ObjectUtils.firstNonNull:127 ARETURN
+org.apache.commons.lang3.ObjectUtils.anyNotNull:158 ALOAD 0
+org.apache.commons.lang3.ObjectUtils.anyNotNull:158 INVOKESTATIC org/apache/commons/lang3/ObjectUtils.firstNonNull([Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.ObjectUtils.anyNotNull:158 IFNULL L0 false true
+org.apache.commons.lang3.ObjectUtils.anyNotNull:158 ICONST_1
+org.apache.commons.lang3.ObjectUtils.anyNotNull:158 IRETURN
+org.apache.commons.lang3.ObjectUtilsTest.main:56 INVOKEVIRTUAL org/apache/commons/lang3/ObjectUtilsTest.testAnyNotNull()V
+org.apache.commons.lang3.ObjectUtilsTest.testAnyNotNull:135 ICONST_1
+org.apache.commons.lang3.ObjectUtilsTest.testAnyNotNull:135 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.ObjectUtilsTest.testAnyNotNull:135 DUP
+org.apache.commons.lang3.ObjectUtilsTest.testAnyNotNull:135 ICONST_0
+org.apache.commons.lang3.ObjectUtilsTest.testAnyNotNull:135 LDC "foo"
+org.apache.commons.lang3.ObjectUtilsTest.testAnyNotNull:135 AASTORE
+org.apache.commons.lang3.ObjectUtilsTest.testAnyNotNull:135 INVOKESTATIC org/apache/commons/lang3/ObjectUtils.anyNotNull([Ljava/lang/Object;)Z
+org.apache.commons.lang3.ObjectUtilsTest.testAnyNotNull:135 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 34 bytecode instructions.
+Computation took 3.85 seconds.

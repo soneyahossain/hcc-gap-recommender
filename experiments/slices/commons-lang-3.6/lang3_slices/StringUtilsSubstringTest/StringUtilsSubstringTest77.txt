@@ -1,0 +1,38 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsSubstringTest.testSubstringBefore_StringString:166:*]:
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.StringUtils.substringBefore:2860 ALOAD 0
+org.apache.commons.lang3.StringUtils.substringBefore:2860 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.substringBefore:2860 IFNE L0 false true
+org.apache.commons.lang3.StringUtils.substringBefore:2860 ALOAD 1
+org.apache.commons.lang3.StringUtils.substringBefore:2860 IFNONNULL L1 true false
+org.apache.commons.lang3.StringUtils.substringBefore:2863 ALOAD 1
+org.apache.commons.lang3.StringUtils.substringBefore:2863 INVOKEVIRTUAL java/lang/String.isEmpty()Z
+org.apache.commons.lang3.StringUtils.substringBefore:2863 IFEQ L2 true false
+org.apache.commons.lang3.StringUtils.substringBefore:2866 ALOAD 0
+org.apache.commons.lang3.StringUtils.substringBefore:2866 ALOAD 1
+org.apache.commons.lang3.StringUtils.substringBefore:2866 INVOKEVIRTUAL java/lang/String.indexOf(Ljava/lang/String;)I
+org.apache.commons.lang3.StringUtils.substringBefore:2866 ISTORE 2
+org.apache.commons.lang3.StringUtils.substringBefore:2867 ILOAD 2
+org.apache.commons.lang3.StringUtils.substringBefore:2867 ICONST_M1
+org.apache.commons.lang3.StringUtils.substringBefore:2867 IF_ICMPNE L3 true false
+org.apache.commons.lang3.StringUtils.substringBefore:2870 ALOAD 0
+org.apache.commons.lang3.StringUtils.substringBefore:2870 ICONST_0
+org.apache.commons.lang3.StringUtils.substringBefore:2870 ILOAD 2
+org.apache.commons.lang3.StringUtils.substringBefore:2870 INVOKEVIRTUAL java/lang/String.substring(II)Ljava/lang/String;
+org.apache.commons.lang3.StringUtils.substringBefore:2870 ARETURN
+org.apache.commons.lang3.StringUtilsSubstringTest.main:45 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsSubstringTest.testSubstringBefore_StringString()V
+org.apache.commons.lang3.StringUtilsSubstringTest.testSubstringBefore_StringString:166 LDC "a"
+org.apache.commons.lang3.StringUtilsSubstringTest.testSubstringBefore_StringString:166 LDC "abcba"
+org.apache.commons.lang3.StringUtilsSubstringTest.testSubstringBefore_StringString:166 LDC "b"
+org.apache.commons.lang3.StringUtilsSubstringTest.testSubstringBefore_StringString:166 INVOKESTATIC org/apache/commons/lang3/StringUtils.substringBefore(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.lang3.StringUtilsSubstringTest.testSubstringBefore_StringString:166 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 33 bytecode instructions.
+Computation took 0.95 seconds.

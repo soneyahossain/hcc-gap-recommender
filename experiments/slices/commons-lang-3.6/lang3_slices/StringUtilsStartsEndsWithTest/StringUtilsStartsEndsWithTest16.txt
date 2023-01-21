@@ -1,0 +1,23 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWithIgnoreCase:80:*]:
+org.apache.commons.lang3.StringUtils.startsWithIgnoreCase:8507 ALOAD 0
+org.apache.commons.lang3.StringUtils.startsWithIgnoreCase:8507 ALOAD 1
+org.apache.commons.lang3.StringUtils.startsWithIgnoreCase:8507 INVOKESTATIC org/apache/commons/lang3/StringUtils.startsWith(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Z)Z
+org.apache.commons.lang3.StringUtils.startsWithIgnoreCase:8507 IRETURN
+org.apache.commons.lang3.StringUtils.startsWith:8522 ALOAD 0
+org.apache.commons.lang3.StringUtils.startsWith:8522 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.startsWith:8522 ALOAD 1
+org.apache.commons.lang3.StringUtils.startsWith:8522 IFNONNULL L3 false true
+org.apache.commons.lang3.StringUtils.startsWith:8523 ALOAD 0
+org.apache.commons.lang3.StringUtils.startsWith:8523 IFNONNULL L1 true false
+org.apache.commons.lang3.StringUtils.startsWith:8523 ICONST_0
+org.apache.commons.lang3.StringUtils.startsWith:8523 IRETURN
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.main:46 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsStartsEndsWithTest.testStartsWithIgnoreCase()V
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWithIgnoreCase:80 LDC "startsWithIgnoreCase(FOOBAR, null)"
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWithIgnoreCase:80 LDC "FOOBAR"
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWithIgnoreCase:80 ACONST_NULL
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWithIgnoreCase:80 INVOKESTATIC org/apache/commons/lang3/StringUtils.startsWithIgnoreCase(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWithIgnoreCase:80 INVOKESTATIC org/junit/Assert.assertFalse(Ljava/lang/String;Z)V
+
+Slice consists of 18 bytecode instructions.
+Computation took 0.85 seconds.

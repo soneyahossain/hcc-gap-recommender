@@ -1,0 +1,49 @@
+ 0.0% done, time left: unknown                                1.5% done, time left: unknown  2.5% done, time left: unknown  5.3% done, time left: unknown  9.0% done, time left: unknown 13.6% done, time left: unknown 20.4% done, time left: unknown 25.2% done, time left: unknown 33.0% done, time left: unknown 41.3% done, time left:   0:00:00   49.9% done, time left:   0:00:00 58.5% done, time left:   0:00:00 67.5% done, time left:   0:00:00 76.6% done, time left:   0:00:00 83.6% done, time left:   0:00:00 89.6% done, time left:   0:00:00 92.9% done, time left:   0:00:00 93.4% done, time left:   0:00:00 95.8% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.BitFieldTest.testByte:209:*]:
+org.apache.commons.lang3.BitField.<init>:86 ALOAD 0
+org.apache.commons.lang3.BitField.<init>:86 ILOAD 1
+org.apache.commons.lang3.BitField.<init>:86 PUTFIELD org/apache/commons/lang3/BitField._mask I
+org.apache.commons.lang3.BitField.isSet:162 ILOAD 1
+org.apache.commons.lang3.BitField.isSet:162 ALOAD 0
+org.apache.commons.lang3.BitField.isSet:162 GETFIELD org/apache/commons/lang3/BitField._mask I
+org.apache.commons.lang3.BitField.isSet:162 IAND
+org.apache.commons.lang3.BitField.isSet:162 IFEQ L0 true false
+org.apache.commons.lang3.BitField.isSet:162 ICONST_0
+org.apache.commons.lang3.BitField.isSet:162 IRETURN
+org.apache.commons.lang3.BitField.clear:218 ILOAD 1
+org.apache.commons.lang3.BitField.clear:218 ALOAD 0
+org.apache.commons.lang3.BitField.clear:218 GETFIELD org/apache/commons/lang3/BitField._mask I
+org.apache.commons.lang3.BitField.clear:218 ICONST_M1
+org.apache.commons.lang3.BitField.clear:218 IXOR
+org.apache.commons.lang3.BitField.clear:218 IAND
+org.apache.commons.lang3.BitField.clear:218 IRETURN
+org.apache.commons.lang3.BitField.clearByte:243 ALOAD 0
+org.apache.commons.lang3.BitField.clearByte:243 ILOAD 1
+org.apache.commons.lang3.BitField.clearByte:243 INVOKEVIRTUAL org/apache/commons/lang3/BitField.clear(I)I
+org.apache.commons.lang3.BitField.clearByte:243 I2B
+org.apache.commons.lang3.BitField.clearByte:243 IRETURN
+org.apache.commons.lang3.BitField.setByteBoolean:319 ILOAD 2
+org.apache.commons.lang3.BitField.setByteBoolean:319 IFEQ L0 true false
+org.apache.commons.lang3.BitField.setByteBoolean:319 ALOAD 0
+org.apache.commons.lang3.BitField.setByteBoolean:319 ILOAD 1
+org.apache.commons.lang3.BitField.setByteBoolean:319 INVOKEVIRTUAL org/apache/commons/lang3/BitField.clearByte(B)B
+org.apache.commons.lang3.BitField.setByteBoolean:319 IRETURN
+org.apache.commons.lang3.BitFieldTest.main:48 INVOKEVIRTUAL org/apache/commons/lang3/BitFieldTest.testByte()V
+org.apache.commons.lang3.BitFieldTest.testByte:207 NEW org/apache/commons/lang3/BitField
+org.apache.commons.lang3.BitFieldTest.testByte:207 DUP
+org.apache.commons.lang3.BitFieldTest.testByte:207 BIPUSH 64
+org.apache.commons.lang3.BitFieldTest.testByte:207 INVOKESPECIAL org/apache/commons/lang3/BitField.<init>(I)V
+org.apache.commons.lang3.BitFieldTest.testByte:207 BIPUSH -63
+org.apache.commons.lang3.BitFieldTest.testByte:207 ICONST_0
+org.apache.commons.lang3.BitFieldTest.testByte:207 INVOKEVIRTUAL org/apache/commons/lang3/BitField.setByteBoolean(BZ)B
+org.apache.commons.lang3.BitFieldTest.testByte:207 ISTORE 1
+org.apache.commons.lang3.BitFieldTest.testByte:209 NEW org/apache/commons/lang3/BitField
+org.apache.commons.lang3.BitFieldTest.testByte:209 DUP
+org.apache.commons.lang3.BitFieldTest.testByte:209 BIPUSH 64
+org.apache.commons.lang3.BitFieldTest.testByte:209 INVOKESPECIAL org/apache/commons/lang3/BitField.<init>(I)V
+org.apache.commons.lang3.BitFieldTest.testByte:209 ILOAD 1
+org.apache.commons.lang3.BitFieldTest.testByte:209 INVOKEVIRTUAL org/apache/commons/lang3/BitField.isSet(I)Z
+org.apache.commons.lang3.BitFieldTest.testByte:209 INVOKESTATIC org/junit/Assert.assertFalse(Z)V
+
+Slice consists of 44 bytecode instructions.
+Computation took 2.07 seconds.

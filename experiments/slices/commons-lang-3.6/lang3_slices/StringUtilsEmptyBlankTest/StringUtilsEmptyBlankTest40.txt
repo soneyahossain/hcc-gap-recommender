@@ -1,0 +1,29 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsEmptyBlankTest.testIsBlank:104:*]:
+org.apache.commons.lang3.StringUtils.isBlank:337 ALOAD 0
+org.apache.commons.lang3.StringUtils.isBlank:337 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isBlank:337 ALOAD 0
+org.apache.commons.lang3.StringUtils.isBlank:337 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isBlank:337 DUP
+org.apache.commons.lang3.StringUtils.isBlank:337 ISTORE 1
+org.apache.commons.lang3.StringUtils.isBlank:337 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isBlank:340 ICONST_0
+org.apache.commons.lang3.StringUtils.isBlank:340 ISTORE 2
+org.apache.commons.lang3.StringUtils.isBlank:340 ILOAD 2
+org.apache.commons.lang3.StringUtils.isBlank:340 ILOAD 1
+org.apache.commons.lang3.StringUtils.isBlank:340 IF_ICMPGE L4 true true
+org.apache.commons.lang3.StringUtils.isBlank:340 IINC 2 1
+org.apache.commons.lang3.StringUtils.isBlank:341 ALOAD 0
+org.apache.commons.lang3.StringUtils.isBlank:341 ILOAD 2
+org.apache.commons.lang3.StringUtils.isBlank:341 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
+org.apache.commons.lang3.StringUtils.isBlank:341 INVOKESTATIC java/lang/Character.isWhitespace(C)Z
+org.apache.commons.lang3.StringUtils.isBlank:341 IFNE L3 true false
+org.apache.commons.lang3.StringUtils.isBlank:345 ICONST_1
+org.apache.commons.lang3.StringUtils.isBlank:345 IRETURN
+org.apache.commons.lang3.StringUtilsEmptyBlankTest.main:36 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsEmptyBlankTest.testIsBlank()V
+org.apache.commons.lang3.StringUtilsEmptyBlankTest.testIsBlank:104 GETSTATIC org/apache/commons/lang3/StringUtilsTest.WHITESPACE Ljava/lang/String;
+org.apache.commons.lang3.StringUtilsEmptyBlankTest.testIsBlank:104 INVOKESTATIC org/apache/commons/lang3/StringUtils.isBlank(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtilsEmptyBlankTest.testIsBlank:104 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 42 bytecode instructions.
+Computation took 0.76 seconds.

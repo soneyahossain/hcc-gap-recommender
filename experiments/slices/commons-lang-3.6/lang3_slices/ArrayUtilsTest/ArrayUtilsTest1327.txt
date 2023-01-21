@@ -1,0 +1,53 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  1.0% done, time left: unknown  2.5% done, time left: unknown  4.3% done, time left: unknown  5.9% done, time left: unknown  7.6% done, time left: unknown  9.5% done, time left: unknown 11.3% done, time left: unknown 13.6% done, time left: unknown 14.6% done, time left: unknown 15.3% done, time left: unknown 17.5% done, time left: unknown 18.9% done, time left: unknown 21.1% done, time left: unknown 23.2% done, time left: unknown 24.5% done, time left: unknown 26.4% done, time left: unknown 29.1% done, time left: unknown 32.1% done, time left: unknown 34.8% done, time left: unknown 36.9% done, time left: unknown 39.8% done, time left: unknown 42.7% done, time left: unknown 45.8% done, time left: unknown 48.9% done, time left: unknown 51.8% done, time left: unknown 54.5% done, time left: unknown 56.0% done, time left: unknown 57.6% done, time left: unknown 59.4% done, time left: unknown 60.9% done, time left: unknown 63.0% done, time left: unknown 65.0% done, time left: unknown 67.7% done, time left: unknown 70.0% done, time left: unknown 71.8% done, time left: unknown 74.9% done, time left:   0:00:00   76.7% done, time left:   0:00:00 79.5% done, time left:   0:00:00 83.0% done, time left:   0:00:00 83.2% done, time left:   0:00:00 84.7% done, time left:   0:00:00 90.0% done, time left:   0:00:00 92.4% done, time left:   0:00:00 96.6% done, time left:   0:00:00 98.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3997:*]:
+org.apache.commons.lang3.ArrayUtils.indexOf:3524 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3524 ILOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3524 ICONST_0
+org.apache.commons.lang3.ArrayUtils.indexOf:3524 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([SSI)I
+org.apache.commons.lang3.ArrayUtils.indexOf:3524 IRETURN
+org.apache.commons.lang3.ArrayUtils.indexOf:3542 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3542 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3548 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.indexOf:3548 ISTORE 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3548 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3548 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3548 ARRAYLENGTH
+org.apache.commons.lang3.ArrayUtils.indexOf:3548 IF_ICMPGE L4 false true
+org.apache.commons.lang3.ArrayUtils.indexOf:3548 IINC 3 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3549 ILOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3549 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3549 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3549 SALOAD
+org.apache.commons.lang3.ArrayUtils.indexOf:3549 IF_ICMPNE L3 true true
+org.apache.commons.lang3.ArrayUtils.indexOf:3550 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3550 IRETURN
+org.apache.commons.lang3.ArrayUtils.contains:3611 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.contains:3611 ILOAD 1
+org.apache.commons.lang3.ArrayUtils.contains:3611 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([SS)I
+org.apache.commons.lang3.ArrayUtils.contains:3611 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.contains:3611 IF_ICMPEQ L0 false true
+org.apache.commons.lang3.ArrayUtils.contains:3611 ICONST_1
+org.apache.commons.lang3.ArrayUtils.contains:3611 IRETURN
+org.apache.commons.lang3.ArrayUtilsTest.main:271 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsTest.testContainsShort()V
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 ICONST_5
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 NEWARRAY T_SHORT
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 DUP
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 ICONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 ICONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 SASTORE
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 DUP
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 ICONST_1
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 ICONST_1
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 SASTORE
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 DUP
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 ICONST_2
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 ICONST_2
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 SASTORE
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3994 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3997 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3997 ICONST_2
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3997 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.contains([SS)Z
+org.apache.commons.lang3.ArrayUtilsTest.testContainsShort:3997 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 48 bytecode instructions.
+Computation took 5.87 seconds.

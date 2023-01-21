@@ -1,0 +1,340 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  1.2% done, time left: unknown  1.6% done, time left: unknown  2.3% done, time left: unknown  3.1% done, time left: unknown  3.6% done, time left: unknown  4.0% done, time left: unknown  5.6% done, time left:   0:00:05    7.4% done, time left:   0:00:05  9.3% done, time left:   0:00:05 11.7% done, time left:   0:00:06 14.1% done, time left:   0:00:06 16.5% done, time left:   0:00:06 18.9% done, time left:   0:00:06 20.1% done, time left:   0:00:05 22.3% done, time left:   0:00:05 24.7% done, time left:   0:00:05 26.1% done, time left:   0:00:05 28.4% done, time left:   0:00:05 30.9% done, time left:   0:00:04 33.4% done, time left:   0:00:04 35.5% done, time left:   0:00:04 37.0% done, time left:   0:00:03 38.6% done, time left:   0:00:03 40.6% done, time left:   0:00:03 42.8% done, time left:   0:00:03 45.0% done, time left:   0:00:03 47.4% done, time left:   0:00:03 49.6% done, time left:   0:00:02 52.1% done, time left:   0:00:02 54.8% done, time left:   0:00:02 57.3% done, time left:   0:00:01 59.8% done, time left:   0:00:01 62.4% done, time left:   0:00:01 65.0% done, time left:   0:00:01 67.6% done, time left:   0:00:00 70.1% done, time left:   0:00:00 72.7% done, time left:   0:00:00 75.2% done, time left:   0:00:00 77.4% done, time left:   0:00:00 79.6% done, time left:   0:00:00 81.9% done, time left:   0:00:00 83.1% done, time left:   0:00:00 84.4% done, time left:   0:00:00 86.7% done, time left:   0:00:00 88.6% done, time left:   0:00:00 89.9% done, time left:   0:00:00 91.4% done, time left:   0:00:00 92.6% done, time left:   0:00:00 94.9% done, time left:   0:00:00 97.0% done, time left:   0:00:00 97.7% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1298:*]:
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 ICONST_0
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([Ljava/lang/Object;Ljava/lang/Object;I)I
+org.apache.commons.lang3.ArrayUtils.indexOf:3199 IRETURN
+org.apache.commons.lang3.ArrayUtils.indexOf:3217 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3217 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3223 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3223 IFNONNULL L5 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ISTORE 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 ARRAYLENGTH
+org.apache.commons.lang3.ArrayUtils.indexOf:3230 IF_ICMPGE L8 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3236 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.indexOf:3236 IRETURN
+org.apache.commons.lang3.ArrayUtils.contains:3302 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.contains:3302 ALOAD 1
+org.apache.commons.lang3.ArrayUtils.contains:3302 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([Ljava/lang/Object;Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.contains:3302 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.contains:3302 IF_ICMPEQ L0 true false
+org.apache.commons.lang3.ArrayUtils.contains:3302 ICONST_0
+org.apache.commons.lang3.ArrayUtils.contains:3302 IRETURN
+org.apache.commons.lang3.builder.EqualsBuilder.<init>:118 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.<init>:118 ICONST_1
+org.apache.commons.lang3.builder.EqualsBuilder.<init>:118 PUTFIELD org/apache/commons/lang3/builder/EqualsBuilder.isEquals Z
+org.apache.commons.lang3.builder.EqualsBuilder.getRegistry:145 GETSTATIC org/apache/commons/lang3/builder/EqualsBuilder.REGISTRY Ljava/lang/ThreadLocal;
+org.apache.commons.lang3.builder.EqualsBuilder.getRegistry:145 INVOKEVIRTUAL java/lang/ThreadLocal.get()Ljava/lang/Object;
+org.apache.commons.lang3.builder.EqualsBuilder.getRegistry:145 ARETURN
+org.apache.commons.lang3.builder.EqualsBuilder.getRegisterPair:158 NEW org/apache/commons/lang3/builder/IDKey
+org.apache.commons.lang3.builder.EqualsBuilder.getRegisterPair:158 ASTORE 2
+org.apache.commons.lang3.builder.EqualsBuilder.getRegisterPair:159 NEW org/apache/commons/lang3/builder/IDKey
+org.apache.commons.lang3.builder.EqualsBuilder.getRegisterPair:159 ASTORE 3
+org.apache.commons.lang3.builder.EqualsBuilder.getRegisterPair:160 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.getRegisterPair:160 ALOAD 3
+org.apache.commons.lang3.builder.EqualsBuilder.getRegisterPair:160 INVOKESTATIC org/apache/commons/lang3/tuple/Pair.of(Ljava/lang/Object;Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Pair;
+org.apache.commons.lang3.builder.EqualsBuilder.getRegisterPair:160 ARETURN
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:177 INVOKESTATIC org/apache/commons/lang3/builder/EqualsBuilder.getRegistry()Ljava/util/Set;
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:177 ASTORE 2
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:178 INVOKESTATIC org/apache/commons/lang3/builder/EqualsBuilder.getRegisterPair(Ljava/lang/Object;Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Pair;
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:178 ASTORE 3
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:179 ALOAD 3
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:179 INVOKEVIRTUAL org/apache/commons/lang3/tuple/Pair.getLeft()Ljava/lang/Object;
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:179 ALOAD 3
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:179 INVOKEVIRTUAL org/apache/commons/lang3/tuple/Pair.getRight()Ljava/lang/Object;
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:179 INVOKESTATIC org/apache/commons/lang3/tuple/Pair.of(Ljava/lang/Object;Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Pair;
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:179 ASTORE 4
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 IFNULL L1 true true
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 ALOAD 3
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 INVOKEINTERFACE java/util/Set.contains(Ljava/lang/Object;)Z
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 IFNE L0 false true
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 ALOAD 4
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 INVOKEINTERFACE java/util/Set.contains(Ljava/lang/Object;)Z
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 IFEQ L1 true false
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 ICONST_0
+org.apache.commons.lang3.builder.EqualsBuilder.isRegistered:181 IRETURN
+org.apache.commons.lang3.builder.EqualsBuilder.register:195 INVOKESTATIC org/apache/commons/lang3/builder/EqualsBuilder.getRegistry()Ljava/util/Set;
+org.apache.commons.lang3.builder.EqualsBuilder.register:195 ASTORE 2
+org.apache.commons.lang3.builder.EqualsBuilder.register:196 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.register:196 IFNONNULL L0 false true
+org.apache.commons.lang3.builder.EqualsBuilder.register:197 NEW java/util/HashSet
+org.apache.commons.lang3.builder.EqualsBuilder.register:197 DUP
+org.apache.commons.lang3.builder.EqualsBuilder.register:197 INVOKESPECIAL java/util/HashSet.<init>()V
+org.apache.commons.lang3.builder.EqualsBuilder.register:197 ASTORE 2
+org.apache.commons.lang3.builder.EqualsBuilder.register:200 INVOKESTATIC org/apache/commons/lang3/builder/EqualsBuilder.getRegisterPair(Ljava/lang/Object;Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Pair;
+org.apache.commons.lang3.builder.EqualsBuilder.register:200 ASTORE 3
+org.apache.commons.lang3.builder.EqualsBuilder.register:201 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.register:201 ALOAD 3
+org.apache.commons.lang3.builder.EqualsBuilder.register:201 INVOKEINTERFACE java/util/Set.add(Ljava/lang/Object;)Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:276 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:276 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:276 ICONST_0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:276 ACONST_NULL
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:276 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:276 INVOKESTATIC org/apache/commons/lang3/builder/EqualsBuilder.reflectionEquals(Ljava/lang/Object;Ljava/lang/Object;ZLjava/lang/Class;[Ljava/lang/String;)Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:276 IRETURN
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:335 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:335 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:335 ILOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:335 ALOAD 3
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:335 ICONST_0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:335 ALOAD 4
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:335 INVOKESTATIC org/apache/commons/lang3/builder/EqualsBuilder.reflectionEquals(Ljava/lang/Object;Ljava/lang/Object;ZLjava/lang/Class;Z[Ljava/lang/String;)Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:335 IRETURN
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:375 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:375 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:375 IF_ACMPNE L0 true false
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:378 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:378 IFNULL L1 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:378 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:378 IFNONNULL L2 true false
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 NEW org/apache/commons/lang3/builder/EqualsBuilder
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 DUP
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 INVOKESPECIAL org/apache/commons/lang3/builder/EqualsBuilder.<init>()V
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 ALOAD 5
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 INVOKEVIRTUAL org/apache/commons/lang3/builder/EqualsBuilder.setExcludeFields([Ljava/lang/String;)Lorg/apache/commons/lang3/builder/EqualsBuilder;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 ALOAD 3
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 INVOKEVIRTUAL org/apache/commons/lang3/builder/EqualsBuilder.setReflectUpToClass(Ljava/lang/Class;)Lorg/apache/commons/lang3/builder/EqualsBuilder;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 ILOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 INVOKEVIRTUAL org/apache/commons/lang3/builder/EqualsBuilder.setTestTransients(Z)Lorg/apache/commons/lang3/builder/EqualsBuilder;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 ILOAD 4
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 INVOKEVIRTUAL org/apache/commons/lang3/builder/EqualsBuilder.setTestRecursive(Z)Lorg/apache/commons/lang3/builder/EqualsBuilder;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 INVOKEVIRTUAL org/apache/commons/lang3/builder/EqualsBuilder.reflectionAppend(Ljava/lang/Object;Ljava/lang/Object;)Lorg/apache/commons/lang3/builder/EqualsBuilder;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 INVOKEVIRTUAL org/apache/commons/lang3/builder/EqualsBuilder.isEquals()Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals:381 IRETURN
+org.apache.commons.lang3.builder.EqualsBuilder.setTestTransients:398 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.setTestTransients:398 ILOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.setTestTransients:398 PUTFIELD org/apache/commons/lang3/builder/EqualsBuilder.testTransients Z
+org.apache.commons.lang3.builder.EqualsBuilder.setTestTransients:399 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.setTestTransients:399 ARETURN
+org.apache.commons.lang3.builder.EqualsBuilder.setTestRecursive:410 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.setTestRecursive:410 ILOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.setTestRecursive:410 PUTFIELD org/apache/commons/lang3/builder/EqualsBuilder.testRecursive Z
+org.apache.commons.lang3.builder.EqualsBuilder.setTestRecursive:411 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.setTestRecursive:411 ARETURN
+org.apache.commons.lang3.builder.EqualsBuilder.setReflectUpToClass:422 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.setReflectUpToClass:422 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.setReflectUpToClass:422 PUTFIELD org/apache/commons/lang3/builder/EqualsBuilder.reflectUpToClass Ljava/lang/Class;
+org.apache.commons.lang3.builder.EqualsBuilder.setReflectUpToClass:423 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.setReflectUpToClass:423 ARETURN
+org.apache.commons.lang3.builder.EqualsBuilder.setExcludeFields:434 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.setExcludeFields:434 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.setExcludeFields:434 PUTFIELD org/apache/commons/lang3/builder/EqualsBuilder.excludeFields [Ljava/lang/String;
+org.apache.commons.lang3.builder.EqualsBuilder.setExcludeFields:435 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.setExcludeFields:435 ARETURN
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:462 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:462 GETFIELD org/apache/commons/lang3/builder/EqualsBuilder.isEquals Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:462 IFNE L0 true false
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:465 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:465 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:465 IF_ACMPNE L1 true false
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:468 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:468 IFNULL L2 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:468 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:468 IFNONNULL L3 true false
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:477 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:477 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:477 ASTORE 3
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:480 ALOAD 3
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:480 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:480 INVOKEVIRTUAL java/lang/Class.isInstance(Ljava/lang/Object;)Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:480 IFEQ L4 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:481 ALOAD 3
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:481 ASTORE 5
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:499 ALOAD 5
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:499 INVOKEVIRTUAL java/lang/Class.isArray()Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:499 IFEQ L7 true false
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:502 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:502 ALOAD 5
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:502 INVOKESPECIAL org/apache/commons/lang3/builder/EqualsBuilder.reflectionAppend(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Class;)V
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:503 ALOAD 5
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:503 INVOKEVIRTUAL java/lang/Class.getSuperclass()Ljava/lang/Class;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:503 IFNULL L9 true true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:503 ALOAD 5
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:503 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:503 GETFIELD org/apache/commons/lang3/builder/EqualsBuilder.reflectUpToClass Ljava/lang/Class;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:503 IF_ACMPEQ L9 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:504 ALOAD 5
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:504 INVOKEVIRTUAL java/lang/Class.getSuperclass()Ljava/lang/Class;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:504 ASTORE 5
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:517 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:517 ARETURN
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:533 INVOKESTATIC org/apache/commons/lang3/builder/EqualsBuilder.isRegistered(Ljava/lang/Object;Ljava/lang/Object;)Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:533 IFEQ L0 true false
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:538 INVOKESTATIC org/apache/commons/lang3/builder/EqualsBuilder.register(Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:539 ALOAD 3
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:539 INVOKEVIRTUAL java/lang/Class.getDeclaredFields()[Ljava/lang/reflect/Field;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:539 ASTORE 4
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:540 ALOAD 4
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:540 ICONST_1
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:540 INVOKESTATIC java/lang/reflect/AccessibleObject.setAccessible([Ljava/lang/reflect/AccessibleObject;Z)V
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:541 ICONST_0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:541 ISTORE 5
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:541 ILOAD 5
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:541 ALOAD 4
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:541 ARRAYLENGTH
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:541 IF_ICMPGE L7 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:541 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:541 GETFIELD org/apache/commons/lang3/builder/EqualsBuilder.isEquals Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:541 IFEQ L7 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:541 IINC 5 1
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:542 ALOAD 4
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:542 ILOAD 5
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:542 AALOAD
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:542 ASTORE 6
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 GETFIELD org/apache/commons/lang3/builder/EqualsBuilder.excludeFields [Ljava/lang/String;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 ALOAD 6
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 INVOKEVIRTUAL java/lang/reflect/Field.getName()Ljava/lang/String;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.contains([Ljava/lang/Object;Ljava/lang/Object;)Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 IFNE L6 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 ALOAD 6
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 INVOKEVIRTUAL java/lang/reflect/Field.getName()Ljava/lang/String;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 LDC "$"
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 INVOKEVIRTUAL java/lang/String.contains(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 IFNE L6 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 GETFIELD org/apache/commons/lang3/builder/EqualsBuilder.testTransients Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 IFNE L2 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 ALOAD 6
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 INVOKEVIRTUAL java/lang/reflect/Field.getModifiers()I
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 INVOKESTATIC java/lang/reflect/Modifier.isTransient(I)Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 IFNE L6 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 ALOAD 6
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 INVOKEVIRTUAL java/lang/reflect/Field.getModifiers()I
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 INVOKESTATIC java/lang/reflect/Modifier.isStatic(I)Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 IFNE L6 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 ALOAD 6
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 LDC Lorg/apache/commons/lang3/builder/EqualsExclude;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 INVOKEVIRTUAL java/lang/reflect/Field.isAnnotationPresent(Ljava/lang/Class;)Z
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:543 IFNE L6 false true
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:549 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:549 ALOAD 6
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:549 INVOKEVIRTUAL java/lang/reflect/Field.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:549 ALOAD 6
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:549 INVOKEVIRTUAL java/lang/reflect/Field.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.builder.EqualsBuilder.reflectionAppend:549 INVOKEVIRTUAL org/apache/commons/lang3/builder/EqualsBuilder.append(Ljava/lang/Object;Ljava/lang/Object;)Lorg/apache/commons/lang3/builder/EqualsBuilder;
+org.apache.commons.lang3.builder.EqualsBuilder.append:593 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.append:593 GETFIELD org/apache/commons/lang3/builder/EqualsBuilder.isEquals Z
+org.apache.commons.lang3.builder.EqualsBuilder.append:593 IFNE L0 true false
+org.apache.commons.lang3.builder.EqualsBuilder.append:596 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.append:596 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.append:596 IF_ACMPNE L1 true false
+org.apache.commons.lang3.builder.EqualsBuilder.append:599 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.append:599 IFNULL L2 false true
+org.apache.commons.lang3.builder.EqualsBuilder.append:599 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.append:599 IFNONNULL L3 true false
+org.apache.commons.lang3.builder.EqualsBuilder.append:603 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.append:603 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.builder.EqualsBuilder.append:603 ASTORE 3
+org.apache.commons.lang3.builder.EqualsBuilder.append:604 ALOAD 3
+org.apache.commons.lang3.builder.EqualsBuilder.append:604 INVOKEVIRTUAL java/lang/Class.isArray()Z
+org.apache.commons.lang3.builder.EqualsBuilder.append:604 IFNE L5 false true
+org.apache.commons.lang3.builder.EqualsBuilder.append:606 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.append:606 GETFIELD org/apache/commons/lang3/builder/EqualsBuilder.testRecursive Z
+org.apache.commons.lang3.builder.EqualsBuilder.append:606 IFEQ L4 true false
+org.apache.commons.lang3.builder.EqualsBuilder.append:609 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.append:609 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilder.append:609 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilder.append:609 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.builder.EqualsBuilder.append:609 PUTFIELD org/apache/commons/lang3/builder/EqualsBuilder.isEquals Z
+org.apache.commons.lang3.builder.EqualsBuilder.isEquals:1074 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilder.isEquals:1074 GETFIELD org/apache/commons/lang3/builder/EqualsBuilder.isEquals Z
+org.apache.commons.lang3.builder.EqualsBuilder.isEquals:1074 IRETURN
+org.apache.commons.lang3.builder.EqualsBuilderTest.main:284 INVOKEVIRTUAL org/apache/commons/lang3/builder/EqualsBuilderTest.testCyclicalObjectReferences()V
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1283 ICONST_1
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1283 INVOKESPECIAL org/apache/commons/lang3/builder/EqualsBuilderTest$TestObjectReference.<init>(I)V
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1284 NEW org/apache/commons/lang3/builder/EqualsBuilderTest$TestObjectReference
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1284 ICONST_1
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1284 INVOKESPECIAL org/apache/commons/lang3/builder/EqualsBuilderTest$TestObjectReference.<init>(I)V
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1284 ASTORE 2
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1288 ICONST_1
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1288 INVOKESPECIAL org/apache/commons/lang3/builder/EqualsBuilderTest$TestObjectReference.<init>(I)V
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1289 NEW org/apache/commons/lang3/builder/EqualsBuilderTest$TestObjectReference
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1289 ICONST_1
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1289 INVOKESPECIAL org/apache/commons/lang3/builder/EqualsBuilderTest$TestObjectReference.<init>(I)V
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1289 ASTORE 4
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1298 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1298 ALOAD 4
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1298 INVOKEVIRTUAL org/apache/commons/lang3/builder/EqualsBuilderTest$TestObjectReference.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.builder.EqualsBuilderTest.testCyclicalObjectReferences:1298 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.<init>:42 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.<init>:42 ILOAD 1
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.<init>:42 PUTFIELD org/apache/commons/lang3/builder/EqualsBuilderTest$TestObject.a I
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:47 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:47 IFNONNULL L0 true false
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:50 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:50 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:50 IF_ACMPNE L1 true false
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:53 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:53 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:53 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:53 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:53 IF_ACMPEQ L2 true false
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:57 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:57 ASTORE 2
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:58 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:58 GETFIELD org/apache/commons/lang3/builder/EqualsBuilderTest$TestObject.a I
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:58 ALOAD 2
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:58 GETFIELD org/apache/commons/lang3/builder/EqualsBuilderTest$TestObject.a I
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:58 IF_ICMPNE L3 false true
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:58 ICONST_1
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObject.equals:58 IRETURN
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObjectReference.<init>:1313 NEW org/apache/commons/lang3/builder/EqualsBuilderTest$TestObject
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObjectReference.<init>:1313 DUP
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObjectReference.<init>:1313 ILOAD 1
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObjectReference.<init>:1313 INVOKESPECIAL org/apache/commons/lang3/builder/EqualsBuilderTest$TestObject.<init>(I)V
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObjectReference.equals:1322 ALOAD 0
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObjectReference.equals:1322 ALOAD 1
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObjectReference.equals:1322 ICONST_0
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObjectReference.equals:1322 ANEWARRAY java/lang/String
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObjectReference.equals:1322 INVOKESTATIC org/apache/commons/lang3/builder/EqualsBuilder.reflectionEquals(Ljava/lang/Object;Ljava/lang/Object;[Ljava/lang/String;)Z
+org.apache.commons.lang3.builder.EqualsBuilderTest$TestObjectReference.equals:1322 IRETURN
+org.apache.commons.lang3.tuple.ImmutablePair.<init>:62 ALOAD 0
+org.apache.commons.lang3.tuple.ImmutablePair.<init>:62 ALOAD 1
+org.apache.commons.lang3.tuple.ImmutablePair.<init>:62 PUTFIELD org/apache/commons/lang3/tuple/ImmutablePair.left Ljava/lang/Object;
+org.apache.commons.lang3.tuple.ImmutablePair.<init>:63 ALOAD 0
+org.apache.commons.lang3.tuple.ImmutablePair.<init>:63 ALOAD 2
+org.apache.commons.lang3.tuple.ImmutablePair.<init>:63 PUTFIELD org/apache/commons/lang3/tuple/ImmutablePair.right Ljava/lang/Object;
+org.apache.commons.lang3.tuple.ImmutablePair.getLeft:102 ALOAD 0
+org.apache.commons.lang3.tuple.ImmutablePair.getLeft:102 GETFIELD org/apache/commons/lang3/tuple/ImmutablePair.left Ljava/lang/Object;
+org.apache.commons.lang3.tuple.ImmutablePair.getLeft:102 ARETURN
+org.apache.commons.lang3.tuple.ImmutablePair.getRight:110 ALOAD 0
+org.apache.commons.lang3.tuple.ImmutablePair.getRight:110 GETFIELD org/apache/commons/lang3/tuple/ImmutablePair.right Ljava/lang/Object;
+org.apache.commons.lang3.tuple.ImmutablePair.getRight:110 ARETURN
+org.apache.commons.lang3.tuple.Pair.of:60 NEW org/apache/commons/lang3/tuple/ImmutablePair
+org.apache.commons.lang3.tuple.Pair.of:60 DUP
+org.apache.commons.lang3.tuple.Pair.of:60 ALOAD 0
+org.apache.commons.lang3.tuple.Pair.of:60 ALOAD 1
+org.apache.commons.lang3.tuple.Pair.of:60 INVOKESPECIAL org/apache/commons/lang3/tuple/ImmutablePair.<init>(Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.lang3.tuple.Pair.of:60 ARETURN
+org.apache.commons.lang3.tuple.Pair.getKey:93 ALOAD 0
+org.apache.commons.lang3.tuple.Pair.getKey:93 INVOKEVIRTUAL org/apache/commons/lang3/tuple/Pair.getLeft()Ljava/lang/Object;
+org.apache.commons.lang3.tuple.Pair.getKey:93 ARETURN
+org.apache.commons.lang3.tuple.Pair.getValue:106 ALOAD 0
+org.apache.commons.lang3.tuple.Pair.getValue:106 INVOKEVIRTUAL org/apache/commons/lang3/tuple/Pair.getRight()Ljava/lang/Object;
+org.apache.commons.lang3.tuple.Pair.getValue:106 ARETURN
+org.apache.commons.lang3.tuple.Pair.hashCode:152 ALOAD 0
+org.apache.commons.lang3.tuple.Pair.hashCode:152 INVOKEVIRTUAL org/apache/commons/lang3/tuple/Pair.getKey()Ljava/lang/Object;
+org.apache.commons.lang3.tuple.Pair.hashCode:152 IFNONNULL L0 true false
+org.apache.commons.lang3.tuple.Pair.hashCode:152 ALOAD 0
+org.apache.commons.lang3.tuple.Pair.hashCode:152 INVOKEVIRTUAL org/apache/commons/lang3/tuple/Pair.getKey()Ljava/lang/Object;
+org.apache.commons.lang3.tuple.Pair.hashCode:152 ALOAD 0
+org.apache.commons.lang3.tuple.Pair.hashCode:152 INVOKEVIRTUAL org/apache/commons/lang3/tuple/Pair.getValue()Ljava/lang/Object;
+org.apache.commons.lang3.tuple.Pair.hashCode:152 IFNONNULL L2 true false
+org.apache.commons.lang3.tuple.Pair.hashCode:152 ALOAD 0
+org.apache.commons.lang3.tuple.Pair.hashCode:152 INVOKEVIRTUAL org/apache/commons/lang3/tuple/Pair.getValue()Ljava/lang/Object;
+org.apache.commons.lang3.tuple.Pair.hashCode:152 IXOR
+org.apache.commons.lang3.tuple.Pair.hashCode:152 IRETURN
+
+Slice consists of 801 bytecode instructions.
+Computation took 5.76 seconds.

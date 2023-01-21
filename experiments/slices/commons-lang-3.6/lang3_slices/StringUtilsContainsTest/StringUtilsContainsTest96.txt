@@ -1,0 +1,80 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253:*]:
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IFNE L0 true false
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ICONST_0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IRETURN
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 ALOAD 0
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 INVOKEINTERFACE java/lang/CharSequence.toString()Ljava/lang/String;
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 ALOAD 1
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 INVOKEINTERFACE java/lang/CharSequence.toString()Ljava/lang/String;
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 ILOAD 2
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 INVOKEVIRTUAL java/lang/String.indexOf(Ljava/lang/String;I)I
+org.apache.commons.lang3.CharSequenceUtils.indexOf:137 IRETURN
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.StringUtils.contains:1976 ALOAD 0
+org.apache.commons.lang3.StringUtils.contains:1976 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.contains:1976 ALOAD 1
+org.apache.commons.lang3.StringUtils.contains:1976 IFNONNULL L1 true false
+org.apache.commons.lang3.StringUtils.contains:1979 ALOAD 0
+org.apache.commons.lang3.StringUtils.contains:1979 ALOAD 1
+org.apache.commons.lang3.StringUtils.contains:1979 ICONST_0
+org.apache.commons.lang3.StringUtils.contains:1979 INVOKESTATIC org/apache/commons/lang3/CharSequenceUtils.indexOf(Ljava/lang/CharSequence;Ljava/lang/CharSequence;I)I
+org.apache.commons.lang3.StringUtils.contains:1979 IFLT L2 false true
+org.apache.commons.lang3.StringUtils.contains:1979 ICONST_1
+org.apache.commons.lang3.StringUtils.contains:1979 IRETURN
+org.apache.commons.lang3.StringUtils.containsAny:2246 ALOAD 0
+org.apache.commons.lang3.StringUtils.containsAny:2246 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.containsAny:2246 IFNE L0 false true
+org.apache.commons.lang3.StringUtils.containsAny:2246 ALOAD 1
+org.apache.commons.lang3.StringUtils.containsAny:2246 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([Ljava/lang/Object;)Z
+org.apache.commons.lang3.StringUtils.containsAny:2246 IFEQ L1 true false
+org.apache.commons.lang3.StringUtils.containsAny:2249 ALOAD 1
+org.apache.commons.lang3.StringUtils.containsAny:2249 ASTORE 2
+org.apache.commons.lang3.StringUtils.containsAny:2249 ALOAD 2
+org.apache.commons.lang3.StringUtils.containsAny:2249 ARRAYLENGTH
+org.apache.commons.lang3.StringUtils.containsAny:2249 ISTORE 3
+org.apache.commons.lang3.StringUtils.containsAny:2249 ICONST_0
+org.apache.commons.lang3.StringUtils.containsAny:2249 ISTORE 4
+org.apache.commons.lang3.StringUtils.containsAny:2249 ILOAD 4
+org.apache.commons.lang3.StringUtils.containsAny:2249 ILOAD 3
+org.apache.commons.lang3.StringUtils.containsAny:2249 IF_ICMPGE L4 false true
+org.apache.commons.lang3.StringUtils.containsAny:2249 ALOAD 2
+org.apache.commons.lang3.StringUtils.containsAny:2249 ILOAD 4
+org.apache.commons.lang3.StringUtils.containsAny:2249 AALOAD
+org.apache.commons.lang3.StringUtils.containsAny:2249 ASTORE 5
+org.apache.commons.lang3.StringUtils.containsAny:2250 ALOAD 0
+org.apache.commons.lang3.StringUtils.containsAny:2250 ALOAD 5
+org.apache.commons.lang3.StringUtils.containsAny:2250 INVOKESTATIC org/apache/commons/lang3/StringUtils.contains(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.containsAny:2250 IFEQ L3 false true
+org.apache.commons.lang3.StringUtils.containsAny:2251 ICONST_1
+org.apache.commons.lang3.StringUtils.containsAny:2251 IRETURN
+org.apache.commons.lang3.StringUtilsContainsTest.main:51 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsContainsTest.testContainsAny_StringStringArray()V
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 LDC "hello, goodbye"
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 ICONST_2
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 ANEWARRAY java/lang/String
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 DUP
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 ICONST_0
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 LDC "hello"
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 AASTORE
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 DUP
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 ICONST_1
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 LDC "Goodbye"
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 AASTORE
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 INVOKESTATIC org/apache/commons/lang3/StringUtils.containsAny(Ljava/lang/CharSequence;[Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtilsContainsTest.testContainsAny_StringStringArray:253 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 75 bytecode instructions.
+Computation took 1.33 seconds.

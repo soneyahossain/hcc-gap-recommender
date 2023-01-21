@@ -1,0 +1,58 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  1.2% done, time left: unknown  3.0% done, time left: unknown  5.0% done, time left: unknown  7.5% done, time left: unknown 10.4% done, time left: unknown 14.2% done, time left: unknown 17.8% done, time left: unknown 21.8% done, time left:   0:00:01   26.5% done, time left:   0:00:02 30.7% done, time left:   0:00:02 34.5% done, time left:   0:00:02 35.8% done, time left:   0:00:01 37.2% done, time left:   0:00:01 39.1% done, time left:   0:00:01 41.1% done, time left:   0:00:02 42.9% done, time left:   0:00:02 44.9% done, time left:   0:00:02 47.1% done, time left:   0:00:02 50.6% done, time left:   0:00:02 54.5% done, time left:   0:00:01 58.5% done, time left:   0:00:00 62.0% done, time left:   0:00:00 63.4% done, time left:   0:00:00 63.8% done, time left:   0:00:00 64.2% done, time left:   0:00:00 65.6% done, time left:   0:00:00 67.7% done, time left:   0:00:00 69.9% done, time left:   0:00:00 72.5% done, time left:   0:00:00 75.7% done, time left:   0:00:00 76.6% done, time left:   0:00:00 77.8% done, time left:   0:00:00 79.9% done, time left:   0:00:00 82.0% done, time left:   0:00:00 83.7% done, time left:   0:00:00 85.8% done, time left:   0:00:00 88.3% done, time left:   0:00:00 90.7% done, time left:   0:00:00 92.7% done, time left:   0:00:00 95.5% done, time left:   0:00:00 98.6% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ClassUtilsTest.test_getAllInterfaces_Class:329:*]:
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:449 ALOAD 0
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:449 IFNONNULL L0 true false
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:453 NEW java/util/LinkedHashSet
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:453 DUP
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:453 INVOKESPECIAL java/util/LinkedHashSet.<init>()V
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:453 ASTORE 1
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:454 ALOAD 0
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:454 ALOAD 1
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:454 INVOKESTATIC org/apache/commons/lang3/ClassUtils.getAllInterfaces(Ljava/lang/Class;Ljava/util/HashSet;)V
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:456 NEW java/util/ArrayList
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:456 DUP
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:456 ALOAD 1
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:456 INVOKESPECIAL java/util/ArrayList.<init>(Ljava/util/Collection;)V
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:456 ARETURN
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:466 ALOAD 0
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:466 IFNULL L4 false true
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:467 ALOAD 0
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:467 INVOKEVIRTUAL java/lang/Class.getInterfaces()[Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:467 ASTORE 2
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ALOAD 2
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ASTORE 3
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ALOAD 3
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ARRAYLENGTH
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ISTORE 4
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ICONST_0
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ISTORE 5
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ILOAD 5
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ILOAD 4
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 IF_ICMPGE L3 true true
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ALOAD 3
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ILOAD 5
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 AALOAD
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 ASTORE 6
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:469 IINC 5 1
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:470 ALOAD 1
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:470 ALOAD 6
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:470 INVOKEVIRTUAL java/util/HashSet.add(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:470 IFEQ L2 false true
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:471 ALOAD 6
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:471 ALOAD 1
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:471 INVOKESTATIC org/apache/commons/lang3/ClassUtils.getAllInterfaces(Ljava/lang/Class;Ljava/util/HashSet;)V
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:475 ALOAD 0
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:475 INVOKEVIRTUAL java/lang/Class.getSuperclass()Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.getAllInterfaces:475 ASTORE 0
+org.apache.commons.lang3.ClassUtilsTest.main:57 INVOKEVIRTUAL org/apache/commons/lang3/ClassUtilsTest.test_getAllInterfaces_Class()V
+org.apache.commons.lang3.ClassUtilsTest.test_getAllInterfaces_Class:323 LDC Lorg/apache/commons/lang3/ClassUtilsTest$CY;
+org.apache.commons.lang3.ClassUtilsTest.test_getAllInterfaces_Class:323 INVOKESTATIC org/apache/commons/lang3/ClassUtils.getAllInterfaces(Ljava/lang/Class;)Ljava/util/List;
+org.apache.commons.lang3.ClassUtilsTest.test_getAllInterfaces_Class:323 ASTORE 1
+org.apache.commons.lang3.ClassUtilsTest.test_getAllInterfaces_Class:329 LDC Lorg/apache/commons/lang3/ClassUtilsTest$IF;
+org.apache.commons.lang3.ClassUtilsTest.test_getAllInterfaces_Class:329 ALOAD 1
+org.apache.commons.lang3.ClassUtilsTest.test_getAllInterfaces_Class:329 ICONST_4
+org.apache.commons.lang3.ClassUtilsTest.test_getAllInterfaces_Class:329 INVOKEINTERFACE java/util/List.get(I)Ljava/lang/Object;
+org.apache.commons.lang3.ClassUtilsTest.test_getAllInterfaces_Class:329 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 372 bytecode instructions.
+Computation took 4.68 seconds.

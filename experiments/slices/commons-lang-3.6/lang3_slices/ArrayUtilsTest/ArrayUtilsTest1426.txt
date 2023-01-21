@@ -1,0 +1,78 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.1% done, time left:   4:26:29    0.6% done, time left:   2:13:39  1.9% done, time left:   1:29:12  2.5% done, time left:   1:06:58  3.1% done, time left:   0:53:38  4.3% done, time left:   0:44:44  5.9% done, time left:   0:38:24  7.6% done, time left:   0:33:21  9.4% done, time left:   0:28:04 11.2% done, time left:   0:23:09 12.8% done, time left:   0:18:58 14.6% done, time left:   0:15:21 14.6% done, time left:   0:12:38 16.9% done, time left:   0:09:52 18.9% done, time left:   0:07:32 20.3% done, time left:   0:05:52 22.5% done, time left:   0:04:23 24.3% done, time left:   0:03:18 26.8% done, time left:   0:02:20 29.3% done, time left:   0:01:35 31.3% done, time left:   0:01:06 33.6% done, time left:   0:00:45 36.5% done, time left:   0:00:27 39.5% done, time left:   0:00:16 42.8% done, time left:   0:00:08 46.4% done, time left:   0:00:04 50.0% done, time left:   0:00:02 53.2% done, time left:   0:00:01 55.4% done, time left:   0:00:01 57.6% done, time left:   0:00:01 59.4% done, time left:   0:00:01 61.1% done, time left:   0:00:01 63.7% done, time left:   0:00:01 65.9% done, time left:   0:00:01 69.0% done, time left:   0:00:00 71.5% done, time left:   0:00:00 73.9% done, time left:   0:00:00 74.9% done, time left:   0:00:00 76.7% done, time left:   0:00:00 79.5% done, time left:   0:00:00 82.9% done, time left:   0:00:00 83.2% done, time left:   0:00:00 84.3% done, time left:   0:00:00 89.6% done, time left:   0:00:00 92.2% done, time left:   0:00:00 96.4% done, time left:   0:00:00 98.3% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4191:*]:
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
+org.apache.commons.lang3.ArrayUtils.indexOf:3905 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3905 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([D)Z
+org.apache.commons.lang3.ArrayUtils.indexOf:3905 IFEQ L0 true false
+org.apache.commons.lang3.ArrayUtils.indexOf:3911 DLOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3911 DLOAD 4
+org.apache.commons.lang3.ArrayUtils.indexOf:3911 DSUB
+org.apache.commons.lang3.ArrayUtils.indexOf:3911 DSTORE 6
+org.apache.commons.lang3.ArrayUtils.indexOf:3912 DLOAD 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3912 DLOAD 4
+org.apache.commons.lang3.ArrayUtils.indexOf:3912 DADD
+org.apache.commons.lang3.ArrayUtils.indexOf:3912 DSTORE 8
+org.apache.commons.lang3.ArrayUtils.indexOf:3913 ILOAD 3
+org.apache.commons.lang3.ArrayUtils.indexOf:3913 ISTORE 10
+org.apache.commons.lang3.ArrayUtils.indexOf:3913 ILOAD 10
+org.apache.commons.lang3.ArrayUtils.indexOf:3913 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3913 ARRAYLENGTH
+org.apache.commons.lang3.ArrayUtils.indexOf:3913 IF_ICMPGE L4 false true
+org.apache.commons.lang3.ArrayUtils.indexOf:3913 IINC 10 1
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 ILOAD 10
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 DALOAD
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 DLOAD 6
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 DCMPL
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 IFLT L3 true true
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 ILOAD 10
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 DALOAD
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 DLOAD 8
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 DCMPG
+org.apache.commons.lang3.ArrayUtils.indexOf:3914 IFGT L3 false true
+org.apache.commons.lang3.ArrayUtils.indexOf:3915 ILOAD 10
+org.apache.commons.lang3.ArrayUtils.indexOf:3915 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4912 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4912 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4912 IFNE L0 true false
+org.apache.commons.lang3.ArrayUtils.isEmpty:4912 ICONST_0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4912 IRETURN
+org.apache.commons.lang3.ArrayUtilsTest.main:285 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance()V
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4185 DCONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 ICONST_5
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 NEWARRAY T_DOUBLE
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 DUP
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 ICONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 DCONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 DASTORE
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 DUP
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 ICONST_1
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 DCONST_1
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 DASTORE
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 DUP
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 ICONST_2
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 LDC 2.0
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 DASTORE
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 DUP
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 ICONST_3
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 LDC 3.0
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 DASTORE
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4186 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4188 LCONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4189 DCONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4191 LDC 3
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4191 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4191 LDC 4.15
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4191 ICONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4191 LDC 2.0
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4191 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([DDID)I
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4191 I2L
+org.apache.commons.lang3.ArrayUtilsTest.testIndexOfDoubleWithStartIndexTolerance:4191 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 73 bytecode instructions.
+Computation took 5.99 seconds.

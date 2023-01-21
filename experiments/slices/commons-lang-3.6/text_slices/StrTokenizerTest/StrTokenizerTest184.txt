@@ -1,0 +1,207 @@
+ 0.0% done, time left: unknown                                0.3% done, time left: unknown  0.8% done, time left: unknown  1.8% done, time left: unknown  3.8% done, time left: unknown  6.8% done, time left: unknown  9.2% done, time left: unknown 12.9% done, time left: unknown 17.6% done, time left: unknown 22.1% done, time left: unknown 27.2% done, time left:   0:00:01   31.3% done, time left:   0:00:02 34.5% done, time left:   0:00:02 37.7% done, time left:   0:00:02 42.7% done, time left:   0:00:01 48.8% done, time left:   0:00:00 54.7% done, time left:   0:00:00 58.2% done, time left:   0:00:00 61.9% done, time left:   0:00:00 67.4% done, time left:   0:00:00 72.7% done, time left:   0:00:00 79.3% done, time left:   0:00:00 86.5% done, time left:   0:00:00 93.8% done, time left:   0:00:00 99.2% done, time left:   0:00:00 100.9% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.text.StrTokenizerTest.testReset:795:*]:
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.text.StrBuilder.substring:2326 NEW java/lang/String
+org.apache.commons.lang3.text.StrBuilder.substring:2326 ARETURN
+org.apache.commons.lang3.text.StrMatcher.splitMatcher:119 GETSTATIC org/apache/commons/lang3/text/StrMatcher.SPLIT_MATCHER Lorg/apache/commons/lang3/text/StrMatcher;
+org.apache.commons.lang3.text.StrMatcher.splitMatcher:119 ARETURN
+org.apache.commons.lang3.text.StrMatcher$CharSetMatcher.isMatch:308 ALOAD 0
+org.apache.commons.lang3.text.StrMatcher$CharSetMatcher.isMatch:308 GETFIELD org/apache/commons/lang3/text/StrMatcher$CharSetMatcher.chars [C
+org.apache.commons.lang3.text.StrMatcher$CharSetMatcher.isMatch:308 ALOAD 1
+org.apache.commons.lang3.text.StrMatcher$CharSetMatcher.isMatch:308 ILOAD 2
+org.apache.commons.lang3.text.StrMatcher$CharSetMatcher.isMatch:308 CALOAD
+org.apache.commons.lang3.text.StrMatcher$CharSetMatcher.isMatch:308 INVOKESTATIC java/util/Arrays.binarySearch([CC)I
+org.apache.commons.lang3.text.StrMatcher$CharSetMatcher.isMatch:308 IFLT L0 true true
+org.apache.commons.lang3.text.StrMatcher$CharSetMatcher.isMatch:308 ICONST_1
+org.apache.commons.lang3.text.StrMatcher$CharSetMatcher.isMatch:308 ICONST_0
+org.apache.commons.lang3.text.StrMatcher$CharSetMatcher.isMatch:308 IRETURN
+org.apache.commons.lang3.text.StrMatcher$NoMatcher.isMatch:424 ICONST_0
+org.apache.commons.lang3.text.StrMatcher$NoMatcher.isMatch:424 IRETURN
+org.apache.commons.lang3.text.StrTokenizer.<init>:126 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.<init>:126 INVOKESTATIC org/apache/commons/lang3/text/StrMatcher.splitMatcher()Lorg/apache/commons/lang3/text/StrMatcher;
+org.apache.commons.lang3.text.StrTokenizer.<init>:126 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.delimMatcher Lorg/apache/commons/lang3/text/StrMatcher;
+org.apache.commons.lang3.text.StrTokenizer.<init>:170 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.<init>:170 IFNULL L0 false true
+org.apache.commons.lang3.text.StrTokenizer.<init>:171 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.<init>:171 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.<init>:171 INVOKEVIRTUAL java/lang/String.toCharArray()[C
+org.apache.commons.lang3.text.StrTokenizer.<init>:171 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.chars [C
+org.apache.commons.lang3.text.StrTokenizer.reset:483 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.reset:483 ICONST_0
+org.apache.commons.lang3.text.StrTokenizer.reset:483 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.tokenPos I
+org.apache.commons.lang3.text.StrTokenizer.reset:484 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.reset:484 ACONST_NULL
+org.apache.commons.lang3.text.StrTokenizer.reset:484 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.tokens [Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizer.hasNext:530 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.hasNext:530 INVOKESPECIAL org/apache/commons/lang3/text/StrTokenizer.checkTokenized()V
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 GETFIELD org/apache/commons/lang3/text/StrTokenizer.tokenPos I
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 GETFIELD org/apache/commons/lang3/text/StrTokenizer.tokens [Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ARRAYLENGTH
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 IF_ICMPGE L0 true true
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ICONST_1
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ICONST_0
+org.apache.commons.lang3.text.StrTokenizer.hasNext:531 IRETURN
+org.apache.commons.lang3.text.StrTokenizer.next:542 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.next:542 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.hasNext()Z
+org.apache.commons.lang3.text.StrTokenizer.next:542 IFEQ L0 false true
+org.apache.commons.lang3.text.StrTokenizer.next:543 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.next:543 DUP
+org.apache.commons.lang3.text.StrTokenizer.next:543 GETFIELD org/apache/commons/lang3/text/StrTokenizer.tokenPos I
+org.apache.commons.lang3.text.StrTokenizer.next:543 DUP_X1
+org.apache.commons.lang3.text.StrTokenizer.next:543 ICONST_1
+org.apache.commons.lang3.text.StrTokenizer.next:543 IADD
+org.apache.commons.lang3.text.StrTokenizer.next:543 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.tokenPos I
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:631 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:631 GETFIELD org/apache/commons/lang3/text/StrTokenizer.tokens [Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:631 IFNONNULL L1 false true
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:632 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:632 GETFIELD org/apache/commons/lang3/text/StrTokenizer.chars [C
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:632 IFNONNULL L0 true false
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:637 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:637 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:637 GETFIELD org/apache/commons/lang3/text/StrTokenizer.chars [C
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:637 ICONST_0
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:637 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:637 GETFIELD org/apache/commons/lang3/text/StrTokenizer.chars [C
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:637 ARRAYLENGTH
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:637 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.tokenize([CII)Ljava/util/List;
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:637 ASTORE 1
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:638 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:638 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:638 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:638 INVOKEINTERFACE java/util/List.size()I
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:638 ANEWARRAY java/lang/String
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:638 INVOKEINTERFACE java/util/List.toArray([Ljava/lang/Object;)[Ljava/lang/Object;
+org.apache.commons.lang3.text.StrTokenizer.checkTokenized:638 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.tokens [Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizer.tokenize:664 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.tokenize:664 IFNULL L0 false true
+org.apache.commons.lang3.text.StrTokenizer.tokenize:664 ILOAD 3
+org.apache.commons.lang3.text.StrTokenizer.tokenize:664 IFNE L1 true false
+org.apache.commons.lang3.text.StrTokenizer.tokenize:668 NEW java/util/ArrayList
+org.apache.commons.lang3.text.StrTokenizer.tokenize:668 ASTORE 5
+org.apache.commons.lang3.text.StrTokenizer.tokenize:669 ILOAD 2
+org.apache.commons.lang3.text.StrTokenizer.tokenize:669 ISTORE 6
+org.apache.commons.lang3.text.StrTokenizer.tokenize:672 ILOAD 6
+org.apache.commons.lang3.text.StrTokenizer.tokenize:672 IFLT L3 true true
+org.apache.commons.lang3.text.StrTokenizer.tokenize:672 ILOAD 6
+org.apache.commons.lang3.text.StrTokenizer.tokenize:672 ILOAD 3
+org.apache.commons.lang3.text.StrTokenizer.tokenize:672 IF_ICMPGE L3 false true
+org.apache.commons.lang3.text.StrTokenizer.tokenize:674 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.tokenize:674 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.tokenize:674 ILOAD 6
+org.apache.commons.lang3.text.StrTokenizer.tokenize:674 ILOAD 3
+org.apache.commons.lang3.text.StrTokenizer.tokenize:674 ALOAD 5
+org.apache.commons.lang3.text.StrTokenizer.tokenize:674 INVOKESPECIAL org/apache/commons/lang3/text/StrTokenizer.readNextToken([CIILorg/apache/commons/lang3/text/StrBuilder;Ljava/util/List;)I
+org.apache.commons.lang3.text.StrTokenizer.tokenize:674 ISTORE 6
+org.apache.commons.lang3.text.StrTokenizer.tokenize:681 ALOAD 5
+org.apache.commons.lang3.text.StrTokenizer.tokenize:681 ARETURN
+org.apache.commons.lang3.text.StrTokenizer.addToken:691 ALOAD 2
+org.apache.commons.lang3.text.StrTokenizer.addToken:691 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.text.StrTokenizer.addToken:691 IFEQ L1 true false
+org.apache.commons.lang3.text.StrTokenizer.addToken:699 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.addToken:699 INVOKEINTERFACE java/util/List.add(Ljava/lang/Object;)Z
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:716 ILOAD 2
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:716 ILOAD 3
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:716 IF_ICMPGE L2 false true
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:717 INVOKEVIRTUAL org/apache/commons/lang3/text/StrMatcher.isMatch([CIII)I
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:717 INVOKEVIRTUAL org/apache/commons/lang3/text/StrMatcher.isMatch([CIII)I
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:717 INVOKESTATIC java/lang/Math.max(II)I
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:717 ISTORE 6
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:720 ILOAD 6
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:720 IFEQ L2 true false
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:729 ILOAD 2
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:729 ILOAD 3
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:729 IF_ICMPLT L3 true false
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:735 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:735 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.getDelimiterMatcher()Lorg/apache/commons/lang3/text/StrMatcher;
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:735 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:735 ILOAD 2
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:735 INVOKEVIRTUAL org/apache/commons/lang3/text/StrMatcher.isMatch([CIII)I
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:735 ISTORE 6
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:736 ILOAD 6
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:736 IFLE L4 true false
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:742 INVOKEVIRTUAL org/apache/commons/lang3/text/StrMatcher.isMatch([CIII)I
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:742 ISTORE 7
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:743 ILOAD 7
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:743 IFLE L5 true false
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:746 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:746 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:746 ILOAD 2
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:746 ILOAD 3
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:746 ALOAD 5
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:746 ICONST_0
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:746 INVOKESPECIAL org/apache/commons/lang3/text/StrTokenizer.readWithQuotes([CIILorg/apache/commons/lang3/text/StrBuilder;Ljava/util/List;II)I
+org.apache.commons.lang3.text.StrTokenizer.readNextToken:746 IRETURN
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:768 ILOAD 2
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:768 ISTORE 8
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:769 ILOAD 7
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:769 IFLE L0 true false
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:769 ICONST_0
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:769 ISTORE 9
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:772 ILOAD 8
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:772 ILOAD 3
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:772 IF_ICMPGE L10 true true
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:776 ILOAD 9
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:776 IFEQ L5 true false
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:806 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:806 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.getDelimiterMatcher()Lorg/apache/commons/lang3/text/StrMatcher;
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:806 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:806 ILOAD 8
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:806 INVOKEVIRTUAL org/apache/commons/lang3/text/StrMatcher.isMatch([CIII)I
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:806 ISTORE 11
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:807 ILOAD 11
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:807 IFLE L6 true true
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:809 ALOAD 5
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:809 INVOKEVIRTUAL org/apache/commons/lang3/text/StrBuilder.substring(II)Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:809 INVOKESPECIAL org/apache/commons/lang3/text/StrTokenizer.addToken(Ljava/util/List;Ljava/lang/String;)V
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:810 ILOAD 8
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:810 ILOAD 11
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:810 IADD
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:810 IRETURN
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:814 ILOAD 7
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:814 IFLE L7 true false
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:821 INVOKEVIRTUAL org/apache/commons/lang3/text/StrMatcher.isMatch([CIII)I
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:821 ISTORE 12
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:822 ILOAD 12
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:822 IFLE L8 true false
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:830 INVOKEVIRTUAL org/apache/commons/lang3/text/StrMatcher.isMatch([CIII)I
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:830 ISTORE 13
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:831 ILOAD 13
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:831 IFLE L9 true false
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:838 IINC 8 1
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:844 ALOAD 5
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:844 INVOKEVIRTUAL org/apache/commons/lang3/text/StrBuilder.substring(II)Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:844 INVOKESPECIAL org/apache/commons/lang3/text/StrTokenizer.addToken(Ljava/util/List;Ljava/lang/String;)V
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:845 ICONST_M1
+org.apache.commons.lang3.text.StrTokenizer.readWithQuotes:845 IRETURN
+org.apache.commons.lang3.text.StrTokenizer.getDelimiterMatcher:877 ALOAD 0
+org.apache.commons.lang3.text.StrTokenizer.getDelimiterMatcher:877 GETFIELD org/apache/commons/lang3/text/StrTokenizer.delimMatcher Lorg/apache/commons/lang3/text/StrMatcher;
+org.apache.commons.lang3.text.StrTokenizer.getDelimiterMatcher:877 ARETURN
+org.apache.commons.lang3.text.StrTokenizerTest.main:98 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizerTest.testReset()V
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:785 NEW org/apache/commons/lang3/text/StrTokenizer
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:785 DUP
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:785 LDC "a b c"
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:785 INVOKESPECIAL org/apache/commons/lang3/text/StrTokenizer.<init>(Ljava/lang/String;)V
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:785 ASTORE 1
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:791 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:791 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.reset()Lorg/apache/commons/lang3/text/StrTokenizer;
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:792 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:792 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.next()Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:793 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:793 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.next()Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:794 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:794 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.next()Ljava/lang/String;
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:795 ALOAD 1
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:795 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.hasNext()Z
+org.apache.commons.lang3.text.StrTokenizerTest.testReset:795 INVOKESTATIC org/junit/Assert.assertFalse(Z)V
+
+Slice consists of 219 bytecode instructions.
+Computation took 2.68 seconds.

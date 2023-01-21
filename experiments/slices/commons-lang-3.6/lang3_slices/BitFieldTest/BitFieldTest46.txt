@@ -1,0 +1,66 @@
+ 0.0% done, time left: unknown                                1.6% done, time left: unknown  2.6% done, time left: unknown  5.3% done, time left: unknown  8.3% done, time left: unknown 11.5% done, time left: unknown 16.0% done, time left: unknown 19.0% done, time left: unknown 25.7% done, time left: unknown 33.3% done, time left:   0:00:00   41.8% done, time left:   0:00:00 49.4% done, time left:   0:00:00 57.8% done, time left:   0:00:00 66.6% done, time left:   0:00:00 75.7% done, time left:   0:00:00 82.0% done, time left:   0:00:00 88.0% done, time left:   0:00:00 92.5% done, time left:   0:00:00 93.0% done, time left:   0:00:00 94.6% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.BitFieldTest.testSetShortValue:171:*]:
+org.apache.commons.lang3.BitField.getValue:105 ALOAD 0
+org.apache.commons.lang3.BitField.getValue:105 ILOAD 1
+org.apache.commons.lang3.BitField.getValue:105 INVOKEVIRTUAL org/apache/commons/lang3/BitField.getRawValue(I)I
+org.apache.commons.lang3.BitField.getValue:105 ALOAD 0
+org.apache.commons.lang3.BitField.getValue:105 GETFIELD org/apache/commons/lang3/BitField._shift_count I
+org.apache.commons.lang3.BitField.getValue:105 ISHR
+org.apache.commons.lang3.BitField.getValue:105 IRETURN
+org.apache.commons.lang3.BitField.getShortValue:123 ALOAD 0
+org.apache.commons.lang3.BitField.getShortValue:123 ILOAD 1
+org.apache.commons.lang3.BitField.getShortValue:123 INVOKEVIRTUAL org/apache/commons/lang3/BitField.getValue(I)I
+org.apache.commons.lang3.BitField.getShortValue:123 I2S
+org.apache.commons.lang3.BitField.getShortValue:123 IRETURN
+org.apache.commons.lang3.BitField.getRawValue:134 ILOAD 1
+org.apache.commons.lang3.BitField.getRawValue:134 ALOAD 0
+org.apache.commons.lang3.BitField.getRawValue:134 GETFIELD org/apache/commons/lang3/BitField._mask I
+org.apache.commons.lang3.BitField.getRawValue:134 IAND
+org.apache.commons.lang3.BitField.getRawValue:134 IRETURN
+org.apache.commons.lang3.BitField.setValue:192 ILOAD 1
+org.apache.commons.lang3.BitField.setValue:192 ALOAD 0
+org.apache.commons.lang3.BitField.setValue:192 GETFIELD org/apache/commons/lang3/BitField._mask I
+org.apache.commons.lang3.BitField.setValue:192 ICONST_M1
+org.apache.commons.lang3.BitField.setValue:192 IXOR
+org.apache.commons.lang3.BitField.setValue:192 IAND
+org.apache.commons.lang3.BitField.setValue:192 ILOAD 2
+org.apache.commons.lang3.BitField.setValue:192 ALOAD 0
+org.apache.commons.lang3.BitField.setValue:192 GETFIELD org/apache/commons/lang3/BitField._shift_count I
+org.apache.commons.lang3.BitField.setValue:192 ISHL
+org.apache.commons.lang3.BitField.setValue:192 ALOAD 0
+org.apache.commons.lang3.BitField.setValue:192 GETFIELD org/apache/commons/lang3/BitField._mask I
+org.apache.commons.lang3.BitField.setValue:192 IAND
+org.apache.commons.lang3.BitField.setValue:192 IOR
+org.apache.commons.lang3.BitField.setValue:192 IRETURN
+org.apache.commons.lang3.BitField.setShortValue:206 ALOAD 0
+org.apache.commons.lang3.BitField.setShortValue:206 ILOAD 1
+org.apache.commons.lang3.BitField.setShortValue:206 ILOAD 2
+org.apache.commons.lang3.BitField.setShortValue:206 INVOKEVIRTUAL org/apache/commons/lang3/BitField.setValue(II)I
+org.apache.commons.lang3.BitField.setShortValue:206 I2S
+org.apache.commons.lang3.BitField.setShortValue:206 IRETURN
+org.apache.commons.lang3.BitFieldTest.main:47 INVOKEVIRTUAL org/apache/commons/lang3/BitFieldTest.testSetShortValue()V
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:166 ICONST_0
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:166 ISTORE 1
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:166 ILOAD 1
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:166 SIPUSH 128
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:166 IF_ICMPGE L1 true true
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:166 IINC 1 1
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:170 ICONST_0
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:170 ISTORE 1
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:170 ILOAD 1
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:170 SIPUSH 128
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:170 IF_ICMPGE L3 false true
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:170 IINC 1 1
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:171 GETSTATIC org/apache/commons/lang3/BitFieldTest.bf_zero Lorg/apache/commons/lang3/BitField;
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:171 GETSTATIC org/apache/commons/lang3/BitFieldTest.bf_zero Lorg/apache/commons/lang3/BitField;
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:171 ICONST_0
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:171 ILOAD 1
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:171 I2S
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:171 INVOKEVIRTUAL org/apache/commons/lang3/BitField.setShortValue(SS)S
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:171 INVOKEVIRTUAL org/apache/commons/lang3/BitField.getShortValue(S)S
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:171 I2L
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:171 LCONST_0
+org.apache.commons.lang3.BitFieldTest.testSetShortValue:171 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 61 bytecode instructions.
+Computation took 2.19 seconds.

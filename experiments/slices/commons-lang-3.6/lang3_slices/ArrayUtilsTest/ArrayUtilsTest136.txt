@@ -1,0 +1,30 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.1% done, time left:   4:26:17    1.7% done, time left:   2:13:15  2.5% done, time left:   1:28:54  3.4% done, time left:   1:06:44  5.9% done, time left:   0:53:26  8.2% done, time left:   0:42:09 11.8% done, time left:   0:27:13 14.6% done, time left:   0:17:57 14.6% done, time left:   0:12:30 17.1% done, time left:   0:08:42 18.9% done, time left:   0:06:17 21.0% done, time left:   0:04:33 23.0% done, time left:   0:03:19 25.1% done, time left:   0:02:26 27.5% done, time left:   0:01:42 30.4% done, time left:   0:01:05 33.6% done, time left:   0:00:37 36.8% done, time left:   0:00:20 39.8% done, time left:   0:00:11 42.7% done, time left:   0:00:06 45.8% done, time left:   0:00:03 49.2% done, time left:   0:00:02 52.0% done, time left:   0:00:01 54.8% done, time left:   0:00:01 56.4% done, time left:   0:00:01 58.5% done, time left:   0:00:01 60.2% done, time left:   0:00:01 62.3% done, time left:   0:00:01 64.3% done, time left:   0:00:01 66.9% done, time left:   0:00:01 69.5% done, time left:   0:00:00 71.8% done, time left:   0:00:00 74.0% done, time left:   0:00:00 76.7% done, time left:   0:00:00 80.1% done, time left:   0:00:00 82.2% done, time left:   0:00:00 83.2% done, time left:   0:00:00 83.8% done, time left:   0:00:00 89.2% done, time left:   0:00:00 92.2% done, time left:   0:00:00 96.5% done, time left:   0:00:00 98.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyLongObjectEmptyArray:949:*]:
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:720 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:720 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([Ljava/lang/Object;)Z
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:720 IFEQ L0 false true
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:721 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_LONG_OBJECT_ARRAY [Ljava/lang/Long;
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:721 ARETURN
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IFNE L0 false true
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ICONST_1
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IRETURN
+org.apache.commons.lang3.ArrayUtilsTest.main:109 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsTest.testNullToEmptyLongObjectEmptyArray()V
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyLongObjectEmptyArray:946 ICONST_0
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyLongObjectEmptyArray:946 ANEWARRAY java/lang/Long
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyLongObjectEmptyArray:946 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyLongObjectEmptyArray:947 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyLongObjectEmptyArray:947 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.nullToEmpty([Ljava/lang/Long;)[Ljava/lang/Long;
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyLongObjectEmptyArray:947 ASTORE 2
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyLongObjectEmptyArray:949 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyLongObjectEmptyArray:949 ALOAD 2
+org.apache.commons.lang3.ArrayUtilsTest.testNullToEmptyLongObjectEmptyArray:949 INVOKESTATIC org/junit/Assert.assertNotSame(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 25 bytecode instructions.
+Computation took 5.42 seconds.

@@ -1,0 +1,23 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:153:*]:
+org.apache.commons.lang3.StringUtils.endsWithIgnoreCase:8620 ALOAD 0
+org.apache.commons.lang3.StringUtils.endsWithIgnoreCase:8620 ALOAD 1
+org.apache.commons.lang3.StringUtils.endsWithIgnoreCase:8620 INVOKESTATIC org/apache/commons/lang3/StringUtils.endsWith(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Z)Z
+org.apache.commons.lang3.StringUtils.endsWithIgnoreCase:8620 IRETURN
+org.apache.commons.lang3.StringUtils.endsWith:8635 ALOAD 0
+org.apache.commons.lang3.StringUtils.endsWith:8635 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.endsWith:8635 ALOAD 1
+org.apache.commons.lang3.StringUtils.endsWith:8635 IFNONNULL L3 false true
+org.apache.commons.lang3.StringUtils.endsWith:8636 ALOAD 0
+org.apache.commons.lang3.StringUtils.endsWith:8636 IFNONNULL L1 true false
+org.apache.commons.lang3.StringUtils.endsWith:8636 ICONST_0
+org.apache.commons.lang3.StringUtils.endsWith:8636 IRETURN
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.main:49 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase()V
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:153 LDC "endsWithIgnoreCase(FOOBAR, null)"
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:153 LDC "FOOBAR"
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:153 ACONST_NULL
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:153 INVOKESTATIC org/apache/commons/lang3/StringUtils.endsWithIgnoreCase(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testEndsWithIgnoreCase:153 INVOKESTATIC org/junit/Assert.assertFalse(Ljava/lang/String;Z)V
+
+Slice consists of 18 bytecode instructions.
+Computation took 0.95 seconds.

@@ -1,0 +1,60 @@
+ 0.0% done, time left: unknown                                0.3% done, time left: unknown  2.9% done, time left: unknown  6.8% done, time left: unknown 10.7% done, time left: unknown 17.1% done, time left: unknown 21.6% done, time left: unknown 27.4% done, time left: unknown 34.4% done, time left: unknown 39.0% done, time left:   0:00:01   44.8% done, time left:   0:00:01 48.7% done, time left:   0:00:01 50.7% done, time left:   0:00:00 61.3% done, time left:   0:00:00 69.6% done, time left:   0:00:00 78.7% done, time left:   0:00:00 88.2% done, time left:   0:00:00 96.0% done, time left:   0:00:00 96.8% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.CharSetTest.testHashCode:399:*]:
+org.apache.commons.lang3.CharSet.<init>:91 ALOAD 0
+org.apache.commons.lang3.CharSet.<init>:91 NEW java/util/HashSet
+org.apache.commons.lang3.CharSet.<init>:91 INVOKESTATIC java/util/Collections.synchronizedSet(Ljava/util/Set;)Ljava/util/Set;
+org.apache.commons.lang3.CharSet.<init>:91 PUTFIELD org/apache/commons/lang3/CharSet.set Ljava/util/Set;
+org.apache.commons.lang3.CharSet.getInstance:156 ALOAD 0
+org.apache.commons.lang3.CharSet.getInstance:156 IFNONNULL L0 true false
+org.apache.commons.lang3.CharSet.getInstance:159 ALOAD 0
+org.apache.commons.lang3.CharSet.getInstance:159 ARRAYLENGTH
+org.apache.commons.lang3.CharSet.getInstance:159 ICONST_1
+org.apache.commons.lang3.CharSet.getInstance:159 IF_ICMPNE L1 false true
+org.apache.commons.lang3.CharSet.getInstance:160 GETSTATIC org/apache/commons/lang3/CharSet.COMMON Ljava/util/Map;
+org.apache.commons.lang3.CharSet.getInstance:160 ALOAD 0
+org.apache.commons.lang3.CharSet.getInstance:160 ICONST_0
+org.apache.commons.lang3.CharSet.getInstance:160 AALOAD
+org.apache.commons.lang3.CharSet.getInstance:160 INVOKEINTERFACE java/util/Map.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.CharSet.getInstance:160 ASTORE 1
+org.apache.commons.lang3.CharSet.getInstance:161 ALOAD 1
+org.apache.commons.lang3.CharSet.getInstance:161 IFNULL L1 true false
+org.apache.commons.lang3.CharSet.getInstance:165 NEW org/apache/commons/lang3/CharSet
+org.apache.commons.lang3.CharSet.getInstance:165 DUP
+org.apache.commons.lang3.CharSet.getInstance:165 INVOKESPECIAL org/apache/commons/lang3/CharSet.<init>([Ljava/lang/String;)V
+org.apache.commons.lang3.CharSet.getInstance:165 ARETURN
+org.apache.commons.lang3.CharSet.hashCode:281 BIPUSH 89
+org.apache.commons.lang3.CharSet.hashCode:281 ALOAD 0
+org.apache.commons.lang3.CharSet.hashCode:281 GETFIELD org/apache/commons/lang3/CharSet.set Ljava/util/Set;
+org.apache.commons.lang3.CharSet.hashCode:281 IADD
+org.apache.commons.lang3.CharSet.hashCode:281 IRETURN
+org.apache.commons.lang3.CharSetTest.main:46 INVOKEVIRTUAL org/apache/commons/lang3/CharSetTest.testHashCode()V
+org.apache.commons.lang3.CharSetTest.testHashCode:391 ICONST_1
+org.apache.commons.lang3.CharSetTest.testHashCode:391 ANEWARRAY java/lang/String
+org.apache.commons.lang3.CharSetTest.testHashCode:391 DUP
+org.apache.commons.lang3.CharSetTest.testHashCode:391 ICONST_0
+org.apache.commons.lang3.CharSetTest.testHashCode:391 LDC "a-c"
+org.apache.commons.lang3.CharSetTest.testHashCode:391 AASTORE
+org.apache.commons.lang3.CharSetTest.testHashCode:391 INVOKESTATIC org/apache/commons/lang3/CharSet.getInstance([Ljava/lang/String;)Lorg/apache/commons/lang3/CharSet;
+org.apache.commons.lang3.CharSetTest.testHashCode:391 ASTORE 3
+org.apache.commons.lang3.CharSetTest.testHashCode:392 ICONST_1
+org.apache.commons.lang3.CharSetTest.testHashCode:392 ANEWARRAY java/lang/String
+org.apache.commons.lang3.CharSetTest.testHashCode:392 DUP
+org.apache.commons.lang3.CharSetTest.testHashCode:392 ICONST_0
+org.apache.commons.lang3.CharSetTest.testHashCode:392 LDC "a-c"
+org.apache.commons.lang3.CharSetTest.testHashCode:392 AASTORE
+org.apache.commons.lang3.CharSetTest.testHashCode:392 INVOKESTATIC org/apache/commons/lang3/CharSet.getInstance([Ljava/lang/String;)Lorg/apache/commons/lang3/CharSet;
+org.apache.commons.lang3.CharSetTest.testHashCode:392 ASTORE 4
+org.apache.commons.lang3.CharSetTest.testHashCode:394 ICONST_1
+org.apache.commons.lang3.CharSetTest.testHashCode:394 ANEWARRAY java/lang/String
+org.apache.commons.lang3.CharSetTest.testHashCode:394 DUP
+org.apache.commons.lang3.CharSetTest.testHashCode:394 LDC "^a-c"
+org.apache.commons.lang3.CharSetTest.testHashCode:399 ALOAD 3
+org.apache.commons.lang3.CharSetTest.testHashCode:399 INVOKEVIRTUAL org/apache/commons/lang3/CharSet.hashCode()I
+org.apache.commons.lang3.CharSetTest.testHashCode:399 I2L
+org.apache.commons.lang3.CharSetTest.testHashCode:399 ALOAD 4
+org.apache.commons.lang3.CharSetTest.testHashCode:399 INVOKEVIRTUAL org/apache/commons/lang3/CharSet.hashCode()I
+org.apache.commons.lang3.CharSetTest.testHashCode:399 I2L
+org.apache.commons.lang3.CharSetTest.testHashCode:399 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
+
+Slice consists of 132 bytecode instructions.
+Computation took 2.16 seconds.

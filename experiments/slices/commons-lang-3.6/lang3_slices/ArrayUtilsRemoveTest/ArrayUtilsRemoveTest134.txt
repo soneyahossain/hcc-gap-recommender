@@ -1,0 +1,31 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementIntArray:463:*]:
+org.apache.commons.lang3.ArrayUtils.clone:357 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.clone:357 IFNONNULL L0 false true
+org.apache.commons.lang3.ArrayUtils.clone:358 ACONST_NULL
+org.apache.commons.lang3.ArrayUtils.clone:358 ARETURN
+org.apache.commons.lang3.ArrayUtils.indexOf:3421 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3421 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([III)I
+org.apache.commons.lang3.ArrayUtils.indexOf:3421 IRETURN
+org.apache.commons.lang3.ArrayUtils.indexOf:3439 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.indexOf:3439 IFNONNULL L0 false true
+org.apache.commons.lang3.ArrayUtils.indexOf:3440 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.indexOf:3440 IRETURN
+org.apache.commons.lang3.ArrayUtils.removeElement:6414 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeElement:6414 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.indexOf([II)I
+org.apache.commons.lang3.ArrayUtils.removeElement:6414 ISTORE 2
+org.apache.commons.lang3.ArrayUtils.removeElement:6415 ILOAD 2
+org.apache.commons.lang3.ArrayUtils.removeElement:6415 ICONST_M1
+org.apache.commons.lang3.ArrayUtils.removeElement:6415 IF_ICMPNE L0 false true
+org.apache.commons.lang3.ArrayUtils.removeElement:6416 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeElement:6416 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.clone([I)[I
+org.apache.commons.lang3.ArrayUtils.removeElement:6416 ARETURN
+org.apache.commons.lang3.ArrayUtilsRemoveTest.main:52 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsRemoveTest.testRemoveElementIntArray()V
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementIntArray:462 ACONST_NULL
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementIntArray:462 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.removeElement([II)[I
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementIntArray:462 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementIntArray:463 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsRemoveTest.testRemoveElementIntArray:463 INVOKESTATIC org/junit/Assert.assertNull(Ljava/lang/Object;)V
+
+Slice consists of 26 bytecode instructions.
+Computation took 1.60 seconds.

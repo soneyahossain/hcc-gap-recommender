@@ -1,0 +1,41 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  1.2% done, time left: unknown  3.1% done, time left: unknown  5.1% done, time left: unknown  7.8% done, time left: unknown 10.6% done, time left: unknown 14.3% done, time left: unknown 17.6% done, time left: unknown 20.9% done, time left:   0:00:02   25.3% done, time left:   0:00:02 29.4% done, time left:   0:00:02 33.6% done, time left:   0:00:02 35.2% done, time left:   0:00:01 36.7% done, time left:   0:00:01 38.5% done, time left:   0:00:01 40.5% done, time left:   0:00:02 42.5% done, time left:   0:00:02 44.4% done, time left:   0:00:02 46.6% done, time left:   0:00:02 49.7% done, time left:   0:00:02 53.5% done, time left:   0:00:01 57.7% done, time left:   0:00:00 61.7% done, time left:   0:00:00 62.9% done, time left:   0:00:00 63.8% done, time left:   0:00:00 64.2% done, time left:   0:00:00 65.7% done, time left:   0:00:00 67.7% done, time left:   0:00:00 70.1% done, time left:   0:00:00 73.2% done, time left:   0:00:00 76.6% done, time left:   0:00:00 79.9% done, time left:   0:00:00 80.7% done, time left:   0:00:00 83.7% done, time left:   0:00:00 84.8% done, time left:   0:00:00 87.2% done, time left:   0:00:00 90.5% done, time left:   0:00:00 93.3% done, time left:   0:00:00 96.2% done, time left:   0:00:00 98.2% done, time left:   0:00:00 99.0% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ClassUtilsTest.test_getShortClassName_Class:163:*]:
+org.apache.commons.lang3.ClassUtils.getShortClassName:191 ALOAD 0
+org.apache.commons.lang3.ClassUtils.getShortClassName:191 IFNONNULL L0 true false
+org.apache.commons.lang3.ClassUtils.getShortClassName:194 ALOAD 0
+org.apache.commons.lang3.ClassUtils.getShortClassName:194 INVOKEVIRTUAL java/lang/Class.getName()Ljava/lang/String;
+org.apache.commons.lang3.ClassUtils.getShortClassName:194 INVOKESTATIC org/apache/commons/lang3/ClassUtils.getShortClassName(Ljava/lang/String;)Ljava/lang/String;
+org.apache.commons.lang3.ClassUtils.getShortClassName:194 ARETURN
+org.apache.commons.lang3.ClassUtils.getShortClassName:210 ALOAD 0
+org.apache.commons.lang3.ClassUtils.getShortClassName:210 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.ClassUtils.getShortClassName:210 IFEQ L0 true false
+org.apache.commons.lang3.ClassUtils.getShortClassName:217 ALOAD 0
+org.apache.commons.lang3.ClassUtils.getShortClassName:217 LDC "["
+org.apache.commons.lang3.ClassUtils.getShortClassName:217 INVOKEVIRTUAL java/lang/String.startsWith(Ljava/lang/String;)Z
+org.apache.commons.lang3.ClassUtils.getShortClassName:217 IFEQ L4 false true
+org.apache.commons.lang3.ClassUtils.getShortClassName:218 ALOAD 0
+org.apache.commons.lang3.ClassUtils.getShortClassName:218 ICONST_0
+org.apache.commons.lang3.ClassUtils.getShortClassName:218 INVOKEVIRTUAL java/lang/String.charAt(I)C
+org.apache.commons.lang3.ClassUtils.getShortClassName:218 BIPUSH 91
+org.apache.commons.lang3.ClassUtils.getShortClassName:218 IF_ICMPNE L2 true true
+org.apache.commons.lang3.ClassUtils.getShortClassName:219 ALOAD 0
+org.apache.commons.lang3.ClassUtils.getShortClassName:219 ICONST_1
+org.apache.commons.lang3.ClassUtils.getShortClassName:219 INVOKEVIRTUAL java/lang/String.substring(I)Ljava/lang/String;
+org.apache.commons.lang3.ClassUtils.getShortClassName:219 ASTORE 0
+org.apache.commons.lang3.ClassUtils.getShortClassName:239 INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String;
+org.apache.commons.lang3.ClassUtils.getShortClassName:239 ARETURN
+org.apache.commons.lang3.ClassUtilsTest.main:47 INVOKEVIRTUAL org/apache/commons/lang3/ClassUtilsTest.test_getShortClassName_Class()V
+org.apache.commons.lang3.ClassUtilsTest.test_getShortClassName_Class:163 LDC "String[][][][]"
+org.apache.commons.lang3.ClassUtilsTest.test_getShortClassName_Class:163 LDC [[[[Ljava/lang/String;
+org.apache.commons.lang3.ClassUtilsTest.test_getShortClassName_Class:163 INVOKESTATIC org/apache/commons/lang3/ClassUtils.getShortClassName(Ljava/lang/Class;)Ljava/lang/String;
+org.apache.commons.lang3.ClassUtilsTest.test_getShortClassName_Class:163 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+
+Slice consists of 49 bytecode instructions.
+Computation took 4.59 seconds.

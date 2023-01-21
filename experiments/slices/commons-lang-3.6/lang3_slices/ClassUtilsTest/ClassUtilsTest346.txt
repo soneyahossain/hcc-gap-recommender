@@ -1,0 +1,87 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.3% done, time left: unknown  1.1% done, time left: unknown  2.8% done, time left: unknown  4.8% done, time left: unknown  7.2% done, time left: unknown 10.4% done, time left: unknown 14.2% done, time left: unknown 17.6% done, time left: unknown 21.3% done, time left:   0:00:02   25.9% done, time left:   0:00:02 30.0% done, time left:   0:00:02 34.3% done, time left:   0:00:02 35.5% done, time left:   0:00:01 36.9% done, time left:   0:00:01 38.8% done, time left:   0:00:01 40.7% done, time left:   0:00:02 42.6% done, time left:   0:00:02 44.5% done, time left:   0:00:02 46.5% done, time left:   0:00:02 49.9% done, time left:   0:00:02 53.5% done, time left:   0:00:01 57.7% done, time left:   0:00:00 61.8% done, time left:   0:00:00 63.1% done, time left:   0:00:00 63.8% done, time left:   0:00:00 64.3% done, time left:   0:00:00 65.8% done, time left:   0:00:00 67.9% done, time left:   0:00:00 70.1% done, time left:   0:00:00 73.3% done, time left:   0:00:00 76.6% done, time left:   0:00:00 79.1% done, time left:   0:00:00 79.9% done, time left:   0:00:00 82.6% done, time left:   0:00:00 83.7% done, time left:   0:00:00 85.5% done, time left:   0:00:00 87.7% done, time left:   0:00:00 90.8% done, time left:   0:00:00 93.7% done, time left:   0:00:00 96.7% done, time left:   0:00:00 98.6% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_DefaultUnboxing_Widening:722:*]:
+org.apache.commons.lang3.ClassUtils.isAssignable:690 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:690 ALOAD 1
+org.apache.commons.lang3.ClassUtils.isAssignable:690 GETSTATIC org/apache/commons/lang3/JavaVersion.JAVA_1_5 Lorg/apache/commons/lang3/JavaVersion;
+org.apache.commons.lang3.ClassUtils.isAssignable:690 INVOKESTATIC org/apache/commons/lang3/SystemUtils.isJavaVersionAtLeast(Lorg/apache/commons/lang3/JavaVersion;)Z
+org.apache.commons.lang3.ClassUtils.isAssignable:690 INVOKESTATIC org/apache/commons/lang3/ClassUtils.isAssignable(Ljava/lang/Class;Ljava/lang/Class;Z)Z
+org.apache.commons.lang3.ClassUtils.isAssignable:690 IRETURN
+org.apache.commons.lang3.ClassUtils.isAssignable:721 ALOAD 1
+org.apache.commons.lang3.ClassUtils.isAssignable:721 IFNONNULL L0 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:725 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:725 IFNONNULL L3 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:729 ILOAD 2
+org.apache.commons.lang3.ClassUtils.isAssignable:729 IFEQ L5 false true
+org.apache.commons.lang3.ClassUtils.isAssignable:730 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:730 INVOKEVIRTUAL java/lang/Class.isPrimitive()Z
+org.apache.commons.lang3.ClassUtils.isAssignable:730 IFEQ L4 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:736 ALOAD 1
+org.apache.commons.lang3.ClassUtils.isAssignable:736 INVOKEVIRTUAL java/lang/Class.isPrimitive()Z
+org.apache.commons.lang3.ClassUtils.isAssignable:736 IFEQ L5 false true
+org.apache.commons.lang3.ClassUtils.isAssignable:736 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:736 INVOKEVIRTUAL java/lang/Class.isPrimitive()Z
+org.apache.commons.lang3.ClassUtils.isAssignable:736 IFNE L5 false true
+org.apache.commons.lang3.ClassUtils.isAssignable:737 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:737 INVOKESTATIC org/apache/commons/lang3/ClassUtils.wrapperToPrimitive(Ljava/lang/Class;)Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.isAssignable:737 ASTORE 0
+org.apache.commons.lang3.ClassUtils.isAssignable:738 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:738 IFNONNULL L5 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:743 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:743 ALOAD 1
+org.apache.commons.lang3.ClassUtils.isAssignable:743 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ClassUtils.isAssignable:743 IFEQ L6 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:746 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:746 INVOKEVIRTUAL java/lang/Class.isPrimitive()Z
+org.apache.commons.lang3.ClassUtils.isAssignable:746 IFEQ L31 false true
+org.apache.commons.lang3.ClassUtils.isAssignable:747 ALOAD 1
+org.apache.commons.lang3.ClassUtils.isAssignable:747 INVOKEVIRTUAL java/lang/Class.isPrimitive()Z
+org.apache.commons.lang3.ClassUtils.isAssignable:747 IFNE L7 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:750 GETSTATIC java/lang/Integer.TYPE Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.isAssignable:750 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:750 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ClassUtils.isAssignable:750 IFEQ L11 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:755 GETSTATIC java/lang/Long.TYPE Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.isAssignable:755 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:755 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ClassUtils.isAssignable:755 IFEQ L15 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:759 GETSTATIC java/lang/Boolean.TYPE Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.isAssignable:759 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:759 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ClassUtils.isAssignable:759 IFEQ L16 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:762 GETSTATIC java/lang/Double.TYPE Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.isAssignable:762 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:762 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ClassUtils.isAssignable:762 IFEQ L17 true false
+org.apache.commons.lang3.ClassUtils.isAssignable:765 GETSTATIC java/lang/Float.TYPE Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.isAssignable:765 ALOAD 0
+org.apache.commons.lang3.ClassUtils.isAssignable:765 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ClassUtils.isAssignable:765 IFEQ L18 false true
+org.apache.commons.lang3.ClassUtils.isAssignable:766 GETSTATIC java/lang/Double.TYPE Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.isAssignable:766 ALOAD 1
+org.apache.commons.lang3.ClassUtils.isAssignable:766 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
+org.apache.commons.lang3.ClassUtils.isAssignable:766 IRETURN
+org.apache.commons.lang3.ClassUtils.wrapperToPrimitive:856 GETSTATIC org/apache/commons/lang3/ClassUtils.wrapperPrimitiveMap Ljava/util/Map;
+org.apache.commons.lang3.ClassUtils.wrapperToPrimitive:856 ALOAD 0
+org.apache.commons.lang3.ClassUtils.wrapperToPrimitive:856 INVOKEINTERFACE java/util/Map.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.ClassUtils.wrapperToPrimitive:856 ARETURN
+org.apache.commons.lang3.ClassUtilsTest.main:68 INVOKEVIRTUAL org/apache/commons/lang3/ClassUtilsTest.test_isAssignable_DefaultUnboxing_Widening()V
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_DefaultUnboxing_Widening:722 LDC "float -> int"
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_DefaultUnboxing_Widening:722 LDC Ljava/lang/Float;
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_DefaultUnboxing_Widening:722 GETSTATIC java/lang/Integer.TYPE Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_DefaultUnboxing_Widening:722 INVOKESTATIC org/apache/commons/lang3/ClassUtils.isAssignable(Ljava/lang/Class;Ljava/lang/Class;)Z
+org.apache.commons.lang3.ClassUtilsTest.test_isAssignable_DefaultUnboxing_Widening:722 INVOKESTATIC org/junit/Assert.assertFalse(Ljava/lang/String;Z)V
+org.apache.commons.lang3.JavaVersion.atLeast:124 ALOAD 0
+org.apache.commons.lang3.JavaVersion.atLeast:124 GETFIELD org/apache/commons/lang3/JavaVersion.value F
+org.apache.commons.lang3.JavaVersion.atLeast:124 ALOAD 1
+org.apache.commons.lang3.JavaVersion.atLeast:124 GETFIELD org/apache/commons/lang3/JavaVersion.value F
+org.apache.commons.lang3.JavaVersion.atLeast:124 FCMPL
+org.apache.commons.lang3.JavaVersion.atLeast:124 IFLT L0 false true
+org.apache.commons.lang3.JavaVersion.atLeast:124 ICONST_1
+org.apache.commons.lang3.JavaVersion.atLeast:124 IRETURN
+org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast:1642 GETSTATIC org/apache/commons/lang3/SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM Lorg/apache/commons/lang3/JavaVersion;
+org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast:1642 ALOAD 0
+org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast:1642 INVOKEVIRTUAL org/apache/commons/lang3/JavaVersion.atLeast(Lorg/apache/commons/lang3/JavaVersion;)Z
+org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast:1642 IRETURN
+
+Slice consists of 164 bytecode instructions.
+Computation took 4.64 seconds.

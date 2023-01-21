@@ -1,0 +1,26 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWith:65:*]:
+org.apache.commons.lang3.StringUtils.startsWith:8481 ALOAD 0
+org.apache.commons.lang3.StringUtils.startsWith:8481 ALOAD 1
+org.apache.commons.lang3.StringUtils.startsWith:8481 INVOKESTATIC org/apache/commons/lang3/StringUtils.startsWith(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Z)Z
+org.apache.commons.lang3.StringUtils.startsWith:8481 IRETURN
+org.apache.commons.lang3.StringUtils.startsWith:8522 ALOAD 0
+org.apache.commons.lang3.StringUtils.startsWith:8522 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.startsWith:8522 ALOAD 1
+org.apache.commons.lang3.StringUtils.startsWith:8522 IFNONNULL L3 true false
+org.apache.commons.lang3.StringUtils.startsWith:8525 ALOAD 1
+org.apache.commons.lang3.StringUtils.startsWith:8525 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.startsWith:8525 ALOAD 0
+org.apache.commons.lang3.StringUtils.startsWith:8525 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.startsWith:8525 IF_ICMPLE L4 false true
+org.apache.commons.lang3.StringUtils.startsWith:8526 ICONST_0
+org.apache.commons.lang3.StringUtils.startsWith:8526 IRETURN
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.main:45 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsStartsEndsWithTest.testStartsWith()V
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWith:65 LDC "startsWith(foo, foobar)"
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWith:65 LDC "foo"
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWith:65 LDC "foobar"
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWith:65 INVOKESTATIC org/apache/commons/lang3/StringUtils.startsWith(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtilsStartsEndsWithTest.testStartsWith:65 INVOKESTATIC org/junit/Assert.assertFalse(Ljava/lang/String;Z)V
+
+Slice consists of 21 bytecode instructions.
+Computation took 0.94 seconds.

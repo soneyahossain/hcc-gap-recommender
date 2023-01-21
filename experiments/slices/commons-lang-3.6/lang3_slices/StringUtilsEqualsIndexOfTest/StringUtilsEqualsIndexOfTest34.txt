@@ -1,0 +1,58 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  1.9% done, time left: unknown  4.3% done, time left: unknown  9.8% done, time left: unknown 15.9% done, time left: unknown 23.5% done, time left: unknown 28.7% done, time left: unknown 33.5% done, time left: unknown 37.2% done, time left: unknown 44.2% done, time left:   0:00:00   49.7% done, time left:   0:00:00 57.5% done, time left:   0:00:00 66.2% done, time left:   0:00:00 73.9% done, time left:   0:00:00 80.3% done, time left:   0:00:00 87.3% done, time left:   0:00:00 92.6% done, time left:   0:00:00 95.8% done, time left:   0:00:00 100.8% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAny:207:*]:
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IFNE L0 true false
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ICONST_0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IRETURN
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4947 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4947 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([Ljava/lang/Object;)Z
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4947 IFNE L0 false true
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4947 ICONST_1
+org.apache.commons.lang3.ArrayUtils.isNotEmpty:4947 IRETURN
+org.apache.commons.lang3.StringUtils.equals:994 ALOAD 0
+org.apache.commons.lang3.StringUtils.equals:994 ALOAD 1
+org.apache.commons.lang3.StringUtils.equals:994 IF_ACMPNE L0 false true
+org.apache.commons.lang3.StringUtils.equals:995 ICONST_1
+org.apache.commons.lang3.StringUtils.equals:995 IRETURN
+org.apache.commons.lang3.StringUtils.equalsAny:1240 ALOAD 1
+org.apache.commons.lang3.StringUtils.equalsAny:1240 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isNotEmpty([Ljava/lang/Object;)Z
+org.apache.commons.lang3.StringUtils.equalsAny:1240 IFEQ L2 false true
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ALOAD 1
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ASTORE 2
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ALOAD 2
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ARRAYLENGTH
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ISTORE 3
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ICONST_0
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ISTORE 4
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ILOAD 4
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ILOAD 3
+org.apache.commons.lang3.StringUtils.equalsAny:1241 IF_ICMPGE L2 false true
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ALOAD 2
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ILOAD 4
+org.apache.commons.lang3.StringUtils.equalsAny:1241 AALOAD
+org.apache.commons.lang3.StringUtils.equalsAny:1241 ASTORE 5
+org.apache.commons.lang3.StringUtils.equalsAny:1242 ALOAD 0
+org.apache.commons.lang3.StringUtils.equalsAny:1242 ALOAD 5
+org.apache.commons.lang3.StringUtils.equalsAny:1242 INVOKESTATIC org/apache/commons/lang3/StringUtils.equals(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtils.equalsAny:1242 IFEQ L1 false true
+org.apache.commons.lang3.StringUtils.equalsAny:1243 ICONST_1
+org.apache.commons.lang3.StringUtils.equalsAny:1243 IRETURN
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.main:109 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.testEqualsAny()V
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAny:207 LDC "foo"
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAny:207 ICONST_1
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAny:207 ANEWARRAY java/lang/CharSequence
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAny:207 DUP
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAny:207 ICONST_0
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAny:207 LDC "foo"
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAny:207 AASTORE
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAny:207 INVOKESTATIC org/apache/commons/lang3/StringUtils.equalsAny(Ljava/lang/CharSequence;[Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAny:207 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 53 bytecode instructions.
+Computation took 2.74 seconds.

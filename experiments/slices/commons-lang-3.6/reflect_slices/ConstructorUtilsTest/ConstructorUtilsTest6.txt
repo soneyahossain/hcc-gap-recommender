@@ -1,0 +1,81 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  1.6% done, time left: unknown  3.4% done, time left: unknown  5.0% done, time left: unknown  6.5% done, time left: unknown  9.2% done, time left: unknown 13.4% done, time left: unknown 18.6% done, time left: unknown 23.8% done, time left:   0:00:01   27.9% done, time left:   0:00:02 33.8% done, time left:   0:00:01 41.6% done, time left:   0:00:00 50.1% done, time left:   0:00:00 58.8% done, time left:   0:00:00 66.7% done, time left:   0:00:00 73.0% done, time left:   0:00:00 78.3% done, time left:   0:00:00 86.7% done, time left:   0:00:00 95.7% done, time left:   0:00:00 96.7% done, time left:   0:00:00 98.6% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:156:*]:
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:500 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:500 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([Ljava/lang/Object;)Z
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:500 IFEQ L0 false true
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:501 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_OBJECT_ARRAY [Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:501 ARETURN
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:520 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:520 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([Ljava/lang/Object;)Z
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:520 IFEQ L0 false true
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:521 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_CLASS_ARRAY [Ljava/lang/Class;
+org.apache.commons.lang3.ArrayUtils.nullToEmpty:521 ARETURN
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IFNE L0 false true
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ICONST_1
+org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IRETURN
+org.apache.commons.lang3.ClassUtils.toClass:1085 ALOAD 0
+org.apache.commons.lang3.ClassUtils.toClass:1085 IFNONNULL L0 true false
+org.apache.commons.lang3.ClassUtils.toClass:1087 ALOAD 0
+org.apache.commons.lang3.ClassUtils.toClass:1087 ARRAYLENGTH
+org.apache.commons.lang3.ClassUtils.toClass:1087 IFNE L1 false true
+org.apache.commons.lang3.ClassUtils.toClass:1088 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_CLASS_ARRAY [Ljava/lang/Class;
+org.apache.commons.lang3.ClassUtils.toClass:1088 ARETURN
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:81 ALOAD 1
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:81 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.nullToEmpty([Ljava/lang/Object;)[Ljava/lang/Object;
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:81 ASTORE 1
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:82 ALOAD 1
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:82 INVOKESTATIC org/apache/commons/lang3/ClassUtils.toClass([Ljava/lang/Object;)[Ljava/lang/Class;
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:82 ASTORE 2
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:83 ALOAD 0
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:83 ALOAD 1
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:83 ALOAD 2
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:83 INVOKESTATIC org/apache/commons/lang3/reflect/ConstructorUtils.invokeConstructor(Ljava/lang/Class;[Ljava/lang/Object;[Ljava/lang/Class;)Ljava/lang/Object;
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:83 ARETURN
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:108 ALOAD 1
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:108 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.nullToEmpty([Ljava/lang/Object;)[Ljava/lang/Object;
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:108 ASTORE 1
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:109 ALOAD 2
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:109 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.nullToEmpty([Ljava/lang/Class;)[Ljava/lang/Class;
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:109 ASTORE 2
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:110 ALOAD 0
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:110 ALOAD 2
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:110 INVOKESTATIC org/apache/commons/lang3/reflect/ConstructorUtils.getMatchingAccessibleConstructor(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:110 ASTORE 3
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:119 ALOAD 3
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:119 ALOAD 1
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:119 INVOKEVIRTUAL java/lang/reflect/Constructor.newInstance([Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor:119 ARETURN
+org.apache.commons.lang3.reflect.ConstructorUtils.getMatchingAccessibleConstructor:247 ALOAD 0
+org.apache.commons.lang3.reflect.ConstructorUtils.getMatchingAccessibleConstructor:247 ALOAD 1
+org.apache.commons.lang3.reflect.ConstructorUtils.getMatchingAccessibleConstructor:247 INVOKEVIRTUAL java/lang/Class.getConstructor([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+org.apache.commons.lang3.reflect.ConstructorUtils.getMatchingAccessibleConstructor:247 ASTORE 2
+org.apache.commons.lang3.reflect.ConstructorUtils.getMatchingAccessibleConstructor:249 ALOAD 2
+org.apache.commons.lang3.reflect.ConstructorUtils.getMatchingAccessibleConstructor:249 ARETURN
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.main:42 INVOKEVIRTUAL org/apache/commons/lang3/reflect/ConstructorUtilsTest.testInvokeConstructor()V
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:152 LDC Lorg/apache/commons/lang3/reflect/ConstructorUtilsTest$TestBean;
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:152 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_CLASS_ARRAY [Ljava/lang/Class;
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:152 INVOKESTATIC org/apache/commons/lang3/reflect/ConstructorUtils.invokeConstructor(Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:156 LDC "()"
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:156 LDC Lorg/apache/commons/lang3/reflect/ConstructorUtilsTest$TestBean;
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:156 ICONST_0
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:156 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:156 INVOKESTATIC org/apache/commons/lang3/reflect/ConstructorUtils.invokeConstructor(Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:156 CHECKCAST org/apache/commons/lang3/reflect/ConstructorUtilsTest$TestBean
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:156 INVOKEVIRTUAL org/apache/commons/lang3/reflect/ConstructorUtilsTest$TestBean.toString()Ljava/lang/String;
+org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor:156 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.apache.commons.lang3.reflect.ConstructorUtilsTest$TestBean.<init>:63 ALOAD 0
+org.apache.commons.lang3.reflect.ConstructorUtilsTest$TestBean.<init>:63 LDC "()"
+org.apache.commons.lang3.reflect.ConstructorUtilsTest$TestBean.<init>:63 PUTFIELD org/apache/commons/lang3/reflect/ConstructorUtilsTest$TestBean.toString Ljava/lang/String;
+org.apache.commons.lang3.reflect.ConstructorUtilsTest$TestBean.toString:112 ALOAD 0
+org.apache.commons.lang3.reflect.ConstructorUtilsTest$TestBean.toString:112 GETFIELD org/apache/commons/lang3/reflect/ConstructorUtilsTest$TestBean.toString Ljava/lang/String;
+org.apache.commons.lang3.reflect.ConstructorUtilsTest$TestBean.toString:112 ARETURN
+
+Slice consists of 340 bytecode instructions.
+Computation took 2.39 seconds.

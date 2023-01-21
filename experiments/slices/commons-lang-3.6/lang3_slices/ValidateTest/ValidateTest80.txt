@@ -1,0 +1,30 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  0.9% done, time left: unknown  1.4% done, time left: unknown  2.1% done, time left: unknown  2.4% done, time left: unknown  3.6% done, time left: unknown  5.7% done, time left:   0:00:04    8.2% done, time left:   0:00:04 10.2% done, time left:   0:00:04 11.9% done, time left:   0:00:05 14.8% done, time left:   0:00:06 17.5% done, time left:   0:00:06 20.7% done, time left:   0:00:05 24.3% done, time left:   0:00:04 27.9% done, time left:   0:00:03 31.5% done, time left:   0:00:03 34.9% done, time left:   0:00:02 38.3% done, time left:   0:00:02 41.5% done, time left:   0:00:02 44.7% done, time left:   0:00:02 47.4% done, time left:   0:00:01 47.5% done, time left:   0:00:00 48.8% done, time left:   0:00:01 51.0% done, time left:   0:00:01 53.5% done, time left:   0:00:01 56.6% done, time left:   0:00:01 60.1% done, time left:   0:00:01 63.5% done, time left:   0:00:00 66.6% done, time left:   0:00:00 70.1% done, time left:   0:00:00 73.6% done, time left:   0:00:00 77.4% done, time left:   0:00:00 81.2% done, time left:   0:00:00 84.4% done, time left:   0:00:00 87.5% done, time left:   0:00:00 91.3% done, time left:   0:00:00 94.6% done, time left:   0:00:00 95.3% done, time left:   0:00:00 95.8% done, time left:   0:00:00 97.3% done, time left:   0:00:00 98.9% done, time left:   0:00:00 99.9% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:894:*]:
+org.apache.commons.lang3.Validate.matchesPattern:877 ALOAD 1
+org.apache.commons.lang3.Validate.matchesPattern:877 ALOAD 0
+org.apache.commons.lang3.Validate.matchesPattern:877 INVOKESTATIC java/util/regex/Pattern.matches(Ljava/lang/String;Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.Validate.matchesPattern:877 IFNE L0 false true
+org.apache.commons.lang3.Validate.matchesPattern:878 NEW java/lang/IllegalArgumentException
+org.apache.commons.lang3.Validate.matchesPattern:878 DUP
+org.apache.commons.lang3.Validate.matchesPattern:878 ALOAD 2
+org.apache.commons.lang3.Validate.matchesPattern:878 ALOAD 3
+org.apache.commons.lang3.Validate.matchesPattern:878 INVOKESTATIC java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+org.apache.commons.lang3.Validate.matchesPattern:878 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
+org.apache.commons.lang3.Validate.matchesPattern:878 ATHROW
+org.apache.commons.lang3.ValidateTest.main:91 INVOKEVIRTUAL org/apache/commons/lang3/ValidateTest.testMatchesPattern_withMessage()V
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:888 LDC "hi"
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:888 ASTORE 1
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:891 ALOAD 1
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:891 LDC "[0-9]*"
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:891 LDC "Does not match"
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:891 ICONST_0
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:891 ANEWARRAY java/lang/Object
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:891 INVOKESTATIC org/apache/commons/lang3/Validate.matchesPattern(Ljava/lang/CharSequence;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:893 ASTORE 2
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:894 LDC "Does not match"
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:894 ALOAD 2
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:894 INVOKEVIRTUAL java/lang/IllegalArgumentException.getMessage()Ljava/lang/String;
+org.apache.commons.lang3.ValidateTest.testMatchesPattern_withMessage:894 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 528 bytecode instructions.
+Computation took 4.89 seconds.

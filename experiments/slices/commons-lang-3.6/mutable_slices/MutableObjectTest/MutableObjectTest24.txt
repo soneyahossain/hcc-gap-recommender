@@ -1,0 +1,28 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:99:*]:
+org.apache.commons.lang3.mutable.MutableObject.<init>:56 ALOAD 0
+org.apache.commons.lang3.mutable.MutableObject.<init>:56 ALOAD 1
+org.apache.commons.lang3.mutable.MutableObject.<init>:56 PUTFIELD org/apache/commons/lang3/mutable/MutableObject.value Ljava/lang/Object;
+org.apache.commons.lang3.mutable.MutableObject.hashCode:117 ALOAD 0
+org.apache.commons.lang3.mutable.MutableObject.hashCode:117 GETFIELD org/apache/commons/lang3/mutable/MutableObject.value Ljava/lang/Object;
+org.apache.commons.lang3.mutable.MutableObject.hashCode:117 IFNONNULL L0 true false
+org.apache.commons.lang3.mutable.MutableObject.hashCode:117 ALOAD 0
+org.apache.commons.lang3.mutable.MutableObject.hashCode:117 GETFIELD org/apache/commons/lang3/mutable/MutableObject.value Ljava/lang/Object;
+org.apache.commons.lang3.mutable.MutableObject.hashCode:117 INVOKEVIRTUAL java/lang/Object.hashCode()I
+org.apache.commons.lang3.mutable.MutableObject.hashCode:117 IRETURN
+org.apache.commons.lang3.mutable.MutableObjectTest.main:39 INVOKEVIRTUAL org/apache/commons/lang3/mutable/MutableObjectTest.testHashCode()V
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:90 NEW org/apache/commons/lang3/mutable/MutableObject
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:90 DUP
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:90 LDC "ALPHA"
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:90 INVOKESPECIAL org/apache/commons/lang3/mutable/MutableObject.<init>(Ljava/lang/Object;)V
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:90 ASTORE 1
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:99 ALOAD 1
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:99 INVOKEVIRTUAL org/apache/commons/lang3/mutable/MutableObject.hashCode()I
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:99 LDC "ALPHA"
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:99 INVOKEVIRTUAL java/lang/String.hashCode()I
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:99 IF_ICMPNE L8 false true
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:99 ICONST_1
+org.apache.commons.lang3.mutable.MutableObjectTest.testHashCode:99 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 23 bytecode instructions.
+Computation took 0.85 seconds.

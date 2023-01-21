@@ -1,0 +1,34 @@
+ 0.0% done, time left: unknown                                1.0% done, time left: unknown  3.0% done, time left: unknown  6.7% done, time left: unknown  7.7% done, time left: unknown  9.4% done, time left: unknown 12.1% done, time left: unknown 15.6% done, time left:   0:00:02   15.6% done, time left:   0:00:03 15.6% done, time left:   0:00:04 15.6% done, time left:   0:00:06 19.1% done, time left:   0:00:06 23.4% done, time left:   0:00:04 24.0% done, time left:   0:00:02 28.5% done, time left:   0:00:02 32.2% done, time left:   0:00:02 32.5% done, time left:   0:00:01 35.3% done, time left:   0:00:01 41.7% done, time left:   0:00:00 48.5% done, time left:   0:00:00 49.4% done, time left:   0:00:00 54.2% done, time left:   0:00:00 57.1% done, time left:   0:00:00 59.5% done, time left:   0:00:00 64.9% done, time left:   0:00:00 71.4% done, time left:   0:00:00 72.5% done, time left:   0:00:00 72.6% done, time left:   0:00:00 74.9% done, time left:   0:00:00 77.2% done, time left:   0:00:00 77.4% done, time left:   0:00:00 79.6% done, time left:   0:00:00 81.0% done, time left:   0:00:00 82.0% done, time left:   0:00:00 84.5% done, time left:   0:00:00 86.8% done, time left:   0:00:00 88.8% done, time left:   0:00:00 89.0% done, time left:   0:00:00 89.1% done, time left:   0:00:00 93.2% done, time left:   0:00:00 97.0% done, time left:   0:00:00 97.8% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1217:*]:
+org.apache.commons.lang3.ArrayUtils.clone:341 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.clone:341 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.clone:344 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.clone:344 INVOKEVIRTUAL [J.clone()Ljava/lang/Object;
+org.apache.commons.lang3.ArrayUtils.clone:344 ARETURN
+org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
+org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
+org.apache.commons.lang3.ArrayUtils.isEmpty:4857 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.isEmpty:4857 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
+org.apache.commons.lang3.ArrayUtils.isEmpty:4857 IFNE L0 false true
+org.apache.commons.lang3.ArrayUtils.isEmpty:4857 ICONST_1
+org.apache.commons.lang3.ArrayUtils.isEmpty:4857 IRETURN
+org.apache.commons.lang3.ArrayUtils.removeElements:7089 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeElements:7089 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([J)Z
+org.apache.commons.lang3.ArrayUtils.removeElements:7089 IFNE L0 true false
+org.apache.commons.lang3.ArrayUtils.removeElements:7090 ALOAD 0
+org.apache.commons.lang3.ArrayUtils.removeElements:7090 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.clone([J)[J
+org.apache.commons.lang3.ArrayUtils.removeElements:7090 ARETURN
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.main:63 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray()V
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1216 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_LONG_ARRAY [J
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1216 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.removeElements([J[J)[J
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1216 ASTORE 1
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1217 GETSTATIC org/apache/commons/lang3/ArrayUtils.EMPTY_LONG_ARRAY [J
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1217 ALOAD 1
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1217 INVOKESTATIC java/util/Arrays.equals([J[J)Z
+org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1217 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
+
+Slice consists of 29 bytecode instructions.
+Computation took 6.10 seconds.

@@ -1,0 +1,40 @@
+ 0.0% done, time left: unknown                                0.5% done, time left: unknown  1.4% done, time left: unknown  1.8% done, time left: unknown  1.9% done, time left: unknown  2.8% done, time left: unknown  3.9% done, time left: unknown  4.9% done, time left: unknown  5.7% done, time left:   0:00:11    6.6% done, time left:   0:00:11  6.6% done, time left:   0:00:13  7.1% done, time left:   0:00:14  8.9% done, time left:   0:00:15 10.6% done, time left:   0:00:15 13.0% done, time left:   0:00:14 15.2% done, time left:   0:00:12 16.7% done, time left:   0:00:11 18.3% done, time left:   0:00:10 20.9% done, time left:   0:00:09 23.5% done, time left:   0:00:08 25.6% done, time left:   0:00:07 28.5% done, time left:   0:00:06 31.5% done, time left:   0:00:05 34.2% done, time left:   0:00:04 37.1% done, time left:   0:00:03 39.9% done, time left:   0:00:03 43.0% done, time left:   0:00:02 44.3% done, time left:   0:00:02 47.5% done, time left:   0:00:02 50.5% done, time left:   0:00:01 53.4% done, time left:   0:00:01 56.4% done, time left:   0:00:01 59.4% done, time left:   0:00:01 62.1% done, time left:   0:00:01 65.3% done, time left:   0:00:00 68.6% done, time left:   0:00:00 71.9% done, time left:   0:00:00 86.0% done, time left:   0:00:00 99.0% done, time left:   0:00:00 99.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.apache.commons.lang3.text.WordUtilsTest.testInitials_String_charArray:404:*]:
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
+org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
+org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
+org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
+org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
+org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
+org.apache.commons.lang3.text.WordUtils.initials:661 ALOAD 0
+org.apache.commons.lang3.text.WordUtils.initials:661 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
+org.apache.commons.lang3.text.WordUtils.initials:661 IFEQ L0 true false
+org.apache.commons.lang3.text.WordUtils.initials:664 ALOAD 1
+org.apache.commons.lang3.text.WordUtils.initials:664 IFNULL L1 false true
+org.apache.commons.lang3.text.WordUtils.initials:664 ALOAD 1
+org.apache.commons.lang3.text.WordUtils.initials:664 ARRAYLENGTH
+org.apache.commons.lang3.text.WordUtils.initials:664 IFNE L1 true false
+org.apache.commons.lang3.text.WordUtils.initials:667 ALOAD 0
+org.apache.commons.lang3.text.WordUtils.initials:667 INVOKEVIRTUAL java/lang/String.length()I
+org.apache.commons.lang3.text.WordUtils.initials:667 ISTORE 2
+org.apache.commons.lang3.text.WordUtils.initials:671 ICONST_0
+org.apache.commons.lang3.text.WordUtils.initials:671 ISTORE 6
+org.apache.commons.lang3.text.WordUtils.initials:671 ILOAD 6
+org.apache.commons.lang3.text.WordUtils.initials:671 ILOAD 2
+org.apache.commons.lang3.text.WordUtils.initials:671 IF_ICMPGE L5 true true
+org.apache.commons.lang3.text.WordUtils.initials:671 IINC 6 1
+org.apache.commons.lang3.text.WordUtils.initials:683 NEW java/lang/String
+org.apache.commons.lang3.text.WordUtils.initials:683 ARETURN
+org.apache.commons.lang3.text.WordUtilsTest.main:49 INVOKEVIRTUAL org/apache/commons/lang3/text/WordUtilsTest.testInitials_String_charArray()V
+org.apache.commons.lang3.text.WordUtilsTest.testInitials_String_charArray:394 LDC " .'"
+org.apache.commons.lang3.text.WordUtilsTest.testInitials_String_charArray:394 INVOKEVIRTUAL java/lang/String.toCharArray()[C
+org.apache.commons.lang3.text.WordUtilsTest.testInitials_String_charArray:394 ASTORE 1
+org.apache.commons.lang3.text.WordUtilsTest.testInitials_String_charArray:404 LDC "KOM"
+org.apache.commons.lang3.text.WordUtilsTest.testInitials_String_charArray:404 LDC "Kay O'Murphy"
+org.apache.commons.lang3.text.WordUtilsTest.testInitials_String_charArray:404 ALOAD 1
+org.apache.commons.lang3.text.WordUtilsTest.testInitials_String_charArray:404 INVOKESTATIC org/apache/commons/lang3/text/WordUtils.initials(Ljava/lang/String;[C)Ljava/lang/String;
+org.apache.commons.lang3.text.WordUtilsTest.testInitials_String_charArray:404 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 35 bytecode instructions.
+Computation took 4.34 seconds.
