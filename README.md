@@ -122,7 +122,7 @@ Evaluator ran successfully: OK
 # RQ1 and RQ3
 To assess RQ1 (computation of SCC and OBCC), you first must download the relevant slices for all subjects. If you are running the provided Virtual Box VM, this is already done for you.
 
-You can download a zipped tar file of slices from `FINAL_LOCATION_FOR_SLICES`. The tar file should be saved in `$HCC_EXPERIMENTS`.
+You can download a zipped tar file of slices from `FIXME: FINAL_LOCATION_FOR_SLICES`. The tar file should be saved in `$HCC_EXPERIMENTS`.
 To untar:
 
 ```
