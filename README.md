@@ -123,7 +123,7 @@ project,9,55.56,100.00,100.00,
 Evaluator ran successfully: OK 
 ```
 
-# RQ1 and RQ3
+# RQ1
 To assess RQ1 (computation of SCC and OBCC), you first must download the relevant slices for all subjects. If you are running the provided Virtual Box VM, this is already done for you.
 
 You can download a zipped tar file of slices from `FIXME: FINAL_LOCATION_FOR_SLICES`. The tar file should be saved in `$HCC_EXPERIMENTS`.
@@ -180,8 +180,18 @@ cd $HCC_EXPERIMENTS/scripts
 ./rq1.sh
 ```
 Warning: this can easily take 1hr or more
+        
+# RQ2
+To assess the functionality and reusuability of RQ2, run the following commands:
 
-## RQ3
+    cd $HCC_EXPERIMENTS/scripts
+    ./rq2.sh
+
+This should take approximately 2 minutes to generate 15 different test suites from the commons-cli-limited subject and run mutation test on those 15 test suites. 
+Upon successful completion, the outputs are stored in the $HCC_EXPERIMENTS/hcc_results/commons-cli-limited/rq2 directory, result.txt stores the statement checked coverage
+gap for 15 test suites and mutation_result.txt stores the mutation scores. All 15 test suites are stored $HCC_EXPERIMENTS/subjects/commons-cli-limited/rq2_test_suites directory.
+
+# RQ3
 Once RQ1 successfully completes, you can run scripts for RQ3.
 ```
 cd $HCC_EXPERIMENTS/scripts
@@ -204,14 +214,3 @@ subject,total_assertion,top_1(%),top_5(%),top_10(%)
 project,601,69.05,84.19,90.02,
 ```
 This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/evaluator/summary.csv`
-        
-# RQ2
-To assess the functionality and reusuability of RQ2, run the following commands:
-
-    cd $HCC_EXPERIMENTS/scripts
-    ./rq2.sh
-
-This should take approximately 2 minutes to generate 15 different test suites from the commons-cli-limited subject and run mutation test on those 15 test suites. 
-Upon successful completion, the outputs are stored in the $HCC_EXPERIMENTS/hcc_results/commons-cli-limited/rq2 directory, result.txt stores the statement checked coverage
-gap for 15 test suites and mutation_result.txt stores the mutation scores. All 15 test suites are stored $HCC_EXPERIMENTS/subjects/commons-cli-limited/rq2_test_suites directory.
-
