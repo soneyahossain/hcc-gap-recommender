@@ -31,12 +31,12 @@ echo "*****************************************************************"
 echo
 echo "Verify ability to generate:"
 echo "   - statement coverage via clover"
-echo "   - object branch coverage via jacoco"
-echo "   - traces"
-echo "   - slices"
-echo "   - checked coverage (statement)"
-echo "   - checked coverage (object branch)"
-echo "   - recommender/evaluator tool output"
+echo "   - object branch coverage via JaCoCo"
+echo "   - traces via JavaSlicer"
+echo "   - slices via JavaSlicer"
+echo "   - statement checked coverage (SCC)"
+echo "   - object branch coverage (OBCC)"
+echo "   - recommendations via recommender"
 echo
 
 header() {
