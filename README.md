@@ -217,6 +217,8 @@ This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/obcc.csv`
 ## RQ3
 Once RQ1 successfully completes, you can run scripts for RQ3.
 ```
+cd $HCC_EXPERIMENTS/scripts
+
 # for a single subject
 ./rq3.sh commons-cli
 
