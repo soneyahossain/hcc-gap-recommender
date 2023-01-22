@@ -218,3 +218,4 @@ This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/evaluator/summ
 
 # Other
 TODO: say something about collecting traces (for ex. for a new program) and that it can take both a long time and requires gobs of storage and memory. 
+TODO: describe the layout and content of `experiments`
