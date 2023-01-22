@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "computing slice for SerializableConverterTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/reflection_slices/SerializableConverterTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/xstream/reflection_traces/SerializableConverterTest.trace com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanOmitFieldAtSerialization:86:*,com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanOmitFieldAtDeserialization:109:*,com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanOmitInheritedFieldAtSerialization:159:*,com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanOmitInheritedFieldAtDeserialization:189:*,com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanOmitNamedFieldAtSerialization:253:*,com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanOmitNamedFieldAtDeserialization:277:*,com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanAliasField:300:*,com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanAliasField:302:*,com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanAliasNamedField:325:*,com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanAliasNamedField:327:*,com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanHandleFieldsDeclaredWithSerializableInterface:348:*,com.thoughtworks.xstream.converters.reflection.SerializableConverterTest.testCanHandleFieldsDeclaredWithSerializableInterface:350:*>$HCC_EXPERIMENTS/slices/xstream/reflection_slices/SerializableConverterTest/SerializableConverterTest.txt
+
+#Total Asserts in com.thoughtworks.xstream.converters.reflection/SerializableConverterTest=============12
+#Total Tests in com.thoughtworks.xstream.converters.reflection/SerializableConverterTest=============0

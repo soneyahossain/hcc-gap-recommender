@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo "computing slice for CompassPlotTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:69:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:73:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:75:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:79:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:81:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:85:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:87:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:92:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:95:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:100:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest10.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:103:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest11.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:108:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest12.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testEquals:111:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest13.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testSerialization:127:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest14.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testCloning:137:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest15.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testCloning:138:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest16.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/plot_traces/CompassPlotTest.trace org.jfree.chart.plot.CompassPlotTest.testCloning:139:*>$HCC_EXPERIMENTS/slices/jfreechart/plot_slices/CompassPlotTest/CompassPlotTest17.txt
+
+#Total Asserts in org.jfree.chart.plot/CompassPlotTest=============17
+#Total Tests in org.jfree.chart.plot/CompassPlotTest=============0

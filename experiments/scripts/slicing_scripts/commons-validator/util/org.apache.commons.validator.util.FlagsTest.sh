@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo "computing slice for FlagsTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testHashCode:44:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testGetFlags:49:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testIsOnOff:56:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testIsOnOff:57:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testIsOnOff:59:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testIsOnOff:60:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testIsOnOff:62:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testTurnOffAll:74:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testClear:80:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testTurnOnAll:86:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest10.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testIsOn_isFalseWhenNotAllFlagsInArgumentAreOn:93:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest11.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testIsOn_isTrueWhenHighOrderBitIsSetAndQueried:100:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest12.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testToString:121:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest13.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testToString:125:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest14.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-validator/util_traces/FlagsTest.trace org.apache.commons.validator.util.FlagsTest.testToString:127:*>$HCC_EXPERIMENTS/slices/commons-validator/util_slices/FlagsTest/FlagsTest15.txt
+
+#Total Asserts in org.apache.commons.validator.util/FlagsTest=============15
+#Total Tests in org.apache.commons.validator.util/FlagsTest=============0

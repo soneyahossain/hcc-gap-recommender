@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "computing slice for AreaRendererTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testEquals:74:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testEquals:77:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testEquals:79:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testHashcode:89:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testHashcode:92:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testCloning:102:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testCloning:103:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testCloning:104:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testPublicCloneable:113:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testSerialization:123:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest10.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testGetLegendItemSeriesIndex:145:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest11.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testGetLegendItemSeriesIndex:146:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest12.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/AreaRendererTest.trace org.jfree.chart.renderer.category.AreaRendererTest.testGetLegendItemSeriesIndex:147:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/AreaRendererTest/AreaRendererTest13.txt
+
+#Total Asserts in org.jfree.chart.renderer.category/AreaRendererTest=============13
+#Total Tests in org.jfree.chart.renderer.category/AreaRendererTest=============0

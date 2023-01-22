@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "computing slice for XmlUtilTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest
+
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatInputStreamOutputStream:86:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest1.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatInputStreamOutputStream:95:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest2.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatInputStreamOutputStream:96:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest3.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatReaderWriter:111:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest4.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatReaderWriter:121:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest5.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatReaderWriter:122:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest6.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatString:137:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest7.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatString:157:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest8.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatString:160:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest9.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatReaderWriter2:167:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest10.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatReaderWriter2:176:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest11.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/xml_traces/XmlUtilTest.trace org.codehaus.plexus.util.xml.XmlUtilTest.testPrettyFormatReaderWriter2:177:*>$HCC_EXPERIMENTS/slices/plexus-utils/xml_slices/XmlUtilTest/XmlUtilTest12.txt
+
+#Total Asserts in org.codehaus.plexus.util.xml/XmlUtilTest=============12
+#Total Tests in org.codehaus.plexus.util.xml/XmlUtilTest=============0

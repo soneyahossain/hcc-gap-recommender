@@ -1,0 +1,28 @@
+#!/bin/bash
+
+echo "computing slice for DateTickTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:73:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:76:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:78:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:81:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:83:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:86:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:88:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:91:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:93:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:96:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest10.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:98:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest11.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:102:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest12.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testEquals:104:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest13.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testHashCode:118:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest14.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testHashCode:121:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest15.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testCloning:132:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest16.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testCloning:133:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest17.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testCloning:134:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest18.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/DateTickTest.trace org.jfree.chart.axis.DateTickTest.testSerialization:145:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/DateTickTest/DateTickTest19.txt
+
+#Total Asserts in org.jfree.chart.axis/DateTickTest=============19
+#Total Tests in org.jfree.chart.axis/DateTickTest=============0

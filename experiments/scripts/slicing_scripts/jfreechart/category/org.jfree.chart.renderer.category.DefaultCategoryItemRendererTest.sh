@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "computing slice for DefaultCategoryItemRendererTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/jfreechart/category_slices/DefaultCategoryItemRendererTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/DefaultCategoryItemRendererTest.trace org.jfree.chart.renderer.category.DefaultCategoryItemRendererTest.testEquals:65:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/DefaultCategoryItemRendererTest/DefaultCategoryItemRendererTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/DefaultCategoryItemRendererTest.trace org.jfree.chart.renderer.category.DefaultCategoryItemRendererTest.testHashcode:75:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/DefaultCategoryItemRendererTest/DefaultCategoryItemRendererTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/DefaultCategoryItemRendererTest.trace org.jfree.chart.renderer.category.DefaultCategoryItemRendererTest.testHashcode:78:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/DefaultCategoryItemRendererTest/DefaultCategoryItemRendererTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/DefaultCategoryItemRendererTest.trace org.jfree.chart.renderer.category.DefaultCategoryItemRendererTest.testCloning:89:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/DefaultCategoryItemRendererTest/DefaultCategoryItemRendererTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/DefaultCategoryItemRendererTest.trace org.jfree.chart.renderer.category.DefaultCategoryItemRendererTest.testCloning:90:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/DefaultCategoryItemRendererTest/DefaultCategoryItemRendererTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/DefaultCategoryItemRendererTest.trace org.jfree.chart.renderer.category.DefaultCategoryItemRendererTest.testCloning:91:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/DefaultCategoryItemRendererTest/DefaultCategoryItemRendererTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/DefaultCategoryItemRendererTest.trace org.jfree.chart.renderer.category.DefaultCategoryItemRendererTest.testPublicCloneable:100:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/DefaultCategoryItemRendererTest/DefaultCategoryItemRendererTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/category_traces/DefaultCategoryItemRendererTest.trace org.jfree.chart.renderer.category.DefaultCategoryItemRendererTest.testSerialization:111:*>$HCC_EXPERIMENTS/slices/jfreechart/category_slices/DefaultCategoryItemRendererTest/DefaultCategoryItemRendererTest8.txt
+
+#Total Asserts in org.jfree.chart.renderer.category/DefaultCategoryItemRendererTest=============8
+#Total Tests in org.jfree.chart.renderer.category/DefaultCategoryItemRendererTest=============0
