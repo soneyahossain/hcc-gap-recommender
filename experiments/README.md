@@ -16,6 +16,7 @@ Note that various environment variables must be set. These can be found in the f
 * `rq1.sh, rq2.sh, rq3.sh, rq4.sh` demonstrates the 4 major research questions highlighted in our ICSE 2023 paper
 * `*build*.sh` are scripts to build the subject programs
 * `trace.sh <subject>` yields traces from running unit tests
+* `autogen-slicer.sh <subject>` automatically generates the slicing scripts needed by `slice.sh`
 * `slice.sh <subject>` runs the scripts inside of `slicing_scripts` to generate slices on a per assertion basis
 * `compute_hcc.stmt.sh <subject>` computes SCC
 * `compute_hcc.ob.sh <subject>` computes OBCC
