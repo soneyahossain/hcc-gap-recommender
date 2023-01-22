@@ -11,6 +11,7 @@ To the extent possible, projects were forked and minimal changes were applied. C
 * `hcc_results` contains output files generated, organized by subject programs
 
 # descriptions of the major scripts under the experiments/scripts directory
+Note that various environment variables must be set. These can be found in the file `setenv`.
 * `smoke-tests.sh` runs the HCC workflow end-to-end on `commons-cli` configured with only a few tests
 * `rq1.sh, rq2.sh, rq3.sh, rq4.sh` demonstrates the 4 major research questions highlighted in our ICSE 2023 paper
 * `*build*.sh` are scripts to build the subject programs
