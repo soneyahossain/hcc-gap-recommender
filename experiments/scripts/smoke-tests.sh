@@ -69,7 +69,7 @@ cleanup
 
 # Compute baseline statement coverage with Clover
 basetmp=/tmp/$USER
-header "Compute baseline statement coverage"
+header "Compute baseline statement coverage (1-2mns)"
 ./clean-build-clover.sh $PROJECT_NAME > $basetmp.$PROJECT_NAME.clover 2>&1
 grep "BUILD SUCCESS" $basetmp.$PROJECT_NAME.clover >/dev/null
 report $? "SCC output file created"
@@ -79,7 +79,7 @@ if [ $? -eq 0 ]; then
 fi
 
 # Compute baseline object-branch coverage with Jacoco
-header "Compute baseline object branch coverage"
+header "Compute baseline object branch coverage (1-2mns)"
 ./clean-build-jacoco.sh $PROJECT_NAME 2>&1 | grep "BUILD SUCCESS" >/dev/null
 report $? "OBCC output file created"
 
