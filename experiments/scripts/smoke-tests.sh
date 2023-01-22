@@ -35,7 +35,7 @@ echo "   - object branch coverage via JaCoCo"
 echo "   - traces via JavaSlicer"
 echo "   - slices via JavaSlicer"
 echo "   - statement checked coverage (SCC)"
-echo "   - object branch coverage (OBCC)"
+echo "   - object branch checked coverage (OBCC)"
 echo "   - recommendations via recommender"
 
 header() {
@@ -68,49 +68,50 @@ report() {
 cleanup
 
 # Compute baseline statement coverage with Clover
+basetmp=/tmp/$USER
 header "Compute baseline statement coverage"
-./clean-build-clover.sh $PROJECT_NAME > $PROJECT_NAME.clover 2>&1
-grep "BUILD SUCCESS" $PROJECT_NAME.clover >/dev/null
+./clean-build-clover.sh $PROJECT_NAME > $basetmp.$PROJECT_NAME.clover 2>&1
+grep "BUILD SUCCESS" $basetmp.$PROJECT_NAME.clover >/dev/null
 report $? "SCC output file created"
-grep -i -A10 'coverage overview' $PROJECT_NAME.clover | grep Statement
+grep -i -A10 'coverage overview' $basetmp.$PROJECT_NAME.clover | grep Statement
+if [ $? -eq 0 ]; then
+	rm $basetmp.$PROJECT_NAME.clover
+fi
 
 # Compute baseline object-branch coverage with Jacoco
 header "Compute baseline object branch coverage"
-./clean-build-jacoco.sh $PROJECT_NAME > $PROJECT_NAME.jacoco 2>&1
-grep "BUILD SUCCESS" $PROJECT_NAME.jacoco >/dev/null
+./clean-build-jacoco.sh $PROJECT_NAME 2>&1 | grep "BUILD SUCCESS" >/dev/null
 report $? "OBCC output file created"
-#grep -i -B6 'jacoco.xml' $PROJECT_NAME.jacoco
 
 # Generate trace information from running unit tests
 header "Generate traces (~2mns)"
-./trace.sh $PROJECT_NAME > $PROJECT_NAME.trace 2>&1
+./trace.sh $PROJECT_NAME >/dev/null 2>&1
 ls $HCC_EXPERIMENTS/traces/$PROJECT_NAME/cli_traces/CommandLineTest.trace >/dev/null
 report $? "Trace file generated"
 
 # Slice traces
 header "Generate slices (~10mns)"
-./slice.sh $PROJECT_NAME > $PROJECT_NAME.slice 2>&1
+./slice.sh $PROJECT_NAME >/dev/null 2>&1
 if [ -f "$HCC_EXPERIMENTS/slices/$PROJECT_NAME/cli_slices/CommandLineTest/CommandLineTest1.txt" ]; then
 	report 0 "Slice file(s) generated"
 else
 	report 1 "Slice file(s) generated"
 fi
-#ls -ltR $HCC_EXPERIMENTS/slices/$PROJECT_NAME/cli_slices/
 
 # Compute SCC
 header "Compute SCC"
-./compute_hcc.stmt.sh $PROJECT_NAME > $PROJECT_NAME.hcc 2>&1
+./compute_hcc.stmt.sh $PROJECT_NAME >/dev/null 2>&1
 cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/scc.csv
 report $? "SCC computed"
 
 # Compute OBCC
 header "Compute OBCC"
-./compute_hcc.ob.sh $PROJECT_NAME > $PROJECT_NAME.hcc.ob 2>&1
+./compute_hcc.ob.sh $PROJECT_NAME >/dev/null  2>&1
 cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/obcc.csv
 report $? "OBCC computed"
 
 # Run evaluator tool
 header "Run recommendation evaluator"
-./evaluator.sh $PROJECT_NAME > $PROJECT_NAME.evaluator 2>&1
+./evaluator.sh $PROJECT_NAME >/dev/null 2>&1
 cat $HCC_EXPERIMENTS/hcc_results/$PROJECT_NAME/evaluator/result/summary.csv
 report $? "Evaluator ran successfully"
