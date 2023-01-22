@@ -2,7 +2,7 @@
 
 echo "computing slice for TreeMarshallerTest"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/core_slices/TreeMarshallerTest
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/core_slices/TreeMarshallerTest
 
 
 #Total Asserts in com.thoughtworks.xstream.core/TreeMarshallerTest=============0

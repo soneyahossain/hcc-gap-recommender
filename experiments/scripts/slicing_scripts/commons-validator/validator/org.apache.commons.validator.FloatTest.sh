@@ -2,7 +2,7 @@
 
 echo "computing slice for FloatTest"
 
-mkdir -p /home/stg/omc_experiments/slices/commons-validator/validator_slices/FloatTest
+mkdir -p $HCC_EXPERIMENTS/slices/commons-validator/validator_slices/FloatTest
 
 
 #Total Asserts in org.apache.commons.validator/FloatTest=============0

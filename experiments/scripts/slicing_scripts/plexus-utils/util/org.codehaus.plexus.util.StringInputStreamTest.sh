@@ -2,7 +2,7 @@
 
 echo "computing slice for StringInputStreamTest"
 
-mkdir -p /home/stg/omc_experiments/slices/plexus-utils/util_slices/StringInputStreamTest
+mkdir -p $HCC_EXPERIMENTS/slices/plexus-utils/util_slices/StringInputStreamTest
 
 
 #Total Asserts in org.codehaus.plexus.util/StringInputStreamTest=============0

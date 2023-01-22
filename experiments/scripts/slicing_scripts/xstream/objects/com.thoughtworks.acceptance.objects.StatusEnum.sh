@@ -2,7 +2,7 @@
 
 echo "computing slice for StatusEnum"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/objects_slices/StatusEnum
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/objects_slices/StatusEnum
 
 
 #Total Asserts in com.thoughtworks.acceptance.objects/StatusEnum=============0

@@ -2,7 +2,7 @@
 
 echo "computing slice for StandardObject"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/objects_slices/StandardObject
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/objects_slices/StandardObject
 
 
 #Total Asserts in com.thoughtworks.acceptance.objects/StandardObject=============0

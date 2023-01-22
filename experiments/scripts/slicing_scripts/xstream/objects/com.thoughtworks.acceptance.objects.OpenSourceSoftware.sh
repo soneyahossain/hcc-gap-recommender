@@ -2,7 +2,7 @@
 
 echo "computing slice for OpenSourceSoftware"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/objects_slices/OpenSourceSoftware
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/objects_slices/OpenSourceSoftware
 
 
 #Total Asserts in com.thoughtworks.acceptance.objects/OpenSourceSoftware=============0

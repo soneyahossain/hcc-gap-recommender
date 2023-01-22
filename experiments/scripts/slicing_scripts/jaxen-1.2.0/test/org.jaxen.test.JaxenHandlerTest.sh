@@ -2,7 +2,7 @@
 
 echo "computing slice for JaxenHandlerTest"
 
-mkdir -p /home/stg/omc_experiments/slices/fse-jaxen-1.2.0/test_slices/JaxenHandlerTest
+mkdir -p $HCC_EXPERIMENTS/slices/jaxen-1.2.0/test_slices/JaxenHandlerTest
 
 
 #Total Asserts in org.jaxen.test/JaxenHandlerTest=============0

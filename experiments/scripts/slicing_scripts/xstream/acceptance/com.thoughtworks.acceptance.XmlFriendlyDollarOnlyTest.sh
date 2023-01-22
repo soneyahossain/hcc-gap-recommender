@@ -2,7 +2,7 @@
 
 echo "computing slice for XmlFriendlyDollarOnlyTest"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/acceptance_slices/XmlFriendlyDollarOnlyTest
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/acceptance_slices/XmlFriendlyDollarOnlyTest
 
 
 #Total Asserts in com.thoughtworks.acceptance/XmlFriendlyDollarOnlyTest=============0

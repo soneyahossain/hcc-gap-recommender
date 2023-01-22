@@ -2,7 +2,7 @@
 
 echo "computing slice for TokenMatchers"
 
-mkdir -p /home/stg/omc_experiments/slices/commons-csv/csv_slices/TokenMatchers
+mkdir -p $HCC_EXPERIMENTS/slices/commons-csv/csv_slices/TokenMatchers
 
 
 #Total Asserts in org.apache.commons.csv/TokenMatchers=============0

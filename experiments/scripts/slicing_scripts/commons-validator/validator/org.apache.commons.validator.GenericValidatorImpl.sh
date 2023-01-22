@@ -2,7 +2,7 @@
 
 echo "computing slice for GenericValidatorImpl"
 
-mkdir -p /home/stg/omc_experiments/slices/commons-validator/validator_slices/GenericValidatorImpl
+mkdir -p $HCC_EXPERIMENTS/slices/commons-validator/validator_slices/GenericValidatorImpl
 
 
 #Total Asserts in org.apache.commons.validator/GenericValidatorImpl=============0

@@ -2,7 +2,7 @@
 
 echo "computing slice for XppDomWriterTest"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/xml_slices/XppDomWriterTest
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/xml_slices/XppDomWriterTest
 
 
 #Total Asserts in com.thoughtworks.xstream.io.xml/XppDomWriterTest=============0

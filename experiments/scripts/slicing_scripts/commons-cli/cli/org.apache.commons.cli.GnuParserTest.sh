@@ -2,7 +2,7 @@
 
 echo "computing slice for GnuParserTest"
 
-mkdir -p /home/stg/omc_experiments/slices/commons-cli/cli_slices/GnuParserTest
+mkdir -p $HCC_EXPERIMENTS/slices/commons-cli/cli_slices/GnuParserTest
 
 
 #Total Asserts in org.apache.commons.cli/GnuParserTest=============0

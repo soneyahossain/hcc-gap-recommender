@@ -2,7 +2,7 @@
 
 echo "computing slice for ReferenceByIDMarshallingStrategyTest"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/core_slices/ReferenceByIDMarshallingStrategyTest
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/core_slices/ReferenceByIDMarshallingStrategyTest
 
 
 #Total Asserts in com.thoughtworks.xstream.core/ReferenceByIDMarshallingStrategyTest=============0

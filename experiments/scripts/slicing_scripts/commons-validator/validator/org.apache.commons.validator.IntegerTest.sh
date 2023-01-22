@@ -2,7 +2,7 @@
 
 echo "computing slice for IntegerTest"
 
-mkdir -p /home/stg/omc_experiments/slices/commons-validator/validator_slices/IntegerTest
+mkdir -p $HCC_EXPERIMENTS/slices/commons-validator/validator_slices/IntegerTest
 
 
 #Total Asserts in org.apache.commons.validator/IntegerTest=============0

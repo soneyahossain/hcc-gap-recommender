@@ -2,7 +2,7 @@
 
 echo "computing slice for ImplicitTest"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/acceptance_slices/ImplicitTest
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/acceptance_slices/ImplicitTest
 
 
 #Total Asserts in com.thoughtworks.acceptance/ImplicitTest=============0

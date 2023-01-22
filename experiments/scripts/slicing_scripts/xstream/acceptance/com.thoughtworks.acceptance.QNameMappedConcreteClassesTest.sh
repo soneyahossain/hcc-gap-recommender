@@ -2,7 +2,7 @@
 
 echo "computing slice for QNameMappedConcreteClassesTest"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/acceptance_slices/QNameMappedConcreteClassesTest
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/acceptance_slices/QNameMappedConcreteClassesTest
 
 
 #Total Asserts in com.thoughtworks.acceptance/QNameMappedConcreteClassesTest=============0

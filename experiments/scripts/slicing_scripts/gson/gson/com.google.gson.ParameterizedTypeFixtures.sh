@@ -2,7 +2,7 @@
 
 echo "computing slice for ParameterizedTypeFixtures"
 
-mkdir -p /home/stg/omc_experiments/slices/gson/gson_slices/ParameterizedTypeFixtures
+mkdir -p $HCC_EXPERIMENTS/slices/gson/gson_slices/ParameterizedTypeFixtures
 
 
 #Total Asserts in com.google.gson/ParameterizedTypeFixtures=============0

@@ -2,7 +2,7 @@
 
 echo "computing slice for MyDialLayerChangeListener"
 
-mkdir -p /home/stg/omc_experiments/slices/jfreechart/dial_slices/MyDialLayerChangeListener
+mkdir -p $HCC_EXPERIMENTS/slices/jfreechart/dial_slices/MyDialLayerChangeListener
 
 
 #Total Asserts in org.jfree.chart.plot.dial/MyDialLayerChangeListener=============0

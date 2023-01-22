@@ -2,7 +2,7 @@
 
 echo "computing slice for XOMXPathTest"
 
-mkdir -p /home/stg/omc_experiments/slices/fse-jaxen-1.2.0/test_slices/XOMXPathTest
+mkdir -p $HCC_EXPERIMENTS/slices/jaxen-1.2.0/test_slices/XOMXPathTest
 
 
 #Total Asserts in org.jaxen.test/XOMXPathTest=============0

@@ -2,7 +2,7 @@
 
 echo "computing slice for RendererChangeDetector"
 
-mkdir -p /home/stg/omc_experiments/slices/jfreechart/renderer_slices/RendererChangeDetector
+mkdir -p $HCC_EXPERIMENTS/slices/jfreechart/renderer_slices/RendererChangeDetector
 
 
 #Total Asserts in org.jfree.chart.renderer/RendererChangeDetector=============0

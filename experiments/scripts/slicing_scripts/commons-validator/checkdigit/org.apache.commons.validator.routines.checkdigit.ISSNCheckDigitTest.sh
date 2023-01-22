@@ -2,7 +2,7 @@
 
 echo "computing slice for ISSNCheckDigitTest"
 
-mkdir -p /home/stg/omc_experiments/slices/commons-validator/checkdigit_slices/ISSNCheckDigitTest
+mkdir -p $HCC_EXPERIMENTS/slices/commons-validator/checkdigit_slices/ISSNCheckDigitTest
 
 
 #Total Asserts in org.apache.commons.validator.routines.checkdigit/ISSNCheckDigitTest=============0

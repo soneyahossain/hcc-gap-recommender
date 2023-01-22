@@ -2,7 +2,7 @@
 
 echo "computing slice for CustomValidatorResources"
 
-mkdir -p /home/stg/omc_experiments/slices/commons-validator/custom_slices/CustomValidatorResources
+mkdir -p $HCC_EXPERIMENTS/slices/commons-validator/custom_slices/CustomValidatorResources
 
 
 #Total Asserts in org.apache.commons.validator.custom/CustomValidatorResources=============0

@@ -2,7 +2,7 @@
 
 echo "computing slice for StandardStaxReaderTest"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/xml_slices/StandardStaxReaderTest
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/xml_slices/StandardStaxReaderTest
 
 
 #Total Asserts in com.thoughtworks.xstream.io.xml/StandardStaxReaderTest=============0

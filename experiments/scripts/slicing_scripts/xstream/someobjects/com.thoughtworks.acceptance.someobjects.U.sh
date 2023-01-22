@@ -2,7 +2,7 @@
 
 echo "computing slice for U"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/someobjects_slices/U
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/someobjects_slices/U
 
 
 #Total Asserts in com.thoughtworks.acceptance.someobjects/U=============0

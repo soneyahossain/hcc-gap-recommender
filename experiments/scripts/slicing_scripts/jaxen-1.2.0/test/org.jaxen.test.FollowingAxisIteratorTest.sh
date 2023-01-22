@@ -2,7 +2,7 @@
 
 echo "computing slice for FollowingAxisIteratorTest"
 
-mkdir -p /home/stg/omc_experiments/slices/fse-jaxen-1.2.0/test_slices/FollowingAxisIteratorTest
+mkdir -p $HCC_EXPERIMENTS/slices/jaxen-1.2.0/test_slices/FollowingAxisIteratorTest
 
 
 #Total Asserts in org.jaxen.test/FollowingAxisIteratorTest=============0

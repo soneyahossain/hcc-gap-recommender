@@ -2,7 +2,7 @@
 
 echo "computing slice for WithList"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/someobjects_slices/WithList
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/someobjects_slices/WithList
 
 
 #Total Asserts in com.thoughtworks.acceptance.someobjects/WithList=============0

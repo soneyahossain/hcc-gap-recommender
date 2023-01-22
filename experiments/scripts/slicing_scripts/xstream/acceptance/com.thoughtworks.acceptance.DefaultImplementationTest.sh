@@ -2,7 +2,7 @@
 
 echo "computing slice for DefaultImplementationTest"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/acceptance_slices/DefaultImplementationTest
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/acceptance_slices/DefaultImplementationTest
 
 
 #Total Asserts in com.thoughtworks.acceptance/DefaultImplementationTest=============0

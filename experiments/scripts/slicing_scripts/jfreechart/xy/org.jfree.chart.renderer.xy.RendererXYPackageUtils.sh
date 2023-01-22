@@ -2,7 +2,7 @@
 
 echo "computing slice for RendererXYPackageUtils"
 
-mkdir -p /home/stg/omc_experiments/slices/jfreechart/xy_slices/RendererXYPackageUtils
+mkdir -p $HCC_EXPERIMENTS/slices/jfreechart/xy_slices/RendererXYPackageUtils
 
 
 #Total Asserts in org.jfree.chart.renderer.xy/RendererXYPackageUtils=============0

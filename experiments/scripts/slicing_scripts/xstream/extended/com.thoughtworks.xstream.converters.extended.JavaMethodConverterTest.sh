@@ -2,7 +2,7 @@
 
 echo "computing slice for JavaMethodConverterTest"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/extended_slices/JavaMethodConverterTest
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/extended_slices/JavaMethodConverterTest
 
 
 #Total Asserts in com.thoughtworks.xstream.converters.extended/JavaMethodConverterTest=============0

@@ -2,7 +2,7 @@
 
 echo "computing slice for SampleDynamicProxy"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/objects_slices/SampleDynamicProxy
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/objects_slices/SampleDynamicProxy
 
 
 #Total Asserts in com.thoughtworks.acceptance.objects/SampleDynamicProxy=============0

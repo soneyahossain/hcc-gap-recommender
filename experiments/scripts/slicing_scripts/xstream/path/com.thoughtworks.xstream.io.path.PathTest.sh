@@ -2,7 +2,7 @@
 
 echo "computing slice for PathTest"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/path_slices/PathTest
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/path_slices/PathTest
 
 
 #Total Asserts in com.thoughtworks.xstream.io.path/PathTest=============0

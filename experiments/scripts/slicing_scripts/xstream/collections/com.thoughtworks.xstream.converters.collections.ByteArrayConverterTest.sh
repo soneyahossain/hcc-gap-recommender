@@ -2,7 +2,7 @@
 
 echo "computing slice for ByteArrayConverterTest"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/collections_slices/ByteArrayConverterTest
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/collections_slices/ByteArrayConverterTest
 
 
 #Total Asserts in com.thoughtworks.xstream.converters.collections/ByteArrayConverterTest=============0

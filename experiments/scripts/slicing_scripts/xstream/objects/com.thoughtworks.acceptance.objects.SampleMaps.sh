@@ -2,7 +2,7 @@
 
 echo "computing slice for SampleMaps"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/objects_slices/SampleMaps
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/objects_slices/SampleMaps
 
 
 #Total Asserts in com.thoughtworks.acceptance.objects/SampleMaps=============0

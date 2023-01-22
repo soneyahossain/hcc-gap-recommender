@@ -2,7 +2,7 @@
 
 echo "computing slice for Handler"
 
-mkdir -p /home/stg/omc_experiments/slices/xstream/someobjects_slices/Handler
+mkdir -p $HCC_EXPERIMENTS/slices/xstream/someobjects_slices/Handler
 
 
 #Total Asserts in com.thoughtworks.acceptance.someobjects/Handler=============0

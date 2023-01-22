@@ -2,7 +2,7 @@
 
 echo "computing slice for ModulusTenEAN13CheckDigitTest"
 
-mkdir -p /home/stg/omc_experiments/slices/commons-validator/checkdigit_slices/ModulusTenEAN13CheckDigitTest
+mkdir -p $HCC_EXPERIMENTS/slices/commons-validator/checkdigit_slices/ModulusTenEAN13CheckDigitTest
 
 
 #Total Asserts in org.apache.commons.validator.routines.checkdigit/ModulusTenEAN13CheckDigitTest=============0
