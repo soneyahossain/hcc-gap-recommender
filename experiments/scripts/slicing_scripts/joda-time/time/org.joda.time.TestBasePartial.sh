@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "computing slice for TestBasePartial"
+
+mkdir -p $HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial
+
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:79:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial1.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:80:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial2.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:83:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial3.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:84:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial4.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:87:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial5.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:88:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial6.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:91:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial7.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:92:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial8.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:98:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial9.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:99:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial10.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:105:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial11.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g  -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/fse-joda-time/time_traces/TestBasePartial.trace org.joda.time.TestBasePartial.testSetMethods:106:*>$HCC_EXPERIMENTS/slices/fse-joda-time/time_slices/TestBasePartial/TestBasePartial12.txt
+
+#Total Asserts in org.joda.time/TestBasePartial=============12
+#Total Tests in org.joda.time/TestBasePartial=============0
