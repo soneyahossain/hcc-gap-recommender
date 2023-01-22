@@ -26,4 +26,4 @@ Note that various environment variables must be set. These can be found in the f
 # caveats
 * Traces can be very large (on the order of 50+ GBs), while slicing can consume lots of memory.
 * Obtaining traces and slices for a subject can take a long time (days) as this process is currently sequential. 
-** Both tracing and slicing are parallelizable. We welcome pull requests!
+  * Both tracing and slicing are parallelizable. Parallelizing both would increase performance dramatically. We welcome pull requests :) !
