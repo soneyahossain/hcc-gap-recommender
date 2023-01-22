@@ -13,7 +13,7 @@ To the extent possible, projects were forked and minimal changes were applied. C
 # descriptions of the major scripts under the experiments/scripts directory
 * `smoke-tests.sh` runs the HCC workflow end-to-end on `commons-cli` configured with only a few tests
 * `rq1.sh, rq2.sh, rq3.sh, rq4.sh` demonstrates the 4 major research questions highlighted in our ICSE 2023 paper
-* `*build*` are scripts to build the subject programs
+* `*build*.sh` are scripts to build the subject programs
 * `trace.sh <subject>` yields traces from running unit tests
 * `slice.sh <subject>` runs the scripts inside of `slicing_scripts` to generate slices on a per assertion basis
 * `compute_hcc.stmt.sh <subject>` computes SCC
