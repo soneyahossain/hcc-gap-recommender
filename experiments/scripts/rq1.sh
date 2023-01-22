@@ -37,7 +37,7 @@ done
 
 echo
 date
-echo "=== Show HCC statement (SCC) output for each subject"
+echo "=== Show SCC output for each subject"
 for s in $subjects
 do
 	echo $s
@@ -46,7 +46,7 @@ done
 
 echo
 date
-echo "=== Show HCC object-branch (OBCC) output for each subject"
+echo "=== Show OBCC output for each subject"
 for s in $subjects
 do
 	echo $s
