@@ -14,9 +14,6 @@ export PROJECT_HOME=$HCC_EXPERIMENTS/subjects/$PROJECT_NAME
 
 # lookup directory with junit tests on a per-project basis
 case $PROJECT_NAME in
-	orekit-6.1)
-		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/orekit
-		;;
 	commons-csv)
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/apache/commons/csv
 		;;
@@ -41,7 +38,7 @@ case $PROJECT_NAME in
 	jackson-core-2.9.10)
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/com/fasterxml/jackson/core
 		;;
-	jackson-dataformat-xml)
+	jackson-dataformat-xml-2.9.10)
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/com/fasterxml/jackson/dataformat/xml
 		;;
 	jsoup-1.10.1)
@@ -63,22 +60,16 @@ case $PROJECT_NAME in
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/jfree/chart
 		;;
 	gson)
-		export PROJECT_TEST_DIR=$PROJECT_HOME/gson/src/test/java/com/google/gson
+		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/com/google/gson
 		;;
-	xstream*)
+	xstream)
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/com/thoughtworks
 		;;
-	plexus-utils*)
-		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/codehaus/plexus/util
+	barbecue)
+		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/net/sourceforge/barbecue
 		;;
-	commons-text)
-		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/apache/commons/text
-		;;
-	commons-validator*)
-		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/apache/commons/validator
-		;;
-	log4j-2.1-core)
-		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/apache/logging/log4j
+	barcode4j)
+		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/krysalis/barcode4j
 		;;
 	*)
 		echo "Unsupported project: $PROJECT_NAME"
@@ -106,5 +97,4 @@ if [ ! -d $HCC_SLICES ]; then
 fi
 
 # generate slicing scripts
-echo Slice using the single assertion per slice method
-$HCC_HOME/scripts/generate_slicing_scripts.singles.sh $HCC_EXPERIMENTS/scripts/slicing_scripts/$PROJECT_NAME
+$HCC_HOME/scripts/generate_slicing_scripts.sh $HCC_EXPERIMENTS/scripts/slicing_scripts/$PROJECT_NAME

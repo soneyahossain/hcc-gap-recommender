@@ -17,7 +17,7 @@ fi
 
 # derived
 export PROJECT_NAME=$( basename $PROJECT_HOME )
-export cri_gen_jar=$HCC_LIBS/hcc_cri_gen.multi.jar
+export cri_gen_jar=$HCC_LIBS/hcc_cri_gen.singles.jar
 export slicer_jar=$HCC_LIBS/slicer.jar
 
 # need to run with java 1.8 or above
