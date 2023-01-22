@@ -1,4 +1,4 @@
-This repository contains all the files and scripts needed to compute OMC from various projects.
+This repository contains all the files and scripts needed to compute SCC and OBCC metrics for various projects.
 To the extent possible, projects were forked and minimal changes were applied. Changes typically consist of:
 * modifying `pom.xml` to add the maven clover plugin to compute various structural coverage metrics
 
