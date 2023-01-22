@@ -16,7 +16,8 @@ In this replication package, we have shown how to run the end-to-end experiment,
 Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already setup. The username is `icse2023` and the password is `icse2023`.
 
 ### Setup on your own machine
-The artifacts have been tested on both Ubuntu 20 and Ubuntu 22. We recommend starting with a clean machine to familiarize yourselves with HCC. 
+The artifacts have been tested on both Ubuntu 20 and Ubuntu 22. Again, we highly recommend using the VirtualBox VM to familiarize yourselves with HCC.
+If installing on your own machine, we recommend starting with a clean machine. 
 
 HCC framework requires the following software on your machine:
 
