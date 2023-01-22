@@ -143,7 +143,7 @@ commons-cli          commons-codec-1.12  commons-lang-3.6  commons-validator  ja
 commons-cli-limited  commons-csv         commons-text      gson               jaxen-1.2.0             joda-time   plexus-utils
 ```
 
-To compute HCC and OBCC metrics for a specific subject program, e.g. `commons-cli`, or seveal subjects, e.g. `commons-cli commons-csv`, run:
+To compute HCC and OBCC metrics for a specific subject program, e.g. `commons-cli`, or several subjects, e.g. `commons-cli commons-csv`, run:
 
 ```
 # this will take about 5 mns
