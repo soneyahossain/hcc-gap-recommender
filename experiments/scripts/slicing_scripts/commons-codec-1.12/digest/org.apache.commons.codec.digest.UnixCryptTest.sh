@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "computing slice for UnixCryptTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testCtor:31:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptStrings:37:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptStrings:39:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptStrings:41:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptStrings:42:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptBytes:48:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptBytes:50:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptBytes:52:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptBytes:53:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptExplicitCall:63:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest10.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptExplicitCall:64:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest11.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptWithoutSalt:98:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest12.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/digest_traces/UnixCryptTest.trace org.apache.commons.codec.digest.UnixCryptTest.testUnixCryptWithoutSalt:100:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/digest_slices/UnixCryptTest/UnixCryptTest13.txt
+
+#Total Asserts in org.apache.commons.codec.digest/UnixCryptTest=============13
+#Total Tests in org.apache.commons.codec.digest/UnixCryptTest=============0

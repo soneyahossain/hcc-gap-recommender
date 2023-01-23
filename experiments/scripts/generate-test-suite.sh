@@ -33,15 +33,15 @@ if [ ! -d $SLICE_DIR ]; then
 fi
 
 case $PROJECT_NAME in
-	fse-joda-time)
+	joda-time)
 		PROJECT_TEST_DIR=$PROJECT_HOME/src/test
 		TEST_DIR_PACKAGE=org.joda.time
 		;;
-	fse-commons-lang-3.6)
+	commons-lang-3.6)
 		PROJECT_TEST_DIR=$PROJECT_HOME/src/test
 		TEST_DIR_PACKAGE=org.apache.commons.lang3
 		;;
-	fse-jaxen-1.2.0)
+	jaxen-1.2.0)
 		PROJECT_TEST_DIR=$PROJECT_HOME/src/java/test
 		TEST_DIR_PACKAGE=org.jaxen.test
 		;;
@@ -101,9 +101,9 @@ esac
 	
 NEW_TEST_SUITE_DIR=$PROJECT_HOME
 
-#slice_dir=fse-joda-time/slices
-#clover=fse-joda-time/hcc_results/fse-joda-time/clover/clover.xml
-#test_dir=fse-joda-time/subjects/fse-joda-time/src/test
+#slice_dir=joda-time/slices
+#clover=joda-time/hcc_results/joda-time/clover/clover.xml
+#test_dir=joda-time/subjects/joda-time/src/test
 #new_test_suite_dir=newtestdir
 #test_dir_package=org.joda.time
 #java -jar $r_jar $slice_dir $clover $test_dir "$new_test_suite_dir" prefix.txt $test_dir_package

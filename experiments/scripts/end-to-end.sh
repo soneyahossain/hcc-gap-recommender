@@ -36,14 +36,11 @@ fi
 header "Slice traces"
 time ./slice.sh $PROJECT_NAME > $PROJECT_NAME.slice 2>&1
 
-header "Compute HCC_s metric"
+header "Compute SCC metric"
 time ./compute_hcc.stmt.sh $PROJECT_NAME > $PROJECT_NAME.hcc 2>&1
 
-header "Compute HCC_ob metric"
+header "Compute OBCC metric"
 time ./compute_hcc.ob.sh $PROJECT_NAME > $PROJECT_NAME.hcc.ob 2>&1
-
-#header "Generate recommendations to close HCC gap"
-#time ./recommend.sh $PROJECT_NAME > $PROJECT_NAME.recommender 2>&1
 
 header "Run evaluator"
 time ./evaluator.sh $PROJECT_NAME > $PROJECT_NAME.evaluator 2>&1

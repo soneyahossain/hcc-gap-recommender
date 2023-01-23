@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "computing slice for MapperCopyTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/xml_traces/MapperCopyTest.trace com.fasterxml.jackson.dataformat.xml.MapperCopyTest.testMapperCopy:28:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest/MapperCopyTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/xml_traces/MapperCopyTest.trace com.fasterxml.jackson.dataformat.xml.MapperCopyTest.testMapperCopy:31:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest/MapperCopyTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/xml_traces/MapperCopyTest.trace com.fasterxml.jackson.dataformat.xml.MapperCopyTest.testMapperCopy:32:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest/MapperCopyTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/xml_traces/MapperCopyTest.trace com.fasterxml.jackson.dataformat.xml.MapperCopyTest.testMapperCopy:35:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest/MapperCopyTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/xml_traces/MapperCopyTest.trace com.fasterxml.jackson.dataformat.xml.MapperCopyTest.testMapperCopy:36:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest/MapperCopyTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/xml_traces/MapperCopyTest.trace com.fasterxml.jackson.dataformat.xml.MapperCopyTest.testMapperCopy:37:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest/MapperCopyTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/xml_traces/MapperCopyTest.trace com.fasterxml.jackson.dataformat.xml.MapperCopyTest.testMapperCopy:41:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest/MapperCopyTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/xml_traces/MapperCopyTest.trace com.fasterxml.jackson.dataformat.xml.MapperCopyTest.testMapperCopy:42:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest/MapperCopyTest8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/xml_traces/MapperCopyTest.trace com.fasterxml.jackson.dataformat.xml.MapperCopyTest.testSerializerProviderCopy:52:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest/MapperCopyTest9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/xml_traces/MapperCopyTest.trace com.fasterxml.jackson.dataformat.xml.MapperCopyTest.testMapperSerialization:59:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest/MapperCopyTest10.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/xml_traces/MapperCopyTest.trace com.fasterxml.jackson.dataformat.xml.MapperCopyTest.testMapperSerialization:70:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/xml_slices/MapperCopyTest/MapperCopyTest11.txt
+
+#Total Asserts in com.fasterxml.jackson.dataformat.xml/MapperCopyTest=============11
+#Total Tests in com.fasterxml.jackson.dataformat.xml/MapperCopyTest=============0

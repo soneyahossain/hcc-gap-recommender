@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "computing slice for Base32Test"
+
+mkdir -p $HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testBase64InBuffer:120:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testBase32Chunked:128:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testBase32HexSamples:136:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testBase32HexSamplesReverse:144:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testBase32HexSamplesReverseLowercase:152:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testBase32Samples:160:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testBase32BinarySamples:174:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testBase32BinarySamplesReverse:182:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testBase32SamplesNonDefaultPadding:191:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testCodec200:198:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test10.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testRandomBytes:206:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test11.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testRandomBytesChunked:216:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test12.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-codec-1.12/binary_traces/Base32Test.trace org.apache.commons.codec.binary.Base32Test.testRandomBytesHex:226:*>$HCC_EXPERIMENTS/slices/commons-codec-1.12/binary_slices/Base32Test/Base32Test13.txt
+
+#Total Asserts in org.apache.commons.codec.binary/Base32Test=============13
+#Total Tests in org.apache.commons.codec.binary/Base32Test=============0

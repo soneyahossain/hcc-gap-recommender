@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo "computing slice for ApplicationTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testLs:64:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testLs:65:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testAnt:101:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testAnt:102:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testAnt:103:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testAnt:104:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testAnt:107:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testAnt:110:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testGroovy:177:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testGroovy:178:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest10.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testMan:229:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest11.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testNLT:333:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest12.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testNLT:334:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest13.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testNLT:335:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest14.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testNLT:336:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest15.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testNLT:337:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest16.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/ApplicationTest.trace org.apache.commons.cli.ApplicationTest.testNLT:338:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/ApplicationTest/ApplicationTest17.txt
+
+#Total Asserts in org.apache.commons.cli/ApplicationTest=============17
+#Total Tests in org.apache.commons.cli/ApplicationTest=============0

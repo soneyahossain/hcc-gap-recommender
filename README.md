@@ -1,6 +1,6 @@
 # Artifact: Measuring and Mitigating Gaps in Structural Testing
 
-This repository contains the artifact for testing the host checked coverage (hcc), coverage gap, and the recommender for closing that gap. It is implemented primarily on Java and includes all data, codes, and scripts required for replicating the studies in the paper "Measuring and Mitigating Gaps in Structural Testing".
+This repository contains the artifact for testing the host checked coverage (hcc), coverage gap, and the recommender for closing that gap. It is implemented primarily in Java and includes all data, codes, and scripts required for replicating the studies in the paper "Measuring and Mitigating Gaps in Structural Testing".
 
 
 ## Introduction
@@ -9,10 +9,14 @@ The artifact implements the host checked coverage (hcc) metric, the coverage gap
 We have shown that the gap strongly and negatively correlates with fault detection effectiveness (RQ2). We utilize the gap to generate recommendations to add more assertions to a test suite and improve the fault-detection power (RQ3+RQ4).
 In this replication package, we have shown how to run the end-to-end experiment, and then we have provided RQ-wise instructions to regenerate the results presented in the paper.
 
-
 ## Setup
 
-The artifact has been tested on Ubuntu 20. We recommend starting with a clean Ubuntu 20 virtual machine to familiarize yourselves with HCC.
+### Setup: the easy way
+Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already setup. The username is `icse2023` and the password is `icse2023`.
+
+### Setup on your own machine
+The artifacts have been tested on both Ubuntu 20 and Ubuntu 22. Again, we highly recommend using the VirtualBox VM to familiarize yourselves with HCC.
+If installing on your own machine, we recommend starting with a clean machine. 
 
 HCC framework requires the following software on your machine:
 
@@ -65,7 +69,8 @@ To build the HCC support libraries:
 cd $HCC_HOME
 ./scripts/install_all.sh
 ```
-## Running end-to-end
+
+## Running HCC end-to-end
 
 To make sure everything is working properly, run the following smoke tests:
 ```
@@ -73,7 +78,7 @@ cd $HCC_EXPERIMENTS/scripts
 ./smoke-tests.sh
 ```
 
-The smoke tests should take approximately 10mns and will exercise an end-to-end workflow of the HCC toolset. 
+The smoke tests should take less than 15 mns and will exercise the HCC toolset workflow end-to-end. 
 You should see output that looks like the following:
 
 ```
@@ -83,41 +88,100 @@ Smoke tests for end-to-end checked coverage computation workflow
 
 Verify ability to generate:
    - statement coverage via clover
-   - object branch coverage via jacoco
-   - traces
-   - slices
-   - checked coverage (statement)
-   - checked coverage (object branch)
-   - recommender/evaluator tool output
+   - object branch coverage via JaCoCo
+   - traces via JavaSlicer
+   - slices via JavaSlicer
+   - statement checked coverage (SCC)
+   - object branch coverage (OBCC)
+   - recommendations via recommender
 
-= Computing statement coverage =
-   Statements: 288/1009 (28.5%)  
+= Compute baseline statement coverage = 
+SCC output file created: OK
+   Statements: 288/1009 (28.5%)                                                                                                 
 
-= Computing object-branch coverage =
-Object-branch coverage output file created: OK
+= Compute baseline object branch coverage = 
+OBCC output file created: OK
 
-= Generating trace files =
+= Generate traces (~2mns) = 
 Trace file generated: OK
 
-= Generating slices =
+= Generate slices =
 Slice file(s) generated: OK
 
-= Computing statement checked coverage (SCC) =                                                     
+= Compute SCC =                                                     
 total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion                                                                   
 1009,288,721,197,15                                                                                                                             
 SCC computed: OK                                                                                                        
                                                                   
-= Computing object-branch checked coverage (OBCC) =                                                                                                     
+= Compute OBCC =                                                                                                     
 total_branch,total_executed,total_missed,total_checked,total_criteria                                                                           
 698,137,561,86,15                                                                                                                               
 OBCC computed: OK                                                                                                    
                                                                                                                                                  
-= Running recommendation evaluator =                                                       
+= Run recommendation evaluator =                                                       
 subject,total_assertion,top_1(%),top_5(%),top_10(%)                                                                                             
 project,9,55.56,100.00,100.00,                                                                                                                   
 Evaluator ran successfully: OK 
 ```
 
+# RQ1
+To assess RQ1 (computation of SCC and OBCC), you first must download the relevant slices for all subjects. If you are running the provided VirtualBox VM, this is already done for you.
+
+Otherwise, you can download a [zipped tar file of slices](https://drive.google.com/file/d/12ood1KRff2ZKYMM2gQ8JXEP_adzBQ1ci/view?usp=share_link). The tar file should be saved in `$HCC_EXPERIMENTS`.
+To untar:
+
+```
+# be sure to save the downloaded file into $HCC_EXPERIMENTS
+tar xvfz icse-2023-slices.tar.gz
+```
+
+Issue the command `ls slices`. You should see output of the form:
+
+```
+commons-cli          commons-codec-1.12  commons-lang-3.6  commons-validator  jackson-dataformat-xml  jfreechart  jsoup-1.10.1  xstream
+commons-cli-limited  commons-csv         commons-text      gson               jaxen-1.2.0             joda-time   plexus-utils
+```
+
+To compute HCC and OBCC metrics for a specific subject program, e.g. `commons-cli`, or several subjects, e.g. `commons-cli commons-csv`, run:
+
+```
+# this will take about 5 mns
+cd $HCC_EXPERIMENTS/scripts
+./rq1.sh commons-cli commons-csv
+```
+
+The script will output HCC and OBCC data for all subject programs upon completion, and should look like:
+
+```
+=== Show HCC statement (SCC) output for each subject
+commons-cli
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+1009,836,173,559,405
+commons-csv
+total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
+748,688,60,367,898
+```
+In general, data for a given subject program can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/scc.csv`
+
+```
+=== Show HCC object-branch (OBCC) output for each subject
+commons-cli
+total_branch,total_executed,total_missed,total_checked,total_criteria
+698,519,179,310,405
+commons-csv
+total_branch,total_executed,total_missed,total_checked,total_criteria
+576,507,69,234,898
+```
+In general, data for a given subject program can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/obcc.csv`
+
+### Computing HCC and OBCC for all subjects
+```
+# warning: this can easily take up 1hr to run for all subjects
+cd $HCC_EXPERIMENTS/scripts
+./rq1.sh
+```
+
+After running RQ1, you may wish to run RQ3 next as RQ3 makes use of the output generated by RQ1.
 
 # RQ2
 To assess the functionality and reusuability of RQ2, run the following commands:
@@ -128,3 +192,32 @@ To assess the functionality and reusuability of RQ2, run the following commands:
 This should take approximately 2 minutes to generate 15 different test suites from the commons-cli-limited subject and run mutation test on those 15 test suites. 
 Upon successful completion, the outputs are stored in the $HCC_EXPERIMENTS/hcc_results/commons-cli-limited/rq2 directory, result.txt stores the statement checked coverage
 gap for 15 test suites and mutation_result.txt stores the mutation scores. All 15 test suites are stored $HCC_EXPERIMENTS/subjects/commons-cli-limited/rq2_test_suites directory.
+
+# RQ3
+Once RQ1 successfully completes, you can run scripts for RQ3.
+```
+cd $HCC_EXPERIMENTS/scripts
+
+# you can specify a list of subject programs
+./rq3.sh commons-cli commons-csv
+
+# for all subjects
+./rq3.sh
+```
+
+This should only take 1-2 mns to run. The output will display data for each subject program specified:
+```
+=== Show evalution of recommendations
+commons-cli
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,331,16.01,51.06,69.79,
+commons-csv
+subject,total_assertion,top_1(%),top_5(%),top_10(%)
+project,601,69.05,84.19,90.02,
+```
+This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/evaluator/summary.csv`
+
+# RQ4
+
+# Other
+More details about various scripts used inside of HCC can be found in the README of the [experiments directory](experiments/). 

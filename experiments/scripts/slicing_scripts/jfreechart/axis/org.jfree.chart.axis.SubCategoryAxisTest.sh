@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo "computing slice for SubCategoryAxisTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testEquals:75:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testEquals:76:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testEquals:80:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testEquals:82:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testEquals:86:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testEquals:88:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testEquals:92:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testEquals:94:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testHashCode:104:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testHashCode:107:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest10.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testCloning:118:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest11.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testCloning:119:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest12.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testCloning:120:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest13.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/axis_traces/SubCategoryAxisTest.trace org.jfree.chart.axis.SubCategoryAxisTest.testSerialization:131:*>$HCC_EXPERIMENTS/slices/jfreechart/axis_slices/SubCategoryAxisTest/SubCategoryAxisTest14.txt
+
+#Total Asserts in org.jfree.chart.axis/SubCategoryAxisTest=============14
+#Total Tests in org.jfree.chart.axis/SubCategoryAxisTest=============0

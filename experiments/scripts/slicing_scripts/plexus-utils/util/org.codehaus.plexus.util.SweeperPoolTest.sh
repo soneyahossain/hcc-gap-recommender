@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "computing slice for SweeperPoolTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest
+
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.testMaxSize:80:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest1.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.testMaxSize:82:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest2.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.testMaxSize:84:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest3.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.testMaxSize:87:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest4.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.testMaxSize:89:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest5.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.testMaxSize:90:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest6.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.testMaxSize:94:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest7.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.testMaxSize:96:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest8.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.testMaxSize:97:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest9.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.testSweepAndTrim1:127:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest10.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.testSweepAndTrim1:128:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest11.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/plexus-utils/util_traces/SweeperPoolTest.trace org.codehaus.plexus.util.SweeperPoolTest.tearDown:155:*>$HCC_EXPERIMENTS/slices/plexus-utils/util_slices/SweeperPoolTest/SweeperPoolTest12.txt
+
+#Total Asserts in org.codehaus.plexus.util/SweeperPoolTest=============12
+#Total Tests in org.codehaus.plexus.util/SweeperPoolTest=============0

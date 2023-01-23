@@ -45,9 +45,9 @@ echo "Prefix to compute HCC:"
 cat $prefix 
 
 #
-# compute HCC information
+# compute HCC Object Branch information
 #
-echo "Computing HCC object branch coverage"
+echo "Computing OBCC"
 echo "    slices_dir: $HCC_SLICES"
 echo "    output_dir: $hcc_output_dir"
 java -jar $hcc_ob_jar $HCC_SLICES $jacoco_xml $hcc_output_dir $prefix

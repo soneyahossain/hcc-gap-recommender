@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo "computing slice for XYItemEntityTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testEquals:68:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testEquals:71:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testEquals:73:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testEquals:76:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testEquals:78:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testEquals:81:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testEquals:83:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testEquals:86:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testEquals:88:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testEquals:91:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest10.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testEquals:93:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest11.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testCloning:105:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest12.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testCloning:106:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest13.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testCloning:107:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest14.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jfreechart/entity_traces/XYItemEntityTest.trace org.jfree.chart.entity.XYItemEntityTest.testSerialization:118:*>$HCC_EXPERIMENTS/slices/jfreechart/entity_slices/XYItemEntityTest/XYItemEntityTest15.txt
+
+#Total Asserts in org.jfree.chart.entity/XYItemEntityTest=============15
+#Total Tests in org.jfree.chart.entity/XYItemEntityTest=============0

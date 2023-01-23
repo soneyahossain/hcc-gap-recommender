@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "computing slice for FieldAttributesTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest
+
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testDeclaringClass:50:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest1.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testModifiers:54:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest2.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testModifiers:55:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest3.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testModifiers:56:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest4.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testModifiers:57:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest5.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testModifiers:58:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest6.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testModifiers:60:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest7.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testModifiers:61:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest8.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testIsSynthetic:65:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest9.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testName:69:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest10.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testDeclaredTypeAndClass:74:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest11.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/gson/gson_traces/FieldAttributesTest.trace com.google.gson.FieldAttributesTest.testDeclaredTypeAndClass:75:*>$HCC_EXPERIMENTS/slices/gson/gson_slices/FieldAttributesTest/FieldAttributesTest12.txt
+
+#Total Asserts in com.google.gson/FieldAttributesTest=============12
+#Total Tests in com.google.gson/FieldAttributesTest=============0

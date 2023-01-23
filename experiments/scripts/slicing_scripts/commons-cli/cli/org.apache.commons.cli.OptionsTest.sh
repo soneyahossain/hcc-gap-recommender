@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo "computing slice for OptionsTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testSimple:41:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testSimple:42:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testDuplicateSimple:52:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testLong:63:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testLong:64:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testDuplicateLong:73:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testHelpOptions:104:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testHelpOptions:105:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testMissingOptionException:120:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testMissingOptionsException:137:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest10.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testToString:149:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest11.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testToString:150:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest12.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testToString:151:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest13.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testGetOptionsGroups:170:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest14.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testGetOptionsGroups:171:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest15.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testGetMatchingOpts:181:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest16.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testGetMatchingOpts:182:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest17.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-cli/cli_traces/OptionsTest.trace org.apache.commons.cli.OptionsTest.testGetMatchingOpts:183:*>$HCC_EXPERIMENTS/slices/commons-cli/cli_slices/OptionsTest/OptionsTest18.txt
+
+#Total Asserts in org.apache.commons.cli/OptionsTest=============18
+#Total Tests in org.apache.commons.cli/OptionsTest=============0

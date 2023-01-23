@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "computing slice for ClassPathUtilsTest"
+
+mkdir -p $HCC_EXPERIMENTS/slices/commons-lang-3.6/lang3_slices/ClassPathUtilsTest
+
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-lang-3.6/lang3_traces/ClassPathUtilsTest.trace org.apache.commons.lang3.ClassPathUtilsTest.testConstructor:44:*>$HCC_EXPERIMENTS/slices/commons-lang-3.6/lang3_slices/ClassPathUtilsTest/ClassPathUtilsTest1.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-lang-3.6/lang3_traces/ClassPathUtilsTest.trace org.apache.commons.lang3.ClassPathUtilsTest.testConstructor:46:*>$HCC_EXPERIMENTS/slices/commons-lang-3.6/lang3_slices/ClassPathUtilsTest/ClassPathUtilsTest2.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-lang-3.6/lang3_traces/ClassPathUtilsTest.trace org.apache.commons.lang3.ClassPathUtilsTest.testConstructor:47:*>$HCC_EXPERIMENTS/slices/commons-lang-3.6/lang3_slices/ClassPathUtilsTest/ClassPathUtilsTest3.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-lang-3.6/lang3_traces/ClassPathUtilsTest.trace org.apache.commons.lang3.ClassPathUtilsTest.testConstructor:48:*>$HCC_EXPERIMENTS/slices/commons-lang-3.6/lang3_slices/ClassPathUtilsTest/ClassPathUtilsTest4.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-lang-3.6/lang3_traces/ClassPathUtilsTest.trace org.apache.commons.lang3.ClassPathUtilsTest.testConstructor:49:*>$HCC_EXPERIMENTS/slices/commons-lang-3.6/lang3_slices/ClassPathUtilsTest/ClassPathUtilsTest5.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-lang-3.6/lang3_traces/ClassPathUtilsTest.trace org.apache.commons.lang3.ClassPathUtilsTest.testToFullyQualifiedNameClassString:67:*>$HCC_EXPERIMENTS/slices/commons-lang-3.6/lang3_slices/ClassPathUtilsTest/ClassPathUtilsTest6.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-lang-3.6/lang3_traces/ClassPathUtilsTest.trace org.apache.commons.lang3.ClassPathUtilsTest.testToFullyQualifiedNamePackageString:85:*>$HCC_EXPERIMENTS/slices/commons-lang-3.6/lang3_slices/ClassPathUtilsTest/ClassPathUtilsTest7.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-lang-3.6/lang3_traces/ClassPathUtilsTest.trace org.apache.commons.lang3.ClassPathUtilsTest.testToFullyQualifiedPathClass:103:*>$HCC_EXPERIMENTS/slices/commons-lang-3.6/lang3_slices/ClassPathUtilsTest/ClassPathUtilsTest8.txt
+timeout $HCC_TRACE_TIMEOUT_SEC java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/commons-lang-3.6/lang3_traces/ClassPathUtilsTest.trace org.apache.commons.lang3.ClassPathUtilsTest.testToFullyQualifiedPathPackage:121:*>$HCC_EXPERIMENTS/slices/commons-lang-3.6/lang3_slices/ClassPathUtilsTest/ClassPathUtilsTest9.txt
+
+#Total Asserts in org.apache.commons.lang3/ClassPathUtilsTest=============9
+#Total Tests in org.apache.commons.lang3/ClassPathUtilsTest=============0

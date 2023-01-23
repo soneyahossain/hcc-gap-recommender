@@ -53,7 +53,7 @@ case $PROJECT_NAME in
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test
 		export CLASSPATH="$PROJECT_HOME/build/classes:$PROJECT_HOME/build/testclasses:$CLASSPATH"
 		;;
-	fse-jaxen-1.2.0)
+	jaxen-1.2.0)
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/java/test
 		export CLASSPATH="$PROJECT_HOME/build/classes:$PROJECT_HOME/build/testclasses:$CLASSPATH"
 		;;

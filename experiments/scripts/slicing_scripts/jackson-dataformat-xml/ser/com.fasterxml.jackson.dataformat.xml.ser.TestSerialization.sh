@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "computing slice for TestSerialization"
+
+mkdir -p $HCC_EXPERIMENTS/slices/jackson-dataformat-xml/ser_slices/TestSerialization
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/ser_traces/TestSerialization.trace com.fasterxml.jackson.dataformat.xml.ser.TestSerialization.testSimpleAttribute:96:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/ser_slices/TestSerialization/TestSerialization1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/ser_traces/TestSerialization.trace com.fasterxml.jackson.dataformat.xml.ser.TestSerialization.testSimpleNsElem:104:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/ser_slices/TestSerialization/TestSerialization2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/ser_traces/TestSerialization.trace com.fasterxml.jackson.dataformat.xml.ser.TestSerialization.testSimpleAttrAndElem:111:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/ser_slices/TestSerialization/TestSerialization3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/ser_traces/TestSerialization.trace com.fasterxml.jackson.dataformat.xml.ser.TestSerialization.testMap:125:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/ser_slices/TestSerialization/TestSerialization4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/ser_traces/TestSerialization.trace com.fasterxml.jackson.dataformat.xml.ser.TestSerialization.testMap:133:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/ser_slices/TestSerialization/TestSerialization5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/ser_traces/TestSerialization.trace com.fasterxml.jackson.dataformat.xml.ser.TestSerialization.testNakedMap:151:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/ser_slices/TestSerialization/TestSerialization6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/ser_traces/TestSerialization.trace com.fasterxml.jackson.dataformat.xml.ser.TestSerialization.testNakedMap:153:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/ser_slices/TestSerialization/TestSerialization7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/ser_traces/TestSerialization.trace com.fasterxml.jackson.dataformat.xml.ser.TestSerialization.testCDataString:160:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/ser_slices/TestSerialization/TestSerialization8.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/ser_traces/TestSerialization.trace com.fasterxml.jackson.dataformat.xml.ser.TestSerialization.testCDataStringArray:167:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/ser_slices/TestSerialization/TestSerialization9.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar $HCC_HOME/lib/slicer.jar -m=1 -p $HCC_EXPERIMENTS/traces/jackson-dataformat-xml/ser_traces/TestSerialization.trace com.fasterxml.jackson.dataformat.xml.ser.TestSerialization.testCustomSerializer:176:*>$HCC_EXPERIMENTS/slices/jackson-dataformat-xml/ser_slices/TestSerialization/TestSerialization10.txt
+
+#Total Asserts in com.fasterxml.jackson.dataformat.xml.ser/TestSerialization=============10
+#Total Tests in com.fasterxml.jackson.dataformat.xml.ser/TestSerialization=============0
