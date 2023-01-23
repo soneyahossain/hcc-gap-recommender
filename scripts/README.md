@@ -1,3 +1,5 @@
+While these scripts can be used directly, we suggest looking at the higher-level scripts in `experiments/scripts`.
+
 # description of major scripts
 * `install_all.sh` builds and installs HCC support jars
 * `compute_hcc.stmt.sh` computes SCC metric
