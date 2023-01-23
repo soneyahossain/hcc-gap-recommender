@@ -219,6 +219,23 @@ This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/evaluator/summ
 
 # RQ4
 
+In RQ4, we have added additional assertions in the `$HCC_EXPERIMENTS/subjects/joda-time/src/test/java/org/joda/time/chrono` test suite based on the recommendation. The enriched test suite can be found at `$HCC_EXPERIMENTS/subjects/joda-time/rq4_enriched_testsuite`. RQ4 computes statement checked coverage for both versions of the chronology test suite. Run following commands to evaluate RQ4:
+
+```
+cd $HCC_EXPERIMENTS/scripts
+./rq4.sh
+```
+This should only take 1-2 mns to run. The output will display:
+
+```
+Compute SCC for original joda-time chronology package
+total checked statements in class: 1546
+.
+.
+Compute SCC for enriched joda-time chronology package
+total checked statements in class: 2068
+```
+Meaning that additional assertions increased the total number of checked statement by 522. 
 
 
 # Other
