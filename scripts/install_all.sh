@@ -24,7 +24,7 @@ if [ ! -z "$MAVEN_REPO" ]; then
 fi
 
 #
-# HCC tools required jdk 1.8
+# HCC tools require jdk 1.8
 #
 export JAVA_HOME=$JDK_1_8
 export PATH=$JAVA_HOME/bin:$PATH
@@ -38,11 +38,6 @@ do
 	pushd $t
 
 	mvn package
-	#sh run.sh
-
-	#if [ "$t" == "recommender" ]; then
-		#sh run-evaluator.sh
-	#fi
 	
 	popd
 done
