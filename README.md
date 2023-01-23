@@ -1,10 +1,10 @@
 # Artifact: Measuring and Mitigating Gaps in Structural Testing
 
-This repository contains the `artifact` for testing the host checked coverage (hcc), coverage gaps, and the recommendations for closing the gaps to improve fault-detection effectiveness. It is implemented primarily in Java and includes all data, source codes, and scripts required for replicating the studies in the paper `Measuring and Mitigating Gaps in Structural Testing` published at `ICSE-2023`.
+This repository contains the `artifact` for testing the host checked coverage (HCC), coverage gaps, and the recommendations for closing the gaps to improve fault-detection effectiveness. It is implemented primarily in Java and includes all data, source codes, and scripts required for replicating the studies in the paper `Measuring and Mitigating Gaps in Structural Testing` published at `ICSE-2023`.
 
 ## Introduction
 
-This replication package implements the host checked coverage (hcc) metric, the coverage gap computed from hcc, and the assertion recommendations to close the gap. Two variants of hcc are the `statement checked coverage (SCC)` and `object branch checked coverage (OBCC)`. To compute hcc, we used and extended the `JavaSlicer (https://github.com/backes/javaslicer)`. Once hcc is calculated, we compute the coverage gap from hcc and regular code coverage `(RQ1)`, where regular statement and object branch coverage are computed using the `clover` and `JaCoCo` tools.
+This replication package implements the host checked coverage (HCC) metric, the coverage gap computed from HCC, and the assertion recommendations to close the gap. Two variants of HCC are the `statement checked coverage (SCC)` and `object branch checked coverage (OBCC)`. To compute HCC, we used and extended the `JavaSlicer (https://github.com/backes/javaslicer)`. Once HCC is calculated, we compute the coverage gap from HCC and regular code coverage `(RQ1)`, where regular statement and object branch coverage are computed using the `clover` and `JaCoCo` tools.
 We have shown that the gap strongly and negatively correlates with the fault detection effectiveness `(RQ2)`. We utilize the gap to generate recommendations to add more assertions to a test suite and improve the fault-detection power `(RQ3+RQ4)`.
 In this replication package, we have shown how to run a time-limited end-to-end experiment and provided RQ-wise instructions to regenerate the results presented in the paper. Instructions and bash scripts to run the entire experiment are also provided.
 
@@ -14,10 +14,10 @@ In this replication package, we have shown how to run a time-limited end-to-end 
 Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already set up. The username is `icse2023`, and the password is `icse2023`.
 
 ### Setup on your own machine
-The artifact have been tested on both `Ubuntu 20` and `Ubuntu 22`. Again, we highly recommend using the `VirtualBox VM` to familiarize yourselves with the hcc framework.
+The artifact have been tested on both `Ubuntu 20` and `Ubuntu 22`. Again, we highly recommend using the `VirtualBox VM` to familiarize yourselves with the HCC framework.
 If installing on your own machine, we recommend starting with a clean machine. 
 
-hcc framework requires the following software on your machine:
+HCC framework requires the following software on your machine:
 
 - `JDK 1.7` (https://www.oracle.com/java/technologies/javase/javase7-archive-downloads.html, https://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html#install-64)
 - `JDK 1.8` (https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
@@ -65,13 +65,13 @@ Then set the needed environment variables in your shell by running (remember to 
 cd experiments
 . setenv
 ```
-To build the HCC support libraries:
+To build the `HCC` support libraries:
 ```
 cd $HCC_HOME
 ./scripts/install_all.sh
 ```
 
-## Running `hcc` end-to-end
+## Running `HCC` end-to-end
 
 To make sure everything is working properly, run the following smoke tests:
 ```
