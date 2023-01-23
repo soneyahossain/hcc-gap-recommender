@@ -153,7 +153,7 @@ cd $HCC_EXPERIMENTS/scripts
 The script will output HCC and OBCC data for all subject programs upon completion, and should look like:
 
 ```
-=== Show HCC statement (SCC) output for each subject
+=== Show statement checked coverage (SCC) output for each subject
 commons-cli
 total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
 1009,836,173,559,405
@@ -164,7 +164,7 @@ total_stmt, total_executed, total_missed, total_checked_stmt, total_assertion
 In general, data for a given subject program can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/scc.csv`
 
 ```
-=== Show HCC object-branch (OBCC) output for each subject
+=== Show object-branch checked coverage (OBCC) output for each subject
 commons-cli
 total_branch,total_executed,total_missed,total_checked,total_criteria
 698,519,179,310,405
