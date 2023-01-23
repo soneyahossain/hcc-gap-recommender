@@ -9,6 +9,8 @@ To the extent possible, projects were cloned with minimal changes were applied. 
 * `slices` and `traces` are automatically generated
 * `scripts` contains utility scripts to run tests, record structure coverage metrics and compute SCC and OBCC metrics
 * `hcc_results` contains output files generated, organized by subject programs
+  * `hcc_results/<subject>/clover` contains statement coverage info generated with Clover
+  * `hcc_results/<subject>/jacoco` contains object-branch coverage info generated with JaCoCo
 
 # descriptions of the major scripts under the experiments/scripts directory
 Note that various environment variables must be set. These can be found in the file `setenv`.
