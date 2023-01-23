@@ -16,6 +16,11 @@ if [ -z $HCC_EXPERIMENTS ]; then
 	cd -
 fi
 
+# cleanup clover
+if [ ! -z "$MAVEN_REPO" ]; then
+	rm -fr $MAVEN_REPO/com/atlassian
+fi
+
 PROJECT_NAME=commons-cli-limited
 
 Red='\033[0;31m'     # Red
