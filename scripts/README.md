@@ -1,3 +1,4 @@
+# description of major scripts
 * `install_all.sh` builds and installs HCC support jars
 * `compute_hcc.stmt.sh` computes SCC metric
 * `compute_hcc.ob.sh` computes OBCC metric
