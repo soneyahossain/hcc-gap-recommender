@@ -1,147 +1,0 @@
- 0.0% done, time left: unknown                                0.7% done, time left: unknown  4.0% done, time left: unknown  8.1% done, time left: unknown 11.9% done, time left: unknown 19.4% done, time left: unknown 22.6% done, time left: unknown 31.7% done, time left: unknown 36.8% done, time left: unknown 42.4% done, time left:   0:00:01   49.5% done, time left:   0:00:00 60.5% done, time left:   0:00:00 66.2% done, time left:   0:00:00 70.5% done, time left:   0:00:00 79.7% done, time left:   0:00:00 89.9% done, time left:   0:00:00 96.1% done, time left:   0:00:00 97.1% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:224:*]:
-org.apache.commons.lang3.CharRange.<init>:74 ALOAD 0
-org.apache.commons.lang3.CharRange.<init>:74 ILOAD 1
-org.apache.commons.lang3.CharRange.<init>:74 PUTFIELD org/apache/commons/lang3/CharRange.start C
-org.apache.commons.lang3.CharRange.<init>:75 ALOAD 0
-org.apache.commons.lang3.CharRange.<init>:75 ILOAD 2
-org.apache.commons.lang3.CharRange.<init>:75 PUTFIELD org/apache/commons/lang3/CharRange.end C
-org.apache.commons.lang3.CharRange.<init>:76 ALOAD 0
-org.apache.commons.lang3.CharRange.<init>:76 ILOAD 3
-org.apache.commons.lang3.CharRange.<init>:76 PUTFIELD org/apache/commons/lang3/CharRange.negated Z
-org.apache.commons.lang3.CharRange.isIn:113 NEW org/apache/commons/lang3/CharRange
-org.apache.commons.lang3.CharRange.isIn:113 DUP
-org.apache.commons.lang3.CharRange.isIn:113 ILOAD 0
-org.apache.commons.lang3.CharRange.isIn:113 ILOAD 1
-org.apache.commons.lang3.CharRange.isIn:113 ICONST_0
-org.apache.commons.lang3.CharRange.isIn:113 INVOKESPECIAL org/apache/commons/lang3/CharRange.<init>(CCZ)V
-org.apache.commons.lang3.CharRange.isIn:113 ARETURN
-org.apache.commons.lang3.CharRange.hashCode:223 BIPUSH 83
-org.apache.commons.lang3.CharRange.hashCode:223 ALOAD 0
-org.apache.commons.lang3.CharRange.hashCode:223 GETFIELD org/apache/commons/lang3/CharRange.start C
-org.apache.commons.lang3.CharRange.hashCode:223 IADD
-org.apache.commons.lang3.CharRange.hashCode:223 BIPUSH 7
-org.apache.commons.lang3.CharRange.hashCode:223 ALOAD 0
-org.apache.commons.lang3.CharRange.hashCode:223 GETFIELD org/apache/commons/lang3/CharRange.end C
-org.apache.commons.lang3.CharRange.hashCode:223 IMUL
-org.apache.commons.lang3.CharRange.hashCode:223 IADD
-org.apache.commons.lang3.CharRange.hashCode:223 ALOAD 0
-org.apache.commons.lang3.CharRange.hashCode:223 GETFIELD org/apache/commons/lang3/CharRange.negated Z
-org.apache.commons.lang3.CharRange.hashCode:223 IFEQ L0 true false
-org.apache.commons.lang3.CharRange.hashCode:223 ICONST_0
-org.apache.commons.lang3.CharRange.hashCode:223 IADD
-org.apache.commons.lang3.CharRange.hashCode:223 IRETURN
-org.apache.commons.lang3.CharSet.<init>:91 ALOAD 0
-org.apache.commons.lang3.CharSet.<init>:91 NEW java/util/HashSet
-org.apache.commons.lang3.CharSet.<init>:91 DUP
-org.apache.commons.lang3.CharSet.<init>:91 INVOKESPECIAL java/util/HashSet.<init>()V
-org.apache.commons.lang3.CharSet.<init>:91 INVOKESTATIC java/util/Collections.synchronizedSet(Ljava/util/Set;)Ljava/util/Set;
-org.apache.commons.lang3.CharSet.<init>:91 PUTFIELD org/apache/commons/lang3/CharSet.set Ljava/util/Set;
-org.apache.commons.lang3.CharSet.getInstance:156 ALOAD 0
-org.apache.commons.lang3.CharSet.getInstance:156 IFNONNULL L0 true false
-org.apache.commons.lang3.CharSet.getInstance:159 ALOAD 0
-org.apache.commons.lang3.CharSet.getInstance:159 ARRAYLENGTH
-org.apache.commons.lang3.CharSet.getInstance:159 ICONST_1
-org.apache.commons.lang3.CharSet.getInstance:159 IF_ICMPNE L1 false true
-org.apache.commons.lang3.CharSet.getInstance:160 GETSTATIC org/apache/commons/lang3/CharSet.COMMON Ljava/util/Map;
-org.apache.commons.lang3.CharSet.getInstance:160 ALOAD 0
-org.apache.commons.lang3.CharSet.getInstance:160 ICONST_0
-org.apache.commons.lang3.CharSet.getInstance:160 AALOAD
-org.apache.commons.lang3.CharSet.getInstance:160 INVOKEINTERFACE java/util/Map.get(Ljava/lang/Object;)Ljava/lang/Object;
-org.apache.commons.lang3.CharSet.getInstance:160 ASTORE 1
-org.apache.commons.lang3.CharSet.getInstance:161 ALOAD 1
-org.apache.commons.lang3.CharSet.getInstance:161 IFNULL L1 true false
-org.apache.commons.lang3.CharSet.getInstance:165 NEW org/apache/commons/lang3/CharSet
-org.apache.commons.lang3.CharSet.getInstance:165 DUP
-org.apache.commons.lang3.CharSet.getInstance:165 ALOAD 0
-org.apache.commons.lang3.CharSet.getInstance:165 INVOKESPECIAL org/apache/commons/lang3/CharSet.<init>([Ljava/lang/String;)V
-org.apache.commons.lang3.CharSet.getInstance:165 ARETURN
-org.apache.commons.lang3.CharSet.<init>:178 ALOAD 1
-org.apache.commons.lang3.CharSet.<init>:178 ASTORE 2
-org.apache.commons.lang3.CharSet.<init>:178 ALOAD 2
-org.apache.commons.lang3.CharSet.<init>:178 ARRAYLENGTH
-org.apache.commons.lang3.CharSet.<init>:178 ISTORE 3
-org.apache.commons.lang3.CharSet.<init>:178 ICONST_0
-org.apache.commons.lang3.CharSet.<init>:178 ISTORE 4
-org.apache.commons.lang3.CharSet.<init>:178 ILOAD 4
-org.apache.commons.lang3.CharSet.<init>:178 ILOAD 3
-org.apache.commons.lang3.CharSet.<init>:178 IF_ICMPGE L1 false true
-org.apache.commons.lang3.CharSet.<init>:178 ALOAD 2
-org.apache.commons.lang3.CharSet.<init>:178 ILOAD 4
-org.apache.commons.lang3.CharSet.<init>:178 AALOAD
-org.apache.commons.lang3.CharSet.<init>:178 ASTORE 5
-org.apache.commons.lang3.CharSet.<init>:179 ALOAD 0
-org.apache.commons.lang3.CharSet.<init>:179 ALOAD 5
-org.apache.commons.lang3.CharSet.<init>:179 INVOKEVIRTUAL org/apache/commons/lang3/CharSet.add(Ljava/lang/String;)V
-org.apache.commons.lang3.CharSet.add:190 ALOAD 1
-org.apache.commons.lang3.CharSet.add:190 IFNONNULL L0 true false
-org.apache.commons.lang3.CharSet.add:194 ALOAD 1
-org.apache.commons.lang3.CharSet.add:194 INVOKEVIRTUAL java/lang/String.length()I
-org.apache.commons.lang3.CharSet.add:194 ISTORE 2
-org.apache.commons.lang3.CharSet.add:195 ICONST_0
-org.apache.commons.lang3.CharSet.add:195 ISTORE 3
-org.apache.commons.lang3.CharSet.add:196 ILOAD 3
-org.apache.commons.lang3.CharSet.add:196 ILOAD 2
-org.apache.commons.lang3.CharSet.add:196 IF_ICMPGE L6 false true
-org.apache.commons.lang3.CharSet.add:197 ILOAD 2
-org.apache.commons.lang3.CharSet.add:197 ILOAD 3
-org.apache.commons.lang3.CharSet.add:197 ISUB
-org.apache.commons.lang3.CharSet.add:197 ISTORE 4
-org.apache.commons.lang3.CharSet.add:198 ILOAD 4
-org.apache.commons.lang3.CharSet.add:198 ICONST_4
-org.apache.commons.lang3.CharSet.add:198 IF_ICMPLT L2 false true
-org.apache.commons.lang3.CharSet.add:198 ALOAD 1
-org.apache.commons.lang3.CharSet.add:198 ILOAD 3
-org.apache.commons.lang3.CharSet.add:198 INVOKEVIRTUAL java/lang/String.charAt(I)C
-org.apache.commons.lang3.CharSet.add:198 BIPUSH 94
-org.apache.commons.lang3.CharSet.add:198 IF_ICMPNE L2 true false
-org.apache.commons.lang3.CharSet.add:202 ILOAD 4
-org.apache.commons.lang3.CharSet.add:202 ICONST_3
-org.apache.commons.lang3.CharSet.add:202 IF_ICMPLT L3 false true
-org.apache.commons.lang3.CharSet.add:202 ALOAD 1
-org.apache.commons.lang3.CharSet.add:202 ILOAD 3
-org.apache.commons.lang3.CharSet.add:202 ICONST_1
-org.apache.commons.lang3.CharSet.add:202 IADD
-org.apache.commons.lang3.CharSet.add:202 INVOKEVIRTUAL java/lang/String.charAt(I)C
-org.apache.commons.lang3.CharSet.add:202 BIPUSH 45
-org.apache.commons.lang3.CharSet.add:202 IF_ICMPNE L3 false true
-org.apache.commons.lang3.CharSet.add:204 ALOAD 0
-org.apache.commons.lang3.CharSet.add:204 GETFIELD org/apache/commons/lang3/CharSet.set Ljava/util/Set;
-org.apache.commons.lang3.CharSet.add:204 ALOAD 1
-org.apache.commons.lang3.CharSet.add:204 ILOAD 3
-org.apache.commons.lang3.CharSet.add:204 INVOKEVIRTUAL java/lang/String.charAt(I)C
-org.apache.commons.lang3.CharSet.add:204 ALOAD 1
-org.apache.commons.lang3.CharSet.add:204 ILOAD 3
-org.apache.commons.lang3.CharSet.add:204 ICONST_2
-org.apache.commons.lang3.CharSet.add:204 IADD
-org.apache.commons.lang3.CharSet.add:204 INVOKEVIRTUAL java/lang/String.charAt(I)C
-org.apache.commons.lang3.CharSet.add:204 INVOKESTATIC org/apache/commons/lang3/CharRange.isIn(CC)Lorg/apache/commons/lang3/CharRange;
-org.apache.commons.lang3.CharSet.add:204 INVOKEINTERFACE java/util/Set.add(Ljava/lang/Object;)Z
-org.apache.commons.lang3.CharSet.getCharRanges:228 ALOAD 0
-org.apache.commons.lang3.CharSet.getCharRanges:228 GETFIELD org/apache/commons/lang3/CharSet.set Ljava/util/Set;
-org.apache.commons.lang3.CharSet.getCharRanges:228 ALOAD 0
-org.apache.commons.lang3.CharSet.getCharRanges:228 GETFIELD org/apache/commons/lang3/CharSet.set Ljava/util/Set;
-org.apache.commons.lang3.CharSet.getCharRanges:228 INVOKEINTERFACE java/util/Set.size()I
-org.apache.commons.lang3.CharSet.getCharRanges:228 ANEWARRAY org/apache/commons/lang3/CharRange
-org.apache.commons.lang3.CharSet.getCharRanges:228 INVOKEINTERFACE java/util/Set.toArray([Ljava/lang/Object;)[Ljava/lang/Object;
-org.apache.commons.lang3.CharSet.getCharRanges:228 ARETURN
-org.apache.commons.lang3.CharSetTest.main:42 INVOKEVIRTUAL org/apache/commons/lang3/CharSetTest.testConstructor_String_oddDash()V
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:222 ICONST_1
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:222 ANEWARRAY java/lang/String
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:222 DUP
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:222 ICONST_0
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:222 LDC "----"
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:222 AASTORE
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:222 INVOKESTATIC org/apache/commons/lang3/CharSet.getInstance([Ljava/lang/String;)Lorg/apache/commons/lang3/CharSet;
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:222 ASTORE 1
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:223 ALOAD 1
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:223 INVOKEVIRTUAL org/apache/commons/lang3/CharSet.getCharRanges()[Lorg/apache/commons/lang3/CharRange;
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:223 ASTORE 2
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:224 LCONST_1
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:224 ALOAD 2
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:224 ARRAYLENGTH
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:224 I2L
-org.apache.commons.lang3.CharSetTest.testConstructor_String_oddDash:224 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
-
-Slice consists of 463 bytecode instructions.
-Computation took 2.05 seconds.

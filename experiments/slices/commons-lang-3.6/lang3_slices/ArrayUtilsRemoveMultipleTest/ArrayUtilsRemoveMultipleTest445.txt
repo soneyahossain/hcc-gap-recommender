@@ -1,137 +1,0 @@
- 0.0% done, time left: unknown                                0.9% done, time left: unknown  2.7% done, time left: unknown  6.1% done, time left: unknown  7.7% done, time left: unknown  8.7% done, time left: unknown 11.3% done, time left: unknown 14.5% done, time left:   0:00:02   15.6% done, time left:   0:00:03 15.6% done, time left:   0:00:04 15.6% done, time left:   0:00:05 15.6% done, time left:   0:00:06 15.6% done, time left:   0:00:07 15.6% done, time left:   0:00:08 17.3% done, time left:   0:00:10 23.4% done, time left:   0:00:03 23.4% done, time left:   0:00:01 27.7% done, time left:   0:00:01 30.9% done, time left:   0:00:02 32.5% done, time left:   0:00:01 34.6% done, time left:   0:00:02 40.7% done, time left:   0:00:00 41.7% done, time left:   0:00:00 46.7% done, time left:   0:00:01 49.4% done, time left:   0:00:01 52.2% done, time left:   0:00:01 57.1% done, time left:   0:00:00 57.6% done, time left:   0:00:00 64.7% done, time left:   0:00:00 64.9% done, time left:   0:00:00 70.8% done, time left:   0:00:00 72.5% done, time left:   0:00:00 72.6% done, time left:   0:00:00 74.9% done, time left:   0:00:00 75.9% done, time left:   0:00:00 77.2% done, time left:   0:00:00 79.6% done, time left:   0:00:00 82.0% done, time left:   0:00:00 82.8% done, time left:   0:00:00 84.5% done, time left:   0:00:00 86.8% done, time left:   0:00:00 89.0% done, time left:   0:00:00 91.5% done, time left:   0:00:00 93.2% done, time left:   0:00:00 94.7% done, time left:   0:00:00 97.0% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1229:*]:
-org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
-org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
-org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
-org.apache.commons.lang3.ArrayUtils.isEmpty:4857 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.isEmpty:4857 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
-org.apache.commons.lang3.ArrayUtils.isEmpty:4857 IFNE L0 true false
-org.apache.commons.lang3.ArrayUtils.isEmpty:4857 ICONST_0
-org.apache.commons.lang3.ArrayUtils.isEmpty:4857 IRETURN
-org.apache.commons.lang3.ArrayUtils.removeElements:7089 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.removeElements:7089 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([J)Z
-org.apache.commons.lang3.ArrayUtils.removeElements:7089 IFNE L0 false true
-org.apache.commons.lang3.ArrayUtils.removeElements:7089 ALOAD 1
-org.apache.commons.lang3.ArrayUtils.removeElements:7089 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([J)Z
-org.apache.commons.lang3.ArrayUtils.removeElements:7089 IFEQ L1 true false
-org.apache.commons.lang3.ArrayUtils.removeElements:7092 NEW java/util/HashMap
-org.apache.commons.lang3.ArrayUtils.removeElements:7092 DUP
-org.apache.commons.lang3.ArrayUtils.removeElements:7092 ALOAD 1
-org.apache.commons.lang3.ArrayUtils.removeElements:7092 ARRAYLENGTH
-org.apache.commons.lang3.ArrayUtils.removeElements:7092 INVOKESPECIAL java/util/HashMap.<init>(I)V
-org.apache.commons.lang3.ArrayUtils.removeElements:7092 ASTORE 2
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 ALOAD 1
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 ASTORE 3
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 ALOAD 3
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 ARRAYLENGTH
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 ISTORE 4
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 ICONST_0
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 ISTORE 5
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 ILOAD 5
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 ILOAD 4
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 IF_ICMPGE L5 true true
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 ALOAD 3
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 ILOAD 5
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 LALOAD
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 LSTORE 6
-org.apache.commons.lang3.ArrayUtils.removeElements:7093 IINC 5 1
-org.apache.commons.lang3.ArrayUtils.removeElements:7094 LLOAD 6
-org.apache.commons.lang3.ArrayUtils.removeElements:7094 INVOKESTATIC java/lang/Long.valueOf(J)Ljava/lang/Long;
-org.apache.commons.lang3.ArrayUtils.removeElements:7094 ASTORE 8
-org.apache.commons.lang3.ArrayUtils.removeElements:7095 ALOAD 2
-org.apache.commons.lang3.ArrayUtils.removeElements:7095 ALOAD 8
-org.apache.commons.lang3.ArrayUtils.removeElements:7095 INVOKEVIRTUAL java/util/HashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
-org.apache.commons.lang3.ArrayUtils.removeElements:7095 ASTORE 9
-org.apache.commons.lang3.ArrayUtils.removeElements:7096 ALOAD 9
-org.apache.commons.lang3.ArrayUtils.removeElements:7096 IFNONNULL L3 false true
-org.apache.commons.lang3.ArrayUtils.removeElements:7097 ALOAD 2
-org.apache.commons.lang3.ArrayUtils.removeElements:7097 ALOAD 8
-org.apache.commons.lang3.ArrayUtils.removeElements:7097 NEW org/apache/commons/lang3/mutable/MutableInt
-org.apache.commons.lang3.ArrayUtils.removeElements:7097 INVOKEVIRTUAL java/util/HashMap.put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
-org.apache.commons.lang3.ArrayUtils.removeElements:7102 NEW java/util/BitSet
-org.apache.commons.lang3.ArrayUtils.removeElements:7102 DUP
-org.apache.commons.lang3.ArrayUtils.removeElements:7102 INVOKESPECIAL java/util/BitSet.<init>()V
-org.apache.commons.lang3.ArrayUtils.removeElements:7102 ASTORE 3
-org.apache.commons.lang3.ArrayUtils.removeElements:7103 ICONST_0
-org.apache.commons.lang3.ArrayUtils.removeElements:7103 ISTORE 4
-org.apache.commons.lang3.ArrayUtils.removeElements:7103 ILOAD 4
-org.apache.commons.lang3.ArrayUtils.removeElements:7103 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.removeElements:7103 ARRAYLENGTH
-org.apache.commons.lang3.ArrayUtils.removeElements:7103 IF_ICMPGE L9 true true
-org.apache.commons.lang3.ArrayUtils.removeElements:7103 IINC 4 1
-org.apache.commons.lang3.ArrayUtils.removeElements:7104 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.removeElements:7104 ILOAD 4
-org.apache.commons.lang3.ArrayUtils.removeElements:7104 LALOAD
-org.apache.commons.lang3.ArrayUtils.removeElements:7104 LSTORE 5
-org.apache.commons.lang3.ArrayUtils.removeElements:7105 ALOAD 2
-org.apache.commons.lang3.ArrayUtils.removeElements:7105 LLOAD 5
-org.apache.commons.lang3.ArrayUtils.removeElements:7105 INVOKESTATIC java/lang/Long.valueOf(J)Ljava/lang/Long;
-org.apache.commons.lang3.ArrayUtils.removeElements:7105 INVOKEVIRTUAL java/util/HashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
-org.apache.commons.lang3.ArrayUtils.removeElements:7105 ASTORE 7
-org.apache.commons.lang3.ArrayUtils.removeElements:7106 ALOAD 7
-org.apache.commons.lang3.ArrayUtils.removeElements:7106 IFNULL L8 false true
-org.apache.commons.lang3.ArrayUtils.removeElements:7110 ALOAD 3
-org.apache.commons.lang3.ArrayUtils.removeElements:7110 ILOAD 4
-org.apache.commons.lang3.ArrayUtils.removeElements:7110 INVOKEVIRTUAL java/util/BitSet.set(I)V
-org.apache.commons.lang3.ArrayUtils.removeElements:7113 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.removeElements:7113 ALOAD 3
-org.apache.commons.lang3.ArrayUtils.removeElements:7113 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.removeAll(Ljava/lang/Object;Ljava/util/BitSet;)Ljava/lang/Object;
-org.apache.commons.lang3.ArrayUtils.removeElements:7113 ARETURN
-org.apache.commons.lang3.ArrayUtils.removeAll:7439 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.removeAll:7439 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
-org.apache.commons.lang3.ArrayUtils.removeAll:7439 ISTORE 2
-org.apache.commons.lang3.ArrayUtils.removeAll:7446 ALOAD 1
-org.apache.commons.lang3.ArrayUtils.removeAll:7446 INVOKEVIRTUAL java/util/BitSet.cardinality()I
-org.apache.commons.lang3.ArrayUtils.removeAll:7446 ISTORE 3
-org.apache.commons.lang3.ArrayUtils.removeAll:7447 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.removeAll:7447 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
-org.apache.commons.lang3.ArrayUtils.removeAll:7447 INVOKEVIRTUAL java/lang/Class.getComponentType()Ljava/lang/Class;
-org.apache.commons.lang3.ArrayUtils.removeAll:7447 ILOAD 2
-org.apache.commons.lang3.ArrayUtils.removeAll:7447 ILOAD 3
-org.apache.commons.lang3.ArrayUtils.removeAll:7447 ISUB
-org.apache.commons.lang3.ArrayUtils.removeAll:7447 INVOKESTATIC java/lang/reflect/Array.newInstance(Ljava/lang/Class;I)Ljava/lang/Object;
-org.apache.commons.lang3.ArrayUtils.removeAll:7447 ASTORE 4
-org.apache.commons.lang3.ArrayUtils.removeAll:7448 ICONST_0
-org.apache.commons.lang3.ArrayUtils.removeAll:7448 ISTORE 5
-org.apache.commons.lang3.ArrayUtils.removeAll:7452 ALOAD 1
-org.apache.commons.lang3.ArrayUtils.removeAll:7452 ILOAD 5
-org.apache.commons.lang3.ArrayUtils.removeAll:7452 INVOKEVIRTUAL java/util/BitSet.nextSetBit(I)I
-org.apache.commons.lang3.ArrayUtils.removeAll:7452 DUP
-org.apache.commons.lang3.ArrayUtils.removeAll:7452 ISTORE 8
-org.apache.commons.lang3.ArrayUtils.removeAll:7452 ICONST_M1
-org.apache.commons.lang3.ArrayUtils.removeAll:7452 IF_ICMPEQ L2 true true
-org.apache.commons.lang3.ArrayUtils.removeAll:7458 ALOAD 1
-org.apache.commons.lang3.ArrayUtils.removeAll:7458 ILOAD 8
-org.apache.commons.lang3.ArrayUtils.removeAll:7458 INVOKEVIRTUAL java/util/BitSet.nextClearBit(I)I
-org.apache.commons.lang3.ArrayUtils.removeAll:7458 ISTORE 5
-org.apache.commons.lang3.ArrayUtils.removeAll:7464 ALOAD 4
-org.apache.commons.lang3.ArrayUtils.removeAll:7464 ARETURN
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.main:63 INVOKEVIRTUAL org/apache/commons/lang3/ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray()V
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 ICONST_2
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 NEWARRAY T_LONG
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 DUP
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 ICONST_0
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 LCONST_1
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 LASTORE
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 ICONST_2
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 NEWARRAY T_LONG
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 DUP
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 ICONST_0
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 LCONST_1
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 LASTORE
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.removeElements([J[J)[J
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1228 ASTORE 1
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1229 ICONST_1
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1229 NEWARRAY T_LONG
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1229 DUP
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1229 ICONST_0
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1229 LDC 2
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1229 LASTORE
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1229 ALOAD 1
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1229 INVOKESTATIC java/util/Arrays.equals([J[J)Z
-org.apache.commons.lang3.ArrayUtilsRemoveMultipleTest.testRemoveElementLongArray:1229 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
-
-Slice consists of 627 bytecode instructions.
-Computation took 6.16 seconds.

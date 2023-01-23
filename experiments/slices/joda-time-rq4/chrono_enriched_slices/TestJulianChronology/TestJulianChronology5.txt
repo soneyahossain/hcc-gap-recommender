@@ -1,0 +1,110 @@
+ 0.0% done, time left: unknown                                0.5% done, time left: unknown  1.0% done, time left: unknown  2.9% done, time left: unknown  6.0% done, time left: unknown 12.5% done, time left: unknown 16.4% done, time left: unknown 16.7% done, time left: unknown 20.7% done, time left: unknown 26.4% done, time left:   0:00:01   34.9% done, time left:   0:00:00 48.3% done, time left:   0:00:00 61.2% done, time left:   0:00:00 68.9% done, time left:   0:00:00 77.3% done, time left:   0:00:00 89.5% done, time left:   0:00:00 102.2% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestJulianChronology.testRecommendedAssertions:359:*]:
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:187 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:187 ARETURN
+org.joda.time.DateTimeZone.setDefault:207 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.setDefault:207 ALOAD 0
+org.joda.time.DateTimeZone.setDefault:207 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.set(Ljava/lang/Object;)V
+org.joda.time.chrono.JulianChronology.getInstance:103 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.JulianChronology.getInstance:103 ICONST_4
+org.joda.time.chrono.JulianChronology.getInstance:103 INVOKESTATIC org/joda/time/chrono/JulianChronology.getInstance(Lorg/joda/time/DateTimeZone;I)Lorg/joda/time/chrono/JulianChronology;
+org.joda.time.chrono.JulianChronology.getInstance:103 ARETURN
+org.joda.time.chrono.JulianChronology.getInstance:128 GETSTATIC org/joda/time/chrono/JulianChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.JulianChronology.getInstance:128 ALOAD 0
+org.joda.time.chrono.JulianChronology.getInstance:128 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.JulianChronology.getInstance:128 ASTORE 3
+org.joda.time.chrono.JulianChronology.getInstance:129 ALOAD 3
+org.joda.time.chrono.JulianChronology.getInstance:129 IFNONNULL L1 false true
+org.joda.time.chrono.JulianChronology.getInstance:130 BIPUSH 7
+org.joda.time.chrono.JulianChronology.getInstance:130 ANEWARRAY org/joda/time/chrono/JulianChronology
+org.joda.time.chrono.JulianChronology.getInstance:130 ASTORE 3
+org.joda.time.chrono.JulianChronology.getInstance:131 GETSTATIC org/joda/time/chrono/JulianChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.JulianChronology.getInstance:131 ALOAD 0
+org.joda.time.chrono.JulianChronology.getInstance:131 ALOAD 3
+org.joda.time.chrono.JulianChronology.getInstance:131 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.JulianChronology.getInstance:137 ALOAD 3
+org.joda.time.chrono.JulianChronology.getInstance:137 ILOAD 1
+org.joda.time.chrono.JulianChronology.getInstance:137 ICONST_1
+org.joda.time.chrono.JulianChronology.getInstance:137 ISUB
+org.joda.time.chrono.JulianChronology.getInstance:137 AALOAD
+org.joda.time.chrono.JulianChronology.getInstance:137 ASTORE 2
+org.joda.time.chrono.JulianChronology.getInstance:142 ALOAD 2
+org.joda.time.chrono.JulianChronology.getInstance:142 IFNONNULL L12 false true
+org.joda.time.chrono.JulianChronology.getInstance:144 ALOAD 3
+org.joda.time.chrono.JulianChronology.getInstance:144 ILOAD 1
+org.joda.time.chrono.JulianChronology.getInstance:144 ICONST_1
+org.joda.time.chrono.JulianChronology.getInstance:144 ISUB
+org.joda.time.chrono.JulianChronology.getInstance:144 AALOAD
+org.joda.time.chrono.JulianChronology.getInstance:144 ASTORE 2
+org.joda.time.chrono.JulianChronology.getInstance:145 ALOAD 2
+org.joda.time.chrono.JulianChronology.getInstance:145 IFNONNULL L8 false true
+org.joda.time.chrono.JulianChronology.getInstance:146 ALOAD 0
+org.joda.time.chrono.JulianChronology.getInstance:146 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.JulianChronology.getInstance:146 IF_ACMPNE L6 true false
+org.joda.time.chrono.JulianChronology.getInstance:150 NEW org/joda/time/chrono/JulianChronology
+org.joda.time.chrono.JulianChronology.getInstance:150 ASTORE 2
+org.joda.time.chrono.JulianChronology.getInstance:153 ALOAD 3
+org.joda.time.chrono.JulianChronology.getInstance:153 ILOAD 1
+org.joda.time.chrono.JulianChronology.getInstance:153 ICONST_1
+org.joda.time.chrono.JulianChronology.getInstance:153 ISUB
+org.joda.time.chrono.JulianChronology.getInstance:153 ALOAD 2
+org.joda.time.chrono.JulianChronology.getInstance:153 AASTORE
+org.joda.time.chrono.JulianChronology.getInstance:157 ALOAD 2
+org.joda.time.chrono.JulianChronology.getInstance:157 ARETURN
+org.joda.time.chrono.JulianChronology.isLeapYear:216 ILOAD 1
+org.joda.time.chrono.JulianChronology.isLeapYear:216 ICONST_3
+org.joda.time.chrono.JulianChronology.isLeapYear:216 IAND
+org.joda.time.chrono.JulianChronology.isLeapYear:216 IFNE L0 true false
+org.joda.time.chrono.JulianChronology.isLeapYear:216 ICONST_0
+org.joda.time.chrono.JulianChronology.isLeapYear:216 IRETURN
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:224 ILOAD 1
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:224 SIPUSH 1968
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:224 ISUB
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:224 ISTORE 2
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:226 ILOAD 2
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:226 IFGT L0 true false
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:231 ILOAD 2
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:231 ICONST_2
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:231 ISHR
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:231 ISTORE 3
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:233 ILOAD 1
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:233 INVOKEVIRTUAL org/joda/time/chrono/JulianChronology.isLeapYear(I)Z
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:233 IFNE L1 false true
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:234 IINC 3 1
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:238 ILOAD 2
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:238 I2L
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:238 LDC 365
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:238 LMUL
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:238 ILOAD 3
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:238 I2L
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:238 LADD
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:238 LDC 86400000
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:238 LMUL
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:238 LSTORE 4
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:242 LLOAD 4
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:242 LDC 62035200000
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:242 LSUB
+org.joda.time.chrono.JulianChronology.calculateFirstDayOfYearMillis:242 LRETURN
+org.joda.time.chrono.TestJulianChronology.main:61 INVOKEVIRTUAL org/joda/time/chrono/TestJulianChronology.setUp()V
+org.joda.time.chrono.TestJulianChronology.main:61 INVOKEVIRTUAL org/joda/time/chrono/TestJulianChronology.testFactory()V
+org.joda.time.chrono.TestJulianChronology.main:73 INVOKEVIRTUAL org/joda/time/chrono/TestJulianChronology.setUp()V
+org.joda.time.chrono.TestJulianChronology.main:73 INVOKEVIRTUAL org/joda/time/chrono/TestJulianChronology.testRecommendedAssertions()V
+org.joda.time.chrono.TestJulianChronology.setUp:93 GETSTATIC org/joda/time/chrono/TestJulianChronology.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestJulianChronology.setUp:93 INVOKESTATIC org/joda/time/DateTimeZone.setDefault(Lorg/joda/time/DateTimeZone;)V
+org.joda.time.chrono.TestJulianChronology.testFactory:117 INVOKESTATIC org/joda/time/chrono/JulianChronology.getInstance()Lorg/joda/time/chrono/JulianChronology;
+org.joda.time.chrono.TestJulianChronology.testRecommendedAssertions:354 INVOKESTATIC org/joda/time/chrono/JulianChronology.getInstance()Lorg/joda/time/chrono/JulianChronology;
+org.joda.time.chrono.TestJulianChronology.testRecommendedAssertions:354 ASTORE 1
+org.joda.time.chrono.TestJulianChronology.testRecommendedAssertions:359 LCONST_0
+org.joda.time.chrono.TestJulianChronology.testRecommendedAssertions:359 ALOAD 1
+org.joda.time.chrono.TestJulianChronology.testRecommendedAssertions:359 SIPUSH 2010
+org.joda.time.chrono.TestJulianChronology.testRecommendedAssertions:359 INVOKEVIRTUAL org/joda/time/chrono/JulianChronology.calculateFirstDayOfYearMillis(I)J
+org.joda.time.chrono.TestJulianChronology.testRecommendedAssertions:359 INVOKESTATIC org/junit/Assert.assertNotEquals(JJ)V
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+
+Slice consists of 390 bytecode instructions.
+Computation took 1.79 seconds.

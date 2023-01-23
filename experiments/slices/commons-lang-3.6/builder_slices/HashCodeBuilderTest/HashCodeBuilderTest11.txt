@@ -1,55 +1,0 @@
- 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.4% done, time left: unknown  0.6% done, time left: unknown  1.3% done, time left: unknown  1.8% done, time left: unknown  1.9% done, time left: unknown  2.7% done, time left: unknown  3.8% done, time left:   0:00:08    4.2% done, time left:   0:00:11  4.3% done, time left:   0:00:13  4.3% done, time left:   0:00:16  4.3% done, time left:   0:00:19  4.7% done, time left:   0:00:20  6.6% done, time left:   0:00:21  8.5% done, time left:   0:00:21 10.9% done, time left:   0:00:19 13.6% done, time left:   0:00:16 16.4% done, time left:   0:00:13 19.3% done, time left:   0:00:10 21.9% done, time left:   0:00:08 23.7% done, time left:   0:00:06 25.8% done, time left:   0:00:06 28.8% done, time left:   0:00:05 30.3% done, time left:   0:00:04 33.0% done, time left:   0:00:04 35.7% done, time left:   0:00:03 38.4% done, time left:   0:00:03 40.5% done, time left:   0:00:03 42.4% done, time left:   0:00:02 45.1% done, time left:   0:00:02 47.8% done, time left:   0:00:02 50.7% done, time left:   0:00:02 53.5% done, time left:   0:00:01 56.4% done, time left:   0:00:01 59.1% done, time left:   0:00:01 61.9% done, time left:   0:00:01 64.5% done, time left:   0:00:00 67.1% done, time left:   0:00:00 69.7% done, time left:   0:00:00 72.4% done, time left:   0:00:00 74.9% done, time left:   0:00:00 77.5% done, time left:   0:00:00 80.2% done, time left:   0:00:00 83.1% done, time left:   0:00:00 85.8% done, time left:   0:00:00 88.7% done, time left:   0:00:00 91.4% done, time left:   0:00:00 94.2% done, time left:   0:00:00 96.3% done, time left:   0:00:00 98.3% done, time left:   0:00:00 99.2% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246:*]:
-org.apache.commons.lang3.builder.HashCodeBuilder.<init>:175 ALOAD 0
-org.apache.commons.lang3.builder.HashCodeBuilder.<init>:175 ILOAD 2
-org.apache.commons.lang3.builder.HashCodeBuilder.<init>:175 PUTFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iConstant I
-org.apache.commons.lang3.builder.HashCodeBuilder.<init>:176 ALOAD 0
-org.apache.commons.lang3.builder.HashCodeBuilder.<init>:176 ILOAD 1
-org.apache.commons.lang3.builder.HashCodeBuilder.<init>:176 PUTFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iTotal I
-org.apache.commons.lang3.builder.HashCodeBuilder.append:776 ALOAD 1
-org.apache.commons.lang3.builder.HashCodeBuilder.append:776 IFNONNULL L0 true false
-org.apache.commons.lang3.builder.HashCodeBuilder.append:780 ALOAD 1
-org.apache.commons.lang3.builder.HashCodeBuilder.append:780 INVOKEVIRTUAL java/lang/Object.getClass()Ljava/lang/Class;
-org.apache.commons.lang3.builder.HashCodeBuilder.append:780 INVOKEVIRTUAL java/lang/Class.isArray()Z
-org.apache.commons.lang3.builder.HashCodeBuilder.append:780 IFEQ L1 true false
-org.apache.commons.lang3.builder.HashCodeBuilder.append:785 ALOAD 0
-org.apache.commons.lang3.builder.HashCodeBuilder.append:785 ALOAD 0
-org.apache.commons.lang3.builder.HashCodeBuilder.append:785 GETFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iTotal I
-org.apache.commons.lang3.builder.HashCodeBuilder.append:785 ALOAD 0
-org.apache.commons.lang3.builder.HashCodeBuilder.append:785 GETFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iConstant I
-org.apache.commons.lang3.builder.HashCodeBuilder.append:785 IMUL
-org.apache.commons.lang3.builder.HashCodeBuilder.append:785 ALOAD 1
-org.apache.commons.lang3.builder.HashCodeBuilder.append:785 INVOKEVIRTUAL java/lang/Object.hashCode()I
-org.apache.commons.lang3.builder.HashCodeBuilder.append:785 IADD
-org.apache.commons.lang3.builder.HashCodeBuilder.append:785 PUTFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iTotal I
-org.apache.commons.lang3.builder.HashCodeBuilder.append:788 ALOAD 0
-org.apache.commons.lang3.builder.HashCodeBuilder.append:788 ARETURN
-org.apache.commons.lang3.builder.HashCodeBuilder.toHashCode:896 ALOAD 0
-org.apache.commons.lang3.builder.HashCodeBuilder.toHashCode:896 GETFIELD org/apache/commons/lang3/builder/HashCodeBuilder.iTotal I
-org.apache.commons.lang3.builder.HashCodeBuilder.toHashCode:896 IRETURN
-org.apache.commons.lang3.builder.HashCodeBuilder.build:907 ALOAD 0
-org.apache.commons.lang3.builder.HashCodeBuilder.build:907 INVOKEVIRTUAL org/apache/commons/lang3/builder/HashCodeBuilder.toHashCode()I
-org.apache.commons.lang3.builder.HashCodeBuilder.build:907 INVOKESTATIC java/lang/Integer.valueOf(I)Ljava/lang/Integer;
-org.apache.commons.lang3.builder.HashCodeBuilder.build:907 ARETURN
-org.apache.commons.lang3.builder.HashCodeBuilderTest.main:150 INVOKEVIRTUAL org/apache/commons/lang3/builder/HashCodeBuilderTest.testObjectBuild()V
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:245 NEW java/lang/Object
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:245 ASTORE 1
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 SIPUSH 629
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 ALOAD 1
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 INVOKEVIRTUAL java/lang/Object.hashCode()I
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 IADD
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 I2L
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 NEW org/apache/commons/lang3/builder/HashCodeBuilder
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 DUP
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 BIPUSH 17
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 BIPUSH 37
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 INVOKESPECIAL org/apache/commons/lang3/builder/HashCodeBuilder.<init>(II)V
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 ALOAD 1
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 INVOKEVIRTUAL org/apache/commons/lang3/builder/HashCodeBuilder.append(Ljava/lang/Object;)Lorg/apache/commons/lang3/builder/HashCodeBuilder;
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 INVOKEVIRTUAL org/apache/commons/lang3/builder/HashCodeBuilder.build()Ljava/lang/Integer;
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 INVOKEVIRTUAL java/lang/Integer.intValue()I
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 I2L
-org.apache.commons.lang3.builder.HashCodeBuilderTest.testObjectBuild:246 INVOKESTATIC org/junit/Assert.assertEquals(JJ)V
-
-Slice consists of 67 bytecode instructions.
-Computation took 5.57 seconds.

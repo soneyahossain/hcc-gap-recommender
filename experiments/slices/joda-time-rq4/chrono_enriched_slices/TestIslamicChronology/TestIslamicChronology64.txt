@@ -1,0 +1,53 @@
+ 0.0% done, time left: unknown                                0.8% done, time left: unknown  2.9% done, time left: unknown  6.5% done, time left: unknown  9.9% done, time left: unknown 12.1% done, time left: unknown 13.3% done, time left:   0:00:07   15.3% done, time left:   0:00:06 16.6% done, time left:   0:00:06 20.8% done, time left:   0:00:04 22.6% done, time left:   0:00:03 27.3% done, time left:   0:00:02 33.6% done, time left:   0:00:01 38.8% done, time left:   0:00:01 45.0% done, time left:   0:00:00 48.1% done, time left:   0:00:00 52.8% done, time left:   0:00:00 57.1% done, time left:   0:00:00 61.0% done, time left:   0:00:00 63.2% done, time left:   0:00:00 66.1% done, time left:   0:00:00 66.4% done, time left:   0:00:00 70.2% done, time left:   0:00:00 74.6% done, time left:   0:00:00 80.7% done, time left:   0:00:00 85.1% done, time left:   0:00:00 85.7% done, time left:   0:00:00 91.4% done, time left:   0:00:00 100.1% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:992:*]:
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 0
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 1
+org.joda.time.chrono.AssembledChronology.<init>:100 PUTFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getZone:107 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getZone:107 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getZone:107 DUP
+org.joda.time.chrono.AssembledChronology.getZone:107 ASTORE 1
+org.joda.time.chrono.AssembledChronology.getZone:107 IFNULL L0 false true
+org.joda.time.chrono.AssembledChronology.getZone:108 ALOAD 1
+org.joda.time.chrono.AssembledChronology.getZone:108 ARETURN
+org.joda.time.chrono.StrictChronology.getInstance:48 NEW org/joda/time/chrono/StrictChronology
+org.joda.time.chrono.StrictChronology.getInstance:48 DUP
+org.joda.time.chrono.StrictChronology.getInstance:48 ALOAD 0
+org.joda.time.chrono.StrictChronology.getInstance:48 INVOKESPECIAL org/joda/time/chrono/StrictChronology.<init>(Lorg/joda/time/Chronology;)V
+org.joda.time.chrono.StrictChronology.getInstance:48 ARETURN
+org.joda.time.chrono.StrictChronology.<init>:59 ALOAD 0
+org.joda.time.chrono.StrictChronology.<init>:59 ALOAD 1
+org.joda.time.chrono.StrictChronology.<init>:59 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;)V
+org.joda.time.chrono.StrictChronology.withUTC:63 ALOAD 0
+org.joda.time.chrono.StrictChronology.withUTC:63 GETFIELD org/joda/time/chrono/StrictChronology.iWithUTC Lorg/joda/time/Chronology;
+org.joda.time.chrono.StrictChronology.withUTC:63 IFNONNULL L1 false true
+org.joda.time.chrono.StrictChronology.withUTC:64 ALOAD 0
+org.joda.time.chrono.StrictChronology.withUTC:64 INVOKEVIRTUAL org/joda/time/chrono/StrictChronology.getZone()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.StrictChronology.withUTC:64 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.StrictChronology.withUTC:64 IF_ACMPNE L0 false true
+org.joda.time.chrono.StrictChronology.withUTC:65 ALOAD 0
+org.joda.time.chrono.StrictChronology.withUTC:65 ALOAD 0
+org.joda.time.chrono.StrictChronology.withUTC:65 PUTFIELD org/joda/time/chrono/StrictChronology.iWithUTC Lorg/joda/time/Chronology;
+org.joda.time.chrono.StrictChronology.withUTC:70 ALOAD 0
+org.joda.time.chrono.StrictChronology.withUTC:70 GETFIELD org/joda/time/chrono/StrictChronology.iWithUTC Lorg/joda/time/Chronology;
+org.joda.time.chrono.StrictChronology.withUTC:70 ARETURN
+org.joda.time.chrono.StrictChronology.withZone:77 ALOAD 1
+org.joda.time.chrono.StrictChronology.withZone:77 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.StrictChronology.withZone:77 IF_ACMPNE L1 false true
+org.joda.time.chrono.StrictChronology.withZone:78 ALOAD 0
+org.joda.time.chrono.StrictChronology.withZone:78 INVOKEVIRTUAL org/joda/time/chrono/StrictChronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.chrono.StrictChronology.withZone:78 ARETURN
+org.joda.time.chrono.TestIslamicChronology.main:151 INVOKEVIRTUAL org/joda/time/chrono/TestIslamicChronology.testRecommendedAssertions()V
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:912 NEW org/joda/time/chrono/CopticChronology
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:912 ASTORE 2
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:986 ALOAD 2
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:986 INVOKESTATIC org/joda/time/chrono/StrictChronology.getInstance(Lorg/joda/time/Chronology;)Lorg/joda/time/chrono/StrictChronology;
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:986 ASTORE 9
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:992 ALOAD 9
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:992 ALOAD 9
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:992 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:992 INVOKEVIRTUAL org/joda/time/chrono/StrictChronology.withZone(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/Chronology;
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:992 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 48 bytecode instructions.
+Computation took 3.32 seconds.

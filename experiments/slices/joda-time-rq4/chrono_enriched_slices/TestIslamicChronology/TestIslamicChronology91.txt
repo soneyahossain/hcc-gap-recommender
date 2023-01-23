@@ -1,0 +1,208 @@
+ 0.0% done, time left: unknown                                0.3% done, time left: unknown  2.1% done, time left: unknown  5.5% done, time left: unknown  9.5% done, time left: unknown 12.1% done, time left: unknown 12.6% done, time left:   0:00:18   14.8% done, time left:   0:00:12 15.4% done, time left:   0:00:10 18.5% done, time left:   0:00:10 21.5% done, time left:   0:00:08 24.4% done, time left:   0:00:06 30.0% done, time left:   0:00:02 36.1% done, time left:   0:00:01 41.5% done, time left:   0:00:01 47.6% done, time left:   0:00:00 49.5% done, time left:   0:00:00 55.8% done, time left:   0:00:00 58.8% done, time left:   0:00:00 61.0% done, time left:   0:00:00 64.8% done, time left:   0:00:00 66.4% done, time left:   0:00:00 68.9% done, time left:   0:00:00 74.2% done, time left:   0:00:00 80.8% done, time left:   0:00:00 85.4% done, time left:   0:00:00 91.7% done, time left:   0:00:00 98.7% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1030:*]:
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:187 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:187 ARETURN
+org.joda.time.DateTimeZone.setDefault:207 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.setDefault:207 ALOAD 0
+org.joda.time.DateTimeZone.setDefault:207 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.set(Ljava/lang/Object;)V
+org.joda.time.chrono.BasicChronology.<init>:127 ALOAD 0
+org.joda.time.chrono.BasicChronology.<init>:127 SIPUSH 1024
+org.joda.time.chrono.BasicChronology.<init>:127 ANEWARRAY org/joda/time/chrono/BasicChronology$YearInfo
+org.joda.time.chrono.BasicChronology.<init>:127 PUTFIELD org/joda/time/chrono/BasicChronology.iYearInfoCache [Lorg/joda/time/chrono/BasicChronology$YearInfo;
+org.joda.time.chrono.BasicChronology.getYearMillis:388 ALOAD 0
+org.joda.time.chrono.BasicChronology.getYearMillis:388 ILOAD 1
+org.joda.time.chrono.BasicChronology.getYearMillis:388 INVOKESPECIAL org/joda/time/chrono/BasicChronology.getYearInfo(I)Lorg/joda/time/chrono/BasicChronology$YearInfo;
+org.joda.time.chrono.BasicChronology.getYearMillis:388 GETFIELD org/joda/time/chrono/BasicChronology$YearInfo.iFirstDayMillis J
+org.joda.time.chrono.BasicChronology.getYearMillis:388 LRETURN
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:413 ALOAD 0
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:413 ILOAD 1
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:413 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.getYearMillis(I)J
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:413 LSTORE 4
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:414 LLOAD 4
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:414 ILOAD 2
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:414 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.getTotalMillisByYearMonth(II)J
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:414 LADD
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:414 LSTORE 4
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:415 LLOAD 4
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:415 ILOAD 3
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:415 ICONST_1
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:415 ISUB
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:415 I2L
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:415 LDC 86400000
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:415 LMUL
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:415 LADD
+org.joda.time.chrono.BasicChronology.getYearMonthDayMillis:415 LRETURN
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:643 ALOAD 0
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:643 ILOAD 1
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:643 ILOAD 2
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:643 ILOAD 3
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:643 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.getYearMonthDayMillis(III)J
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:643 LSTORE 5
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:645 LLOAD 5
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:645 LCONST_0
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:645 LCMP
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:645 IFGE L2 true false
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:647 LLOAD 5
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:647 LCONST_0
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:647 LCMP
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:647 IFLE L3 false true
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:647 ILOAD 1
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:647 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.getMinYear()I
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:647 ICONST_1
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:647 ISUB
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:647 IF_ICMPNE L3 true false
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:650 LLOAD 5
+org.joda.time.chrono.BasicChronology.getDateMidnightMillis:650 LRETURN
+org.joda.time.chrono.BasicChronology.getYearInfo:792 ALOAD 0
+org.joda.time.chrono.BasicChronology.getYearInfo:792 GETFIELD org/joda/time/chrono/BasicChronology.iYearInfoCache [Lorg/joda/time/chrono/BasicChronology$YearInfo;
+org.joda.time.chrono.BasicChronology.getYearInfo:792 ILOAD 1
+org.joda.time.chrono.BasicChronology.getYearInfo:792 SIPUSH 1023
+org.joda.time.chrono.BasicChronology.getYearInfo:792 IAND
+org.joda.time.chrono.BasicChronology.getYearInfo:792 AALOAD
+org.joda.time.chrono.BasicChronology.getYearInfo:792 ASTORE 2
+org.joda.time.chrono.BasicChronology.getYearInfo:793 ALOAD 2
+org.joda.time.chrono.BasicChronology.getYearInfo:793 IFNULL L0 true false
+org.joda.time.chrono.BasicChronology.getYearInfo:794 NEW org/joda/time/chrono/BasicChronology$YearInfo
+org.joda.time.chrono.BasicChronology.getYearInfo:794 DUP
+org.joda.time.chrono.BasicChronology.getYearInfo:794 ALOAD 0
+org.joda.time.chrono.BasicChronology.getYearInfo:794 ILOAD 1
+org.joda.time.chrono.BasicChronology.getYearInfo:794 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.calculateFirstDayOfYearMillis(I)J
+org.joda.time.chrono.BasicChronology.getYearInfo:794 INVOKESPECIAL org/joda/time/chrono/BasicChronology$YearInfo.<init>(IJ)V
+org.joda.time.chrono.BasicChronology.getYearInfo:794 ASTORE 2
+org.joda.time.chrono.BasicChronology.getYearInfo:797 ALOAD 2
+org.joda.time.chrono.BasicChronology.getYearInfo:797 ARETURN
+org.joda.time.chrono.BasicChronology$YearInfo.<init>:827 ALOAD 0
+org.joda.time.chrono.BasicChronology$YearInfo.<init>:827 LLOAD 2
+org.joda.time.chrono.BasicChronology$YearInfo.<init>:827 PUTFIELD org/joda/time/chrono/BasicChronology$YearInfo.iFirstDayMillis J
+org.joda.time.chrono.IslamicChronology.getInstance:170 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.IslamicChronology.getInstance:170 GETSTATIC org/joda/time/chrono/IslamicChronology.LEAP_YEAR_16_BASED Lorg/joda/time/chrono/IslamicChronology$LeapYearPatternType;
+org.joda.time.chrono.IslamicChronology.getInstance:170 INVOKESTATIC org/joda/time/chrono/IslamicChronology.getInstance(Lorg/joda/time/DateTimeZone;Lorg/joda/time/chrono/IslamicChronology$LeapYearPatternType;)Lorg/joda/time/chrono/IslamicChronology;
+org.joda.time.chrono.IslamicChronology.getInstance:170 ARETURN
+org.joda.time.chrono.IslamicChronology.getInstance:195 GETSTATIC org/joda/time/chrono/IslamicChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.IslamicChronology.getInstance:195 ALOAD 0
+org.joda.time.chrono.IslamicChronology.getInstance:195 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.IslamicChronology.getInstance:195 ASTORE 3
+org.joda.time.chrono.IslamicChronology.getInstance:196 ALOAD 3
+org.joda.time.chrono.IslamicChronology.getInstance:196 IFNONNULL L1 false true
+org.joda.time.chrono.IslamicChronology.getInstance:197 ICONST_4
+org.joda.time.chrono.IslamicChronology.getInstance:197 ANEWARRAY org/joda/time/chrono/IslamicChronology
+org.joda.time.chrono.IslamicChronology.getInstance:197 ASTORE 3
+org.joda.time.chrono.IslamicChronology.getInstance:198 GETSTATIC org/joda/time/chrono/IslamicChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.IslamicChronology.getInstance:198 ALOAD 0
+org.joda.time.chrono.IslamicChronology.getInstance:198 ALOAD 3
+org.joda.time.chrono.IslamicChronology.getInstance:198 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.IslamicChronology.getInstance:203 ALOAD 3
+org.joda.time.chrono.IslamicChronology.getInstance:203 ALOAD 1
+org.joda.time.chrono.IslamicChronology.getInstance:203 GETFIELD org/joda/time/chrono/IslamicChronology$LeapYearPatternType.index B
+org.joda.time.chrono.IslamicChronology.getInstance:203 AALOAD
+org.joda.time.chrono.IslamicChronology.getInstance:203 ASTORE 2
+org.joda.time.chrono.IslamicChronology.getInstance:204 ALOAD 2
+org.joda.time.chrono.IslamicChronology.getInstance:204 IFNONNULL L9 false true
+org.joda.time.chrono.IslamicChronology.getInstance:206 ALOAD 3
+org.joda.time.chrono.IslamicChronology.getInstance:206 ALOAD 1
+org.joda.time.chrono.IslamicChronology.getInstance:206 GETFIELD org/joda/time/chrono/IslamicChronology$LeapYearPatternType.index B
+org.joda.time.chrono.IslamicChronology.getInstance:206 AALOAD
+org.joda.time.chrono.IslamicChronology.getInstance:206 ASTORE 2
+org.joda.time.chrono.IslamicChronology.getInstance:207 ALOAD 2
+org.joda.time.chrono.IslamicChronology.getInstance:207 IFNONNULL L5 false true
+org.joda.time.chrono.IslamicChronology.getInstance:208 ALOAD 0
+org.joda.time.chrono.IslamicChronology.getInstance:208 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.IslamicChronology.getInstance:208 IF_ACMPNE L3 true false
+org.joda.time.chrono.IslamicChronology.getInstance:218 NEW org/joda/time/chrono/IslamicChronology
+org.joda.time.chrono.IslamicChronology.getInstance:218 DUP
+org.joda.time.chrono.IslamicChronology.getInstance:218 ALOAD 1
+org.joda.time.chrono.IslamicChronology.getInstance:218 INVOKESPECIAL org/joda/time/chrono/IslamicChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;Lorg/joda/time/chrono/IslamicChronology$LeapYearPatternType;)V
+org.joda.time.chrono.IslamicChronology.getInstance:218 ASTORE 2
+org.joda.time.chrono.IslamicChronology.getInstance:221 ALOAD 3
+org.joda.time.chrono.IslamicChronology.getInstance:221 ALOAD 1
+org.joda.time.chrono.IslamicChronology.getInstance:221 GETFIELD org/joda/time/chrono/IslamicChronology$LeapYearPatternType.index B
+org.joda.time.chrono.IslamicChronology.getInstance:221 ALOAD 2
+org.joda.time.chrono.IslamicChronology.getInstance:221 AASTORE
+org.joda.time.chrono.IslamicChronology.getInstance:225 ALOAD 2
+org.joda.time.chrono.IslamicChronology.getInstance:225 ARETURN
+org.joda.time.chrono.IslamicChronology.<init>:234 ALOAD 0
+org.joda.time.chrono.IslamicChronology.<init>:234 INVOKESPECIAL org/joda/time/chrono/BasicChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.IslamicChronology.<init>:235 ALOAD 0
+org.joda.time.chrono.IslamicChronology.<init>:235 ALOAD 3
+org.joda.time.chrono.IslamicChronology.<init>:235 PUTFIELD org/joda/time/chrono/IslamicChronology.iLeapYears Lorg/joda/time/chrono/IslamicChronology$LeapYearPatternType;
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:364 IINC 2 -1
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:364 ILOAD 2
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:364 ICONST_2
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:364 IREM
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:364 ICONST_1
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:364 IF_ICMPNE L0 false true
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:365 ILOAD 2
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:365 ICONST_2
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:365 IDIV
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:365 ISTORE 2
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:366 ILOAD 2
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:366 I2L
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:366 LDC 5097600000
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:366 LMUL
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:366 LDC 2592000000
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:366 LADD
+org.joda.time.chrono.IslamicChronology.getTotalMillisByYearMonth:366 LRETURN
+org.joda.time.chrono.IslamicChronology.isLeapYear:385 ALOAD 0
+org.joda.time.chrono.IslamicChronology.isLeapYear:385 GETFIELD org/joda/time/chrono/IslamicChronology.iLeapYears Lorg/joda/time/chrono/IslamicChronology$LeapYearPatternType;
+org.joda.time.chrono.IslamicChronology.isLeapYear:385 IRETURN
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:461 IINC 1 -1
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:462 ILOAD 1
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:462 BIPUSH 30
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:462 IDIV
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:462 I2L
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:462 LSTORE 2
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:463 LDC -42521587200000
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:463 LLOAD 2
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:463 LDC 918518400000
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:463 LMUL
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:463 LADD
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:463 LSTORE 4
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:464 ILOAD 1
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:464 BIPUSH 30
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:464 IREM
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:464 ICONST_1
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:464 IADD
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:464 ISTORE 6
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:466 ICONST_1
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:466 ISTORE 7
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:466 ILOAD 7
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:466 ILOAD 6
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:466 IF_ICMPGE L5 true true
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:466 IINC 7 1
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:467 LLOAD 4
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:467 ALOAD 0
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:467 INVOKEVIRTUAL org/joda/time/chrono/IslamicChronology.isLeapYear(I)Z
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:467 IFEQ L3 true true
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:467 LDC 30672000000
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:467 LDC 30585600000
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:467 LADD
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:467 LSTORE 4
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:470 LLOAD 4
+org.joda.time.chrono.IslamicChronology.calculateFirstDayOfYearMillis:470 LRETURN
+org.joda.time.chrono.IslamicChronology.getMinYear:475 ICONST_1
+org.joda.time.chrono.IslamicChronology.getMinYear:475 IRETURN
+org.joda.time.chrono.TestIslamicChronology.main:65 INVOKEVIRTUAL org/joda/time/chrono/TestIslamicChronology.setUp()V
+org.joda.time.chrono.TestIslamicChronology.main:66 INVOKEVIRTUAL org/joda/time/chrono/TestIslamicChronology.testFactory()V
+org.joda.time.chrono.TestIslamicChronology.main:150 INVOKEVIRTUAL org/joda/time/chrono/TestIslamicChronology.setUp()V
+org.joda.time.chrono.TestIslamicChronology.main:151 INVOKEVIRTUAL org/joda/time/chrono/TestIslamicChronology.testRecommendedAssertions()V
+org.joda.time.chrono.TestIslamicChronology.setUp:172 GETSTATIC org/joda/time/chrono/TestIslamicChronology.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestIslamicChronology.setUp:172 INVOKESTATIC org/joda/time/DateTimeZone.setDefault(Lorg/joda/time/DateTimeZone;)V
+org.joda.time.chrono.TestIslamicChronology.testFactory:197 INVOKESTATIC org/joda/time/chrono/IslamicChronology.getInstance()Lorg/joda/time/chrono/IslamicChronology;
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1026 INVOKESTATIC org/joda/time/chrono/IslamicChronology.getInstance()Lorg/joda/time/chrono/IslamicChronology;
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1026 ASTORE 10
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1030 LCONST_0
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1030 ALOAD 10
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1030 SIPUSH 2010
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1030 ICONST_2
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1030 ICONST_2
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1030 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.getDateMidnightMillis(III)J
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1030 INVOKESTATIC org/junit/Assert.assertNotEquals(JJ)V
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+
+Slice consists of 488 bytecode instructions.
+Computation took 3.22 seconds.

@@ -1,87 +1,0 @@
- 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.4% done, time left: unknown  1.4% done, time left: unknown  3.3% done, time left: unknown  5.2% done, time left: unknown  8.1% done, time left: unknown 11.1% done, time left: unknown 14.8% done, time left: unknown 18.5% done, time left: unknown 22.5% done, time left:   0:00:01   27.1% done, time left:   0:00:02 31.4% done, time left:   0:00:02 34.7% done, time left:   0:00:02 36.2% done, time left:   0:00:01 37.9% done, time left:   0:00:02 39.8% done, time left:   0:00:02 41.8% done, time left:   0:00:02 43.6% done, time left:   0:00:02 45.6% done, time left:   0:00:02 48.4% done, time left:   0:00:02 52.0% done, time left:   0:00:01 56.2% done, time left:   0:00:01 60.4% done, time left:   0:00:00 62.6% done, time left:   0:00:00 63.8% done, time left:   0:00:00 65.0% done, time left:   0:00:00 66.6% done, time left:   0:00:00 68.9% done, time left:   0:00:00 71.1% done, time left:   0:00:00 75.2% done, time left:   0:00:00 76.6% done, time left:   0:00:00 77.5% done, time left:   0:00:00 79.9% done, time left:   0:00:00 82.3% done, time left:   0:00:00 83.7% done, time left:   0:00:00 86.2% done, time left:   0:00:00 88.8% done, time left:   0:00:00 92.0% done, time left:   0:00:00 93.8% done, time left:   0:00:00 95.6% done, time left:   0:00:00 98.1% done, time left:   0:00:00 98.9% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.ClassUtilsTest.test_getAbbreviatedName_Class:288:*]:
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:345 ALOAD 0
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:345 IFNONNULL L0 true false
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:348 ALOAD 0
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:348 INVOKEVIRTUAL java/lang/Class.getName()Ljava/lang/String;
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:348 INVOKESTATIC org/apache/commons/lang3/ClassUtils.getAbbreviatedName(Ljava/lang/String;I)Ljava/lang/String;
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:348 ARETURN
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:380 ALOAD 0
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:380 IFNONNULL L1 true false
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:385 ALOAD 0
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:385 BIPUSH 46
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:385 INVOKESTATIC org/apache/commons/lang3/StringUtils.countMatches(Ljava/lang/CharSequence;C)I
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:385 ISTORE 3
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:386 ILOAD 3
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:386 ICONST_1
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:386 IADD
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:386 ANEWARRAY java/lang/String
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:386 ASTORE 4
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:388 ILOAD 3
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:388 ISTORE 6
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:388 ILOAD 6
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:388 IFLT L7 true true
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:388 IINC 6 -1
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:410 ALOAD 4
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:410 INVOKESTATIC org/apache/commons/lang3/StringUtils.join([Ljava/lang/Object;C)Ljava/lang/String;
-org.apache.commons.lang3.ClassUtils.getAbbreviatedName:410 ARETURN
-org.apache.commons.lang3.ClassUtilsTest.main:54 INVOKEVIRTUAL org/apache/commons/lang3/ClassUtilsTest.test_getAbbreviatedName_Class()V
-org.apache.commons.lang3.ClassUtilsTest.test_getAbbreviatedName_Class:288 LDC "j.lang.String"
-org.apache.commons.lang3.ClassUtilsTest.test_getAbbreviatedName_Class:288 LDC Ljava/lang/String;
-org.apache.commons.lang3.ClassUtilsTest.test_getAbbreviatedName_Class:288 BIPUSH 13
-org.apache.commons.lang3.ClassUtilsTest.test_getAbbreviatedName_Class:288 INVOKESTATIC org/apache/commons/lang3/ClassUtils.getAbbreviatedName(Ljava/lang/Class;I)Ljava/lang/String;
-org.apache.commons.lang3.ClassUtilsTest.test_getAbbreviatedName_Class:288 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
-org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
-org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
-org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
-org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
-org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
-org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
-org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
-org.apache.commons.lang3.StringUtils.join:3875 ALOAD 0
-org.apache.commons.lang3.StringUtils.join:3875 IFNONNULL L0 true false
-org.apache.commons.lang3.StringUtils.join:3878 ALOAD 0
-org.apache.commons.lang3.StringUtils.join:3878 ICONST_0
-org.apache.commons.lang3.StringUtils.join:3878 ALOAD 0
-org.apache.commons.lang3.StringUtils.join:3878 ARRAYLENGTH
-org.apache.commons.lang3.StringUtils.join:3878 INVOKESTATIC org/apache/commons/lang3/StringUtils.join([Ljava/lang/Object;CII)Ljava/lang/String;
-org.apache.commons.lang3.StringUtils.join:3878 ARETURN
-org.apache.commons.lang3.StringUtils.join:4133 ALOAD 0
-org.apache.commons.lang3.StringUtils.join:4133 IFNONNULL L0 true false
-org.apache.commons.lang3.StringUtils.join:4136 ILOAD 3
-org.apache.commons.lang3.StringUtils.join:4136 ILOAD 2
-org.apache.commons.lang3.StringUtils.join:4136 ISUB
-org.apache.commons.lang3.StringUtils.join:4136 ISTORE 4
-org.apache.commons.lang3.StringUtils.join:4137 ILOAD 4
-org.apache.commons.lang3.StringUtils.join:4137 IFGT L1 true false
-org.apache.commons.lang3.StringUtils.join:4141 ILOAD 2
-org.apache.commons.lang3.StringUtils.join:4141 ISTORE 6
-org.apache.commons.lang3.StringUtils.join:4141 ILOAD 6
-org.apache.commons.lang3.StringUtils.join:4141 ILOAD 3
-org.apache.commons.lang3.StringUtils.join:4141 IF_ICMPGE L5 true true
-org.apache.commons.lang3.StringUtils.join:4141 IINC 6 1
-org.apache.commons.lang3.StringUtils.join:4149 INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String;
-org.apache.commons.lang3.StringUtils.join:4149 ARETURN
-org.apache.commons.lang3.StringUtils.countMatches:6889 ALOAD 0
-org.apache.commons.lang3.StringUtils.countMatches:6889 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
-org.apache.commons.lang3.StringUtils.countMatches:6889 IFEQ L0 true false
-org.apache.commons.lang3.StringUtils.countMatches:6892 ICONST_0
-org.apache.commons.lang3.StringUtils.countMatches:6892 ISTORE 2
-org.apache.commons.lang3.StringUtils.countMatches:6894 ICONST_0
-org.apache.commons.lang3.StringUtils.countMatches:6894 ISTORE 3
-org.apache.commons.lang3.StringUtils.countMatches:6894 ILOAD 3
-org.apache.commons.lang3.StringUtils.countMatches:6894 ALOAD 0
-org.apache.commons.lang3.StringUtils.countMatches:6894 INVOKEINTERFACE java/lang/CharSequence.length()I
-org.apache.commons.lang3.StringUtils.countMatches:6894 IF_ICMPGE L3 true true
-org.apache.commons.lang3.StringUtils.countMatches:6894 IINC 3 1
-org.apache.commons.lang3.StringUtils.countMatches:6895 ILOAD 1
-org.apache.commons.lang3.StringUtils.countMatches:6895 ALOAD 0
-org.apache.commons.lang3.StringUtils.countMatches:6895 ILOAD 3
-org.apache.commons.lang3.StringUtils.countMatches:6895 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
-org.apache.commons.lang3.StringUtils.countMatches:6895 IF_ICMPNE L2 false true
-org.apache.commons.lang3.StringUtils.countMatches:6896 IINC 2 1
-org.apache.commons.lang3.StringUtils.countMatches:6899 ILOAD 2
-org.apache.commons.lang3.StringUtils.countMatches:6899 IRETURN
-
-Slice consists of 89 bytecode instructions.
-Computation took 4.61 seconds.

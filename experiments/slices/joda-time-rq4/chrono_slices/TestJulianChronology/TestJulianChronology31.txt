@@ -1,0 +1,118 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.7% done, time left: unknown  1.0% done, time left: unknown  2.6% done, time left: unknown  4.3% done, time left: unknown  6.2% done, time left: unknown  8.1% done, time left: unknown  9.2% done, time left: unknown 11.3% done, time left:   0:00:04   13.5% done, time left:   0:00:04 15.5% done, time left:   0:00:04 18.5% done, time left:   0:00:04 19.8% done, time left:   0:00:04 20.2% done, time left:   0:00:04 20.4% done, time left:   0:00:04 21.5% done, time left:   0:00:05 25.2% done, time left:   0:00:05 29.0% done, time left:   0:00:04 32.2% done, time left:   0:00:03 33.7% done, time left:   0:00:02 37.4% done, time left:   0:00:02 40.4% done, time left:   0:00:02 44.9% done, time left:   0:00:01 50.1% done, time left:   0:00:00 54.5% done, time left:   0:00:00 60.8% done, time left:   0:00:00 66.9% done, time left:   0:00:00 73.7% done, time left:   0:00:00 80.4% done, time left:   0:00:00 86.6% done, time left:   0:00:00 89.4% done, time left:   0:00:00 89.9% done, time left:   0:00:00 96.6% done, time left:   0:00:00 102.7% done, time left:   0:00:00  105.2% done, time left:   0:00:00 finished
+The dynamic slice for criterion [org.joda.time.chrono.TestJulianChronology.testDurationFields:182:*]:
+org.joda.time.DateTimeZone.getDefault:163 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.getDefault:163 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.get()Ljava/lang/Object;
+org.joda.time.DateTimeZone.getDefault:163 ASTORE 0
+org.joda.time.DateTimeZone.getDefault:187 ALOAD 0
+org.joda.time.DateTimeZone.getDefault:187 ARETURN
+org.joda.time.DateTimeZone.setDefault:207 GETSTATIC org/joda/time/DateTimeZone.cDefault Ljava/util/concurrent/atomic/AtomicReference;
+org.joda.time.DateTimeZone.setDefault:207 ALOAD 0
+org.joda.time.DateTimeZone.setDefault:207 INVOKEVIRTUAL java/util/concurrent/atomic/AtomicReference.set(Ljava/lang/Object;)V
+org.joda.time.DurationFieldType.eras:205 GETSTATIC org/joda/time/DurationFieldType.ERAS_TYPE Lorg/joda/time/DurationFieldType;
+org.joda.time.DurationFieldType.eras:205 ARETURN
+org.joda.time.DurationFieldType$StandardDurationFieldType.hashCode:278 ICONST_1
+org.joda.time.DurationFieldType$StandardDurationFieldType.hashCode:278 ALOAD 0
+org.joda.time.DurationFieldType$StandardDurationFieldType.hashCode:278 GETFIELD org/joda/time/DurationFieldType$StandardDurationFieldType.iOrdinal B
+org.joda.time.DurationFieldType$StandardDurationFieldType.hashCode:278 ISHL
+org.joda.time.DurationFieldType$StandardDurationFieldType.hashCode:278 IRETURN
+org.joda.time.chrono.AssembledChronology.<init>:102 ALOAD 0
+org.joda.time.chrono.AssembledChronology.<init>:102 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.setFields()V
+org.joda.time.chrono.AssembledChronology.eras:288 ALOAD 0
+org.joda.time.chrono.AssembledChronology.eras:288 GETFIELD org/joda/time/chrono/AssembledChronology.iEras Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.eras:288 ARETURN
+org.joda.time.chrono.AssembledChronology.setFields:319 NEW org/joda/time/chrono/AssembledChronology$Fields
+org.joda.time.chrono.AssembledChronology.setFields:319 ASTORE 1
+org.joda.time.chrono.AssembledChronology.setFields:338 ALOAD 0
+org.joda.time.chrono.AssembledChronology.setFields:338 ALOAD 1
+org.joda.time.chrono.AssembledChronology.setFields:338 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.eras Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.setFields:338 IFNULL L23 true false
+org.joda.time.chrono.AssembledChronology.setFields:338 INVOKESPECIAL org/joda/time/chrono/BaseChronology.eras()Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.setFields:338 PUTFIELD org/joda/time/chrono/AssembledChronology.iEras Lorg/joda/time/DurationField;
+org.joda.time.chrono.BaseChronology.eras:662 INVOKESTATIC org/joda/time/DurationFieldType.eras()Lorg/joda/time/DurationFieldType;
+org.joda.time.chrono.BaseChronology.eras:662 INVOKESTATIC org/joda/time/field/UnsupportedDurationField.getInstance(Lorg/joda/time/DurationFieldType;)Lorg/joda/time/field/UnsupportedDurationField;
+org.joda.time.chrono.BaseChronology.eras:662 ARETURN
+org.joda.time.chrono.BasicChronology.<init>:132 ALOAD 0
+org.joda.time.chrono.BasicChronology.<init>:132 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;)V
+org.joda.time.chrono.BasicGJChronology.<init>:75 ALOAD 0
+org.joda.time.chrono.BasicGJChronology.<init>:75 INVOKESPECIAL org/joda/time/chrono/BasicChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.JulianChronology.getInstance:103 INVOKESTATIC org/joda/time/DateTimeZone.getDefault()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.JulianChronology.getInstance:103 ICONST_4
+org.joda.time.chrono.JulianChronology.getInstance:103 INVOKESTATIC org/joda/time/chrono/JulianChronology.getInstance(Lorg/joda/time/DateTimeZone;I)Lorg/joda/time/chrono/JulianChronology;
+org.joda.time.chrono.JulianChronology.getInstance:103 ARETURN
+org.joda.time.chrono.JulianChronology.getInstance:128 GETSTATIC org/joda/time/chrono/JulianChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.JulianChronology.getInstance:128 ALOAD 0
+org.joda.time.chrono.JulianChronology.getInstance:128 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.JulianChronology.getInstance:128 ASTORE 3
+org.joda.time.chrono.JulianChronology.getInstance:129 ALOAD 3
+org.joda.time.chrono.JulianChronology.getInstance:129 IFNONNULL L1 false true
+org.joda.time.chrono.JulianChronology.getInstance:130 BIPUSH 7
+org.joda.time.chrono.JulianChronology.getInstance:130 ANEWARRAY org/joda/time/chrono/JulianChronology
+org.joda.time.chrono.JulianChronology.getInstance:130 ASTORE 3
+org.joda.time.chrono.JulianChronology.getInstance:131 GETSTATIC org/joda/time/chrono/JulianChronology.cCache Ljava/util/concurrent/ConcurrentHashMap;
+org.joda.time.chrono.JulianChronology.getInstance:131 ALOAD 0
+org.joda.time.chrono.JulianChronology.getInstance:131 ALOAD 3
+org.joda.time.chrono.JulianChronology.getInstance:131 INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.chrono.JulianChronology.getInstance:137 ALOAD 3
+org.joda.time.chrono.JulianChronology.getInstance:137 ILOAD 1
+org.joda.time.chrono.JulianChronology.getInstance:137 ICONST_1
+org.joda.time.chrono.JulianChronology.getInstance:137 ISUB
+org.joda.time.chrono.JulianChronology.getInstance:137 AALOAD
+org.joda.time.chrono.JulianChronology.getInstance:137 ASTORE 2
+org.joda.time.chrono.JulianChronology.getInstance:142 ALOAD 2
+org.joda.time.chrono.JulianChronology.getInstance:142 IFNONNULL L12 false true
+org.joda.time.chrono.JulianChronology.getInstance:144 ALOAD 3
+org.joda.time.chrono.JulianChronology.getInstance:144 ILOAD 1
+org.joda.time.chrono.JulianChronology.getInstance:144 ICONST_1
+org.joda.time.chrono.JulianChronology.getInstance:144 ISUB
+org.joda.time.chrono.JulianChronology.getInstance:144 AALOAD
+org.joda.time.chrono.JulianChronology.getInstance:144 ASTORE 2
+org.joda.time.chrono.JulianChronology.getInstance:145 ALOAD 2
+org.joda.time.chrono.JulianChronology.getInstance:145 IFNONNULL L8 false true
+org.joda.time.chrono.JulianChronology.getInstance:146 ALOAD 0
+org.joda.time.chrono.JulianChronology.getInstance:146 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.JulianChronology.getInstance:146 IF_ACMPNE L6 true false
+org.joda.time.chrono.JulianChronology.getInstance:150 NEW org/joda/time/chrono/JulianChronology
+org.joda.time.chrono.JulianChronology.getInstance:150 DUP
+org.joda.time.chrono.JulianChronology.getInstance:150 INVOKESPECIAL org/joda/time/chrono/JulianChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.JulianChronology.getInstance:150 ASTORE 2
+org.joda.time.chrono.JulianChronology.getInstance:153 ALOAD 3
+org.joda.time.chrono.JulianChronology.getInstance:153 ILOAD 1
+org.joda.time.chrono.JulianChronology.getInstance:153 ICONST_1
+org.joda.time.chrono.JulianChronology.getInstance:153 ISUB
+org.joda.time.chrono.JulianChronology.getInstance:153 ALOAD 2
+org.joda.time.chrono.JulianChronology.getInstance:153 AASTORE
+org.joda.time.chrono.JulianChronology.getInstance:157 ALOAD 2
+org.joda.time.chrono.JulianChronology.getInstance:157 ARETURN
+org.joda.time.chrono.JulianChronology.<init>:167 ALOAD 0
+org.joda.time.chrono.JulianChronology.<init>:167 INVOKESPECIAL org/joda/time/chrono/BasicGJChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.TestJulianChronology.main:61 INVOKEVIRTUAL org/joda/time/chrono/TestJulianChronology.setUp()V
+org.joda.time.chrono.TestJulianChronology.main:61 INVOKEVIRTUAL org/joda/time/chrono/TestJulianChronology.testFactory()V
+org.joda.time.chrono.TestJulianChronology.main:68 INVOKEVIRTUAL org/joda/time/chrono/TestJulianChronology.setUp()V
+org.joda.time.chrono.TestJulianChronology.main:68 INVOKEVIRTUAL org/joda/time/chrono/TestJulianChronology.testDurationFields()V
+org.joda.time.chrono.TestJulianChronology.setUp:93 GETSTATIC org/joda/time/chrono/TestJulianChronology.LONDON Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.TestJulianChronology.setUp:93 INVOKESTATIC org/joda/time/DateTimeZone.setDefault(Lorg/joda/time/DateTimeZone;)V
+org.joda.time.chrono.TestJulianChronology.testFactory:117 INVOKESTATIC org/joda/time/chrono/JulianChronology.getInstance()Lorg/joda/time/chrono/JulianChronology;
+org.joda.time.chrono.TestJulianChronology.testDurationFields:181 INVOKESTATIC org/joda/time/chrono/JulianChronology.getInstance()Lorg/joda/time/chrono/JulianChronology;
+org.joda.time.chrono.TestJulianChronology.testDurationFields:181 ASTORE 1
+org.joda.time.chrono.TestJulianChronology.testDurationFields:182 LDC "eras"
+org.joda.time.chrono.TestJulianChronology.testDurationFields:182 ALOAD 1
+org.joda.time.chrono.TestJulianChronology.testDurationFields:182 INVOKEVIRTUAL org/joda/time/chrono/JulianChronology.eras()Lorg/joda/time/DurationField;
+org.joda.time.chrono.TestJulianChronology.testDurationFields:182 INVOKEVIRTUAL org/joda/time/DurationField.getName()Ljava/lang/String;
+org.joda.time.chrono.TestJulianChronology.testDurationFields:182 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+org.joda.time.field.UnsupportedDurationField.getInstance:49 GETSTATIC org/joda/time/field/UnsupportedDurationField.cCache Ljava/util/HashMap;
+org.joda.time.field.UnsupportedDurationField.getInstance:49 IFNONNULL L0 true false
+org.joda.time.field.UnsupportedDurationField.getInstance:53 GETSTATIC org/joda/time/field/UnsupportedDurationField.cCache Ljava/util/HashMap;
+org.joda.time.field.UnsupportedDurationField.getInstance:53 ALOAD 0
+org.joda.time.field.UnsupportedDurationField.getInstance:53 INVOKEVIRTUAL java/util/HashMap.get(Ljava/lang/Object;)Ljava/lang/Object;
+org.joda.time.field.UnsupportedDurationField.getInstance:53 ASTORE 1
+org.joda.time.field.UnsupportedDurationField.getInstance:59 ALOAD 1
+org.joda.time.field.UnsupportedDurationField.getInstance:59 ARETURN
+org.joda.time.field.UnsupportedDurationField.getName:83 ALOAD 0
+org.joda.time.field.UnsupportedDurationField.getName:83 GETFIELD org/joda/time/field/UnsupportedDurationField.iType Lorg/joda/time/DurationFieldType;
+org.joda.time.field.UnsupportedDurationField.getName:83 ARETURN
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 ALOAD 0
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 GETFIELD org/joda/time/tz/CachedDateTimeZone.iZone Lorg/joda/time/DateTimeZone;
+org.joda.time.tz.CachedDateTimeZone.hashCode:123 IRETURN
+
+Slice consists of 480 bytecode instructions.
+Computation took 4.27 seconds.

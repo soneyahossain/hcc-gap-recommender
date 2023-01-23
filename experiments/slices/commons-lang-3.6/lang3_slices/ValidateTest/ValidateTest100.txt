@@ -1,31 +1,0 @@
- 0.0% done, time left: unknown                                0.2% done, time left: unknown  0.4% done, time left: unknown  0.9% done, time left: unknown  1.4% done, time left: unknown  2.1% done, time left: unknown  2.6% done, time left: unknown  4.2% done, time left: unknown  6.2% done, time left:   0:00:04    7.6% done, time left:   0:00:05  8.4% done, time left:   0:00:05 10.2% done, time left:   0:00:06 11.4% done, time left:   0:00:07 14.3% done, time left:   0:00:07 17.0% done, time left:   0:00:07 18.9% done, time left:   0:00:06 21.1% done, time left:   0:00:06 24.4% done, time left:   0:00:05 27.9% done, time left:   0:00:04 31.3% done, time left:   0:00:03 34.6% done, time left:   0:00:03 37.9% done, time left:   0:00:02 41.2% done, time left:   0:00:02 44.2% done, time left:   0:00:02 47.4% done, time left:   0:00:01 47.6% done, time left:   0:00:00 50.2% done, time left:   0:00:01 53.1% done, time left:   0:00:01 56.2% done, time left:   0:00:01 59.6% done, time left:   0:00:01 63.2% done, time left:   0:00:00 66.2% done, time left:   0:00:00 69.6% done, time left:   0:00:00 73.1% done, time left:   0:00:00 76.8% done, time left:   0:00:00 80.6% done, time left:   0:00:00 83.9% done, time left:   0:00:00 87.4% done, time left:   0:00:00 90.8% done, time left:   0:00:00 93.4% done, time left:   0:00:00 95.3% done, time left:   0:00:00 95.6% done, time left:   0:00:00 96.8% done, time left:   0:00:00 98.7% done, time left:   0:00:00 99.5% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong:1096:*]:
-org.apache.commons.lang3.Validate.exclusiveBetween:1169 LLOAD 4
-org.apache.commons.lang3.Validate.exclusiveBetween:1169 LLOAD 0
-org.apache.commons.lang3.Validate.exclusiveBetween:1169 LCMP
-org.apache.commons.lang3.Validate.exclusiveBetween:1169 IFLE L0 false true
-org.apache.commons.lang3.Validate.exclusiveBetween:1169 LLOAD 4
-org.apache.commons.lang3.Validate.exclusiveBetween:1169 LLOAD 2
-org.apache.commons.lang3.Validate.exclusiveBetween:1169 LCMP
-org.apache.commons.lang3.Validate.exclusiveBetween:1169 IFLT L1 false true
-org.apache.commons.lang3.Validate.exclusiveBetween:1170 NEW java/lang/IllegalArgumentException
-org.apache.commons.lang3.Validate.exclusiveBetween:1170 DUP
-org.apache.commons.lang3.Validate.exclusiveBetween:1170 LDC "The value %s is not in the specified exclusive range of %s to %s"
-org.apache.commons.lang3.Validate.exclusiveBetween:1170 ICONST_3
-org.apache.commons.lang3.Validate.exclusiveBetween:1170 ANEWARRAY java/lang/Object
-org.apache.commons.lang3.Validate.exclusiveBetween:1170 INVOKESTATIC java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
-org.apache.commons.lang3.Validate.exclusiveBetween:1170 INVOKESPECIAL java/lang/IllegalArgumentException.<init>(Ljava/lang/String;)V
-org.apache.commons.lang3.Validate.exclusiveBetween:1170 ATHROW
-org.apache.commons.lang3.ValidateTest.main:104 INVOKEVIRTUAL org/apache/commons/lang3/ValidateTest.testExclusiveBetweenLong()V
-org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong:1093 LCONST_0
-org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong:1093 LDC 5
-org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong:1093 LDC 5
-org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong:1093 INVOKESTATIC org/apache/commons/lang3/Validate.exclusiveBetween(JJJ)V
-org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong:1095 ASTORE 1
-org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong:1096 LDC "The value 5 is not in the specified exclusive range of 0 to 5"
-org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong:1096 ALOAD 1
-org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong:1096 INVOKEVIRTUAL java/lang/IllegalArgumentException.getMessage()Ljava/lang/String;
-org.apache.commons.lang3.ValidateTest.testExclusiveBetweenLong:1096 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
-
-Slice consists of 50 bytecode instructions.
-Computation took 4.99 seconds.

@@ -1,0 +1,40 @@
+ 0.0% done, time left: unknown                                0.4% done, time left: unknown  0.9% done, time left: unknown  1.6% done, time left: unknown  3.6% done, time left: unknown  6.5% done, time left: unknown 10.8% done, time left: unknown 15.6% done, time left: unknown 18.6% done, time left: unknown 21.6% done, time left:   0:00:02   35.6% done, time left:   0:00:00 39.3% done, time left:   0:00:00 45.4% done, time left:   0:00:00 47.1% done, time left:   0:00:00 51.0% done, time left:   0:00:01 57.1% done, time left:   0:00:00 66.5% done, time left:   0:00:00 75.4% done, time left:   0:00:00 80.0% done, time left:   0:00:00 88.9% done, time left:   0:00:00 98.1% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:715:*]:
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 0
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 1
+org.joda.time.chrono.AssembledChronology.<init>:100 PUTFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getBase:308 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ARETURN
+org.joda.time.chrono.BasicChronology.<init>:132 ALOAD 0
+org.joda.time.chrono.BasicChronology.<init>:132 ALOAD 1
+org.joda.time.chrono.BasicChronology.<init>:132 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;)V
+org.joda.time.chrono.BasicFixedMonthChronology.<init>:59 ALOAD 0
+org.joda.time.chrono.BasicFixedMonthChronology.<init>:59 ALOAD 1
+org.joda.time.chrono.BasicFixedMonthChronology.<init>:59 INVOKESPECIAL org/joda/time/chrono/BasicChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.EthiopicChronology.<init>:167 ALOAD 0
+org.joda.time.chrono.EthiopicChronology.<init>:167 ALOAD 1
+org.joda.time.chrono.EthiopicChronology.<init>:167 INVOKESPECIAL org/joda/time/chrono/BasicFixedMonthChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.EthiopicChronology.assemble:258 ALOAD 0
+org.joda.time.chrono.EthiopicChronology.assemble:258 INVOKEVIRTUAL org/joda/time/chrono/EthiopicChronology.getBase()Lorg/joda/time/Chronology;
+org.joda.time.chrono.EthiopicChronology.assemble:258 IFNONNULL L0 false true
+org.joda.time.chrono.EthiopicChronology.assemble:262 ALOAD 1
+org.joda.time.chrono.EthiopicChronology.assemble:262 NEW org/joda/time/field/SkipDateTimeField
+org.joda.time.chrono.EthiopicChronology.assemble:262 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.year Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.TestEthiopicChronology.main:150 INVOKEVIRTUAL org/joda/time/chrono/TestEthiopicChronology.testRecommendedAssertions()V
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:712 NEW org/joda/time/chrono/EthiopicChronology
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:712 DUP
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:712 ACONST_NULL
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:712 INVOKESPECIAL org/joda/time/chrono/EthiopicChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:712 ASTORE 1
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:713 NEW org/joda/time/chrono/AssembledChronology$Fields
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:713 ASTORE 3
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:714 ALOAD 1
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:714 ALOAD 3
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:714 INVOKEVIRTUAL org/joda/time/chrono/EthiopicChronology.assemble(Lorg/joda/time/chrono/AssembledChronology$Fields;)V
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:715 ALOAD 3
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:715 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.year Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.TestEthiopicChronology.testRecommendedAssertions:715 INVOKESTATIC org/junit/Assert.assertNotNull(Ljava/lang/Object;)V
+
+Slice consists of 35 bytecode instructions.
+Computation took 2.21 seconds.

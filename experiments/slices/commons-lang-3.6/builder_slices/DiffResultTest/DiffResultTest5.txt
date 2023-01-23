@@ -1,81 +1,0 @@
- 0.0% done, time left: unknown                                0.5% done, time left: unknown  1.4% done, time left: unknown  1.8% done, time left: unknown  3.8% done, time left: unknown  6.8% done, time left: unknown 10.5% done, time left: unknown 11.4% done, time left: unknown 15.7% done, time left: unknown 24.4% done, time left:   0:00:00   29.9% done, time left:   0:00:02 34.3% done, time left:   0:00:02 39.5% done, time left:   0:00:01 43.7% done, time left:   0:00:01 43.7% done, time left:   0:00:00 46.8% done, time left:   0:00:01 52.4% done, time left:   0:00:00 57.9% done, time left:   0:00:00 66.1% done, time left:   0:00:00 71.3% done, time left:   0:00:00 82.2% done, time left:   0:00:00 88.8% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:106:*]:
-org.apache.commons.lang3.builder.DiffBuilder.<init>:109 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.<init>:109 NEW java/util/ArrayList
-org.apache.commons.lang3.builder.DiffBuilder.<init>:109 PUTFIELD org/apache/commons/lang3/builder/DiffBuilder.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ILOAD 4
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 IFEQ L5 false true
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ALOAD 1
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ALOAD 2
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 IF_ACMPEQ L4 false true
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ALOAD 1
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ALOAD 2
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 IFEQ L5 true false
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ICONST_0
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 PUTFIELD org/apache/commons/lang3/builder/DiffBuilder.objectsTriviallyEqual Z
-org.apache.commons.lang3.builder.DiffBuilder.<init>:147 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.<init>:147 ALOAD 1
-org.apache.commons.lang3.builder.DiffBuilder.<init>:147 ALOAD 2
-org.apache.commons.lang3.builder.DiffBuilder.<init>:147 ICONST_1
-org.apache.commons.lang3.builder.DiffBuilder.<init>:147 INVOKESPECIAL org/apache/commons/lang3/builder/DiffBuilder.<init>(Ljava/lang/Object;Ljava/lang/Object;Lorg/apache/commons/lang3/builder/ToStringStyle;Z)V
-org.apache.commons.lang3.builder.DiffBuilder.append:169 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.append:169 GETFIELD org/apache/commons/lang3/builder/DiffBuilder.objectsTriviallyEqual Z
-org.apache.commons.lang3.builder.DiffBuilder.append:169 IFEQ L0 true false
-org.apache.commons.lang3.builder.DiffBuilder.append:172 ILOAD 2
-org.apache.commons.lang3.builder.DiffBuilder.append:172 ILOAD 3
-org.apache.commons.lang3.builder.DiffBuilder.append:172 IF_ICMPEQ L1 false true
-org.apache.commons.lang3.builder.DiffBuilder.append:173 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.append:173 GETFIELD org/apache/commons/lang3/builder/DiffBuilder.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffBuilder.append:173 INVOKEINTERFACE java/util/List.add(Ljava/lang/Object;)Z
-org.apache.commons.lang3.builder.DiffBuilder.append:187 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.append:187 ARETURN
-org.apache.commons.lang3.builder.DiffBuilder.build:976 NEW org/apache/commons/lang3/builder/DiffResult
-org.apache.commons.lang3.builder.DiffBuilder.build:976 DUP
-org.apache.commons.lang3.builder.DiffBuilder.build:976 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.build:976 GETFIELD org/apache/commons/lang3/builder/DiffBuilder.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffBuilder.build:976 INVOKESPECIAL org/apache/commons/lang3/builder/DiffResult.<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;Lorg/apache/commons/lang3/builder/ToStringStyle;)V
-org.apache.commons.lang3.builder.DiffBuilder.build:976 ARETURN
-org.apache.commons.lang3.builder.DiffResult.<init>:80 ALOAD 0
-org.apache.commons.lang3.builder.DiffResult.<init>:80 ALOAD 3
-org.apache.commons.lang3.builder.DiffResult.<init>:80 PUTFIELD org/apache/commons/lang3/builder/DiffResult.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffResult.toString:158 ALOAD 0
-org.apache.commons.lang3.builder.DiffResult.toString:158 INVOKEVIRTUAL org/apache/commons/lang3/builder/DiffResult.toString(Lorg/apache/commons/lang3/builder/ToStringStyle;)Ljava/lang/String;
-org.apache.commons.lang3.builder.DiffResult.toString:158 ARETURN
-org.apache.commons.lang3.builder.DiffResult.toString:173 ALOAD 0
-org.apache.commons.lang3.builder.DiffResult.toString:173 GETFIELD org/apache/commons/lang3/builder/DiffResult.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffResult.toString:173 INVOKEINTERFACE java/util/List.size()I
-org.apache.commons.lang3.builder.DiffResult.toString:173 IFNE L0 true false
-org.apache.commons.lang3.builder.DiffResult.toString:180 ALOAD 0
-org.apache.commons.lang3.builder.DiffResult.toString:180 GETFIELD org/apache/commons/lang3/builder/DiffResult.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffResult.toString:180 INVOKEINTERFACE java/util/List.iterator()Ljava/util/Iterator;
-org.apache.commons.lang3.builder.DiffResult.toString:180 ASTORE 4
-org.apache.commons.lang3.builder.DiffResult.toString:180 ALOAD 4
-org.apache.commons.lang3.builder.DiffResult.toString:180 INVOKEINTERFACE java/util/Iterator.hasNext()Z
-org.apache.commons.lang3.builder.DiffResult.toString:180 IFEQ L2 true true
-org.apache.commons.lang3.builder.DiffResult.toString:180 ALOAD 4
-org.apache.commons.lang3.builder.DiffResult.toString:180 INVOKEINTERFACE java/util/Iterator.next()Ljava/lang/Object;
-org.apache.commons.lang3.builder.DiffResult.toString:185 LDC "%s %s %s"
-org.apache.commons.lang3.builder.DiffResult.toString:185 ICONST_3
-org.apache.commons.lang3.builder.DiffResult.toString:185 ANEWARRAY java/lang/Object
-org.apache.commons.lang3.builder.DiffResult.toString:185 INVOKESTATIC java/lang/String.format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
-org.apache.commons.lang3.builder.DiffResult.toString:185 ARETURN
-org.apache.commons.lang3.builder.DiffResultTest.main:63 INVOKEVIRTUAL org/apache/commons/lang3/builder/DiffResultTest.testToStringOutput()V
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:103 NEW org/apache/commons/lang3/builder/DiffBuilder
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:103 DUP
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:103 NEW org/apache/commons/lang3/builder/DiffResultTest$EmptyClass
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:103 NEW org/apache/commons/lang3/builder/DiffResultTest$EmptyClass
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:103 INVOKESPECIAL org/apache/commons/lang3/builder/DiffBuilder.<init>(Ljava/lang/Object;Ljava/lang/Object;Lorg/apache/commons/lang3/builder/ToStringStyle;)V
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:103 ICONST_0
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:103 ICONST_1
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:103 INVOKEVIRTUAL org/apache/commons/lang3/builder/DiffBuilder.append(Ljava/lang/String;ZZ)Lorg/apache/commons/lang3/builder/DiffBuilder;
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:103 INVOKEVIRTUAL org/apache/commons/lang3/builder/DiffBuilder.build()Lorg/apache/commons/lang3/builder/DiffResult;
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:103 ASTORE 1
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:106 LDC "DiffResultTest.EmptyClass[test=false] differs from DiffResultTest.EmptyClass[test=true]"
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:106 ALOAD 1
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:106 INVOKEVIRTUAL org/apache/commons/lang3/builder/DiffResult.toString()Ljava/lang/String;
-org.apache.commons.lang3.builder.DiffResultTest.testToStringOutput:106 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
-
-Slice consists of 126 bytecode instructions.
-Computation took 2.54 seconds.

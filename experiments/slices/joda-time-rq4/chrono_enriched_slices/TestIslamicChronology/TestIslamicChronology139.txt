@@ -1,0 +1,52 @@
+ 0.0% done, time left: unknown                                0.5% done, time left: unknown  2.3% done, time left: unknown  5.6% done, time left: unknown  9.8% done, time left: unknown 12.1% done, time left: unknown 12.7% done, time left:   0:00:15   15.1% done, time left:   0:00:10 15.6% done, time left:   0:00:09 19.5% done, time left:   0:00:07 21.9% done, time left:   0:00:06 27.0% done, time left:   0:00:03 33.4% done, time left:   0:00:01 39.0% done, time left:   0:00:01 45.3% done, time left:   0:00:00 48.3% done, time left:   0:00:00 53.4% done, time left:   0:00:00 58.0% done, time left:   0:00:00 61.0% done, time left:   0:00:00 64.1% done, time left:   0:00:00 66.1% done, time left:   0:00:00 67.1% done, time left:   0:00:00 72.2% done, time left:   0:00:00 79.1% done, time left:   0:00:00 85.4% done, time left:   0:00:00 90.0% done, time left:   0:00:00 96.9% done, time left:   0:00:00 102.9% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1083:*]:
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 0
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 1
+org.joda.time.chrono.AssembledChronology.<init>:100 PUTFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getBase:308 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ARETURN
+org.joda.time.chrono.BasicChronology.<init>:132 ALOAD 0
+org.joda.time.chrono.BasicChronology.<init>:132 ALOAD 1
+org.joda.time.chrono.BasicChronology.<init>:132 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;)V
+org.joda.time.chrono.BasicMonthOfYearDateTimeField.<init>:52 ALOAD 0
+org.joda.time.chrono.BasicMonthOfYearDateTimeField.<init>:52 INVOKESPECIAL org/joda/time/field/ImpreciseDateTimeField.<init>(Lorg/joda/time/DateTimeFieldType;J)V
+org.joda.time.chrono.IslamicChronology.<init>:234 ALOAD 0
+org.joda.time.chrono.IslamicChronology.<init>:234 ALOAD 1
+org.joda.time.chrono.IslamicChronology.<init>:234 INVOKESPECIAL org/joda/time/chrono/BasicChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.IslamicChronology.assemble:491 ALOAD 0
+org.joda.time.chrono.IslamicChronology.assemble:491 INVOKEVIRTUAL org/joda/time/chrono/IslamicChronology.getBase()Lorg/joda/time/Chronology;
+org.joda.time.chrono.IslamicChronology.assemble:491 IFNONNULL L0 false true
+org.joda.time.chrono.IslamicChronology.assemble:495 ALOAD 1
+org.joda.time.chrono.IslamicChronology.assemble:495 NEW org/joda/time/chrono/BasicMonthOfYearDateTimeField
+org.joda.time.chrono.IslamicChronology.assemble:495 DUP
+org.joda.time.chrono.IslamicChronology.assemble:495 INVOKESPECIAL org/joda/time/chrono/BasicMonthOfYearDateTimeField.<init>(Lorg/joda/time/chrono/BasicChronology;I)V
+org.joda.time.chrono.IslamicChronology.assemble:495 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.monthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.IslamicChronology.assemble:496 ALOAD 1
+org.joda.time.chrono.IslamicChronology.assemble:496 ALOAD 1
+org.joda.time.chrono.IslamicChronology.assemble:496 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.monthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.IslamicChronology.assemble:496 INVOKEVIRTUAL org/joda/time/DateTimeField.getDurationField()Lorg/joda/time/DurationField;
+org.joda.time.chrono.IslamicChronology.assemble:496 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.months Lorg/joda/time/DurationField;
+org.joda.time.chrono.TestIslamicChronology.main:151 INVOKEVIRTUAL org/joda/time/chrono/TestIslamicChronology.testRecommendedAssertions()V
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1043 NEW org/joda/time/chrono/IslamicChronology
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1043 DUP
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1043 ACONST_NULL
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1043 INVOKESPECIAL org/joda/time/chrono/IslamicChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;Lorg/joda/time/chrono/IslamicChronology$LeapYearPatternType;)V
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1043 ASTORE 10
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1048 NEW org/joda/time/chrono/AssembledChronology$Fields
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1048 ASTORE 6
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1049 ALOAD 10
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1049 ALOAD 6
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1049 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.assemble(Lorg/joda/time/chrono/AssembledChronology$Fields;)V
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1083 ALOAD 6
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1083 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.months Lorg/joda/time/DurationField;
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1083 INVOKESTATIC org/junit/Assert.assertNotNull(Ljava/lang/Object;)V
+org.joda.time.field.ImpreciseDateTimeField.<init>:58 ALOAD 0
+org.joda.time.field.ImpreciseDateTimeField.<init>:58 NEW org/joda/time/field/ImpreciseDateTimeField$LinkedDurationField
+org.joda.time.field.ImpreciseDateTimeField.<init>:58 PUTFIELD org/joda/time/field/ImpreciseDateTimeField.iDurationField Lorg/joda/time/DurationField;
+org.joda.time.field.ImpreciseDateTimeField.getDurationField:138 ALOAD 0
+org.joda.time.field.ImpreciseDateTimeField.getDurationField:138 GETFIELD org/joda/time/field/ImpreciseDateTimeField.iDurationField Lorg/joda/time/DurationField;
+org.joda.time.field.ImpreciseDateTimeField.getDurationField:138 ARETURN
+
+Slice consists of 47 bytecode instructions.
+Computation took 3.14 seconds.

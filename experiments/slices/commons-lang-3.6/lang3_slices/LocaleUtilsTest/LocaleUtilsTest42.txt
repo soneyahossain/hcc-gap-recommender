@@ -1,57 +1,0 @@
- 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.2% done, time left: unknown  0.6% done, time left: unknown  1.0% done, time left: unknown  2.0% done, time left: unknown  3.1% done, time left: unknown  4.5% done, time left: unknown  5.7% done, time left:   0:00:07    6.5% done, time left:   0:00:08  7.6% done, time left:   0:00:08  9.0% done, time left:   0:00:08 10.7% done, time left:   0:00:09 12.5% done, time left:   0:00:09 14.3% done, time left:   0:00:09 15.9% done, time left:   0:00:09 17.6% done, time left:   0:00:09 18.8% done, time left:   0:00:09 20.7% done, time left:   0:00:08 22.7% done, time left:   0:00:08 24.7% done, time left:   0:00:08 26.8% done, time left:   0:00:07 28.8% done, time left:   0:00:06 30.8% done, time left:   0:00:06 32.9% done, time left:   0:00:05 35.0% done, time left:   0:00:05 37.1% done, time left:   0:00:04 39.1% done, time left:   0:00:04 41.0% done, time left:   0:00:04 43.0% done, time left:   0:00:03 44.9% done, time left:   0:00:03 46.8% done, time left:   0:00:03 48.8% done, time left:   0:00:03 50.3% done, time left:   0:00:02 52.3% done, time left:   0:00:02 54.2% done, time left:   0:00:02 56.1% done, time left:   0:00:02 58.0% done, time left:   0:00:02 59.9% done, time left:   0:00:01 61.1% done, time left:   0:00:01 62.8% done, time left:   0:00:01 64.4% done, time left:   0:00:01 65.6% done, time left:   0:00:01 66.3% done, time left:   0:00:01 67.2% done, time left:   0:00:01 68.5% done, time left:   0:00:01 69.9% done, time left:   0:00:01 71.7% done, time left:   0:00:01 73.5% done, time left:   0:00:01 75.2% done, time left:   0:00:00 77.1% done, time left:   0:00:00 78.9% done, time left:   0:00:00 80.8% done, time left:   0:00:00 82.5% done, time left:   0:00:00 84.1% done, time left:   0:00:00 85.9% done, time left:   0:00:00 87.8% done, time left:   0:00:00 89.3% done, time left:   0:00:00 90.3% done, time left:   0:00:00 92.0% done, time left:   0:00:00 93.9% done, time left:   0:00:00 95.9% done, time left:   0:00:00 97.8% done, time left:   0:00:00 99.5% done, time left:   0:00:00 99.7% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:499:*]:
-org.apache.commons.lang3.LocaleUtils.availableLocaleList:254 INVOKESTATIC org/apache/commons/lang3/LocaleUtils$SyncAvoid.access$000()Ljava/util/List;
-org.apache.commons.lang3.LocaleUtils.availableLocaleList:254 ARETURN
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:325 ALOAD 0
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:325 IFNONNULL L0 true true
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:326 INVOKESTATIC java/util/Collections.emptyList()Ljava/util/List;
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:326 ARETURN
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:328 GETSTATIC org/apache/commons/lang3/LocaleUtils.cCountriesByLanguage Ljava/util/concurrent/ConcurrentMap;
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:328 ALOAD 0
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:328 INVOKEINTERFACE java/util/concurrent/ConcurrentMap.get(Ljava/lang/Object;)Ljava/lang/Object;
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:328 ASTORE 1
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:329 ALOAD 1
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:329 IFNONNULL L4 false true
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:330 NEW java/util/ArrayList
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:330 ASTORE 1
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:331 INVOKESTATIC org/apache/commons/lang3/LocaleUtils.availableLocaleList()Ljava/util/List;
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:331 ASTORE 2
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 ICONST_0
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 ISTORE 3
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 ILOAD 3
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 ALOAD 2
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 INVOKEINTERFACE java/util/List.size()I
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 IF_ICMPGE L3 true true
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:332 IINC 3 1
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:340 ALOAD 1
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:340 INVOKESTATIC java/util/Collections.unmodifiableList(Ljava/util/List;)Ljava/util/List;
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:340 ASTORE 1
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:341 GETSTATIC org/apache/commons/lang3/LocaleUtils.cCountriesByLanguage Ljava/util/concurrent/ConcurrentMap;
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:341 ALOAD 0
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:341 ALOAD 1
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:341 INVOKEINTERFACE java/util/concurrent/ConcurrentMap.putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:342 GETSTATIC org/apache/commons/lang3/LocaleUtils.cCountriesByLanguage Ljava/util/concurrent/ConcurrentMap;
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:342 ALOAD 0
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:342 INVOKEINTERFACE java/util/concurrent/ConcurrentMap.get(Ljava/lang/Object;)Ljava/lang/Object;
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:342 ASTORE 1
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:344 ALOAD 1
-org.apache.commons.lang3.LocaleUtils.countriesByLanguage:344 ARETURN
-org.apache.commons.lang3.LocaleUtils$SyncAvoid.access$000:349 GETSTATIC org/apache/commons/lang3/LocaleUtils$SyncAvoid.AVAILABLE_LOCALE_LIST Ljava/util/List;
-org.apache.commons.lang3.LocaleUtils$SyncAvoid.access$000:349 ARETURN
-org.apache.commons.lang3.LocaleUtilsTest.main:68 INVOKEVIRTUAL org/apache/commons/lang3/LocaleUtilsTest.testCountriesByLanguage()V
-org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:497 ALOAD 0
-org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:497 INVOKESTATIC org/apache/commons/lang3/LocaleUtils.countriesByLanguage(Ljava/lang/String;)Ljava/util/List;
-org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:497 ASTORE 2
-org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:499 ALOAD 2
-org.apache.commons.lang3.LocaleUtilsTest.assertCountriesByLanguage:499 INVOKESTATIC org/junit/Assert.assertNotNull(Ljava/lang/Object;)V
-org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:530 ACONST_NULL
-org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:530 INVOKESTATIC org/apache/commons/lang3/LocaleUtilsTest.assertCountriesByLanguage(Ljava/lang/String;[Ljava/lang/String;)V
-org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 LDC "de"
-org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:531 INVOKESTATIC org/apache/commons/lang3/LocaleUtilsTest.assertCountriesByLanguage(Ljava/lang/String;[Ljava/lang/String;)V
-org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:532 LDC "zz"
-org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:532 INVOKESTATIC org/apache/commons/lang3/LocaleUtilsTest.assertCountriesByLanguage(Ljava/lang/String;[Ljava/lang/String;)V
-org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:533 LDC "it"
-org.apache.commons.lang3.LocaleUtilsTest.testCountriesByLanguage:533 INVOKESTATIC org/apache/commons/lang3/LocaleUtilsTest.assertCountriesByLanguage(Ljava/lang/String;[Ljava/lang/String;)V
-
-Slice consists of 443 bytecode instructions.
-Computation took 6.93 seconds.

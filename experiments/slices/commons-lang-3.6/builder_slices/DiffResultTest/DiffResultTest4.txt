@@ -1,105 +1,0 @@
- 0.0% done, time left: unknown                                0.4% done, time left: unknown  1.2% done, time left: unknown  1.8% done, time left: unknown  3.8% done, time left: unknown  6.7% done, time left: unknown 10.2% done, time left: unknown 12.4% done, time left: unknown 17.8% done, time left: unknown 25.2% done, time left:   0:00:01   33.4% done, time left:   0:00:00 39.6% done, time left:   0:00:00 43.7% done, time left:   0:00:01 43.7% done, time left:   0:00:00 49.1% done, time left:   0:00:00 54.0% done, time left:   0:00:00 62.4% done, time left:   0:00:00 67.5% done, time left:   0:00:00 74.2% done, time left:   0:00:00 86.1% done, time left:   0:00:00 89.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.builder.DiffResultTest.testIterator:97:*]:
-org.apache.commons.lang3.builder.DiffBuilder.<init>:109 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.<init>:109 NEW java/util/ArrayList
-org.apache.commons.lang3.builder.DiffBuilder.<init>:109 DUP
-org.apache.commons.lang3.builder.DiffBuilder.<init>:109 INVOKESPECIAL java/util/ArrayList.<init>()V
-org.apache.commons.lang3.builder.DiffBuilder.<init>:109 PUTFIELD org/apache/commons/lang3/builder/DiffBuilder.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ILOAD 4
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 IFEQ L5 false true
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ALOAD 1
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ALOAD 2
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 IF_ACMPEQ L4 false true
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ALOAD 1
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ALOAD 2
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 INVOKEVIRTUAL java/lang/Object.equals(Ljava/lang/Object;)Z
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 IFEQ L5 true false
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 ICONST_0
-org.apache.commons.lang3.builder.DiffBuilder.<init>:115 PUTFIELD org/apache/commons/lang3/builder/DiffBuilder.objectsTriviallyEqual Z
-org.apache.commons.lang3.builder.DiffBuilder.<init>:147 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.<init>:147 ALOAD 1
-org.apache.commons.lang3.builder.DiffBuilder.<init>:147 ALOAD 2
-org.apache.commons.lang3.builder.DiffBuilder.<init>:147 ICONST_1
-org.apache.commons.lang3.builder.DiffBuilder.<init>:147 INVOKESPECIAL org/apache/commons/lang3/builder/DiffBuilder.<init>(Ljava/lang/Object;Ljava/lang/Object;Lorg/apache/commons/lang3/builder/ToStringStyle;Z)V
-org.apache.commons.lang3.builder.DiffBuilder.append:169 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.append:169 GETFIELD org/apache/commons/lang3/builder/DiffBuilder.objectsTriviallyEqual Z
-org.apache.commons.lang3.builder.DiffBuilder.append:169 IFEQ L0 true false
-org.apache.commons.lang3.builder.DiffBuilder.append:172 ILOAD 2
-org.apache.commons.lang3.builder.DiffBuilder.append:172 ILOAD 3
-org.apache.commons.lang3.builder.DiffBuilder.append:172 IF_ICMPEQ L1 false true
-org.apache.commons.lang3.builder.DiffBuilder.append:173 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.append:173 GETFIELD org/apache/commons/lang3/builder/DiffBuilder.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffBuilder.append:173 NEW org/apache/commons/lang3/builder/DiffBuilder$1
-org.apache.commons.lang3.builder.DiffBuilder.append:173 INVOKEINTERFACE java/util/List.add(Ljava/lang/Object;)Z
-org.apache.commons.lang3.builder.DiffBuilder.append:187 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.append:187 ARETURN
-org.apache.commons.lang3.builder.DiffBuilder.build:976 NEW org/apache/commons/lang3/builder/DiffResult
-org.apache.commons.lang3.builder.DiffBuilder.build:976 DUP
-org.apache.commons.lang3.builder.DiffBuilder.build:976 ALOAD 0
-org.apache.commons.lang3.builder.DiffBuilder.build:976 GETFIELD org/apache/commons/lang3/builder/DiffBuilder.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffBuilder.build:976 INVOKESPECIAL org/apache/commons/lang3/builder/DiffResult.<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;Lorg/apache/commons/lang3/builder/ToStringStyle;)V
-org.apache.commons.lang3.builder.DiffBuilder.build:976 ARETURN
-org.apache.commons.lang3.builder.DiffResult.<init>:80 ALOAD 0
-org.apache.commons.lang3.builder.DiffResult.<init>:80 ALOAD 3
-org.apache.commons.lang3.builder.DiffResult.<init>:80 PUTFIELD org/apache/commons/lang3/builder/DiffResult.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffResult.getDiffs:100 ALOAD 0
-org.apache.commons.lang3.builder.DiffResult.getDiffs:100 GETFIELD org/apache/commons/lang3/builder/DiffResult.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffResult.getDiffs:100 INVOKESTATIC java/util/Collections.unmodifiableList(Ljava/util/List;)Ljava/util/List;
-org.apache.commons.lang3.builder.DiffResult.getDiffs:100 ARETURN
-org.apache.commons.lang3.builder.DiffResult.iterator:198 ALOAD 0
-org.apache.commons.lang3.builder.DiffResult.iterator:198 GETFIELD org/apache/commons/lang3/builder/DiffResult.diffs Ljava/util/List;
-org.apache.commons.lang3.builder.DiffResult.iterator:198 INVOKEINTERFACE java/util/List.iterator()Ljava/util/Iterator;
-org.apache.commons.lang3.builder.DiffResult.iterator:198 ARETURN
-org.apache.commons.lang3.builder.DiffResultTest.main:62 INVOKEVIRTUAL org/apache/commons/lang3/builder/DiffResultTest.testIterator()V
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:86 NEW org/apache/commons/lang3/builder/DiffResultTest$SimpleClass
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:86 DUP
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:86 ICONST_1
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:86 INVOKESPECIAL org/apache/commons/lang3/builder/DiffResultTest$SimpleClass.<init>(Z)V
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:86 ASTORE 1
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:87 NEW org/apache/commons/lang3/builder/DiffResultTest$SimpleClass
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:87 DUP
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:87 ICONST_0
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:87 INVOKESPECIAL org/apache/commons/lang3/builder/DiffResultTest$SimpleClass.<init>(Z)V
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:87 ASTORE 2
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:89 ALOAD 1
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:89 ALOAD 2
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:89 INVOKEVIRTUAL org/apache/commons/lang3/builder/DiffResultTest$SimpleClass.diff(Lorg/apache/commons/lang3/builder/DiffResultTest$SimpleClass;)Lorg/apache/commons/lang3/builder/DiffResult;
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:89 INVOKEVIRTUAL org/apache/commons/lang3/builder/DiffResult.getDiffs()Ljava/util/List;
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:89 ASTORE 3
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:90 INVOKEINTERFACE java/util/List.iterator()Ljava/util/Iterator;
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:90 ASTORE 4
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:92 NEW org/apache/commons/lang3/builder/DiffResult
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:92 DUP
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:92 ALOAD 3
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:92 INVOKESPECIAL org/apache/commons/lang3/builder/DiffResult.<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;Lorg/apache/commons/lang3/builder/ToStringStyle;)V
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:92 ASTORE 5
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:93 ALOAD 5
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:93 INVOKEVIRTUAL org/apache/commons/lang3/builder/DiffResult.iterator()Ljava/util/Iterator;
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:93 ASTORE 6
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:95 ALOAD 6
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:95 INVOKEINTERFACE java/util/Iterator.hasNext()Z
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:95 IFEQ L1 false true
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:97 ALOAD 4
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:97 INVOKEINTERFACE java/util/Iterator.next()Ljava/lang/Object;
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:97 ALOAD 6
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:97 INVOKEINTERFACE java/util/Iterator.next()Ljava/lang/Object;
-org.apache.commons.lang3.builder.DiffResultTest.testIterator:97 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.<init>:40 ALOAD 0
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.<init>:40 ILOAD 1
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.<init>:40 PUTFIELD org/apache/commons/lang3/builder/DiffResultTest$SimpleClass.booleanField Z
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 NEW org/apache/commons/lang3/builder/DiffBuilder
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 DUP
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 ALOAD 0
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 ALOAD 1
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 INVOKESPECIAL org/apache/commons/lang3/builder/DiffBuilder.<init>(Ljava/lang/Object;Ljava/lang/Object;Lorg/apache/commons/lang3/builder/ToStringStyle;)V
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 ALOAD 0
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 GETFIELD org/apache/commons/lang3/builder/DiffResultTest$SimpleClass.booleanField Z
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 ALOAD 1
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 GETFIELD org/apache/commons/lang3/builder/DiffResultTest$SimpleClass.booleanField Z
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 INVOKEVIRTUAL org/apache/commons/lang3/builder/DiffBuilder.append(Ljava/lang/String;ZZ)Lorg/apache/commons/lang3/builder/DiffBuilder;
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 INVOKEVIRTUAL org/apache/commons/lang3/builder/DiffBuilder.build()Lorg/apache/commons/lang3/builder/DiffResult;
-org.apache.commons.lang3.builder.DiffResultTest$SimpleClass.diff:49 ARETURN
-
-Slice consists of 200 bytecode instructions.
-Computation took 2.40 seconds.

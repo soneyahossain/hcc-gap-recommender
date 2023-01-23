@@ -1,109 +1,0 @@
- 0.0% done, time left: unknown                                0.7% done, time left: unknown  1.6% done, time left: unknown  1.8% done, time left: unknown  2.0% done, time left: unknown  2.9% done, time left: unknown  4.1% done, time left: unknown  5.0% done, time left: unknown  5.9% done, time left:   0:00:11    6.6% done, time left:   0:00:12  6.6% done, time left:   0:00:14  8.4% done, time left:   0:00:14 10.9% done, time left:   0:00:14 13.2% done, time left:   0:00:12 15.5% done, time left:   0:00:11 16.8% done, time left:   0:00:09 18.9% done, time left:   0:00:09 21.4% done, time left:   0:00:08 24.0% done, time left:   0:00:07 26.8% done, time left:   0:00:06 29.7% done, time left:   0:00:05 32.7% done, time left:   0:00:04 35.4% done, time left:   0:00:03 38.2% done, time left:   0:00:03 41.2% done, time left:   0:00:02 43.1% done, time left:   0:00:02 45.3% done, time left:   0:00:02 48.3% done, time left:   0:00:02 51.2% done, time left:   0:00:01 54.2% done, time left:   0:00:01 57.0% done, time left:   0:00:01 58.8% done, time left:   0:00:01 61.9% done, time left:   0:00:01 65.1% done, time left:   0:00:00 68.4% done, time left:   0:00:00 71.6% done, time left:   0:00:00 74.8% done, time left:   0:00:00 76.5% done, time left:   0:00:00 78.7% done, time left:   0:00:00 81.7% done, time left:   0:00:00 85.1% done, time left:   0:00:00 88.2% done, time left:   0:00:00 91.5% done, time left:   0:00:00 94.7% done, time left:   0:00:00 99.2% done, time left:   0:00:00 99.8% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:131:*]:
-org.apache.commons.lang3.StringUtils.isBlank:337 ALOAD 0
-org.apache.commons.lang3.StringUtils.isBlank:337 IFNULL L0 false true
-org.apache.commons.lang3.StringUtils.isBlank:337 ALOAD 0
-org.apache.commons.lang3.StringUtils.isBlank:337 INVOKEINTERFACE java/lang/CharSequence.length()I
-org.apache.commons.lang3.StringUtils.isBlank:337 DUP
-org.apache.commons.lang3.StringUtils.isBlank:337 ISTORE 1
-org.apache.commons.lang3.StringUtils.isBlank:337 IFNE L1 true false
-org.apache.commons.lang3.StringUtils.isBlank:340 ICONST_0
-org.apache.commons.lang3.StringUtils.isBlank:340 ISTORE 2
-org.apache.commons.lang3.StringUtils.isBlank:340 ILOAD 2
-org.apache.commons.lang3.StringUtils.isBlank:340 ILOAD 1
-org.apache.commons.lang3.StringUtils.isBlank:340 IF_ICMPGE L4 true true
-org.apache.commons.lang3.StringUtils.isBlank:340 IINC 2 1
-org.apache.commons.lang3.StringUtils.isBlank:341 ALOAD 0
-org.apache.commons.lang3.StringUtils.isBlank:341 ILOAD 2
-org.apache.commons.lang3.StringUtils.isBlank:341 INVOKEINTERFACE java/lang/CharSequence.charAt(I)C
-org.apache.commons.lang3.StringUtils.isBlank:341 INVOKESTATIC java/lang/Character.isWhitespace(C)Z
-org.apache.commons.lang3.StringUtils.isBlank:341 IFNE L3 true false
-org.apache.commons.lang3.StringUtils.isBlank:345 ICONST_1
-org.apache.commons.lang3.StringUtils.isBlank:345 IRETURN
-org.apache.commons.lang3.text.WordUtils.wrap:180 ALOAD 0
-org.apache.commons.lang3.text.WordUtils.wrap:180 ILOAD 1
-org.apache.commons.lang3.text.WordUtils.wrap:180 LDC " "
-org.apache.commons.lang3.text.WordUtils.wrap:180 INVOKESTATIC org/apache/commons/lang3/text/WordUtils.wrap(Ljava/lang/String;ILjava/lang/String;ZLjava/lang/String;)Ljava/lang/String;
-org.apache.commons.lang3.text.WordUtils.wrap:180 ARETURN
-org.apache.commons.lang3.text.WordUtils.wrap:274 ALOAD 0
-org.apache.commons.lang3.text.WordUtils.wrap:274 IFNONNULL L0 true false
-org.apache.commons.lang3.text.WordUtils.wrap:283 ALOAD 4
-org.apache.commons.lang3.text.WordUtils.wrap:283 INVOKESTATIC org/apache/commons/lang3/StringUtils.isBlank(Ljava/lang/CharSequence;)Z
-org.apache.commons.lang3.text.WordUtils.wrap:283 IFEQ L3 false true
-org.apache.commons.lang3.text.WordUtils.wrap:284 LDC " "
-org.apache.commons.lang3.text.WordUtils.wrap:284 ASTORE 4
-org.apache.commons.lang3.text.WordUtils.wrap:286 ALOAD 4
-org.apache.commons.lang3.text.WordUtils.wrap:286 INVOKESTATIC java/util/regex/Pattern.compile(Ljava/lang/String;)Ljava/util/regex/Pattern;
-org.apache.commons.lang3.text.WordUtils.wrap:286 ASTORE 5
-org.apache.commons.lang3.text.WordUtils.wrap:287 ALOAD 0
-org.apache.commons.lang3.text.WordUtils.wrap:287 INVOKEVIRTUAL java/lang/String.length()I
-org.apache.commons.lang3.text.WordUtils.wrap:287 ISTORE 6
-org.apache.commons.lang3.text.WordUtils.wrap:288 ICONST_0
-org.apache.commons.lang3.text.WordUtils.wrap:288 ISTORE 7
-org.apache.commons.lang3.text.WordUtils.wrap:291 ILOAD 7
-org.apache.commons.lang3.text.WordUtils.wrap:291 ILOAD 6
-org.apache.commons.lang3.text.WordUtils.wrap:291 IF_ICMPGE L14 false true
-org.apache.commons.lang3.text.WordUtils.wrap:293 ALOAD 5
-org.apache.commons.lang3.text.WordUtils.wrap:293 ALOAD 0
-org.apache.commons.lang3.text.WordUtils.wrap:293 ILOAD 7
-org.apache.commons.lang3.text.WordUtils.wrap:293 ILOAD 7
-org.apache.commons.lang3.text.WordUtils.wrap:293 ILOAD 1
-org.apache.commons.lang3.text.WordUtils.wrap:293 IADD
-org.apache.commons.lang3.text.WordUtils.wrap:293 ICONST_1
-org.apache.commons.lang3.text.WordUtils.wrap:293 IADD
-org.apache.commons.lang3.text.WordUtils.wrap:293 ILOAD 6
-org.apache.commons.lang3.text.WordUtils.wrap:293 INVOKESTATIC java/lang/Math.min(II)I
-org.apache.commons.lang3.text.WordUtils.wrap:293 INVOKEVIRTUAL java/lang/String.substring(II)Ljava/lang/String;
-org.apache.commons.lang3.text.WordUtils.wrap:293 INVOKEVIRTUAL java/util/regex/Pattern.matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
-org.apache.commons.lang3.text.WordUtils.wrap:293 ASTORE 10
-org.apache.commons.lang3.text.WordUtils.wrap:294 ALOAD 10
-org.apache.commons.lang3.text.WordUtils.wrap:294 INVOKEVIRTUAL java/util/regex/Matcher.find()Z
-org.apache.commons.lang3.text.WordUtils.wrap:294 IFEQ L6 true true
-org.apache.commons.lang3.text.WordUtils.wrap:295 ALOAD 10
-org.apache.commons.lang3.text.WordUtils.wrap:295 INVOKEVIRTUAL java/util/regex/Matcher.start()I
-org.apache.commons.lang3.text.WordUtils.wrap:295 IFNE L5 true false
-org.apache.commons.lang3.text.WordUtils.wrap:299 ALOAD 10
-org.apache.commons.lang3.text.WordUtils.wrap:299 INVOKEVIRTUAL java/util/regex/Matcher.start()I
-org.apache.commons.lang3.text.WordUtils.wrap:299 ILOAD 7
-org.apache.commons.lang3.text.WordUtils.wrap:299 IADD
-org.apache.commons.lang3.text.WordUtils.wrap:299 ISTORE 9
-org.apache.commons.lang3.text.WordUtils.wrap:303 ILOAD 6
-org.apache.commons.lang3.text.WordUtils.wrap:303 ILOAD 7
-org.apache.commons.lang3.text.WordUtils.wrap:303 ISUB
-org.apache.commons.lang3.text.WordUtils.wrap:303 ILOAD 1
-org.apache.commons.lang3.text.WordUtils.wrap:303 IF_ICMPGT L7 true true
-org.apache.commons.lang3.text.WordUtils.wrap:307 ALOAD 10
-org.apache.commons.lang3.text.WordUtils.wrap:307 INVOKEVIRTUAL java/util/regex/Matcher.find()Z
-org.apache.commons.lang3.text.WordUtils.wrap:307 IFEQ L8 true true
-org.apache.commons.lang3.text.WordUtils.wrap:308 ALOAD 10
-org.apache.commons.lang3.text.WordUtils.wrap:308 INVOKEVIRTUAL java/util/regex/Matcher.start()I
-org.apache.commons.lang3.text.WordUtils.wrap:308 ILOAD 7
-org.apache.commons.lang3.text.WordUtils.wrap:308 IADD
-org.apache.commons.lang3.text.WordUtils.wrap:308 ISTORE 9
-org.apache.commons.lang3.text.WordUtils.wrap:311 ILOAD 9
-org.apache.commons.lang3.text.WordUtils.wrap:311 ILOAD 7
-org.apache.commons.lang3.text.WordUtils.wrap:311 IF_ICMPLT L9 false true
-org.apache.commons.lang3.text.WordUtils.wrap:315 ILOAD 9
-org.apache.commons.lang3.text.WordUtils.wrap:315 ICONST_1
-org.apache.commons.lang3.text.WordUtils.wrap:315 IADD
-org.apache.commons.lang3.text.WordUtils.wrap:315 ISTORE 7
-org.apache.commons.lang3.text.WordUtils.wrap:346 INVOKEVIRTUAL java/lang/StringBuilder.toString()Ljava/lang/String;
-org.apache.commons.lang3.text.WordUtils.wrap:346 ARETURN
-org.apache.commons.lang3.text.WordUtilsTest.main:39 INVOKEVIRTUAL org/apache/commons/lang3/text/WordUtilsTest.testWrap_StringIntStringBoolean()V
-org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:129 LDC "Here is one line"
-org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:129 ASTORE 1
-org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:130 LDC "Here
-is one
-line"
-org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:130 ASTORE 2
-org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:131 ALOAD 2
-org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:131 ALOAD 1
-org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:131 BIPUSH 6
-org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:131 LDC "
-"
-org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:131 ICONST_0
-org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:131 INVOKESTATIC org/apache/commons/lang3/text/WordUtils.wrap(Ljava/lang/String;ILjava/lang/String;Z)Ljava/lang/String;
-org.apache.commons.lang3.text.WordUtilsTest.testWrap_StringIntStringBoolean:131 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
-
-Slice consists of 566 bytecode instructions.
-Computation took 4.94 seconds.

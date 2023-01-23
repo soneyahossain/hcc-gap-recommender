@@ -1,55 +1,0 @@
- 0.0% done, time left: unknown                                0.1% done, time left: unknown  2.4% done, time left: unknown  7.2% done, time left: unknown 14.6% done, time left: unknown 21.5% done, time left: unknown 25.6% done, time left: unknown 33.0% done, time left: unknown 39.0% done, time left: unknown 41.1% done, time left: unknown 47.9% done, time left:   0:00:00   48.6% done, time left:   0:00:00 49.0% done, time left:   0:00:01 50.4% done, time left:   0:00:01 50.5% done, time left:   0:00:01 51.7% done, time left:   0:00:01 54.5% done, time left:   0:00:01 54.6% done, time left:   0:00:01 54.6% done, time left:   0:00:00 58.2% done, time left:   0:00:01 64.8% done, time left:   0:00:00 73.6% done, time left:   0:00:00 85.9% done, time left:   0:00:00 94.0% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.RangeTest.testIsBefore:293:*]:
-org.apache.commons.lang3.Range.<init>:80 ALOAD 1
-org.apache.commons.lang3.Range.<init>:80 ALOAD 2
-org.apache.commons.lang3.Range.<init>:80 INVOKEINTERFACE java/util/Comparator.compare(Ljava/lang/Object;Ljava/lang/Object;)I
-org.apache.commons.lang3.Range.<init>:80 ICONST_1
-org.apache.commons.lang3.Range.<init>:80 IF_ICMPGE L4 false true
-org.apache.commons.lang3.Range.<init>:82 ALOAD 0
-org.apache.commons.lang3.Range.<init>:82 ALOAD 2
-org.apache.commons.lang3.Range.<init>:82 PUTFIELD org/apache/commons/lang3/Range.maximum Ljava/lang/Object;
-org.apache.commons.lang3.Range.between:141 ALOAD 0
-org.apache.commons.lang3.Range.between:141 ALOAD 1
-org.apache.commons.lang3.Range.between:141 INVOKESTATIC org/apache/commons/lang3/Range.between(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Comparator;)Lorg/apache/commons/lang3/Range;
-org.apache.commons.lang3.Range.between:141 ARETURN
-org.apache.commons.lang3.Range.between:162 NEW org/apache/commons/lang3/Range
-org.apache.commons.lang3.Range.between:162 DUP
-org.apache.commons.lang3.Range.between:162 ALOAD 0
-org.apache.commons.lang3.Range.between:162 ALOAD 1
-org.apache.commons.lang3.Range.between:162 INVOKESPECIAL org/apache/commons/lang3/Range.<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Comparator;)V
-org.apache.commons.lang3.Range.between:162 ARETURN
-org.apache.commons.lang3.Range.isBefore:272 ALOAD 1
-org.apache.commons.lang3.Range.isBefore:272 IFNONNULL L0 true false
-org.apache.commons.lang3.Range.isBefore:275 ALOAD 1
-org.apache.commons.lang3.Range.isBefore:275 ALOAD 0
-org.apache.commons.lang3.Range.isBefore:275 GETFIELD org/apache/commons/lang3/Range.maximum Ljava/lang/Object;
-org.apache.commons.lang3.Range.isBefore:275 INVOKEINTERFACE java/util/Comparator.compare(Ljava/lang/Object;Ljava/lang/Object;)I
-org.apache.commons.lang3.Range.isBefore:275 IFLE L1 true false
-org.apache.commons.lang3.Range.isBefore:275 ICONST_0
-org.apache.commons.lang3.Range.isBefore:275 IRETURN
-org.apache.commons.lang3.Range$ComparableComparator.compare:483 ALOAD 1
-org.apache.commons.lang3.Range$ComparableComparator.compare:483 ALOAD 2
-org.apache.commons.lang3.Range$ComparableComparator.compare:483 INVOKEINTERFACE java/lang/Comparable.compareTo(Ljava/lang/Object;)I
-org.apache.commons.lang3.Range$ComparableComparator.compare:483 IRETURN
-org.apache.commons.lang3.RangeTest.main:47 NEW org/apache/commons/lang3/RangeTest
-org.apache.commons.lang3.RangeTest.main:47 ASTORE 1
-org.apache.commons.lang3.RangeTest.main:76 ALOAD 1
-org.apache.commons.lang3.RangeTest.main:76 INVOKEVIRTUAL org/apache/commons/lang3/RangeTest.setUp()V
-org.apache.commons.lang3.RangeTest.main:77 ALOAD 1
-org.apache.commons.lang3.RangeTest.main:77 INVOKEVIRTUAL org/apache/commons/lang3/RangeTest.testIsBefore()V
-org.apache.commons.lang3.RangeTest.setUp:101 ALOAD 0
-org.apache.commons.lang3.RangeTest.setUp:101 BIPUSH 10
-org.apache.commons.lang3.RangeTest.setUp:101 INVOKESTATIC java/lang/Integer.valueOf(I)Ljava/lang/Integer;
-org.apache.commons.lang3.RangeTest.setUp:101 BIPUSH 20
-org.apache.commons.lang3.RangeTest.setUp:101 INVOKESTATIC java/lang/Integer.valueOf(I)Ljava/lang/Integer;
-org.apache.commons.lang3.RangeTest.setUp:101 INVOKESTATIC org/apache/commons/lang3/Range.between(Ljava/lang/Comparable;Ljava/lang/Comparable;)Lorg/apache/commons/lang3/Range;
-org.apache.commons.lang3.RangeTest.setUp:101 PUTFIELD org/apache/commons/lang3/RangeTest.intRange Lorg/apache/commons/lang3/Range;
-org.apache.commons.lang3.RangeTest.testIsBefore:293 ALOAD 0
-org.apache.commons.lang3.RangeTest.testIsBefore:293 GETFIELD org/apache/commons/lang3/RangeTest.intRange Lorg/apache/commons/lang3/Range;
-org.apache.commons.lang3.RangeTest.testIsBefore:293 BIPUSH 10
-org.apache.commons.lang3.RangeTest.testIsBefore:293 INVOKESTATIC java/lang/Integer.valueOf(I)Ljava/lang/Integer;
-org.apache.commons.lang3.RangeTest.testIsBefore:293 INVOKEVIRTUAL org/apache/commons/lang3/Range.isBefore(Ljava/lang/Object;)Z
-org.apache.commons.lang3.RangeTest.testIsBefore:293 INVOKESTATIC org/junit/Assert.assertFalse(Z)V
-
-Slice consists of 77 bytecode instructions.
-Computation took 2.78 seconds.

@@ -1,40 +1,0 @@
- 0.0% done, time left: unknown                                0.3% done, time left: unknown  0.5% done, time left: unknown  2.8% done, time left: unknown  6.8% done, time left: unknown 11.7% done, time left: unknown 13.4% done, time left: unknown 15.4% done, time left: unknown 15.6% done, time left: unknown 17.6% done, time left:   0:00:04   20.4% done, time left:   0:00:04 22.9% done, time left:   0:00:04 25.4% done, time left:   0:00:04 28.0% done, time left:   0:00:04 31.3% done, time left:   0:00:03 35.6% done, time left:   0:00:02 42.2% done, time left:   0:00:00 48.9% done, time left:   0:00:00 56.1% done, time left:   0:00:00 63.5% done, time left:   0:00:00 71.6% done, time left:   0:00:00 75.8% done, time left:   0:00:00 79.8% done, time left:   0:00:00 84.5% done, time left:   0:00:00 91.8% done, time left:   0:00:00 93.0% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsTrimStripTest.testStripStart_StringString:178:*]:
-org.apache.commons.lang3.StringUtils.stripStart:804 ALOAD 0
-org.apache.commons.lang3.StringUtils.stripStart:804 IFNULL L0 false true
-org.apache.commons.lang3.StringUtils.stripStart:804 ALOAD 0
-org.apache.commons.lang3.StringUtils.stripStart:804 INVOKEVIRTUAL java/lang/String.length()I
-org.apache.commons.lang3.StringUtils.stripStart:804 DUP
-org.apache.commons.lang3.StringUtils.stripStart:804 ISTORE 2
-org.apache.commons.lang3.StringUtils.stripStart:804 IFNE L1 true false
-org.apache.commons.lang3.StringUtils.stripStart:807 ICONST_0
-org.apache.commons.lang3.StringUtils.stripStart:807 ISTORE 3
-org.apache.commons.lang3.StringUtils.stripStart:808 ALOAD 1
-org.apache.commons.lang3.StringUtils.stripStart:808 IFNONNULL L3 true false
-org.apache.commons.lang3.StringUtils.stripStart:812 ALOAD 1
-org.apache.commons.lang3.StringUtils.stripStart:812 INVOKEVIRTUAL java/lang/String.isEmpty()Z
-org.apache.commons.lang3.StringUtils.stripStart:812 IFEQ L4 true false
-org.apache.commons.lang3.StringUtils.stripStart:815 ILOAD 3
-org.apache.commons.lang3.StringUtils.stripStart:815 ILOAD 2
-org.apache.commons.lang3.StringUtils.stripStart:815 IF_ICMPEQ L5 false true
-org.apache.commons.lang3.StringUtils.stripStart:815 ALOAD 1
-org.apache.commons.lang3.StringUtils.stripStart:815 ALOAD 0
-org.apache.commons.lang3.StringUtils.stripStart:815 ILOAD 3
-org.apache.commons.lang3.StringUtils.stripStart:815 INVOKEVIRTUAL java/lang/String.charAt(I)C
-org.apache.commons.lang3.StringUtils.stripStart:815 INVOKEVIRTUAL java/lang/String.indexOf(I)I
-org.apache.commons.lang3.StringUtils.stripStart:815 ICONST_M1
-org.apache.commons.lang3.StringUtils.stripStart:815 IF_ICMPEQ L5 true true
-org.apache.commons.lang3.StringUtils.stripStart:816 IINC 3 1
-org.apache.commons.lang3.StringUtils.stripStart:819 ALOAD 0
-org.apache.commons.lang3.StringUtils.stripStart:819 ILOAD 3
-org.apache.commons.lang3.StringUtils.stripStart:819 INVOKEVIRTUAL java/lang/String.substring(I)Ljava/lang/String;
-org.apache.commons.lang3.StringUtils.stripStart:819 ARETURN
-org.apache.commons.lang3.StringUtilsTrimStripTest.main:40 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsTrimStripTest.testStripStart_StringString()V
-org.apache.commons.lang3.StringUtilsTrimStripTest.testStripStart_StringString:178 LDC "cabab"
-org.apache.commons.lang3.StringUtilsTrimStripTest.testStripStart_StringString:178 LDC "abcabab"
-org.apache.commons.lang3.StringUtilsTrimStripTest.testStripStart_StringString:178 LDC "ab"
-org.apache.commons.lang3.StringUtilsTrimStripTest.testStripStart_StringString:178 INVOKESTATIC org/apache/commons/lang3/StringUtils.stripStart(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
-org.apache.commons.lang3.StringUtilsTrimStripTest.testStripStart_StringString:178 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
-
-Slice consists of 35 bytecode instructions.
-Computation took 2.84 seconds.

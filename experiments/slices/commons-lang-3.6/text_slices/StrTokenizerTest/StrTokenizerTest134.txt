@@ -1,66 +1,0 @@
- 0.0% done, time left: unknown                                0.4% done, time left: unknown  0.8% done, time left: unknown  1.7% done, time left: unknown  3.6% done, time left: unknown  6.4% done, time left: unknown  9.2% done, time left: unknown 12.3% done, time left: unknown 16.5% done, time left: unknown 19.3% done, time left: unknown 22.3% done, time left:   0:00:02   26.0% done, time left:   0:00:03 28.7% done, time left:   0:00:03 32.5% done, time left:   0:00:02 35.9% done, time left:   0:00:02 39.6% done, time left:   0:00:02 45.7% done, time left:   0:00:00 52.0% done, time left:   0:00:00 56.5% done, time left:   0:00:00 60.1% done, time left:   0:00:00 64.2% done, time left:   0:00:00 70.4% done, time left:   0:00:00 76.5% done, time left:   0:00:00 83.7% done, time left:   0:00:00 91.1% done, time left:   0:00:00 98.4% done, time left:   0:00:00 99.6% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:662:*]:
-org.apache.commons.lang3.ArrayUtils.clone:389 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.clone:389 IFNONNULL L0 false true
-org.apache.commons.lang3.ArrayUtils.clone:390 ACONST_NULL
-org.apache.commons.lang3.ArrayUtils.clone:390 ARETURN
-org.apache.commons.lang3.text.StrTokenizer.<init>:245 ALOAD 0
-org.apache.commons.lang3.text.StrTokenizer.<init>:245 ALOAD 1
-org.apache.commons.lang3.text.StrTokenizer.<init>:245 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.clone([C)[C
-org.apache.commons.lang3.text.StrTokenizer.<init>:245 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.chars [C
-org.apache.commons.lang3.text.StrTokenizer.nextToken:433 ALOAD 0
-org.apache.commons.lang3.text.StrTokenizer.nextToken:433 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.hasNext()Z
-org.apache.commons.lang3.text.StrTokenizer.nextToken:433 IFEQ L0 true false
-org.apache.commons.lang3.text.StrTokenizer.nextToken:436 ACONST_NULL
-org.apache.commons.lang3.text.StrTokenizer.nextToken:436 ARETURN
-org.apache.commons.lang3.text.StrTokenizer.reset:483 ALOAD 0
-org.apache.commons.lang3.text.StrTokenizer.reset:483 ICONST_0
-org.apache.commons.lang3.text.StrTokenizer.reset:483 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.tokenPos I
-org.apache.commons.lang3.text.StrTokenizer.reset:484 ALOAD 0
-org.apache.commons.lang3.text.StrTokenizer.reset:484 ACONST_NULL
-org.apache.commons.lang3.text.StrTokenizer.reset:484 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.tokens [Ljava/lang/String;
-org.apache.commons.lang3.text.StrTokenizer.hasNext:530 ALOAD 0
-org.apache.commons.lang3.text.StrTokenizer.hasNext:530 INVOKESPECIAL org/apache/commons/lang3/text/StrTokenizer.checkTokenized()V
-org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ALOAD 0
-org.apache.commons.lang3.text.StrTokenizer.hasNext:531 GETFIELD org/apache/commons/lang3/text/StrTokenizer.tokenPos I
-org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ALOAD 0
-org.apache.commons.lang3.text.StrTokenizer.hasNext:531 GETFIELD org/apache/commons/lang3/text/StrTokenizer.tokens [Ljava/lang/String;
-org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ARRAYLENGTH
-org.apache.commons.lang3.text.StrTokenizer.hasNext:531 IF_ICMPGE L0 true false
-org.apache.commons.lang3.text.StrTokenizer.hasNext:531 ICONST_0
-org.apache.commons.lang3.text.StrTokenizer.hasNext:531 IRETURN
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:631 ALOAD 0
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:631 GETFIELD org/apache/commons/lang3/text/StrTokenizer.tokens [Ljava/lang/String;
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:631 IFNONNULL L1 false true
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:632 ALOAD 0
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:632 GETFIELD org/apache/commons/lang3/text/StrTokenizer.chars [C
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:632 IFNONNULL L0 false true
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:634 ACONST_NULL
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:634 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.tokenize([CII)Ljava/util/List;
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:634 ASTORE 1
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 ALOAD 0
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 ALOAD 1
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 ALOAD 1
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 INVOKEINTERFACE java/util/List.size()I
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 ANEWARRAY java/lang/String
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 INVOKEINTERFACE java/util/List.toArray([Ljava/lang/Object;)[Ljava/lang/Object;
-org.apache.commons.lang3.text.StrTokenizer.checkTokenized:635 PUTFIELD org/apache/commons/lang3/text/StrTokenizer.tokens [Ljava/lang/String;
-org.apache.commons.lang3.text.StrTokenizer.tokenize:664 ALOAD 1
-org.apache.commons.lang3.text.StrTokenizer.tokenize:664 IFNULL L0 true false
-org.apache.commons.lang3.text.StrTokenizer.tokenize:665 INVOKESTATIC java/util/Collections.emptyList()Ljava/util/List;
-org.apache.commons.lang3.text.StrTokenizer.tokenize:665 ARETURN
-org.apache.commons.lang3.text.StrTokenizerTest.main:90 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizerTest.testCloneNull()V
-org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:658 NEW org/apache/commons/lang3/text/StrTokenizer
-org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:658 DUP
-org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:658 ACONST_NULL
-org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:658 INVOKESPECIAL org/apache/commons/lang3/text/StrTokenizer.<init>([C)V
-org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:658 ASTORE 1
-org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:661 ALOAD 1
-org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:661 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.reset()Lorg/apache/commons/lang3/text/StrTokenizer;
-org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:662 ACONST_NULL
-org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:662 ALOAD 1
-org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:662 INVOKEVIRTUAL org/apache/commons/lang3/text/StrTokenizer.nextToken()Ljava/lang/String;
-org.apache.commons.lang3.text.StrTokenizerTest.testCloneNull:662 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
-
-Slice consists of 61 bytecode instructions.
-Computation took 2.81 seconds.

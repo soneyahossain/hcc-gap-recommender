@@ -1,82 +1,0 @@
- 0.0% done, time left: unknown                                1.2% done, time left: unknown  1.9% done, time left: unknown  5.1% done, time left: unknown 11.1% done, time left: unknown 17.3% done, time left: unknown 24.9% done, time left: unknown 28.7% done, time left: unknown 33.5% done, time left: unknown 38.4% done, time left: unknown 45.6% done, time left:   0:00:00   49.7% done, time left:   0:00:00 50.6% done, time left:   0:00:00 52.4% done, time left:   0:00:00 53.4% done, time left:   0:00:00 61.4% done, time left:   0:00:00 68.8% done, time left:   0:00:00 77.0% done, time left:   0:00:00 81.2% done, time left:   0:00:00 87.3% done, time left:   0:00:00 95.5% done, time left:   0:00:00 97.5% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238:*]:
-org.apache.commons.lang3.ArrayUtils.getLength:1384 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.getLength:1384 IFNONNULL L0 true false
-org.apache.commons.lang3.ArrayUtils.getLength:1387 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.getLength:1387 INVOKESTATIC java/lang/reflect/Array.getLength(Ljava/lang/Object;)I
-org.apache.commons.lang3.ArrayUtils.getLength:1387 IRETURN
-org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.isEmpty:4846 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.getLength(Ljava/lang/Object;)I
-org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IFNE L0 true false
-org.apache.commons.lang3.ArrayUtils.isEmpty:4846 ICONST_0
-org.apache.commons.lang3.ArrayUtils.isEmpty:4846 IRETURN
-org.apache.commons.lang3.ArrayUtils.isNotEmpty:4947 ALOAD 0
-org.apache.commons.lang3.ArrayUtils.isNotEmpty:4947 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isEmpty([Ljava/lang/Object;)Z
-org.apache.commons.lang3.ArrayUtils.isNotEmpty:4947 IFNE L0 false true
-org.apache.commons.lang3.ArrayUtils.isNotEmpty:4947 ICONST_1
-org.apache.commons.lang3.ArrayUtils.isNotEmpty:4947 IRETURN
-org.apache.commons.lang3.StringUtils.equalsIgnoreCase:1031 ALOAD 0
-org.apache.commons.lang3.StringUtils.equalsIgnoreCase:1031 IFNULL L0 false true
-org.apache.commons.lang3.StringUtils.equalsIgnoreCase:1031 ALOAD 1
-org.apache.commons.lang3.StringUtils.equalsIgnoreCase:1031 IFNONNULL L3 true false
-org.apache.commons.lang3.StringUtils.equalsIgnoreCase:1033 ALOAD 0
-org.apache.commons.lang3.StringUtils.equalsIgnoreCase:1033 ALOAD 1
-org.apache.commons.lang3.StringUtils.equalsIgnoreCase:1033 IF_ACMPNE L4 false true
-org.apache.commons.lang3.StringUtils.equalsIgnoreCase:1034 ICONST_1
-org.apache.commons.lang3.StringUtils.equalsIgnoreCase:1034 IRETURN
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1271 ALOAD 1
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1271 INVOKESTATIC org/apache/commons/lang3/ArrayUtils.isNotEmpty([Ljava/lang/Object;)Z
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1271 IFEQ L2 false true
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ALOAD 1
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ASTORE 2
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ALOAD 2
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ARRAYLENGTH
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ISTORE 3
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ICONST_0
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ISTORE 4
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ILOAD 4
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ILOAD 3
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 IF_ICMPGE L2 false true
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ALOAD 2
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ILOAD 4
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 AALOAD
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1272 ASTORE 5
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1273 ALOAD 0
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1273 ALOAD 5
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1273 INVOKESTATIC org/apache/commons/lang3/StringUtils.equalsIgnoreCase(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1273 IFEQ L1 false true
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1274 ICONST_1
-org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase:1274 IRETURN
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.main:110 INVOKEVIRTUAL org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase()V
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 LDC "foo"
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 ICONST_2
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 ANEWARRAY java/lang/CharSequence
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 DUP
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 ICONST_0
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 LDC "foo"
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 AASTORE
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 DUP
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 ICONST_1
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 NEW java/lang/String
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 DUP
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 ICONST_3
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 NEWARRAY T_CHAR
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 DUP
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 ICONST_0
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 BIPUSH 102
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 CASTORE
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 DUP
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 ICONST_1
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 BIPUSH 111
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 CASTORE
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 DUP
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 ICONST_2
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 BIPUSH 111
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 CASTORE
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 INVOKESPECIAL java/lang/String.<init>([C)V
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 AASTORE
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 INVOKESTATIC org/apache/commons/lang3/StringUtils.equalsAnyIgnoreCase(Ljava/lang/CharSequence;[Ljava/lang/CharSequence;)Z
-org.apache.commons.lang3.StringUtilsEqualsIndexOfTest.testEqualsAnyIgnoreCase:238 INVOKESTATIC org/junit/Assert.assertTrue(Z)V
-
-Slice consists of 77 bytecode instructions.
-Computation took 2.76 seconds.

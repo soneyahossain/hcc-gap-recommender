@@ -1,0 +1,39 @@
+ 0.0% done, time left: unknown                                0.7% done, time left: unknown  2.9% done, time left: unknown  5.6% done, time left: unknown  9.7% done, time left: unknown 12.1% done, time left: unknown 12.6% done, time left:   0:00:17   14.9% done, time left:   0:00:11 15.6% done, time left:   0:00:10 19.2% done, time left:   0:00:08 21.9% done, time left:   0:00:07 27.1% done, time left:   0:00:03 33.6% done, time left:   0:00:01 38.9% done, time left:   0:00:01 45.3% done, time left:   0:00:00 48.2% done, time left:   0:00:00 53.1% done, time left:   0:00:00 57.6% done, time left:   0:00:00 61.0% done, time left:   0:00:00 64.1% done, time left:   0:00:00 66.1% done, time left:   0:00:00 66.4% done, time left:   0:00:00 70.6% done, time left:   0:00:00 76.8% done, time left:   0:00:00 83.6% done, time left:   0:00:00 87.8% done, time left:   0:00:00 94.6% done, time left:   0:00:00 101.5% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1075:*]:
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 0
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 1
+org.joda.time.chrono.AssembledChronology.<init>:100 PUTFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getBase:308 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ARETURN
+org.joda.time.chrono.BasicChronology.<init>:132 ALOAD 0
+org.joda.time.chrono.BasicChronology.<init>:132 ALOAD 1
+org.joda.time.chrono.BasicChronology.<init>:132 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;)V
+org.joda.time.chrono.BasicChronology.assemble:309 ALOAD 1
+org.joda.time.chrono.BasicChronology.assemble:309 NEW org/joda/time/chrono/GJDayOfWeekDateTimeField
+org.joda.time.chrono.BasicChronology.assemble:309 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.dayOfWeek Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.IslamicChronology.<init>:234 ALOAD 0
+org.joda.time.chrono.IslamicChronology.<init>:234 ALOAD 1
+org.joda.time.chrono.IslamicChronology.<init>:234 INVOKESPECIAL org/joda/time/chrono/BasicChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.IslamicChronology.assemble:491 ALOAD 0
+org.joda.time.chrono.IslamicChronology.assemble:491 INVOKEVIRTUAL org/joda/time/chrono/IslamicChronology.getBase()Lorg/joda/time/Chronology;
+org.joda.time.chrono.IslamicChronology.assemble:491 IFNONNULL L0 false true
+org.joda.time.chrono.IslamicChronology.assemble:492 ALOAD 1
+org.joda.time.chrono.IslamicChronology.assemble:492 INVOKESPECIAL org/joda/time/chrono/BasicChronology.assemble(Lorg/joda/time/chrono/AssembledChronology$Fields;)V
+org.joda.time.chrono.TestIslamicChronology.main:151 INVOKEVIRTUAL org/joda/time/chrono/TestIslamicChronology.testRecommendedAssertions()V
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1043 NEW org/joda/time/chrono/IslamicChronology
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1043 DUP
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1043 ACONST_NULL
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1043 INVOKESPECIAL org/joda/time/chrono/IslamicChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;Lorg/joda/time/chrono/IslamicChronology$LeapYearPatternType;)V
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1043 ASTORE 10
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1048 NEW org/joda/time/chrono/AssembledChronology$Fields
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1048 ASTORE 6
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1049 ALOAD 10
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1049 ALOAD 6
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1049 INVOKEVIRTUAL org/joda/time/chrono/BasicChronology.assemble(Lorg/joda/time/chrono/AssembledChronology$Fields;)V
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1075 ALOAD 6
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1075 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.dayOfWeek Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.TestIslamicChronology.testRecommendedAssertions:1075 INVOKESTATIC org/junit/Assert.assertNotNull(Ljava/lang/Object;)V
+
+Slice consists of 34 bytecode instructions.
+Computation took 3.18 seconds.

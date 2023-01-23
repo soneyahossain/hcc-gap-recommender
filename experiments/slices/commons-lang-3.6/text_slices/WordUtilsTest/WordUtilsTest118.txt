@@ -1,43 +1,0 @@
- 0.0% done, time left: unknown                                0.7% done, time left: unknown  1.6% done, time left: unknown  1.8% done, time left: unknown  2.0% done, time left: unknown  3.1% done, time left: unknown  4.2% done, time left: unknown  5.1% done, time left: unknown  5.9% done, time left:   0:00:11    6.6% done, time left:   0:00:12  6.6% done, time left:   0:00:15  8.5% done, time left:   0:00:14 11.1% done, time left:   0:00:14 13.4% done, time left:   0:00:13 15.2% done, time left:   0:00:11 16.2% done, time left:   0:00:10 17.8% done, time left:   0:00:09 19.2% done, time left:   0:00:09 20.9% done, time left:   0:00:08 23.4% done, time left:   0:00:08 25.8% done, time left:   0:00:07 28.5% done, time left:   0:00:06 31.3% done, time left:   0:00:05 33.8% done, time left:   0:00:04 36.4% done, time left:   0:00:04 38.3% done, time left:   0:00:03 41.2% done, time left:   0:00:03 43.1% done, time left:   0:00:02 45.6% done, time left:   0:00:02 48.8% done, time left:   0:00:02 52.0% done, time left:   0:00:01 55.2% done, time left:   0:00:01 58.4% done, time left:   0:00:01 61.6% done, time left:   0:00:00 64.7% done, time left:   0:00:00 68.0% done, time left:   0:00:00 71.2% done, time left:   0:00:00 74.4% done, time left:   0:00:00 77.5% done, time left:   0:00:00 80.5% done, time left:   0:00:00 83.5% done, time left:   0:00:00 86.0% done, time left:   0:00:00 88.2% done, time left:   0:00:00 91.4% done, time left:   0:00:00 94.7% done, time left:   0:00:00 97.9% done, time left:   0:00:00 99.2% done, time left:   0:00:00 100.1% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.text.WordUtilsTest.testUncapitalizeWithDelimiters_String:311:*]:
-org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
-org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
-org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
-org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
-org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
-org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
-org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
-org.apache.commons.lang3.text.WordUtils.uncapitalize:535 ALOAD 1
-org.apache.commons.lang3.text.WordUtils.uncapitalize:535 IFNONNULL L0 true false
-org.apache.commons.lang3.text.WordUtils.uncapitalize:535 ALOAD 1
-org.apache.commons.lang3.text.WordUtils.uncapitalize:535 ARRAYLENGTH
-org.apache.commons.lang3.text.WordUtils.uncapitalize:535 ISTORE 2
-org.apache.commons.lang3.text.WordUtils.uncapitalize:536 ALOAD 0
-org.apache.commons.lang3.text.WordUtils.uncapitalize:536 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
-org.apache.commons.lang3.text.WordUtils.uncapitalize:536 IFNE L2 false true
-org.apache.commons.lang3.text.WordUtils.uncapitalize:536 ILOAD 2
-org.apache.commons.lang3.text.WordUtils.uncapitalize:536 IFNE L3 true false
-org.apache.commons.lang3.text.WordUtils.uncapitalize:539 ALOAD 0
-org.apache.commons.lang3.text.WordUtils.uncapitalize:539 INVOKEVIRTUAL java/lang/String.toCharArray()[C
-org.apache.commons.lang3.text.WordUtils.uncapitalize:539 ASTORE 3
-org.apache.commons.lang3.text.WordUtils.uncapitalize:541 ICONST_0
-org.apache.commons.lang3.text.WordUtils.uncapitalize:541 ISTORE 5
-org.apache.commons.lang3.text.WordUtils.uncapitalize:541 ILOAD 5
-org.apache.commons.lang3.text.WordUtils.uncapitalize:541 ALOAD 3
-org.apache.commons.lang3.text.WordUtils.uncapitalize:541 ARRAYLENGTH
-org.apache.commons.lang3.text.WordUtils.uncapitalize:541 IF_ICMPGE L7 true true
-org.apache.commons.lang3.text.WordUtils.uncapitalize:541 IINC 5 1
-org.apache.commons.lang3.text.WordUtils.uncapitalize:550 NEW java/lang/String
-org.apache.commons.lang3.text.WordUtils.uncapitalize:550 ARETURN
-org.apache.commons.lang3.text.WordUtilsTest.main:47 INVOKEVIRTUAL org/apache/commons/lang3/text/WordUtilsTest.testUncapitalizeWithDelimiters_String()V
-org.apache.commons.lang3.text.WordUtilsTest.testUncapitalizeWithDelimiters_String:308 ICONST_4
-org.apache.commons.lang3.text.WordUtilsTest.testUncapitalizeWithDelimiters_String:308 NEWARRAY T_CHAR
-org.apache.commons.lang3.text.WordUtilsTest.testUncapitalizeWithDelimiters_String:308 ASTORE 1
-org.apache.commons.lang3.text.WordUtilsTest.testUncapitalizeWithDelimiters_String:311 LDC "i am-here+123"
-org.apache.commons.lang3.text.WordUtilsTest.testUncapitalizeWithDelimiters_String:311 LDC "i am-here+123"
-org.apache.commons.lang3.text.WordUtilsTest.testUncapitalizeWithDelimiters_String:311 ALOAD 1
-org.apache.commons.lang3.text.WordUtilsTest.testUncapitalizeWithDelimiters_String:311 INVOKESTATIC org/apache/commons/lang3/text/WordUtils.uncapitalize(Ljava/lang/String;[C)Ljava/lang/String;
-org.apache.commons.lang3.text.WordUtilsTest.testUncapitalizeWithDelimiters_String:311 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
-
-Slice consists of 38 bytecode instructions.
-Computation took 5.08 seconds.

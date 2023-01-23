@@ -1,0 +1,55 @@
+ 0.0% done, time left: unknown                                0.1% done, time left: unknown  0.8% done, time left: unknown  1.5% done, time left: unknown  2.8% done, time left: unknown  6.6% done, time left: unknown 11.5% done, time left: unknown 15.9% done, time left: unknown 18.3% done, time left: unknown 20.9% done, time left:   0:00:03   33.5% done, time left:   0:00:00 36.9% done, time left:   0:00:00 42.0% done, time left:   0:00:01 45.3% done, time left:   0:00:01 46.8% done, time left:   0:00:01 52.0% done, time left:   0:00:00 60.0% done, time left:   0:00:00 68.5% done, time left:   0:00:00 77.1% done, time left:   0:00:00 83.0% done, time left:   0:00:00 91.2% done, time left:   0:00:00 100.1% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:749:*]:
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 0
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 1
+org.joda.time.chrono.AssembledChronology.<init>:100 PUTFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getBase:308 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ARETURN
+org.joda.time.chrono.BasicChronology.<init>:132 ALOAD 0
+org.joda.time.chrono.BasicChronology.<init>:132 ALOAD 1
+org.joda.time.chrono.BasicChronology.<init>:132 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;)V
+org.joda.time.chrono.BasicFixedMonthChronology.<init>:59 ALOAD 0
+org.joda.time.chrono.BasicFixedMonthChronology.<init>:59 ALOAD 1
+org.joda.time.chrono.BasicFixedMonthChronology.<init>:59 INVOKESPECIAL org/joda/time/chrono/BasicChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.BasicMonthOfYearDateTimeField.<init>:52 ALOAD 0
+org.joda.time.chrono.BasicMonthOfYearDateTimeField.<init>:52 INVOKESPECIAL org/joda/time/field/ImpreciseDateTimeField.<init>(Lorg/joda/time/DateTimeFieldType;J)V
+org.joda.time.chrono.CopticChronology.<init>:166 ALOAD 0
+org.joda.time.chrono.CopticChronology.<init>:166 ALOAD 1
+org.joda.time.chrono.CopticChronology.<init>:166 INVOKESPECIAL org/joda/time/chrono/BasicFixedMonthChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.CopticChronology.assemble:259 ALOAD 0
+org.joda.time.chrono.CopticChronology.assemble:259 INVOKEVIRTUAL org/joda/time/chrono/CopticChronology.getBase()Lorg/joda/time/Chronology;
+org.joda.time.chrono.CopticChronology.assemble:259 IFNONNULL L0 false true
+org.joda.time.chrono.CopticChronology.assemble:267 ALOAD 1
+org.joda.time.chrono.CopticChronology.assemble:267 NEW org/joda/time/chrono/BasicMonthOfYearDateTimeField
+org.joda.time.chrono.CopticChronology.assemble:267 DUP
+org.joda.time.chrono.CopticChronology.assemble:267 INVOKESPECIAL org/joda/time/chrono/BasicMonthOfYearDateTimeField.<init>(Lorg/joda/time/chrono/BasicChronology;I)V
+org.joda.time.chrono.CopticChronology.assemble:267 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.monthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.CopticChronology.assemble:268 ALOAD 1
+org.joda.time.chrono.CopticChronology.assemble:268 ALOAD 1
+org.joda.time.chrono.CopticChronology.assemble:268 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.monthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.CopticChronology.assemble:268 INVOKEVIRTUAL org/joda/time/DateTimeField.getDurationField()Lorg/joda/time/DurationField;
+org.joda.time.chrono.CopticChronology.assemble:268 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.months Lorg/joda/time/DurationField;
+org.joda.time.chrono.TestCopticChronology.main:141 INVOKEVIRTUAL org/joda/time/chrono/TestCopticChronology.testRecommendedAssertions()V
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:742 NEW org/joda/time/chrono/CopticChronology
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:742 DUP
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:742 ACONST_NULL
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:742 INVOKESPECIAL org/joda/time/chrono/CopticChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:742 ASTORE 1
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:743 NEW org/joda/time/chrono/AssembledChronology$Fields
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:743 ASTORE 3
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:744 ALOAD 1
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:744 ALOAD 3
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:744 INVOKEVIRTUAL org/joda/time/chrono/CopticChronology.assemble(Lorg/joda/time/chrono/AssembledChronology$Fields;)V
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:749 ALOAD 3
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:749 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.months Lorg/joda/time/DurationField;
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:749 INVOKESTATIC org/junit/Assert.assertNotNull(Ljava/lang/Object;)V
+org.joda.time.field.ImpreciseDateTimeField.<init>:58 ALOAD 0
+org.joda.time.field.ImpreciseDateTimeField.<init>:58 NEW org/joda/time/field/ImpreciseDateTimeField$LinkedDurationField
+org.joda.time.field.ImpreciseDateTimeField.<init>:58 PUTFIELD org/joda/time/field/ImpreciseDateTimeField.iDurationField Lorg/joda/time/DurationField;
+org.joda.time.field.ImpreciseDateTimeField.getDurationField:138 ALOAD 0
+org.joda.time.field.ImpreciseDateTimeField.getDurationField:138 GETFIELD org/joda/time/field/ImpreciseDateTimeField.iDurationField Lorg/joda/time/DurationField;
+org.joda.time.field.ImpreciseDateTimeField.getDurationField:138 ARETURN
+
+Slice consists of 50 bytecode instructions.
+Computation took 2.28 seconds.

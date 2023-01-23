@@ -1,56 +1,0 @@
- 0.0% done, time left: unknown                                0.6% done, time left: unknown  1.5% done, time left: unknown  1.8% done, time left: unknown  1.9% done, time left: unknown  2.9% done, time left: unknown  4.0% done, time left: unknown  5.0% done, time left: unknown  5.8% done, time left:   0:00:11    6.6% done, time left:   0:00:11  6.6% done, time left:   0:00:14  7.5% done, time left:   0:00:14 10.0% done, time left:   0:00:14 12.5% done, time left:   0:00:13 14.9% done, time left:   0:00:11 16.4% done, time left:   0:00:10 18.2% done, time left:   0:00:09 20.8% done, time left:   0:00:08 23.4% done, time left:   0:00:07 25.9% done, time left:   0:00:06 28.6% done, time left:   0:00:05 31.3% done, time left:   0:00:04 33.8% done, time left:   0:00:04 36.1% done, time left:   0:00:03 37.5% done, time left:   0:00:03 39.2% done, time left:   0:00:03 42.2% done, time left:   0:00:03 43.5% done, time left:   0:00:02 46.7% done, time left:   0:00:02 49.9% done, time left:   0:00:02 53.0% done, time left:   0:00:01 56.2% done, time left:   0:00:01 59.3% done, time left:   0:00:01 62.5% done, time left:   0:00:00 65.7% done, time left:   0:00:00 68.9% done, time left:   0:00:00 72.1% done, time left:   0:00:00 75.3% done, time left:   0:00:00 78.4% done, time left:   0:00:00 81.4% done, time left:   0:00:00 84.3% done, time left:   0:00:00 86.8% done, time left:   0:00:00 89.5% done, time left:   0:00:00 99.0% done, time left:   0:00:00 99.4% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.text.WordUtilsTest.testCapitalizeFully_String:246:*]:
-org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
-org.apache.commons.lang3.StringUtils.isEmpty:210 IFNULL L0 false true
-org.apache.commons.lang3.StringUtils.isEmpty:210 ALOAD 0
-org.apache.commons.lang3.StringUtils.isEmpty:210 INVOKEINTERFACE java/lang/CharSequence.length()I
-org.apache.commons.lang3.StringUtils.isEmpty:210 IFNE L1 true false
-org.apache.commons.lang3.StringUtils.isEmpty:210 ICONST_0
-org.apache.commons.lang3.StringUtils.isEmpty:210 IRETURN
-org.apache.commons.lang3.text.WordUtils.capitalize:408 ALOAD 1
-org.apache.commons.lang3.text.WordUtils.capitalize:408 IFNONNULL L0 false true
-org.apache.commons.lang3.text.WordUtils.capitalize:408 ICONST_M1
-org.apache.commons.lang3.text.WordUtils.capitalize:408 ISTORE 2
-org.apache.commons.lang3.text.WordUtils.capitalize:409 ALOAD 0
-org.apache.commons.lang3.text.WordUtils.capitalize:409 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
-org.apache.commons.lang3.text.WordUtils.capitalize:409 IFNE L2 false true
-org.apache.commons.lang3.text.WordUtils.capitalize:409 ILOAD 2
-org.apache.commons.lang3.text.WordUtils.capitalize:409 IFNE L3 true false
-org.apache.commons.lang3.text.WordUtils.capitalize:412 ALOAD 0
-org.apache.commons.lang3.text.WordUtils.capitalize:412 INVOKEVIRTUAL java/lang/String.toCharArray()[C
-org.apache.commons.lang3.text.WordUtils.capitalize:412 ASTORE 3
-org.apache.commons.lang3.text.WordUtils.capitalize:414 ICONST_0
-org.apache.commons.lang3.text.WordUtils.capitalize:414 ISTORE 5
-org.apache.commons.lang3.text.WordUtils.capitalize:414 ILOAD 5
-org.apache.commons.lang3.text.WordUtils.capitalize:414 ALOAD 3
-org.apache.commons.lang3.text.WordUtils.capitalize:414 ARRAYLENGTH
-org.apache.commons.lang3.text.WordUtils.capitalize:414 IF_ICMPGE L7 true true
-org.apache.commons.lang3.text.WordUtils.capitalize:414 IINC 5 1
-org.apache.commons.lang3.text.WordUtils.capitalize:423 NEW java/lang/String
-org.apache.commons.lang3.text.WordUtils.capitalize:423 ARETURN
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:448 ALOAD 0
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:448 ACONST_NULL
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:448 INVOKESTATIC org/apache/commons/lang3/text/WordUtils.capitalizeFully(Ljava/lang/String;[C)Ljava/lang/String;
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:448 ARETURN
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:478 ALOAD 1
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:478 IFNONNULL L0 false true
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:478 ICONST_M1
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:478 ISTORE 2
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:479 ALOAD 0
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:479 INVOKESTATIC org/apache/commons/lang3/StringUtils.isEmpty(Ljava/lang/CharSequence;)Z
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:479 IFNE L2 false true
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:479 ILOAD 2
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:479 IFNE L3 true false
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:482 ASTORE 0
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:483 ALOAD 0
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:483 ALOAD 1
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:483 INVOKESTATIC org/apache/commons/lang3/text/WordUtils.capitalize(Ljava/lang/String;[C)Ljava/lang/String;
-org.apache.commons.lang3.text.WordUtils.capitalizeFully:483 ARETURN
-org.apache.commons.lang3.text.WordUtilsTest.main:43 INVOKEVIRTUAL org/apache/commons/lang3/text/WordUtilsTest.testCapitalizeFully_String()V
-org.apache.commons.lang3.text.WordUtilsTest.testCapitalizeFully_String:246 LDC "I Am Here 123"
-org.apache.commons.lang3.text.WordUtilsTest.testCapitalizeFully_String:246 LDC "i am HERE 123"
-org.apache.commons.lang3.text.WordUtilsTest.testCapitalizeFully_String:246 INVOKESTATIC org/apache/commons/lang3/text/WordUtils.capitalizeFully(Ljava/lang/String;)Ljava/lang/String;
-org.apache.commons.lang3.text.WordUtilsTest.testCapitalizeFully_String:246 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
-
-Slice consists of 60 bytecode instructions.
-Computation took 4.83 seconds.

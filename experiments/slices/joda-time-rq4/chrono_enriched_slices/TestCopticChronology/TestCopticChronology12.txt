@@ -1,0 +1,40 @@
+ 0.0% done, time left: unknown                                0.4% done, time left: unknown  0.8% done, time left: unknown  1.5% done, time left: unknown  4.2% done, time left: unknown  7.9% done, time left: unknown 12.8% done, time left: unknown 16.2% done, time left: unknown 20.2% done, time left: unknown 23.6% done, time left:   0:00:02   35.7% done, time left:   0:00:00 39.3% done, time left:   0:00:00 43.9% done, time left:   0:00:01 46.8% done, time left:   0:00:01 48.6% done, time left:   0:00:01 54.0% done, time left:   0:00:00 62.1% done, time left:   0:00:00 70.7% done, time left:   0:00:00 78.9% done, time left:   0:00:00 83.9% done, time left:   0:00:00 92.2% done, time left:   0:00:00 100.6% done, time left:   0:00:00  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:748:*]:
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 0
+org.joda.time.chrono.AssembledChronology.<init>:100 ALOAD 1
+org.joda.time.chrono.AssembledChronology.<init>:100 PUTFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getBase:308 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ARETURN
+org.joda.time.chrono.BasicChronology.<init>:132 ALOAD 0
+org.joda.time.chrono.BasicChronology.<init>:132 ALOAD 1
+org.joda.time.chrono.BasicChronology.<init>:132 INVOKESPECIAL org/joda/time/chrono/AssembledChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;)V
+org.joda.time.chrono.BasicFixedMonthChronology.<init>:59 ALOAD 0
+org.joda.time.chrono.BasicFixedMonthChronology.<init>:59 ALOAD 1
+org.joda.time.chrono.BasicFixedMonthChronology.<init>:59 INVOKESPECIAL org/joda/time/chrono/BasicChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.CopticChronology.<init>:166 ALOAD 0
+org.joda.time.chrono.CopticChronology.<init>:166 ALOAD 1
+org.joda.time.chrono.CopticChronology.<init>:166 INVOKESPECIAL org/joda/time/chrono/BasicFixedMonthChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.CopticChronology.assemble:259 ALOAD 0
+org.joda.time.chrono.CopticChronology.assemble:259 INVOKEVIRTUAL org/joda/time/chrono/CopticChronology.getBase()Lorg/joda/time/Chronology;
+org.joda.time.chrono.CopticChronology.assemble:259 IFNONNULL L0 false true
+org.joda.time.chrono.CopticChronology.assemble:267 ALOAD 1
+org.joda.time.chrono.CopticChronology.assemble:267 NEW org/joda/time/chrono/BasicMonthOfYearDateTimeField
+org.joda.time.chrono.CopticChronology.assemble:267 PUTFIELD org/joda/time/chrono/AssembledChronology$Fields.monthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.TestCopticChronology.main:141 INVOKEVIRTUAL org/joda/time/chrono/TestCopticChronology.testRecommendedAssertions()V
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:742 NEW org/joda/time/chrono/CopticChronology
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:742 DUP
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:742 ACONST_NULL
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:742 INVOKESPECIAL org/joda/time/chrono/CopticChronology.<init>(Lorg/joda/time/Chronology;Ljava/lang/Object;I)V
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:742 ASTORE 1
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:743 NEW org/joda/time/chrono/AssembledChronology$Fields
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:743 ASTORE 3
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:744 ALOAD 1
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:744 ALOAD 3
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:744 INVOKEVIRTUAL org/joda/time/chrono/CopticChronology.assemble(Lorg/joda/time/chrono/AssembledChronology$Fields;)V
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:748 ALOAD 3
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:748 GETFIELD org/joda/time/chrono/AssembledChronology$Fields.monthOfYear Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.TestCopticChronology.testRecommendedAssertions:748 INVOKESTATIC org/junit/Assert.assertNotNull(Ljava/lang/Object;)V
+
+Slice consists of 35 bytecode instructions.
+Computation took 2.29 seconds.

@@ -1,0 +1,118 @@
+ 0.0% done, time left: unknown                               100.0% done, time left: unknown  finished
+The dynamic slice for criterion [org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:79:*]:
+org.joda.time.DateTimeUtils.getChronology:268 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:268 IFNONNULL L0 true false
+org.joda.time.DateTimeUtils.getChronology:271 ALOAD 0
+org.joda.time.DateTimeUtils.getChronology:271 ARETURN
+org.joda.time.LocalDate.<init>:456 ALOAD 4
+org.joda.time.LocalDate.<init>:456 INVOKESTATIC org/joda/time/DateTimeUtils.getChronology(Lorg/joda/time/Chronology;)Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.<init>:456 INVOKEVIRTUAL org/joda/time/Chronology.withUTC()Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.<init>:456 ASTORE 4
+org.joda.time.LocalDate.<init>:457 ALOAD 4
+org.joda.time.LocalDate.<init>:457 INVOKEVIRTUAL org/joda/time/Chronology.getDateTimeMillis(IIII)J
+org.joda.time.LocalDate.<init>:457 LSTORE 5
+org.joda.time.LocalDate.<init>:458 ALOAD 0
+org.joda.time.LocalDate.<init>:458 ALOAD 4
+org.joda.time.LocalDate.<init>:458 PUTFIELD org/joda/time/LocalDate.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.<init>:459 ALOAD 0
+org.joda.time.LocalDate.<init>:459 LLOAD 5
+org.joda.time.LocalDate.<init>:459 PUTFIELD org/joda/time/LocalDate.iLocalMillis J
+org.joda.time.LocalDate.getLocalMillis:610 ALOAD 0
+org.joda.time.LocalDate.getLocalMillis:610 GETFIELD org/joda/time/LocalDate.iLocalMillis J
+org.joda.time.LocalDate.getLocalMillis:610 LRETURN
+org.joda.time.LocalDate.getChronology:619 ALOAD 0
+org.joda.time.LocalDate.getChronology:619 GETFIELD org/joda/time/LocalDate.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.getChronology:619 ARETURN
+org.joda.time.LocalDate.withLocalMillis:1054 ALOAD 0
+org.joda.time.LocalDate.withLocalMillis:1054 GETFIELD org/joda/time/LocalDate.iChronology Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.withLocalMillis:1054 INVOKEVIRTUAL org/joda/time/Chronology.dayOfMonth()Lorg/joda/time/DateTimeField;
+org.joda.time.LocalDate.withLocalMillis:1054 LLOAD 1
+org.joda.time.LocalDate.withLocalMillis:1054 INVOKEVIRTUAL org/joda/time/DateTimeField.roundFloor(J)J
+org.joda.time.LocalDate.withLocalMillis:1054 LSTORE 1
+org.joda.time.LocalDate.withLocalMillis:1055 LLOAD 1
+org.joda.time.LocalDate.withLocalMillis:1055 ALOAD 0
+org.joda.time.LocalDate.withLocalMillis:1055 INVOKEVIRTUAL org/joda/time/LocalDate.getLocalMillis()J
+org.joda.time.LocalDate.withLocalMillis:1055 LCMP
+org.joda.time.LocalDate.withLocalMillis:1055 IFNE L0 true false
+org.joda.time.LocalDate.withLocalMillis:1055 NEW org/joda/time/LocalDate
+org.joda.time.LocalDate.withLocalMillis:1055 ARETURN
+org.joda.time.LocalDate.plusYears:1215 ILOAD 1
+org.joda.time.LocalDate.plusYears:1215 IFNE L0 true false
+org.joda.time.LocalDate.plusYears:1218 ALOAD 0
+org.joda.time.LocalDate.plusYears:1218 INVOKEVIRTUAL org/joda/time/LocalDate.getChronology()Lorg/joda/time/Chronology;
+org.joda.time.LocalDate.plusYears:1218 INVOKEVIRTUAL org/joda/time/Chronology.years()Lorg/joda/time/DurationField;
+org.joda.time.LocalDate.plusYears:1218 INVOKEVIRTUAL org/joda/time/DurationField.add(JI)J
+org.joda.time.LocalDate.plusYears:1218 LSTORE 2
+org.joda.time.LocalDate.plusYears:1219 ALOAD 0
+org.joda.time.LocalDate.plusYears:1219 LLOAD 2
+org.joda.time.LocalDate.plusYears:1219 INVOKEVIRTUAL org/joda/time/LocalDate.withLocalMillis(J)Lorg/joda/time/LocalDate;
+org.joda.time.LocalDate.plusYears:1219 ARETURN
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 ALOAD 0
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 GETFIELD org/joda/time/chrono/AssembledChronology.iDayOfMonth Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.AssembledChronology.dayOfMonth:228 ARETURN
+org.joda.time.chrono.AssembledChronology.years:264 ALOAD 0
+org.joda.time.chrono.AssembledChronology.years:264 GETFIELD org/joda/time/chrono/AssembledChronology.iYears Lorg/joda/time/DurationField;
+org.joda.time.chrono.AssembledChronology.years:264 ARETURN
+org.joda.time.chrono.AssembledChronology.getBase:308 ALOAD 0
+org.joda.time.chrono.AssembledChronology.getBase:308 GETFIELD org/joda/time/chrono/AssembledChronology.iBase Lorg/joda/time/Chronology;
+org.joda.time.chrono.AssembledChronology.getBase:308 ARETURN
+org.joda.time.chrono.GJChronology.getZone:284 ALOAD 0
+org.joda.time.chrono.GJChronology.getZone:284 INVOKEVIRTUAL org/joda/time/chrono/GJChronology.getBase()Lorg/joda/time/Chronology;
+org.joda.time.chrono.GJChronology.getZone:284 IFNULL L0 true false
+org.joda.time.chrono.GJChronology.getZone:287 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.GJChronology.getZone:287 ARETURN
+org.joda.time.chrono.GJChronology.withUTC:298 ALOAD 0
+org.joda.time.chrono.GJChronology.withUTC:298 GETSTATIC org/joda/time/DateTimeZone.UTC Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.GJChronology.withUTC:298 INVOKEVIRTUAL org/joda/time/chrono/GJChronology.withZone(Lorg/joda/time/DateTimeZone;)Lorg/joda/time/Chronology;
+org.joda.time.chrono.GJChronology.withUTC:298 ARETURN
+org.joda.time.chrono.GJChronology.withZone:311 ALOAD 1
+org.joda.time.chrono.GJChronology.withZone:311 ALOAD 0
+org.joda.time.chrono.GJChronology.withZone:311 INVOKEVIRTUAL org/joda/time/chrono/GJChronology.getZone()Lorg/joda/time/DateTimeZone;
+org.joda.time.chrono.GJChronology.withZone:311 IF_ACMPNE L1 false true
+org.joda.time.chrono.GJChronology.withZone:312 ALOAD 0
+org.joda.time.chrono.GJChronology.withZone:312 ARETURN
+org.joda.time.chrono.GJChronology.getDateTimeMillis:322 ALOAD 0
+org.joda.time.chrono.GJChronology.getDateTimeMillis:322 INVOKEVIRTUAL org/joda/time/chrono/GJChronology.getBase()Lorg/joda/time/Chronology;
+org.joda.time.chrono.GJChronology.getDateTimeMillis:322 IFNULL L0 true false
+org.joda.time.chrono.GJChronology.getDateTimeMillis:327 ALOAD 0
+org.joda.time.chrono.GJChronology.getDateTimeMillis:327 GETFIELD org/joda/time/chrono/GJChronology.iGregorianChronology Lorg/joda/time/chrono/GregorianChronology;
+org.joda.time.chrono.GJChronology.getDateTimeMillis:327 LSTORE 6
+org.joda.time.chrono.GJChronology.getDateTimeMillis:329 LLOAD 6
+org.joda.time.chrono.GJChronology.getDateTimeMillis:329 ALOAD 0
+org.joda.time.chrono.GJChronology.getDateTimeMillis:329 GETFIELD org/joda/time/chrono/GJChronology.iCutoverMillis J
+org.joda.time.chrono.GJChronology.getDateTimeMillis:329 LCMP
+org.joda.time.chrono.GJChronology.getDateTimeMillis:329 IFGE L1 false true
+org.joda.time.chrono.GJChronology.getDateTimeMillis:331 ALOAD 0
+org.joda.time.chrono.GJChronology.getDateTimeMillis:331 GETFIELD org/joda/time/chrono/GJChronology.iJulianChronology Lorg/joda/time/chrono/JulianChronology;
+org.joda.time.chrono.GJChronology.getDateTimeMillis:331 LSTORE 6
+org.joda.time.chrono.GJChronology.getDateTimeMillis:338 LLOAD 6
+org.joda.time.chrono.GJChronology.getDateTimeMillis:338 LRETURN
+org.joda.time.chrono.GJChronology$CutoverField.roundFloor:880 LLOAD 1
+org.joda.time.chrono.GJChronology$CutoverField.roundFloor:880 ALOAD 0
+org.joda.time.chrono.GJChronology$CutoverField.roundFloor:880 GETFIELD org/joda/time/chrono/GJChronology$CutoverField.iCutover J
+org.joda.time.chrono.GJChronology$CutoverField.roundFloor:880 LCMP
+org.joda.time.chrono.GJChronology$CutoverField.roundFloor:880 IFLT L0 true false
+org.joda.time.chrono.GJChronology$CutoverField.roundFloor:889 ALOAD 0
+org.joda.time.chrono.GJChronology$CutoverField.roundFloor:889 GETFIELD org/joda/time/chrono/GJChronology$CutoverField.iJulianField Lorg/joda/time/DateTimeField;
+org.joda.time.chrono.GJChronology$CutoverField.roundFloor:889 LSTORE 1
+org.joda.time.chrono.GJChronology$CutoverField.roundFloor:891 LLOAD 1
+org.joda.time.chrono.GJChronology$CutoverField.roundFloor:891 LRETURN
+org.joda.time.chrono.GJChronology$LinkedDurationField.add:1141 ALOAD 0
+org.joda.time.chrono.GJChronology$LinkedDurationField.add:1141 GETFIELD org/joda/time/chrono/GJChronology$LinkedDurationField.iField Lorg/joda/time/chrono/GJChronology$ImpreciseCutoverField;
+org.joda.time.chrono.GJChronology$LinkedDurationField.add:1141 LRETURN
+org.joda.time.chrono.TestGJDate.main:40 INVOKEVIRTUAL org/joda/time/chrono/TestGJDate.test_plusYears_positiveToZero()V
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:77 NEW org/joda/time/LocalDate
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:77 DUP
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:77 GETSTATIC org/joda/time/chrono/TestGJDate.GJ_CHRONOLOGY Lorg/joda/time/Chronology;
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:77 INVOKESPECIAL org/joda/time/LocalDate.<init>(IIILorg/joda/time/Chronology;)V
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:77 ASTORE 1
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:78 NEW org/joda/time/LocalDate
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:78 ASTORE 2
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:79 ALOAD 2
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:79 ALOAD 1
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:79 BIPUSH -3
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:79 INVOKEVIRTUAL org/joda/time/LocalDate.plusYears(I)Lorg/joda/time/LocalDate;
+org.joda.time.chrono.TestGJDate.test_plusYears_positiveToZero:79 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
+
+Slice consists of 113 bytecode instructions.
+Computation took 2.10 seconds.

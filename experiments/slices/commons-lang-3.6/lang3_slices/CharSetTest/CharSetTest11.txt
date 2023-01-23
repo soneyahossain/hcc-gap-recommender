@@ -1,29 +1,0 @@
- 0.0% done, time left: unknown                                0.6% done, time left: unknown  3.8% done, time left: unknown  7.7% done, time left: unknown 11.5% done, time left: unknown 18.7% done, time left: unknown 24.4% done, time left: unknown 32.9% done, time left: unknown 37.3% done, time left: unknown 44.7% done, time left:   0:00:00   51.1% done, time left:   0:00:00 61.3% done, time left:   0:00:00 68.1% done, time left:   0:00:00 76.6% done, time left:   0:00:00 86.5% done, time left:   0:00:00 95.4% done, time left:   0:00:00 96.1% done, time left:   0:00:00 98.5% done, time left:   0:00:00 100.0% done, time left:   0:00:00  finished
-The dynamic slice for criterion [org.apache.commons.lang3.CharSetTest.testGetInstance_Stringarray:76:*]:
-org.apache.commons.lang3.CharSet.<init>:91 ALOAD 0
-org.apache.commons.lang3.CharSet.<init>:91 NEW java/util/HashSet
-org.apache.commons.lang3.CharSet.<init>:91 INVOKESTATIC java/util/Collections.synchronizedSet(Ljava/util/Set;)Ljava/util/Set;
-org.apache.commons.lang3.CharSet.<init>:91 PUTFIELD org/apache/commons/lang3/CharSet.set Ljava/util/Set;
-org.apache.commons.lang3.CharSet.getInstance:156 ALOAD 0
-org.apache.commons.lang3.CharSet.getInstance:156 IFNONNULL L0 true false
-org.apache.commons.lang3.CharSet.getInstance:159 ALOAD 0
-org.apache.commons.lang3.CharSet.getInstance:159 ARRAYLENGTH
-org.apache.commons.lang3.CharSet.getInstance:159 ICONST_1
-org.apache.commons.lang3.CharSet.getInstance:159 IF_ICMPNE L1 true false
-org.apache.commons.lang3.CharSet.getInstance:165 NEW org/apache/commons/lang3/CharSet
-org.apache.commons.lang3.CharSet.getInstance:165 DUP
-org.apache.commons.lang3.CharSet.getInstance:165 INVOKESPECIAL org/apache/commons/lang3/CharSet.<init>([Ljava/lang/String;)V
-org.apache.commons.lang3.CharSet.getInstance:165 ARETURN
-org.apache.commons.lang3.CharSet.toString:291 ALOAD 0
-org.apache.commons.lang3.CharSet.toString:291 GETFIELD org/apache/commons/lang3/CharSet.set Ljava/util/Set;
-org.apache.commons.lang3.CharSet.toString:291 ARETURN
-org.apache.commons.lang3.CharSetTest.main:38 INVOKEVIRTUAL org/apache/commons/lang3/CharSetTest.testGetInstance_Stringarray()V
-org.apache.commons.lang3.CharSetTest.testGetInstance_Stringarray:76 LDC "[]"
-org.apache.commons.lang3.CharSetTest.testGetInstance_Stringarray:76 ICONST_0
-org.apache.commons.lang3.CharSetTest.testGetInstance_Stringarray:76 ANEWARRAY java/lang/String
-org.apache.commons.lang3.CharSetTest.testGetInstance_Stringarray:76 INVOKESTATIC org/apache/commons/lang3/CharSet.getInstance([Ljava/lang/String;)Lorg/apache/commons/lang3/CharSet;
-org.apache.commons.lang3.CharSetTest.testGetInstance_Stringarray:76 INVOKEVIRTUAL org/apache/commons/lang3/CharSet.toString()Ljava/lang/String;
-org.apache.commons.lang3.CharSetTest.testGetInstance_Stringarray:76 INVOKESTATIC org/junit/Assert.assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V
-
-Slice consists of 24 bytecode instructions.
-Computation took 1.99 seconds.
