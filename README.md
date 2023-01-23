@@ -38,15 +38,16 @@ The output should look like this:
         OpenJDK 64-Bit Server VM (build 25.312-b07, mixed mode)
 
 - `Apache Maven 3.6.3` (https://maven.apache.org/)
-        
-        
+  
+
         sudo apt update        
         sudo apt install maven
 
-  To verify the installation, run:
-  
+To verify the installation, run:
+        
         mvn -version
-  The output should look something like this:
+  
+The output should look something like this:
      
        Apache Maven 3.6.3
        Maven home: /usr/share/maven
@@ -69,7 +70,7 @@ cd $HCC_HOME
 ./scripts/install_all.sh
 ```
 
-## Running HCC end-to-end
+## Running `hcc` end-to-end
 
 To make sure everything is working properly, run the following smoke tests:
 ```
