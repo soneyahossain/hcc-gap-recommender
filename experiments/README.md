@@ -1,5 +1,5 @@
 This repository contains all the files and scripts needed to compute SCC and OBCC metrics for various projects.
-To the extent possible, projects were forked and minimal changes were applied. Changes typically consist of:
+To the extent possible, projects were cloned with minimal changes were applied. Changes typically consist of:
 * modifying `pom.xml` to add the clover and JaCoCo plugins to compute statement and object-branch structural coverage metrics
 * modifying `pom.xml` to exclude tests that fail with clover, tracing and/or slicing
 
