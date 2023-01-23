@@ -1,4 +1,4 @@
-While these scripts can be used directly, we suggest looking at the higher-level, more [user-friendly scripts](../experiments)
+While these scripts can be used directly, we suggest looking at the higher-level, more [user-friendly scripts](../experiments/scripts)
 .
 
 # description of major scripts
