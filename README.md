@@ -1,7 +1,6 @@
 # Artifact: Measuring and Mitigating Gaps in Structural Testing
 
-This repository contains the artifact for testing the host checked coverage (hcc), coverage gap, and the recommender for closing that gap. It is implemented primarily in Java and includes all data, codes, and scripts required for replicating the studies in the paper "Measuring and Mitigating Gaps in Structural Testing".
-
+This repository contains the `artifact` for testing the host checked coverage (hcc), coverage gaps, and the recommendations for closing the gaps to improve fault-detection effectiveness. It is implemented primarily in Java and includes all data, source codes, and scripts required for replicating the studies in the paper `Measuring and Mitigating Gaps in Structural Testing` published at `ICSE-2023`.
 
 ## Introduction
 
