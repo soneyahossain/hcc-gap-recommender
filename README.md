@@ -4,14 +4,14 @@ This repository contains the `artifact` for testing the host checked coverage (h
 
 ## Introduction
 
-The artifact implements the host checked coverage (hcc) metric, the coverage gap computed from hcc, and the assertion recommendations to close the gap. HCC is calculated for the statement (SCC) and object branch criteria (OBCC). To compute hcc, we used and extended the JavaSlicer (https://github.com/backes/javaslicer). Once hcc is calculated, we compute the coverage gap from hcc and regular code coverage (RQ1), where regular statement and object branch coverage are calculated from the clover and JaCoCo tools.
-We have shown that the gap strongly and negatively correlates with fault detection effectiveness (RQ2). We utilize the gap to generate recommendations to add more assertions to a test suite and improve the fault-detection power (RQ3+RQ4).
-In this replication package, we have shown how to run the end-to-end experiment, and then we have provided RQ-wise instructions to regenerate the results presented in the paper.
+This replication package implements the host checked coverage (hcc) metric, the coverage gap computed from hcc, and the assertion recommendations to close the gap. Two variants of hcc are the `statement checked coverage (SCC)` and `object branch checked coverage (OBCC)`. To compute hcc, we used and extended the `JavaSlicer (https://github.com/backes/javaslicer)`. Once hcc is calculated, we compute the coverage gap from hcc and regular code coverage `(RQ1)`, where regular statement and object branch coverage are computed using the `clover` and `JaCoCo` tools.
+We have shown that the gap strongly and negatively correlates with the fault detection effectiveness `(RQ2)`. We utilize the gap to generate recommendations to add more assertions to a test suite and improve the fault-detection power `(RQ3+RQ4)`.
+In this replication package, we have shown how to run a time-limited end-to-end experiment and provided RQ-wise instructions to regenerate the results presented in the paper. Instructions and bash scripts to run the entire experiment are also provided.
 
 ## Setup
 
-### Setup: the easy way
-Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already setup. The username is `icse2023` and the password is `icse2023`.
+### Setup (VirtualBox VM): the easy way
+Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already set up. The username is `icse2023`, and the password is `icse2023`.
 
 ### Setup on your own machine
 The artifacts have been tested on both Ubuntu 20 and Ubuntu 22. Again, we highly recommend using the VirtualBox VM to familiarize yourselves with HCC.
