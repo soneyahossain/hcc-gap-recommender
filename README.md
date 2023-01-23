@@ -189,6 +189,8 @@ To assess the functionality and reusuability of RQ2, run the following commands:
     cd $HCC_EXPERIMENTS/scripts
     ./rq2.sh
 
+Note: you may see some exceptions during the mutation testing, note that these are normal and expected. 
+
 This should take approximately 2 minutes to generate 15 different test suites from the commons-cli-limited subject and run mutation test on those 15 test suites. 
 Upon successful completion, the outputs are stored in the $HCC_EXPERIMENTS/hcc_results/commons-cli-limited/rq2 directory, result.txt stores the statement checked coverage
 gap for 15 test suites and mutation_result.txt stores the mutation scores. All 15 test suites are stored $HCC_EXPERIMENTS/subjects/commons-cli-limited/rq2_test_suites directory.
