@@ -16,5 +16,10 @@ fi
 
 	mvn -Dhttps.protocols=TLSv1.2 clean test jacoco:report
 	echo "Save jacoco.xml in $OUTPUT_JACOCO_DIR"
-	cp target/site/jacoco/jacoco.xml $OUTPUT_JACOCO_DIR
+
+	if [ "$PROJECT_NAME" == "gson" ]; then
+		cp gson/target/site/jacoco/jacoco.xml $OUTPUT_JACOCO_DIR
+	else
+		cp target/site/jacoco/jacoco.xml $OUTPUT_JACOCO_DIR
+	fi
 popd
