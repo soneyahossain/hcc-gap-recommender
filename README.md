@@ -220,4 +220,4 @@ This data can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/evaluator/summ
 # RQ4
 
 # Other
-More details about various scripts used inside of HCC can be found in the README of the `experiments` directory. 
+More details about various scripts used inside of HCC can be found in the README of the [experiments directory](experiments/). 
