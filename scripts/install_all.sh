@@ -19,6 +19,10 @@ if [ -z "$HCC_HOME" ]; then
 	exit 1
 fi
 
+if [ ! -z "$MAVEN_REPO" ]; then
+	rm -fr $MAVEN_REPO/com/atlassian
+fi
+
 #
 # HCC tools required jdk 1.8
 #
