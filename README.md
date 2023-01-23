@@ -235,7 +235,9 @@ total checked statements in class: 1546
 Compute SCC for enriched joda-time chronology package
 total checked statements in class: 2068
 ```
-Meaning that additional assertions increased the total number of checked statement by 522. 
+Meaning that additional assertions increased the total number of checked statement by 522. The detailed results should be stored in `$HCC_EXPERIMENTS/hcc_results/joda-time`, where `rq4_original_data` directory stored results for original test suite and 
+`rq4_enriched_data` stores results for the enriched test suite. One can run mutation testing again to see the difference in fault-detection effectiveness, however, we skipped that part as mutation testing takes more than 10 minutes to run per test suite. 
+
 
 
 # Other
