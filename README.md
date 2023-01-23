@@ -14,15 +14,15 @@ In this replication package, we have shown how to run a time-limited end-to-end 
 Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already set up. The username is `icse2023`, and the password is `icse2023`.
 
 ### Setup on your own machine
-The artifacts have been tested on both Ubuntu 20 and Ubuntu 22. Again, we highly recommend using the VirtualBox VM to familiarize yourselves with HCC.
+The artifact have been tested on both `Ubuntu 20` and `Ubuntu 22`. Again, we highly recommend using the `VirtualBox VM` to familiarize yourselves with the hcc framework.
 If installing on your own machine, we recommend starting with a clean machine. 
 
-HCC framework requires the following software on your machine:
+hcc framework requires the following software on your machine:
 
-- JDK 1.7 (https://www.oracle.com/java/technologies/javase/javase7-archive-downloads.html, https://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html#install-64)
-- JDK 1.8 (https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
+- `JDK 1.7` (https://www.oracle.com/java/technologies/javase/javase7-archive-downloads.html, https://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html#install-64)
+- `JDK 1.8` (https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
 
-Run the following commands to install:
+Following commands can be run to install JDK 1.8:
 
         sudo apt-get update
         sudo apt-get install openjdk-8-jdk
@@ -37,13 +37,13 @@ The output should look like this:
         OpenJDK Runtime Environment (build 1.8.0_312-8u312-b07-0ubuntu1~20.04-b07)
         OpenJDK 64-Bit Server VM (build 25.312-b07, mixed mode)
 
-- Apache Maven 3.6.3 (https://maven.apache.org/)
-
-
+- `Apache Maven 3.6.3` (https://maven.apache.org/)
+        
+        
         sudo apt update        
         sudo apt install maven
 
-  To verify the installation, run mvn -version:
+  To verify the installation, run:
   
         mvn -version
   The output should look something like this:
