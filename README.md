@@ -11,7 +11,7 @@ In this replication package, we have shown how to run a time-limited end-to-end 
 ## Setup
 
 ### Setup (VirtualBox 6.1): the easy way
-Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already set up when you open a terminal. The username is `icse2023`, and the password is `icse2023`.
+Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already set up when you open a terminal. 
 
 Once you start the VM, open up a terminal and follow the instructions starting from `Running HCC end-to-end` to `RQ4`
 
