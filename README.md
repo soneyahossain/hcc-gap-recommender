@@ -11,7 +11,7 @@ In this replication package, we have shown how to run a time-limited end-to-end 
 ## Setup
 
 ### Setup (VirtualBox VM): the easy way
-Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already set up. The username is `icse2023`, and the password is `icse2023`.
+Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already set up when you open a terminal. The username is `icse2023`, and the password is `icse2023`.
 
 ### Setup on your own machine
 The artifact have been tested on both `Ubuntu 20` and `Ubuntu 22`. Again, we highly recommend using the `VirtualBox VM` to familiarize yourselves with the HCC framework.
