@@ -177,7 +177,7 @@ In general, data for a given subject program can be found in `$HCC_EXPERIMENTS/h
 
 ### Computing `SCC` and `OBCC` for all subjects
 ```
-# this will run on 2 subject programs (as running all subjects will take 1hr)
+# warning: can easily take 1 hr
 cd $HCC_EXPERIMENTS/scripts
 ./rq1.sh all
 ```
