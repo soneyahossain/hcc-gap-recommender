@@ -200,7 +200,7 @@ gap for 15 test suites and `mutation_result.txt` stores the mutation scores. All
 
 # RQ3
 
-To quickly assess functionality and reusuability of `RQ3`, run the following time-limited bash script:
+To quickly assess the functionality and reusuability of `RQ3`, run the following time-limited bash script:
 
 ```
 cd $HCC_EXPERIMENTS/scripts
