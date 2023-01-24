@@ -220,11 +220,13 @@ project,601,69.05,84.19,90.02,
 ```
 This output can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/evaluator/summary.csv`
 
-To run RQ1 and RQ3 on the full suite of subjects, run the following commands (may take 1+ hr):
+To run RQ1 and RQ3 on the full suite of subjects, run the following commands:
 
 ```
 cd $HCC_EXPERIMENTS/scripts
 # for all subjects
+
+# rq1 on all subjects may easily take 1hr or more
 ./rq1.sh all
 ./rq3.sh all
 ```
