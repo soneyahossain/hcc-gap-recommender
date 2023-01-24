@@ -177,7 +177,7 @@ total_branch,total_executed,total_missed,total_checked,total_criteria
 ```
 In general, data for a given subject program can be found in `$HCC_EXPERIMENTS/hcc_results/<subject>/obcc.csv`
 
-### For computing `SCC` and `OBCC` for all subjects, run the following commands which may take 1 hours
+### For computing `SCC` and `OBCC` for all subjects, run the following commands which may take approximately 1 hour
 ```
 # warning: can easily take 1 hr
 cd $HCC_EXPERIMENTS/scripts
