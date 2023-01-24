@@ -31,6 +31,6 @@ Note that various environment variables must be set. These can be found in the f
 * Traces can be very large (on the order of 50+ GBs), while slicing can consume lots of memory.
 * Obtaining traces and slices for a subject can take a long time (days) as this process is currently sequential. 
   * Both tracing and slicing are parallelizable. Parallelizing both would increase performance dramatically. We welcome pull requests :)
-* HCC relies on JavaSlicer and inherent its strengths and weaknesses (https://github.com/backes/javaslicer). 
+* HCC relies on JavaSlicer and inherits its strengths and weaknesses (https://github.com/backes/javaslicer). 
   * Its main strength is that it works fairly robustly.
   * Its most visible weakness is that only Java 1.7 is supported. To broaden the impact of HCC, we would welcome the incorporation of a robust dynamic slicer that supports more recent Java versions.
