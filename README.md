@@ -203,7 +203,7 @@ cd $HCC_EXPERIMENTS/scripts
 ./rq3.sh 
 ```
 
-This should only take 1-2 minutes to run. The output will display data for each subject program specified.
+This should only take 1-2 minutes to run:
 
 ```
 === Show evalution of recommendations
