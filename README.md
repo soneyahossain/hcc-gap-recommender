@@ -250,8 +250,7 @@ Meaning that additional assertions increased the total number of checked stateme
 # Other
 More details about various scripts used to compute HCC can be found in the `README` of the [experiments directory](experiments/). 
 
-# References:
-
+# References
 
 1. Hossain, Soneya Binta; B. Dwyer, Matthew; Elbaum, Sebastian; Nguyen-Tuong, Anh (2023): Measuring and Mitigating Gaps in Structural Testing. figshare. Preprint. https://doi.org/10.6084/m9.figshare.21932058.v5 
 
