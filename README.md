@@ -241,7 +241,7 @@ In RQ4, we have added additional assertions in the `$HCC_EXPERIMENTS/subjects/jo
 cd $HCC_EXPERIMENTS/scripts
 ./rq4.sh
 ```
-This should only take 1-2 minutes to run. The output will display:
+This should only take 1-2 minutes to run. The output will consist of the following information:
 
 ```
 Compute SCC for original joda-time chronology package
