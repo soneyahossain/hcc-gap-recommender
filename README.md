@@ -11,7 +11,8 @@ In this replication package, we have shown how to run a time-limited end-to-end 
 ## Setup
 
 ### Setup (VirtualBox 6.1): the easy way
-Simply download and use the VirtualBox VM provided at `FIXME: final location`. It will have all relevant dependencies and environment variables already set up when you open a terminal. 
+Simply download and use the VirtualBox VM provided at `https://doi.org/10.6084/m9.figshare.21950552`. We have used VirtualBox version 6.1 and suggest users to use the same version. Note that we also tested the VM in the latest version (7.0). The typical `download` and `import` time is ~5 minutes.
+The VM comes with all relevant dependencies and environment variables already set up when you open a terminal. 
 
 Once you start the VM, open up a terminal and follow the instructions starting from `Running HCC end-to-end` to `RQ4`
 
