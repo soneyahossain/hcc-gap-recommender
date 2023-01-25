@@ -247,7 +247,7 @@ This should only take 1-2 minutes to run. The output will consist of the followi
 
 ```
 Compute SCC for original joda-time chronology package
-total checked statements in class: 1547
+total checked statements in class: 1545
 .
 .
 Compute SCC for enriched joda-time chronology package
