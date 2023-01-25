@@ -247,11 +247,11 @@ This should only take 1-2 minutes to run. The output will consist of the followi
 
 ```
 Compute SCC for original joda-time chronology package
-total checked statements in class: 1546
+total checked statements in class: 1547
 .
 .
 Compute SCC for enriched joda-time chronology package
-total checked statements in class: 2068
+total checked statements in class: 2067
 ```
 Meaning that additional assertions increased the total number of checked statement by 522. The detailed results should be stored in `$HCC_EXPERIMENTS/hcc_results/joda-time`, where `rq4_original_data` directory stores results for original test suite and 
 `rq4_enriched_data` stores results for the enriched test suite. One can run mutation testing again to see the difference in fault-detection effectiveness, however, we skipped that part as mutation testing takes more than 10 minutes to run per test suite. 
