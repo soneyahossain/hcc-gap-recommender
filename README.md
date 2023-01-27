@@ -13,8 +13,8 @@ In this replication package, we have shown how to run a time-limited end-to-end 
 ### Setup (VirtualBox 6.1): the easy way
 Simply download and use the VirtualBox VM provided at
 `https://doi.org/10.6084/m9.figshare.21950552`. The file of interest is
-`hcc.ova`. We use VirtualBox version 6.1 and suggest users to use the
-same version. However, we have aso tested the image on VirtualBox 7.0 successfully.   
+`hcc.ova`. We use VirtualBox version 6.1 and suggest users use the
+same version. However, we have also tested the image on VirtualBox 7.0 successfully.   
 
 Once downloaded, you will need to import the `ova` file. The `import`
 time is between 1-4 minutes. The running machine consumes about 13GB of disk space so
