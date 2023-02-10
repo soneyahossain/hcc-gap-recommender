@@ -3,6 +3,9 @@
 # End-to-end workflow for computing HCC for a given project
 #
 
+. hcc.inc
+
+
 set -e
 
 PROJECT_NAME=$1

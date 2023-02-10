@@ -1,4 +1,6 @@
-#!/bin/bash
+#/!/bin/bash
+
+. hcc.inc
 
 if [ -z $1 ]; then
 	echo "Please specify project"

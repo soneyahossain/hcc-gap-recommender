@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. hcc.inc
+
 PROJECT_NAME=$1
 
 if [ -z $1 ]; then

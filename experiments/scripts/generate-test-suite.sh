@@ -1,5 +1,8 @@
 #!/bin/bash
 
+. hcc.inc
+
+
 JAVA_HOME=$JDK_1_8
 PATH=$JAVA_HOME/bin:$PATH
 
