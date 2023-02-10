@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Configuration file for AntRun.
+  
+  Use this file to override the default properties contained
+  in build.xml. For example, to override the build.jar.filename
+  property (which sets the name of the compiled jar file), add
+  an element
+  
+  <jar>
+    <filename>foo</filename>
+  </jar>
+  
+  inside the <build> element.
+  
+  **Caveat emptor:** in some cases, changing this file and running ant
+  again will result in Ant using a cached version of the old file! Run
+  "ant dummy" to make sure that the correct data is being read. Otherwise
+  you might need to run "ant clean" and start over.
+-->
+<build>
+  <!-- Uncomment any of these if you want to override the build
+       script's default values -->
+
+  <!-- The project's name -->
+  <name>BeepBeep 3</name>
+  
+  <!-- The project's version number -->
+  <version>0.10.6-alpha</version>
+  
+  <!-- The project's author. Currently this only
+  shows up in the footer of the Javadoc documentation. -->
+  <author>Sylvain Hall&#233;</author>
+  
+  <!-- The project's main class -->
+  <mainclass>ca.uqac.lif.cep.Main</mainclass>
+  
+  <!-- The target JDK -->
+  <targetjdk>1.6</targetjdk>
+  
+  <!-- Installation folders -->
+  <srcdir>Core/src</srcdir>
+  <bindir>Core/bin</bindir>
+  <libdir>lib</libdir>
+  <docdir>doc</docdir>
+  <depdir>Core/dep</depdir>
+  <test>
+    <srcdir>CoreTest/src</srcdir>
+    <bindir>CoreTest/bin</bindir>
+    <depdir>CoreTest/dep</depdir>
+  </test>
+  
+  <!-- Output jar -->
+  <jar>
+    <filename>beepbeep-3.jar</filename>
+    <withdoc>false</withdoc>
+    <withdeps>true</withdeps>
+    <withsrc>false</withsrc>
+  </jar>
+  
+  <!--
+    Write JAR dependencies here.
+  -->
+  <dependencies>
+   <dependency>
+      <!--
+      Petit Poucet. Used to store provenance information.
+      -->
+      <name>Petit Poucet</name>
+      <classname>ca.uqac.lif.petitpoucet.ProvenanceNode</classname>
+      <files>
+        <zip>https://github.com/liflab/petitpoucet/releases/download/v0.2-alpha/petitpoucet-0.2-alpha.zip</zip>
+      </files>
+      <bundle>true</bundle>
+    </dependency>
+    <dependency>
+      <!--
+      Petit Poucet. Used to store provenance information.
+      -->
+      <name>Azrael Core</name>
+      <classname>ca.uqac.lif.azrael.ObjectPrinter</classname>
+      <files>
+        <jar>https://github.com/sylvainhalle/Azrael/releases/download/v2.0.3/azrael-core.jar</jar>
+      </files>
+      <bundle>true</bundle>
+    </dependency>
+  </dependencies>
+</build>

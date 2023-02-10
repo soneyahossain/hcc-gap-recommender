@@ -9,6 +9,14 @@ fi
 
 cd $HCC_EXPERIMENTS/subjects/$PROJECT_NAME
 
-mvn -Dhttps.protocols=TLSv1.2 clean test 
-# ant clean compile test
+if [ -f pom.xml ]; then
+	mvn -Dhttps.protocols=TLSv1.2 clean test 
+else
+	if [ -f build.xml ]; then
+		ant clean test
+	else
+		echo "Cannot find pom.xml or build.xml"
+		exit 1
+	fi
+fi
 

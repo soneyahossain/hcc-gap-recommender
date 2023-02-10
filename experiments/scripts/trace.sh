@@ -61,6 +61,10 @@ case $PROJECT_NAME in
 		export PROJECT_TEST_DIR=$PROJECT_HOME/gson/src/test/java
 		export CLASSPATH="$PROJECT_HOME/gson/target/classes:$PROJECT_HOME/gson/target/test-classes:$CLASSPATH"
 		;;
+	beepbeep-3)
+		export PROJECT_TEST_DIR=$PROJECT_HOME/CoreTest/bin
+		export CLASSPATH="$PROJECT_HOME/CoreTest/bin:$PROJECT_HOME/CoreTest/src:$PROJECT_HOME/Core/bin:$PROJECT_HOME/Core/src:$PROJECT_HOME/Core/dep/azrael-core.jar:$PROJECT_HOME/Core/dep/petitpoucet.jar:$CLASSPATH"
+		;;
 	*)
 		# most projects seem to have this layout
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java
