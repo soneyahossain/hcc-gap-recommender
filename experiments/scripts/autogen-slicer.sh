@@ -65,11 +65,8 @@ case $PROJECT_NAME in
 	xstream)
 		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/com/thoughtworks
 		;;
-	barbecue)
-		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/net/sourceforge/barbecue
-		;;
-	barcode4j)
-		export PROJECT_TEST_DIR=$PROJECT_HOME/src/test/java/org/krysalis/barcode4j
+	beepbeep-3)
+		export PROJECT_TEST_DIR=$PROJECT_HOME/CoreTest/src/ca/uqac/lif/cep
 		;;
 	*)
 		echo "Unsupported project: $PROJECT_NAME"
