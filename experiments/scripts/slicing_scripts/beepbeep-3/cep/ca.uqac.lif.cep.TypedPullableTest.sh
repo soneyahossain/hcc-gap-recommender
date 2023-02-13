@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "computing slice for TypedPullableTest"
+
+mkdir -p /home/stg/hcc-gap-recommender/experiments/slices/beepbeep-3/cep_slices/TypedPullableTest
+
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar /home/stg/hcc-gap-recommender/experiments/../lib/slicer.jar -m=1 -p /home/stg/hcc-gap-recommender/experiments/traces/beepbeep-3/cep_traces/TypedPullableTest.trace ca.uqac.lif.cep.TypedPullableTest.testTypedPullable1:42:*>/home/stg/hcc-gap-recommender/experiments/slices/beepbeep-3/cep_slices/TypedPullableTest/TypedPullableTest1.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar /home/stg/hcc-gap-recommender/experiments/../lib/slicer.jar -m=1 -p /home/stg/hcc-gap-recommender/experiments/traces/beepbeep-3/cep_traces/TypedPullableTest.trace ca.uqac.lif.cep.TypedPullableTest.testTypedPullable1:44:*>/home/stg/hcc-gap-recommender/experiments/slices/beepbeep-3/cep_slices/TypedPullableTest/TypedPullableTest2.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar /home/stg/hcc-gap-recommender/experiments/../lib/slicer.jar -m=1 -p /home/stg/hcc-gap-recommender/experiments/traces/beepbeep-3/cep_traces/TypedPullableTest.trace ca.uqac.lif.cep.TypedPullableTest.testTypedPullable1:45:*>/home/stg/hcc-gap-recommender/experiments/slices/beepbeep-3/cep_slices/TypedPullableTest/TypedPullableTest3.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar /home/stg/hcc-gap-recommender/experiments/../lib/slicer.jar -m=1 -p /home/stg/hcc-gap-recommender/experiments/traces/beepbeep-3/cep_traces/TypedPullableTest.trace ca.uqac.lif.cep.TypedPullableTest.testTypedPullable1:46:*>/home/stg/hcc-gap-recommender/experiments/slices/beepbeep-3/cep_slices/TypedPullableTest/TypedPullableTest4.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar /home/stg/hcc-gap-recommender/experiments/../lib/slicer.jar -m=1 -p /home/stg/hcc-gap-recommender/experiments/traces/beepbeep-3/cep_traces/TypedPullableTest.trace ca.uqac.lif.cep.TypedPullableTest.testTypedPullable2:58:*>/home/stg/hcc-gap-recommender/experiments/slices/beepbeep-3/cep_slices/TypedPullableTest/TypedPullableTest5.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar /home/stg/hcc-gap-recommender/experiments/../lib/slicer.jar -m=1 -p /home/stg/hcc-gap-recommender/experiments/traces/beepbeep-3/cep_traces/TypedPullableTest.trace ca.uqac.lif.cep.TypedPullableTest.testTypedPullable2:60:*>/home/stg/hcc-gap-recommender/experiments/slices/beepbeep-3/cep_slices/TypedPullableTest/TypedPullableTest6.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar /home/stg/hcc-gap-recommender/experiments/../lib/slicer.jar -m=1 -p /home/stg/hcc-gap-recommender/experiments/traces/beepbeep-3/cep_traces/TypedPullableTest.trace ca.uqac.lif.cep.TypedPullableTest.testTypedPullable2:74:*>/home/stg/hcc-gap-recommender/experiments/slices/beepbeep-3/cep_slices/TypedPullableTest/TypedPullableTest7.txt
+java -Xmx30g -XX:-UseGCOverheadLimit  -XX:+UseG1GC -jar /home/stg/hcc-gap-recommender/experiments/../lib/slicer.jar -m=1 -p /home/stg/hcc-gap-recommender/experiments/traces/beepbeep-3/cep_traces/TypedPullableTest.trace ca.uqac.lif.cep.TypedPullableTest.testTypedPullable3:110:*>/home/stg/hcc-gap-recommender/experiments/slices/beepbeep-3/cep_slices/TypedPullableTest/TypedPullableTest8.txt
+
+#Total Asserts in ca.uqac.lif.cep/TypedPullableTest=============8
+#Total Tests in ca.uqac.lif.cep/TypedPullableTest=============0
