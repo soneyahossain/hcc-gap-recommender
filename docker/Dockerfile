@@ -30,8 +30,7 @@ USER $USERNAME
 WORKDIR $HOME
 
 # Clone UVA HCC Tools
-RUN git clone https://github.com/soneyahossain/hcc-gap-recommender.git
-RUN cd hcc-gap-recommender && git checkout docker-demo
+RUN git clone https://github.com/soneyahossain/hcc-gap-recommender.git && cd hcc-gap-recommender && git checkout docker-demo
 
 # Grab local tarball for 1.7
 ADD jdk-7u80-linux-x64.tar.gz .
