@@ -44,3 +44,6 @@ RUN ls
 RUN ls scripts
 RUN ./scripts/install_all.sh
 
+WORKDIR $HCC_EXPERIMENTS/scripts
+ENTRYPOINT ["./smoke-tests.sh"]
+
